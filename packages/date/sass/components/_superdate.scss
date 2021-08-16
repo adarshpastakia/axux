@@ -1,0 +1,59 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-superdate {
+  &__links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: start;
+  }
+
+  &__popover#{$prefix}-popper {
+    #{$prefix}-popper--body {
+      max-height: 90vh;
+    }
+  }
+
+  &--link {
+    align-self: start;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  &__button {
+    #{$prefix}-tag__inner,
+    #{$prefix}-button__inner {
+      max-width: 15rem;
+    }
+  }
+
+  &__tabs {
+    #{$prefix}-field__options {
+      grid-gap: 0.25rem 0;
+      grid-template-columns: 1fr;
+      justify-items: unset;
+    }
+
+    > #{$prefix}-tab__bar {
+      box-shadow: none;
+      padding: 0;
+
+      #{$prefix}-tab__button {
+        background-color: transparent;
+        box-shadow: none;
+        margin: 0;
+        padding: 0.125em 0.5em;
+
+        &:not(:last-child) {
+          margin-inline-end: 0.5em;
+        }
+
+        &[data-active="true"] {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

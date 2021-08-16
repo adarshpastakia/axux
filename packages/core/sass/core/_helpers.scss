@@ -1,0 +1,281 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix} {
+  &-block {
+    display: block;
+  }
+
+  &-inline {
+    display: inline;
+  }
+
+  &-inline-block {
+    display: inline-block;
+  }
+
+  &-hide {
+    display: none;
+  }
+
+  &-hidden {
+    visibility: hidden;
+  }
+
+  &-selectable {
+    @include text-select();
+  }
+
+  &-fade-in {
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    &--50 {
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+
+    &:hover,
+    &--50:hover {
+      opacity: 1;
+    }
+  }
+
+  &-float--left {
+    float: left;
+  }
+
+  &-float--right {
+    float: right;
+  }
+
+  &-ellipsis {
+    @include ellipsis();
+  }
+
+  &-clearfix {
+    @include clearfix();
+  }
+
+  &-clip {
+    @include clip();
+
+    @for $i from 3 through 9 {
+      &--#{$i} {
+        --line-clamp: #{$i};
+      }
+    }
+  }
+
+  &-paper {
+    border-radius: $base-border-radius;
+  }
+
+  &-bg--none {
+    background: none;
+  }
+
+  &-text-divider {
+    border-width: 1px 0 0;
+    margin: 2rem 0;
+    padding: 0;
+
+    legend {
+      padding: 0 1em;
+      text-align: center;
+    }
+  }
+
+  &-sticky {
+    position: sticky;
+
+    &--top {
+      top: 0;
+    }
+
+    &--bottom {
+      bottom: 0;
+    }
+  }
+
+  &-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &--y {
+      -webkit-overflow-scrolling: touch;
+      overflow-y: auto;
+      @include enable-gpu();
+    }
+
+    &--no {
+      overflow: hidden;
+    }
+  }
+
+  &-border {
+    &,
+    &--xy {
+      border-style: solid;
+      border-width: 1px;
+    }
+
+    &--x {
+      border-inline-end-style: solid;
+      border-inline-end-width: 1px;
+      border-inline-start-style: solid;
+      border-inline-start-width: 1px;
+
+      &--none {
+        border-inline-end: 0;
+        border-inline-start: 0;
+      }
+    }
+
+    &--s {
+      border-inline-start-style: solid;
+      border-inline-start-width: 1px;
+
+      &--none {
+        border-inline-start: 0;
+      }
+    }
+
+    &--e {
+      border-inline-end-style: solid;
+      border-inline-end-width: 1px;
+
+      &--none {
+        border-inline-end: 0;
+      }
+    }
+
+    &--y {
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      border-top-style: solid;
+      border-top-width: 1px;
+
+      &--none {
+        border-bottom: 0;
+        border-top: 0;
+      }
+    }
+
+    &--t {
+      border-top-style: solid;
+      border-top-width: 1px;
+
+      &--none {
+        border-top: 0;
+      }
+    }
+
+    &--b {
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+
+      &--none {
+        border-bottom: 0;
+      }
+    }
+
+    &--none {
+      border: 0;
+    }
+
+    &--sm {
+      border-width: 2px;
+    }
+
+    &--md {
+      border-width: 4px;
+    }
+
+    &--lg {
+      border-width: 6px;
+    }
+
+    &--xl {
+      border-width: 8px;
+    }
+
+    &--dotted {
+      border-style: dotted;
+    }
+    &--dashed {
+      border-style: dashed;
+    }
+  }
+}
+
+[class*="aui-dark--"],
+[class*="aui-light--"] {
+  display: inline-block;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  width: 2rem;
+}
+
+@mixin make-spacing($property, $space, $size: null, $bp: null) {
+  #{$prefix}-#{$property} {
+    &#{$size}#{$bp} {
+      #{$property}: $space;
+    }
+
+    &--x#{$size}#{$bp} {
+      #{$property}-inline-end: $space;
+      #{$property}-inline-start: $space;
+    }
+
+    &--s#{$size}#{$bp} {
+      #{$property}-inline-start: $space;
+    }
+
+    &--e#{$size}#{$bp} {
+      #{$property}-inline-end: $space;
+    }
+
+    &--y#{$size}#{$bp} {
+      #{$property}-bottom: $space;
+      #{$property}-top: $space;
+    }
+
+    &--t#{$size}#{$bp} {
+      #{$property}-top: $space;
+    }
+
+    &--b#{$size}#{$bp} {
+      #{$property}-bottom: $space;
+    }
+  }
+}
+
+@include make-spacing(margin, $base-spacing);
+@include make-spacing(padding, $base-spacing);
+@include make-spacing(margin, 0, "--none");
+@include make-spacing(padding, 0, "--none");
+
+@each $sizeLabel, $ratio in $size-ratio {
+  @include make-spacing(margin, $base-spacing * $ratio, --#{$sizeLabel});
+  @include make-spacing(padding, $base-spacing * $ratio, --#{$sizeLabel});
+}
+
+@each $breakpoint, $size in $breakpoints {
+  @media only screen and (min-width: $size) {
+    @include make-spacing(margin, 0, "--none", \@#{$breakpoint});
+    @include make-spacing(margin, $base-spacing, "--", \@#{$breakpoint});
+    @include make-spacing(padding, 0, "--none", \@#{$breakpoint});
+    @include make-spacing(padding, $base-spacing, "--", \@#{$breakpoint});
+  }
+
+  @each $sizeLabel, $ratio in $size-ratio {
+    @media only screen and (min-width: $size) {
+      @include make-spacing(margin, $base-spacing * $ratio, --#{$sizeLabel}, \@#{$breakpoint});
+      @include make-spacing(padding, $base-spacing * $ratio, --#{$sizeLabel}, \@#{$breakpoint});
+    }
+  }
+}

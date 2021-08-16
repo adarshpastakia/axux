@@ -1,0 +1,40 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+@keyframes spinner {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 currentColor;
+  }
+  to {
+    box-shadow: 0 0 1em 0 currentColor, 0 0 0 0.5em transparent;
+  }
+}
+
+#{$prefix}-anim {
+  &--spin::before,
+  &--spin path {
+    transform-origin: 50% 50%;
+    @include animation(spinner 2s linear infinite);
+  }
+
+  &--spin-step::before,
+  &--spin-step path {
+    transform-origin: 50% 50%;
+    @include animation(spinner 2s steps(var(--spin-steps)) infinite);
+  }
+
+  &--pulse {
+    @include animation(pulse 1s linear infinite);
+  }
+}

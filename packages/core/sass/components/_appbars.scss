@@ -1,0 +1,77 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-header {
+  align-items: center;
+  display: grid;
+  font-size: 1rem;
+  grid-area: head;
+  grid-template-areas: ". icon title actions";
+  grid-template-columns: auto auto 1fr auto;
+  @extend #{$prefix}-border--b;
+
+  &__icon {
+    align-self: stretch;
+    grid-area: icon;
+    padding: 0.125em 0.5em;
+  }
+  &__title {
+    font-size: 0.875rem;
+    grid-area: title;
+    padding: 0.25em 0.5em;
+  }
+  &__actions {
+    display: flex;
+    flex-flow: row nowrap;
+    grid-area: actions;
+    padding: 0 0.25em;
+
+    #{$prefix}-button {
+      &__inner[data-style="link"] {
+        color: inherit !important;
+      }
+    }
+  }
+  &__back {
+    margin-inline-end: 0;
+  }
+
+  #{$prefix}-button {
+    box-shadow: none !important;
+    font-size: 0.875em;
+  }
+
+  #{$prefix}-divider {
+    align-self: stretch;
+    flex-flow: column;
+    margin: 0 4px;
+
+    hr {
+      width: 1px;
+    }
+  }
+}
+
+#{$prefix}-footer {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  grid-area: foot;
+  @extend #{$prefix}-border--t;
+
+  & > #{$prefix}-toolbar {
+    flex: 1;
+  }
+
+  #{$prefix}-divider {
+    align-self: stretch;
+    flex-flow: column;
+    margin: 0 0.25rem;
+
+    hr {
+      width: 1px;
+    }
+  }
+}

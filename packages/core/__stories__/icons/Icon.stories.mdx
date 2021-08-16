@@ -1,0 +1,84 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxFlexBox, AxIcon, COLOR } from "../../src";
+import { IconStory } from "./IconStory";
+import { mdiBell, mdiFingerprint, mdiGamepadCircleUp } from "@mdi/js";
+import { PALETTE } from "../../../../storybook/stylings/theming-items";
+
+<Meta title="@core/Icons/Icon" component={AxIcon} parameters={{ jest: ["Icon.test.tsx"] }} />
+
+<Anchor storyId="core-icons-icon--icon">
+  <Title>Icon</Title>
+</Anchor>
+
+<Description of={AxIcon} />
+
+<Canvas>
+  <Story name="Icon">{IconStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-icons-icon--sizes">
+  <Heading>Sizes</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Sizes">
+    <AxIcon icon={mdiBell} size="sm" />
+    <AxIcon icon={mdiBell} size="default" />
+    <AxIcon icon={mdiBell} size="md" />
+    <AxIcon icon={mdiBell} size="lg" />
+    <AxIcon icon={mdiBell} size="xl" />
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-icons-icon--themes">
+  <Heading>Themes</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Themes">
+    <div>
+      {Object.values(COLOR).map((color) => (
+        <AxIcon icon={mdiBell} key={color} color={color} />
+      ))}
+    </div>
+    <div>
+      {Object.values(PALETTE).map((color) => (
+        <AxIcon icon={mdiBell} key={color} color={color} />
+      ))}
+    </div>
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-icons-icon--animated">
+  <Heading>Animated</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Animated">
+    <AxFlexBox>
+      <AxFlexBox.Row>
+        <AxFlexBox.Col padding flex="auto">
+          <AxIcon icon={mdiFingerprint} size="xl" spin />
+          <div>Spinner</div>
+        </AxFlexBox.Col>
+        <AxFlexBox.Col padding flex="auto">
+          <AxIcon icon={mdiGamepadCircleUp} size="xl" spin={8} />
+          <div>Step spin</div>
+        </AxFlexBox.Col>
+      </AxFlexBox.Row>
+    </AxFlexBox>
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxIcon} sort="requiredFirst" />

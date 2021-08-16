@@ -1,0 +1,144 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-viewport {
+  bottom: 0;
+  display: grid;
+  grid-template-areas: "banner banner" "header header" "menu breadcrumbs" "menu page" "menu footer";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto 1fr auto;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translate3d(0, 0, 0);
+  z-index: 0;
+
+  &__banner {
+    display: flex;
+    flex-flow: row nowrap;
+    grid-area: banner;
+    justify-content: center;
+    line-height: 1;
+    text-align: center;
+
+    > span {
+      flex: 0 0 auto;
+      font-size: 0.75rem;
+      padding: 0.125rem 1rem;
+    }
+
+    #{$prefix}-button {
+      margin: 0;
+
+      &__inner {
+        color: inherit;
+        &:hover {
+          background-color: rgba(#888888, 0.5);
+        }
+      }
+    }
+  }
+
+  &__header {
+    align-items: center;
+    display: grid;
+    grid-area: header;
+    grid-template-areas: "title-box . options-box";
+    grid-template-columns: auto 1fr auto;
+    z-index: 2;
+
+    &__titleBox {
+      align-items: center;
+      display: flex;
+      grid-area: title-box;
+      line-height: 1;
+      padding: $base-spacing * 0.25 $base-spacing * 0.5;
+    }
+
+    &__optionsBox {
+      grid-area: options-box;
+
+      #{$prefix}-button {
+        font-size: 1.25rem;
+        margin: 0 $base-spacing * 0.25;
+
+        &__inner {
+          box-shadow: none;
+        }
+      }
+      #{$prefix}-avatar {
+        font-size: 2rem;
+        margin: 0 $base-spacing * 0.5;
+      }
+    }
+
+    &__title {
+      font-size: 1.5rem;
+    }
+
+    &__subtitle {
+      font-size: 0.875rem;
+    }
+
+    &__icon {
+      line-height: 1;
+      margin-inline-end: 0.5rem;
+
+      img,
+      svg {
+        height: 2.5rem;
+        object-fit: contain;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  &__footer {
+    font-size: 0.625rem;
+    grid-area: footer;
+    margin-top: -0.25rem;
+    padding: 0 $base-spacing * 0.5;
+    text-align: center;
+    z-index: 0;
+    @extend #{$prefix}-color--medium;
+  }
+
+  &__menu {
+    display: grid;
+    grid-area: menu;
+    grid-gap: 0.25rem;
+    grid-template-rows: 1fr auto auto;
+    min-width: 12em;
+    overflow: hidden;
+    z-index: 1;
+
+    #{$prefix}-menu {
+      &__item {
+        line-height: 1.5;
+      }
+    }
+
+    &[data-collapsed="true"] {
+      max-width: 2.5em;
+      min-width: unset;
+
+      #{$prefix}-menu {
+        &__item {
+          padding: 0.5em;
+          #{$prefix}-icon {
+            font-size: 1.25em;
+            line-height: 1;
+          }
+          &__label,
+          &__caret {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

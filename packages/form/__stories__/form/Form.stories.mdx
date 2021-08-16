@@ -1,0 +1,30 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxForm } from "../../src";
+import { FormStory } from "./FormStory";
+
+<Meta title="@form/Form" component={AxForm} parameters={{ jest: ["Form.test.tsx"] }} />
+
+<Anchor storyId="form-form--form">
+  <Title>Form</Title>
+</Anchor>
+
+<Description of={AxForm} />
+
+<Canvas>
+  <Story name="Form" height="30rem" parameters={{ layout: "none" }}>
+    {FormStory}
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxForm} sort="requiredFirst" />

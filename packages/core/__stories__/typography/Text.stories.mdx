@@ -1,0 +1,118 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxFlexBox, AxText } from "../../src";
+import { ColorStory, SerifStory, TextStory } from "./TextStory";
+import { LIPSUM } from "../../../../storybook/components/Lipsum";
+
+<Meta title="@core/Typography/Text" component={AxText} parameters={{ jest: ["Text.test.tsx"] }} />
+
+<Anchor storyId="core-typography-text--text">
+  <Title>Text</Title>
+</Anchor>
+
+<Description of={AxText} />
+
+<Canvas>
+  <Story name="Text">{TextStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-typography-text--serif-font">
+  <Heading>Serif Font</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Serif Font">{SerifStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-typography-text--color">
+  <Heading>Color</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Color">{ColorStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-typography-text--weights">
+  <Heading>Weights</Heading>
+</Anchor>
+
+<Canvas columns={6}>
+  <Story name="Weights">
+    <AxFlexBox.Row>
+      <AxText weight="black">Black text</AxText>
+      <AxText weight="bold">Bold text</AxText>
+      <AxText weight="medium">Medium text</AxText>
+      <AxText weight="normal">Normal text</AxText>
+      <AxText weight="light">Light text</AxText>
+      <AxText weight="thin">Thin text</AxText>
+    </AxFlexBox.Row>
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-typography-text--sizes">
+  <Heading>Sizes</Heading>
+</Anchor>
+
+<Canvas columns={6}>
+  <Story name="Sizes">
+    <AxFlexBox.Row align="middle">
+      <AxText size="xs">XSmall text</AxText>
+      <AxText size="sm">Small text</AxText>
+      <AxText size="default">Default text</AxText>
+      <AxText size="md">Medium text</AxText>
+      <AxText size="lg">Large text</AxText>
+      <AxText size="xl">XLarge text</AxText>
+      <AxText className="ax-col--full" size="2em">
+        2em text
+      </AxText>
+    </AxFlexBox.Row>
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-typography-text--clipped">
+  <Heading>Clipped</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Clipped">
+    <div style={{ maxWidth: 1200 }}>
+      <AxText clip={7}>
+        <p>{LIPSUM.para}</p>
+        <p>{LIPSUM.para}</p>
+      </AxText>
+    </div>
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-typography-text--marked-text">
+  <Heading>Marked text</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Marked text">
+    <AxText mark={LIPSUM.text}>{LIPSUM.para}</AxText>
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-typography-text--tooltip-text">
+  <Heading>Tooltip text</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Tooltip text">
+    <AxText tooltip="Test tooltip">{LIPSUM.text}</AxText>
+    <AxText>{LIPSUM.para.replace(LIPSUM.text, "")}</AxText>
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxText} sort="requiredFirst" />

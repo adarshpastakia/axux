@@ -1,0 +1,57 @@
+import { ArgsTable, Description, Heading, Meta, Subheading, Title } from "@storybook/addon-docs";
+import { useAxNotificationService } from "../../src";
+import { AxToast } from "../../src/overlays/Toast";
+import { AxMessage } from "../../src/overlays/Message";
+
+<Meta
+  title="@core/Notifications/useNotificationService"
+  parameters={{ jest: ["Toast.test.tsx", "Message.test.tsx"] }}
+/>
+
+<Title>Notifications</Title>
+
+<Description of={useAxNotificationService} />
+
+<div className="ax-margin--b--lg" />
+
+```tsx
+import { AxBox, AxButton, useAxNotificationService } from "@axux/core";
+
+const { message, toast } = useAxNotificationService();
+
+const showMessage = () => {
+  message({
+    icon: "mdi mdi-bell",
+    text: "Message text"
+  }).then(() => {
+    // promise resolved when message closed
+  });
+};
+
+const showToast = () => {
+  toast({
+    type: "confirm",
+    icon: "mdi mdi-bell",
+    text: "Message text"
+  }).then((ok: boolean) => {
+    // promise resolved when message closed
+  });
+};
+
+return (
+  <AxBox>
+    <AxButton onClick={showMessage}>Show Message</AxButton>
+    <AxButton onClick={showToast}>Show Toast</AxButton>
+  </AxBox>
+);
+```
+
+<Heading>Props</Heading>
+
+<Subheading>Toast Props</Subheading>
+
+<ArgsTable of={AxToast} sort="requiredFirst" />
+
+<Subheading>Message Props</Subheading>
+
+<ArgsTable of={AxMessage} sort="requiredFirst" />

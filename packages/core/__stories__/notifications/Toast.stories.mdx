@@ -1,0 +1,32 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxToast } from "../../src/overlays/Toast";
+import { ToastStory } from "./NotificationStory";
+
+<Meta
+  title="@core/Notifications/Toast"
+  component={AxToast}
+  parameters={{ jest: ["Toast.test.tsx"] }}
+/>
+
+<Anchor storyId="core-notifications-toast--toast">
+  <Title>Toast Notifications</Title>
+</Anchor>
+
+<Description of={AxToast} />
+
+<Canvas>
+  <Story name="Toast">{ToastStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable story="Toast" sort="requiredFirst" />

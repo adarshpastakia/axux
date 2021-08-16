@@ -1,0 +1,120 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+@if $google-font-sans-serif {
+  @import url($google-font-sans-serif);
+}
+
+@if $google-font-serif {
+  @import url($google-font-serif);
+}
+
+@if $google-font-mono {
+  @import url($google-font-mono);
+}
+
+@if $local-font-sans-serif {
+  @import url($local-font-sans-serif);
+}
+
+@if $local-font-serif {
+  @import url($local-font-serif);
+}
+
+@if $local-font-mono {
+  @import url($local-font-mono);
+}
+
+@at-root html {
+  box-sizing: border-box;
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+
+  *,
+  *::after,
+  *::before {
+    box-sizing: inherit;
+    font-family: inherit;
+  }
+
+  *:focus-visible {
+    outline: none;
+  }
+
+  &:root {
+    --gutter: #{0px};
+    font-size: $base-font-size;
+  }
+}
+
+@at-root body {
+  cursor: default;
+  font: {
+    family: $base-font-family;
+    size: 1rem;
+    weight: $base-font-weight;
+  }
+  height: 100vh;
+  line-height: $base-line-height;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  user-select: none;
+
+  width: 100vw;
+}
+
+::-webkit-input-placeholder {
+  font-family: $base-font-family;
+}
+
+::-moz-placeholder {
+  font-family: $base-font-family;
+}
+
+::-ms-input-placeholder {
+  font-family: $base-font-family;
+}
+
+:-ms-input-placeholder {
+  font-family: $base-font-family;
+}
+
+::placeholder {
+  font-family: $base-font-family;
+}
+
+%hr-base {
+  border-style: solid;
+  border-width: 1px 0;
+  margin: 0.5rem 0;
+  opacity: 0.75;
+  transform: scaleY(0.5);
+}
+
+%vr-base {
+  align-self: stretch;
+  border-style: solid;
+  border-width: 0 1px;
+  margin: 0 0.5rem;
+  opacity: 0.75;
+  transform: scaleX(0.5);
+}
+
+hr {
+  @extend %hr-base;
+}
+
+hr[data-vertical="true"] {
+  @extend %vr-base;
+}
+
+[data-clickable="true"] {
+  cursor: pointer;
+}
+[data-clickable="false"] {
+  cursor: default;
+}

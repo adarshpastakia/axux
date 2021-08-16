@@ -1,0 +1,122 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-popper {
+  box-sizing: border-box;
+  z-index: 50;
+
+  $base: #{$prefix}-popper;
+
+  #{$prefix}-menu__item {
+    font-size: 0.875em;
+    line-height: 1.5;
+  }
+
+  &[data-show="false"] {
+    display: none;
+  }
+
+  &--body {
+    z-index: 0;
+  }
+
+  &--arrow {
+    height: 10px;
+    position: relative;
+    width: 10px;
+    z-index: 2;
+
+    &::before,
+    &::after {
+      border: 5px solid transparent;
+      content: "";
+      display: block;
+      position: absolute;
+    }
+    &::before {
+      @extend #{$prefix}-color--light;
+      border-width: 6px;
+      z-index: 0;
+    }
+    &::after {
+      z-index: 2;
+    }
+  }
+
+  &[data-popper-reference-hidden="true"] {
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  &[data-popper-placement^="top"] #{$base}--arrow {
+    bottom: -10px;
+    &::before {
+      border-top-color: currentColor;
+      bottom: -2px;
+      left: -1px;
+    }
+    &::after {
+      border-top-color: currentColor;
+    }
+  }
+  &[data-popper-placement^="bottom"] #{$base}--arrow {
+    top: -10px;
+    &::before {
+      border-bottom-color: currentColor;
+      left: -1px;
+      top: -2px;
+    }
+    &::after {
+      border-bottom-color: currentColor;
+    }
+  }
+  &[data-popper-placement^="left"] #{$base}--arrow {
+    border-left-color: currentColor;
+    right: -10px;
+    &::before {
+      border-inline-start-color: currentColor;
+      right: -2px;
+      top: -1px;
+    }
+    &::after {
+      border-inline-start-color: currentColor;
+    }
+  }
+  &[data-popper-placement^="right"] #{$base}--arrow {
+    border-right-color: currentColor;
+    left: -10px;
+    &::before {
+      border-inline-end-color: currentColor;
+      left: -2px;
+      top: -1px;
+    }
+    &::after {
+      border-inline-end-color: currentColor;
+    }
+  }
+
+  &#{$prefix}-popover {
+    #{$base}--body {
+      @extend #{$prefix}-color--base;
+      @extend #{$prefix}-bg--base;
+      max-height: 50vh;
+      max-width: 50vw;
+      overflow: auto;
+    }
+
+    #{$base}--arrow {
+      @extend #{$prefix}-color--invert;
+    }
+  }
+
+  &#{$prefix}-tooltip {
+    #{$base}--body {
+      @extend #{$prefix}-shadow--2;
+      border-radius: $base-border-radius;
+      font-size: 0.875em;
+      padding: 0.25em 0.5em;
+    }
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "name": "axux",
+  "version": "1.0.0",
+  "description": "React based UI framework for business applications",
+  "repository": "https://github.com/adarshpastakia/axux",
+  "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "storybook": "start-storybook -p 6003 -s assets --no-manager-cache",
+    "prebuild": "yarn test --json --outputFile=./.storybook/jest-test-results.json",
+    "build": "build-storybook -s assets  -o ./build",
+    "watch:test": "jest --ci --runInBand --detectOpenHandles --watchAll --json --outputFile=./.storybook/jest-test-results.json",
+    "watch:lib": "lerna run watch --parallel",
+    "watch": "npm-run-all -c --parallel watch:test watch:lib",
+    "pretest": "lerna run build --stream",
+    "test": "jest --ci --runInBand --detectOpenHandles"
+  },
+  "dependencies": {
+    "i18next": "^20.3.5",
+    "i18next-browser-languagedetector": "^6.1.2",
+    "react": "next",
+    "react-dom": "next",
+    "react-i18next": "^11.11.4"
+  },
+  "resolutions": {
+    "webpack": "^5.0.0",
+    "css-loader": "^5.0.0",
+    "dotenv-webpack": "^6.0.0",
+    "html-webpack-plugin": "^5.0.0",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.0.0",
+    "webpack-dev-middleware": "^4.1.0",
+    "webpack-virtual-modules": "^0.4.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@mdi/js": "^5.9.55",
+    "@mdi/font": "^5.9.55",
+    "@storybook/addon-actions": "^6.3.4",
+    "@storybook/addon-essentials": "^6.3.4",
+    "@storybook/addon-jest": "^6.3.4",
+    "@storybook/addon-links": "^6.3.4",
+    "@storybook/builder-webpack5": "^6.3.4",
+    "@storybook/manager-webpack5": "^6.3.4",
+    "@storybook/preset-scss": "^1.0.3",
+    "@storybook/react": "^6.3.4",
+    "@storybook/testing-react": "^0.0.21",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/react-hooks": "^7.0.1",
+    "@types/node": "^16.3.3",
+    "@types/prop-types": "^15.7.4",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^27.0.6",
+    "jest-transform-stub": "^2.0.0",
+    "jsdom": "^16.6.0",
+    "jsdom-global": "^3.0.2",
+    "lerna": "^3.22.1",
+    "mutationobserver-shim": "^0.3.7",
+    "node-sass": "^6.0.1",
+    "npm-run-all": "^4.1.5",
+    "path-browserify": "^1.0.1",
+    "prettier": "^2.3.2",
+    "prop-types": "^15.7.2",
+    "sass-loader": "^12.1.0",
+    "stylelint": "^13.13.1",
+    "stylelint-order": "^4.1.0",
+    "stylelint-prettier": "^1.2.0",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
+    ],
+    "plugins": [
+      "@typescript-eslint",
+      "import",
+      "react",
+      "react-hooks"
+    ],
+    "rules": {
+      "no-extra-boolean-cast": "off",
+      "comma-dangle": "off",
+      "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/interface-name-prefix": "off",
+      "@typescript-eslint/explicit-member-accessibility": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-parameter-properties": "off",
+      "@typescript-eslint/no-unused-vars": [
+        1,
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ]
+    },
+    "settings": {
+      "react": {
+        "pragma": "React",
+        "version": "detect"
+      }
+    },
+    "overrides": [
+      {
+        "files": [
+          "*.ts",
+          "*.tsx"
+        ],
+        "rules": {
+          "react/prop-types": "off",
+          "react/display-name": "off",
+          "react/jsx-uses-react": "off",
+          "react/react-in-jsx-scope": "off",
+          "react-hooks/rules-of-hooks": "error",
+          "react-hooks/exhaustive-deps": "warn"
+        }
+      }
+    ],
+    "ignorePatterns": [
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.d.ts"
+    ]
+  },
+  "stylelint": {
+    "plugins": [
+      "stylelint-order",
+      "stylelint-prettier"
+    ],
+    "rules": {
+      "at-rule-name-case": "lower",
+      "block-closing-brace-empty-line-before": "never",
+      "block-opening-brace-newline-after": "always",
+      "color-hex-case": "lower",
+      "color-hex-length": "long",
+      "color-named": "never",
+      "color-no-hex": null,
+      "color-no-invalid-hex": true,
+      "comment-empty-line-before": "always",
+      "comment-whitespace-inside": "always",
+      "font-family-name-quotes": "always-where-required",
+      "font-family-no-duplicate-names": true,
+      "font-family-no-missing-generic-family-keyword": true,
+      "font-weight-notation": "numeric",
+      "function-calc-no-unspaced-operator": true,
+      "function-name-case": "lower",
+      "function-url-quotes": "always",
+      "keyframe-declaration-no-important": true,
+      "length-zero-no-unit": true,
+      "max-empty-lines": 1,
+      "no-duplicate-at-import-rules": true,
+      "no-duplicate-selectors": true,
+      "no-empty-source": true,
+      "no-eol-whitespace": true,
+      "no-extra-semicolons": true,
+      "no-invalid-double-slash-comments": true,
+      "no-unknown-animations": true,
+      "number-leading-zero": "always",
+      "number-no-trailing-zeros": true,
+      "property-case": "lower",
+      "selector-pseudo-class-case": "lower",
+      "selector-pseudo-class-no-unknown": true,
+      "selector-pseudo-element-case": "lower",
+      "selector-pseudo-element-colon-notation": "double",
+      "selector-pseudo-element-no-unknown": true,
+      "selector-type-case": "lower",
+      "selector-type-no-unknown": true,
+      "shorthand-property-no-redundant-values": true,
+      "string-no-newline": true,
+      "string-quotes": "double",
+      "unit-case": "lower",
+      "unit-no-unknown": true,
+      "order/properties-alphabetical-order": true,
+      "prettier/prettier": true
+    },
+    "ignoreFiles": [
+      "**/*.css"
+    ]
+  },
+  "prettier": {
+    "printWidth": 100,
+    "useTabs": false,
+    "trailingComma": "none"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true,
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "./jest/setup.ts"
+    ],
+    "roots": [
+      "<rootDir>/packages"
+    ],
+    "testRegex": "(/__tests__/.*\\.(test|spec))\\.[jt]sx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "tsconfig.test.json"
+      }
+    },
+    "transform": {
+      "\\.(js|jsx|ts|tsx)$": "ts-jest",
+      "\\.svg$": "jest-transform-stub"
+    },
+    "modulePaths": [
+      "<rootDir>/packages",
+      "<rootDir>/node_modules"
+    ],
+    "collectCoverageFrom": [
+      "packages/**/src/**/*.{ts,tsx}",
+      "!**/@types/**/*",
+      "!**/i18n/**/*",
+      "!**/*.d.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "__tests__/",
+      "__stories__/",
+      "types/",
+      "helpers/",
+      "internals/",
+      "node_modules/"
+    ],
+    "coverageDirectory": "<rootDir>/coverage",
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "html"
+    ]
+  },
+  "engines": {
+    "node": ">=14.0.0 <16.0.0",
+    "npm": ">=7.0.0"
+  }
+}

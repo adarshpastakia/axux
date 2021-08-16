@@ -1,0 +1,155 @@
+import { Meta, Title } from "@storybook/addon-docs";
+import { LightBox, Lipsum, Section } from "./components";
+import { CodeLine } from "./components/CodeLine";
+
+<Meta title="AxUx/Typography" />
+
+<Title>
+  <div className="ax-font--serif ax-font--inherit ax-icon ax-bg--invert ax-color--invert ax-margin--e">
+    <span>T</span>
+  </div>
+  Typography
+</Title>
+
+<Section title="Base Font">
+  <LightBox>
+    <Lipsum type="para" />
+  </LightBox>
+</Section>
+
+<Section title="Input Font">
+  <LightBox>
+    <div className="ax-font--mono">
+      <Lipsum type="para" />
+    </div>
+  </LightBox>
+</Section>
+
+<Section title="Serif Font">
+  <LightBox>
+    <div className="ax-font--serif">
+      <Lipsum type="para" />
+    </div>
+  </LightBox>
+</Section>
+
+<Section title="Display Headings">
+  <LightBox>
+    {[1, 2, 3, 4, 5, 6].map((i) => (
+      <CodeLine key={i} code={`.ax-display--${i}`}>
+        <div className={`ax-display--${i}`}>Display {i}</div>
+      </CodeLine>
+    ))}
+  </LightBox>
+</Section>
+
+<Section title="Headings">
+  <LightBox>
+    {[1, 2, 3, 4, 5, 6].map((i) => (
+      <CodeLine key={i} code={`.ax-heading--${i}`}>
+        <div className={`ax-heading--${i}`}>Heading {i}</div>
+      </CodeLine>
+    ))}
+    <br />
+    <h1>
+      Heading
+      <small>
+        with subheading wrapped in <code>small</code> tag
+      </small>
+    </h1>
+  </LightBox>
+</Section>
+
+<Section title="Font Family">
+  <LightBox>
+    <CodeLine code=".ax-font--sans-serif">
+      <div className="ax-font--sans-serif">Sans-Serif font</div>
+    </CodeLine>
+    <CodeLine code=".ax-font--serif">
+      <div className="ax-font--serif">Serif font</div>
+    </CodeLine>
+    <CodeLine code=".ax-font--mono">
+      <div className="ax-font--mono">Monospace font</div>
+    </CodeLine>
+  </LightBox>
+</Section>
+
+<Section title="Font Size">
+  <LightBox>
+    <CodeLine code=".ax-font--xs">
+      <div className="ax-font--xs">X Small</div>
+    </CodeLine>
+    <CodeLine code=".ax-font--sm">
+      <div className="ax-font--sm">Small</div>
+    </CodeLine>
+    <CodeLine code=".ax-font--normal">
+      <div className="ax-font--normal">Normal</div>
+    </CodeLine>
+    <CodeLine code=".ax-font--md">
+      <div className="ax-font--md">Medium</div>
+    </CodeLine>
+    <CodeLine code=".ax-font--lg">
+      <div className="ax-font--lg">Large</div>
+    </CodeLine>
+    <CodeLine code=".ax-font--xl">
+      <div className="ax-font--xl">X Large</div>
+    </CodeLine>
+  </LightBox>
+</Section>
+
+<Section title="Font Weight">
+  <LightBox>
+    <CodeLine code=".ax-weight--thin">
+      <div className="ax-weight--thin">Thin</div>
+    </CodeLine>
+    <CodeLine code=".ax-weight--light">
+      <div className="ax-weight--light">Light</div>
+    </CodeLine>
+    <CodeLine code=".ax-weight--normal">
+      <div className="ax-weight--normal">Normal</div>
+    </CodeLine>
+    <CodeLine code=".ax-weight--medium">
+      <div className="ax-weight--medium">Medium</div>
+    </CodeLine>
+    <CodeLine code=".ax-weight--bold">
+      <div className="ax-weight--bold">Bold</div>
+    </CodeLine>
+    <CodeLine code=".ax-weight--black">
+      <div className="ax-weight--black">Black</div>
+    </CodeLine>
+  </LightBox>
+</Section>
+
+<Section title="Text Transform">
+  <LightBox>
+    <CodeLine code=".ax-text--title">
+      <div className="ax-text--title">Titlecase</div>
+    </CodeLine>
+    <CodeLine code=".ax-text--upper">
+      <div className="ax-text--upper">Uppercase</div>
+    </CodeLine>
+    <CodeLine code=".ax-text--lower">
+      <div className="ax-text--lower">Lowercase</div>
+    </CodeLine>
+    <CodeLine code=".ax-text--underline">
+      <div className="ax-text--underline">Underline</div>
+    </CodeLine>
+    <CodeLine code=".ax-text--smallcaps">
+      <div className="ax-text--smallcaps">Small Caps</div>
+    </CodeLine>
+    <CodeLine>
+      <mark>Mark text</mark>
+    </CodeLine>
+    <CodeLine>
+      <abbr title="Abbreviation text">Abbreviated text</abbr>
+    </CodeLine>
+    <CodeLine>
+      <code>Inline code block</code>
+    </CodeLine>
+    <CodeLine code=".ax-text--dropcaps">
+      <div className="ax-text--dropcaps ax-align--justify ax-padding--e--xxl">
+        <Lipsum type="para" />
+      </div>
+    </CodeLine>
+  </LightBox>
+</Section>

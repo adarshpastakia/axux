@@ -1,0 +1,47 @@
+{
+  "name": "@axux/core",
+  "version": "0.0.0",
+  "description": "AxUx: Core package",
+  "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build:sass": "node-sass sass -o dist",
+    "build:lib": "tsc -p ./tsconfig.build.json",
+    "prebuild": "rm -rf ./dist",
+    "build": "npm-run-all build:sass build:lib",
+    "watch": "yarn build:lib -w"
+  },
+  "dependencies": {
+    "@axux/utilities": "*",
+    "resize-observer-polyfill": "^1.5.1"
+  },
+  "peerDependencies": {
+    "@popperjs/core": "^2.9.2",
+    "i18next": "^20.3.5",
+    "react": "next",
+    "react-dom": "next",
+    "react-helmet": "^6.1.0",
+    "react-i18next": "^11.11.4",
+    "react-popper": "^2.2.5",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-helmet": "^6.1.2",
+    "@types/react-i18next": "^8.1.0",
+    "@types/react-router-dom": "^5.1.8"
+  },
+  "engines": {
+    "node": ">=14.0.0 <16.0.0",
+    "npm": ">=7.0.0"
+  }
+}

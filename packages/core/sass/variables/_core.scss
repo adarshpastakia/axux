@@ -1,0 +1,73 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+$prefix: ".ax" !default;
+
+$google-font-sans-serif: "https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i" !default;
+$google-font-serif: "https://fonts.googleapis.com/css?family=Trirong:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i" !default;
+$google-font-mono: "https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700" !default;
+
+$local-font-sans-serif: false !default;
+$local-font-serif: false !default;
+$local-font-mono: false !default;
+
+$font-family-sans-serif: "Montserrat", "Helvetica Neue", Arial, sans-serif !default;
+$font-family-serif: Trirong, Palatino, Georgia, serif !default;
+$font-family-mono: "Source Code Pro", mono !default;
+
+$font-weight-thin: 200 !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-bold: 600 !default;
+$font-weight-black: 700 !default;
+
+// base type properties
+$base-border-radius: 0.125rem !default;
+
+$base-font-family: $font-family-sans-serif !default;
+$base-font-weight: $font-weight-normal !default;
+$base-font-size: 16px !default;
+$base-line-height: 1.5 !default;
+$base-spacing: 1rem !default;
+
+// typography
+$font-size-headings: (
+  h1: 2.25em,
+  h2: 2em,
+  h3: 1.75em,
+  h4: 1.5em,
+  h5: 1.25em,
+  h6: 0.9375em
+) !default;
+
+$font-sizes: (
+  xs: 0.625rem,
+  sm: 0.875rem,
+  md: 1.25rem,
+  lg: 1.5rem,
+  xl: 1.75rem
+) !default;
+
+// responsive breakpoints
+$breakpoints: (
+  xs: 320px,
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1536px
+) !default;
+$gutter: 8px !default;
+
+$size-ratio: (
+  xxs: 0.125,
+  xs: 0.25,
+  sm: 0.5,
+  md: 1.5,
+  lg: 2,
+  xl: 2.5,
+  xxl: 3
+);

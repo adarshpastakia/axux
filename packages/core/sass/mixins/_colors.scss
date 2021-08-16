@@ -1,0 +1,59 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+@function brightness($color) {
+  @if type-of($color) == color {
+    @return (red($color) * 0.299 + green($color) * 0.587 + blue($color) * 0.114) / 255 * 100%;
+  } @else {
+    @return unquote("brightness(#{$color})");
+  }
+}
+
+@function contrast($color, $light: $white, $dark: $black) {
+  @if $color == null {
+    @return null;
+  } @else {
+    $color-brightness: brightness($color);
+    $dark-text-brightness: brightness($dark);
+    $light-text-brightness: brightness($light);
+    @return if(
+      abs($color-brightness - $light-text-brightness) >
+        abs($color-brightness - $dark-text-brightness),
+      $light,
+      $dark
+    );
+  }
+}
+
+@function lighter($color, $amount) {
+  $hue: hue($color);
+  $saturation: saturation($color);
+  $lightness: lightness($color);
+  @return hsl(
+    $hue: $hue,
+    $saturation: $saturation,
+    $lightness: $lightness +
+      (
+        100-$lightness
+      ) *
+      (
+        $amount
+      )
+  );
+}
+
+@function darker($color, $amount) {
+  $hue: hue($color);
+  $saturation: saturation($color);
+  $lightness: lightness($color);
+  @return hsl(
+    $hue: $hue,
+    $saturation: $saturation,
+    $lightness: $lightness -
+      (
+        $lightness * $amount
+      )
+  );
+}

@@ -1,0 +1,28 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxLink } from "../../src";
+import { LinkStory } from "./LinkStory";
+
+<Meta title="@core/typography/Link" component={AxLink} parameters={{ jest: ["Link.test.tsx"] }} />
+
+<Anchor storyId="core-typography-link--link">
+  <Title>Anchor Link</Title>
+</Anchor>
+
+<Description of={AxLink} />
+
+<Canvas>
+  <Story name="Link">{LinkStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxLink} sort="requiredFirst" />

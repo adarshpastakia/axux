@@ -1,0 +1,154 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-overlay {
+  &__container {
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    left: 0;
+    overflow: visible;
+    padding: 0.5rem;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 99;
+
+    > div {
+      flex: 0 0 auto;
+      margin: 0.25rem 0;
+      overflow: hidden;
+      @extend #{$prefix}-bg--base;
+
+      &[data-show="true"] {
+        padding: 1px;
+      }
+    }
+
+    &[data-mode="message"] {
+      align-items: center;
+      flex-flow: column-reverse;
+
+      > div {
+        &[data-show="true"] > div {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &[data-mode="toast"] {
+      align-items: flex-end;
+      flex-flow: column;
+
+      > div {
+        &[data-show="true"] > div {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+#{$prefix}-message {
+  align-items: center;
+  border-radius: $base-border-radius;
+  display: flex;
+  font-size: 0.875rem;
+  margin: -100% auto 0;
+  max-width: 70vw;
+  padding: $base-spacing * 0.25 $base-spacing;
+  pointer-events: all;
+  position: relative;
+  transition: margin-top 0.5s;
+  @extend #{$prefix}-shadow--2;
+
+  &#{$prefix}-block {
+    width: 100vw;
+  }
+
+  > span {
+    flex: 1;
+  }
+
+  > #{$prefix}-button {
+    > #{$prefix}-button__inner {
+      color: inherit;
+      &:hover {
+        background-color: rgba(#ffffff, 0.25);
+      }
+    }
+  }
+
+  > :not(:last-child) {
+    margin-inline-end: 0.25rem;
+  }
+}
+
+#{$prefix}-toast {
+  border-radius: $base-border-radius;
+  display: grid;
+  grid-template-areas: "icon title" "icon text" "icon footer";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1.5rem 1fr auto;
+  margin: 0 auto -100%;
+  max-width: 70vw;
+  pointer-events: all;
+  position: relative;
+  transition: margin-bottom 0.5s;
+  @extend #{$prefix}-shadow--2;
+
+  #{$prefix}-alert--close {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    @at-root [dir="rtl"] & {
+      left: 0;
+      right: unset;
+    }
+  }
+
+  &__icon {
+    grid-area: icon;
+    padding: 0.5rem;
+
+    #{$prefix}-icon {
+      font-size: 2rem;
+      @extend #{$prefix}-color--white;
+    }
+  }
+
+  &__title {
+    font-weight: $font-weight-bold;
+    grid-area: title;
+    padding: 0.25rem 0.5rem;
+    padding-inline-end: 1.5rem;
+    @include ellipsis();
+  }
+
+  &__text {
+    grid-area: text;
+    max-height: 20rem;
+    overflow: auto;
+    padding: 0.25rem 0.5rem;
+  }
+
+  &__footer {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 0.875rem;
+    grid-area: footer;
+    padding: 0.25rem 0.5rem;
+  }
+
+  #{$prefix}-button {
+    > #{$prefix}-button__inner:not(:hover) {
+      background-color: transparent;
+      color: inherit;
+    }
+  }
+}

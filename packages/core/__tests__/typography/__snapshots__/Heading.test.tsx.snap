@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Heading renders color heading 1`] = `
+<div>
+  <div
+    class="ax-heading--4 ax-padding--sm ax-bg--lightest ax-color--secondary"
+  >
+    Lorem ipsum
+  </div>
+</div>
+`;
+
+exports[`Heading renders display heading 1`] = `
+<div>
+  <div
+    class="ax-display--1 "
+  >
+    Lorem ipsum
+  </div>
+</div>
+`;
+
+exports[`Heading renders serif font heading 1`] = `
+<div>
+  <div
+    class="ax-heading--4  ax-font--serif"
+  >
+    Lorem ipsum
+  </div>
+</div>
+`;
+
+exports[`Heading renders simple heading 1`] = `
+<div>
+  <div
+    class="ax-heading--1 "
+  >
+    Lorem ipsum
+  </div>
+</div>
+`;

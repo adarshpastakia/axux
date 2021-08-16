@@ -1,0 +1,79 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+@mixin button-theme($theme, $color, $solidText: $white) {
+  $base: #{$prefix}-button;
+
+  #{$base}[data-theme="#{$theme}"] {
+    #{$base}__inner {
+      background-color: $base-bg;
+      background-image: linear-gradient(180deg, rgba($white, 0.05), rgba($black, 0.03));
+      box-shadow: 0 0 0 1px rgba($base-border-color, 0.5);
+      color: $color;
+
+      &[data-icon-hilight="true"] {
+        #{$base}__icon,
+        #{$base}__spinner {
+          background-color: $color;
+          color: $solidText;
+        }
+      }
+    }
+
+    &[data-style="outline"] #{$base}__inner {
+      border-color: currentColor;
+      box-shadow: 0 0 1px 1px darker($color, 0.1);
+    }
+
+    &[data-style="solid"] {
+      #{$base}__inner {
+        background-color: $color;
+        box-shadow: 0 0 1px 1px darker($color, 0.3);
+        color: $solidText;
+        &[data-icon-hilight="true"] {
+          #{$base}__icon,
+          #{$base}__spinner {
+            background-color: rgba($black, 0.5);
+            color: $white;
+          }
+        }
+      }
+    }
+
+    &[data-style="link"] #{$base}__inner {
+      background-color: transparent;
+      background-image: none;
+      box-shadow: none;
+    }
+
+    #{$base}__inner:hover {
+      background-color: lighter($color, 0.2);
+      color: $solidText;
+    }
+
+    #{$base}__inner:active,
+    #{$base}__inner[data-active="true"] {
+      background-color: darker($color, 0.3);
+      background-image: linear-gradient(0deg, rgba($base-color, 0.1), rgba($base-color, 0));
+      box-shadow: 1px 1px 2px rgba(#060409, 0.75) inset, -1px -1px 2px rgba(#060409, 0.5) inset;
+      color: $solidText;
+    }
+  }
+}
+
+@include button-theme(default, $color-darkest, $color-empty);
+@include button-theme(muted, $color-muted);
+@include button-theme(primary, $color-primary);
+@include button-theme(secondary, $color-secondary);
+@include button-theme(info, $color-info);
+@include button-theme(danger, $color-danger);
+@include button-theme(success, $color-success);
+@include button-theme(warning, $color-warning);
+
+#{$prefix}-button {
+  &[data-disabled="true"] {
+    background-color: rgba($color-empty, 0.1);
+  }
+}

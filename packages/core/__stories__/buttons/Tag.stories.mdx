@@ -1,0 +1,129 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxHotKeyLabel, AxTag, COLOR, PALETTE } from "../../src";
+import { TagStory, WithBadgeStory, WithIconStory, WithTooltipStory } from "./TagStory";
+import { mdiBell } from "@mdi/js";
+
+<Meta title="@core/Buttons/Tag" component={AxTag} parameters={{ jest: ["Tag.test.tsx"] }} />
+
+<Anchor storyId="core-buttons-tag--tag">
+  <Title>Tag</Title>
+</Anchor>
+
+<Description of={AxTag} />
+
+<Canvas>
+  <Story name="Tag">{TagStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-buttons-tag--with-icon">
+  <Heading>With Icon</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="With Icon">{WithIconStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-buttons-tag--with-tooltip">
+  <Heading>With Tooltip</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="With Tooltip">{WithTooltipStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-buttons-tag--with-badge">
+  <Heading>With Badge</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="With Badge">{WithBadgeStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-buttons-tag--hotkey">
+  <Heading>Hotkey Label</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Hotkey">
+    <AxHotKeyLabel keyCombo={"ctrl+alt+shift+w"} />
+    <AxHotKeyLabel keyCombo={"shift+enter"} />
+    <AxHotKeyLabel keyCombo={"alt+tab"} />
+    <AxHotKeyLabel keyCombo={"ctrl+space"} />
+    <AxHotKeyLabel keyCombo={"ctrl+esc"} />
+    <AxHotKeyLabel keyCombo={"ctrl+del"} />
+    <AxHotKeyLabel keyCombo={"ctrl+up"} />
+    <AxHotKeyLabel keyCombo={"ctrl+right"} />
+    <AxHotKeyLabel keyCombo={"ctrl+backspace"} />
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-buttons-tag--sizes">
+  <Heading>Sizes</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Sizes">
+    <AxTag icon={mdiBell} size="sm">
+      Small
+    </AxTag>
+    <AxTag icon={mdiBell} size="default">
+      Default
+    </AxTag>
+    <AxTag icon={mdiBell} size="md">
+      Medium
+    </AxTag>
+    <AxTag icon={mdiBell} size="lg">
+      Large
+    </AxTag>
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-buttons-tag--themes">
+  <Heading>Themes</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Themes">
+    <div>
+      {Object.values(COLOR).map((color) => (
+        <AxTag key={color} icon={mdiBell} color={color}>
+          {color}
+        </AxTag>
+      ))}
+    </div>
+    <div>
+      {Object.values(COLOR).map((color) => (
+        <AxTag key={color} fillColor icon={mdiBell} color={color}>
+          {color}
+        </AxTag>
+      ))}
+    </div>
+    <div>
+      {Object.values(PALETTE).map((color) => (
+        <AxTag key={color} icon={mdiBell} color={color}>
+          {color}
+        </AxTag>
+      ))}
+    </div>
+    <div>
+      {Object.values(PALETTE).map((color) => (
+        <AxTag key={color} fillColor icon={mdiBell} color={color}>
+          {color}
+        </AxTag>
+      ))}
+    </div>
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable components={{ AxTag, AxHotKeyLabel }} sort="requiredFirst" />

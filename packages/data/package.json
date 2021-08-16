@@ -1,0 +1,43 @@
+{
+  "name": "@axux/data",
+  "version": "0.0.0",
+  "description": "AxUx: Data package",
+  "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build:sass": "node-sass sass -o dist",
+    "build:lib": "tsc -p ./tsconfig.build.json",
+    "prebuild": "rm -rf ./dist",
+    "build": "npm-run-all build:sass build:lib",
+    "watch": "yarn build:lib -w"
+  },
+  "dependencies": {
+    "@axux/core": "*",
+    "@axux/utilities": "*"
+  },
+  "peerDependencies": {
+    "i18next": "^20.3.5",
+    "react": "next",
+    "react-dom": "next",
+    "react-i18next": "^11.11.4",
+    "react-virtualized": "^9.22.3"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-i18next": "^8.1.0",
+    "@types/react-virtualized": "^9.21.13"
+  },
+  "engines": {
+    "node": ">=14.0.0 <16.0.0",
+    "npm": ">=7.0.0"
+  }
+}

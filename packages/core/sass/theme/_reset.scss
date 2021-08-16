@@ -1,0 +1,81 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+@at-root & body {
+  background-color: $body-bg;
+  color: $base-color;
+}
+
+::-moz-selection {
+  background: $color-secondary;
+  color: $white;
+}
+
+::selection {
+  background: $color-secondary;
+  color: $white;
+}
+
+::-webkit-input-placeholder {
+  color: $color-medium;
+}
+
+::-moz-placeholder {
+  color: $color-medium;
+}
+
+::-ms-input-placeholder {
+  color: $color-medium;
+}
+
+:-ms-input-placeholder {
+  color: $color-medium;
+}
+
+::placeholder {
+  color: $color-medium;
+}
+
+::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 0.5rem;
+
+  &-thumb {
+    background-color: rgba($color-secondary, 0.5);
+
+    &:hover {
+      background-color: lighter($color-secondary, 0.3);
+    }
+
+    &:active {
+      background-color: darker($color-secondary, 0.3);
+    }
+  }
+
+  &-track {
+    background-color: $color-lightest;
+    box-shadow: 0 0 2px $color-light inset;
+  }
+
+  &-corner {
+    background-color: $color-empty;
+  }
+}
+
+hr {
+  border-bottom-color: $color-medium;
+  border-top-color: $color-lightest;
+}
+
+hr[data-vertical="true"] {
+  border-inline-end-color: $color-medium;
+  border-inline-start-color: $color-lightest;
+}
+
+input,
+textarea {
+  background: $input-bg;
+  color: $input-color;
+}

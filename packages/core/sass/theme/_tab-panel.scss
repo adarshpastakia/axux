@@ -1,0 +1,63 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-tab {
+  $base: #{$prefix}-tab;
+  $border: 0 0 0 1px $base-border-color inset;
+
+  &__bar {
+    &[data-align="top"] {
+      box-shadow: 0 -2px 0 $color-secondary inset;
+
+      #{$base}__button {
+        box-shadow: 0 -1px 0 0 $color-secondary inset, $border;
+      }
+    }
+    &[data-align="bottom"] {
+      box-shadow: 0 2px 0 $color-secondary inset;
+
+      #{$base}__button {
+        box-shadow: 0 1px 0 0 $color-secondary inset, $border;
+      }
+    }
+
+    @at-root [dir="rtl"] &[data-align="end"],
+      &[data-align="start"] {
+      box-shadow: -2px 0 0 $color-secondary inset;
+
+      #{$base}__button {
+        box-shadow: -1px 0 0 0 $color-secondary inset, $border;
+      }
+    }
+    @at-root [dir="rtl"] &[data-align="start"],
+      &[data-align="end"] {
+      box-shadow: 2px 0 0 $color-secondary inset;
+
+      #{$base}__button {
+        box-shadow: 1px 0 0 0 $color-secondary inset, $border;
+      }
+    }
+  }
+
+  &__button {
+    background-color: $base-bg;
+
+    &[data-active="false"]:hover {
+      background-color: rgba($base-bg, 0.5);
+      box-shadow: 0 0 0 1px $color-secondary;
+      color: $color-secondary;
+    }
+
+    &[data-active="true"] {
+      background-color: $color-secondary;
+      box-shadow: 0 0 1px 1px $color-secondary !important;
+      color: $white;
+    }
+
+    &[data-disabled="true"] {
+      background-color: rgba($body-bg, 0.5);
+    }
+  }
+}

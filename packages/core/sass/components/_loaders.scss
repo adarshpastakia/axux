@@ -1,0 +1,78 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+@keyframes app-loader {
+  from {
+    left: 0;
+    right: 100%;
+  }
+
+  50% {
+    left: 0;
+    right: 0;
+  }
+
+  to {
+    left: 100%;
+    right: 0;
+  }
+}
+
+#{$prefix}-loader {
+  bottom: 0;
+  cursor: wait;
+  display: grid;
+  font-size: 1.5rem;
+  left: 0;
+  line-height: 1;
+  place-content: center;
+  place-items: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+
+  &[data-size="lg"] {
+    font-size: 3rem;
+  }
+  &[data-size="md"] {
+    font-size: 2rem;
+  }
+
+  &__content {
+    backdrop-filter: blur(1rem);
+    border-radius: 0.5rem;
+    padding: $base-spacing;
+  }
+
+  &--blur {
+    backdrop-filter: blur(0.25rem);
+  }
+
+  &__app {
+    display: grid;
+    height: 100vh;
+    place-content: center;
+    place-items: center;
+    position: fixed;
+    width: 100vw;
+    z-index: 9999;
+
+    &--indicator {
+      height: 0.25rem;
+      overflow: hidden;
+      position: relative;
+      width: 10rem;
+
+      &::after {
+        content: "";
+        display: block;
+        height: 0.25rem;
+        position: absolute;
+        @include animation(app-loader 2s linear infinite);
+      }
+    }
+  }
+}

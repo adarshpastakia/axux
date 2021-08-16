@@ -1,0 +1,136 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-field {
+  $base: #{$prefix}-field;
+
+  &__container {
+    background-color: $color-lightest;
+    box-shadow: 0 0 1px $color-muted inset;
+  }
+
+  &__wrapper {
+    background-color: $input-bg;
+    background-image: linear-gradient(
+      180deg,
+      rgba($base-shadow-color, 0.2),
+      rgba($input-bg, 0) 0.25rem
+    );
+    box-shadow: 0 0 1px $color-muted inset;
+    color: $input-color;
+
+    &::after {
+      background-color: $color-primary;
+    }
+
+    &:focus-within {
+      //box-shadow: 0 0 1px $color-secondary, 0 0 2px $color-secondary inset;
+    }
+  }
+
+  &__label {
+    color: $color-dark;
+    > label {
+      &[data-required="true"]::after {
+        color: $color-danger;
+      }
+    }
+  }
+
+  &:focus-within {
+    #{$base}__label {
+      color: $color-darkest;
+    }
+  }
+
+  &__hint {
+    color: $color-muted;
+  }
+
+  &__input:focus {
+    &[type="radio"] ~ #{$prefix}-icon,
+    &[type="checkbox"] ~ #{$prefix}-icon {
+      box-shadow: 0 0 2px 2px $color-primary;
+    }
+  }
+
+  &[data-invalid="true"] {
+    #{$base}__wrapper {
+      //box-shadow: 0 0 1px 1px $color-danger inset;
+      background-color: mix($color-danger, $input-bg, 5%);
+
+      &::after {
+        background-color: $color-danger;
+      }
+    }
+    #{$base}__label {
+      color: $color-danger;
+    }
+  }
+
+  &[data-disabled="true"] #{$base}__wrapper {
+    background-color: $body-bg;
+  }
+
+  &[data-readonly="true"] #{$base}__wrapper {
+    background-color: $base-bg;
+  }
+
+  &__switch {
+    background-color: $base-bg;
+    box-shadow: 0 0 1px $base-color inset;
+    color: $input-color;
+
+    &--handle {
+      background-color: $input-bg;
+      box-shadow: 0 0 1px $base-color inset, 0 1px 1px rgba($base-color, 0.25);
+    }
+  }
+
+  &__option {
+    input:checked ~ #{$base}__switch {
+      background-color: $color-primary;
+      color: $white;
+
+      &[data-color="secondary"] {
+        background-color: $color-secondary;
+      }
+      &[data-color="info"] {
+        background-color: $color-info;
+      }
+      &[data-color="danger"] {
+        background-color: $color-danger;
+      }
+      &[data-color="success"] {
+        background-color: $color-success;
+      }
+      &[data-color="warning"] {
+        background-color: $color-warning;
+      }
+    }
+  }
+
+  &__strength {
+    background: linear-gradient(
+      90deg,
+      $color-red,
+      $color-orange,
+      $color-yellow,
+      $color-green,
+      $color-teal
+    );
+  }
+}
+
+#{$prefix}-select {
+  &__option {
+    &:hover {
+      background-color: rgba($color-primary, 0.25);
+    }
+  }
+  &__popover {
+    background-color: $input-bg;
+  }
+}

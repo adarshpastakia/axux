@@ -1,0 +1,39 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "declaration": false,
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "skipDefaultLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types", "@types"],
+    "lib": ["dom", "es2017"],
+    "baseUrl": "."
+  },
+  "include": [
+    "./packages/**/*.ts",
+    "./packages/**/*.tsx",
+    "./storybook/**/*.ts",
+    "./storybook/**/*.tsx",
+    "./.storybook/*.ts",
+    "./.storybook/*.tsx"
+  ],
+  "files": ["./@types/global.d.ts"],
+  "exclude": ["node_modules", "tmp", "dist", "__tests__"]
+}

@@ -1,0 +1,32 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxDatePanel } from "../../src/panels/DatePanel";
+import { DateStory } from "./DateStory";
+
+<Meta
+  title="@date/DateTime"
+  component={AxDatePanel}
+  parameters={{ jest: ["DateInput.test.tsx"] }}
+/>
+
+<Anchor storyId="@date-datetime--datetime">
+  <Title>Date</Title>
+</Anchor>
+
+<Description of={AxDatePanel} />
+
+<Canvas>
+  <Story name="DateTime">{DateStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxDatePanel} sort="requiredFirst" />

@@ -1,0 +1,64 @@
+import { Meta, Title } from "@storybook/addon-docs";
+import { LightBox, Section } from "./components";
+import {
+  ColorBox,
+  ColorText,
+  ColorTitle,
+  GRAYSCALE,
+  PALETTE,
+  THEME
+} from "./stylings/theming-items";
+import { Fragment } from "react";
+
+<Meta title="AxUx/Colors" />
+
+<Title>🎨 Colors</Title>
+
+<Section title="Basic Palette">
+  <LightBox>
+    <div className="ax-flex">
+      {[...THEME, ...GRAYSCALE].map((c) => (
+        <ColorBox key={c} color={c} />
+      ))}
+    </div>
+  </LightBox>
+</Section>
+
+<Fragment>
+  {[...THEME, ...GRAYSCALE].map((c) => (
+    <Fragment key={c}>
+      <Section title={<ColorTitle color={c}>{c}</ColorTitle>}>
+        <LightBox>
+          <ColorText bg={c} color={c.includes("light") || c === "empty" ? "base" : "invert"}>
+            .ax-bg--{c}
+          </ColorText>
+          <ColorText color={c} bg={c.includes("light") || c === "empty" ? "invert" : "base"}>
+            .ax-color--{c}
+          </ColorText>
+        </LightBox>
+      </Section>
+    </Fragment>
+  ))}
+  <Section title={<ColorTitle color="invert">Invert</ColorTitle>}>
+    <LightBox>
+      <ColorText bg="invert" color="invert">
+        .ax-bg--invert
+      </ColorText>
+      <ColorText color="invert" bg="invert">
+        .ax-color--invert
+      </ColorText>
+    </LightBox>
+    <p>Inverts current theme background or foreground</p>
+  </Section>
+</Fragment>
+
+<Section title="Extra Palette">
+  <LightBox>
+    <div className="ax-flex">
+      {[...PALETTE].map((c) => (
+        <ColorBox key={c} color={c} showLabel />
+      ))}
+    </div>
+  </LightBox>
+  <p>Can be used similar to basic palette color for background or foreground</p>
+</Section>

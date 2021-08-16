@@ -1,0 +1,28 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-meter {
+  font-size: 0.75rem;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    height: 0.75rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  > label {
+    bottom: 0;
+    font-size: 0.5rem;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    z-index: 2;
+  }
+}

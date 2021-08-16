@@ -1,0 +1,30 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxTreePanel } from "../../src";
+import { TreeStory } from "./TreeStory";
+
+<Meta title="@data/Tree" component={AxTreePanel} parameters={{ jest: ["Tree.test.tsx"] }} />
+
+<Anchor storyId="data-tree--tree">
+  <Title>Tree</Title>
+</Anchor>
+
+<Description of={AxTreePanel} />
+
+<Canvas>
+  <Story name="Tree" parameters={{ layout: "none" }} height="30rem">
+    {TreeStory}
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxTreePanel} sort="requiredFirst" />

@@ -1,0 +1,97 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-toolbar {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 0.125rem 0.25rem;
+  white-space: nowrap;
+
+  $base: #{$prefix}-toolbar;
+
+  &--wrapper {
+    align-items: inherit;
+    display: flex;
+    flex: 1;
+    flex-flow: inherit;
+    justify-content: inherit;
+  }
+
+  &--spacer {
+    flex: 1 1 1em;
+  }
+
+  #{$prefix}-divider {
+    align-self: stretch;
+  }
+
+  &--overflow {
+    #{$prefix}-button {
+      display: block;
+      margin: 0;
+
+      &__group {
+        display: grid;
+      }
+
+      &[data-tool-caret="true"] {
+        #{$prefix}-button__caret {
+          display: none;
+        }
+        &::after {
+          bottom: -3px;
+          content: "▾";
+          left: 50%;
+          line-height: 1;
+          pointer-events: none;
+          position: absolute;
+          transform: translateX(-50%);
+        }
+      }
+    }
+  }
+
+  > [data-overflow="true"] {
+    flex: 0 0 2em;
+  }
+
+  > [data-overflow="false"] {
+    display: none;
+  }
+
+  &[data-vertical="false"] {
+    #{$prefix}-divider {
+      flex-flow: column;
+      margin: 0 0.25rem;
+
+      hr {
+        width: 1px;
+      }
+    }
+  }
+
+  &[data-vertical="true"],
+  &--overflow {
+    flex-flow: column nowrap;
+
+    #{$prefix}-divider {
+      flex-flow: row;
+      margin: 0.25rem 0;
+
+      hr {
+        height: 1px;
+      }
+    }
+  }
+
+  &[data-align="end"] {
+    justify-content: flex-end;
+  }
+  &[data-align="center"] {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,117 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+// append browser prefixes for css property
+// @param $property - property name
+// @param $val      - property value
+// @param $fallback - include fallback property
+
+// @function ellipsis
+// @desc clip long text with ellipsis
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// @function strip dot
+@function parse-dotless($class) {
+  $this: quote($class);
+  @return if(str-slice($this, 0, 1) == ".", str-slice($this, 2, str-length($this)), $this);
+}
+
+// @function clip
+// @desc clip long text
+@mixin clip($lines: 2, $line-height: $base-line-height) {
+  --line-clamp: #{$lines};
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--line-clamp);
+  line-height: $line-height;
+  max-height: calc(var(--line-clamp) * #{$line-height} * 1em);
+  overflow: hidden;
+  padding: 0;
+  text-align: justify;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+// disable user selection
+@mixin noselect {
+  cursor: default;
+  user-select: none;
+}
+
+@mixin text-select {
+  cursor: text;
+  user-select: text;
+}
+
+// add clearfix
+@mixin clearfix {
+  &::after,
+  &::before {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}
+
+// create min-width breakpoint
+// @param $breakpoint - breakpoint name ['xs','sm','md','lg','xl','xxl']
+@mixin min-breakpoint($breakpoint) {
+  @media screen and (min-width: map-get($breakpoints, $breakpoint) - 2px) {
+    @content;
+  }
+}
+
+// create max-width breakpoint
+// @param $breakpoint - breakpoint name ['xs','sm','md','lg','xl','xxl']
+@mixin max-breakpoint($breakpoint) {
+  @media screen and (max-width: map-get($breakpoints, $breakpoint) - 2px) {
+    @content;
+  }
+}
+
+// position helper
+// @param $position - ['absolute', 'fixed']
+// @param $coords   - coordinate shortcut [all, vertical horizontal, top horizontal bottom, top right bottom left]
+@mixin position($position: absolute, $coords: auto) {
+  position: $position;
+
+  @if length($list: $coords) == 1 {
+    bottom: $coords;
+    left: $coords;
+    right: $coords;
+    top: $coords;
+  }
+  @if length($list: $coords) == 2 {
+    bottom: nth($coords, 1);
+    left: nth($coords, 2);
+    right: nth($coords, 2);
+    top: nth($coords, 1);
+  }
+  @if length($list: $coords) == 3 {
+    bottom: nth($coords, 3);
+    left: nth($coords, 2);
+    right: nth($coords, 2);
+    top: nth($coords, 1);
+  }
+  @if length($list: $coords) == 4 {
+    bottom: nth($coords, 3);
+    left: nth($coords, 4);
+    right: nth($coords, 2);
+    top: nth($coords, 1);
+  }
+}
+
+@mixin section() {
+  display: grid;
+  grid-area: content;
+  grid-template-areas: "head head head" "side-s content side-e" "foot foot foot";
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+}
