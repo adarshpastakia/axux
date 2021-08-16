@@ -103,7 +103,6 @@
 
       &[data-disabled="true"] {
         pointer-events: none;
-        @extend #{$prefix}-color--muted;
       }
     }
   }
