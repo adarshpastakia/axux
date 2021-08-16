@@ -47,7 +47,7 @@ describe("Button", () => {
   });
 
   it("renders style", (done) => {
-    const fragment = render(<ButtonStory style="outline" />);
+    const fragment = render(<ButtonStory type="outline" />);
     expect(fragment.container).toHaveTextContent("Button");
     expect(fragment.container.querySelector("[data-style='outline']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
