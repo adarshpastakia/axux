@@ -21,16 +21,16 @@
   },
   "dependencies": {
     "@axux/utilities": "*",
+    "@popperjs/core": "^2.9.2",
+    "react-helmet": "^6.1.0",
+    "react-popper": "^2.2.5",
     "resize-observer-polyfill": "^1.5.1"
   },
   "peerDependencies": {
-    "@popperjs/core": "^2.9.2",
     "i18next": "^20.3.5",
     "react": "next",
     "react-dom": "next",
-    "react-helmet": "^6.1.0",
     "react-i18next": "^11.11.4",
-    "react-popper": "^2.2.5",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
