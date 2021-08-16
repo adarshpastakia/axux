@@ -91,23 +91,17 @@
 
   &__option {
     input:checked ~ #{$base}__switch {
-      background-color: $color-primary;
-      color: $white;
+      background-color: $color-dark;
+      color: $color-empty;
 
-      &[data-color="secondary"] {
-        background-color: $color-secondary;
+      @mixin switch-theme($theme, $color) {
+        &[data-color="#{$theme}"] {
+          background-color: $color;
+          color: contrast($color);
+        }
       }
-      &[data-color="info"] {
-        background-color: $color-info;
-      }
-      &[data-color="danger"] {
-        background-color: $color-danger;
-      }
-      &[data-color="success"] {
-        background-color: $color-success;
-      }
-      &[data-color="warning"] {
-        background-color: $color-warning;
+      @each $label, $color in map-merge($theme, $palette) {
+        @include switch-theme($label, $color);
       }
     }
   }

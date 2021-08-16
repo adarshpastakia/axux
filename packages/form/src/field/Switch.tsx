@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { Color } from "@axux/core/dist/types";
+import { Color, ColorPalette } from "@axux/core/dist/types";
 import { FC, memo } from "react";
 import { AxFieldController } from "../internals/FieldController";
 
@@ -32,7 +32,7 @@ export interface SwitchProps {
   /**
    * Checked theme color
    */
-  color?: Color;
+  color?: Color | ColorPalette;
   /**
    * Custom checked label
    */

@@ -67,13 +67,24 @@ const Template: Story<FormProps & { isDisabled?: boolean }> = ({ isDisabled, ...
                 <AxField.Checkbox name="checks.email" label="via Email" />
                 <AxField.Checkbox name="checks.sms" label="via SMS" />
                 <AxField.Checkbox name="checks.notify" label="via App Notification" />
+                <AxField.Checkbox name="checks.none" label="No contact" isDisabled />
+                <AxField.Switch name="switch.email" offLabel="no" onLabel="Email" color="indigo" />
+                <AxField.Switch name="switch.sms" offLabel="no" onLabel="Sms" color="green" />
+                <AxField.Switch
+                  name="switch.notify"
+                  offLabel="no"
+                  onLabel="yes"
+                  color="pink"
+                  label="vi App Notification"
+                />
+                <AxField.Switch name="switch.none" label="Unknown" />
               </AxField.Options>
               <AxField.Options label="Options" name="option">
                 <AxField.Radio value="red" label="Red" />
                 <AxField.Radio value="blue" label="Blue" />
                 <AxField.Radio value="yellow" label="Yellow" />
                 <AxField.Radio value="green" label="Green" />
-                <AxField.Radio value="orange" label="Orange" />
+                <AxField.Radio value="orange" label="Orange" isDisabled />
                 <AxField.Radio value="purple" label="Purple" />
               </AxField.Options>
               <AxField.Select<KeyValue>

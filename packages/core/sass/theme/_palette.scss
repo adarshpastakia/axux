@@ -8,49 +8,6 @@
 // @copyright : 2021
 // @license   : MIT
 
-$base-colors: (
-  bg: $base-bg,
-  color: $base-color,
-  muted: $base-muted,
-  border: $base-border-color
-);
-
-$theme: (
-  primary: $color-primary,
-  secondary: $color-secondary,
-  info: $color-info,
-  danger: $color-danger,
-  success: $color-success,
-  warning: $color-warning
-);
-
-$grayscale: (
-  empty: $color-empty,
-  lightest: $color-lightest,
-  light: $color-light,
-  medium: $color-medium,
-  dark: $color-dark,
-  darkest: $color-darkest,
-  opaque: $color-opaque
-);
-
-$palette: (
-  white: $white,
-  black: $black,
-  purple: $color-purple,
-  violet: $color-violet,
-  indigo: $color-indigo,
-  blue: $color-blue,
-  cyan: $color-cyan,
-  teal: $color-teal,
-  green: $color-green,
-  yellow: $color-yellow,
-  orange: $color-orange,
-  red: $color-red,
-  fuchsia: $color-fuchsia,
-  pink: $color-pink
-);
-
 #{$prefix} {
   &-shadow,
   &-icon--round,

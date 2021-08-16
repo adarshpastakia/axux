@@ -35,6 +35,7 @@
       line-height: 0.75rem;
       padding: 0 2px;
       text-align: center;
+      text-transform: capitalize;
     }
     &::after {
       content: attr(data-off-label);
