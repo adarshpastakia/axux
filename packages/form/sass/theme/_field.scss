@@ -121,6 +121,21 @@
       $color-green,
       $color-teal
     );
+
+    &::after {
+      background-color: $base-bg;
+    }
+  }
+
+  &__step--up,
+  &__step--down {
+    &:hover {
+      background-color: $color-muted;
+    }
+    &:active {
+      background-color: $color-muted;
+      color: $white;
+    }
   }
 }
 

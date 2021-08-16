@@ -45,14 +45,10 @@
 
     &[data-disable="true"] {
       pointer-events: none;
-      @extend #{$prefix}-bg--base;
-      @extend #{$prefix}-color--muted;
     }
 
     &[data-selected="true"] {
       pointer-events: none;
-      @extend #{$prefix}-bg--primary;
-      @extend #{$prefix}-color--white;
     }
   }
 }

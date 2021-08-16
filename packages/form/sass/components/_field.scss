@@ -140,14 +140,6 @@
     overflow: hidden;
     text-align: center;
     width: 1.25rem;
-
-    &:hover {
-      background-color: $color-muted;
-    }
-    &:active {
-      background-color: $color-muted;
-      color: $white;
-    }
   }
   &__step--up {
     transform: scaleY(-1);
@@ -161,7 +153,6 @@
     right: 0;
 
     &::after {
-      @extend #{$prefix}-bg--base;
       content: "";
       display: block;
       height: 100%;
