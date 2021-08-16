@@ -1,0 +1,326 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix} {
+  &-icon,
+  &-avatar {
+    display: inline-block;
+    fill: currentColor;
+    line-height: 1;
+    text-align: center;
+    vertical-align: middle;
+
+    > i,
+    > img,
+    > svg,
+    > span {
+      display: block;
+      height: 1em;
+      object-fit: contain;
+      overflow: hidden;
+      pointer-events: none;
+      width: 1em;
+    }
+  }
+
+  &-icon {
+    --spin-steps: 8;
+
+    > span {
+      font: inherit;
+      text-align: center;
+    }
+
+    &--fluid {
+      min-width: 1em;
+      width: unset;
+    }
+    &--sm {
+      font-size: 0.75em;
+    }
+    &--md {
+      font-size: 1.25em;
+    }
+    &--lg {
+      font-size: 1.5em;
+    }
+  }
+
+  @at-root [dir="rtl"] #{$prefix}-icon {
+    svg,
+    img {
+      transform: scaleX(-1);
+    }
+  }
+  @at-root [dir="ltr"] #{$prefix}-icon {
+    svg,
+    img {
+      transform: scaleX(1);
+    }
+  }
+
+  &-avatar {
+    border-radius: 1em;
+    font-size: 1.5em;
+    height: 1.25em;
+    line-height: 1.25em;
+    overflow: hidden;
+    padding: 0.125em;
+    text-align: center;
+    width: 1.25em;
+    > span {
+      display: inline-block;
+      font-size: 0.5em;
+      font-weight: $font-weight-medium;
+      line-height: 1;
+      vertical-align: 0.45em;
+      width: unset;
+    }
+    > img {
+      border-radius: 1em;
+      overflow: hidden;
+    }
+    > #{$prefix}-icon {
+      vertical-align: 0.05em;
+    }
+    &--sm {
+      font-size: 1.2em;
+    }
+    &--md {
+      font-size: 2em;
+    }
+    &--lg {
+      font-size: 2.5em;
+    }
+    &--xl {
+      font-size: 3em;
+    }
+  }
+
+  &-font {
+    &--normal {
+      font-size: $base-font-size;
+    }
+    &--inherit {
+      font: {
+        family: inherit;
+        size: inherit;
+        weight: inherit;
+      }
+    }
+
+    @each $label, $size in $font-sizes {
+      &--#{$label} {
+        font-size: $size;
+      }
+    }
+
+    &--sans-serif {
+      font-family: $font-family-sans-serif;
+    }
+
+    &--serif {
+      font-family: $font-family-serif;
+    }
+
+    &--mono {
+      font-family: $font-family-mono;
+    }
+  }
+
+  &-text {
+    flex: 1;
+    vertical-align: middle;
+
+    $clipClass: parse-dotless(#{$prefix}-text--clip);
+    &[class^="#{$clipClass}"],
+    &[class*=" #{$clipClass}"] {
+      @include clip();
+    }
+
+    &--upper {
+      text-transform: uppercase;
+    }
+
+    &--lower {
+      text-transform: lowercase;
+    }
+
+    &--title {
+      text-transform: capitalize;
+    }
+
+    &--smallcaps {
+      font-variant: small-caps;
+    }
+
+    &--underline {
+      text-decoration: underline;
+    }
+
+    &--dropcaps {
+      &::first-letter {
+        float: left;
+        font-size: 3em;
+        font-weight: $font-weight-medium;
+        line-height: 1;
+        padding-right: 0.25em;
+      }
+
+      @at-root [dir="rtl"] &::first-letter {
+        float: right;
+        padding-left: 0.25em;
+      }
+    }
+  }
+
+  // alignments
+  &-align {
+    &--start {
+      text-align: start;
+    }
+
+    &--center {
+      text-align: center;
+    }
+
+    &--end {
+      text-align: end;
+    }
+
+    &--justify {
+      text-align: justify;
+    }
+  }
+
+  // font weights
+  &-weight {
+    &--black {
+      font-weight: $font-weight-black;
+    }
+
+    &--bold {
+      font-weight: $font-weight-bold;
+    }
+
+    &--medium {
+      font-weight: $font-weight-medium;
+    }
+
+    &--normal {
+      font-weight: $font-weight-normal;
+    }
+
+    &--light {
+      font-weight: $font-weight-light;
+    }
+
+    &--thin {
+      font-weight: $font-weight-thin;
+    }
+  }
+
+  &-link {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+
+    &::before {
+      @include transition(width 0.25s);
+      bottom: 0;
+      content: "";
+      display: block;
+      height: 1px;
+      left: 0;
+      margin: 0 auto;
+      position: absolute;
+      right: 0;
+      width: 0;
+    }
+
+    &:hover::before {
+      width: 100%;
+    }
+  }
+
+  &-locale--link {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-size: 0.75rem;
+    padding: 0.25em 0.5em;
+    text-transform: capitalize;
+
+    > span {
+      flex: 1;
+      padding: 0 1rem 0 0.25em;
+    }
+
+    &::before {
+      font-size: 1.1rem;
+    }
+
+    &[data-selected="true"] {
+      pointer-events: none;
+
+      &::after {
+        content: "\2713";
+      }
+    }
+
+    &[data-locale="en"]::before {
+      content: "\1F1FA\1F1F8";
+    }
+    &[data-locale="ar"]::before {
+      content: "\1F1F8\1F1E6";
+    }
+    &[data-locale="de"]::before {
+      content: "\1F1E9\1F1EA";
+    }
+    &[data-locale="es"]::before {
+      content: "\1F1EA\1F1F8";
+    }
+    &[data-locale="fr"]::before {
+      content: "\1F1EB\1F1F7";
+    }
+    &[data-locale="it"]::before {
+      content: "\1F1EE\1F1F9";
+    }
+    &[data-locale="jp"]::before {
+      content: "\1F1EF\1F1F5";
+    }
+    &[data-locale="ko"]::before {
+      content: "\1F1F0\1F1F7";
+    }
+    &[data-locale="pt"]::before {
+      content: "\1F1F5\1F1F9";
+    }
+    &[data-locale="ru"]::before {
+      content: "\1F1F7\1F1FA";
+    }
+    &[data-locale="zh"]::before {
+      content: "\1F1E8\1F1F3";
+    }
+  }
+}
+
+// indentation
+@for $i from 1 through 4 {
+  #{$prefix}-text--indent-#{$i} {
+    text-indent: $base-font-size * $i;
+
+    &#{$prefix}-text--dropcaps {
+      text-indent: 0;
+
+      &::first-letter {
+        margin-inline-start: $base-font-size * $i;
+      }
+    }
+  }
+
+  #{$prefix}-text--clip-#{$i * 2} {
+    --line-clamp: #{$i * 2};
+  }
+}

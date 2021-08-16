@@ -1,0 +1,49 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-spotlight {
+  align-items: start;
+  bottom: 0;
+  display: grid;
+  justify-items: center;
+  left: 0;
+  overflow: hidden;
+  padding: 20vh 10vw;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+
+  &__wrapper {
+    border-radius: $base-border-radius;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    max-height: 60vh;
+    max-width: 80vw;
+    overflow: hidden;
+    width: 30rem;
+  }
+
+  &__search {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 1.5rem;
+
+    > input {
+      flex: 1 1 1em;
+      font-size: inherit;
+      padding: 0.25em;
+    }
+
+    > #{$prefix}-icon {
+      margin: 0.25em;
+    }
+  }
+
+  #{$prefix}-menu {
+    font-size: 1.2rem;
+  }
+}

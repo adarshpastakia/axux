@@ -1,0 +1,73 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-grid {
+  $base: #{$prefix}-grid;
+
+  &__header {
+    background-color: mix($color-primary, $base-bg, 10%);
+    border-bottom: 1px solid $base-border-color;
+
+    #{$prefix}-button {
+      box-shadow: 1px 0 0 rgba($base-border-color, 0.25) inset;
+    }
+
+    &--cell {
+      border-inline-end: 1px solid $base-border-color;
+    }
+
+    &--label {
+      &[data-sortable="true"] {
+        &:hover {
+          background-color: mix($color-primary, $base-bg, 8%);
+          color: $color-primary;
+        }
+        &:active {
+          background-color: mix($color-primary, $base-bg, 12%);
+        }
+      }
+    }
+
+    &--resize {
+      box-shadow: 2px 0 2px $color-dark inset;
+    }
+
+    &--filter[data-filtered="false"] #{$prefix}-button__inner {
+      color: $base-muted;
+    }
+  }
+
+  &__body {
+    &--row {
+      &:nth-child(odd) {
+        &,
+        #{$base}__body--cell {
+          background-color: $color-empty;
+        }
+      }
+      &:nth-child(even) {
+        &,
+        #{$base}__body--cell {
+          background-color: $color-lightest;
+        }
+      }
+      &:last-child {
+        &,
+        #{$base}__body--cell {
+          background-color: $color-empty;
+        }
+      }
+    }
+
+    &--cell {
+      border-inline-end: 1px solid $base-border-color;
+    }
+  }
+
+  &__resize--ghost {
+    background-color: rgba($color-primary, 0.1);
+    border-inline-end: 2px dotted $color-primary;
+  }
+}

@@ -1,0 +1,125 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-grid {
+  &__panel {
+    display: grid;
+    grid-area: content;
+    grid-template-areas: "head" "content" "foot";
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+  }
+
+  &__header {
+    overflow: hidden;
+    padding-inline-end: 0.5rem;
+
+    #{$prefix}-button {
+      margin: 0;
+    }
+
+    > div {
+      display: flex;
+      flex-flow: row nowrap;
+    }
+
+    &--cell {
+      align-items: center;
+      display: flex;
+      flex: 1 1 0;
+      flex-flow: row nowrap;
+    }
+
+    &--label {
+      align-items: center;
+      display: flex;
+      flex: 1 1 1em;
+      font-size: 0.875rem;
+      overflow: hidden;
+      padding: 0 0.5em;
+
+      &[data-sortable="true"] {
+        cursor: pointer;
+      }
+
+      > * {
+        pointer-events: none;
+      }
+
+      > label {
+        padding-inline-end: 0.25rem;
+        @include ellipsis();
+      }
+    }
+
+    &--sort {
+      font-size: 0.625rem;
+      letter-spacing: -0.375em;
+
+      span {
+        opacity: 0.15;
+      }
+
+      &[data-sort="asc"] span:first-child {
+        opacity: 0.5;
+      }
+
+      &[data-sort="desc"] span:last-child {
+        opacity: 0.5;
+      }
+    }
+
+    &--resize {
+      align-self: stretch;
+      cursor: col-resize;
+      opacity: 0.5;
+      width: 3px;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-flow: column nowrap;
+    grid-area: content;
+    overflow: scroll;
+
+    &--row {
+      display: flex;
+      flex-flow: row nowrap;
+    }
+
+    &--cell {
+      align-items: center;
+      display: flex;
+      flex: 1 1 0;
+      font-size: 0.875rem;
+
+      > label {
+        flex: 1 1 1em;
+        padding: 0 0.25rem;
+        @include ellipsis();
+      }
+
+      &[data-align="center"] {
+        text-align: center;
+      }
+      &[data-align="end"] {
+        text-align: end;
+      }
+    }
+  }
+
+  &__filler {
+    flex: 1 1 auto;
+  }
+
+  &__resize--ghost {
+    bottom: 0;
+    display: none;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+  }
+}

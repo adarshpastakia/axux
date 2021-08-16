@@ -1,0 +1,49 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Subheading,
+  Title
+} from "@storybook/addon-docs";
+import { ViewportStory } from "./ViewportStory";
+import { AxViewport } from "../../src";
+
+<Meta title="@core/Viewport" parameters={{ jest: ["Viewport.test.tsx"] }} />
+
+<Anchor storyId="core-viewport--viewport">
+  <Title>Viewport</Title>
+</Anchor>
+
+<Description of={AxViewport} />
+
+<Canvas>
+  <Story name="Viewport" height="30rem" parameters={{ layout: "none" }}>
+    {ViewportStory}
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<Subheading>AxViewport</Subheading>
+
+<ArgsTable of={AxViewport} sort="requiredFirst" />
+
+<Subheading>AxViewport.Header</Subheading>
+
+<ArgsTable of={AxViewport.Header} sort="requiredFirst" />
+
+<Subheading>AxViewport.Footer</Subheading>
+
+<ArgsTable of={AxViewport.Footer} sort="requiredFirst" />
+
+<Subheading>AxViewport.Banner</Subheading>
+
+<ArgsTable of={AxViewport.Banner} sort="requiredFirst" />
+
+<Subheading>AxViewport.Menu</Subheading>
+
+<ArgsTable of={AxViewport.Menu} sort="requiredFirst" />

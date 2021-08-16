@@ -1,0 +1,107 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Subheading,
+  Title
+} from "@storybook/addon-docs";
+import { AxFlexBox } from "../../src";
+import { FlexboxStory } from "./FlexboxStory";
+
+<Meta
+  title="@core/Layout/FlexBox"
+  component={AxFlexBox}
+  parameters={{ jest: ["FlexBox.test.tsx"] }}
+/>
+
+<Anchor storyId="core-layout-flexbox--flexbox">
+  <Title>Flex Box</Title>
+</Anchor>
+
+<Description of={AxFlexBox} />
+
+<Canvas>
+  <Story name="Flexbox" parameters={{ layout: "padded" }}>
+    {FlexboxStory}
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-layout-flexbox--aligning">
+  <Heading>Aligning</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Aligning" parameters={{ layout: "padded" }}>
+    <AxFlexBox className="ax-padding--y">
+      <AxFlexBox.Row height={8} className="ax-bg--lightest">
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm" align="top">
+          Align top
+        </AxFlexBox.Col>
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm" align="middle">
+          Align middle
+        </AxFlexBox.Col>
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm" align="bottom">
+          Align bottom
+        </AxFlexBox.Col>
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm" align="stretch">
+          Stretch
+        </AxFlexBox.Col>
+      </AxFlexBox.Row>
+      <AxFlexBox.Row justify="start" className="ax-bg--base">
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm">
+          Justify start
+        </AxFlexBox.Col>
+      </AxFlexBox.Row>
+      <AxFlexBox.Row justify="center" className="ax-bg--lightest">
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm">
+          Justify center
+        </AxFlexBox.Col>
+      </AxFlexBox.Row>
+      <AxFlexBox.Row justify="end" className="ax-bg--base">
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm">
+          Justify end
+        </AxFlexBox.Col>
+      </AxFlexBox.Row>
+      <AxFlexBox.Row justify="even" className="ax-bg--lightest">
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm">
+          Justify even
+        </AxFlexBox.Col>
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm">
+          Justify even
+        </AxFlexBox.Col>
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm">
+          Justify even
+        </AxFlexBox.Col>
+      </AxFlexBox.Row>
+      <AxFlexBox.Row justify="spaced" className="ax-bg--base">
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm">
+          Justify spaced
+        </AxFlexBox.Col>
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm">
+          Justify spaced
+        </AxFlexBox.Col>
+        <AxFlexBox.Col span={3} className="ax-bg--light" padding="sm">
+          Justify spaced
+        </AxFlexBox.Col>
+      </AxFlexBox.Row>
+    </AxFlexBox>
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<Subheading>AxFlexBox</Subheading>
+
+<ArgsTable of={AxFlexBox} sort="requiredFirst" />
+
+<Subheading>AxFlexBox.Row</Subheading>
+
+<ArgsTable of={AxFlexBox.Row} sort="requiredFirst" />
+
+<Subheading>AxFlexBox.Col</Subheading>
+
+<ArgsTable of={AxFlexBox.Col} sort="requiredFirst" />

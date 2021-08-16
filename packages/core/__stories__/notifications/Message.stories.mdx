@@ -1,0 +1,23 @@
+import { Anchor, ArgsTable, Canvas, Description, Heading, Meta, Story, Title } from "@storybook/addon-docs";
+import { AxMessage } from "../../src/overlays/Message";
+import { MessageStory } from "./NotificationStory";
+
+<Meta
+  title="@core/Notifications/Message"
+  component={AxMessage}
+  parameters={{ jest: ["Message.test.tsx"] }}
+/>
+
+<Anchor storyId="core-notifications-message--message">
+  <Title>Message Notification</Title>
+</Anchor>
+
+<Description of={AxMessage} />
+
+<Canvas>
+  <Story name="Message">{MessageStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable story="Message" sort="requiredFirst" />

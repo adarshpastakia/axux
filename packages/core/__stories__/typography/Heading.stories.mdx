@@ -1,0 +1,56 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxHeading } from "../../src";
+import { ColorStory, DisplayStory, HeadingStory, SerifStory } from "./HeadingStory";
+
+<Meta
+  title="@core/Typography/Heading"
+  component={AxHeading}
+  parameters={{ jest: ["Heading.text.tsx"] }}
+/>
+
+<Anchor storyId="core-typography-heading--heading">
+  <Title>Heading</Title>
+</Anchor>
+
+<Description of={AxHeading} />
+
+<Canvas>
+  <Story name="Heading">{HeadingStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-typography-heading--display-heading">
+  <Heading>Display Heading</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Display Heading">{DisplayStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-typography-heading--serif-font">
+  <Heading>Serif Font</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Serif Font">{SerifStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-typography-heading--color">
+  <Heading>Color</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Color">{ColorStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxHeading} sort="requiredFirst" />

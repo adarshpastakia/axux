@@ -1,0 +1,66 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-field {
+  $base: #{$prefix}-field;
+
+  &__switch {
+    border-radius: 1em;
+    cursor: pointer;
+    display: grid;
+    font-size: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+    height: 1rem;
+    line-height: 1rem;
+    min-width: 2rem;
+    padding: 2px;
+    position: relative;
+    transition: background-color 500ms, color 500ms;
+
+    &--handle {
+      border-radius: 1em;
+      height: calc(1rem - 4px);
+      left: 0;
+      margin: 2px;
+      position: absolute;
+      top: 0;
+      transition: transform 250ms;
+      width: calc(50%);
+    }
+
+    &::before,
+    &::after {
+      line-height: 0.75rem;
+      padding: 0 2px;
+      text-align: center;
+    }
+    &::after {
+      content: attr(data-off-label);
+    }
+    &::before {
+      content: attr(data-on-label);
+    }
+  }
+
+  &__option {
+    input:checked ~ #{$base}__switch {
+      #{$base}__switch--handle {
+        transform: translateX(calc(100% - 4px));
+      }
+    }
+  }
+
+  @at-root [dir="rtl"] &__option {
+    #{$base}__switch--handle {
+      left: unset;
+      right: 0;
+    }
+    input:checked ~ #{$base}__switch {
+      #{$base}__switch--handle {
+        transform: translateX(calc(-100% + 4px));
+      }
+    }
+  }
+}

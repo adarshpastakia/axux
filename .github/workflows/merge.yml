@@ -36,7 +36,7 @@ jobs:
       - name: Run coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
-          CC_TEST_REPORTER_ID: 2a23a0adc3ced87e7128870c4b6a2c9f7a6f30de563809efd62efd18a4186ab6
+          CC_TEST_REPORTER_ID: 62bd3dccad59babfcd5d8d737394a442e7efc9ecb8bf3e7e1a2929e90a9054f3
         with:
           coverageCommand: yarn test
 

@@ -1,0 +1,197 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-button {
+  display: inline-flex;
+  font-size: 1rem;
+  margin: 0.25rem;
+  position: relative;
+  vertical-align: middle;
+
+  $base: #{$prefix}-button;
+
+  &[data-size="sm"] {
+    font-size: 0.75rem;
+  }
+  &[data-size="md"] {
+    font-size: 1.25rem;
+  }
+  &[data-size="lg"] {
+    font-size: 1.5rem;
+  }
+
+  &[data-block="true"] {
+    display: flex;
+
+    #{$base}__inner {
+      max-width: unset;
+    }
+  }
+
+  &[data-busy="true"] {
+    cursor: wait;
+
+    #{$base}__inner {
+      pointer-events: none;
+    }
+
+    #{$base}__icon {
+      display: none;
+    }
+
+    #{$base}__spinner {
+      display: block;
+    }
+  }
+
+  &[data-disabled="true"] {
+    cursor: not-allowed;
+
+    #{$base}__inner {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+
+  &__inner {
+    align-items: center;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    flex-flow: row nowrap;
+    font-size: 1em;
+    justify-content: center;
+    line-height: 1;
+    margin: 0;
+    max-width: 10em;
+    overflow: hidden;
+    padding: 0;
+
+    &:first-child {
+      border-bottom-left-radius: $base-border-radius;
+      border-top-left-radius: $base-border-radius;
+
+      @at-root [dir="rtl"] & {
+        border-bottom-right-radius: $base-border-radius;
+        border-top-right-radius: $base-border-radius;
+      }
+    }
+    &:last-child {
+      border-bottom-right-radius: $base-border-radius;
+      border-top-right-radius: $base-border-radius;
+
+      @at-root [dir="rtl"] & {
+        border-bottom-left-radius: $base-border-radius;
+        border-top-left-radius: $base-border-radius;
+      }
+    }
+
+    &[data-icon-align="end"] {
+      #{$base}__icon,
+      #{$base}__spinner {
+        order: 3;
+      }
+    }
+    &[data-icon-align="start"][data-icon-hilight="true"] {
+      #{$base}__icon,
+      #{$base}__spinner {
+        + #{$base}__label {
+          padding-inline-start: 0.5em;
+        }
+      }
+    }
+    &[data-icon-align="end"][data-icon-hilight="true"] {
+      #{$base}__icon,
+      #{$base}__spinner {
+        order: 4;
+
+        + #{$base}__label {
+          padding-inline-end: 0.5em;
+        }
+      }
+    }
+
+    &[data-icon-align="start"][data-no-label="false"][data-icon-hilight="false"] {
+      #{$base}__icon,
+      #{$base}__spinner {
+        margin-inline-start: 0.5em;
+
+        + #{$base}__label {
+          padding-inline-start: 0;
+        }
+      }
+    }
+
+    &[data-icon-align="end"][data-no-label="false"][data-icon-hilight="false"] {
+      #{$base}__icon,
+      #{$base}__spinner {
+        margin-inline-end: 0.5em;
+
+        + #{$base}__label {
+          padding-inline-end: 0;
+        }
+      }
+    }
+  }
+
+  &__icon,
+  &__label,
+  &__caret,
+  &__spinner {
+    pointer-events: none;
+  }
+
+  &__icon,
+  &__spinner {
+    order: 0;
+    padding: 0.25em;
+  }
+
+  &__caret {
+    margin-inline-start: -0.5em;
+    order: 3;
+    padding: 0.25em;
+  }
+
+  &__label {
+    align-self: center;
+    line-height: 1em;
+    order: 1;
+    padding: 0.25em 1em;
+    @include ellipsis();
+
+    > span {
+      font-size: 0.875em;
+    }
+  }
+
+  &__split {
+    flex: 0 0 auto;
+  }
+
+  #{$prefix}-badge {
+    margin-inline-start: -0.5em;
+    order: 3;
+    position: absolute;
+    right: 0.25em;
+
+    @at-root [dir="rtl"] & {
+      left: 0.25em;
+      right: unset;
+    }
+
+    &:not(:empty) {
+      right: -0.25em;
+      top: -0.25em;
+
+      @at-root [dir="rtl"] & {
+        left: -0.25em;
+        right: unset;
+      }
+    }
+  }
+}

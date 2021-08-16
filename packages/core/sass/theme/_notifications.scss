@@ -1,0 +1,41 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+@mixin toast-theme($theme, $color) {
+  #{$prefix}-toast[data-color="#{$theme}"] {
+    background-color: rgba($color, 0.1);
+
+    #{$prefix}-toast__icon {
+      background-color: $color;
+    }
+
+    #{$prefix}-toast__footer {
+      color: $color;
+    }
+
+    #{$prefix}-alert--close #{$prefix}-button__inner:hover {
+      background-color: rgba($color, 0.5);
+    }
+  }
+}
+
+#{$prefix}-toast {
+  background-color: rgba($color-dark, 0.1);
+
+  #{$prefix}-toast__icon {
+    background-color: $color-dark;
+  }
+
+  #{$prefix}-toast__footer {
+    color: $color-dark;
+  }
+}
+
+@include toast-theme(primary, $color-primary);
+@include toast-theme(secondary, $color-secondary);
+@include toast-theme(info, $color-info);
+@include toast-theme(danger, $color-danger);
+@include toast-theme(success, $color-success);
+@include toast-theme(warning, $color-warning);

@@ -1,0 +1,36 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-tree {
+  $base: #{$prefix}-tree;
+
+  &__node {
+    &:hover {
+      background-color: rgba($color-primary, 0.25);
+    }
+    &:active {
+      background-color: rgba($color-primary, 0.5);
+    }
+
+    &[data-selected="true"] {
+      background-color: $color-primary;
+      color: $white;
+
+      #{$prefix}-badge {
+        background-color: rgba($color-medium, 0.5);
+      }
+    }
+
+    &--empty {
+      color: $color-muted;
+    }
+  }
+
+  &__check {
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}

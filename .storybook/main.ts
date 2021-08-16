@@ -1,0 +1,34 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+module.exports = {
+  core: {
+    builder: "webpack5"
+  },
+  stories: [
+    "../storybook/**/*.@(js|jsx|ts|tsx|mdx)",
+    "../packages/**/*.stories.@(js|jsx|ts|tsx|mdx)"
+  ],
+  addons: [
+    "@storybook/preset-scss",
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-jest",
+    "./addon-theme/register.tsx"
+  ],
+  // @ts-ignore
+  webpackFinal: (config) => {
+    // Workaround for @storybook/addon-jest on Webpack 5
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        path: require.resolve("path-browserify")
+      }
+    };
+
+    return config;
+  }
+};

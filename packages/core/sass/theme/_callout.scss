@@ -1,0 +1,31 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+@mixin callout-theme($theme, $color) {
+  #{$prefix}-callout[data-color="#{$theme}"] {
+    background-color: rgba($color, 0.05);
+    border-radius: $base-border-radius;
+    box-shadow: 0 0 2px $color inset;
+    color: $color;
+    overflow: hidden;
+
+    #{$prefix}-alert--close #{$prefix}-button__inner {
+      color: $color;
+    }
+
+    #{$prefix}-alert--close #{$prefix}-button__inner:hover {
+      background-color: rgba($color, 0.5);
+    }
+  }
+}
+
+#{$prefix}-callout {
+  background-color: rgba($color-dark, 0.1);
+  color: $color-dark;
+}
+
+@each $label, $color in map-merge($theme, $palette) {
+  @include callout-theme($label, $color);
+}

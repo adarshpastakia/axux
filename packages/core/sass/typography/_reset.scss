@@ -1,0 +1,177 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: $font-weight-medium;
+  margin: 0;
+}
+
+p {
+  line-height: 1.5;
+  margin: 0;
+  @include text-select();
+}
+
+q {
+  quotes: "\275d""\275e";
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  * {
+    cursor: inherit;
+  }
+}
+
+b {
+  font-weight: $font-weight-bold;
+}
+
+strong {
+  font-weight: $font-weight-medium;
+}
+
+small {
+  font-size: map-get($font-sizes, sm);
+}
+
+img {
+  border: 0;
+}
+
+mark {
+  border-radius: $base-border-radius;
+  color: inherit;
+  padding: 0 2px;
+}
+
+code {
+  border-radius: $base-border-radius;
+  display: inline-block;
+  font-family: $font-family-mono;
+  line-height: 1.25;
+  padding: 0 0.25em;
+}
+
+pre {
+  font-family: $font-family-mono;
+  font-weight: $font-weight-normal;
+  > code {
+    background-color: inherit;
+    color: inherit;
+  }
+}
+
+article {
+  font-size: 1.2rem;
+  line-height: 2.2;
+}
+
+abbr {
+  cursor: help;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style-position: inside;
+  padding: 0;
+
+  &::before {
+    display: none;
+  }
+
+  li {
+    padding: 0.25em 0.5em;
+
+    &::before {
+      display: inline-block;
+      font-size: 0.8em;
+      width: 1.5em;
+    }
+  }
+}
+#{$prefix}-viewport {
+  input,
+  textarea {
+    appearance: none;
+    background: none;
+    border: none;
+    font-family: $font-family-sans-serif;
+    outline: none;
+  }
+}
+
+[data-style="none"] {
+  list-style-type: none;
+}
+[data-style="circle"] {
+  list-style-type: circle;
+}
+[data-style="square"] {
+  list-style-type: square;
+}
+[data-style="blank"] {
+  list-style: none;
+  &::before,
+  li::before {
+    content: "\00A0";
+  }
+}
+[data-style="check"] {
+  list-style: none;
+  &::before,
+  li::before {
+    content: "\2713";
+  }
+}
+[data-style="cross"] {
+  list-style: none;
+  &::before,
+  li::before {
+    content: "\2715";
+  }
+}
+[data-style="arrow"] {
+  list-style: none;
+  &::before,
+  li::before {
+    content: "\2192";
+  }
+}
+
+#{$prefix}-table {
+  border-spacing: 2px;
+  table-layout: fixed;
+  width: 100%;
+
+  th {
+    font-weight: $font-weight-medium;
+    padding: ($base-spacing / 4) ($base-spacing / 2);
+    text-align: left;
+  }
+
+  td {
+    padding: ($base-spacing / 4) ($base-spacing / 2);
+  }
+
+  @include max-breakpoint(sm) {
+    &,
+    tbody,
+    thead,
+    tfoot,
+    tr,
+    td,
+    th {
+      display: block;
+    }
+  }
+}

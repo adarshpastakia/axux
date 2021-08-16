@@ -1,0 +1,23 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-loader {
+  background-color: rgba($base-bg, 0.25);
+
+  &__content {
+    background-color: rgba($base-bg, 0.85);
+    box-shadow: $shadow-level2;
+  }
+
+  &__app {
+    background-color: $base-bg;
+    &--indicator {
+      background-color: $body-bg;
+      &::after {
+        background-color: $color-primary;
+      }
+    }
+  }
+}

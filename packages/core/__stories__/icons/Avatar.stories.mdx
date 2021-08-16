@@ -1,0 +1,89 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxAvatar, COLOR } from "../../src";
+import { BasicStory, IconStory, ImageStory } from "./AvatarStory";
+import { mdiAccount } from "@mdi/js";
+import { PALETTE } from "../../../../storybook/stylings/theming-items"; import { AxBox } from "../../dist/layout/Box";
+
+<Meta title="@core/Icons/Avatar" component={AxAvatar} parameters={{ jest: ["Avatar.test.tsx"] }} />
+
+<Anchor storyId="core-icons-avatar--avatar">
+  <Title>Avatar</Title>
+</Anchor>
+
+<Description of={AxAvatar} />
+
+<Canvas>
+  <Story name="Avatar">{BasicStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-icons-avatar--basic">
+  <Heading>Icon</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Icon">{IconStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-icons-avatar--image">
+  <Heading>Image</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Image">{ImageStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-icons-avatar--sizes">
+  <Heading>Sizes</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Sizes">
+    <AxAvatar title="Username" icon={mdiAccount} size="sm" />
+    <AxAvatar title="Username" icon={mdiAccount} size="default" />
+    <AxAvatar title="Username" icon={mdiAccount} size="md" />
+    <AxAvatar title="Username" icon={mdiAccount} size="lg" />
+    <AxAvatar title="Username" icon={mdiAccount} size="xl" />
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-icons-avatar--themes">
+  <Heading>Themes</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Themes">
+    <AxBox margin>
+      {Object.values(COLOR).map((color) => (
+        <AxAvatar title="Username" icon={mdiAccount} key={color} color={color} />
+      ))}
+    </AxBox>
+    <AxBox margin>
+      {Object.values(PALETTE).map((color) => (
+        <AxAvatar title="Username" icon={mdiAccount} key={color} color={color} />
+      ))}
+    </AxBox>
+    <AxBox margin>
+      {Object.values(COLOR).map((color) => (
+        <AxAvatar title="Username" icon={mdiAccount} key={color} bg={color} />
+      ))}
+    </AxBox>
+    <AxBox margin>
+      {Object.values(PALETTE).map((color) => (
+        <AxAvatar title="Username" icon={mdiAccount} key={color} bg={color} />
+      ))}
+    </AxBox>
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxAvatar} sort="requiredFirst" />

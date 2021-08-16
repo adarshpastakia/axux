@@ -1,0 +1,30 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-subheading {
+  font-size: 0.75em;
+  font-weight: $font-weight-normal;
+}
+
+@for $i from 1 through 6 {
+  $heading: nth(nth($font-size-headings, $i), 1);
+  $size: nth(nth($font-size-headings, $i), 2);
+
+  #{$heading},
+  #{$prefix}-heading--#{$i} {
+    font-size: $size;
+    font-weight: 300;
+
+    small {
+      display: block;
+      @extend #{$prefix}-subheading;
+    }
+  }
+
+  #{$prefix}-display--#{$i} {
+    font-size: $size * 2.5;
+    font-weight: 200;
+  }
+}

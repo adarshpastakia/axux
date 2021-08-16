@@ -1,0 +1,50 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-date {
+  background-color: $input-bg;
+
+  $base: #{$prefix}-date;
+
+  &__cell {
+    &[data-muted="true"],
+    &[data-disabled="true"] {
+      color: rgba($base-color, 0.5);
+    }
+    &[data-today="true"] {
+      box-shadow: 0 0 0 1px rgba($color-primary, 0.5) inset;
+    }
+    &[data-hilight="true"] {
+      background-color: rgba($color-primary, 0.1);
+    }
+    &[data-selected="true"] {
+      background-color: $color-primary;
+      color: $white;
+    }
+
+    &:hover {
+      background-color: rgba($color-primary, 0.3);
+    }
+    &:active {
+      box-shadow: 0 0 1px 1px rgba($base-shadow-color, 0.5) inset;
+    }
+  }
+
+  &__header--label {
+    color: $color-primary;
+  }
+
+  &__head {
+    background-color: rgba($color-primary, 0.2);
+  }
+
+  &__wkhead {
+    background-color: rgba($color-primary, 0.1);
+
+    > div:first-child {
+      background-color: rgba($color-primary, 0.3);
+    }
+  }
+}

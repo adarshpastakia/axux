@@ -1,0 +1,89 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-field {
+  $base: #{$prefix}-field;
+
+  &__options {
+    display: grid;
+    grid-auto-flow: row;
+    grid-gap: 0 $base-spacing/4;
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+
+    &[data-vertical="true"] {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__option {
+    align-items: center;
+    display: inline-flex;
+    height: 1.5rem;
+    padding-inline-start: 2px;
+    position: relative;
+
+    input {
+      opacity: 0;
+      position: absolute;
+      z-index: -1;
+    }
+    > span {
+      flex: 1 1 1em;
+      font-size: 0.875rem;
+      line-height: 1;
+      padding: 0 $base-spacing/4;
+      @include ellipsis();
+    }
+
+    #{$prefix}-icon {
+      cursor: pointer;
+      margin-top: -1px;
+      opacity: 0.8;
+    }
+
+    input[type="radio"] ~ #{$prefix}-icon {
+      border-radius: 1em;
+    }
+
+    [data-check="on"] {
+      display: none;
+    }
+
+    input:checked {
+      & ~ [data-check="off"] {
+        display: none;
+      }
+      & ~ [data-check="on"] {
+        @extend #{$prefix}-color--primary;
+        display: block;
+      }
+    }
+
+    &:hover #{$prefix}-icon,
+    &:focus #{$prefix}-icon {
+      @extend #{$prefix}-color--primary;
+      opacity: 1;
+    }
+
+    input:disabled {
+      pointer-events: none;
+
+      & ~ #{$prefix}-icon {
+        @extend #{$prefix}-color--muted;
+        cursor: not-allowed;
+        opacity: 0.25;
+      }
+      & ~ span {
+        @extend #{$prefix}-color--muted;
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+      & ~ div {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Links should render link 1`] = `
+<div>
+  <a
+    aria-current="page"
+    class="ax-link  active"
+    href="/#/test"
+    rel="noreferrer"
+  >
+    Simple link
+  </a>
+</div>
+`;
+
+exports[`Links should render new tab link 1`] = `
+<div>
+  <a
+    aria-current="page"
+    class="ax-link  active"
+    href="/#/test"
+    rel="noreferrer"
+    target="_blank"
+  >
+    Simple link
+  </a>
+</div>
+`;

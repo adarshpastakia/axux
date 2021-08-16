@@ -1,0 +1,42 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxError } from "../../src";
+import { CustomError, DefaultError } from "./ErrorStory";
+
+<Meta
+  title="@core/Viewport/Error Boundary"
+  component={AxError}
+  parameters={{ jest: ["Error.test.tsx"] }}
+/>
+
+<Title>Error Boundary</Title>
+
+<Description of={AxError} />
+
+<Canvas>
+  <Story name="Default" parameters={{ layout: "none" }} height="30rem">
+    {DefaultError}
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-viewport-error-boundary--custom">
+  <Heading>Custom</Heading>
+</Anchor>
+
+<Canvas withToolbar>
+  <Story name="Custom" parameters={{ layout: "none" }} height="30rem">
+    {CustomError}
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxError} sort="requiredFirst" />

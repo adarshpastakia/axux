@@ -1,0 +1,23 @@
+{
+  "name": "@axux/utilities",
+  "version": "0.0.0",
+  "description": "AxUx UI: Utility package",
+  "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build:lib": "tsc -p ./tsconfig.build.json",
+    "prebuild": "rm -rf ./dist",
+    "build": "npm-run-all build:lib",
+    "watch": "yarn build:lib -w"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

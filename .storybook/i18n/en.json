@@ -1,0 +1,9 @@
+{
+  "core": {
+    "appTitle": "Altux UI",
+    "appDescription": "React based UI framework for business applications"
+  },
+  "login": {
+    "demo": "Login credential for demo [demo/pass]"
+  }
+}

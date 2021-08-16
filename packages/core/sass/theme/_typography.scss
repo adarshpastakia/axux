@@ -1,0 +1,83 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+a {
+  color: $color-secondary;
+}
+
+mark {
+  background: rgba($color-secondary, 0.375);
+}
+
+code {
+  background: rgba($base-muted, 0.05);
+  color: rgba($color-danger, 0.9);
+}
+
+abbr {
+  border-bottom: 1px dashed rgba($base-color, 0.75);
+}
+
+@for $i from 1 through 6 {
+  $heading: nth(nth($font-size-headings, $i), 1);
+
+  #{$heading},
+  #{$prefix}-heading--#{$i} {
+    small {
+      color: $base-muted;
+    }
+  }
+}
+
+#{$prefix} {
+  &-subheading {
+    color: $base-muted;
+  }
+
+  &-link {
+    color: $color-secondary;
+
+    &::before {
+      background: $color-secondary;
+    }
+  }
+
+  &-locale--link {
+    &:hover {
+      background-color: lighter($color-primary, 0.5);
+      color: $white;
+    }
+    &:active {
+      background-color: darker($color-primary, 0.5);
+      color: $white;
+    }
+  }
+
+  &-dl--striped {
+    dt:nth-child(2n + 1),
+    dt:nth-child(2n + 1) + dd {
+      background-color: rgba($base-muted, 0.1);
+    }
+
+    dt:nth-child(4n + 1),
+    dt:nth-child(4n + 1) + dd {
+      background-color: $body-bg;
+    }
+  }
+
+  &-table {
+    thead th {
+      background: rgba($color-secondary, 0.5);
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba($base-muted, 0.1);
+    }
+
+    tr:nth-child(odd) {
+      background-color: $body-bg;
+    }
+  }
+}

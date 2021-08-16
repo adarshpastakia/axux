@@ -1,0 +1,25 @@
+{
+  "locale": {
+    "en": "English",
+    "ar": "عربى"
+  },
+  "options": {
+    "theme": "Switch Theme",
+    "locale": "Change Locale"
+  },
+  "error": {
+    "title": "OOPS! We broke something"
+  },
+  "action": {
+    "ok": "OK",
+    "add": "Add New",
+    "save": "Save",
+    "back": "Back",
+    "close": "Close",
+    "apply": "Apply",
+    "delete": "Delete",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "preview": "Preview"
+  }
+}

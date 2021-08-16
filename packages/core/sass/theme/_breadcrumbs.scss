@@ -1,0 +1,68 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+@mixin modernTheme($i) {
+  $color: darker(lighter($color-primary, 0.25), $i * 0.1);
+
+  color: mix($color, $base-bg, 75%);
+
+  > div {
+    background-color: mix($color, $base-bg, 75%);
+    color: $white;
+  }
+
+  &:hover {
+    color: mix($color, $base-bg, 95%);
+    > div {
+      background-color: mix($color, $base-bg, 95%);
+    }
+  }
+  &:active {
+    color: mix($color, $base-bg, 50%);
+    > div {
+      background-color: mix($color, $base-bg, 50%);
+    }
+  }
+}
+
+#{$prefix}-breadcrumb {
+  $base: #{$prefix}-breadcrumb;
+
+  &__bar[data-theme="modern"] {
+    #{$base}__item {
+      @include modernTheme(10);
+      @for $i from 1 through 9 {
+        &[data-index="#{$i}"] {
+          @include modernTheme($i);
+        }
+      }
+    }
+  }
+
+  &__bar[data-theme="classic"] {
+    #{$base}__item {
+      color: mix($color-primary, $base-bg, 75%);
+      &:hover > div {
+        color: mix($color-primary, $base-bg, 95%);
+      }
+      &:active > div {
+        color: mix($color-primary, $base-bg, 50%);
+      }
+    }
+  }
+
+  &__link {
+    color: $color-primary;
+
+    &:hover {
+      background-color: lighter($color-primary, 0.25);
+      color: $white;
+    }
+    &:active {
+      background-color: darker($color-primary, 0.5);
+      color: $white;
+    }
+  }
+}

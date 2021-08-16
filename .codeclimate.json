@@ -1,0 +1,27 @@
+{
+  "checks": {
+    "similar-code": {
+      "enabled": false
+    }
+  },
+  "exclude_patterns": [
+    ".github/",
+    ".storybook/",
+    "assets/",
+    "coverage/",
+    "jest/",
+    "**/node_modules/",
+    "storybook/",
+    "**/__stories__/",
+    "**/__tests__/",
+    "**/dist/",
+    "**/LICENSE",
+    "**/*.d.ts",
+    "**/*.lock",
+    "**/*.scss",
+    "**/*.json",
+    "**/*.md",
+    ".editorconfig",
+    ".gitignore"
+  ]
+}

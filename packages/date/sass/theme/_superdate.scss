@@ -1,0 +1,37 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-superdate {
+  &--link {
+    color: $color-primary;
+
+    &::before {
+      background: $color-primary;
+    }
+  }
+
+  &__tabs {
+    &,
+    > #{$prefix}-panel {
+      background-color: $input-bg !important;
+    }
+
+    > #{$prefix}-tab__bar {
+      #{$prefix}-tab__button {
+        color: $color-muted;
+
+        &[data-active="false"]:hover {
+          box-shadow: 0 -1px 0 0 $color-primary inset;
+          color: $color-primary;
+        }
+
+        &[data-active="true"] {
+          box-shadow: 0 -2px 0 0 $color-primary inset !important;
+          color: $color-primary;
+        }
+      }
+    }
+  }
+}

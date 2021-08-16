@@ -1,0 +1,67 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+.sb-show-main.sb-show-main.sb-show-main {
+  @import "~@axux/core/sass/axux";
+  @import "~@axux/form/sass/axux-form";
+  @import "~@axux/date/sass/axux-date";
+  @import "~@axux/data/sass/axux-data";
+}
+@import "~@mdi/font/css/materialdesignicons.min.css";
+
+@import "prism";
+.ax-dark.ax-dark {
+  @import "prism-dark";
+}
+.ax-light.ax-light {
+  @import "prism-light";
+}
+
+.sb-show-main.sb-show-main {
+  padding: 0;
+}
+.sb-show-main.sb-main-fullscreen {
+  overflow: auto;
+}
+
+.sb-show-main .sbdocs {
+  .innerZoomElementWrapper {
+    padding-bottom: 24px;
+  }
+  .innerZoomElementWrapper > * {
+    width: unset;
+  }
+  .docs-story .ax-viewport,
+  .docs-story .ax-loader__app {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.os-content a {
+  border: 0 !important;
+}
+
+.prismjs {
+  > code::before {
+    background-color: #808080;
+    color: #ffffff;
+    font-size: 12px;
+    left: 0;
+    padding: 0 0.25rem;
+    position: absolute;
+    top: 0;
+  }
+  > .language-shell::before {
+    background-color: #808080;
+    content: "bash";
+  }
+  > .language-jsx::before,
+  > .language-tsx::before {
+    background-color: #54a0ff;
+    content: "React";
+  }
+}

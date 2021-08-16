@@ -1,0 +1,233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text renders block text 1`] = `
+<div>
+  <span
+    class="ax-text ax-block "
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+  </span>
+</div>
+`;
+
+exports[`Text renders clipped text 1`] = `
+<div>
+  <span
+    class="ax-text   ax-text--clip"
+    style="--line-clamp: 2;"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+  </span>
+</div>
+`;
+
+exports[`Text renders color text 1`] = `
+<div>
+  <span
+    class="ax-text ax-block ax-text--indent-2 ax-align--justify ax-padding--sm ax-bg--lightest ax-color--secondary"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+  </span>
+</div>
+`;
+
+exports[`Text renders marked text 1`] = `
+<div>
+  <span
+    class="ax-text  "
+  >
+    <span>
+      <mark>
+        Lorem ipsum
+      </mark>
+       dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+    </span>
+  </span>
+</div>
+`;
+
+exports[`Text renders marked text when not found 1`] = `
+<div>
+  <span
+    class="ax-text  "
+  >
+    <span>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+    </span>
+  </span>
+</div>
+`;
+
+exports[`Text renders marked text when not found 2`] = `
+<div>
+  <span
+    class="ax-text  "
+  >
+    <b>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </b>
+  </span>
+</div>
+`;
+
+exports[`Text renders serif text 1`] = `
+<div>
+  <span
+    class="ax-text ax-block ax-text--dropcaps ax-align--justify ax-font--serif"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+  </span>
+</div>
+`;
+
+exports[`Text renders simple text 1`] = `
+<div>
+  <span
+    class="ax-text  "
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+  </span>
+</div>
+`;
+
+exports[`Text renders sized text 1`] = `
+<div>
+  <div>
+    <span
+      class="ax-text   ax-font--md"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+    </span>
+    <span
+      class="ax-text  "
+      style="font-size: 10px;"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+    </span>
+    <span
+      class="ax-text  "
+      style="font-size: 3rem;"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Text renders weighted text 1`] = `
+<div>
+  <span
+    class="ax-text   ax-weight--bold"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+  </span>
+</div>
+`;
+
+exports[`Text renders with tooltip 1`] = `
+<div>
+  <span
+    class="ax-text  "
+  >
+    <abbr>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+    </abbr>
+  </span>
+  <div
+    class="ax-popper ax-tooltip ax-bg--darkest ax-color--empty "
+    data-popper-escaped="true"
+    data-popper-placement="top"
+    data-popper-reference-hidden="false"
+    data-show="true"
+    data-show-arrow="true"
+    style="position: absolute; left: 0px; top: 0px; min-width: 0; bottom: 0px; transform: translate(0px, -10px);"
+  >
+    <div
+      class="ax-popper--body"
+    >
+      Test tooltip
+    </div>
+    <div
+      class="ax-popper--arrow"
+      style="position: absolute; left: 0px; transform: translate(0px, 0px);"
+    />
+  </div>
+</div>
+`;
+
+exports[`Text renders with tooltip 2`] = `
+<div>
+  <span
+    class="ax-text  "
+  >
+    <abbr>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+    </abbr>
+  </span>
+</div>
+`;

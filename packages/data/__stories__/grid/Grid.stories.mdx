@@ -1,0 +1,30 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxGridPanel } from "../../src";
+import { GridStory } from "./GridStory";
+
+<Meta title="@data/Grid" component={AxGridPanel} parameters={{ jest: ["Grid.test.tsx"] }} />
+
+<Anchor storyId="data-grid--grid">
+  <Title>Grid</Title>
+</Anchor>
+
+<Description of={AxGridPanel} />
+
+<Canvas>
+  <Story name="Grid" parameters={{ layout: "none" }} height="30rem">
+    {GridStory}
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxGridPanel} sort="requiredFirst" />

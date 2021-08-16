@@ -1,0 +1,192 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+$base-colors: (
+  bg: $base-bg,
+  color: $base-color,
+  muted: $base-muted,
+  border: $base-border-color
+);
+
+$theme: (
+  primary: $color-primary,
+  secondary: $color-secondary,
+  info: $color-info,
+  danger: $color-danger,
+  success: $color-success,
+  warning: $color-warning
+);
+
+$grayscale: (
+  empty: $color-empty,
+  lightest: $color-lightest,
+  light: $color-light,
+  medium: $color-medium,
+  dark: $color-dark,
+  darkest: $color-darkest,
+  opaque: $color-opaque
+);
+
+$palette: (
+  white: $white,
+  black: $black,
+  purple: $color-purple,
+  violet: $color-violet,
+  indigo: $color-indigo,
+  blue: $color-blue,
+  cyan: $color-cyan,
+  teal: $color-teal,
+  green: $color-green,
+  yellow: $color-yellow,
+  orange: $color-orange,
+  red: $color-red,
+  fuchsia: $color-fuchsia,
+  pink: $color-pink
+);
+
+#{$prefix} {
+  &-shadow,
+  &-icon--round,
+  &-shadow--0 {
+    box-shadow: $shadow-level0;
+  }
+
+  &-paper,
+  &-shadow--1 {
+    box-shadow: $shadow-level1;
+  }
+
+  &-shadow--2 {
+    box-shadow: $shadow-level2;
+  }
+
+  &-shadow--3 {
+    box-shadow: $shadow-level3;
+  }
+
+  &-shadow--4 {
+    box-shadow: $shadow-level4;
+  }
+
+  &-border {
+    &,
+    &--xy {
+      border-color: $base-border-color;
+    }
+
+    &--x {
+      border-inline-end-color: $base-border-color;
+      border-inline-start-color: $base-border-color;
+    }
+
+    &--s {
+      border-inline-start-color: $base-border-color;
+    }
+
+    &--e {
+      border-inline-end-color: $base-border-color;
+    }
+
+    &--y {
+      border-bottom-color: $base-border-color;
+      border-top-color: $base-border-color;
+    }
+
+    &--t {
+      border-top-color: $base-border-color;
+    }
+
+    &--b {
+      border-bottom-color: $base-border-color;
+    }
+  }
+
+  &-bg--none {
+    background-color: transparent;
+  }
+
+  &-bg--default {
+    background-color: $color-lightest;
+
+    &#{$prefix}-color--contrast {
+      color: $color-darkest;
+    }
+  }
+
+  @each $label,
+    $color in map-merge(map-merge($base-colors, $grayscale), map-merge($theme, $palette))
+  {
+    $bgLabel: if($label== "bg", "base", $label);
+    $bgLabel: if($bgLabel== "color", "invert", $bgLabel);
+    $colorLabel: if($label== "color", "base", $label);
+    $colorLabel: if($colorLabel== "bg", "invert", $colorLabel);
+    $borderLabel: if($label== "bg", "bg", $label);
+    $borderLabel: if($label== "color", "text", $borderLabel);
+    $borderLabel: if($label== "border", "base", $borderLabel);
+
+    &-bg--#{$bgLabel} {
+      background-color: $color;
+
+      &#{$prefix}-color--contrast {
+        color: contrast($color);
+      }
+
+      #{$prefix}-popper--arrow {
+        color: $color;
+      }
+    }
+    &-color--#{$colorLabel} {
+      color: $color;
+    }
+    &-border--#{$borderLabel} {
+      border-color: $color;
+    }
+
+    &-border--t--#{$label} {
+      border-top-color: $color;
+    }
+    &-border--b--#{$label} {
+      border-bottom-color: $color;
+    }
+    &-border--s--#{$label} {
+      border-inline-start-color: $color;
+    }
+    &-border--e--#{$label} {
+      border-inline-end-color: $color;
+    }
+
+    &-hover--#{$label} {
+      @at-root &:hover {
+        color: $color;
+      }
+    }
+
+    &-hover--bg-#{$label} {
+      @at-root &:hover {
+        background-color: $color;
+      }
+    }
+  }
+}
+
+@for $i from 1 through 10 {
+  @each $label, $color in $theme {
+    $darken: darker($color, 0.1 * $i);
+    $lighten: lighter($color, 0.1 * $i);
+    .aui-dark--#{$label}--#{$i} {
+      background-color: $darken;
+      color: contrast($darken);
+    }
+    .aui-light--#{$label}--#{$i} {
+      background-color: $lighten;
+      color: contrast($lighten);
+    }
+  }
+}

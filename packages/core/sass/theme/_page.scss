@@ -1,0 +1,15 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix} {
+  &-page {
+    background-color: $base-bg;
+    box-shadow: $shadow-level1;
+
+    &__header {
+      background-color: rgba($color-primary, 0.2);
+    }
+  }
+}

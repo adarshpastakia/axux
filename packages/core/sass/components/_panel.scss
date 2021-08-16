@@ -1,0 +1,65 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-panel {
+  border-radius: $base-border-radius;
+  display: grid;
+  grid-template-areas: "head" "content" "foot";
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+  position: relative;
+  @extend #{$prefix}-bg--base;
+
+  $base: #{$prefix}-panel;
+
+  &__group {
+    #{$base} {
+      border-radius: 0;
+      margin-top: -1px;
+
+      &:first-child {
+        border-start-end-radius: $base-border-radius;
+        border-start-start-radius: $base-border-radius;
+        margin: 0;
+      }
+      &:last-child {
+        border-end-end-radius: $base-border-radius;
+        border-end-start-radius: $base-border-radius;
+      }
+    }
+  }
+
+  &__tools {
+    #{$prefix}-button {
+      opacity: 0.75;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  &[data-collapse="true"][data-expand="false"] {
+    min-height: unset !important;
+
+    #{$prefix}-content,
+    #{$prefix}-footer {
+      display: none;
+    }
+    #{$prefix}-header {
+      border: none;
+    }
+  }
+  &[data-expand="true"] {
+    bottom: 1em;
+    left: 1em;
+    max-height: unset !important;
+    position: fixed;
+    right: 1em;
+    top: 1em;
+    z-index: 25;
+    @extend #{$prefix}-shadow--4;
+  }
+}

@@ -1,0 +1,245 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+%ui-flex {
+  display: -ms-flexbox;
+  display: -moz-box;
+  display: flex;
+  flex-flow: row wrap;
+
+  &--inline {
+    display: -ms-inline-flexbox;
+    display: -moz-inline-box;
+    display: inline-flex;
+  }
+
+  &--vertical {
+    flex-flow: column wrap;
+  }
+}
+
+#{$prefix} {
+  &-flex {
+    @extend %ui-flex;
+    align-items: stretch;
+    justify-content: stretch;
+
+    &--inline {
+      @extend %ui-flex--inline;
+    }
+
+    &--vertical {
+      @extend %ui-flex--vertical;
+    }
+  }
+
+  &-container {
+    --gutter: #{$gutter};
+    @include clearfix();
+    display: block;
+
+    &--fluid {
+      max-width: none;
+    }
+
+    &:not(&--fluid) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  &-row {
+    @extend %ui-flex;
+    margin: calc(-0.5 * var(--gutter));
+
+    & + #{$prefix}-row {
+      margin-top: calc(0.5 * var(--gutter));
+    }
+
+    &--reverse {
+      flex-direction: row-reverse;
+    }
+
+    &--vertical {
+      @extend %ui-flex--vertical;
+
+      &--reverse {
+        flex-direction: column-reverse;
+      }
+    }
+
+    &--auto > #{$prefix}-col {
+      @extend #{$prefix}-col--auto;
+    }
+
+    &--nowrap {
+      flex-wrap: nowrap;
+    }
+
+    // valign
+    &--stretch {
+      align-items: stretch;
+    }
+
+    &--top {
+      align-items: flex-start;
+    }
+
+    &--bottom {
+      align-items: flex-end;
+    }
+
+    &--middle {
+      align-items: center;
+    }
+
+    // halign
+    &--start {
+      justify-content: flex-start;
+    }
+
+    &--end {
+      justify-content: flex-end;
+    }
+
+    &--center {
+      justify-content: center;
+    }
+
+    &--spaced {
+      justify-content: space-between;
+    }
+
+    &--even {
+      justify-content: space-evenly;
+    }
+  }
+
+  &-col {
+    flex: 0 0 calc(100% - var(--gutter));
+    margin: calc(0.5 * var(--gutter));
+
+    &--auto {
+      flex: 0 0 auto;
+    }
+
+    &--fill {
+      flex: 1 1 1rem;
+    }
+
+    &--full {
+      flex: 1 1 100%;
+    }
+
+    &--stretch {
+      align-self: stretch;
+    }
+
+    &--top {
+      align-self: flex-start;
+    }
+
+    &--bottom {
+      align-self: flex-end;
+    }
+
+    &--middle {
+      align-self: center;
+    }
+
+    &--content-stretch {
+      display: grid;
+    }
+
+    @for $i from 1 through 12 {
+      &--#{$i} {
+        flex: 0 0 calc(#{($i/12) * 100%} - var(--gutter));
+      }
+    }
+  }
+
+  &-gutter {
+    --gutter: #{$gutter};
+
+    &--none {
+      --gutter: #{$gutter * 0};
+    }
+
+    &--xs {
+      --gutter: #{$gutter * 0.25};
+    }
+
+    &--sm {
+      --gutter: #{$gutter * 0.5};
+    }
+
+    &--md {
+      --gutter: #{$gutter * 2};
+    }
+
+    &--lg {
+      --gutter: #{$gutter * 3};
+    }
+  }
+}
+
+@each $breakpoint, $size in $breakpoints {
+  @media only screen and (min-width: $size) {
+    #{$prefix} {
+      &-container:not(#{$prefix}-container--fluid) {
+        max-width: if($breakpoint==xs, 100%, $size - 32px);
+      }
+
+      &-col--auto\@#{$breakpoint} {
+        flex: 0 0 auto;
+      }
+
+      &-col--fill\@#{$breakpoint} {
+        flex: 1 1 1rem;
+      }
+
+      &-col--stretch\@#{$breakpoint} {
+        align-self: stretch;
+      }
+
+      &-col--top\@#{$breakpoint} {
+        align-self: flex-start;
+      }
+
+      &-col--bottom\@#{$breakpoint} {
+        align-self: flex-end;
+      }
+
+      &-col--middle\@#{$breakpoint} {
+        align-self: center;
+      }
+
+      &-hide--up\@#{$breakpoint} {
+        display: none;
+      }
+
+      &-show--down\@#{$breakpoint} {
+        display: none;
+      }
+    }
+
+    @for $i from 1 through 12 {
+      #{$prefix}-col--#{$i}\@#{$breakpoint} {
+        flex: 0 0 calc(#{($i/12) * 100%} - var(--gutter));
+      }
+    }
+  }
+  @media only screen and (max-width: $size) {
+    #{$prefix} {
+      &-hide--down\@#{$breakpoint} {
+        display: none;
+      }
+
+      &-show--up\@#{$breakpoint} {
+        display: none;
+      }
+    }
+  }
+}

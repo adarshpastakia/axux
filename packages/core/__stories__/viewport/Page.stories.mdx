@@ -1,0 +1,58 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story, Subheading,
+  Title
+} from "@storybook/addon-docs";
+import { AxPage, AxSection } from "../../src";
+import { PageStory, SectionStory } from "./PageStory";
+
+<Meta title="@core/Viewport/Page" component={AxPage} parameters={{ jest: ["Page.test.tsx"] }} />
+
+<Anchor storyId="core-viewport-page--page">
+  <Title>Page</Title>
+</Anchor>
+
+<Description of={AxPage} />
+
+<Canvas>
+  <Story name="Basic Page" height="30rem" parameters={{ layout: "none" }}>
+    {PageStory}
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-viewport-page--sectioned-page">
+  <Heading>Sectioned Page</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Sectioned Page" height="30rem" parameters={{ layout: "none" }}>
+    {SectionStory}
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<Subheading>AxPage</Subheading>
+
+<ArgsTable of={AxPage} sort="requiredFirst" />
+
+<Subheading>AxSection</Subheading>
+
+<ArgsTable of={AxSection} sort="requiredFirst" />
+
+<Subheading>AxSection.Head</Subheading>
+
+<ArgsTable of={AxSection.Head} sort="requiredFirst" />
+
+<Subheading>AxSection.Foot</Subheading>
+
+<ArgsTable of={AxSection.Foot} sort="requiredFirst" />
+
+<Subheading>AxSection.Side</Subheading>
+
+<ArgsTable of={AxSection.Side} sort="requiredFirst" />

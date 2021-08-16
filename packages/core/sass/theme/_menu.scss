@@ -1,0 +1,42 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+@mixin menu-theme($theme, $color) {
+  $base: #{$prefix}-menu__item;
+  #{$prefix}-menu__item[data-color="#{$theme}"] {
+    color: $color;
+
+    &:hover {
+      background-color: lighter($color, 0.5);
+      &,
+      #{$base}__subtext,
+      #{$prefix}-tag__inner {
+        color: $white !important;
+      }
+    }
+
+    &:active {
+      background-color: darker($color, 0.2);
+    }
+
+    &[data-active="true"] {
+      background-color: rgba($color, 0.85) !important;
+      pointer-events: none;
+      &,
+      #{$base}__subtext,
+      #{$prefix}-tag__inner {
+        color: $white !important;
+      }
+    }
+  }
+}
+
+@include menu-theme("", $color-primary);
+@include menu-theme("primary", $color-primary);
+@include menu-theme("secondary", $color-secondary);
+@include menu-theme("info", $color-info);
+@include menu-theme("danger", $color-danger);
+@include menu-theme("success", $color-success);
+@include menu-theme("warning", $color-warning);

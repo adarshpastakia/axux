@@ -1,0 +1,25 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-meter {
+  background: linear-gradient(
+    90deg,
+    rgba($color-red, 0.75),
+    rgba($color-orange, 0.75),
+    rgba($color-yellow, 0.75),
+    rgba($color-green, 0.75),
+    rgba($color-teal, 0.75)
+  );
+
+  &::after {
+    background: $color-empty;
+  }
+
+  @each $label, $color in map-merge($theme, $palette) {
+    &[data-theme="#{$label}"] {
+      background: linear-gradient(90deg, mix($color, $base-bg, 10%), $color);
+    }
+  }
+}
