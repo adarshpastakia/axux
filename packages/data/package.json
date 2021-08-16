@@ -21,14 +21,14 @@
   },
   "dependencies": {
     "@axux/core": "*",
-    "@axux/utilities": "*"
+    "@axux/utilities": "*",
+    "react-virtualized": "^9.22.3"
   },
   "peerDependencies": {
     "i18next": "^20.3.5",
     "react": "next",
     "react-dom": "next",
-    "react-i18next": "^11.11.4",
-    "react-virtualized": "^9.22.3"
+    "react-i18next": "^11.11.4"
   },
   "devDependencies": {
     "@types/react": "^17.0.14",
