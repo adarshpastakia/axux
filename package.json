@@ -25,7 +25,8 @@
     "i18next-browser-languagedetector": "^6.1.2",
     "react": "next",
     "react-dom": "next",
-    "react-i18next": "^11.11.4"
+    "react-i18next": "^11.11.4",
+    "react-router-dom": "^5.2.0"
   },
   "resolutions": {
     "webpack": "^5.0.0",
