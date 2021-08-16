@@ -56,14 +56,12 @@
         display: none;
       }
       & ~ [data-check="on"] {
-        @extend #{$prefix}-color--primary;
         display: block;
       }
     }
 
     &:hover #{$prefix}-icon,
     &:focus #{$prefix}-icon {
-      @extend #{$prefix}-color--primary;
       opacity: 1;
     }
 
@@ -71,12 +69,10 @@
       pointer-events: none;
 
       & ~ #{$prefix}-icon {
-        @extend #{$prefix}-color--muted;
         cursor: not-allowed;
         opacity: 0.25;
       }
       & ~ span {
-        @extend #{$prefix}-color--muted;
         cursor: not-allowed;
         opacity: 0.5;
       }
