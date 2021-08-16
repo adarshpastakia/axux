@@ -34,6 +34,10 @@
 
   &__header--label {
     color: $color-primary;
+
+    &[data-disabled="true"] {
+      color: $color-muted;
+    }
   }
 
   &__head {

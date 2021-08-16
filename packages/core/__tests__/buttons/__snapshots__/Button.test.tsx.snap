@@ -452,12 +452,14 @@ exports[`Button renders with tooltip 1`] = `
     data-popper-reference-hidden="false"
     data-show="true"
     data-show-arrow="true"
-    style="position: absolute; left: 0px; top: 0px; min-width: 0; transform: translate(0px, 130px);"
+    style="position: fixed; left: 0px; top: 0px; min-width: 0; transform: translate(0px, 130px);"
   >
     <div
       class="ax-popper--body"
     >
-      Test tooltip
+      <span>
+        Test tooltip
+      </span>
     </div>
     <div
       class="ax-popper--arrow"

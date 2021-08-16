@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@axux/core": "*",
+    "@axux/form": "*",
     "@axux/utilities": "*",
     "react-virtualized": "^9.22.3"
   },
