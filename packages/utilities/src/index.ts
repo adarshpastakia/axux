@@ -10,6 +10,7 @@ export * from "./_ascii";
 export * from "./_interpolate";
 export * from "./_hash";
 export * from "./_isType";
+export * from "./_format";
 export * from "./_isEqual";
 export * from "./_getByPath";
 export * from "./_debounce";
