@@ -40,7 +40,6 @@ const Template: Story<FormProps & { isDisabled?: boolean }> = ({ isDisabled, ...
                 autoFocus
                 required
                 allowClear
-                span={2}
                 isDisabled={isDisabled}
                 label="Text field"
                 placeholder="Any text..."
@@ -62,6 +61,16 @@ const Template: Story<FormProps & { isDisabled?: boolean }> = ({ isDisabled, ...
                 isDisabled={isDisabled}
                 label="Number field"
                 placeholder="Any integer..."
+              />
+              <AxField.Slider
+                required
+                name="slider"
+                isDisabled={isDisabled}
+                label="Slider field"
+                minValue={-180}
+                maxValue={180}
+                showLabel
+                showValue
               />
               <AxField.Options label="Checks">
                 <AxField.Checkbox name="checks.email" label="via Email" />
@@ -174,6 +183,7 @@ FormStory.args = {
   schema: yup.object<KeyValue>().shape({
     text: yup.string().required(),
     number: yup.number().min(1).max(99),
+    slider: yup.number().required().min(1).max(99),
     password: yup.string(),
     option: yup.string().required(),
     textarea: yup.string(),

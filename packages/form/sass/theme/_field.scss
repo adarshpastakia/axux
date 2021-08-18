@@ -51,7 +51,8 @@
 
   &__input:focus {
     &[type="radio"] ~ #{$prefix}-icon,
-    &[type="checkbox"] ~ #{$prefix}-icon {
+    &[type="checkbox"] ~ #{$prefix}-icon,
+    &[type="checkbox"] ~ #{$base}__switch {
       box-shadow: 0 0 2px 2px $color-primary;
     }
   }
