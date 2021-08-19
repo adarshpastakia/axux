@@ -37,10 +37,7 @@ export interface PanelProps
    * Panel title
    */
   title?: string;
-  /**
-   * Remove border
-   */
-  noBorder?: boolean;
+  paper?: boolean;
   /**
    * Height
    */
@@ -90,7 +87,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       onBack,
       onExpand,
       onClose,
-      noBorder,
+      paper,
       isLoading,
       height,
       minHeight,
@@ -184,7 +181,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
     return (
       <div
         ref={ref}
-        className={`ax-panel ${noBorder ? "" : "ax-paper"} ${className}`}
+        className={`ax-panel ${paper ? "ax-paper" : ""} ${className}`}
         data-collapse={collapsed}
         data-expand={expanded}
         style={styles}
