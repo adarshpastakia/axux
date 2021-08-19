@@ -24,6 +24,8 @@ export interface PageProps extends IconProps, ElementProps, RefProp<HTMLDivEleme
    * Show loading indicator
    */
   isLoading?: boolean;
+
+  paper?: boolean;
 }
 
 /**
@@ -31,9 +33,9 @@ export interface PageProps extends IconProps, ElementProps, RefProp<HTMLDivEleme
  * @internal
  */
 export const AxPage: FC<PageProps> = forwardRef<HTMLDivElement, PageProps>(
-  ({ children, className, isLoading, icon, title, actions }, ref) => {
+  ({ children, className, isLoading, paper, icon, title, actions }, ref) => {
     return (
-      <div className={`ax-page ${className ?? ""}`}>
+      <div className={`ax-page ${paper ? "ax-paper" : ""} ${className ?? ""}`}>
         <Helmet title={title} />
         <div className="ax-page__header">
           {icon && (
