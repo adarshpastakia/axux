@@ -71,6 +71,7 @@ const Template: Story<FormProps & { isDisabled?: boolean }> = ({ isDisabled, ...
                 maxValue={180}
                 showLabel
                 showValue
+                showTicks
               />
               <AxField.Options label="Checks">
                 <AxField.Checkbox name="checks.email" label="via Email" />
