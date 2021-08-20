@@ -4,5 +4,13 @@
   },
   "grid": {
     "empty": "No records found"
+  },
+  "action": {
+    "find": "Find...",
+    "showShortcuts": "Keyboard shortcuts...",
+    "collapseAll": "Collapse All",
+    "expandAll": "Expand All",
+    "checkAll": "Check All",
+    "uncheckAll": "Uncheck All"
   }
 }
