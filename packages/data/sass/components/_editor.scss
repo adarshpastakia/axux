@@ -1,0 +1,16 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-code {
+  &__editor {
+    .react-monaco-editor-container {
+      grid-area: content;
+    }
+
+    .monaco-editor .folded-background {
+      opacity: 0.5;
+    }
+  }
+}

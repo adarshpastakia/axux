@@ -1,0 +1,34 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxCodeEditor } from "../../src";
+import { CodeEditorStory } from "./CodeStory";
+
+<Meta
+  title="@data/Code Editor"
+  component={AxCodeEditor}
+  parameters={{ jest: ["CodeEditor.test.tsx"] }}
+/>
+
+<Anchor storyId="data-code-editor--code-editor">
+  <Title>Code Editor</Title>
+</Anchor>
+
+<Description of={AxCodeEditor} />
+
+<Canvas>
+  <Story name="Code Editor" parameters={{ layout: "none" }} height="30rem">
+    {CodeEditorStory}
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxCodeEditor} sort="requiredFirst" />

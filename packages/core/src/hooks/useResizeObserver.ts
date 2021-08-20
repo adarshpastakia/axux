@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useCallback, useLayoutEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 export const useAxResizeObserver = (
   onResize: (size: { width: number; height: number }) => void
@@ -21,16 +21,16 @@ export const useAxResizeObserver = (
     }
   }, [onResize]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const timer = resizeTimer.current;
     if (ref.current) {
       const ob = new ResizeObserver(doResize);
       ob.observe(ref.current);
       return () => {
-        ob.disconnect();
         if (timer) {
           clearTimeout(timer);
         }
+        ob.disconnect();
       };
     }
     return () => {
