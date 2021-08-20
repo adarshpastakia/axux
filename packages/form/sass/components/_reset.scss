@@ -3,14 +3,16 @@
 // @copyright : 2021
 // @license   : MIT
 
-input,
-textarea {
-  background: none;
-  border: none;
-  font-size: 0.75rem;
-  margin: 0;
-  outline: none;
-  padding: 0.25rem 0.5em;
+@at-root {
+  input,
+  textarea {
+    background: none;
+    border: none;
+    font-size: 0.75rem;
+    margin: 0;
+    outline: none;
+    padding: 0.25rem 0.5em;
+  }
 }
 
 textarea {

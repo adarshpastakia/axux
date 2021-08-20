@@ -99,16 +99,6 @@ ol {
     }
   }
 }
-#{$prefix}-viewport {
-  input,
-  textarea {
-    appearance: none;
-    background: none;
-    border: none;
-    font-family: $font-family-sans-serif;
-    outline: none;
-  }
-}
 
 [data-style="none"] {
   list-style-type: none;
