@@ -105,7 +105,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
         (child) =>
           child &&
           "type" in (child as KeyValue) &&
-          (child as KeyValue).type.displayName === "AxHeader"
+          (child as KeyValue).type.displayName === "AxPanel.Header"
       ) as ReactElement;
 
       const actions = (
@@ -165,7 +165,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
           (child) =>
             child &&
             "type" in (child as KeyValue) &&
-            (child as KeyValue).type.displayName !== "AxHeader"
+            (child as KeyValue).type.displayName !== "AxPanel.Header"
         ),
       [children]
     );

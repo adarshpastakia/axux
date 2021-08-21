@@ -1,0 +1,66 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { ModalStory } from "./NotificationStory";
+import { AxModal } from "../../src/overlays/Modal";
+
+<Meta title="@core/Modals/Modal" component={AxModal} parameters={{ jest: ["Modal.test.tsx"] }} />
+
+<Anchor storyId="core-modals-modal--modal">
+  <Title>Modal Overlays</Title>
+</Anchor>
+
+<Description of={AxModal} />
+
+<Canvas>
+  <Story name="Modal">{ModalStory}</Story>
+</Canvas>
+
+<div className="ax-margin--b--lg" />
+
+```tsx
+import {
+  AxBox,
+  AxButton,
+  AxContent,
+  AxModal,
+  useAxModalService
+} from "@axux/core";
+
+export const ModalBody = ({ doClose }) => {
+  return (
+    <AxModal onClose={doClose}>
+      <AxModal.Header title="Modal title" icon="mdi mdi-bell" iconBg="primary" />
+      <AxContent>Any content</AxContent>
+      <AxModal.Footer>
+        <AxButton onClick={doClose} />
+      </AxModal.Footer>
+    </AxModal>
+  );
+};
+
+export const Element = () => {
+  const { open } = useAxModalService();
+
+  const showModal = () => {
+    open(ModalBody);
+  };
+
+  return (
+    <AxBox>
+      <AxButton onClick={showModal}>Show Modal</AxButton>
+    </AxBox>
+  );
+};
+```
+
+<Heading>Props</Heading>
+
+<ArgsTable story="Modal" sort="requiredFirst" />

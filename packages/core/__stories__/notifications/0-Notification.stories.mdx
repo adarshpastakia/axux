@@ -18,44 +18,46 @@ import { AxAlert } from "../../src/overlays/Alert";
 ```tsx
 import { AxBox, AxButton, useAxNotificationService } from "@axux/core";
 
-const { message, toast, alert, confirm } = useAxNotificationService();
+export const Element = () => {
+  const { message, toast, alert } = useAxNotificationService();
 
-const showMessage = () => {
-  message({
-    icon: "mdi mdi-bell",
-    text: "Message text"
-  }).then(() => {
-    // promise resolved when message closed
-  });
+  const showMessage = () => {
+    message({
+      icon: "mdi mdi-bell",
+      text: "Message text"
+    }).then(() => {
+      // promise resolved when message closed
+    });
+  };
+
+  const showToast = () => {
+    toast({
+      type: "confirm",
+      icon: "mdi mdi-bell",
+      text: "Message text"
+    }).then((ok: boolean) => {
+      // promise resolved when message closed
+    });
+  };
+
+  const showAlert = () => {
+    alert({
+      type: "confirm",
+      icon: "mdi mdi-bell",
+      text: "Message text"
+    }).then((ok: boolean) => {
+      // promise resolved when message closed
+    });
+  };
+
+  return (
+    <AxBox>
+      <AxButton onClick={showMessage}>Show Message</AxButton>
+      <AxButton onClick={showToast}>Show Toast</AxButton>
+      <AxButton onClick={showAlert}>Show Alert</AxButton>
+    </AxBox>
+  );
 };
-
-const showToast = () => {
-  toast({
-    type: "confirm",
-    icon: "mdi mdi-bell",
-    text: "Message text"
-  }).then((ok: boolean) => {
-    // promise resolved when message closed
-  });
-};
-
-const showAlert = () => {
-  alert({
-    type: "confirm",
-    icon: "mdi mdi-bell",
-    text: "Message text"
-  }).then((ok: boolean) => {
-    // promise resolved when message closed
-  });
-};
-
-return (
-  <AxBox>
-    <AxButton onClick={showMessage}>Show Message</AxButton>
-    <AxButton onClick={showToast}>Show Toast</AxButton>
-    <AxButton onClick={showAlert}>Show Alert</AxButton>
-  </AxBox>
-);
 ```
 
 <Heading>Props</Heading>

@@ -31,12 +31,6 @@
   }
 }
 
-#{$prefix}-overlay {
-  &__mask {
-    background-color: rgba($base-bg, 0.1);
-  }
-}
-
 #{$prefix}-toast {
   background-color: rgba($color-dark, 0.1);
 

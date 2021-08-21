@@ -1,0 +1,123 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-overlay {
+  &__mask {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 95;
+
+    &[data-show="true"] {
+      backdrop-filter: blur(1px);
+      > div {
+        margin-top: 0;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__container {
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    left: 0;
+    overflow: visible;
+    padding: 0.5rem;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 99;
+
+    > div {
+      flex: 0 0 auto;
+      margin: 0.25rem 0 0;
+      overflow: hidden;
+      @extend #{$prefix}-bg--base;
+
+      &[data-show="true"] {
+        overflow: visible;
+      }
+    }
+
+    &[data-mode="message"] {
+      align-items: center;
+      flex-flow: column-reverse;
+
+      > div {
+        &[data-show="true"] > div {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &[data-mode="toast"] {
+      align-items: flex-end;
+      flex-flow: column;
+
+      > div {
+        &[data-show="true"] > div {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+#{$prefix}-modal {
+  border-radius: $base-border-radius;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  left: 50%;
+  margin-top: -10rem;
+  max-height: 80vh;
+  max-width: 80vw;
+  min-height: 10rem;
+  min-width: 15rem;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s, margin 0.15s;
+
+  &[data-size="sm"] {
+    width: 20rem;
+  }
+  &[data-size="md"] {
+    width: 36rem;
+  }
+  &[data-size="lg"] {
+    width: 42rem;
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-areas: ". content .";
+    grid-template-columns: auto 1fr auto;
+
+    > #{$prefix}-button {
+      margin: 0;
+
+      #{$prefix}-button__inner {
+        border-radius: 0 !important;
+      }
+
+      &:first-child {
+        @extend #{$prefix}-border--e;
+      }
+      &:last-child {
+        @extend #{$prefix}-border--s;
+      }
+    }
+  }
+
+  &__body {
+    @include section();
+  }
+}
