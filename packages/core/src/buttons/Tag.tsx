@@ -40,6 +40,10 @@ export interface TagProps extends RefProp, IconProps, ElementProps, WithTooltipP
    * Remove event handler
    */
   onRemove?: UIEventHandler;
+  /**
+   * Tab index to allow focus
+   */
+  tabIndex?: number;
 }
 
 /**
