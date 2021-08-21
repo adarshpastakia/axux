@@ -1,0 +1,32 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AlertStory } from "./NotificationStory";
+import { AxAlert } from "../../src/overlays/Alert";
+
+<Meta
+  title="@core/Notifications/Alert"
+  component={AxAlert}
+  parameters={{ jest: ["Alerts.test.tsx"] }}
+/>
+
+<Anchor storyId="core-notifications-alert--alert">
+  <Title>Alert Overlays</Title>
+</Anchor>
+
+<Description of={AxAlert} />
+
+<Canvas>
+  <Story name="Alert">{AlertStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable story="Alert" sort="requiredFirst" />

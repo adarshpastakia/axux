@@ -19,18 +19,38 @@
       background-color: rgba($color, 0.5);
     }
   }
+  #{$prefix}-alert[data-color="#{$theme}"] {
+    #{$prefix}-alert__icon,
+    #{$prefix}-alert__title {
+      color: $color;
+    }
+
+    #{$prefix}-alert--close #{$prefix}-button__inner:hover {
+      background-color: rgba($color, 0.5);
+    }
+  }
+}
+
+#{$prefix}-overlay {
+  &__mask {
+    background-color: rgba($base-bg, 0.1);
+  }
 }
 
 #{$prefix}-toast {
   background-color: rgba($color-dark, 0.1);
 
-  #{$prefix}-toast__icon {
+  &__icon {
     background-color: $color-dark;
   }
 
-  #{$prefix}-toast__footer {
+  &__footer {
     color: $color-dark;
   }
+}
+
+#{$prefix}-alert {
+  background-color: $base-bg;
 }
 
 @include toast-theme(primary, $color-primary);

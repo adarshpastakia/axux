@@ -4,6 +4,22 @@
 // @license   : MIT
 
 #{$prefix}-overlay {
+  &__mask {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 95;
+
+    &[data-show="true"] {
+      backdrop-filter: blur(1px);
+      > div {
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
   &__container {
     bottom: 0;
     display: flex;
@@ -19,12 +35,13 @@
 
     > div {
       flex: 0 0 auto;
-      margin: 0.25rem 0;
+      margin: 0.25rem 0 0;
       overflow: hidden;
       @extend #{$prefix}-bg--base;
 
       &[data-show="true"] {
-        padding: 1px;
+        //padding: 1px;
+        overflow: visible;
       }
     }
 
@@ -100,17 +117,6 @@
   transition: margin-bottom 0.5s;
   @extend #{$prefix}-shadow--2;
 
-  #{$prefix}-alert--close {
-    position: absolute;
-    right: 0;
-    top: 0;
-
-    @at-root [dir="rtl"] & {
-      left: 0;
-      right: unset;
-    }
-  }
-
   &__icon {
     grid-area: icon;
     padding: 0.5rem;
@@ -124,8 +130,8 @@
   &__title {
     font-weight: $font-weight-bold;
     grid-area: title;
+    margin-inline-end: 3rem;
     padding: 0.25rem 0.5rem;
-    padding-inline-end: 1.5rem;
     @include ellipsis();
   }
 
@@ -150,5 +156,80 @@
       background-color: transparent;
       color: inherit;
     }
+  }
+}
+
+#{$prefix}-alert {
+  display: grid;
+  font-size: 1rem;
+  grid-template-areas: "icon title" "icon message" "footer footer";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr auto;
+  left: 50%;
+  max-height: 60vh;
+  max-width: 24rem;
+  min-width: 15rem;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.25s;
+  @extend #{$prefix}-shadow--2;
+
+  $base: #{$prefix}-alert;
+
+  &__icon {
+    grid-area: icon;
+    line-height: 1;
+    padding: 0.25em 0.5em;
+
+    #{$prefix}-icon {
+      font-size: 3em;
+    }
+  }
+
+  &__title {
+    font-weight: $font-weight-bold;
+    grid-area: title;
+    line-height: 1;
+    margin-inline-end: 1.5rem;
+    padding: 0.5em 0.5em 0;
+  }
+
+  &__text {
+    font-size: 0.75em;
+    grid-area: message;
+    margin-inline-end: 1.5rem;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    place-self: center;
+  }
+
+  &__footer {
+    display: flex;
+    grid-area: footer;
+    justify-content: flex-end;
+    padding: 0.25em 0.5em;
+  }
+
+  &--close {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &,
+    #{$prefix}-button {
+      margin: 0;
+    }
+
+    @at-root [dir="rtl"] & {
+      left: 0;
+      right: unset;
+    }
+  }
+
+  &__input {
+    position: absolute;
+    top: -200%;
   }
 }

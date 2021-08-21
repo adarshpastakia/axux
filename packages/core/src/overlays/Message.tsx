@@ -3,10 +3,10 @@
 // @copyright : 2021
 // @license   : MIT
 
-import {  useMemo, VFC } from "react";
+import { useMemo, VFC } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
-import { AllColors, EmptyCallback, IconProps } from "../types";
+import { AllColors, IconProps } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
@@ -42,7 +42,6 @@ export interface MessageProps extends IconProps {
  * @param color
  * @param block
  * @param onClose
- * @param aria
  * @constructor
  */
 export const AxMessage: VFC<MessageProps & { [key: string]: AnyObject }> = ({
@@ -52,8 +51,7 @@ export const AxMessage: VFC<MessageProps & { [key: string]: AnyObject }> = ({
   icon,
   color = "invert",
   block,
-  onClose,
-  ...aria
+  onClose
 }) => {
   const classes = useMemo(() => {
     const cls = ["ax-message"];
@@ -66,7 +64,7 @@ export const AxMessage: VFC<MessageProps & { [key: string]: AnyObject }> = ({
     return cls.join(" ");
   }, [block, color]);
   return (
-    <div className={classes} {...aria} data-color={color}>
+    <div className={classes} data-color={color}>
       {icon && <AxIcon icon={icon} size="sm" />}
       {title && <b>{title}</b>}
       <span>{text}</span>

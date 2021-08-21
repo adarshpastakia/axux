@@ -5,9 +5,8 @@
 
 import { isObject, isString } from "@axux/utilities";
 import { useMemo } from "react";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { createRoot } from "react-dom";
+import { render, unmountComponentAtNode } from "react-dom";
+import { AlertProps, AxAlert } from "../overlays/Alert";
 import { AxMessage, MessageProps } from "../overlays/Message";
 import { AxToast, ToastProps } from "../overlays/Toast";
 
@@ -56,22 +55,27 @@ export const useAxNotificationService = () => {
       let timerRef: AnyObject = null;
       const el = document.createElement("div");
       messageContainer.appendChild(el);
-      const root = createRoot(el);
       const onClose = () => {
         el.dataset.show = "";
         setTimeout(() => {
-          root.unmount();
+          unmountComponentAtNode(el);
           el.remove();
         }, 500);
         clearTimeout(timerRef);
         resolve();
       };
-      root.render(<AxMessage {...obj} onClose={onClose} />, el);
+      render(<AxMessage {...obj} onClose={onClose} />, el);
       setTimeout(() => (el.dataset.show = "true"), 10);
       if (timeout > 0) {
         timerRef = setTimeout(onClose, timeout);
       }
     });
+  };
+
+  const closeAllToasts = () => {
+    toastContainer
+      .querySelectorAll<HTMLButtonElement>(".ax-alert--close > :first-child button")
+      .forEach((b) => b.click());
   };
 
   const toast = (props: string | ToastProps, timeout = 5000) => {
@@ -80,17 +84,16 @@ export const useAxNotificationService = () => {
       let timerRef: AnyObject = null;
       const el = document.createElement("div");
       toastContainer.appendChild(el);
-      const root = createRoot(el);
       const onClose = (b = false) => {
         el.dataset.show = "";
         setTimeout(() => {
-          root.unmount();
+          unmountComponentAtNode(el);
           el.remove();
         }, 500);
         clearTimeout(timerRef);
         resolve(b);
       };
-      root.render(<AxToast {...obj} onClose={onClose} />, el);
+      render(<AxToast {...obj} onClose={onClose} onCloseAll={closeAllToasts} />, el);
       setTimeout(() => (el.dataset.show = "true"), 10);
       if (obj.type !== "confirm" && timeout > 0) {
         timerRef = setTimeout(onClose, timeout);
@@ -98,5 +101,24 @@ export const useAxNotificationService = () => {
     });
   };
 
-  return { message, toast };
+  const alert = (props: string | AlertProps) => {
+    const obj: AlertProps = makeProps(props);
+    const el = document.createElement("div");
+    el.className = "ax-overlay__mask";
+    document.body.appendChild(el);
+    return new Promise<boolean>((resolve) => {
+      const onClose = (b = false) => {
+        el.dataset.show = "";
+        setTimeout(() => {
+          unmountComponentAtNode(el);
+          el.remove();
+        }, 500);
+        resolve(b);
+      };
+      render(<AxAlert {...obj} onClose={onClose} />, el);
+      setTimeout(() => (el.dataset.show = "true"), 10);
+    });
+  };
+
+  return { message, toast, alert, confirm };
 };

@@ -6,6 +6,7 @@
 import { mdiCheckCircle } from "@mdi/js";
 import { Story } from "@storybook/react";
 import { AxButton, useAxNotificationService } from "../../src";
+import { AlertProps } from "../../src/overlays/Alert";
 import { MessageProps } from "../../src/overlays/Message";
 import { ToastProps } from "../../src/overlays/Toast";
 
@@ -31,6 +32,17 @@ ToastStory.args = {
   icon: mdiCheckCircle,
   type: "confirm",
   title: "Toast",
+  text: "This a notification message"
+};
+
+const AlertTemplate: Story<AlertProps> = (props) => {
+  const { alert } = useAxNotificationService();
+
+  return <AxButton onClick={() => alert(props)}>Show Alert</AxButton>;
+};
+export const AlertStory = AlertTemplate.bind({});
+AlertStory.args = {
+  title: "Alert",
   text: "This a notification message"
 };
 
