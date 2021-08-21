@@ -3,6 +3,8 @@
 // @copyright : 2021
 // @license   : MIT
 
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
+
 module.exports = {
   core: {
     builder: "webpack5"
@@ -28,6 +30,13 @@ module.exports = {
         path: require.resolve("path-browserify")
       }
     };
+
+    config.plugins.push(
+      new MonacoWebpackPlugin({
+        // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
+        languages: ["json", "javascript", "css", "html", "text", "markdown", "typescript"]
+      })
+    );
 
     return config;
   }

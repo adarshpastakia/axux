@@ -9,6 +9,7 @@ export { addTranslationBundle } from "./i18n";
 
 export { useAxGlobals } from "./context/Globals";
 export { useAxBreadcrumbService } from "./context/BreadcrumbService";
+export { useAxResizeObserver } from "./hooks/useResizeObserver";
 export { useAxNotificationService } from "./hooks/useNotificationService";
 
 // Hotkey

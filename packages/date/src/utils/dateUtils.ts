@@ -10,7 +10,6 @@ import {
   addYears as _addYears,
   endOfDecade as _endOfDecade,
   endOfMonth as _endOfMonth,
-  endOfWeek as _endOfWeek,
   endOfYear as _endOfYear,
   format,
   isSameMonth as _isSameMonth,

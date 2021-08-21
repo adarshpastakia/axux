@@ -91,10 +91,6 @@ export interface ElementProps extends AriaAttributes {
    * CSS class name
    */
   className?: HTMLAttributes<HTMLElement>["className"];
-  /**
-   * Tab index to allow focus
-   */
-  tabIndex?: number;
 }
 
 export interface AnchorProps {

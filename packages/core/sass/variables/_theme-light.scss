@@ -43,15 +43,15 @@ $input-bg: #ffffff;
 $input-color: #1e272e;
 
 $shadow-level0: 0 0 0 1px rgba($color-shadow, 0.5), 0 0 0 rgba($color-shadow, 0),
-0 0 0 rgba($color-shadow, 0);
+  0 0 0 rgba($color-shadow, 0);
 $shadow-level1: 0 0 0 1px rgba($color-shadow, 0.3), 0 0 0 rgba($color-shadow, 0),
-0 1px 1px rgba($color-shadow, 0.6);
+  0 1px 1px rgba($color-shadow, 0.6);
 $shadow-level2: 0 0 0 1px rgba($color-shadow, 0.3), 0 1px 1px rgba($color-shadow, 0.6),
-0 2px 6px rgba($color-shadow, 0.6);
+  0 2px 6px rgba($color-shadow, 0.6);
 $shadow-level3: 0 0 0 1px rgba($color-shadow, 0.3), 0 2px 4px rgba($color-shadow, 0.6),
-0 8px 24px rgba($color-shadow, 0.6);
+  0 8px 24px rgba($color-shadow, 0.6);
 $shadow-level4: 0 0 0 1px rgba($color-shadow, 0.3), 0 4px 8px rgba($color-shadow, 0.6),
-0 18px 46px 6px rgba($color-shadow, 0.6);
+  0 18px 46px 6px rgba($color-shadow, 0.6);
 
 $color-lightest: mix($color-empty, $color-opaque, 96%);
 $color-light: mix($color-empty, $color-opaque, 81%);
@@ -66,3 +66,46 @@ $base-color: $color-opaque;
 $base-muted: $color-muted;
 $base-border-color: $color-light;
 $base-shadow-color: $color-shadow;
+
+$base-colors: (
+  bg: $base-bg,
+  color: $base-color,
+  muted: $base-muted,
+  border: $base-border-color
+);
+
+$theme: (
+  primary: $color-primary,
+  secondary: $color-secondary,
+  info: $color-info,
+  danger: $color-danger,
+  success: $color-success,
+  warning: $color-warning
+);
+
+$grayscale: (
+  empty: $color-empty,
+  lightest: $color-lightest,
+  light: $color-light,
+  medium: $color-medium,
+  dark: $color-dark,
+  darkest: $color-darkest,
+  opaque: $color-opaque
+);
+
+$palette: (
+  white: $white,
+  black: $black,
+  purple: $color-purple,
+  violet: $color-violet,
+  indigo: $color-indigo,
+  blue: $color-blue,
+  cyan: $color-cyan,
+  teal: $color-teal,
+  green: $color-green,
+  yellow: $color-yellow,
+  orange: $color-orange,
+  red: $color-red,
+  fuchsia: $color-fuchsia,
+  pink: $color-pink
+);

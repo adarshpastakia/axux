@@ -7,7 +7,6 @@ import { useMemo, VFC } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
-import { AlertClose } from "../internals/AlertClose";
 import { Color, IconProps } from "../types";
 import { AppIcons } from "../types/appIcons";
 
@@ -51,7 +50,6 @@ export interface ToastProps extends IconProps {
  * @param icon
  * @param color
  * @param onClose
- * @param aria
  * @constructor
  */
 export const AxToast: VFC<ToastProps & { [key: string]: AnyObject }> = ({
@@ -64,7 +62,7 @@ export const AxToast: VFC<ToastProps & { [key: string]: AnyObject }> = ({
   color = "primary",
   extraActions,
   onClose,
-  ...aria
+  onCloseAll
 }) => {
   const { t } = useTranslation("core");
   const iconType = useMemo(() => {
@@ -90,8 +88,15 @@ export const AxToast: VFC<ToastProps & { [key: string]: AnyObject }> = ({
   }, [t, cancelLabel]);
 
   return (
-    <div className="ax-toast" data-color={color} {...aria}>
-      <AlertClose onClick={() => onClose && onClose(false)} />
+    <div className="ax-toast" data-color={color}>
+      <div className="ax-alert--close">
+        <AxButton icon={AppIcons.iconClose} type="link" onClick={() => onClose && onClose(false)} />
+        <AxButton
+          icon={AppIcons.iconCloseAll}
+          type="link"
+          onClick={() => onCloseAll && onCloseAll()}
+        />
+      </div>
       <div className="ax-toast__icon">
         <AxIcon icon={icon ?? iconType} />
       </div>

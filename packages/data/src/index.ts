@@ -10,3 +10,5 @@ export type { TreeNode } from "./tree/Tree";
 
 export { AxGridPanel } from "./grid/GridPanel";
 export type { GridColumn } from "./grid/Grid";
+
+export { AxCodeEditor } from "./code/CodeEditor";

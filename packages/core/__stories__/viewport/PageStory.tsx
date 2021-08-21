@@ -5,15 +5,13 @@
 
 import { Story } from "@storybook/react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
-import { AxHeading } from "../../dist/typography/Heading";
-import { AxText } from "../../dist/typography/Text";
-import { AxContent, AxPage, AxSection, AxSpacer, AxViewport } from "../../src";
+import { AxContent, AxHeading, AxPage, AxSection, AxSpacer, AxText, AxViewport } from "../../src";
 import { AsideProps } from "../../src/page/Aside";
 import { PageProps } from "../../src/page/Page";
 
 const Template: Story<PageProps> = (props) => (
   <AxViewport>
-    <AxPage {...props}>
+    <AxPage {...props} paper>
       <AxContent>
         <AxHeading level={2}>Page content</AxHeading>
         <AxSpacer />
@@ -32,7 +30,7 @@ PageStory.args = {};
 
 const SectionTemplate: Story<AsideProps> = (props) => (
   <AxViewport>
-    <AxPage>
+    <AxPage paper>
       <AxSection.Side {...props}>
         <AxContent>Side content</AxContent>
       </AxSection.Side>

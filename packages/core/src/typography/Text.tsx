@@ -6,7 +6,16 @@
 import { isEmpty, isNumber, isObject, isString } from "@axux/utilities";
 import { FC, Fragment, useMemo } from "react";
 import { AxTooltip, TooltipProps } from "../overlays/Tooltip";
-import { AllColors, ElementProps, Font, Size, SizeList, Weight } from "../types";
+import {
+  AllColors,
+  ElementProps,
+  Font,
+  Size,
+  SizeList,
+  TextAlign,
+  TextTransform,
+  Weight
+} from "../types";
 
 /** @internal */
 export interface TextProps extends ElementProps {
@@ -47,6 +56,9 @@ export interface TextProps extends ElementProps {
    * Tooltip for text
    */
   tooltip?: string | TooltipProps;
+
+  align?: TextAlign;
+  transform?: TextTransform;
 }
 
 /**
@@ -62,6 +74,8 @@ export interface TextProps extends ElementProps {
  * @param block
  * @param mark
  * @param tooltip
+ * @param align
+ * @param transform
  * @param aria-*
  * @constructor
  * @internal
@@ -78,6 +92,8 @@ export const AxText: FC<TextProps> = ({
   block,
   mark,
   tooltip,
+  align,
+  transform,
   ...aria
 }) => {
   const classes = useMemo(() => {
@@ -94,6 +110,12 @@ export const AxText: FC<TextProps> = ({
     if (color) {
       cls.push(`ax-color--${color}`);
     }
+    if (align) {
+      cls.push(`ax-align--${align}`);
+    }
+    if (transform) {
+      cls.push(`ax-text--${transform}`);
+    }
     if (clip) {
       cls.push("ax-text--clip");
     }
@@ -101,7 +123,7 @@ export const AxText: FC<TextProps> = ({
       cls.push(`ax-font--${size}`);
     }
     return cls.join(" ");
-  }, [bg, block, className, clip, color, font, size, weight]);
+  }, [align, bg, block, className, clip, color, font, size, transform, weight]);
 
   const styles = useMemo(() => {
     const s: KeyValue = {};

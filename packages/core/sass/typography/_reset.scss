@@ -19,6 +19,7 @@ p {
   @include text-select();
 }
 
+//noinspection CssInvalidPropertyValue
 q {
   quotes: "\275d""\275e";
 }
@@ -97,16 +98,6 @@ ol {
       font-size: 0.8em;
       width: 1.5em;
     }
-  }
-}
-#{$prefix}-viewport {
-  input,
-  textarea {
-    appearance: none;
-    background: none;
-    border: none;
-    font-family: $font-family-sans-serif;
-    outline: none;
   }
 }
 

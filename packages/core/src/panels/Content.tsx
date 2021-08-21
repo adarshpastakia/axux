@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { isTrue } from "@axux/utilities";
-import { FC, forwardRef, useMemo } from "react";
+import { FC, forwardRef, UIEvent, useMemo } from "react";
 import { ElementProps, RefProp, Spacing } from "../types";
 import { EmptyContent } from "./EmptyContent";
 
@@ -22,6 +22,8 @@ export interface ContentProps extends ElementProps, RefProp<HTMLDivElement> {
    * Centered content
    */
   centered?: boolean;
+
+  onScroll?: (event: UIEvent<HTMLDivElement>) => void;
 }
 
 interface ContentFC extends FC<ContentProps> {
@@ -32,8 +34,11 @@ interface ContentFC extends FC<ContentProps> {
  * Page content
  * @internal
  */
-export const AxContent: ContentFC = forwardRef<HTMLDivElement, ContentProps>(
-  ({ children, className = "", centered, padding = true, scroll = true, ...aria }, ref) => {
+export const AxContent: ContentFC = forwardRef<HTMLDivElement | null, ContentProps>(
+  (
+    { children, className = "", centered, padding = true, scroll = true, onScroll, ...aria },
+    ref
+  ) => {
     const classes = useMemo(() => {
       const cls = ["ax-content", className ?? ""];
       if (padding) {
@@ -48,7 +53,7 @@ export const AxContent: ContentFC = forwardRef<HTMLDivElement, ContentProps>(
       return cls.join(" ");
     }, [centered, className, padding, scroll]);
     return (
-      <div ref={ref} className={classes} {...aria}>
+      <div ref={ref} className={classes} {...aria} onScroll={onScroll}>
         {children}
       </div>
     );

@@ -8,6 +8,7 @@ import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxField } from "@axux/form";
 import { isNil } from "@axux/utilities";
 import { Fragment, useCallback, useEffect, useState, VFC } from "react";
+import { useTranslation } from "react-i18next";
 import { InternalNode, TreeNode as TreeNodeType, TreePanelProps } from "./Tree";
 import { TreeNode } from "./TreeNode";
 
@@ -53,6 +54,7 @@ const toggleNode = (node: InternalNode, isChecked = false) => {
 /**
  * Tree panel
  * @param data
+ * @param tools
  * @param maxNodes
  * @param onChange
  * @param onSelect
@@ -73,6 +75,7 @@ export const AxTreePanel: VFC<TreePanelProps> = ({
   isCheckable,
   checkLevel = 0
 }) => {
+  const { t } = useTranslation("data");
   const [nodes, setNodes] = useState<InternalNode[]>([]);
   const [nodeMap, setNodeMap] = useState<KeyValue<InternalNode>>({});
 
@@ -156,14 +159,14 @@ export const AxTreePanel: VFC<TreePanelProps> = ({
                 type="link"
                 color="secondary"
                 icon={AppIcons.iconCheckAll}
-                tooltip="Check All"
+                tooltip={t("action.checkAll")}
                 onClick={() => toggleAll(true)}
               />
               <AxButton
                 type="link"
                 color="secondary"
                 icon={AppIcons.iconCheckboxOff}
-                tooltip="Uncheck All"
+                tooltip={t("action.uncheckAll")}
                 onClick={() => toggleAll(false)}
               />
               <span className="ax-color--light">|</span>
@@ -173,14 +176,14 @@ export const AxTreePanel: VFC<TreePanelProps> = ({
             type="link"
             color="secondary"
             icon={AppIcons.iconExpandAll}
-            tooltip="Expand All"
+            tooltip={t("action.expandAll")}
             onClick={() => openAll(true)}
           />
           <AxButton
             type="link"
             color="secondary"
             icon={AppIcons.iconCollapseAll}
-            tooltip="Collapse All"
+            tooltip={t("action.collapseAll")}
             onClick={() => openAll(false)}
           />
         </div>

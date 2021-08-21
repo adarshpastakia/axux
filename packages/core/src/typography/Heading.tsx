@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { FC, useMemo } from "react";
-import { AllColors, ElementProps, Font } from "../types";
+import { AllColors, ElementProps, Font, TextAlign, TextTransform } from "../types";
 
 /** @internal */
 export interface HeadingProps extends ElementProps {
@@ -28,6 +28,9 @@ export interface HeadingProps extends ElementProps {
    * Text color
    */
   color?: AllColors;
+
+  align?: TextAlign;
+  transform?: TextTransform;
 }
 
 /**
@@ -39,6 +42,8 @@ export interface HeadingProps extends ElementProps {
  * @param font
  * @param bg
  * @param color
+ * @param align
+ * @param transform
  * @param aria-*
  * @constructor
  * @internal
@@ -51,6 +56,8 @@ export const AxHeading: FC<HeadingProps> = ({
   font,
   bg,
   color,
+  align,
+  transform,
   ...aria
 }) => {
   const classes = useMemo(() => {
@@ -64,8 +71,14 @@ export const AxHeading: FC<HeadingProps> = ({
     if (color) {
       cls.push(`ax-color--${color}`);
     }
+    if (align) {
+      cls.push(`ax-align--${align}`);
+    }
+    if (transform) {
+      cls.push(`ax-text--${transform}`);
+    }
     return cls.join(" ");
-  }, [bg, className, color, font, forDisplay, level]);
+  }, [align, bg, className, color, font, forDisplay, level, transform]);
 
   return (
     <div className={classes} {...aria}>

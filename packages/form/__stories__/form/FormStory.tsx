@@ -40,7 +40,6 @@ const Template: Story<FormProps & { isDisabled?: boolean }> = ({ isDisabled, ...
                 autoFocus
                 required
                 allowClear
-                span={2}
                 isDisabled={isDisabled}
                 label="Text field"
                 placeholder="Any text..."
@@ -63,17 +62,39 @@ const Template: Story<FormProps & { isDisabled?: boolean }> = ({ isDisabled, ...
                 label="Number field"
                 placeholder="Any integer..."
               />
+              <AxField.Slider
+                required
+                name="slider"
+                isDisabled={isDisabled}
+                label="Slider field"
+                minValue={-180}
+                maxValue={180}
+                showLabel
+                showValue
+                showTicks
+              />
               <AxField.Options label="Checks">
                 <AxField.Checkbox name="checks.email" label="via Email" />
                 <AxField.Checkbox name="checks.sms" label="via SMS" />
                 <AxField.Checkbox name="checks.notify" label="via App Notification" />
+                <AxField.Checkbox name="checks.none" label="No contact" isDisabled />
+                <AxField.Switch name="switch.email" offLabel="no" onLabel="Email" color="indigo" />
+                <AxField.Switch name="switch.sms" offLabel="no" onLabel="Sms" color="green" />
+                <AxField.Switch
+                  name="switch.notify"
+                  offLabel="no"
+                  onLabel="yes"
+                  color="pink"
+                  label="vi App Notification"
+                />
+                <AxField.Switch name="switch.none" label="Unknown" />
               </AxField.Options>
               <AxField.Options label="Options" name="option">
                 <AxField.Radio value="red" label="Red" />
                 <AxField.Radio value="blue" label="Blue" />
                 <AxField.Radio value="yellow" label="Yellow" />
                 <AxField.Radio value="green" label="Green" />
-                <AxField.Radio value="orange" label="Orange" />
+                <AxField.Radio value="orange" label="Orange" isDisabled />
                 <AxField.Radio value="purple" label="Purple" />
               </AxField.Options>
               <AxField.Select<KeyValue>
@@ -163,6 +184,7 @@ FormStory.args = {
   schema: yup.object<KeyValue>().shape({
     text: yup.string().required(),
     number: yup.number().min(1).max(99),
+    slider: yup.number().required().min(1).max(99),
     password: yup.string(),
     option: yup.string().required(),
     textarea: yup.string(),

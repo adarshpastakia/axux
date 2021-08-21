@@ -21,7 +21,7 @@ export const usePropToggle = (
   const doToggle = useCallback(() => {
     callback && callback(!toggle, key);
     setToggle(!toggle);
-  }, [toggle, callback]);
+  }, [callback, toggle, key]);
 
   return [toggle, doToggle];
 };

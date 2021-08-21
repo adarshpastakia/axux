@@ -46,9 +46,9 @@ const darkColors = {
 };
 const lightTheme = create({
   base: "light",
-  appBg: "#f1f1f6",
-  barBg: "#f1f1f6",
-  appContentBg: "#fafaff",
+  appBg: "#f5f6fa",
+  barBg: "#fefefe",
+  appContentBg: "#fafdfd",
   colorPrimary: lightColors.secondary,
   colorSecondary: lightColors.primary,
   ...reset
@@ -56,7 +56,7 @@ const lightTheme = create({
 const darkTheme = create({
   base: "dark",
   appBg: "#272f36",
-  barBg: "#272f36",
+  barBg: "#2f3640",
   appContentBg: "#1e272e",
   colorPrimary: darkColors.secondary,
   colorSecondary: darkColors.primary,
