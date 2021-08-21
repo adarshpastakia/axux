@@ -5,6 +5,7 @@
 
 #{$prefix}-spotlight {
   align-items: start;
+  backdrop-filter: blur(1px);
   bottom: 0;
   display: grid;
   justify-items: center;

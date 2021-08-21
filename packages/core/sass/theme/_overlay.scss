@@ -1,0 +1,21 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-overlay {
+  &__mask {
+    background-color: rgba($base-bg, 0.1);
+  }
+}
+
+#{$prefix}-modal {
+  background-color: $base-bg;
+  box-shadow: $shadow-level2;
+
+  $base: #{$prefix}-modal;
+
+  &:focus-within {
+    box-shadow: $shadow-level2, 0 0 1px 1px $color-primary;
+  }
+}

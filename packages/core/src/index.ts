@@ -10,6 +10,7 @@ export { addTranslationBundle } from "./i18n";
 export { useAxGlobals } from "./context/Globals";
 export { useAxBreadcrumbService } from "./context/BreadcrumbService";
 export { useAxResizeObserver } from "./hooks/useResizeObserver";
+export { useAxModalService } from "./hooks/useModalService";
 export { useAxNotificationService } from "./hooks/useNotificationService";
 
 // Hotkey
@@ -52,6 +53,7 @@ export { AxSection } from "./page/Section";
 export { AxContent } from "./panels/Content";
 export { AxPanel } from "./panels/Panel";
 export { AxTabPanel } from "./panels/TabPanel";
+export { AxModal } from "./overlays/Modal";
 
 // Buttons
 export { AxButton } from "./buttons/Button";
