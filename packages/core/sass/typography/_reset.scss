@@ -19,6 +19,7 @@ p {
   @include text-select();
 }
 
+//noinspection CssInvalidPropertyValue
 q {
   quotes: "\275d""\275e";
 }

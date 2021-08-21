@@ -33,6 +33,10 @@ export interface ButtonProps
    * Button display style
    */
   type?: "default" | "outline" | "solid" | "link";
+  /**
+   * Tab index to allow focus
+   */
+  tabIndex?: number;
 
   /**
    * Button label

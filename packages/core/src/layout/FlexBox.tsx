@@ -5,8 +5,8 @@
 
 import { FC, forwardRef, useMemo } from "react";
 import { ElementProps, Gutter, RefProp } from "../types";
-import { AxFlexCol, FlexColProps } from "./FlexCol";
-import { AxFlexRow, FlexRowProps } from "./FlexRow";
+import { AxFlexCol } from "./FlexCol";
+import { AxFlexRow } from "./FlexRow";
 
 /** @internal */
 export interface FlexBoxProps extends ElementProps, RefProp<HTMLDivElement> {

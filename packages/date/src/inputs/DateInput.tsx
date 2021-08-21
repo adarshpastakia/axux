@@ -149,8 +149,8 @@ const DateField: FC<DateProps & WrapperProps & FieldStateProps & InnerProps> = (
         date={value}
         dateDisabled={dateDisabled}
         onChange={afterChange}
-        hijriCalendar={hijriCalendar}
-        showHijriToggle={isHijri}
+        hijriCalendar={isHijri}
+        showHijriToggle={showHijriToggle}
         onHijriChange={setHijri}
       />
     </AxPopover>

@@ -32,6 +32,7 @@ interface ExtendedFC extends FC<MenuProps> {
  * @param items
  * @param onClick
  * @param className
+ * @param rest
  * @constructor
  * @internal
  */
@@ -45,7 +46,6 @@ export const AxMenu: ExtendedFC = ({ children, size, items, onClick, className, 
   return (
     <AxPanel
       {...rest}
-      noBorder
       className={`ax-menu ${className ?? ""}`}
       onClick={checkMenuClick}
       data-size={size}

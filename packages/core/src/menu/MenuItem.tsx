@@ -57,7 +57,6 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
       badge,
       icon = "blank",
       info,
-      isFloating,
       isCollapsed,
       isCollapsable,
       mark,
