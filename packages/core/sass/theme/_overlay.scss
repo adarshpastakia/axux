@@ -15,6 +15,14 @@
 
   $base: #{$prefix}-modal;
 
+  &__wrapper {
+    > #{$prefix}-button[data-style="link"] {
+      #{$prefix}-button__inner:not(:hover) {
+        background-color: rgba($color-medium, 0.1);
+      }
+    }
+  }
+
   &:focus-within {
     box-shadow: $shadow-level2, 0 0 1px 1px $color-primary;
   }

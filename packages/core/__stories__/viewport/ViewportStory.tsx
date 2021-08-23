@@ -62,7 +62,7 @@ const Spotlight = () => {
 const Header = () => {
   const { openSpotlight } = useAxGlobals();
   return (
-    <AxViewport.Header icon="/poster.png">
+    <AxViewport.Header icon="poster.png">
       <AxButton badge={{ color: "danger", value: 9 }} color="primary" icon={mdiBell} />
       <AxButton
         color="primary"

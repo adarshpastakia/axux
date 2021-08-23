@@ -18,7 +18,14 @@ import { AxHeader } from "../appbars/Header";
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../internals/usePropToggle";
 import { AxLoader } from "../loader/Loader";
-import { CollapseProps, ElementProps, EmptyCallback, ExpandProps, RefProp } from "../types";
+import {
+  CollapseProps,
+  ElementProps,
+  EmptyCallback,
+  ExpandProps,
+  IconProps,
+  RefProp
+} from "../types";
 import { AppIcons } from "../types/appIcons";
 import { AxPanelGroup } from "./PanelGroup";
 import { AxPanelStack } from "./PanelStack";
@@ -28,11 +35,12 @@ export interface PanelProps
   extends CollapseProps,
     ExpandProps,
     ElementProps,
+    IconProps,
     RefProp<HTMLDivElement> {
   /**
    * Panel id
    */
-  id?: string;
+  panelId?: string;
   /**
    * Panel title
    */
@@ -76,7 +84,8 @@ interface ExtendedFC extends FC<PanelProps> {
 export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
   (
     {
-      id,
+      panelId,
+      icon,
       title,
       className = "",
       isExpandable,
@@ -97,8 +106,8 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
     },
     ref
   ) => {
-    const [collapsed, toggleCollapse] = usePropToggle(isCollapsed, onCollapse, id);
-    const [expanded, toggleExpand] = usePropToggle(isExpanded, onExpand, id);
+    const [collapsed, toggleCollapse] = usePropToggle(isCollapsed, onCollapse, panelId);
+    const [expanded, toggleExpand] = usePropToggle(isExpanded, onExpand, panelId);
 
     const header = useMemo(() => {
       const head = Children.toArray(children).find(
@@ -120,7 +129,6 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
           {!expanded && isCollapsable && (
             <AxButton
               type="link"
-              data-testid={`collapse-${id}`}
               icon={collapsed ? AppIcons.iconExpandPlus : AppIcons.iconCollapseMinus}
               onClick={toggleCollapse}
             />
@@ -138,7 +146,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
         });
       } else if (!!title || isExpandable || isCollapsable || !!onClose || !!onBack) {
         return (
-          <AxHeader title={title} onBack={onBack}>
+          <AxHeader title={title} icon={icon} onBack={onBack}>
             {actions}
           </AxHeader>
         );
@@ -151,10 +159,10 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       expanded,
       toggleExpand,
       isCollapsable,
-      id,
       collapsed,
       toggleCollapse,
       onClose,
+      icon,
       title,
       onBack
     ]);

@@ -66,3 +66,7 @@ export const isFalse = (value: AnyObject = ""): value is false => {
 export const isSvgPath = (value: AnyObject): value is string => {
   return typeof value === "string" && value.match(/^[Mm]\d.*[\dzZ]$/) !== null;
 };
+
+export const isRtl = () => {
+  return getComputedStyle(document.documentElement).direction === "rtl";
+};

@@ -68,7 +68,7 @@ export interface FormProps<T = KeyValue> {
  * Form wrapper
  * @internal
  */
-export const AxForm = <T,>({
+export const AxForm = <T extends KeyValue>({
   schema,
   children,
   formRef,

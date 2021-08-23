@@ -40,11 +40,11 @@ export const AxPanelGroup: FC<PanelGroupProps> = ({ children, accordion, activeP
           child,
           accordion
             ? {
-                id: child.props.id || child.key,
-                collapsable: true,
+                panelId: child.props.panelId || child.key,
+                isCollapsable: true,
                 onCollapse: (b: boolean, id: string) =>
                   changeExpanded(b, id, child.props.onCollapse),
-                collapsed: expandedPanel !== (child.props.id || child.key)
+                isCollapsed: expandedPanel !== (child.props.panelId || child.key)
               }
             : undefined
         )

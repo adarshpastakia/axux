@@ -23,8 +23,8 @@ import { ControllerProps, FieldStateProps, SelectCommonProps, WrapperProps } fro
 import { AxSelectOption } from "./Option";
 
 /** @internal */
-export interface TagProps<T = KeyValue[]>
-  extends ControllerProps<string | T>,
+export interface TagProps<T = KeyValue>
+  extends ControllerProps<string[] | T[]>,
     WrapperProps,
     FieldStateProps,
     SelectCommonProps {
@@ -170,7 +170,7 @@ TagField.displayName = "AxTagField";
  * Select input
  * @internal
  */
-export const AxTagField = <T,>({
+export const AxTagField = <T extends KeyValue>({
   children,
   value,
   onChange,

@@ -3,14 +3,49 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxMeter, AxPage, AxViewport } from "@axux/core";
-import { Countries } from "@axux/utilities";
+import {
+  AxContent,
+  AxFlexBox,
+  AxIcon,
+  AxMeter,
+  AxModal,
+  AxPage,
+  AxText,
+  AxViewport
+} from "@axux/core";
+import { Countries, Country } from "@axux/utilities";
 import { Story } from "@storybook/react";
-import { useMemo } from "react";
-import { GridProps } from "../../dist/gird/Grid";
-import { AxGridPanel, GridColumn } from "../../src";
+import { useCallback, useMemo } from "react";
+import { AxGridPanel, GridColumn, useAxNavigator } from "../../src";
+import { GridProps } from "../../src/grid/Grid";
 
-const Template: Story<GridProps> = (props) => {
+const RecordModal = ({
+  record,
+  onClose,
+  onNavigate,
+  headLabel
+}: { record: Country } & KeyValue) => {
+  return (
+    <AxModal onClose={onClose} title={record.name} size="md" onNavigate={onNavigate}>
+      <AxModal.Header title={record.name}>{headLabel}</AxModal.Header>
+      <AxContent>
+        <AxFlexBox>
+          <AxFlexBox.Row>
+            <AxFlexBox.Col flex="auto">
+              <AxIcon size={5} icon={<span>{record.emoji}</span>} />
+            </AxFlexBox.Col>
+            <AxFlexBox.Col flex="fill">
+              <AxText block size="lg">{record.fullname}</AxText>
+              <AxText block size="md">{record.capital}</AxText>
+            </AxFlexBox.Col>
+          </AxFlexBox.Row>
+        </AxFlexBox>
+      </AxContent>
+    </AxModal>
+  );
+};
+
+const Template: Story<GridProps<Country>> = (props) => {
   const columns = useMemo<GridColumn[]>(
     () => [
       {
@@ -67,17 +102,35 @@ const Template: Story<GridProps> = (props) => {
     ],
     []
   );
+  const { record, onNavigate, setCurrentIndex, headLabel } = useAxNavigator<Country>(props.data);
+
+  const openDetail = useCallback(
+    (_, index) => {
+      setCurrentIndex(index);
+    },
+    [setCurrentIndex]
+  );
+
   return (
     <AxViewport>
       <AxPage>
-        <AxGridPanel {...props} columns={columns} />
+        <AxGridPanel<Country> {...props} columns={columns} onRowSelect={openDetail} />
       </AxPage>
+      {record && (
+        <RecordModal
+          record={record}
+          onClose={() => setCurrentIndex(-1)}
+          headLabel={headLabel}
+          onNavigate={onNavigate}
+        />
+      )}
     </AxViewport>
   );
 };
 
 export const GridStory = Template.bind({});
 GridStory.args = {
+  isSelectable: true,
   data: Countries.list.map((c) => ({ ...c, strength: Math.random() * 100 }))
 };
 

@@ -3,8 +3,19 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isNumber } from "@axux/utilities";
-import { Children, cloneElement, FC, forwardRef, ReactElement, useMemo } from "react";
+import { isNumber, isRtl } from "@axux/utilities";
+import {
+  Children,
+  cloneElement,
+  FC,
+  forwardRef,
+  KeyboardEvent,
+  ReactElement,
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+  useRef
+} from "react";
 import { AxFooter } from "../appbars/Footer";
 import { AxHeader } from "../appbars/Header";
 import { AxButton } from "../buttons/Button";
@@ -30,7 +41,7 @@ export interface ModalProps extends ElementProps, IconProps, RefProp<HTMLDivElem
    */
   width?: string | number;
   size?: Size;
-  onClose?: EmptyCallback;
+  onClose: EmptyCallback;
   onNavigate?: (dir: "prev" | "next") => void;
 }
 
@@ -41,6 +52,8 @@ interface ExtendedFC extends FC<ModalProps> {
 
 export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
   ({ children, icon, title, onClose, onNavigate, size, height, width }, ref) => {
+    const maskRef = useRef<HTMLDivElement>(null);
+
     const header = useMemo(() => {
       const head = Children.toArray(children).find(
         (child) =>
@@ -49,7 +62,9 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
           (child as KeyValue).type.displayName === "AxModal.Header"
       ) as ReactElement;
 
-      const actions = <AxButton type="link" icon={AppIcons.iconClose} onClick={onClose} />;
+      const actions = (
+        <AxButton key="close-link" type="link" icon={AppIcons.iconClose} onClick={onClose} />
+      );
 
       if (head) {
         const childs = Array.isArray(head.props.children)
@@ -85,30 +100,63 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
       };
     }, [height, width]);
 
+    useLayoutEffect(() => {
+      if (maskRef.current) {
+        const el = maskRef.current;
+        (el.firstElementChild as HTMLElement).focus();
+        setTimeout(() => (el.dataset.show = "true"), 10);
+      }
+    }, []);
+
+    const keyHandler = useCallback(
+      (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          onClose && onClose();
+        }
+        const target = event.target as HTMLElement;
+        const { ctrlKey, shiftKey, altKey, metaKey, key } = event;
+        if (
+          !ctrlKey &&
+          !shiftKey &&
+          !altKey &&
+          !metaKey &&
+          (key === "ArrowLeft" || key === "ArrowRight")
+        ) {
+          if (target.tagName !== "INPUT" && target.tagName !== "TEXTAREA") {
+            onNavigate &&
+              onNavigate(key === (isRtl() ? "ArrowRight" : "ArrowLeft") ? "prev" : "next");
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        }
+      },
+      [onClose, onNavigate]
+    );
+
     return (
-      <div className="ax-modal" ref={ref} data-size={size} style={styles}>
-        <div className="ax-modal__header">{header}</div>
-        <div className="ax-modal__wrapper">
-          {onNavigate && (
-            <AxButton
-              type="link"
-              tabIndex={-1}
-              icon={AppIcons.iconPrev}
-              onClick={() => onNavigate("prev")}
-            />
-          )}
-          <div className="ax-modal__body" tabIndex={0}>
-            {childs}
+      <div className="ax-overlay__mask" ref={maskRef} onKeyDown={keyHandler}>
+        <div className="ax-modal" ref={ref} data-size={size} style={styles} tabIndex={0}>
+          <div className="ax-modal__header">{header}</div>
+          <div className="ax-modal__wrapper">
+            {onNavigate && (
+              <AxButton
+                type="link"
+                tabIndex={-1}
+                icon={AppIcons.iconPrev}
+                onClick={() => onNavigate("prev")}
+              />
+            )}
+            <div className="ax-modal__body">{childs}</div>
+            {onNavigate && (
+              <AxButton
+                data-end="true"
+                tabIndex={-1}
+                type="link"
+                icon={AppIcons.iconNext}
+                onClick={() => onNavigate("next")}
+              />
+            )}
           </div>
-          {onNavigate && (
-            <AxButton
-              data-end="true"
-              tabIndex={-1}
-              type="link"
-              icon={AppIcons.iconNext}
-              onClick={() => onNavigate("next")}
-            />
-          )}
         </div>
       </div>
     );

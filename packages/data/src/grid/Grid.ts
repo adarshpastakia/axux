@@ -79,10 +79,12 @@ interface BooleanColumn extends BaseColumn {
 export type GridColumn = StringColumn | NumberColumn | DateColumn | BooleanColumn;
 
 /** @internal */
-export interface GridProps {
-  data: KeyValue[];
+export interface GridProps<T = KeyValue> {
+  data: T[];
   columns: Array<GridColumn>;
   isLoading?: boolean;
   isCheckable?: boolean;
   isSelectable?: boolean;
+
+  onRowSelect?: (record: T, index: number) => void;
 }

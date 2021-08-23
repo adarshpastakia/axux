@@ -31,7 +31,7 @@ export interface MeterProps {
  */
 export const AxMeter: VFC<MeterProps> = ({ value = 0, showLabel, color }) => {
   const percent = useMemo(() => {
-    return `${(value > 100 ? 100 : value).toFixed(2).replace(/[.0]*$/, "")}%`;
+    return `${(value > 100 ? 100 : value).toFixed(2)}%`;
   }, [value]);
   return (
     <div

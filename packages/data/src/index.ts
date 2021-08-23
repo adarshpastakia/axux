@@ -12,3 +12,5 @@ export { AxGridPanel } from "./grid/GridPanel";
 export type { GridColumn } from "./grid/Grid";
 
 export { AxCodeEditor } from "./code/CodeEditor";
+
+export { useAxNavigator } from "./hooks/useNavigator";

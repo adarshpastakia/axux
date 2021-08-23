@@ -15,4 +15,5 @@ export * from "./_isEqual";
 export * from "./_getByPath";
 export * from "./_debounce";
 export { default as Countries } from "./_countries";
+export type { Country } from "./_countries";
 export { _fetch as fetch } from "./_fetch";

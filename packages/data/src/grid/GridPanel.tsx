@@ -4,7 +4,6 @@
 // @license   : MIT
 
 import { AxContent, AxLoader } from "@axux/core";
-import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { GridProps } from "./Grid";
 import { GridBody } from "./GridBody";
@@ -21,10 +20,10 @@ import { GridHeader } from "./GridHeader";
  * TODO: implement locked columns
  * TODO: implement footer, dynamic / footer record
  */
-export const AxGridPanel: FC<GridProps> = ({ isLoading, data, columns }) => {
+export const AxGridPanel = <T extends KeyValue>({ isLoading, data, ...rest }: GridProps) => {
   const { t } = useTranslation("data");
   return (
-    <GridContextProvider data={data} columns={columns}>
+    <GridContextProvider data={data} {...rest}>
       <div className="ax-grid__panel">
         <GridHeader />
         {data.length > 0 && <GridBody />}

@@ -1,0 +1,32 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxCallout } from "../../src";
+import { CalloutStory } from "./CalloutStory";
+
+<Meta
+  title="@core/Panels/Callout"
+  component={AxCallout}
+  parameters={{ jest: ["Callout.test.tsx"] }}
+/>
+
+<Anchor storyId="core-panels-callout--callout">
+  <Title>Callout</Title>
+</Anchor>
+
+<Description of={AxCallout} />
+
+<Canvas>
+  <Story name="Callout">{CalloutStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxCallout} sort="requiredFirst" />

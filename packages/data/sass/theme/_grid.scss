@@ -59,6 +59,19 @@
           background-color: $color-empty;
         }
       }
+
+      &[data-hover="true"]:hover {
+        &,
+        #{$base}__body--cell {
+          background-color: mix($color-primary, $base-bg, 15%);
+        }
+      }
+      &[data-hover="true"]:active {
+        &,
+        #{$base}__body--cell {
+          background-color: mix($color-primary, $base-bg, 25%);
+        }
+      }
     }
 
     &--cell {

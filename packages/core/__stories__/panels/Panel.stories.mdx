@@ -1,0 +1,55 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Subheading,
+  Title
+} from "@storybook/addon-docs";
+import { AxPanel } from "../../src";
+import { GroupStory, PanelStory, StackStory } from "./PanelStory";
+
+<Meta title="@core/Panels/Panel" parameters={{ jest: ["Panel.test.tsx"] }} />
+
+<Anchor storyId="core-panels-panel--panel">
+  <Title>Panel</Title>
+</Anchor>
+
+<Description of={AxPanel} />
+
+<Canvas>
+  <Story name="Panel">{PanelStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-panels-panel--panel-stack">
+  <Heading>Panel Stack</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Panel Stack">{StackStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-panels-panel--panel-group">
+  <Heading>Panel Group</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Panel Group">{GroupStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<Subheading>AxPanel</Subheading>
+
+<ArgsTable of={AxPanel} sort="requiredFirst" />
+
+<Subheading>AxPanel.Header</Subheading>
+
+<ArgsTable of={AxPanel.Header} sort="requiredFirst" />
+
+<Subheading>AxPanel.Footer</Subheading>
+
+<ArgsTable of={AxPanel.Footer} sort="requiredFirst" />

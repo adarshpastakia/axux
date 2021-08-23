@@ -23,6 +23,7 @@
   #{$prefix}-alert--close {
     grid-area: close;
     place-self: start;
+    position: relative;
   }
 
   &__icon {
@@ -35,7 +36,7 @@
   }
 
   &__title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: $font-weight-bold;
     grid-area: title;
     padding: 0.25rem 0.5rem;
@@ -44,10 +45,11 @@
   }
 
   &__body {
+    font-size: 0.875rem;
     grid-area: body;
     max-height: 20rem;
     overflow: auto;
-    padding: 0.5rem 0.5rem 1rem;
+    padding: 0.25rem 0.5rem 1rem;
     padding-inline-end: 2rem;
     text-align: justify;
   }

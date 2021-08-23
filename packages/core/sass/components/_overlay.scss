@@ -96,6 +96,15 @@
     width: 42rem;
   }
 
+  &__header {
+    #{$prefix}-header__icon {
+      font-size: 1.15rem;
+    }
+    #{$prefix}-header__title {
+      font-size: 1.1rem;
+    }
+  }
+
   &__wrapper {
     display: grid;
     grid-template-areas: ". content .";
@@ -106,13 +115,7 @@
 
       #{$prefix}-button__inner {
         border-radius: 0 !important;
-      }
-
-      &:first-child {
-        @extend #{$prefix}-border--e;
-      }
-      &:last-child {
-        @extend #{$prefix}-border--s;
+        font-size: 1.5rem;
       }
     }
   }

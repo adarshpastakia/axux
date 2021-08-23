@@ -15,7 +15,7 @@ import {
   useRef,
   useState
 } from "react";
-import { GridColumn } from "./Grid";
+import { GridColumn, GridProps } from "./Grid";
 
 /** @internal */
 type SortType = { name: string; order: "asc" | "desc" };
@@ -28,6 +28,9 @@ interface GridContextType {
   sort: SortType;
   widths: KeyValue;
   filters: KeyValue;
+
+  isSelectable: boolean;
+  onRowSelect?: (record: KeyValue, index: number) => void;
 
   scrollTo: number;
   onScroll: (x: number) => void;
@@ -66,17 +69,14 @@ const getSorter = (type: string, name: string, order: string) => {
 
 /**
  * Datagrid context
- * @param children
- * @param columns
- * @param data
- * @constructor
- * @internal
  * TODO: add filter functionality
  */
-export const GridContextProvider: FC<{ columns: GridColumn[]; data: KeyValue[] }> = ({
+export const GridContextProvider: FC<GridProps> = ({
   children,
   columns,
-  data
+  data,
+  onRowSelect,
+  isSelectable = false
 }) => {
   const { isRtl } = useIsRtl();
   const [filters, setFilters] = useState<KeyValue>({});
@@ -175,9 +175,11 @@ export const GridContextProvider: FC<{ columns: GridColumn[]; data: KeyValue[] }
         onSort,
         onFilter,
         onClearFilter,
+        onRowSelect,
         onResize,
         onResizeEnd,
-        onResizeStart
+        onResizeStart,
+        isSelectable
       }}
     >
       {children}

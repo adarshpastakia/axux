@@ -8,6 +8,7 @@
   $border: 0 0 0 1px $base-border-color inset;
 
   &__bar {
+    background-color: $body-bg;
     &[data-align="top"] {
       box-shadow: 0 -2px 0 $color-secondary inset;
 

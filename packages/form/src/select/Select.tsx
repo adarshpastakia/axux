@@ -156,7 +156,7 @@ SelectField.displayName = "AxSelectField";
  * Select input
  * @internal
  */
-export const AxSelectField = <T,>({
+export const AxSelectField = <T extends KeyValue>({
   children,
   value,
   onChange,

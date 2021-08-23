@@ -20,7 +20,7 @@ export interface IconProps extends RefProp, ElementProps {
   /**
    * Icon size
    */
-  size?: Size;
+  size?: Size | number | string;
   /**
    * SVG viewBox
    */
@@ -92,14 +92,22 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
       );
     }, [icon, isSvg, useImage, viewBox]);
 
+    const styles = useMemo(() => {
+      const s: KeyValue = {};
+      if (isString(size) && !SizeList.includes(size)) {
+        s.fontSize = size;
+      }
+      if (isNumber(size)) {
+        s.fontSize = `${size}rem`;
+      }
+      if (spin) {
+        s["--spin-steps"] = spin;
+      }
+      return s;
+    }, [spin, size]);
+
     return (
-      <div
-        {...aria}
-        className={classes}
-        onClick={onClick}
-        ref={ref as AnyObject}
-        style={{ "--spin-steps": spin } as AnyObject}
-      >
+      <div {...aria} className={classes} onClick={onClick} ref={ref as AnyObject} style={styles}>
         {iconEl}
       </div>
     );

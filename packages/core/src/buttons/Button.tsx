@@ -161,6 +161,7 @@ export const AxButton: ExtendedFC<ButtonProps> = forwardRef<HTMLAnchorElement, B
             data-no-label={isEmpty(label || children)}
             data-icon-align={iconAlign}
             data-icon-hilight={iconHilight}
+            {...aria}
           >
             {icon && <AxIcon className="ax-button__icon" icon={icon} />}
             {isLoading && (
