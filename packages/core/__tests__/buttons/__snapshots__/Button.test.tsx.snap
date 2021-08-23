@@ -234,6 +234,7 @@ exports[`Button renders new tab link 1`] = `
       data-icon-hilight="false"
       data-no-label="false"
       href="/test"
+      target="_blank"
     >
       <div
         class="ax-icon ax-button__icon"

@@ -124,7 +124,7 @@ export interface OptionProps<T> {
 }
 
 /** @internal */
-export interface SelectCommonProps {
+export interface SelectCommonProps<T = KeyValue> {
   /**
    * Select handler
    */
@@ -159,7 +159,7 @@ export interface SelectCommonProps {
   /**
    * Match selected value against option
    */
-  matcher?: (value: AnyObject, match: AnyObject) => boolean;
+  matcher?: (value: T, match: T) => boolean;
 
   /**
    * Object property for icon
@@ -180,7 +180,7 @@ export interface SelectCommonProps {
   /**
    * Convert object into option
    */
-  makeOption?: (option: AnyObject) => OptionProps<AnyObject>;
+  makeOption?: (option: T) => OptionProps<T>;
 
   /**
    * Use portal for dropdown

@@ -24,10 +24,10 @@ import { AxSelectOption } from "./Option";
 
 /** @internal */
 export interface SelectProps<T = KeyValue>
-  extends ControllerProps<string | T>,
+  extends ControllerProps,
     WrapperProps,
     FieldStateProps,
-    SelectCommonProps {
+    SelectCommonProps<T> {
   /**
    * Select handler
    */
@@ -45,7 +45,7 @@ interface InnerProps {
   onEnter?: KeyboardEventHandler;
 }
 
-const SelectField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerProps> = ({
+const SelectField: FC<SelectCommonProps<AnyObject> & WrapperProps & FieldStateProps & InnerProps> = ({
   children,
   placeholder,
   allowSearch,

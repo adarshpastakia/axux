@@ -18,7 +18,7 @@ import { OptionProps, SelectCommonProps } from "../types";
 
 /** @internal */
 export const useSelect = <T = KeyValue>(
-  props: SelectCommonProps & {
+  props: SelectCommonProps<T> & {
     value: AnyObject;
     onChange?: (value?: AnyObject) => void;
     multiple?: boolean;
