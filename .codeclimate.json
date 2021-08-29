@@ -22,6 +22,8 @@
     "**/*.json",
     "**/*.md",
     ".editorconfig",
-    ".gitignore"
+    ".gitignore",
+    "**/_countries.ts",
+    "**/hijri-date.js"
   ]
 }

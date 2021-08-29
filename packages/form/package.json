@@ -20,23 +20,23 @@
     "watch": "yarn build:lib -w"
   },
   "dependencies": {
-    "@hookform/resolvers": "^2.6.1",
+    "@hookform/resolvers": "^2.8.0",
     "@axux/core": "*",
     "@axux/utilities": "*",
-    "react-hook-form": "^7.12.1",
+    "react-hook-form": "^7.14.0",
     "yup": "^0.32.9"
   },
   "peerDependencies": {
-    "i18next": "^20.3.5",
+    "i18next": "^20.4.0",
     "react": "next",
     "react-dom": "next",
     "react-i18next": "^11.11.4"
   },
   "devDependencies": {
-    "@types/react": "^17.0.14",
+    "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "@types/react-i18next": "^8.1.0",
-    "@types/yup": "0.29.11"
+    "@types/yup": "^0.29.13"
   },
   "engines": {
     "node": ">=14.0.0 <16.0.0",

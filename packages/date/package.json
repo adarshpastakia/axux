@@ -23,17 +23,16 @@
     "@axux/core": "*",
     "@axux/form": "*",
     "@axux/utilities": "*",
-    "date-fns": "^2.23.0",
-    "hijri-date": "^0.2.2"
+    "date-fns": "^2.23.0"
   },
   "peerDependencies": {
-    "i18next": "^20.3.5",
+    "i18next": "^20.4.0",
     "react": "next",
     "react-dom": "next",
     "react-i18next": "^11.11.4"
   },
   "devDependencies": {
-    "@types/react": "^17.0.14",
+    "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "@types/react-i18next": "^8.1.0"
   },

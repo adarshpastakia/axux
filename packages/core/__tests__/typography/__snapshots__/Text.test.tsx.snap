@@ -127,40 +127,38 @@ exports[`Text renders simple text 1`] = `
 
 exports[`Text renders sized text 1`] = `
 <div>
-  <div>
-    <span
-      class="ax-text   ax-font--md "
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+  <span
+    class="ax-text   ax-font--md "
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
           egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
           viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
           diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
           ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
           nec augue tincidunt, ac aliquet velit facilisis.
-    </span>
-    <span
-      class="ax-text   "
-      style="font-size: 10px;"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+  </span>
+  <span
+    class="ax-text   "
+    style="font-size: 10px;"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
           egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
           viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
           diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
           ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
           nec augue tincidunt, ac aliquet velit facilisis.
-    </span>
-    <span
-      class="ax-text   "
-      style="font-size: 3rem;"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+  </span>
+  <span
+    class="ax-text   "
+    style="font-size: 3rem;"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
           egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
           viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
           diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
           ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
           nec augue tincidunt, ac aliquet velit facilisis.
-    </span>
-  </div>
+  </span>
 </div>
 `;
 
@@ -194,7 +192,7 @@ exports[`Text renders with tooltip 1`] = `
       class="ax-popper ax-tooltip ax-bg--darkest ax-color--empty "
       data-popper-escaped="true"
       data-popper-placement="top"
-      data-popper-reference-hidden="false"
+      data-popper-reference-hidden="true"
       data-show="true"
       data-show-arrow="true"
       style="position: fixed; left: 0px; top: 0px; min-width: 0; bottom: 0px; transform: translate(0px, -10px);"

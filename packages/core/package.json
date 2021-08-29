@@ -21,20 +21,20 @@
   },
   "dependencies": {
     "@axux/utilities": "*",
-    "@popperjs/core": "^2.9.2",
+    "@popperjs/core": "^2.9.3",
     "react-helmet": "^6.1.0",
     "react-popper": "^2.2.5",
     "resize-observer-polyfill": "^1.5.1"
   },
   "peerDependencies": {
-    "i18next": "^20.3.5",
+    "i18next": "^20.4.0",
     "react": "next",
     "react-dom": "next",
     "react-i18next": "^11.11.4",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.1"
   },
   "devDependencies": {
-    "@types/react": "^17.0.14",
+    "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "@types/react-helmet": "^6.1.2",
     "@types/react-i18next": "^8.1.0",

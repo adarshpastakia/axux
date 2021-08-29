@@ -24,22 +24,18 @@
     "@axux/date": "*",
     "@axux/form": "*",
     "@axux/utilities": "*",
-    "ace-builds": "^1.4.12",
-    "react-monaco-editor": "^0.44.0",
-    "react-ace": "^9.4.3",
-    "react-virtualized": "^9.22.3"
+    "react-monaco-editor": "^0.44.0"
   },
   "peerDependencies": {
-    "i18next": "^20.3.5",
+    "i18next": "^20.4.0",
     "react": "next",
     "react-dom": "next",
     "react-i18next": "^11.11.4"
   },
   "devDependencies": {
-    "@types/react": "^17.0.14",
+    "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
-    "@types/react-i18next": "^8.1.0",
-    "@types/react-virtualized": "^9.21.13"
+    "@types/react-i18next": "^8.1.0"
   },
   "engines": {
     "node": ">=14.0.0 <16.0.0",
