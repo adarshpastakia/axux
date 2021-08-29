@@ -151,8 +151,9 @@ const JsonProperty: VFC<JsonObjectProps> = ({ value, propName = [], ...props }) 
             </JsonObject>
           ) : (
             <JsonValue
-              value={innerObject}
+              key={row}
               label={label}
+              value={innerObject}
               propName={type === "array" ? propName : [...propName, label]}
               {...props}
             />

@@ -20,7 +20,9 @@ import { JsonViewStory } from "./JsonViewStory";
 <Description of={AxJsonView} />
 
 <Canvas>
-  <Story name="JSON View">{JsonViewStory}</Story>
+  <Story name="JSON View" parameters={{ layout: "none" }} height="30rem">
+    {JsonViewStory}
+  </Story>
 </Canvas>
 
 <Heading>Props</Heading>
