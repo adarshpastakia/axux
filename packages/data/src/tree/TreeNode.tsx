@@ -9,7 +9,7 @@ import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { isEmpty } from "@axux/utilities";
 import { Fragment, useLayoutEffect, useMemo, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
-import { InternalNode } from "./Tree";
+import { InternalNode } from "./types";
 
 /** @internal */
 const nodeSort = (withCheck?: boolean) => (a: KeyValue, b: KeyValue) => {

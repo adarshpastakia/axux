@@ -17,6 +17,7 @@ PanelStory.args = {
   title: "My Panel",
   icon: "mdi mdi-bell",
   minHeight: 10,
+  isLoading: false,
   isCollapsable: true,
   isExpandable: true,
   paper: true,

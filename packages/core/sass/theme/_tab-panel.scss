@@ -10,40 +10,25 @@
   &__bar {
     background-color: $body-bg;
     &[data-align="top"] {
-      box-shadow: 0 -2px 0 $color-secondary inset;
-
-      #{$base}__button {
-        box-shadow: 0 -1px 0 0 $color-secondary inset, $border;
-      }
+      box-shadow: 0 -1px 0 $color-secondary inset;
     }
     &[data-align="bottom"] {
-      box-shadow: 0 2px 0 $color-secondary inset;
-
-      #{$base}__button {
-        box-shadow: 0 1px 0 0 $color-secondary inset, $border;
-      }
+      box-shadow: 0 1px 0 $color-secondary inset;
     }
 
     @at-root [dir="rtl"] &[data-align="end"],
       &[data-align="start"] {
-      box-shadow: -2px 0 0 $color-secondary inset;
-
-      #{$base}__button {
-        box-shadow: -1px 0 0 0 $color-secondary inset, $border;
-      }
+      box-shadow: -1px 0 0 $color-secondary inset;
     }
     @at-root [dir="rtl"] &[data-align="start"],
       &[data-align="end"] {
-      box-shadow: 2px 0 0 $color-secondary inset;
-
-      #{$base}__button {
-        box-shadow: 1px 0 0 0 $color-secondary inset, $border;
-      }
+      box-shadow: 1px 0 0 $color-secondary inset;
     }
   }
 
   &__button {
     background-color: $base-bg;
+    box-shadow: $border;
 
     &[data-active="false"]:hover {
       background-color: rgba($base-bg, 0.5);

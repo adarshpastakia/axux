@@ -136,7 +136,7 @@ const SelectField: FC<SelectCommonProps<AnyObject> & WrapperProps & FieldStatePr
           <AxButton
             type="link"
             tabIndex={-1}
-            icon={AppIcons.iconCaret}
+            icon={AppIcons.iconCaretDown}
             isDisabled={isDisabled || isReadonly}
             onClick={() => setOpen(isEditable)}
           />

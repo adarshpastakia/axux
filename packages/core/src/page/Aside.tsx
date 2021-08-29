@@ -149,7 +149,7 @@ export const Aside: FC<AsideProps> = ({
           {isCollapsable && (
             <AxButton
               type="link"
-              icon={collapsed ? AppIcons.iconNext : AppIcons.iconPrev}
+              icon={collapsed ? AppIcons.iconCaretRight : AppIcons.iconCaretLeft}
               onClick={toggleCollapse}
             />
           )}
@@ -168,7 +168,7 @@ export const Aside: FC<AsideProps> = ({
         {children}
       </div>
       {isResizeable && <div ref={resizeHandleRef} className="ax-section__side--resizeHandle" />}
-      {isLoading && <AxLoader size="md" color="primary" />}
+      {isLoading && <AxLoader />}
     </div>
   );
 };

@@ -7,6 +7,7 @@
 
 export { getLogger } from "./logger";
 export * from "./_ascii";
+export * from "./_tokenize";
 export * from "./_interpolate";
 export * from "./_hash";
 export * from "./_isType";

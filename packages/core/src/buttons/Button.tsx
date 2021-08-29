@@ -174,12 +174,12 @@ export const AxButton: ExtendedFC<ButtonProps> = forwardRef<HTMLAnchorElement, B
             )}
             {badgeEl}
             {!hideCaret && !split && !!(aria as KeyValue)["data-popover"] && (
-              <AxIcon icon={AppIcons.iconCaret} className="ax-button__caret" />
+              <AxIcon icon={AppIcons.iconCaretDown} className="ax-button__caret" />
             )}
           </InnerButton>
           {split && (
             <button className="ax-button__inner ax-button__split" tabIndex={tabIndex}>
-              <AxIcon icon={AppIcons.iconCaret} className="ax-button__icon" />
+              <AxIcon icon={AppIcons.iconCaretDown} className="ax-button__icon" />
             </button>
           )}
         </div>

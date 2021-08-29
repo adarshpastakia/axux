@@ -7,8 +7,8 @@ import { AxButton, AxIcon, AxTooltip } from "@axux/core";
 import { useResize } from "@axux/core/dist/internals/useResize";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { Fragment, useMemo, useRef, useState, VFC } from "react";
-import { GridColumn } from "./Grid";
 import { useGridContext } from "./GridContext";
+import { GridColumn } from "./types";
 
 /**
  * Header cell
@@ -18,6 +18,7 @@ import { useGridContext } from "./GridContext";
  * @param tooltip
  * @param minWidth
  * @param maxWidth
+ * @param filterOptions
  * @param isPrimary
  * @param isSortable
  * @param isFilterable
@@ -33,6 +34,7 @@ export const HeaderCell: VFC<GridColumn> = ({
   tooltip,
   minWidth = "2rem",
   maxWidth,
+  filterOptions,
   isPrimary,
   isSortable,
   isFilterable,
@@ -102,7 +104,7 @@ export const HeaderCell: VFC<GridColumn> = ({
           )}
         </div>
       </AxTooltip>
-      {isFilterable && (
+      {isFilterable && filterOptions && (
         <AxButton
           className="ax-grid__header--filter"
           icon={AppIcons.iconFilter}

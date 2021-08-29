@@ -21,4 +21,5 @@ export const AxDateRange = {
 };
 
 export { AxSuperDate } from "./superdate/SuperDate";
+export { AxDateDisplay } from "./display/DateDisplay";
 export { DateUtils } from "./utils/dateMath";

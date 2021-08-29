@@ -1,9 +1,15 @@
 {
+  "label": {
+    "noRecords": "No Records"
+  },
   "tree": {
     "noItems": "No items"
   },
   "grid": {
     "empty": "No records found"
+  },
+  "json": {
+    "empty": "No data properties"
   },
   "action": {
     "find": "Find...",

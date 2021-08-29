@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxButton, AxPopover, useAxGlobals } from "@axux/core";
+import { AxButton, AxPopover } from "@axux/core";
 import { EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxFieldController } from "@axux/form/dist/internals/FieldController";
@@ -19,6 +19,7 @@ import {
   useMemo,
   useState
 } from "react";
+import { useLocale } from "../hooks/useLocale";
 import { AxDatePanel } from "../panels/DatePanel";
 import { DateProps } from "../types";
 import { dateFormat } from "../utils";
@@ -67,7 +68,7 @@ const DateField: FC<DateProps & WrapperProps & FieldStateProps & InnerProps> = (
   dateDisabled,
   ...props
 }) => {
-  const { dateLocale } = useAxGlobals();
+  const { dateLocale, isHijri, setHijri } = useLocale(hijriCalendar);
 
   const [isOpen, setOpen] = useState(false);
   const [value, setValue] = useState<DateProps["date"]>();
@@ -76,7 +77,6 @@ const DateField: FC<DateProps & WrapperProps & FieldStateProps & InnerProps> = (
     setValue(date);
   }, [date]);
 
-  const [isHijri, setHijri] = useState(hijriCalendar ?? false);
   useEffect(() => {
     setValue(date);
   }, [date]);
@@ -85,7 +85,7 @@ const DateField: FC<DateProps & WrapperProps & FieldStateProps & InnerProps> = (
    * Get input label
    */
   const inputLabel = useMemo(() => {
-    return value ? dateFormat(value, format, dateLocale,isHijri) : "";
+    return value ? dateFormat(value, format, dateLocale, isHijri) : "";
   }, [dateLocale, format, isHijri, value]);
 
   const isEditable = useMemo(() => !(isDisabled || isReadonly), [isDisabled, isReadonly]);

@@ -36,6 +36,7 @@ export interface HeaderProps extends IconProps, ElementProps {
    *
    */
   onBack?: EmptyCallback;
+  onClick?: EmptyCallback;
 }
 
 /**
@@ -48,6 +49,8 @@ export interface HeaderProps extends IconProps, ElementProps {
  * @param onBack
  * @param iconBg
  * @param iconColor
+ * @param onClick
+ * @param className
  * @param aria-*
  * @constructor
  * @internal
@@ -61,10 +64,12 @@ export const AxHeader: FC<HeaderProps> = ({
   onBack,
   iconBg,
   iconColor,
+  onClick,
+  className,
   ...aria
 }) => {
   const classes = useMemo(() => {
-    const cls = ["ax-header"];
+    const cls = ["ax-header", className ?? ""];
     if (bg) {
       cls.push(`ax-bg--${bg}`);
       if (!color) {
@@ -96,7 +101,7 @@ export const AxHeader: FC<HeaderProps> = ({
         <Fragment>
           <AxButton
             type="link"
-            icon={AppIcons.iconPrev}
+            icon={AppIcons.iconCaretLeft}
             color="primary"
             onClick={onBack}
             className="ax-header__back ax-prevent-close"
@@ -109,7 +114,9 @@ export const AxHeader: FC<HeaderProps> = ({
           <AxIcon icon={icon} />
         </div>
       )}
-      <div className="ax-header__title">{title}</div>
+      <div className={`ax-header__title ${!!onClick ? "ax-clickable" : ""}`} onClick={onClick}>
+        {title}
+      </div>
       {children && <div className="ax-header__actions">{children}</div>}
     </div>
   );

@@ -6,6 +6,10 @@
 #{$prefix}-loader {
   background-color: rgba($base-bg, 0.25);
 
+  &--progress {
+    background-color: $color-lightest;
+  }
+
   &__content {
     background-color: rgba($base-bg, 0.85);
     box-shadow: $shadow-level2;
@@ -18,6 +22,22 @@
       &::after {
         background-color: $color-primary;
       }
+    }
+  }
+
+  &__text {
+    &::after {
+      background-image: linear-gradient(
+        -45deg,
+        transparent 4rem,
+        rgba($base-bg, 0.5) 6rem,
+        transparent 10rem
+      );
+    }
+
+    > div {
+      background-color: $color-lightest;
+      box-shadow: 0 0 1px $base-border-color;
     }
   }
 }

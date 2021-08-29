@@ -7,8 +7,8 @@
   &__panel {
     display: grid;
     grid-area: content;
-    grid-template-areas: "search" "tools" "tree";
-    grid-template-rows: auto auto 1fr;
+    grid-template-areas: "search" "tools" "loader" "tree";
+    grid-template-rows: auto auto auto 1fr;
     overflow: hidden;
 
     > #{$prefix}-field {
@@ -24,6 +24,8 @@
 
   &__node {
     align-items: center;
+    contain-intrinsic-size: 2rem;
+    content-visibility: auto;
     cursor: pointer;
     display: flex;
     flex-flow: row nowrap;

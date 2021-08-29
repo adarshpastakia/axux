@@ -3,9 +3,19 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isEmpty, isNumber, isObject, isString } from "@axux/utilities";
-import { FC, Fragment, useMemo } from "react";
-import { AxTooltip, TooltipProps } from "../overlays/Tooltip";
+import { isEmpty, isNumber, isString, tokenize } from "@axux/utilities";
+import {
+  FC,
+  forwardRef,
+  Fragment,
+  useImperativeHandle,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
+import { useTranslation } from "react-i18next";
+import { AxTooltip } from "../overlays/Tooltip";
 import {
   AllColors,
   ElementProps,
@@ -51,11 +61,11 @@ export interface TextProps extends ElementProps {
   /**
    * Mark text within
    */
-  mark?: string;
+  mark?: string | string[];
   /**
    * Tooltip for text
    */
-  tooltip?: string | TooltipProps;
+  abbr?: [textPart: string, tooltip: string][];
 
   align?: TextAlign;
   transform?: TextTransform;
@@ -80,99 +90,146 @@ export interface TextProps extends ElementProps {
  * @constructor
  * @internal
  */
-export const AxText: FC<TextProps> = ({
-  children,
-  className,
-  font,
-  size,
-  weight,
-  bg,
-  color,
-  clip,
-  block,
-  mark,
-  tooltip,
-  align,
-  transform,
-  ...aria
-}) => {
-  const classes = useMemo(() => {
-    const cls = ["ax-text", block ? "ax-block" : "", className ?? ""];
-    if (font) {
-      cls.push(`ax-font--${font}`);
-    }
-    if (weight) {
-      cls.push(`ax-weight--${weight}`);
-    }
-    if (bg) {
-      cls.push(`ax-bg--${bg}`);
-    }
-    if (color) {
-      cls.push(`ax-color--${color}`);
-    }
-    if (align) {
-      cls.push(`ax-align--${align}`);
-    }
-    if (transform) {
-      cls.push(`ax-text--${transform}`);
-    }
-    if (clip) {
-      cls.push("ax-text--clip");
-    }
-    if (isString(size) && SizeList.includes(size)) {
-      cls.push(`ax-font--${size}`);
-    }
-    return cls.join(" ");
-  }, [align, bg, block, className, clip, color, font, size, transform, weight]);
+export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
+  (
+    {
+      children,
+      className,
+      font,
+      size,
+      weight,
+      bg,
+      color,
+      clip,
+      block,
+      mark,
+      abbr,
+      align,
+      transform,
+      ...aria
+    },
+    ref
+  ) => {
+    const textRef = useRef<HTMLSpanElement>(null);
+    const [canClip, setCanClip] = useState(false);
+    const [showMore, setShowMore] = useState(true);
 
-  const styles = useMemo(() => {
-    const s: KeyValue = {};
-    if (isString(size) && !SizeList.includes(size)) {
-      s.fontSize = size;
-    }
-    if (isNumber(size)) {
-      s.fontSize = `${size}rem`;
-    }
-    if (clip) {
-      s["--line-clamp"] = clip;
-    }
-    return s;
-  }, [clip, size]);
+    const { t } = useTranslation();
+    useImperativeHandle(ref, () => textRef.current as HTMLSpanElement);
 
-  const Wrapper = useMemo(() => (isEmpty(tooltip) ? Fragment : AxTooltip), [tooltip]);
-
-  const tooltipProps = useMemo(() => {
-    if (isObject(tooltip)) {
-      return tooltip;
-    }
-    return { content: tooltip };
-  }, [tooltip]);
-
-  const inner = useMemo(() => {
-    if (isString(children)) {
-      if (!isEmpty(tooltip)) {
-        return <abbr>{children}</abbr>;
+    const classes = useMemo(() => {
+      const cls = ["ax-text", block || clip ? "ax-block" : "", className ?? ""];
+      if (font) {
+        cls.push(`ax-font--${font}`);
       }
-      if (!isEmpty(mark)) {
-        const regx = new RegExp(`(${mark})=?`, "i");
-        return (
-          <span
-            dangerouslySetInnerHTML={{
-              __html: regx.test(children) ? children.replace(regx, `<mark>$1</mark>`) : children
-            }}
-          />
-        );
+      if (weight) {
+        cls.push(`ax-weight--${weight}`);
       }
-    }
-    return children;
-  }, [children, mark, tooltip]);
+      if (bg) {
+        cls.push(`ax-bg--${bg}`);
+      }
+      if (color) {
+        cls.push(`ax-color--${color}`);
+      }
+      if (clip) {
+        cls.push(`ax-align--justify`);
+      } else if (align) {
+        cls.push(`ax-align--${align}`);
+      }
+      if (transform) {
+        cls.push(`ax-text--${transform}`);
+      }
+      if (isString(size) && SizeList.includes(size)) {
+        cls.push(`ax-font--${size}`);
+      }
+      return cls.join(" ");
+    }, [align, bg, block, className, clip, color, font, size, transform, weight]);
 
-  return (
-    <Wrapper {...((isEmpty(tooltip) ? {} : tooltipProps) as AnyObject)}>
-      <span className={classes} {...aria} style={styles}>
-        {inner}
-      </span>
-    </Wrapper>
-  );
-};
+    const styles = useMemo(() => {
+      const s: KeyValue = {};
+      if (isString(size) && !SizeList.includes(size)) {
+        s.fontSize = size;
+      }
+      if (isNumber(size)) {
+        s.fontSize = `${size}rem`;
+      }
+      if (clip) {
+        s["--line-clamp"] = clip;
+      }
+      return s;
+    }, [clip, size]);
+
+    useLayoutEffect(() => {
+      setShowMore(true);
+      if (textRef.current && clip) {
+        const el = textRef.current;
+        el.style.display = "block";
+        el.classList.remove("ax-text--clip");
+        setTimeout(() => {
+          const lh = parseInt(getComputedStyle(el).lineHeight);
+          setCanClip(el.offsetHeight > clip * lh);
+          setShowMore(false);
+          el.style.display = "";
+        }, 1);
+      }
+    }, [clip, children]);
+
+    const inner = useMemo(() => {
+      if (isString(children)) {
+        const tokens = tokenize(children, abbr ? abbr.map(([keyword]) => keyword) : mark);
+
+        if (!isEmpty(abbr)) {
+          const titles: KeyValue = abbr.reduce((t, [a, b]) => ({ ...t, [a.toLowerCase()]: b }), {});
+          return (
+            <Fragment>
+              {tokens.map(([start, text], i) => (
+                <Fragment key={i}>
+                  {start ? <span>{start}</span> : null}
+                  {text ? (
+                    <AxTooltip content={titles[text.toLowerCase()]}>
+                      <abbr>{text}</abbr>
+                    </AxTooltip>
+                  ) : null}
+                </Fragment>
+              ))}
+            </Fragment>
+          );
+        }
+        if (!isEmpty(mark)) {
+          return (
+            <Fragment>
+              {tokens.map(([start, text], i) => (
+                <Fragment key={i}>
+                  {start ? <span>{start}</span> : null}
+                  {text ? <mark>{text}</mark> : null}
+                </Fragment>
+              ))}
+            </Fragment>
+          );
+        }
+      }
+      return children;
+    }, [children, mark, abbr]);
+
+    return (
+      <Fragment>
+        <span
+          className={`${classes} ${showMore ? "" : "ax-clip"}`}
+          {...aria}
+          style={styles}
+          ref={textRef}
+        >
+          {inner}
+        </span>
+        {canClip && (
+          <span className="ax-block ax-font--sm ax-align--end">
+            <a onClick={() => setShowMore(!showMore)}>
+              {t(showMore ? "action.less" : "action.more")}
+            </a>
+          </span>
+        )}
+      </Fragment>
+    );
+  }
+);
 AxText.displayName = "AxText";

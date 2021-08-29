@@ -32,7 +32,7 @@ export const GridBody: VFC = () => {
 
       <div className="ax-grid__body--row ax-grid__filler">
         {columns.map((column, index) => (
-          <BodyCell key={index} record={{}} {...column} />
+          <BodyCell key={index} record={{}} type="string" name={column.name} />
         ))}
       </div>
     </div>

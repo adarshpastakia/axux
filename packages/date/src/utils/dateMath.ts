@@ -40,6 +40,9 @@ export const I18nKey = "superdate";
 
 /** @internal */
 const isDate = (value: AnyObject): value is Date => {
+  if (isString(value) && !value.match(/^(\d*[-/.]\d*[-/.]\d*)?/)) {
+    return false;
+  }
   try {
     const parsed = parseISO(value);
     return !isNaN(parsed.valueOf());
@@ -51,7 +54,10 @@ const isDate = (value: AnyObject): value is Date => {
 
 /** @internal */
 const isDateLike = (value: AnyObject) => {
-  return !!value.match(/^\$(now|minute|hour|day|week|month|quarter|year|decade)([-+]\d*)?$/);
+  return (
+    isString(value) &&
+    !!value.match(/^\$(now|minute|hour|day|week|month|quarter|year|decade)([-+]\d*)?$/)
+  );
 };
 
 /** @internal */

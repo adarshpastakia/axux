@@ -21,6 +21,15 @@
   }
 }
 
+@keyframes infinite-progress {
+  0% {
+    transform: scaleX(1) translateX(-100%);
+  }
+  100% {
+    transform: scaleX(1) translateX(100%);
+  }
+}
+
 #{$prefix}-anim {
   &--spin::before,
   &--spin path {

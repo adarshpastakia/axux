@@ -15,7 +15,7 @@ import {
   useRef,
   useState
 } from "react";
-import { GridColumn, GridProps } from "./Grid";
+import { GridColumn, GridProps } from "./types";
 
 /** @internal */
 type SortType = { name: string; order: "asc" | "desc" };

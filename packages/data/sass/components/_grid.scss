@@ -7,8 +7,8 @@
   &__panel {
     display: grid;
     grid-area: content;
-    grid-template-areas: "head" "content" "foot";
-    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "head" "loader" "content" "foot";
+    grid-template-rows: auto auto 1fr auto;
     overflow: hidden;
   }
 
@@ -87,11 +87,13 @@
 
     &--row {
       display: flex;
+      flex: 0 0 (0.875 * 1.5 * 1rem);
       flex-flow: row nowrap;
     }
 
     &--cell {
       align-items: center;
+      content-visibility: auto;
       display: flex;
       flex: 1 1 0;
       font-size: 0.875rem;

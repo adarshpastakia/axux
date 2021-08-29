@@ -9,7 +9,7 @@ import { Country } from "@axux/utilities/dist/_countries";
 import { Story } from "@storybook/react";
 import { useMemo } from "react";
 import { AxTreePanel } from "../../src";
-import { TreeNode, TreePanelProps } from "../../src/tree/Tree";
+import { TreeNode, TreePanelProps } from "../../src/tree/types";
 
 const Template: Story<TreePanelProps> = (props) => {
   const data = useMemo<TreeNode[]>(() => {

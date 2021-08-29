@@ -13,6 +13,8 @@
   "action": {
     "ok": "OK",
     "add": "Add New",
+    "more": "Show more",
+    "less": "Show less",
     "save": "Save",
     "back": "Back",
     "close": "Close",

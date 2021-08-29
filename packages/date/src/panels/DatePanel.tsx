@@ -5,13 +5,14 @@
 
 import { AxButton } from "@axux/core";
 import { isAfter, isBefore } from "date-fns";
-import { FC, useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { DateHeader } from "../components/DateHeader";
 import { DatePage } from "../components/DatePage";
 import { DecadePage } from "../components/DecadePage";
 import { MonthPage } from "../components/MonthPage";
 import { YearPage } from "../components/YearPage";
+import { useLocale } from "../hooks/useLocale";
 import { DateProps, PageType } from "../types";
 import {
   addMonths,
@@ -36,7 +37,7 @@ export const AxDatePanel: FC<DateProps> = ({
   dateDisabled: isDisabled
 }) => {
   const { t } = useTranslation("date");
-  const [isHijri, setHijri] = useState(hijriCalendar ?? false);
+  const { isHijri, setHijri } = useLocale(hijriCalendar);
   const [selected, setSelected] = useState<Date | undefined>(date);
   const [pageDate, setPageDate] = useState(date || new Date());
 
@@ -150,10 +151,6 @@ export const AxDatePanel: FC<DateProps> = ({
     },
     [page, pageDate, min, isHijri, max]
   );
-
-  useLayoutEffect(() => {
-    setHijri(hijriCalendar ?? false);
-  }, [hijriCalendar]);
 
   const props = {
     page,

@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxButton, AxPopover, useAxGlobals } from "@axux/core";
+import { AxButton, AxPopover } from "@axux/core";
 import { EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxFieldController } from "@axux/form/dist/internals/FieldController";
@@ -19,6 +19,7 @@ import {
   useMemo,
   useState
 } from "react";
+import { useLocale } from "../hooks/useLocale";
 import { AxRangePanel } from "../panels/RangePanel";
 import { RangeProps } from "../types";
 import { dateFormat } from "../utils";
@@ -67,11 +68,10 @@ const RangeField: FC<RangeProps & WrapperProps & FieldStateProps & InnerProps> =
   presets,
   ...props
 }) => {
-  const { dateLocale } = useAxGlobals();
+  const { dateLocale, isHijri, setHijri } = useLocale(hijriCalendar);
   const [isOpen, setOpen] = useState(false);
   const [value, setValue] = useState<RangeProps["date"]>();
 
-  const [isHijri, setHijri] = useState(hijriCalendar ?? false);
   useEffect(() => {
     setValue(date);
   }, [date]);

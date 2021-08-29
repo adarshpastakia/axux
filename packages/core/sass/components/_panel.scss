@@ -6,8 +6,8 @@
 #{$prefix}-panel {
   border-radius: $base-border-radius;
   display: grid;
-  grid-template-areas: "head" "content" "foot";
-  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "head" "loader" "content" "foot";
+  grid-template-rows: auto auto 1fr auto;
   margin: 0.375rem;
   overflow: hidden;
   position: relative;

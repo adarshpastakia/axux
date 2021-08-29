@@ -4,16 +4,17 @@
 // @license   : MIT
 
 import { AxButton } from "@axux/core";
-import { addMonths, addYears, isAfter, isSameMonth } from "date-fns";
-import { FC, useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { isAfter } from "date-fns";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { DateHeader } from "../components/DateHeader";
 import { DatePage } from "../components/DatePage";
 import { DecadePage } from "../components/DecadePage";
 import { MonthPage } from "../components/MonthPage";
 import { YearPage } from "../components/YearPage";
+import { useLocale } from "../hooks/useLocale";
 import { PageType, RangeProps } from "../types";
-import { isDateDisabled } from "../utils";
+import { addMonths, addYears, isDateDisabled, isSameMonth } from "../utils";
 
 const DatePanel = (props: AnyObject) => {
   const { t } = useTranslation("date");
@@ -46,10 +47,13 @@ export const AxRangePanel: FC<RangeProps> = ({
   onHijriChange
 }) => {
   const { t } = useTranslation("date");
-  const [isHijri, setHijri] = useState(hijriCalendar ?? false);
+  const { isHijri, setHijri } = useLocale(hijriCalendar);
   const [hilight, setHilight] = useState<[Date, Date] | undefined>();
   const [selected, setSelected] = useState<[Date, Date] | undefined>();
-  const [pageDate, setPageDate] = useState({ start: new Date(), end: addMonths(new Date(), 1) });
+  const [pageDate, setPageDate] = useState({
+    start: new Date(),
+    end: addMonths(new Date(), 1, isHijri)
+  });
 
   const [page, setPage] = useState({ start: PageType.DATE, end: PageType.DATE });
 
@@ -57,10 +61,13 @@ export const AxRangePanel: FC<RangeProps> = ({
     if (date) {
       setSelected(date);
       const [start, end] = date;
-      setPageDate({ start, end: isSameMonth(start, end) ? addMonths(start, 1) : end });
+      setPageDate({
+        start,
+        end: isSameMonth(start, end, isHijri) ? addMonths(start, 1, isHijri) : end
+      });
       setPage({ start: PageType.DATE, end: PageType.DATE });
     }
-  }, [date]);
+  }, [date, isHijri]);
 
   const changePage = useCallback(
     (key: "start" | "end") => {
@@ -71,36 +78,36 @@ export const AxRangePanel: FC<RangeProps> = ({
 
   const changePageDate = useCallback(
     (key: "start" | "end", diff: number) => {
-      const dt = addMonths(pageDate[key], diff);
+      const dt = addMonths(pageDate[key], diff, isHijri);
       switch (page[key]) {
         case PageType.DATE:
           if (key === "start") {
-            setPageDate({ end: addMonths(dt, 1), [key]: dt });
+            setPageDate({ end: addMonths(dt, 1, isHijri), [key]: dt });
           } else if (key === "end") {
-            setPageDate({ start: addMonths(dt, -1), [key]: dt });
+            setPageDate({ start: addMonths(dt, -1, isHijri), [key]: dt });
           }
           break;
         case PageType.MONTH:
-          return setPageDate({ ...pageDate, [key]: addYears(pageDate[key], diff) });
+          return setPageDate({ ...pageDate, [key]: addYears(pageDate[key], diff, isHijri) });
         case PageType.YEAR:
-          return setPageDate({ ...pageDate, [key]: addYears(pageDate[key], diff * 10) });
+          return setPageDate({ ...pageDate, [key]: addYears(pageDate[key], diff * 10, isHijri) });
         case PageType.DECADE:
-          return setPageDate({ ...pageDate, [key]: addYears(pageDate[key], diff * 100) });
+          return setPageDate({ ...pageDate, [key]: addYears(pageDate[key], diff * 100, isHijri) });
       }
     },
-    [page, pageDate]
+    [isHijri, page, pageDate]
   );
 
   const selectPage = useCallback(
     (key: "start" | "end", dt: Date) => {
       if (key === "start") {
-        setPageDate({ end: addMonths(dt, 1), [key]: dt });
+        setPageDate({ end: addMonths(dt, 1, isHijri), [key]: dt });
       } else if (key === "end") {
-        setPageDate({ start: addMonths(dt, -1), [key]: dt });
+        setPageDate({ start: addMonths(dt, -1, isHijri), [key]: dt });
       }
       setPage({ ...page, [key]: page[key] - 1 });
     },
-    [page]
+    [isHijri, page]
   );
 
   const selectDate = useCallback(
@@ -119,7 +126,10 @@ export const AxRangePanel: FC<RangeProps> = ({
           if (isAfter(start, end)) {
             [start, end] = [end, start];
           }
-          setPageDate({ start, end: isSameMonth(start, end) ? addMonths(start, 1) : end });
+          setPageDate({
+            start,
+            end: isSameMonth(start, end, isHijri) ? addMonths(start, 1, isHijri) : end
+          });
           setPage({ start: PageType.DATE, end: PageType.DATE });
           setSelected([start, end]);
           onChange && onChange([start, end]);
@@ -127,12 +137,8 @@ export const AxRangePanel: FC<RangeProps> = ({
         }
       }
     },
-    [onChange, hilight]
+    [hilight, isHijri, onChange]
   );
-
-  useLayoutEffect(() => {
-    setHijri(hijriCalendar ?? false);
-  }, [hijriCalendar]);
 
   const propsStart = {
     page: page.start,

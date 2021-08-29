@@ -9,6 +9,7 @@
     display: inline-block;
     fill: currentColor;
     line-height: 1;
+    position: relative;
     text-align: center;
     vertical-align: middle;
 
@@ -83,10 +84,12 @@
       overflow: hidden;
     }
     > #{$prefix}-icon {
+      border-radius: 1em;
+      overflow: hidden;
       vertical-align: 0.05em;
     }
     &--sm {
-      font-size: 1.2em;
+      font-size: 1.25em;
     }
     &--md {
       font-size: 2em;
@@ -131,7 +134,6 @@
   }
 
   &-text {
-    flex: 1;
     vertical-align: middle;
 
     $clipClass: parse-dotless(#{$prefix}-text--clip);

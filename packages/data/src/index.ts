@@ -6,11 +6,17 @@
 import "./i18n";
 
 export { AxTreePanel } from "./tree/TreePanel";
-export type { TreeNode } from "./tree/Tree";
+export type { TreeNode } from "./tree/types";
 
 export { AxGridPanel } from "./grid/GridPanel";
-export type { GridColumn } from "./grid/Grid";
+export type { GridColumn } from "./grid/types";
 
+export { AxTimeline } from "./timeline/Timeline";
+export { AxProfileCard } from "./profile/ProfileCard";
 export { AxCodeEditor } from "./code/CodeEditor";
+export { AxJsonView } from "./json/JsonView";
+export { AxPagination } from "./pagination/Pagination";
+export { AxRecordCounter } from "./pagination/Counter";
 
 export { useAxNavigator } from "./hooks/useNavigator";
+export { useAxPagination } from "./hooks/usePagination";

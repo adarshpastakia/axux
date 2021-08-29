@@ -1,0 +1,25 @@
+import { Meta, Title } from "@storybook/addon-docs";
+import { LightBox, Lipsum, Section } from "./components";
+import { CodeLine } from "./components/CodeLine";
+import { AxIcon } from "@axux/core";
+import { AppIcons } from "@axux/core/dist/types/appIcons";
+
+<Meta title="AxUx/Icons" />
+
+<Title>
+  <div className="ax-font--serif ax-font--inherit ax-icon ax-bg--invert ax-color--invert ax-margin--e">
+    <span>I</span>
+  </div>
+  Icons
+</Title>
+
+<div className="ax-flex">
+  {Object.entries(AppIcons)
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([key, icon]) => (
+      <div className="ax-align--center ax-margin--sm">
+        <AxIcon key={key} icon={icon} size="lg" />
+        <div>{key}</div>
+      </div>
+    ))}
+</div>

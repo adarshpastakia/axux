@@ -102,12 +102,14 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       minHeight,
       maxHeight,
       onClick,
-      children
+      children,
+      ...aria
     },
     ref
   ) => {
     const [collapsed, toggleCollapse] = usePropToggle(isCollapsed, onCollapse, panelId);
     const [expanded, toggleExpand] = usePropToggle(isExpanded, onExpand, panelId);
+    const isAccordion = useMemo(() => !!(aria as KeyValue).isAccordion, [aria]);
 
     const header = useMemo(() => {
       const head = Children.toArray(children).find(
@@ -142,11 +144,17 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
           ? head.props.children
           : [head.props.children];
         return cloneElement(head as ReactElement, {
-          children: [...childs, actions, onBack]
+          children: [...childs, actions, onBack],
+          onClick: isAccordion && collapsed ? () => toggleCollapse() : undefined
         });
       } else if (!!title || isExpandable || isCollapsable || !!onClose || !!onBack) {
         return (
-          <AxHeader title={title} icon={icon} onBack={onBack}>
+          <AxHeader
+            title={title}
+            icon={icon}
+            onBack={onBack}
+            onClick={isAccordion && collapsed ? () => toggleCollapse() : undefined}
+          >
             {actions}
           </AxHeader>
         );
@@ -162,9 +170,10 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       collapsed,
       toggleCollapse,
       onClose,
-      icon,
       title,
-      onBack
+      onBack,
+      isAccordion,
+      icon
     ]);
 
     const childs = useMemo(

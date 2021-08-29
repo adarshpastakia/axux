@@ -98,7 +98,7 @@ import { LIPSUM } from "../../../../storybook/components/Lipsum";
 
 <Canvas>
   <Story name="Marked text">
-    <AxText mark={LIPSUM.text}>{LIPSUM.para}</AxText>
+    <AxText mark={["ipsum", "sapien"]}>{LIPSUM.para}</AxText>
   </Story>
 </Canvas>
 
@@ -108,8 +108,15 @@ import { LIPSUM } from "../../../../storybook/components/Lipsum";
 
 <Canvas>
   <Story name="Tooltip text">
-    <AxText tooltip="Test tooltip">{LIPSUM.text}</AxText>
-    <AxText>{LIPSUM.para.replace(LIPSUM.text, "")}</AxText>
+    <AxText
+      abbr={[
+        ["IPSUM", "Test thing"],
+        ["eros", "Someone"],
+        ["velit", "Another"]
+      ]}
+    >
+      {LIPSUM.para}
+    </AxText>
   </Story>
 </Canvas>
 

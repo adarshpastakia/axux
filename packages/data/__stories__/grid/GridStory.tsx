@@ -10,14 +10,22 @@ import {
   AxMeter,
   AxModal,
   AxPage,
+  AxSection,
   AxText,
   AxViewport
 } from "@axux/core";
 import { Countries, Country } from "@axux/utilities";
 import { Story } from "@storybook/react";
 import { useCallback, useMemo } from "react";
-import { AxGridPanel, GridColumn, useAxNavigator } from "../../src";
-import { GridProps } from "../../src/grid/Grid";
+import {
+  AxGridPanel,
+  AxPagination,
+  AxRecordCounter,
+  GridColumn,
+  useAxNavigator,
+  useAxPagination
+} from "../../src";
+import { GridProps } from "../../src/grid/types";
 
 const RecordModal = ({
   record,
@@ -35,8 +43,12 @@ const RecordModal = ({
               <AxIcon size={5} icon={<span>{record.emoji}</span>} />
             </AxFlexBox.Col>
             <AxFlexBox.Col flex="fill">
-              <AxText block size="lg">{record.fullname}</AxText>
-              <AxText block size="md">{record.capital}</AxText>
+              <AxText block size="lg">
+                {record.fullname}
+              </AxText>
+              <AxText block size="md">
+                {record.capital}
+              </AxText>
             </AxFlexBox.Col>
           </AxFlexBox.Row>
         </AxFlexBox>
@@ -72,7 +84,6 @@ const Template: Story<GridProps<Country>> = (props) => {
         label: "Continent",
         width: "8rem",
         isSortable: true,
-        isFilterable: true,
         isResizeable: true,
         filterOptions: ["Africa", "Asia", "Europe", "Oceania", "North America", "South America"]
       },
@@ -102,7 +113,14 @@ const Template: Story<GridProps<Country>> = (props) => {
     ],
     []
   );
-  const { record, onNavigate, setCurrentIndex, headLabel } = useAxNavigator<Country>(props.data);
+  const { record, onNavigate, setCurrentIndex, headLabel } = useAxNavigator<Country>(
+    props.data ?? []
+  );
+
+  const { pageEnd, pageStart, totalCount, pageRecords, ...pager } = useAxPagination({
+    perPage: 20,
+    records: props.data ?? []
+  });
 
   const openDetail = useCallback(
     (_, index) => {
@@ -114,7 +132,20 @@ const Template: Story<GridProps<Country>> = (props) => {
   return (
     <AxViewport>
       <AxPage>
-        <AxGridPanel<Country> {...props} columns={columns} onRowSelect={openDetail} />
+        <AxSection.Head className="ax-flex ax-row--middle">
+          <AxFlexBox.Col flex="fill">
+            <AxRecordCounter start={pageStart} end={pageEnd} total={totalCount} />
+          </AxFlexBox.Col>
+          <AxFlexBox.Col flex="auto">
+            <AxPagination {...pager} />
+          </AxFlexBox.Col>
+        </AxSection.Head>
+        <AxGridPanel<Country>
+          {...props}
+          data={pageRecords}
+          columns={columns}
+          onRowSelect={openDetail}
+        />
       </AxPage>
       {record && (
         <RecordModal

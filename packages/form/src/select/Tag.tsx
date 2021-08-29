@@ -150,7 +150,7 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
           <AxButton
             type="link"
             tabIndex={-1}
-            icon={AppIcons.iconCaret}
+            icon={AppIcons.iconCaretDown}
             isDisabled={isDisabled || isReadonly}
             onClick={() => setOpen(isEditable)}
           />

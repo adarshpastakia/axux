@@ -59,7 +59,7 @@ export const AxPage: FC<PageProps> = forwardRef<HTMLDivElement, PageProps>(
             </div>
           </ErrorBoundary>
         </Suspense>
-        {isLoading && <AxLoader size="lg" color="primary" />}
+        {isLoading && <AxLoader />}
       </div>
     );
   }

@@ -1,0 +1,30 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxTimeline } from "../../src";
+import { TimelineStory } from "./TimelineStory";
+
+<Meta title="@data/Timeline" component={AxTimeline} parameters={{ jest: ["Timeline.test.tsx"] }} />
+
+<Anchor storyId="data-timeline--timeline">
+  <Title>Timeline</Title>
+</Anchor>
+
+<Description of={AxTimeline} />
+
+<Canvas>
+  <Story name="Timeline" parameters={{ layout: "none" }} height="30rem">
+    {TimelineStory}
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxTimeline} sort="requiredFirst" />

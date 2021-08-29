@@ -22,7 +22,7 @@ const Template: Story<PropsWithChildren<TabPanelProps>> = (props) => (
             <p>{LIPSUM.para}</p>
           </AxContent>
         </AxTabPanel.Tab>
-        <AxTabPanel.Tab id="second" label="Second tab" icon={mdiAccountBox} isPinned>
+        <AxTabPanel.Tab id="second" label="Second tab" icon={mdiAccountBox} isPinned isLoading>
           <AxContent>
             <AxHeading>Second Tab</AxHeading>
             <p>{LIPSUM.para}</p>

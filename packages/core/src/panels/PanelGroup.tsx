@@ -9,6 +9,7 @@ import { Children, cloneElement, FC, useCallback, useEffect, useState } from "re
 export interface PanelGroupProps {
   accordion?: boolean;
   activePanel?: string;
+  onActiveChange?: (panelId: string) => void;
 }
 
 /**
@@ -16,10 +17,16 @@ export interface PanelGroupProps {
  * @param children
  * @param accordion
  * @param activePanel
+ * @param onActiveChange
  * @constructor
  * @internal
  */
-export const AxPanelGroup: FC<PanelGroupProps> = ({ children, accordion, activePanel }) => {
+export const AxPanelGroup: FC<PanelGroupProps> = ({
+  children,
+  accordion,
+  activePanel,
+  onActiveChange
+}) => {
   const [expandedPanel, setExpandedPanel] = useState<string>();
 
   useEffect(() => {
@@ -29,9 +36,10 @@ export const AxPanelGroup: FC<PanelGroupProps> = ({ children, accordion, activeP
   const changeExpanded = useCallback((collapsed: boolean, id: string, handler?: AnyObject) => {
     if (!collapsed) {
       setExpandedPanel(id);
+      onActiveChange && onActiveChange(id);
     }
     handler && handler(collapsed);
-  }, []);
+  }, [onActiveChange]);
 
   return (
     <div className="ax-panel__group">
@@ -42,6 +50,7 @@ export const AxPanelGroup: FC<PanelGroupProps> = ({ children, accordion, activeP
             ? {
                 panelId: child.props.panelId || child.key,
                 isCollapsable: true,
+                isAccordion: true,
                 onCollapse: (b: boolean, id: string) =>
                   changeExpanded(b, id, child.props.onCollapse),
                 isCollapsed: expandedPanel !== (child.props.panelId || child.key)

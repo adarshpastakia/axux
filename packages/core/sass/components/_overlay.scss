@@ -72,7 +72,8 @@
 #{$prefix}-modal {
   border-radius: $base-border-radius;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-areas: "header" "loader" "body";
+  grid-template-rows: auto auto 1fr;
   left: 50%;
   margin-top: -10rem;
   max-height: 80vh;
@@ -90,13 +91,14 @@
     width: 20rem;
   }
   &[data-size="md"] {
-    width: 36rem;
+    width: 40vw;
   }
   &[data-size="lg"] {
-    width: 42rem;
+    width: 60vw;
   }
 
   &__header {
+    grid-area: header;
     #{$prefix}-header__icon {
       font-size: 1.15rem;
     }
@@ -107,6 +109,7 @@
 
   &__wrapper {
     display: grid;
+    grid-area: body;
     grid-template-areas: ". content .";
     grid-template-columns: auto 1fr auto;
 

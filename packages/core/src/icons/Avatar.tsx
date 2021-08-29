@@ -18,7 +18,7 @@ export interface AvatarProps extends RefProp, ElementProps {
   /**
    * Avatar icon
    */
-  icon?: string;
+  icon?: string | JSX.Element;
   /**
    * Avatar title
    * when no image available will default to two characters from title
@@ -63,7 +63,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
       const cls = ["ax-avatar", `ax-avatar--${size}`, className];
       if (bg) {
         cls.push(`ax-bg--${bg}`);
-        cls.push(`ax-color--contrast`);
+        cls.push(color ? `ax-color--${color}` : `ax-color--contrast`);
       } else if (color) {
         cls.push(`ax-color--${color}`);
         cls.push("ax-bg--lightest");
@@ -91,7 +91,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
       }
     }, [fallback, icon, src, title]);
     return (
-      <AxTooltip content={title} ref={ref}>
+      <AxTooltip content={title} ref={ref} isDisabled={!title}>
         <div className={classes} data-clickable={!isEmpty(onClick)} onClick={onClick}>
           {body}
         </div>

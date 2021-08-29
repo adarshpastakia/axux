@@ -8,6 +8,7 @@ import { getChildProps } from "@axux/utilities/dist/react";
 import { Children, cloneElement, FC, useEffect, useMemo, useState } from "react";
 import { AxIcon } from "../icons/Icon";
 import { BadgeType, useBadge } from "../internals/useBadge";
+import { AxLoader } from "../loader/Loader";
 import { ElementProps, EmptyCallback, IconProps } from "../types";
 import { AppIcons } from "../types/appIcons";
 
@@ -18,6 +19,7 @@ export interface TabProps extends IconProps, ElementProps {
   badge?: BadgeType;
   isPinned?: boolean;
   isDisabled?: boolean;
+  isLoading?: boolean;
   onClose?: EmptyCallback;
 }
 
@@ -112,21 +114,21 @@ export const AxTabPanel: ExtendedFC = ({
   const [active, setActive] = useState(activeTab);
 
   const pinned = useMemo(() => {
-    return Children.toArray(children).filter((child) => getChildProps(child).pinned);
+    return Children.toArray(children).filter((child) => getChildProps(child).isPinned);
   }, [children]);
   const tabs = useMemo(() => {
-    return Children.toArray(children).filter((child) => !getChildProps(child).pinned);
+    return Children.toArray(children).filter((child) => !getChildProps(child).isPinned);
   }, [children]);
 
   const tabMap = useMemo(() => {
     return Children.toArray(children)
       .map(getChildProps)
-      .filter((tab) => !tab.disabled)
-      .reduce((map, tab) => ({ ...map, [tab.id]: tab.children }), {});
+      .filter((tab) => !tab.isDisabled)
+      .reduce((map, tab) => ({ ...map, [tab.id]: tab }), {});
   }, [children]);
 
   useEffect(() => {
-    if (activeTab && Object.keys(tabMap).includes(activeTab)) {
+    if (activeTab && activeTab in tabMap) {
       setActive(activeTab);
     } else {
       let firstSelectable = null;
@@ -134,7 +136,7 @@ export const AxTabPanel: ExtendedFC = ({
         firstSelectable = pinned.find((tab) => !getChildProps(tab).disabled);
       }
       if (!firstSelectable && tabs) {
-        firstSelectable = tabs.find((tab) => !getChildProps(tab).disabled);
+        firstSelectable = tabs.find((tab) => !getChildProps(tab).isDisabled);
       }
       if (firstSelectable) {
         setActive(getChildProps(firstSelectable).id);
@@ -164,6 +166,13 @@ export const AxTabPanel: ExtendedFC = ({
     }
   };
 
+  const isCurrentLoading = useMemo(() => {
+    if (active && active in tabMap) {
+      return tabMap[active].isLoading;
+    }
+    return false;
+  }, [active, tabMap]);
+
   return (
     <div className={`ax-tab__panel ${className}`} data-align={align}>
       <div className="ax-tab__bar" data-align={align}>
@@ -186,7 +195,8 @@ export const AxTabPanel: ExtendedFC = ({
         </div>
         {append && <div className="ax-tab__bar--append">{append}</div>}
       </div>
-      {active ? tabMap[active] : null}
+      {isCurrentLoading && <AxLoader />}
+      {active ? tabMap[active].children : null}
     </div>
   );
 };

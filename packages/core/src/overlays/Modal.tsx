@@ -16,9 +16,11 @@ import {
   useMemo,
   useRef
 } from "react";
+import { createPortal } from "react-dom";
 import { AxFooter } from "../appbars/Footer";
 import { AxHeader } from "../appbars/Header";
 import { AxButton } from "../buttons/Button";
+import { AxLoader } from "../loader/Loader";
 import { ElementProps, EmptyCallback, IconProps, RefProp, Size } from "../types";
 import { AppIcons } from "../types/appIcons";
 
@@ -41,6 +43,7 @@ export interface ModalProps extends ElementProps, IconProps, RefProp<HTMLDivElem
    */
   width?: string | number;
   size?: Size;
+  isLoading?: boolean;
   onClose: EmptyCallback;
   onNavigate?: (dir: "prev" | "next") => void;
 }
@@ -51,7 +54,7 @@ interface ExtendedFC extends FC<ModalProps> {
 }
 
 export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
-  ({ children, icon, title, onClose, onNavigate, size, height, width }, ref) => {
+  ({ children, icon, title, isLoading, onClose, onNavigate, size, height, width }, ref) => {
     const maskRef = useRef<HTMLDivElement>(null);
 
     const header = useMemo(() => {
@@ -133,7 +136,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
       [onClose, onNavigate]
     );
 
-    return (
+    return createPortal(
       <div className="ax-overlay__mask" ref={maskRef} onKeyDown={keyHandler}>
         <div className="ax-modal" ref={ref} data-size={size} style={styles} tabIndex={0}>
           <div className="ax-modal__header">{header}</div>
@@ -142,7 +145,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
               <AxButton
                 type="link"
                 tabIndex={-1}
-                icon={AppIcons.iconPrev}
+                icon={AppIcons.iconCaretLeft}
                 onClick={() => onNavigate("prev")}
               />
             )}
@@ -152,13 +155,15 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
                 data-end="true"
                 tabIndex={-1}
                 type="link"
-                icon={AppIcons.iconNext}
+                icon={AppIcons.iconCaretRight}
                 onClick={() => onNavigate("next")}
               />
             )}
           </div>
+          {isLoading && <AxLoader />}
         </div>
-      </div>
+      </div>,
+      document.body
     );
   }
 ) as AnyObject;

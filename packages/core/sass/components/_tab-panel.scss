@@ -12,32 +12,35 @@
     overflow: hidden;
 
     &[data-align="top"] {
-      grid-template-areas: "tabbar" "content";
-      grid-template-rows: auto 1fr;
+      grid-template-areas: "tabbar" "loader" "content";
+      grid-template-rows: auto auto 1fr;
       padding-top: 0;
     }
 
     &[data-align="bottom"] {
-      grid-template-areas: "content" "tabbar";
-      grid-template-rows: 1fr auto;
+      grid-template-areas: "loader" "content" "tabbar";
+      grid-template-rows: auto 1fr auto;
       padding-bottom: 0;
     }
 
     &[data-align="start"] {
-      grid-template-areas: "tabbar content";
+      grid-template-areas: "tabbar loader" "tabbar content";
       grid-template-columns: auto 1fr;
+      grid-template-rows: auto 1fr;
       padding-inline-start: 0;
     }
 
     &[data-align="end"] {
-      grid-template-areas: "content tabbar";
+      grid-template-areas: "loader tabbar" "content tabbar";
       grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr;
       padding-inline-end: 0;
     }
   }
   &__bar {
     display: flex;
     flex-flow: row nowrap;
+    grid-area: tabbar;
     overflow: hidden;
     z-index: 2;
 
@@ -65,7 +68,7 @@
     }
 
     &[data-align="top"] {
-      padding: 0 0.25em;
+      padding: 0 0.25rem;
       > div {
         align-items: flex-end;
         flex-flow: row nowrap;
@@ -84,7 +87,7 @@
     }
 
     &[data-align="bottom"] {
-      padding: 0 0.25em;
+      padding: 0 0.25rem;
       > div {
         align-items: flex-start;
         flex-flow: row nowrap;
@@ -104,7 +107,7 @@
 
     &[data-align="start"] {
       flex-flow: column nowrap;
-      padding: 0.25em 0;
+      padding: 0.25rem 0;
       > div {
         align-items: stretch;
         flex-flow: column nowrap;
@@ -121,7 +124,7 @@
 
     &[data-align="end"] {
       flex-flow: column nowrap;
-      padding: 0.25em 0;
+      padding: 0.25rem 0;
       > div {
         align-items: stretch;
         flex-flow: column nowrap;
@@ -142,17 +145,17 @@
     display: flex;
     flex-flow: row nowrap;
     margin: 2px;
-    padding: 0 0.5em;
+    padding: 0 0.5rem;
     text-align: center;
 
     &--label {
       flex: 1;
-      max-width: 10em;
+      max-width: 10rem;
       @include ellipsis();
 
       > span {
-        font-size: 0.75em;
-        padding: 0 0.25em;
+        font-size: 0.875rem;
+        padding: 0 0.25rem;
       }
     }
     &--close {

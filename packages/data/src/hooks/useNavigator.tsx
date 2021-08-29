@@ -6,7 +6,7 @@
 import { AxText } from "@axux/core";
 import { useCallback, useMemo, useState } from "react";
 
-export const useAxNavigator = <T extends KeyValue>(records: T[]) => {
+export const useAxNavigator = <T extends KeyValue>(records: T[] = []) => {
   const [recordIndex, setCurrentIndex] = useState(-1);
   const onNavigate = useCallback(
     (dir) => {
@@ -29,7 +29,7 @@ export const useAxNavigator = <T extends KeyValue>(records: T[]) => {
         {recordIndex}/{records.length}
       </AxText>
     ),
-    [recordIndex, records.length]
+    [recordIndex, records]
   );
 
   return {

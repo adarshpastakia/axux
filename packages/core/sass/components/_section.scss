@@ -20,9 +20,9 @@
     @extend #{$prefix}-border--e;
     display: grid;
     grid-area: side-s;
-    grid-template-areas: "head resize" "body resize" "foot resize";
+    grid-template-areas: "head resize" "loader resize" "body resize" "foot resize";
     grid-template-columns: 1fr auto;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
     overflow: hidden;
     position: relative;
 

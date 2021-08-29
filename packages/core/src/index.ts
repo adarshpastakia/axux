@@ -21,7 +21,7 @@ export type { SpotlightRecord } from "./spotlight/Spotlight";
 
 // Loaders
 export { AxAppLoader } from "./loader/AppLoader";
-export { AxLoader } from "./loader/Loader";
+export { AxTextLoader } from "./loader/TextLoader";
 export { AxSpinner } from "./loader/Spinner";
 
 // Iconography
@@ -29,6 +29,7 @@ export { AxIcon } from "./icons/Icon";
 export { AxAvatar } from "./icons/Avatar";
 
 // Typography
+export { AxCopy } from "./typography/Copy";
 export { AxText } from "./typography/Text";
 export { AxLink } from "./typography/Link";
 export { AxCallout } from "./panels/Callout";

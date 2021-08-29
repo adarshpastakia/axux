@@ -8,12 +8,12 @@ import {
   Story,
   Title
 } from "@storybook/addon-docs";
-import { ModalStory } from "./NotificationStory";
-import { AxModal } from "../../src/overlays/Modal";
+import { ModalStory } from "./ModalStory";
+import { AxModal } from "../../src";
 
-<Meta title="@core/Modals/Modal" component={AxModal} parameters={{ jest: ["Modal.test.tsx"] }} />
+<Meta title="@core/Panels/Modal" component={AxModal} parameters={{ jest: ["Modal.test.tsx"] }} />
 
-<Anchor storyId="core-modals-modal--modal">
+<Anchor storyId="core-panels-modal--modal">
   <Title>Modal Overlays</Title>
 </Anchor>
 
@@ -26,13 +26,8 @@ import { AxModal } from "../../src/overlays/Modal";
 <div className="ax-margin--b--lg" />
 
 ```tsx
-import {
-  AxBox,
-  AxButton,
-  AxContent,
-  AxModal,
-  useAxModalService
-} from "@axux/core";
+import { AxBox, AxButton, AxContent, AxModal } from "@axux/core";
+import { useState } from "react";
 
 export const ModalBody = ({ doClose }) => {
   return (
@@ -47,15 +42,16 @@ export const ModalBody = ({ doClose }) => {
 };
 
 export const Element = () => {
-  const { open } = useAxModalService();
+  const [isOpen, setOpen] = useState(false);
 
   const showModal = () => {
-    open(ModalBody);
+    setOpen(true);
   };
 
   return (
     <AxBox>
       <AxButton onClick={showModal}>Show Modal</AxButton>
+      {isOpen && <ModalBody />}
     </AxBox>
   );
 };

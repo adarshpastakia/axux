@@ -1,0 +1,28 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxJsonView } from "../../src";
+import { JsonViewStory } from "./JsonViewStory";
+
+<Meta title="@data/JSON View" component={AxJsonView} parameters={{ jest: ["JsonView.test.tsx"] }} />
+
+<Anchor storyId="data-json-view--json-view">
+  <Title>JSON View</Title>
+</Anchor>
+
+<Description of={AxJsonView} />
+
+<Canvas>
+  <Story name="JSON View">{JsonViewStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxJsonView} sort="requiredFirst" />

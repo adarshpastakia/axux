@@ -5,8 +5,8 @@
 
 import { isTrue } from "@axux/utilities";
 import { useMemo, VFC } from "react";
-import { GridColumn } from "./Grid";
 import { useGridContext } from "./GridContext";
+import { GridColumn } from "./types";
 
 /**
  * Data cell

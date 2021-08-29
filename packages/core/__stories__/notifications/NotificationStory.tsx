@@ -5,9 +5,7 @@
 
 import { mdiCheckCircle } from "@mdi/js";
 import { Story } from "@storybook/react";
-import { Fragment, useState } from "react";
-import { LIPSUM } from "../../../../storybook/components/Lipsum";
-import { AxButton, AxContent, AxModal, AxToolbar, useAxNotificationService } from "../../src";
+import { AxButton, useAxNotificationService } from "../../src";
 import { AlertProps } from "../../src/overlays/Alert";
 import { MessageProps } from "../../src/overlays/Message";
 import { ToastProps } from "../../src/overlays/Toast";
@@ -46,36 +44,6 @@ export const AlertStory = AlertTemplate.bind({});
 AlertStory.args = {
   title: "Alert",
   text: "This a notification message"
-};
-
-const ModalTemplate: Story = (props) => {
-  const [isOpen, setOpen] = useState(false);
-
-  return (
-    <Fragment>
-      <AxButton onClick={() => setOpen(true)}>Show Modal</AxButton>
-      {isOpen && (
-        <AxModal {...props} onClose={() => setOpen(false)}>
-          <AxModal.Header title="Modal title" icon="mdi mdi-bell" iconBg="primary" />
-          <AxContent>
-            {LIPSUM.para}
-            <div>
-              <input />
-            </div>
-          </AxContent>
-          <AxModal.Footer>
-            <AxToolbar align="end">
-              <AxButton onClick={() => setOpen(false)}>Close</AxButton>
-            </AxToolbar>
-          </AxModal.Footer>
-        </AxModal>
-      )}
-    </Fragment>
-  );
-};
-export const ModalStory = ModalTemplate.bind({});
-ModalStory.args = {
-  //
 };
 
 export default { title: "Example/Notifications", component: useAxNotificationService };

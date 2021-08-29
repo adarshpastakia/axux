@@ -86,5 +86,8 @@ export interface GridProps<T = KeyValue> {
   isCheckable?: boolean;
   isSelectable?: boolean;
 
+  emptyDisplay?: JSX.Element;
+
+  onSort?: (column: string, dir: "asc" | "desc") => void;
   onRowSelect?: (record: T, index: number) => void;
 }

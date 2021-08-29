@@ -20,6 +20,15 @@
   }
 }
 
+@keyframes text-load {
+  0% {
+    left: -18rem;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
 #{$prefix}-loader {
   bottom: 0;
   cursor: wait;
@@ -41,6 +50,25 @@
     font-size: 2rem;
   }
 
+  &--progress {
+    grid-area: loader;
+    height: 4px;
+    overflow: hidden;
+    position: relative;
+
+    &::before {
+      background-color: currentColor;
+      bottom: 1px;
+      content: "";
+      left: 0;
+      position: absolute;
+      top: 1px;
+      transform: scaleX(0) translateX(0%);
+      width: 100%;
+      @include animation(infinite-progress 1s ease-in-out infinite);
+    }
+  }
+
   &__content {
     backdrop-filter: blur(1rem);
     border-radius: 0.5rem;
@@ -48,7 +76,7 @@
   }
 
   &--blur {
-    backdrop-filter: blur(0.25rem);
+    backdrop-filter: blur(1px);
   }
 
   &__app {
@@ -73,6 +101,31 @@
         position: absolute;
         @include animation(app-loader 2s linear infinite);
       }
+    }
+  }
+
+  &__text {
+    overflow: hidden;
+    position: relative;
+
+    > div {
+      border-radius: $base-border-radius;
+      height: 0.75rem;
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        width: 75%;
+      }
+    }
+
+    &::after {
+      bottom: 0;
+      content: "";
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 18rem;
+      @include animation(text-load 1s linear infinite);
     }
   }
 }

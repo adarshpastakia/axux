@@ -12,16 +12,16 @@ export const usePropToggle = (
   callback?: (is: boolean, key?: string) => void,
   key?: string
 ): [boolean, EmptyCallback] => {
-  const [toggle, setToggle] = useState(is);
+  const [toggleOn, setToggleOn] = useState(is);
 
   useLayoutEffect(() => {
-    setToggle(is);
+    setToggleOn(is);
   }, [is]);
 
   const doToggle = useCallback(() => {
-    callback && callback(!toggle, key);
-    setToggle(!toggle);
-  }, [callback, toggle, key]);
+    callback && callback(!toggleOn, key);
+    setToggleOn(!toggleOn);
+  }, [toggleOn, callback, key]);
 
-  return [toggle, doToggle];
+  return [toggleOn, doToggle];
 };

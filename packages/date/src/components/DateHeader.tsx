@@ -45,7 +45,7 @@ export const DateHeader = (props: DateContext) => {
           color="primary"
           isDisabled={headDisabled && headDisabled(-12)}
           onClick={() => changePageDate(-12)}
-          icon={AppIcons.iconFirst}
+          icon={AppIcons.iconChevronLeft}
         />
       )}
       <AxButton
@@ -54,7 +54,7 @@ export const DateHeader = (props: DateContext) => {
         color="primary"
         isDisabled={headDisabled && headDisabled(-1)}
         onClick={() => changePageDate(-1)}
-        icon={AppIcons.iconPrev}
+        icon={AppIcons.iconCaretLeft}
       />
       <div
         className="ax-date__header--label"
@@ -69,7 +69,7 @@ export const DateHeader = (props: DateContext) => {
         color="primary"
         isDisabled={headDisabled && headDisabled(1)}
         onClick={() => changePageDate(1)}
-        icon={AppIcons.iconNext}
+        icon={AppIcons.iconCaretRight}
       />
       {page === PageType.DATE && (
         <AxButton
@@ -78,7 +78,7 @@ export const DateHeader = (props: DateContext) => {
           color="primary"
           isDisabled={headDisabled && headDisabled(12)}
           onClick={() => changePageDate(12)}
-          icon={AppIcons.iconLast}
+          icon={AppIcons.iconChevronRight}
         />
       )}
     </div>

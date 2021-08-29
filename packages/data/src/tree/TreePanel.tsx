@@ -9,8 +9,8 @@ import { AxField } from "@axux/form";
 import { isNil } from "@axux/utilities";
 import { Fragment, useCallback, useEffect, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
-import { InternalNode, TreeNode as TreeNodeType, TreePanelProps } from "./Tree";
 import { TreeNode } from "./TreeNode";
+import { InternalNode, TreeNode as TreeNodeType, TreePanelProps } from "./types";
 
 /** @internal */
 const nodeSort = (a: KeyValue, b: KeyValue) => {
