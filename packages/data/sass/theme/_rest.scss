@@ -1,0 +1,24 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-json {
+  &__label {
+    color: $color-muted;
+  }
+}
+
+#{$prefix}-profileCard {
+  @include paper();
+
+  &__inner {
+    background-color: $base-bg;
+  }
+
+  &__head {
+    &::after {
+      background-color: $base-bg;
+    }
+  }
+}

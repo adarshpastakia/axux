@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@axux/core": "*",
+    "@axux/date": "*",
     "@axux/form": "*",
     "@axux/utilities": "*",
     "ace-builds": "^1.4.12",

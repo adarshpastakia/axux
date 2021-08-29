@@ -11,7 +11,6 @@
 
   &__label {
     display: block;
-    @extend #{$prefix}-color--muted;
 
     #{$prefix}-icon {
       margin-inline-end: 0.25rem;

@@ -3,10 +3,11 @@
 // @copyright : 2021
 // @license   : MIT
 
-// append browser prefixes for css property
-// @param $property - property name
-// @param $val      - property value
-// @param $fallback - include fallback property
+@mixin paper {
+  border-radius: $base-border-radius;
+  box-shadow: $shadow-level0;
+  margin: 0.375rem;
+}
 
 // @function ellipsis
 // @desc clip long text with ellipsis

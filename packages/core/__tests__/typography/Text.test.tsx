@@ -100,7 +100,7 @@ describe("Text", () => {
   });
 
   it("renders with tooltip", async () => {
-    const fragment = render(<TextStory tooltip={{ content: "Test tooltip" }} />);
+    const fragment = render(<TextStory abbr={[["IPSUM", "Test tooltip"]]} />);
 
     const el = fragment.container.querySelector("abbr") as HTMLElement;
     act(() => {
