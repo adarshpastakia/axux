@@ -68,7 +68,7 @@ export const AxPopover: ExtendedFC<PopoverProps & RefProp> = forwardRef<HTMLElem
       resize = true,
       forceRender = false,
       placement = "bottom-start",
-      isOpen = false,
+      isOpen,
       isDisabled = false,
       usePortal = false,
       showArrow = false,

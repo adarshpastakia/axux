@@ -6,7 +6,7 @@
 #{$prefix}-menu {
   display: flex;
   flex-flow: column nowrap;
-  font-size: 0.875rem;
+  font-size: 1em;
   font-weight: $font-weight-medium;
   line-height: 1;
   overflow: auto;
@@ -14,10 +14,10 @@
   $base: #{$prefix}-menu;
 
   &[data-size="md"] {
-    font-size: 1rem;
+    font-size: 1em;
   }
   &[data-size="lg"] {
-    font-size: 1.25rem;
+    font-size: 1.25em;
   }
 
   &__item + #{$base} {

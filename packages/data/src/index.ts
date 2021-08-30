@@ -12,6 +12,8 @@ export { AxGridPanel } from "./grid/GridPanel";
 export type { GridColumn } from "./grid/types";
 
 export { AxTimeline } from "./timeline/Timeline";
+export type { TimelineRecord } from "./timeline/types";
+
 export { AxProfileCard } from "./profile/ProfileCard";
 export { AxCodeEditor } from "./code/CodeEditor";
 export { AxJsonView } from "./json/JsonView";

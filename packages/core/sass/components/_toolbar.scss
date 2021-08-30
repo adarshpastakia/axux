@@ -8,7 +8,7 @@
   display: flex;
   justify-content: flex-start;
   overflow: hidden;
-  padding: 0.125rem 0.25rem;
+  padding: 0.125em 0.25em;
   white-space: nowrap;
 
   $base: #{$prefix}-toolbar;
@@ -66,7 +66,7 @@
   &[data-vertical="false"] {
     #{$prefix}-divider {
       flex-flow: column;
-      margin: 0 0.25rem;
+      margin: 0 0.25em;
 
       hr {
         @extend hr[data-vertical="true"];
@@ -82,7 +82,7 @@
 
     #{$prefix}-divider {
       flex-flow: row;
-      margin: 0.25rem 0;
+      margin: 0.25em 0;
 
       hr {
         height: 1px;

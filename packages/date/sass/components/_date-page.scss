@@ -8,9 +8,15 @@
   display: inline-grid;
   grid-template-rows: auto 1fr auto;
   vertical-align: top;
-  width: 18rem;
+  width: 18em;
 
   $base: #{$prefix}-date;
+
+  &__popover#{$prefix}-popper {
+    #{$prefix}-popper--body {
+      max-height: unset;
+    }
+  }
 
   &__range {
     box-shadow: 0 0 1px #95a5a6;
@@ -57,9 +63,9 @@
     }
     &--parts {
       grid-auto-flow: row;
-      grid-gap: 0.5rem;
+      grid-gap: 0.5em;
       grid-template-columns: repeat(3, 1fr);
-      padding: 0.5rem;
+      padding: 0.5em;
       place-content: center;
     }
   }
@@ -74,9 +80,9 @@
   &__cell {
     border-radius: $base-border-radius;
     cursor: pointer;
-    font-size: 0.75rem;
-    line-height: 1.5rem;
-    min-width: 1.5rem;
+    font-size: 0.75em;
+    line-height: 2em;
+    min-width: 1.5em;
     overflow: hidden;
     text-align: center;
 
@@ -96,9 +102,9 @@
     &--label {
       cursor: pointer;
       flex: 1;
-      font-size: 0.875rem;
+      font-size: 1em;
       font-weight: $font-weight-bold;
-      line-height: 2rem;
+      line-height: 2em;
       text-align: center;
 
       &[data-disabled="true"] {
@@ -112,13 +118,13 @@
     justify-content: space-between;
 
     #{$prefix}-button {
-      font-size: 0.875rem;
+      font-size: 1em;
     }
   }
 
   &__head {
     display: grid;
-    font-size: 0.75rem;
+    font-size: 0.75em;
     grid-area: head;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
@@ -126,20 +132,20 @@
 
   &__wkhead {
     display: grid;
-    font-size: 0.625rem;
+    font-size: 0.75em;
     grid-area: wkhead;
     grid-gap: 1px;
     grid-template-rows: auto repeat(6, 1fr);
-    padding: 0 0 0.25rem;
+    padding: 0 0 0.25em;
     text-align: center;
-    width: 1rem;
+    width: 1.5em;
     div {
       align-self: center;
-      line-height: 1.25rem;
+      line-height: 1.25em;
 
       &:first-child {
-        line-height: 1.125rem;
-        margin-bottom: 0.25rem;
+        line-height: 1.5em;
+        margin-bottom: 0.25em;
       }
     }
   }
@@ -149,6 +155,6 @@
     grid-auto-flow: row;
     grid-gap: 1px;
     grid-template-columns: repeat(7, auto);
-    padding: 0.25rem;
+    padding: 0.25em;
   }
 }

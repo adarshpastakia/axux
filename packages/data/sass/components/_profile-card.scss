@@ -6,24 +6,22 @@
 #{$prefix}-profileCard {
   $base: #{$prefix}-profileCard;
   display: inline-block;
-  font-size: 1.25rem;
 
   &[data-size="sm"] {
-    font-size: 1rem;
+    font-size: 0.875em;
   }
   &[data-size="md"] {
-    font-size: 1.5rem;
+    font-size: 1.5em;
   }
 
   &__inner {
     display: grid;
     grid-template-rows: auto auto 1fr;
-    max-height: 20em;
-    width: 12em;
+    width: 15em;
   }
 
   &__head {
-    padding: 0.5rem;
+    padding: 0.5em;
     position: relative;
     text-align: center;
 
@@ -53,12 +51,12 @@
     font-size: 1em;
     font-weight: $font-weight-medium;
     line-height: 1;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25em 0.5em;
     text-align: center;
   }
 
   &__body {
-    font-size: 0.875em;
-    padding: 0.25rem 0.5rem;
+    max-height: 20em;
+    padding: 0.25em 0.5em;
   }
 }

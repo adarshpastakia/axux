@@ -71,7 +71,7 @@
 
   &-paper {
     border-radius: $base-border-radius;
-    margin: 0.375rem;
+    margin: 0.375em;
   }
 
   &-bg--none {
@@ -84,7 +84,7 @@
 
   &-text-divider {
     border-width: 1px 0 0;
-    margin: 2rem 0;
+    margin: 2em 0;
     padding: 0;
 
     legend {
@@ -219,10 +219,10 @@
 [class*="aui-dark--"],
 [class*="aui-light--"] {
   display: inline-block;
-  height: 2rem;
-  line-height: 2rem;
+  height: 2em;
+  line-height: 2em;
   text-align: center;
-  width: 2rem;
+  width: 2em;
 }
 
 @mixin make-spacing($property, $space, $size: null, $bp: null) {

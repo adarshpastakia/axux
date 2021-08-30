@@ -13,14 +13,6 @@ import { TreeNode } from "./TreeNode";
 import { InternalNode, TreeNode as TreeNodeType, TreePanelProps } from "./types";
 
 /** @internal */
-const nodeSort = (a: KeyValue, b: KeyValue) => {
-  if (a.isLeaf !== b.isLeaf) {
-    return a.isLeaf ? 1 : -1;
-  }
-  return a.label.toString().toLowerCase().localeCompare(b.label.toString().toLowerCase());
-};
-
-/** @internal */
 const refactorNodes = (nodes?: TreeNodeType[], parent = "", level = 0): InternalNode[] => {
   if (isNil(nodes)) {
     return undefined as AnyObject;
@@ -57,6 +49,7 @@ const toggleNode = (node: InternalNode, isChecked = false) => {
  * @param tools
  * @param maxNodes
  * @param onChange
+ * @param sort
  * @param onSelect
  * @param isSearchable
  * @param isCheckable
@@ -70,18 +63,22 @@ export const AxTreePanel: VFC<TreePanelProps> = ({
   tools,
   maxNodes,
   onChange,
+  sort,
   onSelect,
   isSearchable,
   isCheckable,
   checkLevel = 0
 }) => {
   const { t } = useTranslation("data");
+  const [canExpand, setCanExpand] = useState(true);
   const [nodes, setNodes] = useState<InternalNode[]>([]);
   const [nodeMap, setNodeMap] = useState<KeyValue<InternalNode>>({});
 
   useEffect(() => {
     const nodeList = refactorNodes(data);
-    setNodeMap(mapNodes(nodeList));
+    const nodeMap = mapNodes(nodeList);
+    setCanExpand(Object.values(nodeMap).some((node) => node.level > 0));
+    setNodeMap(nodeMap);
     setNodes(nodeList);
   }, [data]);
 
@@ -172,34 +169,43 @@ export const AxTreePanel: VFC<TreePanelProps> = ({
               <span className="ax-color--light">|</span>
             </Fragment>
           )}
-          <AxButton
-            type="link"
-            color="secondary"
-            icon={AppIcons.iconExpandAll}
-            tooltip={t("action.expandAll")}
-            onClick={() => openAll(true)}
-          />
-          <AxButton
-            type="link"
-            color="secondary"
-            icon={AppIcons.iconCollapseAll}
-            tooltip={t("action.collapseAll")}
-            onClick={() => openAll(false)}
-          />
+          {canExpand && (
+            <Fragment>
+              <AxButton
+                type="link"
+                color="secondary"
+                icon={AppIcons.iconExpandAll}
+                tooltip={t("action.expandAll")}
+                onClick={() => openAll(true)}
+              />
+              <AxButton
+                type="link"
+                color="secondary"
+                icon={AppIcons.iconCollapseAll}
+                tooltip={t("action.collapseAll")}
+                onClick={() => openAll(false)}
+              />
+            </Fragment>
+          )}
         </div>
         <div>{tools}</div>
       </div>
       <div className="ax-tree__body">
-        {nodes.sort(nodeSort).map((node) => (
-          <TreeNode
-            key={node.id}
-            node={node}
-            maxNodes={maxNodes}
-            onClick={handleClick}
-            isCheckable={isCheckable}
-            checkLevel={checkLevel}
-          />
-        ))}
+        <TreeNode
+          key="root"
+          node={
+            {
+              children: nodes,
+              isOpen: true
+            } as AnyObject
+          }
+          isRoot
+          sort={sort}
+          maxNodes={maxNodes}
+          onClick={handleClick}
+          isCheckable={isCheckable}
+          checkLevel={checkLevel}
+        />
       </div>
     </div>
   );

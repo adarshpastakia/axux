@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isEmpty, isFalse, isObject, isTrue } from "@axux/utilities";
+import { isEmpty, isObject, isTrue } from "@axux/utilities";
 import { useMemo, VFC } from "react";
 import { AllColors } from "../types";
 
@@ -46,7 +46,7 @@ export const useBadge = (props?: BadgeType) => {
       return props as BadgeProps;
     } else if (isTrue(props)) {
       return { pulse: true };
-    } else if (!isFalse(props) && !isEmpty(props)) {
+    } else if (!isEmpty(props)) {
       return { value: props };
     }
   }, [props]);

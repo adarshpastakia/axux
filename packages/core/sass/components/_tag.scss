@@ -11,7 +11,7 @@
   box-shadow: 0 0 1px currentColor;
   cursor: default;
   display: inline-flex;
-  font-size: 0.75rem;
+  font-size: 0.75em;
   margin: 2px;
   overflow: hidden;
   position: relative;
@@ -30,21 +30,21 @@
   }
 
   &[data-size="sm"] {
-    font-size: 0.625rem;
+    font-size: 0.625em;
   }
 
   &[data-size="md"] {
-    font-size: 0.875rem;
+    font-size: 1em;
   }
 
   &[data-size="lg"] {
-    font-size: 1rem;
+    font-size: 1.25em;
   }
 
   &__inner {
     align-items: center;
     display: flex;
-    max-width: 8rem;
+    max-width: 8em;
     overflow: hidden;
     padding: 0.25em;
     z-index: 1;
@@ -52,7 +52,7 @@
     > span {
       font-weight: 500;
       line-height: 1.25;
-      padding: 0 0.25rem;
+      padding: 0 0.25em;
       z-index: 5;
       @include ellipsis();
     }
@@ -61,7 +61,6 @@
   &__close {
     cursor: pointer;
     display: inline-block;
-    margin: -0.25em 0;
     margin-inline-end: 0.5em;
     opacity: 0.75;
     z-index: 1;

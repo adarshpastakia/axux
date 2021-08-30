@@ -14,7 +14,7 @@
 
   &__header {
     overflow: hidden;
-    padding-inline-end: 0.5rem;
+    padding-inline-end: 0.5em;
 
     #{$prefix}-button {
       margin: 0;
@@ -36,7 +36,7 @@
       align-items: center;
       display: flex;
       flex: 1 1 1em;
-      font-size: 0.875rem;
+      font-size: 1em;
       overflow: hidden;
       padding: 0 0.5em;
 
@@ -49,13 +49,13 @@
       }
 
       > label {
-        padding-inline-end: 0.25rem;
+        padding-inline-end: 0.25em;
         @include ellipsis();
       }
     }
 
     &--sort {
-      font-size: 0.625rem;
+      font-size: 0.625em;
       letter-spacing: -0.375em;
 
       span {
@@ -87,7 +87,7 @@
 
     &--row {
       display: flex;
-      flex: 0 0 (0.875 * 1.5 * 1rem);
+      flex: 0 0 (0.875 * 1.5 * 1em);
       flex-flow: row nowrap;
     }
 
@@ -96,11 +96,11 @@
       content-visibility: auto;
       display: flex;
       flex: 1 1 0;
-      font-size: 0.875rem;
+      font-size: 1em;
 
       > label {
         flex: 1 1 1em;
-        padding: 0 0.25rem;
+        padding: 0 0.25em;
         @include ellipsis();
       }
 

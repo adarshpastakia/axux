@@ -8,7 +8,7 @@
   display: grid;
   grid-template-areas: "icon title close" "icon body body";
   grid-template-columns: auto 1fr auto;
-  grid-template-rows: minmax(1.5rem, max-content) 1fr auto;
+  grid-template-rows: minmax(1.5em, max-content) 1fr auto;
   margin: 0 auto;
   max-width: 70vw;
   pointer-events: all;
@@ -28,29 +28,29 @@
 
   &__icon {
     grid-area: icon;
-    padding: 0.5rem;
+    padding: 0.5em;
 
     #{$prefix}-icon {
-      font-size: 2rem;
+      font-size: 2em;
     }
   }
 
   &__title {
-    font-size: 1.25rem;
+    font-size: 1.25em;
     font-weight: $font-weight-light;
     grid-area: title;
-    padding: 0.25rem 0.5rem;
-    padding-inline-end: 1.5rem;
+    padding: 0.25em 0.5em;
+    padding-inline-end: 1.5em;
     @include ellipsis();
   }
 
   &__body {
-    font-size: 0.875rem;
+    font-size: 1em;
     grid-area: body;
-    max-height: 20rem;
+    max-height: 20em;
     overflow: auto;
-    padding: 0.25rem 0.5rem 1rem;
-    padding-inline-end: 2rem;
+    padding: 0.25em 0.5em 1em;
+    padding-inline-end: 2em;
     text-align: justify;
   }
 }

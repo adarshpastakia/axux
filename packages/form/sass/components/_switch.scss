@@ -10,18 +10,16 @@
     border-radius: 1em;
     cursor: pointer;
     display: grid;
-    font-size: 0.5rem;
+    font-size: 0.75em;
     grid-template-columns: 1fr 1fr;
-    height: 1rem;
-    line-height: 1rem;
-    min-width: 2rem;
+    min-width: 2em;
     padding: 2px;
     position: relative;
     transition: background-color 500ms, color 500ms;
 
     &--handle {
       border-radius: 1em;
-      height: calc(1rem - 4px);
+      height: calc(1.5em - 6px);
       left: 0;
       margin: 2px;
       position: absolute;
@@ -32,8 +30,8 @@
 
     &::before,
     &::after {
-      line-height: 0.75rem;
-      padding: 0 2px;
+      line-height: 1em;
+      padding: 0 4px;
       text-align: center;
       text-transform: capitalize;
     }

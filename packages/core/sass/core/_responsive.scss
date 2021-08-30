@@ -126,7 +126,7 @@
     }
 
     &--fill {
-      flex: 1 1 1rem;
+      flex: 1 1 1em;
     }
 
     &--full {
@@ -197,7 +197,7 @@
       }
 
       &-col--fill\@#{$breakpoint} {
-        flex: 1 1 1rem;
+        flex: 1 1 1em;
       }
 
       &-col--stretch\@#{$breakpoint} {

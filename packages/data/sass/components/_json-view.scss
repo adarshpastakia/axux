@@ -5,15 +5,17 @@
 
 #{$prefix}-json {
   &__view {
-    font-size: 0.875rem;
-    padding: 0.5rem;
+    font-size: 1em;
+    padding: 0.5em;
   }
 
   &__label {
     display: block;
+    font-size: 0.875em;
+    text-transform: capitalize;
 
     #{$prefix}-icon {
-      margin-inline-end: 0.25rem;
+      margin-inline-end: 0.25em;
     }
 
     > span {
@@ -36,15 +38,15 @@
 
     > span {
       flex: 1 1 1em;
-      padding: 0.0625rem 0;
+      padding: 0.0625em 0;
     }
   }
 
   &__property {
-    margin-bottom: 0.875rem;
+    margin-bottom: 1em;
 
     > #{$prefix}-json__property {
-      padding-inline-start: 1rem;
+      padding-inline-start: 1em;
     }
   }
 }

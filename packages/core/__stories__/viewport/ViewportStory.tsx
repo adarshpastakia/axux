@@ -127,6 +127,12 @@ const Page = () => {
     addItem({ label: "Page", to: "#/2" });
     addItem({ label: "Section", to: "#/3" });
     addItem({ label: "Here", to: "#/4" });
+    addItem({ label: "Here", to: "#/5" });
+    addItem({ label: "Here", to: "#/6" });
+    addItem({ label: "Here", to: "#/7" });
+    addItem({ label: "Here", to: "#/8" });
+    addItem({ label: "Here", to: "#/9" });
+    addItem({ label: "Here", to: "#/10" });
   }, [addItem]);
   return (
     <AxPage

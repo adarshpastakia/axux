@@ -14,6 +14,7 @@ export interface BaseNode extends IconProps {
   badge?: BadgeType;
   isLeaf?: boolean;
   isDisabled?: boolean;
+  record?: KeyValue;
 }
 /** @internal */
 interface LeafNode extends BaseNode {
@@ -49,6 +50,7 @@ export interface TreePanelProps {
   allowPartial?: boolean;
   maxNodes?: number;
   tools?: ReactNode;
+  sort?: { prop: string; order: "asc" | "desc" } | true;
   onLoad?: (id: string) => Promise<TreeNode[]> | TreeNode[];
   onSelect?: (id: string) => void;
   onChange?: (selected: string[]) => void;

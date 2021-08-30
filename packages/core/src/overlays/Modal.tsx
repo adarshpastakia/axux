@@ -62,7 +62,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
         (child) =>
           child &&
           "type" in (child as KeyValue) &&
-          (child as KeyValue).type.displayName === "AxModal.Header"
+          (child as KeyValue).type.displayName === "AxPanel.Header"
       ) as ReactElement;
 
       const actions = (
@@ -91,7 +91,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
           (child) =>
             child &&
             "type" in (child as KeyValue) &&
-            (child as KeyValue).type.displayName !== "AxModal.Header"
+            (child as KeyValue).type.displayName !== "AxPanel.Header"
         ),
       [children]
     );
@@ -171,5 +171,3 @@ AxModal.Header = AxHeader;
 AxModal.Footer = AxFooter;
 
 AxModal.displayName = "AxModal";
-AxModal.Header.displayName = "AxModal.Header";
-AxModal.Footer.displayName = "AxModal.Footer";

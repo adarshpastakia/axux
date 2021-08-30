@@ -8,8 +8,6 @@
   display: grid;
   grid-template-areas: "head" "loader" "content" "foot";
   grid-template-rows: auto auto 1fr auto;
-  margin: 0.375rem;
-  overflow: hidden;
   position: relative;
   @extend #{$prefix}-bg--base;
 
@@ -18,7 +16,6 @@
   &__group {
     #{$base} {
       border-radius: 0;
-      margin-top: -0.375rem;
 
       &:first-child {
         border-start-end-radius: $base-border-radius;
@@ -28,6 +25,11 @@
         border-end-end-radius: $base-border-radius;
         border-end-start-radius: $base-border-radius;
       }
+    }
+    #{$prefix}-header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
     }
   }
 
@@ -50,7 +52,7 @@
       display: none;
     }
     #{$prefix}-header {
-      border: none;
+      //border: none;
     }
   }
   &[data-expand="true"] {

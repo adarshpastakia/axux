@@ -33,6 +33,7 @@ export const Tab: FC<TabProps> = ({
   label,
   badge,
   className = "",
+  isLoading = false,
   isPinned = false,
   isDisabled = false,
   onClose,
@@ -47,6 +48,7 @@ export const Tab: FC<TabProps> = ({
       key={id}
       data-id={id}
       data-pinned={isPinned}
+      data-loading={isLoading}
       data-disabled={isDisabled}
     >
       <div className="ax-tab__button--label">
@@ -75,6 +77,8 @@ export interface TabPanelProps extends Pick<ElementProps, "className"> {
    * @default "top"
    */
   align?: "top" | "bottom" | "start" | "end";
+
+  iconOnly?: boolean;
 
   activeTab?: string;
   onBeforeChange?: (oldKey?: string, newKey?: string) => boolean | Promise<boolean> | void;

@@ -63,7 +63,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
         cls.push(`ax-color--${color}`);
       }
       if (isString(size) && SizeList.includes(size ?? "")) {
-        cls.push(`ax-font--${size}`);
+        cls.push(`ax-icon--${size}`);
       }
       if (isTrue(spin)) {
         cls.push("ax-anim--spin");
@@ -85,7 +85,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
         <svg viewBox={viewBox}>
           <path fill="currentColor" d={icon.toString()} />
         </svg>
-      ) : useImage ? (
+      ) : useImage || icon.toString().includes(".svg") ? (
         <img src={icon.toString()} alt={icon.toString()} />
       ) : (
         <i className={`${icon}`} />

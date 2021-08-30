@@ -10,7 +10,7 @@
     align-items: center;
     display: flex;
     grid-area: breadcrumbs;
-    padding: 0.125em 0.375rem;
+    padding: 0.125em 0.375em;
 
     > div:first-child {
       display: flex;
@@ -18,7 +18,7 @@
     }
 
     #{$prefix}-button {
-      font-size: 0.875rem;
+      font-size: 1em;
       &__inner {
         box-shadow: none !important;
       }
@@ -26,7 +26,7 @@
     &[data-theme="classic"] #{$base}__item {
       &:not(:last-child)::after {
         content: "\25B9";
-        padding: 0 0.25rem;
+        padding: 0 0.25em;
         @extend #{$prefix}-color--muted;
       }
 
@@ -50,8 +50,8 @@
       }
       &:first-child::before {
         border-color: currentColor;
-        border-end-start-radius: 0.25rem;
-        border-start-start-radius: 0.25rem;
+        border-end-start-radius: 0.25em;
+        border-start-start-radius: 0.25em;
         border-width: 0 1em 0 0;
         height: 1.2em;
       }
@@ -69,9 +69,10 @@
     align-items: center;
     cursor: pointer;
     display: flex;
-    font-size: 0.875rem;
+    font-size: 0.875em;
     font-weight: $font-weight-medium;
     line-height: 1.25;
+    vertical-align: middle;
     white-space: nowrap;
     &:last-child {
       pointer-events: none;
@@ -81,7 +82,7 @@
   &__link {
     align-items: center;
     display: flex;
-    font-size: 0.875rem;
+    font-size: 0.875em;
     padding: 0.25em 0.5em;
   }
 }

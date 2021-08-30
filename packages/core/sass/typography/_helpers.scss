@@ -47,6 +47,12 @@
     &--lg {
       font-size: 1.5em;
     }
+    &--xl {
+      font-size: 2.5em;
+    }
+    &--xxl {
+      font-size: 3.5em;
+    }
   }
 
   @at-root [dir="rtl"] #{$prefix}-icon {
@@ -112,6 +118,10 @@
         size: inherit;
         weight: inherit;
       }
+    }
+
+    &--reset {
+      font-size: 1rem;
     }
 
     @each $label, $size in $font-sizes {
@@ -251,17 +261,17 @@
     align-items: center;
     cursor: pointer;
     display: flex;
-    font-size: 0.75rem;
+    font-size: 0.875em;
     padding: 0.25em 0.5em;
     text-transform: capitalize;
 
     > span {
       flex: 1;
-      padding: 0 1rem 0 0.25em;
+      padding: 0 1em 0 0.25em;
     }
 
     &::before {
-      font-size: 1.1rem;
+      font-size: 1.1em;
     }
 
     &[data-selected="true"] {

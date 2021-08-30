@@ -30,7 +30,8 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
   avatarBg,
   avatarColor,
   avatarIcon,
-  avatarImage
+  avatarImage,
+  activityMap
 }) => {
   const headClass = useMemo(() => {
     return ["ax-profileCard__head", headBg ? `ax-bg--${headBg}` : "ax-bg--light"].join(" ");
@@ -51,6 +52,7 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
           <div className="ax-profileCard__name">{name}</div>
           <AxDivider />
         </div>
+        {activityMap && <div>{activityMap}</div>}
         <div className="ax-profileCard__body">{children}</div>
       </div>
     </div>

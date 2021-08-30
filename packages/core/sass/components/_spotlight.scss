@@ -24,14 +24,14 @@
     max-height: 60vh;
     max-width: 80vw;
     overflow: hidden;
-    width: 30rem;
+    width: 30em;
   }
 
   &__search {
     align-items: center;
     display: flex;
     flex-flow: row nowrap;
-    font-size: 1.5rem;
+    font-size: 1.5em;
 
     > input {
       flex: 1 1 1em;
@@ -45,6 +45,6 @@
   }
 
   #{$prefix}-menu {
-    font-size: 1.2rem;
+    font-size: 1.2em;
   }
 }

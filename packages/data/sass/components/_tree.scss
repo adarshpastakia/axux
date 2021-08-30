@@ -20,31 +20,38 @@
     grid-area: tree;
     --tree-level: 0;
     overflow: auto;
+    padding: 0.25em 0.5em;
   }
 
   &__node {
     align-items: center;
-    contain-intrinsic-size: 2rem;
+    contain-intrinsic-size: 2em;
     content-visibility: auto;
     cursor: pointer;
     display: flex;
     flex-flow: row nowrap;
-    margin-inline-start: calc(var(--tree-level) * 1.25rem);
+    margin-inline-start: calc(var(--tree-level) * 1.25em);
     overflow: hidden;
-    padding: 0 0.25rem;
+    padding: 0 0.25em;
 
     :not(:last-child) {
-      margin-inline-end: 0.25rem;
+      margin-inline-end: 0.25em;
     }
 
     &--label {
       flex: 1 1 1em;
-      font-size: 0.875rem;
+      font-size: 1em;
       @include ellipsis();
     }
 
     &--empty {
-      font-size: 0.875rem;
+      font-size: 1em;
+      pointer-events: none;
+    }
+
+    &[data-disabled="true"] {
+      mix-blend-mode: luminosity;
+      opacity: 0.75;
       pointer-events: none;
     }
   }
@@ -57,18 +64,18 @@
   }
 
   &__tools {
-    padding: 0.125rem 0.25rem;
+    padding: 0.125em 0.25em;
 
     > div:first-child {
       flex: 1 1 1em;
 
       > span {
-        padding: 0 0.25rem;
+        padding: 0 0.25em;
       }
     }
 
     #{$prefix}-button {
-      font-size: 0.875rem;
+      font-size: 1em;
       margin: 0;
     }
   }

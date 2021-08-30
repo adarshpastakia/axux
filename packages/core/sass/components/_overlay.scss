@@ -27,7 +27,7 @@
     justify-content: flex-end;
     left: 0;
     overflow: visible;
-    padding: 0.5rem;
+    padding: 0.5em;
     pointer-events: none;
     position: fixed;
     right: 0;
@@ -36,7 +36,7 @@
 
     > div {
       flex: 0 0 auto;
-      margin: 0.25rem 0 0;
+      margin: 0.25em 0 0;
       overflow: hidden;
       @extend #{$prefix}-bg--base;
 
@@ -75,11 +75,11 @@
   grid-template-areas: "header" "loader" "body";
   grid-template-rows: auto auto 1fr;
   left: 50%;
-  margin-top: -10rem;
+  margin-top: -10em;
   max-height: 80vh;
   max-width: 80vw;
-  min-height: 10rem;
-  min-width: 15rem;
+  min-height: 10em;
+  min-width: 15em;
   opacity: 0;
   overflow: hidden;
   position: absolute;
@@ -88,7 +88,7 @@
   transition: opacity 0.25s, margin 0.15s;
 
   &[data-size="sm"] {
-    width: 20rem;
+    width: 20em;
   }
   &[data-size="md"] {
     width: 40vw;
@@ -100,10 +100,10 @@
   &__header {
     grid-area: header;
     #{$prefix}-header__icon {
-      font-size: 1.15rem;
+      font-size: 1.15em;
     }
     #{$prefix}-header__title {
-      font-size: 1.1rem;
+      font-size: 1.1em;
     }
   }
 
@@ -118,7 +118,7 @@
 
       #{$prefix}-button__inner {
         border-radius: 0 !important;
-        font-size: 1.5rem;
+        font-size: 1.5em;
       }
     }
   }

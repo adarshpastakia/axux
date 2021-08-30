@@ -15,8 +15,8 @@
     &__header {
       align-items: center;
       display: grid;
-      font-size: 0.75em;
-      grid-gap: 0.25rem;
+      font-size: 0.875em;
+      grid-gap: 0.25em;
       grid-template-areas: "icon title actions";
       grid-template-columns: auto 1fr auto;
       padding: 0 $base-spacing * 0.5;
@@ -27,7 +27,7 @@
     }
 
     &__title {
-      font-size: 0.9rem;
+      font-size: 0.9em;
       grid-area: title;
       line-height: 1;
       padding: $base-spacing * 0.25 0;
@@ -39,16 +39,8 @@
       padding-bottom: 2px;
 
       > #{$prefix}-button {
-        #{$prefix}-button {
-          font-size: 1rem;
-          &__label {
-            font-size: 0.875rem;
-            padding: 0 0.25rem;
-          }
-          &__icon {
-            font-size: 1.125em;
-            padding: 0;
-          }
+        #{$prefix}-button__inner {
+          font-size: 1em;
         }
       }
     }
@@ -73,7 +65,7 @@
       text-align: center;
 
       > #{$prefix}-icon {
-        font-size: 2.5rem;
+        font-size: 2.5em;
       }
 
       > h3 {

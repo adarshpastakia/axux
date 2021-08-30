@@ -5,21 +5,21 @@
 
 #{$prefix}-button {
   display: inline-flex;
-  font-size: 1rem;
-  margin: 0.125rem;
+  font-size: 1em;
+  margin: 0.125em;
   position: relative;
   vertical-align: middle;
 
   $base: #{$prefix}-button;
 
   &[data-size="sm"] {
-    font-size: 0.75rem;
+    font-size: 0.75em;
   }
   &[data-size="md"] {
-    font-size: 1.25rem;
+    font-size: 1.25em;
   }
   &[data-size="lg"] {
-    font-size: 1.5rem;
+    font-size: 1.5em;
   }
 
   &[data-block="true"] {
@@ -198,7 +198,7 @@
   &__group {
     display: flex;
     flex-flow: row nowrap;
-    margin: 0.125rem;
+    margin: 0.125em;
 
     #{$base} {
       margin: 0;

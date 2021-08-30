@@ -9,38 +9,44 @@ import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { isEmpty } from "@axux/utilities";
 import { Fragment, useLayoutEffect, useMemo, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
-import { InternalNode } from "./types";
+import { InternalNode, TreePanelProps } from "./types";
 
 /** @internal */
-const nodeSort = (withCheck?: boolean) => (a: KeyValue, b: KeyValue) => {
-  if (a.isLeaf !== b.isLeaf) {
-    return a.isLeaf ? 1 : -1;
-  }
-  if (withCheck && a.isChecked !== b.isChecked) {
-    return a.isChecked > 0 ? -1 : 1;
-  }
-  return a.label.toString().toLowerCase().localeCompare(b.label.toString().toLowerCase());
+const nodeSort = (sort: AnyObject, withCheck?: boolean) => {
+  const sorter = sort === true ? { prop: "label", order: "asc" } : sort;
+  return (a: KeyValue, b: KeyValue) => {
+    if (a.isLeaf !== b.isLeaf) {
+      return a.isLeaf ? 1 : -1;
+    }
+    if (withCheck && a.isChecked !== b.isChecked) {
+      return a.isChecked > 0 ? -1 : 1;
+    }
+    const aValue = sorter.prop in a ? a[sorter.prop] : a.label;
+    const bValue = sorter.prop in b ? b[sorter.prop] : b.label;
+    return (
+      aValue.toString().toLowerCase().localeCompare(bValue.toString().toLowerCase()) *
+      (sorter.order === "asc" ? 1 : -1)
+    );
+  };
 };
 
 /**
  * Tree node
- * @param node
- * @param isCheckable
- * @param checkLevel
- * @param onClick
  * @constructor
  * @internal
  */
-export const TreeNode: VFC<{
-  node: InternalNode;
-  isCheckable?: boolean;
-  checkLevel?: number;
-  maxNodes?: number;
-  onClick: (id: string, el?: string) => void;
-}> = ({
-  node: { id, level, isLeaf, isOpen, isSelected, isChecked, label, icon, badge, children },
+export const TreeNode: VFC<
+  {
+    node: InternalNode;
+    isRoot?: boolean;
+    onClick: (id: string, el?: string) => void;
+  } & Pick<TreePanelProps, "sort" | "maxNodes" | "isCheckable" | "checkLevel">
+> = ({
+  node: { id, level, isLeaf, isOpen, isSelected, isChecked, isDisabled, label, icon, badge, children },
   isCheckable,
   maxNodes,
+  sort,
+  isRoot,
   checkLevel = 0,
   onClick
 }) => {
@@ -66,47 +72,52 @@ export const TreeNode: VFC<{
 
   const [showAll, setShowAll] = useState(false);
   const nodes = useMemo(() => {
-    if (maxNodes && !showAll) {
-      return (children ?? []).sort(nodeSort(true)).slice(0, Math.min(Math.max(4, maxNodes), 18));
+    const nodeList = children ?? [];
+    if (sort) {
+      nodeList.sort(nodeSort(sort, !!maxNodes && !showAll));
     }
-    return (children ?? []).sort(nodeSort());
-  }, [children, maxNodes, showAll]);
+    return maxNodes && !showAll ? nodeList.slice(0, Math.min(Math.max(4, maxNodes), 18)) : nodeList;
+  }, [children, maxNodes, showAll, sort]);
 
   useLayoutEffect(() => setShowAll(false), [isOpen]);
 
   return (
     <Fragment>
-      <div
-        data-node-id={id}
-        className="ax-tree__node"
-        data-selected={!isCheckable && isSelected}
-        style={{ "--tree-level": level } as AnyObject}
-        onClick={(e) => onClick && onClick(id, (e.target as HTMLElement).dataset.nodeToggle)}
-      >
-        {!isLeaf && (
-          <AxIcon
-            data-node-toggle="toggle"
-            className="ax-tree__toggle"
-            icon={isOpen ? AppIcons.iconCollapseMinus : AppIcons.iconExpandPlus}
-          />
-        )}
-        {checkIcon && <AxIcon color="muted" className="ax-tree__check" icon={checkIcon} />}
-        {icon && <AxIcon icon={icon} />}
+      {!isRoot && (
         <div
-          className={`ax-tree__node--label ${
-            isCheckable && !showCheckbox && isChecked !== false ? "ax-weight--medium" : ""
-          }`}
+          data-node-id={id}
+          className="ax-tree__node"
+          data-disabled={isDisabled}
+          data-selected={!isCheckable && isSelected}
+          style={{ "--tree-level": level } as AnyObject}
+          onClick={(e) => onClick && onClick(id, (e.target as HTMLElement).dataset.nodeToggle)}
         >
-          {label}
+          {!isLeaf && (
+            <AxIcon
+              data-node-toggle="toggle"
+              className="ax-tree__toggle"
+              icon={isOpen ? AppIcons.iconCollapseMinus : AppIcons.iconExpandPlus}
+            />
+          )}
+          {checkIcon && <AxIcon color="muted" className="ax-tree__check" icon={checkIcon} />}
+          {icon && <AxIcon className="ax-tree__icon" icon={icon} />}
+          <div
+            className={`ax-tree__node--label ${
+              isCheckable && !showCheckbox && isChecked !== false ? "ax-weight--medium" : ""
+            }`}
+          >
+            {label}
+          </div>
+          {badgeEl}
         </div>
-        {badgeEl}
-      </div>
+      )}
       {showChildren &&
         (!isEmpty(nodes) ? (
           nodes.map((node) => (
             <TreeNode
               key={node.id}
               node={node}
+              sort={sort}
               onClick={onClick}
               isCheckable={isCheckable}
               checkLevel={checkLevel}

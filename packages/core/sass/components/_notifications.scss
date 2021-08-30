@@ -7,7 +7,7 @@
   align-items: center;
   border-radius: $base-border-radius;
   display: flex;
-  font-size: 0.875rem;
+  font-size: 1em;
   margin: -110% auto 0;
   max-width: 70vw;
   padding: $base-spacing * 0.25 $base-spacing;
@@ -34,7 +34,7 @@
   }
 
   > :not(:last-child) {
-    margin-inline-end: 0.25rem;
+    margin-inline-end: 0.25em;
   }
 }
 
@@ -43,7 +43,7 @@
   display: grid;
   grid-template-areas: "icon title" "icon text" "icon footer";
   grid-template-columns: auto 1fr;
-  grid-template-rows: 1.5rem 1fr auto;
+  grid-template-rows: 1.5em 1fr auto;
   margin: 0 auto -110%;
   max-width: 70vw;
   pointer-events: all;
@@ -53,10 +53,10 @@
 
   &__icon {
     grid-area: icon;
-    padding: 0.5rem;
+    padding: 0.5em;
 
     #{$prefix}-icon {
-      font-size: 2rem;
+      font-size: 2em;
       @extend #{$prefix}-color--white;
     }
   }
@@ -64,25 +64,25 @@
   &__title {
     font-weight: $font-weight-bold;
     grid-area: title;
-    margin-inline-end: 3rem;
-    padding: 0.25rem 0.5rem;
+    margin-inline-end: 3em;
+    padding: 0.25em 0.5em;
     @include ellipsis();
   }
 
   &__text {
     grid-area: text;
-    max-height: 20rem;
+    max-height: 20em;
     overflow: auto;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25em 0.5em;
   }
 
   &__footer {
     align-items: center;
     display: flex;
     flex-flow: row nowrap;
-    font-size: 0.875rem;
+    font-size: 1em;
     grid-area: footer;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25em 0.5em;
   }
 
   #{$prefix}-button {
@@ -96,15 +96,15 @@
 #{$prefix}-alert {
   border-radius: $base-border-radius;
   display: grid;
-  font-size: 1rem;
+  font-size: 1em;
   grid-template-areas: "icon title" "icon message" "footer footer";
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr auto;
   left: 50%;
-  margin-top: -10rem;
+  margin-top: -10em;
   max-height: 60vh;
-  max-width: 24rem;
-  min-width: 15rem;
+  max-width: 24em;
+  min-width: 15em;
   opacity: 0;
   overflow: hidden;
   position: absolute;
@@ -129,14 +129,14 @@
     font-weight: $font-weight-bold;
     grid-area: title;
     line-height: 1;
-    margin-inline-end: 1.5rem;
+    margin-inline-end: 1.5em;
     padding: 0.5em 0.5em 0;
   }
 
   &__text {
     font-size: 0.75em;
     grid-area: message;
-    margin-inline-end: 1.5rem;
+    margin-inline-end: 1.5em;
     overflow: auto;
     padding: 0.5em 0.75em;
     place-self: center;

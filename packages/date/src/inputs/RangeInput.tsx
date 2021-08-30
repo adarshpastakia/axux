@@ -107,6 +107,7 @@ const RangeField: FC<RangeProps & WrapperProps & FieldStateProps & InnerProps> =
       resize={false}
       autoTrigger={false}
       usePortal={usePortal}
+      className="ax-date__popover"
       onOpen={() => setOpen(isEditable)}
       onClose={() => setOpen(false)}
     >

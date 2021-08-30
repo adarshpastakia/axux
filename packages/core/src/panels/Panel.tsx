@@ -144,7 +144,8 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
           ? head.props.children
           : [head.props.children];
         return cloneElement(head as ReactElement, {
-          children: [...childs, actions, onBack],
+          children: [...childs, actions],
+          onBack,
           onClick: isAccordion && collapsed ? () => toggleCollapse() : undefined
         });
       } else if (!!title || isExpandable || isCollapsable || !!onClose || !!onBack) {

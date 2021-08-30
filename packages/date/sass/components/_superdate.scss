@@ -18,20 +18,20 @@
 
   &--link {
     align-self: start;
-    font-size: 0.75rem;
+    font-size: 0.875em;
     white-space: nowrap;
   }
 
   &__button {
     #{$prefix}-tag__inner,
     #{$prefix}-button__inner {
-      max-width: 15rem;
+      max-width: 15em;
     }
   }
 
   &__tabs {
     #{$prefix}-field__options {
-      grid-gap: 0.25rem 0;
+      grid-gap: 0.25em 0;
       grid-template-columns: 1fr;
       justify-items: unset;
     }
@@ -42,6 +42,7 @@
       #{$prefix}-tab__button {
         background-color: transparent;
         box-shadow: none;
+        font-size: 0.875em;
         margin: 0;
         padding: 0.125em 0.5em;
 

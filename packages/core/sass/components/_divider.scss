@@ -5,6 +5,7 @@
 
 #{$prefix}-divider {
   align-items: center;
+  align-self: stretch;
   display: flex;
   font-size: 0.75em;
 
@@ -21,7 +22,7 @@
 
   &[data-rainbow="true"] > hr {
     border: none;
-    height: 0.125rem;
+    height: 0.125em;
     transform: none;
   }
 

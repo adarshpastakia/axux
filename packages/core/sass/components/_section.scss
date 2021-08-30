@@ -27,7 +27,7 @@
     position: relative;
 
     $base: #{$prefix}-section__side;
-    $collapsedWidth: 2rem;
+    $collapsedWidth: 2em;
 
     &--header {
       align-items: center;
@@ -59,8 +59,7 @@
     }
 
     &--title {
-      font-size: 0.9rem;
-      line-height: 1rem;
+      line-height: 1em;
       padding: 0.25em 0.5em;
       @include ellipsis();
     }
@@ -108,7 +107,7 @@
         &--title {
           left: 1em;
           position: absolute;
-          top: 1rem;
+          top: 1em;
           transform: rotate(-90deg) translateX(-100%);
           transform-origin: 0 50%;
         }
@@ -147,7 +146,7 @@
       @extend #{$prefix}-border--s;
       border-inline-end: none;
       grid-area: side-e;
-      grid-template-areas: "resize head" "resize body" "reszie foot";
+      grid-template-areas: "resize head" "resize loader" "resize body" "reszie foot";
       grid-template-columns: auto 1fr;
 
       #{$base} {

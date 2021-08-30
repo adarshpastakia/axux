@@ -10,7 +10,7 @@
     display: grid;
     grid-auto-flow: row;
     grid-gap: 0 $base-spacing/4;
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
 
     &[data-vertical="true"] {
       grid-template-columns: 1fr;
@@ -20,7 +20,7 @@
   &__option {
     align-items: center;
     display: inline-flex;
-    height: 1.5rem;
+    height: 1.5em;
     padding-inline-start: 2px;
     position: relative;
 
@@ -31,7 +31,7 @@
     }
     > span {
       flex: 1 1 1em;
-      font-size: 0.875rem;
+      font-size: 0.875em;
       line-height: 1;
       padding: 0 $base-spacing/4;
       @include ellipsis();
