@@ -19,6 +19,7 @@ export const AxPagination: VFC<PaginationProps> = ({ page, totalPages, onPageCha
       <AxButton
         type="link"
         color="primary"
+        className="flippable"
         isDisabled={page <= 1}
         onClick={() => onPageChange(1)}
         icon={AppIcons.iconChevronLeft}
@@ -26,6 +27,7 @@ export const AxPagination: VFC<PaginationProps> = ({ page, totalPages, onPageCha
       <AxButton
         type="link"
         color="primary"
+        className="flippable"
         isDisabled={page <= 1}
         onClick={() => onPageChange(page - 1)}
         icon={AppIcons.iconCaretLeft}
@@ -36,6 +38,7 @@ export const AxPagination: VFC<PaginationProps> = ({ page, totalPages, onPageCha
       <AxButton
         type="link"
         color="primary"
+        className="flippable"
         isDisabled={page >= totalPages}
         onClick={() => onPageChange(page + 1)}
         icon={AppIcons.iconCaretRight}
@@ -43,6 +46,7 @@ export const AxPagination: VFC<PaginationProps> = ({ page, totalPages, onPageCha
       <AxButton
         type="link"
         color="primary"
+        className="flippable"
         isDisabled={page >= totalPages}
         onClick={() => onPageChange(totalPages)}
         icon={AppIcons.iconChevronRight}

@@ -4,16 +4,19 @@
 // @license   : MIT
 
 #{$prefix}-section {
+  position: relative;
   @include section();
 
   &__head {
     @extend #{$prefix}-border--b;
     grid-area: head;
+    z-index: 6;
   }
 
   &__foot {
     @extend #{$prefix}-border--t;
     grid-area: foot;
+    z-index: 6;
   }
 
   &__side {
@@ -39,7 +42,7 @@
       @extend #{$prefix}-border--b;
 
       #{$prefix}-button {
-        font-size: 0.875em;
+        font-size: 1.25em;
         margin: 0;
       }
     }

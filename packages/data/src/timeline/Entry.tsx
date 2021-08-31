@@ -51,7 +51,7 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
           color={iconColor as AnyObject}
         />
       </div>
-      <AxPanel className="ax-timeline__entry--body" maxHeight={20} paper={type === "comment"}>
+      <AxPanel className="ax-timeline__entry--body" maxHeight="80vh" paper={type === "comment"}>
         <AxPanel.Header
           className="ax-timeline__entry--head"
           bg="lightest"

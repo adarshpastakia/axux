@@ -15,15 +15,25 @@
   &__wrapper {
     display: grid;
     grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr;
     margin: 0 auto;
     max-width: 800px;
     min-height: 100%;
     padding-inline-end: 2em;
 
-    > #{$prefix}-button__group {
-      align-self: end;
-      bottom: 0;
-      position: sticky;
+    > div:last-child {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      > #{$prefix}-button__group:first-child {
+        position: sticky;
+        top: 0;
+      }
+
+      > #{$prefix}-button__group:last-child {
+        bottom: 0;
+        position: sticky;
+      }
     }
 
     #{$prefix}-loader__text {

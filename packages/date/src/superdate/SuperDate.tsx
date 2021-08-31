@@ -3,10 +3,11 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxButton, AxPopover, AxTabPanel, AxTag, useAxGlobals } from "@axux/core";
+import { AxButton, AxPopover, AxTabPanel, AxTag } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocale } from "../hooks/useLocale";
 import { DateValue, RelativeProps, Type } from "../types";
 import { DateUtils, superDateType } from "../utils/dateMath";
 import { AbsoluteRange } from "./AbsoluteRange";
@@ -18,7 +19,8 @@ export const AxSuperDate: FC<RelativeProps> = ({ type = "button", onChange, date
     t,
     i18n: { language }
   } = useTranslation("superdate");
-  const { dateLocale } = useAxGlobals();
+  const { dateLocale } = useLocale();
+  const panelRef = useRef<HTMLDivElement>(null);
   const [isOpen, setOpen] = useState(false);
 
   const [value, setValue] = useState<RelativeProps["date"]>(date ?? "$now");
@@ -47,7 +49,12 @@ export const AxSuperDate: FC<RelativeProps> = ({ type = "button", onChange, date
     }
     return ret;
   }, [tooltip, type]);
-
+  const updatePopup = useCallback(() => {
+    if (panelRef.current) {
+      const el = panelRef.current;
+      setTimeout(() => el.dispatchEvent(new Event("updatePopper", { bubbles: true })), 10);
+    }
+  }, []);
   const afterChange = useCallback(
     (v: DateValue) => {
       onChange && onChange(v);
@@ -65,29 +72,35 @@ export const AxSuperDate: FC<RelativeProps> = ({ type = "button", onChange, date
       onClose={() => setOpen(false)}
     >
       <Wrapper {...wrapperProps}>{label}</Wrapper>
-      <AxTabPanel className="ax-superdate__tabs" activeTab={activeTab}>
-        <AxTabPanel.Tab id={Type.QUICK} label={t("label.quick")}>
-          <QuickSelect
-            {...props}
-            onChange={afterChange}
-            date={activeTab === Type.QUICK ? value : undefined}
-          />
-        </AxTabPanel.Tab>
-        <AxTabPanel.Tab id={Type.RELATIVE} label={t("label.relative")}>
-          <RelativeRange
-            {...props}
-            onChange={afterChange}
-            date={activeTab === Type.RELATIVE ? value : undefined}
-          />
-        </AxTabPanel.Tab>
-        <AxTabPanel.Tab id={Type.ABSOLUTE} label={t("label.absolute")}>
-          <AbsoluteRange
-            {...props}
-            onChange={afterChange}
-            date={activeTab === Type.ABSOLUTE ? value : undefined}
-          />
-        </AxTabPanel.Tab>
-      </AxTabPanel>
+      <div ref={panelRef}>
+        <AxTabPanel
+          className="ax-superdate__tabs"
+          activeTab={activeTab}
+          onActiveChange={updatePopup}
+        >
+          <AxTabPanel.Tab id={Type.QUICK} label={t("label.quick")}>
+            <QuickSelect
+              {...props}
+              onChange={afterChange}
+              date={activeTab === Type.QUICK ? value : undefined}
+            />
+          </AxTabPanel.Tab>
+          <AxTabPanel.Tab id={Type.RELATIVE} label={t("label.relative")}>
+            <RelativeRange
+              {...props}
+              onChange={afterChange}
+              date={activeTab === Type.RELATIVE ? value : undefined}
+            />
+          </AxTabPanel.Tab>
+          <AxTabPanel.Tab id={Type.ABSOLUTE} label={t("label.absolute")}>
+            <AbsoluteRange
+              {...props}
+              onChange={afterChange}
+              date={activeTab === Type.ABSOLUTE ? value : undefined}
+            />
+          </AxTabPanel.Tab>
+        </AxTabPanel>
+      </div>
     </AxPopover>
   );
 };

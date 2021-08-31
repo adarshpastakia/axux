@@ -9,7 +9,7 @@
   grid-template-areas: "head" "loader" "content" "foot";
   grid-template-rows: auto auto 1fr auto;
   position: relative;
-  @extend #{$prefix}-bg--base;
+  @extend #{$prefix}-bg--panel;
 
   $base: #{$prefix}-panel;
 

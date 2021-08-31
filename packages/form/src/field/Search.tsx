@@ -52,7 +52,7 @@ export const AxSearchField: FC<SearchFieldProps> = memo(
       >
         {icon !== "blank" && (
           <AxAddon>
-            <AxIcon icon={icon} color="muted" />
+            <AxIcon icon={icon} color="muted" className="flippable" />
           </AxAddon>
         )}
         {children}

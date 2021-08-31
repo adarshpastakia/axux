@@ -55,16 +55,22 @@
     }
   }
 
-  @at-root [dir="rtl"] #{$prefix}-icon {
-    svg,
-    img {
-      transform: scaleX(-1);
+  @at-root [dir="rtl"] {
+    .flippable #{$prefix}-icon,
+    #{$prefix}-icon.flippable {
+      svg,
+      img {
+        transform: scaleX(-1);
+      }
     }
   }
-  @at-root [dir="ltr"] #{$prefix}-icon {
-    svg,
-    img {
-      transform: scaleX(1);
+  @at-root [dir="ltr"] {
+    .flippable #{$prefix}-icon,
+    #{$prefix}-icon.flippable {
+      svg,
+      img {
+        transform: scaleX(1);
+      }
     }
   }
 
@@ -73,7 +79,6 @@
     font-size: 1.5em;
     height: 1.25em;
     line-height: 1.25em;
-    overflow: hidden;
     padding: 0.125em;
     text-align: center;
     width: 1.25em;
@@ -105,6 +110,35 @@
     }
     &--xl {
       font-size: 3em;
+    }
+
+    &--topLeft,
+    &--topRight,
+    &--bottomLeft,
+    &--bottomRight {
+      box-shadow: 0 0 2px rgba(#000000, 0.5) inset;
+      font-size: 0.375em;
+      position: absolute;
+    }
+    &--topLeft {
+      left: 0;
+      top: 0;
+      transform: translate(-20%, -10%);
+    }
+    &--topRight {
+      right: 0;
+      top: 0;
+      transform: translate(20%, -10%);
+    }
+    &--bottomLeft {
+      bottom: 0;
+      left: 0;
+      transform: translate(-20%, 10%);
+    }
+    &--bottomRight {
+      bottom: 0;
+      right: 0;
+      transform: translate(20%, 10%);
     }
   }
 

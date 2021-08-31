@@ -13,12 +13,12 @@
   @include paper();
 
   &__inner {
-    background-color: $base-bg;
+    background-color: $panel-bg;
   }
 
   &__head {
     &::after {
-      background-color: $base-bg;
+      background-color: $panel-bg;
     }
   }
 }

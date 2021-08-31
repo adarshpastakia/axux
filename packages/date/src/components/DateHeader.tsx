@@ -43,6 +43,7 @@ export const DateHeader = (props: DateContext) => {
           data-pos="first"
           type="link"
           color="primary"
+          className="flippable"
           isDisabled={headDisabled && headDisabled(-12)}
           onClick={() => changePageDate(-12)}
           icon={AppIcons.iconChevronLeft}
@@ -52,6 +53,7 @@ export const DateHeader = (props: DateContext) => {
         data-pos="prev"
         type="link"
         color="primary"
+        className="flippable"
         isDisabled={headDisabled && headDisabled(-1)}
         onClick={() => changePageDate(-1)}
         icon={AppIcons.iconCaretLeft}
@@ -67,6 +69,7 @@ export const DateHeader = (props: DateContext) => {
         data-pos="next"
         type="link"
         color="primary"
+        className="flippable"
         isDisabled={headDisabled && headDisabled(1)}
         onClick={() => changePageDate(1)}
         icon={AppIcons.iconCaretRight}
@@ -76,6 +79,7 @@ export const DateHeader = (props: DateContext) => {
           data-pos="last"
           type="link"
           color="primary"
+          className="flippable"
           isDisabled={headDisabled && headDisabled(12)}
           onClick={() => changePageDate(12)}
           icon={AppIcons.iconChevronRight}

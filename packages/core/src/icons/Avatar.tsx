@@ -40,6 +40,10 @@ export interface AvatarProps extends RefProp, ElementProps {
    * Click handler
    */
   onClick?: MouseEventHandler;
+  topLeft?: string;
+  topRight?: string;
+  bottomLeft?: string;
+  bottomRight?: string;
 }
 
 /**
@@ -56,7 +60,23 @@ export interface AvatarProps extends RefProp, ElementProps {
  * @internal
  */
 export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
-  ({ icon, image, title, onClick, className = "", size = "normal", color = "", bg = "" }, ref) => {
+  (
+    {
+      icon,
+      image,
+      title,
+      onClick,
+      className = "",
+      size = "normal",
+      color = "",
+      bg = "",
+      topLeft,
+      topRight,
+      bottomRight,
+      bottomLeft
+    },
+    ref
+  ) => {
     const [src, setSrc] = useState(image);
     useEffect(() => setSrc(image), [image]);
     const classes = useMemo(() => {
@@ -94,9 +114,16 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
       <AxTooltip content={title} ref={ref} isDisabled={!title}>
         <div className={classes} data-clickable={!isEmpty(onClick)} onClick={onClick}>
           {body}
+
+          {topLeft && <AxIcon className="ax-avatar--topLeft" icon={topLeft} />}
+          {topRight && <AxIcon className="ax-avatar--topRight" icon={topRight} />}
+          {bottomLeft && <AxIcon className="ax-avatar--bottomLeft" icon={bottomLeft} />}
+          {bottomRight && <AxIcon className="ax-avatar--bottomRight" icon={bottomRight} />}
         </div>
       </AxTooltip>
     );
   }
 );
 AxAvatar.displayName = "AxAvatar";
+
+// TODO: Added rounded icon allow JSX.Element for info icons

@@ -45,21 +45,27 @@ export const AxViewportHeader: FC<ViewportHeaderProps> = ({
 }) => {
   return (
     <div className={`ax-viewport__header ${className ?? ""}`} {...aria}>
-      <NavLink className="ax-viewport__header__titleBox" to="/">
-        <div className="ax-viewport__header__icon">
-          {isString(icon) && <img alt="Application logo" src={icon} />}
-          {isValidElement(icon) && icon}
-        </div>
-        <div>
-          {isString(title) && (
-            <Fragment>
-              <div className="ax-viewport__header__title">{title}</div>
-              <div className="ax-viewport__header__subtitle">{subTitle}</div>
-            </Fragment>
+      {(icon || title) && (
+        <NavLink className="ax-viewport__header__titleBox" to="/">
+          {icon && (
+            <div className="ax-viewport__header__icon">
+              {isString(icon) && <img alt="Application logo" src={icon} />}
+              {isValidElement(icon) && icon}
+            </div>
           )}
-          {isValidElement(title) && title}
-        </div>
-      </NavLink>
+          {title && (
+            <div>
+              {isString(title) && (
+                <Fragment>
+                  <div className="ax-viewport__header__title">{title}</div>
+                  <div className="ax-viewport__header__subtitle">{subTitle}</div>
+                </Fragment>
+              )}
+              {isValidElement(title) && title}
+            </div>
+          )}
+        </NavLink>
+      )}
       {children && <div className="ax-viewport__header__optionsBox">{children}</div>}
     </div>
   );

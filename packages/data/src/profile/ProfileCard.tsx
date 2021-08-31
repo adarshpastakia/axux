@@ -15,6 +15,11 @@ export interface ProfileCardProps {
   avatarColor?: Color | ColorPalette;
   headBg?: Color | ColorPalette;
 
+  topLeft?: string;
+  topRight?: string;
+  bottomLeft?: string;
+  bottomRight?: string;
+
   name?: string | JSX.Element;
 
   activityMap?: JSX.Element;
@@ -31,7 +36,11 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
   avatarColor,
   avatarIcon,
   avatarImage,
-  activityMap
+  activityMap,
+  topLeft,
+  topRight,
+  bottomRight,
+  bottomLeft
 }) => {
   const headClass = useMemo(() => {
     return ["ax-profileCard__head", headBg ? `ax-bg--${headBg}` : "ax-bg--light"].join(" ");
@@ -46,6 +55,10 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
             icon={avatarIcon ?? AppIcons.iconFace}
             bg={avatarBg}
             color={avatarColor ?? "light"}
+            topLeft={topLeft}
+            topRight={topRight}
+            bottomRight={bottomRight}
+            bottomLeft={bottomLeft}
           />
         </div>
         <div>

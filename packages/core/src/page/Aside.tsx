@@ -149,6 +149,7 @@ export const Aside: FC<AsideProps> = ({
           {isCollapsable && (
             <AxButton
               type="link"
+              className="flippable"
               icon={collapsed ? AppIcons.iconCaretRight : AppIcons.iconCaretLeft}
               onClick={toggleCollapse}
             />

@@ -63,28 +63,34 @@ export const AxTimeline: ExtendedFC = ({ children, isLoading, canLoadMore, onLoa
           {children}
           {isLoading && <AxTextLoader />}
         </div>
-        <AxButton.Group vertical>
-          <AxButton
-            isDisabled={(canScroll | 1) === 1}
-            onClick={() => doScroll(-2)}
-            icon={AppIcons.iconChevronTop}
-          />
-          <AxButton
-            isDisabled={(canScroll | 1) === 1}
-            onClick={() => doScroll(-1)}
-            icon={AppIcons.iconCaretTop}
-          />
-          <AxButton
-            isDisabled={(canScroll | 2) === 2}
-            onClick={() => doScroll(1)}
-            icon={AppIcons.iconCaretDown}
-          />
-          <AxButton
-            isDisabled={(canScroll | 2) === 2}
-            onClick={() => doScroll(2)}
-            icon={AppIcons.iconChevronDown}
-          />
-        </AxButton.Group>
+        <div>
+          <AxButton.Group vertical>
+            <AxButton icon={AppIcons.iconSortTimeDesc} />
+            <AxButton icon={AppIcons.iconSortTimeAsc} data-active="true" />
+          </AxButton.Group>
+          <AxButton.Group vertical>
+            <AxButton
+              isDisabled={(canScroll | 1) === 1}
+              onClick={() => doScroll(-2)}
+              icon={AppIcons.iconChevronTop}
+            />
+            <AxButton
+              isDisabled={(canScroll | 1) === 1}
+              onClick={() => doScroll(-1)}
+              icon={AppIcons.iconCaretTop}
+            />
+            <AxButton
+              isDisabled={(canScroll | 2) === 2}
+              onClick={() => doScroll(1)}
+              icon={AppIcons.iconCaretDown}
+            />
+            <AxButton
+              isDisabled={(canScroll | 2) === 2}
+              onClick={() => doScroll(2)}
+              icon={AppIcons.iconChevronDown}
+            />
+          </AxButton.Group>
+        </div>
       </div>
     </div>
   );

@@ -77,6 +77,10 @@
     }
   }
 
+  &-bg--panel {
+    background-color: $panel-bg;
+  }
+
   @each $label,
     $color in map-merge(map-merge($base-colors, $grayscale), map-merge($theme, $palette))
   {
