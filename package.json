@@ -20,7 +20,7 @@
     "pretest": "lerna run build --stream",
     "test": "jest --ci --runInBand --detectOpenHandles",
     "dist": "lerna run build --stream",
-    "release": "lerna version --yes --preid=alpha"
+    "release": "lerna version --yes --preid=alpha -m \"chore(release): %v\""
   },
   "dependencies": {
     "i18next": "^20.3.5",
