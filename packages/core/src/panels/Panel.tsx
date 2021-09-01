@@ -148,7 +148,6 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       } else if (!!title || isExpandable || isCollapsable || !!onClose || !!onBack) {
         return (
           <AxHeader
-            size="md"
             title={title}
             icon={icon}
             onBack={onBack}
