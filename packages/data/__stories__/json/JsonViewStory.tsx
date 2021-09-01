@@ -54,6 +54,8 @@ const Template: Story<JsonViewProps> = (props) => {
 };
 
 export const JsonViewStory = Template.bind({});
-JsonViewStory.args = {};
+JsonViewStory.args = {
+  filters: []
+};
 
 export default { title: "Example/JsonView", component: AxJsonView };
