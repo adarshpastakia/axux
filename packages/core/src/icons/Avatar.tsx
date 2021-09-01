@@ -4,9 +4,17 @@
 // @license   : MIT
 
 import { isEmpty } from "@axux/utilities";
-import { forwardRef, MouseEventHandler, useEffect, useMemo, useState, VFC } from "react";
+import {
+  forwardRef,
+  isValidElement,
+  MouseEventHandler,
+  useEffect,
+  useMemo,
+  useState,
+  VFC
+} from "react";
 import { AxTooltip } from "../overlays/Tooltip";
-import { AllColors, ElementProps, RefProp, Size } from "../types";
+import { AllColors, ElementProps, IconType, RefProp, Size } from "../types";
 import { AxIcon } from "./Icon";
 
 /** @internal */
@@ -40,10 +48,17 @@ export interface AvatarProps extends RefProp, ElementProps {
    * Click handler
    */
   onClick?: MouseEventHandler;
-  topLeft?: string;
-  topRight?: string;
-  bottomLeft?: string;
-  bottomRight?: string;
+
+  infograph?: {
+    top?: IconType;
+    bottom?: IconType;
+    start?: IconType;
+    end?: IconType;
+    topStart?: IconType;
+    topEnd?: IconType;
+    bottomStart?: IconType;
+    bottomEnd?: IconType;
+  };
 }
 
 /**
@@ -70,10 +85,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
       size = "normal",
       color = "",
       bg = "",
-      topLeft,
-      topRight,
-      bottomRight,
-      bottomLeft
+      infograph
     },
     ref
   ) => {
@@ -115,15 +127,15 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
         <div className={classes} data-clickable={!isEmpty(onClick)} onClick={onClick}>
           {body}
 
-          {topLeft && <AxIcon className="ax-avatar--topLeft" icon={topLeft} />}
-          {topRight && <AxIcon className="ax-avatar--topRight" icon={topRight} />}
-          {bottomLeft && <AxIcon className="ax-avatar--bottomLeft" icon={bottomLeft} />}
-          {bottomRight && <AxIcon className="ax-avatar--bottomRight" icon={bottomRight} />}
+          {infograph &&
+            Object.entries(infograph).map(([key, icon]) =>
+              isValidElement(icon) && icon.type === AxIcon
+                ? icon
+                : icon && <AxIcon key={key} className={`ax-avatar--${key}`} icon={icon} />
+            )}
         </div>
       </AxTooltip>
     );
   }
 );
 AxAvatar.displayName = "AxAvatar";
-
-// TODO: Added rounded icon allow JSX.Element for info icons

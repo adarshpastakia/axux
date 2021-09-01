@@ -138,7 +138,7 @@ const Page = () => {
     <AxPage
       title="Page"
       actions={[
-        <AxButton.Dropdown key="Options" icon={mdiPlus} hideCaret>
+        <AxButton.Dropdown key="Options" icon={mdiPlus} hideCaret usePortal>
           <AxMenu>
             <AxMenu.Item label="New..." panelId="new" />
             <AxMenu.Item label="Save" />

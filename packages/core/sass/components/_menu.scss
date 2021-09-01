@@ -27,6 +27,10 @@
     }
   }
 
+  #{$prefix}-header {
+    font-size: 0.875em;
+  }
+
   #{$prefix}-divider {
     margin: 0.25em 0;
     opacity: 0.5;

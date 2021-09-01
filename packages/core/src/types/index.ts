@@ -84,6 +84,8 @@ export type EmptyCallback = () => void;
 
 export type BooleanCallback = (b: boolean) => void;
 
+export type IconType = "blank" | string | JSX.Element;
+
 export const SizeList = ["none", "xxs", "xs", "sm", "md", "lg", "xl", "xxl"];
 
 export interface ElementProps extends AriaAttributes {
@@ -166,7 +168,7 @@ export interface IconProps {
   /**
    * Icon svg path (24x24) | font class | component
    */
-  icon?: "blank" | string | JSX.Element;
+  icon?: IconType;
 }
 
 export interface CollapseProps {

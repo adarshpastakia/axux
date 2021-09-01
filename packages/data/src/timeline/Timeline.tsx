@@ -14,7 +14,14 @@ interface ExtendedFC extends FC<TimelineProps> {
   Entry: typeof TimelineEntry;
 }
 
-export const AxTimeline: ExtendedFC = ({ children, isLoading, canLoadMore, onLoadMore }) => {
+export const AxTimeline: ExtendedFC = ({
+  children,
+  isLoading,
+  canLoadMore,
+  onLoadMore,
+  sortOrder,
+  onSort
+}) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScroll, setCanScroll] = useState(0);
 
@@ -65,8 +72,16 @@ export const AxTimeline: ExtendedFC = ({ children, isLoading, canLoadMore, onLoa
         </div>
         <div>
           <AxButton.Group vertical>
-            <AxButton icon={AppIcons.iconSortTimeDesc} />
-            <AxButton icon={AppIcons.iconSortTimeAsc} data-active="true" />
+            <AxButton
+              icon={AppIcons.iconSortTimeDesc}
+              onClick={() => onSort && onSort("desc")}
+              data-active={sortOrder === "desc"}
+            />
+            <AxButton
+              icon={AppIcons.iconSortTimeAsc}
+              onClick={() => onSort && onSort("asc")}
+              data-active={sortOrder === "asc"}
+            />
           </AxButton.Group>
           <AxButton.Group vertical>
             <AxButton

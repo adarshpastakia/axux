@@ -35,6 +35,7 @@ export interface HeaderProps extends IconProps, ElementProps {
   /**
    *
    */
+  size?: "md" | "lg";
   onBack?: EmptyCallback;
   onClick?: EmptyCallback;
 }
@@ -46,6 +47,7 @@ export interface HeaderProps extends IconProps, ElementProps {
  * @param children
  * @param bg
  * @param color
+ * @param size
  * @param onBack
  * @param iconBg
  * @param iconColor
@@ -61,6 +63,7 @@ export const AxHeader: FC<HeaderProps> = ({
   children,
   bg,
   color,
+  size,
   onBack,
   iconBg,
   iconColor,
@@ -77,8 +80,11 @@ export const AxHeader: FC<HeaderProps> = ({
     if (color) {
       cls.push(`ax-color--${color}`);
     }
+    if (size) {
+      cls.push(`ax-font--${size}`);
+    }
     return cls.join(" ");
-  }, [bg, color]);
+  }, [bg, className, color, size]);
   const iconClasses = useMemo(() => {
     const cls = ["ax-header__icon"];
     if (iconBg) {

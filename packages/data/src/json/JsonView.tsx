@@ -7,7 +7,7 @@ import { AxButton, AxContent, AxCopy, AxIcon } from "@axux/core";
 import { ElementProps } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay, DateUtils } from "@axux/date";
-import { Format, isArray, isBoolean, isEmpty, isNumber, isObject } from "@axux/utilities";
+import { Format, isArray, isBoolean, isEmpty, isNil, isNumber, isObject } from "@axux/utilities";
 import { FC, Fragment, useCallback, useEffect, useMemo, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -18,6 +18,7 @@ export interface JsonViewProps extends ElementProps {
   collapseDefault?: boolean;
   emptyDisplay?: JSX.Element;
   formatter?: (key?: string, value?: AnyObject) => string | JSX.Element;
+  filters?: true | string[];
   onFilter?: (key: string, value: AnyObject, negate: boolean) => void;
 }
 
@@ -33,24 +34,38 @@ const JsonValue: VFC<JsonObjectProps> = ({
   propName = [],
   formatter,
   onFilter,
+  filters,
   canCopy
 }) => {
   const valueDisplay = useMemo(() => {
     if (isEmpty(value)) return "-";
-    if (formatter) return formatter(propName.join("."), value);
+    if (formatter) {
+      const ret = formatter(propName.join("."), value);
+      if (!isNil(ret)) return ret;
+    }
 
     if (isNumber(value)) return Format.number(value);
     if (isBoolean(value)) return !!value ? "Yes" : "No";
     if (DateUtils.isValid(value))
-      return <AxDateDisplay date={DateUtils.parse(value) as AnyObject} />;
+      return (
+        <AxDateDisplay date={DateUtils.parse(value) as AnyObject} format="dd MMM yyyy HH:mm:ss" />
+      );
 
     return value.toString();
   }, [formatter, propName, value]);
+  const canFilter = useMemo(
+    () =>
+      !isEmpty(value) &&
+      filters &&
+      propName &&
+      (filters === true || filters.includes(propName.join("."))),
+    [filters, propName, value]
+  );
   return (
     <div className="ax-json__property">
       {label && <label className="ax-json__label">{label}</label>}
       <div className="ax-json__value">
-        {!isEmpty(value) && onFilter && propName && (
+        {canFilter && onFilter && (
           <AxButton.Group>
             <AxButton
               color="primary"

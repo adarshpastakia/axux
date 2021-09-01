@@ -4,12 +4,17 @@
 // @license   : MIT
 
 import { isString } from "@axux/utilities";
-import { FC, Fragment, isValidElement } from "react";
+import { FC, Fragment, isValidElement, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { ElementProps } from "../types";
+import { AxText } from "../typography/Text";
 
 /** @internal */
 export interface ViewportHeaderProps extends ElementProps {
+  /**
+   * Root href
+   */
+  href?: string;
   /**
    * Application icon
    */
@@ -27,6 +32,7 @@ export interface ViewportHeaderProps extends ElementProps {
 /**
  * Viewport header
  * @param className
+ * @param href
  * @param icon
  * @param title
  * @param subTitle
@@ -37,35 +43,41 @@ export interface ViewportHeaderProps extends ElementProps {
  */
 export const AxViewportHeader: FC<ViewportHeaderProps> = ({
   className,
+  href,
   icon,
   title,
   subTitle,
   children,
   ...aria
 }) => {
+  const AppTitle = useMemo(
+    () => (
+      <Fragment>
+        {icon && (
+          <div className="ax-viewport__header__icon">
+            {isString(icon) && <img alt="Application logo" src={icon} />}
+            {isValidElement(icon) && icon}
+          </div>
+        )}
+        {title && (
+          <div>
+            {isString(title) && (
+              <Fragment>
+                <div className="ax-viewport__header__title">{title}</div>
+                <div className="ax-viewport__header__subtitle">{subTitle}</div>
+              </Fragment>
+            )}
+            {isValidElement(title) && title}
+          </div>
+        )}
+      </Fragment>
+    ),
+    [icon, subTitle, title]
+  );
   return (
     <div className={`ax-viewport__header ${className ?? ""}`} {...aria}>
-      {(icon || title) && (
-        <NavLink className="ax-viewport__header__titleBox" to="/">
-          {icon && (
-            <div className="ax-viewport__header__icon">
-              {isString(icon) && <img alt="Application logo" src={icon} />}
-              {isValidElement(icon) && icon}
-            </div>
-          )}
-          {title && (
-            <div>
-              {isString(title) && (
-                <Fragment>
-                  <div className="ax-viewport__header__title">{title}</div>
-                  <div className="ax-viewport__header__subtitle">{subTitle}</div>
-                </Fragment>
-              )}
-              {isValidElement(title) && title}
-            </div>
-          )}
-        </NavLink>
-      )}
+      {(icon || title) &&
+        (!!href ? <NavLink to={href}>{AppTitle}</NavLink> : <AxText>{AppTitle}</AxText>)}
       {children && <div className="ax-viewport__header__optionsBox">{children}</div>}
     </div>
   );

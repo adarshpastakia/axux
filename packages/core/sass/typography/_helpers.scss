@@ -38,6 +38,9 @@
       min-width: 1em;
       width: unset;
     }
+    &--round {
+      border-radius: 1em;
+    }
     &--sm {
       font-size: 0.75em;
     }
@@ -112,30 +115,30 @@
       font-size: 3em;
     }
 
-    &--topLeft,
-    &--topRight,
-    &--bottomLeft,
-    &--bottomRight {
+    &--topEnd,
+    &--topStart,
+    &--bottomStart,
+    &--bottomEnd {
       box-shadow: 0 0 2px rgba(#000000, 0.5) inset;
       font-size: 0.375em;
       position: absolute;
     }
-    &--topLeft {
+    &--topStart {
       left: 0;
       top: 0;
       transform: translate(-20%, -10%);
     }
-    &--topRight {
+    &--topEnd {
       right: 0;
       top: 0;
       transform: translate(20%, -10%);
     }
-    &--bottomLeft {
+    &--bottomStart {
       bottom: 0;
       left: 0;
       transform: translate(-20%, 10%);
     }
-    &--bottomRight {
+    &--bottomEnd {
       bottom: 0;
       right: 0;
       transform: translate(20%, 10%);

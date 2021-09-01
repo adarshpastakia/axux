@@ -21,4 +21,6 @@ export interface TimelineProps {
   isLoading?: boolean;
   canLoadMore?: boolean;
   onLoadMore?: EmptyCallback;
+  sortOrder?: "asc" | "desc";
+  onSort?: (order: "asc" | "desc") => void;
 }

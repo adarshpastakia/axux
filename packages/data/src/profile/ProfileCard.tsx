@@ -4,6 +4,7 @@
 // @license   : MIT
 
 import { AxAvatar, AxDivider } from "@axux/core";
+import { AvatarProps } from "@axux/core/dist/icons/Avatar";
 import { Color, ColorPalette } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { FC, useMemo } from "react";
@@ -15,16 +16,13 @@ export interface ProfileCardProps {
   avatarColor?: Color | ColorPalette;
   headBg?: Color | ColorPalette;
 
-  topLeft?: string;
-  topRight?: string;
-  bottomLeft?: string;
-  bottomRight?: string;
-
   name?: string | JSX.Element;
 
   activityMap?: JSX.Element;
 
   size?: "sm" | "default" | "md";
+
+  infograph?: AvatarProps["infograph"];
 }
 
 export const AxProfileCard: FC<ProfileCardProps> = ({
@@ -37,10 +35,7 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
   avatarIcon,
   avatarImage,
   activityMap,
-  topLeft,
-  topRight,
-  bottomRight,
-  bottomLeft
+  infograph
 }) => {
   const headClass = useMemo(() => {
     return ["ax-profileCard__head", headBg ? `ax-bg--${headBg}` : "ax-bg--light"].join(" ");
@@ -55,10 +50,7 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
             icon={avatarIcon ?? AppIcons.iconFace}
             bg={avatarBg}
             color={avatarColor ?? "light"}
-            topLeft={topLeft}
-            topRight={topRight}
-            bottomRight={bottomRight}
-            bottomLeft={bottomLeft}
+            infograph={infograph}
           />
         </div>
         <div>

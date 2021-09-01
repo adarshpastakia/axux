@@ -26,7 +26,7 @@ export const useAxNavigator = <T extends KeyValue>(records: T[] = []) => {
   const headLabel = useMemo(
     () => (
       <AxText color="muted" size="sm">
-        {recordIndex}/{records.length}
+        {recordIndex + 1}/{records.length}
       </AxText>
     ),
     [recordIndex, records]

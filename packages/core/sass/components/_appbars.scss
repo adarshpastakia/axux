@@ -6,7 +6,6 @@
 #{$prefix}-header {
   align-items: center;
   display: grid;
-  font-size: 1em;
   grid-area: head;
   grid-template-areas: ". . icon title actions";
   grid-template-columns: auto auto auto 1fr auto;
@@ -15,6 +14,7 @@
   &__title {
     font-size: 1em;
     grid-area: title;
+    line-height: 1;
     padding: 0.25em 0.5em;
   }
   &__icon {
@@ -23,7 +23,7 @@
     padding: 0.125em 0.5em;
   }
   &__icon + #{$prefix}-header__title {
-    padding-inline-start: 0;
+    padding-inline-start: 0.25em;
   }
   &__actions {
     align-items: center;
@@ -38,13 +38,15 @@
       }
     }
   }
-  &__back {
-    margin-inline-end: 0;
-  }
 
   #{$prefix}-button {
     box-shadow: none !important;
     font-size: 0.875em;
+  }
+  &__back#{$prefix}-button {
+    font-size: 1.25em;
+    margin: 0;
+    margin-inline-end: -0.25em;
   }
 
   #{$prefix}-divider {

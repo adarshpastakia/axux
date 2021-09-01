@@ -113,14 +113,14 @@ const Template: Story<GridProps<Country>> = (props) => {
     ],
     []
   );
-  const { record, onNavigate, setCurrentIndex, headLabel } = useAxNavigator<Country>(
-    props.data ?? []
-  );
 
   const { pageEnd, pageStart, totalCount, pageRecords, ...pager } = useAxPagination({
     perPage: 20,
     records: props.data ?? []
   });
+  const { record, onNavigate, setCurrentIndex, headLabel } = useAxNavigator<Country>(
+    pageRecords ?? []
+  );
 
   const openDetail = useCallback(
     (_, index) => {

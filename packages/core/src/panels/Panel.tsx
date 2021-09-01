@@ -113,10 +113,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
 
     const header = useMemo(() => {
       const head = Children.toArray(children).find(
-        (child) =>
-          child &&
-          "type" in (child as KeyValue) &&
-          (child as KeyValue).type.displayName === "AxPanel.Header"
+        (child) => child && "type" in (child as KeyValue) && (child as KeyValue).type === AxHeader
       ) as ReactElement;
 
       const actions = (
@@ -151,6 +148,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       } else if (!!title || isExpandable || isCollapsable || !!onClose || !!onBack) {
         return (
           <AxHeader
+            size="md"
             title={title}
             icon={icon}
             onBack={onBack}
@@ -180,10 +178,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
     const childs = useMemo(
       () =>
         Children.toArray(children).filter(
-          (child) =>
-            child &&
-            "type" in (child as KeyValue) &&
-            (child as KeyValue).type.displayName !== "AxPanel.Header"
+          (child) => child && "type" in (child as KeyValue) && (child as KeyValue).type !== AxHeader
         ),
       [children]
     );

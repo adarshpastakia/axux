@@ -97,16 +97,6 @@
     width: 60vw;
   }
 
-  &__header {
-    grid-area: header;
-    #{$prefix}-header__icon {
-      font-size: 1.15em;
-    }
-    #{$prefix}-header__title {
-      font-size: 1.1em;
-    }
-  }
-
   &__wrapper {
     display: grid;
     grid-area: body;

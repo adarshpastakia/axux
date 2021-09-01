@@ -59,7 +59,7 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
             <Fragment>
               <AxText weight="medium">{username}</AxText>
               <AxText>{event}</AxText>
-              <AxDateDisplay date={timestamp} />
+              <AxDateDisplay date={timestamp} format="dd MMM yyyy HH:mm:ss" />
             </Fragment>
           }
         >

@@ -30,6 +30,10 @@ export interface IconProps extends RefProp, ElementProps {
    */
   useImage?: boolean;
   /**
+   * Rounded icon
+   */
+  round?: boolean;
+  /**
    * Apply spin animation, linear or steps by count
    */
   spin?: boolean | number;
@@ -48,19 +52,34 @@ export interface IconProps extends RefProp, ElementProps {
  * @param useImage
  * @param className
  * @param spin
+ * @param round
  * @param onClick
  * @constructor
  * @internal
  */
 export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
   (
-    { icon, color, size, useImage, viewBox = "0 0 24 24", className, spin, onClick, ...aria },
+    {
+      icon,
+      color,
+      size,
+      useImage,
+      viewBox = "0 0 24 24",
+      className,
+      round,
+      spin,
+      onClick,
+      ...aria
+    },
     ref
   ) => {
     const classes = useMemo(() => {
       const cls = ["ax-icon", className ?? ""];
       if (color) {
         cls.push(`ax-color--${color}`);
+      }
+      if (round) {
+        cls.push(`ax-icon--round`);
       }
       if (isString(size) && SizeList.includes(size ?? "")) {
         cls.push(`ax-icon--${size}`);
@@ -72,7 +91,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
         cls.push("ax-anim--spin-step");
       }
       return cls.join(" ");
-    }, [className, color, size, spin]);
+    }, [className, color, round, size, spin]);
     const isSvg = useMemo(() => {
       return isSvgPath(icon);
     }, [icon]);

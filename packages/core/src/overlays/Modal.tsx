@@ -59,10 +59,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
 
     const header = useMemo(() => {
       const head = Children.toArray(children).find(
-        (child) =>
-          child &&
-          "type" in (child as KeyValue) &&
-          (child as KeyValue).type.displayName === "AxPanel.Header"
+        (child) => child && "type" in (child as KeyValue) && (child as KeyValue).type === AxHeader
       ) as ReactElement;
 
       const actions = (
@@ -74,11 +71,12 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
           ? head.props.children
           : [head.props.children];
         return cloneElement(head as ReactElement, {
+          size: head.props.size ?? "lg",
           children: [...childs, actions]
         });
       } else {
         return (
-          <AxHeader title={title} icon={icon}>
+          <AxHeader title={title} icon={icon} size="lg">
             {actions}
           </AxHeader>
         );
@@ -88,10 +86,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
     const childs = useMemo(
       () =>
         Children.toArray(children).filter(
-          (child) =>
-            child &&
-            "type" in (child as KeyValue) &&
-            (child as KeyValue).type.displayName !== "AxPanel.Header"
+          (child) => child && "type" in (child as KeyValue) && (child as KeyValue).type !== AxHeader
         ),
       [children]
     );
