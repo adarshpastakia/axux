@@ -19,8 +19,7 @@
     "watch": "npm-run-all -c --parallel watch:test watch:lib",
     "pretest": "lerna run build --stream",
     "test": "jest --ci --runInBand --detectOpenHandles",
-    "predist": "lerna run build --stream",
-    "dist": "lerna publish from-package --yes",
+    "dist": "lerna run build --stream",
     "release": "lerna version --yes --preid=alpha"
   },
   "dependencies": {
