@@ -18,7 +18,10 @@
     "watch:lib": "lerna run watch --parallel",
     "watch": "npm-run-all -c --parallel watch:test watch:lib",
     "pretest": "lerna run build --stream",
-    "test": "jest --ci --runInBand --detectOpenHandles"
+    "test": "jest --ci --runInBand --detectOpenHandles",
+    "predist": "lerna run build --stream",
+    "dist": "lerna publish from-package --yes",
+    "release": "lerna version --yes --preid=alpha"
   },
   "dependencies": {
     "i18next": "^20.3.5",
