@@ -12,6 +12,10 @@
   "files": [
     "src"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build:sass": "node-sass sass -o dist",
     "build:lib": "tsc -p ./tsconfig.build.json",
