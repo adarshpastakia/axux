@@ -114,7 +114,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
     const [canClip, setCanClip] = useState(false);
     const [showMore, setShowMore] = useState(true);
 
-    const { t } = useTranslation();
+    const { t } = useTranslation("core");
     useImperativeHandle(ref, () => textRef.current as HTMLSpanElement);
 
     const classes = useMemo(() => {

@@ -19,7 +19,7 @@ import { AppIcons } from "../types/appIcons";
  */
 export const AxThemeToggle: VFC<ElementProps & { isMenu?: boolean }> = ({ className, isMenu }) => {
   const { toggleTheme } = useContext(Globals);
-  const { t } = useTranslation();
+  const { t } = useTranslation("core");
   return isMenu ? (
     <AxMenuItem
       label={t("options.theme")}

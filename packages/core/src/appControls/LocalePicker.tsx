@@ -37,7 +37,7 @@ export const AxLocalePicker: VFC<ElementProps & { isMenu?: boolean }> = ({ class
   const {
     t,
     i18n: { language }
-  } = useTranslation();
+  } = useTranslation("core");
   return (
     <AxPopover usePortal closeOnClick placement={isMenu ? "right-start" : "bottom-start"}>
       {isMenu ? (

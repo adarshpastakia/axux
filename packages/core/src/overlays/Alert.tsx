@@ -46,7 +46,7 @@ export const AxAlert: VFC<AlertProps & { [key: string]: AnyObject }> = ({
   cancelLabel,
   onClose
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("core");
   const iconType = useMemo(() => {
     switch (type) {
       case "confirm":

@@ -76,7 +76,7 @@ interface State {
 }
 
 const DefaultMessage: FC<{ error?: string }> = ({ error }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("core");
   return (
     <Fragment>
       <h4>{t("error.title")}</h4>

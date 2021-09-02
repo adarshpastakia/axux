@@ -64,7 +64,7 @@ export const AxToast: VFC<ToastProps & { [key: string]: AnyObject }> = ({
   onClose,
   onCloseAll
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("core");
   const iconType = useMemo(() => {
     switch (type) {
       case "confirm":

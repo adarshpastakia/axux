@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 /** @internal */
 export const useIsRtl = () => {
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation("core");
   const [isRtl, setIsRtl] = useState(false);
   useLayoutEffect(() => {
     setIsRtl(i18n.dir() === "rtl");
