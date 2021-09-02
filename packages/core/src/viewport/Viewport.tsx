@@ -32,18 +32,16 @@ interface ExtendedFC extends FC<ViewportProps> {
 export const AxViewport: ExtendedFC = forwardRef<HTMLDivElement, ViewportProps>(
   ({ children, ...props }, ref) => {
     return (
-      <BrowserRouter>
-        <GlobalProvider {...props}>
-          <AxHotKeyWrapper>
-            <Suspense fallback={<div>Loading...</div>}>
-              <div className="ax-viewport" ref={ref}>
-                <AxBreadcrumbBar />
-                <ErrorBoundary>{children}</ErrorBoundary>
-              </div>
-            </Suspense>
-          </AxHotKeyWrapper>
-        </GlobalProvider>
-      </BrowserRouter>
+      <GlobalProvider {...props}>
+        <AxHotKeyWrapper>
+          <Suspense fallback={<div>Loading...</div>}>
+            <div className="ax-viewport" ref={ref}>
+              <AxBreadcrumbBar />
+              <ErrorBoundary>{children}</ErrorBoundary>
+            </div>
+          </Suspense>
+        </AxHotKeyWrapper>
+      </GlobalProvider>
     );
   }
 ) as AnyObject;
