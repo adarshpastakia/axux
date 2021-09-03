@@ -145,7 +145,7 @@ export const Aside: FC<AsideProps> = ({
     >
       {(title || isCollapsable) && (
         <div className="ax-section__side--header">
-          {title && <span className="ax-section__side--title">{title}</span>}
+          <span className="ax-section__side--title">{title}</span>
           {isCollapsable && (
             <AxButton
               type="link"
