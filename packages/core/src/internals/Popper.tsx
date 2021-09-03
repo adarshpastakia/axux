@@ -289,7 +289,9 @@ export const AxPopper: FC<Props & KeyValue> = ({
         ref: setTriggerEl,
         ...triggerProps
       })}
-      {usePortal && renderBody && createPortal(popperBody, document.body)}
+      {usePortal &&
+        renderBody &&
+        createPortal(popperBody, document.querySelector(".ax-viewport") as HTMLElement)}
       {!usePortal && renderBody && popperBody}
     </>
   );
