@@ -27,66 +27,6 @@
   @import url($local-font-mono);
 }
 
-@at-root html {
-  box-sizing: border-box;
-  height: 100vh;
-  overflow: hidden;
-  width: 100vw;
-
-  *,
-  *::after,
-  *::before {
-    box-sizing: inherit;
-    font-family: inherit;
-  }
-
-  *:focus-visible {
-    outline: none;
-  }
-
-  &:root {
-    --gutter: #{0px};
-    font-size: $base-font-size;
-  }
-}
-
-@at-root body {
-  cursor: default;
-  font: {
-    family: $base-font-family;
-    size: 1em;
-    weight: $base-font-weight;
-  }
-  height: 100vh;
-  line-height: $base-line-height;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  user-select: none;
-
-  width: 100vw;
-}
-
-::-webkit-input-placeholder {
-  font-family: $base-font-family;
-}
-
-::-moz-placeholder {
-  font-family: $base-font-family;
-}
-
-::-ms-input-placeholder {
-  font-family: $base-font-family;
-}
-
-:-ms-input-placeholder {
-  font-family: $base-font-family;
-}
-
-::placeholder {
-  font-family: $base-font-family;
-}
-
 %hr-base {
   border-style: solid;
   border-width: 1px 0;
@@ -104,17 +44,68 @@
   transform: scaleX(0.5);
 }
 
-hr {
-  @extend %hr-base;
-}
+#{$prefix}-viewport {
+  box-sizing: border-box;
 
-hr[data-vertical="true"] {
-  @extend %vr-base;
-}
+  *,
+  *::after,
+  *::before {
+    box-sizing: inherit;
+    font-family: inherit;
+  }
 
-[data-clickable="true"] {
-  cursor: pointer;
-}
-[data-clickable="false"] {
+  *:focus-visible {
+    outline: none;
+  }
+
+  &:root {
+    --gutter: #{0px};
+    font-size: $base-font-size;
+  }
+
   cursor: default;
+  font: {
+    family: $base-font-family;
+    size: 1em;
+    weight: $base-font-weight;
+  }
+  line-height: $base-line-height;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+
+  ::-webkit-input-placeholder {
+    font-family: $base-font-family;
+  }
+
+  ::-moz-placeholder {
+    font-family: $base-font-family;
+  }
+
+  ::-ms-input-placeholder {
+    font-family: $base-font-family;
+  }
+
+  :-ms-input-placeholder {
+    font-family: $base-font-family;
+  }
+
+  ::placeholder {
+    font-family: $base-font-family;
+  }
+
+  hr {
+    @extend %hr-base;
+  }
+
+  hr[data-vertical="true"] {
+    @extend %vr-base;
+  }
+
+  [data-clickable="true"] {
+    cursor: pointer;
+  }
+  [data-clickable="false"] {
+    cursor: default;
+  }
 }
