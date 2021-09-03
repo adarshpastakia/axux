@@ -5,6 +5,7 @@
 
 #{$prefix}-section {
   position: relative;
+  z-index: 4;
   @include section();
 
   &__head {
