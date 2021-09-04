@@ -78,5 +78,5 @@ export interface RelativeProps extends Omit<BaseProps, "min" | "max"> {
   date?: string;
   type?: "button" | "tag";
   presets?: { [label: string]: string };
-  onChange?: (date: string) => void;
+  onChange?: (date?: string, dates?: [ParsedDate, ParsedDate]) => void;
 }

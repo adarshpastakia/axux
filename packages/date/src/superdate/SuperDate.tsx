@@ -8,7 +8,7 @@ import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocale } from "../hooks/useLocale";
-import { DateValue, RelativeProps, Type } from "../types";
+import { RelativeProps, Type } from "../types";
 import { DateUtils, superDateType } from "../utils/dateMath";
 import { AbsoluteRange } from "./AbsoluteRange";
 import { QuickSelect } from "./QuickSelect";
@@ -60,8 +60,8 @@ export const AxSuperDate: FC<RelativeProps> = ({ type = "button", onChange, date
     }
   }, []);
   const afterChange = useCallback(
-    (v: DateValue) => {
-      onChange && onChange(v);
+    (v?: string) => {
+      onChange && onChange(v, DateUtils.parseRange(v));
       setValue(v);
       setOpen(false);
     },
