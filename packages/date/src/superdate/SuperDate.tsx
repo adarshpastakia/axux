@@ -26,7 +26,11 @@ export const AxSuperDate: FC<RelativeProps> = ({ type = "button", onChange, date
   const [value, setValue] = useState<RelativeProps["date"]>(date ?? "$now");
 
   const [label, tooltip] = useMemo(
-    () => language && [DateUtils.label(value, dateLocale), DateUtils.toString(value, dateLocale)],
+    () =>
+      language && [
+        DateUtils.label(value, dateLocale),
+        DateUtils.toString(value, undefined, dateLocale)
+      ],
     [dateLocale, value, language]
   );
   const activeTab = useMemo<Type>(() => superDateType(value), [value]);

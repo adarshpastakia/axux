@@ -13,7 +13,7 @@ import { DateUtils } from "../utils/dateMath";
 export const AbsoluteRange: FC<RelativeProps> = ({ date, onChange }) => {
   const { t } = useTranslation("superdate");
   const [parsed, setParsed] = useState<[ParsedDate, ParsedDate] | undefined>();
-  useEffect(() => setParsed(DateUtils.parse(date) as [ParsedDate, ParsedDate]), [date]);
+  useEffect(() => setParsed(DateUtils.parseRange(date)), [date]);
   return (
     <AxPanel>
       <AxRangePanel date={parsed as AnyObject} onChange={setParsed} />

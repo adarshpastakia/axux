@@ -5,6 +5,7 @@
 
 import { AxButton, AxContent, AxPanel } from "@axux/core";
 import { AxField } from "@axux/form";
+import { isString } from "@axux/utilities";
 import { FC, MouseEvent, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { DateParts, RelativeProps } from "../types";
@@ -22,7 +23,7 @@ export const QuickSelect: FC<RelativeProps> = ({ date, onChange }) => {
   const [quickDate, setQuickDate] = useState("$day-1");
 
   useEffect(() => {
-    if (date && date.includes("|") && date.includes(DateParts.NOW)) {
+    if (isString(date) && date.includes("|") && date.includes(DateParts.NOW)) {
       const [start, end] = date.split("|");
       if (start !== DateParts.NOW) {
         setQuickDate(start);

@@ -4,6 +4,7 @@
 // @license   : MIT
 
 import { AxButton, AxContent, AxPanel, AxToolbar } from "@axux/core";
+import { isString } from "@axux/utilities";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { DateParts, RelativeProps } from "../types";
@@ -16,7 +17,7 @@ export const RelativeRange: FC<RelativeProps> = ({ date, onChange }) => {
   const [endDate, setEndDate] = useState("$day-1");
 
   useEffect(() => {
-    if (date && date.includes("|")) {
+    if (isString(date) && date.includes("|")) {
       const [start, end] = date.split("|");
       if (start !== DateParts.NOW) {
         setStartDate(start);

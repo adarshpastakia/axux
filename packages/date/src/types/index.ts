@@ -71,12 +71,12 @@ export interface DatePart {
   part?: DateParts;
 }
 
-export type DateValue = string | undefined;
+export type DateValue = string | number | undefined;
 export type ParsedDate = Date | undefined;
 
 export interface RelativeProps extends Omit<BaseProps, "min" | "max"> {
-  date?: DateValue;
+  date?: string;
   type?: "button" | "tag";
-  presets?: { [label: string]: DateValue };
-  onChange?: (date: DateValue) => void;
+  presets?: { [label: string]: string };
+  onChange?: (date: string) => void;
 }

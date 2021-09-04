@@ -73,9 +73,9 @@ export const getDateParts = (dt: DateValue): DatePart | undefined => {
 };
 
 /** @internal */
-export const parseDate = (dt?: string, rounded?: "start" | "end"): ParsedDate => {
+export const parseDate = (dt?: string | number, rounded?: "start" | "end"): ParsedDate => {
   if (dt && isDate(dt)) {
-    return parseISO(dt);
+    return new Date(dt);
   } else if (dt && isDateLike(dt)) {
     const parts = getDateParts(dt);
 
@@ -138,7 +138,7 @@ const parseDateValue = (dt: DateValue): [ParsedDate, ParsedDate] | ParsedDate =>
   if (isNil(dt)) {
     return undefined;
   }
-  if (dt.includes("|")) {
+  if (isString(dt) && dt.includes("|")) {
     const [startDate, endDate] = dt.split("|");
     return [parseDate(startDate, "start"), parseDate(endDate, "end")];
   } else {
@@ -147,9 +147,9 @@ const parseDateValue = (dt: DateValue): [ParsedDate, ParsedDate] | ParsedDate =>
 };
 
 /** @internal */
-const parseLabel = (dt: string, locale?: KeyValue): string => {
+const parseLabel = (dt: string | number, locale?: KeyValue): string => {
   if (isDate(dt)) {
-    return dateFormat(parseISO(dt), "PP", locale);
+    return dateFormat(new Date(dt), "PP", locale);
   } else if (isDateLike(dt)) {
     const parts = getDateParts(dt);
 
@@ -176,7 +176,7 @@ export const parseDateLabel = (dt: DateValue, locale?: KeyValue): string => {
   if (isNil(dt)) {
     return "";
   }
-  if (dt.includes("|")) {
+  if (isString(dt) && dt.includes("|")) {
     const [startDate, endDate] = dt.split("|");
     return startDate === endDate
       ? parseLabel(startDate, locale)
@@ -194,18 +194,18 @@ export const makeSuperDate = (start?: DateValue, end?: DateValue) => {
   const endParsed = parseDate(end);
   if (start && end && start && end && startParsed && endParsed) {
     return isBefore(startParsed, endParsed) ? `${start}|${end}` : `${end}|${start}`;
-  } else if (start && !end && start) {
+  } else if (start && !end && isString(start)) {
     return start.includes("-") ? `${start}|${DateParts.NOW}` : `${DateParts.NOW}|${start}`;
   }
   return undefined;
 };
 
 /** @internal */
-export const superDateType = (dt?: string): Type => {
+export const superDateType = (dt?: string | number): Type => {
   if (isNil(dt)) {
     return Type.QUICK;
   }
-  if (dt.includes("|")) {
+  if (isString(dt) && dt.includes("|")) {
     const [startDate, endDate] = dt.split("|");
     if (startDate === endDate) {
       return Type.QUICK;
@@ -226,14 +226,17 @@ export const superDateType = (dt?: string): Type => {
 
 export const DateUtils = {
   isValid(dt: DateValue): boolean {
-    if (dt && dt.includes("|")) {
+    if (isString(dt) && dt.includes("|")) {
       const [start, end] = dt.split("|");
       return ((isDate(start) || isDateLike(start)) && isDate(end)) || isDateLike(end);
     }
     return isDate(dt) || isDateLike(dt);
   },
-  parse(dt: DateValue): [ParsedDate, ParsedDate] | ParsedDate {
-    return parseDateValue(dt);
+  parse(dt: DateValue): ParsedDate {
+    return parseDateValue(dt) as ParsedDate;
+  },
+  parseRange(dt: DateValue): [ParsedDate, ParsedDate] {
+    return parseDateValue(dt) as [ParsedDate, ParsedDate];
   },
   label(dt: DateValue, locale?: KeyValue): string {
     return parseDateLabel(dt, locale);
@@ -255,17 +258,16 @@ export const DateUtils = {
     }
     return undefined;
   },
-  toString(dt: DateValue, locale?: KeyValue) {
-    const formatString = "PPpp";
+  toString(dt: DateValue, format = "PPpp", locale?: KeyValue) {
     const dates = parseDateValue(dt);
     if (Array.isArray(dates)) {
       const [start, end] = dates;
       return [
-        start && dateFormat(start, formatString, locale),
-        end && dateFormat(end, formatString, locale)
+        start && dateFormat(start, format, locale),
+        end && dateFormat(end, format, locale)
       ].join(` ${i18n.t(`${I18nKey}:separator`, "→")} `);
     } else if (dates) {
-      return dateFormat(dates, formatString, locale);
+      return dateFormat(dates, format, locale);
     }
     return undefined;
   }
