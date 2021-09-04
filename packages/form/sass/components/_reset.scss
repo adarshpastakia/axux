@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-@at-root {
+#{$prefix}-viewport {
   input,
   textarea {
     background: none;
@@ -13,51 +13,51 @@
     outline: none;
     padding: 0.25em 0.5em;
   }
-}
 
-textarea {
-  min-height: 3em;
-  resize: vertical;
-}
+  textarea {
+    min-height: 3em;
+    resize: vertical;
+  }
 
-input[type="search"]::-webkit-search-cancel-button {
-  display: none;
-}
+  input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+  }
 
-input::-ms-clear,
-select::-ms-clear,
-textarea::-ms-clear {
-  display: none;
-}
+  input::-ms-clear,
+  select::-ms-clear,
+  textarea::-ms-clear {
+    display: none;
+  }
 
-//noinspection CssInvalidPseudoSelector
-input:-webkit-autofill,
-select:-webkit-autofill,
-textarea:-webkit-autofill,
-input:-internal-autofill-previewed,
-input:-internal-autofill-selected,
-textarea:-internal-autofill-previewed,
-textarea:-internal-autofill-selected,
-select:-internal-autofill-previewed,
-select:-internal-autofill-selected {
-  // stylelint-disable-next-line declaration-no-important
-  background-color: transparent !important;
-}
+  //noinspection CssInvalidPseudoSelector
+  input:-webkit-autofill,
+  select:-webkit-autofill,
+  textarea:-webkit-autofill,
+  input:-internal-autofill-previewed,
+  input:-internal-autofill-selected,
+  textarea:-internal-autofill-previewed,
+  textarea:-internal-autofill-selected,
+  select:-internal-autofill-previewed,
+  select:-internal-autofill-selected {
+    // stylelint-disable-next-line declaration-no-important
+    background-color: transparent !important;
+  }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-input[type="password"] {
-  font-family: monospace;
-}
+  input[type="password"] {
+    font-family: monospace;
+  }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  background-color: transparent !important;
-  box-shadow: 0 0 0 5em rgba(#1d79c1, 0.1) inset;
-  transition: background-color 5000s ease-in-out 0s;
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    background-color: transparent !important;
+    box-shadow: 0 0 0 5em rgba(#1d79c1, 0.1) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
 }
