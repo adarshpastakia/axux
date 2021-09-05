@@ -46,6 +46,14 @@
     }
   }
 
+  &[data-active="true"] {
+    cursor: default;
+
+    #{$base}__inner {
+      pointer-events: none;
+    }
+  }
+
   &[data-disabled="true"] {
     cursor: not-allowed;
 
