@@ -77,10 +77,6 @@ const DateField: FC<DateProps & WrapperProps & FieldStateProps & InnerProps> = (
     setValue(date);
   }, [date]);
 
-  useEffect(() => {
-    setValue(date);
-  }, [date]);
-
   /**
    * Get input label
    */
