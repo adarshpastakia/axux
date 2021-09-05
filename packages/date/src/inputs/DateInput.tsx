@@ -57,7 +57,7 @@ const DateField: FC<DateProps & WrapperProps & FieldStateProps & InnerProps> = (
   onClear,
   inputRef,
   format = "dd MMM yyyy",
-  date,
+  value: date,
   onChange,
   onBlur,
   onEnter,
