@@ -6,11 +6,29 @@
 import { Story } from "@storybook/react";
 import { PropsWithChildren } from "react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
+import { AxMenu } from "../../dist";
+import { AxContextMenu } from "../../src";
 import { AxButton, AxContent, AxPanel, AxText } from "../../src";
 import { PanelProps } from "../../src/panels/Panel";
 import { ElementProps } from "../../src/types";
 
-const Template: Story<PropsWithChildren<PanelProps>> = (props) => <AxPanel {...props} />;
+const Template: Story<PropsWithChildren<PanelProps>> = (props) => (
+  <AxPanel {...props}>
+    <AxContextMenu
+      menu={[
+        <AxMenu key="one">
+          <AxMenu.Item label="Submenu" panelId="submenu" />
+          <AxMenu.Item label="Test" />
+        </AxMenu>,
+        <AxMenu key="two" panelId="submenu" title="Submenu">
+          <AxMenu.Item label="Test" />
+        </AxMenu>
+      ]}
+    >
+      <AxContent>Test right click</AxContent>
+    </AxContextMenu>
+  </AxPanel>
+);
 
 export const PanelStory = Template.bind({});
 PanelStory.args = {

@@ -162,10 +162,12 @@ export const AxPopper: FC<Props & KeyValue> = ({
       popperEl && popperEl.addEventListener("updatePopper", () => forceUpdate && forceUpdate());
 
       if (trigger === "click") {
-        const handler = () => {
-          isNil(isOpen) && setOpen(!open);
-          open && onClose && onClose();
-          !open && onOpen && onOpen();
+        const handler = (e: MouseEvent) => {
+          if (e.button === 0) {
+            isNil(isOpen) && setOpen(!open);
+            open && onClose && onClose();
+            !open && onOpen && onOpen();
+          }
         };
 
         const forceClose = (e: MouseEvent) => {
@@ -185,8 +187,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
             refCloseTimer.current = setTimeout(() => {
               setOpen(false);
               onClose && onClose();
-            }, 100);
-            return false;
+            }, 10);
           }
         };
 
@@ -291,7 +292,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
       })}
       {usePortal &&
         renderBody &&
-        createPortal(popperBody, document.querySelector(".ax-viewport") as HTMLElement)}
+        createPortal(popperBody, document.querySelector(".ax-root") as HTMLElement)}
       {!usePortal && renderBody && popperBody}
     </>
   );

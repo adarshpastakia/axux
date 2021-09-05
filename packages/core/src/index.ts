@@ -54,6 +54,7 @@ export { AxContent } from "./panels/Content";
 export { AxPanel } from "./panels/Panel";
 export { AxTabPanel } from "./panels/TabPanel";
 export { AxModal } from "./overlays/Modal";
+export { AxContextMenu } from "./overlays/ContextMenu";
 
 // Buttons
 export { AxButton } from "./buttons/Button";
