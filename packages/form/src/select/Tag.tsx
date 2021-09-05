@@ -51,7 +51,6 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
   allowSearch,
   isDisabled,
   isReadonly,
-  usePortal,
   label,
   hint,
   appendLabel,
@@ -92,8 +91,8 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
 
   return (
     <AxPopover
+      usePortal
       isOpen={isOpen}
-      usePortal={usePortal}
       autoTrigger={false}
       onOpen={() => setOpen(isEditable)}
       onClose={() => {

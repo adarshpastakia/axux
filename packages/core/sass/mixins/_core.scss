@@ -17,6 +17,23 @@
   white-space: nowrap;
 }
 
+@mixin hr-base {
+  border-style: solid;
+  border-width: 1px 0;
+  margin: 0.5em 0;
+  opacity: 0.75;
+  transform: scaleY(0.5);
+}
+
+@mixin vr-base {
+  align-self: stretch;
+  border-style: solid;
+  border-width: 0 1px;
+  margin: 0 0.5em;
+  opacity: 0.75;
+  transform: scaleX(0.5);
+}
+
 // @function strip dot
 @function parse-dotless($class) {
   $this: quote($class);

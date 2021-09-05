@@ -125,11 +125,13 @@ const withI18nProvider = (StoryComp: Story, context: StoryContext) => {
   }, [context.globals.locale]);
   const dateLocale = useMemo(() => dateLocales[context.globals.locale], [context.globals.locale]);
   return (
-    <I18nextProvider i18n={i18n}>
-      <GlobalProvider dateLocale={dateLocale}>
-        <StoryComp {...context} />
-      </GlobalProvider>
-    </I18nextProvider>
+    <div className="ax-root">
+      <I18nextProvider i18n={i18n}>
+        <GlobalProvider dateLocale={dateLocale}>
+          <StoryComp {...context} />
+        </GlobalProvider>
+      </I18nextProvider>
+    </div>
   );
 };
 export const decorators = [withI18nProvider, withTests({ results })];

@@ -25,6 +25,9 @@
   &__icon + #{$prefix}-header__title {
     padding-inline-start: 0.25em;
   }
+  &__back + #{$prefix}-divider {
+    margin-inline-end: 0 !important;
+  }
   &__actions {
     align-items: center;
     display: flex;

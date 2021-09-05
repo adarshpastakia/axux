@@ -181,9 +181,4 @@ export interface SelectCommonProps<T = KeyValue> {
    * Convert object into option
    */
   makeOption?: (option: T) => OptionProps<T>;
-
-  /**
-   * Use portal for dropdown
-   */
-  usePortal?: boolean;
 }

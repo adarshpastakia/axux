@@ -10,8 +10,8 @@
   font-size: 0.75em;
 
   > hr {
-    flex: 1 1 1em;
-    margin: 0;
+    flex: 1 1 auto;
+    margin: 0 !important;
     opacity: 1;
   }
   > #{$prefix}-text {

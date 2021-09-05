@@ -158,7 +158,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
           {isLoading && <AxLoader />}
         </div>
       </div>,
-      document.body
+      document.querySelector(".ax-viewport") as HTMLElement
     );
   }
 ) as AnyObject;

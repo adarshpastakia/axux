@@ -45,111 +45,116 @@ interface InnerProps {
   onEnter?: KeyboardEventHandler;
 }
 
-const SelectField: FC<SelectCommonProps<AnyObject> & WrapperProps & FieldStateProps & InnerProps> = ({
-  children,
-  placeholder,
-  allowSearch,
-  isDisabled,
-  isReadonly,
-  usePortal,
-  label,
-  hint,
-  appendLabel,
-  required,
-  maxWidth,
-  minWidth,
-  width,
-  span,
-  canClear,
-  onClear,
-  error,
-  selectRef,
-  ...props
-}) => {
-  const {
-    isOpen,
-    setOpen,
-    inputRef,
-    inputLabel,
-    innerOptions,
-    handleKey,
-    handleClick,
-    isQuerying,
-    queryHandler,
-    isSelected,
-    resetList
-  } = useSelect({
+const SelectField: FC<SelectCommonProps<AnyObject> & WrapperProps & FieldStateProps & InnerProps> =
+  ({
+    children,
+    placeholder,
+    allowSearch,
+    isDisabled,
+    isReadonly,
+    label,
+    hint,
+    appendLabel,
+    required,
+    maxWidth,
+    minWidth,
+    width,
+    span,
+    canClear,
+    onClear,
+    error,
+    selectRef,
     ...props
-  });
+  }) => {
+    const {
+      isOpen,
+      setOpen,
+      inputRef,
+      inputLabel,
+      innerOptions,
+      handleKey,
+      handleClick,
+      isQuerying,
+      queryHandler,
+      isSelected,
+      resetList
+    } = useSelect({
+      ...props
+    });
 
-  const isEditable = useMemo(() => !(isDisabled || isReadonly), [isDisabled, isReadonly]);
+    const isEditable = useMemo(() => !(isDisabled || isReadonly), [isDisabled, isReadonly]);
 
-  useImperativeHandle(selectRef, () => ({
-    focus: () => inputRef.current && inputRef.current.focus()
-  }));
+    useImperativeHandle(selectRef, () => ({
+      focus: () => inputRef.current && inputRef.current.focus()
+    }));
 
-  return (
-    <AxPopover
-      closeOnClick
-      isOpen={isOpen}
-      usePortal={usePortal}
-      autoTrigger={false}
-      onOpen={() => setOpen(isEditable)}
-      onClose={() => {
-        setOpen(false);
-        resetList();
-      }}
-    >
-      <AxFieldWrapper
-        label={label}
-        hint={hint}
-        appendLabel={appendLabel}
-        required={required}
-        maxWidth={maxWidth}
-        minWidth={minWidth}
-        width={width}
-        span={span}
-        isLoading={isQuerying}
-        isDisabled={isDisabled}
-        isReadonly={isReadonly}
-        canClear={canClear}
-        onClear={onClear}
-        error={error}
+    return (
+      <AxPopover
+        usePortal
+        closeOnClick
+        isOpen={isOpen}
+        autoTrigger={false}
+        onOpen={() => setOpen(isEditable)}
+        onClose={() => {
+          setOpen(false);
+          resetList();
+        }}
       >
-        {children}
-        <input
-          size={1}
-          ref={inputRef}
-          className="ax-field__input"
-          formNoValidate
-          disabled={isDisabled}
-          placeholder={placeholder}
-          defaultValue={inputLabel}
-          readOnly={!allowSearch || isReadonly}
-          onFocus={(e) => e.target.select()}
-          onClick={() => setOpen(isEditable)}
-          onChange={queryHandler}
-          onKeyUp={handleKey}
-          autoComplete={"off"}
-        />
-        <div className="ax-field__handle">
-          <AxButton
-            type="link"
-            tabIndex={-1}
-            icon={AppIcons.iconCaretDown}
-            isDisabled={isDisabled || isReadonly}
+        <AxFieldWrapper
+          label={label}
+          hint={hint}
+          appendLabel={appendLabel}
+          required={required}
+          maxWidth={maxWidth}
+          minWidth={minWidth}
+          width={width}
+          span={span}
+          isLoading={isQuerying}
+          isDisabled={isDisabled}
+          isReadonly={isReadonly}
+          canClear={canClear}
+          onClear={onClear}
+          error={error}
+        >
+          {children}
+          <input
+            size={1}
+            ref={inputRef}
+            className="ax-field__input"
+            formNoValidate
+            disabled={isDisabled}
+            placeholder={placeholder}
+            defaultValue={inputLabel}
+            readOnly={!allowSearch || isReadonly}
+            onFocus={(e) => e.target.select()}
             onClick={() => setOpen(isEditable)}
+            onChange={queryHandler}
+            onKeyUp={handleKey}
+            autoComplete={"off"}
           />
+          <div className="ax-field__handle">
+            <AxButton
+              type="link"
+              tabIndex={-1}
+              icon={AppIcons.iconCaretDown}
+              isDisabled={isDisabled || isReadonly}
+              onClick={() => setOpen(isEditable)}
+            />
+          </div>
+        </AxFieldWrapper>
+        <div onClickCapture={handleClick} className="ax-select__popover">
+          {innerOptions.map((opt, index) => (
+            <AxSelectOption
+              key={opt.value}
+              {...opt}
+              value={`${index}`}
+              selected={isSelected(opt)}
+            />
+          ))}
         </div>
-      </AxFieldWrapper>
-      <div onClickCapture={handleClick} className="ax-select__popover">
-        {innerOptions.map((opt, index) => (
-          <AxSelectOption key={opt.value} {...opt} value={`${index}`} selected={isSelected(opt)} />
-        ))}
-      </div>
-    </AxPopover>
-  );
-};
+      </AxPopover>
+    );
+  };
 SelectField.displayName = "AxSelectField";
 
 /**

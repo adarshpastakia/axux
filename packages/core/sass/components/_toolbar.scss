@@ -68,8 +68,8 @@
       flex-flow: column;
       margin: 0 0.25em;
 
-      hr {
-        @extend hr[data-vertical="true"];
+      > hr {
+        @include vr-base;
         margin: 0;
         width: 1px;
       }
@@ -84,7 +84,7 @@
       flex-flow: row;
       margin: 0.25em 0;
 
-      hr {
+      > hr {
         height: 1px;
       }
     }

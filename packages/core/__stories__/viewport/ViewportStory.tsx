@@ -14,6 +14,7 @@ import {
 } from "@mdi/js";
 import { Story } from "@storybook/react";
 import { useEffect } from "react";
+import { MemoryRouter } from "react-router-dom";
 import {
   AxAvatar,
   AxButton,
@@ -162,14 +163,16 @@ const Page = () => {
 };
 
 const Template: Story<ViewportProps> = (props) => (
-  <AxViewport {...props}>
-    <AxViewport.Banner color="secondary">Test Banner</AxViewport.Banner>
-    <AxViewport.Footer>© 2021</AxViewport.Footer>
-    <Spotlight />
-    <Header />
-    <Menu />
-    <Page />
-  </AxViewport>
+  <MemoryRouter>
+    <AxViewport {...props}>
+      <AxViewport.Banner color="secondary">Test Banner</AxViewport.Banner>
+      <AxViewport.Footer>© 2021</AxViewport.Footer>
+      <Spotlight />
+      <Header />
+      <Menu />
+      <Page />
+    </AxViewport>
+  </MemoryRouter>
 );
 
 export const ViewportStory = Template.bind({});
