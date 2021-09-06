@@ -52,7 +52,7 @@
     height: unset !important;
     min-height: unset !important;
 
-    > #{$prefix}panel__body,
+    > #{$prefix}-panel__body,
     > #{$prefix}-footer {
       display: none;
     }
