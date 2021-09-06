@@ -5,7 +5,7 @@
 
 #{$prefix}-badge {
   border-radius: 1em;
-  font-size: 0.625em;
+  font-size: 0.75em;
   line-height: 1.5em;
   min-width: 1.5em;
   overflow: hidden;
@@ -14,8 +14,8 @@
   vertical-align: middle;
 
   &:empty {
-    height: 0.375em;
-    min-width: 0.375em;
+    height: 0.5em;
+    min-width: 0.5em;
   }
 
   &--pulse:empty {

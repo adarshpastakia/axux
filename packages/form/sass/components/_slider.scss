@@ -117,7 +117,7 @@
       flex-flow: row nowrap;
       justify-content: space-between;
       position: relative;
-      top: -0.375em;
+      top: -0.5em;
       z-index: 1;
 
       button {
@@ -145,10 +145,10 @@
           content: "";
           display: block;
           height: 0.25em;
-          left: 0.375em;
+          left: 0.5em;
           pointer-events: none;
           position: relative;
-          top: calc(-1em - 1px);
+          top: -1.125em;
           width: 0.25em;
           z-index: 1;
         }

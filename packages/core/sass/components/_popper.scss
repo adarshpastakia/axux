@@ -10,7 +10,7 @@
   $base: #{$prefix}-popper;
 
   #{$prefix}-menu__item {
-    font-size: 0.875em;
+    font-size: 1em;
     line-height: 1.5;
   }
 
@@ -115,7 +115,7 @@
     #{$base}--body {
       @extend #{$prefix}-shadow--2;
       border-radius: $base-border-radius;
-      font-size: 0.875em;
+      font-size: 1em;
       padding: 0.25em 0.5em;
     }
   }

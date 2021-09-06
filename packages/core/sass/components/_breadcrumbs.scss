@@ -10,7 +10,7 @@
     align-items: center;
     display: flex;
     grid-area: breadcrumbs;
-    padding: 0.125em 0.375em;
+    padding: 0.125em 0.5em;
 
     > div:first-child {
       display: flex;
@@ -69,7 +69,7 @@
     align-items: center;
     cursor: pointer;
     display: flex;
-    font-size: 0.875em;
+    font-size: 1em;
     font-weight: $font-weight-medium;
     line-height: 1.25;
     vertical-align: middle;
@@ -82,7 +82,7 @@
   &__link {
     align-items: center;
     display: flex;
-    font-size: 0.875em;
+    font-size: 1em;
     padding: 0.25em 0.5em;
   }
 }

@@ -120,7 +120,7 @@
     &--bottomStart,
     &--bottomEnd {
       box-shadow: 0 0 2px rgba(#000000, 0.5) inset;
-      font-size: 0.375em;
+      font-size: 0.5em;
       position: absolute;
     }
     &--topStart {
@@ -298,7 +298,7 @@
     align-items: center;
     cursor: pointer;
     display: flex;
-    font-size: 0.875em;
+    font-size: 1em;
     padding: 0.25em 0.5em;
     text-transform: capitalize;
 

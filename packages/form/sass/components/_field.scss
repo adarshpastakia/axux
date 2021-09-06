@@ -68,9 +68,9 @@
   }
 
   &__input {
-    font-size: 0.875em;
+    font-size: 1em;
     grid-area: field;
-    line-height: 1.75em;
+    line-height: 1.5;
     min-height: 1.75em;
     min-width: 1em;
     padding: 0 0.5em;
@@ -134,9 +134,9 @@
   &__step--up,
   &__step--down {
     cursor: pointer;
-    font-size: 0.875em;
+    font-size: 1em;
     height: 50%;
-    line-height: 0.375em;
+    line-height: 0.5em;
     overflow: hidden;
     text-align: center;
     width: 1.25em;
