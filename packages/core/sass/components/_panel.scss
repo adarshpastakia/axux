@@ -13,6 +13,10 @@
 
   $base: #{$prefix}-panel;
 
+  &__body {
+    display: contents;
+  }
+
   &__group {
     #{$base} {
       border-radius: 0;
@@ -48,8 +52,8 @@
     height: unset !important;
     min-height: unset !important;
 
-    #{$prefix}-content,
-    #{$prefix}-footer {
+    > #{$prefix}panel__body,
+    > #{$prefix}-footer {
       display: none;
     }
     #{$prefix}-header {

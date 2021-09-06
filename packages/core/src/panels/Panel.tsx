@@ -200,7 +200,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
         onClick={onClick}
       >
         {header}
-        {childs}
+        <div className="ax-panel__body">{childs}</div>
         {isLoading && <AxLoader />}
       </div>
     );
