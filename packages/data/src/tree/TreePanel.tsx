@@ -130,7 +130,7 @@ export const AxTreePanel: VFC<TreePanelProps> = ({
 
   const toggleAll = useCallback(
     (b: boolean) => {
-      Object.values(nodeMap).forEach((node) => (node.isChecked = b));
+      Object.values(nodeMap).forEach((node) => !node.isDisabled && (node.isChecked = b));
       fireSelect();
       setNodes([...nodes]);
     },
@@ -139,7 +139,7 @@ export const AxTreePanel: VFC<TreePanelProps> = ({
 
   const openAll = useCallback(
     (b: boolean) => {
-      Object.values(nodeMap).forEach((node) => (node.isOpen = b));
+      Object.values(nodeMap).forEach((node) => !node.isDisabled && (node.isOpen = b));
       setNodes([...nodes]);
     },
     [nodeMap, nodes]

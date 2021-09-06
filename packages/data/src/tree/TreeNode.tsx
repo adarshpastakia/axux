@@ -42,7 +42,19 @@ export const TreeNode: VFC<
     onClick: (id: string, el?: string) => void;
   } & Pick<TreePanelProps, "sort" | "maxNodes" | "isCheckable" | "checkLevel">
 > = ({
-  node: { id, level, isLeaf, isOpen, isSelected, isChecked, isDisabled, label, icon, badge, children },
+  node: {
+    id,
+    level,
+    isLeaf,
+    isOpen,
+    isSelected,
+    isChecked,
+    isDisabled,
+    label,
+    icon,
+    badge,
+    children
+  },
   isCheckable,
   maxNodes,
   sort,
@@ -131,7 +143,7 @@ export const TreeNode: VFC<
             {t("tree.noItems")}
           </div>
         ))}
-      {showChildren && !!maxNodes && !isEmpty(nodes) && (
+      {showChildren && !!maxNodes && !isEmpty(nodes) && nodes.length > maxNodes && (
         <div className="ax-tree__node" style={{ "--tree-level": level + 1 } as AnyObject}>
           <a className="ax-link ax-font--sm" onClick={() => setShowAll(!showAll)}>
             {showAll ? "Show less" : "Show more"}
