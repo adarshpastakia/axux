@@ -5,6 +5,7 @@
 
 #{$prefix}-overlay {
   &__mask {
+    background: none;
     bottom: 0;
     left: 0;
     position: fixed;
@@ -22,6 +23,7 @@
   }
 
   &__container {
+    background: none;
     bottom: 0;
     display: flex;
     justify-content: flex-end;
