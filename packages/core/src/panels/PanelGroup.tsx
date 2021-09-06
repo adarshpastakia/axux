@@ -4,9 +4,10 @@
 // @license   : MIT
 
 import { Children, cloneElement, FC, useCallback, useEffect, useState } from "react";
+import { ElementProps } from "../types";
 
 /** @internal */
-export interface PanelGroupProps {
+export interface PanelGroupProps extends ElementProps {
   accordion?: boolean;
   activePanel?: string;
   onActiveChange?: (panelId: string) => void;
@@ -15,6 +16,7 @@ export interface PanelGroupProps {
 /**
  * Panel accordion group
  * @param children
+ * @param className
  * @param accordion
  * @param activePanel
  * @param onActiveChange
@@ -23,6 +25,7 @@ export interface PanelGroupProps {
  */
 export const AxPanelGroup: FC<PanelGroupProps> = ({
   children,
+  className,
   accordion,
   activePanel,
   onActiveChange
@@ -33,16 +36,19 @@ export const AxPanelGroup: FC<PanelGroupProps> = ({
     setExpandedPanel(activePanel);
   }, [activePanel]);
 
-  const changeExpanded = useCallback((collapsed: boolean, id: string, handler?: AnyObject) => {
-    if (!collapsed) {
-      setExpandedPanel(id);
-      onActiveChange && onActiveChange(id);
-    }
-    handler && handler(collapsed);
-  }, [onActiveChange]);
+  const changeExpanded = useCallback(
+    (collapsed: boolean, id: string, handler?: AnyObject) => {
+      if (!collapsed) {
+        setExpandedPanel(id);
+        onActiveChange && onActiveChange(id);
+      }
+      handler && handler(collapsed);
+    },
+    [onActiveChange]
+  );
 
   return (
-    <div className="ax-panel__group">
+    <div className={`ax-panel__group ${className ?? ""}`}>
       {Children.toArray(children).map((child: AnyObject) =>
         cloneElement(
           child,
