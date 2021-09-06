@@ -11,20 +11,12 @@
   @import url($google-font-serif);
 }
 
-@if $google-font-mono {
-  @import url($google-font-mono);
-}
-
 @if $local-font-sans-serif {
   @import url($local-font-sans-serif);
 }
 
 @if $local-font-serif {
   @import url($local-font-serif);
-}
-
-@if $local-font-mono {
-  @import url($local-font-mono);
 }
 
 #{$prefix}-root {
