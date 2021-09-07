@@ -17,6 +17,12 @@
   }
 
   &__head {
+    #{$prefix}-avatar {
+      img {
+        background-color: $color-lightest;
+      }
+    }
+
     &::after {
       background-color: $panel-bg;
     }
