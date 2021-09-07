@@ -5,6 +5,7 @@
 
 import { isEmpty, isObject, isTrue } from "@axux/utilities";
 import { useMemo, VFC } from "react";
+import { isColor } from "../helpers";
 import { AllColors } from "../types";
 
 /** @internal */
@@ -35,7 +36,18 @@ const AxBadge: VFC<BadgeProps> = ({ color, value, pulse }) => {
     }
     return cls.join(" ");
   }, [color, pulse, value]);
-  return <div className={classes}>{value}</div>;
+  const styles = useMemo<AnyObject>(() => {
+    const ret: KeyValue = {};
+    if (color && isColor(color)) {
+      ret.color = color;
+    }
+    return ret;
+  }, [color]);
+  return (
+    <div className={classes} style={styles}>
+      {value}
+    </div>
+  );
 };
 AxBadge.displayName = "AxBadge";
 

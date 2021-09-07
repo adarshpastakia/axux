@@ -7,3 +7,5 @@
 export { makeMargin } from "./margin";
 /** @internal */
 export { makePadding } from "./padding";
+
+export const isColor = (color: string) => color.startsWith("#") || color.startsWith("rgb");

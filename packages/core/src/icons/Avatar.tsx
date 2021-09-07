@@ -13,6 +13,7 @@ import {
   useState,
   VFC
 } from "react";
+import { isColor } from "../helpers";
 import { AxTooltip } from "../overlays/Tooltip";
 import { AllColors, ElementProps, IconType, RefProp, Size } from "../types";
 import { AxIcon } from "./Icon";
@@ -124,10 +125,10 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
     }, [fallback, icon, src, title]);
     const styles = useMemo(() => {
       const ret: KeyValue = {};
-      if (bg && bg.startsWith("#")) {
+      if (bg && isColor(bg)) {
         ret.backgroundColor = bg;
       }
-      if (color && color.startsWith("#")) {
+      if (color && isColor(color)) {
         ret.color = color;
       }
       return ret;
@@ -138,7 +139,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
           className={classes}
           data-clickable={!isEmpty(onClick)}
           onClick={onClick}
-          style={styles as AnyObject}
+          style={styles}
         >
           {body}
 

@@ -5,6 +5,7 @@
 
 import { isNumber, isString, isSvgPath, isTrue } from "@axux/utilities";
 import { forwardRef, isValidElement, MouseEventHandler, useMemo, VFC } from "react";
+import { isColor } from "../helpers";
 import { AllColors, ElementProps, RefProp, Size, SizeList } from "../types";
 
 /** @internal */
@@ -115,7 +116,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
 
     const styles = useMemo(() => {
       const s: KeyValue = {};
-      if (color && color.startsWith("#")) {
+      if (color && isColor(color)) {
         s.color = color;
       }
       if (isString(size) && !SizeList.includes(size)) {
