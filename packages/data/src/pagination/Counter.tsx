@@ -15,8 +15,8 @@ export interface CounterProps {
 export const AxRecordCounter: VFC<CounterProps> = ({ start, end, total }) => {
   const { t } = useTranslation("data");
   return (
-    <span className="ax-padding--x--sm ax-font--sm ax-color--muted">
+    <bdi className="ax-padding--x--sm ax-font--sm ax-color--muted">
       {total > 0 ? `${start}-${end} of ${total}` : t("label.noRecords")}
-    </span>
+    </bdi>
   );
 };

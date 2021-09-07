@@ -32,9 +32,9 @@ export const AxPagination: VFC<PaginationProps> = ({ page, totalPages, onPageCha
         onClick={() => onPageChange(page - 1)}
         icon={AppIcons.iconCaretLeft}
       />
-      <span className="ax-font--sm ax-padding--x--sm ax-col--middle">
+      <bdi className="ax-font--sm ax-padding--x--sm ax-col--middle">
         {page} / {totalPages}
-      </span>
+      </bdi>
       <AxButton
         type="link"
         color="primary"
