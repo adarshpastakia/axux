@@ -13,30 +13,32 @@ import {
   endOfYear as _endOfYear,
   format,
   isSameMonth as _isSameMonth,
-  isValid,
   startOfDay as _startOfDay,
   startOfDecade as _startOfDecade,
   startOfMonth as _startOfMonth,
   startOfWeek as _startOfWeek,
   startOfYear as _startOfYear
 } from "date-fns";
+import { DateLike } from "../types";
+import { parseDate } from "./dateMath";
 import "./hijri-date";
 
 export const dateFormat = (
-  date?: Date,
+  date?: DateLike,
   fmt = "dd MMM yyyy",
   locale?: KeyValue,
   isHijri?: boolean
 ) => {
   let formatted = "";
-  if (date && isValid(date)) {
+  const dt = parseDate(date as AnyObject);
+  if (dt) {
     if (isHijri) {
-      const hdate = date.toHijri();
+      const hdate = dt.toHijri();
       formatted = hdate.format(fmt, {
         locale: locale && locale.code.startsWith("ar") ? "ar" : "en"
       });
     } else {
-      formatted = format(date, fmt, { locale });
+      formatted = format(dt, fmt, { locale });
     }
   }
   if (locale && locale.code.startsWith("ar")) {

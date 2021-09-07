@@ -71,6 +71,7 @@ export interface DatePart {
   part?: DateParts;
 }
 
+export type DateLike = string | number | Date;
 export type DateValue = string | number | undefined;
 export type ParsedDate = Date | undefined;
 
