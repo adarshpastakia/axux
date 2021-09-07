@@ -45,7 +45,7 @@ const isDate = (value: AnyObject): value is Date => {
   }
   try {
     const parsed = parseISO(value);
-    return !isNaN(parsed.valueOf());
+    if (!isNaN(parsed.valueOf())) return true;
   } catch {
     //
   }
