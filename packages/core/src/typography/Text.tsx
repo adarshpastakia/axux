@@ -15,6 +15,7 @@ import {
   useState
 } from "react";
 import { useTranslation } from "react-i18next";
+import { isColor } from "../helpers";
 import { AxTooltip } from "../overlays/Tooltip";
 import {
   AllColors,
@@ -65,7 +66,7 @@ export interface TextProps extends ElementProps {
   /**
    * Tooltip for text
    */
-  abbr?: [textPart: string, tooltip: string][];
+  abbr?: [textPart: string, tooltip: string, color?: string][];
 
   align?: TextAlign;
   transform?: TextTransform;
@@ -179,19 +180,30 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
         const tokens = tokenize(children, abbr ? abbr.map(([keyword]) => keyword) : mark);
 
         if (!isEmpty(abbr)) {
-          const titles: KeyValue = abbr.reduce((t, [a, b]) => ({ ...t, [a.toLowerCase()]: b }), {});
+          const titles: KeyValue = abbr.reduce(
+            (t, [a, tooltip = "", color = ""]) => ({ ...t, [a.toLowerCase()]: { tooltip, color } }),
+            {}
+          );
           return (
             <Fragment>
-              {tokens.map(([start, text], i) => (
-                <Fragment key={i}>
-                  {start ? <span>{start}</span> : null}
-                  {text ? (
-                    <AxTooltip content={titles[text.toLowerCase()]}>
-                      <abbr>{text}</abbr>
-                    </AxTooltip>
-                  ) : null}
-                </Fragment>
-              ))}
+              {tokens.map(([start, text], i) => {
+                const { tooltip, color } = titles[text.toLowerCase()];
+                return (
+                  <Fragment key={i}>
+                    {start ? <span>{start}</span> : null}
+                    {text ? (
+                      <AxTooltip content={tooltip}>
+                        <abbr
+                          className={`ax-color--${color}`}
+                          style={isColor(color) ? { color } : {}}
+                        >
+                          {text}
+                        </abbr>
+                      </AxTooltip>
+                    ) : null}
+                  </Fragment>
+                );
+              })}
             </Fragment>
           );
         }
