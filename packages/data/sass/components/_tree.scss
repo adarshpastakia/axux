@@ -40,13 +40,19 @@
 
     &--label {
       flex: 1 1 1em;
-      font-size: 1em;
       @include ellipsis();
     }
 
     &--empty {
-      font-size: 1em;
       pointer-events: none;
+    }
+
+    &--link {
+      pointer-events: none;
+
+      #{$prefix}-link {
+        pointer-events: all;
+      }
     }
 
     &[data-disabled="true"] {
@@ -64,6 +70,8 @@
   }
 
   &__tools {
+    display: flex;
+    flex-flow: row nowrap;
     padding: 0.125em 0.25em;
 
     > div:first-child {
