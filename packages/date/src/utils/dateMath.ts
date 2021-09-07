@@ -40,6 +40,7 @@ export const I18nKey = "superdate";
 
 /** @internal */
 const isDate = (value: AnyObject): value is Date => {
+  if (isDateLike(value)) return false;
   if (isString(value) && !value.match(/^(\d*[-/.]\d*[-/.]\d*)?/)) {
     return false;
   }
