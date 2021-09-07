@@ -6,7 +6,7 @@
 import { AxIcon } from "@axux/core";
 import { useBadge } from "@axux/core/dist/internals/useBadge";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { isEmpty } from "@axux/utilities";
+import { isEmpty, isNumber } from "@axux/utilities";
 import { Fragment, useLayoutEffect, useMemo, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
 import { InternalNode, TreePanelProps } from "./types";
@@ -21,12 +21,14 @@ const nodeSort = (sort: AnyObject, withCheck?: boolean) => {
     if (withCheck && a.isChecked !== b.isChecked) {
       return a.isChecked > 0 ? -1 : 1;
     }
-    const aValue = sorter.prop in a ? a[sorter.prop] : a.label;
-    const bValue = sorter.prop in b ? b[sorter.prop] : b.label;
-    return (
-      aValue.toString().toLowerCase().localeCompare(bValue.toString().toLowerCase()) *
-      (sorter.order === "asc" ? 1 : -1)
-    );
+    const aValue = sorter.prop in a ? a.record[sorter.prop] : a.label;
+    const bValue = sorter.prop in b ? b.record[sorter.prop] : b.label;
+    const less = sorter.order === "asc" ? 1 : -1;
+    return isNumber(aValue) && isNumber(bValue)
+      ? aValue > bValue
+        ? less
+        : less * -1
+      : aValue.toString().toLowerCase().localeCompare(bValue.toString().toLowerCase()) * less;
   };
 };
 
@@ -53,7 +55,7 @@ export const TreeNode: VFC<
     label,
     icon,
     badge,
-    children
+    children = []
   },
   isCheckable,
   maxNodes,
@@ -143,8 +145,11 @@ export const TreeNode: VFC<
             {t("tree.noItems")}
           </div>
         ))}
-      {showChildren && !!maxNodes && !isEmpty(nodes) && nodes.length > maxNodes && (
-        <div className="ax-tree__node" style={{ "--tree-level": level + 1 } as AnyObject}>
+      {showChildren && !!maxNodes && !isEmpty(children) && children.length > maxNodes && (
+        <div
+          className="ax-tree__node ax-tree__node--link"
+          style={{ "--tree-level": level + 1 } as AnyObject}
+        >
           <a className="ax-link ax-font--sm" onClick={() => setShowAll(!showAll)}>
             {showAll ? "Show less" : "Show more"}
           </a>

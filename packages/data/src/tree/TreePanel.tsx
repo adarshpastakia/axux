@@ -18,10 +18,11 @@ const refactorNodes = (nodes?: TreeNodeType[], parent = "", level = 0): Internal
     return undefined as AnyObject;
   }
   return nodes.map<InternalNode>(({ children, ...node }) => ({
-    ...node,
-    children: refactorNodes(children, `${parent}${!!parent ? "|" : ""}${node.id}`, level + 1),
     isChecked: false,
     isSelected: false,
+    record: {},
+    ...node,
+    children: refactorNodes(children, `${parent}${!!parent ? "|" : ""}${node.id}`, level + 1),
     parent,
     level
   }));
