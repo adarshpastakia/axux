@@ -122,9 +122,24 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
         return <span>{fallback}</span>;
       }
     }, [fallback, icon, src, title]);
+    const styles = useMemo(() => {
+      const ret: KeyValue = {};
+      if (bg && bg.startsWith("#")) {
+        ret.backgroundColor = bg;
+      }
+      if (color && color.startsWith("#")) {
+        ret.color = color;
+      }
+      return ret;
+    }, [bg, color]);
     return (
       <AxTooltip content={title} ref={ref} isDisabled={!title}>
-        <div className={classes} data-clickable={!isEmpty(onClick)} onClick={onClick}>
+        <div
+          className={classes}
+          data-clickable={!isEmpty(onClick)}
+          onClick={onClick}
+          style={styles as AnyObject}
+        >
           {body}
 
           {infograph &&

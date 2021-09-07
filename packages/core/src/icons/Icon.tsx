@@ -115,6 +115,9 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
 
     const styles = useMemo(() => {
       const s: KeyValue = {};
+      if (color && color.startsWith("#")) {
+        s.color = color;
+      }
       if (isString(size) && !SizeList.includes(size)) {
         s.fontSize = size;
       }
@@ -125,7 +128,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
         s["--spin-steps"] = spin;
       }
       return s;
-    }, [spin, size]);
+    }, [color, size, spin]);
 
     return (
       <div {...aria} className={classes} onClick={onClick} ref={ref as AnyObject} style={styles}>
