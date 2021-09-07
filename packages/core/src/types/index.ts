@@ -38,7 +38,7 @@ export type ColorPalette =
   | "fuchsia"
   | "pink";
 
-export type AllColors = Color | Grayscale | ColorPalette | BaseColor;
+export type AllColors = Color | Grayscale | ColorPalette | BaseColor | string;
 
 /**
  * Basic sizes
