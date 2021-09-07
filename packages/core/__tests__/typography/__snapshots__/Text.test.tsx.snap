@@ -185,7 +185,9 @@ exports[`Text renders with tooltip 1`] = `
     <span>
       Lorem 
     </span>
-    <abbr>
+    <abbr
+      class="ax-color--"
+    >
       ipsum
     </abbr>
     <div
@@ -213,7 +215,9 @@ exports[`Text renders with tooltip 1`] = `
        dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
           egestas mauris nec, tincidunt 
     </span>
-    <abbr>
+    <abbr
+      class="ax-color--"
+    >
       ipsum
     </abbr>
     <span>
@@ -235,14 +239,18 @@ exports[`Text renders with tooltip 2`] = `
     <span>
       Lorem 
     </span>
-    <abbr>
+    <abbr
+      class="ax-color--"
+    >
       ipsum
     </abbr>
     <span>
        dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
           egestas mauris nec, tincidunt 
     </span>
-    <abbr>
+    <abbr
+      class="ax-color--"
+    >
       ipsum
     </abbr>
     <span>

@@ -187,7 +187,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
           return (
             <Fragment>
               {tokens.map(([start, text], i) => {
-                const { tooltip, color } = titles[text.toLowerCase()];
+                const { tooltip = "", color = "" } = titles[text.toLowerCase()] ?? {};
                 return (
                   <Fragment key={i}>
                     {start ? <span>{start}</span> : null}
