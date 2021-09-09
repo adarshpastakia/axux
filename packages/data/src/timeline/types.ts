@@ -15,6 +15,9 @@ export interface TimelineRecord {
   iconBg?: Color | ColorPalette;
   iconColor?: Color | ColorPalette;
   actions?: ReactNodeArray;
+  sidebar?: JSX.Element;
+  reverse?: boolean;
+  noline?: boolean;
 }
 
 export interface TimelineProps {

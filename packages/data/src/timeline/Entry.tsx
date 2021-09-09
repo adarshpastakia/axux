@@ -14,10 +14,13 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
   type = "comment",
   event,
   icon,
+  noline,
+  reverse,
   iconBg = "light",
   iconColor = "contrast",
   timestamp = new Date(),
   username,
+  sidebar,
   actions,
   children
 }) => {
@@ -41,7 +44,13 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
     }
   }, []);
   return (
-    <section className="ax-timeline__entry" data-entry={type} ref={eventRef}>
+    <section
+      className="ax-timeline__entry"
+      data-entry={type}
+      ref={eventRef}
+      data-reverse={reverse}
+      data-noline={noline}
+    >
       <div className="ax-timeline__entry--icon">
         <AxAvatar
           size={type === "comment" ? "md" : "sm"}
@@ -76,6 +85,7 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
           </AxContent>
         )}
       </AxPanel>
+      {sidebar && <div className="ax-timeline__entry--side">{sidebar}</div>}
     </section>
   );
 };
