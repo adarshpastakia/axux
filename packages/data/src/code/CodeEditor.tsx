@@ -32,7 +32,7 @@ export const AxCodeEditor: VFC<CodeEditorProps> = ({
   const [theme, setTheme] = useState("light");
   useLayoutEffect(() => {
     const [r, g, b]: [number, number, number] = getComputedStyle(
-      document.body
+      document.querySelector(".ax-viewport") as HTMLElement
     ).backgroundColor.match(/\d?\d?\d/g) as AnyObject;
     setTheme(r < 100 && g < 100 && b < 100 ? "vs-dark" : "light");
   });
@@ -52,13 +52,11 @@ export const AxCodeEditor: VFC<CodeEditorProps> = ({
         <AxSection ref={ref} className="ax-code__editor">
           <MonacoEditor
             ref={editorRef}
-            defaultValue={value}
+            value={value}
             onChange={onChange}
             language={language}
             theme={theme}
-            options={{
-              readOnly: isReadonly
-            }}
+            options={{ wordWrap: "on", readOnly: isReadonly }}
           />
         </AxSection>
       </AxSection>
