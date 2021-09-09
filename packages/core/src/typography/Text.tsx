@@ -192,7 +192,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
                   <Fragment key={i}>
                     {start ? <span>{start}</span> : null}
                     {text ? (
-                      <AxTooltip content={tooltip}>
+                      <AxTooltip content={tooltip} usePortal>
                         <abbr
                           className={`ax-color--${color}`}
                           style={isColor(color) ? { color } : {}}
