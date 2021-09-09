@@ -75,11 +75,11 @@
     }
 
     tr:nth-child(even) {
-      background-color: rgba($base-muted, 0.1);
+      background-color: rgba($body-bg, 0.4);
     }
 
     tr:nth-child(odd) {
-      background-color: $body-bg;
+      background-color: inherit;
     }
   }
 }
