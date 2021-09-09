@@ -49,7 +49,7 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
             image={avatarImage}
             icon={avatarIcon ?? AppIcons.iconFace}
             bg={avatarBg}
-            color={avatarColor ?? "light"}
+            color={avatarColor}
             infograph={infograph}
           />
         </div>
