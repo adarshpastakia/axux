@@ -179,17 +179,37 @@ exports[`Text renders weighted text 1`] = `
 
 exports[`Text renders with tooltip 1`] = `
 <div>
-  <span
-    class="ax-text   "
+  <div
+    class="ax-root"
   >
-    <span>
-      Lorem 
-    </span>
-    <abbr
-      class="ax-color--"
+    <span
+      class="ax-text   "
     >
-      ipsum
-    </abbr>
+      <span>
+        Lorem 
+      </span>
+      <abbr
+        class="ax-color--"
+      >
+        ipsum
+      </abbr>
+      <span>
+         dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+          egestas mauris nec, tincidunt 
+      </span>
+      <abbr
+        class="ax-color--"
+      >
+        ipsum
+      </abbr>
+      <span>
+        . Sed commodo sagittis sapien non sagittis. Vestibulum
+          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
+          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
+          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
+          nec augue tincidunt, ac aliquet velit facilisis.
+      </span>
+    </span>
     <div
       class="ax-popper ax-tooltip ax-bg--darkest ax-color--empty "
       data-popper-escaped="true"
@@ -211,55 +231,43 @@ exports[`Text renders with tooltip 1`] = `
         style="position: absolute; left: 0px; transform: translate(0px, 0px);"
       />
     </div>
-    <span>
-       dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-          egestas mauris nec, tincidunt 
-    </span>
-    <abbr
-      class="ax-color--"
-    >
-      ipsum
-    </abbr>
-    <span>
-      . Sed commodo sagittis sapien non sagittis. Vestibulum
-          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-          nec augue tincidunt, ac aliquet velit facilisis.
-    </span>
-  </span>
+  </div>
 </div>
 `;
 
 exports[`Text renders with tooltip 2`] = `
 <div>
-  <span
-    class="ax-text   "
+  <div
+    class="ax-root"
   >
-    <span>
-      Lorem 
-    </span>
-    <abbr
-      class="ax-color--"
+    <span
+      class="ax-text   "
     >
-      ipsum
-    </abbr>
-    <span>
-       dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
+      <span>
+        Lorem 
+      </span>
+      <abbr
+        class="ax-color--"
+      >
+        ipsum
+      </abbr>
+      <span>
+         dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
           egestas mauris nec, tincidunt 
-    </span>
-    <abbr
-      class="ax-color--"
-    >
-      ipsum
-    </abbr>
-    <span>
-      . Sed commodo sagittis sapien non sagittis. Vestibulum
+      </span>
+      <abbr
+        class="ax-color--"
+      >
+        ipsum
+      </abbr>
+      <span>
+        . Sed commodo sagittis sapien non sagittis. Vestibulum
           viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
           diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
           ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
           nec augue tincidunt, ac aliquet velit facilisis.
+      </span>
     </span>
-  </span>
+  </div>
 </div>
 `;

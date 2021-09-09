@@ -154,7 +154,9 @@ describe("Text", () => {
   it("renders with tooltip", async () => {
     const fragment = render(
       <I18nextProvider i18n={i18next}>
-        <TextStory abbr={[["IPSUM", "Test tooltip"]]} />
+        <div className="ax-root">
+          <TextStory abbr={[["IPSUM", "Test tooltip"]]} />
+        </div>
       </I18nextProvider>
     );
 
