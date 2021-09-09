@@ -5,6 +5,7 @@
 
 import { isEmpty } from "@axux/utilities";
 import {
+  cloneElement,
   forwardRef,
   isValidElement,
   MouseEventHandler,
@@ -116,7 +117,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
     }, [title]);
     const body = useMemo(() => {
       if (!isEmpty(src)) {
-        return <img alt={title} src={src} onError={() => setSrc("")} />;
+        return <img alt={title} src={src} onError={() => setSrc("")} loading="lazy" />;
       } else if (!isEmpty(icon)) {
         return <AxIcon icon={icon} />;
       } else {
@@ -146,8 +147,11 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
           {infograph &&
             Object.entries(infograph).map(([key, icon]) =>
               isValidElement(icon) && icon.type === AxIcon
-                ? icon
-                : icon && <AxIcon key={key} className={`ax-avatar--${key}`} icon={icon} />
+                ? cloneElement(icon as AnyObject, {
+                    className: `ax-avatar--${key} ${((icon.props as AnyObject) ?? {}).className}`,
+                    round: true
+                  })
+                : icon && <AxIcon key={key} className={`ax-avatar--${key}`} icon={icon} round />
             )}
         </div>
       </AxTooltip>

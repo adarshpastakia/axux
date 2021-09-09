@@ -108,7 +108,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
       ) : useImage ||
         icon.toString().includes(".svg") ||
         icon.toString().startsWith("data:image") ? (
-        <img src={icon.toString()} alt={icon.toString()} />
+        <img src={icon.toString()} alt={icon.toString()} loading="lazy" />
       ) : (
         <i className={`${icon}`} />
       );
