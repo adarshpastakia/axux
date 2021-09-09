@@ -24,6 +24,16 @@
       pointer-events: none;
       width: 1em;
     }
+
+    &--round {
+      > i,
+      > span {
+        font-size: 0.5em;
+        height: 1.5em;
+        padding: 0.25em;
+        width: 1.5em;
+      }
+    }
   }
 
   &-icon {
