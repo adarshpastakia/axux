@@ -19,18 +19,20 @@
     }
 
     > #{$prefix}-tab__bar {
-      box-shadow: 0 -1px 0 0 rgba($base-border-color, 0.5) inset;
+      box-shadow: 0 -1px 0 0 rgba($base-border-color, 0.2) inset !important;
 
       #{$prefix}-tab__button {
         color: $color-muted;
 
         &[data-active="false"]:hover {
+          background-color: inherit;
           box-shadow: 0 -1px 0 0 $color-primary inset;
           color: $color-primary;
         }
 
         &[data-active="true"] {
-          box-shadow: 0 -2px 0 0 $color-primary inset !important;
+          background-color: inherit;
+          box-shadow: 0 -3px 0 0 $color-primary inset !important;
           color: $color-primary;
         }
       }

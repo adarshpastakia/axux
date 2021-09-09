@@ -18,7 +18,7 @@ const Presets: string[][] = [
   ["$day+1", "$week+1", "$month+1", "$quarter+1", "$year+1", "$decade+1"]
 ];
 
-export const QuickSelect: FC<RelativeProps> = ({ date, onChange }) => {
+export const QuickSelect: FC<RelativeProps> = ({ date, onChange, presets }) => {
   const { t } = useTranslation(I18nKey);
   const [quickDate, setQuickDate] = useState("$day-1");
 
@@ -46,6 +46,13 @@ export const QuickSelect: FC<RelativeProps> = ({ date, onChange }) => {
     },
     [onChange]
   );
+  const selectCustomPreset = useCallback(
+    (e: MouseEvent<HTMLElement>) => {
+      const { preset } = e.currentTarget.dataset;
+      onChange && onChange(`${preset}`);
+    },
+    [onChange]
+  );
 
   return (
     <AxPanel>
@@ -54,20 +61,35 @@ export const QuickSelect: FC<RelativeProps> = ({ date, onChange }) => {
           <AxButton.Positive onClick={applyRelative}>{t("core:action.apply")}</AxButton.Positive>
         </RelativeInput>
         <AxField.Options label={t("label.preset")}>
-          {Presets.map((p, i) => (
-            <div key={i} className="ax-superdate__links">
-              {p.map((key) => (
+          {!presets &&
+            Presets.map((p, i) => (
+              <div key={i} className="ax-superdate__links">
+                {p.map((key) => (
+                  <a
+                    key={key}
+                    data-preset={key}
+                    className="ax-link ax-superdate--link"
+                    onClick={selectPreset}
+                  >
+                    {t(parseDateLabel(key))}
+                  </a>
+                ))}
+              </div>
+            ))}
+          {presets && (
+            <div className="ax-superdate__links">
+              {Object.entries(presets).map(([key, preset]) => (
                 <a
                   key={key}
-                  data-preset={key}
+                  data-preset={preset}
                   className="ax-link ax-superdate--link"
-                  onClick={selectPreset}
+                  onClick={selectCustomPreset}
                 >
-                  {t(parseDateLabel(key))}
+                  {key}
                 </a>
               ))}
             </div>
-          ))}
+          )}
         </AxField.Options>
       </AxContent>
     </AxPanel>

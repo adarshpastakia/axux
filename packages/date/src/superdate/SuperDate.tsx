@@ -14,7 +14,14 @@ import { AbsoluteRange } from "./AbsoluteRange";
 import { QuickSelect } from "./QuickSelect";
 import { RelativeRange } from "./RelativeRange";
 
-export const AxSuperDate: FC<RelativeProps> = ({ type = "button", onChange, date, ...props }) => {
+export const AxSuperDate: FC<RelativeProps> = ({
+  type = "button",
+  onChange,
+  date,
+  defaultView,
+  presets,
+  ...props
+}) => {
   const {
     t,
     i18n: { language }
@@ -33,7 +40,7 @@ export const AxSuperDate: FC<RelativeProps> = ({ type = "button", onChange, date
       ],
     [dateLocale, value, language]
   );
-  const activeTab = useMemo<Type>(() => superDateType(value), [value]);
+  const activeTab = useMemo<Type>(() => defaultView || superDateType(value), [defaultView, value]);
 
   useEffect(() => {
     setValue(date);
@@ -84,14 +91,13 @@ export const AxSuperDate: FC<RelativeProps> = ({ type = "button", onChange, date
         >
           <AxTabPanel.Tab id={Type.QUICK} label={t("label.quick")}>
             <QuickSelect
-              {...props}
+              presets={presets}
               onChange={afterChange}
               date={activeTab === Type.QUICK ? value : undefined}
             />
           </AxTabPanel.Tab>
           <AxTabPanel.Tab id={Type.RELATIVE} label={t("label.relative")}>
             <RelativeRange
-              {...props}
               onChange={afterChange}
               date={activeTab === Type.RELATIVE ? value : undefined}
             />

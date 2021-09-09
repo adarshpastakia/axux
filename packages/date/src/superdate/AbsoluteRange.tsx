@@ -10,13 +10,17 @@ import { AxRangePanel } from "../panels/RangePanel";
 import { ParsedDate, RelativeProps } from "../types";
 import { DateUtils } from "../utils/dateMath";
 
-export const AbsoluteRange: FC<RelativeProps> = ({ date, onChange }) => {
+export const AbsoluteRange: FC<Omit<RelativeProps, "type" | "presets">> = ({
+  date,
+  onChange,
+  ...props
+}) => {
   const { t } = useTranslation("superdate");
   const [parsed, setParsed] = useState<[ParsedDate, ParsedDate] | undefined>();
   useEffect(() => setParsed(DateUtils.parseRange(date)), [date]);
   return (
     <AxPanel>
-      <AxRangePanel date={parsed as AnyObject} onChange={setParsed} />
+      <AxRangePanel date={parsed as AnyObject} onChange={setParsed} {...props} />
       <AxPanel.Footer>
         <AxToolbar align="end">
           <AxButton.Positive
