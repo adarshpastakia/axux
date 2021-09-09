@@ -20,7 +20,7 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "target": "es5",
-    "module": "esnext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "typeRoots": ["node_modules/@types", "@types"],
     "lib": ["dom", "es2017"],
