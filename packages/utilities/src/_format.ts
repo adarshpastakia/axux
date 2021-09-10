@@ -24,16 +24,18 @@ export namespace Format {
   export const percent = (number?: string | number) => {
     return numberFormat(number, "0,0[.]00%");
   };
-  export const duration = (number?: string | number) => {
-    const value = parseInt(`${number}`, 10);
+  export const duration = (number?: string | number, isFraction?: boolean) => {
+    if (isNil(number)) {
+      return "00:00.000";
+    }
+    const value = parseFloat(`${number}`) * (isFraction ? 1000 : 1);
     if (!isNaN(value)) {
       const days = differenceInDays(value, 0);
       const prefix = days > 0 ? `${days}d:` : "";
-      return `${prefix}${format(
-        parseISO(new Date(value).toISOString().replace("Z", "")),
-        "HH:mm:ss.SSS"
-      )}`;
+      let time = format(parseISO(new Date(value).toISOString().replace("Z", "")), "HH:mm:ss.SSS");
+      if (!prefix) time = time.replace(/^00:/, "");
+      return `${prefix}${time}`;
     }
-    return "00:00:00.000";
+    return "00:00.000";
   };
 }
