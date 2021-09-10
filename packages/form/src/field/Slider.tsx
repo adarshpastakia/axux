@@ -20,11 +20,11 @@ export interface SliderFieldProps extends ControllerProps<number>, WrapperProps,
   /**
    * Minimum value
    */
-  minValue?: number;
+  min?: number;
   /**
    * Maximum value
    */
-  maxValue?: number;
+  max?: number;
   vertical?: boolean;
   showLabel?: boolean;
   showTicks?: boolean;
@@ -38,8 +38,8 @@ export interface SliderFieldProps extends ControllerProps<number>, WrapperProps,
 export const AxSliderField: VFC<SliderFieldProps> = memo(
   ({
     step = 1,
-    minValue = 0,
-    maxValue = 100,
+    min = 0,
+    max = 100,
     showLabel,
     showTicks,
     showValue,
@@ -60,15 +60,15 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
     const [hilight, setHilight] = useState(0);
     const updateHilight = useCallback(
       (value) => {
-        setHilight(((value - minValue) / (maxValue - minValue)) * 100);
+        setHilight(((value - min) / (max - min)) * 100);
       },
-      [maxValue, minValue]
+      [max, min]
     );
 
     const ticks = useMemo(() => {
-      const diff = (maxValue - minValue) / 10;
-      return new Array(11).fill(0).map((_, i) => minValue + diff * i);
-    }, [maxValue, minValue]);
+      const diff = (max - min) / 10;
+      return new Array(11).fill(0).map((_, i) => min + diff * i);
+    }, [max, min]);
 
     return (
       <AxFieldController
@@ -94,7 +94,7 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
                 </AxFieldLabel>
               )}
               <div className="ax-field__slider" data-vertical={vertical}>
-                {showLabel && <span>{Format.number(minValue)}</span>}
+                {showLabel && <span>{Format.number(min)}</span>}
                 <div className="ax-field__slider--wrapper">
                   <input
                     className="ax-field__input"
@@ -102,8 +102,8 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
                     name={name}
                     size={1}
                     step={step}
-                    min={minValue}
-                    max={maxValue}
+                    min={min}
+                    max={max}
                     type="range"
                     formNoValidate
                     disabled={isDisabled}
@@ -144,7 +144,7 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
                     </div>
                   )}
                 </div>
-                {showLabel && <span>{Format.number(maxValue)}</span>}
+                {showLabel && <span>{Format.number(max)}</span>}
               </div>
               {hint && <div className="ax-field__hint">{hint}</div>}
             </div>
