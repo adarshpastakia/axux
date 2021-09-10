@@ -88,7 +88,7 @@
 
     &--side {
       flex: 0 0 auto;
-      padding-inline-end: 0.5em;
+      padding-inline-end: 1rem;
       padding-top: 0.25em;
     }
 
@@ -110,7 +110,7 @@
 
       #{$base}__entry--side {
         padding-inline-end: 0;
-        padding-inline-start: 0.5em;
+        padding-inline-start: 1rem;
       }
     }
 

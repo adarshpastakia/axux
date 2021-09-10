@@ -11,6 +11,7 @@ export interface TimelineRecord {
   timestamp: Date;
   username: string | JSX.Element;
   event: string | JSX.Element;
+  image?: string;
   icon?: string | JSX.Element;
   iconBg?: Color | ColorPalette;
   iconColor?: Color | ColorPalette;

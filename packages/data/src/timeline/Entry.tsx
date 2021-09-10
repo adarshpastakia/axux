@@ -14,6 +14,7 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
   type = "comment",
   event,
   icon,
+  image,
   noline,
   reverse,
   iconBg = "light",
@@ -55,6 +56,7 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
         <AxAvatar
           size={type === "comment" ? "md" : "sm"}
           title=""
+          image={image}
           bg={iconBg as AnyObject}
           icon={entryIcon}
           color={iconColor as AnyObject}
