@@ -10,7 +10,7 @@ export const tokenize = (str: string, keywords?: string | string[]) => {
     return [str, ""];
   }
   const keys = isArray(keywords) ? keywords : [keywords];
-  const regx = new RegExp(`(${keys.join("|").replace(/([+*.])/gm, "\\$1")})`, "img");
+  const regx = new RegExp(`\\b(${keys.join("|").replace(/([+*.])\\b/gm, "\\$1")})`, "img");
   let match;
   let lastIndex = 0;
   const tokens = [];
