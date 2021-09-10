@@ -32,6 +32,8 @@
       }
     }
     #{$prefix}-header {
+      border: none;
+      box-shadow: 0 0 1px rgb(0 0 0 / 50%) inset;
       position: sticky;
       top: 0;
       z-index: 2;

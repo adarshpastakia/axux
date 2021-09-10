@@ -54,6 +54,24 @@
       grid-template-areas: "content";
       overflow: hidden;
       @extend #{$prefix}-bg--base;
+
+      #{$prefix}-panel__group {
+        align-self: start;
+        display: flex;
+        flex-flow: column nowrap;
+        grid-area: content;
+        max-height: 100%;
+        overflow: hidden;
+
+        #{$prefix}-panel {
+          flex: 0 0 auto;
+          overflow: hidden;
+
+          &[data-collapse="false"] {
+            flex: 1 1 auto;
+          }
+        }
+      }
     }
 
     &--placeholder {
