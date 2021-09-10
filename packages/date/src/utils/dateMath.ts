@@ -141,7 +141,10 @@ const parseDateValue = (dt: DateValue): [ParsedDate, ParsedDate] | ParsedDate =>
   }
   if (isString(dt) && dt.includes("|")) {
     const [startDate, endDate] = dt.split("|");
-    return [parseDate(startDate, "start"), parseDate(endDate, "end")];
+    return [
+      parseDate(startDate, startDate === endDate ? "start" : undefined),
+      parseDate(endDate, startDate === endDate ? "end" : undefined)
+    ];
   } else {
     return parseDate(dt);
   }
