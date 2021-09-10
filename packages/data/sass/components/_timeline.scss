@@ -14,12 +14,12 @@
 
   &__wrapper {
     display: grid;
+    grid-gap: 1rem;
     grid-template-columns: 1fr auto;
     grid-template-rows: 1fr;
     margin: 0 auto;
     max-width: 800px;
     min-height: 100%;
-    padding-inline-end: 2em;
 
     > div:last-child {
       display: flex;
