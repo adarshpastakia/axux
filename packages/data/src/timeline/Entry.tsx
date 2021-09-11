@@ -19,6 +19,7 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
   reverse,
   iconBg = "light",
   iconColor = "contrast",
+  headerBg = "lightest",
   timestamp = new Date(),
   username,
   sidebar,
@@ -65,7 +66,7 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
       <AxPanel className="ax-timeline__entry--body" maxHeight="80vh" paper={type === "comment"}>
         <AxPanel.Header
           className="ax-timeline__entry--head"
-          bg="lightest"
+          bg={headerBg}
           title={
             <Fragment>
               <AxText weight="medium">{username}</AxText>
