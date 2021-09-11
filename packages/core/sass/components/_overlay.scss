@@ -11,7 +11,7 @@
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 95;
+    z-index: 45;
 
     &[data-show="true"] {
       backdrop-filter: blur(1px);
@@ -104,6 +104,7 @@
     grid-area: body;
     grid-template-areas: ". content .";
     grid-template-columns: auto 1fr auto;
+    overflow: hidden;
 
     > #{$prefix}-button {
       margin: 0;

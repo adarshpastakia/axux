@@ -117,4 +117,8 @@
     margin-inline-end: 0.5em;
     z-index: 1;
   }
+
+  &#{$prefix}-color--default::before {
+    content: unset;
+  }
 }
