@@ -43,7 +43,7 @@
     "@types/react-i18next": "^8.1.0"
   },
   "engines": {
-    "node": ">=14.0.0 <16.0.0",
+    "node": ">=10.22.0 <16.0.0",
     "npm": ">=7.0.0"
   },
   "gitHead": "3d6263afa73bea21d7c9b9a765fe7b870051f59f"
