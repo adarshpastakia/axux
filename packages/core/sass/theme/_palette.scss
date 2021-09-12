@@ -97,6 +97,10 @@
 
       &#{$prefix}-color--contrast {
         color: contrast($color);
+
+        #{$prefix}-button[data-style="link"] #{$prefix}-button__inner {
+          color: inherit;
+        }
       }
 
       #{$prefix}-popper--arrow {
