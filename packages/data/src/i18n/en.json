@@ -11,6 +11,9 @@
   "json": {
     "empty": "No data properties"
   },
+  "histogram": {
+    "empty": "No histograms"
+  },
   "action": {
     "find": "Find...",
     "showShortcuts": "Keyboard shortcuts...",

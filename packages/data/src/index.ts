@@ -11,6 +11,9 @@ export type { TreeNode } from "./tree/types";
 export { AxGridPanel } from "./grid/GridPanel";
 export type { GridColumn } from "./grid/types";
 
+export { AxHistogram } from "./histogram/Histogram";
+export type { HistogramRecord } from "./histogram/types";
+
 export { AxTimeline } from "./timeline/Timeline";
 export type { TimelineRecord } from "./timeline/types";
 

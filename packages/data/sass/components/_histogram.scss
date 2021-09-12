@@ -1,0 +1,38 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-histogram {
+  &__group {
+    padding: 0.25em 0.5em;
+    @include ellipsis();
+  }
+
+  &__meter {
+    margin: 0 0.25em;
+    min-height: 1em;
+    position: relative;
+
+    &::before,
+    &::after {
+      bottom: 0;
+      content: attr(data-count);
+      left: 0;
+      padding: 0.25em 0.5em;
+      position: absolute;
+      right: 0;
+      text-align: end;
+      top: 0;
+    }
+
+    &::before {
+      background: linear-gradient(90deg, rgba($base-color, 0.1), currentColor);
+    }
+
+    &::after {
+      background: inherit;
+      left: calc(var(--meter) * 100%);
+    }
+  }
+}
