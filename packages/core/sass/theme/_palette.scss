@@ -98,8 +98,10 @@
       &#{$prefix}-color--contrast {
         color: contrast($color);
 
-        #{$prefix}-button[data-style="link"] #{$prefix}-button__inner {
-          color: inherit;
+        #{$prefix}-button[data-style="link"] {
+          #{$prefix}-button__inner:not(:hover):not(:active):not([data-active="true"]) {
+            color: inherit;
+          }
         }
       }
 
