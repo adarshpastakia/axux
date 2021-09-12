@@ -6,7 +6,6 @@
 import { Color, ColorPalette, ElementProps } from "@axux/core/dist/types";
 
 export interface HistogramRecord {
-  group?: string;
   label: string;
   count: number;
   color?: Color | ColorPalette;

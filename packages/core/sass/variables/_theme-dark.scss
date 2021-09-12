@@ -54,7 +54,7 @@ $shadow-level3: 0 0 0 1px rgba($color-shadow, 0.3), 0 2px 4px rgba($color-shadow
 $shadow-level4: 0 0 0 1px rgba($color-shadow, 0.3), 0 4px 8px rgba($color-shadow, 0.6),
   0 18px 46px 6px rgba($color-shadow, 0.6);
 
-$color-lightest: mix($color-empty, $color-opaque, 96%);
+$color-lightest: mix($color-empty, $color-opaque, 92%);
 $color-light: mix($color-empty, $color-opaque, 81%);
 $color-medium: mix($color-empty, $color-opaque, 63%);
 $color-dark: mix($color-empty, $color-opaque, 36%);
@@ -62,7 +62,7 @@ $color-darkest: mix($color-empty, $color-opaque, 18%);
 $color-muted: mix($color-empty, $color-opaque, 42%);
 
 $body-bg: $color-lightest;
-$base-bg: $color-empty;
+$base-bg: mix($color-empty, $color-opaque, 96%);
 $base-color: $color-opaque;
 $base-muted: $color-muted;
 $base-border-color: $color-light;

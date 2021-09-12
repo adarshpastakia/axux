@@ -28,3 +28,22 @@
     }
   }
 }
+
+#{$prefix}-histogram {
+  &__group {
+    background-color: $color-lightest;
+  }
+  &__meter {
+    &::after {
+      background: $panel-bg;
+    }
+    &::before {
+      background: linear-gradient(90deg, rgba($panel-bg, 0.1), rgba($panel-bg, 0.9));
+    }
+
+    &[data-disabled="true"] {
+      color: $color-light;
+      pointer-events: none;
+    }
+  }
+}
