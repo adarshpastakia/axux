@@ -20,7 +20,9 @@ export const AxTimeline: ExtendedFC = ({
   canLoadMore,
   onLoadMore,
   sortOrder,
-  onSort
+  onSort,
+  className,
+  ...aria
 }) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScroll, setCanScroll] = useState(0);
@@ -64,7 +66,12 @@ export const AxTimeline: ExtendedFC = ({
   }, [checkScroll]);
 
   return (
-    <div className="ax-timeline__panel" onScroll={checkScroll} ref={scrollerRef}>
+    <div
+      className={`ax-timeline__panel ${className ?? ""}`}
+      onScroll={checkScroll}
+      ref={scrollerRef}
+      {...aria}
+    >
       <div className="ax-timeline__wrapper">
         <div>
           {children}

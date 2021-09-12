@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { BadgeType } from "@axux/core/dist/internals/useBadge";
-import { IconProps } from "@axux/core/dist/types";
+import { ElementProps, IconProps } from "@axux/core/dist/types";
 import { ReactNode } from "react";
 
 /** @internal */
@@ -42,7 +42,7 @@ export interface InternalNode extends BaseNode {
 export type TreeNode = LeafNode | FolderNode;
 
 /** @internal */
-export interface TreePanelProps {
+export interface TreePanelProps extends ElementProps {
   data: TreeNode[];
   checkLevel?: number;
   isCheckable?: boolean;

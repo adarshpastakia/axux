@@ -5,11 +5,11 @@
 
 import { AxAvatar, AxDivider } from "@axux/core";
 import { AvatarProps } from "@axux/core/dist/icons/Avatar";
-import { Color, ColorPalette } from "@axux/core/dist/types";
+import { Color, ColorPalette, ElementProps } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { FC, useMemo } from "react";
 
-export interface ProfileCardProps {
+export interface ProfileCardProps extends ElementProps {
   avatarImage?: string;
   avatarIcon?: string;
   avatarBg?: Color | ColorPalette;
@@ -35,13 +35,15 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
   avatarIcon,
   avatarImage,
   activityMap,
-  infograph
+  infograph,
+  className,
+  ...aria
 }) => {
   const headClass = useMemo(() => {
     return ["ax-profileCard__head", headBg ? `ax-bg--${headBg}` : "ax-bg--light"].join(" ");
   }, [headBg]);
   return (
-    <div className="ax-profileCard" data-size={size}>
+    <div className={`ax-profileCard ${className ?? ""}`} data-size={size} {...aria}>
       <div className="ax-profileCard__inner">
         <div className={headClass}>
           <AxAvatar

@@ -55,6 +55,10 @@ const toggleNode = (node: InternalNode, isChecked = false) => {
  * @param isSearchable
  * @param isCheckable
  * @param checkLevel
+ * @param allowPartial
+ * @param onLoad
+ * @param className
+ * @param aria
  * @constructor
  * @internal
  * TODO: add search functionality
@@ -68,7 +72,11 @@ export const AxTreePanel: VFC<TreePanelProps> = ({
   onSelect,
   isSearchable,
   isCheckable,
-  checkLevel = 0
+  checkLevel = 0,
+  allowPartial,
+  onLoad,
+  className,
+  ...aria
 }) => {
   const { t } = useTranslation("data");
   const [canExpand, setCanExpand] = useState(true);
@@ -147,7 +155,7 @@ export const AxTreePanel: VFC<TreePanelProps> = ({
   );
 
   return (
-    <div className="ax-tree__panel">
+    <div className={`ax-tree__panel ${className ?? ""}`} {...aria}>
       {isSearchable && <AxField.Search />}
       <div className="ax-tree__tools ax-bg--lightest">
         <div>

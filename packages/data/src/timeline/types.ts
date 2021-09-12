@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { Color, ColorPalette, EmptyCallback } from "@axux/core/dist/types";
+import { Color, ColorPalette, ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { ReactNodeArray } from "react";
 
 export interface TimelineRecord {
@@ -19,7 +19,7 @@ export interface TimelineRecord {
   sidebar?: JSX.Element;
 }
 
-export interface TimelineProps {
+export interface TimelineProps extends ElementProps {
   isLoading?: boolean;
   canLoadMore?: boolean;
   onLoadMore?: EmptyCallback;
