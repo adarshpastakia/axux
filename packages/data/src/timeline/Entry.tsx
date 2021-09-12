@@ -4,13 +4,20 @@
 // @license   : MIT
 
 import { AxAvatar, AxContent, AxPanel, AxText } from "@axux/core";
+import { HeaderProps } from "@axux/core/dist/appbars/Header";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay } from "@axux/date";
 import { isString } from "@axux/utilities";
 import { FC, Fragment, isValidElement, useLayoutEffect, useMemo, useRef } from "react";
 import { TimelineRecord } from "./types";
 
-export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
+export interface TimelineEntryProps extends TimelineRecord {
+  headerProps?: Omit<HeaderProps, "title" | "onClick" | "onBack">;
+  reverse?: boolean;
+  noline?: boolean;
+}
+
+export const TimelineEntry: FC<Partial<TimelineEntryProps>> = ({
   type = "comment",
   event,
   icon,
@@ -19,7 +26,7 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
   reverse,
   iconBg = "light",
   iconColor = "contrast",
-  headerBg = "lightest",
+  headerProps = { bg: "lightest" },
   timestamp = new Date(),
   username,
   sidebar,
@@ -65,8 +72,8 @@ export const TimelineEntry: FC<Partial<TimelineRecord>> = ({
       </div>
       <AxPanel className="ax-timeline__entry--body" maxHeight="80vh" paper={type === "comment"}>
         <AxPanel.Header
-          className="ax-timeline__entry--head"
-          bg={headerBg}
+          {...headerProps}
+          className={`ax-timeline__entry--head ${headerProps.className ?? ""}`}
           title={
             <Fragment>
               <AxText weight="medium">{username}</AxText>
