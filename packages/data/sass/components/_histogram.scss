@@ -10,9 +10,11 @@
   }
 
   &__meter {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
     margin: 0.25em 0;
     min-height: 1em;
-    padding-inline-end: 2em;
     position: relative;
     @include ellipsis();
 
@@ -20,15 +22,20 @@
       padding: 0 0.5em;
       position: relative;
       z-index: 5;
+      &:first-child {
+        flex: 1 1 1em;
+      }
+      &:last-child {
+        font-size: 0.75em;
+      }
     }
 
     &::before,
     &::after {
       bottom: 0;
-      content: attr(data-count);
+      content: "";
       left: 0;
       overflow: hidden;
-      padding: 0.25em 0.5em;
       position: absolute;
       right: 0;
       text-align: end;
