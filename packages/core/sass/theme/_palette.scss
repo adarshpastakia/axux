@@ -97,7 +97,7 @@
 
       &#{$prefix}-color--contrast {
         color: if(
-          index($palette-contrast, $label) != null,
+          map-has-key($palette-contrast, $label),
           map-get($palette-contrast, $label),
           contrast($color)
         );
