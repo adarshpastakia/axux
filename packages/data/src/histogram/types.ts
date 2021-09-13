@@ -9,11 +9,14 @@ export interface HistogramRecord {
   label: string;
   count: number;
   color?: Color | ColorPalette;
+  record?: KeyValue;
 }
 
 export interface HistogramProps extends ElementProps {
   data: [group: string, records: HistogramRecord[]][];
   total: number;
   color?: Color | ColorPalette;
-  emptyMessage?: string;
+  emptyDisplay?: JSX.Element;
+  isLoading?: boolean;
+  onClick?: (record: HistogramRecord) => void;
 }

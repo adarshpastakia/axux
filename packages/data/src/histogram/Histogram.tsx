@@ -9,7 +9,15 @@ import { Fragment, VFC } from "react";
 import { useTranslation } from "react-i18next";
 import { HistogramProps } from "./types";
 
-export const AxHistogram: VFC<HistogramProps> = ({ data, color, total, className }) => {
+export const AxHistogram: VFC<HistogramProps> = ({
+  data,
+  color,
+  total,
+  className,
+  isLoading,
+  emptyDisplay,
+  onClick
+}) => {
   const { t } = useTranslation("data");
   return (
     <div className={`ax-histogram ${className ?? ""}`}>
@@ -20,6 +28,7 @@ export const AxHistogram: VFC<HistogramProps> = ({ data, color, total, className
             <div
               key={i}
               data-disabled={rec.count <= 0}
+              onClick={() => onClick && onClick(rec)}
               className={`ax-histogram__meter ax-bg--${rec.color ?? color ?? "secondary"}`}
               style={{ "--meter": rec.count / Math.max(1, total) } as AnyObject}
             >
@@ -27,10 +36,12 @@ export const AxHistogram: VFC<HistogramProps> = ({ data, color, total, className
               <span>{Format.percent(rec.count / Math.max(1, total))}</span>
             </div>
           ))}
-          {records.length === 0 && <AxContent.Empty message={t("histogram.empty")} />}
+          {!isLoading && records.length === 0 && <AxContent.Empty message={t("histogram.empty")} />}
         </Fragment>
       ))}
-      {data.length === 0 && <AxContent.Empty message={t("histogram.empty")} />}
+      {!isLoading &&
+        data.length === 0 &&
+        (emptyDisplay ?? <AxContent.Empty message={t("histogram.empty")} />)}
     </div>
   );
 };
