@@ -110,3 +110,23 @@ $palette: (
   fuchsia: $color-fuchsia,
   pink: $color-pink
 );
+$palette-contrast: (
+  primary: $white,
+  secondary: $white,
+  info: $black,
+  danger: $white,
+  success: $white,
+  warning: $black,
+  purple: $white,
+  violet: $white,
+  indigo: $white,
+  blue: $white,
+  cyan: $white,
+  teal: $white,
+  green: $white,
+  yellow: $black,
+  orange: $white,
+  red: $white,
+  fuchsia: $white,
+  pink: $white
+);

@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-#{$prefix}-viewport {
+@at-root #{$prefix}-root {
   #{$prefix}-subheading {
     font-size: 0.75em;
     font-weight: $font-weight-normal;

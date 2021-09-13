@@ -11,7 +11,7 @@
       background-color: $base-bg;
       background-image: linear-gradient(180deg, rgba($white, 0.05), rgba($black, 0.03));
       box-shadow: 0 0 0 1px rgba($base-border-color, 0.5);
-      color: if($theme == "default", inherit, $color);
+      color: $color;
 
       &[data-icon-hilight="true"] {
         #{$base}__icon,
@@ -42,15 +42,20 @@
       }
     }
 
+    #{$base}__inner:hover {
+      background-color: lighter($color, 0.2);
+      color: $solidText;
+    }
+
     &[data-style="link"] #{$base}__inner {
       background-color: transparent;
       background-image: none;
       box-shadow: none;
-    }
+      color: if($theme == "default", inherit, $color);
 
-    #{$base}__inner:hover {
-      background-color: lighter($color, 0.2);
-      color: $solidText;
+      &:hover {
+        background-color: rgba(lighter($color, 0.2), 0.5);
+      }
     }
 
     #{$base}__inner:active,

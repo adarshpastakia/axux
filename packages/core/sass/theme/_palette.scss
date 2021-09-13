@@ -96,7 +96,11 @@
       background-color: $color;
 
       &#{$prefix}-color--contrast {
-        color: contrast($color);
+        color: if(
+          index($palette-contrast, $label) != null,
+          map-get($palette-contrast, $label),
+          contrast($color)
+        );
 
         #{$prefix}-button[data-style="link"] {
           #{$prefix}-button__inner:not(:hover):not(:active):not([data-active="true"]) {
