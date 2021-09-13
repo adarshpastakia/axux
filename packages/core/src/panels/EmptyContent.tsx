@@ -37,4 +37,3 @@ export const EmptyContent: VFC<EmptyContentProps> = ({ icon, title, message, act
     </div>
   );
 };
-EmptyContent.displayName = "AxContent.Empty";

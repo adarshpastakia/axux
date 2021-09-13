@@ -59,5 +59,6 @@ export const AxContent: ContentFC = forwardRef<HTMLDivElement | null, ContentPro
     );
   }
 ) as AnyObject;
-AxContent.displayName = "AxContent";
 AxContent.Empty = EmptyContent;
+AxContent.displayName = "AxContent";
+AxContent.Empty.displayName = "AxContent.Empty";
