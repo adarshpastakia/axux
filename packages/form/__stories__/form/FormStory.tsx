@@ -67,8 +67,8 @@ const Template: Story<FormProps & { isDisabled?: boolean }> = ({ isDisabled, ...
                 name="slider"
                 isDisabled={isDisabled}
                 label="Slider field"
-                minValue={-180}
-                maxValue={180}
+                min={-180}
+                max={180}
                 showLabel
                 showValue
                 showTicks
