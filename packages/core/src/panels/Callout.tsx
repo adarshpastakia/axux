@@ -13,7 +13,7 @@ export interface CalloutProps extends ElementProps, IconProps {
   /**
    * Callout title
    */
-  title?: JSX.Element;
+  title?: string | JSX.Element;
   /**
    * Theme color
    */
