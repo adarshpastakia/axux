@@ -5,6 +5,7 @@
 
 import { AxAvatar, AxContent, AxPanel, AxText } from "@axux/core";
 import { HeaderProps } from "@axux/core/dist/appbars/Header";
+import { ElementProps } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay } from "@axux/date";
 import { isString } from "@axux/utilities";
@@ -17,7 +18,7 @@ export interface TimelineEntryProps extends TimelineRecord {
   noline?: boolean;
 }
 
-export const TimelineEntry: FC<Partial<TimelineEntryProps>> = ({
+export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
   type = "comment",
   event,
   icon,
@@ -31,6 +32,7 @@ export const TimelineEntry: FC<Partial<TimelineEntryProps>> = ({
   username,
   sidebar,
   actions,
+  className,
   children
 }) => {
   const eventRef = useRef<HTMLDivElement>(null);
@@ -54,7 +56,7 @@ export const TimelineEntry: FC<Partial<TimelineEntryProps>> = ({
   }, []);
   return (
     <section
-      className="ax-timeline__entry"
+      className={`ax-timeline__entry ${className ?? ""}`}
       data-entry={type}
       ref={eventRef}
       data-reverse={reverse}
