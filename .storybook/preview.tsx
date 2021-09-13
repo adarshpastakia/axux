@@ -149,6 +149,7 @@ channel.on("THEME_TOGGLE", (theme: string) => {
 });
 
 const originalError = console.error;
+document.body.classList.add(`ax-root`);
 window.console.error = (...args) => {
   if (/.*ReactDOM.render is no longer supported in React 18.*/.test(args[0])) {
     return;
