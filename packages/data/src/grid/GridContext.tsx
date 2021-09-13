@@ -6,7 +6,7 @@
 import { useIsRtl } from "@axux/core/dist/internals/useIsRtl";
 import {
   createContext,
-  FC,
+  PropsWithChildren,
   RefObject,
   useCallback,
   useContext,
@@ -71,13 +71,13 @@ const getSorter = (type: string, name: string, order: string) => {
  * Datagrid context
  * TODO: add filter functionality
  */
-export const GridContextProvider: FC<GridProps> = ({
+export const GridContextProvider = <T extends KeyValue>({
   children,
   columns,
   data,
   onRowSelect,
   isSelectable = false
-}) => {
+}: PropsWithChildren<GridProps<T>>) => {
   const { isRtl } = useIsRtl();
   const [filters, setFilters] = useState<KeyValue>({});
   const [sort, setSort] = useState<SortType>({ name: "", order: "asc" });
@@ -175,15 +175,17 @@ export const GridContextProvider: FC<GridProps> = ({
         onSort,
         onFilter,
         onClearFilter,
-        onRowSelect,
+        onRowSelect: onRowSelect as AnyObject,
         onResize,
         onResizeEnd,
         onResizeStart,
         isSelectable
       }}
     >
-      {children}
-      <div className="ax-grid__resize--ghost" ref={ghostRef} />
+      <div className="ax-grid__panel">
+        {children}
+        <div className="ax-grid__resize--ghost" ref={ghostRef} />
+      </div>
     </GridContext.Provider>
   );
 };

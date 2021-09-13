@@ -8,13 +8,17 @@
     display: grid;
     grid-area: content;
     grid-template-areas: "head" "loader" "content" "foot";
-    grid-template-rows: auto auto 1fr auto;
-    overflow: hidden;
+    grid-template-rows: min-content min-content 1fr min-content;
+    overflow: auto;
+    position: relative;
   }
 
   &__header {
     overflow: hidden;
     padding-inline-end: 0.5em;
+    position: sticky;
+    top: 0;
+    z-index: 5;
 
     #{$prefix}-button {
       margin: 0;
@@ -79,11 +83,17 @@
     }
   }
 
+  &__footer {
+    bottom: 0;
+    position: sticky;
+    z-index: 5;
+  }
+
   &__body {
     display: flex;
     flex-flow: column nowrap;
     grid-area: content;
-    overflow: scroll;
+    z-index: 2;
 
     &--row {
       display: flex;

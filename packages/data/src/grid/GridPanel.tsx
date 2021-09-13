@@ -26,18 +26,16 @@ export const AxGridPanel = <T extends KeyValue>({
   data,
   emptyDisplay,
   ...rest
-}: GridProps) => {
+}: GridProps<T>) => {
   const { t } = useTranslation("data");
   return (
-    <GridContextProvider data={data} {...rest}>
-      <div className="ax-grid__panel">
-        <GridHeader />
-        {data.length > 0 && <GridBody />}
-        {!isLoading &&
-          data.length === 0 &&
-          (emptyDisplay ?? <AxContent.Empty message={t("grid.empty")} />)}
-        {isLoading && <AxLoader />}
-      </div>
+    <GridContextProvider<T> data={data} {...rest}>
+      <GridHeader />
+      {data.length > 0 && <GridBody />}
+      {!isLoading &&
+        data.length === 0 &&
+        (emptyDisplay ?? <AxContent.Empty message={t("grid.empty")} />)}
+      {isLoading && <AxLoader />}
     </GridContextProvider>
   );
 };
