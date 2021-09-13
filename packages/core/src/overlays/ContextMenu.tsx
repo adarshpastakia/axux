@@ -10,9 +10,16 @@ import { ElementProps } from "../types";
 
 export interface ContextMenuProps extends ElementProps {
   menu: ReactNodeArray;
+
+  onContextMenu?: (e: MouseEvent) => boolean;
 }
 
-export const AxContextMenu: FC<ContextMenuProps> = ({ children, className, menu }) => {
+export const AxContextMenu: FC<ContextMenuProps> = ({
+  children,
+  onContextMenu,
+  className,
+  menu
+}) => {
   const [rect, setRect] = useState({
     top: 0,
     left: 0,
@@ -30,23 +37,25 @@ export const AxContextMenu: FC<ContextMenuProps> = ({ children, className, menu 
 
   const handleClick = useCallback(
     (e: MouseEvent) => {
-      const el = e.currentTarget;
-      setTimeout(() => {
-        setRect({
-          top: e.clientY,
-          left: e.clientX,
-          height: 16,
-          width: 16
-        });
-        el.addEventListener("mouseup", preventMouseup);
-        setIsOpen(true);
-        el.removeEventListener("mouseup", preventMouseup);
-      }, 200);
+      if (!onContextMenu || onContextMenu(e)) {
+        const el = e.currentTarget;
+        setTimeout(() => {
+          setRect({
+            top: e.clientY,
+            left: e.clientX,
+            height: 16,
+            width: 16
+          });
+          el.addEventListener("mouseup", preventMouseup);
+          setIsOpen(true);
+          el.removeEventListener("mouseup", preventMouseup);
+        }, 200);
+      }
       e.stopPropagation();
       e.preventDefault();
       return false;
     },
-    [preventMouseup]
+    [onContextMenu, preventMouseup]
   );
 
   return (
