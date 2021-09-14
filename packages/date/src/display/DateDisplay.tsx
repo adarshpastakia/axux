@@ -13,40 +13,42 @@ import { dateFormat } from "../utils";
 export interface DateDisplayProps
   extends Omit<TextProps, "mark" | "abbr" | "block" | "clip" | "transform"> {
   date: DateLike | [DateLike, DateLike];
+  withTime?: boolean;
   format?: string;
 }
 
-export const AxDateDisplay: VFC<DateDisplayProps> = ({
-  date,
-  format = "dd MMM yyyy",
-  ...props
-}) => {
+export const AxDateDisplay: VFC<DateDisplayProps> = ({ date, withTime, format, ...props }) => {
   const { isHijri, dateLocale } = useLocale();
+
+  const fmt = useMemo(
+    () => format ?? `dd MMM yyyy${withTime ? " HH:mm:ss" : ""}`,
+    [format, withTime]
+  );
 
   const display = useMemo(() => {
     if (Array.isArray(date)) {
-      return `${dateFormat(date[0], format, dateLocale, isHijri)} - ${dateFormat(
+      return `${dateFormat(date[0], fmt, dateLocale, isHijri)} - ${dateFormat(
         date[1],
-        format,
+        fmt,
         dateLocale,
         isHijri
       )}`;
     } else {
-      return dateFormat(date, format, dateLocale, isHijri);
+      return dateFormat(date, fmt, dateLocale, isHijri);
     }
-  }, [date, dateLocale, format, isHijri]);
+  }, [date, dateLocale, fmt, isHijri]);
   const tooltip = useMemo(() => {
     if (Array.isArray(date)) {
-      return `${dateFormat(date[0], format, dateLocale, !isHijri)} - ${dateFormat(
+      return `${dateFormat(date[0], fmt, dateLocale, !isHijri)} - ${dateFormat(
         date[1],
-        format,
+        fmt,
         dateLocale,
         !isHijri
       )}`;
     } else {
-      return dateFormat(date, format, dateLocale, !isHijri);
+      return dateFormat(date, fmt, dateLocale, !isHijri);
     }
-  }, [date, dateLocale, format, isHijri]);
+  }, [date, dateLocale, fmt, isHijri]);
 
   return (
     <AxTooltip content={tooltip} usePortal>
