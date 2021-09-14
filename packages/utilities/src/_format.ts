@@ -6,12 +6,13 @@
 import { differenceInDays, format, parseISO } from "date-fns";
 import { CountryCode, parsePhoneNumberFromString } from "libphonenumber-js";
 import numeral from "numeral";
-import { isNil } from "./_isType";
+import { isEmpty, isNil } from "./_isType";
 import { Countries } from "./index";
 
 export namespace Format {
   const getPhone = (value = "", country = "ae") => {
-    const number = parsePhoneNumberFromString(value || "", country as CountryCode);
+    const phone = value.match(/^[0+]/) ? value : `+${value}`;
+    const number = parsePhoneNumberFromString(phone, country as CountryCode);
     return number
       ? number
       : {
@@ -29,6 +30,7 @@ export namespace Format {
   };
 
   export const phone = (value?: string) => {
+    if (isEmpty(value)) return "";
     const phone = getPhone(value);
     return `${Countries.emoji(phone.country ?? "")} ${phone.formatInternational()}`;
   };
