@@ -4,10 +4,23 @@
 // @license   : MIT
 
 import { differenceInDays, format, parseISO } from "date-fns";
+import { CountryCode, parsePhoneNumberFromString } from "libphonenumber-js";
 import numeral from "numeral";
 import { isNil } from "./_isType";
+import { Countries } from "./index";
 
 export namespace Format {
+  const getPhone = (value = "", country = "ae") => {
+    const number = parsePhoneNumberFromString(value || "", country as CountryCode);
+    return number
+      ? number
+      : {
+          country: "",
+          formatNational: () => value,
+          formatInternational: () => value
+        };
+  };
+
   const numberFormat = (number?: string | number, format = "0,0[.]00a") => {
     if (isNil(number)) {
       return "";
@@ -15,6 +28,10 @@ export namespace Format {
     return numeral(number).format(format);
   };
 
+  export const phone = (value?: string) => {
+    const phone = getPhone(value);
+    return `${Countries.emoji(phone.country ?? "")} ${phone.formatInternational()}`;
+  };
   export const number = (number?: string | number, format?: string) => {
     return numberFormat(number, format);
   };
