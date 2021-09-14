@@ -30,7 +30,7 @@ export namespace Format {
   };
 
   export const phone = (value?: string) => {
-    if (isEmpty(value)) return "";
+    if (isEmpty(value)) return undefined;
     const phone = getPhone(value);
     return `${Countries.emoji(phone.country ?? "")} ${phone.formatInternational()}`;
   };
