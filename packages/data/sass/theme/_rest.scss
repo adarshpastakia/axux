@@ -34,16 +34,27 @@
     background-color: $color-lightest;
   }
   &__meter {
+    background-color: currentColor;
+
     &::after {
       background: $panel-bg;
+      border-inline-start: 2px solid currentColor;
     }
     &::before {
-      background: linear-gradient(90deg, rgba($panel-bg, 0.1), rgba($panel-bg, 0.9));
+      background: linear-gradient(90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
+    }
+
+    > span {
+      color: $base-color;
     }
 
     &[data-disabled="true"] {
       color: $color-light;
       pointer-events: none;
+
+      > span {
+        color: inherit;
+      }
     }
   }
 }

@@ -29,19 +29,18 @@ export const AxHistogram: VFC<HistogramProps> = ({
               key={i}
               data-disabled={rec.count <= 0}
               onClick={() => onClick && onClick(rec)}
-              className={`ax-histogram__meter ax-bg--${rec.color ?? color ?? "secondary"}`}
+              className={`ax-histogram__meter ax-color--${rec.color ?? color ?? "secondary"}`}
               style={{ "--meter": rec.count / Math.max(1, total) } as AnyObject}
             >
               <span>{rec.label}</span>
               <span>{Format.percent(rec.count / Math.max(1, total))}</span>
             </div>
           ))}
-          {!isLoading && records.length === 0 && <AxContent.Empty message={t("histogram.empty")} />}
+          {!isLoading &&
+            records.length === 0 &&
+            (emptyDisplay ?? <AxContent.Empty message={t("histogram.empty")} />)}
         </Fragment>
       ))}
-      {!isLoading &&
-        data.length === 0 &&
-        (emptyDisplay ?? <AxContent.Empty message={t("histogram.empty")} />)}
     </div>
   );
 };
