@@ -16,6 +16,8 @@ export interface TimelineEntryProps extends TimelineRecord {
   headerProps?: Omit<HeaderProps, "title" | "onClick" | "onBack">;
   reverse?: boolean;
   noline?: boolean;
+  isCollapsed?: boolean;
+  isCollapsable?: boolean;
 }
 
 export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
@@ -25,6 +27,8 @@ export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
   image,
   noline,
   reverse,
+  isCollapsed,
+  isCollapsable,
   iconBg = "light",
   iconColor = "contrast",
   headerProps = { bg: "lightest" },
@@ -72,7 +76,13 @@ export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
           color={iconColor as AnyObject}
         />
       </div>
-      <AxPanel className="ax-timeline__entry--body" maxHeight="80vh" paper={type === "comment"}>
+      <AxPanel
+        className="ax-timeline__entry--body"
+        maxHeight="80vh"
+        paper={type === "comment"}
+        isCollapsable={isCollapsable}
+        isCollapsed={isCollapsed}
+      >
         <AxPanel.Header
           {...headerProps}
           className={`ax-timeline__entry--head ${headerProps.className ?? ""}`}
