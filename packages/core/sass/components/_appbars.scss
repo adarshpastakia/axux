@@ -21,7 +21,8 @@
   &__icon {
     align-self: stretch;
     grid-area: icon;
-    padding: 0 0.5em;
+    line-height: 1;
+    padding: 0.5em;
   }
   &__icon + #{$prefix}-header__title {
     padding-inline-start: 0.25em;

@@ -100,9 +100,12 @@
       height: 1em;
     }
 
-    &[data-entry="event"] #{$base}__entry--head {
-      background: none;
-      border-bottom: none;
+    &[data-entry="event"] {
+      #{$base}__entry--body,
+      #{$base}__entry--head {
+        background: none;
+        border-bottom: none;
+      }
     }
 
     &[data-reverse="true"] {

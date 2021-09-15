@@ -177,6 +177,7 @@ export const AxDatePanel: FC<DateProps> = ({
           {showHijriToggle && (
             <AxButton
               type="link"
+              color="primary"
               onClick={() => {
                 onHijriChange && onHijriChange(!isHijri);
                 setHijri(!isHijri);

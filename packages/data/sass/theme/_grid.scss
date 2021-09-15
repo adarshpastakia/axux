@@ -15,6 +15,7 @@
     }
 
     &--cell {
+      background-color: mix($color-primary, $base-bg, 10%);
       border-inline-end: 1px solid $base-border-color;
     }
 

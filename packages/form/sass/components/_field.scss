@@ -97,14 +97,27 @@
     }
     > #{$prefix}-button {
       font-size: 1em;
-      margin: -0.5em -0.25em;
+      margin: -0.4em -0.25em;
       z-index: 2;
+
+      #{$prefix}-button__inner {
+        border-radius: 0;
+      }
     }
     &[data-align="start"] {
       grid-area: prepend;
     }
     &[data-align="end"] {
       grid-area: append;
+    }
+
+    &:first-child > #{$prefix}-button #{$prefix}-button__inner {
+      border-bottom-left-radius: $base-border-radius;
+      border-top-left-radius: $base-border-radius;
+    }
+    &:last-child > #{$prefix}-button #{$prefix}-button__inner {
+      border-bottom-right-radius: $base-border-radius;
+      border-top-right-radius: $base-border-radius;
     }
   }
   &__error {

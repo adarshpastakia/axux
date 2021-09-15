@@ -118,7 +118,7 @@
     z-index: 1;
   }
 
-  &#{$prefix}-color--default::before {
+  &#{$prefix}-color--default[data-solid="false"]::before {
     content: unset;
   }
 }

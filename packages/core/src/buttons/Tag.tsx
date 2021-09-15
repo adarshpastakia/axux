@@ -16,7 +16,7 @@ export interface TagProps extends RefProp, IconProps, ElementProps, WithTooltipP
   /**
    * Tag label color
    */
-  color?: Color | BaseColor | ColorPalette;
+  color?: Color | BaseColor | ColorPalette | string;
   /**
    * Size
    */

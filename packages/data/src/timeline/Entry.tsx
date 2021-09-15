@@ -31,7 +31,7 @@ export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
   isCollapsable,
   iconBg = "light",
   iconColor = "contrast",
-  headerProps = { bg: "lightest" },
+  headerProps = { bg: "empty" },
   timestamp = new Date(),
   username,
   sidebar,

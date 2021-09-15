@@ -188,6 +188,7 @@ export const AxRangePanel: FC<RangeProps> = ({
           {showHijriToggle && (
             <AxButton
               type="link"
+              color="primary"
               onClick={() => {
                 onHijriChange && onHijriChange(!isHijri);
                 setHijri(!isHijri);
