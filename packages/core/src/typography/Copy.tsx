@@ -6,13 +6,15 @@
 import { useCallback, useEffect, useState, VFC } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxTooltip } from "../overlays/Tooltip";
+import { Size } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 export interface CopyProps {
   text: string;
+  size?: Size;
 }
 
-export const AxCopy: VFC<CopyProps> = ({ text }) => {
+export const AxCopy: VFC<CopyProps> = ({ text, size = "sm" }) => {
   const [copied, setCopied] = useState(false);
   const doCopy = useCallback(() => {
     navigator.clipboard.writeText(text);
@@ -27,7 +29,7 @@ export const AxCopy: VFC<CopyProps> = ({ text }) => {
   return (
     <AxTooltip content="Copied!" isDisabled={!copied} isOpen={copied} usePortal>
       <AxButton
-        size="sm"
+        size={size}
         onClick={doCopy}
         type={copied ? "solid" : "link"}
         color={copied ? "success" : "default"}
