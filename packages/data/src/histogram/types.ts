@@ -18,5 +18,6 @@ export interface HistogramProps extends ElementProps {
   color?: Color | ColorPalette;
   emptyDisplay?: JSX.Element;
   isLoading?: boolean;
+  format?: "percent" | "number";
   onClick?: (record: HistogramRecord) => void;
 }
