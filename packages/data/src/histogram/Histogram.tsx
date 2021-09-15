@@ -29,7 +29,9 @@ export const AxHistogram: VFC<HistogramProps> = ({
               key={i}
               data-disabled={rec.count <= 0}
               onClick={() => onClick && onClick(rec)}
-              className={`ax-histogram__meter ax-color--${rec.color ?? color ?? "secondary"}`}
+              className={`ax-histogram__meter ax-color--${rec.color ?? color ?? "secondary"} ${
+                !!onClick ? "ax-clickable" : ""
+              }`}
               style={{ "--meter": rec.count / Math.max(1, total) } as AnyObject}
             >
               <span>{rec.label}</span>
