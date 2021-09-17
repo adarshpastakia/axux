@@ -8,6 +8,7 @@ import {
   FC,
   forwardRef,
   Fragment,
+  useCallback,
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
@@ -15,8 +16,6 @@ import {
   useState
 } from "react";
 import { useTranslation } from "react-i18next";
-import { isColor } from "../helpers";
-import { AxTooltip } from "../overlays/Tooltip";
 import {
   AllColors,
   ElementProps,
@@ -27,6 +26,7 @@ import {
   TextTransform,
   Weight
 } from "../types";
+import { AxAbbr } from "./Abbr";
 
 /** @internal */
 export interface TextProps extends ElementProps {
@@ -70,6 +70,8 @@ export interface TextProps extends ElementProps {
 
   align?: TextAlign;
   transform?: TextTransform;
+
+  abbrRenderer?: (part: string[]) => JSX.Element;
 }
 
 /**
@@ -107,6 +109,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       abbr,
       align,
       transform,
+      abbrRenderer,
       ...aria
     },
     ref
@@ -175,6 +178,20 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       }
     }, [clip, children]);
 
+    const abbrRender = useCallback(
+      (text: string, tooltip: string, color = "") => {
+        if (abbrRenderer) {
+          return abbrRenderer([text, tooltip, color]);
+        }
+        return (
+          <AxAbbr tooltip={tooltip} color={color}>
+            {text}
+          </AxAbbr>
+        );
+      },
+      [abbrRenderer]
+    );
+
     const inner = useMemo(() => {
       if (isString(children)) {
         const tokens = tokenize(children, abbr ? abbr.map(([keyword]) => keyword) : mark);
@@ -191,16 +208,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
                 return (
                   <Fragment key={i}>
                     {start ? <span>{start}</span> : null}
-                    {text ? (
-                      <AxTooltip content={tooltip} usePortal>
-                        <abbr
-                          className={`ax-color--${color}`}
-                          style={isColor(color) ? { color } : {}}
-                        >
-                          {text}
-                        </abbr>
-                      </AxTooltip>
-                    ) : null}
+                    {text ? abbrRender(text, tooltip, color) : null}
                   </Fragment>
                 );
               })}
@@ -221,7 +229,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
         }
       }
       return children;
-    }, [children, mark, abbr]);
+    }, [children, abbr, mark, abbrRender]);
 
     return (
       <Fragment>
