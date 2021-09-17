@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { withinEl } from "@axux/utilities/dist/dom";
-import { FC, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { FC, ReactNodeArray, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../internals/usePropToggle";
 import { useResize } from "../internals/useResize";
@@ -53,6 +53,8 @@ export interface AsideProps extends IconProps, CollapseProps, ElementProps {
    * Event handler when shown
    */
   onFlyout?: EmptyCallback;
+
+  actions?: ReactNodeArray;
 }
 
 /**
@@ -90,6 +92,7 @@ export const Aside: FC<AsideProps> = ({
   minWidth = "2em",
   maxWidth = "35vw",
   end,
+  actions,
   ...aria
 }) => {
   const elementRef = useRef<HTMLDivElement>(null);
@@ -146,11 +149,16 @@ export const Aside: FC<AsideProps> = ({
       {(title || isCollapsable) && (
         <div className="ax-section__side--header">
           <span className="ax-section__side--title">{title}</span>
+          <div>{actions}</div>
           {isCollapsable && (
             <AxButton
               type="link"
               className="flippable"
-              icon={collapsed ? AppIcons.iconCaretRight : AppIcons.iconCaretLeft}
+              icon={
+                (collapsed && !end) || (!collapsed && end)
+                  ? AppIcons.iconCaretRight
+                  : AppIcons.iconCaretLeft
+              }
               onClick={toggleCollapse}
             />
           )}

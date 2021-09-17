@@ -37,12 +37,12 @@
       align-items: center;
       display: grid;
       grid-area: head;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1fr auto auto;
       z-index: 7;
       @extend #{$prefix}-bg--base;
       @extend #{$prefix}-border--b;
 
-      #{$prefix}-button {
+      > #{$prefix}-button {
         font-size: 1.25em;
         margin: 0;
       }
@@ -173,19 +173,13 @@
 
       #{$base} {
         &--header {
-          grid-template-columns: auto 1fr;
+          grid-template-columns: auto 1fr auto;
 
-          #{$prefix}-button {
+          > #{$prefix}-button {
             margin: 0;
             margin-inline-end: -1px;
+            order: -1;
           }
-
-          #{$prefix}-button__icon {
-            transform: scaleX(-1);
-          }
-        }
-        &--title {
-          order: 1;
         }
       }
 

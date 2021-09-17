@@ -30,6 +30,7 @@ export { AxAvatar } from "./icons/Avatar";
 
 // Typography
 export { AxCopy } from "./typography/Copy";
+export { AxAbbr } from "./typography/Abbr";
 export { AxText } from "./typography/Text";
 export { AxLink } from "./typography/Link";
 export { AxCallout } from "./panels/Callout";
