@@ -18,6 +18,8 @@
     }
 
     &--wrapper {
+      align-items: center;
+      display: flex;
       flex: 1 1 1em;
       margin: 0 0.5em;
       min-height: 1.5em;
@@ -36,7 +38,6 @@
 
       &::before {
         height: 0.125em;
-        top: calc(0.75em + 1px);
         z-index: 0;
       }
 
@@ -55,7 +56,6 @@
           border-radius: 1em;
           cursor: pointer;
           height: 1em;
-          margin-top: -2px;
           width: 1em;
         }
       }
@@ -63,7 +63,6 @@
 
     &--hilight {
       height: 0.25em;
-      top: 0.75em;
       z-index: 2;
     }
 
