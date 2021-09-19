@@ -31,7 +31,7 @@ export const isEmpty = (val: AnyObject): val is undefined => {
 export const isObject = (val: AnyObject): val is KeyValue => {
   return !isNil(val) && !(val instanceof Date) && typeof val === "object" && !Array.isArray(val);
 };
-export const isArray = (val: AnyObject): val is KeyValue[] => {
+export const isArray = <T = AnyObject>(val: AnyObject): val is T[] => {
   return Array.isArray(val);
 };
 
