@@ -219,6 +219,14 @@
       text-decoration: underline;
     }
 
+    &--nowrap {
+      white-space: nowrap;
+    }
+
+    &--break {
+      word-break: break-word;
+    }
+
     &--dropcaps {
       &::first-letter {
         float: left;
