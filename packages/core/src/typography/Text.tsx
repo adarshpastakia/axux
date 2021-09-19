@@ -60,6 +60,14 @@ export interface TextProps extends ElementProps {
    */
   block?: boolean;
   /**
+   * Word break
+   */
+  wordBreak?: boolean;
+  /**
+   * No wrap
+   */
+  noWrap?: boolean;
+  /**
    * Mark text within
    */
   mark?: string | string[];
@@ -110,6 +118,8 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       align,
       transform,
       abbrRenderer,
+      noWrap,
+      wordBreak,
       ...aria
     },
     ref
@@ -146,8 +156,26 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       if (isString(size) && SizeList.includes(size)) {
         cls.push(`ax-font--${size}`);
       }
+      if (wordBreak) {
+        cls.push("ax-text--break");
+      } else if (noWrap) {
+        cls.push("ax-text--nowrap");
+      }
       return cls.join(" ");
-    }, [align, bg, block, className, clip, color, font, size, transform, weight]);
+    }, [
+      align,
+      bg,
+      block,
+      className,
+      clip,
+      color,
+      font,
+      noWrap,
+      size,
+      transform,
+      weight,
+      wordBreak
+    ]);
 
     const styles = useMemo(() => {
       const s: KeyValue = {};
