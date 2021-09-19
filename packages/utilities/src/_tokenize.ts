@@ -10,7 +10,15 @@ export const tokenize = (str: string, keywords?: string | string[]) => {
     return [str, ""];
   }
   const keys = isArray(keywords) ? keywords : [keywords];
-  const regx = new RegExp(`\\b(${keys.join("|").replace(/([+*.?^$()[\]\\!&\-=])/gm, "\\$1")})\\b`, "img");
+  const keyMap = keys.map((key) => {
+    // escape regex control characters
+    let escapedKey = key.replace(/([+*.?^$()[\]\\!&|\-=])/gm, "\\$1");
+    // place token within word boundaries if start/end with alpha-numeric
+    if (!key.match(/^[a-zà-ⱬ0-9]/)) escapedKey = `\\b${escapedKey}`;
+    if (!key.match(/[a-zà-ⱬ0-9]$/)) escapedKey = `${escapedKey}\\b`;
+    return escapedKey;
+  });
+  const regx = new RegExp(`(${keyMap.join("|")})`, "img");
   let match;
   let lastIndex = 0;
   const tokens = [];
