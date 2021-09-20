@@ -70,8 +70,11 @@
   }
 
   &-table {
+    thead {
+      background-color: $base-bg;
+    }
     thead th {
-      background: rgba($color-secondary, 0.5);
+      background: rgba($color-secondary, 0.3);
     }
 
     tr:nth-child(even) {

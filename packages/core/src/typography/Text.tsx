@@ -197,12 +197,13 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
         const el = textRef.current;
         el.style.display = "block";
         el.classList.remove("ax-text--clip");
-        setTimeout(() => {
+        const timer = setTimeout(() => {
           const lh = parseInt(getComputedStyle(el).lineHeight);
           setCanClip(el.offsetHeight > clip * lh);
           setShowMore(false);
           el.style.display = "";
         }, 1);
+        return () => clearTimeout(timer);
       }
     }, [clip, children]);
 
