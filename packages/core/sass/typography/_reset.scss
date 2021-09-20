@@ -158,6 +158,12 @@
   table-layout: fixed;
   width: 100%;
 
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
   th {
     font-weight: $font-weight-medium;
     padding: ($base-spacing / 4) ($base-spacing / 2);
@@ -166,6 +172,7 @@
 
   td {
     padding: ($base-spacing / 4) ($base-spacing / 2);
+    z-index: 0;
   }
 
   @include max-breakpoint(sm) {
