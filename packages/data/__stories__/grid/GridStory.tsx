@@ -25,7 +25,7 @@ import {
   useAxNavigator,
   useAxPagination
 } from "../../src";
-import { GridProps } from "../../src/grid/types";
+import { GridProps } from "../../src/datagrid/types";
 
 const RecordModal = ({
   record,

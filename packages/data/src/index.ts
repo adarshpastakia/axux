@@ -8,8 +8,8 @@ import "./i18n";
 export { AxTreePanel } from "./tree/TreePanel";
 export type { TreeNode } from "./tree/types";
 
-export { AxGridPanel } from "./grid/GridPanel";
-export type { GridColumn } from "./grid/types";
+export { AxGridPanel } from "./datagrid/GridPanel";
+export type { GridColumn } from "./datagrid/types";
 
 export { AxHistogram } from "./histogram/Histogram";
 export type { HistogramRecord } from "./histogram/types";
