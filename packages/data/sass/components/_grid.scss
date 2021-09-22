@@ -1,0 +1,51 @@
+// @author    : Adarsh Pastakia
+// @version   : 0.0.1
+// @copyright : 2021
+// @license   : MIT
+
+#{$prefix}-gridView {
+  $base: #{$prefix}-gridView;
+
+  &__panel {
+    grid-area: content;
+    overflow: auto;
+    padding: 1em;
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr;
+    min-height: 100%;
+
+    > div:first-child {
+      align-items: start;
+      display: grid;
+      grid-auto-flow: row;
+      grid-gap: 1em;
+      grid-template-columns: repeat(auto-fit, var(--cell-width));
+      place-content: center;
+    }
+
+    > div:last-child {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      > #{$prefix}-button__group:first-child {
+        position: sticky;
+        top: 0;
+      }
+
+      > #{$prefix}-button__group:last-child {
+        bottom: 0;
+        position: sticky;
+      }
+    }
+
+    #{$prefix}-loader__text {
+      margin: 0 0.25em;
+      margin-inline-start: 2.75em;
+    }
+  }
+}
