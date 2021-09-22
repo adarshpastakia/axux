@@ -4,8 +4,8 @@
 // @license   : MIT
 
 @at-root #{$root} {
-  @import "grid";
   @import "tree";
   @import "editor";
+  @import "datagrid";
   @import "rest";
 }
