@@ -74,6 +74,7 @@ export const AxTimeline: ExtendedFC = ({
   }, []);
   useLayoutEffect(() => {
     if (scrollerRef.current) {
+      const height = scrollerRef.current.offsetHeight;
       const ob = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) =>
@@ -84,6 +85,7 @@ export const AxTimeline: ExtendedFC = ({
           );
         },
         {
+          rootMargin: `${height}px 0px ${height}px 0px`,
           root: scrollerRef.current
         }
       );
