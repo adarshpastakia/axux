@@ -12,6 +12,10 @@
     padding: 1em;
   }
 
+  &__item {
+    min-height: 2em;
+  }
+
   &__wrapper {
     display: grid;
     grid-gap: 1rem;

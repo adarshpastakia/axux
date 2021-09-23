@@ -9,7 +9,7 @@ import { ElementProps } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay } from "@axux/date";
 import { isString } from "@axux/utilities";
-import { FC, Fragment, isValidElement, useLayoutEffect, useMemo, useRef } from "react";
+import { FC, Fragment, isValidElement, useEffect, useMemo, useState } from "react";
 import { TimelineRecord } from "./types";
 
 export interface TimelineEntryProps extends TimelineRecord {
@@ -39,30 +39,30 @@ export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
   className,
   children
 }) => {
-  const eventRef = useRef<HTMLDivElement>(null);
+  const [eventRef, setEventRef] = useState<HTMLElement | null>(null);
   const entryIcon = useMemo(
     () => icon ?? (type === "comment" ? AppIcons.iconFace : AppIcons.iconDot),
     [icon, type]
   );
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (ResizeObserver) {
-      if (eventRef.current) {
-        const el = eventRef.current;
-        const ob = new ResizeObserver(
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          () => (el.style.containIntrinsicSize = `3rem ${el.offsetHeight ?? 48}px`)
-        );
+      if (eventRef && eventRef.parentElement) {
+        const el = eventRef;
+        const ph = eventRef.parentElement;
+        const ob = new ResizeObserver(() => {
+          ph.style.height = `${el.offsetHeight ?? 48}px`;
+        });
         ob.observe(el);
         return () => ob.disconnect();
       }
     }
-  }, []);
+  }, [eventRef]);
+
   return (
     <section
-      className={`ax-timeline__entry ${className ?? ""}`}
+      ref={setEventRef}
+      className={`${className ?? ""}`}
       data-entry={type}
-      ref={eventRef}
       data-reverse={reverse}
       data-noline={noline}
     >

@@ -7,7 +7,8 @@ import { AxButton, AxTextLoader } from "@axux/core";
 import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { FC, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { Children, FC, useCallback, useLayoutEffect, useReducer, useRef, useState } from "react";
+import { GridItem } from "./Item";
 
 export interface GridProps extends ElementProps {
   cellWidth?: string;
@@ -18,7 +19,11 @@ export interface GridProps extends ElementProps {
   onSort?: (order: "asc" | "desc") => void;
 }
 
-export const AxGridView: FC<GridProps> = ({
+interface ExtendedFC extends FC<GridProps> {
+  Item: typeof GridItem;
+}
+
+export const AxGridView: ExtendedFC = ({
   children,
   isLoading,
   canLoadMore,
@@ -70,6 +75,32 @@ export const AxGridView: FC<GridProps> = ({
     }
   }, [checkScroll]);
 
+  const [visibilityMap, dispatch] = useReducer<
+    (state: boolean[], { index, visible }: KeyValue) => boolean[]
+  >((state, { index, visible }) => {
+    state.splice(index, 1, visible);
+    return [...state];
+  }, []);
+  useLayoutEffect(() => {
+    if (scrollerRef.current) {
+      const ob = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) =>
+            dispatch({
+              index: parseInt((entry.target as HTMLElement).dataset.index + ""),
+              visible: entry.isIntersecting
+            })
+          );
+        },
+        {
+          root: scrollerRef.current
+        }
+      );
+      scrollerRef.current.querySelectorAll(".ax-timeline__entry").forEach((e) => ob.observe(e));
+      return () => ob.disconnect();
+    }
+  }, [children]);
+
   return (
     <div
       className={`ax-gridView__panel ${className ?? ""}`}
@@ -80,7 +111,11 @@ export const AxGridView: FC<GridProps> = ({
     >
       <div className="ax-gridView__wrapper">
         <div>
-          {children}
+          {Children.map(children, (child, i) => (
+            <section key={i} data-index={i} className="ax-gridView__item">
+              {visibilityMap[i] && child}
+            </section>
+          ))}
           {isLoading && <AxTextLoader />}
         </div>
         <div>
@@ -123,4 +158,7 @@ export const AxGridView: FC<GridProps> = ({
     </div>
   );
 };
+AxGridView.Item = GridItem;
+
 AxGridView.displayName = "AxGridView";
+AxGridView.Item.displayName = "AxGridView.Item";

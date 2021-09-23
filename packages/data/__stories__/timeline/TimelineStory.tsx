@@ -7,8 +7,7 @@ import { AxPage, AxViewport, useAxGlobals } from "@axux/core";
 import { mdiFaceProfile, mdiTag } from "@mdi/js";
 import { Story } from "@storybook/react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
-import { AxTimeline } from "../../src";
-import { TimelineRecord } from "../../src/timeline/types";
+import { AxTimeline, TimelineRecord } from "../../src";
 
 const entries: Array<TimelineRecord & { body?: string }> = [
   {
@@ -62,6 +61,31 @@ const Template: Story = (props) => {
       <AxPage paper>
         <AxTimeline {...props}>
           {[
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
+            ...entries,
             ...entries,
             ...entries,
             ...entries,

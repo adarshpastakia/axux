@@ -6,7 +6,8 @@
 import { AxButton, AxTextLoader } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { FC, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { Children, FC, useCallback, useLayoutEffect, useReducer, useRef, useState } from "react";
+import ResizeObserver from "resize-observer-polyfill";
 import { TimelineEntry } from "./Entry";
 import { TimelineProps } from "./types";
 
@@ -50,7 +51,7 @@ export const AxTimeline: ExtendedFC = ({
       else scrollTo = diff * el.offsetHeight + el.scrollTop;
       el.scrollTo({
         top: scrollTo,
-        behavior: "smooth"
+        behavior: "auto"
       });
     }
   }, []);
@@ -65,6 +66,32 @@ export const AxTimeline: ExtendedFC = ({
     }
   }, [checkScroll]);
 
+  const [visibilityMap, dispatch] = useReducer<
+    (state: boolean[], { index, visible }: KeyValue) => boolean[]
+  >((state, { index, visible }) => {
+    state.splice(index, 1, visible);
+    return [...state];
+  }, []);
+  useLayoutEffect(() => {
+    if (scrollerRef.current) {
+      const ob = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) =>
+            dispatch({
+              index: parseInt((entry.target as HTMLElement).dataset.index + ""),
+              visible: entry.isIntersecting
+            })
+          );
+        },
+        {
+          root: scrollerRef.current
+        }
+      );
+      scrollerRef.current.querySelectorAll(".ax-timeline__entry").forEach((e) => ob.observe(e));
+      return () => ob.disconnect();
+    }
+  }, [children]);
+
   return (
     <div
       className={`ax-timeline__panel ${className ?? ""}`}
@@ -74,7 +101,11 @@ export const AxTimeline: ExtendedFC = ({
     >
       <div className="ax-timeline__wrapper">
         <div>
-          {children}
+          {Children.map(children, (child, i) => (
+            <section key={i} data-index={i} className="ax-timeline__entry">
+              {visibilityMap[i] && child}
+            </section>
+          ))}
           {isLoading && <AxTextLoader />}
         </div>
         <div>
