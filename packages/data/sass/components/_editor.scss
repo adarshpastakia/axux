@@ -12,5 +12,10 @@
     .monaco-editor .folded-background {
       opacity: 0.5;
     }
+
+    .monaco-findInput textarea {
+      min-height: unset;
+      resize: initial;
+    }
   }
 }
