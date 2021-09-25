@@ -6,6 +6,7 @@
 import { AxButton, AxTextLoader } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
+import { getChildProps } from "@axux/utilities/dist/react";
 import { Children, FC, useCallback, useLayoutEffect, useReducer, useRef, useState } from "react";
 import ResizeObserver from "resize-observer-polyfill";
 import { TimelineEntry } from "./Entry";
@@ -104,7 +105,12 @@ export const AxTimeline: ExtendedFC = ({
       <div className="ax-timeline__wrapper">
         <div>
           {Children.map(children, (child, i) => (
-            <section key={i} data-index={i} className="ax-timeline__entry">
+            <section
+              key={i}
+              data-index={i}
+              className="ax-timeline__entry"
+              data-collapsed={getChildProps(child).isCollapsed}
+            >
               {visibilityMap[i] && child}
             </section>
           ))}

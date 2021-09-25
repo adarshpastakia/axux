@@ -3,9 +3,10 @@
 // @copyright : 2021
 // @license   : MIT
 
+import { ElementProps } from "@axux/core/dist/types";
 import { FC, useEffect, useState } from "react";
 
-export const GridItem: FC = ({ children }) => {
+export const GridItem: FC<ElementProps> = ({ children, className }) => {
   const [eventRef, setEventRef] = useState<HTMLElement | null>(null);
   useEffect(() => {
     if (ResizeObserver) {
@@ -21,5 +22,9 @@ export const GridItem: FC = ({ children }) => {
     }
   }, [eventRef]);
 
-  return <section ref={setEventRef}>{children}</section>;
+  return (
+    <section ref={setEventRef} className={className}>
+      {children}
+    </section>
+  );
 };

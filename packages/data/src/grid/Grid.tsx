@@ -98,7 +98,7 @@ export const AxGridView: ExtendedFC = ({
           root: scrollerRef.current
         }
       );
-      scrollerRef.current.querySelectorAll(".ax-timeline__entry").forEach((e) => ob.observe(e));
+      scrollerRef.current.querySelectorAll(".ax-gridView__item").forEach((e) => ob.observe(e));
       return () => ob.disconnect();
     }
   }, [children]);
