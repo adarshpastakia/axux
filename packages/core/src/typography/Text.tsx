@@ -205,6 +205,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
         }, 1);
         return () => clearTimeout(timer);
       }
+      setCanClip(false);
     }, [clip, children]);
 
     const abbrRender = useCallback(
