@@ -27,7 +27,7 @@
 
     #{$prefix}-avatar {
       box-shadow: 0 0 2px 0 #000e1d inset;
-      font-size: 6em;
+      font-size: 5em;
       position: relative;
       z-index: 2;
 
@@ -39,7 +39,7 @@
     &::after {
       bottom: 0;
       content: "";
-      height: 30%;
+      height: 3em;
       left: 0;
       position: absolute;
       right: 0;
