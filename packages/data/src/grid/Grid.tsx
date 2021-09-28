@@ -121,18 +121,22 @@ export const AxGridView: ExtendedFC = ({
           {isLoading && <AxTextLoader />}
         </div>
         <div>
-          <AxButton.Group vertical>
-            <AxButton
-              icon={AppIcons.iconSortTimeDesc}
-              onClick={() => onSort && onSort("desc")}
-              data-active={sortOrder === "desc"}
-            />
-            <AxButton
-              icon={AppIcons.iconSortTimeAsc}
-              onClick={() => onSort && onSort("asc")}
-              data-active={sortOrder === "asc"}
-            />
-          </AxButton.Group>
+          <div>
+            {onSort && (
+              <AxButton.Group vertical>
+                <AxButton
+                  icon={AppIcons.iconSortTimeDesc}
+                  onClick={() => onSort && onSort("desc")}
+                  data-active={sortOrder === "desc"}
+                />
+                <AxButton
+                  icon={AppIcons.iconSortTimeAsc}
+                  onClick={() => onSort && onSort("asc")}
+                  data-active={sortOrder === "asc"}
+                />
+              </AxButton.Group>
+            )}
+          </div>
           <AxButton.Group vertical>
             <AxButton
               isDisabled={(canScroll | 1) === 1}
