@@ -46,8 +46,11 @@
       top: 0;
     }
 
-    &::after {
+    @at-root [dir="ltr"] &::after {
       left: calc(var(--meter) * 100%);
+    }
+    @at-root [dir="rtl"] &::after {
+      right: calc(var(--meter) * 100%);
     }
   }
 }

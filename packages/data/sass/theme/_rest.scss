@@ -40,8 +40,11 @@
       background: $panel-bg;
       border-inline-start: 2px solid currentColor;
     }
-    &::before {
+    @at-root [dir="ltr"] &::before {
       background: linear-gradient(90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
+    }
+    @at-root [dir="rtl"] &::before {
+      background: linear-gradient(-90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
     }
 
     > span {
