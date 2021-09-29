@@ -96,6 +96,7 @@ export interface ElementProps extends AriaAttributes {
 }
 
 export interface AnchorProps {
+  to?: string;
   href?: string;
   download?: boolean;
   target?: HTMLAttributeAnchorTarget | undefined;

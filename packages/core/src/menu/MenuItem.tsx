@@ -45,7 +45,8 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
 >(
   (
     {
-      href = "",
+      to,
+      href,
       label,
       className,
       color,
@@ -115,7 +116,9 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
           {showCaret && (
             <div className="ax-menu__item__caret">
               <AxIcon
-                icon={isCollapsable && !isCollapsed ? AppIcons.iconCaretDown : AppIcons.iconCaretRight}
+                icon={
+                  isCollapsable && !isCollapsed ? AppIcons.iconCaretDown : AppIcons.iconCaretRight
+                }
               />
             </div>
           )}
@@ -126,10 +129,12 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
 
     return (
       <AxTooltip content={label} isDisabled={!menuCollapsed} placement="right" usePortal ref={ref}>
-        {isEmpty(href) ? (
-          <a {...elProps}>{innerEl}</a>
+        {isEmpty(to) ? (
+          <a href={href} {...elProps}>
+            {innerEl}
+          </a>
         ) : (
-          <NavLink to={href} {...elProps}>
+          <NavLink to={to} {...elProps}>
             {innerEl}
           </NavLink>
         )}

@@ -107,6 +107,7 @@ export const AxButton: ExtendedFC<ButtonProps> = forwardRef<HTMLAnchorElement, B
       label,
       tooltip,
       block,
+      to,
       href,
       badge,
       onClick,
@@ -129,11 +130,13 @@ export const AxButton: ExtendedFC<ButtonProps> = forwardRef<HTMLAnchorElement, B
     const InnerButton = useCallback(
       (props) =>
         href ? (
-          <NavLink ref={ref} to={href} {...props} />
+          <a ref={ref} href={href} {...props} />
+        ) : to ? (
+          <NavLink ref={ref} to={to} {...props} />
         ) : (
           <button ref={ref} type="button" {...props} />
         ),
-      [ref, href]
+      [ref, href, to]
     );
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
