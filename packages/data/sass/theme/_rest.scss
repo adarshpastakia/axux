@@ -40,12 +40,6 @@
       background: $panel-bg;
       border-inline-start: 2px solid currentColor;
     }
-    @at-root [dir="ltr"] &::before {
-      background: linear-gradient(90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
-    }
-    @at-root [dir="rtl"] &::before {
-      background: linear-gradient(-90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
-    }
 
     > span {
       color: $base-color;
@@ -59,5 +53,16 @@
         color: inherit;
       }
     }
+  }
+}
+
+@at-root &[dir="ltr"] {
+  #{$prefix}-histogram__meter::before {
+    background: linear-gradient(90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
+  }
+}
+@at-root &[dir="rtl"] {
+  #{$prefix}-histogram__meter::before {
+    background: linear-gradient(-90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
   }
 }
