@@ -34,6 +34,7 @@ export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
   headerProps = { bg: "empty" },
   timestamp = new Date(),
   username,
+  footer,
   sidebar,
   actions,
   className,
@@ -106,6 +107,7 @@ export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
             {isValidElement(children) && children}
           </AxContent>
         )}
+        {footer && <AxPanel.Footer className="ax-timeline__entry--foot">{footer}</AxPanel.Footer>}
       </AxPanel>
       {sidebar && <div className="ax-timeline__entry--side">{sidebar}</div>}
     </section>

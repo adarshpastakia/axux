@@ -17,6 +17,7 @@ export interface TimelineRecord {
   iconColor?: Color | ColorPalette;
   actions?: ReactNodeArray;
   sidebar?: JSX.Element;
+  footer?: JSX.Element;
 }
 
 export interface TimelineProps extends ElementProps {
