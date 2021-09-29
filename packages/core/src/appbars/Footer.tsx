@@ -4,12 +4,14 @@
 // @license   : MIT
 
 import { FC } from "react";
+import { ElementProps } from "../types";
 
 /**
  * Footer bar
  * @param children
+ * @param className
  * @internal
  */
-export const AxFooter: FC = ({ children }) => {
-  return <div className="ax-footer">{children}</div>;
+export const AxFooter: FC<ElementProps> = ({ children, className }) => {
+  return <div className={`ax-footer ${className ?? ""}`}>{children}</div>;
 };
