@@ -14,6 +14,7 @@ import { TimelineRecord } from "./types";
 
 export interface TimelineEntryProps extends TimelineRecord {
   headerProps?: Omit<HeaderProps, "title" | "onClick" | "onBack">;
+  headerAppend?: JSX.Element;
   reverse?: boolean;
   noline?: boolean;
   isCollapsed?: boolean;
@@ -32,6 +33,7 @@ export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
   iconBg = "light",
   iconColor = "contrast",
   headerProps = { bg: "empty" },
+  headerAppend,
   timestamp = new Date(),
   username,
   footer,
@@ -92,6 +94,7 @@ export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
               <AxText weight="medium">{username}</AxText>
               <AxText>{event}</AxText>
               <AxDateDisplay date={timestamp} format="dd MMM yyyy HH:mm:ss" />
+              {headerAppend}
             </Fragment>
           }
         >
