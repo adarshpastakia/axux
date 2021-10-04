@@ -5,7 +5,7 @@
 
 import { AxAvatar, AxDivider } from "@axux/core";
 import { AvatarProps } from "@axux/core/dist/icons/Avatar";
-import { Color, ColorPalette, ElementProps } from "@axux/core/dist/types";
+import { Color, ColorPalette, ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { FC, useMemo } from "react";
 
@@ -23,6 +23,8 @@ export interface ProfileCardProps extends ElementProps {
   size?: "sm" | "default" | "md";
 
   infograph?: AvatarProps["infograph"];
+
+  onClick?: EmptyCallback;
 }
 
 export const AxProfileCard: FC<ProfileCardProps> = ({
@@ -37,13 +39,20 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
   activityMap,
   infograph,
   className,
+  onClick,
   ...aria
 }) => {
   const headClass = useMemo(() => {
     return ["ax-profileCard__head", headBg ? `ax-bg--${headBg}` : "ax-bg--light"].join(" ");
   }, [headBg]);
   return (
-    <div className={`ax-profileCard ${className ?? ""}`} data-size={size} {...aria}>
+    <div
+      className={`ax-profileCard ${className ?? ""}`}
+      data-size={size}
+      {...aria}
+      data-clickable={!!onClick}
+      onClick={onClick}
+    >
       <div className="ax-profileCard__inner">
         <div className={headClass}>
           <AxAvatar

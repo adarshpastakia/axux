@@ -27,6 +27,10 @@
       background-color: $panel-bg;
     }
   }
+
+  &[data-clickable="true"]:hover {
+    box-shadow: $shadow-level2;
+  }
 }
 
 #{$prefix}-histogram {
