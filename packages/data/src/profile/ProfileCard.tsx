@@ -12,6 +12,7 @@ import { FC, useMemo } from "react";
 export interface ProfileCardProps extends ElementProps {
   avatarImage?: string;
   avatarIcon?: string;
+  avatarTitle?: string;
   avatarBg?: Color | ColorPalette;
   avatarColor?: Color | ColorPalette;
   headBg?: Color | ColorPalette;
@@ -36,6 +37,7 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
   avatarColor,
   avatarIcon,
   avatarImage,
+  avatarTitle,
   activityMap,
   infograph,
   className,
@@ -56,7 +58,7 @@ export const AxProfileCard: FC<ProfileCardProps> = ({
       <div className="ax-profileCard__inner">
         <div className={headClass}>
           <AxAvatar
-            title=""
+            title={avatarTitle ?? ""}
             image={avatarImage}
             icon={avatarIcon ?? AppIcons.iconFace}
             bg={avatarBg}
