@@ -68,6 +68,10 @@ export interface TextProps extends ElementProps {
    */
   noWrap?: boolean;
   /**
+   * Clip single line with ellipsis
+   */
+  ellipsis?: boolean;
+  /**
    * Mark text within
    */
   mark?: string | string[];
@@ -118,6 +122,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       align,
       transform,
       abbrRenderer,
+      ellipsis,
       noWrap,
       wordBreak,
       ...aria
@@ -160,6 +165,8 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
         cls.push("ax-text--break");
       } else if (noWrap) {
         cls.push("ax-text--nowrap");
+      } else if (ellipsis) {
+        cls.push("ax-ellipsis");
       }
       return cls.join(" ");
     }, [
@@ -170,6 +177,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       clip,
       color,
       font,
+      ellipsis,
       noWrap,
       size,
       transform,
