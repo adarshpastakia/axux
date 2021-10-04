@@ -52,7 +52,7 @@ export const AxSwitchField: FC<SwitchProps> = memo(
     return (
       <AxFieldController value={checked} onChange={onChange} name={name}>
         {({ ref, onChange, value, onBlur }) => (
-          <label className="ax-field__option">
+          <label className="ax-field__option" onClick={(e) => e.stopPropagation()}>
             <input
               ref={ref}
               name={name}

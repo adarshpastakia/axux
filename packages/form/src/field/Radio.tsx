@@ -42,7 +42,7 @@ export interface RadioProps {
 export const AxRadioField: VFC<RadioProps> = memo(
   ({ name, label, isDisabled, value, checked, onChange }) => {
     return (
-      <label className="ax-field__option">
+      <label className="ax-field__option" onClick={(e) => e.stopPropagation()}>
         <input
           name={name}
           type="radio"
