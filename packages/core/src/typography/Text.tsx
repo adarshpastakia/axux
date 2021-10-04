@@ -16,6 +16,7 @@ import {
   useState
 } from "react";
 import { useTranslation } from "react-i18next";
+import { isColor } from "../helpers";
 import {
   AllColors,
   ElementProps,
@@ -193,11 +194,14 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       if (isNumber(size)) {
         s.fontSize = `${size}rem`;
       }
+      if (color && isColor(color)) {
+        s.color = color;
+      }
       if (clip) {
         s["--line-clamp"] = clip;
       }
       return s;
-    }, [clip, size]);
+    }, [clip, color, size]);
 
     useLayoutEffect(() => {
       setShowMore(true);
