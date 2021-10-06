@@ -14,6 +14,7 @@ export interface GridProps extends ElementProps {
   cellWidth?: string;
   isLoading?: boolean;
   canLoadMore?: boolean;
+  hideScrollButtons?: boolean;
   onLoadMore?: EmptyCallback;
   sortOrder?: "asc" | "desc";
   onSort?: (order: "asc" | "desc") => void;
@@ -30,6 +31,7 @@ export const AxGridView: ExtendedFC = ({
   onLoadMore,
   sortOrder,
   onSort,
+  hideScrollButtons,
   cellWidth = "20em",
   className,
   ...aria
@@ -137,28 +139,30 @@ export const AxGridView: ExtendedFC = ({
               </AxButton.Group>
             )}
           </div>
-          <AxButton.Group vertical>
-            <AxButton
-              isDisabled={(canScroll | 1) === 1}
-              onClick={() => doScroll(-2)}
-              icon={AppIcons.iconChevronTop}
-            />
-            <AxButton
-              isDisabled={(canScroll | 1) === 1}
-              onClick={() => doScroll(-1)}
-              icon={AppIcons.iconCaretTop}
-            />
-            <AxButton
-              isDisabled={(canScroll | 2) === 2}
-              onClick={() => doScroll(1)}
-              icon={AppIcons.iconCaretDown}
-            />
-            <AxButton
-              isDisabled={(canScroll | 2) === 2}
-              onClick={() => doScroll(2)}
-              icon={AppIcons.iconChevronDown}
-            />
-          </AxButton.Group>
+          {!hideScrollButtons && (
+            <AxButton.Group vertical>
+              <AxButton
+                isDisabled={(canScroll | 1) === 1}
+                onClick={() => doScroll(-2)}
+                icon={AppIcons.iconChevronTop}
+              />
+              <AxButton
+                isDisabled={(canScroll | 1) === 1}
+                onClick={() => doScroll(-1)}
+                icon={AppIcons.iconCaretTop}
+              />
+              <AxButton
+                isDisabled={(canScroll | 2) === 2}
+                onClick={() => doScroll(1)}
+                icon={AppIcons.iconCaretDown}
+              />
+              <AxButton
+                isDisabled={(canScroll | 2) === 2}
+                onClick={() => doScroll(2)}
+                icon={AppIcons.iconChevronDown}
+              />
+            </AxButton.Group>
+          )}
         </div>
       </div>
     </div>
