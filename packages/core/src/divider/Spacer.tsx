@@ -3,12 +3,12 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { VFC } from "react";
+import { FC, VFC } from "react";
 import { Size } from "../types";
 
 const Flex: VFC = () => <div style={{ flex: "1 1 1em" }} />;
 
-interface ExtendedFC extends VFC<{ size?: Size }> {
+interface ExtendedFC extends FC<{ size?: Size; children: never }> {
   Flex: typeof Flex;
 }
 
