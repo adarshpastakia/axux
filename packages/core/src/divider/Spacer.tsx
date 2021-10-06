@@ -8,7 +8,7 @@ import { Size } from "../types";
 
 const Flex: VFC = () => <div style={{ flex: "1 1 1em" }} />;
 
-interface ExtendedFC extends FC<{ size?: Size; children: never }> {
+interface ExtendedFC extends FC<{ size?: Size; children?: never }> {
   Flex: typeof Flex;
 }
 
