@@ -1,6 +1,6 @@
 {
   "name": "@axux/date",
-  "version": "0.0.1-alpha.38",
+  "version": "0.0.1-alpha.39",
   "description": "AxUx: Date package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@axux/core": "^0.0.1-alpha.38",
-    "@axux/form": "^0.0.1-alpha.38",
+    "@axux/form": "^0.0.1-alpha.39",
     "@axux/utilities": "^0.0.1-alpha.29",
     "date-fns": "^2.23.0"
   },
