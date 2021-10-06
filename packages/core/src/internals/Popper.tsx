@@ -57,7 +57,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
   closeOnClick,
   triggerSelector,
   forceRender,
-  usePortal = true,
+  usePortal = false,
   updateAnchor,
   autoTrigger = true,
   ...props
