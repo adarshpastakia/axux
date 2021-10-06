@@ -32,6 +32,7 @@ export interface ControllerProps<T = string> {
    * Auto focus on render
    */
   autoFocus?: boolean;
+  onClear?: EmptyCallback;
   /**
    * Callback handler for enter key press
    */

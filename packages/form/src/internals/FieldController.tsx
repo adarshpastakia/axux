@@ -42,6 +42,7 @@ export const AxFieldController: FC<FieldControllerProps> = ({
   name,
   autoFocus,
   value,
+  onClear: inheritClearHandler,
   onChange: inheritChangeHandler,
   onEnterPressed,
   error,
@@ -79,6 +80,7 @@ export const AxFieldController: FC<FieldControllerProps> = ({
             };
             const clearHandler = () => {
               onChange("");
+              inheritClearHandler && inheritClearHandler();
               inheritChangeHandler && inheritChangeHandler(undefined);
               refInput.current && refInput.current.focus();
             };
@@ -132,6 +134,7 @@ export const AxFieldController: FC<FieldControllerProps> = ({
     error,
     formContext,
     handleEnter,
+    inheritClearHandler,
     inheritChangeHandler,
     name,
     value
