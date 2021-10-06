@@ -109,6 +109,7 @@ export const AxFieldController: FC<FieldControllerProps> = ({
       const clearHandler = () => {
         setCanClear(false);
         refInput.current && (refInput.current.value = "");
+        inheritClearHandler && inheritClearHandler();
         inheritChangeHandler && inheritChangeHandler(undefined);
         refInput.current && refInput.current.focus();
       };

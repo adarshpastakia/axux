@@ -33,6 +33,7 @@ export const AxTextField: FC<TextFieldProps> = memo(
     isReadonly,
     autoComplete,
     value,
+    onClear,
     onChange,
     onEnterPressed,
     allowClear,
@@ -48,6 +49,7 @@ export const AxTextField: FC<TextFieldProps> = memo(
         error={error}
         allowClear={allowClear}
         name={name}
+        onClear={onClear}
         autoFocus={autoFocus}
         onEnterPressed={onEnterPressed}
       >
