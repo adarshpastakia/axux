@@ -1,6 +1,6 @@
 {
   "name": "@axux/data",
-  "version": "0.0.1-alpha.39",
+  "version": "0.0.1-alpha.40",
   "description": "AxUx: Data package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -26,9 +26,9 @@
     "watch": "yarn build:lib -w"
   },
   "dependencies": {
-    "@axux/core": "^0.0.1-alpha.38",
-    "@axux/date": "^0.0.1-alpha.39",
-    "@axux/form": "^0.0.1-alpha.39",
+    "@axux/core": "^0.0.1-alpha.40",
+    "@axux/date": "^0.0.1-alpha.40",
+    "@axux/form": "^0.0.1-alpha.40",
     "@axux/utilities": "^0.0.1-alpha.29",
     "react-monaco-editor": "^0.44.0",
     "resize-observer-polyfill": "^1.5.1"
