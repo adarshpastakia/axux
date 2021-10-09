@@ -16,8 +16,7 @@ import {
   useCallback,
   useLayoutEffect,
   useMemo,
-  useRef,
-  useState
+  useRef
 } from "react";
 import { Controller, RefCallBack, useFormContext } from "react-hook-form";
 import { ControllerProps } from "../types";
@@ -51,7 +50,6 @@ export const AxFieldController: FC<FieldControllerProps> = ({
   const formContext = useFormContext();
 
   const refInput = useRef<HTMLInputElement>();
-  const [canClear, setCanClear] = useState(false);
 
   const handleEnter = useCallback(
     (e: KeyboardEvent) => {
@@ -102,12 +100,11 @@ export const AxFieldController: FC<FieldControllerProps> = ({
         />
       );
     } else {
+      const canClear = allowClear && !isEmpty(value);
       const changeHandler = (value: AnyObject) => {
-        setCanClear(!!allowClear && !isEmpty(value));
         inheritChangeHandler && inheritChangeHandler(value);
       };
       const clearHandler = () => {
-        setCanClear(false);
         refInput.current && (refInput.current.value = "");
         inheritClearHandler && inheritClearHandler();
         inheritChangeHandler && inheritChangeHandler(undefined);
@@ -130,7 +127,6 @@ export const AxFieldController: FC<FieldControllerProps> = ({
     }
   }, [
     allowClear,
-    canClear,
     children,
     error,
     formContext,

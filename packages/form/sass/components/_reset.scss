@@ -3,13 +3,13 @@
 // @copyright : 2021
 // @license   : MIT
 
-#{$prefix}-root {
+#{$prefix}-field {
   input,
   textarea {
     background: none;
     border: none;
     color: inherit;
-    font-family: inherit;
+    font-family: $font-family-sans-serif;
     outline: none;
   }
 

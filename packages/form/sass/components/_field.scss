@@ -41,6 +41,16 @@
     #{$base}__wrapper {
       border-radius: 0;
     }
+
+    > #{$prefix}-button {
+      height: 2em;
+      margin: 0;
+      width: 2em;
+
+      #{$prefix}-button__inner {
+        border-radius: 0;
+      }
+    }
   }
 
   &__wrapper {
@@ -68,7 +78,6 @@
   }
 
   &__input {
-    font-size: 0.875em;
     grid-area: field;
     line-height: 1.5;
     min-height: 2em;
@@ -87,17 +96,17 @@
     flex-flow: row nowrap;
     font-size: 1em;
     line-height: 1;
-    padding: 0.5em 0.25em;
+    padding: 0.5em;
 
     > #{$prefix}-icon,
     > #{$base}__option {
       font-size: 1em;
       height: 1em;
-      margin: -0.125em 0;
+      margin: 0;
     }
     > #{$prefix}-button {
-      font-size: 1em;
-      margin: -0.4em -0.25em;
+      height: 2em;
+      margin: -0.5em;
       z-index: 2;
 
       #{$prefix}-button__inner {
@@ -122,7 +131,7 @@
   }
   &__error {
     grid-area: error;
-    padding: 0 0.25em;
+    padding: 0.25em;
     #{$prefix}-icon {
       margin-top: -1px;
     }
@@ -131,6 +140,7 @@
     align-self: center;
     grid-area: clear;
     line-height: 1em;
+    padding: 0.25em;
   }
   &__handle {
     align-self: stretch;
@@ -138,8 +148,8 @@
     line-height: 1;
 
     > #{$prefix}-button {
-      font-size: 1em;
-      margin: 0.125em 0 0;
+      height: 100%;
+      margin: 0;
       z-index: 2;
     }
   }

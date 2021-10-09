@@ -13,7 +13,7 @@ import { AxTextField, TextFieldProps } from "./Text";
 /** @internal */
 export interface SearchFieldProps
   extends IconProps,
-    Omit<TextFieldProps, "type" | "onChange" | "onEnterPressed"> {
+    Omit<TextFieldProps, "type" | "onEnterPressed"> {
   /**
    * Search button icon
    */
@@ -35,6 +35,7 @@ export const AxSearchField: FC<SearchFieldProps> = memo(
     searchIcon = AppIcons.iconSearch,
     onSearch,
     value: _value,
+    onChange,
     ...props
   }) => {
     const [value, setValue] = useState(_value ?? "");
@@ -47,8 +48,11 @@ export const AxSearchField: FC<SearchFieldProps> = memo(
         {...props}
         value={value}
         type="search"
-        onChange={(v) => setValue(v ?? "")}
-        onEnterPressed={() => value && onSearch && onSearch(value)}
+        onChange={(v) => {
+          setValue(v ?? "");
+          onChange && onChange(v);
+        }}
+        onEnterPressed={() => onSearch && onSearch(value)}
       >
         {icon !== "blank" && (
           <AxAddon>

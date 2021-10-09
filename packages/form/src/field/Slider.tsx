@@ -6,13 +6,16 @@
 import { AxIcon, AxTooltip } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { Format, isEmpty } from "@axux/utilities";
-import { memo, useCallback, useMemo, useState, VFC } from "react";
+import { memo, useCallback, useEffect, useMemo, useState, VFC } from "react";
 import { AxFieldController } from "../internals/FieldController";
 import { AxFieldLabel } from "../internals/FieldLabel";
 import { ControllerProps, FieldStateProps, WrapperProps } from "../types";
 
 /** @internal */
-export interface SliderFieldProps extends ControllerProps<number>, WrapperProps, FieldStateProps {
+export interface SliderFieldProps
+  extends Omit<ControllerProps<number>, "allowClear" | "onClear" | "onEnterPressed">,
+    Omit<WrapperProps, "placeholder" | "minWidth" | "maxWidth">,
+    FieldStateProps {
   /**
    * Step value
    */
@@ -29,6 +32,8 @@ export interface SliderFieldProps extends ControllerProps<number>, WrapperProps,
   showLabel?: boolean;
   showTicks?: boolean;
   showValue?: boolean;
+
+  height?: string | number;
 }
 
 /**
@@ -43,20 +48,27 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
     showLabel,
     showTicks,
     showValue,
-    placeholder,
     isDisabled,
     isReadonly,
     vertical,
     label,
-    value = 0,
+    value: _value = 0,
     onChange,
     name,
     hint,
     error,
     autoFocus,
     required,
-    appendLabel
+    appendLabel,
+    width,
+    height = "24em",
+    span = 1
   }) => {
+    const [value, setValue] = useState(_value ?? 0);
+    useEffect(() => {
+      setValue(_value ?? 0);
+    }, [_value]);
+
     const [hilight, setHilight] = useState(0);
     const updateHilight = useCallback(
       (value) => {
@@ -70,17 +82,32 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
       return new Array(11).fill(0).map((_, i) => min + diff * i);
     }, [max, min]);
 
+    const updateValue = useCallback(
+      (v = 0) => {
+        setValue(v);
+        onChange && onChange(v);
+      },
+      [onChange]
+    );
+
     return (
       <AxFieldController
         value={value}
-        onChange={onChange}
         error={error}
         name={name}
         autoFocus={autoFocus}
+        onChange={updateValue}
       >
         {({ ref, onChange, value, error, onBlur, onEnter }) => {
           return (
-            <div className="ax-field" data-invalid={!!error} ref={() => updateHilight(value)}>
+            <div
+              className="ax-field"
+              data-invalid={!!error}
+              ref={() => updateHilight(value)}
+              style={{
+                gridColumnEnd: `span ${Math.min(4, Math.max(1, span))}`
+              }}
+            >
               {label && (
                 <AxFieldLabel required={required} appendLabel={appendLabel}>
                   {label}
@@ -95,40 +122,53 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
               )}
               <div className="ax-field__slider" data-vertical={vertical}>
                 {showLabel && <span>{Format.number(min)}</span>}
-                <div className="ax-field__slider--wrapper">
-                  <input
-                    className="ax-field__input"
-                    ref={ref}
-                    name={name}
-                    size={1}
-                    step={step}
-                    min={min}
-                    max={max}
-                    type="range"
-                    formNoValidate
-                    disabled={isDisabled}
-                    readOnly={isReadonly}
-                    placeholder={placeholder}
-                    value={value}
-                    onBlur={onBlur}
-                    onKeyUp={onEnter}
-                    onChange={(event) => {
-                      updateHilight(event.target.valueAsNumber);
-                      onChange && onChange(event.target.valueAsNumber);
+                <div className="ax-col--fill">
+                  <div
+                    className="ax-field__slider--wrapper"
+                    style={{
+                      width: vertical ? undefined : width,
+                      height: vertical ? height : undefined
                     }}
-                  />
-                  <div className="ax-field__slider--hilight" style={{ width: `${hilight}%` }} />
-                  {showValue && !isEmpty(value) && (
-                    <div className="ax-field__slider--value-wrapper">
-                      <div
-                        className="ax-field__slider--value"
-                        style={{ left: `${hilight}%` }}
-                        data-align={hilight > 50 ? "start" : "end"}
-                      >
-                        <div>{Format.number(value)}</div>
+                  >
+                    <input
+                      className="ax-field__input"
+                      ref={ref}
+                      name={name}
+                      size={1}
+                      step={step}
+                      min={min}
+                      max={max}
+                      type="range"
+                      formNoValidate
+                      disabled={isDisabled}
+                      readOnly={isReadonly}
+                      value={value}
+                      onBlur={onBlur}
+                      onKeyUp={onEnter}
+                      style={{
+                        width: vertical ? height : width
+                      }}
+                      onChange={(event) => {
+                        updateHilight(event.target.valueAsNumber);
+                        onChange && onChange(event.target.valueAsNumber);
+                      }}
+                    />
+                    <div
+                      className="ax-field__slider--hilight"
+                      style={{ [vertical ? "height" : "width"]: `${hilight}%` }}
+                    />
+                    {showValue && !isEmpty(value) && (
+                      <div className="ax-field__slider--value-wrapper">
+                        <div
+                          className="ax-field__slider--value"
+                          style={{ [vertical ? "bottom" : "left"]: `${hilight}%` }}
+                          data-align={hilight > 50 ? "start" : "end"}
+                        >
+                          <div>{Format.number(value)}</div>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                   {showTicks && (
                     <div className="ax-field__slider--ticks">
                       {ticks.map((v) => (

@@ -10,7 +10,7 @@
     border-radius: 1em;
     cursor: pointer;
     display: grid;
-    font-size: 0.75em;
+    font-size: 0.875em;
     grid-template-columns: 1fr 1fr;
     min-width: 2em;
     padding: 2px;
@@ -19,7 +19,7 @@
 
     &--handle {
       border-radius: 1em;
-      height: calc(1.5em - 6px);
+      height: calc(1.5em - 8px);
       left: 0;
       margin: 2px;
       position: absolute;

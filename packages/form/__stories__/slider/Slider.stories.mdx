@@ -1,0 +1,52 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxSliderField } from "../../src/field/Slider";
+import { SliderStory, WithLabelStory, WithTicksStory, WithValueLabelStory } from "./SliderDemo";
+
+<Meta title="@form/Slider" component={AxSliderField} parameters={{ jest: ["Slider.test.tsx"] }} />
+
+<Anchor storyId="form-slider--slider">
+  <Title>Slider</Title>
+</Anchor>
+
+<Description of={AxSliderField} />
+
+<Canvas>
+  <Story name="Slider">{SliderStory}</Story>
+</Canvas>
+
+<Anchor storyId="form-slider--with-labels">
+  <Heading>With Labels</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="With Labels">{WithLabelStory}</Story>
+</Canvas>
+
+<Anchor storyId="form-slider--with-value-label">
+  <Heading>With Value Label</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="With Value Label">{WithValueLabelStory}</Story>
+</Canvas>
+
+<Anchor storyId="form-slider--with-ticks">
+  <Heading>With Ticks</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="With Ticks">{WithTicksStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxSliderField} sort="requiredFirst" />

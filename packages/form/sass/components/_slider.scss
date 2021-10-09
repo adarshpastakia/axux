@@ -7,45 +7,40 @@
   $base: #{$prefix}-field__slider;
 
   &__slider {
-    align-items: flex-start;
     display: flex;
     flex-flow: row nowrap;
 
     > span {
       flex: 0 0 auto;
       font-size: 0.75em;
-      padding: 0.25em 0.25em 0;
+      line-height: 2em;
+
+      &:first-child {
+        padding-inline-end: 0.5em;
+      }
+      &:last-child {
+        padding-inline-start: 0.5em;
+      }
     }
 
     &--wrapper {
-      align-items: center;
-      display: flex;
-      flex: 1 1 1em;
-      margin: 0 0.5em;
-      min-height: 1.5em;
       position: relative;
 
       #{$base}--hilight,
       &::before {
         border-radius: 0.25em;
         content: "";
-        height: 0.25em;
-        left: 0;
         overflow: hidden;
         position: absolute;
-        right: 0;
       }
 
       &::before {
-        height: 0.125em;
         z-index: 0;
       }
 
       input[type="range"] {
-        align-items: center;
         appearance: none;
-        display: flex;
-        min-height: 1.75em;
+        margin: 0;
         padding: 0;
         position: relative;
         width: 100%;
@@ -62,24 +57,17 @@
     }
 
     &--hilight {
-      height: 0.25em;
       z-index: 2;
     }
 
     &--value {
       position: absolute;
-      top: 50%;
-      transform: translate(1em, -50%);
 
       &-wrapper {
         display: block;
-        height: 1.75em;
-        left: 0.5em;
         pointer-events: none;
         position: absolute;
-        right: 0.5em;
-        top: 0;
-        z-index: 2;
+        z-index: 3;
       }
 
       div {
@@ -100,6 +88,74 @@
         width: 0.5em;
         z-index: 0;
       }
+    }
+
+    &--ticks {
+      align-items: stretch;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+
+      button {
+        appearance: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 0.625em;
+        height: 1em;
+        line-height: 1;
+        padding: 0;
+        position: relative;
+        text-align: center;
+        width: 1em;
+
+        span {
+          position: absolute;
+        }
+
+        &::before {
+          border-radius: 1em;
+          content: "";
+          display: block;
+          height: 0.4em;
+          pointer-events: none;
+          position: relative;
+          width: 0.5em;
+          z-index: 1;
+        }
+      }
+    }
+  }
+
+  &__slider[data-vertical="false"] {
+    align-items: flex-start;
+
+    > span {
+      padding: 0.375em 0.25em;
+    }
+
+    #{$base}--wrapper {
+      height: 2em;
+      width: 100%;
+
+      &::before,
+      #{$base}--hilight {
+        height: 0.25em;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &::before {
+        height: 0.125em;
+      }
+    }
+
+    #{$base}--value {
+      top: 50%;
+      transform: translate(1em, -50%);
 
       &[data-align="start"] {
         transform: translate(calc(-1 * (100% + 1em)), -50%);
@@ -110,50 +166,98 @@
           transform: translate(0.25em, -0.25em) rotate(45deg);
         }
       }
+
+      &-wrapper {
+        height: 2em;
+        left: 0.5em;
+        right: 0.5em;
+        top: 0;
+      }
     }
 
-    &--ticks {
-      align-items: stretch;
-      display: flex;
+    #{$base}-ticks {
       flex-flow: row nowrap;
-      justify-content: space-between;
-      position: relative;
-      top: -0.5em;
-      z-index: 1;
+      top: -0.125em;
 
       button {
-        appearance: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 0.75em;
-        height: 1em;
-        line-height: 1;
-        padding: 0;
-        position: relative;
-        text-align: center;
-        width: 1em;
-
         span {
           left: 50%;
-          position: absolute;
           top: 0.25em;
           transform: translateX(-50%);
         }
 
         &::before {
-          border-radius: 1em;
-          content: "";
-          display: block;
-          height: 0.25em;
-          left: 0.5em;
-          pointer-events: none;
-          position: relative;
-          top: -1em;
-          width: 0.25em;
-          z-index: 1;
+          left: 0.25em;
+          top: -1.9em;
         }
       }
+    }
+  }
+
+  &__slider[data-vertical="true"] {
+    align-items: center;
+    flex-flow: column nowrap;
+    width: 2em;
+
+    > span {
+      display: block;
+      padding: 0.25em;
+      text-align: center;
+    }
+
+    #{$base}--wrapper {
+      height: 100%;
+      width: 2em;
+
+      &::before,
+      #{$base}--hilight {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0.25em;
+      }
+
+      &::before {
+        top: 0;
+        width: 0.125em;
+      }
+    }
+
+    #{$base}--value {
+      transform: translate(2em, 0.5em);
+
+      &-wrapper {
+        bottom: 0.5em;
+        left: 0;
+        top: 0.5em;
+        width: 2em;
+      }
+    }
+
+    #{$base}-ticks {
+      flex-flow: column nowrap;
+      top: -0.125em;
+
+      button {
+        span {
+          left: 0.25em;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        &::before {
+          left: -1.9em;
+          top: 0.25em;
+        }
+      }
+    }
+
+    #{$prefix}-field__input {
+      bottom: 0;
+      left: 2em;
+      position: absolute;
+      transform: rotate(270deg);
+      transform-origin: 0 100%;
     }
   }
 }

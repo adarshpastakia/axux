@@ -63,17 +63,17 @@
         background-color: $color-darkest;
         box-shadow: 0 0 0 1px $color-lightest;
       }
-
-      &[data-align="start"] {
-        div {
-          box-shadow: -1px 0 0 1px $color-lightest;
-        }
-      }
     }
 
     &--ticks {
       button::before {
         background-color: $color-darkest;
+      }
+    }
+
+    &[data-vertical="false"] #{$base}__slider--value[data-align="start"] {
+      div {
+        box-shadow: -1px 0 0 1px $color-lightest;
       }
     }
   }

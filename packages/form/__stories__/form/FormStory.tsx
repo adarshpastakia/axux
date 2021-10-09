@@ -3,7 +3,8 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxButton, AxContent, AxPage, AxSection, AxToolbar, AxViewport } from "@axux/core";
+import { AxButton, AxContent, AxIcon, AxPage, AxSection, AxToolbar, AxViewport } from "@axux/core";
+import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { Countries } from "@axux/utilities";
 import { Story } from "@storybook/react";
 import { useCallback, useRef, useState } from "react";
