@@ -29,7 +29,7 @@ export const useAxNotificationService = () => {
     ) as HTMLElement;
     if (!el) {
       el = document.createElement("div");
-      el.className = "ax-overlay__container ax-root";
+      el.className = "ax-overlay__container";
       el.dataset.mode = "message";
       document.body.appendChild(el);
     }
@@ -42,7 +42,7 @@ export const useAxNotificationService = () => {
     ) as HTMLElement;
     if (!el) {
       el = document.createElement("div");
-      el.className = "ax-overlay__container ax-root";
+      el.className = "ax-overlay__container";
       el.dataset.mode = "toast";
       document.body.appendChild(el);
     }
@@ -104,7 +104,7 @@ export const useAxNotificationService = () => {
   const alert = (props: string | AlertProps) => {
     const obj: AlertProps = makeProps(props);
     const el = document.createElement("div");
-    el.className = "ax-overlay__mask ax-root";
+    el.className = "ax-overlay__mask";
     document.body.appendChild(el);
     return new Promise<boolean>((resolve) => {
       const onClose = (b = false) => {

@@ -19,7 +19,7 @@
   @import url($local-font-serif);
 }
 
-@at-root #{$prefix}-root {
+body {
   box-sizing: border-box;
 
   *,
@@ -81,6 +81,6 @@
     cursor: pointer;
   }
   [data-clickable="false"] {
-    cursor: default;
+    cursor: inherit;
   }
 }
