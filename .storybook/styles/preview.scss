@@ -3,8 +3,10 @@
 // @copyright : 2021
 // @license   : MIT
 
+@import "~@axux/core/sass/base";
 .sb-show-main.sb-show-main.sb-show-main {
-  @import "~@axux/core/sass/axux";
+  @import "~@axux/core/sass/theme-light";
+  @import "~@axux/core/sass/theme-dark";
   @import "~@axux/form/sass/axux-form";
   @import "~@axux/date/sass/axux-date";
   @import "~@axux/data/sass/axux-data";

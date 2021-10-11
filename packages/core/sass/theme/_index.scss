@@ -3,6 +3,22 @@
 // @copyright : 2021
 // @license   : MIT
 
+@function contrast($color, $light: $white, $dark: $black) {
+  @if $color == null {
+    @return null;
+  } @else {
+    $color-brightness: brightness($color);
+    $dark-text-brightness: brightness($dark);
+    $light-text-brightness: brightness($light);
+    @return if(
+      abs($color-brightness - $light-text-brightness) >
+        abs($color-brightness - $dark-text-brightness),
+      $light,
+      $dark
+    );
+  }
+}
+
 @at-root #{$root} {
   @import "reset";
   @import "palette";

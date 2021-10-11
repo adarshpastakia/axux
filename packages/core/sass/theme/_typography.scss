@@ -4,23 +4,6 @@
 // @license   : MIT
 
 & {
-  a {
-    color: $color-secondary;
-  }
-
-  mark {
-    background: rgba($color-secondary, 0.375);
-  }
-
-  code {
-    background: rgba($base-muted, 0.05);
-    color: rgba($color-danger, 0.9);
-  }
-
-  abbr {
-    border-bottom: 1px dashed rgba($base-color, 0.75);
-  }
-
   @for $i from 1 through 6 {
     $heading: nth(nth($font-size-headings, $i), 1);
 
@@ -44,6 +27,19 @@
     &::before {
       background: $color-secondary;
     }
+  }
+
+  &-mark {
+    background: rgba($color-secondary, 0.375);
+  }
+
+  &-code {
+    background: rgba($base-muted, 0.05);
+    color: rgba($color-danger, 0.9);
+  }
+
+  &-abbr {
+    border-bottom: 1px dashed rgba($base-color, 0.75);
   }
 
   &-locale--link {

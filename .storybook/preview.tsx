@@ -125,13 +125,11 @@ const withI18nProvider = (StoryComp: Story, context: StoryContext) => {
   }, [context.globals.locale]);
   const dateLocale = useMemo(() => dateLocales[context.globals.locale], [context.globals.locale]);
   return (
-    <div className="ax-root">
-      <I18nextProvider i18n={i18n}>
-        <GlobalProvider dateLocale={dateLocale}>
-          <StoryComp {...context} />
-        </GlobalProvider>
-      </I18nextProvider>
-    </div>
+    <I18nextProvider i18n={i18n}>
+      <GlobalProvider dateLocale={dateLocale}>
+        <StoryComp {...context} />
+      </GlobalProvider>
+    </I18nextProvider>
   );
 };
 export const decorators = [withI18nProvider, withTests({ results })];
@@ -149,7 +147,6 @@ channel.on("THEME_TOGGLE", (theme: string) => {
 });
 
 const originalError = console.error;
-document.body.classList.add(`ax-root`);
 window.console.error = (...args) => {
   if (/.*ReactDOM.render is no longer supported in React 18.*/.test(args[0])) {
     return;

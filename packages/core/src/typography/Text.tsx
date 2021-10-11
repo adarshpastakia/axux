@@ -263,7 +263,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
               {tokens.map(([start, text], i) => (
                 <Fragment key={i}>
                   {start ? <span>{start}</span> : null}
-                  {text ? <mark>{text}</mark> : null}
+                  {text ? <mark className="ax-mark">{text}</mark> : null}
                 </Fragment>
               ))}
             </Fragment>
