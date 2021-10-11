@@ -13,7 +13,7 @@ export interface AbbrProps {
 }
 
 export const AxAbbr: FC<AbbrProps> = ({ tooltip, color, children }) => (
-  <AxTooltip content={tooltip} usePortal>
+  <AxTooltip content={tooltip}>
     <abbr className={`ax-abbr ax-color--${color}`} style={color && isColor(color) ? { color } : {}}>
       {children}
     </abbr>

@@ -51,7 +51,9 @@ exports[`Text renders marked text 1`] = `
   <span
     class="ax-text   "
   >
-    <mark>
+    <mark
+      class="ax-mark"
+    >
       Lorem ipsum
     </mark>
     <span>
@@ -189,16 +191,37 @@ exports[`Text renders with tooltip 1`] = `
         Lorem 
       </span>
       <abbr
-        class="ax-color--"
+        class="ax-abbr ax-color--"
       >
         ipsum
       </abbr>
+      <div
+        class="ax-popper ax-tooltip ax-bg--darkest ax-color--empty "
+        data-popper-escaped="true"
+        data-popper-placement="top"
+        data-popper-reference-hidden="true"
+        data-show="true"
+        data-show-arrow="true"
+        style="position: fixed; left: 0px; top: 0px; min-width: 0; bottom: 0px; transform: translate(0px, -10px);"
+      >
+        <div
+          class="ax-popper--body"
+        >
+          <span>
+            Test tooltip
+          </span>
+        </div>
+        <div
+          class="ax-popper--arrow"
+          style="position: absolute; left: 0px; transform: translate(0px, 0px);"
+        />
+      </div>
       <span>
          dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
           egestas mauris nec, tincidunt 
       </span>
       <abbr
-        class="ax-color--"
+        class="ax-abbr ax-color--"
       >
         ipsum
       </abbr>
@@ -210,27 +233,6 @@ exports[`Text renders with tooltip 1`] = `
           nec augue tincidunt, ac aliquet velit facilisis.
       </span>
     </span>
-    <div
-      class="ax-popper ax-tooltip ax-bg--darkest ax-color--empty "
-      data-popper-escaped="true"
-      data-popper-placement="top"
-      data-popper-reference-hidden="true"
-      data-show="true"
-      data-show-arrow="true"
-      style="position: fixed; left: 0px; top: 0px; min-width: 0; bottom: 0px; transform: translate(0px, -10px);"
-    >
-      <div
-        class="ax-popper--body"
-      >
-        <span>
-          Test tooltip
-        </span>
-      </div>
-      <div
-        class="ax-popper--arrow"
-        style="position: absolute; left: 0px; transform: translate(0px, 0px);"
-      />
-    </div>
   </div>
 </div>
 `;
@@ -247,7 +249,7 @@ exports[`Text renders with tooltip 2`] = `
         Lorem 
       </span>
       <abbr
-        class="ax-color--"
+        class="ax-abbr ax-color--"
       >
         ipsum
       </abbr>
@@ -256,7 +258,7 @@ exports[`Text renders with tooltip 2`] = `
           egestas mauris nec, tincidunt 
       </span>
       <abbr
-        class="ax-color--"
+        class="ax-abbr ax-color--"
       >
         ipsum
       </abbr>
