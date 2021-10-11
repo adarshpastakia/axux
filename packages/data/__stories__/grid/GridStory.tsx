@@ -16,7 +16,7 @@ import {
 } from "@axux/core";
 import { Countries, Country } from "@axux/utilities";
 import { Story } from "@storybook/react";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import {
   AxGridPanel,
   AxPagination,
@@ -114,10 +114,10 @@ const Template: Story<GridProps<Country>> = (props) => {
     []
   );
 
-  const { pageEnd, pageStart, totalCount, pageRecords, ...pager } = useAxPagination({
-    perPage: 20,
-    records: props.data ?? []
-  });
+  const { pageEnd, pageStart, totalCount, pageRecords, setRecords, ...pager } =
+    useAxPagination<Country>({
+      perPage: 20
+    });
   const { record, onNavigate, setCurrentIndex, headLabel } = useAxNavigator<Country>(
     pageRecords ?? []
   );
@@ -128,6 +128,10 @@ const Template: Story<GridProps<Country>> = (props) => {
     },
     [setCurrentIndex]
   );
+
+  useEffect(() => {
+    setRecords(props.data, 2);
+  }, [props.data, setRecords]);
 
   return (
     <AxViewport>

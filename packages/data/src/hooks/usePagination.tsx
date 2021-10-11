@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useCallback, useEffect, useReducer } from "react";
+import { useCallback, useReducer } from "react";
 
 interface Return<T> {
   records: T[];
@@ -12,7 +12,7 @@ interface Return<T> {
 
 interface PaginationOptions<T> {
   perPage: number;
-
+  defaultPage?: number;
   records?: T[];
 
   onLoadPage?: (page: number) => Return<T> | Promise<Return<T>>;
@@ -25,17 +25,13 @@ interface State<T> {
   pageStart: number;
   pageEnd: number;
   totalCount: number;
-
+  records: T[];
   pageRecords: T[];
 }
 
-type Action<T> = (State<T> & { type: "loadRecords" }) | { type: "resetState"; state: State<T> };
+type Action<T> = (State<T> & { type: "loadRecords" }) | { type: "resetState" };
 
-export const useAxPagination = <T extends KeyValue>({
-  perPage = 20,
-  records = [],
-  onLoadPage
-}: PaginationOptions<T>) => {
+export const useAxPagination = <T extends KeyValue>({ perPage = 20 }: PaginationOptions<T>) => {
   const reducer = useCallback((state: State<T>, { type, ...rest }: Action<T>) => {
     switch (type) {
       case "loadRecords":
@@ -50,37 +46,39 @@ export const useAxPagination = <T extends KeyValue>({
           pageStart: 0,
           pageEnd: 0,
           totalCount: 0,
-          pageRecords: []
+          pageRecords: [],
+          records: []
         };
       default:
         throw new Error();
     }
   }, []);
 
-  const [{ page, totalPages, pageStart, pageEnd, totalCount, pageRecords }, dispatch] = useReducer(
-    reducer,
-    {
+  const [{ page, totalPages, pageStart, pageEnd, totalCount, records, pageRecords }, dispatch] =
+    useReducer(reducer, {
       page: 0,
       totalPages: 0,
       pageStart: 0,
       pageEnd: 0,
       totalCount: 0,
+      records: [],
       pageRecords: []
-    }
-  );
+    });
 
-  const loadRecords = useCallback(
-    (page: number, records: T[], total: number) => {
-      const start = total > 0 ? (page - 1) * perPage : 0;
-      const totalPages = Math.ceil(total / perPage);
+  const loadPageRecords = useCallback(
+    (page: number, records: T[]) => {
+      const start = records.length > 0 ? (page - 1) * perPage : 0;
+      const totalPages = Math.ceil(records.length / perPage);
+      const pageRecords = records.slice(start, start + perPage);
       dispatch({
         type: "loadRecords",
-        pageRecords: records,
+        page,
+        records,
+        pageRecords,
         pageStart: start + 1,
         pageEnd: start + records.length,
-        page,
         totalPages: totalPages || 1,
-        totalCount: total
+        totalCount: records.length
       });
     },
     [perPage]
@@ -88,38 +86,26 @@ export const useAxPagination = <T extends KeyValue>({
 
   const onPageChange = useCallback(
     (page: number) => {
-      if (onLoadPage) {
-        const ret = onLoadPage(page - 1);
-        if (ret instanceof Promise) {
-          ret.then((resp) => {
-            loadRecords(page, resp.records, resp.totalCount);
-          });
-        } else {
-          loadRecords(page, ret.records, ret.totalCount);
-        }
-      } else if (records) {
-        const start = (page - 1) * perPage;
-        const ret = records.slice(start, start + perPage);
-        loadRecords(page, ret, records.length);
-      }
+      loadPageRecords(page, records);
     },
-    [loadRecords, onLoadPage, perPage, records]
+    [loadPageRecords, records]
   );
 
-  useEffect(() => {
-    dispatch({
-      type: "resetState",
-      state: {
-        page: 0,
-        totalPages: 0,
-        pageStart: 0,
-        pageEnd: 0,
-        totalCount: 0,
-        pageRecords: []
-      }
-    });
-    onPageChange(1);
-  }, [onPageChange]);
+  const setRecords = useCallback(
+    (records: T[] = [], defaultPage = 1) => {
+      loadPageRecords(defaultPage, records);
+    },
+    [loadPageRecords]
+  );
 
-  return { page, totalPages, pageStart, pageEnd, totalCount, pageRecords, onPageChange };
+  return {
+    page,
+    totalPages,
+    pageStart,
+    pageEnd,
+    totalCount,
+    pageRecords,
+    onPageChange,
+    setRecords
+  };
 };
