@@ -101,6 +101,11 @@ export const useAxNotificationService = () => {
     });
   };
 
+  const toastError = (props: string | Omit<ToastProps, "color">) => {
+    const obj: ToastProps = makeProps(props);
+    return toast({ ...obj, color: "danger" }, 0);
+  };
+
   const alert = (props: string | AlertProps) => {
     const obj: AlertProps = makeProps(props);
     const el = document.createElement("div");
@@ -120,5 +125,5 @@ export const useAxNotificationService = () => {
     });
   };
 
-  return { message, toast, alert, confirm };
+  return { message, toast, alert, confirm, toastError };
 };
