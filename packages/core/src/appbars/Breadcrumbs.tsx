@@ -3,22 +3,49 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useContext, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { NavLink } from "react-router-dom";
-import { Breadcrumb, useAxBreadcrumbService } from "../context/BreadcrumbService";
-import { Globals } from "../context/Globals";
 import { AxIcon } from "../icons/Icon";
 import { AxBox } from "../layout/Box";
 import { AxPopover } from "../overlays/Popover";
+import { EmptyCallback, IconProps } from "../types";
 
-const LinkItem = ({ i = 0, to = "", index = 0, icon, label }: AnyObject) => (
-  <NavLink key={i} to={to} className="ax-breadcrumb__item" data-index={index}>
-    <div>
-      {icon && <AxIcon icon={icon} />}
-      {label && <span>{label}</span>}
-    </div>
-  </NavLink>
-);
+interface Breadcrumb extends IconProps {
+  to?: string;
+  onClick?: EmptyCallback;
+  label?: string | JSX.Element;
+}
+
+export interface Props {
+  items: Breadcrumb[];
+  actions?: JSX.Element[];
+  theme?: "classic" | "modern";
+}
+
+const LinkItem = ({
+  i = 0,
+  to = "",
+  className = "ax-breadcrumb__item",
+  index = 0,
+  icon,
+  label,
+  onClick
+}: AnyObject) =>
+  to ? (
+    <NavLink key={i} to={to} className={className} data-index={index} onClick={onClick}>
+      <div>
+        {icon && <AxIcon icon={icon} />}
+        {label && <span>{label}</span>}
+      </div>
+    </NavLink>
+  ) : (
+    <a key={i} className={className} data-index={index} onClick={onClick}>
+      <div>
+        {icon && <AxIcon icon={icon} />}
+        {label && <span>{label}</span>}
+      </div>
+    </a>
+  );
 
 const LinkPopover = ({ rest }: { rest: Breadcrumb[] }) => (
   <AxPopover placement="bottom">
@@ -26,23 +53,22 @@ const LinkPopover = ({ rest }: { rest: Breadcrumb[] }) => (
       <div>...</div>
     </div>
     <AxBox>
-      {rest.map(({ to, icon, label }, i) => (
-        <NavLink key={i} to={to} className="ax-breadcrumb__link">
-          <div>
-            <AxIcon icon={icon ?? "blank"} />
-            {label && <span>{label}</span>}
-          </div>
-        </NavLink>
+      {rest.map(({ to = "", onClick, icon, label }, i) => (
+        <LinkItem
+          key={i}
+          to={to}
+          className="ax-breadcrumb__link"
+          icon={icon}
+          label={label}
+          onClick={onClick}
+        />
       ))}
     </AxBox>
   </AxPopover>
 );
 
 /** @internal */
-export const AxBreadcrumbBar = () => {
-  const { breadcrumbTheme } = useContext(Globals);
-  const { items, actions } = useAxBreadcrumbService();
-
+export const AxBreadcrumbBar: FC<Props> = ({ items, actions = [], theme }) => {
   const [start, rest, end] = useMemo(
     () =>
       items.length > 8 ? [items.slice(0, 3), items.slice(3, -3), items.slice(-3)] : [[], [], items],
@@ -51,14 +77,28 @@ export const AxBreadcrumbBar = () => {
   if (items.length === 0 && actions.length === 0) return null;
 
   return (
-    <div className="ax-breadcrumb__bar" data-theme={breadcrumbTheme}>
+    <div className="ax-breadcrumb__bar" data-theme={theme}>
       <div>
-        {start.map(({ to, icon, label }, i) => (
-          <LinkItem key={i} to={to} icon={icon} label={label} index={start.length - i + 4} />
+        {start.map(({ to, icon, label, onClick }, i) => (
+          <LinkItem
+            key={i}
+            to={to}
+            icon={icon}
+            label={label}
+            index={start.length - i + 4}
+            onClick={onClick}
+          />
         ))}
         {rest.length > 0 && <LinkPopover rest={rest} />}
-        {end.map(({ to, icon, label }, i) => (
-          <LinkItem key={i} to={to} icon={icon} label={label} index={end.length - i + 4} />
+        {end.map(({ to, icon, label, onClick }, i) => (
+          <LinkItem
+            key={i}
+            to={to}
+            icon={icon}
+            label={label}
+            index={end.length - i + 4}
+            onClick={onClick}
+          />
         ))}
       </div>
       <div>{actions}</div>

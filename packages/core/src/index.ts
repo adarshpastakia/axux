@@ -70,6 +70,7 @@ export { AxTooltip } from "./overlays/Tooltip";
 // App bars
 export { AxMeter } from "./appbars/Meter";
 export { AxToolbar } from "./appbars/Toolbar";
+export { AxBreadcrumbBar } from "./appbars/Breadcrumbs";
 
 // App controls
 export { AxThemeToggle } from "./appControls/ThemeToggle";
