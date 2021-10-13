@@ -128,7 +128,7 @@
     }
   }
 
-  &__slider[data-vertical="false"] {
+  &__slider:not([data-vertical="true"]) {
     align-items: flex-start;
 
     > span {
