@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-body {
+#{$prefix}-root {
   h1,
   h2,
   h3,
@@ -62,11 +62,13 @@ body {
     font-family: $font-family-mono;
     line-height: 1.25;
     padding: 0 0.25em;
+    @include text-select();
   }
 
   pre {
     font-family: $font-family-mono;
     font-weight: $font-weight-normal;
+    @include text-select();
 
     > code {
       background-color: inherit;

@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-body {
+#{$prefix}-root {
   dl {
     dt {
       font-weight: $font-weight-normal;

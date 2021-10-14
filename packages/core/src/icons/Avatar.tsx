@@ -51,6 +51,8 @@ export interface AvatarProps extends RefProp, ElementProps {
    */
   onClick?: MouseEventHandler;
 
+  noBgForImage?: boolean;
+
   infograph?: {
     top?: IconType;
     bottom?: IconType;
@@ -87,6 +89,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
       size = "normal",
       color = "",
       bg = "",
+      noBgForImage,
       infograph
     },
     ref
@@ -95,7 +98,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
     useEffect(() => setSrc(image), [image]);
     const classes = useMemo(() => {
       const cls = ["ax-avatar", `ax-avatar--${size}`, className];
-      if (bg) {
+      if (!(!!src && noBgForImage) && bg) {
         cls.push(`ax-bg--${bg}`);
         cls.push(color ? `ax-color--${color}` : `ax-color--contrast`);
       } else if (color) {
@@ -106,7 +109,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
         cls.push("ax-color--base");
       }
       return cls.join(" ");
-    }, [className, size, bg, color]);
+    }, [size, className, src, noBgForImage, bg, color]);
     const fallback = useMemo(() => {
       const list: string[] = title.trim().split(" ");
       const first = list[0];
@@ -126,14 +129,14 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
     }, [fallback, icon, src, title]);
     const styles = useMemo(() => {
       const ret: KeyValue = {};
-      if (bg && isColor(bg)) {
+      if (!(!!src && noBgForImage) && bg && isColor(bg)) {
         ret.backgroundColor = bg;
       }
       if (color && isColor(color)) {
         ret.color = color;
       }
       return ret;
-    }, [bg, color]);
+    }, [bg, color, noBgForImage, src]);
     return (
       <AxTooltip content={title} ref={ref} isDisabled={!title}>
         <div

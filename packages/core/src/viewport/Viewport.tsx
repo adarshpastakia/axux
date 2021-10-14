@@ -34,7 +34,7 @@ export const AxViewport: ExtendedFC = forwardRef<HTMLDivElement, ViewportProps>(
       <GlobalProvider {...props}>
         <AxHotKeyWrapper>
           <Suspense fallback={<div>Loading...</div>}>
-            <div className="ax-viewport" ref={ref}>
+            <div className="ax-viewport ax-root" ref={ref}>
               <ViewportBreadcrumbs />
               <ErrorBoundary>{children}</ErrorBoundary>
             </div>

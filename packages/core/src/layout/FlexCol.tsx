@@ -42,6 +42,10 @@ export interface FlexColProps extends ElementProps, PaddingProps, RefProp<HTMLDi
    * Min width
    */
   minWidth?: number | string;
+  /**
+   * Max width
+   */
+  maxWidth?: number | string;
 }
 
 /**
@@ -76,6 +80,7 @@ export const AxFlexCol: FC<FlexColProps> = forwardRef<HTMLDivElement, FlexColPro
       stretchContent = false,
       align = "",
       width = "unset",
+      maxWidth = "unset",
       minWidth = "unset",
       height = "unset",
       minHeight = "unset",
@@ -140,9 +145,10 @@ export const AxFlexCol: FC<FlexColProps> = forwardRef<HTMLDivElement, FlexColPro
         height: isNumber(height) ? `${height}rem` : height,
         minHeight: isNumber(minHeight) ? `${minHeight}rem` : minHeight,
         width: isNumber(width) ? `${width}rem` : width,
+        maxWidth: isNumber(maxWidth) ? `${maxWidth}rem` : maxWidth,
         minWidth: isNumber(minWidth) ? `${minWidth}rem` : minWidth
       };
-    }, [height, minHeight, minWidth, width]);
+    }, [height, maxWidth, minHeight, minWidth, width]);
 
     return (
       <div ref={ref} className={classes} style={styles} {...aria}>

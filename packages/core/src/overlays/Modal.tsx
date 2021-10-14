@@ -132,7 +132,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
     );
 
     return createPortal(
-      <div className="ax-overlay__mask" ref={maskRef} onKeyDown={keyHandler}>
+      <div className="ax-overlay__mask ax-root" ref={maskRef} onKeyDown={keyHandler}>
         <div className="ax-modal" ref={ref} data-size={size} style={styles} tabIndex={0}>
           <div className="ax-modal__header">{header}</div>
           <div className="ax-modal__wrapper">

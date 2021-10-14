@@ -19,7 +19,7 @@
   @import url($local-font-serif);
 }
 
-body {
+#{$prefix}-root {
   box-sizing: border-box;
 
   *,
