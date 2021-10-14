@@ -11,7 +11,7 @@ import { Countries } from "./index";
 
 export namespace Format {
   const getPhone = (value = "", country = "ae") => {
-    const phone = value.match(/^[0+]/) ? value : `+${value}`;
+    const phone = value.match(/^[0+]/) ? value.replace(/^00/, "+") : `+${value}`;
     const number = parsePhoneNumberFromString(phone, country as CountryCode);
     return number
       ? number
