@@ -23,6 +23,12 @@
         box-shadow: none !important;
       }
     }
+    #{$base}__item {
+      max-width: 12em;
+      > div {
+        @include ellipsis();
+      }
+    }
     &[data-theme="classic"] #{$base}__item {
       &:not(:last-child)::after {
         content: "\25B9";

@@ -80,5 +80,17 @@
     tr:nth-child(odd) {
       background-color: inherit;
     }
+
+    &--selectable {
+      tbody > tr {
+        cursor: pointer;
+      }
+      tbody > tr:hover > td {
+        background: rgba($color-secondary, 0.1);
+      }
+      tbody > tr:active > td {
+        background: rgba($color-secondary, 0.2);
+      }
+    }
   }
 }

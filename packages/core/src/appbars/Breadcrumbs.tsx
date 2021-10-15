@@ -33,14 +33,14 @@ const LinkItem = ({
 }: AnyObject) =>
   to ? (
     <NavLink key={i} to={to} className={className} data-index={index} onClick={onClick}>
-      <div>
+      <div title={label}>
         {icon && <AxIcon icon={icon} />}
         {label && <span>{label}</span>}
       </div>
     </NavLink>
   ) : (
     <a key={i} className={className} data-index={index} onClick={onClick}>
-      <div>
+      <div title={label}>
         {icon && <AxIcon icon={icon} />}
         {label && <span>{label}</span>}
       </div>
@@ -68,7 +68,7 @@ const LinkPopover = ({ rest }: { rest: Breadcrumb[] }) => (
 );
 
 /** @internal */
-export const AxBreadcrumbBar: FC<Props> = ({ items, actions = [], theme }) => {
+export const AxBreadcrumbBar: FC<Props> = ({ items, actions = [], theme = "classic" }) => {
   const [start, rest, end] = useMemo(
     () =>
       items.length > 8 ? [items.slice(0, 3), items.slice(3, -3), items.slice(-3)] : [[], [], items],
