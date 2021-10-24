@@ -4,115 +4,123 @@
 // @license   : MIT
 
 import { AxAvatar, AxContent, AxPanel, AxText } from "@axux/core";
-import { HeaderProps } from "@axux/core/dist/appbars/Header";
-import { ElementProps } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay } from "@axux/date";
 import { isString } from "@axux/utilities";
-import { FC, Fragment, isValidElement, useEffect, useMemo, useState } from "react";
+import { CSSProperties, FC, Fragment, isValidElement, useEffect, useMemo, useState } from "react";
 import { TimelineRecord } from "./types";
 
-export interface TimelineEntryProps extends TimelineRecord {
-  headerProps?: Omit<HeaderProps, "title" | "onClick" | "onBack">;
-  headerAppend?: JSX.Element;
-  reverse?: boolean;
-  noline?: boolean;
-  isCollapsed?: boolean;
-  isCollapsable?: boolean;
+export interface TimelineEntryProps {
+  record: TimelineRecord;
+  // Virtualized props
+  index?: number;
+  style?: CSSProperties;
+  isScrolling?: boolean;
+  measure: () => void;
 }
 
-export const TimelineEntry: FC<Partial<TimelineEntryProps> & ElementProps> = ({
-  type = "comment",
-  event,
-  icon,
-  image,
-  noline,
-  reverse,
-  isCollapsed,
-  isCollapsable,
-  iconBg = "light",
-  iconColor = "contrast",
-  headerProps = { bg: "empty" },
-  headerAppend,
-  timestamp = new Date(),
-  username,
-  footer,
-  sidebar,
-  actions,
-  className,
-  children
+export const TimelineEntry: FC<TimelineEntryProps> = ({
+  record: {
+    type = "comment",
+    event,
+    icon,
+    image,
+    iconBg = "light",
+    iconColor = "contrast",
+    timestamp = new Date(),
+    username,
+    footer,
+    sidebar,
+    actions,
+    isCollapsed,
+    isCollapsable,
+    noline,
+    reverse,
+    headerProps = { bg: "empty" },
+    headerAppend,
+    className
+  },
+  children,
+  isScrolling,
+  measure,
+  index,
+  style
 }) => {
   const [eventRef, setEventRef] = useState<HTMLElement | null>(null);
   const entryIcon = useMemo(
     () => icon ?? (type === "comment" ? AppIcons.iconFace : AppIcons.iconDot),
     [icon, type]
   );
+
   useEffect(() => {
-    if (ResizeObserver) {
-      if (eventRef && eventRef.parentElement) {
+    if (ResizeObserver && !isScrolling) {
+      if (eventRef) {
         const el = eventRef;
-        const ph = eventRef.parentElement;
         const ob = new ResizeObserver(() => {
-          ph.style.height = `${el.offsetHeight ?? 48}px`;
+          const { offsetWidth: width, offsetHeight: height } = el;
+          console.log("======>", index, { width, height });
+          measure && measure();
         });
         ob.observe(el);
         return () => ob.disconnect();
       }
     }
-  }, [eventRef]);
+  }, [eventRef, isScrolling, measure, index]);
 
   return (
-    <section
-      ref={setEventRef}
-      className={`${className ?? ""}`}
+    <div
+      className={`ax-timeline__entry ${className ?? ""}`}
       data-entry={type}
       data-reverse={reverse}
       data-noline={noline}
+      style={style}
     >
-      <div className="ax-timeline__entry--icon">
-        <AxAvatar
-          size={type === "comment" ? "md" : "sm"}
-          title=""
-          image={image}
-          bg={iconBg as AnyObject}
-          icon={entryIcon}
-          color={iconColor as AnyObject}
-        />
-      </div>
-      <AxPanel
-        className="ax-timeline__entry--body"
-        maxHeight="80vh"
-        paper={type === "comment"}
-        isCollapsable={isCollapsable}
-        isCollapsed={isCollapsed}
-      >
-        <AxPanel.Header
-          {...headerProps}
-          className={`ax-timeline__entry--head ${headerProps.className ?? ""}`}
-          title={
-            <Fragment>
-              <AxText weight="medium">{username}</AxText>
-              <AxText>{event}</AxText>
-              <AxDateDisplay date={timestamp} format="dd MMM yyyy HH:mm:ss" />
-              {headerAppend}
-            </Fragment>
-          }
+      <section ref={setEventRef} className={className}>
+        <div className="ax-timeline__entry--icon">
+          <AxAvatar
+            size={type === "comment" ? "md" : "sm"}
+            title=""
+            image={image}
+            bg={iconBg as AnyObject}
+            icon={entryIcon}
+            color={iconColor as AnyObject}
+          />
+        </div>
+        <AxPanel
+          className="ax-timeline__entry--body"
+          maxHeight="80vh"
+          paper={type === "comment"}
+          isCollapsable={isCollapsable}
+          isCollapsed={isCollapsed}
         >
-          {actions}
-        </AxPanel.Header>
-        {type === "comment" && (
-          <AxContent>
-            {isString(children) && (
-              <AxText block clip={3}>
-                {children}
-              </AxText>
-            )}
-            {isValidElement(children) && children}
-          </AxContent>
-        )}
-        {footer && <AxPanel.Footer className="ax-timeline__entry--foot">{footer}</AxPanel.Footer>}
-      </AxPanel>
-      {sidebar && <div className="ax-timeline__entry--side">{sidebar}</div>}
-    </section>
+          <AxPanel.Header
+            {...headerProps}
+            className={`ax-timeline__entry--head ${headerProps.className ?? ""}`}
+            title={
+              <Fragment>
+                <AxText weight="medium">{username}</AxText>
+                <AxText>{event}</AxText>
+                <AxDateDisplay date={timestamp} format="dd MMM yyyy HH:mm:ss" />
+                {headerAppend}
+              </Fragment>
+            }
+          >
+            {actions}
+          </AxPanel.Header>
+          {type === "comment" && (
+            <AxContent>
+              {isString(children) && (
+                <AxText block clip={3}>
+                  {children}
+                </AxText>
+              )}
+              {isValidElement(children) && children}
+            </AxContent>
+          )}
+          {footer && <AxPanel.Footer className="ax-timeline__entry--foot">{footer}</AxPanel.Footer>}
+        </AxPanel>
+        {sidebar && <div className="ax-timeline__entry--side">{sidebar}</div>}
+      </section>
+    </div>
   );
 };

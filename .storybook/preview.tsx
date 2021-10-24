@@ -135,6 +135,7 @@ const withI18nProvider = (StoryComp: Story, context: StoryContext) => {
 export const decorators = [withI18nProvider, withTests({ results })];
 
 const channel = addons.getChannel();
+document.documentElement.classList.add(`ax-root`);
 channel.on("THEME_TOGGLE", (theme: string) => {
   addParameters({
     docs: {

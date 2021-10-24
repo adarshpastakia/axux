@@ -6,11 +6,16 @@
 import { AxButton, AxTextLoader } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { getChildProps } from "@axux/utilities/dist/react";
-import { Children, FC, useCallback, useLayoutEffect, useReducer, useRef, useState } from "react";
-import ResizeObserver from "resize-observer-polyfill";
+import { FC, useCallback, useRef, useState } from "react";
 import { TimelineEntry } from "./Entry";
 import { TimelineProps } from "./types";
+import {
+  AutoSizer,
+  CellMeasurer,
+  CellMeasurerCache,
+  List,
+  WindowScroller
+} from "react-virtualized";
 
 interface ExtendedFC extends FC<TimelineProps> {
   Entry: typeof TimelineEntry;
@@ -23,15 +28,23 @@ export const AxTimeline: ExtendedFC = ({
   onLoadMore,
   sortOrder,
   onSort,
+  list,
   className,
   ...aria
 }) => {
-  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [scrollerRef, setScrollerRef] = useState<HTMLDivElement>();
   const [canScroll, setCanScroll] = useState(0);
 
+  const cache = useRef(
+    new CellMeasurerCache({
+      defaultHeight: 50,
+      fixedWidth: true
+    })
+  );
+
   const checkScroll = useCallback(() => {
-    if (scrollerRef.current) {
-      const { scrollHeight, scrollTop, offsetHeight } = scrollerRef.current;
+    if (scrollerRef) {
+      const { scrollHeight, scrollTop, offsetHeight } = scrollerRef;
       if (scrollHeight === offsetHeight) setCanScroll(0);
       else if (scrollTop === 0) setCanScroll(1);
       else if (scrollTop + offsetHeight === scrollHeight) setCanScroll(2);
@@ -41,81 +54,75 @@ export const AxTimeline: ExtendedFC = ({
         !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100);
       }
     }
-  }, [canLoadMore, isLoading, onLoadMore]);
+  }, [scrollerRef, canLoadMore, isLoading, onLoadMore]);
 
-  const doScroll = useCallback((diff: number) => {
-    if (scrollerRef.current) {
-      const el = scrollerRef.current;
-      let scrollTo;
-      if (diff === -2) scrollTo = 0;
-      else if (diff === 2) scrollTo = el.scrollHeight;
-      else scrollTo = diff * el.offsetHeight + el.scrollTop;
-      el.scrollTo({
-        top: scrollTo,
-        behavior: "auto"
-      });
-    }
-  }, []);
-
-  useLayoutEffect(() => {
-    if (ResizeObserver) {
-      const ob = new ResizeObserver(checkScroll);
-      if (scrollerRef.current && scrollerRef.current.firstElementChild) {
-        ob.observe(scrollerRef.current.firstElementChild);
+  const doScroll = useCallback(
+    (diff: number) => {
+      if (scrollerRef) {
+        const el = scrollerRef;
+        let scrollTo;
+        if (diff === -2) scrollTo = 0;
+        else if (diff === 2) scrollTo = el.scrollHeight;
+        else scrollTo = diff * el.offsetHeight + el.scrollTop;
+        el.scrollTo({
+          top: scrollTo,
+          behavior: "auto"
+        });
       }
-      return () => ob.disconnect();
-    }
-  }, [checkScroll]);
-
-  const [visibilityMap, dispatch] = useReducer<
-    (state: boolean[], { index, visible }: KeyValue) => boolean[]
-  >((state, { index, visible }) => {
-    state.splice(index, 1, visible);
-    return [...state];
-  }, []);
-  useLayoutEffect(() => {
-    if (scrollerRef.current) {
-      const height = scrollerRef.current.offsetHeight;
-      const ob = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) =>
-            dispatch({
-              index: parseInt((entry.target as HTMLElement).dataset.index + ""),
-              visible: entry.isIntersecting
-            })
-          );
-        },
-        {
-          rootMargin: `${height}px 0px ${height}px 0px`,
-          root: scrollerRef.current
-        }
-      );
-      scrollerRef.current.querySelectorAll(".ax-timeline__entry").forEach((e) => ob.observe(e));
-      return () => ob.disconnect();
-    }
-  }, [children]);
+    },
+    [scrollerRef]
+  );
 
   return (
     <div
       className={`ax-timeline__panel ${className ?? ""}`}
       onScroll={checkScroll}
-      ref={scrollerRef}
+      ref={(el) => setScrollerRef(el as HTMLDivElement)}
       {...aria}
     >
       <div className="ax-timeline__wrapper">
-        <div>
-          {Children.map(children, (child, i) => (
-            <section
-              key={i}
-              data-index={i}
-              className="ax-timeline__entry"
-              data-collapsed={getChildProps(child).isCollapsed}
-            >
-              {visibilityMap[i] && child}
-            </section>
-          ))}
-          {isLoading && <AxTextLoader />}
-        </div>
+        <WindowScroller scrollElement={scrollerRef}>
+          {({ height, isScrolling, registerChild, scrollTop }) => (
+            <div>
+              <AutoSizer disableHeight>
+                {({ width }) => (
+                  <div ref={registerChild}>
+                    <List
+                      autoHeight
+                      width={width}
+                      height={height}
+                      isScrolling={isScrolling}
+                      deferredMeasurementCache={cache.current}
+                      rowHeight={cache.current.rowHeight}
+                      rowCount={list.length}
+                      rowRenderer={({ index, key, parent, style }: AnyObject) => (
+                        <CellMeasurer
+                          cache={cache.current}
+                          columnIndex={0}
+                          key={key}
+                          parent={parent}
+                          rowIndex={index}
+                        >
+                          {({ measure }) =>
+                            children({
+                              record: list[index],
+                              index,
+                              style,
+                              measure,
+                              isScrolling
+                            })
+                          }
+                        </CellMeasurer>
+                      )}
+                      scrollTop={scrollTop}
+                    />
+                    {isLoading && <AxTextLoader />}
+                  </div>
+                )}
+              </AutoSizer>
+            </div>
+          )}
+        </WindowScroller>
         <div>
           <AxButton.Group vertical>
             <AxButton
