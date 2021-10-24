@@ -21,7 +21,7 @@ import { GridProps } from "./types";
  * TODO: implement locked columns
  * TODO: implement footer, dynamic / footer record
  */
-export const AxGridPanel = <T extends KeyValue>({
+export const AxDatagrid = <T extends KeyValue>({
   isLoading,
   data,
   emptyDisplay,

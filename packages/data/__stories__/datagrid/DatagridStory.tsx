@@ -18,7 +18,7 @@ import { Countries, Country } from "@axux/utilities";
 import { Story } from "@storybook/react";
 import { useCallback, useEffect, useMemo } from "react";
 import {
-  AxGridPanel,
+  AxDatagrid,
   AxPagination,
   AxRecordCounter,
   GridColumn,
@@ -144,7 +144,7 @@ const Template: Story<GridProps<Country>> = (props) => {
             <AxPagination {...pager} />
           </AxFlexBox.Col>
         </AxSection.Head>
-        <AxGridPanel<Country>
+        <AxDatagrid<Country>
           {...props}
           data={pageRecords}
           columns={columns}
@@ -163,10 +163,10 @@ const Template: Story<GridProps<Country>> = (props) => {
   );
 };
 
-export const GridStory = Template.bind({});
-GridStory.args = {
+export const DatagridStory = Template.bind({});
+DatagridStory.args = {
   isSelectable: true,
   data: Countries.list.map((c) => ({ ...c, strength: Math.random() * 100 }))
 };
 
-export default { title: "Example/Grid", component: AxGridPanel };
+export default { title: "Example/Grid", component: AxDatagrid };

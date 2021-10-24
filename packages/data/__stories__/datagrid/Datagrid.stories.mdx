@@ -1,0 +1,30 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxDatagrid } from "../../src";
+import { DatagridStory } from "./DatagridStory";
+
+<Meta title="@data/Datagrid" component={AxDatagrid} parameters={{ jest: ["Datagrid.test.tsx"] }} />
+
+<Anchor storyId="data-datagrid--datagrid">
+  <Title>Datagrid</Title>
+</Anchor>
+
+<Description of={AxDatagrid} />
+
+<Canvas>
+  <Story name="Datagrid" parameters={{ layout: "none" }} height="30rem">
+    {DatagridStory}
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxDatagrid} sort="requiredFirst" />

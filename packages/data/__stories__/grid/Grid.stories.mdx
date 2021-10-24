@@ -8,23 +8,59 @@ import {
   Story,
   Title
 } from "@storybook/addon-docs";
-import { AxGridPanel } from "../../src";
-import { GridStory } from "./GridStory";
+import { AxGridView } from "../../src";
+import { mdiComment, mdiStar } from "@mdi/js";
+import { records } from "./records";
+import { LIPSUM } from "../../../../storybook/components/Lipsum";
+import { AxButton, AxContent, AxPage, AxPanel, AxText, AxViewport } from "@axux/core";
 
-<Meta title="@data/Grid" component={AxGridPanel} parameters={{ jest: ["Grid.test.tsx"] }} />
+<Meta title="@data/Grid" component={AxGridView} parameters={{ jest: ["Grid.test.tsx"] }} />
 
 <Anchor storyId="data-grid--grid">
   <Title>Grid</Title>
 </Anchor>
 
-<Description of={AxGridPanel} />
+<Description of={AxGridView} />
 
 <Canvas>
   <Story name="Grid" parameters={{ layout: "none" }} height="30rem">
-    {GridStory}
+    <AxViewport>
+      <AxPage>
+        <AxGridView list={records} sortOrder="asc">
+          {(props) => (
+            <AxGridView.Item {...props}>
+              <div className="ax-flex">
+                <AxPanel title="Grid cell" className="ax-col ax-col--fill" paper>
+                  <AxContent>
+                    <div className="ax-row ax-gutter">
+                      <img
+                        alt="img"
+                        className="ax-col ax-col--auto"
+                        src="https://picsum.photos/id/128/172"
+                        width={128}
+                        height={172}
+                      />
+                      <div className="ax-col ax-col--fill">
+                        <AxText clip={4}>{LIPSUM.line}</AxText>
+                      </div>
+                    </div>
+                  </AxContent>
+                </AxPanel>
+                <div className="ax-col ax-col--auto ax-margin--t--sm">
+                  <AxButton.Group vertical>
+                    <AxButton icon={mdiStar} />
+                    <AxButton icon={mdiComment} />
+                  </AxButton.Group>
+                </div>
+              </div>
+            </AxGridView.Item>
+          )}
+        </AxGridView>
+      </AxPage>
+    </AxViewport>
   </Story>
 </Canvas>
 
 <Heading>Props</Heading>
 
-<ArgsTable of={AxGridPanel} sort="requiredFirst" />
+<ArgsTable of={AxGridView} sort="requiredFirst" />

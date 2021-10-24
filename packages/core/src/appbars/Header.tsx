@@ -73,7 +73,7 @@ export const AxHeader: FC<HeaderProps> = ({
 }) => {
   const classes = useMemo(() => {
     const cls = ["ax-header", className ?? ""];
-    cls.push(`ax-bg--${bg ?? "base"}`);
+    cls.push(`ax-bg--${bg ?? "panel"}`);
     if (!color) {
       cls.push(`ax-color--contrast`);
     }
