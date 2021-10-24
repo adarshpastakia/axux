@@ -4,8 +4,8 @@
 // @license   : MIT
 
 import { isColor, isNumber, isString, isSvgPath, isTrue } from "@axux/utilities";
-import { forwardRef, isValidElement, MouseEventHandler, useMemo, VFC } from "react";
-import { AllColors, ElementProps, RefProp, Size, SizeList } from "../types";
+import { forwardRef, isValidElement, MouseEventHandler, useMemo } from "react";
+import { AllColors, ElementProps, RefProp, Size, SizeList, VFC } from "../types";
 
 /** @internal */
 export interface IconProps extends RefProp, ElementProps {

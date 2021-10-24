@@ -108,7 +108,7 @@ const Template: Story<GridProps<Country>> = (props) => {
         width: "12rem",
         align: "center",
         isSortable: true,
-        render: (value) => <AxMeter value={value} showLabel />
+        render: (value) => <AxMeter value={value} showLabel color="primary" />
       }
     ],
     []

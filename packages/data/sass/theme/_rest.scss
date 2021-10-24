@@ -9,6 +9,17 @@
   }
 }
 
+#{$prefix}-checkList {
+  &__item {
+    &:hover {
+      background-color: rgba($color-primary, 0.25);
+    }
+    &:active {
+      background-color: rgba($color-primary, 0.5);
+    }
+  }
+}
+
 #{$prefix}-profileCard {
   @include paper();
 

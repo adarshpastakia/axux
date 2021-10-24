@@ -3,8 +3,8 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useMemo, VFC } from "react";
-import { Color } from "../types";
+import { useMemo } from "react";
+import { Color, VFC } from "../types";
 
 /** @internal */
 export interface MeterProps {

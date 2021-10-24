@@ -3,8 +3,8 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { FC, VFC } from "react";
-import { Size } from "../types";
+import { FC } from "react";
+import { Size, VFC } from "../types";
 
 const Flex: VFC = () => <div style={{ flex: "1 1 1em" }} />;
 

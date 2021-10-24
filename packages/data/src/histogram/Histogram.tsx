@@ -4,8 +4,9 @@
 // @license   : MIT
 
 import { AxContent } from "@axux/core";
+import { VFC } from "@axux/core/dist/types";
 import { Format } from "@axux/utilities";
-import { Fragment, VFC } from "react";
+import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { HistogramProps } from "./types";
 
@@ -30,7 +31,7 @@ export const AxHistogram: VFC<HistogramProps> = ({
               key={i}
               data-disabled={rec.count <= 0}
               onClick={() => onClick && onClick(rec)}
-              className={`ax-histogram__meter ax-color--${rec.color ?? color ?? "secondary"} ${
+              className={`ax-histogram__meter ax-color--${rec.color ?? color ?? "info"} ${
                 !!onClick && rec.count > 0 ? "ax-clickable" : ""
               }`}
               style={{ "--meter": rec.count / Math.max(1, total) } as AnyObject}

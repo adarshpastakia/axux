@@ -3,10 +3,10 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useMemo, VFC } from "react";
+import { useMemo } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
-import { AllColors, IconProps } from "../types";
+import { AllColors, IconProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */

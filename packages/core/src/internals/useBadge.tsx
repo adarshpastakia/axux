@@ -4,12 +4,12 @@
 // @license   : MIT
 
 import { isBoolean, isColor, isEmpty, isObject, isTrue } from "@axux/utilities";
-import { useMemo, VFC } from "react";
-import { AllColors } from "../types";
+import { useMemo } from "react";
+import { AllColors, VFC } from "../types";
 
 /** @internal */
 export interface BadgeProps {
-  value?: string | number;
+  value?: string | number | JSX.Element;
   color?: AllColors;
   pulse?: boolean;
 }

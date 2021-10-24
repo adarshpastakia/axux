@@ -3,10 +3,10 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useCallback, useEffect, useState, VFC } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxTooltip } from "../overlays/Tooltip";
-import { Size } from "../types";
+import { Size, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 export interface CopyProps {

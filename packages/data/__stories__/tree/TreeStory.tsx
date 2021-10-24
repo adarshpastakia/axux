@@ -3,11 +3,12 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxPage, AxSection, AxViewport } from "@axux/core";
+import { AxContent, AxPage, AxSection, AxViewport } from "@axux/core";
 import { Countries } from "@axux/utilities";
 import { Country } from "@axux/utilities/dist/_countries";
 import { Story } from "@storybook/react";
 import { useMemo } from "react";
+import { AxCheckList } from "../../src";
 import { AxTreePanel } from "../../src";
 import { TreeNode, TreePanelProps } from "../../src/tree/types";
 
@@ -42,6 +43,21 @@ const Template: Story<TreePanelProps> = (props) => {
       <AxPage>
         <AxSection.Side width="24rem" isResizeable>
           <AxTreePanel {...props} data={data} />
+        </AxSection.Side>
+        <AxSection.Side end width="24rem">
+          <AxContent>
+            <AxCheckList
+              items={new Array(20)
+                .fill(0)
+                .map((_, i) => ({
+                  id: `key${i}`,
+                  label: `Item ${i}`,
+                  count: Math.floor(Math.random() * 99)
+                }))
+                .sort((a, b) => (a.count > b.count ? -1 : 1))
+                .map((item) => ({ ...item, disabled: item.count < 20, badge: item.count }))}
+            />
+          </AxContent>
         </AxSection.Side>
       </AxPage>
     </AxViewport>

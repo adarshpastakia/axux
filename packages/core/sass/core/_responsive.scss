@@ -21,6 +21,11 @@
 }
 
 #{$prefix} {
+  &-spacing {
+    > * {
+      margin-inline-end: 0.5rem;
+    }
+  }
   &-flex {
     @extend %ui-flex;
     align-items: stretch;

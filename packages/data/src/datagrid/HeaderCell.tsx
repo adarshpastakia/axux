@@ -5,8 +5,9 @@
 
 import { AxButton, AxIcon, AxTooltip } from "@axux/core";
 import { useResize } from "@axux/core/dist/internals/useResize";
+import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { Fragment, useMemo, useRef, useState, VFC } from "react";
+import { Fragment, useMemo, useRef, useState } from "react";
 import { useGridContext } from "./GridContext";
 import { GridColumn } from "./types";
 

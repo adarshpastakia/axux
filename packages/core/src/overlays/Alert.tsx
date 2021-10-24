@@ -3,12 +3,12 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { ReactNodeArray, useCallback, useMemo, VFC } from "react";
+import { ReactNodeArray, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
 import { AlertClose } from "../internals/AlertClose";
-import { Color, IconProps } from "../types";
+import { Color, IconProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 export interface AlertProps extends IconProps {

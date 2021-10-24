@@ -46,14 +46,14 @@ import { LIPSUM } from "../../../../storybook/components/Lipsum";
 
 <Canvas columns={6}>
   <Story name="Weights">
-    <AxFlexBox.Row>
+    <AxFlexBox.Spaced>
       <AxText weight="black">Black text</AxText>
       <AxText weight="bold">Bold text</AxText>
       <AxText weight="medium">Medium text</AxText>
       <AxText weight="normal">Normal text</AxText>
       <AxText weight="light">Light text</AxText>
       <AxText weight="thin">Thin text</AxText>
-    </AxFlexBox.Row>
+    </AxFlexBox.Spaced>
   </Story>
 </Canvas>
 
@@ -63,7 +63,7 @@ import { LIPSUM } from "../../../../storybook/components/Lipsum";
 
 <Canvas columns={6}>
   <Story name="Sizes">
-    <AxFlexBox.Row align="middle">
+    <AxFlexBox.Spaced>
       <AxText size="xs">XSmall text</AxText>
       <AxText size="sm">Small text</AxText>
       <AxText size="default">Default text</AxText>
@@ -73,7 +73,7 @@ import { LIPSUM } from "../../../../storybook/components/Lipsum";
       <AxText className="ax-col--full" size="2em">
         2em text
       </AxText>
-    </AxFlexBox.Row>
+    </AxFlexBox.Spaced>
   </Story>
 </Canvas>
 
@@ -98,7 +98,7 @@ import { LIPSUM } from "../../../../storybook/components/Lipsum";
 
 <Canvas>
   <Story name="Marked text">
-    <AxText mark={["ipsum", "sapien"]}>{LIPSUM.para}</AxText>
+    <AxText.Marked mark={["ipsum", "sapien"]}>{LIPSUM.para}</AxText.Marked>
   </Story>
 </Canvas>
 
@@ -108,15 +108,15 @@ import { LIPSUM } from "../../../../storybook/components/Lipsum";
 
 <Canvas>
   <Story name="Tooltip text">
-    <AxText
+    <AxText.Abbr
       abbr={[
         ["IPSUM", "Test thing"],
-        ["eros", "Someone"],
-        ["velit", "Another"]
+        ["eros", "Someone", "red"],
+        ["velit", "Another", "indigo"]
       ]}
     >
       {LIPSUM.para}
-    </AxText>
+    </AxText.Abbr>
   </Story>
 </Canvas>
 

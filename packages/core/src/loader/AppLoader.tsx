@@ -3,8 +3,8 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useEffect, VFC } from "react";
-import { ElementProps } from "../types";
+import { useEffect } from "react";
+import { ElementProps, VFC } from "../types";
 import { AxHeading } from "../typography/Heading";
 
 /** @internal */

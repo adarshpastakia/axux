@@ -4,10 +4,11 @@
 // @license   : MIT
 
 import { AxButton } from "@axux/core";
+import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxField } from "@axux/form";
 import { isNil } from "@axux/utilities";
-import { Fragment, useCallback, useEffect, useState, VFC } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TreeNode } from "./TreeNode";
 import { InternalNode, TreeNode as TreeNodeType, TreePanelProps } from "./types";

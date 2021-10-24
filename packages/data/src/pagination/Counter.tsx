@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { VFC } from "react";
+import { VFC } from "@axux/core/dist/types";
 import { useTranslation } from "react-i18next";
 
 export interface CounterProps {

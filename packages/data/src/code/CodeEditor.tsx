@@ -4,8 +4,8 @@
 // @license   : MIT
 
 import { AxSection, useAxResizeObserver } from "@axux/core";
-import { ElementProps } from "@axux/core/dist/types";
-import { useLayoutEffect, useRef, useState, VFC } from "react";
+import { ElementProps, VFC } from "@axux/core/dist/types";
+import { useLayoutEffect, useRef, useState } from "react";
 import MonacoEditor from "react-monaco-editor";
 import { CodeEditorTools } from "./CodeEditorTools";
 

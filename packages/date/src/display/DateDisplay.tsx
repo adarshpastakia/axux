@@ -4,8 +4,9 @@
 // @license   : MIT
 
 import { AxText, AxTooltip } from "@axux/core";
+import { VFC } from "@axux/core/dist/types";
 import { TextProps } from "@axux/core/dist/typography/Text";
-import { useMemo, VFC } from "react";
+import { useMemo } from "react";
 import { useLocale } from "../hooks/useLocale";
 import { DateLike } from "../types";
 import { dateFormat } from "../utils";

@@ -3,6 +3,25 @@
 // @copyright : 2021
 // @license   : MIT
 
+#{$prefix}-checkList {
+  &__label {
+    padding: 0 0.25em;
+  }
+  &__item {
+    cursor: pointer;
+    margin-bottom: 0.125em;
+
+    > div:first-child {
+      line-height: 1em;
+    }
+
+    &[data-disabled="true"] {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}
+
 #{$prefix}-tree {
   &__panel {
     display: grid;

@@ -4,8 +4,9 @@
 // @license   : MIT
 
 import { AxButton, AxDivider, AxToolbar } from "@axux/core";
+import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { useCallback, VFC } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { monaco } from "react-monaco-editor";
 

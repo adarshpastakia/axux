@@ -21,6 +21,7 @@ export { AxGridView } from "./grid/Grid";
 export { AxProfileCard } from "./profile/ProfileCard";
 export { AxCodeEditor } from "./code/CodeEditor";
 export { AxJsonView } from "./json/JsonView";
+export { AxCheckList } from "./checklist/CheckList";
 export { AxPagination } from "./pagination/Pagination";
 export { AxRecordCounter } from "./pagination/Counter";
 

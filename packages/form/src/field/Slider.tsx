@@ -4,9 +4,10 @@
 // @license   : MIT
 
 import { AxIcon, AxTooltip } from "@axux/core";
+import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { Format, isEmpty } from "@axux/utilities";
-import { memo, useCallback, useEffect, useMemo, useState, VFC } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { AxFieldController } from "../internals/FieldController";
 import { AxFieldLabel } from "../internals/FieldLabel";
 import { ControllerProps, FieldStateProps, WrapperProps } from "../types";
@@ -50,7 +51,7 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
     showValue,
     isDisabled,
     isReadonly,
-    vertical,
+    vertical = false,
     label,
     value: _value = 0,
     onChange,
@@ -122,7 +123,7 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
               )}
               <div className="ax-field__slider" data-vertical={vertical}>
                 {showLabel && <span>{Format.number(min)}</span>}
-                <div className="ax-col--fill">
+                <div className="ax-field__slider--container">
                   <div
                     className="ax-field__slider--wrapper"
                     style={{

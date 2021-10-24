@@ -3,12 +3,12 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useContext, VFC } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
 import { Globals } from "../context/Globals";
 import { AxMenuItem } from "../menu/MenuItem";
-import { ElementProps } from "../types";
+import { ElementProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /**

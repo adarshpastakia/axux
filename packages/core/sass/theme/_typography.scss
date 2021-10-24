@@ -38,10 +38,6 @@
     color: rgba($color-danger, 0.9);
   }
 
-  &-abbr {
-    border-bottom: 1px dashed rgba($base-color, 0.75);
-  }
-
   &-locale--link {
     &:hover {
       background-color: lighter($color-primary, 0.5);

@@ -3,19 +3,98 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { FC } from "react";
+import { isColor, isEmpty, isString, tokenize } from "@axux/utilities";
+import { FC, forwardRef, Fragment, useCallback, useImperativeHandle, useMemo, useRef } from "react";
 import { AxTooltip } from "../overlays/Tooltip";
-import { isColor } from "@axux/utilities";
+import { ElementProps } from "../types";
 
 export interface AbbrProps {
   tooltip: string;
   color?: string;
 }
 
-export const AxAbbr: FC<AbbrProps> = ({ tooltip, color, children }) => (
+const Abbr: FC<AbbrProps> = ({ tooltip, color, children }) => (
   <AxTooltip content={tooltip}>
     <abbr className={`ax-abbr ax-color--${color}`} style={color && isColor(color) ? { color } : {}}>
       {children}
     </abbr>
   </AxTooltip>
+);
+
+/** @internal */
+export interface AbbrTextProps extends ElementProps {
+  /**
+   * Tooltip for text
+   */
+  abbr?: [textPart: string, tooltip: string, color?: string][];
+
+  abbrRenderer?: (part: string[]) => JSX.Element;
+}
+
+/**
+ * Text block for applying various stylings to textual content
+ * @param children
+ * @param className
+ * @param abbr
+ * @param aria-*
+ * @constructor
+ * @internal
+ */
+export const AbbrText: FC<AbbrTextProps> = forwardRef<HTMLSpanElement, AbbrTextProps>(
+  ({ children, className, abbr, abbrRenderer, ...aria }, ref) => {
+    const textRef = useRef<HTMLSpanElement>(null);
+
+    useImperativeHandle(ref, () => textRef.current as HTMLSpanElement);
+
+    const abbrRender = useCallback(
+      (text: string, tooltip: string, color = "") => {
+        if (abbrRenderer) {
+          return abbrRenderer([text, tooltip, color]);
+        }
+        return (
+          <Abbr tooltip={tooltip} color={color}>
+            {text}
+          </Abbr>
+        );
+      },
+      [abbrRenderer]
+    );
+
+    const inner = useMemo(() => {
+      if (isString(children)) {
+        if (!isEmpty(abbr)) {
+          const tokens = tokenize(
+            children,
+            abbr.map(([keyword]) => keyword)
+          );
+          const titles: KeyValue = abbr.reduce(
+            (t, [a, tooltip = "", color = ""]) => ({ ...t, [a.toLowerCase()]: { tooltip, color } }),
+            {}
+          );
+          return (
+            <Fragment>
+              {tokens.map(([start, text], i) => {
+                const { tooltip = "", color = "" } = titles[text.toLowerCase()] ?? {};
+                return (
+                  <Fragment key={i}>
+                    {start ? <span>{start}</span> : null}
+                    {text ? abbrRender(text, tooltip, color) : null}
+                  </Fragment>
+                );
+              })}
+            </Fragment>
+          );
+        }
+      }
+      return children;
+    }, [children, abbr, abbrRender]);
+
+    return (
+      <Fragment>
+        <span className={`ax-text ${className ?? ""}`} {...aria} ref={textRef}>
+          {inner}
+        </span>
+      </Fragment>
+    );
+  }
 );

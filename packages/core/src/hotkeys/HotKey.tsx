@@ -3,7 +3,8 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useEffect, VFC } from "react";
+import { useEffect } from "react";
+import { VFC } from "../types";
 import { HotKey } from "./commons";
 import { useAxHotKeys } from "./HotKeyWrapper";
 

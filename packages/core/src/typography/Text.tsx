@@ -3,12 +3,11 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isColor, isEmpty, isNumber, isString, tokenize } from "@axux/utilities";
+import { isColor, isNumber, isString } from "@axux/utilities";
 import {
   FC,
   forwardRef,
   Fragment,
-  useCallback,
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
@@ -26,7 +25,8 @@ import {
   TextTransform,
   Weight
 } from "../types";
-import { AxAbbr } from "./Abbr";
+import { AbbrText } from "./Abbr";
+import { MarkedText } from "./Marked";
 
 /** @internal */
 export interface TextProps extends ElementProps {
@@ -71,19 +71,14 @@ export interface TextProps extends ElementProps {
    * Clip single line with ellipsis
    */
   ellipsis?: boolean;
-  /**
-   * Mark text within
-   */
-  mark?: string | string[];
-  /**
-   * Tooltip for text
-   */
-  abbr?: [textPart: string, tooltip: string, color?: string][];
 
   align?: TextAlign;
   transform?: TextTransform;
+}
 
-  abbrRenderer?: (part: string[]) => JSX.Element;
+interface Extended extends FC<TextProps> {
+  Abbr: typeof AbbrText;
+  Marked: typeof MarkedText;
 }
 
 /**
@@ -105,7 +100,7 @@ export interface TextProps extends ElementProps {
  * @constructor
  * @internal
  */
-export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
+export const AxText: Extended = forwardRef<HTMLSpanElement, TextProps>(
   (
     {
       children,
@@ -117,11 +112,8 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       color,
       clip,
       block,
-      mark,
-      abbr,
       align,
       transform,
-      abbrRenderer,
       ellipsis,
       noWrap,
       wordBreak,
@@ -219,59 +211,6 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       setCanClip(false);
     }, [clip, children]);
 
-    const abbrRender = useCallback(
-      (text: string, tooltip: string, color = "") => {
-        if (abbrRenderer) {
-          return abbrRenderer([text, tooltip, color]);
-        }
-        return (
-          <AxAbbr tooltip={tooltip} color={color}>
-            {text}
-          </AxAbbr>
-        );
-      },
-      [abbrRenderer]
-    );
-
-    const inner = useMemo(() => {
-      if (isString(children)) {
-        const tokens = tokenize(children, abbr ? abbr.map(([keyword]) => keyword) : mark);
-
-        if (!isEmpty(abbr)) {
-          const titles: KeyValue = abbr.reduce(
-            (t, [a, tooltip = "", color = ""]) => ({ ...t, [a.toLowerCase()]: { tooltip, color } }),
-            {}
-          );
-          return (
-            <Fragment>
-              {tokens.map(([start, text], i) => {
-                const { tooltip = "", color = "" } = titles[text.toLowerCase()] ?? {};
-                return (
-                  <Fragment key={i}>
-                    {start ? <span>{start}</span> : null}
-                    {text ? abbrRender(text, tooltip, color) : null}
-                  </Fragment>
-                );
-              })}
-            </Fragment>
-          );
-        }
-        if (!isEmpty(mark)) {
-          return (
-            <Fragment>
-              {tokens.map(([start, text], i) => (
-                <Fragment key={i}>
-                  {start ? <span>{start}</span> : null}
-                  {text ? <mark className="ax-mark">{text}</mark> : null}
-                </Fragment>
-              ))}
-            </Fragment>
-          );
-        }
-      }
-      return children;
-    }, [children, abbr, mark, abbrRender]);
-
     return (
       <Fragment>
         <span
@@ -280,7 +219,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
           style={styles}
           ref={textRef}
         >
-          {inner}
+          {children}
         </span>
         {canClip && (
           <span className="ax-block ax-align--end">
@@ -292,5 +231,10 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       </Fragment>
     );
   }
-);
+) as AnyObject;
+AxText.Abbr = AbbrText;
+AxText.Marked = MarkedText;
+
 AxText.displayName = "AxText";
+AxText.Abbr.displayName = "AxText.Abbr";
+AxText.Marked.displayName = "AxText.Marked";

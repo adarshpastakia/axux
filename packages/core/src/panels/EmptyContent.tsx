@@ -3,10 +3,10 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { cloneElement, ReactElement, ReactNodeArray, VFC } from "react";
+import { cloneElement, ReactElement, ReactNodeArray } from "react";
 import { AxToolbar } from "../appbars/Toolbar";
 import { AxIcon } from "../icons/Icon";
-import { IconProps } from "../types";
+import { IconProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */

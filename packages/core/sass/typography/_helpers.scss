@@ -241,6 +241,10 @@
         padding-left: 0.25em;
       }
     }
+
+    > abbr {
+      border-bottom: 1px dashed currentColor;
+    }
   }
 
   // alignments

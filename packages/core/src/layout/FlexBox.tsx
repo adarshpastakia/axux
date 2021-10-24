@@ -23,7 +23,12 @@ export interface FlexBoxProps extends ElementProps, RefProp<HTMLDivElement> {
 interface ExtendedFC extends FC<FlexBoxProps> {
   Row: typeof AxFlexRow;
   Col: typeof AxFlexCol;
+  Spaced: typeof Spacing;
 }
+
+const Spacing: FC<ElementProps> = ({ className, ...props }) => {
+  return <div className={`ax-spacing ${className ?? ""}`} {...props} />;
+};
 
 /**
  * FlexBox layout components
@@ -51,7 +56,9 @@ export const AxFlexBox: ExtendedFC = forwardRef<HTMLDivElement, FlexBoxProps>(
 ) as AnyObject;
 AxFlexBox.Row = AxFlexRow;
 AxFlexBox.Col = AxFlexCol;
+AxFlexBox.Spaced = Spacing;
 
 AxFlexBox.displayName = "AxFlexBox";
 AxFlexBox.Row.displayName = "AxFlexBox.Row";
 AxFlexBox.Col.displayName = "AxFlexBox.Col";
+AxFlexBox.Spaced.displayName = "AxFlexBox.Spaced";

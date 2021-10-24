@@ -3,8 +3,9 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useMemo, VFC } from "react";
+import { useMemo } from "react";
 import { AxTag } from "../buttons/Tag";
+import { VFC } from "../types";
 import { HotKey, reduceHotKey } from "./commons";
 
 /**

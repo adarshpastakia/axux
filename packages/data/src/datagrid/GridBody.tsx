@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { VFC } from "react";
+import { VFC } from "@axux/core/dist/types";
 import { BodyCell } from "./BodyCell";
 import { useGridContext } from "./GridContext";
 

@@ -23,6 +23,10 @@
       }
     }
 
+    &--container {
+      flex: 1 1 1em;
+    }
+
     &--wrapper {
       position: relative;
 
@@ -121,14 +125,14 @@
           height: 0.4em;
           pointer-events: none;
           position: relative;
-          width: 0.5em;
+          width: 0.4em;
           z-index: 1;
         }
       }
     }
   }
 
-  &__slider:not([data-vertical="true"]) {
+  &__slider[data-vertical="false"] {
     align-items: flex-start;
 
     > span {
@@ -175,7 +179,7 @@
       }
     }
 
-    #{$base}-ticks {
+    #{$base}--ticks {
       flex-flow: row nowrap;
       top: -0.125em;
 
@@ -195,14 +199,18 @@
   }
 
   &__slider[data-vertical="true"] {
-    align-items: center;
-    flex-flow: column nowrap;
+    align-items: flex-start;
+    flex-flow: column-reverse nowrap;
     width: 2em;
 
     > span {
-      display: block;
+      align-self: stretch;
       padding: 0.25em;
       text-align: center;
+    }
+
+    #{$base}--container {
+      display: flex;
     }
 
     #{$base}--wrapper {
@@ -234,19 +242,18 @@
       }
     }
 
-    #{$base}-ticks {
-      flex-flow: column nowrap;
+    #{$base}--ticks {
+      flex-flow: column-reverse nowrap;
       top: -0.125em;
 
       button {
         span {
           left: 0.25em;
-          top: 50%;
           transform: translateY(-50%);
         }
 
         &::before {
-          left: -1.9em;
+          left: -1.8em;
           top: 0.25em;
         }
       }

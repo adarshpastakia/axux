@@ -4,8 +4,9 @@
 // @license   : MIT
 
 import { AxIcon } from "@axux/core";
+import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { memo, VFC } from "react";
+import { memo } from "react";
 
 /** @internal */
 export interface RadioProps {

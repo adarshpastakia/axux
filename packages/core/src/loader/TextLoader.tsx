@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { VFC } from "react";
+import { VFC } from "../types";
 
 export const AxTextLoader: VFC = () => {
   return (

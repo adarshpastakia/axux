@@ -3,9 +3,8 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { VFC } from "react";
 import { AxIcon } from "../icons/Icon";
-import { AllColors, Size } from "../types";
+import { AllColors, Size, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */

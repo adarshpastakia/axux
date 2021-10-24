@@ -4,11 +4,11 @@
 // @license   : MIT
 
 import { AxButton, AxContent, AxCopy, AxIcon } from "@axux/core";
-import { ElementProps } from "@axux/core/dist/types";
+import { ElementProps, VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay, DateUtils } from "@axux/date";
 import { Format, isArray, isBoolean, isEmpty, isNil, isNumber, isObject } from "@axux/utilities";
-import { FC, Fragment, useCallback, useEffect, useMemo, useState, VFC } from "react";
+import { FC, Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export interface JsonViewProps extends ElementProps {

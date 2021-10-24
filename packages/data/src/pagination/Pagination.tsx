@@ -4,8 +4,8 @@
 // @license   : MIT
 
 import { AxButton } from "@axux/core";
+import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { VFC } from "react";
 
 export interface PaginationProps {
   page: number;

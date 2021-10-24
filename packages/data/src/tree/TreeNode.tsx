@@ -5,9 +5,10 @@
 
 import { AxIcon } from "@axux/core";
 import { useBadge } from "@axux/core/dist/internals/useBadge";
+import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { isEmpty, isNumber } from "@axux/utilities";
-import { Fragment, useLayoutEffect, useMemo, useState, VFC } from "react";
+import { Fragment, useLayoutEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { InternalNode, TreePanelProps } from "./types";
 
