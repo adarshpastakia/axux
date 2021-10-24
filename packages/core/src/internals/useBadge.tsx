@@ -3,9 +3,8 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isBoolean, isEmpty, isObject, isTrue } from "@axux/utilities";
+import { isBoolean, isColor, isEmpty, isObject, isTrue } from "@axux/utilities";
 import { useMemo, VFC } from "react";
-import { isColor } from "../helpers";
 import { AllColors } from "../types";
 
 /** @internal */

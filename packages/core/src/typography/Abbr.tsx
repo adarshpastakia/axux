@@ -4,8 +4,8 @@
 // @license   : MIT
 
 import { FC } from "react";
-import { isColor } from "../helpers";
 import { AxTooltip } from "../overlays/Tooltip";
+import { isColor } from "@axux/utilities";
 
 export interface AbbrProps {
   tooltip: string;

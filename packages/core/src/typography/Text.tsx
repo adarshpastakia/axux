@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isEmpty, isNumber, isString, tokenize } from "@axux/utilities";
+import { isColor, isEmpty, isNumber, isString, tokenize } from "@axux/utilities";
 import {
   FC,
   forwardRef,
@@ -16,7 +16,6 @@ import {
   useState
 } from "react";
 import { useTranslation } from "react-i18next";
-import { isColor } from "../helpers";
 import {
   AllColors,
   ElementProps,
@@ -208,7 +207,7 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
       if (textRef.current && clip) {
         const el = textRef.current;
         el.style.display = "block";
-        el.classList.remove("ax-text--clip");
+        el.classList.remove("ax-clip");
         const timer = setTimeout(() => {
           const lh = parseInt(getComputedStyle(el).lineHeight);
           setCanClip(el.offsetHeight > clip * lh);
@@ -284,8 +283,8 @@ export const AxText: FC<TextProps> = forwardRef<HTMLSpanElement, TextProps>(
           {inner}
         </span>
         {canClip && (
-          <span className="ax-block ax-font--sm ax-align--end">
-            <a onClick={() => setShowMore(!showMore)}>
+          <span className="ax-block ax-align--end">
+            <a className="ax-font--sm ax-link" onClick={() => setShowMore(!showMore)}>
               {t(showMore ? "action.less" : "action.more")}
             </a>
           </span>

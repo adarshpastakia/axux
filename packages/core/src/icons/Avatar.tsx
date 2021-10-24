@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isEmpty } from "@axux/utilities";
+import { isColor, isEmpty } from "@axux/utilities";
 import {
   cloneElement,
   forwardRef,
@@ -14,7 +14,6 @@ import {
   useState,
   VFC
 } from "react";
-import { isColor } from "../helpers";
 import { AxTooltip } from "../overlays/Tooltip";
 import { AllColors, ElementProps, IconType, RefProp, Size } from "../types";
 import { AxIcon } from "./Icon";

@@ -63,6 +63,8 @@ export const isFalse = (value: AnyObject = ""): value is false => {
   );
 };
 
+export const isColor = (color: string) => color.startsWith("#") || color.startsWith("rgb");
+
 export const isSvgPath = (value: AnyObject): value is string => {
   return typeof value === "string" && value.match(/^[Mm]\d.*[\dzZ]$/) !== null;
 };

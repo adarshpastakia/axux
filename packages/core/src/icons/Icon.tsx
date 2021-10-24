@@ -3,9 +3,8 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isNumber, isString, isSvgPath, isTrue } from "@axux/utilities";
+import { isColor, isNumber, isString, isSvgPath, isTrue } from "@axux/utilities";
 import { forwardRef, isValidElement, MouseEventHandler, useMemo, VFC } from "react";
-import { isColor } from "../helpers";
 import { AllColors, ElementProps, RefProp, Size, SizeList } from "../types";
 
 /** @internal */
