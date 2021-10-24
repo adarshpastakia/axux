@@ -31,7 +31,8 @@
     "@axux/form": "^0.0.1-alpha.43",
     "@axux/utilities": "^0.0.1-alpha.43",
     "react-monaco-editor": "^0.44.0",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "react-virtualized": "^9.22.3"
   },
   "peerDependencies": {
     "i18next": "^20.4.0",
@@ -42,7 +43,8 @@
   "devDependencies": {
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
-    "@types/react-i18next": "^8.1.0"
+    "@types/react-i18next": "^8.1.0",
+    "@types/react-virtualized": "^9.21.14"
   },
   "engines": {
     "node": ">=10.22.0 <16.0.0",
