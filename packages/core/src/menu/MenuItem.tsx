@@ -108,7 +108,7 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
         <Fragment>
           <AxIcon icon={icon} />
           <div className="ax-menu__item__label">
-            <AxText mark={mark}>{label}</AxText>
+            <AxText.Marked mark={mark}>{label}</AxText.Marked>
             {info && <span className="ax-menu__item__subtext">{info}</span>}
           </div>
           {badgeEl}

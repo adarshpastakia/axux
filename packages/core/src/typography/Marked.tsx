@@ -5,7 +5,6 @@
 
 import { isEmpty, isString, tokenize } from "@axux/utilities";
 import { FC, forwardRef, Fragment, useImperativeHandle, useMemo, useRef } from "react";
-import { useTranslation } from "react-i18next";
 import { ElementProps } from "../types";
 
 /** @internal */
@@ -13,7 +12,7 @@ export interface MarkedProps extends ElementProps {
   /**
    * Mark text within
    */
-  mark: string | string[];
+  mark?: string | string[];
 }
 
 /**

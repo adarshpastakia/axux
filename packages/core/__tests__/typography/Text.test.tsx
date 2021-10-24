@@ -9,6 +9,7 @@ import i18next from "i18next";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
 import * as stories from "../../__stories__/typography/TextStory";
+import { AxText } from "../../dist";
 
 const { TextStory, SerifStory, ColorStory } = composeStories(stories);
 
@@ -119,7 +120,7 @@ describe("Text", () => {
   it("renders marked text", (done) => {
     const fragment = render(
       <I18nextProvider i18n={i18next}>
-        <TextStory mark={LIPSUM.text} />
+        <AxText.Marked mark={LIPSUM.text}>{LIPSUM.line}</AxText.Marked>
       </I18nextProvider>
     );
     expect(fragment.container.querySelector("mark")).toBeInTheDocument();
@@ -131,7 +132,9 @@ describe("Text", () => {
   it("renders marked text when not found", (done) => {
     let fragment = render(
       <I18nextProvider i18n={i18next}>
-        <TextStory mark="Test me" />
+        <AxText.Marked mark="Test me">
+          <b>{LIPSUM.line}</b>
+        </AxText.Marked>
       </I18nextProvider>
     );
     expect(fragment.container.querySelector("mark")).toBeNull();
@@ -140,9 +143,9 @@ describe("Text", () => {
 
     fragment = render(
       <I18nextProvider i18n={i18next}>
-        <TextStory mark={LIPSUM.text}>
+        <AxText.Marked mark={LIPSUM.text}>
           <b>{LIPSUM.line}</b>
-        </TextStory>
+        </AxText.Marked>
       </I18nextProvider>
     );
     expect(fragment.container.querySelector("mark")).toBeNull();
@@ -155,7 +158,7 @@ describe("Text", () => {
     const fragment = render(
       <I18nextProvider i18n={i18next}>
         <div className="ax-root">
-          <TextStory abbr={[["IPSUM", "Test tooltip"]]} />
+          <AxText.Abbr abbr={[["IPSUM", "Test tooltip"]]}>{LIPSUM.line}</AxText.Abbr>
         </div>
       </I18nextProvider>
     );

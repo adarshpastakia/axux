@@ -49,7 +49,7 @@ exports[`Text renders color text 1`] = `
 exports[`Text renders marked text 1`] = `
 <div>
   <span
-    class="ax-text   "
+    class="ax-text "
   >
     <mark
       class="ax-mark"
@@ -57,12 +57,7 @@ exports[`Text renders marked text 1`] = `
       Lorem ipsum
     </mark>
     <span>
-       dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-          nec augue tincidunt, ac aliquet velit facilisis.
+       dolor sit amet, consectetur adipiscing elit.
     </span>
   </span>
 </div>
@@ -71,16 +66,11 @@ exports[`Text renders marked text 1`] = `
 exports[`Text renders marked text when not found 1`] = `
 <div>
   <span
-    class="ax-text   "
+    class="ax-text "
   >
-    <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-          egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-          nec augue tincidunt, ac aliquet velit facilisis.
-    </span>
+    <b>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </b>
   </span>
 </div>
 `;
@@ -88,7 +78,7 @@ exports[`Text renders marked text when not found 1`] = `
 exports[`Text renders marked text when not found 2`] = `
 <div>
   <span
-    class="ax-text   "
+    class="ax-text "
   >
     <b>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -185,7 +175,7 @@ exports[`Text renders with tooltip 1`] = `
     class="ax-root"
   >
     <span
-      class="ax-text   "
+      class="ax-text "
     >
       <span>
         Lorem 
@@ -217,20 +207,7 @@ exports[`Text renders with tooltip 1`] = `
         />
       </div>
       <span>
-         dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-          egestas mauris nec, tincidunt 
-      </span>
-      <abbr
-        class="ax-abbr ax-color--"
-      >
-        ipsum
-      </abbr>
-      <span>
-        . Sed commodo sagittis sapien non sagittis. Vestibulum
-          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-          nec augue tincidunt, ac aliquet velit facilisis.
+         dolor sit amet, consectetur adipiscing elit.
       </span>
     </span>
   </div>
@@ -243,7 +220,7 @@ exports[`Text renders with tooltip 2`] = `
     class="ax-root"
   >
     <span
-      class="ax-text   "
+      class="ax-text "
     >
       <span>
         Lorem 
@@ -254,20 +231,7 @@ exports[`Text renders with tooltip 2`] = `
         ipsum
       </abbr>
       <span>
-         dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-          egestas mauris nec, tincidunt 
-      </span>
-      <abbr
-        class="ax-abbr ax-color--"
-      >
-        ipsum
-      </abbr>
-      <span>
-        . Sed commodo sagittis sapien non sagittis. Vestibulum
-          viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-          diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-          ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-          nec augue tincidunt, ac aliquet velit facilisis.
+         dolor sit amet, consectetur adipiscing elit.
       </span>
     </span>
   </div>
