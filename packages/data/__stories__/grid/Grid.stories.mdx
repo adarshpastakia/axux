@@ -30,7 +30,7 @@ import { AxButton, AxContent, AxPage, AxPanel, AxText, AxViewport } from "@axux/
           {(props) => (
             <AxGridView.Item {...props}>
               <div className="ax-flex">
-                <AxPanel title="Grid cell" className="ax-col ax-col--fill" paper>
+                <AxPanel title={`Grid cell ${props.index}`} className="ax-col ax-col--fill" paper>
                   <AxContent>
                     <div className="ax-row ax-gutter">
                       <img

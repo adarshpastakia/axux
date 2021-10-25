@@ -68,14 +68,16 @@ export const TimelineEntry: FC<TimelineEntryProps> = memo(
           const el = eventRef;
           const ob = new ResizeObserver(() => {
             const { offsetWidth: width, offsetHeight: height } = el;
-            console.log("======>", index, { width, height });
-            measure && measure();
+            if (style && height !== style.height) {
+              console.log("======>", index, style, { width, height });
+              measure && measure();
+            }
           });
           ob.observe(el);
           return () => ob.disconnect();
         }
       }
-    }, [eventRef, isScrolling, measure, index]);
+    }, [eventRef, isScrolling, measure, style, index]);
 
     return (
       <div

@@ -136,6 +136,7 @@ export const AxTimeline: ExtendedFC = ({
               data-active={sortOrder === "asc"}
             />
           </AxButton.Group>
+          <div className="ax-col--fill" />
           <AxButton.Group vertical>
             <AxButton
               isDisabled={(canScroll | 1) === 1}

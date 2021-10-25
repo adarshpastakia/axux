@@ -4,11 +4,11 @@
 // @license   : MIT
 
 import { AxButton, AxTextLoader } from "@axux/core";
+import { useIsRtl } from "@axux/core/dist/internals/useIsRtl";
 import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { CSSProperties, FC, ReactNode, useCallback, useRef, useState } from "react";
-import { GridItem } from "./Item";
+import { CSSProperties, FC, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import {
   AutoSizer,
   CellMeasurer,
@@ -17,10 +17,12 @@ import {
   Masonry,
   WindowScroller
 } from "react-virtualized";
+import { GridItem } from "./Item";
 
 export interface GridProps extends ElementProps {
   list: KeyValue[];
-  cellWidth?: string;
+  cellWidth?: number;
+  cellHeight?: number;
   isLoading?: boolean;
   canLoadMore?: boolean;
   hideScrollButtons?: boolean;
@@ -49,20 +51,42 @@ export const AxGridView: ExtendedFC = ({
   sortOrder,
   onSort,
   hideScrollButtons,
-  cellWidth = "20em",
+  cellWidth = 520,
+  cellHeight = 50,
   className,
   ...aria
 }) => {
+  const { isRtl } = useIsRtl();
   const [scrollerRef, setScrollerRef] = useState<HTMLDivElement>();
+  const [masonryRef, setMasonryRef] = useState<Masonry>();
   const [canScroll, setCanScroll] = useState(0);
 
   const cache = useRef(
     new CellMeasurerCache({
-      defaultWidth: 520,
+      defaultWidth: cellWidth,
       fixedWidth: true,
-      defaultHeight: 50
+      defaultHeight: cellHeight
     })
   );
+  const [width, setWidth] = useState(1200);
+  const positioner = useRef(
+    createMasonryCellPositioner({
+      cellMeasurerCache: cache.current,
+      columnWidth: cellWidth,
+      columnCount: Math.floor(width / (cellWidth + 16)),
+      spacer: 16
+    })
+  );
+
+  useEffect(() => {
+    cache.current.clearAll();
+    positioner.current.reset({
+      columnWidth: cellWidth,
+      columnCount: Math.floor(width / (cellWidth + 16)),
+      spacer: 16
+    });
+    masonryRef && masonryRef.clearCellPositions();
+  }, [cellWidth, masonryRef, width]);
 
   const checkScroll = useCallback(() => {
     if (scrollerRef) {
@@ -100,28 +124,24 @@ export const AxGridView: ExtendedFC = ({
       className={`ax-gridView__panel ${className ?? ""}`}
       onScroll={checkScroll}
       ref={(el) => setScrollerRef(el as HTMLDivElement)}
-      style={{ "--cell-width": cellWidth } as AnyObject}
       {...aria}
     >
       <div className="ax-gridView__wrapper">
         <WindowScroller scrollElement={scrollerRef}>
           {({ height, isScrolling, registerChild, scrollTop }) => (
             <div>
-              <AutoSizer disableHeight>
+              <AutoSizer disableHeight height={height} onResize={({ width }) => setWidth(width)}>
                 {({ width }) => (
                   <div ref={registerChild}>
                     <Masonry
                       autoHeight
                       width={width}
                       height={height}
+                      rowDirection={isRtl ? "rtl" : "ltr"}
+                      ref={(e) => setMasonryRef(e as Masonry)}
                       isScrolling={isScrolling}
                       cellMeasurerCache={cache.current}
-                      cellPositioner={createMasonryCellPositioner({
-                        cellMeasurerCache: cache.current,
-                        columnWidth: 520,
-                        columnCount: Math.floor(width / 536),
-                        spacer: 16
-                      })}
+                      cellPositioner={positioner.current}
                       cellCount={list.length}
                       cellRenderer={({ index, key, parent, style }: AnyObject) => (
                         <CellMeasurer cache={cache.current} key={key} index={index} parent={parent}>
@@ -129,7 +149,7 @@ export const AxGridView: ExtendedFC = ({
                             children({
                               record: list[index],
                               index,
-                              style,
+                              style: { ...style, direction: isRtl ? "rtl" : "ltr" },
                               measure,
                               isScrolling
                             })
@@ -146,22 +166,21 @@ export const AxGridView: ExtendedFC = ({
           )}
         </WindowScroller>
         <div>
-          <div>
-            {onSort && (
-              <AxButton.Group vertical>
-                <AxButton
-                  icon={AppIcons.iconSortTimeDesc}
-                  onClick={() => onSort && onSort("desc")}
-                  data-active={sortOrder === "desc"}
-                />
-                <AxButton
-                  icon={AppIcons.iconSortTimeAsc}
-                  onClick={() => onSort && onSort("asc")}
-                  data-active={sortOrder === "asc"}
-                />
-              </AxButton.Group>
-            )}
-          </div>
+          {onSort && (
+            <AxButton.Group vertical>
+              <AxButton
+                icon={AppIcons.iconSortTimeDesc}
+                onClick={() => onSort && onSort("desc")}
+                data-active={sortOrder === "desc"}
+              />
+              <AxButton
+                icon={AppIcons.iconSortTimeAsc}
+                onClick={() => onSort && onSort("asc")}
+                data-active={sortOrder === "asc"}
+              />
+            </AxButton.Group>
+          )}
+          <div className="ax-col--fill" />
           {!hideScrollButtons && (
             <AxButton.Group vertical>
               <AxButton

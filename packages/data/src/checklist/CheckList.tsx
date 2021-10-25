@@ -43,7 +43,7 @@ const ItemElement: VFC<{ item: Item; selected: boolean; onCheck: EmptyCallback }
       </div>
       {item.icon && (
         <div className="ax-col--auto">
-          <AxIcon icon={item.icon} size={16} />
+          <AxIcon icon={item.icon} size="lg" />
         </div>
       )}
       <div className="ax-col--fill ax-ellipsis ax-checkList__label">{item.label}</div>

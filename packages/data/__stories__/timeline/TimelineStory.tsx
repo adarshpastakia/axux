@@ -9,6 +9,7 @@ import {
   AxPage,
   AxPanel,
   AxSection,
+  AxText,
   AxViewport,
   useAxGlobals
 } from "@axux/core";
@@ -86,7 +87,10 @@ const Template: Story = (props) => {
           <AxTimeline list={[]} {...props}>
             {({ record: { body, ...record }, ...props }: AnyObject) => (
               <AxTimeline.Entry {...props} record={record}>
-                {body}
+                <div>
+                  <p>Test head</p>
+                  <AxText clip={4}>{body}</AxText>
+                </div>
               </AxTimeline.Entry>
             )}
           </AxTimeline>

@@ -8,6 +8,7 @@ import {
   FC,
   forwardRef,
   Fragment,
+  memo,
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
