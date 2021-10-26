@@ -5,13 +5,14 @@
 
 import { AxSection, useAxResizeObserver } from "@axux/core";
 import { ElementProps, VFC } from "@axux/core/dist/types";
-import { useLayoutEffect, useRef, useState } from "react";
+import { isString } from "@axux/utilities";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import MonacoEditor from "react-monaco-editor";
 import { CodeEditorTools } from "./CodeEditorTools";
 
 /** @internal */
 export interface CodeEditorProps extends ElementProps {
-  value?: string;
+  value?: string | KeyValue;
   onChange?: (value?: string) => void;
 
   isReadonly?: boolean;
@@ -41,6 +42,11 @@ export const AxCodeEditor: VFC<CodeEditorProps> = ({
     editorRef.current?.editor?.layout(size);
   });
 
+  const codeValue = useMemo(
+    () => (isString(value) ? value : JSON.stringify(value, null, 4)),
+    [value]
+  );
+
   return (
     <AxSection>
       <AxSection>
@@ -52,7 +58,7 @@ export const AxCodeEditor: VFC<CodeEditorProps> = ({
         <AxSection ref={ref} className="ax-code__editor">
           <MonacoEditor
             ref={editorRef}
-            value={value}
+            value={codeValue}
             onChange={onChange}
             language={language}
             theme={theme}

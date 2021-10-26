@@ -45,6 +45,7 @@ interface ExtendedFC extends FC<GridProps> {
 export const AxGridView: ExtendedFC = ({
   list,
   children,
+  className,
   isLoading,
   canLoadMore,
   onLoadMore,
@@ -53,7 +54,6 @@ export const AxGridView: ExtendedFC = ({
   hideScrollButtons,
   cellWidth = 520,
   cellHeight = 50,
-  className,
   ...aria
 }) => {
   const { isRtl } = useIsRtl();

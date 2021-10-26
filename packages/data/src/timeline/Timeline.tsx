@@ -22,14 +22,14 @@ interface ExtendedFC extends FC<TimelineProps> {
 }
 
 export const AxTimeline: ExtendedFC = ({
+  list,
   children,
+  className,
   isLoading,
   canLoadMore,
   onLoadMore,
   sortOrder,
   onSort,
-  list,
-  className,
   ...aria
 }) => {
   const [scrollerRef, setScrollerRef] = useState<HTMLDivElement>();

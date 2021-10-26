@@ -17,6 +17,7 @@ import {
 import { Countries, Country } from "@axux/utilities";
 import { Story } from "@storybook/react";
 import { useCallback, useEffect, useMemo } from "react";
+import { AxCodeEditor } from "../../src";
 import {
   AxDatagrid,
   AxPagination,
@@ -34,25 +35,11 @@ const RecordModal = ({
   headLabel
 }: { record: Country } & KeyValue) => {
   return (
-    <AxModal onClose={onClose} title={record.name} size="md" onNavigate={onNavigate}>
-      <AxModal.Header title={record.name}>{headLabel}</AxModal.Header>
-      <AxContent>
-        <AxFlexBox>
-          <AxFlexBox.Row>
-            <AxFlexBox.Col flex="auto">
-              <AxIcon size={5} icon={<span>{record.emoji}</span>} />
-            </AxFlexBox.Col>
-            <AxFlexBox.Col flex="fill">
-              <AxText block size="lg">
-                {record.fullname}
-              </AxText>
-              <AxText block size="md">
-                {record.capital}
-              </AxText>
-            </AxFlexBox.Col>
-          </AxFlexBox.Row>
-        </AxFlexBox>
-      </AxContent>
+    <AxModal onClose={onClose} size="lg" onNavigate={onNavigate} height="90vh">
+      <AxModal.Header title={record.name} icon={<span>{record.emoji}</span>}>
+        {headLabel}
+      </AxModal.Header>
+      <AxCodeEditor value={record} />
     </AxModal>
   );
 };

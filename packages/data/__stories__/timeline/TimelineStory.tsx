@@ -4,6 +4,7 @@
 // @license   : MIT
 
 import {
+  AxAvatar,
   AxButton,
   AxContent,
   AxPage,
@@ -13,6 +14,8 @@ import {
   AxViewport,
   useAxGlobals
 } from "@axux/core";
+import { AppIcons } from "@axux/core/dist/types/appIcons";
+import { AxDateDisplay } from "@axux/date";
 import { mdiComment, mdiFaceProfile, mdiStar, mdiTag } from "@mdi/js";
 import { Story } from "@storybook/react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
@@ -86,10 +89,47 @@ const Template: Story = (props) => {
         <AxSection>
           <AxTimeline list={[]} {...props}>
             {({ record: { body, ...record }, ...props }: AnyObject) => (
-              <AxTimeline.Entry {...props} record={record}>
-                <div>
-                  <p>Test head</p>
-                  <AxText clip={4}>{body}</AxText>
+              <AxTimeline.Entry
+                {...props}
+                record={record}
+                avatar={
+                  record.type === "comment" ? (
+                    <AxAvatar title="" bg="info" color="indigo" icon={AppIcons.iconFace} />
+                  ) : (
+                    AppIcons.iconClock
+                  )
+                }
+              >
+                <div className="ax-flex">
+                  {record.type === "comment" ? (
+                    <AxPanel
+                      className="ax-col ax-col--fill"
+                      paper={record.type === "comment"}
+                      isCollapsable={record.type === "comment"}
+                    >
+                      <AxPanel.Header
+                        title={
+                          <span>
+                            {record.username} @ <AxDateDisplay date={record.timestamp} />
+                          </span>
+                        }
+                      />
+                      <AxContent>
+                        <p>Test head</p>
+                        <AxText clip={4}>{body}</AxText>
+                      </AxContent>
+                    </AxPanel>
+                  ) : (
+                    <div className="ax-col ax-col--fill">
+                      {record.username} @ <AxDateDisplay date={record.timestamp} />
+                    </div>
+                  )}
+                  <div className="ax-col ax-col--auto ax-padding--x--xs">
+                    <AxButton.Group vertical>
+                      <AxButton icon={mdiStar} />
+                      <AxButton icon={mdiComment} />
+                    </AxButton.Group>
+                  </div>
                 </div>
               </AxTimeline.Entry>
             )}

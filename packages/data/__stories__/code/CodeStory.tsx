@@ -19,7 +19,7 @@ const Template: Story<CodeEditorProps> = (props) => (
 
 export const CodeEditorStory = Template.bind({});
 CodeEditorStory.args = {
-  value: JSON.stringify(Countries.list, null, 2)
+  value: Countries.list
 };
 
 export default { title: "Example/CodeEditor", component: AxCodeEditor };

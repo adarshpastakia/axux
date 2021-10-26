@@ -43,70 +43,57 @@
   }
 
   &__entry {
+    display: flex;
+    flex-flow: row nowrap;
     min-height: 2em;
 
-    > section {
-      display: flex;
-      flex-flow: row nowrap;
-      #{$base}__entry {
-        &--icon {
-          flex: 0 0 auto;
-          position: relative;
-          text-align: center;
-          width: 2.5em;
+    &--icon {
+      flex: 0 0 auto;
+      position: relative;
+      text-align: center;
+      width: 2.5em;
 
-          #{$prefix}-avatar {
-            margin-top: 0.25em;
-
-            &--md {
-              margin: 0;
-            }
-          }
-
-          &::before {
-            background-color: currentColor;
-            bottom: 0;
-            content: "";
-            left: calc(50% - 1px);
-            opacity: 0.25;
-            position: absolute;
-            top: 0;
-            width: 2px;
-            z-index: 0;
-          }
+      #{$prefix}-avatar {
+        &--md {
+          margin: 0;
         }
+      }
 
-        &--head {
-          #{$prefix}-text {
-            flex: 0 0 auto;
-            margin-inline-end: 0.25em;
-          }
-        }
-
-        &--body {
-          flex: 1 1 1em;
-          margin: 2px 0.5em 1em;
-        }
-
-        &--side {
-          flex: 0 0 auto;
-          padding-inline-end: 1rem;
-          padding-top: 0.25em;
-        }
-
-        &--body[data-collapse="true"] + #{$base}__entry--side {
-          height: 0;
-          overflow: hidden;
-        }
+      &::before {
+        background-color: currentColor;
+        bottom: 0;
+        content: "";
+        left: calc(50% - 1px);
+        opacity: 0.25;
+        position: absolute;
+        top: 0;
+        width: 2px;
+        z-index: 0;
       }
     }
 
-    &[data-entry="event"] > section {
-      #{$base}__entry--body,
-      #{$base}__entry--head {
-        background: none;
-        border-bottom: none;
+    &--head {
+      #{$prefix}-text {
+        flex: 0 0 auto;
+        margin-inline-end: 0.25em;
       }
+    }
+
+    &--body {
+      align-self: flex-start;
+      flex: 1 1 1em;
+      margin: 2px 0.5em 1em;
+    }
+
+    &--side {
+      flex: 0 0 auto;
+      padding-inline-end: 1rem;
+      padding-top: 0.25em;
+    }
+
+    &--body[data-collapse="true"] + #{$base}__entry--side {
+      height: 0;
+      overflow: hidden;
     }
 
     &[data-reverse="true"] > section {

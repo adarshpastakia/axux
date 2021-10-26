@@ -6,38 +6,34 @@
 import { ElementProps } from "@axux/core/dist/types";
 import { CSSProperties, FC, memo, useEffect, useState } from "react";
 
-export interface CellProps extends ElementProps {
+export interface CellProps {
   index?: number;
   style?: CSSProperties;
   isScrolling?: boolean;
   measure: () => void;
 }
 
-export const GridItem: FC<CellProps> = memo(
-  ({ className, style, isScrolling, measure, children, index }) => {
-    const [eventRef, setEventRef] = useState<HTMLElement | null>(null);
+export const GridItem: FC<CellProps> = memo(({ children, isScrolling, measure, index, style }) => {
+  const [eventRef, setEventRef] = useState<HTMLElement | null>(null);
 
-    useEffect(() => {
-      if (ResizeObserver && !isScrolling) {
-        if (eventRef) {
-          const el = eventRef;
-          const ob = new ResizeObserver(() => {
-            const { offsetWidth: width, offsetHeight: height } = el;
-            console.log("======>", index, { width, height });
-            measure && measure();
-          });
-          ob.observe(el);
-          return () => ob.disconnect();
-        }
+  useEffect(() => {
+    if (ResizeObserver && !isScrolling) {
+      if (eventRef) {
+        const el = eventRef;
+        const ob = new ResizeObserver(() => {
+          const { offsetWidth: width, offsetHeight: height } = el;
+          console.log("======>", index, { width, height });
+          measure && measure();
+        });
+        ob.observe(el);
+        return () => ob.disconnect();
       }
-    }, [eventRef, isScrolling, measure, index]);
+    }
+  }, [eventRef, isScrolling, measure, index]);
 
-    return (
-      <div style={style} className="ant-grid__cell">
-        <section ref={setEventRef} className={className}>
-          {children}
-        </section>
-      </div>
-    );
-  }
-);
+  return (
+    <div style={style} className="ax-grid__cell">
+      <section ref={setEventRef}>{children}</section>
+    </div>
+  );
+});
