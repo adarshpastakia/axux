@@ -13,7 +13,7 @@ export interface HistogramRecord {
 }
 
 export interface HistogramProps extends ElementProps {
-  data: [group: string, records: HistogramRecord[]][];
+  data: HistogramRecord[];
   total: number;
   color?: Color | ColorPalette;
   emptyDisplay?: JSX.Element;

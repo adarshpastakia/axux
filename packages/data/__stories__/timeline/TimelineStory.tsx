@@ -19,8 +19,7 @@ import { AxDateDisplay } from "@axux/date";
 import { mdiComment, mdiFaceProfile, mdiStar, mdiTag } from "@mdi/js";
 import { Story } from "@storybook/react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
-import { AxHistogram } from "../../dist";
-import { AxTimeline, TimelineRecord } from "../../src";
+import { AxHistogram, AxTimeline, TimelineRecord } from "../../src";
 
 const entries: Array<TimelineRecord & { body?: string }> = [
   {
@@ -142,22 +141,12 @@ const Template: Story = (props) => {
                     format="number"
                     total={128}
                     data={[
-                      [
-                        "Group 1",
-                        [
-                          { count: 99, label: "Item 1" },
-                          { count: 72, label: "Item 2" },
-                          { count: 45, label: "Item 3" }
-                        ]
-                      ],
-                      [
-                        "Group 2",
-                        [
-                          { count: 99, label: "Item 1", color: "primary" },
-                          { count: 72, label: "Item 2" },
-                          { count: 45, label: "Item 3" }
-                        ]
-                      ]
+                      { count: 99, label: "Item 1" },
+                      { count: 72, label: "Item 2" },
+                      { count: 45, label: "Item 3" },
+                      { count: 99, label: "Item 4", color: "primary" },
+                      { count: 72, label: "Item 5" },
+                      { count: 45, label: "Item 6" }
                     ]}
                   />
                   <div style={{ height: "1200px" }} />
@@ -169,22 +158,12 @@ const Template: Story = (props) => {
                     format="number"
                     total={128}
                     data={[
-                      [
-                        "Group 1",
-                        [
-                          { count: 99, label: "Item 1" },
-                          { count: 72, label: "Item 2" },
-                          { count: 45, label: "Item 3" }
-                        ]
-                      ],
-                      [
-                        "Group 2",
-                        [
-                          { count: 99, label: "Item 1", color: "primary" },
-                          { count: 72, label: "Item 2" },
-                          { count: 45, label: "Item 3" }
-                        ]
-                      ]
+                      { count: 99, label: "Item 1" },
+                      { count: 72, label: "Item 2" },
+                      { count: 45, label: "Item 3" },
+                      { count: 99, label: "Item 4", color: "secondary" },
+                      { count: 72, label: "Item 5" },
+                      { count: 45, label: "Item 6" }
                     ]}
                   />
                   <div style={{ height: "1200px" }} />
