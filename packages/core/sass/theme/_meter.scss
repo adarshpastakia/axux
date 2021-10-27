@@ -19,7 +19,7 @@
 
   @each $label, $color in map-merge($theme, $palette) {
     &[data-theme="#{$label}"] {
-      background: linear-gradient(90deg, mix($color, $base-bg, 10%), $color);
+      background: linear-gradient(90deg, mix($color, $base-bg, 10%), mix($color, $base-bg, 50%));
     }
   }
 }
