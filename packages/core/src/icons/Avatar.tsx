@@ -11,11 +11,10 @@ import {
   MouseEventHandler,
   useEffect,
   useMemo,
-  useState,
-  VFC
+  useState
 } from "react";
 import { AxTooltip } from "../overlays/Tooltip";
-import { AllColors, ElementProps, IconType, RefProp, Size } from "../types";
+import { AllColors, ElementProps, IconType, RefProp, Size, VFC } from "../types";
 import { AxIcon } from "./Icon";
 
 /** @internal */

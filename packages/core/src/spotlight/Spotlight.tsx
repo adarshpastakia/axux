@@ -4,16 +4,7 @@
 // @license   : MIT
 
 import { debounce } from "@axux/utilities";
-import {
-  Fragment,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  VFC
-} from "react";
+import { Fragment, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Globals } from "../context/Globals";
 import { AxHotKey } from "../hotkeys/HotKey";
 import { AxIcon } from "../icons/Icon";
@@ -21,7 +12,7 @@ import { BadgeType } from "../internals/useBadge";
 import { AxBox } from "../layout/Box";
 import { AxSpinner } from "../loader/Spinner";
 import { AxMenu } from "../menu/Menu";
-import { AnchorProps, Color, IconProps } from "../types";
+import { AnchorProps, Color, IconProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 import { AxText } from "../typography/Text";
 
