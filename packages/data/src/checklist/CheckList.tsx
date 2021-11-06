@@ -7,7 +7,7 @@ import { AxIcon } from "@axux/core";
 import { BadgeType, useBadge } from "@axux/core/dist/internals/useBadge";
 import { EmptyCallback, VFC } from "@axux/core/dist/types";
 import { AxField } from "@axux/form";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface Item {
@@ -21,6 +21,7 @@ interface Props {
   items: Item[];
   maxCount?: number;
   className?: string;
+  selected?: string[];
   defaultSelected?: string[];
   onChange?: (ids: string[]) => void;
 }
@@ -39,7 +40,7 @@ const ItemElement: VFC<{ item: Item; selected: boolean; onCheck: EmptyCallback }
       data-disabled={item.disabled}
     >
       <div className="ax-col--auto">
-        <AxField.Checkbox checked={selected} />
+        <AxField.Checkbox checked={selected} onChange={onCheck} />
       </div>
       {item.icon && (
         <div className="ax-col--auto">
@@ -55,6 +56,7 @@ const ItemElement: VFC<{ item: Item; selected: boolean; onCheck: EmptyCallback }
 export const AxCheckList: VFC<Props> = ({
   items,
   maxCount = 6,
+  selected: _selected = [],
   defaultSelected = [],
   className,
   onChange
@@ -62,6 +64,10 @@ export const AxCheckList: VFC<Props> = ({
   const { t } = useTranslation("core");
   const [listCount, setListCount] = useState(maxCount);
   const [selected, setSelected] = useState<string[]>(defaultSelected);
+
+  useEffect(() => {
+    setSelected(_selected);
+  }, [_selected]);
 
   const checkChanged = useCallback(
     (id: string) => {
