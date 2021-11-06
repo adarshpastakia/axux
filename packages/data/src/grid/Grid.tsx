@@ -133,31 +133,38 @@ export const AxGridView: ExtendedFC = ({
               <AutoSizer disableHeight height={height} onResize={({ width }) => setWidth(width)}>
                 {({ width }) => (
                   <div ref={registerChild}>
-                    <Masonry
-                      autoHeight
-                      width={width}
-                      height={height}
-                      rowDirection={isRtl ? "rtl" : "ltr"}
-                      ref={(e) => setMasonryRef(e as Masonry)}
-                      isScrolling={isScrolling}
-                      cellMeasurerCache={cache.current}
-                      cellPositioner={positioner.current}
-                      cellCount={list.length}
-                      cellRenderer={({ index, key, parent, style }: AnyObject) => (
-                        <CellMeasurer cache={cache.current} key={key} index={index} parent={parent}>
-                          {({ measure }) =>
-                            children({
-                              record: list[index],
-                              index,
-                              style: { ...style, direction: isRtl ? "rtl" : "ltr" },
-                              measure,
-                              isScrolling
-                            })
-                          }
-                        </CellMeasurer>
-                      )}
-                      scrollTop={scrollTop}
-                    />
+                    {list.length > 0 && (
+                      <Masonry
+                        autoHeight
+                        width={width}
+                        height={height}
+                        rowDirection={isRtl ? "rtl" : "ltr"}
+                        ref={(e) => setMasonryRef(e as Masonry)}
+                        isScrolling={isScrolling}
+                        cellMeasurerCache={cache.current}
+                        cellPositioner={positioner.current}
+                        cellCount={list.length}
+                        cellRenderer={({ index, key, parent, style }: AnyObject) => (
+                          <CellMeasurer
+                            cache={cache.current}
+                            key={key}
+                            index={index}
+                            parent={parent}
+                          >
+                            {({ measure }) =>
+                              children({
+                                record: list[index],
+                                index,
+                                style: { ...style, direction: isRtl ? "rtl" : "ltr" },
+                                measure,
+                                isScrolling
+                              })
+                            }
+                          </CellMeasurer>
+                        )}
+                        scrollTop={scrollTop}
+                      />
+                    )}
                     {isLoading && <AxTextLoader />}
                   </div>
                 )}
