@@ -21,8 +21,6 @@ export const GridItem: FC<CellProps> = memo(({ children, isScrolling, measure, i
       if (eventRef) {
         const el = eventRef;
         const ob = new ResizeObserver(() => {
-          const { offsetWidth: width, offsetHeight: height } = el;
-          console.log("======>", index, { width, height });
           measure && measure();
         });
         ob.observe(el);

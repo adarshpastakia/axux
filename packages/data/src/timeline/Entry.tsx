@@ -35,8 +35,6 @@ export const TimelineEntry: FC<TimelineEntryProps> = memo(
         if (eventRef) {
           const el = eventRef;
           const ob = new ResizeObserver(() => {
-            const { offsetWidth: width, offsetHeight: height } = el;
-            console.log("======>", index, style, { width, height });
             measure && measure();
           });
           ob.observe(el);
