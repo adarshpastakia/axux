@@ -9,7 +9,13 @@ import {
   Title
 } from "@storybook/addon-docs";
 import { AxSliderField } from "../../src/field/Slider";
-import { SliderStory, WithLabelStory, WithTicksStory, WithValueLabelStory } from "./SliderDemo";
+import {
+  RangeStory,
+  SliderStory,
+  WithLabelStory,
+  WithTicksStory,
+  WithValueLabelStory
+} from "./SliderDemo";
 
 <Meta title="@form/Slider" component={AxSliderField} parameters={{ jest: ["Slider.test.tsx"] }} />
 
@@ -45,6 +51,14 @@ import { SliderStory, WithLabelStory, WithTicksStory, WithValueLabelStory } from
 
 <Canvas>
   <Story name="With Ticks">{WithTicksStory}</Story>
+</Canvas>
+
+<Anchor storyId="form-slider--range-slider">
+  <Heading>Range Slider</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Range Slider">{RangeStory}</Story>
 </Canvas>
 
 <Heading>Props</Heading>

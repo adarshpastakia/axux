@@ -78,6 +78,53 @@
     }
   }
 
+  &__range {
+    > span {
+      color: $color-muted;
+    }
+    &--wrapper {
+      &::before {
+        background-color: $color-light;
+      }
+      #{$base}__slider--hilight {
+        background-color: $color-primary;
+      }
+    }
+
+    &--handle {
+      background: $color-empty;
+      box-shadow: 0 0 0 1px $color-medium, 1px 1px 2px $color-darkest;
+
+      &:hover,
+      &:focus {
+        background: mix($color-primary, $color-opaque, 75%);
+      }
+    }
+    &--value {
+      div {
+        background-color: $color-darkest;
+        box-shadow: 1px 0 0 1px $color-lightest;
+        color: $color-empty;
+      }
+      &::before {
+        background-color: $color-darkest;
+        box-shadow: 0 0 0 1px $color-lightest;
+      }
+    }
+
+    &--ticks {
+      button::before {
+        background-color: $color-darkest;
+      }
+    }
+
+    #{$base}__range--value[data-align="start"] {
+      div {
+        box-shadow: -1px 0 0 1px $color-lightest;
+      }
+    }
+  }
+
   &[data-invalid="true"] #{$base}__slider {
     #{$base}__slider--hilight {
       background-color: $color-danger;

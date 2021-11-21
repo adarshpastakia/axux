@@ -5,8 +5,9 @@
 
 import { Story } from "@storybook/react";
 import { PropsWithChildren } from "react";
-import { SliderFieldProps } from "../../dist/field/Slider";
 import { AxField } from "../../src";
+import { RangeFieldProps } from "../../src/field/Range";
+import { SliderFieldProps } from "../../src/field/Slider";
 
 const Template: Story<PropsWithChildren<SliderFieldProps>> = (props) => (
   <AxField.Slider {...props} />
@@ -42,6 +43,20 @@ WithTicksStory.args = {
   showLabel: true,
   showValue: true,
   showTicks: true
+};
+
+const RangeTemplate: Story<PropsWithChildren<RangeFieldProps>> = (props) => (
+  <AxField.Range {...props} />
+);
+
+export const RangeStory = RangeTemplate.bind({});
+RangeStory.args = {
+  min: 0,
+  max: 100,
+  step: 1,
+  value: [20, 75],
+  width: "20em",
+  label: "Range slider"
 };
 
 export default { title: "Example/Slider", component: AxField.Slider };
