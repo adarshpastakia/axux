@@ -8,7 +8,6 @@ import {
   FC,
   forwardRef,
   Fragment,
-  memo,
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
@@ -220,7 +219,8 @@ export const AxText: Extended = forwardRef<HTMLSpanElement, TextProps>(
           style={styles}
           ref={textRef}
         >
-          {children}
+          {isString(children) && children.split("\n").map((t, i) => <p key={i}>{t}</p>)}
+          {!isString(children) && children}
         </span>
         {canClip && (
           <span className="ax-block ax-align--end">
