@@ -38,7 +38,11 @@ export const MarkedText: FC<MarkedProps> = forwardRef<HTMLSpanElement, MarkedPro
             <Fragment>
               {tokens.map(([start, text], i) => (
                 <Fragment key={i}>
-                  {start ? <span>{start}</span> : null}
+                  {start ? (
+                    <span
+                      dangerouslySetInnerHTML={{ __html: start.split("\n").join("<br />") }}
+                    />
+                  ) : null}
                   {text ? <mark className="ax-mark">{text}</mark> : null}
                 </Fragment>
               ))}

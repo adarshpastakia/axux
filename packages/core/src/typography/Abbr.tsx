@@ -77,7 +77,11 @@ export const AbbrText: FC<AbbrTextProps> = forwardRef<HTMLSpanElement, AbbrTextP
                 const { tooltip = "", color = "" } = titles[text.toLowerCase()] ?? {};
                 return (
                   <Fragment key={i}>
-                    {start ? <span>{start}</span> : null}
+                    {start ? (
+                      <span
+                        dangerouslySetInnerHTML={{ __html: start.split("\n").join("<br />") }}
+                      />
+                    ) : null}
                     {text ? abbrRender(text, tooltip, color) : null}
                   </Fragment>
                 );

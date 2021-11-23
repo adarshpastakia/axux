@@ -219,7 +219,9 @@ export const AxText: Extended = forwardRef<HTMLSpanElement, TextProps>(
           style={styles}
           ref={textRef}
         >
-          {isString(children) && children.split("\n").map((t, i) => <p key={i}>{t}</p>)}
+          {isString(children) && (
+            <span dangerouslySetInnerHTML={{ __html: children.split("\n").join("<br />") }} />
+          )}
           {!isString(children) && children}
         </span>
         {canClip && (
