@@ -9,6 +9,8 @@ import { Children, cloneElement, FC, useEffect, useMemo, useState } from "react"
 import { AxIcon } from "../icons/Icon";
 import { BadgeType, useBadge } from "../internals/useBadge";
 import { AxLoader } from "../loader/Loader";
+import { AxTooltip } from "../overlays/Tooltip";
+import { AxSection } from "../page/Section";
 import { ElementProps, EmptyCallback, IconProps } from "../types";
 import { AppIcons } from "../types/appIcons";
 
@@ -16,6 +18,7 @@ import { AppIcons } from "../types/appIcons";
 export interface TabProps extends IconProps, ElementProps {
   id: string;
   label?: string;
+  tooltip?: string;
   badge?: BadgeType;
   isPinned?: boolean;
   isDisabled?: boolean;
@@ -27,46 +30,50 @@ export interface TabProps extends IconProps, ElementProps {
  * Tab button
  * @internal
  */
-export const Tab: FC<TabProps> = ({
+export const Tab: FC<TabProps & { placement?: "left" | "bottom" }> = ({
   id,
   icon,
   label,
+  tooltip,
   badge,
   className = "",
   isLoading = false,
   isPinned = false,
   isDisabled = false,
   onClose,
+  placement = "bottom",
   ...props
 }) => {
   const badgeEl = useBadge(badge);
 
   return (
-    <a
-      className={`ax-tab__button ${className}`}
-      {...props}
-      key={id}
-      data-id={id}
-      data-pinned={isPinned}
-      data-loading={isLoading}
-      data-disabled={isDisabled}
-    >
-      <div className="ax-tab__button--label">
-        {icon && <AxIcon icon={icon} />}
-        {label && <span>{label}</span>}
-      </div>
-      {badgeEl}
-      {!!onClose && (
-        <AxIcon
-          className="ax-tab__button--close"
-          icon={AppIcons.iconClose}
-          onClick={(e) => {
-            onClose();
-            e.stopPropagation();
-          }}
-        />
-      )}
-    </a>
+    <AxTooltip content={tooltip ?? ""} isDisabled={!tooltip} placement={placement}>
+      <a
+        className={`ax-tab__button ${className}`}
+        {...props}
+        key={id}
+        data-id={id}
+        data-pinned={isPinned}
+        data-loading={isLoading}
+        data-disabled={isDisabled}
+      >
+        <div className="ax-tab__button--label">
+          {icon && <AxIcon icon={icon} />}
+          {label && <span>{label}</span>}
+        </div>
+        {badgeEl}
+        {!!onClose && (
+          <AxIcon
+            className="ax-tab__button--close"
+            icon={AppIcons.iconClose}
+            onClick={(e) => {
+              onClose();
+              e.stopPropagation();
+            }}
+          />
+        )}
+      </a>
+    </AxTooltip>
   );
 };
 Tab.displayName = "AxTabPanel.Tab";
@@ -185,6 +192,7 @@ export const AxTabPanel: ExtendedFC = ({
           {pinned.map((tab: AnyObject) =>
             cloneElement(tab, {
               onClick: changeTab,
+              placement: align === "start" || align === "end" ? "left" : "bottom",
               "data-active": tab.props.id === active
             })
           )}
@@ -193,14 +201,17 @@ export const AxTabPanel: ExtendedFC = ({
           {tabs.map((tab: AnyObject) =>
             cloneElement(tab, {
               onClick: changeTab,
+              placement: align === "start" || align === "end" ? "left" : "bottom",
               "data-active": tab.props.id === active
             })
           )}
         </div>
         {append && <div className="ax-tab__bar--append">{append}</div>}
       </div>
-      {isCurrentLoading && <AxLoader />}
-      {active ? tabMap[active].children : null}
+      <AxSection>
+        {isCurrentLoading && <AxLoader />}
+        {active ? tabMap[active].children : null}
+      </AxSection>
     </div>
   );
 };
