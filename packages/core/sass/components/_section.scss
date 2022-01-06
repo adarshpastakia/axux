@@ -37,6 +37,7 @@
       align-items: center;
       display: grid;
       grid-area: head;
+      grid-template-areas: "title actions toggle";
       grid-template-columns: 1fr auto auto;
       z-index: 7;
       @extend #{$prefix}-bg--base;
@@ -79,9 +80,16 @@
     }
 
     &--title {
+      grid-area: title;
       line-height: 1em;
       padding: 0.25em 0.5em;
       @include ellipsis();
+    }
+    &--actions {
+      grid-area: actions;
+    }
+    &--toggle {
+      grid-area: toggle;
     }
 
     &--resizeHandle {
@@ -171,6 +179,7 @@
 
       #{$base} {
         &--header {
+          grid-template-areas: "toggle title actions";
           grid-template-columns: auto 1fr auto;
 
           > #{$prefix}-button {

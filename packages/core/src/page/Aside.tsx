@@ -149,11 +149,11 @@ export const Aside: FC<AsideProps> = ({
       {(title || isCollapsable) && (
         <div className="ax-section__side--header">
           <span className="ax-section__side--title">{title}</span>
-          <div>{actions}</div>
+          <div className="ax-section__side--actions">{actions}</div>
           {isCollapsable && (
             <AxButton
               type="link"
-              className="flippable"
+              className="ax-section__side--toggle flippable"
               icon={
                 (collapsed && !end) || (!collapsed && end)
                   ? AppIcons.iconCaretRight
