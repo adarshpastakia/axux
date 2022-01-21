@@ -39,10 +39,12 @@ export const AxContextMenu: FC<ContextMenuProps> = ({
     (e: MouseEvent) => {
       if (!onContextMenu || onContextMenu(e)) {
         const el = e.currentTarget;
+        const top = e.clientY;
+        const left = e.clientX;
         setTimeout(() => {
           setRect({
-            top: e.clientY,
-            left: e.clientX,
+            top,
+            left,
             height: 16,
             width: 16
           });
