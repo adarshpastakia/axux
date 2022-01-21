@@ -83,7 +83,7 @@ export const AxToolbar: FC<ToolbarProps> = ({ children, align, vertical = false 
     <div ref={refToolbar} className="ax-toolbar" data-align={align} data-vertical={vertical}>
       <div className="ax-toolbar--wrapper">{children}</div>
       {hasOverflow && <AxSpacer.Flex />}
-      <AxPopover forceRender placement={vertical ? "right-start" : "bottom"}>
+      <AxPopover forceRender placement={vertical ? "right-end" : "bottom-end"}>
         <AxButton icon={AppIcons.iconOverflow} data-overflow={hasOverflow} type="link" hideCaret />
         <div className="ax-toolbar--overflow" ref={refOverflow} />
       </AxPopover>
