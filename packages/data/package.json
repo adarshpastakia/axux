@@ -47,7 +47,7 @@
     "@types/react-virtualized": "^9.21.14"
   },
   "engines": {
-    "node": ">=10.22.0 <16.0.0",
+    "node": ">=10.22.0 <=16.0.0",
     "npm": ">=7.0.0"
   },
   "gitHead": "1be08e5968a0e4583cb12a6063373e54fc7b57ea"
