@@ -11,6 +11,7 @@ export { useAxGlobals } from "./context/Globals";
 export { useAxBreadcrumbService } from "./context/BreadcrumbService";
 export { useAxResizeObserver } from "./hooks/useResizeObserver";
 export { useAxNotificationService } from "./hooks/useNotificationService";
+export { useAxContextMenu } from "./hooks/useContextMenu";
 
 // Hotkey
 export { AxHotKey } from "./hotkeys/HotKey";
@@ -54,7 +55,6 @@ export { AxContent } from "./panels/Content";
 export { AxPanel } from "./panels/Panel";
 export { AxTabPanel } from "./panels/TabPanel";
 export { AxModal } from "./overlays/Modal";
-export { AxContextMenu } from "./overlays/ContextMenu";
 
 // Buttons
 export { AxButton } from "./buttons/Button";
