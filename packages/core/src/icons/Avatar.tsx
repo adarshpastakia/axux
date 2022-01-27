@@ -83,7 +83,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
       image,
       title,
       onClick,
-      className = "",
+      className,
       size = "normal",
       color = "",
       bg = "",

@@ -27,7 +27,7 @@ export interface HeadFootProps extends ElementProps {
  */
 export const Head: FC<HeadFootProps> = ({
   children,
-  className = "",
+  className,
   height,
   minHeight,
   maxHeight,
@@ -55,14 +55,14 @@ export const Head: FC<HeadFootProps> = ({
  */
 export const Foot: FC<HeadFootProps> = ({
   children,
-  className = "",
+  className,
   height,
   minHeight,
   maxHeight,
   ...aria
 }) => (
   <div
-    className={`ax-section__foot ${className}`}
+    className={`ax-section__foot ${className ?? ""}`}
     style={{ height, minHeight, maxHeight }}
     {...aria}
   >

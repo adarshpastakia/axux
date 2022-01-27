@@ -6,9 +6,9 @@
 import { ReactNodeArray, useMemo } from "react";
 import { AxPopper } from "../internals/Popper";
 import { AxPanelStack } from "../panels/PanelStack";
-import { VFC } from "../types";
+import { ElementProps, VFC } from "../types";
 
-export interface ContextMenuProps {
+export interface ContextMenuProps extends ElementProps {
   menu: ReactNodeArray;
   x: number;
   y: number;
@@ -18,6 +18,7 @@ export const AxContextMenu: VFC<ContextMenuProps & { onClose: () => void }> = ({
   menu,
   x,
   y,
+  className,
   onClose
 }) => {
   const rect = useMemo(
@@ -41,7 +42,7 @@ export const AxContextMenu: VFC<ContextMenuProps & { onClose: () => void }> = ({
       onClose={onClose}
     >
       <span style={{ position: "fixed", pointerEvents: "none", ...rect }} />
-      <AxPanelStack>{menu}</AxPanelStack>
+      <AxPanelStack className={className}>{menu}</AxPanelStack>
     </AxPopper>
   );
 };

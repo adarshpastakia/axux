@@ -81,7 +81,7 @@ export const Aside: FC<AsideProps> = ({
   children,
   title,
   isLoading,
-  className = "",
+  className,
   isCollapsable,
   isCollapsed = false,
   flyout,
@@ -139,7 +139,7 @@ export const Aside: FC<AsideProps> = ({
 
   return (
     <div
-      className={`ax-section__side ${className}`}
+      className={`ax-section__side ${className ?? ""}`}
       data-end={end}
       data-collapsed={collapsed}
       data-flyout={peek}

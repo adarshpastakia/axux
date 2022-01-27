@@ -250,7 +250,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
   const popperBody = useMemo(
     () => (
       <div
-        className={`ax-popper ${className}`}
+        className={`ax-popper ${className ?? ""}`}
         data-show={open && !innerOpen && !isDisabled}
         ref={setPopperEl}
         data-show-arrow={showArrow}

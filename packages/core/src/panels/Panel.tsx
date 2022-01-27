@@ -87,7 +87,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       panelId,
       icon,
       title,
-      className = "",
+      className,
       isExpandable,
       isCollapsable,
       isExpanded = false,
@@ -193,7 +193,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
     return (
       <div
         ref={ref}
-        className={`ax-panel ${paper ? "ax-paper" : ""} ${className}`}
+        className={`ax-panel ${paper ? "ax-paper" : ""} ${className ?? ""}`}
         data-collapse={collapsed}
         data-expand={expanded}
         style={styles}

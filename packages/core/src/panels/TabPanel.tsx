@@ -36,7 +36,7 @@ export const Tab: FC<TabProps & { placement?: "left" | "bottom" }> = ({
   label,
   tooltip,
   badge,
-  className = "",
+  className,
   isLoading = false,
   isPinned = false,
   isDisabled = false,
@@ -49,7 +49,7 @@ export const Tab: FC<TabProps & { placement?: "left" | "bottom" }> = ({
   return (
     <AxTooltip content={tooltip ?? ""} isDisabled={!tooltip} placement={placement}>
       <a
-        className={`ax-tab__button ${className}`}
+        className={`ax-tab__button ${className ?? ""}`}
         {...props}
         key={id}
         data-id={id}
@@ -114,7 +114,7 @@ interface ExtendedFC extends FC<TabPanelProps> {
  */
 export const AxTabPanel: ExtendedFC = ({
   children,
-  className = "",
+  className,
   align = "top",
   activeTab,
   onBeforeChange,
@@ -185,7 +185,7 @@ export const AxTabPanel: ExtendedFC = ({
   }, [active, tabMap]);
 
   return (
-    <div className={`ax-tab__panel ${className}`} data-align={align}>
+    <div className={`ax-tab__panel ${className ?? ""}`} data-align={align}>
       <div className="ax-tab__bar" data-align={align}>
         {prepend && <div className="ax-tab__bar--prepend">{prepend}</div>}
         <div className="ax-tab__bar--pinned">

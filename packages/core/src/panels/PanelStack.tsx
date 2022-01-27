@@ -58,7 +58,7 @@ export const AxPanelStack: FC<ElementProps> = ({ children, className, ...aria })
 
   return (
     <div
-      className={`ax-panel__stack ${className}`}
+      className={`ax-panel__stack ${className ?? ""}`}
       {...aria}
       onClick={checkMenuClick}
       ref={stackRef}
