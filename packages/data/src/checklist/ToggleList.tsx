@@ -40,9 +40,9 @@ const ItemElement: VFC<{ item: Item; selected: number; onCheck: EmptyCallback }>
       data-disabled={item.disabled}
     >
       <div className="ax-col--auto">
-        {selected < 0 && <AxIcon icon={AppIcons.iconCheckboxOff} color="muted" />}
-        {selected === 0 && <AxIcon icon={AppIcons.iconCheckPlus} color="primary" />}
-        {selected === 1 && <AxIcon icon={AppIcons.iconCheckMinus} color="danger" />}
+        {selected < 0 && <AxIcon size="md" icon={AppIcons.iconCheckboxOff} color="muted" />}
+        {selected === 0 && <AxIcon size="md" icon={AppIcons.iconCheckPlus} color="primary" />}
+        {selected === 1 && <AxIcon size="md" icon={AppIcons.iconCheckMinus} color="danger" />}
       </div>
       {item.icon && (
         <div className="ax-col--auto">
