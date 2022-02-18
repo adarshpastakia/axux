@@ -23,7 +23,7 @@ const Template: Story<JsonViewProps> = (props) => {
               boolean: true,
               number: 99.18,
               string: LIPSUM.line,
-              date: "2020-03-04T12:48.00.000",
+              date: "2020-03-04T12:48:00.000",
               relative: "$year|$now",
               innerObject: {
                 prop1: LIPSUM.line,
