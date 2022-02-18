@@ -99,7 +99,7 @@ interface ExtendedFC<T> extends FC<T> {
 /**
  * Action buttons
  */
-export const AxButton: ExtendedFC<ButtonProps> = forwardRef<HTMLAnchorElement, ButtonProps>(
+export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<HTMLAnchorElement, ButtonProps>(
   (
     {
       children,
