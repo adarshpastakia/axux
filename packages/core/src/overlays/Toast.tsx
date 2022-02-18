@@ -39,7 +39,7 @@ export interface ToastProps extends IconProps {
   /**
    * Extra action button
    */
-  extraAction?: JSX.Element;
+  extraActions?: JSX.Element;
 }
 
 /**
