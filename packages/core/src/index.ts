@@ -55,6 +55,7 @@ export { AxContent } from "./panels/Content";
 export { AxPanel } from "./panels/Panel";
 export { AxTabPanel } from "./panels/TabPanel";
 export { AxModal } from "./overlays/Modal";
+export { AxCollapsable } from "./panels/Collapsable";
 
 // Buttons
 export { AxButton } from "./buttons/Button";
