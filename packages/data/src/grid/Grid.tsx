@@ -27,7 +27,9 @@ export interface GridProps extends ElementProps {
   canLoadMore?: boolean;
   hideScrollButtons?: boolean;
   onLoadMore?: EmptyCallback;
+  onScroll?: (top: number) => void;
   sortOrder?: "asc" | "desc";
+  initialScroll?: number;
   onSort?: (order: "asc" | "desc") => void;
   children: (props: {
     style: CSSProperties;
@@ -51,6 +53,8 @@ export const AxGridView: ExtendedFC = ({
   onLoadMore,
   sortOrder,
   onSort,
+  onScroll,
+  initialScroll = 0,
   hideScrollButtons,
   cellWidth = 520,
   cellHeight = 50,
@@ -60,6 +64,7 @@ export const AxGridView: ExtendedFC = ({
   const [scrollerRef, setScrollerRef] = useState<HTMLDivElement>();
   const [masonryRef, setMasonryRef] = useState<Masonry>();
   const [canScroll, setCanScroll] = useState(0);
+  const [firstScroll, setFirstScroll] = useState<number | undefined>(initialScroll);
 
   const cache = useRef(
     new CellMeasurerCache({
@@ -99,6 +104,7 @@ export const AxGridView: ExtendedFC = ({
       if (scrollTop + offsetHeight >= scrollHeight - 10) {
         !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100);
       }
+      onScroll?.(scrollTop);
     }
   }, [scrollerRef, canLoadMore, isLoading, onLoadMore]);
 
@@ -144,6 +150,16 @@ export const AxGridView: ExtendedFC = ({
                         cellMeasurerCache={cache.current}
                         cellPositioner={positioner.current}
                         cellCount={list.length}
+                        onCellsRendered={
+                          scrollerRef &&
+                          firstScroll !== undefined &&
+                          scrollerRef.scrollHeight >= firstScroll
+                            ? () => {
+                                scrollerRef?.scrollTo({ top: firstScroll });
+                                setFirstScroll(undefined);
+                              }
+                            : undefined
+                        }
                         cellRenderer={({ index, key, parent, style }: AnyObject) => (
                           <CellMeasurer
                             cache={cache.current}

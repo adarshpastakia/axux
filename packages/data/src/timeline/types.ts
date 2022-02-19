@@ -35,6 +35,8 @@ export interface TimelineProps extends ElementProps {
   onLoadMore?: EmptyCallback;
   sortOrder?: "asc" | "desc";
   onSort?: (order: "asc" | "desc") => void;
+  onScroll?: (top: number) => void;
+  initialScroll?: number;
   children: (props: {
     style: CSSProperties;
     isScrolling: boolean;

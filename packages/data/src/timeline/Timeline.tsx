@@ -4,11 +4,10 @@
 // @license   : MIT
 
 import { AxButton, AxTextLoader } from "@axux/core";
+import { RefProp } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
 import { FC, useCallback, useRef, useState } from "react";
-import { TimelineEntry } from "./Entry";
-import { TimelineProps } from "./types";
 import {
   AutoSizer,
   CellMeasurer,
@@ -16,8 +15,10 @@ import {
   List,
   WindowScroller
 } from "react-virtualized";
+import { TimelineEntry } from "./Entry";
+import { TimelineProps } from "./types";
 
-interface ExtendedFC extends FC<TimelineProps> {
+interface ExtendedFC extends FC<TimelineProps & RefProp<HTMLDivElement>> {
   Entry: typeof TimelineEntry;
 }
 
@@ -28,12 +29,15 @@ export const AxTimeline: ExtendedFC = ({
   isLoading,
   canLoadMore,
   onLoadMore,
+  onScroll,
+  initialScroll = 0,
   sortOrder,
   onSort,
   ...aria
 }) => {
   const [scrollerRef, setScrollerRef] = useState<HTMLDivElement>();
   const [canScroll, setCanScroll] = useState(0);
+  const [firstScroll, setFirstScroll] = useState<number | undefined>(initialScroll);
 
   const cache = useRef(
     new CellMeasurerCache({
@@ -53,6 +57,7 @@ export const AxTimeline: ExtendedFC = ({
       if (scrollTop + offsetHeight >= scrollHeight - 10) {
         !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100);
       }
+      onScroll?.(scrollTop);
     }
   }, [scrollerRef, canLoadMore, isLoading, onLoadMore]);
 
@@ -95,6 +100,16 @@ export const AxTimeline: ExtendedFC = ({
                       deferredMeasurementCache={cache.current}
                       rowHeight={cache.current.rowHeight}
                       rowCount={list.length}
+                      onRowsRendered={
+                        scrollerRef &&
+                        firstScroll !== undefined &&
+                        scrollerRef.scrollHeight >= firstScroll
+                          ? () => {
+                              scrollerRef?.scrollTo({ top: firstScroll });
+                              setFirstScroll(undefined);
+                            }
+                          : undefined
+                      }
                       rowRenderer={({ index, key, parent, style }: AnyObject) => (
                         <CellMeasurer
                           cache={cache.current}
