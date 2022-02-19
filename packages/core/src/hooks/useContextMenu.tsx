@@ -5,14 +5,14 @@
 
 import { useMemo } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
-import { AxContextMenu, ContextMenuProps } from "../overlays/ContextMenu";
+import { AxContextMenuPopper, ContextMenuPopperProps } from "../overlays/ContextMenu";
 
 export const useAxContextMenu = () => {
   const toastContainer = useMemo(() => {
     return document.body.querySelector(".ax-root") as HTMLElement;
   }, []);
 
-  const showContextMenu = (props: ContextMenuProps) => {
+  const showContextMenu = (props: ContextMenuPopperProps) => {
     const el = document.createElement("div");
     toastContainer.appendChild(el);
     const onClose = () => {
@@ -21,7 +21,7 @@ export const useAxContextMenu = () => {
         el.remove();
       }, 10);
     };
-    setTimeout(() => render(<AxContextMenu {...props} onClose={onClose} />, el), 50);
+    setTimeout(() => render(<AxContextMenuPopper {...props} onClose={onClose} />, el), 50);
   };
 
   return { showContextMenu };

@@ -65,6 +65,7 @@ export type { MenuItemType } from "./menu/MenuItem";
 // Overlays
 export { AxPopover } from "./overlays/Popover";
 export { AxTooltip } from "./overlays/Tooltip";
+export { AxContextMenu } from "./overlays/ContextMenu";
 
 // App bars
 export { AxMeter } from "./appbars/Meter";
