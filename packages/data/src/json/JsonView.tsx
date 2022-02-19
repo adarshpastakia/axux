@@ -90,7 +90,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
           {!isEmpty(value) && canCopy && <AxCopy text={value} />}
         </span>
       </div>
-      {score && <AxMeter showLabel value={score} color="primary" border="primary" />}
+      {score && <AxMeter showLabel value={score} color="primary" border />}
     </div>
   );
 };
