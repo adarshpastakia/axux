@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxButton, AxContent, AxCopy, AxIcon } from "@axux/core";
+import { AxButton, AxContent, AxCopy, AxIcon, AxMeter } from "@axux/core";
 import { ElementProps, VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay, DateUtils } from "@axux/date";
@@ -24,6 +24,7 @@ export interface JsonViewProps extends ElementProps {
 
 interface JsonObjectProps extends Omit<JsonViewProps, "json"> {
   value: AnyObject;
+  score?: number;
   propName?: string[];
   label?: string;
 }
@@ -31,6 +32,7 @@ interface JsonObjectProps extends Omit<JsonViewProps, "json"> {
 const JsonValue: VFC<JsonObjectProps> = ({
   value,
   label,
+  score,
   propName = [],
   formatter,
   onFilter,
@@ -88,6 +90,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
           {!isEmpty(value) && canCopy && <AxCopy text={value} />}
         </span>
       </div>
+      {score && <AxMeter showLabel value={score} color="primary" border="primary" />}
     </div>
   );
 };
@@ -144,7 +147,7 @@ const JsonProperty: VFC<JsonObjectProps> = ({ value, propName = [], ...props }) 
   }, []);
   const getObjectValue = useCallback((key: string, obj: AnyObject): KeyValue => {
     const entries = Object.entries(obj);
-    if (entries.length === 1) {
+    if (!Array.isArray(obj) && entries.length === 1) {
       return getObjectValue(`${key}.${entries[0][0]}`, entries[0][1]);
     }
     return { label: key, innerObject: obj };
@@ -167,7 +170,7 @@ const JsonProperty: VFC<JsonObjectProps> = ({ value, propName = [], ...props }) 
           ) : (
             <JsonValue
               key={row}
-              label={label}
+              label={type === "array" ? "" : key}
               value={innerObject}
               propName={type === "array" ? propName : [...propName, label]}
               {...props}
@@ -177,7 +180,8 @@ const JsonProperty: VFC<JsonObjectProps> = ({ value, propName = [], ...props }) 
           return (
             <JsonValue
               key={row}
-              label={key}
+              label={type === "array" ? "" : key}
+              score={value?._score_}
               value={value._label_ ?? value}
               propName={type === "array" ? propName : [...propName, key]}
               {...props}
