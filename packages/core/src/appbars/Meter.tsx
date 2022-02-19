@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { useMemo } from "react";
-import { Color, VFC } from "../types";
+import { Color, ColorPalette, VFC } from "../types";
 
 /** @internal */
 export interface MeterProps {
@@ -15,11 +15,11 @@ export interface MeterProps {
   /**
    * Meter theme
    */
-  color?: Color | "rainbow";
+  color?: Color | ColorPalette | "rainbow";
   /**
    * Meter border
    */
-  border?: Color;
+  border?: boolean;
   /**
    * Show value label
    */
@@ -40,7 +40,7 @@ export const AxMeter: VFC<MeterProps> = ({ value = 0, showLabel, color, border }
   }, [value]);
   return (
     <div
-      className={`ax-meter ${border ? "ax-border" : ""} ax-border--${border}`}
+      className={`ax-meter ${border ? "ax-border" : ""} ax-border--${color}`}
       data-theme={color}
       style={{
         paddingInlineStart: percent
