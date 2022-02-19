@@ -13,9 +13,13 @@ export interface MeterProps {
    */
   value: number;
   /**
-   * Button theme
+   * Meter theme
    */
   color?: Color | "rainbow";
+  /**
+   * Meter border
+   */
+  border?: Color;
   /**
    * Show value label
    */
@@ -27,15 +31,16 @@ export interface MeterProps {
  * @param value
  * @param showLabel
  * @param color
+ * @param border
  * @constructor
  */
-export const AxMeter: VFC<MeterProps> = ({ value = 0, showLabel, color }) => {
+export const AxMeter: VFC<MeterProps> = ({ value = 0, showLabel, color, border }) => {
   const percent = useMemo(() => {
     return `${(value > 100 ? 100 : value).toFixed(2)}%`;
   }, [value]);
   return (
     <div
-      className="ax-meter"
+      className={`ax-meter ${border ? "ax-border" : ""} ax-border--${border}`}
       data-theme={color}
       style={{
         paddingInlineStart: percent
