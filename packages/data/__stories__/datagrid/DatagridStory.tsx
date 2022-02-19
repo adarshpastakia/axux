@@ -3,22 +3,12 @@
 // @copyright : 2021
 // @license   : MIT
 
-import {
-  AxContent,
-  AxFlexBox,
-  AxIcon,
-  AxMeter,
-  AxModal,
-  AxPage,
-  AxSection,
-  AxText,
-  AxViewport
-} from "@axux/core";
+import { AxFlexBox, AxMeter, AxModal, AxPage, AxSection, AxViewport } from "@axux/core";
 import { Countries, Country } from "@axux/utilities";
 import { Story } from "@storybook/react";
 import { useCallback, useEffect, useMemo } from "react";
-import { AxCodeEditor } from "../../src";
 import {
+  AxCodeEditor,
   AxDatagrid,
   AxPagination,
   AxRecordCounter,

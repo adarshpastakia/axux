@@ -20,7 +20,10 @@ const Template: Story<JsonViewProps> = (props) => {
             {...props}
             json={{
               emptyNode: "",
-              boolean: true,
+              boolean: {
+                _label_: true,
+                _score_: 75.69
+              },
               number: 99.18,
               string: LIPSUM.line,
               date: "2020-03-04T12:48:00.000",
@@ -29,7 +32,9 @@ const Template: Story<JsonViewProps> = (props) => {
                 prop1: LIPSUM.line,
                 prop2: LIPSUM.line
               },
-              stringArray: Countries.list.slice(0, 4).map((c) => c.name),
+              stringArray: Countries.list
+                .slice(0, 4)
+                .map((c) => ({ _label_: c.name, _score_: 24.18 })),
               objectArray: Countries.list.slice(0, 4),
               singleChild: {
                 innerChild: {
