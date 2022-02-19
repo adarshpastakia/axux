@@ -6,7 +6,7 @@
 import { AxSection, useAxResizeObserver } from "@axux/core";
 import { ElementProps, VFC } from "@axux/core/dist/types";
 import { isString } from "@axux/utilities";
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
 import MonacoEditor from "react-monaco-editor";
 import { CodeEditorTools } from "./CodeEditorTools";
 
@@ -28,7 +28,7 @@ export const AxCodeEditor: VFC<CodeEditorProps> = ({
   language = "json",
   onChange
 }) => {
-  const editorRef = useRef<MonacoEditor>(null);
+  const [editorRef, setEditorRef] = useState<MonacoEditor>();
 
   const [theme, setTheme] = useState("light");
   useLayoutEffect(() => {
@@ -39,7 +39,7 @@ export const AxCodeEditor: VFC<CodeEditorProps> = ({
   });
 
   const ref = useAxResizeObserver((size) => {
-    editorRef.current?.editor?.layout(size);
+    editorRef?.editor?.layout(size);
   });
 
   const codeValue = useMemo(
@@ -52,12 +52,12 @@ export const AxCodeEditor: VFC<CodeEditorProps> = ({
       <AxSection>
         {!hideToolbar && (
           <AxSection.Head>
-            <CodeEditorTools editor={editorRef.current?.editor} />
+            <CodeEditorTools editor={editorRef?.editor} />
           </AxSection.Head>
         )}
         <AxSection ref={ref} className="ax-code__editor">
           <MonacoEditor
-            ref={editorRef}
+            ref={(e) => setEditorRef(e as AnyObject)}
             value={codeValue}
             onChange={onChange}
             language={language}
