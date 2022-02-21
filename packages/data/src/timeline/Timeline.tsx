@@ -7,7 +7,7 @@ import { AxButton, AxTextLoader } from "@axux/core";
 import { RefProp } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { FC, useCallback, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   AutoSizer,
   CellMeasurer,
@@ -35,9 +35,14 @@ export const AxTimeline: ExtendedFC = ({
   onSort,
   ...aria
 }) => {
+  const windowRef = useRef<WindowScroller>(null);
   const [scrollerRef, setScrollerRef] = useState<HTMLDivElement>();
   const [canScroll, setCanScroll] = useState(0);
-  const [firstScroll, setFirstScroll] = useState<number | undefined>(initialScroll);
+  const [firstScroll, setFirstScroll] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    setFirstScroll(initialScroll);
+  }, [initialScroll]);
 
   const cache = useRef(
     new CellMeasurerCache({
@@ -78,6 +83,14 @@ export const AxTimeline: ExtendedFC = ({
     [scrollerRef]
   );
 
+  useLayoutEffect(() => {
+    if (firstScroll !== undefined) {
+      scrollerRef && (scrollerRef.scrollTop = firstScroll);
+      windowRef.current?.updatePosition();
+      setFirstScroll(undefined);
+    }
+  }, [firstScroll]);
+
   return (
     <div
       className={`ax-timeline__panel ${className ?? ""}`}
@@ -86,7 +99,7 @@ export const AxTimeline: ExtendedFC = ({
       {...aria}
     >
       <div className="ax-timeline__wrapper">
-        <WindowScroller scrollElement={scrollerRef}>
+        <WindowScroller ref={windowRef} scrollElement={scrollerRef}>
           {({ height, isScrolling, registerChild, scrollTop }) => (
             <div>
               <AutoSizer disableHeight>
@@ -100,16 +113,6 @@ export const AxTimeline: ExtendedFC = ({
                       deferredMeasurementCache={cache.current}
                       rowHeight={cache.current.rowHeight}
                       rowCount={list.length}
-                      onRowsRendered={
-                        scrollerRef &&
-                        firstScroll !== undefined &&
-                        scrollerRef.scrollHeight >= firstScroll
-                          ? () => {
-                              scrollerRef?.scrollTo({ top: firstScroll });
-                              setFirstScroll(undefined);
-                            }
-                          : undefined
-                      }
                       rowRenderer={({ index, key, parent, style }: AnyObject) => (
                         <CellMeasurer
                           cache={cache.current}

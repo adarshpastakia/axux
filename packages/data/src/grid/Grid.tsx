@@ -8,7 +8,16 @@ import { useIsRtl } from "@axux/core/dist/internals/useIsRtl";
 import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { CSSProperties, FC, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import {
+  CSSProperties,
+  FC,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState
+} from "react";
 import {
   AutoSizer,
   CellMeasurer,
@@ -61,10 +70,15 @@ export const AxGridView: ExtendedFC = ({
   ...aria
 }) => {
   const { isRtl } = useIsRtl();
+  const windowRef = useRef<WindowScroller>(null);
   const [scrollerRef, setScrollerRef] = useState<HTMLDivElement>();
   const [masonryRef, setMasonryRef] = useState<Masonry>();
   const [canScroll, setCanScroll] = useState(0);
-  const [firstScroll, setFirstScroll] = useState<number | undefined>(initialScroll);
+  const [firstScroll, setFirstScroll] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    setFirstScroll(initialScroll);
+  }, [initialScroll]);
 
   const cache = useRef(
     new CellMeasurerCache({
@@ -125,6 +139,14 @@ export const AxGridView: ExtendedFC = ({
     [scrollerRef]
   );
 
+  useLayoutEffect(() => {
+    if (firstScroll !== undefined) {
+      scrollerRef && (scrollerRef.scrollTop = firstScroll);
+      windowRef.current?.updatePosition();
+      setFirstScroll(undefined);
+    }
+  }, [firstScroll]);
+
   return (
     <div
       className={`ax-gridView__panel ${className ?? ""}`}
@@ -133,7 +155,7 @@ export const AxGridView: ExtendedFC = ({
       {...aria}
     >
       <div className="ax-gridView__wrapper">
-        <WindowScroller scrollElement={scrollerRef}>
+        <WindowScroller ref={windowRef} scrollElement={scrollerRef}>
           {({ height, isScrolling, registerChild, scrollTop }) => (
             <div>
               <AutoSizer disableHeight height={height} onResize={({ width }) => setWidth(width)}>
@@ -150,16 +172,6 @@ export const AxGridView: ExtendedFC = ({
                         cellMeasurerCache={cache.current}
                         cellPositioner={positioner.current}
                         cellCount={list.length}
-                        onCellsRendered={
-                          scrollerRef &&
-                          firstScroll !== undefined &&
-                          scrollerRef.scrollHeight >= firstScroll
-                            ? () => {
-                                scrollerRef?.scrollTo({ top: firstScroll });
-                                setFirstScroll(undefined);
-                              }
-                            : undefined
-                        }
                         cellRenderer={({ index, key, parent, style }: AnyObject) => (
                           <CellMeasurer
                             cache={cache.current}

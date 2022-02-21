@@ -109,7 +109,7 @@ const Template: Story = (props) => {
                       <AxPanel.Header
                         title={
                           <span>
-                            {record.username} @ <AxDateDisplay date={record.timestamp} />
+                            {props.index} - {record.username} @ <AxDateDisplay date={record.timestamp} />
                           </span>
                         }
                       />
@@ -120,7 +120,7 @@ const Template: Story = (props) => {
                     </AxPanel>
                   ) : (
                     <div className="ax-col ax-col--fill">
-                      {record.username} @ <AxDateDisplay date={record.timestamp} />
+                      {props.index} - {record.username} @ <AxDateDisplay date={record.timestamp} />
                     </div>
                   )}
                   <div className="ax-col ax-col--auto ax-padding--x--xs">
