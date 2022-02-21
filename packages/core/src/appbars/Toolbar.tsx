@@ -20,6 +20,10 @@ export interface ToolbarProps {
    * Vertical toolbar
    */
   vertical?: boolean;
+  /**
+   * Enable overflow
+   */
+  enableOverflow?: boolean;
 }
 
 const elementHasOverflow = (el: HTMLElement) => {
@@ -35,12 +39,18 @@ const childNotInView = (el: HTMLElement, child: Element, vertical: boolean) => {
  *
  * Toolbar
  * @param align
+ * @param enableOverflow
  * @param vertical
  * @param children
  * @constructor
  * @internal
  */
-export const AxToolbar: FC<ToolbarProps> = ({ children, align, vertical = false }) => {
+export const AxToolbar: FC<ToolbarProps> = ({
+  children,
+  align,
+  enableOverflow = false,
+  vertical = false
+}) => {
   const refToolbar = useRef<HTMLDivElement>(null);
   const refOverflow = useRef<HTMLDivElement>(null);
 
@@ -68,7 +78,7 @@ export const AxToolbar: FC<ToolbarProps> = ({ children, align, vertical = false 
   }, [refToolbar, vertical]);
 
   useLayoutEffect(() => {
-    if (ResizeObserver) {
+    if (ResizeObserver && enableOverflow) {
       const ob = new ResizeObserver(checkOverflow);
       if (refToolbar.current) {
         ob.observe(refToolbar.current);
@@ -77,16 +87,23 @@ export const AxToolbar: FC<ToolbarProps> = ({ children, align, vertical = false 
 
       return () => ob.disconnect();
     }
-  }, [refToolbar, checkOverflow]);
+  }, [refToolbar, checkOverflow, enableOverflow]);
 
   return (
     <div ref={refToolbar} className="ax-toolbar" data-align={align} data-vertical={vertical}>
       <div className="ax-toolbar--wrapper">{children}</div>
       {hasOverflow && <AxSpacer.Flex />}
-      <AxPopover forceRender placement={vertical ? "right-end" : "bottom-end"}>
-        <AxButton icon={AppIcons.iconOverflow} data-overflow={hasOverflow} type="link" hideCaret />
-        <div className="ax-toolbar--overflow" ref={refOverflow} />
-      </AxPopover>
+      {enableOverflow && (
+        <AxPopover forceRender placement={vertical ? "right-end" : "bottom-end"}>
+          <AxButton
+            icon={AppIcons.iconOverflow}
+            data-overflow={hasOverflow}
+            type="link"
+            hideCaret
+          />
+          <div className="ax-toolbar--overflow" ref={refOverflow} />
+        </AxPopover>
+      )}
     </div>
   );
 };
