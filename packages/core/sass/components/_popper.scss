@@ -5,6 +5,7 @@
 
 #{$prefix}-popper {
   box-sizing: border-box;
+  font-family: $base-font-family;
   z-index: 50;
 
   $base: #{$prefix}-popper;

@@ -48,3 +48,8 @@ export const getByPath = (obj: KeyValue, path: string, defaultValue: AnyObject =
   }
   return defaultValue;
 };
+
+/** @internal */
+export const getValue = (...args: AnyObject[]) => {
+  return args.find((a) => !isEmpty(a));
+};
