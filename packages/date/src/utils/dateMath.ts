@@ -21,8 +21,6 @@ import {
   endOfWeek,
   endOfYear,
   isBefore,
-  isValid,
-  parseISO,
   startOfDay,
   startOfDecade,
   startOfHour,
@@ -45,12 +43,12 @@ const isDate = (value: AnyObject): value is Date => {
     return false;
   }
   try {
-    const parsed = parseISO(value);
-    if (!isNaN(parsed.valueOf())) return true;
+    const parsed = Date.parse(value);
+    if (!isNaN(parsed)) return true;
   } catch {
     //
   }
-  return isValid(value);
+  return false;
 };
 
 /** @internal */
