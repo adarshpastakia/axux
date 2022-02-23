@@ -1,6 +1,6 @@
 {
   "name": "@axux/date",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "AxUx: Date package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -26,9 +26,9 @@
     "watch": "yarn build:lib -w"
   },
   "dependencies": {
-    "@axux/core": "^0.0.7",
-    "@axux/form": "^0.0.7",
-    "@axux/utilities": "^0.0.7",
+    "@axux/core": "^0.0.8",
+    "@axux/form": "^0.0.8",
+    "@axux/utilities": "^0.0.8",
     "date-fns": "^2.23.0"
   },
   "peerDependencies": {
