@@ -4,11 +4,11 @@
 // @license   : MIT
 
 import { FC, useMemo } from "react";
-import { AllColors, MarginProps, Size, TextAlign } from "../types";
+import { AllColors, ElementProps, MarginProps, Size, TextAlign } from "../types";
 import { AxText } from "../typography/Text";
 
 /** @internal */
-export interface DividerProps extends Pick<MarginProps, "margin"> {
+export interface DividerProps extends Pick<MarginProps, "margin">, ElementProps {
   /**
    * Vertical divider for toolbars and flexbox
    */
@@ -47,20 +47,21 @@ export const AxDivider: FC<DividerProps> = ({
   children,
   margin = "sm",
   align = "start",
+  className,
   color,
   rainbow = false,
   size,
   vertical = false
 }) => {
   const classes = useMemo(() => {
-    const cls = ["ax-divider"];
+    const cls = ["ax-divider", className ?? ""];
     if (vertical) {
       cls.push(`ax-margin--x--${margin}`);
     } else {
       cls.push(`ax-margin--y--${margin}`);
     }
     return cls.join(" ");
-  }, [margin, vertical]);
+  }, [margin, vertical, className]);
 
   return (
     <div

@@ -36,11 +36,12 @@ export interface MeterProps {
  */
 export const AxMeter: VFC<MeterProps> = ({ value = 0, showLabel, color, border }) => {
   const percent = useMemo(() => {
-    return `${(value > 100 ? 100 : value).toFixed(2)}%`;
+    return `${((value > 1 ? value / 100 : value) * 100).toFixed(2)}%`;
   }, [value]);
   return (
     <div
-      className={`ax-meter ${border ? "ax-border" : ""} ax-border--${color}`}
+      className="ax-meter"
+      data-border={border}
       data-theme={color}
       style={{
         paddingInlineStart: percent

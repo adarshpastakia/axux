@@ -8,6 +8,7 @@
   font-size: 1em;
   margin: 0.125em;
   position: relative;
+  user-select: none;
   vertical-align: middle;
 
   $base: #{$prefix}-button;

@@ -11,6 +11,7 @@
     display: flex;
     grid-area: breadcrumbs;
     padding: 0.125em 0.5em;
+    user-select: none;
 
     > div:first-child {
       display: flex;

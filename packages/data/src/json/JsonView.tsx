@@ -17,6 +17,7 @@ export interface JsonViewProps extends ElementProps {
   canCopy?: boolean;
   collapseDefault?: boolean;
   emptyDisplay?: JSX.Element;
+  labeler: (key: string) => string;
   formatter?: (key?: string, value?: AnyObject) => string | JSX.Element;
   filters?: true | string[];
   onFilter?: (key: string, value: AnyObject, negate: boolean) => void;
@@ -34,6 +35,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
   label,
   score,
   propName = [],
+  labeler,
   formatter,
   onFilter,
   filters,
@@ -63,9 +65,15 @@ const JsonValue: VFC<JsonObjectProps> = ({
       (filters === true || filters.includes(propName.join("."))),
     [filters, propName, value]
   );
+  const labelDisplay = useMemo(() => {
+    if (labeler) {
+      return labeler(propName.join(".")) ?? label;
+    }
+    return label;
+  }, [label, labeler]);
   return (
     <div className="ax-json__property">
-      {label && <label className="ax-json__label">{label}</label>}
+      {labelDisplay && <label className="ax-json__label">{labelDisplay}</label>}
       <div className="ax-json__value">
         {canFilter && onFilter && (
           <AxButton.Group>

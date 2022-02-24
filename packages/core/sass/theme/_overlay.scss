@@ -9,7 +9,8 @@
   }
 }
 
-#{$prefix}-modal {
+#{$prefix}-modal,
+#{$prefix}-flyout {
   background-color: $base-bg;
   box-shadow: $shadow-level2;
 

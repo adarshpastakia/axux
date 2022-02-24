@@ -19,6 +19,7 @@
     margin: 0.25em 0;
     min-height: 1em;
     position: relative;
+    user-select: none;
     z-index: 2;
     @include ellipsis();
 
