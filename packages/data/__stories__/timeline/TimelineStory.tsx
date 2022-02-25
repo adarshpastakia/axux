@@ -87,7 +87,7 @@ const Template: Story = (props) => {
   const [data, setData] = useState<HistogramRecord[]>([
     { id: 0, count: 99, label: "Item 1" },
     { id: 1, count: 72, label: "Item 2" },
-    { id: 2, count: 45, label: "Item 3" },
+    { id: 2, count: 18, label: "Item 3" },
     { id: 3, count: 99, label: "Item 4" },
     { id: 4, count: 72, label: "Item 5" },
     { id: 5, count: 45, label: "Item 6" }
@@ -95,7 +95,7 @@ const Template: Story = (props) => {
   const [negate, setNegate] = useState<HistogramRecord[]>([
     { id: 0, count: 99, label: "Item 1" },
     { id: 1, count: 72, label: "Item 2" },
-    { id: 2, count: 45, label: "Item 3" },
+    { id: 2, count: 9, label: "Item 3" },
     { id: 3, count: 99, label: "Item 4" },
     { id: 4, count: 72, label: "Item 5" },
     { id: 5, count: 45, label: "Item 6" }

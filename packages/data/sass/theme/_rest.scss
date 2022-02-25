@@ -53,10 +53,7 @@
       border-inline-start: 2px solid currentColor;
     }
 
-    > span:first-child {
-      color: $white;
-    }
-    > span:last-child {
+    > span {
       color: $base-color;
     }
 

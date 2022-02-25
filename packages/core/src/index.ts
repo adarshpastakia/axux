@@ -61,6 +61,7 @@ export { AxCollapsable } from "./panels/Collapsable";
 // Buttons
 export { AxButton } from "./buttons/Button";
 export { AxTag } from "./buttons/Tag";
+export { AxActionButton } from "./buttons/ActionButton";
 export { AxMenu } from "./menu/Menu";
 export type { MenuItemType } from "./menu/MenuItem";
 

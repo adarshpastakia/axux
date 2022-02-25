@@ -3,9 +3,8 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { FC, useCallback, useEffect, useState } from "react";
-import { AxButton } from "../buttons/Button";
-import { AxTooltip } from "../overlays/Tooltip";
+import { useCallback, useEffect, useState } from "react";
+import { AxActionButton } from "../buttons/ActionButton";
 import { Size, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 
@@ -14,7 +13,7 @@ export interface CopyProps {
   size?: Size;
 }
 
-export const AxCopy: FC<CopyProps> = ({ text, children, size = "sm" }) => {
+export const AxCopy: VFC<CopyProps> = ({ text, size = "sm" }) => {
   const [copied, setCopied] = useState(false);
   const doCopy = useCallback(() => {
     navigator.clipboard.writeText(text);
@@ -27,17 +26,12 @@ export const AxCopy: FC<CopyProps> = ({ text, children, size = "sm" }) => {
     }
   }, [copied]);
   return (
-    <AxTooltip content="Copied!" isDisabled={!copied} isOpen={copied} usePortal>
-      {!children && (
-        <AxButton
-          size={size}
-          onClick={doCopy}
-          type={copied ? "solid" : "link"}
-          color={copied ? "success" : "default"}
-          icon={copied ? AppIcons.iconCheckAll : AppIcons.iconCopy}
-        />
-      )}
-      {children && <div onClick={doCopy} className="ax-clickable">{children}</div>}
-    </AxTooltip>
+    <AxActionButton
+      size={size}
+      onClick={doCopy}
+      type="link"
+      color="default"
+      icon={AppIcons.iconCopy}
+    />
   );
 };
