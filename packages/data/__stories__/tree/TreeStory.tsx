@@ -3,13 +3,12 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxContent, AxPage, AxSection, AxViewport } from "@axux/core";
+import { AxContent, AxPage, AxPanel, AxSection, AxViewport } from "@axux/core";
 import { Countries } from "@axux/utilities";
 import { Country } from "@axux/utilities/dist/_countries";
 import { Story } from "@storybook/react";
-import { useMemo } from "react";
-import { AxCheckList } from "../../src";
-import { AxTreePanel } from "../../src";
+import { useMemo, useState } from "react";
+import { AxCheckList, AxTreePanel } from "../../src";
 import { TreeNode, TreePanelProps } from "../../src/tree/types";
 
 const Template: Story<TreePanelProps> = (props) => {
@@ -38,6 +37,23 @@ const Template: Story<TreePanelProps> = (props) => {
       }))
     ];
   }, []);
+
+  const items = useMemo(
+    () =>
+      new Array(20)
+        .fill(0)
+        .map((_, i) => ({
+          id: `key${i}`,
+          label: `Item ${i}`,
+          count: Math.floor(Math.random() * 99)
+        }))
+        .sort((a, b) => (a.count > b.count ? -1 : 1))
+        .map((item) => ({ ...item, disabled: item.count < 20, badge: item.count })),
+    []
+  );
+
+  const [selected, setSelected] = useState<AnyObject>([]);
+  const [selection, setSelection] = useState<AnyObject>({ include: [], exclude: [] });
   return (
     <AxViewport>
       <AxPage>
@@ -45,19 +61,23 @@ const Template: Story<TreePanelProps> = (props) => {
           <AxTreePanel {...props} data={data} />
         </AxSection.Side>
         <AxSection.Side end width="24rem">
-          <AxContent>
-            <AxCheckList
-              items={new Array(20)
-                .fill(0)
-                .map((_, i) => ({
-                  id: `key${i}`,
-                  label: `Item ${i}`,
-                  count: Math.floor(Math.random() * 99)
-                }))
-                .sort((a, b) => (a.count > b.count ? -1 : 1))
-                .map((item) => ({ ...item, disabled: item.count < 20, badge: item.count }))}
-            />
-          </AxContent>
+          <AxPanel.Group>
+            <AxPanel panelId="check" title="Check List" isCollapsable>
+              <AxContent>
+                <AxCheckList onChange={setSelected} selected={selected} items={items} />
+              </AxContent>
+            </AxPanel>
+            <AxPanel panelId="toggle" title="Toggle List" isCollapsable>
+              <AxContent>
+                <AxCheckList
+                  allowNegate
+                  onChange={setSelection}
+                  selected={selection}
+                  items={items}
+                />
+              </AxContent>
+            </AxPanel>
+          </AxPanel.Group>
         </AxSection.Side>
       </AxPage>
     </AxViewport>

@@ -45,9 +45,6 @@
 }
 
 #{$prefix}-histogram {
-  &__group {
-    background-color: $color-lightest;
-  }
   &__meter {
     background-color: currentColor;
 
@@ -56,7 +53,10 @@
       border-inline-start: 2px solid currentColor;
     }
 
-    > span {
+    > span:first-child {
+      color: $white;
+    }
+    > span:last-child {
       color: $base-color;
     }
 

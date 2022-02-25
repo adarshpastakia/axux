@@ -5,22 +5,26 @@
 
 #{$prefix}-histogram {
   &__group {
-    padding: 0.25em 0.5em;
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    @include ellipsis();
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    user-select: none;
+    z-index: 2;
+
+    &:hover #{$prefix}-histogram__toggles {
+      cursor: pointer;
+      display: block;
+    }
   }
 
   &__meter {
     align-items: center;
     display: flex;
+    flex: 1 1 1em;
     flex-flow: row nowrap;
     margin: 0.25em 0;
     min-height: 1em;
     position: relative;
-    user-select: none;
-    z-index: 2;
     @include ellipsis();
 
     > span {
@@ -53,5 +57,9 @@
     @at-root [dir="rtl"] &::after {
       right: calc(var(--meter) * 100%);
     }
+  }
+
+  &__toggles {
+    display: none;
   }
 }

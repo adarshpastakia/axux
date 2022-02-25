@@ -18,8 +18,9 @@ import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay } from "@axux/date";
 import { mdiComment, mdiFaceProfile, mdiStar, mdiTag } from "@mdi/js";
 import { Story } from "@storybook/react";
+import { useState } from "react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
-import { AxHistogram, AxTimeline, TimelineRecord } from "../../src";
+import { AxHistogram, AxTimeline, HistogramRecord, TimelineRecord } from "../../src";
 
 const entries: Array<TimelineRecord & { body?: string }> = [
   {
@@ -82,6 +83,23 @@ const entries: Array<TimelineRecord & { body?: string }> = [
 
 const Template: Story = (props) => {
   const { dateLocale } = useAxGlobals();
+
+  const [data, setData] = useState<HistogramRecord[]>([
+    { id: 0, count: 99, label: "Item 1" },
+    { id: 1, count: 72, label: "Item 2" },
+    { id: 2, count: 45, label: "Item 3" },
+    { id: 3, count: 99, label: "Item 4" },
+    { id: 4, count: 72, label: "Item 5" },
+    { id: 5, count: 45, label: "Item 6" }
+  ]);
+  const [negate, setNegate] = useState<HistogramRecord[]>([
+    { id: 0, count: 99, label: "Item 1" },
+    { id: 1, count: 72, label: "Item 2" },
+    { id: 2, count: 45, label: "Item 3" },
+    { id: 3, count: 99, label: "Item 4" },
+    { id: 4, count: 72, label: "Item 5" },
+    { id: 5, count: 45, label: "Item 6" }
+  ]);
   return (
     <AxViewport dateLocale={dateLocale}>
       <AxPage paper>
@@ -109,7 +127,8 @@ const Template: Story = (props) => {
                       <AxPanel.Header
                         title={
                           <span>
-                            {props.index} - {record.username} @ <AxDateDisplay date={record.timestamp} />
+                            {props.index} - {record.username} @{" "}
+                            <AxDateDisplay date={record.timestamp} />
                           </span>
                         }
                       />
@@ -134,39 +153,36 @@ const Template: Story = (props) => {
             )}
           </AxTimeline>
           <AxSection.Side end title="Side Left" isCollapsable flyout isResizeable minWidth="20em">
-            <AxPanel.Group accordion>
-              <AxPanel panelId="histo" title="Histogram" className="ant-padding-none">
+            <AxPanel.Group>
+              <AxPanel panelId="histo" title="Histogram">
                 <AxContent padding="none">
                   <AxHistogram
                     format="number"
                     total={128}
-                    data={[
-                      { count: 99, label: "Item 1" },
-                      { count: 72, label: "Item 2" },
-                      { count: 45, label: "Item 3" },
-                      { count: 99, label: "Item 4", color: "primary" },
-                      { count: 72, label: "Item 5" },
-                      { count: 45, label: "Item 6" }
-                    ]}
+                    data={data}
+                    onClick={(rec) => {
+                      rec.color = rec.color === "secondary" ? undefined : "secondary";
+                      const newData = [...data];
+                      newData.splice(rec.id as number, 1, rec);
+                      setData(newData);
+                    }}
                   />
-                  <div style={{ height: "1200px" }} />
                 </AxContent>
               </AxPanel>
-              <AxPanel panelId="histo2" title="Histogram" className="ant-padding-none">
+              <AxPanel panelId="histo2" title="Histogram">
                 <AxContent padding="none">
                   <AxHistogram
                     format="number"
                     total={128}
-                    data={[
-                      { count: 99, label: "Item 1" },
-                      { count: 72, label: "Item 2" },
-                      { count: 45, label: "Item 3" },
-                      { count: 99, label: "Item 4", color: "secondary" },
-                      { count: 72, label: "Item 5" },
-                      { count: 45, label: "Item 6" }
-                    ]}
+                    data={negate}
+                    allowNegate
+                    onClick={(rec, b) => {
+                      rec.include = b;
+                      const newData = [...negate];
+                      newData.splice(rec.id as number, 1, rec);
+                      setNegate(newData);
+                    }}
                   />
-                  <div style={{ height: "1200px" }} />
                 </AxContent>
               </AxPanel>
             </AxPanel.Group>

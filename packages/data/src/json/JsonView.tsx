@@ -14,11 +14,11 @@ import { useTranslation } from "react-i18next";
 export interface JsonViewProps extends ElementProps {
   json: KeyValue;
   sorted?: boolean;
-  canCopy?: boolean;
   collapseDefault?: boolean;
   emptyDisplay?: JSX.Element;
   labeler?: (key: string) => string;
   formatter?: (key?: string, value?: AnyObject) => string | JSX.Element;
+  copy?: true | string[];
   filters?: true | string[];
   onFilter?: (key: string, value: AnyObject, negate: boolean) => void;
 }
@@ -39,7 +39,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
   formatter,
   onFilter,
   filters,
-  canCopy
+  copy
 }) => {
   const valueDisplay = useMemo(() => {
     if (isEmpty(value)) return "-";
@@ -59,10 +59,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
   }, [formatter, propName, value]);
   const canFilter = useMemo(
     () =>
-      !isEmpty(value) &&
-      filters &&
-      propName &&
-      (filters === true || filters.includes(propName.join("."))),
+      !isEmpty(value) && propName && (filters === true || filters?.includes?.(propName.join("."))),
     [filters, propName, value]
   );
   const labelDisplay = useMemo(() => {
@@ -70,12 +67,16 @@ const JsonValue: VFC<JsonObjectProps> = ({
       return labeler(propName.join(".")) ?? label;
     }
     return label;
-  }, [label, labeler]);
+  }, [label, labeler, propName]);
+  const canCopy = useMemo(
+    () => !isEmpty(value) && propName && (copy === true || copy?.includes?.(propName?.join("."))),
+    [copy, propName, value]
+  );
   return (
     <div className="ax-json__property">
       {labelDisplay && <label className="ax-json__label">{labelDisplay}</label>}
       <div className="ax-json__value">
-        {canFilter && onFilter && (
+        {onFilter && canFilter && (
           <AxButton.Group>
             <AxButton
               color="primary"
@@ -95,7 +96,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
         )}
         <span>
           {valueDisplay}
-          {!isEmpty(value) && canCopy && <AxCopy text={value} />}
+          {canCopy && <AxCopy text={value} />}
         </span>
       </div>
       {score && <AxMeter showLabel value={score} color="primary" border />}
