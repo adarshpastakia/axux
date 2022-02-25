@@ -13,6 +13,13 @@ import { AxText } from "../../dist";
 
 const { TextStory, SerifStory, ColorStory } = composeStories(stories);
 
+const AR =
+  'هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد محتوى نصي، هنا يوجد محتوى نصي" فتجعلها تبدو (أي الأحرف) وكأنها نص مقروء. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم إيبسوم بشكل إفتراضي كنموذج عن النص، وإذا قمت بإدخال "lorem ipsum" في أي محرك بحث ستظهر العديد من المواقع الحديثة العهد في نتائج البحث. على مدى السنين ظهرت نسخ جديدة ومختلفة من نص لوريم إيبسوم، أحياناً عن طريق الصدفة، وأحياناً عن عمد كإدخال بعض العبارات الفكاهية إليها.';
+const AR_MARK: AnyObject = [
+  ["لصفحة ما سيلهي", "Test"],
+  ["السنين", "Test"]
+];
+
 i18next
   .use(initReactI18next)
   .init({
@@ -175,6 +182,32 @@ describe("Text", () => {
     });
     expect(fragment.container).not.toHaveTextContent("Test tooltip");
     expect(fragment.container).toMatchSnapshot();
+    fragment.unmount();
+  });
+
+  it("renders arabic with tooltip", async () => {
+    const fragment = render(
+      <I18nextProvider i18n={i18next}>
+        <div className="ax-root">
+          <AxText.Abbr abbr={AR_MARK}>{AR}</AxText.Abbr>
+        </div>
+      </I18nextProvider>
+    );
+
+    console.log(fragment.container.innerHTML);
+
+    // const el = fragment.container.querySelector("abbr") as HTMLElement;
+    // act(() => {
+    //   fireEvent.mouseOver(el);
+    // });
+    // await waitFor(() => fragment.container.querySelector(".ax-tooltip"));
+    // expect(fragment.container).toHaveTextContent("Test");
+    // expect(fragment.container).toMatchSnapshot();
+    // act(() => {
+    //   fireEvent.mouseOut(el);
+    // });
+    // expect(fragment.container).not.toHaveTextContent("Test");
+    // expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
   });
 });
