@@ -17,7 +17,7 @@ export interface JsonViewProps extends ElementProps {
   canCopy?: boolean;
   collapseDefault?: boolean;
   emptyDisplay?: JSX.Element;
-  labeler: (key: string) => string;
+  labeler?: (key: string) => string;
   formatter?: (key?: string, value?: AnyObject) => string | JSX.Element;
   filters?: true | string[];
   onFilter?: (key: string, value: AnyObject, negate: boolean) => void;
