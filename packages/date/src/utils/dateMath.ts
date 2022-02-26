@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isNil, isString } from "@axux/utilities";
+import { isNil, isNumber, isString } from "@axux/utilities";
 import {
   addDays,
   addHours,
@@ -20,6 +20,7 @@ import {
   endOfQuarter,
   endOfWeek,
   endOfYear,
+  formatDistanceToNowStrict,
   isBefore,
   startOfDay,
   startOfDecade,
@@ -42,6 +43,7 @@ const isDate = (value: AnyObject): value is Date => {
   if (isString(value) && !value.match(/^(\d*[-/.]\d*[-/.]\d*)?/)) {
     return false;
   }
+  if (isNumber(value)) return true;
   try {
     const parsed = Date.parse(value);
     if (!isNaN(parsed)) return true;
@@ -249,6 +251,12 @@ export const DateUtils = {
       if (start && end) return `${start.toISOString()}|${end.toISOString()}`;
     }
     return "";
+  },
+  age(dt: DateValue) {
+    const dates = parseDateValue(dt);
+    if (dates && isDate(dates)) {
+      return formatDistanceToNowStrict(dates);
+    }
   },
   toISOString(dt: DateValue): [DateValue, DateValue] | DateValue {
     const dates = parseDateValue(dt);
