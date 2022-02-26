@@ -29,6 +29,7 @@ export const AxCopy: VFC<CopyProps> = ({ text, size = "sm" }) => {
     <AxActionButton
       size={size}
       onClick={doCopy}
+      actionLabel="Copied!"
       type="link"
       color="default"
       icon={AppIcons.iconCopy}
