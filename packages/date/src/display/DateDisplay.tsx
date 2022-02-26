@@ -10,21 +10,26 @@ import { useMemo } from "react";
 import { useLocale } from "../hooks/useLocale";
 import { DateLike } from "../types";
 import { dateFormat } from "../utils";
+import { DateUtils } from "../utils/dateMath";
 
 export interface DateDisplayProps
   extends Omit<TextProps, "mark" | "abbr" | "block" | "clip" | "transform"> {
   date: DateLike | [DateLike, DateLike];
   withTime?: boolean;
+  showAge?: boolean;
   format?: string;
 }
 
-export const AxDateDisplay: VFC<DateDisplayProps> = ({ date, withTime, format, ...props }) => {
+export const AxDateDisplay: VFC<DateDisplayProps> = ({
+  date,
+  withTime,
+  showAge,
+  format,
+  ...props
+}) => {
   const { isHijri, dateLocale } = useLocale();
 
-  const fmt = useMemo(
-    () => format ?? `dd MMM yyyy${withTime ? " HH:mm:ss" : ""}`,
-    [format, withTime]
-  );
+  const fmt = useMemo(() => format ?? `PP${withTime ? " pp" : ""}`, [format, withTime]);
 
   const display = useMemo(() => {
     if (Array.isArray(date)) {
@@ -51,10 +56,13 @@ export const AxDateDisplay: VFC<DateDisplayProps> = ({ date, withTime, format, .
     }
   }, [date, dateLocale, fmt, isHijri]);
 
+  const age = useMemo(() => !Array.isArray(date) && DateUtils.age(date), [date]);
+
   return (
     <AxTooltip content={tooltip} usePortal>
       <AxText {...props}>
         <span className="ax-inline-block">{display}</span>
+        {showAge && !!age && <span className="ax-inline-block">({age})</span>}
       </AxText>
     </AxTooltip>
   );

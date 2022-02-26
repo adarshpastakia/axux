@@ -32,7 +32,7 @@ import {
   startOfYear
 } from "date-fns";
 import i18n from "i18next";
-import { DatePart, DateParts, DateValue, ParsedDate, Type } from "../types";
+import { DateLike, DatePart, DateParts, DateValue, ParsedDate, Type } from "../types";
 import { dateFormat } from "./index";
 
 export const I18nKey = "superdate";
@@ -252,8 +252,8 @@ export const DateUtils = {
     }
     return "";
   },
-  age(dt: DateValue) {
-    const dates = parseDateValue(dt);
+  age(dt: DateLike) {
+    const dates = parseDate(dt as AnyObject);
     if (dates && isDate(dates)) {
       return formatDistanceToNowStrict(dates);
     }
