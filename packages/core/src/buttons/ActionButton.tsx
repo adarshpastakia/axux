@@ -5,15 +5,21 @@
 
 import { FC, MouseEvent, useCallback, useEffect, useState } from "react";
 import { AxTooltip } from "../overlays/Tooltip";
-import { Size } from "../types";
 import { AppIcons } from "../types/appIcons";
 import { AxButton, ButtonProps } from "./Button";
 
 export interface ActionProps extends ButtonProps {
-  size?: Size;
+  actionLabel: string;
 }
 
-export const AxActionButton: FC<ActionProps> = ({ onClick, type, color, icon, ...props }) => {
+export const AxActionButton: FC<ActionProps> = ({
+  onClick,
+  actionLabel,
+  type,
+  color,
+  icon,
+  ...props
+}) => {
   const [actionDone, setActionDone] = useState(false);
   const doClick = useCallback(
     (e: MouseEvent) => {
@@ -29,7 +35,7 @@ export const AxActionButton: FC<ActionProps> = ({ onClick, type, color, icon, ..
     }
   }, [actionDone]);
   return (
-    <AxTooltip content="Copied!" isDisabled={!actionDone} isOpen={actionDone} usePortal>
+    <AxTooltip content={actionLabel} isDisabled={!actionDone} isOpen={actionDone} usePortal>
       <AxButton
         onClick={doClick}
         type={actionDone ? "solid" : type}
