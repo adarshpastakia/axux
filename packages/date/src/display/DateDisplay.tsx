@@ -29,7 +29,10 @@ export const AxDateDisplay: VFC<DateDisplayProps> = ({
 }) => {
   const { isHijri, dateLocale } = useLocale();
 
-  const fmt = useMemo(() => format ?? `PP${withTime ? " pp" : ""}`, [format, withTime]);
+  const fmt = useMemo(
+    () => format ?? `dd MMM yyyy${withTime ? " HH:mm:ss" : ""}`,
+    [format, withTime]
+  );
 
   const display = useMemo(() => {
     if (Array.isArray(date)) {
@@ -62,7 +65,7 @@ export const AxDateDisplay: VFC<DateDisplayProps> = ({
     <AxTooltip content={tooltip} usePortal>
       <AxText {...props}>
         <span className="ax-inline-block">{display}</span>
-        {showAge && !!age && <span className="ax-inline-block">({age})</span>}
+        {showAge && !!age && <span className="ax-inline-block">&nbsp;({age})</span>}
       </AxText>
     </AxTooltip>
   );
