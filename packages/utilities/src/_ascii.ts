@@ -60,7 +60,7 @@ const conversions = {
 
 /** @internal */
 export const ascii = (str: string) => {
-  if (isEmpty(str.toString())) return "";
+  if (isEmpty(str)) return "";
   Object.entries(conversions).forEach(([a, l]) => {
     const re = new RegExp(l, "g");
     str = str.replace(re, a);

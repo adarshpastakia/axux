@@ -3,6 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
+import { ascii } from "./_ascii";
 import { isBoolean, isNumber, isObject, isString } from "./_isType";
 
 /** @internal */
@@ -31,4 +32,12 @@ export const isEqual = (obj: AnyObject, test: AnyObject): boolean => {
     return !Object.keys(obj).some((k) => !isEqual(obj[k], test[k]));
   }
   return false;
+};
+
+/** @internal */
+export const matchString = (base: string, match: string) => {
+  const _base = ascii(base).toLowerCase();
+  const _match = ascii(match).toLowerCase();
+
+  return _base.includes(_match);
 };
