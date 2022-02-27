@@ -43,6 +43,7 @@ export const AxTextareaField: FC<TextareaFieldProps> = memo(
         error={error}
         allowClear={allowClear}
         name={name}
+        alternateEnter
         autoFocus={autoFocus}
         onEnterPressed={onEnterPressed}
       >
@@ -66,7 +67,7 @@ export const AxTextareaField: FC<TextareaFieldProps> = memo(
               placeholder={placeholder}
               value={value}
               onBlur={onBlur}
-              onKeyUp={onEnter}
+              onKeyDown={onEnter}
               onChange={(event) => onChange && onChange(event.target.value)}
             />
           </AxFieldWrapper>

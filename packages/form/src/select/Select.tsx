@@ -184,7 +184,6 @@ export const AxSelectField = <T extends KeyValue>({
     >
       {({ ref, onChange, value, error, onBlur, onEnter, onClear, canClear }) => (
         <Fragment>
-          {children}
           <SelectField
             {...props}
             canClear={canClear}
@@ -195,7 +194,9 @@ export const AxSelectField = <T extends KeyValue>({
             onBlur={onBlur}
             onEnter={onEnter}
             onChange={onChange}
-          />
+          >
+            {children}
+          </SelectField>
         </Fragment>
       )}
     </AxFieldController>

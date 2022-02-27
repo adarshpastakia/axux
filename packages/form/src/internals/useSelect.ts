@@ -20,6 +20,7 @@ import { OptionProps, SelectCommonProps } from "../types";
 export const useSelect = <T = KeyValue>(
   props: SelectCommonProps<T> & {
     value: AnyObject;
+    allowCustom?: boolean;
     onChange?: (value?: AnyObject) => void;
     multiple?: boolean;
     autoFocus?: boolean;
@@ -32,6 +33,7 @@ export const useSelect = <T = KeyValue>(
     onQuery,
     makeOption,
     value,
+    allowCustom,
     matcher,
     asObject,
     onChange,
@@ -61,6 +63,7 @@ export const useSelect = <T = KeyValue>(
         return {
           raw: option as T,
           value: isObject(option) ? option[valueProperty] : option,
+          color: isObject(option) ? option.color : undefined,
           label: isObject(option) ? option[labelProperty] ?? option[valueProperty] : option,
           icon: isObject(option) ? option[iconProperty] : undefined,
           badge: isObject(option) ? option[badgeProperty] : undefined
@@ -99,14 +102,16 @@ export const useSelect = <T = KeyValue>(
     [value, multiple, matchOption]
   );
 
+  const [defaultOptions, setDefaultOptions] = useState<AnyObject[]>([]);
   /**
    * Default list of select options
    */
-  const defaultOptions = useMemo(() => {
-    /**
-     * Refactor options into select option props
-     */
-    return [...options.map(refactorOption)];
+  useEffect(() => {
+    setDefaultOptions(
+      [...options.map(refactorOption)].sort((a, b) =>
+        a.label.toLowerCase().localeCompare(b.label.toLowerCase())
+      )
+    );
   }, [options, refactorOption]);
 
   /**
@@ -179,12 +184,30 @@ export const useSelect = <T = KeyValue>(
     }
   }, [asObject, defaultOptions, multiple, refactorOption, tryMatchValue, value]);
 
-  const resetList = useCallback(() => {
-    setOptions(defaultOptions);
-    if (inputRef.current) {
-      inputRef.current.value = multiple ? "" : inputRef.current.defaultValue;
-    }
-  }, [defaultOptions, multiple]);
+  const resetList = useCallback(
+    (_options?: AnyObject) => {
+      setOptions(_options ?? defaultOptions);
+      if (inputRef.current) {
+        inputRef.current.value = multiple ? "" : inputRef.current.defaultValue;
+      }
+    },
+    [defaultOptions, multiple]
+  );
+
+  const createOption = useCallback(
+    (newValue: string) => {
+      const _options = [...defaultOptions, refactorOption(newValue)].sort((a, b) =>
+        a.label.toLowerCase().localeCompare(b.label.toLowerCase())
+      );
+      setDefaultOptions(_options);
+      onChange && onChange([...((value as AnyObject) ?? []), newValue]);
+      if (inputRef.current) {
+        resetList(_options);
+        inputRef.current.focus();
+      }
+    },
+    [defaultOptions, onChange, refactorOption, resetList, value]
+  );
 
   /**
    * Handle item click
@@ -234,7 +257,11 @@ export const useSelect = <T = KeyValue>(
         _values.splice(-1);
         onChange && onChange(_values);
       } else if (code === "Enter") {
-        onEnterPressed && onEnterPressed();
+        if (multiple && !!target.value) {
+          allowCustom && createOption(target.value);
+        } else {
+          onEnterPressed && onEnterPressed();
+        }
       }
     },
     [multiple, value, onChange, onEnterPressed]
@@ -254,6 +281,7 @@ export const useSelect = <T = KeyValue>(
     handleRemove,
     handleKey,
     resetList,
+    createOption,
     isSelected: tryMatchValue
   };
 };

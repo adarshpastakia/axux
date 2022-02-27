@@ -25,6 +25,9 @@ const _get = (hit: AnyObject, field: string): AnyObject => {
         if (outerPath in currentValue) {
           currentValue = currentValue[outerPath];
           if (isArray(currentValue)) {
+            if (currentValue[innerPath as AnyObject]) {
+              return currentValue[innerPath as AnyObject];
+            }
             return currentValue.map((val) => _get(val, innerPath)).filter((val) => !isEmpty(val));
           } else {
             return _get(currentValue, innerPath);

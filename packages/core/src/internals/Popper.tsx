@@ -3,7 +3,6 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isNil } from "@axux/utilities";
 import { isVisible, withinDomTree, withinEl } from "@axux/utilities/dist/dom";
 import { Placement } from "@popperjs/core";
 import {
@@ -164,7 +163,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
       if (trigger === "click") {
         const handler = (e: MouseEvent) => {
           if (e.button === 0) {
-            isNil(isOpen) && setOpen(!open);
+            setOpen(!open);
             open && onClose && onClose();
             !open && onOpen && onOpen();
           }
@@ -176,14 +175,13 @@ export const AxPopper: FC<Props & KeyValue> = ({
             ".ax-prevent-close",
             ".ax-force-close"
           );
+          const forceClose =
+            !preventClose &&
+            withinDomTree(e.target as HTMLElement, ".ax-force-close", ".ax-prevent-close");
           const canClose =
             !preventClose &&
-            !withinEl(
-              e.target as HTMLElement,
-              '[data-popover-anchor="true"]',
-              closeOnClick ? "empty" : ".ax-popper"
-            );
-          if (isVisible(popperEl) && canClose && !preventClose) {
+            !withinEl(e.target as HTMLElement, closeOnClick ? "empty" : ".ax-popper");
+          if (isVisible(popperEl) && (forceClose || canClose)) {
             refCloseTimer.current = setTimeout(() => {
               setOpen(false);
               onClose && onClose();
@@ -193,7 +191,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
 
         anchorEl.dataset.clickable = "true";
         autoTrigger && anchorEl.addEventListener("click", handler);
-        document.addEventListener("mouseup", forceClose);
+        open && document.addEventListener("mouseup", forceClose);
 
         return () => {
           anchorEl.removeEventListener("click", handler);
@@ -201,8 +199,8 @@ export const AxPopper: FC<Props & KeyValue> = ({
         };
       }
       if (trigger === "hover") {
-        const handlerOpen = () => isNil(isOpen) && setOpen(true);
-        const handlerClose = () => isNil(isOpen) && setOpen(false);
+        const handlerOpen = () => setOpen(true);
+        const handlerClose = () => setOpen(false);
         const handlerShow = () => {
           setInnerOpen(true);
           setOpen(false);
@@ -232,8 +230,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
     forceUpdate,
     anchorEl,
     open,
-    autoTrigger,
-    isOpen
+    autoTrigger
   ]);
 
   const triggerProps = useMemo(() => {

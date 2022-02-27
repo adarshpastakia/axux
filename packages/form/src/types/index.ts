@@ -114,6 +114,10 @@ export interface OptionProps<T> {
    */
   badge?: BadgeType;
   /**
+   * Tag color
+   */
+  color?: string;
+  /**
    * Disabled
    */
   isDisabled?: boolean;

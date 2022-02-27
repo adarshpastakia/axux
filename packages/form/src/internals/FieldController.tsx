@@ -33,6 +33,7 @@ interface ControlProps {
   onEnter: KeyboardEventHandler;
 }
 interface FieldControllerProps extends ControllerProps<AnyObject> {
+  alternateEnter?: boolean;
   children: (control: ControlProps) => ReactElement;
 }
 
@@ -41,6 +42,7 @@ export const AxFieldController: FC<FieldControllerProps> = ({
   name,
   autoFocus,
   value,
+  alternateEnter = false,
   onClear: inheritClearHandler,
   onChange: inheritChangeHandler,
   onEnterPressed,
@@ -53,9 +55,13 @@ export const AxFieldController: FC<FieldControllerProps> = ({
 
   const handleEnter = useCallback(
     (e: KeyboardEvent) => {
-      e.key === "Enter" && onEnterPressed && onEnterPressed();
+      if (e.key === "Enter" && e.shiftKey === alternateEnter) {
+        onEnterPressed?.();
+        e.preventDefault();
+        return false;
+      }
     },
-    [onEnterPressed]
+    [onEnterPressed, alternateEnter]
   );
 
   useLayoutEffect(() => {

@@ -32,6 +32,7 @@ export interface TagProps<T = KeyValue>
    * Select handler
    */
   onSelect?: (value?: T[]) => void;
+  allowCustom?: boolean;
 }
 
 interface InnerProps {
@@ -122,6 +123,7 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
             <AxTag
               key={o.value}
               icon={o.icon}
+              color={o.color}
               tabIndex={-1}
               onRemove={isEditable ? () => handleRemove(index) : undefined}
             >
@@ -192,7 +194,6 @@ export const AxTagField = <T extends KeyValue>({
     >
       {({ ref, onChange, value, error, onBlur, onEnter, onClear, canClear }) => (
         <Fragment>
-          {children}
           <TagField
             {...props}
             canClear={canClear}
@@ -203,7 +204,9 @@ export const AxTagField = <T extends KeyValue>({
             onBlur={onBlur}
             onEnter={onEnter}
             onChange={onChange}
-          />
+          >
+            {children}
+          </TagField>
         </Fragment>
       )}
     </AxFieldController>
