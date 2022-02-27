@@ -24,6 +24,9 @@
     visibility: hidden;
   }
 
+  &-no-select {
+    @include noselect();
+  }
   &-selectable {
     @include text-select();
   }

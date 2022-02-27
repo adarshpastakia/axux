@@ -11,7 +11,7 @@
   overflow: hidden;
   padding: 0 0.25em;
   text-align: center;
-  user-select: none;
+  @include noselect();
   vertical-align: middle;
 
   &:empty {

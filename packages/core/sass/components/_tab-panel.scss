@@ -147,7 +147,7 @@
     margin: 2px;
     padding: 0 0.5em;
     text-align: center;
-    user-select: none;
+    @include noselect();
 
     &--label {
       flex: 1;

@@ -8,7 +8,7 @@
     align-items: center;
     display: flex;
     flex-flow: row nowrap;
-    user-select: none;
+    @include noselect();
     z-index: 2;
 
     &:hover #{$prefix}-histogram__toggles {
@@ -49,6 +49,7 @@
       right: 0;
       text-align: end;
       top: 0;
+      transition: left 1s ease-in 0.5s;
     }
 
     @at-root [dir="ltr"] &::after {

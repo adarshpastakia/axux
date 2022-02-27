@@ -23,7 +23,7 @@
 
   &-link {
     color: $color-secondary;
-    user-select: none;
+    @include noselect();
 
     &::before {
       background: $color-secondary;

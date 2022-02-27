@@ -9,7 +9,7 @@
   &__label {
     cursor: pointer;
     padding: 0 0.25em;
-    user-select: none;
+    @include noselect();
   }
   &__toggles {
     cursor: pointer;
@@ -78,7 +78,7 @@
 
     &--label {
       flex: 1 1 1em;
-      user-select: none;
+      @include noselect();
       @include ellipsis();
     }
 

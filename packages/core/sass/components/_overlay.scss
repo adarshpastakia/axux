@@ -137,6 +137,10 @@
   transform: translateX(100%);
   transition: transform 0.5s;
 
+  @at-root [dir="rtl"] & {
+    transform: translateX(-100%);
+  }
+
   &[data-size="sm"] {
     width: 20em;
   }

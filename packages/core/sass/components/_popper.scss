@@ -77,24 +77,24 @@
     border-left-color: currentColor;
     right: -10px;
     &::before {
-      border-inline-start-color: currentColor;
+      border-left-color: currentColor;
       right: -2px;
       top: -1px;
     }
     &::after {
-      border-inline-start-color: currentColor;
+      border-left-color: currentColor;
     }
   }
   &[data-popper-placement^="right"] #{$base}--arrow {
     border-right-color: currentColor;
     left: -10px;
     &::before {
-      border-inline-end-color: currentColor;
+      border-right-color: currentColor;
       left: -2px;
       top: -1px;
     }
     &::after {
-      border-inline-end-color: currentColor;
+      border-right-color: currentColor;
     }
   }
 

@@ -11,7 +11,7 @@
     line-height: 1;
     position: relative;
     text-align: center;
-    user-select: none;
+    @include noselect();
     vertical-align: middle;
 
     > i,
@@ -43,6 +43,10 @@
     > span {
       font: inherit;
       text-align: center;
+
+      > img {
+        width: 100%;
+      }
     }
 
     &--fluid {

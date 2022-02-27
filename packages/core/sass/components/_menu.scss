@@ -79,7 +79,7 @@
 
     &__label {
       grid-area: label;
-      user-select: none;
+      @include noselect();
       > span {
         display: block;
         @extend #{$prefix}-ellipsis;
@@ -89,7 +89,7 @@
     &__subtext {
       font-size: 0.75em;
       line-height: 1.25;
-      user-select: none;
+      @include noselect();
       @extend #{$prefix}-color--muted;
     }
 
