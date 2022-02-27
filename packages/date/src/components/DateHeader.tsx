@@ -9,8 +9,15 @@ import { useMemo } from "react";
 import { DateContext, PageType } from "../types";
 import { dateFormat, endOfCentury, endOfDecade, startOfCentury, startOfDecade } from "../utils";
 
-export const DateHeader = (props: DateContext) => {
-  const { page, pageDate, changePage, changePageDate, headDisabled, isHijri } = props;
+export const DateHeader = (props: Partial<DateContext>) => {
+  const {
+    page,
+    pageDate = new Date(),
+    changePage,
+    changePageDate,
+    headDisabled,
+    isHijri = false
+  } = props;
   const { dateLocale } = useAxGlobals();
 
   const headLabel = useMemo(() => {
@@ -45,7 +52,7 @@ export const DateHeader = (props: DateContext) => {
           color="primary"
           className="flippable"
           isDisabled={headDisabled && headDisabled(-12)}
-          onClick={() => changePageDate(-12)}
+          onClick={() => changePageDate?.(-12)}
           icon={AppIcons.iconChevronLeft}
         />
       )}
@@ -55,13 +62,13 @@ export const DateHeader = (props: DateContext) => {
         color="primary"
         className="flippable"
         isDisabled={headDisabled && headDisabled(-1)}
-        onClick={() => changePageDate(-1)}
+        onClick={() => changePageDate?.(-1)}
         icon={AppIcons.iconCaretLeft}
       />
       <div
         className="ax-date__header--label"
         onClick={changePage}
-        data-disabled={page === PageType.DECADE}
+        data-disabled={!changePage || page === PageType.DECADE}
       >
         {headLabel}
       </div>
@@ -71,7 +78,7 @@ export const DateHeader = (props: DateContext) => {
         color="primary"
         className="flippable"
         isDisabled={headDisabled && headDisabled(1)}
-        onClick={() => changePageDate(1)}
+        onClick={() => changePageDate?.(1)}
         icon={AppIcons.iconCaretRight}
       />
       {page === PageType.DATE && (
@@ -81,7 +88,7 @@ export const DateHeader = (props: DateContext) => {
           color="primary"
           className="flippable"
           isDisabled={headDisabled && headDisabled(12)}
-          onClick={() => changePageDate(12)}
+          onClick={() => changePageDate?.(12)}
           icon={AppIcons.iconChevronRight}
         />
       )}

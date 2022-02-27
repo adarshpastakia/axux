@@ -11,6 +11,7 @@ import { useLocale } from "../hooks/useLocale";
 import { RelativeProps, Type } from "../types";
 import { DateUtils, superDateType } from "../utils/dateMath";
 import { AbsoluteRange } from "./AbsoluteRange";
+import { EventCalendar } from "./EventCalendar";
 import { QuickSelect } from "./QuickSelect";
 import { RelativeRange } from "./RelativeRange";
 
@@ -18,6 +19,7 @@ export const AxSuperDate: FC<RelativeProps> = ({
   type = "button",
   onChange,
   date,
+  events,
   defaultView,
   presets,
   ...props
@@ -109,6 +111,11 @@ export const AxSuperDate: FC<RelativeProps> = ({
               date={activeTab === Type.ABSOLUTE ? value : undefined}
             />
           </AxTabPanel.Tab>
+          {events && (
+            <AxTabPanel.Tab id={Type.EVENTS} label={t("label.events")}>
+              <EventCalendar events={events} onChange={afterChange} />
+            </AxTabPanel.Tab>
+          )}
         </AxTabPanel>
       </div>
     </AxPopover>

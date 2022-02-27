@@ -56,5 +56,9 @@
         }
       }
     }
+
+    > #{$prefix}-section > #{$prefix}-panel {
+      grid-area: content;
+    }
   }
 }

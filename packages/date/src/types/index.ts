@@ -50,7 +50,8 @@ export interface DateContext {
 export enum Type {
   QUICK = "QUICK",
   RELATIVE = "RELATIVE",
-  ABSOLUTE = "ABSOLUTE"
+  ABSOLUTE = "ABSOLUTE",
+  EVENTS = "EVENTS"
 }
 
 export enum DateParts {
@@ -75,10 +76,18 @@ export type DateLike = string | number | Date;
 export type DateValue = string | number | undefined;
 export type ParsedDate = Date | undefined;
 
+export type CalendarEvent = {
+  icon: string;
+  label: string;
+  start: string | number;
+  end: string | number;
+};
+
 export interface RelativeProps extends Omit<BaseProps, "min" | "max"> {
   date?: string;
   type?: "button" | "tag";
   defaultView?: Type.QUICK | Type.RELATIVE | Type.ABSOLUTE;
   presets?: { [label: string]: string };
+  events?: { [year: string]: CalendarEvent[] };
   onChange?: (date?: string, dates?: [ParsedDate, ParsedDate]) => void;
 }
