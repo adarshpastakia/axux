@@ -72,14 +72,16 @@ exports[`Text renders marked text 1`] = `
   <span
     class="ax-text "
   >
-    <mark
-      class="ax-mark"
-    >
-      Lorem ipsum
-    </mark>
-    <span>
-       dolor sit amet, consectetur adipiscing elit.
-    </span>
+    <bdi>
+      <mark
+        class="ax-mark"
+      >
+        Lorem ipsum
+      </mark>
+      <span>
+         dolor sit amet, consectetur adipiscing elit.
+      </span>
+    </bdi>
   </span>
 </div>
 `;
@@ -89,9 +91,11 @@ exports[`Text renders marked text when not found 1`] = `
   <span
     class="ax-text "
   >
-    <b>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    </b>
+    <bdi>
+      <b>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </b>
+    </bdi>
   </span>
 </div>
 `;
@@ -101,9 +105,11 @@ exports[`Text renders marked text when not found 2`] = `
   <span
     class="ax-text "
   >
-    <b>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    </b>
+    <bdi>
+      <b>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </b>
+    </bdi>
   </span>
 </div>
 `;
@@ -240,38 +246,40 @@ exports[`Text renders with tooltip 1`] = `
     <span
       class="ax-text "
     >
-      <span>
-        Lorem 
-      </span>
-      <abbr
-        class="ax-abbr ax-color--"
-      >
-        ipsum
-      </abbr>
-      <div
-        class="ax-popper ax-tooltip ax-bg--darkest ax-color--empty "
-        data-popper-escaped="true"
-        data-popper-placement="top"
-        data-popper-reference-hidden="true"
-        data-show="true"
-        data-show-arrow="true"
-        style="position: fixed; left: 0px; top: 0px; min-width: 0; bottom: 0px; transform: translate(0px, -10px);"
-      >
-        <div
-          class="ax-popper--body"
+      <bdi>
+        <span>
+          Lorem 
+        </span>
+        <abbr
+          class="ax-abbr ax-color--"
         >
-          <span>
-            Test tooltip
-          </span>
-        </div>
+          ipsum
+        </abbr>
         <div
-          class="ax-popper--arrow"
-          style="position: absolute; left: 0px; transform: translate(0px, 0px);"
-        />
-      </div>
-      <span>
-         dolor sit amet, consectetur adipiscing elit.
-      </span>
+          class="ax-popper ax-tooltip ax-bg--darkest ax-color--empty "
+          data-popper-escaped="true"
+          data-popper-placement="top"
+          data-popper-reference-hidden="true"
+          data-show="true"
+          data-show-arrow="true"
+          style="position: fixed; left: 0px; top: 0px; min-width: 0; bottom: 0px; transform: translate(0px, -10px);"
+        >
+          <div
+            class="ax-popper--body"
+          >
+            <span>
+              Test tooltip
+            </span>
+          </div>
+          <div
+            class="ax-popper--arrow"
+            style="position: absolute; left: 0px; transform: translate(0px, 0px);"
+          />
+        </div>
+        <span>
+           dolor sit amet, consectetur adipiscing elit.
+        </span>
+      </bdi>
     </span>
   </div>
 </div>
@@ -285,17 +293,19 @@ exports[`Text renders with tooltip 2`] = `
     <span
       class="ax-text "
     >
-      <span>
-        Lorem 
-      </span>
-      <abbr
-        class="ax-abbr ax-color--"
-      >
-        ipsum
-      </abbr>
-      <span>
-         dolor sit amet, consectetur adipiscing elit.
-      </span>
+      <bdi>
+        <span>
+          Lorem 
+        </span>
+        <abbr
+          class="ax-abbr ax-color--"
+        >
+          ipsum
+        </abbr>
+        <span>
+           dolor sit amet, consectetur adipiscing elit.
+        </span>
+      </bdi>
     </span>
   </div>
 </div>
