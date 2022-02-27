@@ -96,7 +96,7 @@ export const AbbrText: FC<AbbrTextProps> = forwardRef<HTMLSpanElement, AbbrTextP
     return (
       <Fragment>
         <span className={`ax-text ${className ?? ""}`} {...aria} ref={textRef}>
-          {inner}
+          <bdi>{inner}</bdi>
         </span>
       </Fragment>
     );

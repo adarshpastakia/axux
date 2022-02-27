@@ -95,7 +95,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
           </AxButton.Group>
         )}
         <span>
-          {valueDisplay}
+          <bdi>{valueDisplay}</bdi>
           {canCopy && <AxCopy text={value} />}
         </span>
       </div>
