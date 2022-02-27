@@ -103,13 +103,15 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       maxHeight,
       onClick,
       children,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      isAccordion,
       ...aria
     },
     ref
   ) => {
     const [collapsed, toggleCollapse] = usePropToggle(isCollapsed, onCollapse, panelId);
     const [expanded, toggleExpand] = usePropToggle(isExpanded, onExpand, panelId);
-    const isAccordion = useMemo(() => !!(aria as KeyValue).isAccordion, [aria]);
 
     const header = useMemo(() => {
       const head = Children.toArray(children).find(
@@ -198,6 +200,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
         data-expand={expanded}
         style={styles}
         onClick={onClick}
+        {...aria}
       >
         {header}
         <div className="ax-panel__body">{childs}</div>

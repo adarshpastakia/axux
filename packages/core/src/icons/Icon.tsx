@@ -105,8 +105,9 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
           <path fill="currentColor" d={icon.toString()} />
         </svg>
       ) : useImage ||
-        icon.toString().includes(".svg") ||
-        icon.toString().startsWith("data:image") ? (
+        icon?.toString().includes(".svg") ||
+        icon?.toString().includes(".png") ||
+        icon?.toString().startsWith("data:image") ? (
         <img src={icon.toString()} alt={icon.toString()} loading="lazy" />
       ) : (
         <i className={`${icon}`} />
