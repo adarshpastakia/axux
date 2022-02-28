@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { ascii, debounce, isNil, isObject } from "@axux/utilities";
+import { ascii, debounce, isEqual, isNil, isObject } from "@axux/utilities";
 import {
   ChangeEvent,
   KeyboardEvent,
@@ -15,6 +15,12 @@ import {
   useState
 } from "react";
 import { OptionProps, SelectCommonProps } from "../types";
+
+/** TODO
+ * Badly implemented, rethink refactoring and maintaining copy of options list
+ * match multiple tags by value order and not option list order
+ * implement arrow keys
+ */
 
 /** @internal */
 export const useSelect = <T = KeyValue>(
@@ -89,30 +95,22 @@ export const useSelect = <T = KeyValue>(
     [matcher, valueProperty]
   );
 
-  /**
-   * Match wrapper for single/multiple values
-   */
-  const tryMatchValue = useCallback(
-    (option, val?) => {
-      const _current = val || value;
-      return multiple
-        ? ((_current || []) as AnyObject).some((v: T) => matchOption(option, v))
-        : matchOption(option, _current);
-    },
-    [value, multiple, matchOption]
-  );
-
+  const [originalList, setOriginalList] = useState<AnyObject[]>([]);
   const [defaultOptions, setDefaultOptions] = useState<AnyObject[]>([]);
+
+  useEffect(() => {
+    if (!isEqual(options, originalList)) setOriginalList(options);
+  }, [options, originalList]);
   /**
    * Default list of select options
    */
   useEffect(() => {
     setDefaultOptions(
-      [...options.map(refactorOption)].sort((a, b) =>
+      [...originalList.map(refactorOption)].sort((a, b) =>
         a.label.toLowerCase().localeCompare(b.label.toLowerCase())
       )
     );
-  }, [options, refactorOption]);
+  }, [originalList, refactorOption]);
 
   /**
    * Stateful list of select options
@@ -163,26 +161,37 @@ export const useSelect = <T = KeyValue>(
   };
 
   /**
+   * Match wrapper for single/multiple values
+   */
+  const tryMatchValue = useCallback(
+    (val) => {
+      if (defaultOptions.length === 0) return multiple ? [] : "";
+      return multiple
+        ? ((val || []) as AnyObject).map((v: T) =>
+            defaultOptions.find((opt) => matchOption(opt, v))
+          ) ?? []
+        : defaultOptions.find((opt) => matchOption(opt, val));
+    },
+    [multiple, defaultOptions, matchOption]
+  );
+
+  /**
    * Get input label
    */
   const inputLabel = useMemo(() => {
     if (multiple) {
-      if (asObject) {
-        return (value as AnyObject).map((val: KeyValue) => refactorOption(val as T));
-      } else {
-        return defaultOptions.filter((o) => tryMatchValue(o));
-      }
+      return tryMatchValue(value);
     } else {
       let _value;
       if (isObject(value)) {
         _value = refactorOption(value as T);
       } else {
-        _value = defaultOptions.find((o) => tryMatchValue(o));
+        _value = tryMatchValue(value);
       }
       inputRef.current && (inputRef.current.value = _value ? _value.label : "");
       return _value ? _value.label : "";
     }
-  }, [asObject, defaultOptions, multiple, refactorOption, tryMatchValue, value]);
+  }, [multiple, refactorOption, tryMatchValue, value]);
 
   const resetList = useCallback(
     (_options?: AnyObject) => {
@@ -269,6 +278,15 @@ export const useSelect = <T = KeyValue>(
 
   const [isOpen, setOpen] = useState(false);
 
+  const isSelected = useCallback(
+    (opt) => {
+      return multiple
+        ? !!(value as AnyObject[]).find((val) => matchOption(opt, val))
+        : matchOption(opt, value);
+    },
+    [matchOption, multiple, value]
+  );
+
   return {
     isOpen,
     setOpen,
@@ -282,6 +300,6 @@ export const useSelect = <T = KeyValue>(
     handleKey,
     resetList,
     createOption,
-    isSelected: tryMatchValue
+    isSelected
   };
 };

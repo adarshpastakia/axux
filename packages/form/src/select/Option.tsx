@@ -25,6 +25,7 @@ export const AxSelectOption: FC<OptionProps<string | KeyValue> & { selected?: bo
       data-disabled={isDisabled}
       data-selected={selected}
       data-value={value}
+      ref={(el) => selected && el?.scrollIntoView()}
     >
       {icon && <AxIcon icon={icon} />}
       <label>{label}</label>
