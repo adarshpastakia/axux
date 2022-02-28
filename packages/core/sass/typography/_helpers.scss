@@ -224,6 +224,10 @@
       text-decoration: underline;
     }
 
+    &--strikethrough {
+      text-decoration: line-through currentColor;
+    }
+
     &--nowrap {
       white-space: nowrap;
     }
