@@ -41,7 +41,11 @@ const _get = (hit: AnyObject, field: string): AnyObject => {
 };
 
 /** @internal */
-export const getByPath = (obj: KeyValue, path: string, defaultValue: AnyObject = undefined) => {
+export const getByPath = <T = AnyObject>(
+  obj: KeyValue,
+  path: string,
+  defaultValue: AnyObject = undefined
+): T => {
   if (isEmpty(obj) || isEmpty(path)) {
     return defaultValue;
   }
