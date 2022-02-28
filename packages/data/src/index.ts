@@ -15,7 +15,6 @@ export { AxHistogram } from "./histogram/Histogram";
 export type { HistogramRecord } from "./histogram/types";
 
 export { AxTimeline } from "./timeline/Timeline";
-export type { TimelineRecord } from "./timeline/types";
 
 export { AxGridView } from "./grid/Grid";
 export { AxProfileCard } from "./profile/ProfileCard";

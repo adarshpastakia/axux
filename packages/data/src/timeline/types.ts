@@ -3,33 +3,11 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { Color, ColorPalette, ElementProps, EmptyCallback } from "@axux/core/dist/types";
-import { CSSProperties, ReactNode, ReactNodeArray } from "react";
-import { HeaderProps } from "@axux/core/dist/appbars/Header";
+import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
+import { CSSProperties, ReactNode } from "react";
 
-export interface TimelineRecord {
-  type?: "event" | "comment";
-  timestamp: Date;
-  username: string | JSX.Element;
-  event: string | JSX.Element;
-  className?: string;
-  image?: string;
-  icon?: string | JSX.Element;
-  iconBg?: Color | ColorPalette;
-  iconColor?: Color | ColorPalette;
-  actions?: ReactNodeArray;
-  sidebar?: JSX.Element;
-  footer?: JSX.Element;
-  headerProps?: Omit<HeaderProps, "title" | "onClick" | "onBack">;
-  headerAppend?: JSX.Element;
-  reverse?: boolean;
-  noline?: boolean;
-  isCollapsed?: boolean;
-  isCollapsable?: boolean;
-}
-
-export interface TimelineProps extends ElementProps {
-  list: TimelineRecord[];
+export interface TimelineProps<T = KeyValue> extends ElementProps {
+  list: T[];
   isLoading?: boolean;
   canLoadMore?: boolean;
   onLoadMore?: EmptyCallback;
@@ -42,6 +20,6 @@ export interface TimelineProps extends ElementProps {
     isScrolling: boolean;
     measure: () => void;
     index: number;
-    record: TimelineRecord;
+    record: T;
   }) => ReactNode;
 }

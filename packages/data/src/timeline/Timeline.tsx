@@ -142,18 +142,20 @@ export const AxTimeline: ExtendedFC = ({
           )}
         </WindowScroller>
         <div>
-          <AxButton.Group vertical>
-            <AxButton
-              icon={AppIcons.iconSortTimeDesc}
-              onClick={() => onSort && onSort("desc")}
-              data-active={sortOrder === "desc"}
-            />
-            <AxButton
-              icon={AppIcons.iconSortTimeAsc}
-              onClick={() => onSort && onSort("asc")}
-              data-active={sortOrder === "asc"}
-            />
-          </AxButton.Group>
+          {onSort && (
+            <AxButton.Group vertical>
+              <AxButton
+                icon={AppIcons.iconSortTimeDesc}
+                onClick={() => onSort("desc")}
+                data-active={sortOrder === "desc"}
+              />
+              <AxButton
+                icon={AppIcons.iconSortTimeAsc}
+                onClick={() => onSort("asc")}
+                data-active={sortOrder === "asc"}
+              />
+            </AxButton.Group>
+          )}
           <div className="ax-col--fill" />
           <AxButton.Group vertical>
             <AxButton

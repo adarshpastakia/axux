@@ -20,9 +20,9 @@ import { mdiComment, mdiFaceProfile, mdiStar, mdiTag } from "@mdi/js";
 import { Story } from "@storybook/react";
 import { useState } from "react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
-import { AxHistogram, AxTimeline, HistogramRecord, TimelineRecord } from "../../src";
+import { AxHistogram, AxTimeline, HistogramRecord } from "../../src";
 
-const entries: Array<TimelineRecord & { body?: string }> = [
+const entries: Array<KeyValue> = [
   {
     type: "event",
     timestamp: new Date(),
