@@ -53,8 +53,9 @@
       font-weight: 500;
       line-height: 1.25;
       padding: 0 0.25em;
-      @include noselect();
+      pointer-events: none;
       z-index: 5;
+      @include noselect();
       @include ellipsis();
     }
   }

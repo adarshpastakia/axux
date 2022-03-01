@@ -7,7 +7,7 @@ import { AxContent, AxIcon } from "@axux/core";
 import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { Format } from "@axux/utilities";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { HistogramProps, HistogramRecord } from "./types";
 
@@ -30,9 +30,6 @@ const HistogramMeter: VFC<
     [color, negativeColor, positiveColor, record.color, record.include]
   );
 
-  const handleClick = useCallback(() => {
-    !allowNegate && onClick && onClick(record);
-  }, [allowNegate, onClick, record]);
   const handleInclude = useCallback(() => {
     onClick && onClick(record, record.include === true ? undefined : true);
   }, [onClick, record]);
@@ -71,7 +68,8 @@ const HistogramMeter: VFC<
       )}
       <div
         data-disabled={record.count <= 0}
-        onClick={handleClick}
+        onContextMenu={(e) => e.preventDefault()}
+        onMouseUp={(e) => onClick?.(record, e.button === 0)}
         className={`ax-histogram__meter ax-color--${meterColor} ${
           record.count > 0 && !allowNegate ? "ax-clickable" : ""
         }`}

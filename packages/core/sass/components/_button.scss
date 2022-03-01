@@ -185,6 +185,7 @@
   #{$prefix}-badge {
     margin-inline-start: -0.5em;
     order: 3;
+    pointer-events: none;
     position: absolute;
     right: 0.25em;
 

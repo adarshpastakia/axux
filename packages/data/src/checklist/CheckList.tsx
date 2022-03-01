@@ -84,7 +84,8 @@ const ToggleItemElement: VFC<
       )}
       <div
         className="ax-col--fill ax-ellipsis ax-checkList__label"
-        onClick={() => onCheck(selected === 1 ? 0 : selected === 0 ? undefined : 1)}
+        onContextMenu={(e) => e.preventDefault()}
+        onMouseUp={(e) => onCheck(e.button === 0 ? 1 : 0)}
       >
         {item.label}
       </div>

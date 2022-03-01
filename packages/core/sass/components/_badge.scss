@@ -11,8 +11,8 @@
   overflow: hidden;
   padding: 0 0.25em;
   text-align: center;
-  @include noselect();
   vertical-align: middle;
+  @include noselect();
 
   &:empty {
     height: 0.5em;
