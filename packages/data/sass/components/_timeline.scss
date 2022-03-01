@@ -96,7 +96,7 @@
       overflow: hidden;
     }
 
-    &[data-reverse="true"] > section {
+    &[data-reverse="true"] {
       flex-direction: row-reverse;
 
       #{$base}__entry--side {

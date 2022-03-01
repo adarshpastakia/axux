@@ -138,6 +138,11 @@
       flex: 1 1 100%;
     }
 
+    &--ellipsis {
+      flex: 0 1 auto;
+      @include ellipsis();
+    }
+
     &--stretch {
       align-self: stretch;
     }

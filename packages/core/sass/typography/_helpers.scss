@@ -273,6 +273,11 @@
     &--justify {
       text-align: justify;
     }
+
+    &--middle {
+      align-items: center;
+      display: flex;
+    }
   }
 
   // font weights

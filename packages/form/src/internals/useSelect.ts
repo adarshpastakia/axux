@@ -167,8 +167,8 @@ export const useSelect = <T = KeyValue>(
     (val) => {
       if (defaultOptions.length === 0) return multiple ? [] : "";
       return multiple
-        ? ((val || []) as AnyObject).map((v: T) =>
-            defaultOptions.find((opt) => matchOption(opt, v))
+        ? ((val || []) as AnyObject).map(
+            (v: T) => defaultOptions.find((opt) => matchOption(opt, v)) ?? refactorOption(v)
           ) ?? []
         : defaultOptions.find((opt) => matchOption(opt, val));
     },

@@ -63,6 +63,11 @@
     display: none;
   }
 
+  #{$prefix}-field {
+    flex: 0 0 auto;
+    margin: 0 0.25em;
+  }
+
   &[data-vertical="false"] {
     #{$prefix}-divider {
       flex-flow: column;
@@ -73,6 +78,9 @@
         margin: 0;
         width: 1px;
       }
+    }
+    #{$prefix}-button__group {
+      margin-inline-end: 1rem;
     }
   }
 
@@ -87,6 +95,9 @@
       > hr {
         height: 1px;
       }
+    }
+    #{$prefix}-button__group {
+      margin-bottom: 1rem;
     }
   }
 

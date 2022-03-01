@@ -46,7 +46,7 @@
     }
   }
 
-  @at-root #{$prefix}-viewport &[data-popper-reference-hidden="true"] {
+  @at-root &[data-popper-reference-hidden="true"] {
     pointer-events: none;
     visibility: hidden;
   }
