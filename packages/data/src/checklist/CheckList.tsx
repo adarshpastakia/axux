@@ -85,7 +85,15 @@ const ToggleItemElement: VFC<
       <div
         className="ax-col--fill ax-ellipsis ax-checkList__label"
         onContextMenu={(e) => e.preventDefault()}
-        onMouseUp={(e) => onCheck(e.button === 0 ? 1 : 0)}
+        onMouseUp={(e) =>
+          onCheck(
+            (selected === 1 && e.button === 0) || (selected === 0 && e.button === 2)
+              ? undefined
+              : e.button === 0
+              ? 1
+              : 0
+          )
+        }
       >
         {item.label}
       </div>
@@ -180,7 +188,7 @@ export const AxCheckList: VFC<ToggleProps | CheckProps> = ({
   );
 
   return (
-    <div className={className}>
+    <div className={`ax-checkList ${className ?? ""}`}>
       {items
         .slice(0, listCount)
         .map((item) =>
@@ -208,7 +216,7 @@ export const AxCheckList: VFC<ToggleProps | CheckProps> = ({
           )
         )}
       {items.length > maxCount && (
-        <div className="ax-block ax-font--sm ax-align--end">
+        <div className="ax-block ax-font--sm ax-align--end ax-padding--x">
           <a
             className="ax-link"
             onClick={() =>

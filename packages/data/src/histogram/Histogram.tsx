@@ -7,7 +7,7 @@ import { AxContent, AxIcon } from "@axux/core";
 import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { Format } from "@axux/utilities";
-import { useCallback, useMemo, MouseEvent } from "react";
+import { MouseEvent, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { HistogramProps, HistogramRecord } from "./types";
 
@@ -31,11 +31,23 @@ const HistogramMeter: VFC<
   );
 
   const handleInclude = useCallback(() => {
-    onClick && onClick(record, record.include === true ? undefined : true);
+    onClick?.(record, record.include === true ? undefined : true);
   }, [onClick, record]);
   const handleExclude = useCallback(() => {
-    onClick && onClick(record, record.include === false ? undefined : false);
+    onClick?.(record, record.include === false ? undefined : false);
   }, [onClick, record]);
+  const handleToggle = useCallback(
+    (e: MouseEvent) => {
+      let toggle = undefined;
+      if (record.include !== true && e.button === 0) {
+        toggle = true;
+      } else if (record.include !== false && e.button === 2) {
+        toggle = false;
+      }
+      onClick?.(record, toggle);
+    },
+    [onClick, record]
+  );
 
   const meter = useMemo(() => record.count / Math.max(1, total), [record.count, total]);
   const badge = useMemo(
@@ -47,7 +59,11 @@ const HistogramMeter: VFC<
   );
 
   return (
-    <div className="ax-histogram__group">
+    <div
+      className="ax-histogram__group"
+      data-disabled={record.count <= 0}
+      data-selected={record.include !== undefined}
+    >
       {allowNegate && (
         <div className="ax-col--auto ax-histogram__toggles">
           <AxIcon
@@ -67,12 +83,9 @@ const HistogramMeter: VFC<
         </div>
       )}
       <div
-        data-disabled={record.count <= 0}
         onContextMenu={(e) => e.preventDefault()}
-        onMouseUp={(e) => onClick?.(record, e.button === 0)}
-        className={`ax-histogram__meter ax-color--${meterColor} ${
-          record.count > 0 && !allowNegate ? "ax-clickable" : ""
-        }`}
+        onMouseUp={handleToggle}
+        className={`ax-histogram__meter ax-color--${meterColor}`}
         style={{ "--meter": meter } as AnyObject}
       >
         <span>{record.label}</span>

@@ -54,6 +54,7 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
   isReadonly,
   label,
   hint,
+  hideDropdown,
   appendLabel,
   required,
   maxWidth,
@@ -140,27 +141,35 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
               placeholder={placeholder}
               readOnly={!allowSearch || isReadonly}
               onFocus={(e) => e.target.select()}
-              onClick={() => setOpen(isEditable)}
+              onClick={() => setOpen(!hideDropdown && isEditable)}
               onChange={queryHandler}
               onKeyDown={handleKey}
               autoComplete={"off"}
             />
           )}
         </div>
-        <div className="ax-field__handle">
-          <AxButton
-            type="link"
-            tabIndex={-1}
-            icon={AppIcons.iconCaretDown}
-            isDisabled={isDisabled || isReadonly}
-            onClick={() => setOpen(isEditable)}
-          />
-        </div>
+        {!hideDropdown && (
+          <div className="ax-field__handle">
+            <AxButton
+              type="link"
+              tabIndex={-1}
+              icon={AppIcons.iconCaretDown}
+              isDisabled={isDisabled || isReadonly}
+              onClick={() => setOpen(isEditable)}
+            />
+          </div>
+        )}
       </AxFieldWrapper>
       <div onClickCapture={handleClick} className="ax-select__popover">
-        {innerOptions.map((opt, index) => (
-          <AxSelectOption key={opt.value} {...opt} value={`${index}`} selected={isSelected(opt)} />
-        ))}
+        {!hideDropdown &&
+          innerOptions.map((opt, index) => (
+            <AxSelectOption
+              key={opt.value}
+              {...opt}
+              value={`${index}`}
+              selected={isSelected(opt)}
+            />
+          ))}
       </div>
     </AxPopover>
   );

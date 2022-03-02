@@ -56,14 +56,12 @@
     > span {
       color: $base-color;
     }
+  }
+  &__group[data-disabled="true"] #{$prefix}-histogram__meter {
+    color: $color-light;
 
-    &[data-disabled="true"] {
-      color: $color-light;
-      pointer-events: none;
-
-      > span {
-        color: inherit;
-      }
+    > span {
+      color: $color-muted;
     }
   }
 }

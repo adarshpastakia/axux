@@ -186,4 +186,6 @@ export interface SelectCommonProps<T = KeyValue> {
    * Convert object into option
    */
   makeOption?: (option: T) => OptionProps<T>;
+
+  hideDropdown?: boolean;
 }

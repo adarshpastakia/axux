@@ -63,12 +63,12 @@ const Template: Story<TreePanelProps> = (props) => {
         <AxSection.Side end width="24rem">
           <AxPanel.Group>
             <AxPanel panelId="check" title="Check List" isCollapsable>
-              <AxContent>
+              <AxContent padding="none">
                 <AxCheckList onChange={setSelected} selected={selected} items={items} />
               </AxContent>
             </AxPanel>
             <AxPanel panelId="toggle" title="Toggle List" isCollapsable>
-              <AxContent>
+              <AxContent padding="none">
                 <AxCheckList
                   allowNegate
                   onChange={setSelection}

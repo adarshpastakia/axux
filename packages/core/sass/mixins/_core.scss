@@ -57,7 +57,6 @@
 
 // disable user selection
 @mixin noselect {
-  cursor: default;
   user-select: none;
 }
 

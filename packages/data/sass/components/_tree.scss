@@ -16,7 +16,9 @@
     display: none;
   }
   &__item {
+    cursor: pointer;
     margin-bottom: 0.125em;
+    padding: 0 0.5em;
 
     > div:first-child {
       line-height: 1em;
