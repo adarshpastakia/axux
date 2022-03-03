@@ -15,6 +15,7 @@ export interface TimelineProps<T = KeyValue> extends ElementProps {
   onSort?: (order: "asc" | "desc") => void;
   onScroll?: (top: number) => void;
   initialScroll?: number;
+  actions?: ReactNode;
   children: (props: {
     style: CSSProperties;
     isScrolling: boolean;

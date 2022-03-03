@@ -10,6 +10,7 @@
   grid-template-areas: ". . icon title actions";
   grid-template-columns: auto auto auto 1fr auto;
   @extend #{$prefix}-border--b;
+  @include noselect();
 
   &__title {
     font-size: 1em;

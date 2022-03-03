@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxButton, AxPopover, AxTag } from "@axux/core";
+import { AxButton, AxPopover, AxTag, useAxResizeObserver } from "@axux/core";
 import { EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import {
@@ -85,6 +85,10 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
     multiple: true
   });
 
+  const refPopperEl = useAxResizeObserver(() =>
+    refPopperEl.current?.dispatchEvent(new Event("updatePopper", { bubbles: true }))
+  );
+
   const isEditable = useMemo(() => !(isDisabled || isReadonly), [isDisabled, isReadonly]);
 
   useImperativeHandle(selectRef, () => ({
@@ -103,6 +107,7 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
       }}
     >
       <AxFieldWrapper
+        ref={refPopperEl}
         label={label}
         hint={hint}
         appendLabel={appendLabel}

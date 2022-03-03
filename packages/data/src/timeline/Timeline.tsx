@@ -25,6 +25,7 @@ interface ExtendedFC extends FC<TimelineProps & RefProp<HTMLDivElement>> {
 export const AxTimeline: ExtendedFC = ({
   list,
   children,
+  actions,
   className,
   isLoading,
   canLoadMore,
@@ -156,6 +157,7 @@ export const AxTimeline: ExtendedFC = ({
               />
             </AxButton.Group>
           )}
+          {actions}
           <div className="ax-col--fill" />
           <AxButton.Group vertical>
             <AxButton

@@ -40,6 +40,7 @@ export interface GridProps extends ElementProps {
   sortOrder?: "asc" | "desc";
   initialScroll?: number;
   onSort?: (order: "asc" | "desc") => void;
+  actions?: ReactNode;
   children: (props: {
     style: CSSProperties;
     isScrolling: boolean;
@@ -62,6 +63,7 @@ export const AxGridView: ExtendedFC = ({
   onLoadMore,
   sortOrder,
   onSort,
+  actions,
   onScroll,
   initialScroll = 0,
   hideScrollButtons,
@@ -215,6 +217,7 @@ export const AxGridView: ExtendedFC = ({
               />
             </AxButton.Group>
           )}
+          {actions}
           <div className="ax-col--fill" />
           {!hideScrollButtons && (
             <AxButton.Group vertical>

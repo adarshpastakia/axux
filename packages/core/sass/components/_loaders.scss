@@ -80,11 +80,15 @@
   }
 
   &__app {
+    bottom: 0;
     display: grid;
     height: 100vh;
+    left: 0;
     place-content: center;
     place-items: center;
     position: fixed;
+    right: 0;
+    top: 0;
     width: 100vw;
     z-index: 9999;
 

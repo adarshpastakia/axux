@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { AxIcon, AxTooltip } from "@axux/core";
-import { ElementProps } from "@axux/core/dist/types";
+import { ElementProps, RefProp } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { FC, forwardRef } from "react";
 import { FieldStateProps, WrapperProps } from "../types";
@@ -18,7 +18,10 @@ export interface FieldWrapperProps extends WrapperProps, FieldStateProps, Elemen
 }
 
 /** @internal */
-export const AxFieldWrapper: FC<FieldWrapperProps> = forwardRef<HTMLDivElement, FieldWrapperProps>(
+export const AxFieldWrapper: FC<FieldWrapperProps & RefProp<HTMLDivElement>> = forwardRef<
+  HTMLDivElement,
+  FieldWrapperProps
+>(
   (
     {
       children,
