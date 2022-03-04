@@ -7,6 +7,7 @@ import { isNumber } from "@axux/utilities";
 import {
   Children,
   cloneElement,
+  DOMAttributes,
   FC,
   forwardRef,
   MouseEventHandler,
@@ -36,7 +37,8 @@ export interface PanelProps
     ExpandProps,
     ElementProps,
     IconProps,
-    RefProp<HTMLDivElement> {
+    RefProp<HTMLDivElement>,
+    DOMAttributes<HTMLDivElement> {
   /**
    * Panel id
    */
@@ -62,7 +64,6 @@ export interface PanelProps
    * Show loading indicator
    */
   isLoading?: boolean;
-  onClick?: MouseEventHandler;
   onClose?: EmptyCallback;
   /**
    *
@@ -101,7 +102,6 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       height,
       minHeight,
       maxHeight,
-      onClick,
       children,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -199,7 +199,6 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
         data-collapse={collapsed}
         data-expand={expanded}
         style={styles}
-        onClick={onClick}
         {...aria}
       >
         {header}

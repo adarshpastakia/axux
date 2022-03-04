@@ -16,8 +16,7 @@
 
     > i,
     > img,
-    > svg,
-    > span {
+    > svg {
       display: block;
       height: 1em;
       object-fit: contain;
@@ -27,8 +26,7 @@
     }
 
     &--round {
-      > i,
-      > span {
+      > i {
         font-size: 0.5em;
         height: 1.5em;
         padding: 0.25em;
@@ -39,15 +37,6 @@
 
   &-icon {
     --spin-steps: 8;
-
-    > span {
-      font: inherit;
-      text-align: center;
-
-      > img {
-        width: 100%;
-      }
-    }
 
     &--fluid {
       min-width: 1em;
@@ -221,7 +210,7 @@
     }
 
     &--underline {
-      text-decoration: underline;
+      text-decoration: underline currentColor;
     }
 
     &--strikethrough {

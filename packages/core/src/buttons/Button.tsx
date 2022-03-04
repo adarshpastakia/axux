@@ -11,6 +11,8 @@ import { BadgeType, useBadge } from "../internals/useBadge";
 import { useWithTooltip, WithTooltipProps } from "../internals/useWithTooltip";
 import { AnchorProps, Color, ElementProps, IconProps, RefProp, Size } from "../types";
 import { AppIcons } from "../types/appIcons";
+import { AxActionButton } from "./ActionButton";
+import { AxConfirmButton } from "./ConfirmButton";
 import { AxDropdown } from "./Dropdown";
 import { AxButtonGroup } from "./Group";
 
@@ -91,6 +93,8 @@ export interface ButtonProps
 interface ExtendedFC<T> extends FC<T> {
   Group: typeof AxButtonGroup;
   Dropdown: typeof AxDropdown;
+  Action: typeof AxActionButton;
+  Confirm: typeof AxConfirmButton;
   Positive: FC<Omit<ButtonProps, "color" | "type">>;
   Negative: FC<Omit<ButtonProps, "color" | "type">>;
   Neutral: FC<Omit<ButtonProps, "color" | "type">>;
@@ -99,7 +103,10 @@ interface ExtendedFC<T> extends FC<T> {
 /**
  * Action buttons
  */
-export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<HTMLAnchorElement, ButtonProps>(
+export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
+  HTMLAnchorElement,
+  ButtonProps
+>(
   (
     {
       children,
@@ -192,12 +199,16 @@ export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<HTMLAnchor
 ) as AnyObject;
 AxButton.Group = AxButtonGroup;
 AxButton.Dropdown = AxDropdown;
+AxButton.Action = AxActionButton;
+AxButton.Confirm = AxConfirmButton;
 AxButton.Positive = (props) => <AxButton {...props} color="primary" type="solid" />;
 AxButton.Negative = (props) => <AxButton {...props} color="danger" type="solid" />;
 AxButton.Neutral = (props) => <AxButton {...props} color="default" type="default" />;
 
 AxButton.displayName = "AxButton";
 AxButton.Group.displayName = "AxButton.Group";
+AxButton.Action.displayName = "AxButton.Action";
+AxButton.Confirm.displayName = "AxButton.Confirm";
 AxButton.Dropdown.displayName = "AxButton.Dropdown";
 AxButton.Positive.displayName = "AxButton.Positive";
 AxButton.Negative.displayName = "AxButton.Negative";

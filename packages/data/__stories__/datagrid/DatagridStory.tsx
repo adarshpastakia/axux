@@ -26,7 +26,7 @@ const RecordModal = ({
 }: { record: Country } & KeyValue) => {
   return (
     <AxModal onClose={onClose} size="lg" onNavigate={onNavigate} height="90vh">
-      <AxModal.Header title={record.name} icon={<span>{record.emoji}</span>}>
+      <AxModal.Header title={record.name} icon={record.emoji}>
         {headLabel}
       </AxModal.Header>
       <AxCodeEditor value={record} />

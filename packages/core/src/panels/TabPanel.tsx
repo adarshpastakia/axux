@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isFalse } from "@axux/utilities";
+import { getValue, isFalse } from "@axux/utilities";
 import { getChildProps } from "@axux/utilities/dist/react";
 import { Children, cloneElement, FC, useEffect, useMemo, useState } from "react";
 import { AxIcon } from "../icons/Icon";
@@ -30,12 +30,13 @@ export interface TabProps extends IconProps, ElementProps {
  * Tab button
  * @internal
  */
-export const Tab: FC<TabProps & { placement?: "left" | "bottom" }> = ({
+export const Tab: FC<TabProps & { iconOnly?: boolean; placement?: "left" | "bottom" }> = ({
   id,
   icon,
   label,
   tooltip,
   badge,
+  iconOnly,
   className,
   isLoading = false,
   isPinned = false,
@@ -46,8 +47,28 @@ export const Tab: FC<TabProps & { placement?: "left" | "bottom" }> = ({
 }) => {
   const badgeEl = useBadge(badge);
 
+  const fallback = useMemo(() => {
+    const list: string[] = getValue(label, id).trim().split(" ");
+    const first = list[0];
+    const last = list.length > 1 && list.pop();
+    return (
+      first && last ? `${first.charAt(0)}${last.charAt(0)}` : `${first.substr(0, 2)}`
+    ).toUpperCase();
+  }, [label]);
+
+  const iconEl = useMemo(() => {
+    if (iconOnly && !icon) {
+      return fallback;
+    }
+    return icon;
+  }, [icon, iconOnly, fallback]);
+
+  const tooltipText = useMemo(() => {
+    return iconOnly ? getValue(tooltip, label) : tooltip;
+  }, [iconOnly, label, tooltip]);
+
   return (
-    <AxTooltip content={tooltip ?? ""} isDisabled={!tooltip} placement={placement}>
+    <AxTooltip content={tooltipText ?? ""} isDisabled={!tooltipText} placement={placement}>
       <a
         className={`ax-tab__button ${className ?? ""}`}
         {...props}
@@ -58,8 +79,8 @@ export const Tab: FC<TabProps & { placement?: "left" | "bottom" }> = ({
         data-disabled={isDisabled}
       >
         <div className="ax-tab__button--label">
-          {icon && <AxIcon icon={icon} />}
-          {label && <span>{label}</span>}
+          {iconEl && <AxIcon icon={iconEl} />}
+          {!iconOnly && label && <span>{label}</span>}
         </div>
         {badgeEl}
         {!!onClose && (
@@ -85,6 +106,8 @@ export interface TabPanelProps extends Pick<ElementProps, "className"> {
    */
   align?: "top" | "bottom" | "start" | "end";
 
+  simpleTabs?: boolean;
+
   iconOnly?: boolean;
 
   activeTab?: string;
@@ -104,6 +127,8 @@ interface ExtendedFC extends FC<TabPanelProps> {
  * @param children
  * @param className
  * @param align
+ * @param iconOnly
+ * @param simpleTabs
  * @param activeTab
  * @param onBeforeChange
  * @param onActiveChange
@@ -116,6 +141,8 @@ export const AxTabPanel: ExtendedFC = ({
   children,
   className,
   align = "top",
+  iconOnly,
+  simpleTabs = false,
   activeTab,
   onBeforeChange,
   onActiveChange,
@@ -125,11 +152,15 @@ export const AxTabPanel: ExtendedFC = ({
   const [active, setActive] = useState(activeTab);
 
   const pinned = useMemo(() => {
-    return Children.toArray(children).filter((child) => getChildProps(child).isPinned);
-  }, [children]);
+    return simpleTabs
+      ? []
+      : Children.toArray(children).filter((child) => getChildProps(child).isPinned);
+  }, [children, simpleTabs]);
   const tabs = useMemo(() => {
-    return Children.toArray(children).filter((child) => !getChildProps(child).isPinned);
-  }, [children]);
+    return simpleTabs
+      ? Children.toArray(children)
+      : Children.toArray(children).filter((child) => !getChildProps(child).isPinned);
+  }, [children, simpleTabs]);
 
   const tabMap = useMemo(() => {
     return Children.toArray(children)
@@ -185,22 +216,28 @@ export const AxTabPanel: ExtendedFC = ({
   }, [active, tabMap]);
 
   return (
-    <div className={`ax-tab__panel ${className ?? ""}`} data-align={align}>
+    <div className={`ax-tab__panel ${className ?? ""}`} data-align={align} data-simple={simpleTabs}>
       <div className="ax-tab__bar" data-align={align}>
         {prepend && <div className="ax-tab__bar--prepend">{prepend}</div>}
-        <div className="ax-tab__bar--pinned">
-          {pinned.map((tab: AnyObject) =>
-            cloneElement(tab, {
-              onClick: changeTab,
-              placement: align === "start" || align === "end" ? "left" : "bottom",
-              "data-active": tab.props.id === active
-            })
-          )}
-        </div>
+        {pinned.length > 0 && (
+          <div className="ax-tab__bar--pinned">
+            {pinned.map((tab: AnyObject) =>
+              cloneElement(tab, {
+                key: tab.props.id,
+                onClick: changeTab,
+                iconOnly,
+                placement: align === "start" || align === "end" ? "left" : "bottom",
+                "data-active": tab.props.id === active
+              })
+            )}
+          </div>
+        )}
         <div className="ax-tab__bar--scroller">
           {tabs.map((tab: AnyObject) =>
             cloneElement(tab, {
+              key: tab.props.id,
               onClick: changeTab,
+              iconOnly,
               placement: align === "start" || align === "end" ? "left" : "bottom",
               "data-active": tab.props.id === active
             })

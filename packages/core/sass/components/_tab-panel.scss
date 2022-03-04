@@ -15,12 +15,20 @@
       grid-template-areas: "tabbar" "content";
       grid-template-rows: auto 1fr;
       padding-top: 0;
+
+      #{$base}__button {
+        text-align: center;
+      }
     }
 
     &[data-align="bottom"] {
       grid-template-areas: "content" "tabbar";
       grid-template-rows: 1fr auto;
       padding-bottom: 0;
+
+      #{$base}__button {
+        text-align: center;
+      }
     }
 
     &[data-align="start"] {
@@ -28,6 +36,10 @@
       grid-template-columns: auto 1fr;
       grid-template-rows: 1fr;
       padding-inline-start: 0;
+
+      #{$base}__button {
+        text-align: end;
+      }
     }
 
     &[data-align="end"] {
@@ -35,6 +47,10 @@
       grid-template-columns: 1fr auto;
       grid-template-rows: 1fr;
       padding-inline-end: 0;
+
+      #{$base}__button {
+        text-align: start;
+      }
     }
   }
   &__bar {
@@ -146,7 +162,6 @@
     flex-flow: row nowrap;
     margin: 2px;
     padding: 0 0.5em;
-    text-align: center;
     @include noselect();
 
     &--label {
@@ -159,6 +174,10 @@
         padding: 0 0.25em;
         vertical-align: middle;
       }
+    }
+    #{$prefix}-badge {
+      font-size: 0.65em;
+      margin-inline-start: 0.25rem;
     }
     &--close {
       margin: 0 0.5em;
@@ -173,6 +192,19 @@
     &[data-disabled="true"] {
       opacity: 0.5;
       pointer-events: none;
+    }
+  }
+
+  &__panel[data-simple="true"] {
+    #{$base}__bar {
+      padding: 0.5em 0.25em;
+
+      &--scroller {
+        justify-content: center;
+      }
+    }
+    #{$base}__button {
+      border-radius: 0;
     }
   }
 }

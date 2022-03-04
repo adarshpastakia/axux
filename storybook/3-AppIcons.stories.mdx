@@ -5,9 +5,7 @@ import { AppIcons } from "@axux/core/src/types/appIcons";
 <Meta title="AxUx/Icons" />
 
 <Title>
-  <section className="ax-font--serif ax-font--inherit ax-icon ax-bg--invert ax-color--invert ax-margin--e">
-    <span>I</span>
-  </section>
+  <AxIcon className="ax-font--serif ax-margin--e ax-bg--invert" color="invert" icon="I" />
   Icons
 </Title>
 
@@ -15,10 +13,8 @@ import { AppIcons } from "@axux/core/src/types/appIcons";
   {Object.entries(AppIcons)
     .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([key, icon]) => (
-      <AxCopy text={key} key={key}>
-        <section className="ax-align--center ax-paper ax-padding">
-          <AxIcon icon={icon} size="lg" />
-        </section>
-      </AxCopy>
+      <section key={key} className="ax-align--center ax-paper ax-padding">
+        <AxIcon icon={icon} size="lg" />
+      </section>
     ))}
 </div>

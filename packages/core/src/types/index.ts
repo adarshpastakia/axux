@@ -74,7 +74,13 @@ export type TextAlign = "start" | "center" | "end" | "justify";
 /**
  * Text transform
  */
-export type TextTransform = "title" | "lower" | "upper" | "smallcaps" | "underline";
+export type TextTransform =
+  | "title"
+  | "lower"
+  | "upper"
+  | "smallcaps"
+  | "underline"
+  | "strikethrough";
 
 /**
  * Spacing values

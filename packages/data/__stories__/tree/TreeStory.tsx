@@ -32,7 +32,7 @@ const Template: Story<TreePanelProps> = (props) => {
           id: c.iso2,
           label: c.name,
           badge: c.tld,
-          icon: <span>{c.emoji}</span>
+          icon: c.emoji
         }))
       }))
     ];

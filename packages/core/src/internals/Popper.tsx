@@ -88,7 +88,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
       },
       {
         name: "preventOverflow",
-        enabled: true
+        enabled: trigger !== "hover"
       },
       {
         name: "offset",
@@ -199,8 +199,8 @@ export const AxPopper: FC<Props & KeyValue> = ({
         };
       }
       if (trigger === "hover") {
-        const handlerOpen = () => setOpen(true);
-        const handlerClose = () => setOpen(false);
+        const handlerOpen = () => isOpen === undefined && setOpen(true);
+        const handlerClose = () => isOpen === undefined && setOpen(false);
         const handlerShow = () => {
           setInnerOpen(true);
           setOpen(false);
@@ -230,6 +230,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
     forceUpdate,
     anchorEl,
     open,
+    isOpen,
     autoTrigger
   ]);
 

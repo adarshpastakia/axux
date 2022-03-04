@@ -98,7 +98,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
 
     const iconEl = useMemo(() => {
       if (!isString(icon) && isValidElement(icon)) {
-        return <span>{icon}</span>;
+        return icon;
       }
       return isSvg ? (
         <svg viewBox={viewBox}>
@@ -109,6 +109,19 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
         icon?.toString().includes(".png") ||
         icon?.toString().startsWith("data:image") ? (
         <img src={icon.toString()} alt={icon.toString()} loading="lazy" />
+      ) : icon?.toString().length <= 4 ? (
+        <svg viewBox="0 0 1em 1em">
+          <text
+            x="50%"
+            y="50%"
+            dy=".075em"
+            dominantBaseline="middle"
+            textAnchor="middle"
+            textLength="1em"
+          >
+            {icon}
+          </text>
+        </svg>
       ) : (
         <i className={`${icon}`} />
       );

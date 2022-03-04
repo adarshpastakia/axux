@@ -7,44 +7,81 @@
   $base: #{$prefix}-tab;
   $border: 0 0 0 1px $base-border-color inset;
 
-  &__bar {
-    background-color: $color-lightest;
-    &[data-align="top"] {
-      box-shadow: 0 -1px 0 $color-secondary inset;
+  &__panel[data-simple="false"] {
+    #{$base}__bar {
+      background-color: $color-lightest;
+      &[data-align="top"] {
+        box-shadow: 0 -1px 0 $color-secondary inset;
+      }
+      &[data-align="bottom"] {
+        box-shadow: 0 1px 0 $color-secondary inset;
+      }
+
+      @at-root [dir="rtl"] &[data-align="end"],
+        &[data-align="start"] {
+        box-shadow: -1px 0 0 $color-secondary inset;
+      }
+      @at-root [dir="rtl"] &[data-align="start"],
+        &[data-align="end"] {
+        box-shadow: 1px 0 0 $color-secondary inset;
+      }
+
+      #{$base}__button {
+        background-color: $base-bg;
+        box-shadow: $border;
+
+        &[data-active="false"]:hover {
+          background-color: rgba($base-bg, 0.5);
+          box-shadow: 0 0 0 1px $color-secondary;
+          color: $color-secondary;
+        }
+
+        &[data-active="true"] {
+          background-color: $color-secondary;
+          box-shadow: 0 0 1px 1px $color-secondary !important;
+          color: $white;
+        }
+
+        &[data-disabled="true"] {
+          background-color: rgba($body-bg, 0.5);
+          color: $color-muted;
+        }
+      }
     }
-    &[data-align="bottom"] {
-      box-shadow: 0 1px 0 $color-secondary inset;
+  }
+  &__panel[data-simple="true"] {
+    #{$base}__bar {
+      background-color: $base-bg;
+
+      &[data-align="top"] #{$base}__button[data-active="true"] {
+        box-shadow: 0 -3px 0 $color-secondary inset;
+      }
+      &[data-align="bottom"] #{$base}__button[data-active="true"] {
+        box-shadow: 0 3px 0 $color-secondary inset;
+      }
+
+      @at-root [dir="rtl"] &[data-align="end"] #{$base}__button[data-active="true"],
+        &[data-align="start"] #{$base}__button[data-active="true"] {
+        box-shadow: -3px 0 0 $color-secondary inset;
+      }
+      @at-root [dir="rtl"] &[data-align="start"] #{$base}__button[data-active="true"],
+        &[data-align="end"] #{$base}__button[data-active="true"] {
+        box-shadow: 3px 0 0 $color-secondary inset;
+      }
     }
 
-    @at-root [dir="rtl"] &[data-align="end"],
-      &[data-align="start"] {
-      box-shadow: -1px 0 0 $color-secondary inset;
-    }
-    @at-root [dir="rtl"] &[data-align="start"],
-      &[data-align="end"] {
-      box-shadow: 1px 0 0 $color-secondary inset;
+    #{$base}__button {
+      color: $color-primary;
+
+      &:hover,
+      &[data-active="true"] {
+        color: $color-secondary;
+      }
     }
   }
 
-  &__button {
-    background-color: $base-bg;
-    box-shadow: $border;
-
-    &[data-active="false"]:hover {
-      background-color: rgba($base-bg, 0.5);
-      box-shadow: 0 0 0 1px $color-secondary;
-      color: $color-secondary;
-    }
-
-    &[data-active="true"] {
-      background-color: $color-secondary;
-      box-shadow: 0 0 1px 1px $color-secondary !important;
-      color: $white;
-    }
-
-    &[data-disabled="true"] {
-      background-color: rgba($body-bg, 0.5);
-      color: $color-muted;
-    }
+  &__button[data-disabled="true"] {
+    background-color: rgba($body-bg, 0.5);
+    color: $color-muted;
   }
 }

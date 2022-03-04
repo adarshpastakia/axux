@@ -83,7 +83,8 @@
 
   abbr {
     cursor: help;
-    text-decoration: none;
+    display: inline-block;
+    text-decoration: underline dotted;
   }
 
   ul,

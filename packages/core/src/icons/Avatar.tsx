@@ -81,7 +81,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
     {
       icon,
       image,
-      title,
+      title = "",
       onClick,
       className,
       size = "normal",
@@ -122,7 +122,13 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
       } else if (!isEmpty(icon)) {
         return <AxIcon icon={icon} />;
       } else {
-        return <span>{fallback}</span>;
+        return (
+          <svg viewBox="0 0 54 24">
+            <text x="3" y="24">
+              {fallback}
+            </text>
+          </svg>
+        );
       }
     }, [fallback, icon, src, title]);
     const styles = useMemo(() => {

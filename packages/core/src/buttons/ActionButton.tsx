@@ -9,17 +9,10 @@ import { AppIcons } from "../types/appIcons";
 import { AxButton, ButtonProps } from "./Button";
 
 export interface ActionProps extends ButtonProps {
-  actionLabel: string;
+  message: string;
 }
 
-export const AxActionButton: FC<ActionProps> = ({
-  onClick,
-  actionLabel,
-  type,
-  color,
-  icon,
-  ...props
-}) => {
+export const AxActionButton: FC<ActionProps> = ({ onClick, message, color, icon, ...props }) => {
   const [actionDone, setActionDone] = useState(false);
   const doClick = useCallback(
     (e: MouseEvent) => {
@@ -35,10 +28,10 @@ export const AxActionButton: FC<ActionProps> = ({
     }
   }, [actionDone]);
   return (
-    <AxTooltip content={actionLabel} isDisabled={!actionDone} isOpen={actionDone} usePortal>
+    <AxTooltip content={message} isDisabled={!actionDone} isOpen={actionDone} usePortal>
       <AxButton
         onClick={doClick}
-        type={actionDone ? "solid" : type}
+        data-active={actionDone}
         color={actionDone ? "success" : color}
         icon={actionDone ? AppIcons.iconCheckAll : icon}
         {...props}
