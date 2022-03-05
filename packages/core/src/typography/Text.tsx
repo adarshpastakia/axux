@@ -4,27 +4,9 @@
 // @license   : MIT
 
 import { isColor, isNumber, isString } from "@axux/utilities";
-import {
-  FC,
-  forwardRef,
-  Fragment,
-  useImperativeHandle,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import { FC, forwardRef, Fragment, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  AllColors,
-  ElementProps,
-  Font,
-  Size,
-  SizeList,
-  TextAlign,
-  TextTransform,
-  Weight
-} from "../types";
+import { AllColors, ElementProps, Font, Size, SizeList, TextAlign, TextTransform, Weight } from "../types";
 import { AbbrText } from "./Abbr";
 import { MarkedText } from "./Marked";
 

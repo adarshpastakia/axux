@@ -3,13 +3,13 @@
 // @copyright : 2021
 // @license   : MIT
 
+import { isColor } from "@axux/utilities";
 import { FC, forwardRef, MouseEventHandler, UIEventHandler, useMemo } from "react";
 import { AxIcon } from "../icons/Icon";
 import { BadgeType, useBadge } from "../internals/useBadge";
 import { useWithTooltip, WithTooltipProps } from "../internals/useWithTooltip";
 import { BaseColor, Color, ColorPalette, ElementProps, IconProps, RefProp, Size } from "../types";
 import { AppIcons } from "../types/appIcons";
-import { isColor } from "@axux/utilities";
 
 /** @internal */
 export interface TagProps extends RefProp, IconProps, ElementProps, WithTooltipProps {

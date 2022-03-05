@@ -3,7 +3,6 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { ElementProps } from "@axux/core/dist/types";
 import { CSSProperties, FC, memo, useEffect, useState } from "react";
 
 export interface CellProps {

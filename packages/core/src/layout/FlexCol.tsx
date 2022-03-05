@@ -5,8 +5,8 @@
 
 import { isNumber } from "@axux/utilities";
 import { FC, forwardRef, useMemo } from "react";
-import { AlignItem, ElementProps, PaddingProps, RefProp } from "../types";
 import { makePadding } from "../helpers";
+import { AlignItem, ElementProps, PaddingProps, RefProp } from "../types";
 
 /** @internal */
 export interface FlexColProps extends ElementProps, PaddingProps, RefProp<HTMLDivElement> {

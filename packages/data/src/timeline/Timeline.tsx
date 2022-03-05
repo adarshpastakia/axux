@@ -8,13 +8,7 @@ import { RefProp } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
 import { FC, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import {
-  AutoSizer,
-  CellMeasurer,
-  CellMeasurerCache,
-  List,
-  WindowScroller
-} from "react-virtualized";
+import { AutoSizer, CellMeasurer, CellMeasurerCache, List, WindowScroller } from "react-virtualized";
 import { TimelineEntry } from "./Entry";
 import { TimelineProps } from "./types";
 

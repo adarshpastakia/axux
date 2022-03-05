@@ -5,7 +5,7 @@
 
 import { AxAvatar, AxDivider } from "@axux/core";
 import { AvatarProps } from "@axux/core/dist/icons/Avatar";
-import { Color, ColorPalette, ElementProps, EmptyCallback } from "@axux/core/dist/types";
+import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AllColors } from "@axux/core/src/types";
 import { FC, useMemo } from "react";

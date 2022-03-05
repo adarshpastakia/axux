@@ -4,16 +4,7 @@
 // @license   : MIT
 
 import { ascii, debounce, isEqual, isNil, isObject } from "@axux/utilities";
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import { ChangeEvent, KeyboardEvent, MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { OptionProps, SelectCommonProps } from "../types";
 
 /** TODO

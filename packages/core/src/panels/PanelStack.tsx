@@ -3,16 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import {
-  Children,
-  cloneElement,
-  FC,
-  MouseEvent,
-  useCallback,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import { Children, cloneElement, FC, MouseEvent, useCallback, useMemo, useRef, useState } from "react";
 import { ElementProps } from "../types";
 
 /**

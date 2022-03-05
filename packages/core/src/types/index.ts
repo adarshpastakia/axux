@@ -3,13 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import {
-  AriaAttributes,
-  FC,
-  HTMLAttributeAnchorTarget,
-  HTMLAttributes,
-  RefAttributes
-} from "react";
+import { AriaAttributes, FC, HTMLAttributeAnchorTarget, HTMLAttributes, RefAttributes } from "react";
 
 export interface VFC<T = KeyValue> extends FC<T> {
   children?: never;
