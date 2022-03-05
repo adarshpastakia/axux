@@ -20,8 +20,6 @@
 }
 
 @at-root #{$root} {
-  @import "reset";
-  @import "palette";
   @import "typography";
   @import "menu";
   @import "page";
@@ -36,4 +34,6 @@
   @import "tab-panel";
   @import "breadcrumbs";
   @import "notifications";
+  @import "reset";
+  @import "palette";
 }

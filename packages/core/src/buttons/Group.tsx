@@ -49,7 +49,7 @@ export const AxButtonGroup: FC<ButtonGroupProps> = ({
         const { value: elValue, onClick: elHandler } = getChildProps(el);
         return cloneElement(el as ReactElement, {
           "data-toggle-active": !isEmpty(value) && elValue === value,
-          onClick: () => [onChange && onChange(elValue), elHandler && elHandler()]
+          onClick: (b: AnyObject) => [onChange && onChange(elValue), elHandler && elHandler(b)]
         });
       })}
     </div>

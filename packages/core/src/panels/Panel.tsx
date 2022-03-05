@@ -10,7 +10,6 @@ import {
   DOMAttributes,
   FC,
   forwardRef,
-  MouseEventHandler,
   ReactElement,
   useMemo
 } from "react";

@@ -117,7 +117,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
             dy=".075em"
             dominantBaseline="middle"
             textAnchor="middle"
-            textLength="1em"
+            style={{ fontSize: ".75em" }}
           >
             {icon}
           </text>

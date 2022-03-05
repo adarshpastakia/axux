@@ -29,7 +29,7 @@ export const AxConfirmButton: FC<ConfirmProps> = ({
   cancelLabel,
   ...props
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("core");
   const [isOpen, setOpen] = useState(false);
   return (
     <AxPopover
@@ -47,7 +47,7 @@ export const AxConfirmButton: FC<ConfirmProps> = ({
             <AxText size="sm">{message}</AxText>
           </AxContent>
         </AxPopover.PreventClose>
-        <AxSection.Foot className="ax-align--end ax-padding--x--sm">
+        <AxSection.Foot className="ax-align--end ax-padding--x--sm ax-border--none">
           <AxButton.Neutral size="sm" onClick={() => onClick?.(false)}>
             {cancelLabel ?? t("action.cancel")}
           </AxButton.Neutral>

@@ -18,7 +18,6 @@
     @extend #{$prefix}-border--t;
     grid-area: foot;
     z-index: 6;
-    line-height: 1;
   }
 
   &__side {

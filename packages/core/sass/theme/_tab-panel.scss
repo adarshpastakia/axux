@@ -7,71 +7,92 @@
   $base: #{$prefix}-tab;
   $border: 0 0 0 1px $base-border-color inset;
 
-  &__panel[data-simple="false"] {
+  &__bar {
+    background-color: $color-lightest;
+    &[data-align="top"] {
+      box-shadow: 0 -1px 0 $color-secondary inset;
+    }
+    &[data-align="bottom"] {
+      box-shadow: 0 1px 0 $color-secondary inset;
+    }
+
+    @at-root [dir="rtl"] &[data-align="end"],
+      &[data-align="start"] {
+      box-shadow: -1px 0 0 $color-secondary inset;
+    }
+    @at-root [dir="rtl"] &[data-align="start"],
+      &[data-align="end"] {
+      box-shadow: 1px 0 0 $color-secondary inset;
+    }
+
+    #{$base}__button {
+      background-color: $base-bg;
+      box-shadow: $border;
+
+      &[data-active="false"]:hover {
+        background-color: rgba($base-bg, 0.5);
+        box-shadow: 0 0 0 1px $color-secondary;
+        color: $color-secondary;
+      }
+
+      &[data-active="true"] {
+        background-color: $color-secondary;
+        box-shadow: 0 0 1px 1px $color-secondary;
+        color: $white;
+      }
+    }
+  }
+
+  &__panel[data-simple="true"] {
     #{$base}__bar {
-      background-color: $color-lightest;
+      background-color: $base-bg;
+      box-shadow: none;
+
       &[data-align="top"] {
-        box-shadow: 0 -1px 0 $color-secondary inset;
+        #{$base}__button:hover {
+          box-shadow: 0 -1px 0 $color-secondary inset;
+        }
+        #{$base}__button[data-active="true"] {
+          box-shadow: 0 -3px 0 $color-secondary inset;
+        }
       }
       &[data-align="bottom"] {
-        box-shadow: 0 1px 0 $color-secondary inset;
+        #{$base}__button:hover {
+          box-shadow: 0 -1px 0 $color-secondary inset;
+        }
+        #{$base}__button[data-active="true"] {
+          box-shadow: 0 1px 0 $color-secondary inset;
+        }
       }
 
       @at-root [dir="rtl"] &[data-align="end"],
         &[data-align="start"] {
-        box-shadow: -1px 0 0 $color-secondary inset;
+        #{$base}__button:hover {
+          box-shadow: -1px 0 0 $color-secondary inset;
+        }
+        #{$base}__button[data-active="true"] {
+          box-shadow: -3px 0 0 $color-secondary inset;
+        }
       }
       @at-root [dir="rtl"] &[data-align="start"],
         &[data-align="end"] {
-        box-shadow: 1px 0 0 $color-secondary inset;
-      }
-
-      #{$base}__button {
-        background-color: $base-bg;
-        box-shadow: $border;
-
-        &[data-active="false"]:hover {
-          background-color: rgba($base-bg, 0.5);
-          box-shadow: 0 0 0 1px $color-secondary;
-          color: $color-secondary;
+        #{$base}__button:hover {
+          box-shadow: 1px 0 0 $color-secondary inset;
         }
-
-        &[data-active="true"] {
-          background-color: $color-secondary;
-          box-shadow: 0 0 1px 1px $color-secondary !important;
-          color: $white;
+        #{$base}__button[data-active="true"] {
+          box-shadow: 3px 0 0 $color-secondary inset;
         }
-
-        &[data-disabled="true"] {
-          background-color: rgba($body-bg, 0.5);
-          color: $color-muted;
-        }
-      }
-    }
-  }
-  &__panel[data-simple="true"] {
-    #{$base}__bar {
-      background-color: $base-bg;
-
-      &[data-align="top"] #{$base}__button[data-active="true"] {
-        box-shadow: 0 -3px 0 $color-secondary inset;
-      }
-      &[data-align="bottom"] #{$base}__button[data-active="true"] {
-        box-shadow: 0 3px 0 $color-secondary inset;
-      }
-
-      @at-root [dir="rtl"] &[data-align="end"] #{$base}__button[data-active="true"],
-        &[data-align="start"] #{$base}__button[data-active="true"] {
-        box-shadow: -3px 0 0 $color-secondary inset;
-      }
-      @at-root [dir="rtl"] &[data-align="start"] #{$base}__button[data-active="true"],
-        &[data-align="end"] #{$base}__button[data-active="true"] {
-        box-shadow: 3px 0 0 $color-secondary inset;
       }
     }
 
     #{$base}__button {
+      background-color: transparent;
+      box-shadow: none;
       color: $color-primary;
+
+      &:hover {
+        box-shadow: none;
+      }
 
       &:hover,
       &[data-active="true"] {
@@ -81,7 +102,7 @@
   }
 
   &__button[data-disabled="true"] {
-    background-color: rgba($body-bg, 0.5);
-    color: $color-muted;
+    background-color: rgba($body-bg, 0.5) !important;
+    color: $color-muted !important;
   }
 }
