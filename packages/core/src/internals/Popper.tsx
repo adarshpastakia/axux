@@ -31,6 +31,7 @@ export interface Props {
   className?: string;
   forceRender?: boolean;
   closeOnClick?: boolean;
+  preventClose?: boolean;
   triggerSelector?: string;
   showArrow?: boolean;
   usePortal?: boolean;
@@ -56,6 +57,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
   closeOnClick,
   triggerSelector,
   forceRender,
+  preventClose = false,
   usePortal = false,
   updateAnchor,
   autoTrigger = true,
@@ -170,16 +172,16 @@ export const AxPopper: FC<Props & KeyValue> = ({
         };
 
         const forceClose = (e: MouseEvent) => {
-          const preventClose = withinDomTree(
+          const _preventClose = withinDomTree(
             e.target as HTMLElement,
             ".ax-prevent-close",
             ".ax-force-close"
           );
           const forceClose =
-            !preventClose &&
+            !_preventClose &&
             withinDomTree(e.target as HTMLElement, ".ax-force-close", ".ax-prevent-close");
           const canClose =
-            !preventClose &&
+            !_preventClose &&
             !withinEl(e.target as HTMLElement, closeOnClick ? "empty" : ".ax-popper");
           if (isVisible(popperEl) && (forceClose || canClose)) {
             refCloseTimer.current = setTimeout(() => {
@@ -190,8 +192,8 @@ export const AxPopper: FC<Props & KeyValue> = ({
         };
 
         anchorEl.dataset.clickable = "true";
-        autoTrigger && anchorEl.addEventListener("click", handler);
-        open && document.addEventListener("mouseup", forceClose);
+        autoTrigger && !preventClose && anchorEl.addEventListener("click", handler);
+        open && !preventClose && document.addEventListener("mouseup", forceClose);
 
         return () => {
           anchorEl.removeEventListener("click", handler);
@@ -225,6 +227,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
     triggerSelector,
     popperEl,
     closeOnClick,
+    preventClose,
     onOpen,
     onClose,
     forceUpdate,

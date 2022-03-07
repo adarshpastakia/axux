@@ -40,10 +40,12 @@ export const AxFlyout: FC<FlyoutProps> = forwardRef<HTMLDivElement, FlyoutProps>
     const [isOpen, setOpen] = useState(false);
 
     const handleClose = useCallback(() => {
-      setOpen(false);
-      setTimeout(() => {
-        onClose && onClose();
-      }, 500);
+      requestAnimationFrame(() => {
+        setOpen(false);
+        setTimeout(() => {
+          onClose && onClose();
+        }, 500);
+      });
     }, [onClose]);
 
     const header = useMemo(() => {
@@ -83,11 +85,11 @@ export const AxFlyout: FC<FlyoutProps> = forwardRef<HTMLDivElement, FlyoutProps>
     useLayoutEffect(() => {
       if (maskRef.current) {
         const el = maskRef.current;
-        (el.firstElementChild as HTMLElement).focus();
-        setTimeout(() => {
+        requestAnimationFrame(() => {
+          (el.firstElementChild as HTMLElement).focus();
           setOpen(true);
           el.dataset.show = "true";
-        }, 10);
+        });
       }
     }, []);
 

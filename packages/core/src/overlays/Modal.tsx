@@ -104,8 +104,10 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
     useLayoutEffect(() => {
       if (maskRef.current) {
         const el = maskRef.current;
-        (el.firstElementChild as HTMLElement).focus();
-        setTimeout(() => (el.dataset.show = "true"), 10);
+        requestAnimationFrame(() => {
+          (el.firstElementChild as HTMLElement).focus();
+          el.dataset.show = "true";
+        });
       }
     }, []);
 

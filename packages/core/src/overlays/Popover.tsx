@@ -40,6 +40,7 @@ export interface PopoverProps extends ElementProps {
    * Close popover when clicked
    */
   closeOnClick?: boolean;
+  preventClose?: boolean;
   /**
    * Event handler when opened
    */
@@ -69,6 +70,7 @@ export const AxPopover: ExtendedFC<PopoverProps & RefProp> = forwardRef<HTMLElem
       forceRender = false,
       placement = "bottom-start",
       isOpen,
+      preventClose = false,
       isDisabled = false,
       usePortal = false,
       showArrow = false,
@@ -91,6 +93,7 @@ export const AxPopover: ExtendedFC<PopoverProps & RefProp> = forwardRef<HTMLElem
         closeOnClick={closeOnClick}
         usePortal={usePortal}
         showArrow={showArrow}
+        preventClose={preventClose}
         className={`ax-popover ${className ?? ""}`}
         inheritRef={ref}
         isOpen={isOpen}

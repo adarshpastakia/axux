@@ -25,9 +25,13 @@
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-between;
-      > #{$prefix}-button__group:first-child {
+      > div:first-child {
         position: sticky;
         top: 0;
+
+        #{$prefix}-button__group {
+          margin-bottom: 0.5em;
+        }
       }
 
       > #{$prefix}-button__group:last-child {

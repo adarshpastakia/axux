@@ -3,7 +3,13 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AriaAttributes, FC, HTMLAttributeAnchorTarget, HTMLAttributes, RefAttributes } from "react";
+import {
+  AriaAttributes,
+  FC,
+  HTMLAttributeAnchorTarget,
+  HTMLAttributes,
+  RefAttributes
+} from "react";
 
 export interface VFC<T = KeyValue> extends FC<T> {
   children?: never;
@@ -91,7 +97,7 @@ export type AlignItem = "top" | "middle" | "bottom" | "stretch";
 export type JustifyContent = "start" | "center" | "end" | "spaced" | "even";
 
 export type EmptyCallback = () => void;
-
+export type BooleanReturn = () => boolean | void;
 export type BooleanCallback = (b: boolean) => void;
 
 export type IconType = "blank" | string | JSX.Element;

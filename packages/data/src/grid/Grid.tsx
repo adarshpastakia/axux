@@ -8,7 +8,16 @@ import { useIsRtl } from "@axux/core/dist/internals/useIsRtl";
 import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { CSSProperties, FC, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  CSSProperties,
+  FC,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState
+} from "react";
 import {
   AutoSizer,
   CellMeasurer,
@@ -194,21 +203,23 @@ export const AxGridView: ExtendedFC = ({
           )}
         </WindowScroller>
         <div>
-          {onSort && (
-            <AxButton.Group vertical>
-              <AxButton
-                icon={AppIcons.iconSortTimeDesc}
-                onClick={() => onSort && onSort("desc")}
-                data-active={sortOrder === "desc"}
-              />
-              <AxButton
-                icon={AppIcons.iconSortTimeAsc}
-                onClick={() => onSort && onSort("asc")}
-                data-active={sortOrder === "asc"}
-              />
-            </AxButton.Group>
-          )}
-          {actions}
+          <div>
+            {onSort && (
+              <AxButton.Group vertical>
+                <AxButton
+                  icon={AppIcons.iconSortTimeDesc}
+                  onClick={() => onSort && onSort("desc")}
+                  data-active={sortOrder === "desc"}
+                />
+                <AxButton
+                  icon={AppIcons.iconSortTimeAsc}
+                  onClick={() => onSort && onSort("asc")}
+                  data-active={sortOrder === "asc"}
+                />
+              </AxButton.Group>
+            )}
+            {actions}
+          </div>
           <div className="ax-col--fill" />
           {!hideScrollButtons && (
             <AxButton.Group vertical>

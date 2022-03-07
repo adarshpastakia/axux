@@ -65,7 +65,7 @@ export const useAxNotificationService = () => {
         resolve();
       };
       render(<AxMessage {...obj} onClose={onClose} />, el);
-      setTimeout(() => (el.dataset.show = "true"), 10);
+      requestAnimationFrame(() => (el.dataset.show = "true"));
       if (timeout > 0) {
         timerRef = setTimeout(onClose, timeout);
       }
@@ -94,7 +94,7 @@ export const useAxNotificationService = () => {
         resolve(b);
       };
       render(<AxToast {...obj} onClose={onClose} onCloseAll={closeAllToasts} />, el);
-      setTimeout(() => (el.dataset.show = "true"), 10);
+      requestAnimationFrame(() => (el.dataset.show = "true"));
       if (obj.type !== "confirm" && timeout > 0) {
         timerRef = setTimeout(onClose, timeout);
       }
@@ -121,7 +121,7 @@ export const useAxNotificationService = () => {
         resolve(b);
       };
       render(<AxAlert {...obj} onClose={onClose} />, el);
-      setTimeout(() => (el.dataset.show = "true"), 10);
+      requestAnimationFrame(() => (el.dataset.show = "true"));
     });
   };
 

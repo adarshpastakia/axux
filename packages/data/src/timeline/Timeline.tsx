@@ -8,7 +8,13 @@ import { RefProp } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
 import { FC, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { AutoSizer, CellMeasurer, CellMeasurerCache, List, WindowScroller } from "react-virtualized";
+import {
+  AutoSizer,
+  CellMeasurer,
+  CellMeasurerCache,
+  List,
+  WindowScroller
+} from "react-virtualized";
 import { TimelineEntry } from "./Entry";
 import { TimelineProps } from "./types";
 
@@ -137,21 +143,23 @@ export const AxTimeline: ExtendedFC = ({
           )}
         </WindowScroller>
         <div>
-          {onSort && (
-            <AxButton.Group vertical>
-              <AxButton
-                icon={AppIcons.iconSortTimeDesc}
-                onClick={() => onSort("desc")}
-                data-active={sortOrder === "desc"}
-              />
-              <AxButton
-                icon={AppIcons.iconSortTimeAsc}
-                onClick={() => onSort("asc")}
-                data-active={sortOrder === "asc"}
-              />
-            </AxButton.Group>
-          )}
-          {actions}
+          <div>
+            {onSort && (
+              <AxButton.Group vertical>
+                <AxButton
+                  icon={AppIcons.iconSortTimeDesc}
+                  onClick={() => onSort("desc")}
+                  data-active={sortOrder === "desc"}
+                />
+                <AxButton
+                  icon={AppIcons.iconSortTimeAsc}
+                  onClick={() => onSort("asc")}
+                  data-active={sortOrder === "asc"}
+                />
+              </AxButton.Group>
+            )}
+            {actions}
+          </div>
           <div className="ax-col--fill" />
           <AxButton.Group vertical>
             <AxButton
