@@ -1,6 +1,6 @@
 {
   "name": "@axux/core",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "AxUx: Core package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "watch": "yarn build:lib -w"
   },
   "dependencies": {
-    "@axux/utilities": "^0.0.20",
+    "@axux/utilities": "^0.0.21",
     "@popperjs/core": "^2.9.3",
     "react-helmet": "^6.1.0",
     "react-popper": "^2.2.5",
