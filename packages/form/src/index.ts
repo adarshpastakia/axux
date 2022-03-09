@@ -9,3 +9,4 @@ export { AxForm } from "./form/Form";
 export type { FormRef } from "./form/Form";
 
 export { AxField } from "./field/Field";
+export type { UseFieldArrayReturn as ArrayRef } from "react-hook-form/dist/types/fieldArray";

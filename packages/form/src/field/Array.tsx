@@ -9,7 +9,7 @@ import { UseFieldArrayReturn } from "react-hook-form/dist/types/fieldArray";
 
 interface Props {
   name: string;
-  arrayRef: MutableRefObject<UseFieldArrayReturn>;
+  arrayRef?: MutableRefObject<UseFieldArrayReturn | undefined>;
   children: (fields: FieldArrayWithId[]) => ReactNodeArray;
 }
 
