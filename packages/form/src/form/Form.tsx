@@ -32,7 +32,7 @@ export interface FormRef<T = KeyValue> {
   /**
    * Validate form
    */
-  validate: () => void;
+  validate: () => Promise<boolean>;
 }
 
 /** @internal */

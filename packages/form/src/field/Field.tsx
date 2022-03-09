@@ -9,6 +9,7 @@ import { AxSelectField } from "../select/Select";
 import { AxTagField } from "../select/Tag";
 import { WrapperProps } from "../types";
 import { AxAddon } from "./Addon";
+import { AxFieldArray } from "./Array";
 import { AxCheckboxField } from "./Checkbox";
 import { AxNumberField } from "./Number";
 import { AxOptions } from "./Options";
@@ -41,6 +42,7 @@ interface ExtendedFC<T> extends FC<T> {
   Checkbox: typeof AxCheckboxField;
   Select: typeof AxSelectField;
   Tag: typeof AxTagField;
+  Array: typeof AxFieldArray;
 }
 
 /**
@@ -75,6 +77,7 @@ AxField.Switch = AxSwitchField;
 AxField.Checkbox = AxCheckboxField;
 AxField.Select = AxSelectField;
 AxField.Tag = AxTagField;
+AxField.Array = AxFieldArray;
 
 AxField.displayName = "AxField";
 AxField.Addon.displayName = "AxField.Addon";
@@ -89,6 +92,7 @@ AxField.Options.displayName = "AxField.Options";
 AxField.Radio.displayName = "AxField.Radio";
 AxField.Switch.displayName = "AxField.Switch";
 AxField.Checkbox.displayName = "AxField.Checkbox";
+AxField.Array.displayName = "AxField.Array";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 AxField.Select.displayName = "AxField.Select";
