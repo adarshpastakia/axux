@@ -15,6 +15,8 @@ export interface PopoverProps extends ElementProps {
    */
   isOpen?: boolean;
 
+  trigger?: "click" | "contextmenu";
+
   isDisabled?: boolean;
   /**
    * Set minWidth to anchor width
@@ -40,7 +42,6 @@ export interface PopoverProps extends ElementProps {
    * Close popover when clicked
    */
   closeOnClick?: boolean;
-  preventClose?: boolean;
   /**
    * Event handler when opened
    */
@@ -51,6 +52,7 @@ export interface PopoverProps extends ElementProps {
   onClose?: EmptyCallback;
 
   autoTrigger?: boolean;
+  preventClose?: boolean;
 }
 
 interface ExtendedFC<T> extends FC<T> {
@@ -70,6 +72,7 @@ export const AxPopover: ExtendedFC<PopoverProps & RefProp> = forwardRef<HTMLElem
       forceRender = false,
       placement = "bottom-start",
       isOpen,
+      trigger = "click",
       preventClose = false,
       isDisabled = false,
       usePortal = false,
@@ -84,7 +87,7 @@ export const AxPopover: ExtendedFC<PopoverProps & RefProp> = forwardRef<HTMLElem
   ) => {
     return (
       <AxPopper
-        trigger="click"
+        trigger={trigger}
         resize={resize}
         updateAnchor
         autoTrigger={autoTrigger}

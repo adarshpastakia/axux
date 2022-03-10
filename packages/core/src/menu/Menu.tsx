@@ -9,6 +9,7 @@ import { AxDivider } from "../divider/Divider";
 import { AxContent } from "../panels/Content";
 import { AxPanel } from "../panels/Panel";
 import { ElementProps, Size } from "../types";
+import { AxText, TextProps } from "../typography/Text";
 import { AxMenuItem, MenuItemType } from "./MenuItem";
 
 /** @internal */
@@ -22,7 +23,10 @@ export interface MenuProps extends ElementProps {
 
 interface ExtendedFC extends FC<MenuProps> {
   Item: typeof AxMenuItem;
-  Divider: FC<{ text?: string }>;
+  Text: FC<
+    Pick<TextProps, "bg" | "color" | "transform" | "align" | "size" | "weight" | "className">
+  >;
+  Divider: FC;
 }
 
 /**
@@ -65,8 +69,18 @@ export const AxMenu: ExtendedFC = ({ children, size, items, onClick, className, 
   );
 };
 AxMenu.Item = AxMenuItem;
-AxMenu.Divider = ({ text }) => <AxDivider>{text}</AxDivider>;
+AxMenu.Divider = ({ children }) => <AxDivider>{children}</AxDivider>;
+AxMenu.Text = ({ className, color = "dark", ...props }) => (
+  <AxText
+    className={`ax-padding--y--xs ax-padding--x--sm ${className}`}
+    color={color}
+    block
+    ellipsis
+    {...props}
+  />
+);
 
 AxMenu.displayName = "AxMenu";
 AxMenu.Item.displayName = "AxMenu.Item";
+AxMenu.Text.displayName = "AxMenu.Text";
 AxMenu.Divider.displayName = "AxMenu.Divider";

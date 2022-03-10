@@ -78,6 +78,7 @@
 
     &__label {
       grid-area: label;
+      padding-inline-end: 1.5em;
       @include noselect();
       > span {
         display: block;

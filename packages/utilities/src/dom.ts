@@ -23,6 +23,18 @@ export const withinDomTree = (target: HTMLElement | null, className: string, bef
 };
 
 /** @internal */
+export const withinElement = (target: HTMLElement | null, ...elements: (HTMLElement | null)[]) => {
+  if (!target) {
+    return false;
+  }
+  do {
+    if (target && elements.includes(target)) return true;
+    target = target?.parentElement ?? null;
+  } while (target && !elements.includes(target) && target !== document.body);
+  return false;
+};
+
+/** @internal */
 export const isVisible = (el: HTMLElement | null) => {
   if (!el) return false;
   const visible = getComputedStyle(el).display !== "none";

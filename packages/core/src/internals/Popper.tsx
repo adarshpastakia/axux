@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isVisible, withinDomTree, withinEl } from "@axux/utilities/dist/dom";
+import { isVisible, withinDomTree, withinElement } from "@axux/utilities/dist/dom";
 import { Placement } from "@popperjs/core";
 import {
   Children,
@@ -23,7 +23,7 @@ import { EmptyCallback } from "../types";
 
 /** @internal */
 export interface Props {
-  trigger?: "hover" | "click";
+  trigger?: "hover" | "click" | "contextmenu";
   placement?: Placement;
   isOpen?: boolean;
   isDisabled?: boolean;
@@ -107,7 +107,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
       let triggerButton: HTMLElement =
         (triggerSelector ? triggerEl.querySelector(triggerSelector) : undefined) || triggerEl;
 
-      if (triggerEl.classList.contains("ax-button") && trigger === "click") {
+      if (triggerEl.classList.contains("ax-button") && trigger !== "hover") {
         triggerButton =
           triggerEl.querySelector(".ax-button__split") ||
           triggerEl.querySelector(".ax-button__inner") ||
@@ -151,7 +151,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
   }, [resize, triggerEl]);
 
   useLayoutEffect(() => {
-    if (trigger === "click") {
+    if (trigger !== "hover") {
       open && forceUpdate && forceUpdate();
       anchorEl &&
         anchorEl.dispatchEvent(new Event(open ? "innershow" : "innerhide", { bubbles: true }));
@@ -162,12 +162,13 @@ export const AxPopper: FC<Props & KeyValue> = ({
     if (anchorEl) {
       popperEl && popperEl.addEventListener("updatePopper", () => forceUpdate && forceUpdate());
 
-      if (trigger === "click") {
+      if (trigger !== "hover") {
         const handler = (e: MouseEvent) => {
-          if (e.button === 0) {
+          if (e.button === (trigger === "click" ? 0 : 2)) {
             setOpen(!open);
             open && onClose && onClose();
             !open && onOpen && onOpen();
+            return trigger === "click";
           }
         };
 
@@ -180,9 +181,8 @@ export const AxPopper: FC<Props & KeyValue> = ({
           const forceClose =
             !_preventClose &&
             withinDomTree(e.target as HTMLElement, ".ax-force-close", ".ax-prevent-close");
-          const canClose =
-            !_preventClose &&
-            !withinEl(e.target as HTMLElement, closeOnClick ? "empty" : ".ax-popper");
+          let canClose = !_preventClose && closeOnClick;
+          if (!closeOnClick) canClose = !withinElement(e.target as HTMLElement, anchorEl, popperEl);
           if (isVisible(popperEl) && (forceClose || canClose)) {
             refCloseTimer.current = setTimeout(() => {
               setOpen(false);
@@ -192,11 +192,11 @@ export const AxPopper: FC<Props & KeyValue> = ({
         };
 
         anchorEl.dataset.clickable = "true";
-        autoTrigger && !preventClose && anchorEl.addEventListener("click", handler);
+        trigger && autoTrigger && anchorEl.addEventListener(trigger, handler);
         open && !preventClose && document.addEventListener("mouseup", forceClose);
 
         return () => {
-          anchorEl.removeEventListener("click", handler);
+          trigger && anchorEl.removeEventListener(trigger, handler);
           document.removeEventListener("mouseup", forceClose);
         };
       }

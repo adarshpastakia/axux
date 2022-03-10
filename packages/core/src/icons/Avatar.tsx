@@ -134,7 +134,7 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
       return ret;
     }, [bg, color, noBgForImage, src]);
     return (
-      <AxTooltip content={title} ref={ref} isDisabled={!title}>
+      <AxTooltip content={title} ref={ref} isDisabled={!title} usePortal>
         <div
           className={classes}
           data-clickable={!isEmpty(onClick)}

@@ -103,7 +103,7 @@ export const AxSpotlight: VFC<SpotlightProps> = ({ defaultItems = [], onQuery, o
             <AxMenu onClick={onSelect}>
               {Object.entries(menuItems).map(([group, items]) => (
                 <Fragment key={group}>
-                  {group && <AxMenu.Divider text={group} />}
+                  {group && <AxMenu.Text>{group}</AxMenu.Text>}
                   {items.map((item: AnyObject) => (
                     <AxMenu.Item key={item.id} {...item} mark={query} />
                   ))}
