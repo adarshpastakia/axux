@@ -22,6 +22,7 @@ export const AxSuperDate: FC<RelativeProps> = ({
   events,
   defaultView,
   presets,
+  isDisabled,
   ...props
 }) => {
   const {
@@ -53,6 +54,7 @@ export const AxSuperDate: FC<RelativeProps> = ({
     const ret: KeyValue = {
       icon: AppIcons.iconClock,
       color: "primary",
+      isDisabled: isDisabled,
       className: "ax-superdate__button",
       onClick: () => setOpen(true),
       tooltip
@@ -61,7 +63,7 @@ export const AxSuperDate: FC<RelativeProps> = ({
       ret.hideCaret = true;
     }
     return ret;
-  }, [tooltip, type]);
+  }, [tooltip, type, isDisabled]);
   const updatePopup = useCallback(() => {
     if (panelRef.current) {
       const el = panelRef.current;

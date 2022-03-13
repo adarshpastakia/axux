@@ -153,9 +153,9 @@ export const AxPopper: FC<Props & KeyValue> = ({
   useLayoutEffect(() => {
     if (trigger !== "hover") {
       open && forceUpdate && forceUpdate();
-      anchorEl &&
-        anchorEl.dispatchEvent(new Event(open ? "innershow" : "innerhide", { bubbles: true }));
     }
+    anchorEl &&
+      anchorEl.dispatchEvent(new Event(open ? "innershow" : "innerhide", { bubbles: true }));
   }, [open, forceUpdate, anchorEl, trigger]);
 
   useLayoutEffect(() => {

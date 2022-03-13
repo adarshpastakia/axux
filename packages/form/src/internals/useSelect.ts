@@ -4,7 +4,16 @@
 // @license   : MIT
 
 import { ascii, debounce, isEqual, isNil, isObject } from "@axux/utilities";
-import { ChangeEvent, KeyboardEvent, MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import { OptionProps, SelectCommonProps } from "../types";
 
 /** TODO
@@ -148,7 +157,7 @@ export const useSelect = <T = KeyValue>(
   const queryHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setOpen(true);
-    debounce(() => performQuery(query), 250);
+    debounce(performQuery, 250)(query);
   };
 
   /**
@@ -163,7 +172,7 @@ export const useSelect = <T = KeyValue>(
           ) ?? []
         : defaultOptions.find((opt) => matchOption(opt, val));
     },
-    [multiple, defaultOptions, matchOption]
+    [multiple, defaultOptions, matchOption, refactorOption]
   );
 
   /**
@@ -264,7 +273,7 @@ export const useSelect = <T = KeyValue>(
         }
       }
     },
-    [multiple, value, onChange, onEnterPressed]
+    [multiple, value, onChange, onEnterPressed, allowCustom, createOption]
   );
 
   const [isOpen, setOpen] = useState(false);

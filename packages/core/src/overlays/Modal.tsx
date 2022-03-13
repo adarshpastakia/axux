@@ -16,12 +16,12 @@ import {
   useMemo,
   useRef
 } from "react";
-import { createPortal } from "react-dom";
 import { AxFooter } from "../appbars/Footer";
 import { AxHeader } from "../appbars/Header";
 import { AxButton } from "../buttons/Button";
+import { AxHotKeyWrapper } from "../hotkeys/HotKeyWrapper";
 import { AxLoader } from "../loader/Loader";
-import { ElementProps, EmptyCallback, IconProps, RefProp, Size } from "../types";
+import { ElementProps, IconProps, RefProp, Size } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
@@ -44,7 +44,7 @@ export interface ModalProps extends ElementProps, IconProps, RefProp<HTMLDivElem
   width?: string | number;
   size?: Size;
   isLoading?: boolean;
-  onClose: EmptyCallback;
+  onClose?: () => Promise<boolean | void> | boolean | void;
   onNavigate?: (dir: "prev" | "next") => void;
 }
 
@@ -114,7 +114,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
     const keyHandler = useCallback(
       (event: KeyboardEvent) => {
         if (event.key === "Escape") {
-          onClose && onClose();
+          onClose?.();
         }
         const target = event.target as HTMLElement;
         const { ctrlKey, shiftKey, altKey, metaKey, key } = event;
@@ -136,40 +136,41 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
       [onClose, onNavigate]
     );
 
-    return createPortal(
-      <div className="ax-overlay__mask ax-root" ref={maskRef} onKeyDown={keyHandler}>
-        <div
-          className={`ax-modal ${className ?? ""}`}
-          ref={ref}
-          data-size={size}
-          style={styles}
-          tabIndex={0}
-        >
-          <div className="ax-modal__header">{header}</div>
-          <div className="ax-modal__wrapper">
-            {onNavigate && (
-              <AxButton
-                type="link"
-                tabIndex={-1}
-                icon={AppIcons.iconCaretLeft}
-                onClick={() => onNavigate("prev")}
-              />
-            )}
-            <div className="ax-modal__body">{childs}</div>
-            {onNavigate && (
-              <AxButton
-                data-end="true"
-                tabIndex={-1}
-                type="link"
-                icon={AppIcons.iconCaretRight}
-                onClick={() => onNavigate("next")}
-              />
-            )}
+    return (
+      <AxHotKeyWrapper>
+        <div className="ax-overlay__mask ax-root" ref={maskRef} onKeyDown={keyHandler}>
+          <div
+            className={`ax-modal ${className ?? ""}`}
+            ref={ref}
+            data-size={size}
+            style={styles}
+            tabIndex={0}
+          >
+            <div className="ax-modal__header">{header}</div>
+            <div className="ax-modal__wrapper">
+              {onNavigate && (
+                <AxButton
+                  type="link"
+                  tabIndex={-1}
+                  icon={AppIcons.iconCaretLeft}
+                  onClick={() => onNavigate("prev")}
+                />
+              )}
+              <div className="ax-modal__body">{childs}</div>
+              {onNavigate && (
+                <AxButton
+                  data-end="true"
+                  tabIndex={-1}
+                  type="link"
+                  icon={AppIcons.iconCaretRight}
+                  onClick={() => onNavigate("next")}
+                />
+              )}
+            </div>
+            {isLoading && <AxLoader />}
           </div>
-          {isLoading && <AxLoader />}
         </div>
-      </div>,
-      document.body
+      </AxHotKeyWrapper>
     );
   }
 ) as AnyObject;

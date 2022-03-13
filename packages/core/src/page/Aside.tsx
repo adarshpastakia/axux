@@ -80,6 +80,7 @@ export interface AsideProps extends IconProps, CollapseProps, ElementProps {
 export const Aside: FC<AsideProps> = ({
   children,
   title,
+  icon,
   isLoading,
   className,
   isCollapsable,

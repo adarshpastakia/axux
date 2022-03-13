@@ -16,9 +16,9 @@ import {
   useRef,
   useState
 } from "react";
-import { createPortal } from "react-dom";
 import { AxHeader } from "../appbars/Header";
 import { AxButton } from "../buttons/Button";
+import { AxHotKeyWrapper } from "../hotkeys/HotKeyWrapper";
 import { AxLoader } from "../loader/Loader";
 import { ElementProps, EmptyCallback, IconProps, Size } from "../types";
 import { AppIcons } from "../types/appIcons";
@@ -31,7 +31,7 @@ export interface FlyoutProps extends ElementProps, IconProps {
   title?: string;
   size?: Size;
   isLoading?: boolean;
-  onClose: EmptyCallback;
+  onClose?: EmptyCallback;
 }
 
 export const AxFlyout: FC<FlyoutProps> = forwardRef<HTMLDivElement, FlyoutProps>(
@@ -43,7 +43,7 @@ export const AxFlyout: FC<FlyoutProps> = forwardRef<HTMLDivElement, FlyoutProps>
       requestAnimationFrame(() => {
         setOpen(false);
         setTimeout(() => {
-          onClose && onClose();
+          onClose?.();
         }, 500);
       });
     }, [onClose]);
@@ -102,28 +102,30 @@ export const AxFlyout: FC<FlyoutProps> = forwardRef<HTMLDivElement, FlyoutProps>
       [handleClose]
     );
 
-    return createPortal(
-      <div
-        className="ax-overlay__mask ax-root"
-        ref={maskRef}
-        onKeyDown={keyHandler}
-        onClick={(e) => !(e.target as HTMLElement).closest(".ax-flyout") && handleClose()}
-      >
+    return (
+      <AxHotKeyWrapper>
         <div
-          className={`ax-flyout ${className ?? ""}`}
-          ref={ref}
-          data-size={size}
-          data-show={isOpen}
-          tabIndex={0}
+          className="ax-overlay__mask ax-root"
+          ref={maskRef}
+          onKeyDown={keyHandler}
+          onClick={(e) => !(e.target as HTMLElement).closest(".ax-flyout") && handleClose()}
         >
-          <div className="ax_flyout__header">{header}</div>
-          <div className="ax_flyout__wrapper">
-            <div className="ax_flyout__body">{childs}</div>
+          <div
+            className={`ax-flyout ${className ?? ""}`}
+            ref={ref}
+            data-size={size}
+            data-show={isOpen}
+            tabIndex={0}
+          >
+            <div className="ax_flyout__header">{header}</div>
+            <div className="ax_flyout__wrapper">
+              <div className="ax_flyout__body">{childs}</div>
+            </div>
+            {isLoading && <AxLoader />}
           </div>
-          {isLoading && <AxLoader />}
         </div>
-      </div>,
-      document.body
+      </AxHotKeyWrapper>
     );
   }
 );
+AxFlyout.displayName = "AxFlyout";
