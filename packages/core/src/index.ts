@@ -12,6 +12,7 @@ export { useAxBreadcrumbService } from "./context/BreadcrumbService";
 export { useAxResizeObserver } from "./hooks/useResizeObserver";
 export { useAxNotificationService } from "./hooks/useNotificationService";
 export { useAxContextMenu } from "./hooks/useContextMenu";
+export { useAxOverlays } from "./hooks/useOverlays";
 
 // Hotkey
 export { AxHotKey } from "./hotkeys/HotKey";

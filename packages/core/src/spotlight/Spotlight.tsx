@@ -57,7 +57,7 @@ export const AxSpotlight: VFC<SpotlightProps> = ({ defaultItems = [], onQuery, o
   );
   const changeQuery = useCallback(
     (str: string) => {
-      debounce(() => runQuery(str));
+      debounce(runQuery)(str);
       setQuery(str);
     },
     [runQuery]
