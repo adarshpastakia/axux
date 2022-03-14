@@ -58,7 +58,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
   triggerSelector,
   forceRender,
   preventClose = false,
-  usePortal: __ = false,
+  usePortal: portal = false,
   updateAnchor,
   autoTrigger = true,
   ...props
@@ -95,14 +95,17 @@ export const AxPopper: FC<Props & KeyValue> = ({
       {
         name: "offset",
         options: {
-          offset: [0, showArrow ? 10 : 0]
+          offset: [0, showArrow ? 11 : 0]
         }
       },
       { name: "arrow", enabled: showArrow, options: { element: arrowElement } }
     ]
   });
 
-  const usePortal = useMemo(() => withinDomTree(triggerEl, ".ax-viewport"), [triggerEl]);
+  const usePortal = useMemo(
+    () => (trigger !== "hover" ? withinDomTree(triggerEl, ".ax-viewport") : portal),
+    [portal, trigger, triggerEl]
+  );
   const anchorEl = useMemo(() => {
     if (triggerEl) {
       let triggerButton: HTMLElement =
@@ -161,7 +164,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
 
   useLayoutEffect(() => {
     if (anchorEl) {
-      popperEl && popperEl.addEventListener("updatePopper", () => forceUpdate && forceUpdate());
+      triggerEl && triggerEl.addEventListener("updatePopper", () => forceUpdate && forceUpdate());
 
       if (trigger !== "hover") {
         const handler = (e: MouseEvent) => {

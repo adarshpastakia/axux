@@ -62,7 +62,7 @@ export const AxDateDisplay: VFC<DateDisplayProps> = ({
   const age = useMemo(() => !Array.isArray(date) && DateUtils.age(date), [date]);
 
   return (
-    <AxTooltip content={tooltip} usePortal>
+    <AxTooltip content={tooltip}>
       <AxText {...props}>
         <span className="ax-inline-block">{display}</span>
         {showAge && !!age && <span className="ax-inline-block">&nbsp;({age})</span>}
