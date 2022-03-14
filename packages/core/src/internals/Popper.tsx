@@ -58,7 +58,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
   triggerSelector,
   forceRender,
   preventClose = false,
-  usePortal = false,
+  usePortal: __ = false,
   updateAnchor,
   autoTrigger = true,
   ...props
@@ -102,6 +102,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
     ]
   });
 
+  const usePortal = useMemo(() => withinDomTree(triggerEl, ".ax-viewport"), [triggerEl]);
   const anchorEl = useMemo(() => {
     if (triggerEl) {
       let triggerButton: HTMLElement =
@@ -251,7 +252,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
   const popperBody = useMemo(
     () => (
       <div
-        className={`ax-popper ${className ?? ""}`}
+        className={`ax-popper ax-root ${className ?? ""}`}
         data-show={open && !innerOpen && !isDisabled}
         ref={setPopperEl}
         data-show-arrow={showArrow}
