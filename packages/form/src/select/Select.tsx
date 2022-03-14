@@ -64,6 +64,7 @@ const SelectField: FC<SelectCommonProps<AnyObject> & WrapperProps & FieldStatePr
     onClear,
     error,
     selectRef,
+    usePortal = true,
     ...props
   }) => {
     const {
@@ -90,7 +91,7 @@ const SelectField: FC<SelectCommonProps<AnyObject> & WrapperProps & FieldStatePr
 
     return (
       <AxPopover
-        usePortal
+        usePortal={usePortal}
         closeOnClick
         isOpen={isOpen}
         autoTrigger={false}
