@@ -256,13 +256,13 @@ exports[`Text renders with tooltip 1`] = `
           ipsum
         </abbr>
         <div
-          class="ax-popper ax-tooltip ax-bg--darkest ax-color--empty "
+          class="ax-popper ax-root ax-tooltip ax-bg--darkest ax-color--empty "
           data-popper-escaped="true"
           data-popper-placement="top"
           data-popper-reference-hidden="true"
           data-show="true"
           data-show-arrow="true"
-          style="position: fixed; left: 0px; top: 0px; min-width: 0; bottom: 0px; transform: translate(0px, -10px);"
+          style="position: fixed; left: 0px; top: 0px; min-width: 0; bottom: 0px; transform: translate(0px, -11px);"
         >
           <div
             class="ax-popper--body"
