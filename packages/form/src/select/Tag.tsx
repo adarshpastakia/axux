@@ -107,7 +107,6 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
       }}
     >
       <AxFieldWrapper
-        ref={refPopperEl}
         label={label}
         hint={hint}
         appendLabel={appendLabel}
@@ -124,7 +123,7 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
         error={error}
       >
         {children}
-        <div className="ax-select__tagContainer">
+        <div className="ax-select__tagContainer" ref={refPopperEl}>
           {inputLabel.map((o: KeyValue, index: number) => (
             <AxTag
               key={o.value}
