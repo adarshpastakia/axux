@@ -118,7 +118,7 @@ export const AxGridView: ExtendedFC = ({
       else setCanScroll(3);
 
       if (scrollTop + offsetHeight >= scrollHeight - 10) {
-        !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100);
+        !isLoading && canLoadMore && onLoadMore && debounce(onLoadMore, 100)();
       }
       onScroll?.(scrollTop);
     }
