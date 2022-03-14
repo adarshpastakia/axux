@@ -6,7 +6,6 @@
 #{$prefix}-field {
   $base: #{$prefix}-field;
   flex: 1 1 auto;
-  margin-bottom: 0.5em;
 
   & #{$base} {
     margin: 0;

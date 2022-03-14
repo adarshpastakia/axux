@@ -11,6 +11,10 @@
   grid-template-columns: repeat(var(--columns), minmax(8em, 1fr));
   margin: 0 auto;
 
+  #{$prefix}-field {
+    margin-bottom: 0.5em;
+  }
+
   @each $breakpoint, $size in $breakpoints {
     @media only screen and (min-width: $size) {
       &[data-fluid="false"] {
