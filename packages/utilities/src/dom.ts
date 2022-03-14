@@ -30,7 +30,7 @@ export const withinElement = (target: HTMLElement | null, ...elements: (HTMLElem
   do {
     if (target && elements.includes(target)) return true;
     target = target?.parentElement ?? null;
-  } while (target && !elements.includes(target) && target !== document.body);
+  } while (target && target !== document.body);
   return false;
 };
 

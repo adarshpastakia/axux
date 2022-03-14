@@ -46,6 +46,7 @@ export const RelativeInput: FC<Props> = ({ label, value, onChange, children }) =
       <AxField.Number width={48} value={dateParts.diff} onChange={(v) => updateDate("diff", v)} />
       <AxField.Select
         width={96}
+        usePortal={false}
         options={parts.map((value) => ({ value, label: t(`label.${value}`) }))}
         value={dateParts.part}
         onChange={(v?: string) => updateDate("part", v)}
@@ -53,6 +54,7 @@ export const RelativeInput: FC<Props> = ({ label, value, onChange, children }) =
       <AxField.Select
         width={96}
         value={dateParts.op}
+        usePortal={false}
         options={[
           { value: "-", label: t("label.-") },
           { value: "+", label: t("label.+") }

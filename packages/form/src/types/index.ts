@@ -187,5 +187,6 @@ export interface SelectCommonProps<T = KeyValue> {
    */
   makeOption?: (option: T) => OptionProps<T>;
 
+  usePortal?: boolean;
   hideDropdown?: boolean;
 }
