@@ -57,7 +57,7 @@ export const AxTimeline: ExtendedFC = ({
       const { scrollHeight, scrollTop, offsetHeight } = scrollerRef;
       if (scrollHeight === offsetHeight) setCanScroll(0);
       else if (scrollTop === 0) setCanScroll(1);
-      else if (scrollTop + offsetHeight === scrollHeight) setCanScroll(2);
+      else if (scrollTop + offsetHeight >= scrollHeight - 5) setCanScroll(2);
       else setCanScroll(3);
 
       if (scrollTop + offsetHeight >= scrollHeight - 10) {
