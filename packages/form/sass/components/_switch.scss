@@ -7,10 +7,11 @@
   $base: #{$prefix}-field;
 
   &__switch {
+    align-items: center;
     border-radius: 1em;
     cursor: pointer;
     display: grid;
-    font-size: 0.875em;
+    height: 1.25em;
     grid-template-columns: 1fr 1fr;
     min-width: 2em;
     padding: 2px;
@@ -19,7 +20,7 @@
 
     &--handle {
       border-radius: 1em;
-      height: calc(1.5em - 6px);
+      height: calc(1.25em - 4px);
       left: 0;
       margin: 2px;
       position: absolute;
@@ -30,6 +31,7 @@
 
     &::before,
     &::after {
+      font-size: 0.75em;
       line-height: 1em;
       padding: 0 4px;
       text-align: center;
