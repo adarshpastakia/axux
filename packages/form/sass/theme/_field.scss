@@ -81,12 +81,12 @@
 
   &__switch {
     background-color: $base-bg;
-    box-shadow: 0 0 1px $base-color inset;
+    box-shadow: 0 0 1px $base-color;
     color: $input-color;
 
     &--handle {
       background-color: $input-bg;
-      box-shadow: 0 0 1px $base-color inset, 0 1px 1px rgba($base-color, 0.25);
+      box-shadow: 0 0 1px $base-color, 0 1px 1px rgba($base-color, 0.25);
     }
   }
 
