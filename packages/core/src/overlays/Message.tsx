@@ -31,6 +31,10 @@ export interface MessageProps extends IconProps {
    * Full width message
    */
   block?: boolean;
+  /**
+   * Extra action button
+   */
+  extraActions?: JSX.Element;
 }
 
 /**
@@ -41,6 +45,7 @@ export interface MessageProps extends IconProps {
  * @param icon
  * @param color
  * @param block
+ * @param extraActions
  * @param onClose
  * @constructor
  */
@@ -51,6 +56,7 @@ export const AxMessage: VFC<MessageProps & { [key: string]: AnyObject }> = ({
   icon,
   color = "invert",
   block,
+  extraActions,
   onClose
 }) => {
   const classes = useMemo(() => {
@@ -68,6 +74,7 @@ export const AxMessage: VFC<MessageProps & { [key: string]: AnyObject }> = ({
       {icon && <AxIcon icon={icon} size="sm" />}
       {title && <b>{title}</b>}
       <span>{text}</span>
+      {extraActions}
       <AxButton
         icon={!dismissLabel ? AppIcons.iconClose : undefined}
         size="sm"
