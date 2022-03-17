@@ -15,7 +15,6 @@
   &__title {
     font-size: 1em;
     grid-area: title;
-    line-height: 1;
     padding: 0.25em 0.5em;
     @include ellipsis();
   }

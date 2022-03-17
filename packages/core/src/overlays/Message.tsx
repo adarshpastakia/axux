@@ -6,7 +6,7 @@
 import { useMemo } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
-import { AllColors, IconProps, VFC } from "../types";
+import { AllColors, BooleanCallback, IconProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
@@ -49,7 +49,7 @@ export interface MessageProps extends IconProps {
  * @param onClose
  * @constructor
  */
-export const AxMessage: VFC<MessageProps & { [key: string]: AnyObject }> = ({
+export const AxMessage: VFC<MessageProps & { onClose?: BooleanCallback }> = ({
   title,
   text,
   dismissLabel,
@@ -74,13 +74,13 @@ export const AxMessage: VFC<MessageProps & { [key: string]: AnyObject }> = ({
       {icon && <AxIcon icon={icon} size="sm" />}
       {title && <b>{title}</b>}
       <span>{text}</span>
-      {extraActions}
+      <div onClickCapture={() => onClose?.(false)}>{extraActions}</div>
       <AxButton
         icon={!dismissLabel ? AppIcons.iconClose : undefined}
         size="sm"
         type="link"
         label={dismissLabel}
-        onClick={onClose}
+        onClick={() => onClose?.(true)}
       />
     </div>
   );

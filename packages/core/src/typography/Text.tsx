@@ -161,11 +161,8 @@ export const AxText: Extended = forwardRef<HTMLSpanElement, TextProps>(
 
     const styles = useMemo(() => {
       const s: KeyValue = {};
-      if (isString(size) && !SizeList.includes(size)) {
+      if (!SizeList.includes(`${size}`)) {
         s.fontSize = size;
-      }
-      if (isNumber(size)) {
-        s.fontSize = `${size}rem`;
       }
       if (color && isColor(color)) {
         s.color = color;

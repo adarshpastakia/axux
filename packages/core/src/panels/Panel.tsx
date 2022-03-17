@@ -4,13 +4,28 @@
 // @license   : MIT
 
 import { isNumber } from "@axux/utilities";
-import { Children, cloneElement, DOMAttributes, FC, forwardRef, ReactElement, useMemo } from "react";
+import {
+  Children,
+  cloneElement,
+  DOMAttributes,
+  FC,
+  forwardRef,
+  ReactElement,
+  useMemo
+} from "react";
 import { AxFooter } from "../appbars/Footer";
 import { AxHeader } from "../appbars/Header";
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../internals/usePropToggle";
 import { AxLoader } from "../loader/Loader";
-import { CollapseProps, ElementProps, EmptyCallback, ExpandProps, IconProps, RefProp } from "../types";
+import {
+  CollapseProps,
+  ElementProps,
+  EmptyCallback,
+  ExpandProps,
+  IconProps,
+  RefProp
+} from "../types";
 import { AppIcons } from "../types/appIcons";
 import { AxPanelGroup } from "./PanelGroup";
 import { AxPanelStack } from "./PanelStack";
@@ -170,9 +185,9 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
 
     const styles = useMemo(() => {
       return {
-        height: isNumber(height) ? `${height}rem` : height,
-        minHeight: isNumber(minHeight) ? `${minHeight}rem` : minHeight,
-        maxHeight: isNumber(maxHeight) ? `${maxHeight}rem` : maxHeight
+        height,
+        minHeight,
+        maxHeight
       };
     }, [height, minHeight, maxHeight]);
 

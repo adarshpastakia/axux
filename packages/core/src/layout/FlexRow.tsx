@@ -89,8 +89,8 @@ export const AxFlexRow: FC<FlexRowProps> = forwardRef<HTMLDivElement, FlexRowPro
 
     const styles = useMemo(() => {
       return {
-        height: isNumber(height) ? `${height}rem` : height,
-        minHeight: isNumber(minHeight) ? `${minHeight}rem` : minHeight
+        height,
+        minHeight
       };
     }, [height, minHeight]);
 

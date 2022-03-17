@@ -51,18 +51,18 @@ export const useAxNotificationService = () => {
 
   const message = (props: string | MessageProps, timeout = 5000) => {
     const obj: MessageProps = makeProps(props);
-    return new Promise<void>((resolve) => {
+    return new Promise<boolean>((resolve) => {
       let timerRef: AnyObject = null;
       const el = document.createElement("div");
       messageContainer.appendChild(el);
-      const onClose = () => {
+      const onClose = (b = true) => {
         el.dataset.show = "";
         setTimeout(() => {
           unmountComponentAtNode(el);
           el.remove();
         }, 500);
         clearTimeout(timerRef);
-        resolve();
+        resolve(b);
       };
       render(<AxMessage {...obj} onClose={onClose} />, el);
       requestAnimationFrame(() => (el.dataset.show = "true"));

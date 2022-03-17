@@ -96,8 +96,8 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
 
     const styles = useMemo(() => {
       return {
-        height: isNumber(height) ? `${height}rem` : height,
-        width: isNumber(width) ? `${width}rem` : width
+        height,
+        width
       };
     }, [height, width]);
 

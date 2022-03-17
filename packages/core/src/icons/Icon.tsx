@@ -105,6 +105,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
           <path fill="currentColor" d={icon.toString()} />
         </svg>
       ) : useImage ||
+        icon?.toString().startsWith("http") ||
         icon?.toString().includes(".svg") ||
         icon?.toString().includes(".png") ||
         icon?.toString().startsWith("data:image") ? (
@@ -132,11 +133,8 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
       if (color && isColor(color)) {
         s.color = color;
       }
-      if (isString(size) && !SizeList.includes(size)) {
+      if (!SizeList.includes(`${size}`)) {
         s.fontSize = size;
-      }
-      if (isNumber(size)) {
-        s.fontSize = `${size}rem`;
       }
       if (spin) {
         s["--spin-steps"] = spin;
