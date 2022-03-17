@@ -197,7 +197,7 @@ exports[`Text renders sized text 1`] = `
   </span>
   <span
     class="ax-text   "
-    style="font-size: 3rem;"
+    style="font-size: 3px;"
   >
     <span>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
