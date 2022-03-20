@@ -85,7 +85,7 @@
       &::before {
         content: "︎";
         height: 0.5em;
-        left: 0;
+        inset-inline-start: 0;
         position: absolute;
         top: 50%;
         transform: translate(-0.25em, -0.25em) rotate(45deg);
@@ -165,8 +165,8 @@
         transform: translate(calc(-1 * (100% + 1em)), -50%);
 
         &::before {
-          left: unset;
-          right: 0;
+          inset-inline-end: 0;
+          inset-inline-start: unset;
           transform: translate(0.25em, -0.25em) rotate(45deg);
         }
       }

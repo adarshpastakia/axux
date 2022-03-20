@@ -8,6 +8,7 @@ import { useIsRtl } from "./useIsRtl";
 
 interface Options {
   reverse?: boolean;
+  vertical?: boolean;
   onStart?: () => void;
   onEnd?: () => void;
 }
@@ -16,7 +17,7 @@ interface Options {
 export const useResize = (
   resizeRef: RefObject<HTMLElement>,
   callback: (diff: { x: number; y: number }) => void,
-  { reverse = false, onStart, onEnd }: Options
+  { reverse = false, vertical = false, onStart, onEnd }: Options
 ) => {
   const { isRtl } = useIsRtl();
 
@@ -41,7 +42,7 @@ export const useResize = (
   const onResizeStart = useCallback(
     (e: MouseEvent) => {
       e.preventDefault();
-      document.body.style.cursor = "col-resize";
+      document.body.style.cursor = vertical ? "row-resize" : "col-resize";
       document.addEventListener("mousemove", onResize);
       document.addEventListener("mouseup", onResizeEnd);
       onStart && onStart();

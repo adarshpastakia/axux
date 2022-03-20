@@ -101,9 +101,9 @@ export const useAxNotificationService = () => {
     });
   };
 
-  const toastError = (props: string | Omit<ToastProps, "color">) => {
+  const toastError = (props: string | Omit<ToastProps, "color">, timeout = 30000) => {
     const obj: ToastProps = makeProps(props);
-    return toast({ ...obj, color: "danger" }, 0);
+    return toast({ ...obj, color: "danger" }, timeout);
   };
 
   const alert = (props: string | AlertProps) => {

@@ -60,6 +60,28 @@
     &--xxl {
       font-size: 3.5em;
     }
+
+    #{$prefix}-badge {
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+
+      @at-root [dir="rtl"] & {
+        left: 0;
+        right: unset;
+      }
+
+      &:not(:empty) {
+        font-size: 0.5em;
+        right: -0.75em;
+        top: -0.5em;
+
+        @at-root [dir="rtl"] & {
+          left: -0.75em;
+          right: unset;
+        }
+      }
+    }
   }
 
   @at-root [dir="rtl"] {

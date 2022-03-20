@@ -34,6 +34,8 @@ export interface SliderFieldProps
   showTicks?: boolean;
   showValue?: boolean;
 
+  ticks?: number[];
+
   height?: string | number;
 }
 
@@ -53,6 +55,7 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
     isReadonly,
     vertical = false,
     label,
+    ticks: _ticks,
     value: _value = 0,
     onChange,
     name,
@@ -79,9 +82,10 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
     );
 
     const ticks = useMemo(() => {
+      if (_ticks) return _ticks;
       const diff = (max - min) / 10;
       return new Array(11).fill(0).map((_, i) => min + diff * i);
-    }, [max, min]);
+    }, [_ticks, max, min]);
 
     const updateValue = useCallback(
       (v = 0) => {
@@ -162,7 +166,7 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
                       <div className="ax-field__slider--value-wrapper">
                         <div
                           className="ax-field__slider--value"
-                          style={{ [vertical ? "bottom" : "left"]: `${hilight}%` }}
+                          style={{ [vertical ? "bottom" : "insetInlineStart"]: `${hilight}%` }}
                           data-align={hilight > 50 ? "start" : "end"}
                         >
                           <div>{Format.number(value)}</div>

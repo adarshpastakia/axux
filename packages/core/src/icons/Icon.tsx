@@ -5,6 +5,7 @@
 
 import { isColor, isNumber, isString, isSvgPath, isTrue } from "@axux/utilities";
 import { forwardRef, isValidElement, MouseEventHandler, useMemo } from "react";
+import { BadgeType, useBadge } from "../internals/useBadge";
 import { AllColors, ElementProps, RefProp, Size, SizeList, VFC } from "../types";
 
 /** @internal */
@@ -41,6 +42,11 @@ export interface IconProps extends RefProp, ElementProps {
    * Click handler
    */
   onClick?: MouseEventHandler;
+
+  /**
+   * Badge indicator
+   */
+  badge?: BadgeType;
 }
 
 /**
@@ -69,10 +75,12 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
       round,
       spin,
       onClick,
+      badge,
       ...aria
     },
     ref
   ) => {
+    const badgeEl = useBadge(badge);
     const classes = useMemo(() => {
       const cls = ["ax-icon", className ?? ""];
       if (color) {
@@ -145,6 +153,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
     return (
       <div {...aria} className={classes} onClick={onClick} ref={ref as AnyObject} style={styles}>
         {iconEl}
+        {badgeEl}
       </div>
     );
   }
