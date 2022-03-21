@@ -3,10 +3,29 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isColor, isNumber, isString } from "@axux/utilities";
-import { FC, forwardRef, Fragment, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { isColor, isString } from "@axux/utilities";
+import {
+  FC,
+  forwardRef,
+  Fragment,
+  useImperativeHandle,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import { useTranslation } from "react-i18next";
-import { AllColors, ElementProps, Font, Size, SizeList, TextAlign, TextTransform, Weight } from "../types";
+import ResizeObserver from "resize-observer-polyfill";
+import {
+  AllColors,
+  ElementProps,
+  Font,
+  Size,
+  SizeList,
+  TextAlign,
+  TextTransform,
+  Weight
+} from "../types";
 import { AbbrText } from "./Abbr";
 import { MarkedText } from "./Marked";
 
@@ -175,20 +194,21 @@ export const AxText: Extended = forwardRef<HTMLSpanElement, TextProps>(
 
     useLayoutEffect(() => {
       setShowMore(true);
-      if (textRef.current && clip) {
-        const el = textRef.current;
-        el.style.display = "block";
-        el.classList.remove("ax-clip");
-        const timer = setTimeout(() => {
+      setCanClip(false);
+    }, [children, clip]);
+
+    useLayoutEffect(() => {
+      if (!canClip && clip && textRef.current && ResizeObserver) {
+        const el = textRef.current as HTMLElement;
+        const observer = new ResizeObserver(() => {
           const lh = parseInt(getComputedStyle(el).lineHeight);
           setCanClip(el.offsetHeight > clip * lh);
           setShowMore(false);
-          el.style.display = "";
-        }, 1);
-        return () => clearTimeout(timer);
+        });
+        observer.observe(el);
+        return () => observer.disconnect();
       }
-      setCanClip(false);
-    }, [clip, children]);
+    }, [canClip, clip]);
 
     return (
       <Fragment>

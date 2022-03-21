@@ -4,10 +4,11 @@
 // @license   : MIT
 
 import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
-import { CSSProperties, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export interface TimelineProps<T = KeyValue> extends ElementProps {
-  list: T[];
+  list: { avatar?: string; reverse?: boolean; record: T }[];
+  noLine?: boolean;
   isLoading?: boolean;
   canLoadMore?: boolean;
   onLoadMore?: EmptyCallback;
@@ -16,11 +17,5 @@ export interface TimelineProps<T = KeyValue> extends ElementProps {
   onScroll?: (top: number) => void;
   initialScroll?: number;
   actions?: ReactNode;
-  children: (props: {
-    style: CSSProperties;
-    isScrolling: boolean;
-    measure: () => void;
-    index: number;
-    record: T;
-  }) => ReactNode;
+  children: (props: { index: number; record: T }) => ReactNode;
 }

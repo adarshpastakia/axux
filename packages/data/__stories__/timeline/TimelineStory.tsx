@@ -24,62 +24,81 @@ import { AxHistogram, AxTimeline, HistogramRecord } from "../../src";
 
 const entries: Array<KeyValue> = [
   {
-    type: "event",
-    timestamp: new Date(),
-    icon: mdiTag,
-    iconBg: "info",
-    iconColor: "white",
-    username: "Smeg",
-    event: "started"
+    avatar: AppIcons.iconClock,
+    record: {
+      type: "event",
+      timestamp: new Date(),
+      icon: mdiTag,
+      iconBg: "info",
+      iconColor: "white",
+      username: "Smeg",
+      event: "started"
+    }
   },
   {
-    type: "comment",
-    timestamp: new Date(),
-    username: "Smeg",
-    event: "started",
-    icon: mdiFaceProfile,
-    body: LIPSUM.para,
-    isCollapsable: true,
-    sidebar: (
-      <AxButton.Group vertical>
-        <AxButton icon={mdiStar} />
-        <AxButton icon={mdiComment} />
-      </AxButton.Group>
-    )
+    avatar: <AxAvatar title="" bg="info" color="indigo" icon={AppIcons.iconFace} />,
+    record: {
+      type: "comment",
+      timestamp: new Date(),
+      username: "Smeg",
+      event: "started",
+      icon: mdiFaceProfile,
+      body: LIPSUM.para,
+      isCollapsable: true,
+      sidebar: (
+        <AxButton.Group vertical>
+          <AxButton icon={mdiStar} />
+          <AxButton icon={mdiComment} />
+        </AxButton.Group>
+      )
+    }
   },
   {
-    type: "event",
-    timestamp: new Date(),
-    icon: mdiTag,
-    iconBg: "info",
-    iconColor: "white",
-    username: "Smeg",
-    event: "started"
+    avatar: AppIcons.iconClock,
+    record: {
+      type: "event",
+      timestamp: new Date(),
+      icon: mdiTag,
+      iconBg: "info",
+      iconColor: "white",
+      username: "Smeg",
+      event: "started"
+    }
   },
   {
-    type: "event",
-    timestamp: new Date(),
-    icon: mdiTag,
-    iconBg: "info",
-    iconColor: "white",
-    username: "Smeg",
-    event: "started"
+    avatar: AppIcons.iconClock,
+    record: {
+      type: "event",
+      timestamp: new Date(),
+      icon: mdiTag,
+      iconBg: "info",
+      iconColor: "white",
+      username: "Smeg",
+      event: "started"
+    }
   },
   {
-    type: "comment",
-    timestamp: new Date(),
-    username: "Smeg",
-    event: "started",
-    body: LIPSUM.para,
-    isCollapsable: true,
-    sidebar: (
-      <AxButton.Group vertical>
-        <AxButton icon={mdiStar} />
-        <AxButton icon={mdiComment} />
-      </AxButton.Group>
-    )
+    avatar: <AxAvatar title="" bg="info" color="indigo" icon={AppIcons.iconFace} />,
+    record: {
+      type: "comment",
+      timestamp: new Date(),
+      username: "Smeg",
+      event: "started",
+      body: LIPSUM.para,
+      isCollapsable: true,
+      sidebar: (
+        <AxButton.Group vertical>
+          <AxButton icon={mdiStar} />
+          <AxButton icon={mdiComment} />
+        </AxButton.Group>
+      )
+    }
   }
 ];
+
+const records: AnyObject = new Array(1000).fill(null).map((_, i) => ({
+  ...entries[Math.floor(Math.random() * entries.length)]
+}));
 
 const Template: Story = (props) => {
   const { dateLocale } = useAxGlobals();
@@ -104,52 +123,39 @@ const Template: Story = (props) => {
     <AxViewport dateLocale={dateLocale}>
       <AxPage paper>
         <AxSection>
-          <AxTimeline list={[]} {...props}>
-            {({ record: { body, ...record }, ...props }: AnyObject) => (
-              <AxTimeline.Entry
-                {...props}
-                record={record}
-                avatar={
-                  record.type === "comment" ? (
-                    <AxAvatar title="" bg="info" color="indigo" icon={AppIcons.iconFace} />
-                  ) : (
-                    AppIcons.iconClock
-                  )
-                }
-              >
-                <div className="ax-flex">
-                  {record.type === "comment" ? (
-                    <AxPanel
-                      className="ax-col ax-col--fill"
-                      paper={record.type === "comment"}
-                      isCollapsable={record.type === "comment"}
-                    >
-                      <AxPanel.Header
-                        title={
-                          <span>
-                            {props.index} - {record.username} @{" "}
-                            <AxDateDisplay date={record.timestamp} />
-                          </span>
-                        }
-                      />
-                      <AxContent>
-                        <p>Test head</p>
-                        <AxText clip={4}>{body}</AxText>
-                      </AxContent>
-                    </AxPanel>
-                  ) : (
-                    <div className="ax-col ax-col--fill">
-                      {props.index} - {record.username} @ <AxDateDisplay date={record.timestamp} />
-                    </div>
-                  )}
-                  <div className="ax-col ax-col--auto ax-padding--x--xs">
-                    <AxButton.Group vertical>
-                      <AxButton icon={mdiStar} />
-                      <AxButton icon={mdiComment} />
-                    </AxButton.Group>
+          <AxTimeline list={records} {...props}>
+            {({ record: { body, ...record }, index }: AnyObject) => (
+              <div className="ax-flex">
+                {record.type === "comment" ? (
+                  <AxPanel
+                    className="ax-col ax-col--fill"
+                    paper={record.type === "comment"}
+                    isCollapsable={record.type === "comment"}
+                  >
+                    <AxPanel.Header
+                      title={
+                        <span>
+                          {index} - {record.username} @ <AxDateDisplay date={record.timestamp} />
+                        </span>
+                      }
+                    />
+                    <AxContent>
+                      <p>Test head</p>
+                      <AxText clip={4}>{body}</AxText>
+                    </AxContent>
+                  </AxPanel>
+                ) : (
+                  <div className="ax-col ax-col--fill">
+                    {index} - {record.username} @ <AxDateDisplay date={record.timestamp} />
                   </div>
+                )}
+                <div className="ax-col ax-col--auto ax-padding--x--xs">
+                  <AxButton.Group vertical>
+                    <AxButton icon={mdiStar} />
+                    <AxButton icon={mdiComment} />
+                  </AxButton.Group>
                 </div>
-              </AxTimeline.Entry>
+              </div>
             )}
           </AxTimeline>
           <AxSection.Side end title="Side Left" isCollapsable flyout isResizeable minWidth="20em">
@@ -194,10 +200,6 @@ const Template: Story = (props) => {
 };
 
 export const TimelineStory = Template.bind({});
-TimelineStory.args = {
-  list: new Array(1000)
-    .fill(null)
-    .map((_, i) => ({ ...entries[Math.floor(Math.random() * entries.length)], index: i }))
-};
+TimelineStory.args = {};
 
 export default { title: "Example/Timeline", component: AxTimeline };

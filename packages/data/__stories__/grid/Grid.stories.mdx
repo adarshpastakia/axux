@@ -28,32 +28,30 @@ import { AxButton, AxContent, AxPage, AxPanel, AxText, AxViewport } from "@axux/
       <AxPage>
         <AxGridView list={records} sortOrder="asc">
           {(props) => (
-            <AxGridView.Item {...props}>
-              <div className="ax-flex">
-                <AxPanel title={`Grid cell ${props.index}`} className="ax-col ax-col--fill" paper>
-                  <AxContent>
-                    <div className="ax-row ax-gutter">
-                      <img
-                        alt="img"
-                        className="ax-col ax-col--auto"
-                        src="https://picsum.photos/id/128/172"
-                        width={128}
-                        height={172}
-                      />
-                      <div className="ax-col ax-col--fill">
-                        <AxText clip={4}>{LIPSUM.line}</AxText>
-                      </div>
+            <div className="ax-flex">
+              <AxPanel title={`Grid cell ${props.index}`} className="ax-col ax-col--fill" paper>
+                <AxContent>
+                  <div className="ax-row ax-gutter">
+                    <img
+                      alt="img"
+                      className="ax-col ax-col--auto"
+                      src="https://picsum.photos/id/128/172"
+                      width={128}
+                      height={172}
+                    />
+                    <div className="ax-col ax-col--fill">
+                      <AxText clip={4}>{LIPSUM.line}</AxText>
                     </div>
-                  </AxContent>
-                </AxPanel>
-                <div className="ax-col ax-col--auto ax-padding--x--xs">
-                  <AxButton.Group vertical>
-                    <AxButton icon={mdiStar} />
-                    <AxButton icon={mdiComment} />
-                  </AxButton.Group>
-                </div>
+                  </div>
+                </AxContent>
+              </AxPanel>
+              <div className="ax-col ax-col--auto ax-padding--x--xs">
+                <AxButton.Group vertical>
+                  <AxButton icon={mdiStar} />
+                  <AxButton icon={mdiComment} />
+                </AxButton.Group>
               </div>
-            </AxGridView.Item>
+            </div>
           )}
         </AxGridView>
       </AxPage>

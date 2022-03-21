@@ -3,58 +3,77 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxAvatar } from "@axux/core";
+import { AxAvatar, AxTextLoader } from "@axux/core";
+import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { CSSProperties, FC, isValidElement, memo, useEffect, useMemo, useState } from "react";
+import { isValidElement, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
-export interface TimelineEntryProps {
-  noline?: boolean;
-  reverse?: boolean;
-  avatar?: string | JSX.Element;
-  index?: number;
-  style?: CSSProperties;
-  isScrolling?: boolean;
-  measure: () => void;
-}
+export const TimelineEntry: VFC<AnyObject> = ({
+  avatar,
+  reverse,
+  index,
+  record,
+  callback
+}: KeyValue) => {
+  const eventRef = useRef<HTMLElement>(null);
+  const entryIcon = useMemo(
+    () =>
+      isValidElement(avatar) ? (
+        avatar
+      ) : (
+        <AxAvatar bg="lightest" color="medium" title="" icon={avatar ?? AppIcons.iconFace} />
+      ),
+    [avatar]
+  );
 
-export const TimelineEntry: FC<TimelineEntryProps> = memo(
-  ({ children, isScrolling, measure, avatar, index, style, noline, reverse }) => {
-    const [eventRef, setEventRef] = useState<HTMLElement | null>(null);
-    const entryIcon = useMemo(
-      () =>
-        isValidElement(avatar) ? (
-          avatar
-        ) : (
-          <AxAvatar bg="lightest" color="medium" title="" icon={avatar ?? AppIcons.iconFace} />
-        ),
-      [avatar]
-    );
-
-    useEffect(() => {
-      if (ResizeObserver && !isScrolling) {
-        if (eventRef) {
-          const el = eventRef;
-          const ob = new ResizeObserver(() => {
-            measure && measure();
-          });
-          ob.observe(el);
-          return () => ob.disconnect();
-        }
+  useEffect(() => {
+    if (ResizeObserver) {
+      if (eventRef.current) {
+        const el = eventRef.current;
+        const ob = new ResizeObserver(() => {
+          const { offsetHeight: height } = el;
+          (el as AnyObject).attributeStyleMap.set("contain-intrinsic-size", height + "px");
+        });
+        ob.observe(el);
+        return () => ob.disconnect();
       }
-    }, [eventRef, isScrolling, measure, index]);
+    }
+  }, [index]);
 
-    return (
-      <div
-        className={`ax-timeline__entry`}
-        data-reverse={reverse}
-        data-noline={noline}
-        style={style}
-      >
-        <div className="ax-timeline__entry--icon">{entryIcon}</div>
-        <section ref={setEventRef} className="ax-timeline__entry--body">
-          {children}
-        </section>
-      </div>
-    );
-  }
-);
+  const [visible, setVisible] = useState(false);
+  useLayoutEffect(() => {
+    if (eventRef.current) {
+      let timer: AnyObject;
+      const el = eventRef.current as AnyObject;
+      const scrollerRef = el.closest(".ax-timeline__panel") as HTMLElement;
+      const ob = new IntersectionObserver(
+        (entries) => {
+          clearTimeout(timer);
+          setVisible(false);
+          el.attributeStyleMap.set(
+            "content-visibility",
+            entries[0].isIntersecting ? "visible" : "hidden"
+          );
+          setTimeout(() => setVisible(entries[0].isIntersecting), 500);
+        },
+        {
+          threshold: 0.25,
+          rootMargin: `${scrollerRef.offsetHeight / 2}px 0px ${scrollerRef.offsetHeight / 2}px 0px`,
+          root: scrollerRef
+        }
+      );
+      ob.observe(eventRef.current);
+      return () => ob.disconnect();
+    }
+  }, []);
+
+  return (
+    <div className={`ax-timeline__entry`} data-reverse={reverse}>
+      <div className="ax-timeline__entry--icon">{entryIcon}</div>
+      <section ref={eventRef} className="ax-timeline__entry--body">
+        {visible && callback({ record, index })}
+        {!visible && <AxTextLoader />}
+      </section>
+    </div>
+  );
+};
