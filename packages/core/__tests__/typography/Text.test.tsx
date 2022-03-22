@@ -9,7 +9,7 @@ import i18next from "i18next";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
 import * as stories from "../../__stories__/typography/TextStory";
-import { AxText } from "../../dist";
+import { AxText } from "../../src";
 
 const { TextStory, SerifStory, ColorStory } = composeStories(stories);
 
@@ -193,8 +193,6 @@ describe("Text", () => {
         </div>
       </I18nextProvider>
     );
-
-    console.log(fragment.container.innerHTML);
 
     // const el = fragment.container.querySelector("abbr") as HTMLElement;
     // act(() => {

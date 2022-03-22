@@ -5,19 +5,18 @@
 
 import { Story } from "@storybook/react";
 import { PropsWithChildren } from "react";
-import { AxBox } from "../../dist/layout/Box";
-import { FlexBoxProps } from "../../dist/layout/FlexBox";
-import { AxFlexBox } from "../../src";
+import { AxBox, AxFlexBox } from "../../src";
+import { FlexBoxProps } from "../../src/layout/FlexBox";
 
 const Template: Story<PropsWithChildren<FlexBoxProps>> = (props) => (
   <AxBox paddingY="md">
     <AxFlexBox {...props}>
-      <AxFlexBox.Row height={3}>
+      <AxFlexBox.Row height="3rem">
         <AxFlexBox.Col span={3} className="ax-bg--light" />
         <AxFlexBox.Col span={6} className="ax-bg--light" />
         <AxFlexBox.Col span={3} className="ax-bg--light" />
       </AxFlexBox.Row>
-      <AxFlexBox.Row height={5}>
+      <AxFlexBox.Row height="5rem">
         <AxFlexBox.Col span={4} className="ax-bg--light" />
         <AxFlexBox.Col span={4} className="ax-bg--light" />
         <AxFlexBox.Col span={4} className="ax-bg--light" />
