@@ -5,55 +5,58 @@
 
 import { AxTextLoader } from "@axux/core";
 import { VFC } from "@axux/core/dist/types";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 
-export const GridItem: VFC<AnyObject> = ({ callback, record, index }: KeyValue) => {
-  const entryRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (ResizeObserver) {
+export const GridItem: VFC<AnyObject> = memo(
+  ({ callback, record, index }: KeyValue) => {
+    const entryRef = useRef<HTMLDivElement>(null);
+    const [visible, setVisible] = useState(false);
+    useEffect(() => {
       if (entryRef.current) {
-        const el = entryRef.current;
-        const ob = new ResizeObserver(() => {
-          const { offsetHeight: height } = el;
-          (el as AnyObject).attributeStyleMap.set("contain-intrinsic-size", height + "px");
-        });
-        ob.observe(el);
-        return () => ob.disconnect();
-      }
-    }
-  }, [index]);
-
-  const [visible, setVisible] = useState(false);
-  useLayoutEffect(() => {
-    if (entryRef.current) {
-      let timer: AnyObject;
-      const el = entryRef.current as AnyObject;
-      const scrollerRef = el.closest(".ax-gridView__panel") as HTMLElement;
-      const ob = new IntersectionObserver(
-        (entries) => {
-          clearTimeout(timer);
-          setVisible(false);
-          el.attributeStyleMap.set(
-            "content-visibility",
-            entries[0].isIntersecting ? "visible" : "hidden"
-          );
-          setTimeout(() => setVisible(entries[0].isIntersecting), 500);
-        },
-        {
-          threshold: 0.25,
-          rootMargin: `${scrollerRef.offsetHeight / 2}px 0px ${scrollerRef.offsetHeight / 2}px 0px`,
-          root: scrollerRef
+        const el: AnyObject = entryRef.current;
+        let obResize: ResizeObserver;
+        let obIntersection: IntersectionObserver;
+        if (ResizeObserver) {
+          obResize = new ResizeObserver(() => {
+            const { offsetHeight: height } = el;
+            (el as AnyObject).attributeStyleMap.set("contain-intrinsic-size", height + "px");
+          });
+          obResize.observe(el);
         }
-      );
-      ob.observe(entryRef.current);
-      return () => ob.disconnect();
-    }
-  }, []);
+        if (IntersectionObserver) {
+          let timer: AnyObject;
+          const scrollerRef = el.closest(".ax-gridView__panel") as HTMLElement;
+          obIntersection = new IntersectionObserver(
+            (entries) => {
+              const visible = entries.pop()?.isIntersecting;
+              clearTimeout(timer);
+              setVisible(false);
+              el.attributeStyleMap.set("content-visibility", visible ? "visible" : "hidden");
+              timer = setTimeout(() => setVisible(!!visible), 200);
+            },
+            {
+              threshold: 0.25,
+              rootMargin: `${scrollerRef.offsetHeight * 1.5}px 0px ${
+                scrollerRef.offsetHeight * 1.5
+              }px 0px`,
+              root: scrollerRef
+            }
+          );
+          obIntersection.observe(el);
+        }
+        return () => {
+          obResize?.disconnect();
+          obIntersection?.disconnect();
+        };
+      }
+    }, [index]);
 
-  return (
-    <section ref={entryRef} className="ax-gridView__item" data-index={index}>
-      {visible && callback({ record, index })}
-      {!visible && <AxTextLoader />}
-    </section>
-  );
-};
+    return (
+      <section ref={entryRef} className="ax-gridView__item" data-index={index}>
+        {visible && callback({ record, index })}
+        {!visible && <AxTextLoader />}
+      </section>
+    );
+  },
+  (prev, next) => prev.index === next.index && prev.record === next.record
+);

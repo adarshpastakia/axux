@@ -7,7 +7,7 @@ import { AxButton, AxTextLoader } from "@axux/core";
 import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { FC, ReactNode, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { FC, ReactNode, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { GridItem } from "./Item";
 
 export interface GridProps extends ElementProps {
@@ -68,7 +68,7 @@ export const AxGridView: FC<GridProps> = ({
       else scrollTo = diff * el.offsetHeight + el.scrollTop;
       el.scrollTo({
         top: scrollTo,
-        behavior: "smooth"
+        behavior: "auto"
       });
     }
   }, []);
@@ -87,13 +87,6 @@ export const AxGridView: FC<GridProps> = ({
     }
   }, [checkScroll]);
 
-  const gridList = useMemo(() => list, [list]);
-  const gridItems = useMemo(() => {
-    return gridList.map((record, index) => {
-      return <GridItem key={index} index={index} record={record} callback={children} />;
-    });
-  }, [gridList]);
-
   return (
     <div
       className={`ax-gridView__panel ${className ?? ""}`}
@@ -104,7 +97,9 @@ export const AxGridView: FC<GridProps> = ({
     >
       <div className="ax-gridView__wrapper">
         <div>
-          {gridItems}
+          {list.map((record, index) => {
+            return <GridItem key={index} index={index} record={record} callback={children} />;
+          })}
           {isLoading && <AxTextLoader />}
         </div>
         <div>

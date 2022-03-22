@@ -6,12 +6,30 @@
 import { AxButton, AxTextLoader } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { FC, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { FC, ReactNode, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { TimelineEntry } from "./Entry";
-import { TimelineProps } from "./types";
+import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
+
+interface TimelineProps<T = KeyValue> extends ElementProps {
+  list: T[];
+  noLine?: boolean;
+  isLoading?: boolean;
+  canLoadMore?: boolean;
+  onLoadMore?: EmptyCallback;
+  sortOrder?: "asc" | "desc";
+  onSort?: (order: "asc" | "desc") => void;
+  onScroll?: (top: number) => void;
+  initialScroll?: number;
+  actions?: ReactNode;
+  avatar?: (props: { index: number; record: T }) => string | ReactNode;
+  reverse?: (props: { index: number; record: T }) => boolean;
+  children: (props: { index: number; record: T }) => ReactNode;
+}
 
 export const AxTimeline: FC<TimelineProps> = ({
   list,
+  avatar,
+  reverse,
   children,
   noLine,
   actions,
@@ -37,7 +55,7 @@ export const AxTimeline: FC<TimelineProps> = ({
       else setCanScroll(3);
 
       if (scrollTop + offsetHeight >= scrollHeight - 10) {
-        !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100);
+        !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100)();
       }
       onScroll?.(scrollTop);
     }
@@ -52,7 +70,7 @@ export const AxTimeline: FC<TimelineProps> = ({
       else scrollTo = diff * el.offsetHeight + el.scrollTop;
       el.scrollTo({
         top: scrollTo,
-        behavior: "smooth"
+        behavior: "auto"
       });
     }
   }, []);
@@ -71,13 +89,6 @@ export const AxTimeline: FC<TimelineProps> = ({
     }
   }, [checkScroll]);
 
-  const timelineList = useMemo(() => list, [list]);
-  const timelineItems = useMemo(() => {
-    return timelineList.map((item, index) => {
-      return <TimelineEntry key={index} index={index} {...item} callback={children} />;
-    });
-  }, [timelineList]);
-
   return (
     <div
       className={`ax-timeline__panel ${className ?? ""}`}
@@ -87,7 +98,18 @@ export const AxTimeline: FC<TimelineProps> = ({
     >
       <div className="ax-timeline__wrapper" data-noline={noLine}>
         <div>
-          {timelineItems}
+          {list.map((record, index) => {
+            return (
+              <TimelineEntry
+                key={index}
+                index={index}
+                record={record}
+                avatar={avatar?.({ record, index })}
+                reverse={reverse?.({ record, index })}
+                callback={children}
+              />
+            );
+          })}
           {isLoading && <AxTextLoader />}
         </div>
         <div>

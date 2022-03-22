@@ -113,6 +113,7 @@
   }
 
   &#{$prefix}-tooltip {
+    pointer-events: none;
     #{$base}--body {
       @extend #{$prefix}-shadow--2;
       border-radius: $base-border-radius;

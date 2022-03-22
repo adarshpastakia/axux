@@ -42,7 +42,10 @@
 
     #{$prefix}-loader__text {
       margin: 0 0.25em;
-      margin-inline-start: 2.75em;
+    }
+
+    &[data-noline="true"] #{$base}__entry--icon::before {
+      display: none;
     }
   }
 
@@ -74,10 +77,6 @@
         width: 2px;
         z-index: 0;
       }
-    }
-
-    &[data-noline="true"] #{$base}__entry--icon::before {
-      display: none;
     }
 
     &--head {
