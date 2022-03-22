@@ -3,7 +3,6 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isNumber } from "@axux/utilities";
 import {
   Children,
   cloneElement,

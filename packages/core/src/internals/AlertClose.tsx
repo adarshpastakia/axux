@@ -10,10 +10,5 @@ import { AppIcons } from "../types/appIcons";
 
 /** @internal */
 export const AlertClose: FC<{ onClick: EmptyCallback }> = ({ onClick }) => (
-  <AxButton
-    className="ax-alert--close"
-    icon={AppIcons.iconClose}
-    type="link"
-    onClick={onClick}
-  />
+  <AxButton className="ax-alert--close" icon={AppIcons.iconClose} type="link" onClick={onClick} />
 );

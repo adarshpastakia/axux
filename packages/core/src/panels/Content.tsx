@@ -35,10 +35,7 @@ interface ContentFC extends FC<ContentProps> {
  * @internal
  */
 export const AxContent: ContentFC = forwardRef<HTMLDivElement | null, ContentProps>(
-  (
-    { children, className, centered, padding = true, scroll = true, onScroll, ...aria },
-    ref
-  ) => {
+  ({ children, className, centered, padding = true, scroll = true, onScroll, ...aria }, ref) => {
     const classes = useMemo(() => {
       const cls = ["ax-content", className ?? ""];
       if (padding) {

@@ -3,7 +3,6 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isNumber } from "@axux/utilities";
 import { FC, forwardRef, useMemo } from "react";
 import { AlignItem, ElementProps, Gutter, JustifyContent, RefProp } from "../types";
 

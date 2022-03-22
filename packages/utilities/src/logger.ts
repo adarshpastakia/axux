@@ -44,7 +44,12 @@ export const getLogger = (base: string) => ({
   warning(msg: string, ...rest: AnyObject[]) {
     if (process.env.NODE_ENV === "development") {
       // tslint:disable-next-line:no-console
-      console.warn(`%cWARNING::%c${base} - ${msg}\n`, TypeColors.warning, TagColors.warning, ...rest);
+      console.warn(
+        `%cWARNING::%c${base} - ${msg}\n`,
+        TypeColors.warning,
+        TagColors.warning,
+        ...rest
+      );
     }
   }
 });
