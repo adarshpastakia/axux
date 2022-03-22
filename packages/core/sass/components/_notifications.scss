@@ -153,18 +153,13 @@
   }
 
   &--close {
+    inset-block-start: 0;
+    inset-inline-end: 0;
     position: absolute;
-    right: 0;
-    top: 0;
 
     &,
     #{$prefix}-button {
       margin: 0;
-    }
-
-    @at-root [dir="rtl"] & {
-      left: 0;
-      right: unset;
     }
   }
 

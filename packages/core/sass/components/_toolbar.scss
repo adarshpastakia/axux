@@ -45,7 +45,7 @@
         &::after {
           bottom: -3px;
           content: "▾";
-          left: 50%;
+          inset-inline-start: 50%;
           line-height: 1;
           pointer-events: none;
           position: absolute;

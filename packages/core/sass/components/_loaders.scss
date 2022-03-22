@@ -5,42 +5,39 @@
 
 @keyframes app-loader {
   from {
-    left: 0;
-    right: 100%;
+    inset-inline-end: 100%;
+    inset-inline-start: 0;
   }
 
   50% {
-    left: 0;
-    right: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
   }
 
   to {
-    left: 100%;
-    right: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 100%;
   }
 }
 
 @keyframes text-load {
   0% {
-    left: -18em;
+    inset-inline-start: -18em;
   }
   100% {
-    left: 100%;
+    inset-inline-start: 100%;
   }
 }
 
 #{$prefix}-loader {
-  bottom: 0;
   cursor: wait;
   display: grid;
   font-size: 1.5em;
-  left: 0;
+  inset: 0;
   line-height: 1;
   place-content: center;
   place-items: center;
   position: absolute;
-  right: 0;
-  top: 0;
   z-index: 9999;
 
   &[data-size="lg"] {
@@ -58,11 +55,10 @@
 
     &::before {
       background-color: currentColor;
-      bottom: 1px;
       content: "";
-      left: 0;
+      inset: 1px 0 1px 0;
+      inset-inline-end: unset;
       position: absolute;
-      top: 1px;
       transform: scaleX(0) translateX(0%);
       width: 100%;
       @include animation(infinite-progress 1s ease-in-out infinite);
@@ -80,15 +76,12 @@
   }
 
   &__app {
-    bottom: 0;
     display: grid;
     height: 100vh;
-    left: 0;
+    inset: 0;
     place-content: center;
     place-items: center;
     position: fixed;
-    right: 0;
-    top: 0;
     width: 100vw;
     z-index: 9999;
 
@@ -123,11 +116,10 @@
     }
 
     &::after {
-      bottom: 0;
       content: "";
-      left: 0;
+      inset: 0;
+      inset-inline-end: unset;
       position: absolute;
-      top: 0;
       width: 18em;
       @include animation(text-load 1s linear infinite);
     }

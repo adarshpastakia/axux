@@ -37,11 +37,10 @@
         border-radius: 0.25em;
         content: "";
         height: 0.125em;
-        left: 0;
+        inset: 50% 0 0;
+        inset-block-end: unset;
         overflow: hidden;
         position: absolute;
-        right: 0;
-        top: 50%;
         transform: translateY(-50%);
       }
 

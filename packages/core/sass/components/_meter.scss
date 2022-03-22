@@ -15,15 +15,12 @@
   }
 
   > label {
-    bottom: 0;
     font-size: 0.5em;
-    left: 0;
+    inset: 0;
     position: absolute;
-    right: 0;
     text-align: center;
-    top: 0;
-    @include noselect();
     vertical-align: middle;
     z-index: 2;
+    @include noselect();
   }
 }

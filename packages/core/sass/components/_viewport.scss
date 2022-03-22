@@ -4,16 +4,13 @@
 // @license   : MIT
 
 #{$prefix}-viewport {
-  bottom: 0;
   display: grid;
   grid-template-areas: "banner banner" "header header" "menu breadcrumbs" "menu page" "menu footer";
   grid-template-columns: auto 1fr;
   grid-template-rows: auto auto auto 1fr auto;
-  left: 0;
+  inset: 0;
   overflow: hidden;
   position: fixed;
-  right: 0;
-  top: 0;
   transform: translate3d(0, 0, 0);
   z-index: 0;
 

@@ -52,22 +52,22 @@
   }
 
   &[data-popper-placement^="top"] #{$base}--arrow {
-    bottom: -10px;
+    inset-block-end: -10px;
     &::before {
       border-top-color: currentColor;
-      bottom: -2px;
-      left: -1px;
+      inset-block-end: -2px;
+      inset-inline-start: -1px;
     }
     &::after {
       border-top-color: currentColor;
     }
   }
   &[data-popper-placement^="bottom"] #{$base}--arrow {
-    top: -10px;
+    inset-block-start: -10px;
     &::before {
       border-bottom-color: currentColor;
-      left: -1px;
-      top: -2px;
+      inset-block-start: -2px;
+      inset-inline-start: -1px;
     }
     &::after {
       border-bottom-color: currentColor;
@@ -75,11 +75,11 @@
   }
   &[data-popper-placement^="left"] #{$base}--arrow {
     border-left-color: currentColor;
-    right: -10px;
+    inset-inline-end: -10px;
     &::before {
       border-left-color: currentColor;
-      right: -2px;
-      top: -1px;
+      inset-block-start: -1px;
+      inset-inline-end: -2px;
     }
     &::after {
       border-left-color: currentColor;
@@ -87,11 +87,11 @@
   }
   &[data-popper-placement^="right"] #{$base}--arrow {
     border-right-color: currentColor;
-    left: -10px;
+    inset-inline-start: -10px;
     &::before {
       border-right-color: currentColor;
-      left: -2px;
-      top: -1px;
+      inset-block-start: -1px;
+      inset-inline-start: -2px;
     }
     &::after {
       border-right-color: currentColor;

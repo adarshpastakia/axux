@@ -139,18 +139,15 @@
         }
 
         &--body {
-          bottom: 0;
           grid-area: unset;
-          left: 0;
+          inset-block: 0;
+          inset-inline-start: 0;
           position: absolute;
-          top: 0;
           transform: translateX(-100%);
           transition: transform 500ms;
           z-index: -1;
 
           @at-root [dir="rtl"] & {
-            left: unset;
-            right: 0;
             transform: translateX(100%);
           }
         }
@@ -196,13 +193,10 @@
           }
 
           &--body {
-            left: unset;
-            right: 0;
+            inset-inline-end: 0;
             transform: translateX(100%);
 
             @at-root [dir="rtl"] & {
-              left: 0;
-              right: unset;
               transform: translateX(-100%);
             }
           }

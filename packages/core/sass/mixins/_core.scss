@@ -98,28 +98,22 @@
   position: $position;
 
   @if length($list: $coords) == 1 {
-    bottom: $coords;
-    left: $coords;
-    right: $coords;
-    top: $coords;
+    inset: $coords;
   }
   @if length($list: $coords) == 2 {
-    bottom: nth($coords, 1);
-    left: nth($coords, 2);
-    right: nth($coords, 2);
-    top: nth($coords, 1);
+    inset-block: nth($coords, 1);
+    inset-inline: nth($coords, 2);
   }
   @if length($list: $coords) == 3 {
-    bottom: nth($coords, 3);
-    left: nth($coords, 2);
-    right: nth($coords, 2);
-    top: nth($coords, 1);
+    inset-block-end: nth($coords, 3);
+    inset-block-start: nth($coords, 1);
+    inset-inline: nth($coords, 2);
   }
   @if length($list: $coords) == 4 {
-    bottom: nth($coords, 3);
-    left: nth($coords, 4);
-    right: nth($coords, 2);
-    top: nth($coords, 1);
+    inset-block-end: nth($coords, 3);
+    inset-block-start: nth($coords, 1);
+    inset-inline-end: nth($coords, 2);
+    inset-inline-start: nth($coords, 4);
   }
 }
 

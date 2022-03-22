@@ -142,9 +142,9 @@ channel.on("THEME_TOGGLE", (theme: string) => {
       theme: theme === "dark" ? darkTheme : lightTheme
     }
   });
-  document.documentElement.classList.remove(`ax-light`);
-  document.documentElement.classList.remove(`ax-dark`);
-  document.documentElement.classList.add(`ax-${theme}`);
+  document.body.classList.remove(`ax-light`);
+  document.body.classList.remove(`ax-dark`);
+  document.body.classList.add(`ax-${theme}`);
 });
 
 const originalError = console.error;

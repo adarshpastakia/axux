@@ -26,10 +26,7 @@
     }
 
     #{$prefix}-loader {
-      bottom: 0;
-      left: 0;
-      position: absolute;
-      right: 0;
+      inset-block-start: unset;
     }
 
     &--cell {

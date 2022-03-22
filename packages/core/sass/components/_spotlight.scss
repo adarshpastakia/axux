@@ -6,15 +6,12 @@
 #{$prefix}-spotlight {
   align-items: start;
   backdrop-filter: blur(1px);
-  bottom: 0;
   display: grid;
+  inset: 0;
   justify-items: center;
-  left: 0;
   overflow: hidden;
   padding: 20vh 10vw;
   position: fixed;
-  right: 0;
-  top: 0;
   z-index: 9999;
 
   &__wrapper {

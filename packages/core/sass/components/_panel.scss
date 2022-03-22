@@ -63,12 +63,9 @@
     }
   }
   &[data-expand="true"] {
-    bottom: 1em;
-    left: 1em;
+    inset: 1em;
     max-height: unset !important;
     position: fixed;
-    right: 1em;
-    top: 1em;
     z-index: 25;
     @extend #{$prefix}-shadow--4;
   }

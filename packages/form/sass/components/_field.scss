@@ -168,11 +168,10 @@
   }
 
   &__strength {
-    bottom: -3px;
     height: 2px;
-    left: 0;
+    inset-block-end: -3px;
+    inset-inline: 0;
     position: absolute;
-    right: 0;
 
     &::after {
       content: "";

@@ -11,8 +11,8 @@
     border-radius: 1em;
     cursor: pointer;
     display: grid;
-    height: 1.25em;
     grid-template-columns: 1fr 1fr;
+    height: 1.25em;
     min-width: 2em;
     padding: 2px;
     position: relative;
@@ -21,10 +21,10 @@
     &--handle {
       border-radius: 1em;
       height: calc(1.25em - 4px);
-      left: 0;
+      inset-block-start: 0;
+      inset-inline-start: 0;
       margin: 2px;
       position: absolute;
-      top: 0;
       transition: transform 250ms;
       width: calc(50%);
     }
@@ -56,10 +56,6 @@
   }
 
   @at-root [dir="rtl"] &__option {
-    #{$base}__switch--handle {
-      left: unset;
-      right: 0;
-    }
     input:checked ~ #{$base}__switch {
       #{$base}__switch--handle {
         transform: translateX(calc(-100% + 4px));

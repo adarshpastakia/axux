@@ -54,22 +54,16 @@
 
     &::before,
     &::after {
-      bottom: 0;
       content: "";
-      left: 0;
+      inset: 0;
       overflow: hidden;
       position: absolute;
-      right: 0;
       text-align: end;
-      top: 0;
       transition: left 1s ease-in 0.5s;
     }
 
-    @at-root [dir="ltr"] &::after {
-      left: calc(var(--meter) * 100%);
-    }
-    @at-root [dir="rtl"] &::after {
-      right: calc(var(--meter) * 100%);
+    &::after {
+      inset-inline-start: calc(var(--meter) * 100%);
     }
   }
 
