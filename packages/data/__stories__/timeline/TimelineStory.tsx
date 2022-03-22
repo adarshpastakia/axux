@@ -4,7 +4,6 @@
 // @license   : MIT
 
 import {
-  AxAvatar,
   AxButton,
   AxContent,
   AxPage,
@@ -14,7 +13,6 @@ import {
   AxViewport,
   useAxGlobals
 } from "@axux/core";
-import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay } from "@axux/date";
 import { mdiComment, mdiFaceProfile, mdiStar, mdiTag } from "@mdi/js";
 import { Story } from "@storybook/react";
@@ -24,75 +22,49 @@ import { AxHistogram, AxTimeline, HistogramRecord } from "../../src";
 
 const entries: Array<KeyValue> = [
   {
-    avatar: AppIcons.iconClock,
-    record: {
-      type: "event",
-      timestamp: new Date(),
-      icon: mdiTag,
-      iconBg: "info",
-      iconColor: "white",
-      username: "Smeg",
-      event: "started"
-    }
+    type: "event",
+    timestamp: new Date(),
+    avatar: mdiTag,
+    avatarBg: "info",
+    avatarColor: "white",
+    username: "Smeg",
+    event: "started"
   },
   {
-    avatar: <AxAvatar title="" bg="info" color="indigo" icon={AppIcons.iconFace} />,
-    record: {
-      type: "comment",
-      timestamp: new Date(),
-      username: "Smeg",
-      event: "started",
-      icon: mdiFaceProfile,
-      body: LIPSUM.para,
-      isCollapsable: true,
-      sidebar: (
-        <AxButton.Group vertical>
-          <AxButton icon={mdiStar} />
-          <AxButton icon={mdiComment} />
-        </AxButton.Group>
-      )
-    }
+    type: "comment",
+    timestamp: new Date(),
+    username: "Smeg",
+    event: "started",
+    avatar: mdiFaceProfile,
+    body: LIPSUM.para,
+    isCollapsable: true
   },
   {
-    avatar: AppIcons.iconClock,
-    record: {
-      type: "event",
-      timestamp: new Date(),
-      icon: mdiTag,
-      iconBg: "info",
-      iconColor: "white",
-      username: "Smeg",
-      event: "started"
-    }
+    type: "event",
+    timestamp: new Date(),
+    avatar: mdiTag,
+    avatarBg: "info",
+    avatarColor: "white",
+    username: "Smeg",
+    event: "started"
   },
   {
-    avatar: AppIcons.iconClock,
-    record: {
-      type: "event",
-      timestamp: new Date(),
-      icon: mdiTag,
-      iconBg: "info",
-      iconColor: "white",
-      username: "Smeg",
-      event: "started"
-    }
+    type: "event",
+    timestamp: new Date(),
+    avatar: mdiTag,
+    avatarBg: "info",
+    avatarColor: "white",
+    username: "Smeg",
+    event: "started"
   },
   {
-    avatar: <AxAvatar title="" bg="info" color="indigo" icon={AppIcons.iconFace} />,
-    record: {
-      type: "comment",
-      timestamp: new Date(),
-      username: "Smeg",
-      event: "started",
-      body: LIPSUM.para,
-      isCollapsable: true,
-      sidebar: (
-        <AxButton.Group vertical>
-          <AxButton icon={mdiStar} />
-          <AxButton icon={mdiComment} />
-        </AxButton.Group>
-      )
-    }
+    type: "comment",
+    timestamp: new Date(),
+    username: "Smeg",
+    event: "started",
+    avatar: mdiFaceProfile,
+    body: LIPSUM.para,
+    isCollapsable: true
   }
 ];
 
@@ -123,7 +95,7 @@ const Template: Story = (props) => {
     <AxViewport dateLocale={dateLocale}>
       <AxPage paper>
         <AxSection>
-          <AxTimeline list={records} {...props}>
+          <AxTimeline list={props.records ?? []} {...props}>
             {({ record: { body, ...record }, index }: AnyObject) => (
               <div className="ax-flex">
                 {record.type === "comment" ? (
@@ -200,6 +172,8 @@ const Template: Story = (props) => {
 };
 
 export const TimelineStory = Template.bind({});
-TimelineStory.args = {};
+TimelineStory.args = {
+  list: records
+};
 
 export default { title: "Example/Timeline", component: AxTimeline };
