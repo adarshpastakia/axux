@@ -152,6 +152,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
                 <AxButton
                   type="link"
                   tabIndex={-1}
+                  className="flippable"
                   icon={AppIcons.iconCaretLeft}
                   onClick={() => onNavigate("prev")}
                 />
@@ -159,9 +160,10 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
               <div className="ax-modal__body">{childs}</div>
               {onNavigate && (
                 <AxButton
-                  data-end="true"
-                  tabIndex={-1}
                   type="link"
+                  tabIndex={-1}
+                  data-end="true"
+                  className="flippable"
                   icon={AppIcons.iconCaretRight}
                   onClick={() => onNavigate("next")}
                 />

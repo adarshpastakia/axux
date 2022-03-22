@@ -116,6 +116,7 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
           {showCaret && (
             <div className="ax-menu__item__caret">
               <AxIcon
+                className="flippable"
                 icon={
                   isCollapsable && !isCollapsed ? AppIcons.iconCaretDown : AppIcons.iconCaretRight
                 }

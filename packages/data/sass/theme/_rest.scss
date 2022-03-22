@@ -68,11 +68,11 @@
 
 @at-root &[dir="ltr"] {
   #{$prefix}-histogram__meter::before {
-    background: linear-gradient(90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
+    background: linear-gradient(-90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
   }
 }
 @at-root &[dir="rtl"] {
   #{$prefix}-histogram__meter::before {
-    background: linear-gradient(-90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
+    background: linear-gradient(90deg, rgba($panel-bg, 0.3), rgba($panel-bg, 0.9));
   }
 }

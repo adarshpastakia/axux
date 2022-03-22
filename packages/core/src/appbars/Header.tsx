@@ -108,7 +108,7 @@ export const AxHeader: FC<HeaderProps> = ({
             icon={AppIcons.iconCaretLeft}
             color="primary"
             onClick={onBack}
-            className="ax-header__back ax-prevent-close"
+            className="ax-header__back ax-prevent-close flippable"
           />
           <AxDivider vertical />
         </Fragment>

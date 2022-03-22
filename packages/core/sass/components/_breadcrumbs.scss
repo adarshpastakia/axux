@@ -35,6 +35,10 @@
         content: "\25B9";
         padding: 0 0.25em;
         @extend #{$prefix}-color--muted;
+
+        @at-root [dir="rtl"] & {
+          transform: scaleX(-1);
+        }
       }
 
       &:last-child {

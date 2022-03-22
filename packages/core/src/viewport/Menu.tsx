@@ -65,8 +65,8 @@ export const AxViewportMenu: FC<ViewportMenuProps> = ({
         <AxButton
           block
           type="link"
-          className="ax-margin--none"
           onClick={toggleCollapse}
+          className="ax-margin--none flippable"
           icon={collapsed ? AppIcons.iconMenuExpand : AppIcons.iconMenuCollapse}
         />
       </div>

@@ -74,6 +74,7 @@ export const AxContextMenu: FC<ContextMenuProps> = ({
 
   const handleClick = useCallback(
     (e: MouseEvent) => {
+      if ((e.target as HTMLDivElement).closest(".ax-menu")) return false;
       if (!onContextMenu || onContextMenu(e)) {
         const el = e.currentTarget;
         const y = e.clientY;
