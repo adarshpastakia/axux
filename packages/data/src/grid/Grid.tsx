@@ -7,11 +7,11 @@ import { AxButton, AxTextLoader } from "@axux/core";
 import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { FC, ReactNode, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { ReactNode, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { GridItem } from "./Item";
 
-export interface GridProps extends ElementProps {
-  list: KeyValue[];
+export interface GridProps<T = KeyValue> extends ElementProps {
+  list: T & { key: string; avatar?: string; reverse?: boolean }[];
   cellWidth?: string;
   isLoading?: boolean;
   canLoadMore?: boolean;
@@ -22,10 +22,10 @@ export interface GridProps extends ElementProps {
   onScroll?: (top: number) => void;
   initialScroll?: number;
   actions?: ReactNode;
-  children: (props: { index: number; record: KeyValue }) => ReactNode;
+  children: (props: { index: number; record: T }) => ReactNode;
 }
 
-export const AxGridView: FC<GridProps> = ({
+export const AxGridView = <T extends KeyValue>({
   list,
   children,
   isLoading,
@@ -40,13 +40,14 @@ export const AxGridView: FC<GridProps> = ({
   cellWidth,
   className,
   ...aria
-}) => {
+}: GridProps<T>) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScroll, setCanScroll] = useState(0);
 
   const checkScroll = useCallback(() => {
     if (scrollerRef.current) {
-      const { scrollHeight, scrollTop, offsetHeight } = scrollerRef.current;
+      const el = scrollerRef.current;
+      const { scrollHeight, scrollTop, offsetHeight } = el;
       if (scrollHeight === offsetHeight) setCanScroll(0);
       else if (scrollTop === 0) setCanScroll(1);
       else if (scrollTop + offsetHeight === scrollHeight) setCanScroll(2);
@@ -55,7 +56,12 @@ export const AxGridView: FC<GridProps> = ({
       if (scrollTop + offsetHeight >= scrollHeight - 10) {
         !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100);
       }
-      onScroll?.(scrollTop);
+      debounce(() => {
+        const first: AnyObject = Array.from<HTMLElement>(
+          el.querySelectorAll(".ax-gridView__item")
+        ).find((e) => e.offsetTop >= el.scrollTop);
+        onScroll?.(first?.dataset.index);
+      }, 250)();
     }
   }, [canLoadMore, isLoading, onLoadMore]);
 
@@ -74,7 +80,10 @@ export const AxGridView: FC<GridProps> = ({
   }, []);
 
   useLayoutEffect(() => {
-    initialScroll && scrollerRef.current?.scrollTo({ top: initialScroll, behavior: "auto" });
+    initialScroll &&
+      scrollerRef.current
+        ?.querySelector(`.ax-gridView__item[data-index="${initialScroll}"]`)
+        ?.scrollIntoView();
   }, [initialScroll]);
 
   useLayoutEffect(() => {
@@ -98,7 +107,14 @@ export const AxGridView: FC<GridProps> = ({
       <div className="ax-gridView__wrapper">
         <div>
           {list.map((record, index) => {
-            return <GridItem key={index} index={index} record={record} callback={children} />;
+            return (
+              <GridItem
+                index={index}
+                record={record}
+                callback={children}
+                key={record.key ?? index}
+              />
+            );
           })}
           {isLoading && <AxTextLoader />}
         </div>

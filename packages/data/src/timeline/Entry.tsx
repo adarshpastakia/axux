@@ -17,13 +17,13 @@ export const TimelineEntry: VFC<AnyObject> = memo(
           avatar
         ) : (
           <AxAvatar
-            bg="lightest"
-            color="medium"
+            bg={record.avatarBg ?? "lightest"}
+            color={record.avatarColor ?? "medium"}
             title=""
             icon={avatar ?? record.avatar ?? AppIcons.iconFace}
           />
         ),
-      [avatar, record.avatar]
+      [avatar, record]
     );
 
     const [visible, setVisible] = useState(false);
@@ -68,7 +68,7 @@ export const TimelineEntry: VFC<AnyObject> = memo(
     }, [index]);
 
     return (
-      <div className={`ax-timeline__entry`} data-reverse={reverse ?? record.reverse}>
+      <div className="ax-timeline__entry" data-reverse={reverse ?? record.reverse} data-index={index}>
         <div className="ax-timeline__entry--icon">{entryIcon}</div>
         <section ref={eventRef} className="ax-timeline__entry--body">
           {visible && callback({ record, index })}

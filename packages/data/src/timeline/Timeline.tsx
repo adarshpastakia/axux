@@ -4,14 +4,20 @@
 // @license   : MIT
 
 import { AxButton, AxTextLoader } from "@axux/core";
+import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { FC, ReactNode, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { ReactNode, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { TimelineEntry } from "./Entry";
-import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 
 interface TimelineProps<T = KeyValue> extends ElementProps {
-  list: T[];
+  list: (T & {
+    key: string;
+    avatar?: string;
+    avatarBg?: string;
+    avatarColor?: string;
+    reverse?: boolean;
+  })[];
   noLine?: boolean;
   isLoading?: boolean;
   canLoadMore?: boolean;
@@ -26,7 +32,7 @@ interface TimelineProps<T = KeyValue> extends ElementProps {
   children: (props: { index: number; record: T }) => ReactNode;
 }
 
-export const AxTimeline: FC<TimelineProps> = ({
+export const AxTimeline = <T extends KeyValue>({
   list,
   avatar,
   reverse,
@@ -42,13 +48,14 @@ export const AxTimeline: FC<TimelineProps> = ({
   sortOrder,
   onSort,
   ...aria
-}) => {
+}: TimelineProps<T>) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScroll, setCanScroll] = useState(0);
 
   const checkScroll = useCallback(() => {
     if (scrollerRef.current) {
-      const { scrollHeight, scrollTop, offsetHeight } = scrollerRef.current;
+      const el = scrollerRef.current;
+      const { scrollHeight, scrollTop, offsetHeight } = el;
       if (scrollHeight === offsetHeight) setCanScroll(0);
       else if (scrollTop === 0) setCanScroll(1);
       else if (scrollTop + offsetHeight === scrollHeight) setCanScroll(2);
@@ -57,7 +64,12 @@ export const AxTimeline: FC<TimelineProps> = ({
       if (scrollTop + offsetHeight >= scrollHeight - 10) {
         !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100)();
       }
-      onScroll?.(scrollTop);
+      debounce(() => {
+        const first: AnyObject = Array.from<HTMLElement>(
+          el.querySelectorAll(".ax-timeline__entry")
+        ).find((e) => e.offsetTop >= el.scrollTop);
+        onScroll?.(first?.dataset.index);
+      }, 250)();
     }
   }, [canLoadMore, isLoading, onLoadMore]);
 
@@ -76,7 +88,10 @@ export const AxTimeline: FC<TimelineProps> = ({
   }, []);
 
   useLayoutEffect(() => {
-    initialScroll && scrollerRef.current?.scrollTo({ top: initialScroll, behavior: "auto" });
+    initialScroll &&
+      scrollerRef.current
+        ?.querySelector(`.ax-timeline__entry[data-index="${initialScroll}"]`)
+        ?.scrollIntoView();
   }, [initialScroll]);
 
   useLayoutEffect(() => {
@@ -101,12 +116,12 @@ export const AxTimeline: FC<TimelineProps> = ({
           {list.map((record, index) => {
             return (
               <TimelineEntry
-                key={index}
                 index={index}
                 record={record}
+                callback={children}
+                key={record.key ?? index}
                 avatar={avatar?.({ record, index })}
                 reverse={reverse?.({ record, index })}
-                callback={children}
               />
             );
           })}
