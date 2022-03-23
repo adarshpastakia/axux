@@ -95,7 +95,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
       {
         name: "offset",
         options: {
-          offset: [0, showArrow ? 11 : 0]
+          offset: [0, showArrow ? 10 : 0]
         }
       },
       { name: "arrow", enabled: showArrow, options: { element: arrowElement } }
@@ -238,7 +238,8 @@ export const AxPopper: FC<Props & KeyValue> = ({
     anchorEl,
     open,
     isOpen,
-    autoTrigger
+    autoTrigger,
+    triggerEl
   ]);
 
   const triggerProps = useMemo(() => {

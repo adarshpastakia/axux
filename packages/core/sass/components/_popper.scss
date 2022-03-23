@@ -52,22 +52,22 @@
   }
 
   &[data-popper-placement^="top"] #{$base}--arrow {
-    inset-block-end: -10px;
+    bottom: -10px;
     &::before {
       border-top-color: currentColor;
-      inset-block-end: -2px;
-      inset-inline-start: -1px;
+      bottom: -2px;
+      left: -1px;
     }
     &::after {
       border-top-color: currentColor;
     }
   }
   &[data-popper-placement^="bottom"] #{$base}--arrow {
-    inset-block-start: -10px;
+    top: -10px;
     &::before {
       border-bottom-color: currentColor;
-      inset-block-start: -2px;
-      inset-inline-start: -1px;
+      left: -1px;
+      top: -2px;
     }
     &::after {
       border-bottom-color: currentColor;
@@ -75,11 +75,11 @@
   }
   &[data-popper-placement^="left"] #{$base}--arrow {
     border-left-color: currentColor;
-    inset-inline-end: -10px;
+    right: -10px;
     &::before {
       border-left-color: currentColor;
-      inset-block-start: -1px;
-      inset-inline-end: -2px;
+      right: -2px;
+      top: -1px;
     }
     &::after {
       border-left-color: currentColor;
@@ -87,11 +87,11 @@
   }
   &[data-popper-placement^="right"] #{$base}--arrow {
     border-right-color: currentColor;
-    inset-inline-start: -10px;
+    left: -10px;
     &::before {
       border-right-color: currentColor;
-      inset-block-start: -1px;
-      inset-inline-start: -2px;
+      left: -2px;
+      top: -1px;
     }
     &::after {
       border-right-color: currentColor;
@@ -118,10 +118,10 @@
   }
 
   &#{$prefix}-tooltip {
+    border-radius: $base-border-radius;
     pointer-events: none;
+    @extend #{$prefix}-shadow--2;
     #{$base}--body {
-      @extend #{$prefix}-shadow--2;
-      border-radius: $base-border-radius;
       font-size: 1em;
       padding: 0.25em 0.5em;
     }
