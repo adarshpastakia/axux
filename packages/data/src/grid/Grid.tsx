@@ -54,7 +54,7 @@ export const AxGridView: ExtendedFC = ({
       else setCanScroll(3);
 
       if (scrollTop + offsetHeight >= scrollHeight - 10) {
-        !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100);
+        !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100)();
       }
       debounce(() => {
         const first: AnyObject = Array.from<HTMLElement>(
@@ -84,7 +84,7 @@ export const AxGridView: ExtendedFC = ({
       scrollerRef.current
         ?.querySelector(`.ax-gridView__item[data-index="${initialScroll}"]`)
         ?.scrollIntoView();
-  }, [initialScroll]);
+  }, []);
 
   useLayoutEffect(() => {
     if (ResizeObserver) {

@@ -83,7 +83,7 @@ export const AxTimeline: ExtendedFC = ({
       scrollerRef.current
         ?.querySelector(`.ax-timeline__entry[data-index="${initialScroll}"]`)
         ?.scrollIntoView();
-  }, [initialScroll]);
+  }, []);
 
   useLayoutEffect(() => {
     if (ResizeObserver) {
