@@ -68,7 +68,7 @@ const entries: Array<KeyValue> = [
   }
 ];
 
-const records: AnyObject = new Array(1000).fill(null).map((_, i) => ({
+const records: AnyObject[] = new Array(1000).fill(null).map((_) => ({
   ...entries[Math.floor(Math.random() * entries.length)]
 }));
 
@@ -95,40 +95,42 @@ const Template: Story = (props) => {
     <AxViewport dateLocale={dateLocale}>
       <AxPage paper>
         <AxSection>
-          <AxTimeline list={props.records ?? []} {...props}>
-            {({ record: { body, ...record }, index }: AnyObject) => (
-              <div className="ax-flex">
-                {record.type === "comment" ? (
-                  <AxPanel
-                    className="ax-col ax-col--fill"
-                    paper={record.type === "comment"}
-                    isCollapsable={record.type === "comment"}
-                  >
-                    <AxPanel.Header
-                      title={
-                        <span>
-                          {index} - {record.username} @ <AxDateDisplay date={record.timestamp} />
-                        </span>
-                      }
-                    />
-                    <AxContent>
-                      <p>Test head</p>
-                      <AxText clip={4}>{body}</AxText>
-                    </AxContent>
-                  </AxPanel>
-                ) : (
-                  <div className="ax-col ax-col--fill">
-                    {index} - {record.username} @ <AxDateDisplay date={record.timestamp} />
+          <AxTimeline {...props}>
+            {records.map(({ body, avatar, ...record }, index) => (
+              <AxTimeline.Entry key={index} index={index} avatar={avatar}>
+                <div className="ax-flex">
+                  {record.type === "comment" ? (
+                    <AxPanel
+                      className="ax-col ax-col--fill"
+                      paper={record.type === "comment"}
+                      isCollapsable={record.type === "comment"}
+                    >
+                      <AxPanel.Header
+                        title={
+                          <span>
+                            {index} - {record.username} @ <AxDateDisplay date={record.timestamp} />
+                          </span>
+                        }
+                      />
+                      <AxContent>
+                        <p>Test head</p>
+                        <AxText clip={4}>{body}</AxText>
+                      </AxContent>
+                    </AxPanel>
+                  ) : (
+                    <div className="ax-col ax-col--fill">
+                      {index} - {record.username} @ <AxDateDisplay date={record.timestamp} />
+                    </div>
+                  )}
+                  <div className="ax-col ax-col--auto ax-padding--x--xs">
+                    <AxButton.Group vertical>
+                      <AxButton icon={mdiStar} />
+                      <AxButton icon={mdiComment} />
+                    </AxButton.Group>
                   </div>
-                )}
-                <div className="ax-col ax-col--auto ax-padding--x--xs">
-                  <AxButton.Group vertical>
-                    <AxButton icon={mdiStar} />
-                    <AxButton icon={mdiComment} />
-                  </AxButton.Group>
                 </div>
-              </div>
-            )}
+              </AxTimeline.Entry>
+            ))}
           </AxTimeline>
           <AxSection.Side end title="Side Left" isCollapsable flyout isResizeable minWidth="20em">
             <AxPanel.Group>
@@ -172,8 +174,6 @@ const Template: Story = (props) => {
 };
 
 export const TimelineStory = Template.bind({});
-TimelineStory.args = {
-  list: records
-};
+TimelineStory.args = {};
 
 export default { title: "Example/Timeline", component: AxTimeline };

@@ -21,6 +21,7 @@
 
   &__wrapper {
     display: grid;
+    grid-gap: 1rem;
     grid-template-columns: 1fr auto;
     grid-template-rows: 1fr;
     justify-content: center;

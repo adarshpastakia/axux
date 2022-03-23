@@ -7,11 +7,10 @@ import { AxButton, AxTextLoader } from "@axux/core";
 import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { ReactNode, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { FC, ReactNode, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { GridItem } from "./Item";
 
-export interface GridProps<T = KeyValue> extends ElementProps {
-  list: T & { key: string; avatar?: string; reverse?: boolean }[];
+export interface GridProps extends ElementProps {
   cellWidth?: string;
   isLoading?: boolean;
   canLoadMore?: boolean;
@@ -22,11 +21,12 @@ export interface GridProps<T = KeyValue> extends ElementProps {
   onScroll?: (top: number) => void;
   initialScroll?: number;
   actions?: ReactNode;
-  children: (props: { index: number; record: T }) => ReactNode;
+}
+interface ExtendedFC extends FC<GridProps> {
+  Item: typeof GridItem;
 }
 
-export const AxGridView = <T extends KeyValue>({
-  list,
+export const AxGridView: ExtendedFC = ({
   children,
   isLoading,
   canLoadMore,
@@ -40,7 +40,7 @@ export const AxGridView = <T extends KeyValue>({
   cellWidth,
   className,
   ...aria
-}: GridProps<T>) => {
+}) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScroll, setCanScroll] = useState(0);
 
@@ -63,7 +63,7 @@ export const AxGridView = <T extends KeyValue>({
         onScroll?.(first?.dataset.index);
       }, 250)();
     }
-  }, [canLoadMore, isLoading, onLoadMore]);
+  }, [canLoadMore, isLoading, onLoadMore, onScroll]);
 
   const doScroll = useCallback((diff: number) => {
     if (scrollerRef.current) {
@@ -106,16 +106,7 @@ export const AxGridView = <T extends KeyValue>({
     >
       <div className="ax-gridView__wrapper">
         <div>
-          {list.map((record, index) => {
-            return (
-              <GridItem
-                index={index}
-                record={record}
-                callback={children}
-                key={record.key ?? index}
-              />
-            );
-          })}
+          {children}
           {isLoading && <AxTextLoader />}
         </div>
         <div>
@@ -165,4 +156,7 @@ export const AxGridView = <T extends KeyValue>({
     </div>
   );
 };
+AxGridView.Item = GridItem;
+
 AxGridView.displayName = "AxGridView";
+AxGridView.Item.displayName = "AxGridView.Item";

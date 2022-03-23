@@ -3,22 +3,11 @@
 // @copyright : 2022
 // @license   : MIT
 
-import {
-  AxButton,
-  AxContent,
-  AxPage,
-  AxPanel,
-  AxSection,
-  AxText,
-  AxViewport,
-  useAxGlobals
-} from "@axux/core";
-import { AxDateDisplay } from "@axux/date";
+import { AxButton, AxContent, AxPage, AxPanel, AxText, AxViewport } from "@axux/core";
 import { mdiComment, mdiFaceProfile, mdiStar, mdiTag } from "@mdi/js";
 import { Story } from "@storybook/react";
-import { useState } from "react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
-import { AxGridView, AxHistogram, AxTimeline, HistogramRecord } from "../../src";
+import { AxGridView } from "../../src";
 
 const list = [
   {
@@ -65,7 +54,7 @@ const list = [
   }
 ];
 
-export const records: AnyObject = new Array(1000)
+export const records: AnyObject[] = new Array(1000)
   .fill(null)
   .map((_, i) => ({ ...list[Math.floor(Math.random() * list.length)], index: i }));
 
@@ -73,33 +62,35 @@ const Template: Story = (props) => {
   return (
     <AxViewport>
       <AxPage>
-        <AxGridView list={props.records ?? []} {...props}>
-          {(props) => (
-            <div className="ax-flex">
-              <AxPanel title={`Grid cell ${props.index}`} className="ax-col ax-col--fill" paper>
-                <AxContent>
-                  <div className="ax-row ax-gutter">
-                    <img
-                      alt="img"
-                      className="ax-col ax-col--auto"
-                      src="https://picsum.photos/id/128/172"
-                      width={128}
-                      height={172}
-                    />
-                    <div className="ax-col ax-col--fill">
-                      <AxText clip={4}>{LIPSUM.line}</AxText>
+        <AxGridView {...props}>
+          {records.map((_, index) => (
+            <AxGridView.Item key={index} index={index}>
+              <div className="ax-flex">
+                <AxPanel title={`Grid cell ${index}`} className="ax-col ax-col--fill" paper>
+                  <AxContent>
+                    <div className="ax-row ax-gutter">
+                      <img
+                        alt="img"
+                        className="ax-col ax-col--auto"
+                        src="https://picsum.photos/id/128/172"
+                        width={128}
+                        height={172}
+                      />
+                      <div className="ax-col ax-col--fill">
+                        <AxText clip={4}>{LIPSUM.line}</AxText>
+                      </div>
                     </div>
-                  </div>
-                </AxContent>
-              </AxPanel>
-              <div className="ax-col ax-col--auto ax-padding--x--xs">
-                <AxButton.Group vertical>
-                  <AxButton icon={mdiStar} />
-                  <AxButton icon={mdiComment} />
-                </AxButton.Group>
+                  </AxContent>
+                </AxPanel>
+                <div className="ax-col ax-col--auto ax-padding--x--xs">
+                  <AxButton.Group vertical>
+                    <AxButton icon={mdiStar} />
+                    <AxButton icon={mdiComment} />
+                  </AxButton.Group>
+                </div>
               </div>
-            </div>
-          )}
+            </AxGridView.Item>
+          ))}
         </AxGridView>
       </AxPage>
     </AxViewport>
@@ -108,7 +99,6 @@ const Template: Story = (props) => {
 
 export const GridStory = Template.bind({});
 GridStory.args = {
-  list: records,
   sortOrder: "asc"
 };
 

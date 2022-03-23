@@ -4,12 +4,19 @@
 // @license   : MIT
 
 import { AxAvatar, AxTextLoader } from "@axux/core";
-import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { isValidElement, memo, useEffect, useMemo, useRef, useState } from "react";
+import { FC, isValidElement, memo, useEffect, useMemo, useRef, useState } from "react";
 
-export const TimelineEntry: VFC<AnyObject> = memo(
-  ({ avatar, reverse, index, record, callback }: KeyValue) => {
+interface EntryProps {
+  index: number;
+  avatar?: string | JSX.Element;
+  avatarBg?: string;
+  avatarColor?: string;
+  reverse?: boolean;
+}
+
+export const TimelineEntry: FC<EntryProps> = memo(
+  ({ avatar, avatarBg, avatarColor, reverse, children, index }) => {
     const eventRef = useRef<HTMLElement>(null);
     const entryIcon = useMemo(
       () =>
@@ -17,13 +24,13 @@ export const TimelineEntry: VFC<AnyObject> = memo(
           avatar
         ) : (
           <AxAvatar
-            bg={record.avatarBg ?? "lightest"}
-            color={record.avatarColor ?? "medium"}
+            bg={avatarBg ?? "lightest"}
+            color={avatarColor ?? "medium"}
             title=""
-            icon={avatar ?? record.avatar ?? AppIcons.iconFace}
+            icon={avatar ?? AppIcons.iconFace}
           />
         ),
-      [avatar, record]
+      [avatar, avatarBg, avatarColor]
     );
 
     const [visible, setVisible] = useState(false);
@@ -68,18 +75,14 @@ export const TimelineEntry: VFC<AnyObject> = memo(
     }, [index]);
 
     return (
-      <div
-        className="ax-timeline__entry"
-        data-reverse={reverse ?? record.reverse}
-        data-index={index}
-      >
+      <div className="ax-timeline__entry" data-reverse={reverse} data-index={index}>
         <div className="ax-timeline__entry--icon">{entryIcon}</div>
         <section ref={eventRef} className="ax-timeline__entry--body">
-          {visible && callback({ record, index })}
+          {visible && children}
           {!visible && <AxTextLoader />}
         </section>
       </div>
     );
   },
-  (prev, next) => prev.index === next.index && prev.record === next.record
+  (prev, next) => prev.index === next.index
 );

@@ -4,11 +4,10 @@
 // @license   : MIT
 
 import { AxTextLoader } from "@axux/core";
-import { VFC } from "@axux/core/dist/types";
-import { memo, useEffect, useRef, useState } from "react";
+import { FC, memo, useEffect, useRef, useState } from "react";
 
-export const GridItem: VFC<AnyObject> = memo(
-  ({ callback, record, index }: KeyValue) => {
+export const GridItem: FC<{ index: number }> = memo(
+  ({ children, index }: KeyValue) => {
     const entryRef = useRef<HTMLDivElement>(null);
     const [visible, setVisible] = useState(false);
     useEffect(() => {
@@ -53,10 +52,10 @@ export const GridItem: VFC<AnyObject> = memo(
 
     return (
       <section ref={entryRef} className="ax-gridView__item" data-index={index}>
-        {visible && callback({ record, index })}
+        {visible && children}
         {!visible && <AxTextLoader />}
       </section>
     );
   },
-  (prev, next) => prev.index === next.index && prev.record === next.record
+  (prev, next) => prev.index === next.index
 );

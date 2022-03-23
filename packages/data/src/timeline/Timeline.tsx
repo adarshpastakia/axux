@@ -7,17 +7,10 @@ import { AxButton, AxTextLoader } from "@axux/core";
 import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { ReactNode, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { FC, ReactNode, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { TimelineEntry } from "./Entry";
 
-interface TimelineProps<T = KeyValue> extends ElementProps {
-  list: (T & {
-    key: string;
-    avatar?: string;
-    avatarBg?: string;
-    avatarColor?: string;
-    reverse?: boolean;
-  })[];
+interface TimelineProps extends ElementProps {
   noLine?: boolean;
   isLoading?: boolean;
   canLoadMore?: boolean;
@@ -27,15 +20,13 @@ interface TimelineProps<T = KeyValue> extends ElementProps {
   onScroll?: (top: number) => void;
   initialScroll?: number;
   actions?: ReactNode;
-  avatar?: (props: { index: number; record: T }) => string | ReactNode;
-  reverse?: (props: { index: number; record: T }) => boolean;
-  children: (props: { index: number; record: T }) => ReactNode;
 }
 
-export const AxTimeline = <T extends KeyValue>({
-  list,
-  avatar,
-  reverse,
+interface ExtendedFC extends FC<TimelineProps> {
+  Entry: typeof TimelineEntry;
+}
+
+export const AxTimeline: ExtendedFC = ({
   children,
   noLine,
   actions,
@@ -48,7 +39,7 @@ export const AxTimeline = <T extends KeyValue>({
   sortOrder,
   onSort,
   ...aria
-}: TimelineProps<T>) => {
+}) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScroll, setCanScroll] = useState(0);
 
@@ -71,7 +62,7 @@ export const AxTimeline = <T extends KeyValue>({
         onScroll?.(first?.dataset.index);
       }, 250)();
     }
-  }, [canLoadMore, isLoading, onLoadMore]);
+  }, [canLoadMore, isLoading, onLoadMore, onScroll]);
 
   const doScroll = useCallback((diff: number) => {
     if (scrollerRef.current) {
@@ -113,18 +104,7 @@ export const AxTimeline = <T extends KeyValue>({
     >
       <div className="ax-timeline__wrapper" data-noline={noLine}>
         <div>
-          {list.map((record, index) => {
-            return (
-              <TimelineEntry
-                index={index}
-                record={record}
-                callback={children}
-                key={record.key ?? index}
-                avatar={avatar?.({ record, index })}
-                reverse={reverse?.({ record, index })}
-              />
-            );
-          })}
+          {children}
           {isLoading && <AxTextLoader />}
         </div>
         <div>
@@ -173,4 +153,7 @@ export const AxTimeline = <T extends KeyValue>({
     </div>
   );
 };
+AxTimeline.Entry = TimelineEntry;
+
 AxTimeline.displayName = "AxTimeline";
+AxTimeline.Entry.displayName = "AxTimeline.Entry";
