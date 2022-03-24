@@ -43,6 +43,7 @@ export const TimelineEntry: FC<EntryProps> = ({
   useEffect(() => {
     if (eventRef.current) {
       const el: AnyObject = eventRef.current;
+      let timer: AnyObject;
       let obResize: ResizeObserver;
       let obIntersection: IntersectionObserver;
       if (ResizeObserver) {
@@ -53,7 +54,6 @@ export const TimelineEntry: FC<EntryProps> = ({
         obResize.observe(el);
       }
       if (IntersectionObserver) {
-        let timer: AnyObject;
         const scrollerRef = el.closest(".ax-timeline__panel") as HTMLElement;
         obIntersection = new IntersectionObserver(
           (entries) => {
@@ -74,6 +74,7 @@ export const TimelineEntry: FC<EntryProps> = ({
         obIntersection.observe(el);
       }
       return () => {
+        clearTimeout(timer);
         obResize?.disconnect();
         obIntersection?.disconnect();
       };

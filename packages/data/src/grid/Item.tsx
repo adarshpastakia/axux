@@ -12,6 +12,7 @@ export const GridItem: FC<{ index: number }> = ({ children, index }: KeyValue) =
   useEffect(() => {
     if (entryRef.current) {
       const el: AnyObject = entryRef.current;
+      let timer: AnyObject;
       let obResize: ResizeObserver;
       let obIntersection: IntersectionObserver;
       if (ResizeObserver) {
@@ -22,7 +23,6 @@ export const GridItem: FC<{ index: number }> = ({ children, index }: KeyValue) =
         obResize.observe(el);
       }
       if (IntersectionObserver) {
-        let timer: AnyObject;
         const scrollerRef = el.closest(".ax-gridView__panel") as HTMLElement;
         obIntersection = new IntersectionObserver(
           (entries) => {
@@ -43,6 +43,7 @@ export const GridItem: FC<{ index: number }> = ({ children, index }: KeyValue) =
         obIntersection.observe(el);
       }
       return () => {
+        clearTimeout(timer);
         obResize?.disconnect();
         obIntersection?.disconnect();
       };
