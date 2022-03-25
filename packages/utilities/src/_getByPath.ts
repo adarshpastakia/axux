@@ -6,7 +6,7 @@
 import { isArray, isEmpty, isNil, isObject } from "./_isType";
 
 const _get = (hit: AnyObject, field: string): AnyObject => {
-  if (isEmpty(hit)) {
+  if (isNil(hit)) {
     return undefined;
   }
 
@@ -50,7 +50,7 @@ export const getByPath = <T = AnyObject>(
     return defaultValue;
   }
   const value = _get(obj, path);
-  if (!isEmpty(value)) {
+  if (!isNil(value)) {
     return value;
   }
   return defaultValue;
