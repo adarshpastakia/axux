@@ -44,6 +44,7 @@ const isDate = (value: AnyObject): value is Date => {
     return false;
   }
   if (isNumber(value)) return true;
+  if (value.includes?.("ISO") || value.includes?.("UTF")) return false;
   try {
     const parsed = Date.parse(value);
     if (!isNaN(parsed)) return true;

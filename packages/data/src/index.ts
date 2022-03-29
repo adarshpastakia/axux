@@ -26,3 +26,6 @@ export { AxRecordCounter } from "./pagination/Counter";
 
 export { useAxNavigator } from "./hooks/useNavigator";
 export { useAxPagination } from "./hooks/usePagination";
+
+export type { GridRef } from "./grid/Grid";
+export type { TimelineRef } from "./timeline/Timeline";

@@ -164,7 +164,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
 
   useLayoutEffect(() => {
     if (anchorEl) {
-      triggerEl && triggerEl.addEventListener("updatePopper", () => forceUpdate && forceUpdate());
+      const updater = () => forceUpdate && forceUpdate();
 
       if (trigger !== "hover") {
         const handler = (e: MouseEvent) => {
@@ -198,8 +198,10 @@ export const AxPopper: FC<Props & KeyValue> = ({
         anchorEl.dataset.clickable = "true";
         trigger && autoTrigger && anchorEl.addEventListener(trigger, handler);
         open && !preventClose && document.addEventListener("mouseup", forceClose);
+        triggerEl && triggerEl.addEventListener("updatePopper", updater);
 
         return () => {
+          triggerEl && triggerEl.removeEventListener("updatePopper", updater);
           trigger && anchorEl.removeEventListener(trigger, handler);
           document.removeEventListener("mouseup", forceClose);
         };
@@ -217,8 +219,10 @@ export const AxPopper: FC<Props & KeyValue> = ({
         anchorEl.addEventListener("mouseout", handlerClose);
         anchorEl.addEventListener("innershow", handlerShow);
         anchorEl.addEventListener("innerhide", handlerHide);
+        anchorEl.removeEventListener("updatePopper", updater);
 
         return () => {
+          anchorEl.removeEventListener("updatePopper", updater);
           anchorEl.removeEventListener("mouseover", handlerOpen);
           anchorEl.removeEventListener("mouseout", handlerClose);
           anchorEl.removeEventListener("innershow", handlerShow);

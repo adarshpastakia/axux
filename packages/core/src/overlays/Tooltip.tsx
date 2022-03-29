@@ -5,7 +5,7 @@
 
 import { isEmpty } from "@axux/utilities";
 import { Placement } from "@popperjs/core";
-import { FC, forwardRef, useMemo } from "react";
+import { FC, forwardRef, Fragment, useMemo } from "react";
 import { AxPopper } from "../internals/Popper";
 import { AllColors, ElementProps, RefProp } from "../types";
 
@@ -40,7 +40,9 @@ export const AxTooltip: FC<TooltipProps> = forwardRef<HTMLElement, TooltipProps>
       }
       return `ax-bg--${color} ax-color--contrast`;
     }, [color]);
-    return (
+    return isEmpty(content) || isDisabled ? (
+      <Fragment>{children}</Fragment>
+    ) : (
       <AxPopper
         trigger="hover"
         inheritRef={ref}
