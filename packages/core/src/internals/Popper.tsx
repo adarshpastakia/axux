@@ -90,7 +90,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
       },
       {
         name: "preventOverflow",
-        enabled: trigger !== "hover"
+        enabled: true
       },
       {
         name: "offset",

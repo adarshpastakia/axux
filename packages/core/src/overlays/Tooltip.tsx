@@ -5,7 +5,7 @@
 
 import { isEmpty } from "@axux/utilities";
 import { Placement } from "@popperjs/core";
-import { FC, forwardRef, Fragment, useMemo } from "react";
+import { cloneElement, FC, forwardRef, ReactElement, useMemo } from "react";
 import { AxPopper } from "../internals/Popper";
 import { AllColors, ElementProps, RefProp } from "../types";
 
@@ -41,7 +41,7 @@ export const AxTooltip: FC<TooltipProps> = forwardRef<HTMLElement, TooltipProps>
       return `ax-bg--${color} ax-color--contrast`;
     }, [color]);
     return isEmpty(content) || isDisabled ? (
-      <Fragment>{children}</Fragment>
+      cloneElement(children as ReactElement, { ref })
     ) : (
       <AxPopper
         trigger="hover"
