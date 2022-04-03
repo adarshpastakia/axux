@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { isColor, isNumber, isString, isSvgPath, isTrue } from "@axux/utilities";
-import { forwardRef, isValidElement, MouseEventHandler, useMemo } from "react";
+import { forwardRef, MouseEventHandler, useMemo } from "react";
 import { BadgeType, useBadge } from "../internals/useBadge";
 import { AllColors, ElementProps, RefProp, Size, SizeList, VFC } from "../types";
 
@@ -105,8 +105,8 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
     }, [icon]);
 
     const iconEl = useMemo(() => {
-      if (!isString(icon) && isValidElement(icon)) {
-        return icon;
+      if (!isString(icon)) {
+        throw Error("Invalid icon expected string");
       }
       return isSvg ? (
         <svg viewBox={viewBox}>
@@ -119,15 +119,8 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
         icon?.toString().startsWith("data:image") ? (
         <img src={icon.toString()} alt={icon.toString()} loading="lazy" />
       ) : icon?.toString().length <= 4 ? (
-        <svg viewBox="0 0 1em 1em">
-          <text
-            x="50%"
-            y="50%"
-            dy=".075em"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            style={{ fontSize: ".75em" }}
-          >
+        <svg>
+          <text x="50%" y="50%" dy=".075em" dominantBaseline="middle" textAnchor="middle">
             {icon}
           </text>
         </svg>

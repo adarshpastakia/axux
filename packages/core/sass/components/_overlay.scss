@@ -6,9 +6,8 @@
 #{$prefix}-overlay {
   &__mask {
     background: none;
-    inset: 0;
-    position: fixed;
     z-index: 45;
+    @include position(fixed, 0);
 
     &[data-show="true"] {
       backdrop-filter: blur(1px);
@@ -22,13 +21,12 @@
   &__container {
     background: none;
     display: flex;
-    inset: 0;
     justify-content: flex-end;
     overflow: visible;
     padding: 0.5em;
     pointer-events: none;
-    position: fixed;
     z-index: 99;
+    @include position(fixed, 0);
 
     > div {
       flex: 0 0 auto;

@@ -8,7 +8,7 @@ import {
   Story,
   Title
 } from "@storybook/addon-docs";
-import { AxButton, COLOR } from "../../src";
+import { AxButton, AxMenu, AxText, COLOR } from "../../src";
 import {
   ButtonStory,
   OnlyIconStory,
@@ -79,32 +79,32 @@ import { mdiBell } from "@mdi/js";
       <AxButton type="link">Link</AxButton>
     </div>
     <div>
-      <AxButton data-popover="true" type="default">
-        Default
-      </AxButton>
-      <AxButton data-popover="true" type="outline">
-        Outline
-      </AxButton>
-      <AxButton data-popover="true" type="solid">
-        Solid
-      </AxButton>
-      <AxButton data-popover="true" type="link">
-        Link
-      </AxButton>
+      <AxButton.Dropdown type="default" label="Default">
+        <AxMenu><AxMenu.Item label="Dropdown menu"/></AxMenu>
+      </AxButton.Dropdown>
+      <AxButton.Dropdown type="outline" label="Outline">
+        <AxMenu><AxMenu.Item label="Dropdown menu"/></AxMenu>
+      </AxButton.Dropdown>
+      <AxButton.Dropdown type="solid" label="Solid">
+        <AxMenu><AxMenu.Item label="Dropdown menu"/></AxMenu>
+      </AxButton.Dropdown>
+      <AxButton.Dropdown type="link" label="Link">
+        <AxMenu><AxMenu.Item label="Dropdown menu"/></AxMenu>
+      </AxButton.Dropdown>
     </div>
     <div>
-      <AxButton split data-popover="true" type="default">
-        Default
-      </AxButton>
-      <AxButton split data-popover="true" type="outline">
-        Outline
-      </AxButton>
-      <AxButton split data-popover="true" type="solid">
-        Solid
-      </AxButton>
-      <AxButton split data-popover="true" type="link">
-        Link
-      </AxButton>
+      <AxButton.Dropdown split type="default" label="Default">
+        <AxMenu><AxMenu.Item label="Dropdown menu"/></AxMenu>
+      </AxButton.Dropdown>
+      <AxButton.Dropdown split type="outline" label="Outline">
+        <AxMenu><AxMenu.Item label="Dropdown menu"/></AxMenu>
+      </AxButton.Dropdown>
+      <AxButton.Dropdown split type="solid" label="Solid">
+        <AxMenu><AxMenu.Item label="Dropdown menu"/></AxMenu>
+      </AxButton.Dropdown>
+      <AxButton.Dropdown split type="link" label="Link">
+        <AxMenu><AxMenu.Item label="Dropdown menu"/></AxMenu>
+      </AxButton.Dropdown>
     </div>
   </Story>
 </Canvas>

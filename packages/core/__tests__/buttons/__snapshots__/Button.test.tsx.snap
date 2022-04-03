@@ -234,7 +234,6 @@ exports[`Button renders new tab link 1`] = `
       data-icon-hilight="false"
       data-no-label="false"
       href="/test"
-      target="_blank"
     >
       <div
         class="ax-icon ax-button__icon"
@@ -448,12 +447,9 @@ exports[`Button renders with tooltip 1`] = `
   </div>
   <div
     class="ax-popper ax-root ax-tooltip ax-bg--darkest ax-color--empty "
-    data-popper-escaped="true"
-    data-popper-placement="bottom"
-    data-popper-reference-hidden="true"
     data-show="true"
     data-show-arrow="true"
-    style="position: fixed; left: 0px; top: 0px; min-width: 0; transform: translate(0px, 10px);"
+    style="position: fixed; left: 0px; top: 0px; min-width: 0;"
   >
     <div
       class="ax-popper--body"
@@ -464,7 +460,7 @@ exports[`Button renders with tooltip 1`] = `
     </div>
     <div
       class="ax-popper--arrow"
-      style="position: absolute; left: 0px; transform: translate(0px, 0px);"
+      style="position: absolute;"
     />
   </div>
 </div>

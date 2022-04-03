@@ -9,6 +9,7 @@ import {
   Title
 } from "@storybook/addon-docs";
 import { AxBox, AxText } from "../../src";
+import { BoxStory } from "./BoxStory";
 
 <Meta title="@core/Layout/Box" component={AxBox} parameters={{ jest: ["Box.test.tsx"] }} />
 
@@ -18,17 +19,7 @@ import { AxBox, AxText } from "../../src";
 
 <Canvas>
   <Story name="Box">
-    <AxBox className="ax-border ax-border--dashed">
-      <AxBox
-        className="ax-border ax-border--dashed ax-bg--lightest"
-        margin="md@md sm@sm lg@lg"
-        padding="md@md sm@sm lg@lg"
-      >
-        <AxText bg="base" block>
-          Box wrappers with margin and padding
-        </AxText>
-      </AxBox>
-    </AxBox>
+    {BoxStory}
   </Story>
 </Canvas>
 

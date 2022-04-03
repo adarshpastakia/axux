@@ -5,7 +5,16 @@
 
 import { Story } from "@storybook/react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
-import { AxContent, AxHeading, AxPage, AxSection, AxSpacer, AxText, AxViewport } from "../../src";
+import {
+  AxButton,
+  AxContent,
+  AxHeading,
+  AxPage,
+  AxSection,
+  AxSpacer,
+  AxText,
+  AxViewport
+} from "../../src";
 import { AsideProps } from "../../src/page/Aside";
 import { PageProps } from "../../src/page/Page";
 
@@ -50,10 +59,10 @@ const SectionTemplate: Story<AsideProps> = (props) => (
 export const SectionStory = SectionTemplate.bind({});
 SectionStory.args = {
   title: "Sidebar",
+  end: false,
   flyout: true,
   isResizeable: true,
-  isCollapsable: true,
-  icon: "mdi mdi-heart-circle-outline"
+  isCollapsable: true
 };
 
 export default { title: "Example/Page", component: AxPage };

@@ -183,11 +183,10 @@
   }
 
   #{$prefix}-badge {
-    inset-inline-end: 0.25em;
     margin-inline-start: -0.5em;
     order: 3;
     pointer-events: none;
-    position: absolute;
+    @include position(absolute, auto 0.25em auto auto);
 
     &:not(:empty) {
       font-size: 0.625em;

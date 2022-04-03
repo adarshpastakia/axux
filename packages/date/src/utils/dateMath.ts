@@ -38,12 +38,12 @@ import { dateFormat } from "./index";
 export const I18nKey = "superdate";
 
 /** @internal */
-const isDate = (value: AnyObject): value is Date => {
+const isDate = (value: AnyObject, ignoreNumber = false): value is Date => {
   if (isDateLike(value)) return false;
   if (isString(value) && !value.match(/^(\d*[-/.]\d*[-/.]\d*)?/)) {
     return false;
   }
-  if (isNumber(value)) return true;
+  if (isNumber(value)) return !ignoreNumber;
   if (value.includes?.("ISO") || value.includes?.("UTF")) return false;
   try {
     const parsed = Date.parse(value);
@@ -75,14 +75,18 @@ export const getDateParts = (dt: DateValue): DatePart | undefined => {
 };
 
 /** @internal */
-export const parseDate = (dt?: string | number, rounded?: "start" | "end"): ParsedDate => {
+export const parseDate = (
+  dt?: string | number,
+  ordinal?: "start" | "end",
+  isRounded = false
+): ParsedDate => {
   if (dt && isDate(dt)) {
     return new Date(dt);
   } else if (dt && isDateLike(dt)) {
     const parts = getDateParts(dt);
 
     if (parts) {
-      const { part, op, diff } = parts;
+      const { part, op, diff = 0 } = parts;
       const diffNum = parseInt(`${op}${diff}`, 10);
       let date = startOfMinute(new Date());
 
@@ -90,43 +94,43 @@ export const parseDate = (dt?: string | number, rounded?: "start" | "end"): Pars
         case DateParts.NOW:
           return date;
         case DateParts.DECADE:
-          if (rounded) {
-            date = (rounded === "start" ? startOfDecade : endOfDecade)(date);
+          if (isRounded || diff === 0) {
+            date = (ordinal === "start" ? startOfDecade : endOfDecade)(date);
           }
           return addYears(date, diffNum * 10);
         case DateParts.YEAR:
-          if (rounded) {
-            date = (rounded === "start" ? startOfYear : endOfYear)(date);
+          if (isRounded || diff === 0) {
+            date = (ordinal === "start" ? startOfYear : endOfYear)(date);
           }
           return addYears(date, diffNum);
         case DateParts.QUARTER:
-          if (rounded) {
-            date = (rounded === "start" ? startOfQuarter : endOfQuarter)(date);
+          if (isRounded || diff === 0) {
+            date = (ordinal === "start" ? startOfQuarter : endOfQuarter)(date);
           }
           return addQuarters(date, diffNum);
         case DateParts.MONTH:
-          if (rounded) {
-            date = (rounded === "start" ? startOfMonth : endOfMonth)(date);
+          if (isRounded || diff === 0) {
+            date = (ordinal === "start" ? startOfMonth : endOfMonth)(date);
           }
           return addMonths(date, diffNum);
         case DateParts.WEEK:
-          if (rounded) {
-            date = (rounded === "start" ? startOfWeek : endOfWeek)(date);
+          if (isRounded || diff === 0) {
+            date = (ordinal === "start" ? startOfWeek : endOfWeek)(date);
           }
           return addWeeks(date, diffNum);
         case DateParts.DAY:
-          if (rounded) {
-            date = (rounded === "start" ? startOfDay : endOfDay)(date);
+          if (isRounded || diff === 0) {
+            date = (ordinal === "start" ? startOfDay : endOfDay)(date);
           }
           return addDays(date, diffNum);
         case DateParts.HOUR:
-          if (rounded) {
-            date = (rounded === "start" ? startOfHour : endOfHour)(date);
+          if (isRounded || diff === 0) {
+            date = (ordinal === "start" ? startOfHour : endOfHour)(date);
           }
           return addHours(date, diffNum);
         case DateParts.MINUTE:
-          if (rounded) {
-            date = (rounded === "start" ? startOfMinute : endOfMinute)(date);
+          if (isRounded || diff === 0) {
+            date = (ordinal === "start" ? startOfMinute : endOfMinute)(date);
           }
           return addMinutes(date, diffNum);
       }
@@ -143,8 +147,8 @@ const parseDateValue = (dt: DateValue): [ParsedDate, ParsedDate] | ParsedDate =>
   if (isString(dt) && dt.includes("|")) {
     const [startDate, endDate] = dt.split("|");
     return [
-      parseDate(startDate, startDate === endDate ? "start" : undefined),
-      parseDate(endDate, startDate === endDate ? "end" : undefined)
+      parseDate(startDate, "start", startDate === endDate),
+      parseDate(endDate, "end", startDate === endDate)
     ];
   } else {
     return parseDate(dt);
@@ -230,12 +234,15 @@ export const superDateType = (dt?: string | number): Type => {
 };
 
 export const DateUtils = {
-  isValid(dt: DateValue): boolean {
+  isValid(dt: DateValue, ignoreNumber = false): boolean {
     if (isString(dt) && dt.includes("|")) {
       const [start, end] = dt.split("|");
-      return ((isDate(start) || isDateLike(start)) && isDate(end)) || isDateLike(end);
+      return (
+        ((isDate(start, ignoreNumber) || isDateLike(start)) && isDate(end, ignoreNumber)) ||
+        isDateLike(end)
+      );
     }
-    return isDate(dt) || isDateLike(dt);
+    return isDate(dt, ignoreNumber) || isDateLike(dt);
   },
   parse(dt: DateValue): ParsedDate {
     return parseDateValue(dt) as ParsedDate;

@@ -16,11 +16,10 @@
 
   > label {
     font-size: 0.5em;
-    inset: 0;
-    position: absolute;
     text-align: center;
     vertical-align: middle;
     z-index: 2;
     @include noselect();
+    @include position(absolute, 0);
   }
 }

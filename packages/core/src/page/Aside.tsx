@@ -9,11 +9,11 @@ import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../internals/usePropToggle";
 import { useResize } from "../internals/useResize";
 import { AxLoader } from "../loader/Loader";
-import { CollapseProps, ElementProps, EmptyCallback, IconProps } from "../types";
+import { CollapseProps, ElementProps, EmptyCallback } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
-export interface AsideProps extends IconProps, CollapseProps, ElementProps {
+export interface AsideProps extends CollapseProps, ElementProps {
   /**
    * Align inline-end
    */
@@ -80,7 +80,6 @@ export interface AsideProps extends IconProps, CollapseProps, ElementProps {
 export const Aside: FC<AsideProps> = ({
   children,
   title,
-  icon,
   isLoading,
   className,
   isCollapsable,

@@ -10,6 +10,7 @@
   min-width: 1.5em;
   overflow: hidden;
   padding: 0 0.25em;
+  pointer-events: none;
   text-align: center;
   vertical-align: middle;
   @include noselect();

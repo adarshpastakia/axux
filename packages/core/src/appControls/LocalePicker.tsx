@@ -28,9 +28,7 @@ const LocaleLabels: KeyValue = {
 
 /**
  * Switch between available i18n locales
- * @param className
- * @param isMenu
- * @constructor
+ * @internal
  */
 export const AxLocalePicker: VFC<ElementProps & { isMenu?: boolean }> = ({ className, isMenu }) => {
   const { locales, changeLocale } = useContext(Globals);
@@ -56,7 +54,7 @@ export const AxLocalePicker: VFC<ElementProps & { isMenu?: boolean }> = ({ class
       )}
       <div dir="ltr">
         {locales.map((locale) => (
-          <div key={locale} className="ax-flex" onClick={() => changeLocale(locale)}>
+          <div key={locale} className="ax-row" onClick={() => changeLocale(locale)}>
             <div
               className="ax-col--fill ax-locale--link"
               data-locale={locale}

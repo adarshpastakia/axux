@@ -11,7 +11,7 @@ export interface FlexRowProps extends ElementProps, RefProp<HTMLDivElement> {
   /**
    * Wrap columns
    */
-  wrap?: boolean;
+  noWrap?: boolean;
   /**
    * Arrange reverse order
    */
@@ -50,7 +50,7 @@ export const AxFlexRow: FC<FlexRowProps> = forwardRef<HTMLDivElement, FlexRowPro
   (
     {
       children,
-      wrap = true,
+      noWrap = false,
       reverse = false,
       vertical = false,
       align = "",
@@ -65,7 +65,7 @@ export const AxFlexRow: FC<FlexRowProps> = forwardRef<HTMLDivElement, FlexRowPro
   ) => {
     const classes = useMemo(() => {
       const cls = ["ax-row", className ?? ""];
-      if (wrap === false) {
+      if (noWrap === false) {
         cls.push(`ax-row--nowrap`);
       }
       if (vertical) {
@@ -84,7 +84,7 @@ export const AxFlexRow: FC<FlexRowProps> = forwardRef<HTMLDivElement, FlexRowPro
         cls.push(`ax-gutter--${gutter}`);
       }
       return cls.join(" ");
-    }, [className, wrap, vertical, reverse, align, justify, gutter]);
+    }, [className, noWrap, vertical, reverse, align, justify, gutter]);
 
     const styles = useMemo(() => {
       return {

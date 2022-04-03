@@ -14,7 +14,7 @@ export interface HistogramRecord {
   record?: KeyValue;
 }
 
-export interface HistogramProps extends ElementProps {
+export interface HistogramProps extends Omit<ElementProps, "onClick"> {
   data: HistogramRecord[];
   total: number;
   color?: Color | ColorPalette;

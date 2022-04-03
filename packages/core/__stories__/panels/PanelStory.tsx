@@ -10,20 +10,20 @@ import { AxButton, AxContent, AxContextMenu, AxMenu, AxPanel, AxText } from "../
 import { PanelProps } from "../../src/panels/Panel";
 import { ElementProps } from "../../src/types";
 
+const contextItems = [
+  <AxMenu key="one">
+    <AxMenu.Item label="Submenu" panelId="submenu" />
+    <AxMenu.Item label="Test" />
+  </AxMenu>,
+  <AxMenu key="submenu" panelId="submenu" title="Submenu">
+    <AxMenu.Item label="Test Next" />
+  </AxMenu>
+];
+
 const Template: Story<PropsWithChildren<PanelProps>> = (props) => {
   return (
     <AxPanel {...props}>
-      <AxContextMenu
-        menu={[
-          <AxMenu key="one">
-            <AxMenu.Item label="Submenu" panelId="submenu" />
-            <AxMenu.Item label="Test" />
-          </AxMenu>,
-          <AxMenu key="two" panelId="submenu" title="Submenu">
-            <AxMenu.Item label="Test" />
-          </AxMenu>
-        ]}
-      >
+      <AxContextMenu menu={contextItems}>
         <AxContent>Test right click</AxContent>
       </AxContextMenu>
     </AxPanel>
@@ -46,12 +46,13 @@ const StackTemplate: Story<ElementProps> = (props) => (
   <AxPanel.Stack {...props}>
     <AxPanel paper height="10rem" title="Panel 1">
       <AxContent>
-        <AxButton data-panel="pan2">Next 2</AxButton>
+        <AxButton panelId="pan2">Next 2</AxButton>
       </AxContent>
     </AxPanel>
     <AxPanel paper panelId="pan2" height="10rem" title="Panel 2">
       <AxContent>
-        <AxButton data-panel="pan3">Next 3</AxButton>
+        <AxButton panelId="back">Back</AxButton>
+        <AxButton panelId="pan3">Next 3</AxButton>
       </AxContent>
     </AxPanel>
     <AxPanel paper panelId="pan3" height="10rem" title="Panel 3">

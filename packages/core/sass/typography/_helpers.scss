@@ -62,9 +62,9 @@
     }
 
     #{$prefix}-badge {
-      inset-inline-end: 0;
       pointer-events: none;
       position: absolute;
+      @include position(absolute, auto 0 auto auto);
 
       &:not(:empty) {
         font-size: 0.5em;
@@ -205,6 +205,14 @@
       @include clip();
     }
 
+    p {
+      line-height: inherit;
+    }
+
+    &:not(#{$prefix}-block) p {
+      display: inline-block;
+    }
+
     &--upper {
       text-transform: uppercase;
     }
@@ -243,12 +251,11 @@
         font-size: 3em;
         font-weight: $font-weight-medium;
         line-height: 1;
-        padding-right: 0.25em;
+        padding-inline-end: 0.25em;
       }
 
       @at-root [dir="rtl"] &::first-letter {
         float: right;
-        padding-left: 0.25em;
       }
     }
 

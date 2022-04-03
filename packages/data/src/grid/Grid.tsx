@@ -23,7 +23,7 @@ export interface GridRef {
   scrollTo: (index: number) => void;
 }
 
-export interface GridProps extends ElementProps, RefProp<GridRef> {
+export interface GridProps extends Omit<ElementProps, "onScroll">, RefProp<GridRef> {
   cellWidth?: string;
   isLoading?: boolean;
   canLoadMore?: boolean;

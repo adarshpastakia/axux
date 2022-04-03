@@ -26,19 +26,6 @@
       margin-inline-end: 0.5rem;
     }
   }
-  &-flex {
-    @extend %ui-flex;
-    align-items: stretch;
-    justify-content: stretch;
-
-    &--inline {
-      @extend %ui-flex--inline;
-    }
-
-    &--vertical {
-      @extend %ui-flex--vertical;
-    }
-  }
 
   &-container {
     --gutter: #{$gutter};
@@ -50,8 +37,7 @@
     }
 
     &:not(&--fluid) {
-      margin-left: auto;
-      margin-right: auto;
+      margin-inline: auto;
     }
   }
 

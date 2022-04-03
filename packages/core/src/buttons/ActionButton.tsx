@@ -15,7 +15,7 @@ export interface ActionProps extends ButtonProps {
 export const AxActionButton: FC<ActionProps> = ({ onClick, message, color, icon, ...props }) => {
   const [actionDone, setActionDone] = useState(false);
   const doClick = useCallback(
-    (e: MouseEvent) => {
+    (e: MouseEvent<HTMLElement>) => {
       onClick && onClick(e);
       setActionDone(true);
     },

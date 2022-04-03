@@ -58,7 +58,7 @@ export class ErrorBoundary extends Component<
             <div className="ax-errorBoundary">
               <div>
                 <div style={{ padding: 16 }}>
-                  <div className="ax-flex ax-row--middle">
+                  <div className="ax-row ax-row--middle">
                     <ErrorIcon />
                     <div className="ax-padding--x--md ax-align--start ax-col--fill">
                       {E ? (

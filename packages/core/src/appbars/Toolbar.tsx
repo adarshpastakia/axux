@@ -38,11 +38,6 @@ const childNotInView = (el: HTMLElement, child: Element, vertical: boolean) => {
 /**
  *
  * Toolbar
- * @param align
- * @param enableOverflow
- * @param vertical
- * @param children
- * @constructor
  * @internal
  */
 export const AxToolbar: FC<ToolbarProps> = ({

@@ -9,6 +9,7 @@
   grid-area: head;
   grid-template-areas: ". . icon title actions";
   grid-template-columns: auto auto auto 1fr auto;
+  overflow: hidden;
   @extend #{$prefix}-border--b;
   @include noselect();
 
@@ -70,6 +71,7 @@
   display: flex;
   flex-flow: row nowrap;
   grid-area: foot;
+  overflow: hidden;
   @extend #{$prefix}-border--t;
 
   & > #{$prefix}-toolbar {

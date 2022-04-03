@@ -31,6 +31,7 @@ export interface AlertProps extends IconProps {
  * @param type
  * @param color
  * @param icon
+ * @param extraActions
  * @param okLabel
  * @param cancelLabel
  * @param onClose
@@ -42,6 +43,7 @@ export const AxAlert: VFC<AlertProps & { [key: string]: AnyObject }> = ({
   type = "alert",
   color = "primary",
   icon,
+  extraActions,
   okLabel,
   cancelLabel,
   onClose
@@ -93,6 +95,7 @@ export const AxAlert: VFC<AlertProps & { [key: string]: AnyObject }> = ({
         }
       />
       <div className="ax-alert__footer">
+        <div onClickCapture={() => onClose?.(false)}>{extraActions}</div>
         {type === "confirm" && (
           <AxButton
             type="link"

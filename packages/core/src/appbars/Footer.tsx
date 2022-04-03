@@ -8,10 +8,12 @@ import { ElementProps } from "../types";
 
 /**
  * Footer bar
- * @param children
- * @param className
  * @internal
  */
-export const AxFooter: FC<ElementProps> = ({ children, className }) => {
-  return <div className={`ax-footer ${className ?? ""}`}>{children}</div>;
+export const AxFooter: FC<ElementProps> = ({ children, className, ...props }) => {
+  return (
+    <div className={`ax-footer ${className ?? ""}`} {...props}>
+      {children}
+    </div>
+  );
 };

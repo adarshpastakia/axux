@@ -35,9 +35,8 @@
     &::after {
       content: "";
       height: 3em;
-      inset: unset 0 0;
-      position: absolute;
       z-index: 0;
+      @include position(absolute, auto 0 0);
     }
   }
 

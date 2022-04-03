@@ -3,13 +3,14 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { FC, MouseEvent, ReactNodeArray, useCallback, useMemo, useState } from "react";
+import { FC, MouseEvent, useCallback, useLayoutEffect, useMemo, useState } from "react";
 import { AxPopper } from "../internals/Popper";
 import { AxPanelStack } from "../panels/PanelStack";
-import { ElementProps, VFC } from "../types";
+import { VFC } from "../types";
 
-export interface ContextMenuPopperProps extends ElementProps {
-  menu: ReactNodeArray;
+export interface ContextMenuPopperProps {
+  menu: JSX.Element[];
+  className?: string;
   x: number;
   y: number;
 }
@@ -31,6 +32,17 @@ export const AxContextMenuPopper: VFC<ContextMenuPopperProps & { onClose: () => 
     [x, y]
   );
 
+  useLayoutEffect(() => {
+    const callback = (e: Event) => {
+      e.stopPropagation();
+      document.body.removeEventListener("mouseup", callback);
+    };
+    document.body.addEventListener("mouseup", callback);
+    return () => {
+      document.body.removeEventListener("mouseup", callback);
+    };
+  }, []);
+
   return (
     <AxPopper
       placement="bottom-start"
@@ -47,9 +59,9 @@ export const AxContextMenuPopper: VFC<ContextMenuPopperProps & { onClose: () => 
   );
 };
 
-export interface ContextMenuProps extends ElementProps {
-  menu: ReactNodeArray;
-
+export interface ContextMenuProps {
+  menu: JSX.Element[];
+  className?: string;
   onContextMenu?: (e: MouseEvent) => boolean;
 }
 

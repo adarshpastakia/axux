@@ -103,8 +103,8 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
         cls.push(`ax-color--${color}`);
         cls.push("ax-bg--lightest");
       } else {
-        cls.push("ax-bg--medium");
-        cls.push("ax-color--base");
+        cls.push("ax-bg--light");
+        cls.push("ax-color--dark");
       }
       return cls.join(" ");
     }, [size, className, src, noBgForImage, bg, color]);
@@ -123,8 +123,15 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
         return <AxIcon icon={icon} />;
       } else {
         return (
-          <svg viewBox="0 0 54 24">
-            <text x="3" y="24">
+          <svg>
+            <text
+              x="50%"
+              y="50%"
+              dy=".075em"
+              dominantBaseline="middle"
+              textAnchor="middle"
+              style={{ fontSize: ".625em" }}
+            >
               {fallback}
             </text>
           </svg>

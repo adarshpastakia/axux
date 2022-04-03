@@ -37,24 +37,10 @@ export interface HeaderProps extends IconProps, ElementProps {
    */
   size?: "md" | "lg";
   onBack?: EmptyCallback;
-  onClick?: EmptyCallback;
 }
 
 /**
  * Header bar
- * @param title
- * @param icon
- * @param children
- * @param bg
- * @param color
- * @param size
- * @param onBack
- * @param iconBg
- * @param iconColor
- * @param onClick
- * @param className
- * @param aria-*
- * @constructor
  * @internal
  */
 export const AxHeader: FC<HeaderProps> = ({
@@ -69,7 +55,7 @@ export const AxHeader: FC<HeaderProps> = ({
   iconColor,
   onClick,
   className,
-  ...aria
+  ...props
 }) => {
   const classes = useMemo(() => {
     const cls = ["ax-header", className ?? ""];
@@ -100,7 +86,7 @@ export const AxHeader: FC<HeaderProps> = ({
   }, [iconBg, iconColor]);
 
   return (
-    <div className={classes} {...aria}>
+    <div className={classes} {...props}>
       {onBack && (
         <Fragment>
           <AxButton

@@ -6,7 +6,7 @@
 import { Placement } from "@popperjs/core";
 import { FC, forwardRef, PropsWithChildren } from "react";
 import { AxPopper } from "../internals/Popper";
-import { ElementProps, EmptyCallback, RefProp } from "../types";
+import { ElementProps, EmptyCallback } from "../types";
 
 /** @internal */
 export interface PopoverProps extends ElementProps {
@@ -55,7 +55,7 @@ export interface PopoverProps extends ElementProps {
   preventClose?: boolean;
 }
 
-interface ExtendedFC<T> extends FC<T> {
+interface ExtendedFC extends FC<PopoverProps> {
   PreventClose: FC;
   ForceClose: FC;
 }
@@ -64,7 +64,7 @@ interface ExtendedFC<T> extends FC<T> {
  * Dropdown
  * @internal
  */
-export const AxPopover: ExtendedFC<PopoverProps & RefProp> = forwardRef<HTMLElement, PopoverProps>(
+export const AxPopover: ExtendedFC = forwardRef<HTMLElement, PopoverProps>(
   (
     {
       closeOnClick = false,

@@ -16,7 +16,7 @@ import { Fragment } from "react";
 
 <Section title="Basic Palette">
   <LightBox>
-    <div className="ax-flex">
+    <div className="ax-row">
       {[...THEME, ...GRAYSCALE].map((c) => (
         <ColorBox key={c} color={c} />
       ))}
@@ -54,7 +54,7 @@ import { Fragment } from "react";
 
 <Section title="Extra Palette">
   <LightBox>
-    <div className="ax-flex">
+    <div className="ax-row">
       {[...PALETTE].map((c) => (
         <ColorBox key={c} color={c} showLabel />
       ))}

@@ -28,11 +28,7 @@ export interface MeterProps {
 
 /**
  * Meter bar
- * @param value
- * @param showLabel
- * @param color
- * @param border
- * @constructor
+ * @internal
  */
 export const AxMeter: VFC<MeterProps> = ({ value = 0, showLabel, color, border }) => {
   const percent = useMemo(() => {

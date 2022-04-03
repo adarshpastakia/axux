@@ -107,7 +107,7 @@ const Template: Story<FormProps & { isDisabled?: boolean }> = ({ isDisabled, ...
                   label: name,
                   value: iso2,
                   badge: tld,
-                  icon: <span>{emoji}</span>
+                  icon: emoji
                 }))}
                 isDisabled={isDisabled}
                 label="Select field"
@@ -138,8 +138,8 @@ const Template: Story<FormProps & { isDisabled?: boolean }> = ({ isDisabled, ...
                 ]}
                 makeOption={({ icon, value }) => ({
                   value,
-                  label: value,
-                  icon: <span>{icon}</span>
+                  icon,
+                  label: value
                 })}
                 isDisabled={isDisabled}
                 label="Multi select field"

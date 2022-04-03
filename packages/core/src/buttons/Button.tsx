@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { isEmpty } from "@axux/utilities";
-import { FC, forwardRef, MouseEventHandler, useCallback } from "react";
+import { FC, forwardRef, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import { AxIcon } from "../icons/Icon";
 import { BadgeType, useBadge } from "../internals/useBadge";
@@ -48,10 +48,6 @@ export interface ButtonProps
    * Button value for toggle group
    */
   value?: string;
-  /**
-   * Click event handler
-   */
-  onClick?: MouseEventHandler;
 
   /**
    * Badge indicator
@@ -88,9 +84,14 @@ export interface ButtonProps
    * When used in dropdown use to hide caret
    */
   hideCaret?: boolean;
+
+  /**
+   * panelId to navigate panel stack
+   */
+  panelId?: string;
 }
 
-interface ExtendedFC<T> extends FC<T> {
+interface ExtendedFC extends FC<ButtonProps> {
   Group: typeof AxButtonGroup;
   Dropdown: typeof AxDropdown;
   Action: typeof AxActionButton;
@@ -103,10 +104,7 @@ interface ExtendedFC<T> extends FC<T> {
 /**
  * Action buttons
  */
-export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
-  HTMLAnchorElement,
-  ButtonProps
->(
+export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
   (
     {
       children,
@@ -117,7 +115,6 @@ export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
       to,
       href,
       badge,
-      onClick,
       hideCaret,
       split,
       isLoading,
@@ -129,6 +126,7 @@ export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
       iconAlign = "start",
       iconHilight = false,
       tabIndex,
+      panelId,
       ref: _ref,
       ...aria
     },
@@ -167,11 +165,10 @@ export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
           <InnerButton
             tabIndex={tabIndex}
             className="ax-button__inner"
-            onClick={onClick}
             data-no-label={isEmpty(label || children)}
+            data-panel={panelId}
             data-icon-align={iconAlign}
             data-icon-hilight={iconHilight}
-            {...aria}
           >
             {icon && <AxIcon className="ax-button__icon" icon={icon} />}
             {isLoading && (

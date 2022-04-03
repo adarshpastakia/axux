@@ -33,12 +33,11 @@
   cursor: wait;
   display: grid;
   font-size: 1.5em;
-  inset: 0;
   line-height: 1;
   place-content: center;
   place-items: center;
-  position: absolute;
   z-index: 9999;
+  @include position(absolute, 0);
 
   &[data-size="lg"] {
     font-size: 3em;
@@ -51,16 +50,16 @@
     grid-area: loader;
     height: 4px;
     overflow: hidden;
-    position: relative;
+    z-index: 10;
+    @include position(absolute, 0 0 auto);
 
     &::before {
       background-color: currentColor;
       content: "";
-      inset: 1px 0 1px 0;
       inset-inline-end: unset;
-      position: absolute;
       transform: scaleX(0) translateX(0%);
       width: 100%;
+      @include position(absolute, 1px 0);
       @include animation(infinite-progress 1s ease-in-out infinite);
     }
   }
@@ -78,12 +77,12 @@
   &__app {
     display: grid;
     height: 100vh;
-    inset: 0;
     place-content: center;
     place-items: center;
-    position: fixed;
+    text-align: center;
     width: 100vw;
     z-index: 9999;
+    @include position(fixed, 0);
 
     &--indicator {
       height: 0.25em;
@@ -98,6 +97,11 @@
         position: absolute;
         @include animation(app-loader 2s linear infinite);
       }
+    }
+
+    small {
+      font-size: 1rem;
+      font-weight: 300;
     }
   }
 

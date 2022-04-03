@@ -37,7 +37,7 @@ export const AxViewportMenu: FC<ViewportMenuProps> = ({
   const [collapsed, toggleCollapse] = usePropToggle(isCollapsed, onCollapse);
 
   const getItemIcon = useCallback((item: KeyValue) => {
-    return item.icon ?? <span>{(item.label ?? "-").substr(0, 1)}</span>;
+    return item.icon ?? (item.label ?? "-").substr(0, 1);
   }, []);
 
   return (

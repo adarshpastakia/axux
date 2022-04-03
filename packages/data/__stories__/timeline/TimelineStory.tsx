@@ -14,7 +14,7 @@ import {
   useAxGlobals
 } from "@axux/core";
 import { AxDateDisplay } from "@axux/date";
-import { mdiComment, mdiFaceProfile, mdiStar, mdiTag } from "@mdi/js";
+import { mdiComment, mdiFaceMan, mdiStar, mdiTag } from "@mdi/js";
 import { Story } from "@storybook/react";
 import { useState } from "react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
@@ -35,7 +35,7 @@ const entries: Array<KeyValue> = [
     timestamp: new Date(),
     username: "Smeg",
     event: "started",
-    avatar: mdiFaceProfile,
+    avatar: mdiFaceMan,
     body: LIPSUM.para,
     isCollapsable: true
   },
@@ -62,7 +62,7 @@ const entries: Array<KeyValue> = [
     timestamp: new Date(),
     username: "Smeg",
     event: "started",
-    avatar: mdiFaceProfile,
+    avatar: mdiFaceMan,
     body: LIPSUM.para,
     isCollapsable: true
   }
@@ -98,7 +98,7 @@ const Template: Story = (props) => {
           <AxTimeline {...props}>
             {records.map(({ body, avatar, ...record }, index) => (
               <AxTimeline.Entry key={index} index={index} avatar={avatar}>
-                <div className="ax-flex">
+                <div className="ax-row">
                   {record.type === "comment" ? (
                     <AxPanel
                       className="ax-col ax-col--fill"

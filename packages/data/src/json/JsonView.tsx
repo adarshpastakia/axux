@@ -50,7 +50,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
 
     if (isNumber(value)) return Format.number(value);
     if (isBoolean(value)) return !!value ? "Yes" : "No";
-    if (DateUtils.isValid(value))
+    if (DateUtils.isValid(value, true))
       return (
         <AxDateDisplay date={DateUtils.parse(value) as AnyObject} format="dd MMM yyyy HH:mm:ss" />
       );

@@ -65,7 +65,7 @@ const darkTheme = create({
 
 export const parameters = {
   layout: "centered",
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: {},
   backgrounds: { disable: true, grid: { disable: true } },
   docs: {
     components: {
@@ -142,9 +142,9 @@ channel.on("THEME_TOGGLE", (theme: string) => {
       theme: theme === "dark" ? darkTheme : lightTheme
     }
   });
-  document.body.classList.remove(`ax-light`);
-  document.body.classList.remove(`ax-dark`);
-  document.body.classList.add(`ax-${theme}`);
+  document.documentElement.classList.remove(`ax-light`);
+  document.documentElement.classList.remove(`ax-dark`);
+  document.documentElement.classList.add(`ax-${theme}`);
 });
 
 const originalError = console.error;

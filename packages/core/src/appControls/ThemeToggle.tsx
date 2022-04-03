@@ -13,9 +13,7 @@ import { AppIcons } from "../types/appIcons";
 
 /**
  * Toggle between light and dark themes
- * @param className
- * @param isMenu
- * @constructor
+ * @internal
  */
 export const AxThemeToggle: VFC<ElementProps & { isMenu?: boolean }> = ({ className, isMenu }) => {
   const { toggleTheme } = useContext(Globals);

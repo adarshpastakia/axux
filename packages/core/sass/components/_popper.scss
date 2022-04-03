@@ -118,6 +118,7 @@
   }
 
   &#{$prefix}-tooltip {
+    font-size: 0.875rem;
     border-radius: $base-border-radius;
     pointer-events: none;
     @extend #{$prefix}-shadow--2;

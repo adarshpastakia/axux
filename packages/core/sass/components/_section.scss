@@ -21,7 +21,7 @@
     @extend #{$prefix}-border--e;
     display: grid;
     grid-area: side-s;
-    grid-template-areas: "head resize" "loader resize" "body resize" "foot resize";
+    grid-template-areas: "head resize" "body resize" "foot resize";
     grid-template-columns: 1fr auto;
     grid-template-rows: auto auto 1fr auto;
     overflow: hidden;
@@ -194,21 +194,21 @@
 
           &--body {
             inset-inline-end: 0;
-            transform: translateX(100%);
+            transform: translateX($collapsedWidth);
 
             @at-root [dir="rtl"] & {
-              transform: translateX(-100%);
+              transform: translateX(-1 * $collapsedWidth);
             }
           }
         }
 
         &[data-flyout="true"] #{$base}--body {
           box-shadow: -2px 0 25px rgba(0, 0, 0, 0.5);
-          transform: translateX(-1 * $collapsedWidth);
+          transform: translateX(calc(-100% - 1px));
 
           @at-root [dir="rtl"] & {
             box-shadow: 2px 0 25px rgba(0, 0, 0, 0.5);
-            transform: translateX($collapsedWidth);
+            transform: translateX(calc(100% + 1px));
           }
         }
       }

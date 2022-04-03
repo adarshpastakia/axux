@@ -5,6 +5,7 @@
 
 @import "~@axux/core/sass/base";
 .sb-show-main.sb-show-main.sb-show-main {
+  @import "~@axux/core/sass/base";
   @import "~@axux/core/sass/theme-light";
   @import "~@axux/core/sass/theme-dark";
   @import "~@axux/form/sass/axux-form";
@@ -29,6 +30,12 @@
 }
 
 .sb-show-main .sbdocs {
+  & .os-host.os-host,
+  &.sbdocs.sbdocs.sbdocs-wrapper,
+  & .sbdocs-preview.sbdocs-preview {
+    background: none;
+  }
+
   .innerZoomElementWrapper {
     padding-bottom: 24px;
   }

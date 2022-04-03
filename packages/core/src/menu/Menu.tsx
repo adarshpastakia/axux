@@ -13,7 +13,7 @@ import { AxText, TextProps } from "../typography/Text";
 import { AxMenuItem, MenuItemType } from "./MenuItem";
 
 /** @internal */
-export interface MenuProps extends ElementProps {
+export interface MenuProps extends Omit<ElementProps, "onClick"> {
   size?: Size;
   title?: string;
   panelId?: string;

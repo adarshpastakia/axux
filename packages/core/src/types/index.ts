@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import {
-  AriaAttributes,
+  AriaAttributes, DOMAttributes,
   FC,
   HTMLAttributeAnchorTarget,
   HTMLAttributes,
@@ -109,6 +109,19 @@ export interface ElementProps extends AriaAttributes {
    * CSS class name
    */
   className?: HTMLAttributes<HTMLElement>["className"];
+
+  onClick?: DOMAttributes<HTMLElement>["onClick"];
+  onDoubleClick?: DOMAttributes<HTMLElement>["onDoubleClick"];
+  onContextMenu?: DOMAttributes<HTMLElement>["onContextMenu"];
+
+  onMouseDown?: DOMAttributes<HTMLElement>["onMouseDown"];
+  onMouseUp?: DOMAttributes<HTMLElement>["onMouseUp"];
+  onMouseEnter?: DOMAttributes<HTMLElement>["onMouseEnter"];
+  onMouseLeave?: DOMAttributes<HTMLElement>["onMouseLeave"];
+
+  onKeyDown?: DOMAttributes<HTMLElement>["onKeyDown"];
+  onKeyUp?: DOMAttributes<HTMLElement>["onKeyUp"];
+  onScroll?: DOMAttributes<HTMLElement>["onScroll"];
 }
 
 export interface AnchorProps {

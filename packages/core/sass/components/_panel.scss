@@ -8,6 +8,7 @@
   display: grid;
   grid-template-areas: "head" "loader" "content" "foot";
   grid-template-rows: auto auto 1fr auto;
+  overflow: hidden;
   position: relative;
   @extend #{$prefix}-bg--panel;
 
@@ -62,10 +63,9 @@
     }
   }
   &[data-expand="true"] {
-    inset: 1em;
     max-height: unset !important;
-    position: fixed;
     z-index: 25;
+    @include position(fixed, 1em);
     @extend #{$prefix}-shadow--4;
   }
 }

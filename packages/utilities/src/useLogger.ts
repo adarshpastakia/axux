@@ -3,14 +3,14 @@
 // @copyright : 2021
 // @license   : MIT
 
-const TypeColors = {
+export const TypeColors = {
   info: "color: #2B95D6;font-weight:bold;",
   debug: "color: #5C7080;font-weight:bold;",
   error: "color: #F55656;font-weight:bold;",
   warning: "color: #F29D49;font-weight:bold;"
 };
 
-const TagColors = {
+export const TagColors = {
   info: "color: #106BA3;",
   debug: "color: #394B59;",
   error: "color: #C23030;",
@@ -19,11 +19,20 @@ const TagColors = {
 
 /* istanbul ignore file */
 /** @internal */
-export const getLogger = (base: string) => ({
+export const useLogger = (base: string) => ({
+  timer(key: string) {
+    console.time(key);
+    return {
+      log: (...args: AnyObject[]) => console.timeLog(key, ...args),
+      end: () => console.timeEnd(key)
+    };
+  },
+
   debug(msg: string, ...rest: AnyObject[]) {
     if (process.env.NODE_ENV === "development") {
       // tslint:disable-next-line:no-console
-      console.debug(`%cDEBUG::%c${base} - ${msg}\n`, TypeColors.debug, TagColors.debug, ...rest);
+      console.debug(`%cDEBUG::%c${base} - ${msg}`, TypeColors.debug, TagColors.debug);
+      rest.forEach((e) => console.table(e));
     }
   },
 

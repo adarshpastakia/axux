@@ -1,17 +1,9 @@
 // @author    : Adarsh Pastakia
 // @version   : 0.0.1
-// @copyright : 2021
+// @copyright : 2022
 // @license   : MIT
 
-import {
-  Children,
-  cloneElement,
-  DOMAttributes,
-  FC,
-  forwardRef,
-  ReactElement,
-  useMemo
-} from "react";
+import { Children, cloneElement, FC, forwardRef, ReactElement, useMemo } from "react";
 import { AxFooter } from "../appbars/Footer";
 import { AxHeader } from "../appbars/Header";
 import { AxButton } from "../buttons/Button";
@@ -35,8 +27,7 @@ export interface PanelProps
     ExpandProps,
     ElementProps,
     IconProps,
-    RefProp<HTMLDivElement>,
-    DOMAttributes<HTMLDivElement> {
+    RefProp<HTMLDivElement> {
   /**
    * Panel id
    */
@@ -104,7 +95,8 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       isAccordion,
-      ...aria
+      onClick,
+      ...props
     },
     ref
   ) => {
@@ -190,14 +182,26 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       };
     }, [height, minHeight, maxHeight]);
 
+    const classes = useMemo(() => {
+      const cls = ["ax-panel", className ?? ""];
+      if (onClick) {
+        cls.push("ax-clickable");
+      }
+      if (paper) {
+        cls.push("ax-paper");
+      }
+      return cls.join(" ");
+    }, [className, onClick, paper]);
+
     return (
       <div
         ref={ref}
-        className={`ax-panel ${paper ? "ax-paper" : ""} ${className ?? ""}`}
+        className={classes}
         data-collapse={collapsed}
         data-expand={expanded}
+        onClick={onClick}
         style={styles}
-        {...aria}
+        {...props}
       >
         {header}
         <div className="ax-panel__body">{childs}</div>

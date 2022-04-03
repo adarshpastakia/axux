@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { AxButton, AxContent, AxPage, AxPanel, AxText, AxViewport } from "@axux/core";
-import { mdiComment, mdiFaceProfile, mdiStar, mdiTag } from "@mdi/js";
+import { mdiComment, mdiFaceMan, mdiStar, mdiTag } from "@mdi/js";
 import { Story } from "@storybook/react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
 import { AxGridView } from "../../src";
@@ -24,7 +24,7 @@ const list = [
     timestamp: new Date(),
     username: "Smeg",
     event: "started",
-    icon: mdiFaceProfile,
+    icon: mdiFaceMan,
     body: LIPSUM.para
   },
   {
@@ -65,7 +65,7 @@ const Template: Story = (props) => {
         <AxGridView {...props}>
           {records.map((_, index) => (
             <AxGridView.Item key={index} index={index}>
-              <div className="ax-flex">
+              <div className="ax-row">
                 <AxPanel title={`Grid cell ${index}`} className="ax-col ax-col--fill" paper>
                   <AxContent>
                     <div className="ax-row ax-gutter">

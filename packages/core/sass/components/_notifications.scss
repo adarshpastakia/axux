@@ -10,7 +10,7 @@
   font-size: 1em;
   margin: -110% auto 0;
   max-width: 70vw;
-  min-width: 12vw;
+  min-width: 15rem;
   padding: $base-spacing * 0.25 $base-spacing;
   pointer-events: all;
   position: relative;
@@ -47,7 +47,7 @@
   grid-template-rows: 1.5em 1fr auto;
   margin: 0 auto -100%;
   max-width: 30vw;
-  min-width: 15vw;
+  min-width: 15rem;
   pointer-events: all;
   position: relative;
   transition: margin-bottom 0.5s;

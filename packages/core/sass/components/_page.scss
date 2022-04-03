@@ -7,7 +7,7 @@
   &-page {
     display: grid;
     grid-area: page;
-    grid-template-areas: "title" "loader" "content";
+    grid-template-areas: "title" "content";
     grid-template-rows: auto auto 1fr;
     overflow: hidden;
     position: relative;

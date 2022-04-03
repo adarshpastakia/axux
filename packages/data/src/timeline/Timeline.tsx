@@ -23,7 +23,7 @@ export interface TimelineRef {
   scrollTo: (index: number) => void;
 }
 
-interface TimelineProps extends ElementProps, RefProp<TimelineRef> {
+interface TimelineProps extends Omit<ElementProps, "onScroll">, RefProp<TimelineRef> {
   noLine?: boolean;
   isLoading?: boolean;
   canLoadMore?: boolean;
