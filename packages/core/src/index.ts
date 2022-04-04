@@ -3,6 +3,9 @@
 // @copyright : 2021
 // @license   : MIT
 
+// force-update
+const update = "1";
+
 export { COLOR, PALETTE } from "./types/enums";
 
 export { addTranslationBundle } from "./i18n";
