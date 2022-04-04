@@ -98,9 +98,10 @@
       }
     }
 
-    small {
-      font-size: 1rem;
-      font-weight: 300;
+    > div > small {
+      font-size: 1rem !important;
+      font-weight: 300 !important;
+      margin-bottom: 1rem;
     }
   }
 

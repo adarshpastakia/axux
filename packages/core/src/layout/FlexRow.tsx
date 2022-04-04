@@ -65,7 +65,7 @@ export const AxFlexRow: FC<FlexRowProps> = forwardRef<HTMLDivElement, FlexRowPro
   ) => {
     const classes = useMemo(() => {
       const cls = ["ax-row", className ?? ""];
-      if (noWrap === false) {
+      if (noWrap) {
         cls.push(`ax-row--nowrap`);
       }
       if (vertical) {
