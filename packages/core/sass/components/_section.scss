@@ -157,7 +157,7 @@
       &[data-flyout="true"] #{$base}--body {
         box-shadow: 2px 0 25px rgba(0, 0, 0, 0.5);
         transform: translateX($collapsedWidth);
-        z-index: 5;
+        z-index: 1;
 
         @at-root [dir="rtl"] & {
           box-shadow: -2px 0 25px rgba(0, 0, 0, 0.5);
