@@ -37,11 +37,9 @@
         border-radius: 0.25em;
         content: "";
         height: 0.125em;
-        inset: 50% 0 0;
-        inset-block-end: unset;
         overflow: hidden;
-        position: absolute;
         transform: translateY(-50%);
+        @include position(absolute, 50% 0 null 0);
       }
 
       &::before {

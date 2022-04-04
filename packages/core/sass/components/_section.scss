@@ -23,7 +23,7 @@
     grid-area: side-s;
     grid-template-areas: "head resize" "body resize" "foot resize";
     grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
     overflow: hidden;
     position: relative;
 
@@ -140,12 +140,10 @@
 
         &--body {
           grid-area: unset;
-          inset-block: 0;
-          inset-inline-start: 0;
-          position: absolute;
           transform: translateX(-100%);
           transition: transform 500ms;
           z-index: -1;
+          @include position(absolute, 0 null 0 0);
 
           @at-root [dir="rtl"] & {
             transform: translateX(100%);
@@ -169,7 +167,7 @@
       @extend #{$prefix}-border--s;
       border-inline-end: none;
       grid-area: side-e;
-      grid-template-areas: "resize head" "resize loader" "resize body" "reszie foot";
+      grid-template-areas: "resize head" "resize body" "reszie foot";
       grid-template-columns: auto 1fr;
 
       #{$base} {
@@ -193,8 +191,8 @@
           }
 
           &--body {
-            inset-inline-end: 0;
             transform: translateX($collapsedWidth);
+            @include position(null, null null 0);
 
             @at-root [dir="rtl"] & {
               transform: translateX(-1 * $collapsedWidth);

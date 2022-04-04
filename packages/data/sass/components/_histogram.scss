@@ -55,15 +55,14 @@
     &::before,
     &::after {
       content: "";
-      inset: 0;
       overflow: hidden;
-      position: absolute;
       text-align: end;
       transition: left 1s ease-in 0.5s;
+      @include position(absolute, 0);
     }
 
     &::after {
-      inset-inline-start: calc(var(--meter) * 100%);
+      @include position(null, null null null calc(var(--meter) * 100%));
     }
   }
 

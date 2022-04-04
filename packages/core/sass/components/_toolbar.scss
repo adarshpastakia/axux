@@ -43,13 +43,11 @@
           display: none;
         }
         &::after {
-          bottom: -3px;
           content: "▾";
-          inset-inline-start: 50%;
           line-height: 1;
           pointer-events: none;
-          position: absolute;
           transform: translateX(-50%);
+          @include position(absolute, null null -3px 50%);
         }
       }
     }

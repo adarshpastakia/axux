@@ -20,10 +20,9 @@
   &::before {
     background-color: currentColor;
     content: "";
-    inset: 0;
     opacity: 0.1;
-    position: absolute;
     z-index: 0;
+    @include position(absolute, 0);
   }
 
   &[data-size="sm"] {

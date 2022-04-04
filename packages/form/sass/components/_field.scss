@@ -169,9 +169,7 @@
 
   &__strength {
     height: 2px;
-    inset-block-end: -3px;
-    inset-inline: 0;
-    position: absolute;
+    @include position(absolute, null 0 -3px);
 
     &::after {
       content: "";

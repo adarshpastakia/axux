@@ -94,26 +94,93 @@
 // position helper
 // @param $position - ['absolute', 'fixed']
 // @param $coords   - coordinate shortcut [all, vertical horizontal, top horizontal bottom, top right bottom left]
-@mixin position($position: absolute, $coords: auto) {
-  position: $position;
+@mixin position($position: absolute, $coords: null) {
+  @if $position != null {
+    position: $position;
+  }
 
   @if length($list: $coords) == 1 {
     inset: $coords;
   }
   @if length($list: $coords) == 2 {
-    inset-block: nth($coords, 1);
-    inset-inline: nth($coords, 2);
+    @if nth($coords, 1) != null {
+      @if $fallback {
+        bottom: nth($coords, 1);
+        top: nth($coords, 1);
+      } @else {
+        inset-block: nth($coords, 1);
+      }
+    }
+    @if nth($coords, 2) != null {
+      @if $fallback {
+        left: nth($coords, 2);
+        right: nth($coords, 2);
+      } @else {
+        inset-inline: nth($coords, 2);
+      }
+    }
   }
   @if length($list: $coords) == 3 {
-    inset-block-end: nth($coords, 3);
-    inset-block-start: nth($coords, 1);
-    inset-inline: nth($coords, 2);
+    @if nth($coords, 1) != null {
+      @if $fallback {
+        top: nth($coords, 1);
+      } @else {
+        inset-block-start: nth($coords, 1);
+      }
+    }
+    @if nth($coords, 2) != null {
+      @if $fallback {
+        left: nth($coords, 2);
+        right: nth($coords, 2);
+      } @else {
+        inset-inline: nth($coords, 2);
+      }
+    }
+    @if nth($coords, 3) != null {
+      @if $fallback {
+        bottom: nth($coords, 3);
+      } @else {
+        inset-block-end: nth($coords, 3);
+      }
+    }
   }
   @if length($list: $coords) == 4 {
-    inset-block-end: nth($coords, 3);
-    inset-block-start: nth($coords, 1);
-    inset-inline-end: nth($coords, 2);
-    inset-inline-start: nth($coords, 4);
+    @if nth($coords, 1) != null {
+      @if $fallback {
+        top: nth($coords, 1);
+      } @else {
+        inset-block-start: nth($coords, 1);
+      }
+    }
+    @if nth($coords, 2) != null {
+      @if $fallback {
+        right: nth($coords, 2);
+        @at-root [dir="rtl"] & {
+          left: nth($coords, 2);
+          right: unset;
+        }
+      } @else {
+        inset-inline-end: nth($coords, 2);
+      }
+    }
+    @if nth($coords, 3) != null {
+      @if $fallback {
+        bottom: nth($coords, 3);
+      } @else {
+        inset-block-end: nth($coords, 3);
+      }
+    }
+    @if nth($coords, 4) != null {
+      @if $fallback {
+        left: nth($coords, 4);
+        @at-root [dir="rtl"] & {
+          left: unset;
+          right: nth($coords, 4);
+        }
+      } @else {
+        inset-inline-start: nth($coords, 4);
+      }
+    }
   }
 }
 

@@ -69,13 +69,10 @@
       &::before {
         background-color: currentColor;
         content: "";
-        inset: 0;
-        inset-inline-end: unset;
-        inset-inline-start: calc(50% - 1px);
         opacity: 0.25;
-        position: absolute;
         width: 2px;
         z-index: 0;
+        @include position(absolute, 0 null 0 calc(50% - 1px));
       }
     }
 

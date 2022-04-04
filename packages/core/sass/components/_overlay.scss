@@ -118,16 +118,14 @@
   display: grid;
   grid-template-areas: "header" "loader" "body";
   grid-template-rows: auto auto 1fr;
-  inset: 0;
-  inset-inline-start: unset;
   max-width: 80vw;
   min-width: 15em;
   opacity: 0;
   overflow: hidden;
-  position: absolute;
   transform: translateX(100%);
   transition: transform 0.5s;
   width: 30em;
+  @include position(absolute, 0 0 0 null);
 
   @at-root [dir="rtl"] & {
     transform: translateX(-100%);

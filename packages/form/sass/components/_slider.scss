@@ -85,12 +85,10 @@
       &::before {
         content: "︎";
         height: 0.5em;
-        inset-inline-start: 0;
-        position: absolute;
-        top: 50%;
         transform: translate(-0.25em, -0.25em) rotate(45deg);
         width: 0.5em;
         z-index: 0;
+        @include position(absolute, 50% null null 0);
 
         @at-root [dir="rtl"] & {
           transform: translate(0.25em, -0.25em) rotate(45deg);
@@ -150,9 +148,8 @@
       &::before,
       #{$base}--hilight {
         height: 0.25em;
-        inset-inline: 0;
-        top: 50%;
         transform: translateY(-50%);
+        @include position(null, 50% 0 null);
       }
 
       &::before {
@@ -176,9 +173,8 @@
         }
 
         &::before {
-          inset-inline-end: 0;
-          inset-inline-start: unset;
           transform: translate(0.25em, -0.25em) rotate(45deg);
+          @include position(null, null 0 null null);
 
           @at-root [dir="rtl"] & {
             transform: translate(-0.25em, -0.25em) rotate(45deg);
@@ -188,8 +184,7 @@
 
       &-wrapper {
         height: 2em;
-        inset-block-start: 0;
-        inset-inline: 0.5em;
+        @include position(null, 0 0.5em null);
       }
     }
 
@@ -266,24 +261,21 @@
 
       button {
         span {
-          inset-inline-start: 0.25em;
           transform: translateY(-50%);
           width: 2em;
+          @include position(null, null null null 0.25em);
         }
 
         &::before {
-          inset-inline-start: -1.8em;
-          top: 0.25em;
+          @include position(null, 0.25em null null -1.8em);
         }
       }
     }
 
     #{$prefix}-field__input {
-      bottom: 0;
-      inset-inline-start: 100%;
-      position: absolute;
       transform: rotate(270deg);
       transform-origin: 0 100%;
+      @include position(absolute, null null 0 100%);
 
       @at-root [dir="rtl"] & {
         transform: rotate(90deg);

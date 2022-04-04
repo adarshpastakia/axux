@@ -186,12 +186,11 @@
     margin-inline-start: -0.5em;
     order: 3;
     pointer-events: none;
-    @include position(absolute, auto 0.25em auto auto);
+    @include position(absolute, null 0.25em null null);
 
     &:not(:empty) {
       font-size: 0.625em;
-      inset-block-start: -0.25em;
-      inset-inline-end: -0.25em;
+      @include position(absolute, -0.25em -0.25em null null);
     }
   }
 

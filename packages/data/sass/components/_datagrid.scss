@@ -18,15 +18,16 @@
     flex-flow: row nowrap;
     position: sticky;
     top: 0;
-    @include noselect();
     z-index: 5;
+    @include noselect();
 
     #{$prefix}-button {
       margin: 0;
     }
 
-    #{$prefix}-loader {
-      inset-block-start: unset;
+    #{$prefix}-loader--progress {
+      bottom: 0;
+      top: unset;
     }
 
     &--cell {

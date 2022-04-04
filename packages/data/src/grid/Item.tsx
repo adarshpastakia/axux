@@ -29,7 +29,11 @@ export const GridItem: FC<{ index: number }> = ({ children, index }: KeyValue) =
             const visible = entries.pop()?.isIntersecting;
             clearTimeout(timer);
             setVisible(false);
-            el.attributeStyleMap.set("content-visibility", visible ? "visible" : "hidden");
+            try {
+              el.attributeStyleMap.set("content-visibility", visible ? "visible" : "hidden");
+            } catch (e) {
+              el.style.visibility = visible ? "visible" : "hidden";
+            }
             timer = setTimeout(() => setVisible(!!visible), 200);
           },
           {

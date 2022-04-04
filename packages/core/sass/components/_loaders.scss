@@ -5,27 +5,27 @@
 
 @keyframes app-loader {
   from {
-    inset-inline-end: 100%;
-    inset-inline-start: 0;
+    left: 0;
+    right: 100%;
   }
 
   50% {
-    inset-inline-end: 0;
-    inset-inline-start: 0;
+    left: 0;
+    right: 0;
   }
 
   to {
-    inset-inline-end: 0;
-    inset-inline-start: 100%;
+    left: 100%;
+    right: 0;
   }
 }
 
 @keyframes text-load {
   0% {
-    inset-inline-start: -18em;
+    left: -18em;
   }
   100% {
-    inset-inline-start: 100%;
+    left: 100%;
   }
 }
 
@@ -51,15 +51,14 @@
     height: 4px;
     overflow: hidden;
     z-index: 10;
-    @include position(absolute, 0 0 auto);
+    @include position(absolute, 0 0 null);
 
     &::before {
       background-color: currentColor;
       content: "";
-      inset-inline-end: unset;
       transform: scaleX(0) translateX(0%);
       width: 100%;
-      @include position(absolute, 1px 0);
+      @include position(absolute, 1px null 1px 0);
       @include animation(infinite-progress 1s ease-in-out infinite);
     }
   }
@@ -121,10 +120,8 @@
 
     &::after {
       content: "";
-      inset: 0;
-      inset-inline-end: unset;
-      position: absolute;
       width: 18em;
+      @include position(absolute, 0 null 0 0);
       @include animation(text-load 1s linear infinite);
     }
   }
