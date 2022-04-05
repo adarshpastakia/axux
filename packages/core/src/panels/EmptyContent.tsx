@@ -3,14 +3,13 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { cloneElement, ReactElement, ReactNode, ReactNodeArray } from "react";
+import { cloneElement, ReactElement, ReactNode } from "react";
 import { AxToolbar } from "../appbars/Toolbar";
-import { AxIcon } from "../icons/Icon";
+import { useIcon } from "../hooks/useIcon";
 import { ElementProps, IconProps, VFC } from "../types";
-import { AppIcons } from "../types/appIcons";
 
 /** @internal */
-export interface EmptyContentProps extends IconProps, ElementProps {
+export interface EmptyContentProps extends IconProps<JSX.Element>, ElementProps {
   /**
    * Title text
    */
@@ -22,7 +21,7 @@ export interface EmptyContentProps extends IconProps, ElementProps {
   /**
    * Actions
    */
-  actions?: ReactNodeArray;
+  actions?: JSX.Element[];
   /**
    * Image
    */
@@ -37,10 +36,11 @@ export const EmptyContent: VFC<EmptyContentProps> = ({
   image,
   className
 }) => {
+  const iconEl = useIcon(icon);
   return (
     <div className={`ax-content__empty ${className ?? ""}`}>
       {image && <div>{image}</div>}
-      {!image && <AxIcon icon={icon ?? AppIcons.iconNoResult} />}
+      {!image && iconEl}
       {title && <h3>{title}</h3>}
       {message && <p>{message}</p>}
       <AxToolbar align="center">

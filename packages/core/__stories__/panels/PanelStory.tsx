@@ -3,6 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
+import { mdiBell } from "@mdi/js";
 import { Story } from "@storybook/react";
 import { PropsWithChildren } from "react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
@@ -11,8 +12,8 @@ import { PanelProps } from "../../src/panels/Panel";
 import { ElementProps } from "../../src/types";
 
 const contextItems = [
-  <AxMenu key="one">
-    <AxMenu.Item label="Submenu" panelId="submenu" />
+  <AxMenu key="one" withIcons>
+    <AxMenu.Item icon={mdiBell} label="Submenu" panelId="submenu" />
     <AxMenu.Item label="Test" />
   </AxMenu>,
   <AxMenu key="submenu" panelId="submenu" title="Submenu">

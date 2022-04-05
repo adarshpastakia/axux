@@ -18,6 +18,7 @@ export interface MenuProps extends Omit<ElementProps, "onClick"> {
   title?: string;
   panelId?: string;
   items?: MenuItemType[];
+  withIcons?: boolean;
   onClick?: (menuId: string) => void;
 }
 
@@ -31,16 +32,17 @@ interface ExtendedFC extends FC<MenuProps> {
 
 /**
  * Menu
- * @param children
- * @param size
- * @param items
- * @param onClick
- * @param className
- * @param rest
- * @constructor
  * @internal
  */
-export const AxMenu: ExtendedFC = ({ children, size, items, onClick, className, ...rest }) => {
+export const AxMenu: ExtendedFC = ({
+  children,
+  withIcons,
+  size,
+  items,
+  onClick,
+  className,
+  ...rest
+}) => {
   const checkMenuClick = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
     if (onClick && target.dataset.id) {
@@ -53,6 +55,7 @@ export const AxMenu: ExtendedFC = ({ children, size, items, onClick, className, 
       className={`ax-menu ${className ?? ""}`}
       onClick={checkMenuClick}
       data-size={size}
+      data-with-icons={withIcons}
     >
       <AxContent padding="none" scroll>
         {children}

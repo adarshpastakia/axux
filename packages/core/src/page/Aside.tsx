@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { withinEl } from "@axux/utilities/dist/dom";
-import { FC, ReactNodeArray, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { FC, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../internals/usePropToggle";
 import { useResize } from "../internals/useResize";
@@ -54,7 +54,7 @@ export interface AsideProps extends CollapseProps, ElementProps {
    */
   onFlyout?: EmptyCallback;
 
-  actions?: ReactNodeArray;
+  actions?: JSX.Element[];
 }
 
 /**

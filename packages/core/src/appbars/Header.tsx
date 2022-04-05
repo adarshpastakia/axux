@@ -6,12 +6,12 @@
 import { FC, Fragment, useMemo } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxDivider } from "../divider/Divider";
-import { AxIcon } from "../icons/Icon";
+import { useIcon } from "../hooks/useIcon";
 import { AllColors, ElementProps, EmptyCallback, IconProps } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
-export interface HeaderProps extends IconProps, ElementProps {
+export interface HeaderProps extends IconProps<JSX.Element>, ElementProps {
   /**
    * Header title
    */
@@ -84,6 +84,7 @@ export const AxHeader: FC<HeaderProps> = ({
     }
     return cls.join(" ");
   }, [iconBg, iconColor]);
+  const iconEl = useIcon(icon, iconClasses);
 
   return (
     <div className={classes} {...props}>
@@ -99,11 +100,7 @@ export const AxHeader: FC<HeaderProps> = ({
           <AxDivider vertical />
         </Fragment>
       )}
-      {icon && (
-        <div className={iconClasses}>
-          <AxIcon icon={icon} />
-        </div>
-      )}
+      {iconEl}
       <div className={`ax-header__title ${!!onClick ? "ax-clickable" : ""}`} onClick={onClick}>
         {title}
       </div>

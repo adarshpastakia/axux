@@ -26,7 +26,7 @@ export interface PanelProps
   extends CollapseProps,
     ExpandProps,
     ElementProps,
-    IconProps,
+    IconProps<JSX.Element>,
     RefProp<HTMLDivElement> {
   /**
    * Panel id

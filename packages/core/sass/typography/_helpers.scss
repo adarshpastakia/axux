@@ -130,33 +130,58 @@
       font-size: 3em;
     }
 
+    &--top,
+    &--start,
+    &--bottom,
+    &--end,
     &--topEnd,
     &--topStart,
     &--bottomStart,
     &--bottomEnd {
       box-shadow: 0 0 2px rgba(#000000, 0.5) inset;
-      font-size: 0.5em;
+      font-size: 0.325em;
+      padding: 0.125em;
       position: absolute;
+    }
+    &--top {
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -75%);
+    }
+    &--end {
+      right: 0;
+      top: 50%;
+      transform: translate(75%, -50%);
+    }
+    &--start {
+      left: 0;
+      top: 50%;
+      transform: translate(-75%, -50%);
+    }
+    &--bottom {
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 75%);
     }
     &--topStart {
       left: 0;
       top: 0;
-      transform: translate(-20%, -10%);
+      transform: translate(-25%, -15%);
     }
     &--topEnd {
       right: 0;
       top: 0;
-      transform: translate(20%, -10%);
+      transform: translate(25%, -15%);
     }
     &--bottomStart {
       bottom: 0;
       left: 0;
-      transform: translate(-20%, 10%);
+      transform: translate(-25%, 15%);
     }
     &--bottomEnd {
       bottom: 0;
       right: 0;
-      transform: translate(20%, 10%);
+      transform: translate(25%, 15%);
     }
   }
 

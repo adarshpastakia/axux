@@ -72,8 +72,8 @@
       pointer-events: none;
     }
 
-    span#{$prefix}-icon {
-      align-self: start;
+    #{$prefix}-icon {
+      line-height: 1;
     }
 
     &__label {
@@ -101,5 +101,9 @@
       opacity: 0.5;
       pointer-events: none;
     }
+  }
+
+  &[data-with-icons="true"] #{$base} {
+    grid-template-columns: 1em 1fr;
   }
 }

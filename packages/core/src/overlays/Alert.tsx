@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { ReactNodeArray, useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
@@ -21,7 +21,7 @@ export interface AlertProps extends IconProps {
   okLabel?: string;
   cancelLabel?: string;
 
-  extraActions?: ReactNodeArray;
+  extraActions?: JSX.Element[];
 }
 
 /**

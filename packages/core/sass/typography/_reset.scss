@@ -82,9 +82,9 @@
   }
 
   abbr {
+    border-bottom: 1px dashed currentColor;
     cursor: help;
     display: inline-block;
-    text-decoration: underline dotted;
   }
 
   ul,

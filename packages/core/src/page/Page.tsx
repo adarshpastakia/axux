@@ -3,15 +3,15 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { cloneElement, FC, forwardRef, ReactNodeArray, Suspense } from "react";
+import { cloneElement, FC, forwardRef, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import { ErrorBoundary } from "../errorBoundary/ErrorBoundary";
-import { AxIcon } from "../icons/Icon";
+import { useIcon } from "../hooks/useIcon";
 import { AxLoader } from "../loader/Loader";
 import { ElementProps, IconProps, RefProp } from "../types";
 
 /** @internal */
-export interface PageProps extends IconProps, ElementProps, RefProp<HTMLDivElement> {
+export interface PageProps extends IconProps<JSX.Element>, ElementProps, RefProp<HTMLDivElement> {
   /**
    * Page title
    */
@@ -19,7 +19,7 @@ export interface PageProps extends IconProps, ElementProps, RefProp<HTMLDivEleme
   /**
    * Header actions
    */
-  actions?: ReactNodeArray;
+  actions?: JSX.Element[];
   /**
    * Show loading indicator
    */
@@ -34,15 +34,12 @@ export interface PageProps extends IconProps, ElementProps, RefProp<HTMLDivEleme
  */
 export const AxPage: FC<PageProps> = forwardRef<HTMLDivElement, PageProps>(
   ({ children, className, isLoading, paper, icon, title, actions }, ref) => {
+    const iconEl = useIcon(icon);
     return (
       <div className={`ax-page ${paper ? "ax-paper" : ""} ${className ?? ""}`}>
         <Helmet title={title} />
         <div className="ax-page__header">
-          {icon && (
-            <div className="ax-page__icon">
-              <AxIcon icon={icon} />
-            </div>
-          )}
+          {iconEl && <div className="ax-page__icon">{iconEl}</div>}
           {title && <div className="ax-page__title">{title}</div>}
           {actions && (
             <div className="ax-page__actions">

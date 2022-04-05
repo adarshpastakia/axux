@@ -24,7 +24,7 @@ import { ElementProps, EmptyCallback, IconProps, Size } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
-export interface FlyoutProps extends ElementProps, IconProps {
+export interface FlyoutProps extends ElementProps, IconProps<JSX.Element> {
   /**
    * Panel title
    */

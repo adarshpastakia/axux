@@ -127,6 +127,7 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
       iconHilight = false,
       tabIndex,
       panelId,
+      onClick,
       ref: _ref,
       ...aria
     },
@@ -165,6 +166,7 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
           <InnerButton
             tabIndex={tabIndex}
             className="ax-button__inner"
+            onClick={onClick}
             data-no-label={isEmpty(label || children)}
             data-panel={panelId}
             data-icon-align={iconAlign}

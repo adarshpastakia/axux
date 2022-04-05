@@ -15,6 +15,10 @@ export interface IconProps extends RefProp, ElementProps {
    */
   icon: string | JSX.Element;
   /**
+   * Background
+   */
+  bg?: AllColors;
+  /**
    * Color
    */
   color?: AllColors;
@@ -51,16 +55,6 @@ export interface IconProps extends RefProp, ElementProps {
 
 /**
  * Icon
- * @param icon
- * @param color
- * @param size
- * @param viewBox
- * @param useImage
- * @param className
- * @param spin
- * @param round
- * @param onClick
- * @constructor
  * @internal
  */
 export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
@@ -68,6 +62,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
     {
       icon,
       color,
+      bg,
       size,
       useImage,
       viewBox = "0 0 24 24",
@@ -83,7 +78,10 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
     const badgeEl = useBadge(badge);
     const classes = useMemo(() => {
       const cls = ["ax-icon", className ?? ""];
-      if (color) {
+      if (bg) {
+        cls.push(`ax-bg--${bg}`);
+        cls.push(color ? `ax-color--${color}` : `ax-color--contrast`);
+      } else if (color) {
         cls.push(`ax-color--${color}`);
       }
       if (round) {
@@ -131,6 +129,9 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
 
     const styles = useMemo(() => {
       const s: KeyValue = {};
+      if (bg && isColor(bg)) {
+        s.backgroundColor = bg;
+      }
       if (color && isColor(color)) {
         s.color = color;
       }

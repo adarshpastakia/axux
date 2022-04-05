@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { getChildProps } from "@axux/utilities/dist/react";
-import { Children, cloneElement, FC, ReactNodeArray, useCallback } from "react";
+import { Children, cloneElement, FC, useCallback } from "react";
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../internals/usePropToggle";
 import { AxMenu } from "../menu/Menu";
@@ -16,7 +16,7 @@ export interface ViewportMenuProps extends Omit<CollapseProps, "isCollapsable"> 
   /**
    * Fixed options
    */
-  options?: ReactNodeArray;
+  options?: JSX.Element[];
 }
 
 /**

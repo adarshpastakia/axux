@@ -25,7 +25,7 @@ import { ElementProps, IconProps, RefProp, Size } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
-export interface ModalProps extends ElementProps, IconProps, RefProp<HTMLDivElement> {
+export interface ModalProps extends ElementProps, IconProps<JSX.Element>, RefProp<HTMLDivElement> {
   /**
    * Panel id
    */

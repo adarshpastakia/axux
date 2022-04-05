@@ -8,9 +8,19 @@ import {
   Story,
   Title
 } from "@storybook/addon-docs";
-import { AxAvatar, AxBox, COLOR } from "../../src";
+import { AxAvatar, AxBox, AxIcon, COLOR } from "../../src";
 import { BasicStory, IconStory, ImageStory } from "./AvatarStory";
-import { mdiAccount } from "@mdi/js";
+import {
+  mdiAccount,
+  mdiAccountVoice,
+  mdiAlert,
+  mdiBell,
+  mdiBullseye,
+  mdiCardAccountPhone,
+  mdiFaceRecognition,
+  mdiFlask,
+  mdiNumeric1Circle
+} from "@mdi/js";
 import { PALETTE } from "../../../../storybook/stylings/theming-items";
 
 <Meta title="@core/Icons/Avatar" component={AxAvatar} parameters={{ jest: ["Avatar.test.tsx"] }} />
@@ -52,6 +62,31 @@ import { PALETTE } from "../../../../storybook/stylings/theming-items";
     <AxAvatar title="Username" icon={mdiAccount} size="md" />
     <AxAvatar title="Username" icon={mdiAccount} size="lg" />
     <AxAvatar title="Username" icon={mdiAccount} size="xl" />
+  </Story>
+</Canvas>
+
+<Anchor storyId="core-icons-avatar--infographs">
+  <Heading>Infographs</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Infographs">
+    <AxAvatar
+      title="Username"
+      icon={mdiAccount}
+      size="5rem"
+      className="ax-margin"
+      infograph={{
+        top: mdiBell,
+        topEnd: <AxIcon bg="danger" color="white" icon={mdiBullseye} />,
+        bottomStart: mdiAccountVoice,
+        start: mdiCardAccountPhone,
+        end: mdiFlask,
+        bottom: <AxIcon bg="warning" color="white" icon={mdiAlert} />,
+        topStart: <AxIcon bg="info" color="white" icon={mdiNumeric1Circle} />,
+        bottomEnd: mdiFaceRecognition
+      }}
+    />
   </Story>
 </Canvas>
 
