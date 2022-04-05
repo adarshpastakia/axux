@@ -40,7 +40,7 @@ export const isString = (value: AnyObject): value is string => {
 };
 
 export const isNumber = (value: AnyObject): value is number => {
-  return typeof value === "number" || /^[+-]?\d+(\.\d+)?$/.test(value);
+  return typeof value === "number";
 };
 
 export const isBoolean = (value: AnyObject): value is boolean => {

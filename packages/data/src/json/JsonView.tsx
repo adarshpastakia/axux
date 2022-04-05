@@ -48,7 +48,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
       if (!isNil(ret)) return ret;
     }
 
-    if (isNumber(value)) return Format.number(value);
+    if (isNumber(value) || /^[+-]?\d+(\.\d+)?$/.test(`${value}`)) return Format.number(value);
     if (isBoolean(value)) return !!value ? "Yes" : "No";
     if (DateUtils.isValid(value, true))
       return (

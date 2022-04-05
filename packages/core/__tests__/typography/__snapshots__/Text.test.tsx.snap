@@ -6,17 +6,7 @@ exports[`Text renders block text 1`] = `
     class="ax-text ax-block  "
   >
     <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-      <br />
-                egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-      <br />
-                viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-      <br />
-                diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-      <br />
-                ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-      <br />
-                nec augue tincidunt, ac aliquet velit facilisis.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis, egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna nec augue tincidunt, ac aliquet velit facilisis.
     </span>
   </span>
 </div>
@@ -29,17 +19,7 @@ exports[`Text renders clipped text 1`] = `
     style="--line-clamp: 2;"
   >
     <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-      <br />
-                egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-      <br />
-                viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-      <br />
-                diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-      <br />
-                ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-      <br />
-                nec augue tincidunt, ac aliquet velit facilisis.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis, egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna nec augue tincidunt, ac aliquet velit facilisis.
     </span>
   </span>
 </div>
@@ -51,17 +31,7 @@ exports[`Text renders color text 1`] = `
     class="ax-text ax-block ax-text--indent-2 ax-align--justify ax-padding--sm ax-bg--lightest ax-color--secondary "
   >
     <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-      <br />
-                egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-      <br />
-                viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-      <br />
-                diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-      <br />
-                ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-      <br />
-                nec augue tincidunt, ac aliquet velit facilisis.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis, egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna nec augue tincidunt, ac aliquet velit facilisis.
     </span>
   </span>
 </div>
@@ -120,17 +90,7 @@ exports[`Text renders serif text 1`] = `
     class="ax-text ax-block ax-text--dropcaps ax-align--justify ax-font--serif "
   >
     <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-      <br />
-                egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-      <br />
-                viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-      <br />
-                diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-      <br />
-                ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-      <br />
-                nec augue tincidunt, ac aliquet velit facilisis.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis, egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna nec augue tincidunt, ac aliquet velit facilisis.
     </span>
   </span>
 </div>
@@ -142,17 +102,7 @@ exports[`Text renders simple text 1`] = `
     class="ax-text   "
   >
     <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-      <br />
-                egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-      <br />
-                viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-      <br />
-                diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-      <br />
-                ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-      <br />
-                nec augue tincidunt, ac aliquet velit facilisis.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis, egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna nec augue tincidunt, ac aliquet velit facilisis.
     </span>
   </span>
 </div>
@@ -164,17 +114,7 @@ exports[`Text renders sized text 1`] = `
     class="ax-text   ax-font--md "
   >
     <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-      <br />
-                egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-      <br />
-                viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-      <br />
-                diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-      <br />
-                ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-      <br />
-                nec augue tincidunt, ac aliquet velit facilisis.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis, egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna nec augue tincidunt, ac aliquet velit facilisis.
     </span>
   </span>
   <span
@@ -182,17 +122,7 @@ exports[`Text renders sized text 1`] = `
     style="font-size: 10px;"
   >
     <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-      <br />
-                egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-      <br />
-                viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-      <br />
-                diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-      <br />
-                ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-      <br />
-                nec augue tincidunt, ac aliquet velit facilisis.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis, egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna nec augue tincidunt, ac aliquet velit facilisis.
     </span>
   </span>
   <span
@@ -200,17 +130,7 @@ exports[`Text renders sized text 1`] = `
     style="font-size: 3px;"
   >
     <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-      <br />
-                egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-      <br />
-                viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-      <br />
-                diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-      <br />
-                ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-      <br />
-                nec augue tincidunt, ac aliquet velit facilisis.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis, egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna nec augue tincidunt, ac aliquet velit facilisis.
     </span>
   </span>
 </div>
@@ -222,17 +142,7 @@ exports[`Text renders weighted text 1`] = `
     class="ax-text   ax-weight--bold "
   >
     <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis,
-      <br />
-                egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum
-      <br />
-                viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis
-      <br />
-                diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce
-      <br />
-                ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna
-      <br />
-                nec augue tincidunt, ac aliquet velit facilisis.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis eros mollis, egestas mauris nec, tincidunt ipsum. Sed commodo sagittis sapien non sagittis. Vestibulum viverra sapien vitae nisi condimentum, eu malesuada velit iaculis. Duis pulvinar lobortis diam, a pharetra urna commodo non. Integer molestie pharetra enim a pulvinar. Fusce ultrices augue vel magna tincidunt, auctor efficitur lectus gravida. Nunc scelerisque urna nec augue tincidunt, ac aliquet velit facilisis.
     </span>
   </span>
 </div>
