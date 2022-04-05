@@ -70,6 +70,7 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
   const {
     isOpen,
     setOpen,
+    listRef,
     inputRef,
     inputLabel,
     innerOptions,
@@ -164,7 +165,7 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
           </div>
         )}
       </AxFieldWrapper>
-      <div onClickCapture={handleClick} className="ax-select__popover">
+      <div onClickCapture={handleClick} className="ax-select__popover" ref={listRef}>
         {!hideDropdown &&
           innerOptions.map((opt, index) => (
             <AxSelectOption

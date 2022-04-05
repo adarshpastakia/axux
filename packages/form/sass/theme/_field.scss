@@ -137,7 +137,18 @@
 #{$prefix}-select {
   &__option {
     &:hover {
+      background-color: rgba($color-primary, 0.15);
+    }
+    &[data-disable="true"] {
+      background-color: $base-bg;
+      color: $color-muted;
+    }
+    &[data-hilight="true"] {
       background-color: rgba($color-primary, 0.25);
+    }
+    &[data-selected="true"] {
+      background-color: $color-primary;
+      color: $white;
     }
   }
   &__popover {

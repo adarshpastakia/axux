@@ -20,10 +20,18 @@
       grid-template-areas: "icon title actions";
       grid-template-columns: auto 1fr auto;
       padding: 0 $base-spacing * 0.5;
+
+      &:not(:empty) ~ #{$prefix}-loader--progress {
+        top: 1.5em;
+      }
     }
 
     &__icon {
       grid-area: icon;
+    }
+
+    & > #{$prefix}-loader--progress {
+      bottom: unset;
     }
 
     &__title {
@@ -47,10 +55,6 @@
 
     &__body {
       @include section();
-    }
-
-    & > #{$prefix}-loader--progress {
-      bottom: unset;
     }
   }
 

@@ -34,14 +34,14 @@ const LinkItem = ({
   to ? (
     <NavLink key={i} to={to} className={className} data-index={index} onClick={onClick}>
       <div title={label}>
-        {icon && <AxIcon icon={icon} />}
+        {icon && <AxIcon icon={icon} size="md" />}
         {label && <span>{label}</span>}
       </div>
     </NavLink>
   ) : (
     <a key={i} className={className} data-index={index} onClick={onClick}>
       <div title={label}>
-        {icon && <AxIcon icon={icon} />}
+        {icon && <AxIcon icon={icon} size="md" />}
         {label && <span>{label}</span>}
       </div>
     </a>

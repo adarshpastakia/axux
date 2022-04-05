@@ -147,17 +147,3 @@
     }
   }
 }
-
-#{$prefix}-select {
-  &__option {
-    &[data-disable="true"] {
-      background-color: $base-bg;
-      color: $color-muted;
-    }
-
-    &[data-selected="true"] {
-      background-color: $color-primary;
-      color: $white;
-    }
-  }
-}
