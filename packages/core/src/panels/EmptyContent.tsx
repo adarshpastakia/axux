@@ -7,6 +7,7 @@ import { cloneElement, ReactElement, ReactNode } from "react";
 import { AxToolbar } from "../appbars/Toolbar";
 import { useIcon } from "../hooks/useIcon";
 import { ElementProps, IconProps, VFC } from "../types";
+import { AppIcons } from "../types/appIcons";
 
 /** @internal */
 export interface EmptyContentProps extends IconProps<JSX.Element>, ElementProps {
@@ -36,7 +37,7 @@ export const EmptyContent: VFC<EmptyContentProps> = ({
   image,
   className
 }) => {
-  const iconEl = useIcon(icon);
+  const iconEl = useIcon(icon ?? AppIcons.iconNoResult);
   return (
     <div className={`ax-content__empty ${className ?? ""}`}>
       {image && <div>{image}</div>}

@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isEmpty, isFalse, isTrue } from "@axux/utilities";
+import { isEmpty, isTrue } from "@axux/utilities";
 import { FC, forwardRef, Fragment, MouseEventHandler, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { useIcon } from "../hooks/useIcon";
@@ -154,7 +154,6 @@ MenuItemInner.displayName = "AxMenu.Item.Inner";
 export const AxMenuItem: FC<MenuItemProps> = forwardRef<HTMLAnchorElement, MenuItemProps>(
   ({ panelId, isFloating, defaultCollapsed = true, isCollapsable, children, ...props }, ref) => {
     const [collapsed, toggleCollapse] = usePropToggle(defaultCollapsed);
-    const collapsable = !isFalse(isCollapsable);
     const menuCollapsed = isTrue((props as AnyObject)["data-collapsed"]);
     const floating = isTrue(isFloating || menuCollapsed) && !!children;
     const showCaret = isTrue(
@@ -184,13 +183,13 @@ export const AxMenuItem: FC<MenuItemProps> = forwardRef<HTMLAnchorElement, MenuI
           showCaret={showCaret}
           isFloating={floating}
           isCollapsed={collapsed}
-          isCollapsable={collapsable}
-          isClickable={!collapsable && !!children ? !!props.onClick : true}
+          isCollapsable={isCollapsable}
+          isClickable={!isCollapsable && !!children ? !!props.onClick : true}
           menuCollapsed={menuCollapsed}
           toggleCollapse={toggleCollapse}
           {...props}
         />
-        {(!collapsed || !collapsable || floating) && <div className="ax-menu">{children}</div>}
+        {((isCollapsable && !collapsed) || floating) && <div className="ax-menu">{children}</div>}
       </Wrapper>
     );
   }
