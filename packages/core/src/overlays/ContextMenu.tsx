@@ -32,17 +32,6 @@ export const AxContextMenuPopper: VFC<ContextMenuPopperProps & { onClose: () => 
     [x, y]
   );
 
-  useLayoutEffect(() => {
-    const callback = (e: Event) => {
-      e.stopPropagation();
-      document.body.removeEventListener("mouseup", callback);
-    };
-    document.body.addEventListener("mouseup", callback);
-    return () => {
-      document.body.removeEventListener("mouseup", callback);
-    };
-  }, []);
-
   return (
     <AxPopper
       placement="bottom-start"
