@@ -6,6 +6,7 @@
 import { AxButton, AxIcon } from "@axux/core";
 import { IconProps } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
+import { debounce } from "@axux/utilities";
 import { FC, memo, useEffect, useState } from "react";
 import { AxAddon } from "./Addon";
 import { AxTextField, TextFieldProps } from "./Text";
@@ -50,7 +51,7 @@ export const AxSearchField: FC<SearchFieldProps> = memo(
         type="search"
         onChange={(v) => {
           setValue(v ?? "");
-          onChange && onChange(v);
+          onChange && debounce(onChange)(v);
         }}
         onEnterPressed={() => onSearch && onSearch(value)}
       >
