@@ -37,6 +37,12 @@ export const AxHotKeyWrapper: FC = memo(({ children }) => {
   const handler = useCallback((items: KeyValue[], event: KeyboardEvent) => {
     if (items.length === 0) return;
     const { key: keyCode, code, altKey, ctrlKey, metaKey, shiftKey } = event;
+    if (
+      keyCode !== "Enter" &&
+      keyCode !== "Esc" &&
+      ["INPUT", "TEXTAREA", "SELECT"].includes((event.target as HTMLElement).tagName)
+    )
+      return;
     const find = items.find(
       ({ key, alt, ctrl, meta, shift }: KeyValue) =>
         (key.toLowerCase() === keyCode.toLowerCase() || key.toLowerCase() === code.toLowerCase()) &&
