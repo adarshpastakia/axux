@@ -94,6 +94,7 @@ export const Tab: FC<TabProps & { iconOnly?: boolean; placement?: "left" | "bott
         {badgeEl}
         {!!onClose && (
           <AxIcon
+            aria-label="Close"
             className="ax-tab__button--close"
             icon={AppIcons.iconClose}
             onClick={(e) => {

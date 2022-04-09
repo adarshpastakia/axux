@@ -113,6 +113,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
           {isExpandable && (
             <AxButton
               type="link"
+              aria-label="Collapse"
               icon={expanded ? AppIcons.iconCollapse : AppIcons.iconExpand}
               onClick={toggleExpand}
             />
@@ -120,11 +121,14 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
           {!expanded && isCollapsable && (
             <AxButton
               type="link"
+              aria-label="Expand"
               icon={collapsed ? AppIcons.iconExpandPlus : AppIcons.iconCollapseMinus}
               onClick={toggleCollapse}
             />
           )}
-          {onClose && <AxButton type="link" icon={AppIcons.iconClose} onClick={onClose} />}
+          {onClose && (
+            <AxButton type="link" icon={AppIcons.iconClose} onClick={onClose} aria-label="Close" />
+          )}
         </AxButton.Group>
       );
 

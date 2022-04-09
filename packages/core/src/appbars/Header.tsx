@@ -95,6 +95,7 @@ export const AxHeader: FC<HeaderProps> = ({
             icon={AppIcons.iconCaretLeft}
             color="primary"
             onClick={onBack}
+            aria-label="Back"
             className="ax-header__back ax-prevent-close flippable"
           />
           <AxDivider vertical />

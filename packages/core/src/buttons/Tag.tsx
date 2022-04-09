@@ -71,7 +71,15 @@ export const AxTag: FC<TagProps> = forwardRef<HTMLElement, TagProps>(
   ) => {
     const { Wrapper, tooltipProps } = useWithTooltip(tooltip, ref);
     const badgeEl = useBadge(badge);
-
+    const classes = useMemo(() => {
+      const cls = ["ax-tag", className];
+      if (color && !isColor(color)) {
+        cls.push(`ax-color--${color}`);
+      } else {
+        cls.push("ax-color--dark");
+      }
+      return cls.join(" ");
+    }, [className, color]);
     const styles = useMemo(() => {
       const s: KeyValue = {};
       if (color && isColor(color)) {
@@ -84,7 +92,7 @@ export const AxTag: FC<TagProps> = forwardRef<HTMLElement, TagProps>(
       <Wrapper {...tooltipProps}>
         <div
           ref={ref as AnyObject}
-          className={`ax-tag ax-color--${color} ${className ?? ""}`}
+          className={classes}
           data-size={size}
           data-clickable={!!onClick}
           data-solid={fillColor}
@@ -98,7 +106,12 @@ export const AxTag: FC<TagProps> = forwardRef<HTMLElement, TagProps>(
           </div>
           {badgeEl}
           {onRemove && (
-            <AxIcon className="ax-tag__close" icon={AppIcons.iconClose} onClick={onRemove} />
+            <AxIcon
+              role="remove"
+              className="ax-tag__close"
+              icon={AppIcons.iconClose}
+              onClick={onRemove}
+            />
           )}
         </div>
       </Wrapper>

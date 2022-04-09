@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isColor, isEmpty } from "@axux/utilities";
+import { isColor, isEmpty, isString } from "@axux/utilities";
 import {
   cloneElement,
   forwardRef,
@@ -95,16 +95,19 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
     const [src, setSrc] = useState(image);
     useEffect(() => setSrc(image), [image]);
     const classes = useMemo(() => {
-      const cls = ["ax-avatar", `ax-avatar--${size}`, className];
-      if (!(!!src && noBgForImage) && bg) {
+      const cls = ["ax-avatar", className];
+      if (!(!!src && noBgForImage) && bg && !isColor(bg)) {
         cls.push(`ax-bg--${bg}`);
-        cls.push(color ? `ax-color--${color}` : `ax-color--contrast`);
-      } else if (color) {
+        cls.push(color && !isColor(color) ? `ax-color--${color}` : `ax-color--contrast`);
+      } else if (color && !isColor(color)) {
         cls.push(`ax-color--${color}`);
         cls.push("ax-bg--lightest");
       } else {
         cls.push("ax-bg--light");
         cls.push("ax-color--dark");
+      }
+      if (isString(size) && SizeList.includes(size ?? "")) {
+        cls.push(`ax-avatar--${size}`);
       }
       return cls.join(" ");
     }, [size, className, src, noBgForImage, bg, color]);

@@ -67,10 +67,16 @@ const Header = () => {
   const [state, setState] = useState(false);
   return (
     <AxViewport.Header icon="poster.png">
-      <AxButton badge={{ color: "danger", value: 9 }} color="primary" icon={mdiBell} />
+      <AxButton
+        badge={{ color: "danger", value: 9 }}
+        color="primary"
+        icon={mdiBell}
+        aria-label="Notifications"
+      />
       <AxButton
         color="primary"
         icon={mdiMagnify}
+        aria-label="Search"
         tooltip={{
           content: (
             <span>
@@ -81,7 +87,12 @@ const Header = () => {
         onClick={openSpotlight}
       />
       <AxPopover showArrow placement="bottom-end" closeOnClick>
-        <AxAvatar image="https://picsum.photos/id/515/200" title="User Name" bg="indigo" />
+        <AxAvatar
+          image="https://picsum.photos/id/515/200"
+          title="User Name"
+          bg="indigo"
+          aria-label="Profile"
+        />
         <AxMenu size="md">
           <AxMenu.Item
             label="Profile"
@@ -133,7 +144,7 @@ const Menu = () => {
 const Page = () => {
   const { addItem } = useAxBreadcrumbService();
   useEffect(() => {
-    addItem({ icon: "mdi mdi-home", to: "#/1" });
+    addItem({ icon: "mdi mdi-home", to: "#/1", "aria-label": "Home" });
     addItem({ label: "Page", to: "#/2" });
     addItem({ label: "Section", to: "#/3" });
     addItem({ label: "Here", to: "#/4" });

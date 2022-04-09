@@ -6,3 +6,4 @@
 export { Lipsum } from "./Lipsum";
 export { Section } from "./Section";
 export { LightBox } from "./LightBox";
+export { StateLabel } from "./StateLabel";

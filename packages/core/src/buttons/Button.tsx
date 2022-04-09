@@ -61,7 +61,7 @@ export interface ButtonProps
   /**
    * Use split button for dropdown
    */
-  split?: boolean;
+  split?: boolean | string;
   /**
    * Icon placement inline-end
    */
@@ -161,7 +161,6 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
           data-block={block}
           data-busy={isLoading}
           data-disabled={isDisabled}
-          {...aria}
         >
           <InnerButton
             tabIndex={tabIndex}
@@ -171,6 +170,7 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
             data-panel={panelId}
             data-icon-align={iconAlign}
             data-icon-hilight={iconHilight}
+            {...aria}
           >
             {icon && <AxIcon className="ax-button__icon" icon={icon} />}
             {isLoading && (
@@ -187,7 +187,12 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
             )}
           </InnerButton>
           {split && (
-            <button className="ax-button__inner ax-button__split" tabIndex={tabIndex}>
+            <button
+              className="ax-button__inner ax-button__split"
+              tabIndex={tabIndex}
+              role="split"
+              aria-label={`${split}`}
+            >
               <AxIcon icon={AppIcons.iconCaretDown} className="ax-button__icon" />
             </button>
           )}

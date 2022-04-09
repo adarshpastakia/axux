@@ -13,7 +13,7 @@ const { ButtonStory, WithIconStory, OnlyIconStory, WithTooltipStory } = composeS
 describe("Button", () => {
   it("renders basic button", (done) => {
     const fragment = render(<ButtonStory />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector(".ax-button__icon")).toBeNull();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -22,7 +22,7 @@ describe("Button", () => {
 
   it("renders with icon", (done) => {
     const fragment = render(<WithIconStory />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector(".ax-button__icon")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -31,7 +31,7 @@ describe("Button", () => {
 
   it("renders only icon", (done) => {
     const fragment = render(<OnlyIconStory />);
-    expect(fragment.container).not.toHaveTextContent("Button");
+    expect(fragment.container).not.toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector(".ax-button__icon")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -40,7 +40,7 @@ describe("Button", () => {
 
   it("renders color", (done) => {
     const fragment = render(<ButtonStory color="secondary" />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector("[data-theme='secondary']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     done();
@@ -48,7 +48,7 @@ describe("Button", () => {
 
   it("renders style", (done) => {
     const fragment = render(<ButtonStory type="outline" />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector("[data-style='outline']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -57,7 +57,7 @@ describe("Button", () => {
 
   it("renders size", (done) => {
     const fragment = render(<ButtonStory size="md" />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector("[data-size='md']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -66,7 +66,7 @@ describe("Button", () => {
 
   it("renders block", (done) => {
     const fragment = render(<ButtonStory block />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector("[data-block='true']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -75,7 +75,7 @@ describe("Button", () => {
 
   it("renders icon align", (done) => {
     const fragment = render(<WithIconStory iconAlign="end" />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector("[data-icon-align='end']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -84,7 +84,7 @@ describe("Button", () => {
 
   it("renders icon hilight", (done) => {
     const fragment = render(<WithIconStory iconHilight />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector("[data-icon-hilight='true']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -95,7 +95,7 @@ describe("Button", () => {
     const fragment = render(<WithIconStory href="/test" />, {
       wrapper: BrowserRouter
     });
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector("[href='/test']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -106,7 +106,7 @@ describe("Button", () => {
     const fragment = render(<WithIconStory href="/test" target="_blank" />, {
       wrapper: BrowserRouter
     });
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector("[target='_blank']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -115,7 +115,7 @@ describe("Button", () => {
 
   it("renders with spinner", (done) => {
     const fragment = render(<WithIconStory isLoading />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector(".ax-button__spinner")).toBeInTheDocument();
     expect(fragment.container.querySelector("[data-busy='true']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
@@ -124,7 +124,7 @@ describe("Button", () => {
 
   it("renders disabled", (done) => {
     const fragment = render(<WithIconStory isDisabled />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Click Me!");
     expect(fragment.container.querySelector("[data-disabled='true']")).toBeInTheDocument();
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
@@ -133,19 +133,19 @@ describe("Button", () => {
 
   it("renders with tooltip", async () => {
     const fragment = render(<WithTooltipStory />);
-    expect(fragment.container).toHaveTextContent("Button");
+    expect(fragment.container).toHaveTextContent("Tooltip!");
 
     const button = fragment.container.querySelector(".ax-button__inner") as HTMLElement;
     act(() => {
       fireEvent.mouseOver(button);
     });
     await waitFor(() => fragment.container.querySelector(".ax-tooltip"));
-    expect(fragment.container).toHaveTextContent("Test tooltip");
+    expect(fragment.container).toHaveTextContent("This is a clickable button");
     expect(fragment.container).toMatchSnapshot();
     act(() => {
       fireEvent.mouseOut(button);
     });
-    expect(fragment.container).not.toHaveTextContent("Test tooltip");
+    expect(fragment.container).not.toHaveTextContent("This is a clickable button");
     expect(fragment.container).toMatchSnapshot();
     fragment.unmount();
   });

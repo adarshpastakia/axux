@@ -18,6 +18,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-jest",
+    '@storybook/addon-a11y',
     "./addon-theme/register.tsx"
   ],
   // @ts-ignore

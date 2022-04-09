@@ -153,6 +153,7 @@ export const Aside: FC<AsideProps> = ({
           {isCollapsable && (
             <AxButton
               type="link"
+              aria-label="Toggle collapse"
               className="ax-section__side--toggle flippable"
               icon={
                 (collapsed && !end) || (!collapsed && end)

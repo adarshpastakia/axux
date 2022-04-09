@@ -20,7 +20,7 @@
   &::before {
     background-color: currentColor;
     content: "";
-    opacity: 0.1;
+    opacity: 0.05;
     z-index: 0;
     @include position(absolute, 0);
   }
@@ -117,7 +117,12 @@
     z-index: 1;
   }
 
-  &#{$prefix}-color--default[data-solid="false"]::before {
-    content: unset;
+  &#{$prefix}-color--default[data-solid="false"] {
+    &::before {
+      opacity: 0;
+    }
+    &:hover::before {
+      opacity: 0.1;
+    }
   }
 }

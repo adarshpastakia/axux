@@ -51,6 +51,8 @@ export interface IconProps extends RefProp, ElementProps {
    * Badge indicator
    */
   badge?: BadgeType;
+
+  role?: string;
 }
 
 /**
@@ -71,6 +73,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
       spin,
       onClick,
       badge,
+      role,
       ...aria
     },
     ref
@@ -78,10 +81,10 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
     const badgeEl = useBadge(badge);
     const classes = useMemo(() => {
       const cls = ["ax-icon", className ?? ""];
-      if (bg) {
+      if (bg && !isColor(bg)) {
         cls.push(`ax-bg--${bg}`);
-        cls.push(color ? `ax-color--${color}` : `ax-color--contrast`);
-      } else if (color) {
+        cls.push(color && !isColor(color) ? `ax-color--${color}` : `ax-color--contrast`);
+      } else if (color && !isColor(color)) {
         cls.push(`ax-color--${color}`);
       }
       if (round) {
@@ -145,7 +148,14 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
     }, [color, size, spin]);
 
     return (
-      <div {...aria} className={classes} onClick={onClick} ref={ref as AnyObject} style={styles}>
+      <div
+        {...aria}
+        role={role}
+        className={classes}
+        onClick={onClick}
+        ref={ref as AnyObject}
+        style={styles}
+      >
         {iconEl}
         {badgeEl}
       </div>
