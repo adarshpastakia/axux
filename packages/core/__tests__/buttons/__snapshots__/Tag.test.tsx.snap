@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tag renders basic tag 1`] = `
+<div>
+  <div
+    class="ax-tag  ax-color--default"
+    data-clickable="false"
+    data-size="normal"
+    data-solid="false"
+  >
+    <div
+      class="ax-tag__inner"
+    >
+      <span>
+        Tag
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tag renders color 1`] = `
+<div>
+  <div
+    class="ax-tag  ax-color--secondary"
+    data-clickable="false"
+    data-size="normal"
+    data-solid="false"
+  >
+    <div
+      class="ax-tag__inner"
+    >
+      <span>
+        Tag
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tag renders style 1`] = `
+<div>
+  <div
+    class="ax-tag  ax-color--default"
+    data-clickable="false"
+    data-size="normal"
+    data-solid="true"
+  >
+    <div
+      class="ax-tag__inner"
+    >
+      <span>
+        Tag
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tag renders with icon 1`] = `
+<div>
+  <div
+    class="ax-tag  ax-color--default"
+    data-clickable="false"
+    data-size="normal"
+    data-solid="false"
+  >
+    <div
+      class="ax-tag__inner"
+    >
+      <div
+        class="ax-icon "
+      >
+        <i
+          class="mdi mdi-bell"
+        />
+      </div>
+      <span>
+        Icon
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tag renders with tooltip 1`] = `
+<div>
+  <div
+    class="ax-tag  ax-color--default"
+    data-clickable="false"
+    data-size="normal"
+    data-solid="false"
+  >
+    <div
+      class="ax-tag__inner"
+    >
+      <span>
+        Tooltip
+      </span>
+    </div>
+  </div>
+  <div
+    class="ax-popper ax-root ax-tooltip ax-bg--darkest ax-color--empty "
+    data-show="true"
+    data-show-arrow="true"
+    style="position: fixed; left: 0px; top: 0px; min-width: 0;"
+  >
+    <div
+      class="ax-popper--body"
+    >
+      <span>
+        Test tooltip
+      </span>
+    </div>
+    <div
+      class="ax-popper--arrow"
+      style="position: absolute;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Tag renders with tooltip 2`] = `
+<div>
+  <div
+    class="ax-tag  ax-color--default"
+    data-clickable="false"
+    data-size="normal"
+    data-solid="false"
+  >
+    <div
+      class="ax-tag__inner"
+    >
+      <span>
+        Tooltip
+      </span>
+    </div>
+  </div>
+</div>
+`;
