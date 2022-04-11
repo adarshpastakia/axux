@@ -151,11 +151,11 @@
   @each $label, $color in $theme {
     $darken: darker($color, 0.1 * $i);
     $lighten: lighter($color, 0.1 * $i);
-    .aui-dark--#{$label}--#{$i} {
+    .ax-dark--#{$label}--#{$i} {
       background-color: $darken;
       color: contrast($darken);
     }
-    .aui-light--#{$label}--#{$i} {
+    .ax-light--#{$label}--#{$i} {
       background-color: $lighten;
       color: contrast($lighten);
     }

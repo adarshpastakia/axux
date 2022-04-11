@@ -268,7 +268,7 @@ export const AxTabPanel: ExtendedFC = ({
       </div>
       <AxSection>
         {isCurrentLoading && <AxLoader />}
-        {active ? tabMap[active].children : null}
+        {active && tabMap[active] ? tabMap[active].children : null}
       </AxSection>
     </div>
   );

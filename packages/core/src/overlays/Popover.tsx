@@ -15,7 +15,7 @@ export interface PopoverProps extends ElementProps {
    */
   isOpen?: boolean;
 
-  trigger?: "click" | "contextmenu";
+  trigger?: "click" | "contextmenu" | "hover";
 
   isDisabled?: boolean;
   /**
