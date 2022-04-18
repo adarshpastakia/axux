@@ -24,6 +24,7 @@
     > span {
       flex: 0 0 auto;
       font-size: 0.75em;
+      line-height: 1.25;
       padding: 0.125em 1em;
     }
 
@@ -49,10 +50,17 @@
 
     &__titleBox {
       align-items: center;
+      color: inherit;
       display: flex;
       grid-area: title-box;
       line-height: 1;
       padding: $base-spacing * 0.25 $base-spacing * 0.5;
+      @include noselect();
+
+      &:visited,
+      &:active {
+        color: inherit;
+      }
     }
 
     &__optionsBox {
@@ -105,7 +113,6 @@
   &__menu {
     display: grid;
     grid-area: menu;
-    grid-gap: 0.25em;
     grid-template-rows: 1fr auto auto;
     min-width: 12em;
     overflow: hidden;
@@ -114,7 +121,14 @@
     #{$prefix}-menu {
       &__item {
         line-height: 1.5;
+        #{$prefix}-icon {
+          font-size: 1.25em;
+        }
       }
+    }
+
+    #{$prefix}-button {
+      border-radius: 0;
     }
 
     &[data-collapsed="true"] {
@@ -125,7 +139,7 @@
         &__item {
           padding: 0.5em;
           #{$prefix}-icon {
-            font-size: 1.25em;
+            font-size: 1.5em;
             line-height: 1;
           }
           &__label,

@@ -182,9 +182,9 @@ export const GridContextProvider = <T extends KeyValue>({
         isSelectable
       }}
     >
-      <div className="ax-grid__panel">
+      <div className="ax-datagrid__panel">
         {children}
-        <div className="ax-grid__resize--ghost" ref={ghostRef} />
+        <div className="ax-datagrid__resize--ghost" ref={ghostRef} />
       </div>
     </GridContext.Provider>
   );

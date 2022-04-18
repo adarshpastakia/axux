@@ -18,7 +18,11 @@ export const GridItem: FC<{ index: number }> = ({ children, index }: KeyValue) =
       if (ResizeObserver) {
         obResize = new ResizeObserver(() => {
           const { offsetHeight: height } = el;
-          (el as AnyObject).attributeStyleMap.set("contain-intrinsic-size", height + "px");
+          try {
+            (el as AnyObject).attributeStyleMap.set("contain-intrinsic-size", height + "px");
+          } catch (e) {
+            el.style.minHeight = height + "px";
+          }
         });
         obResize.observe(el);
       }

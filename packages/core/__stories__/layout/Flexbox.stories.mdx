@@ -94,14 +94,11 @@ import { FlexboxStory } from "./FlexboxStory";
 
 <Heading>Props</Heading>
 
-<Subheading>AxFlexBox</Subheading>
-
-<ArgsTable of={AxFlexBox} sort="requiredFirst" />
-
-<Subheading>AxFlexBox.Row</Subheading>
-
-<ArgsTable of={AxFlexBox.Row} sort="requiredFirst" />
-
-<Subheading>AxFlexBox.Col</Subheading>
-
-<ArgsTable of={AxFlexBox.Col} sort="requiredFirst" />
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxFlexBox,
+    "AxFlexBox.Row": AxFlexBox.Row,
+    "AxFlexBox.Col": AxFlexBox.Col
+  }}
+/>

@@ -5,8 +5,7 @@
 
 import { Story } from "@storybook/react";
 import { StateLabel } from "../../../../storybook/components";
-import { AxAvatar, AxButton, AxFlexBox } from "../../src";
-import { ButtonProps } from "../../src/buttons/Button";
+import { AxAvatar, AxFlexBox } from "../../src";
 import { AvatarProps } from "../../src/icons/Avatar";
 
 const Template: Story<AvatarProps> = (props) => <AxAvatar {...props} />;
@@ -40,16 +39,21 @@ export const AvatarSizes: Story<Omit<AvatarProps, "size">> = (props) => (
         ["md", "Medium"],
         ["lg", "Large"],
         ["xl", "XLarge"],
-        [64, "Pixels"],
+        [48, "Pixels"],
         ["5rem", "Rem"]
       ].map(([size, label]: AnyObject) => (
         <AxFlexBox.Col flex="auto" key={size}>
           <StateLabel>{label}</StateLabel>
-          <AxAvatar icon="mdi mdi-account" {...props} size={size} />
+          <AxAvatar {...props} size={size} />
         </AxFlexBox.Col>
       ))}
     </AxFlexBox.Row>
   </AxFlexBox>
 );
+
+export const SizeStory = AvatarSizes.bind({});
+ImageStory.args = {
+  icon: "mdi mdi-account"
+};
 
 export default { title: "Example/Avatar", component: AxAvatar };

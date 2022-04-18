@@ -6,7 +6,6 @@ import {
   Heading,
   Meta,
   Story,
-  Subheading,
   Title
 } from "@storybook/addon-docs";
 import { ViewportStory } from "./ViewportStory";
@@ -28,22 +27,13 @@ import { AxViewport } from "../../src";
 
 <Heading>Props</Heading>
 
-<Subheading>AxViewport</Subheading>
-
-<ArgsTable of={AxViewport} sort="requiredFirst" />
-
-<Subheading>AxViewport.Header</Subheading>
-
-<ArgsTable of={AxViewport.Header} sort="requiredFirst" />
-
-<Subheading>AxViewport.Footer</Subheading>
-
-<ArgsTable of={AxViewport.Footer} sort="requiredFirst" />
-
-<Subheading>AxViewport.Banner</Subheading>
-
-<ArgsTable of={AxViewport.Banner} sort="requiredFirst" />
-
-<Subheading>AxViewport.Menu</Subheading>
-
-<ArgsTable of={AxViewport.Menu} sort="requiredFirst" />
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxViewport,
+    "AxViewport.Header": AxViewport.Header,
+    "AxViewport.Footer": AxViewport.Footer,
+    "AxViewport.Banner": AxViewport.Banner,
+    "AxViewport.Menu": AxViewport.Menu
+  }}
+/>

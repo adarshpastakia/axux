@@ -15,7 +15,7 @@ import { HeaderCell } from "./HeaderCell";
 export const GridHeader: FC = ({ children }) => {
   const { columns } = useGridContext();
   return (
-    <div className="ax-grid__header">
+    <div className="ax-datagrid__header">
       {columns.map((column, index) => (
         <HeaderCell key={index} {...column} />
       ))}

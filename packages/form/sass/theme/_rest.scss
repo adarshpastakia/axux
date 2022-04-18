@@ -13,8 +13,8 @@
       }
     }
 
-    &:hover #{$prefix}-icon,
-    &:focus #{$prefix}-icon {
+    &:hover > #{$prefix}-icon,
+    &:focus > #{$prefix}-icon {
       color: $color-primary;
     }
 

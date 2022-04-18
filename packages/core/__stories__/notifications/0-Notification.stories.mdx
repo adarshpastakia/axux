@@ -62,14 +62,4 @@ export const Element = () => {
 
 <Heading>Props</Heading>
 
-<Subheading>Toast Props</Subheading>
-
-<ArgsTable of={AxToast} sort="requiredFirst" />
-
-<Subheading>Message Props</Subheading>
-
-<ArgsTable of={AxMessage} sort="requiredFirst" />
-
-<Subheading>Alert Props</Subheading>
-
-<ArgsTable of={AxAlert} sort="requiredFirst" />
+<ArgsTable sort="requiredFirst" components={{ AxToast, AxMessage, AxAlert }} />

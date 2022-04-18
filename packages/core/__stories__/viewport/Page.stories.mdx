@@ -5,7 +5,8 @@ import {
   Description,
   Heading,
   Meta,
-  Story, Subheading,
+  Story,
+  Subheading,
   Title
 } from "@storybook/addon-docs";
 import { AxPage, AxSection } from "../../src";
@@ -37,22 +38,13 @@ import { PageStory, SectionStory } from "./PageStory";
 
 <Heading>Props</Heading>
 
-<Subheading>AxPage</Subheading>
-
-<ArgsTable of={AxPage} sort="requiredFirst" />
-
-<Subheading>AxSection</Subheading>
-
-<ArgsTable of={AxSection} sort="requiredFirst" />
-
-<Subheading>AxSection.Head</Subheading>
-
-<ArgsTable of={AxSection.Head} sort="requiredFirst" />
-
-<Subheading>AxSection.Foot</Subheading>
-
-<ArgsTable of={AxSection.Foot} sort="requiredFirst" />
-
-<Subheading>AxSection.Side</Subheading>
-
-<ArgsTable of={AxSection.Side} sort="requiredFirst" />
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxPage,
+    AxSection,
+    "AxSection.Head": AxSection.Head,
+    "AxSection.Foot": AxSection.Foot,
+    "AxSection.Side": AxSection.Side
+  }}
+/>

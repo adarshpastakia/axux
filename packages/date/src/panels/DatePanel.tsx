@@ -52,6 +52,8 @@ export const AxDatePanel: FC<DateProps> = ({
     }
     if (min && isBefore(current, min)) {
       setPageDate(startOfMonth(min, isHijri));
+    } else if (max && isAfter(current, max)) {
+      setPageDate(startOfMonth(max, isHijri));
     } else {
       setPageDate(startOfMonth(current, isHijri));
     }

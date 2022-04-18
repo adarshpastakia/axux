@@ -18,23 +18,7 @@ import { BoxStory } from "./BoxStory";
 <Description of={AxBox} />
 
 <Canvas>
-  <Story name="Box">
-    {BoxStory}
-  </Story>
-</Canvas>
-
-<Anchor storyId="core-layout-box--padded">
-  <Heading>Padded</Heading>
-</Anchor>
-
-<Canvas>
-  <Story name="Padded">
-    <AxBox className="ax-border ax-border--dashed ax-bg--lightest" padding="md@md sm@sm lg@lg">
-      <AxText bg="base" block>
-        Padded box wrapper
-      </AxText>
-    </AxBox>
-  </Story>
+  <Story name="Box">{BoxStory}</Story>
 </Canvas>
 
 <Heading>Props</Heading>

@@ -3,35 +3,20 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
-import { Globals } from "../context/Globals";
 import { AxMenuItem } from "../menu/MenuItem";
 import { AxPopover } from "../overlays/Popover";
 import { ElementProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
-
-const LocaleLabels: KeyValue = {
-  en: "English",
-  ar: "عربى",
-  de: "Deutsche",
-  es: "Español",
-  fr: "Français",
-  it: "Italiano",
-  jp: "日本語",
-  ko: "한국어",
-  pt: "Português",
-  ru: "Pусский",
-  zh: "中国人"
-};
+import { useAxGlobals } from "../../dist";
 
 /**
  * Switch between available i18n locales
  * @internal
  */
 export const AxLocalePicker: VFC<ElementProps & { isMenu?: boolean }> = ({ className, isMenu }) => {
-  const { locales, changeLocale } = useContext(Globals);
+  const { locales = [], changeLocale } = useAxGlobals();
   const {
     t,
     i18n: { language }
@@ -46,6 +31,7 @@ export const AxLocalePicker: VFC<ElementProps & { isMenu?: boolean }> = ({ class
         />
       ) : (
         <AxButton
+          hideCaret
           type="link"
           color="primary"
           icon={AppIcons.iconLocale}
@@ -53,14 +39,14 @@ export const AxLocalePicker: VFC<ElementProps & { isMenu?: boolean }> = ({ class
         />
       )}
       <div dir="ltr">
-        {locales.map((locale) => (
+        {locales.map((locale: string) => (
           <div key={locale} className="ax-row" onClick={() => changeLocale(locale)}>
             <div
               className="ax-col--fill ax-locale--link"
               data-locale={locale}
               data-selected={locale === language}
             >
-              <span>{LocaleLabels[locale] ?? locale}</span>
+              <span>{t(`locale.${locale}`, locale)}</span>
             </div>
           </div>
         ))}

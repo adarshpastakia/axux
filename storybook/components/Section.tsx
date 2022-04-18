@@ -3,12 +3,12 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { Heading } from "@storybook/addon-docs";
 import { FC } from "react";
 
 export const Section: FC<{ title: string }> = ({ children, title }) => (
   <div className="ax-container ax-margin--b--lg">
-    <Heading>{title}</Heading>
+    <div className="ax-heading--3 ax-color--secondary ">{title}</div>
+    <hr className="ax-margin--b--sm" />
     <div>{children}</div>
   </div>
 );

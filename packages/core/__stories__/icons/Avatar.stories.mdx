@@ -8,8 +8,8 @@ import {
   Story,
   Title
 } from "@storybook/addon-docs";
-import { AxAvatar, AxBox, AxFlexBox, AxIcon, COLOR } from "../../src";
-import { AvatarSizes, BasicStory, IconStory, ImageStory } from "./AvatarStory";
+import { AxAvatar, AxFlexBox, AxIcon } from "../../src";
+import { BasicStory, IconStory, ImageStory, SizeStory } from "./AvatarStory";
 import {
   mdiAccount,
   mdiAccountVoice,
@@ -21,7 +21,7 @@ import {
   mdiFlask,
   mdiNumeric1Circle
 } from "@mdi/js";
-import { PALETTE } from "../../../../storybook/stylings/theming-items";
+import { PALETTE, THEME } from "../../../../storybook/stylings/theming-items";
 
 <Meta title="@core/Icons/Avatar" component={AxAvatar} parameters={{ jest: ["Avatar.test.tsx"] }} />
 
@@ -42,7 +42,7 @@ import { PALETTE } from "../../../../storybook/stylings/theming-items";
 </Anchor>
 
 <Canvas>
-  <Story name="Sizes">{AvatarSizes.bind({})}</Story>
+  <Story name="Sizes">{SizeStory}</Story>
 </Canvas>
 
 <Anchor storyId="core-icons-avatar--infographs">
@@ -78,14 +78,14 @@ import { PALETTE } from "../../../../storybook/stylings/theming-items";
   <Story name="Themes">
     <AxFlexBox>
       <AxFlexBox.Row>
-        {Object.values(COLOR).map((color) => (
+        {Object.values(THEME).map((color) => (
           <AxFlexBox.Col key={color} flex="auto">
             <AxAvatar title="Username" icon={mdiAccount} color={color} />
           </AxFlexBox.Col>
         ))}
       </AxFlexBox.Row>
       <AxFlexBox.Row>
-        {Object.values(COLOR).map((color) => (
+        {Object.values(THEME).map((color) => (
           <AxFlexBox.Col key={color} flex="auto">
             <AxAvatar title="Username" icon={mdiAccount} bg={color} />
           </AxFlexBox.Col>

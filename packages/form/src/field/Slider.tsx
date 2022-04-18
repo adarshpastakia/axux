@@ -119,7 +119,7 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
                   {error && (
                     <AxTooltip color="danger" content={error} placement="bottom">
                       <span className="ax-field__error">
-                        <AxIcon icon={AppIcons.iconExclaim} color="danger" />
+                        <AxIcon icon="!" color="danger" />
                       </span>
                     </AxTooltip>
                   )}

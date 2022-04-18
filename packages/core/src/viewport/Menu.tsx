@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { getChildProps } from "@axux/utilities/dist/react";
-import { Children, cloneElement, FC, useCallback } from "react";
+import { Children, cloneElement, FC, useCallback, useEffect, useState } from "react";
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../internals/usePropToggle";
 import { AxMenu } from "../menu/Menu";
@@ -35,13 +35,24 @@ export const AxViewportMenu: FC<ViewportMenuProps> = ({
   onCollapse
 }) => {
   const [collapsed, toggleCollapse] = usePropToggle(isCollapsed, onCollapse);
+  const [canCollapse, setCanCollapse] = useState(true);
+
+  useEffect(() => {
+    const ob = new ResizeObserver(() => {
+      setCanCollapse(document.body.clientWidth >= 1100);
+    });
+    ob.observe(document.body);
+    return () => {
+      ob.disconnect();
+    };
+  }, []);
 
   const getItemIcon = useCallback((item: KeyValue) => {
     return item.icon ?? (item.label ?? "-").substr(0, 1);
   }, []);
 
   return (
-    <div className="ax-viewport__menu" data-collapsed={collapsed}>
+    <div className="ax-viewport__menu" data-collapsed={!canCollapse || collapsed}>
       <AxMenu>
         {Children.toArray(children).map((child: AnyObject) =>
           cloneElement(child, {
@@ -61,15 +72,17 @@ export const AxViewportMenu: FC<ViewportMenuProps> = ({
           )}
         </AxMenu>
       )}
-      <div className="ax-border--t">
-        <AxButton
-          block
-          type="link"
-          onClick={toggleCollapse}
-          className="ax-margin--none flippable"
-          icon={collapsed ? AppIcons.iconMenuExpand : AppIcons.iconMenuCollapse}
-        />
-      </div>
+      {canCollapse && (
+        <div className="ax-border--t">
+          <AxButton
+            block
+            type="link"
+            onClick={toggleCollapse}
+            className="ax-margin--none flippable"
+            icon={collapsed ? AppIcons.iconMenuExpand : AppIcons.iconMenuCollapse}
+          />
+        </div>
+      )}
     </div>
   );
 };

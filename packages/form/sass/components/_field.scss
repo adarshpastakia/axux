@@ -132,6 +132,7 @@
     grid-area: error;
     padding: 0.25em;
     #{$prefix}-icon {
+      font-size: 1em;
       margin-top: -1px;
     }
   }

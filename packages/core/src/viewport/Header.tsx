@@ -7,7 +7,6 @@ import { isString } from "@axux/utilities";
 import { FC, Fragment, isValidElement, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { ElementProps } from "../types";
-import { AxText } from "../typography/Text";
 
 /** @internal */
 export interface ViewportHeaderProps extends ElementProps {
@@ -76,8 +75,11 @@ export const AxViewportHeader: FC<ViewportHeaderProps> = ({
   );
   return (
     <div className={`ax-viewport__header ${className ?? ""}`} {...aria}>
-      {(icon || title) &&
-        (!!href ? <NavLink to={href}>{AppTitle}</NavLink> : <AxText>{AppTitle}</AxText>)}
+      {(icon || title) && (
+        <NavLink className="ax-viewport__header__titleBox" to={href ?? "/"}>
+          {AppTitle}
+        </NavLink>
+      )}
       {children && <div className="ax-viewport__header__optionsBox">{children}</div>}
     </div>
   );

@@ -4,6 +4,7 @@
 // @license   : MIT
 
 #{$prefix}-button {
+  border-radius: $base-border-radius;
   display: inline-flex;
   font-size: 1em;
   margin: 0.125em;

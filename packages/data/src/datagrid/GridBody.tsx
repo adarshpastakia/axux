@@ -16,11 +16,11 @@ export const GridBody: VFC = () => {
   const { records, columns, onScroll, isSelectable, onRowSelect } = useGridContext();
 
   return (
-    <div className="ax-grid__body" onScroll={(e) => onScroll(-1 * e.currentTarget.scrollLeft)}>
+    <div className="ax-datagrid__body" onScroll={(e) => onScroll(-1 * e.currentTarget.scrollLeft)}>
       {records.map((record, row) => (
         <div
           key={row}
-          className="ax-grid__body--row"
+          className="ax-datagrid__body--row"
           data-hover={isSelectable}
           onClick={() => isSelectable && onRowSelect && onRowSelect(record, row)}
         >
@@ -30,7 +30,7 @@ export const GridBody: VFC = () => {
         </div>
       ))}
 
-      <div className="ax-grid__body--row ax-grid__filler">
+      <div className="ax-datagrid__body--row ax-datagrid__filler">
         {columns.map((column, index) => (
           <BodyCell key={index} record={{}} type="string" name={column.name} />
         ))}

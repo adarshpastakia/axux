@@ -41,7 +41,10 @@ const AlertTemplate: Story<AlertProps> = (props) => {
   return (
     <AxButton
       onClick={() =>
-        alert({ ...props, extraActions: [<AxButton>Next</AxButton>, <AxButton>Prev</AxButton>] })
+        alert({
+          ...props,
+          extraActions: [<AxButton key="next">Next</AxButton>, <AxButton key="prev">Prev</AxButton>]
+        })
       }
     >
       Show Alert

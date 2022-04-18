@@ -140,7 +140,7 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
         ) : to ? (
           <NavLink ref={ref} to={to} {...props} />
         ) : (
-          <button ref={ref} type="button" {...props} />
+          <button ref={ref} type={(aria as KeyValue)["data-type"] ?? "button"} {...props} />
         ),
       [ref, href, to]
     );
@@ -205,9 +205,13 @@ AxButton.Group = AxButtonGroup;
 AxButton.Dropdown = AxDropdown;
 AxButton.Action = AxActionButton;
 AxButton.Confirm = AxConfirmButton;
-AxButton.Positive = (props) => <AxButton {...props} color="primary" type="solid" />;
-AxButton.Negative = (props) => <AxButton {...props} color="danger" type="solid" />;
-AxButton.Neutral = (props) => <AxButton {...props} color="default" type="default" />;
+AxButton.Positive = (props) => (
+  <AxButton {...props} color="primary" type="solid" data-type="submit" />
+);
+AxButton.Negative = (props) => (
+  <AxButton {...props} color="danger" type="solid" data-type="reset" />
+);
+AxButton.Neutral = (props) => <AxButton {...props} color="primary" type="link" />;
 
 AxButton.displayName = "AxButton";
 AxButton.Group.displayName = "AxButton.Group";

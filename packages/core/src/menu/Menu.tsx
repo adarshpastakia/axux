@@ -53,11 +53,10 @@ export const AxMenu: ExtendedFC = ({
     <AxPanel
       {...rest}
       className={`ax-menu ${className ?? ""}`}
-      onClick={checkMenuClick}
       data-size={size}
       data-with-icons={withIcons}
     >
-      <AxContent padding="none" scroll>
+      <AxContent padding="none" scroll onClick={checkMenuClick}>
         {children}
         {items &&
           items.map((item) =>

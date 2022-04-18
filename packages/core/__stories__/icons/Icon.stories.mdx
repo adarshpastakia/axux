@@ -8,10 +8,12 @@ import {
   Story,
   Title
 } from "@storybook/addon-docs";
-import { AxFlexBox, AxIcon, COLOR } from "../../src";
-import { IconStory } from "./IconStory";
+import { AxFlexBox, AxIcon } from "../../src";
+import { IconStory, ImageStory, PathStory, RoundStory, SizeStory } from "./IconStory";
 import { mdiBell, mdiFingerprint, mdiGamepadCircleUp } from "@mdi/js";
-import { PALETTE } from "../../../../storybook/stylings/theming-items";
+import { PALETTE, THEME } from "../../../../storybook/stylings/theming-items"; import {
+  StateLabel
+} from "../../../../storybook/components";
 
 <Meta title="@core/Icons/Icon" component={AxIcon} parameters={{ jest: ["Icon.test.tsx"] }} />
 
@@ -22,7 +24,10 @@ import { PALETTE } from "../../../../storybook/stylings/theming-items";
 <Description of={AxIcon} />
 
 <Canvas>
-  <Story name="Icon">{IconStory}</Story>
+  <Story name="Font Icon">{IconStory}</Story>
+  <Story name="SVG Path">{PathStory}</Story>
+  <Story name="Image">{ImageStory}</Story>
+  <Story name="Rounded">{RoundStory}</Story>
 </Canvas>
 
 <Anchor storyId="core-icons-icon--sizes">
@@ -30,13 +35,7 @@ import { PALETTE } from "../../../../storybook/stylings/theming-items";
 </Anchor>
 
 <Canvas>
-  <Story name="Sizes">
-    <AxIcon icon={mdiBell} size="sm" />
-    <AxIcon icon={mdiBell} size="default" />
-    <AxIcon icon={mdiBell} size="md" />
-    <AxIcon icon={mdiBell} size="lg" />
-    <AxIcon icon={mdiBell} size="xl" />
-  </Story>
+  <Story name="Sizes">{SizeStory}</Story>
 </Canvas>
 
 <Anchor storyId="core-icons-icon--themes">
@@ -46,13 +45,13 @@ import { PALETTE } from "../../../../storybook/stylings/theming-items";
 <Canvas>
   <Story name="Themes">
     <div>
-      {Object.values(COLOR).map((color) => (
-        <AxIcon icon={mdiBell} key={color} color={color} />
+      {Object.values(THEME).map((color) => (
+        <AxIcon icon={mdiBell} key={color} size="2rem" color={color} />
       ))}
     </div>
     <div>
       {Object.values(PALETTE).map((color) => (
-        <AxIcon icon={mdiBell} key={color} color={color} />
+        <AxIcon icon={mdiBell} key={color} size="2rem" color={color} />
       ))}
     </div>
   </Story>
@@ -67,12 +66,12 @@ import { PALETTE } from "../../../../storybook/stylings/theming-items";
     <AxFlexBox>
       <AxFlexBox.Row>
         <AxFlexBox.Col padding flex="auto">
-          <AxIcon icon={mdiFingerprint} size="xl" spin />
-          <div>Spinner</div>
+          <StateLabel>Spin</StateLabel>
+          <AxIcon icon={mdiFingerprint} size="2rem" spin />
         </AxFlexBox.Col>
         <AxFlexBox.Col padding flex="auto">
-          <AxIcon icon={mdiGamepadCircleUp} size="xl" spin={8} />
-          <div>Step spin</div>
+          <StateLabel>Steps</StateLabel>
+          <AxIcon icon={mdiGamepadCircleUp} size="2rem" spin={8} />
         </AxFlexBox.Col>
       </AxFlexBox.Row>
     </AxFlexBox>

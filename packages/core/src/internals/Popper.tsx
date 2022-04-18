@@ -291,7 +291,7 @@ export const AxPopper: FC<Props> = ({
 
   const triggerProps = useMemo(() => {
     if (updateAnchor && anchorEl) {
-      anchorEl.dataset.active = `${open}`;
+      anchorEl.dataset.open = `${open}`;
       return {
         "data-popover-anchor": "true",
         "data-popover": "true"

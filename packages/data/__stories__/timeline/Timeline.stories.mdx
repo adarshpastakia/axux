@@ -11,7 +11,11 @@ import {
 import { AxTimeline } from "../../src";
 import { TimelineStory } from "./TimelineStory";
 
-<Meta title="@data/Timeline" component={AxTimeline} parameters={{ jest: ["Timeline.test.tsx"] }} />
+<Meta
+  title="@data/Timeline"
+  component={AxTimeline}
+  parameters={{ jest: ["Timeline.test.tsx"], a11y: { disable: true } }}
+/>
 
 <Anchor storyId="data-timeline--timeline">
   <Title>Timeline</Title>
@@ -27,4 +31,4 @@ import { TimelineStory } from "./TimelineStory";
 
 <Heading>Props</Heading>
 
-<ArgsTable of={AxTimeline} sort="requiredFirst" />
+<ArgsTable sort="requiredFirst" components={{ AxTimeline, "AxTimeline.Entry": AxTimeline.Entry }} />

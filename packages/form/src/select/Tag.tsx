@@ -160,7 +160,7 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
               tabIndex={-1}
               icon={AppIcons.iconCaretDown}
               isDisabled={isDisabled || isReadonly}
-              onClick={() => setOpen(isEditable)}
+              onClick={() => [inputRef.current?.focus(), setOpen(true)]}
             />
           </div>
         )}

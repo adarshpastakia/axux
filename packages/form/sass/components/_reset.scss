@@ -39,7 +39,7 @@
   select:-internal-autofill-previewed,
   select:-internal-autofill-selected {
     // stylelint-disable-next-line declaration-no-important
-    background-color: transparent !important;
+    //background-color: transparent !important;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
@@ -56,8 +56,7 @@
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus {
-    background-color: transparent !important;
-    box-shadow: 0 0 0 5em rgba(#1d79c1, 0.1) inset;
-    transition: background-color 5000s ease-in-out 0s;
+    //box-shadow: 0 0 0 5em rgba(#1d79c1, 0.1) inset;
+    //transition: background-color 5000s ease-in-out 0s;
   }
 }

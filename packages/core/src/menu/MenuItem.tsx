@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { isEmpty, isTrue } from "@axux/utilities";
-import { FC, forwardRef, Fragment, MouseEventHandler, useMemo } from "react";
+import { Children, FC, forwardRef, Fragment, MouseEventHandler, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { useIcon } from "../hooks/useIcon";
 import { AxIcon } from "../icons/Icon";
@@ -82,7 +82,7 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
         "data-color": color ?? "",
         "data-panel": panelId,
         "data-floating": isFloating,
-        "data-active": isActive || (aria as KeyValue)["data-active"],
+        "data-active": isTrue(isActive || (aria as KeyValue)["data-active"]),
         "data-disabled": isDisabled,
         "data-clickable": isClickable,
         onClick: isCollapsable && !menuCollapsed ? toggleCollapse : onClick,
@@ -137,7 +137,7 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
             {innerEl}
           </a>
         ) : (
-          <NavLink to={to} {...elProps}>
+          <NavLink end to={to} {...elProps}>
             {innerEl}
           </NavLink>
         )}

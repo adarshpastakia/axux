@@ -1,0 +1,40 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxCallout, AxContent } from "../../src";
+import { CustomEmptyStory, EmptyStory } from "./EmptyStory";
+
+<Meta
+  title="@core/Panels/Empty Content"
+  component={AxCallout}
+  parameters={{ jest: ["Empty.test.tsx"] }}
+/>
+
+<Anchor storyId="core-panels-empty-content--empty-content">
+  <Title>Empty Content</Title>
+</Anchor>
+
+<Description of={AxContent.Empty} />
+
+<Canvas>
+  <Story name="Empty Content">{EmptyStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-panels-empty-content--custom-empty">
+  <Heading>Custom Empty</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Custom Empty">{CustomEmptyStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxContent.Empty} sort="requiredFirst" />

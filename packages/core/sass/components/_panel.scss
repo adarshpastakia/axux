@@ -69,3 +69,9 @@
     @extend #{$prefix}-shadow--4;
   }
 }
+
+#{$prefix}-collapsable {
+  & + & {
+    margin-top: -1px;
+  }
+}

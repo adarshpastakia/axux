@@ -38,15 +38,6 @@ export interface FormRef<T = KeyValue> {
 /** @internal */
 export interface FormProps<T = KeyValue> {
   /**
-   * Layout columns (1-4)
-   * @default 2
-   */
-  columns?: number;
-  /**
-   * Stretch form to 100%
-   */
-  fluid?: boolean;
-  /**
    * Default form values
    */
   defaultValues?: T;
@@ -72,8 +63,6 @@ export const AxForm = <T extends KeyValue>({
   schema,
   children,
   formRef,
-  fluid = false,
-  columns = 2,
   onSubmit = () => Promise.resolve(),
   defaultValues
 }: PropsWithChildren<FormProps<T>>) => {
@@ -108,9 +97,7 @@ export const AxForm = <T extends KeyValue>({
         ref={formEl}
         noValidate
         className="ax-form"
-        data-fluid={fluid}
         onSubmit={methods.handleSubmit(onSubmit as AnyObject)}
-        style={{ "--columns": Math.min(4, Math.max(1, columns)) } as AnyObject}
       >
         {children}
         <input type="submit" style={{ position: "absolute", top: "-200%" }} />

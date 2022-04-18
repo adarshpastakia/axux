@@ -21,6 +21,8 @@
       background-color: darker($color, 0.2);
     }
 
+    &.active,
+    &[data-open="true"],
     &[data-active="true"] {
       background-color: rgba($color, 0.85) !important;
       pointer-events: none;

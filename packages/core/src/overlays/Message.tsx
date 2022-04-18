@@ -71,7 +71,7 @@ export const AxMessage: VFC<MessageProps & { onClose?: BooleanCallback }> = ({
   }, [block, color]);
   return (
     <div className={classes} data-color={color}>
-      {icon && <AxIcon icon={icon} size="sm" />}
+      {icon && <AxIcon icon={icon} size="md" />}
       {title && <b>{title}</b>}
       <span>{text}</span>
       <div onClickCapture={() => onClose?.(false)}>{extraActions}</div>

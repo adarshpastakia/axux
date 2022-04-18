@@ -141,7 +141,7 @@ const SelectField: FC<
             tabIndex={-1}
             icon={AppIcons.iconCaretDown}
             isDisabled={isDisabled || isReadonly}
-            onClick={() => setOpen(isEditable)}
+            onClick={() => [inputRef.current?.focus(), setOpen(true)]}
           />
         </div>
       </AxFieldWrapper>
@@ -159,7 +159,7 @@ SelectField.displayName = "AxSelectField";
  * Select input
  * @internal
  */
-export const AxSelectField = <T extends KeyValue>({
+export const AxSelectField = <T extends AnyObject>({
   children,
   value,
   onChange,

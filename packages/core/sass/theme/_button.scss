@@ -59,6 +59,7 @@
     }
 
     #{$base}__inner:active,
+    #{$base}__inner[data-open="true"],
     #{$base}__inner[data-active="true"],
     &[data-active="true"] #{$base}__inner {
       background-color: darker($color, 0.3);
@@ -81,5 +82,9 @@
 #{$prefix}-button {
   &[data-disabled="true"] {
     background-color: rgba($color-empty, 0.1);
+  }
+
+  &:focus-within {
+    box-shadow: 0 0 0 2px $base-bg, 0 0 4px 3px $color-primary;
   }
 }

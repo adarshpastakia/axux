@@ -42,14 +42,11 @@ import { GroupStory, PanelStory, StackStory } from "./PanelStory";
 
 <Heading>Props</Heading>
 
-<Subheading>AxPanel</Subheading>
-
-<ArgsTable of={AxPanel} sort="requiredFirst" />
-
-<Subheading>AxPanel.Header</Subheading>
-
-<ArgsTable of={AxPanel.Header} sort="requiredFirst" />
-
-<Subheading>AxPanel.Footer</Subheading>
-
-<ArgsTable of={AxPanel.Footer} sort="requiredFirst" />
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxPanel,
+    "AxPanel.Header": AxPanel.Header,
+    "AxPanel.Footer": AxPanel.Footer
+  }}
+/>

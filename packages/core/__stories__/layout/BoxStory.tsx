@@ -4,52 +4,30 @@
 // @license   : MIT
 
 import { Story } from "@storybook/react";
-import { PropsWithChildren, useCallback } from "react";
-import { AxBox, AxContextMenu, AxMenu, AxText, useAxContextMenu } from "../../src";
-import { FlexBoxProps } from "../../src/layout/FlexBox";
+import { PropsWithChildren } from "react";
+import { AxBox, AxText } from "../../src";
+import { BoxProps } from "../../src/layout/Box";
 
-const innerItems = [
-  <AxMenu key="menu1">
-    <AxMenu.Item label="Option Inner" />
-  </AxMenu>
-];
-
-const Template: Story<PropsWithChildren<FlexBoxProps>> = (props) => {
-  const { showContextMenu } = useAxContextMenu();
-  const onContext = useCallback((e) => {
-    showContextMenu({
-      x: e.clientX,
-      y: e.clientY,
-      menu: [
-        <AxMenu key="menu1">
-          <AxMenu.Item label="Option Outer" />
-        </AxMenu>
-      ]
-    });
-    e.preventDefault();
-    return false;
-  }, []);
-
+const Template: Story<PropsWithChildren<BoxProps>> = (props) => {
   return (
     <div className="ax-root">
-      <AxBox className="ax-border ax-border--dashed" onContextMenu={onContext} {...props}>
-        <AxContextMenu menu={innerItems}>
-          <AxBox
-            className="ax-border ax-border--dashed ax-bg--lightest"
-            margin="md@md sm@sm lg@lg"
-            padding="md@md sm@sm lg@lg"
-          >
-            <AxText bg="base" block>
-              Box wrappers with margin and padding
-            </AxText>
-          </AxBox>
-        </AxContextMenu>
+      <AxBox className="ax-border ax-border--dashed">
+        <AxBox {...props}>
+          <AxText block>
+            Box wrappers with margin and padding
+          </AxText>
+        </AxBox>
       </AxBox>
     </div>
   );
 };
 
 export const BoxStory = Template.bind({});
-BoxStory.args = {};
+BoxStory.args = {
+  className: "ax-border ax-border--dashed",
+  margin: "md@md sm@sm lg@lg",
+  padding: "md@md sm@sm lg@lg",
+  bg: "lightest"
+};
 
 export default { title: "Example/Box", component: AxBox };

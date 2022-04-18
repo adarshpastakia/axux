@@ -12,14 +12,14 @@ const Template: Story<PropsWithChildren<FlexBoxProps>> = (props) => (
   <AxBox paddingY="md">
     <AxFlexBox {...props}>
       <AxFlexBox.Row height="3rem">
-        <AxFlexBox.Col span={3} className="ax-bg--light" />
-        <AxFlexBox.Col span={6} className="ax-bg--light" />
-        <AxFlexBox.Col span={3} className="ax-bg--light" />
+        <AxFlexBox.Col span={3} className="ax-bg--lightest ax-border" />
+        <AxFlexBox.Col span={6} className="ax-bg--lightest ax-border" />
+        <AxFlexBox.Col span={3} className="ax-bg--lightest ax-border" />
       </AxFlexBox.Row>
       <AxFlexBox.Row height="5rem">
-        <AxFlexBox.Col span={4} className="ax-bg--light" />
-        <AxFlexBox.Col span={4} className="ax-bg--light" />
-        <AxFlexBox.Col span={4} className="ax-bg--light" />
+        <AxFlexBox.Col span={4} className="ax-bg--lightest ax-border" />
+        <AxFlexBox.Col span={4} className="ax-bg--lightest ax-border" />
+        <AxFlexBox.Col span={4} className="ax-bg--lightest ax-border" />
       </AxFlexBox.Row>
       <AxFlexBox.Row>
         {new Array(12).fill(null).map((_, i) => (
@@ -29,7 +29,7 @@ const Template: Story<PropsWithChildren<FlexBoxProps>> = (props) => (
             span="12@xs 6@sm 4@md 3@lg 2@xl 1@xxl"
             padding="sm@xs @md md@xl"
             stretchContent
-            className="ax-bg--light"
+            className="ax-bg--lightest ax-border"
           >
             <AxBox className="ax-bg--base" />
           </AxFlexBox.Col>

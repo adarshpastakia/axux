@@ -5,13 +5,18 @@ import {
   Description,
   Heading,
   Meta,
-  Story, Subheading,
+  Story,
+  Subheading,
   Title
 } from "@storybook/addon-docs";
 import { AxTabPanel } from "../../src";
 import { TabStory } from "./TabStory";
 
-<Meta title="@core/Panels/Tab Panel" component={AxTabPanel} parameters={{ jest: ["TabPanel.test.tsx"] }} />
+<Meta
+  title="@core/Panels/Tab Panel"
+  component={AxTabPanel}
+  parameters={{ jest: ["TabPanel.test.tsx"] }}
+/>
 
 <Anchor storyId="core-panels-tab-panel--tab-panel">
   <Title>Tab Panel</Title>
@@ -27,10 +32,10 @@ import { TabStory } from "./TabStory";
 
 <Heading>Props</Heading>
 
-<Subheading>AxTabPanel</Subheading>
-
-<ArgsTable of={AxTabPanel} sort="requiredFirst" />
-
-<Subheading>AxTabPanel.Tab</Subheading>
-
-<ArgsTable of={AxTabPanel.Tab} sort="requiredFirst" />
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxTabPanel,
+    "AxTabPanel.Tab": AxTabPanel.Tab
+  }}
+/>

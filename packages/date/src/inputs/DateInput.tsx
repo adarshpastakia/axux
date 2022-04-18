@@ -97,10 +97,10 @@ const DateField: FC<DateProps & WrapperProps & FieldStateProps & InnerProps> = (
 
   return (
     <AxPopover
-      closeOnClick
       isOpen={isOpen}
       resize={false}
       autoTrigger={false}
+      closeOnClick={false}
       usePortal={usePortal}
       className="ax-date__popover"
       onOpen={() => setOpen(isEditable)}

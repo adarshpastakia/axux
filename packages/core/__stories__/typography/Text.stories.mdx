@@ -119,4 +119,11 @@ import { LIPSUM } from "../../../../storybook/components/Lipsum";
 
 <Heading>Props</Heading>
 
-<ArgsTable of={AxText} sort="requiredFirst" />
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxText,
+    "AxText.Abbr": AxText.Abbr,
+    "AxText.Marked": AxText.Marked
+  }}
+/>

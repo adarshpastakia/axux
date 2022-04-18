@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxIcon } from "@axux/core";
+import { AxIcon, AxTooltip } from "@axux/core";
 import { VFC } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { memo } from "react";
@@ -41,7 +41,7 @@ export const AxCheckboxField: VFC<CheckboxProps> = memo(
   ({ name, label, isDisabled, checked, onChange }) => {
     return (
       <AxFieldController value={checked} onChange={onChange} name={name}>
-        {({ ref, onChange, value, onBlur }) => (
+        {({ ref, onChange, value, error, onBlur }) => (
           <label className="ax-field__option" onClick={(e) => e.stopPropagation()}>
             <input
               ref={ref}
@@ -55,6 +55,13 @@ export const AxCheckboxField: VFC<CheckboxProps> = memo(
             />
             <AxIcon data-check="off" icon={AppIcons.iconCheckboxOff} />
             <AxIcon data-check="on" icon={AppIcons.iconCheckboxOn} />
+            {error && (
+              <AxTooltip color="danger" content={error} placement="bottom">
+                <span className="ax-field__error">
+                  <AxIcon icon="!" color="danger" />
+                </span>
+              </AxTooltip>
+            )}
             {label && <span>{label}</span>}
           </label>
         )}

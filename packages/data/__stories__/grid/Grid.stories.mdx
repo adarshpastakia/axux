@@ -11,7 +11,11 @@ import {
 import { AxGridView } from "../../src";
 import { GridStory } from "./GridStory";
 
-<Meta title="@data/Grid" component={AxGridView} parameters={{ jest: ["Grid.test.tsx"] }} />
+<Meta
+  title="@data/Grid"
+  component={AxGridView}
+  parameters={{ jest: ["Grid.test.tsx"], a11y: { disable: true } }}
+/>
 
 <Anchor storyId="data-grid--grid">
   <Title>Grid</Title>
@@ -27,4 +31,4 @@ import { GridStory } from "./GridStory";
 
 <Heading>Props</Heading>
 
-<ArgsTable of={AxGridView} sort="requiredFirst" />
+<ArgsTable sort="requiredFirst" components={{ AxGridView, "AxGridView.Item": AxGridView.Item }} />

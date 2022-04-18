@@ -29,19 +29,24 @@
       position: absolute;
       z-index: -1;
     }
-    > span {
+    > span:last-child {
       flex: 1 1 1em;
       font-size: 0.875em;
-      line-height: 1;
+      line-height: 1.25;
       padding: 0 $base-spacing/4;
       @include ellipsis();
     }
 
-    #{$prefix}-icon {
+    > #{$prefix}-icon {
       cursor: pointer;
       font-size: 1.25em;
       margin-top: -1px;
       opacity: 0.8;
+    }
+
+    #{$base}__error {
+      line-height: 1;
+      padding: 0;
     }
 
     input[type="radio"] ~ #{$prefix}-icon {
