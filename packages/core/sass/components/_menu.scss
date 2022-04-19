@@ -103,7 +103,7 @@
     }
   }
 
-  &[data-with-icons="true"] #{$base} {
+  &[data-with-icons="true"] > #{$prefix}-panel__body > #{$prefix}-content > #{$base} {
     grid-template-columns: 1em 1fr;
   }
 }

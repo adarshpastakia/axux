@@ -44,16 +44,16 @@ $input-bg: #ffffff;
 $input-color: #252f36;
 $panel-bg: #ffffff;
 
-$shadow-level0: 0 0 0 1px rgba($color-shadow, 0.5), 0 0 0 rgba($color-shadow, 0),
+$shadow-level0: 0 0 0 1px rgba($color-shadow, 0.1), 0 0 0 rgba($color-shadow, 0),
   0 0 0 rgba($color-shadow, 0);
-$shadow-level1: 0 0 0 1px rgba($color-shadow, 0.3), 0 0 0 rgba($color-shadow, 0),
-  0 1px 1px rgba($color-shadow, 0.6);
-$shadow-level2: 0 0 0 1px rgba($color-shadow, 0.3), 0 1px 1px rgba($color-shadow, 0.6),
-  0 2px 6px rgba($color-shadow, 0.6);
-$shadow-level3: 0 0 0 1px rgba($color-shadow, 0.3), 0 2px 4px rgba($color-shadow, 0.6),
-  0 8px 24px rgba($color-shadow, 0.6);
-$shadow-level4: 0 0 0 1px rgba($color-shadow, 0.3), 0 4px 8px rgba($color-shadow, 0.6),
-  0 18px 46px 6px rgba($color-shadow, 0.6);
+$shadow-level1: 0 0 0 1px rgba($color-shadow, 0.1), 0 0 0 rgba($color-shadow, 0),
+  0 1px 1px rgba($color-shadow, 0.2);
+$shadow-level2: 0 0 0 1px rgba($color-shadow, 0.1), 0 1px 1px rgba($color-shadow, 0.2),
+  0 2px 6px rgba($color-shadow, 0.2);
+$shadow-level3: 0 0 0 1px rgba($color-shadow, 0.1), 0 2px 4px rgba($color-shadow, 0.2),
+  0 8px 24px rgba($color-shadow, 0.2);
+$shadow-level4: 0 0 0 1px rgba($color-shadow, 0.1), 0 4px 8px rgba($color-shadow, 0.2),
+  0 18px 46px 6px rgba($color-shadow, 0.2);
 
 $color-lightest: $color-lightest-light;
 $color-light: $color-light-light;

@@ -4,23 +4,20 @@
 // @license   : MIT
 
 import { Story } from "@storybook/react";
-import { PropsWithChildren } from "react";
 import { AxContent } from "../../src";
 import { EmptyContentProps } from "../../src/panels/EmptyContent";
 
-const Template: Story<PropsWithChildren<EmptyContentProps>> = (props) => (
-  <AxContent.Empty {...props} />
-);
+const Template: Story<EmptyContentProps> = (props) => <AxContent.Empty {...props} />;
 
 export const EmptyStory = Template.bind({});
 EmptyStory.args = {
-  title: "Callout Message",
+  title: "Empty Message",
   message: "This is a message describing empty content"
 };
 
 export const CustomEmptyStory = Template.bind({});
 CustomEmptyStory.args = {
-  title: "Callout Message",
+  title: "Empty Message",
   icon: "mdi mdi-bell",
   message: "This is a message describing empty content",
   actions: [

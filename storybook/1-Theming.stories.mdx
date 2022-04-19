@@ -16,9 +16,9 @@ import { Fragment } from "react";
 
 <Section title="Basic Palette">
   <LightBox>
-    <div className="ax-row">
+    <div className="ax-row" style={{ height: 128 }}>
       {[...THEME, ...GRAYSCALE].map((c) => (
-        <ColorBox key={c} color={c} />
+        <div className={`ax-col ax-col--fill ax-bg--${c}`} />
       ))}
     </div>
   </LightBox>

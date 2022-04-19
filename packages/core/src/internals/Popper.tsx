@@ -262,8 +262,8 @@ export const AxPopper: FC<Props> = ({
         };
         const handlerHide = () => setInnerOpen(false);
 
-        anchorEl.addEventListener("mouseover", handlerOpen);
-        anchorEl.addEventListener("mouseout", handlerClose);
+        autoTrigger && anchorEl.addEventListener("mouseover", handlerOpen);
+        autoTrigger && anchorEl.addEventListener("mouseout", handlerClose);
         anchorEl.addEventListener("innershow", handlerShow);
         anchorEl.addEventListener("innerhide", handlerHide);
 

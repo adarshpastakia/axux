@@ -116,7 +116,7 @@
 #{$prefix}-flyout {
   border-radius: $base-border-radius;
   display: grid;
-  grid-template-areas: "header" "loader" "body";
+  grid-template-areas: "header" "loader" "content";
   grid-template-rows: auto auto 1fr;
   max-width: 80vw;
   min-width: 15em;
@@ -143,23 +143,6 @@
 
   &[data-show="true"] {
     transform: translateX(0);
-  }
-
-  &__wrapper {
-    display: grid;
-    grid-area: body;
-    grid-template-areas: ". content .";
-    grid-template-columns: auto 1fr auto;
-    overflow: hidden;
-
-    > #{$prefix}-button {
-      margin: 0;
-
-      #{$prefix}-button__inner {
-        border-radius: 0 !important;
-        font-size: 1.5em;
-      }
-    }
   }
 
   &__body {

@@ -21,7 +21,7 @@ export const HomePage = () => {
               <img src="logo.png" alt="logo" height={64} />
             </AxFlexBox.Col>
             <AxFlexBox.Col flex="auto">
-              <AxHeading forDisplay level={3} className="ax-row ax-row--middle">
+              <AxHeading forDisplay level={3} className="ax-padding--e">
                 <span>AxUX</span>
               </AxHeading>
             </AxFlexBox.Col>

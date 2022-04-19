@@ -8,29 +8,30 @@ import { Children, cloneElement, FC, useCallback, useEffect, useState } from "re
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../internals/usePropToggle";
 import { AxMenu } from "../menu/Menu";
-import { CollapseProps } from "../types";
+import { CollapseProps, ElementProps } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
-export interface ViewportMenuProps extends Omit<CollapseProps, "isCollapsable"> {
+export interface ViewportMenuProps extends ElementProps, Omit<CollapseProps, "isCollapsable"> {
   /**
    * Fixed options
    */
   options?: JSX.Element[];
+  /**
+   * Width
+   */
+  width?: string | number;
 }
 
 /**
  * Application viewport menu
- * @param children
- * @param options
- * @param isCollapsed
- * @param onCollapse
- * @constructor
  * @internal
  */
 export const AxViewportMenu: FC<ViewportMenuProps> = ({
   children,
   options,
+  className,
+  width = "15rem",
   isCollapsed = false,
   onCollapse
 }) => {
@@ -52,11 +53,15 @@ export const AxViewportMenu: FC<ViewportMenuProps> = ({
   }, []);
 
   return (
-    <div className="ax-viewport__menu" data-collapsed={!canCollapse || collapsed}>
+    <div
+      className={`ax-viewport__menu ${className ?? ""}`}
+      data-collapsed={!canCollapse || collapsed}
+      style={{ width }}
+    >
       <AxMenu>
         {Children.toArray(children).map((child: AnyObject) =>
           cloneElement(child, {
-            "data-collapsed": collapsed,
+            "data-collapsed": !canCollapse || collapsed,
             icon: getItemIcon(getChildProps(child))
           })
         )}
@@ -66,7 +71,7 @@ export const AxViewportMenu: FC<ViewportMenuProps> = ({
           {options.map((child: AnyObject) =>
             cloneElement(child, {
               isFloating: true,
-              "data-collapsed": collapsed,
+              "data-collapsed": !canCollapse || collapsed,
               icon: getItemIcon(child.props)
             })
           )}

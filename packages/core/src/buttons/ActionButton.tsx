@@ -28,7 +28,13 @@ export const AxActionButton: FC<ActionProps> = ({ onClick, message, color, icon,
     }
   }, [actionDone]);
   return (
-    <AxTooltip content={message} isDisabled={!actionDone} isOpen={actionDone} usePortal>
+    <AxTooltip
+      usePortal
+      content={message}
+      isDisabled={!actionDone}
+      isOpen={actionDone}
+      autoTrigger={false}
+    >
       <AxButton
         onClick={doClick}
         data-active={actionDone}

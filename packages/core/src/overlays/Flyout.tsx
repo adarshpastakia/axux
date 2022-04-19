@@ -117,10 +117,8 @@ export const AxFlyout: FC<FlyoutProps> = forwardRef<HTMLDivElement, FlyoutProps>
             data-show={isOpen}
             tabIndex={0}
           >
-            <div className="ax_flyout__header">{header}</div>
-            <div className="ax_flyout__wrapper">
-              <div className="ax_flyout__body">{childs}</div>
-            </div>
+            <div className="ax-flyout__header">{header}</div>
+            <div className="ax-flyout__body">{childs}</div>
             {isLoading && <AxLoader />}
           </div>
         </div>

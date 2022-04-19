@@ -14,7 +14,7 @@ import {
   AxThemeToggle
 } from "@axux/core/src";
 import { mdiAccount, mdiToggleSwitch, mdiToggleSwitchOffOutline } from "@mdi/js";
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useOutletContext } from "react-router-dom";
 import { HomePage } from "./pages/Home";
 import chrome from "../assets/chrome.svg";
@@ -24,8 +24,20 @@ import { Login } from "./login/Login";
 import { Register } from "./login/Register";
 
 const AppHeader = () => {
-  const [state, setState] = useState(true);
+  const [largeFont, setLargeFont] = useState(false);
   const { setIsAuthenticated } = useOutletContext<KeyValue>();
+  const toggleSize = useCallback(() => {
+    setLargeFont(!largeFont);
+    document.documentElement.style.fontSize = largeFont ? "13px" : "16px";
+  }, [largeFont]);
+
+  useEffect(() => {
+    document.documentElement.style.fontSize = "13px";
+    return () => {
+      document.documentElement.style.fontSize = "16px";
+    };
+  }, []);
+
   return (
     <AxViewport.Header href="/app" icon="logo.png" title="AxUX" subTitle="Demo application">
       <AxPopover showArrow placement="bottom-end" closeOnClick>
@@ -43,9 +55,9 @@ const AppHeader = () => {
           />
           <AxDivider />
           <AxMenu.Item
-            label="Toggle something"
-            onClick={() => setState(!state)}
-            icon={state ? mdiToggleSwitch : mdiToggleSwitchOffOutline}
+            label="Large font"
+            onClick={toggleSize}
+            icon={largeFont ? mdiToggleSwitch : mdiToggleSwitchOffOutline}
           />
           <AxDivider />
           <AxThemeToggle isMenu />
@@ -62,7 +74,7 @@ export const AppViewport = () => {
   const { pathname } = useLocation();
   return (
     <Fragment>
-      <AxViewport.Banner color="fuchsia">
+      <AxViewport.Banner color="secondary">
         <span>Browser support&nbsp;&nbsp;</span>
         <AxIcon icon={chrome} />
         <span>&nbsp;≥87&nbsp;&nbsp;</span>
@@ -73,14 +85,19 @@ export const AppViewport = () => {
       </AxViewport.Banner>
       <AppHeader />
       <AxViewport.Menu>
-        <AxMenu.Item to="/app" label="Home" info="Framework overview" icon="mdi mdi-home" />
-        <AxMenu.Item label="Components" isCollapsable defaultCollapsed={false}>
+        <AxMenu.Item to="/app" label="Home" info="Framework overview" icon="mdi mdi-home-outline" />
+        <AxMenu.Item
+          label="Components"
+          icon="mdi mdi-developer-board"
+          isCollapsable
+          defaultCollapsed={false}
+        >
           <AxMenu.Item to="/app/buttons" label="Buttons" />
           <AxMenu.Item to="/app/menus" label="Menus" />
           <AxMenu.Item to="/app/overlays" label="Overlays" />
           <AxMenu.Item to="/app/notifications" label="Notifications" />
         </AxMenu.Item>
-        <AxMenu.Item label="Forms" isCollapsable>
+        <AxMenu.Item label="Forms" icon="mdi mdi-form-textbox" isCollapsable>
           <AxMenu.Item to="/app/login" label="Login" />
           <AxMenu.Item to="/app/register" label="Register" />
         </AxMenu.Item>

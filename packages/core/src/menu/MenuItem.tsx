@@ -25,7 +25,7 @@ export interface MenuItemProps
     ElementProps,
     AnchorProps {
   id?: string;
-  label: string;
+  label: string | JSX.Element;
   info?: string;
   mark?: string;
   color?: Color;

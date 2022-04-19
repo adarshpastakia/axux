@@ -45,6 +45,9 @@
     }
   }
 
+  &__error {
+    color: $color-danger;
+  }
   &__hint {
     color: $color-muted;
   }

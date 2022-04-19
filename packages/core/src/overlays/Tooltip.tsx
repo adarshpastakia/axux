@@ -30,10 +30,14 @@ export interface TooltipProps extends ElementProps, RefProp {
 
   isOpen?: boolean;
   isDisabled?: boolean;
+  autoTrigger?: boolean;
 }
 
 export const AxTooltip: FC<TooltipProps> = forwardRef<HTMLElement, TooltipProps>(
-  ({ children, content, placement = "top", color, className, isDisabled, ...props }, ref) => {
+  (
+    { children, content, placement = "top", color, className, autoTrigger, isDisabled, ...props },
+    ref
+  ) => {
     const classes = useMemo(() => {
       if (!color) {
         return "ax-bg--darkest ax-color--empty";
@@ -47,6 +51,7 @@ export const AxTooltip: FC<TooltipProps> = forwardRef<HTMLElement, TooltipProps>
         trigger="hover"
         inheritRef={ref}
         placement={placement}
+        autoTrigger={autoTrigger}
         isDisabled={isEmpty(content) || isDisabled}
         className={`ax-tooltip ${classes} ${className ?? ""}`}
         showArrow

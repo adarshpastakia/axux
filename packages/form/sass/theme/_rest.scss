@@ -7,6 +7,10 @@
   $base: #{$prefix}-field;
 
   &__option {
+    &[data-invalid="true"] > #{$prefix}-icon {
+      color: $color-danger;
+    }
+
     input:checked {
       & ~ [data-check="on"] {
         color: $color-primary;

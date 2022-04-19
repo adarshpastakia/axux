@@ -9,6 +9,7 @@ import { AxMenuItem } from "../menu/MenuItem";
 import { AxPopover } from "../overlays/Popover";
 import { ElementProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
+import { AxMenu } from "../menu/Menu";
 import { useAxGlobals } from "../../dist";
 
 /**
@@ -38,19 +39,25 @@ export const AxLocalePicker: VFC<ElementProps & { isMenu?: boolean }> = ({ class
           className={`ax-prevent-close ${className ?? ""}`}
         />
       )}
-      <div dir="ltr">
+      <AxMenu withIcons={false}>
         {locales.map((locale: string) => (
-          <div key={locale} className="ax-row" onClick={() => changeLocale(locale)}>
-            <div
-              className="ax-col--fill ax-locale--link"
-              data-locale={locale}
-              data-selected={locale === language}
-            >
-              <span>{t(`locale.${locale}`, locale)}</span>
-            </div>
-          </div>
+          <AxMenu.Item
+            key={locale}
+            className="ax-row"
+            onClick={() => changeLocale(locale)}
+            label={
+              <div
+                dir="ltr"
+                className="ax-col--fill ax-locale--link"
+                data-locale={locale}
+                data-selected={locale === language}
+              >
+                <span>{t(`locale.${locale}`, locale)}</span>
+              </div>
+            }
+          />
         ))}
-      </div>
+      </AxMenu>
     </AxPopover>
   );
 };

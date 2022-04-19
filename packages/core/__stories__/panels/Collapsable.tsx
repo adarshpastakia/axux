@@ -10,7 +10,7 @@ import { AxBox, AxCallout, AxCollapsable, AxText } from "../../src";
 import { CollapsableProps } from "../../src/panels/Collapsable";
 
 const Template: Story<PropsWithChildren<CollapsableProps>> = (props) => (
-  <Fragment>
+  <AxBox width={320}>
     <AxCollapsable {...props} className="ax-border">
       <AxText>Collapsable Title</AxText>
       <AxBox padding="sm">{LIPSUM.para}</AxBox>
@@ -19,7 +19,7 @@ const Template: Story<PropsWithChildren<CollapsableProps>> = (props) => (
       <AxText>Collapsable Title</AxText>
       <AxBox padding="sm">{LIPSUM.para}</AxBox>
     </AxCollapsable>
-  </Fragment>
+  </AxBox>
 );
 
 export const CollapsableStory = Template.bind({});

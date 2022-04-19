@@ -42,7 +42,7 @@ export const AxCheckboxField: VFC<CheckboxProps> = memo(
     return (
       <AxFieldController value={checked} onChange={onChange} name={name}>
         {({ ref, onChange, value, error, onBlur }) => (
-          <label className="ax-field__option" onClick={(e) => e.stopPropagation()}>
+          <label className="ax-field__option" data-invalid={!!error} onClick={(e) => e.stopPropagation()}>
             <input
               ref={ref}
               name={name}
@@ -57,9 +57,7 @@ export const AxCheckboxField: VFC<CheckboxProps> = memo(
             <AxIcon data-check="on" icon={AppIcons.iconCheckboxOn} />
             {error && (
               <AxTooltip color="danger" content={error} placement="bottom">
-                <span className="ax-field__error">
-                  <AxIcon icon="!" color="danger" />
-                </span>
+                <span className="ax-field__error">!</span>
               </AxTooltip>
             )}
             {label && <span>{label}</span>}
