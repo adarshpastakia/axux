@@ -100,9 +100,19 @@
         opacity: 0.2;
       }
     }
+    &:active {
+      &::before {
+        opacity: 0.4;
+      }
+    }
     &[data-solid="true"]:hover {
       &::before {
-        opacity: 0.9;
+        opacity: 0.8;
+      }
+    }
+    &[data-solid="true"]:active {
+      &::before {
+        opacity: 1;
       }
     }
   }
@@ -121,8 +131,11 @@
     &::before {
       opacity: 0;
     }
-    &:hover::before {
+    &[data-clickable="true"]:hover::before {
       opacity: 0.1;
+    }
+    &[data-clickable="true"]:active::before {
+      opacity: 0.2;
     }
   }
 }

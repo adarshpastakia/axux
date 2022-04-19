@@ -3,7 +3,7 @@
 // @copyright : 2022
 // @license   : MIT
 
-import { MemoryRouter, Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import { HashRouter, Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import { AxViewport } from "@axux/core";
 import { Login } from "./login/Login";
 import { useEffect, useState } from "react";
@@ -21,7 +21,7 @@ const RouteCheck = () => {
 export const Demo = () => {
   return (
     <AxViewport>
-      <MemoryRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<RouteCheck />}>
             <Route path="login" element={<Login />} />
@@ -29,7 +29,7 @@ export const Demo = () => {
             <Route path="app/*" element={<AppViewport />} />
           </Route>
         </Routes>
-      </MemoryRouter>
+      </HashRouter>
     </AxViewport>
   );
 };

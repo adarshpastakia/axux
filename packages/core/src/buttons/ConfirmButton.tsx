@@ -44,15 +44,15 @@ export const AxConfirmButton: FC<ConfirmProps> = ({
       <AxPanel>
         <AxPopover.PreventClose>
           <AxContent padding="sm">
-            <AxText size="sm">{message}</AxText>
+            <AxText>{message}</AxText>
           </AxContent>
         </AxPopover.PreventClose>
         <AxSection.Foot className="ax-align--end ax-padding--x--sm ax-border--none">
-          <AxButton.Neutral size="sm" onClick={() => onClick?.(false)}>
+          <AxButton.Neutral onClick={() => onClick?.(false)}>
             {cancelLabel ?? t("action.cancel")}
           </AxButton.Neutral>
           <span>&nbsp;</span>
-          <AxButton.Positive size="sm" onClick={() => onClick?.(true)}>
+          <AxButton.Positive onClick={() => onClick?.(true)}>
             {okLabel ?? t("action.ok")}
           </AxButton.Positive>
         </AxSection.Foot>

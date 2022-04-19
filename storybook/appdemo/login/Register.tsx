@@ -56,7 +56,7 @@ const RegistrationForm = () => {
         <AxField.Text label="First Name" name="firstName" required />
         <AxField.Text label="Last Name" name="lastName" required />
         <AxDateTime.Input label="Date of birth" max={maxDob} />
-        <AxField.Options label="User Group" name="group" vertical>
+        <AxField.Options label="User Group" name="group">
           <AxField.Radio value="owner" label="Owner" />
           <AxField.Radio value="moderator" label="Moderator" />
           <AxField.Radio value="user" label="User" />
@@ -88,7 +88,7 @@ export const Register = () => {
         padding: "1.5rem",
         overflow: "hidden",
         placeContent: "center",
-        gridTemplateColumns: "480px auto",
+        gridTemplateColumns: "320px auto",
         gridTemplateRows: "auto auto"
       }}
     >

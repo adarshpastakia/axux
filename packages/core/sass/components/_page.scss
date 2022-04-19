@@ -12,6 +12,10 @@
     overflow: hidden;
     position: relative;
 
+    &#{$prefix}-paper {
+      margin: 0.5em;
+    }
+
     &__header {
       align-items: center;
       display: grid;

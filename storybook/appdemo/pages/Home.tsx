@@ -79,20 +79,15 @@ export const HomePage = () => {
               </AxFlexBox.Row>
             </AxFlexBox.Col>
             <AxFlexBox.Col span="6@md">
-              <a
-                href="?path=/docs/core-buttons-button--button"
-                className="ax-block ax-color--base ax-hover--secondary ax-hover--bg-lightest"
-              >
-                <AxFlexBox.Row noWrap>
-                  <AxFlexBox.Col flex="auto">
-                    <img alt="icon" src={button} height={96} />
-                  </AxFlexBox.Col>
-                  <AxFlexBox.Col flex="fill" className="ax-padding--t">
-                    <AxHeading>Buttons</AxHeading>
-                    <p>Action buttons and toolbar</p>
-                  </AxFlexBox.Col>
-                </AxFlexBox.Row>
-              </a>
+              <AxFlexBox.Row noWrap>
+                <AxFlexBox.Col flex="auto">
+                  <img alt="icon" src={button} height={96} />
+                </AxFlexBox.Col>
+                <AxFlexBox.Col flex="fill" className="ax-padding--t">
+                  <AxHeading>Buttons</AxHeading>
+                  <p>Action buttons and toolbar</p>
+                </AxFlexBox.Col>
+              </AxFlexBox.Row>
             </AxFlexBox.Col>
             <AxFlexBox.Col span="6@md">
               <AxFlexBox.Row noWrap>

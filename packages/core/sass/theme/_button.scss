@@ -10,7 +10,7 @@
     #{$base}__inner {
       background-color: $base-bg;
       background-image: linear-gradient(180deg, rgba($white, 0.05), rgba($black, 0.03));
-      box-shadow: 0 0 0 1px rgba($base-border-color, 0.5);
+      box-shadow: 0 0 1px 1px $base-border-color;
       color: $color;
 
       &[data-icon-hilight="true"] {

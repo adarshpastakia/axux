@@ -9,8 +9,8 @@
   font-size: 1em;
   margin: 0.125em;
   position: relative;
-  @include noselect();
   vertical-align: middle;
+  @include noselect();
 
   $base: #{$prefix}-button;
 
@@ -69,6 +69,7 @@
     align-items: center;
     appearance: none;
     border: none;
+    border-radius: $base-border-radius;
     cursor: pointer;
     display: flex;
     flex: 1;
@@ -80,25 +81,6 @@
     max-width: 10em;
     overflow: hidden;
     padding: 0;
-
-    &:first-child {
-      border-bottom-left-radius: $base-border-radius;
-      border-top-left-radius: $base-border-radius;
-
-      @at-root [dir="rtl"] & {
-        border-bottom-right-radius: $base-border-radius;
-        border-top-right-radius: $base-border-radius;
-      }
-    }
-    &:last-child {
-      border-bottom-right-radius: $base-border-radius;
-      border-top-right-radius: $base-border-radius;
-
-      @at-root [dir="rtl"] & {
-        border-bottom-left-radius: $base-border-radius;
-        border-top-left-radius: $base-border-radius;
-      }
-    }
 
     &[data-icon-align="end"] {
       #{$base}__icon,
@@ -196,12 +178,37 @@
   }
 
   &__group {
-    display: flex;
+    display: inline-flex;
     flex-flow: row nowrap;
     margin: 0.125em;
 
     #{$base} {
+      border-radius: 0;
       margin: 0;
+
+      &__inner {
+        border-radius: 0;
+      }
+
+      &:first-child #{$base}__inner {
+        border-bottom-left-radius: $base-border-radius;
+        border-top-left-radius: $base-border-radius;
+
+        @at-root [dir="rtl"] & {
+          border-bottom-right-radius: $base-border-radius;
+          border-top-right-radius: $base-border-radius;
+        }
+      }
+
+      &:last-child #{$base}__inner {
+        border-bottom-right-radius: $base-border-radius;
+        border-top-right-radius: $base-border-radius;
+
+        @at-root [dir="rtl"] & {
+          border-bottom-left-radius: $base-border-radius;
+          border-top-left-radius: $base-border-radius;
+        }
+      }
     }
 
     &[data-vertical="true"] {

@@ -3,16 +3,19 @@
 // @copyright : 2022
 // @license   : MIT
 
-import { AxContent, AxIcon, AxPage, AxViewport } from "@axux/core";
 import {
   AxAvatar,
+  AxContent,
   AxDivider,
   AxHotKeyLabel,
+  AxIcon,
   AxLocalePicker,
   AxMenu,
+  AxPage,
   AxPopover,
-  AxThemeToggle
-} from "@axux/core/src";
+  AxThemeToggle,
+  AxViewport
+} from "@axux/core";
 import { mdiAccount, mdiToggleSwitch, mdiToggleSwitchOffOutline } from "@mdi/js";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useOutletContext } from "react-router-dom";
@@ -22,6 +25,7 @@ import firefox from "../assets/firefox.svg";
 import safari from "../assets/safari.svg";
 import { Login } from "./login/Login";
 import { Register } from "./login/Register";
+import { Buttons } from "./pages/Buttons";
 
 const AppHeader = () => {
   const [largeFont, setLargeFont] = useState(false);
@@ -85,29 +89,36 @@ export const AppViewport = () => {
       </AxViewport.Banner>
       <AppHeader />
       <AxViewport.Menu>
-        <AxMenu.Item to="/app" label="Home" info="Framework overview" icon="mdi mdi-home-outline" />
+        <AxMenu.Item to="." label="Home" info="Framework overview" icon="mdi mdi-home-outline" />
         <AxMenu.Item
           label="Components"
           icon="mdi mdi-developer-board"
           isCollapsable
           defaultCollapsed={false}
         >
-          <AxMenu.Item to="/app/buttons" label="Buttons" />
-          <AxMenu.Item to="/app/menus" label="Menus" />
-          <AxMenu.Item to="/app/overlays" label="Overlays" />
-          <AxMenu.Item to="/app/notifications" label="Notifications" />
+          <AxMenu.Item to="buttons" label="Buttons" />
+          <AxMenu.Item to="menus" label="Menus" />
+          <AxMenu.Item to="overlays" label="Overlays" />
+          <AxMenu.Item to="notifications" label="Notifications" />
         </AxMenu.Item>
-        <AxMenu.Item label="Forms" icon="mdi mdi-form-textbox" isCollapsable>
-          <AxMenu.Item to="/app/login" label="Login" />
-          <AxMenu.Item to="/app/register" label="Register" />
+        <AxMenu.Item label="Form" icon="mdi mdi-form-textbox" isCollapsable>
+          <AxMenu.Item to="form" label="Form" />
+          <AxMenu.Item to="text" label="Text" />
+          <AxMenu.Item to="select" label="Select" />
+          <AxMenu.Item to="options" label="Options" />
+        </AxMenu.Item>
+        <AxMenu.Item label="Examples" icon="mdi mdi-toy-brick-outline" isCollapsable>
+          <AxMenu.Item to="login" label="Login" />
+          <AxMenu.Item to="register" label="Register" />
         </AxMenu.Item>
       </AxViewport.Menu>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="" element={<HomePage />} />
+        <Route path="buttons" element={<Buttons />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route
-          path="/*"
+          path="*"
           element={
             <AxPage>
               <AxContent.Empty message="No implemented" title={pathname} />
