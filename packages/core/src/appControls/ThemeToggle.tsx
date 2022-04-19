@@ -8,7 +8,7 @@ import { AxButton } from "../buttons/Button";
 import { AxMenuItem } from "../menu/MenuItem";
 import { ElementProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
-import { useAxGlobals } from "../../dist";
+import { useAxGlobals } from "../context/Globals";
 
 /**
  * Toggle between light and dark themes

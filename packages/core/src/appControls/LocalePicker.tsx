@@ -10,7 +10,7 @@ import { AxPopover } from "../overlays/Popover";
 import { ElementProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 import { AxMenu } from "../menu/Menu";
-import { useAxGlobals } from "../../dist";
+import { useAxGlobals } from "../context/Globals";
 
 /**
  * Switch between available i18n locales
