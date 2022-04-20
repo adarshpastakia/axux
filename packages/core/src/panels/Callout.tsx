@@ -35,6 +35,7 @@ export interface CalloutProps extends ElementProps, IconProps {
 export const AxCallout: FC<CalloutProps> = ({
   title,
   icon,
+  rtlFlip,
   color = "primary",
   isClosable,
   onClose,
@@ -52,7 +53,7 @@ export const AxCallout: FC<CalloutProps> = ({
       {isClosable && <AlertClose onClick={handleClose} />}
       {icon && (
         <div className="ax-callout__icon">
-          <AxIcon icon={icon} />
+          <AxIcon icon={icon} rtlFlip={rtlFlip} />
         </div>
       )}
       {title && <div className="ax-callout__title">{title}</div>}

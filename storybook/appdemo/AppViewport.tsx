@@ -78,7 +78,7 @@ export const AppViewport = () => {
   const { pathname } = useLocation();
   return (
     <Fragment>
-      <AxViewport.Banner color="secondary">
+      <AxViewport.Banner>
         <span>Browser support&nbsp;&nbsp;</span>
         <AxIcon icon={chrome} />
         <span>&nbsp;≥87&nbsp;&nbsp;</span>

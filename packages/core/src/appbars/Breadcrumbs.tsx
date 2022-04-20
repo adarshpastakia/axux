@@ -28,6 +28,7 @@ const LinkItem = ({
   className = "ax-breadcrumb__item",
   index = 0,
   icon,
+  rtlFlip,
   label,
   onClick,
   ...aria
@@ -35,7 +36,7 @@ const LinkItem = ({
   to ? (
     <NavLink key={i} to={to} className={className} data-index={index} onClick={onClick} {...aria}>
       <div title={label}>
-        {icon && <AxIcon icon={icon} size="md" />}
+        {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} size="md" />}
         {label && <span>{label}</span>}
       </div>
     </NavLink>
@@ -81,11 +82,12 @@ export const AxBreadcrumbBar: FC<Props> = ({ items, actions = [], theme = "class
   return (
     <div className="ax-breadcrumb__bar" data-theme={theme}>
       <div>
-        {start.map(({ to, icon, label, onClick, ...aria }, i) => (
+        {start.map(({ to, icon, label, onClick, rtlFlip, ...aria }, i) => (
           <LinkItem
             key={i}
             to={to}
             icon={icon}
+            rtlFlip={rtlFlip}
             label={label}
             index={start.length - i + 4}
             onClick={onClick}
@@ -93,11 +95,12 @@ export const AxBreadcrumbBar: FC<Props> = ({ items, actions = [], theme = "class
           />
         ))}
         {rest.length > 0 && <LinkPopover rest={rest} />}
-        {end.map(({ to, icon, label, onClick, ...aria }, i) => (
+        {end.map(({ to, icon, label, onClick, rtlFlip, ...aria }, i) => (
           <LinkItem
             key={i}
             to={to}
             icon={icon}
+            rtlFlip={rtlFlip}
             label={label}
             index={end.length - i + 4}
             onClick={onClick}

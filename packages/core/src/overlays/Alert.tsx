@@ -43,6 +43,7 @@ export const AxAlert: VFC<AlertProps & { [key: string]: AnyObject }> = ({
   type = "alert",
   color = "primary",
   icon,
+  rtlFlip,
   extraActions,
   okLabel,
   cancelLabel,
@@ -82,7 +83,7 @@ export const AxAlert: VFC<AlertProps & { [key: string]: AnyObject }> = ({
     <div className="ax-alert" data-color={color}>
       <AlertClose onClick={() => handleClose(false)} />
       <div className="ax-alert__icon">
-        <AxIcon icon={icon || iconType} color={color} />
+        <AxIcon icon={icon || iconType} color={color} rtlFlip={rtlFlip} />
       </div>
       {title && <div className="ax-alert__title">{title}</div>}
       {text && <p className="ax-alert__text">{text}</p>}

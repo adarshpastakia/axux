@@ -53,6 +53,7 @@ export interface IconProps extends RefProp, ElementProps {
   badge?: BadgeType;
 
   role?: string;
+  rtlFlip?: boolean;
 }
 
 /**
@@ -66,6 +67,7 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
       color,
       bg,
       size,
+      rtlFlip,
       useImage,
       viewBox = "0 0 24 24",
       className,
@@ -99,8 +101,11 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
       if (isNumber(spin)) {
         cls.push("ax-anim--spin-step");
       }
+      if (rtlFlip) {
+        cls.push("flippable");
+      }
       return cls.join(" ");
-    }, [className, color, round, size, spin]);
+    }, [className, color, round, rtlFlip, size, spin]);
     const isSvg = useMemo(() => {
       return isSvgPath(icon);
     }, [icon]);

@@ -42,6 +42,7 @@ export interface TabProps extends IconProps, ElementProps {
 export const Tab: FC<TabProps & { iconOnly?: boolean; placement?: "left" | "bottom" }> = ({
   id,
   icon,
+  rtlFlip,
   label,
   tooltip,
   badge,
@@ -88,7 +89,7 @@ export const Tab: FC<TabProps & { iconOnly?: boolean; placement?: "left" | "bott
         data-disabled={isDisabled}
       >
         <div className="ax-tab__button--label">
-          {iconEl && <AxIcon icon={iconEl} />}
+          {iconEl && <AxIcon icon={iconEl} rtlFlip={rtlFlip} />}
           {!iconOnly && label && <span>{label}</span>}
         </div>
         {badgeEl}

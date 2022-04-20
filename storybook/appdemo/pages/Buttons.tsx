@@ -56,7 +56,7 @@ export const Buttons = () => {
         <AxSpacer size="md" />
         <AxBox className="ax-spacing">
           <AxButton.Group>
-            <AxButton size="lg" type="solid" icon="mdi mdi-rewind" tooltip="Backward" />
+            <AxButton size="lg" type="solid" icon="mdi mdi-rewind" tooltip="Backward" rtlFlip />
             <AxButton
               size="lg"
               type="solid"
@@ -64,10 +64,16 @@ export const Buttons = () => {
               icon="mdi mdi-record"
               tooltip="Record"
             />
-            <AxButton size="lg" color="success" icon="mdi mdi-play" tooltip="Play" />
+            <AxButton size="lg" color="success" icon="mdi mdi-play" tooltip="Play" rtlFlip />
             <AxButton size="lg" color="info" icon="mdi mdi-pause" tooltip="Pause" />
             <AxButton size="lg" color="danger" icon="mdi mdi-stop" tooltip="Stop" />
-            <AxButton size="lg" type="solid" icon="mdi mdi-fast-forward" tooltip="Forward" />
+            <AxButton
+              size="lg"
+              type="solid"
+              icon="mdi mdi-fast-forward"
+              tooltip="Forward"
+              rtlFlip
+            />
           </AxButton.Group>
           <AxButton.Group>
             <AxButton size="lg">First</AxButton>

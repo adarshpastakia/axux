@@ -46,6 +46,7 @@ export interface HeaderProps extends IconProps<JSX.Element>, ElementProps {
 export const AxHeader: FC<HeaderProps> = ({
   title,
   icon,
+  rtlFlip,
   children,
   bg,
   color,
@@ -84,7 +85,7 @@ export const AxHeader: FC<HeaderProps> = ({
     }
     return cls.join(" ");
   }, [iconBg, iconColor]);
-  const iconEl = useIcon(icon, iconClasses);
+  const iconEl = useIcon(icon, iconClasses, rtlFlip);
 
   return (
     <div className={classes} {...props}>

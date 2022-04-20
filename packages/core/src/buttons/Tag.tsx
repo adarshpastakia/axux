@@ -55,6 +55,7 @@ export const AxTag: FC<TagProps> = forwardRef<HTMLElement, TagProps>(
   (
     {
       icon,
+      rtlFlip,
       children,
       isDisabled,
       onClick,
@@ -101,7 +102,7 @@ export const AxTag: FC<TagProps> = forwardRef<HTMLElement, TagProps>(
           {...aria}
         >
           <div className="ax-tag__inner" onClick={onClick}>
-            {icon && <AxIcon icon={icon} />}
+            {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
             <span>{children}</span>
           </div>
           {badgeEl}

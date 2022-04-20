@@ -117,6 +117,7 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
       badge,
       hideCaret,
       split,
+      rtlFlip,
       isLoading,
       isDisabled,
       className,
@@ -172,7 +173,7 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
             data-icon-hilight={iconHilight}
             {...aria}
           >
-            {icon && <AxIcon className="ax-button__icon" icon={icon} />}
+            {icon && <AxIcon className="ax-button__icon" icon={icon} rtlFlip={rtlFlip} />}
             {isLoading && (
               <AxIcon className="ax-button__spinner" icon={AppIcons.iconSpinner} spin />
             )}

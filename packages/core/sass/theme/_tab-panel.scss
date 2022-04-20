@@ -28,6 +28,7 @@
     #{$base}__button {
       background-color: $base-bg;
       box-shadow: $border;
+      color: $color-primary;
 
       &[data-active="false"]:hover {
         background-color: rgba($base-bg, 0.5);

@@ -35,7 +35,7 @@ export interface FlyoutProps extends ElementProps, IconProps<JSX.Element> {
 }
 
 export const AxFlyout: FC<FlyoutProps> = forwardRef<HTMLDivElement, FlyoutProps>(
-  ({ children, className, icon, title, size, isLoading, onClose }, ref) => {
+  ({ children, className, icon, rtlFlip, title, size, isLoading, onClose }, ref) => {
     const maskRef = useRef<HTMLDivElement>(null);
     const [isOpen, setOpen] = useState(false);
 
@@ -67,7 +67,7 @@ export const AxFlyout: FC<FlyoutProps> = forwardRef<HTMLDivElement, FlyoutProps>
         });
       } else {
         return (
-          <AxHeader title={title} icon={icon} size="lg">
+          <AxHeader title={title} icon={icon} rtlFlip={rtlFlip} size="lg">
             {actions}
           </AxHeader>
         );

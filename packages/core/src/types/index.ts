@@ -200,6 +200,10 @@ export interface IconProps<T = undefined> {
    * Icon svg path (24x24) | font class | component
    */
   icon?: IconType | T;
+  /**
+   * Flip icon in RTL
+   */
+  rtlFlip?: boolean;
 }
 
 export interface CollapseProps {

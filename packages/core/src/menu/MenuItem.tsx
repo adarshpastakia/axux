@@ -58,6 +58,7 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
       appendLabel,
       badge,
       icon,
+      rtlFlip,
       info,
       isFloating,
       isCollapsed,
@@ -73,7 +74,7 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
     ref
   ) => {
     const badgeEl = useBadge(badge);
-    const iconEl = useIcon(icon);
+    const iconEl = useIcon(icon, "", rtlFlip);
 
     const elProps = useMemo(
       () => ({

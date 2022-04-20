@@ -111,6 +111,8 @@ export const AxFlexCol: FC<FlexColProps> = forwardRef<HTMLDivElement, FlexColPro
           .toString()
           .split(" ")
           .forEach((s) => cls.push(`ax-col--${s}`));
+      } else if (!flex) {
+        cls.push(`ax-col--auto`);
       }
       cls.push(
         makePadding({

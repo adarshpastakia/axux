@@ -52,80 +52,78 @@ export interface ToastProps extends IconProps {
  * @param onClose
  * @constructor
  */
-export const AxToast: VFC<ToastProps & { onClose?: BooleanCallback; onCloseAll?: EmptyCallback }> =
-  ({
-    title,
-    text,
-    okLabel,
-    cancelLabel,
-    icon,
-    type = "alert",
-    color = "primary",
-    extraActions,
-    onClose,
-    onCloseAll
-  }) => {
-    const { t } = useTranslation("core");
-    const iconType = useMemo(() => {
-      switch (type) {
-        case "confirm":
-          return AppIcons.iconQuestion;
-        default:
-          return AppIcons.iconAlert;
-      }
-    }, [type]);
+export const AxToast: VFC<
+  ToastProps & { onClose?: BooleanCallback; onCloseAll?: EmptyCallback }
+> = ({
+  title,
+  text,
+  okLabel,
+  cancelLabel,
+  icon,
+  rtlFlip,
+  type = "alert",
+  color = "primary",
+  extraActions,
+  onClose,
+  onCloseAll
+}) => {
+  const { t } = useTranslation("core");
+  const iconType = useMemo(() => {
+    switch (type) {
+      case "confirm":
+        return AppIcons.iconQuestion;
+      default:
+        return AppIcons.iconAlert;
+    }
+  }, [type]);
 
-    const okText = useMemo(() => {
-      if (!okLabel) {
-        return t("action.ok", "OK");
-      }
-      return okLabel;
-    }, [t, okLabel]);
-    const cancelText = useMemo(() => {
-      if (!cancelLabel) {
-        return t("action.cancel", "Cancel");
-      }
-      return cancelLabel;
-    }, [t, cancelLabel]);
+  const okText = useMemo(() => {
+    if (!okLabel) {
+      return t("action.ok", "OK");
+    }
+    return okLabel;
+  }, [t, okLabel]);
+  const cancelText = useMemo(() => {
+    if (!cancelLabel) {
+      return t("action.cancel", "Cancel");
+    }
+    return cancelLabel;
+  }, [t, cancelLabel]);
 
-    return (
-      <div className="ax-toast" data-color={color}>
-        <div className="ax-alert--close">
+  return (
+    <div className="ax-toast" data-color={color}>
+      <div className="ax-alert--close">
+        <AxButton icon={AppIcons.iconClose} type="link" onClick={() => onClose && onClose(false)} />
+        <AxButton
+          icon={AppIcons.iconCloseAll}
+          type="link"
+          onClick={() => onCloseAll && onCloseAll()}
+        />
+      </div>
+      <div className="ax-toast__icon">
+        <AxIcon icon={icon ?? iconType} rtlFlip={rtlFlip} />
+      </div>
+      {title && <div className="ax-toast__title">{title}</div>}
+      <span className="ax-toast__text">{text}</span>
+      <div className="ax-toast__footer">
+        <div className="ax-col--fill">{extraActions}</div>
+        {type === "confirm" && (
           <AxButton
-            icon={AppIcons.iconClose}
             type="link"
+            color={color}
+            label={cancelText}
             onClick={() => onClose && onClose(false)}
           />
-          <AxButton
-            icon={AppIcons.iconCloseAll}
-            type="link"
-            onClick={() => onCloseAll && onCloseAll()}
-          />
-        </div>
-        <div className="ax-toast__icon">
-          <AxIcon icon={icon ?? iconType} />
-        </div>
-        {title && <div className="ax-toast__title">{title}</div>}
-        <span className="ax-toast__text">{text}</span>
-        <div className="ax-toast__footer">
-          <div className="ax-col--fill">{extraActions}</div>
-          {type === "confirm" && (
-            <AxButton
-              type="link"
-              color={color}
-              label={cancelText}
-              onClick={() => onClose && onClose(false)}
-            />
-          )}
-          <AxButton
-            type="outline"
-            color={color}
-            label={okText}
-            data-default={true}
-            onClick={() => onClose && onClose(true)}
-          />
-        </div>
+        )}
+        <AxButton
+          type="outline"
+          color={color}
+          label={okText}
+          data-default={true}
+          onClick={() => onClose && onClose(true)}
+        />
       </div>
-    );
-  };
+    </div>
+  );
+};
 AxToast.displayName = "AxToast";

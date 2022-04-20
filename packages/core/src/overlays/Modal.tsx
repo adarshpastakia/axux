@@ -55,7 +55,19 @@ interface ExtendedFC extends FC<ModalProps> {
 
 export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
   (
-    { children, className, icon, title, isLoading, onClose, onNavigate, size, height, width },
+    {
+      children,
+      className,
+      icon,
+      rtlFlip,
+      title,
+      isLoading,
+      onClose,
+      onNavigate,
+      size,
+      height,
+      width
+    },
     ref
   ) => {
     const maskRef = useRef<HTMLDivElement>(null);
@@ -79,12 +91,12 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
         });
       } else {
         return (
-          <AxHeader title={title} icon={icon} size="lg">
+          <AxHeader title={title} icon={icon} rtlFlip={rtlFlip} size="lg">
             {actions}
           </AxHeader>
         );
       }
-    }, [children, icon, onClose, title]);
+    }, [children, icon, rtlFlip, onClose, title]);
 
     const childs = useMemo(
       () =>

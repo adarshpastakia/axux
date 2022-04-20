@@ -77,7 +77,8 @@
     .flippable #{$prefix}-icon,
     #{$prefix}-icon.flippable {
       svg,
-      img {
+      img,
+      i {
         transform: scaleX(-1);
       }
     }
@@ -86,7 +87,8 @@
     .flippable #{$prefix}-icon,
     #{$prefix}-icon.flippable {
       svg,
-      img {
+      img,
+      i {
         transform: scaleX(1);
       }
     }

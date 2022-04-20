@@ -54,6 +54,7 @@ export const AxMessage: VFC<MessageProps & { onClose?: BooleanCallback }> = ({
   text,
   dismissLabel,
   icon,
+  rtlFlip,
   color = "invert",
   block,
   extraActions,
@@ -71,7 +72,7 @@ export const AxMessage: VFC<MessageProps & { onClose?: BooleanCallback }> = ({
   }, [block, color]);
   return (
     <div className={classes} data-color={color}>
-      {icon && <AxIcon icon={icon} size="md" />}
+      {icon && <AxIcon icon={icon} size="md" rtlFlip={rtlFlip} />}
       {title && <b>{title}</b>}
       <span>{text}</span>
       <div onClickCapture={() => onClose?.(false)}>{extraActions}</div>
