@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { isEmpty } from "@axux/utilities";
-import { FC, forwardRef, useCallback } from "react";
+import { FC, forwardRef, MouseEvent, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import { AxIcon } from "../icons/Icon";
 import { BadgeType, useBadge } from "../internals/useBadge";
@@ -143,7 +143,7 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
         ) : (
           <button ref={ref} type={(aria as KeyValue)["data-type"] ?? "button"} {...props} />
         ),
-      [ref, href, to]
+      [ref, href, to, aria]
     );
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -166,7 +166,7 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
           <InnerButton
             tabIndex={tabIndex}
             className="ax-button__inner"
-            onClick={onClick}
+            onClick={(e: MouseEvent<HTMLElement>) => [e.currentTarget.blur(), onClick?.(e)]}
             data-no-label={isEmpty(label || children)}
             data-panel={panelId}
             data-icon-align={iconAlign}
@@ -190,6 +190,7 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
           {split && (
             <button
               className="ax-button__inner ax-button__split"
+              onClick={(e: MouseEvent<HTMLElement>) => e.currentTarget.blur()}
               tabIndex={tabIndex}
               role="split"
               aria-label={`${split}`}

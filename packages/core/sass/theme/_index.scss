@@ -19,6 +19,15 @@
   }
 }
 
+@keyframes #{$ax-theme}FocusRingAnimate {
+  0% {
+    box-shadow: 0 0 0 5px $color-empty, 0 0 2px 6px $color-primary;
+  }
+  100% {
+    box-shadow: 0 0 0 2px $color-empty, 0 0 2px 3px $color-primary;
+  }
+}
+
 @at-root #{$root} {
   @import "typography";
   @import "menu";
