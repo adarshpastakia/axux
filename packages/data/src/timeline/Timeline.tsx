@@ -136,7 +136,7 @@ export const AxTimeline: ExtendedFC = forwardRef<TimelineRef, TimelineProps>(
             {isLoading && <AxTextLoader />}
           </div>
           <div>
-            <div>
+            <div className="ax-row ax-row--vertical">
               {onSort && (
                 <AxButton.Group vertical>
                   <AxButton

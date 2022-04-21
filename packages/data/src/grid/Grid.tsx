@@ -139,7 +139,7 @@ export const AxGridView: ExtendedFC = forwardRef<GridRef, GridProps>(
             {!isLoading && <div style={{ height: "3rem" }} />}
           </div>
           <div>
-            <div>
+            <div className="ax-row ax-row--vertical">
               {onSort && (
                 <AxButton.Group vertical>
                   <AxButton
