@@ -209,6 +209,10 @@
           border-top-left-radius: $base-border-radius;
         }
       }
+
+      &:focus-within {
+        z-index: 2;
+      }
     }
 
     &[data-vertical="true"] {

@@ -141,9 +141,9 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
         ) : to ? (
           <NavLink ref={ref} to={to} {...props} />
         ) : (
-          <button ref={ref} type={(aria as KeyValue)["data-type"] ?? "button"} {...props} />
+          <button ref={ref} type={(props as KeyValue)["data-type"] ?? "button"} {...props} />
         ),
-      [ref, href, to, aria]
+      [ref, href, to]
     );
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -166,7 +166,8 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
           <InnerButton
             tabIndex={tabIndex}
             className="ax-button__inner"
-            onClick={(e: MouseEvent<HTMLElement>) => [e.currentTarget.blur(), onClick?.(e)]}
+            onClick={onClick}
+            onMouseUp={(e: MouseEvent<HTMLElement>) => e.currentTarget.blur()}
             data-no-label={isEmpty(label || children)}
             data-panel={panelId}
             data-icon-align={iconAlign}

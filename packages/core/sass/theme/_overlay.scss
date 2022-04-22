@@ -25,6 +25,6 @@
   }
 
   &:focus-within {
-    box-shadow: $shadow-level2, 0 0 1px 1px $color-primary;
+    animation: $focusRing;
   }
 }

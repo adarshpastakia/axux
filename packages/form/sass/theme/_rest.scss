@@ -62,10 +62,6 @@
         background-color: $color-darkest;
         box-shadow: 1px 0 0 1px $color-lightest;
         color: $color-empty;
-
-        @at-root [dir="rtl"] & {
-          box-shadow: -1px 0 0 1px $color-lightest;
-        }
       }
       &::before {
         background-color: $color-darkest;
@@ -82,10 +78,6 @@
     &[data-vertical="false"] #{$base}__slider--value[data-align="start"] {
       div {
         box-shadow: -1px 0 0 1px $color-lightest;
-
-        @at-root [dir="rtl"] & {
-          box-shadow: 1px 0 0 1px $color-lightest;
-        }
       }
     }
   }
@@ -149,5 +141,16 @@
         }
       }
     }
+  }
+}
+
+@at-root &[dir="rtl"] {
+  #{$prefix}-field__slider[data-vertical="false"]
+    #{$prefix}-field__slider--value[data-align="start"]
+    div {
+    box-shadow: 1px 0 0 1px $color-lightest;
+  }
+  #{$prefix}-field__slider--value div {
+    box-shadow: -1px 0 0 1px $color-lightest;
   }
 }

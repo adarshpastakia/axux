@@ -173,7 +173,13 @@ export const AxSliderField: VFC<SliderFieldProps> = memo(
                     )}
                   </div>
                   {showTicks && (
-                    <div className="ax-field__slider--ticks">
+                    <div
+                      className="ax-field__slider--ticks"
+                      style={{
+                        width: vertical ? undefined : width,
+                        height: vertical ? height : undefined
+                      }}
+                    >
                       {ticks.map((v) => (
                         <button
                           type="button"

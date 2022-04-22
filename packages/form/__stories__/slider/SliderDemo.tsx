@@ -20,7 +20,7 @@ SliderStory.args = {
   step: 1,
   value: 50,
   width: "20em",
-  vertical: true,
+  vertical: false,
   label: "Numerical slider"
 };
 

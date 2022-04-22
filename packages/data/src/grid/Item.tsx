@@ -4,12 +4,16 @@
 // @license   : MIT
 
 import { AxTextLoader } from "@axux/core";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useLayoutEffect, useRef, useState } from "react";
 
-export const GridItem: FC<{ index: number }> = ({ children, index }: KeyValue) => {
+export const GridItem: FC<{ index: number; minHeight?: string }> = ({
+  children,
+  index,
+  minHeight
+}: KeyValue) => {
   const entryRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (entryRef.current) {
       const el: AnyObject = entryRef.current;
       let timer: AnyObject;
@@ -57,6 +61,17 @@ export const GridItem: FC<{ index: number }> = ({ children, index }: KeyValue) =
       };
     }
   }, [index]);
+
+  useLayoutEffect(() => {
+    if (entryRef.current) {
+      const el: AnyObject = entryRef.current;
+      try {
+        (el as AnyObject).attributeStyleMap.set("contain-intrinsic-size", minHeight);
+      } catch (e) {
+        el.style.minHeight = minHeight;
+      }
+    }
+  }, []);
 
   return (
     <section ref={entryRef} className="ax-gridView__item" data-index={index}>

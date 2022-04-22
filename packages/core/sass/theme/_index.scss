@@ -29,6 +29,8 @@
 }
 
 @at-root #{$root} {
+  $focusRing: 350ms cubic-bezier(0.594, 0.0452, 0.249, 1) 150ms 1 normal forwards #{$ax-theme}FocusRingAnimate;
+
   @import "typography";
   @import "menu";
   @import "page";

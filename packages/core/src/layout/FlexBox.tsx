@@ -28,7 +28,7 @@ interface ExtendedFC extends FC<FlexBoxProps> {
   Row: typeof AxFlexRow;
   Col: typeof AxFlexCol;
   Grid: typeof Grid;
-  Space: typeof Spacing;
+  Spaced: typeof Spacing;
 }
 
 const Grid: FC<ElementProps & { columns?: number }> = ({ className, columns = 2, ...props }) => {
@@ -50,7 +50,7 @@ const Spacing: FC<ElementProps> = ({ className, ...props }) => {
  * @internal
  */
 export const AxFlexBox: ExtendedFC = forwardRef<HTMLDivElement, FlexBoxProps>(
-  ({ fluid = false, gutter, maxWidth, children, className }, ref) => {
+  ({ fluid = false, gutter, maxWidth, children, className, ...props }, ref) => {
     const classes = useMemo(() => {
       const cls = ["ax-container", className ?? ""];
       if (fluid) {
@@ -63,7 +63,7 @@ export const AxFlexBox: ExtendedFC = forwardRef<HTMLDivElement, FlexBoxProps>(
     }, [className, fluid, gutter]);
 
     return (
-      <div ref={ref} className={classes} style={{ maxWidth }}>
+      <div ref={ref} className={classes} style={{ maxWidth }} {...props}>
         {children}
       </div>
     );
@@ -72,10 +72,10 @@ export const AxFlexBox: ExtendedFC = forwardRef<HTMLDivElement, FlexBoxProps>(
 AxFlexBox.Row = AxFlexRow;
 AxFlexBox.Col = AxFlexCol;
 AxFlexBox.Grid = Grid;
-AxFlexBox.Space = Spacing;
+AxFlexBox.Spaced = Spacing;
 
 AxFlexBox.displayName = "AxFlexBox";
 AxFlexBox.Row.displayName = "AxFlexBox.Row";
 AxFlexBox.Col.displayName = "AxFlexBox.Col";
 AxFlexBox.Grid.displayName = "AxFlexBox.Grid";
-AxFlexBox.Space.displayName = "AxFlexBox.Spaced";
+AxFlexBox.Spaced.displayName = "AxFlexBox.Spaced";

@@ -88,7 +88,7 @@
         transform: translate(-0.25em, -0.25em) rotate(45deg);
         width: 0.5em;
         z-index: 0;
-        @include position(absolute, 50% null null 0);
+        @include position(absolute, 50% null null null);
 
         @at-root [dir="rtl"] & {
           transform: translate(0.25em, -0.25em) rotate(45deg);
@@ -174,7 +174,7 @@
 
         &::before {
           transform: translate(0.25em, -0.25em) rotate(45deg);
-          @include position(null, null 0 null null);
+          @include position(null, 50% 0 null null);
 
           @at-root [dir="rtl"] & {
             transform: translate(-0.25em, -0.25em) rotate(45deg);
@@ -200,8 +200,7 @@
         }
 
         &::before {
-          left: 0.25em;
-          top: -1.9em;
+          @include position(relative, -1.9em null null 0.25em);
         }
       }
     }

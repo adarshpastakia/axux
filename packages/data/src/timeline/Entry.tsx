@@ -5,7 +5,7 @@
 
 import { AxAvatar, AxTextLoader } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { FC, isValidElement, useEffect, useMemo, useRef, useState } from "react";
+import { FC, isValidElement, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 interface EntryProps {
   index: number;
@@ -40,7 +40,7 @@ export const TimelineEntry: FC<EntryProps> = ({
   );
 
   const [visible, setVisible] = useState(false);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (eventRef.current) {
       const el: AnyObject = eventRef.current;
       let timer: AnyObject;

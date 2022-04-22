@@ -71,4 +71,8 @@
     border-inline-end-color: $color-medium;
     border-inline-start-color: $color-lightest;
   }
+
+  [data-focus-ring="true"] {
+    animation: $focusRing;
+  }
 }
