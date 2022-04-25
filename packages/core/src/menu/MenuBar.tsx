@@ -18,7 +18,7 @@ export interface MenubarProps {
  * MenuBar
  * @internal
  */
-export const AxMenuBar: FC<MenubarProps> = ({ children, size, items, onClick, className }) => {
+export const AxMenuBar: FC<MenubarProps> = ({ children, size, onClick, className }) => {
   const checkMenuClick = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
     if (onClick && target.dataset.id) {

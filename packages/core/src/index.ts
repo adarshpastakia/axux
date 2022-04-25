@@ -3,9 +3,6 @@
 // @copyright : 2021
 // @license   : MIT
 
-// force-update
-const update = "1";
-
 export { COLOR, PALETTE } from "./types/enums";
 
 export { addTranslationBundle } from "./i18n";
@@ -66,7 +63,6 @@ export { AxCollapsable } from "./panels/Collapsable";
 export { AxButton } from "./buttons/Button";
 export { AxTag } from "./buttons/Tag";
 export { AxMenu } from "./menu/Menu";
-export type { MenuItemType } from "./menu/MenuItem";
 
 // Overlays
 export { AxPopover } from "./overlays/Popover";
