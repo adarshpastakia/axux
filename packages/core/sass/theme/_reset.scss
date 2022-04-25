@@ -64,12 +64,9 @@
 
   hr {
     border-bottom-color: $color-medium;
-    border-top-color: $color-lightest;
-  }
-
-  hr[data-vertical="true"] {
     border-inline-end-color: $color-medium;
     border-inline-start-color: $color-lightest;
+    border-top-color: $color-lightest;
   }
 
   [data-focus-ring="true"] {

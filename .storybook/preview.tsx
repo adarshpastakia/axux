@@ -71,7 +71,7 @@ export const parameters = {
     components: {
       Title: (props: any) => (
         <div>
-          <div className="ax-display--5 ax-color--primary" {...props} />
+          <div className="ax-display--4 ax-color--primary" {...props} />
           <hr className="ax-margin--b" />
         </div>
       ),

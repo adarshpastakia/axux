@@ -9,9 +9,10 @@ import { AxButton } from "../buttons/Button";
 import { AxSpacer } from "../divider/Spacer";
 import { AxPopover } from "../overlays/Popover";
 import { AppIcons } from "../types/appIcons";
+import { ElementProps } from "../types";
 
 /** @internal */
-export interface ToolbarProps {
+export interface ToolbarProps extends ElementProps {
   /**
    * Align children
    */
@@ -41,10 +42,12 @@ const childNotInView = (el: HTMLElement, child: Element, vertical: boolean) => {
  * @internal
  */
 export const AxToolbar: FC<ToolbarProps> = ({
+  className,
   children,
   align,
   enableOverflow = false,
-  vertical = false
+  vertical = false,
+  ...props
 }) => {
   const refToolbar = useRef<HTMLDivElement>(null);
   const refOverflow = useRef<HTMLDivElement>(null);
@@ -85,7 +88,13 @@ export const AxToolbar: FC<ToolbarProps> = ({
   }, [refToolbar, checkOverflow, enableOverflow]);
 
   return (
-    <div ref={refToolbar} className="ax-toolbar" data-align={align} data-vertical={vertical}>
+    <div
+      ref={refToolbar}
+      className={`ax-toolbar ${className ?? ""}`}
+      data-align={align}
+      data-vertical={vertical}
+      {...props}
+    >
       <div className="ax-toolbar--wrapper">{children}</div>
       {hasOverflow && <AxSpacer.Flex />}
       {enableOverflow && (

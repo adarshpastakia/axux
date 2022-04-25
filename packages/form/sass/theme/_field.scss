@@ -15,8 +15,8 @@
     background-color: $input-bg;
     background-image: linear-gradient(
       180deg,
-      rgba($base-shadow-color, 0.2),
-      rgba($input-bg, 0) 0.25em
+      rgba($black, 0.5),
+      rgba($input-bg, 0) 0.125em
     );
     box-shadow: 0 0 1px $color-muted inset;
     color: $input-color;

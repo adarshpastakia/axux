@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { isEmpty, isTrue } from "@axux/utilities";
-import { Children, FC, forwardRef, Fragment, MouseEventHandler, useMemo } from "react";
+import { FC, forwardRef, Fragment, MouseEventHandler, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { useIcon } from "../hooks/useIcon";
 import { AxIcon } from "../icons/Icon";
@@ -15,8 +15,6 @@ import { AxTooltip } from "../overlays/Tooltip";
 import { AnchorProps, Color, ElementProps, IconProps, RefProp } from "../types";
 import { AppIcons } from "../types/appIcons";
 import { AxText } from "../typography/Text";
-
-export type MenuItemType = string | MenuItemProps;
 
 /** @internal */
 export interface MenuItemProps
@@ -121,7 +119,9 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
               <AxIcon
                 className="flippable"
                 icon={
-                  isCollapsable && !isCollapsed ? AppIcons.iconCaretDown : AppIcons.iconCaretRight
+                  (isCollapsable && !isCollapsed) || showCaret === "bottom"
+                    ? AppIcons.iconCaretDown
+                    : AppIcons.iconCaretRight
                 }
               />
             </div>
@@ -149,11 +149,22 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
 MenuItemInner.displayName = "AxMenu.Item.Inner";
 
 /**
- * Menu item
+ * Menus item
  * @internal
  */
 export const AxMenuItem: FC<MenuItemProps> = forwardRef<HTMLAnchorElement, MenuItemProps>(
-  ({ panelId, isFloating, defaultCollapsed = true, isCollapsable, children, ...props }, ref) => {
+  (
+    {
+      panelId,
+      isFloating,
+      defaultCollapsed = true,
+      placement = "end",
+      isCollapsable,
+      children,
+      ...props
+    }: AnyObject,
+    ref
+  ) => {
     const [collapsed, toggleCollapse] = usePropToggle(defaultCollapsed);
     const menuCollapsed = isTrue((props as AnyObject)["data-collapsed"]);
     const floating = isTrue(isFloating || menuCollapsed) && !!children;
@@ -169,11 +180,11 @@ export const AxMenuItem: FC<MenuItemProps> = forwardRef<HTMLAnchorElement, MenuI
               closeOnClick: true,
               usePortal: true,
               updateAnchor: true,
-              placement: "right-start",
+              placement: placement === "bottom" ? "bottom-start" : "right-start",
               resize: false
             }
           : {},
-      [floating]
+      [floating, placement]
     );
 
     return (
@@ -181,7 +192,7 @@ export const AxMenuItem: FC<MenuItemProps> = forwardRef<HTMLAnchorElement, MenuI
         <MenuItemInner
           ref={ref}
           panelId={panelId}
-          showCaret={showCaret}
+          showCaret={showCaret && placement}
           isFloating={floating}
           isCollapsed={collapsed}
           isCollapsable={isCollapsable}

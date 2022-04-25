@@ -3,9 +3,21 @@
 // @copyright : 2022
 // @license   : MIT
 
-import { AxBox, AxButton, AxMenu, AxSpacer, AxTag, useAxNotificationService } from "@axux/core";
-import { Page } from "../components/Page";
-import { Section } from "../components/Section";
+import {
+  AxBox,
+  AxButton,
+  AxDivider,
+  AxLocalePicker,
+  AxMenu,
+  AxSpacer,
+  AxTag,
+  AxText,
+  AxThemeToggle,
+  AxToolbar,
+  useAxNotificationService
+} from "@axux/core";
+import { Page, Section } from "../../components";
+import { AxField } from "@axux/form";
 
 export const Buttons = () => {
   const { message } = useAxNotificationService();
@@ -83,7 +95,7 @@ export const Buttons = () => {
         </AxBox>
       </Section>
 
-      <Section title="Tag">
+      <Section title="Tags">
         <AxBox className="ax-spacing">
           <AxTag size="lg">Simple tag</AxTag>
           <AxTag size="lg" color="primary" onClick={() => message("Tag was clicked")}>
@@ -98,6 +110,24 @@ export const Buttons = () => {
           <AxTag size="lg" onRemove={() => message("Tag was removed")}>
             Removable tag
           </AxTag>
+        </AxBox>
+      </Section>
+
+      <Section title="Toolbar">
+        <AxBox className="ax-border ax-font--md">
+          <AxToolbar>
+            <AxText>Simple Text</AxText>
+            <AxField.Text width="18em" />
+            <AxSpacer />
+            <AxTag color="blue" size="sm">
+              Tag Label
+            </AxTag>
+            <AxSpacer.Flex />
+            <AxButton icon="mdi mdi-bell" badge={{ value: 9, color: "red" }} />
+            <AxDivider />
+            <AxLocalePicker />
+            <AxThemeToggle />
+          </AxToolbar>
         </AxBox>
       </Section>
     </Page>

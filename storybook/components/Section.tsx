@@ -4,11 +4,15 @@
 // @license   : MIT
 
 import { FC } from "react";
+import { AxBox, AxDivider, AxHeading, AxSpacer } from "@axux/core";
 
 export const Section: FC<{ title: string }> = ({ children, title }) => (
-  <div className="ax-container ax-margin--b--lg">
-    <div className="ax-heading--3 ax-color--secondary ">{title}</div>
-    <hr className="ax-margin--b--sm" />
-    <div>{children}</div>
-  </div>
+  <AxBox marginBottom="xxl">
+    <AxHeading level={2} color="primary">
+      {title}
+    </AxHeading>
+    <AxDivider rainbow />
+    <AxSpacer />
+    {children}
+  </AxBox>
 );

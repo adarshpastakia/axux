@@ -26,6 +26,7 @@ import safari from "../assets/safari.svg";
 import { Login } from "./login/Login";
 import { Register } from "./login/Register";
 import { Buttons } from "./pages/Buttons";
+import { Menus } from "./pages/Menus";
 
 const AppHeader = () => {
   const [largeFont, setLargeFont] = useState(false);
@@ -115,6 +116,7 @@ export const AppViewport = () => {
       <Routes>
         <Route path="" element={<HomePage />} />
         <Route path="buttons" element={<Buttons />} />
+        <Route path="menus" element={<Menus />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route
