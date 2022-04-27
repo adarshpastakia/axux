@@ -22,6 +22,7 @@ import { AxTooltip } from "../overlays/Tooltip";
 import { AxSection } from "../page/Section";
 import { ElementProps, EmptyCallback, IconProps } from "../types";
 import { AppIcons } from "../types/appIcons";
+import { AxEllipsis } from "../typography/Ellipsis";
 
 /** @internal */
 export interface TabProps extends IconProps, ElementProps {
@@ -90,7 +91,7 @@ export const Tab: FC<TabProps & { iconOnly?: boolean; placement?: "left" | "bott
       >
         <div className="ax-tab__button--label">
           {iconEl && <AxIcon icon={iconEl} rtlFlip={rtlFlip} />}
-          {!iconOnly && label && <span>{label}</span>}
+          {!iconOnly && label && <AxEllipsis>{label}</AxEllipsis>}
         </div>
         {badgeEl}
         {!!onClose && (

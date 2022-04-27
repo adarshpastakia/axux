@@ -209,6 +209,28 @@
       }
     }
 
+    &-ellipsis--middle {
+      display: block;
+      padding-inline-end: 40%;
+      position: relative;
+      @include ellipsis();
+
+      &::after {
+        content: attr(title);
+        direction: rtl;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        width: 40%;
+
+        @at-root [dir="rtl"] & {
+          direction: ltr;
+          left: 0;
+          right: unset;
+        }
+      }
+    }
+
     &-font {
       &--normal {
         font-size: $base-font-size;

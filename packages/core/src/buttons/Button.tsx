@@ -15,6 +15,7 @@ import { AxActionButton } from "./ActionButton";
 import { AxConfirmButton } from "./ConfirmButton";
 import { AxDropdown } from "./Dropdown";
 import { AxButtonGroup } from "./Group";
+import { AxEllipsis } from "../typography/Ellipsis";
 
 /** @internal */
 export interface ButtonProps
@@ -180,7 +181,7 @@ export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
             )}
             {(label || children) && (
               <div className="ax-button__label">
-                <span>{label || children}</span>
+                <AxEllipsis>{label || children}</AxEllipsis>
               </div>
             )}
             {badgeEl}

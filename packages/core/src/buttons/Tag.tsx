@@ -10,6 +10,7 @@ import { BadgeType, useBadge } from "../internals/useBadge";
 import { useWithTooltip, WithTooltipProps } from "../internals/useWithTooltip";
 import { BaseColor, Color, ColorPalette, ElementProps, IconProps, RefProp, Size } from "../types";
 import { AppIcons } from "../types/appIcons";
+import { AxEllipsis } from "../typography/Ellipsis";
 
 /** @internal */
 export interface TagProps extends RefProp, IconProps, ElementProps, WithTooltipProps {
@@ -103,7 +104,9 @@ export const AxTag: FC<TagProps> = forwardRef<HTMLElement, TagProps>(
         >
           <div className="ax-tag__inner" onClick={onClick}>
             {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
-            <span>{children}</span>
+            <span>
+              <AxEllipsis>{children}</AxEllipsis>
+            </span>
           </div>
           {badgeEl}
           {onRemove && (

@@ -36,6 +36,7 @@ export { AxText } from "./typography/Text";
 export { AxLink } from "./typography/Link";
 export { AxCallout } from "./panels/Callout";
 export { AxHeading } from "./typography/Heading";
+export { AxEllipsis } from "./typography/Ellipsis";
 
 // Layout
 export { AxBox } from "./layout/Box";

@@ -154,8 +154,8 @@
     align-self: center;
     line-height: 1em;
     order: 1;
+    overflow: hidden;
     padding: 0.25em 1em;
-    @include ellipsis();
 
     > span {
       font-size: 1em;
