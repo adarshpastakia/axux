@@ -18,8 +18,12 @@ exports[`Button renders basic button 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -46,8 +50,12 @@ exports[`Button renders block 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -73,8 +81,12 @@ exports[`Button renders color 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -108,8 +120,12 @@ exports[`Button renders disabled 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -142,8 +158,12 @@ exports[`Button renders icon align 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -176,8 +196,12 @@ exports[`Button renders icon hilight 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -210,8 +234,12 @@ exports[`Button renders link 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </a>
@@ -245,8 +273,12 @@ exports[`Button renders new tab link 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </a>
@@ -300,8 +332,12 @@ exports[`Button renders size 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -327,8 +363,12 @@ exports[`Button renders style 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -361,8 +401,12 @@ exports[`Button renders with icon 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -408,8 +452,12 @@ exports[`Button renders with spinner 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Click Me!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -435,8 +483,12 @@ exports[`Button renders with tooltip 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Tooltip!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Tooltip!
+          </span>
         </span>
       </div>
     </button>
@@ -480,8 +532,12 @@ exports[`Button renders with tooltip 2`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Tooltip!
+        <span
+          class="ax-block"
+        >
+          <span>
+            Tooltip!
+          </span>
         </span>
       </div>
     </button>

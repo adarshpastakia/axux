@@ -12,7 +12,13 @@ exports[`Tag renders basic tag 1`] = `
       class="ax-tag__inner"
     >
       <span>
-        Tag
+        <span
+          class="ax-block"
+        >
+          <span>
+            Tag
+          </span>
+        </span>
       </span>
     </div>
   </div>
@@ -31,7 +37,13 @@ exports[`Tag renders color 1`] = `
       class="ax-tag__inner"
     >
       <span>
-        Tag
+        <span
+          class="ax-block"
+        >
+          <span>
+            Tag
+          </span>
+        </span>
       </span>
     </div>
   </div>
@@ -50,7 +62,13 @@ exports[`Tag renders style 1`] = `
       class="ax-tag__inner"
     >
       <span>
-        Tag
+        <span
+          class="ax-block"
+        >
+          <span>
+            Tag
+          </span>
+        </span>
       </span>
     </div>
   </div>
@@ -76,7 +94,13 @@ exports[`Tag renders with icon 1`] = `
         />
       </div>
       <span>
-        Icon
+        <span
+          class="ax-block"
+        >
+          <span>
+            Icon
+          </span>
+        </span>
       </span>
     </div>
   </div>
@@ -95,7 +119,13 @@ exports[`Tag renders with tooltip 1`] = `
       class="ax-tag__inner"
     >
       <span>
-        Tooltip
+        <span
+          class="ax-block"
+        >
+          <span>
+            Tooltip
+          </span>
+        </span>
       </span>
     </div>
   </div>
@@ -132,7 +162,13 @@ exports[`Tag renders with tooltip 2`] = `
       class="ax-tag__inner"
     >
       <span>
-        Tooltip
+        <span
+          class="ax-block"
+        >
+          <span>
+            Tooltip
+          </span>
+        </span>
       </span>
     </div>
   </div>
