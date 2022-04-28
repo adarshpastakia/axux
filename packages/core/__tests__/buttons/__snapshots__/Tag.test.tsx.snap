@@ -13,7 +13,8 @@ exports[`Tag renders basic tag 1`] = `
     >
       <span>
         <span
-          class="ax-block"
+          class="ax-ellipsis--middle"
+          data-enabled="false"
         >
           <span>
             Tag
@@ -38,7 +39,8 @@ exports[`Tag renders color 1`] = `
     >
       <span>
         <span
-          class="ax-block"
+          class="ax-ellipsis--middle"
+          data-enabled="false"
         >
           <span>
             Tag
@@ -63,7 +65,8 @@ exports[`Tag renders style 1`] = `
     >
       <span>
         <span
-          class="ax-block"
+          class="ax-ellipsis--middle"
+          data-enabled="false"
         >
           <span>
             Tag
@@ -95,7 +98,8 @@ exports[`Tag renders with icon 1`] = `
       </div>
       <span>
         <span
-          class="ax-block"
+          class="ax-ellipsis--middle"
+          data-enabled="false"
         >
           <span>
             Icon
@@ -120,7 +124,8 @@ exports[`Tag renders with tooltip 1`] = `
     >
       <span>
         <span
-          class="ax-block"
+          class="ax-ellipsis--middle"
+          data-enabled="false"
         >
           <span>
             Tooltip
@@ -163,7 +168,8 @@ exports[`Tag renders with tooltip 2`] = `
     >
       <span>
         <span
-          class="ax-block"
+          class="ax-ellipsis--middle"
+          data-enabled="false"
         >
           <span>
             Tooltip

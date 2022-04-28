@@ -210,23 +210,28 @@
     }
 
     &-ellipsis--middle {
-      display: block;
-      padding-inline-end: 40%;
-      position: relative;
+      display: inline-block;
+      max-width: 100%;
+      vertical-align: middle;
       @include ellipsis();
 
-      &::after {
-        content: attr(title);
-        direction: rtl;
-        overflow: hidden;
-        position: absolute;
-        right: 0;
-        width: 40%;
+      &[data-enabled="true"] {
+        padding-inline-end: 50%;
+        position: relative;
 
-        @at-root [dir="rtl"] & {
-          direction: ltr;
-          left: 0;
-          right: unset;
+        &::after {
+          content: attr(title);
+          direction: rtl;
+          overflow: hidden;
+          position: absolute;
+          right: 0;
+          width: 50%;
+
+          @at-root [dir="rtl"] & {
+            direction: ltr;
+            left: 0;
+            right: unset;
+          }
         }
       }
     }

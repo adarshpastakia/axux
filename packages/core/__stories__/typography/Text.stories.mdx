@@ -9,8 +9,9 @@ import {
   Title
 } from "@storybook/addon-docs";
 import { AxFlexBox, AxText } from "../../src";
-import { ColorStory, SerifStory, TextStory } from "./TextStory";
+import { ClipStory, ColorStory, SerifStory, TextStory } from "./TextStory";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
+import { AxBox, AxEllipsis } from "../../dist";
 
 <Meta title="@core/Typography/Text" component={AxText} parameters={{ jest: ["Text.test.tsx"] }} />
 
@@ -38,6 +39,38 @@ import { LIPSUM } from "../../../../storybook/components/Lipsum";
 
 <Canvas>
   <Story name="Color">{ColorStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-typography-text--ellipsis">
+  <Heading>Ellipsis</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Ellipsis">
+    <AxBox maxWidth={128}>
+      <AxText block>
+        <AxEllipsis>No Ellipsis</AxEllipsis>
+      </AxText>
+      <AxText block>
+        <AxEllipsis>5 Years Ago</AxEllipsis>
+      </AxText>
+      <AxText block>
+        <AxEllipsis>A very long text that's broken in the middle</AxEllipsis>
+      </AxText>
+      <AxText block>
+        <AxEllipsis>Do you agree with the <a className="ax-link">Terms &amp; Conditions</a></AxEllipsis>
+      </AxText>
+      <AxText block>
+        <AxEllipsis>{LIPSUM.line}</AxEllipsis>
+      </AxText>
+      <AxText block>
+        <AxEllipsis>{LIPSUM.arPara.substring(0, 45)}</AxEllipsis>
+      </AxText>
+      <AxText block>
+        <AxEllipsis>5 Years Ago → Now</AxEllipsis>
+      </AxText>
+    </AxBox>
+  </Story>
 </Canvas>
 
 <Anchor storyId="core-typography-text--weights">
@@ -82,11 +115,7 @@ import { LIPSUM } from "../../../../storybook/components/Lipsum";
 </Anchor>
 
 <Canvas>
-  <Story name="Clipped">
-    <div style={{ maxWidth: 1200 }}>
-      <AxText clip={4}>{`${LIPSUM.para}\n${LIPSUM.para}`}</AxText>
-    </div>
-  </Story>
+  <Story name="Clipped">{ClipStory}</Story>
 </Canvas>
 
 <Anchor storyId="core-typography-text--marked-text">
