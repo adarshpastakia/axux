@@ -3,6 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
+// @ts-ignore
 import React, { useCallback, useEffect, useState } from "react";
 import { FORCE_RE_RENDER } from "@storybook/core-events";
 import { API, useGlobals, useParameter } from "@storybook/api";

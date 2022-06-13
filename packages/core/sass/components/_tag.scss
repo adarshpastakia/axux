@@ -19,14 +19,10 @@
 
   &::before {
     background-color: currentColor;
-    bottom: 0;
     content: "";
-    left: 0;
-    opacity: 0.1;
-    position: absolute;
-    right: 0;
-    top: 0;
+    opacity: 0.05;
     z-index: 0;
+    @include position(absolute, 0);
   }
 
   &[data-size="sm"] {
@@ -52,11 +48,11 @@
     > span {
       font-weight: 500;
       line-height: 1.25;
+      overflow: hidden;
       padding: 0 0.25em;
       pointer-events: none;
       z-index: 5;
       @include noselect();
-      @include ellipsis();
     }
   }
 
@@ -104,9 +100,19 @@
         opacity: 0.2;
       }
     }
+    &:active {
+      &::before {
+        opacity: 0.4;
+      }
+    }
     &[data-solid="true"]:hover {
       &::before {
-        opacity: 0.9;
+        opacity: 0.8;
+      }
+    }
+    &[data-solid="true"]:active {
+      &::before {
+        opacity: 1;
       }
     }
   }
@@ -121,7 +127,15 @@
     z-index: 1;
   }
 
-  &#{$prefix}-color--default[data-solid="false"]::before {
-    content: unset;
+  &#{$prefix}-color--default[data-solid="false"] {
+    &::before {
+      opacity: 0;
+    }
+    &[data-clickable="true"]:hover::before {
+      opacity: 0.1;
+    }
+    &[data-clickable="true"]:active::before {
+      opacity: 0.2;
+    }
   }
 }

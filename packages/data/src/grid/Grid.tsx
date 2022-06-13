@@ -4,130 +4,87 @@
 // @license   : MIT
 
 import { AxButton, AxTextLoader } from "@axux/core";
-import { useIsRtl } from "@axux/core/dist/internals/useIsRtl";
-import { ElementProps, EmptyCallback } from "@axux/core/dist/types";
+import { ElementProps, EmptyCallback, RefProp } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
 import {
-  CSSProperties,
   FC,
+  forwardRef,
   ReactNode,
   useCallback,
-  useEffect,
+  useImperativeHandle,
   useLayoutEffect,
   useRef,
   useState
 } from "react";
-import {
-  AutoSizer,
-  CellMeasurer,
-  CellMeasurerCache,
-  createMasonryCellPositioner,
-  Masonry,
-  WindowScroller
-} from "react-virtualized";
 import { GridItem } from "./Item";
 
-export interface GridProps extends ElementProps {
-  list: KeyValue[];
-  cellWidth?: number;
-  cellHeight?: number;
+export interface GridRef {
+  scrollTo: (index: number) => void;
+}
+
+export interface GridProps extends Omit<ElementProps, "onScroll">, RefProp<GridRef> {
+  cellWidth?: string;
   isLoading?: boolean;
   canLoadMore?: boolean;
   hideScrollButtons?: boolean;
   onLoadMore?: EmptyCallback;
-  onScroll?: (top: number) => void;
   sortOrder?: "asc" | "desc";
-  initialScroll?: number;
   onSort?: (order: "asc" | "desc") => void;
+  onScroll?: (top: number) => void;
+  initialScroll?: number;
   actions?: ReactNode;
-  children: (props: {
-    style: CSSProperties;
-    isScrolling: boolean;
-    measure: () => void;
-    index: number;
-    record: KeyValue;
-  }) => ReactNode;
 }
-
 interface ExtendedFC extends FC<GridProps> {
   Item: typeof GridItem;
 }
 
-export const AxGridView: ExtendedFC = ({
-  list,
-  children,
-  className,
-  isLoading,
-  canLoadMore,
-  onLoadMore,
-  sortOrder,
-  onSort,
-  actions,
-  onScroll,
-  initialScroll = 0,
-  hideScrollButtons,
-  cellWidth = 520,
-  cellHeight = 50,
-  ...aria
-}) => {
-  const { isRtl } = useIsRtl();
-  const windowRef = useRef<WindowScroller>(null);
-  const [scrollerRef, setScrollerRef] = useState<HTMLDivElement>();
-  const [masonryRef, setMasonryRef] = useState<Masonry>();
-  const [canScroll, setCanScroll] = useState(0);
-  const [firstScroll, setFirstScroll] = useState<number | undefined>(undefined);
+export const AxGridView: ExtendedFC = forwardRef<GridRef, GridProps>(
+  (
+    {
+      children,
+      isLoading,
+      canLoadMore,
+      onLoadMore,
+      sortOrder,
+      onSort,
+      onScroll,
+      initialScroll,
+      actions,
+      hideScrollButtons,
+      cellWidth,
+      className,
+      ...aria
+    },
+    ref
+  ) => {
+    const scrollerRef = useRef<HTMLDivElement>(null);
+    const [canScroll, setCanScroll] = useState(0);
 
-  useEffect(() => {
-    setFirstScroll(initialScroll);
-  }, [initialScroll]);
+    const checkScroll = useCallback(() => {
+      if (scrollerRef.current) {
+        const el = scrollerRef.current;
+        const { scrollHeight, scrollTop, offsetHeight } = el;
+        if (scrollHeight === offsetHeight) setCanScroll(0);
+        else if (scrollTop === 0) setCanScroll(1);
+        else if (scrollTop + offsetHeight >= scrollHeight) setCanScroll(2);
+        else setCanScroll(3);
 
-  const cache = useRef(
-    new CellMeasurerCache({
-      defaultWidth: cellWidth,
-      fixedWidth: true,
-      defaultHeight: cellHeight
-    })
-  );
-  const [width, setWidth] = useState(1200);
-  const positioner = useRef(
-    createMasonryCellPositioner({
-      cellMeasurerCache: cache.current,
-      columnWidth: cellWidth,
-      columnCount: Math.floor(width / (cellWidth + 16)),
-      spacer: 16
-    })
-  );
-
-  useEffect(() => {
-    cache.current.clearAll();
-    positioner.current.reset({
-      columnWidth: cellWidth,
-      columnCount: Math.floor(width / (cellWidth + 16)),
-      spacer: 16
-    });
-    masonryRef && masonryRef.clearCellPositions();
-  }, [cellWidth, masonryRef, width]);
-
-  const checkScroll = useCallback(() => {
-    if (scrollerRef) {
-      const { scrollHeight, scrollTop, offsetHeight } = scrollerRef;
-      if (scrollHeight === offsetHeight) setCanScroll(0);
-      else if (scrollTop === 0) setCanScroll(1);
-      else if (scrollTop + offsetHeight === scrollHeight) setCanScroll(2);
-      else setCanScroll(3);
-
-      if (scrollTop + offsetHeight >= scrollHeight - 10) {
-        !isLoading && canLoadMore && onLoadMore && debounce(onLoadMore, 100)();
+        if (scrollTop + offsetHeight >= scrollHeight - 16) {
+          !isLoading && canLoadMore && onLoadMore && debounce(() => onLoadMore(), 100)();
+        }
+        debounce(() => {
+          const first: AnyObject = Array.from<HTMLElement>(
+            el.querySelectorAll(".ax-gridView__item")
+          ).find((e) => e.offsetTop >= el.scrollTop);
+          onScroll?.(first?.dataset.index);
+        }, 250)();
       }
-      onScroll?.(scrollTop);
-    }
-  }, [scrollerRef, canLoadMore, isLoading, onLoadMore]);
+    }, [canLoadMore, isLoading, onLoadMore, onScroll]);
 
-  const doScroll = useCallback(
-    (diff: number) => {
-      if (scrollerRef) {
-        const el = scrollerRef;
+    const doScroll = useCallback((diff: number) => {
+      if (scrollerRef.current) {
+        const el = scrollerRef.current;
         let scrollTo;
         if (diff === -2) scrollTo = 0;
         else if (diff === 2) scrollTo = el.scrollHeight;
@@ -137,119 +94,98 @@ export const AxGridView: ExtendedFC = ({
           behavior: "auto"
         });
       }
-    },
-    [scrollerRef]
-  );
+    }, []);
 
-  useLayoutEffect(() => {
-    if (firstScroll !== undefined) {
-      scrollerRef && (scrollerRef.scrollTop = firstScroll);
-      windowRef.current?.updatePosition();
-      setFirstScroll(undefined);
-    }
-  }, [firstScroll]);
+    useImperativeHandle(
+      ref,
+      () => ({
+        scrollTo: (index: number) =>
+          scrollerRef.current
+            ?.querySelector(`.ax-gridView__item[data-index="${index}"]`)
+            ?.scrollIntoView({ block: "nearest" })
+      }),
+      []
+    );
 
-  return (
-    <div
-      className={`ax-gridView__panel ${className ?? ""}`}
-      onScroll={checkScroll}
-      ref={(el) => setScrollerRef(el as HTMLDivElement)}
-      {...aria}
-    >
-      <div className="ax-gridView__wrapper">
-        <WindowScroller ref={windowRef} scrollElement={scrollerRef}>
-          {({ height, isScrolling, registerChild, scrollTop }) => (
-            <div>
-              <AutoSizer disableHeight height={height} onResize={({ width }) => setWidth(width)}>
-                {({ width }) => (
-                  <div ref={registerChild}>
-                    {list.length > 0 && (
-                      <Masonry
-                        autoHeight
-                        width={width}
-                        height={height}
-                        rowDirection={isRtl ? "rtl" : "ltr"}
-                        ref={(e) => setMasonryRef(e as Masonry)}
-                        isScrolling={isScrolling}
-                        cellMeasurerCache={cache.current}
-                        cellPositioner={positioner.current}
-                        cellCount={list.length}
-                        cellRenderer={({ index, key, parent, style }: AnyObject) => (
-                          <CellMeasurer
-                            cache={cache.current}
-                            key={key}
-                            index={index}
-                            parent={parent}
-                          >
-                            {({ measure }) =>
-                              children({
-                                record: list[index],
-                                index,
-                                style: { ...style, direction: isRtl ? "rtl" : "ltr" },
-                                measure,
-                                isScrolling
-                              })
-                            }
-                          </CellMeasurer>
-                        )}
-                        scrollTop={scrollTop}
-                      />
-                    )}
-                    {isLoading && <AxTextLoader />}
-                  </div>
-                )}
-              </AutoSizer>
-            </div>
-          )}
-        </WindowScroller>
-        <div>
+    useLayoutEffect(() => {
+      initialScroll &&
+        scrollerRef.current
+          ?.querySelector(`.ax-gridView__item[data-index="${initialScroll}"]`)
+          ?.scrollIntoView();
+    }, []);
+
+    useLayoutEffect(() => {
+      if (ResizeObserver) {
+        const ob = new ResizeObserver(checkScroll);
+        if (scrollerRef.current && scrollerRef.current.firstElementChild) {
+          ob.observe(scrollerRef.current.firstElementChild);
+        }
+        return () => ob.disconnect();
+      }
+    }, [checkScroll]);
+
+    return (
+      <div
+        className={`ax-gridView__panel ${className ?? ""}`}
+        style={{ "--cell-width": cellWidth } as AnyObject}
+        onScroll={checkScroll}
+        ref={scrollerRef as AnyObject}
+        {...aria}
+      >
+        <div className="ax-gridView__wrapper">
           <div>
-            {onSort && (
+            {children}
+            {isLoading && <AxTextLoader />}
+            {!isLoading && <div style={{ height: "3rem" }} />}
+          </div>
+          <div>
+            <div className="ax-row ax-row--vertical">
+              {onSort && (
+                <AxButton.Group vertical>
+                  <AxButton
+                    icon={AppIcons.iconSortTimeDesc}
+                    onClick={() => onSort && onSort("desc")}
+                    data-active={sortOrder === "desc"}
+                  />
+                  <AxButton
+                    icon={AppIcons.iconSortTimeAsc}
+                    onClick={() => onSort && onSort("asc")}
+                    data-active={sortOrder === "asc"}
+                  />
+                </AxButton.Group>
+              )}
+              {actions}
+            </div>
+            {!hideScrollButtons && (
               <AxButton.Group vertical>
                 <AxButton
-                  icon={AppIcons.iconSortTimeDesc}
-                  onClick={() => onSort && onSort("desc")}
-                  data-active={sortOrder === "desc"}
+                  isDisabled={(canScroll | 1) === 1}
+                  onClick={() => doScroll(-2)}
+                  icon={AppIcons.iconChevronTop}
                 />
                 <AxButton
-                  icon={AppIcons.iconSortTimeAsc}
-                  onClick={() => onSort && onSort("asc")}
-                  data-active={sortOrder === "asc"}
+                  isDisabled={(canScroll | 1) === 1}
+                  onClick={() => doScroll(-1)}
+                  icon={AppIcons.iconCaretTop}
+                />
+                <AxButton
+                  isDisabled={(canScroll | 2) === 2}
+                  onClick={() => doScroll(1)}
+                  icon={AppIcons.iconCaretDown}
+                />
+                <AxButton
+                  isDisabled={(canScroll | 2) === 2}
+                  onClick={() => doScroll(2)}
+                  icon={AppIcons.iconChevronDown}
                 />
               </AxButton.Group>
             )}
-            {actions}
           </div>
-          <div className="ax-col--fill" />
-          {!hideScrollButtons && (
-            <AxButton.Group vertical>
-              <AxButton
-                isDisabled={(canScroll | 1) === 1}
-                onClick={() => doScroll(-2)}
-                icon={AppIcons.iconChevronTop}
-              />
-              <AxButton
-                isDisabled={(canScroll | 1) === 1}
-                onClick={() => doScroll(-1)}
-                icon={AppIcons.iconCaretTop}
-              />
-              <AxButton
-                isDisabled={(canScroll | 2) === 2}
-                onClick={() => doScroll(1)}
-                icon={AppIcons.iconCaretDown}
-              />
-              <AxButton
-                isDisabled={(canScroll | 2) === 2}
-                onClick={() => doScroll(2)}
-                icon={AppIcons.iconChevronDown}
-              />
-            </AxButton.Group>
-          )}
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+) as AnyObject;
 AxGridView.Item = GridItem;
 
 AxGridView.displayName = "AxGridView";

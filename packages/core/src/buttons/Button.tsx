@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { isEmpty } from "@axux/utilities";
-import { FC, forwardRef, MouseEventHandler, useCallback } from "react";
+import { FC, forwardRef, MouseEvent, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import { AxIcon } from "../icons/Icon";
 import { BadgeType, useBadge } from "../internals/useBadge";
@@ -15,6 +15,7 @@ import { AxActionButton } from "./ActionButton";
 import { AxConfirmButton } from "./ConfirmButton";
 import { AxDropdown } from "./Dropdown";
 import { AxButtonGroup } from "./Group";
+import { AxEllipsis } from "../typography/Ellipsis";
 
 /** @internal */
 export interface ButtonProps
@@ -48,10 +49,6 @@ export interface ButtonProps
    * Button value for toggle group
    */
   value?: string;
-  /**
-   * Click event handler
-   */
-  onClick?: MouseEventHandler;
 
   /**
    * Badge indicator
@@ -65,7 +62,7 @@ export interface ButtonProps
   /**
    * Use split button for dropdown
    */
-  split?: boolean;
+  split?: boolean | string;
   /**
    * Icon placement inline-end
    */
@@ -88,9 +85,14 @@ export interface ButtonProps
    * When used in dropdown use to hide caret
    */
   hideCaret?: boolean;
+
+  /**
+   * panelId to navigate panel stack
+   */
+  panelId?: string;
 }
 
-interface ExtendedFC<T> extends FC<T> {
+interface ExtendedFC extends FC<ButtonProps> {
   Group: typeof AxButtonGroup;
   Dropdown: typeof AxDropdown;
   Action: typeof AxActionButton;
@@ -103,10 +105,7 @@ interface ExtendedFC<T> extends FC<T> {
 /**
  * Action buttons
  */
-export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
-  HTMLAnchorElement,
-  ButtonProps
->(
+export const AxButton: ExtendedFC = forwardRef<HTMLAnchorElement, ButtonProps>(
   (
     {
       children,
@@ -117,9 +116,9 @@ export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
       to,
       href,
       badge,
-      onClick,
       hideCaret,
       split,
+      rtlFlip,
       isLoading,
       isDisabled,
       className,
@@ -129,6 +128,8 @@ export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
       iconAlign = "start",
       iconHilight = false,
       tabIndex,
+      panelId,
+      onClick,
       ref: _ref,
       ...aria
     },
@@ -141,7 +142,7 @@ export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
         ) : to ? (
           <NavLink ref={ref} to={to} {...props} />
         ) : (
-          <button ref={ref} type="button" {...props} />
+          <button ref={ref} type={(props as KeyValue)["data-type"] ?? "button"} {...props} />
         ),
       [ref, href, to]
     );
@@ -162,24 +163,25 @@ export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
           data-block={block}
           data-busy={isLoading}
           data-disabled={isDisabled}
-          {...aria}
         >
           <InnerButton
             tabIndex={tabIndex}
             className="ax-button__inner"
             onClick={onClick}
+            onMouseUp={(e: MouseEvent<HTMLElement>) => e.currentTarget.blur()}
             data-no-label={isEmpty(label || children)}
+            data-panel={panelId}
             data-icon-align={iconAlign}
             data-icon-hilight={iconHilight}
             {...aria}
           >
-            {icon && <AxIcon className="ax-button__icon" icon={icon} />}
+            {icon && <AxIcon className="ax-button__icon" icon={icon} rtlFlip={rtlFlip} />}
             {isLoading && (
               <AxIcon className="ax-button__spinner" icon={AppIcons.iconSpinner} spin />
             )}
             {(label || children) && (
               <div className="ax-button__label">
-                <span>{label || children}</span>
+                <AxEllipsis>{label || children}</AxEllipsis>
               </div>
             )}
             {badgeEl}
@@ -188,7 +190,13 @@ export const AxButton: ExtendedFC<ButtonProps & RefProp> = forwardRef<
             )}
           </InnerButton>
           {split && (
-            <button className="ax-button__inner ax-button__split" tabIndex={tabIndex}>
+            <button
+              className="ax-button__inner ax-button__split"
+              onClick={(e: MouseEvent<HTMLElement>) => e.currentTarget.blur()}
+              tabIndex={tabIndex}
+              role="split"
+              aria-label={`${split}`}
+            >
               <AxIcon icon={AppIcons.iconCaretDown} className="ax-button__icon" />
             </button>
           )}
@@ -201,9 +209,13 @@ AxButton.Group = AxButtonGroup;
 AxButton.Dropdown = AxDropdown;
 AxButton.Action = AxActionButton;
 AxButton.Confirm = AxConfirmButton;
-AxButton.Positive = (props) => <AxButton {...props} color="primary" type="solid" />;
-AxButton.Negative = (props) => <AxButton {...props} color="danger" type="solid" />;
-AxButton.Neutral = (props) => <AxButton {...props} color="default" type="default" />;
+AxButton.Positive = (props) => (
+  <AxButton {...props} color="primary" type="solid" data-type="submit" />
+);
+AxButton.Negative = (props) => (
+  <AxButton {...props} color="danger" type="solid" data-type="reset" />
+);
+AxButton.Neutral = (props) => <AxButton {...props} color="primary" type="link" />;
 
 AxButton.displayName = "AxButton";
 AxButton.Group.displayName = "AxButton.Group";

@@ -76,9 +76,7 @@ export const AxFieldWrapper: FC<FieldWrapperProps & RefProp<HTMLDivElement>> = f
           )}
           {error && (
             <AxTooltip color="danger" content={error} placement="bottom">
-              <div className="ax-field__error">
-                <AxIcon icon={AppIcons.iconExclaim} color="danger" />
-              </div>
+              <div className="ax-field__error">!</div>
             </AxTooltip>
           )}
           {isLoading && (

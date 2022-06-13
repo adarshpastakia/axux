@@ -30,12 +30,11 @@ export const AxDatagrid = <T extends KeyValue>({
   const { t } = useTranslation("data");
   return (
     <GridContextProvider<T> data={data} {...rest}>
-      <GridHeader />
+      <GridHeader> {isLoading && <AxLoader />}</GridHeader>
       {data.length > 0 && <GridBody />}
       {!isLoading &&
         data.length === 0 &&
         (emptyDisplay ?? <AxContent.Empty message={t("grid.empty")} />)}
-      {isLoading && <AxLoader />}
     </GridContextProvider>
   );
 };

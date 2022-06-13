@@ -1,16 +1,22 @@
 // @author    : Adarsh Pastakia
 // @version   : 0.0.1
-// @copyright : 2021
+// @copyright : 2022
 // @license   : MIT
 
-import { isNumber } from "@axux/utilities";
-import { Children, cloneElement, DOMAttributes, FC, forwardRef, ReactElement, useMemo } from "react";
+import { Children, cloneElement, FC, forwardRef, ReactElement, useMemo } from "react";
 import { AxFooter } from "../appbars/Footer";
 import { AxHeader } from "../appbars/Header";
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../internals/usePropToggle";
 import { AxLoader } from "../loader/Loader";
-import { CollapseProps, ElementProps, EmptyCallback, ExpandProps, IconProps, RefProp } from "../types";
+import {
+  CollapseProps,
+  ElementProps,
+  EmptyCallback,
+  ExpandProps,
+  IconProps,
+  RefProp
+} from "../types";
 import { AppIcons } from "../types/appIcons";
 import { AxPanelGroup } from "./PanelGroup";
 import { AxPanelStack } from "./PanelStack";
@@ -20,9 +26,8 @@ export interface PanelProps
   extends CollapseProps,
     ExpandProps,
     ElementProps,
-    IconProps,
-    RefProp<HTMLDivElement>,
-    DOMAttributes<HTMLDivElement> {
+    IconProps<JSX.Element>,
+    RefProp<HTMLDivElement> {
   /**
    * Panel id
    */
@@ -90,7 +95,8 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       isAccordion,
-      ...aria
+      onClick,
+      ...props
     },
     ref
   ) => {
@@ -107,6 +113,7 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
           {isExpandable && (
             <AxButton
               type="link"
+              aria-label="Collapse"
               icon={expanded ? AppIcons.iconCollapse : AppIcons.iconExpand}
               onClick={toggleExpand}
             />
@@ -114,11 +121,14 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
           {!expanded && isCollapsable && (
             <AxButton
               type="link"
+              aria-label="Expand"
               icon={collapsed ? AppIcons.iconExpandPlus : AppIcons.iconCollapseMinus}
               onClick={toggleCollapse}
             />
           )}
-          {onClose && <AxButton type="link" icon={AppIcons.iconClose} onClick={onClose} />}
+          {onClose && (
+            <AxButton type="link" icon={AppIcons.iconClose} onClick={onClose} aria-label="Close" />
+          )}
         </AxButton.Group>
       );
 
@@ -170,20 +180,32 @@ export const AxPanel: ExtendedFC = forwardRef<HTMLDivElement, PanelProps>(
 
     const styles = useMemo(() => {
       return {
-        height: isNumber(height) ? `${height}rem` : height,
-        minHeight: isNumber(minHeight) ? `${minHeight}rem` : minHeight,
-        maxHeight: isNumber(maxHeight) ? `${maxHeight}rem` : maxHeight
+        height,
+        minHeight,
+        maxHeight
       };
     }, [height, minHeight, maxHeight]);
+
+    const classes = useMemo(() => {
+      const cls = ["ax-panel", className ?? ""];
+      if (onClick) {
+        cls.push("ax-clickable");
+      }
+      if (paper) {
+        cls.push("ax-paper");
+      }
+      return cls.join(" ");
+    }, [className, onClick, paper]);
 
     return (
       <div
         ref={ref}
-        className={`ax-panel ${paper ? "ax-paper" : ""} ${className ?? ""}`}
+        className={classes}
         data-collapse={collapsed}
         data-expand={expanded}
+        onClick={onClick}
         style={styles}
-        {...aria}
+        {...props}
       >
         {header}
         <div className="ax-panel__body">{childs}</div>

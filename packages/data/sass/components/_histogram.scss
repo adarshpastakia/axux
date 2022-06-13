@@ -35,7 +35,7 @@
     display: flex;
     flex: 1 1 1em;
     flex-flow: row nowrap;
-    margin: 0.25em 0;
+    margin: 0.125em 0;
     min-height: 1em;
     position: relative;
     @include ellipsis();
@@ -54,22 +54,15 @@
 
     &::before,
     &::after {
-      bottom: 0;
       content: "";
-      left: 0;
       overflow: hidden;
-      position: absolute;
-      right: 0;
       text-align: end;
-      top: 0;
       transition: left 1s ease-in 0.5s;
+      @include position(absolute, 0);
     }
 
-    @at-root [dir="ltr"] &::after {
-      left: calc(var(--meter) * 100%);
-    }
-    @at-root [dir="rtl"] &::after {
-      right: calc(var(--meter) * 100%);
+    &::after {
+      @include position(null, null null null calc(var(--meter) * 100%));
     }
   }
 

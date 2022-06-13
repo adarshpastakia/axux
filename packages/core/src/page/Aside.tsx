@@ -4,16 +4,16 @@
 // @license   : MIT
 
 import { withinEl } from "@axux/utilities/dist/dom";
-import { FC, ReactNodeArray, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { FC, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../internals/usePropToggle";
 import { useResize } from "../internals/useResize";
 import { AxLoader } from "../loader/Loader";
-import { CollapseProps, ElementProps, EmptyCallback, IconProps } from "../types";
+import { CollapseProps, ElementProps, EmptyCallback } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
-export interface AsideProps extends IconProps, CollapseProps, ElementProps {
+export interface AsideProps extends CollapseProps, ElementProps {
   /**
    * Align inline-end
    */
@@ -54,7 +54,7 @@ export interface AsideProps extends IconProps, CollapseProps, ElementProps {
    */
   onFlyout?: EmptyCallback;
 
-  actions?: ReactNodeArray;
+  actions?: JSX.Element[];
 }
 
 /**
@@ -80,7 +80,6 @@ export interface AsideProps extends IconProps, CollapseProps, ElementProps {
 export const Aside: FC<AsideProps> = ({
   children,
   title,
-  icon,
   isLoading,
   className,
   isCollapsable,
@@ -154,6 +153,7 @@ export const Aside: FC<AsideProps> = ({
           {isCollapsable && (
             <AxButton
               type="link"
+              aria-label="Toggle collapse"
               className="ax-section__side--toggle flippable"
               icon={
                 (collapsed && !end) || (!collapsed && end)

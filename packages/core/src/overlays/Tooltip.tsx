@@ -5,7 +5,7 @@
 
 import { isEmpty } from "@axux/utilities";
 import { Placement } from "@popperjs/core";
-import { FC, forwardRef, useMemo } from "react";
+import { cloneElement, FC, forwardRef, ReactElement, useMemo } from "react";
 import { AxPopper } from "../internals/Popper";
 import { AllColors, ElementProps, RefProp } from "../types";
 
@@ -30,21 +30,28 @@ export interface TooltipProps extends ElementProps, RefProp {
 
   isOpen?: boolean;
   isDisabled?: boolean;
+  autoTrigger?: boolean;
 }
 
 export const AxTooltip: FC<TooltipProps> = forwardRef<HTMLElement, TooltipProps>(
-  ({ children, content, placement = "top", color, className, isDisabled, ...props }, ref) => {
+  (
+    { children, content, placement = "top", color, className, autoTrigger, isDisabled, ...props },
+    ref
+  ) => {
     const classes = useMemo(() => {
       if (!color) {
         return "ax-bg--darkest ax-color--empty";
       }
       return `ax-bg--${color} ax-color--contrast`;
     }, [color]);
-    return (
+    return isEmpty(content) || isDisabled ? (
+      cloneElement(children as ReactElement, { ref })
+    ) : (
       <AxPopper
         trigger="hover"
         inheritRef={ref}
         placement={placement}
+        autoTrigger={autoTrigger}
         isDisabled={isEmpty(content) || isDisabled}
         className={`ax-tooltip ${classes} ${className ?? ""}`}
         showArrow

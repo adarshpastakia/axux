@@ -5,7 +5,16 @@
 
 import { getValue, isFalse } from "@axux/utilities";
 import { getChildProps } from "@axux/utilities/dist/react";
-import { Children, cloneElement, FC, useEffect, useMemo, useState } from "react";
+import {
+  Children,
+  cloneElement,
+  FC,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import { AxIcon } from "../icons/Icon";
 import { BadgeType, useBadge } from "../internals/useBadge";
 import { AxLoader } from "../loader/Loader";
@@ -13,6 +22,7 @@ import { AxTooltip } from "../overlays/Tooltip";
 import { AxSection } from "../page/Section";
 import { ElementProps, EmptyCallback, IconProps } from "../types";
 import { AppIcons } from "../types/appIcons";
+import { AxEllipsis } from "../typography/Ellipsis";
 
 /** @internal */
 export interface TabProps extends IconProps, ElementProps {
@@ -33,6 +43,7 @@ export interface TabProps extends IconProps, ElementProps {
 export const Tab: FC<TabProps & { iconOnly?: boolean; placement?: "left" | "bottom" }> = ({
   id,
   icon,
+  rtlFlip,
   label,
   tooltip,
   badge,
@@ -54,7 +65,7 @@ export const Tab: FC<TabProps & { iconOnly?: boolean; placement?: "left" | "bott
     return (
       first && last ? `${first.charAt(0)}${last.charAt(0)}` : `${first.substr(0, 2)}`
     ).toUpperCase();
-  }, [label]);
+  }, [id, label]);
 
   const iconEl = useMemo(() => {
     if (iconOnly && !icon) {
@@ -79,12 +90,13 @@ export const Tab: FC<TabProps & { iconOnly?: boolean; placement?: "left" | "bott
         data-disabled={isDisabled}
       >
         <div className="ax-tab__button--label">
-          {iconEl && <AxIcon icon={iconEl} />}
-          {!iconOnly && label && <span>{label}</span>}
+          {iconEl && <AxIcon icon={iconEl} rtlFlip={rtlFlip} />}
+          {!iconOnly && label && <AxEllipsis>{label}</AxEllipsis>}
         </div>
         {badgeEl}
         {!!onClose && (
           <AxIcon
+            aria-label="Close"
             className="ax-tab__button--close"
             icon={AppIcons.iconClose}
             onClick={(e) => {
@@ -149,6 +161,7 @@ export const AxTabPanel: ExtendedFC = ({
   prepend,
   append
 }) => {
+  const panelRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(activeTab);
 
   const pinned = useMemo(() => {
@@ -168,6 +181,11 @@ export const AxTabPanel: ExtendedFC = ({
       .filter((tab) => !tab.isDisabled)
       .reduce((map, tab) => ({ ...map, [tab.id]: tab }), {});
   }, [children]);
+
+  useLayoutEffect(() => {
+    const el = panelRef.current;
+    setTimeout(() => el && el.dispatchEvent(new Event("updatePopper", { bubbles: true })), 10);
+  }, [activeTab]);
 
   useEffect(() => {
     if (activeTab && activeTab in tabMap) {
@@ -216,7 +234,12 @@ export const AxTabPanel: ExtendedFC = ({
   }, [active, tabMap]);
 
   return (
-    <div className={`ax-tab__panel ${className ?? ""}`} data-align={align} data-simple={simpleTabs}>
+    <div
+      ref={panelRef}
+      className={`ax-tab__panel ${className ?? ""}`}
+      data-align={align}
+      data-simple={simpleTabs}
+    >
       <div className="ax-tab__bar" data-align={align}>
         {prepend && <div className="ax-tab__bar--prepend">{prepend}</div>}
         {pinned.length > 0 && (
@@ -247,7 +270,7 @@ export const AxTabPanel: ExtendedFC = ({
       </div>
       <AxSection>
         {isCurrentLoading && <AxLoader />}
-        {active ? tabMap[active].children : null}
+        {active && tabMap[active] ? tabMap[active].children : null}
       </AxSection>
     </div>
   );

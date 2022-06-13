@@ -65,13 +65,13 @@ const darkTheme = create({
 
 export const parameters = {
   layout: "centered",
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: {},
   backgrounds: { disable: true, grid: { disable: true } },
   docs: {
     components: {
       Title: (props: any) => (
         <div>
-          <div className="ax-display--5 ax-color--primary" {...props} />
+          <div className="ax-display--4 ax-color--primary" {...props} />
           <hr className="ax-margin--b" />
         </div>
       ),

@@ -3,10 +3,18 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isColor, isEmpty } from "@axux/utilities";
-import { cloneElement, forwardRef, isValidElement, MouseEventHandler, useEffect, useMemo, useState } from "react";
+import { isColor, isEmpty, isString } from "@axux/utilities";
+import {
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  MouseEventHandler,
+  useEffect,
+  useMemo,
+  useState
+} from "react";
 import { AxTooltip } from "../overlays/Tooltip";
-import { AllColors, ElementProps, IconType, RefProp, Size, VFC } from "../types";
+import { AllColors, ElementProps, IconType, RefProp, Size, SizeList, VFC } from "../types";
 import { AxIcon } from "./Icon";
 
 /** @internal */
@@ -44,14 +52,14 @@ export interface AvatarProps extends RefProp, ElementProps {
   noBgForImage?: boolean;
 
   infograph?: {
-    top?: IconType;
-    bottom?: IconType;
-    start?: IconType;
-    end?: IconType;
-    topStart?: IconType;
-    topEnd?: IconType;
-    bottomStart?: IconType;
-    bottomEnd?: IconType;
+    top?: IconType | JSX.Element;
+    bottom?: IconType | JSX.Element;
+    start?: IconType | JSX.Element;
+    end?: IconType | JSX.Element;
+    topStart?: IconType | JSX.Element;
+    topEnd?: IconType | JSX.Element;
+    bottomStart?: IconType | JSX.Element;
+    bottomEnd?: IconType | JSX.Element;
   };
 }
 
@@ -87,16 +95,19 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
     const [src, setSrc] = useState(image);
     useEffect(() => setSrc(image), [image]);
     const classes = useMemo(() => {
-      const cls = ["ax-avatar", `ax-avatar--${size}`, className];
-      if (!(!!src && noBgForImage) && bg) {
+      const cls = ["ax-avatar", className];
+      if (!(!!src && noBgForImage) && bg && !isColor(bg)) {
         cls.push(`ax-bg--${bg}`);
-        cls.push(color ? `ax-color--${color}` : `ax-color--contrast`);
-      } else if (color) {
+        cls.push(color && !isColor(color) ? `ax-color--${color}` : `ax-color--contrast`);
+      } else if (color && !isColor(color)) {
         cls.push(`ax-color--${color}`);
         cls.push("ax-bg--lightest");
       } else {
-        cls.push("ax-bg--medium");
-        cls.push("ax-color--base");
+        cls.push("ax-bg--light");
+        cls.push("ax-color--dark");
+      }
+      if (isString(size) && SizeList.includes(size ?? "")) {
+        cls.push(`ax-avatar--${size}`);
       }
       return cls.join(" ");
     }, [size, className, src, noBgForImage, bg, color]);
@@ -115,8 +126,15 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
         return <AxIcon icon={icon} />;
       } else {
         return (
-          <svg viewBox="0 0 54 24">
-            <text x="3" y="24">
+          <svg>
+            <text
+              x="50%"
+              y="50%"
+              dy=".075em"
+              dominantBaseline="middle"
+              textAnchor="middle"
+              style={{ fontSize: ".625em" }}
+            >
               {fallback}
             </text>
           </svg>
@@ -128,11 +146,14 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
       if (!(!!src && noBgForImage) && bg && isColor(bg)) {
         ret.backgroundColor = bg;
       }
+      if (!SizeList.includes(`${size}`)) {
+        ret.fontSize = size;
+      }
       if (color && isColor(color)) {
         ret.color = color;
       }
       return ret;
-    }, [bg, color, noBgForImage, src]);
+    }, [bg, color, noBgForImage, size, src]);
     return (
       <AxTooltip content={title} ref={ref} isDisabled={!title} usePortal>
         <div
@@ -147,10 +168,20 @@ export const AxAvatar: VFC<AvatarProps> = forwardRef<HTMLElement, AvatarProps>(
             Object.entries(infograph).map(([key, icon]) =>
               isValidElement(icon) && icon.type === AxIcon
                 ? cloneElement(icon as AnyObject, {
-                    className: `ax-avatar--${key} ${((icon.props as AnyObject) ?? {}).className}`,
+                    key,
+                    className: `ax-avatar--${key} ax-bg--base ${
+                      ((icon.props as AnyObject) ?? {}).className
+                    }`,
                     round: true
                   })
-                : icon && <AxIcon key={key} className={`ax-avatar--${key}`} icon={icon} round />
+                : icon && (
+                    <AxIcon
+                      key={key}
+                      className={`ax-avatar--${key} ax-bg--base`}
+                      icon={icon}
+                      round
+                    />
+                  )
             )}
         </div>
       </AxTooltip>

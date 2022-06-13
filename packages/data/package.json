@@ -1,6 +1,6 @@
 {
   "name": "@axux/data",
-  "version": "0.0.24",
+  "version": "0.2.15",
   "description": "AxUx: Data package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -26,29 +26,26 @@
     "watch": "yarn build:lib -w"
   },
   "dependencies": {
-    "@axux/core": "^0.0.24",
-    "@axux/date": "^0.0.24",
-    "@axux/form": "^0.0.24",
-    "@axux/utilities": "^0.0.24",
-    "react-monaco-editor": "^0.44.0",
-    "react-virtualized": "^9.22.3",
+    "@axux/core": "^0.2.15",
+    "@axux/date": "^0.2.15",
+    "@axux/form": "^0.2.15",
+    "@axux/utilities": "^0.2.7",
+    "react-monaco-editor": "^0.47.0",
     "resize-observer-polyfill": "^1.5.1"
   },
   "peerDependencies": {
-    "i18next": "^20.4.0",
-    "react": "next",
-    "react-dom": "next",
-    "react-i18next": "^11.11.4"
+    "i18next": "^20.6.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-i18next": "^11.16.2"
   },
   "devDependencies": {
-    "@types/react": "^17.0.19",
-    "@types/react-dom": "^17.0.9",
-    "@types/react-i18next": "^8.1.0",
-    "@types/react-virtualized": "^9.21.14"
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
+    "@types/react-i18next": "^8.1.0"
   },
   "engines": {
-    "node": ">=10.22.0 <=16.0.0",
+    "node": ">=10.22.0",
     "npm": ">=7.0.0"
-  },
-  "gitHead": "1be08e5968a0e4583cb12a6063373e54fc7b57ea"
+  }
 }

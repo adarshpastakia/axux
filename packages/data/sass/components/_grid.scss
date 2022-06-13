@@ -10,10 +10,13 @@
     grid-area: content;
     overflow: auto;
     padding: 1em;
+    --cell-width: 1fr;
   }
 
   &__item {
-    min-height: 2em;
+    contain-intrinsic-size: 2rem;
+    content-visibility: hidden;
+    min-height: 2rem;
   }
 
   &__wrapper {
@@ -23,8 +26,16 @@
     grid-template-rows: 1fr;
     justify-content: center;
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1400px;
     min-height: 100%;
+
+    > div:first-child {
+      align-content: start;
+      display: grid;
+      grid-gap: 1rem;
+      grid-template-columns: repeat(2, var(--cell-width));
+      justify-content: center;
+    }
 
     > div:last-child {
       display: flex;
@@ -47,7 +58,7 @@
 
     #{$prefix}-loader__text {
       margin: 0 0.25em;
-      margin-inline-start: 2.75em;
+      margin-inline-end: 2.75em;
     }
   }
 }

@@ -7,7 +7,7 @@ import { FC } from "react";
 
 export const CodeLine: FC<{ code: string }> = ({ children, code }) => (
   <div className="ax-container ax-margin--b--lg">
-    <div className="ax-flex ax-row--middle">
+    <div className="ax-row ax-row--middle">
       <div className="ax-col--fill">{children}</div>
       {code && (
         <small>

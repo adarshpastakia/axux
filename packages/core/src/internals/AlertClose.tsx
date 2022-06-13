@@ -14,6 +14,7 @@ export const AlertClose: FC<{ onClick: EmptyCallback }> = ({ onClick }) => (
     className="ax-alert--close"
     icon={AppIcons.iconClose}
     type="link"
+    aria-label="Close"
     onClick={onClick}
   />
 );

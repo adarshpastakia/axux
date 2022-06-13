@@ -42,7 +42,7 @@ const Template: Story<GridProps<Country>> = (props) => {
         name: "emoji",
         label: "Flag",
         align: "center",
-        icon: <span>{Countries.emoji("")}</span>,
+        icon: Countries.emoji(""),
         tooltip: true,
         width: "3rem"
       },
@@ -113,7 +113,7 @@ const Template: Story<GridProps<Country>> = (props) => {
   return (
     <AxViewport>
       <AxPage>
-        <AxSection.Head className="ax-flex ax-row--middle">
+        <AxSection.Head className="ax-row ax-row--middle">
           <AxFlexBox.Col flex="fill">
             <AxRecordCounter start={pageStart} end={pageEnd} total={totalCount} />
           </AxFlexBox.Col>

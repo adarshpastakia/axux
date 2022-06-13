@@ -6,6 +6,7 @@
 import { isEmpty, isTrue } from "@axux/utilities";
 import { FC, forwardRef, Fragment, MouseEventHandler, useMemo } from "react";
 import { NavLink } from "react-router-dom";
+import { useIcon } from "../hooks/useIcon";
 import { AxIcon } from "../icons/Icon";
 import { BadgeType, useBadge } from "../internals/useBadge";
 import { usePropToggle } from "../internals/usePropToggle";
@@ -15,16 +16,14 @@ import { AnchorProps, Color, ElementProps, IconProps, RefProp } from "../types";
 import { AppIcons } from "../types/appIcons";
 import { AxText } from "../typography/Text";
 
-export type MenuItemType = string | MenuItemProps;
-
 /** @internal */
 export interface MenuItemProps
   extends RefProp<HTMLAnchorElement>,
-    IconProps,
+    IconProps<JSX.Element>,
     ElementProps,
     AnchorProps {
   id?: string;
-  label: string;
+  label: string | JSX.Element;
   info?: string;
   mark?: string;
   color?: Color;
@@ -56,7 +55,8 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
       onClick,
       appendLabel,
       badge,
-      icon = "blank",
+      icon,
+      rtlFlip,
       info,
       isFloating,
       isCollapsed,
@@ -72,6 +72,7 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
     ref
   ) => {
     const badgeEl = useBadge(badge);
+    const iconEl = useIcon(icon, "", rtlFlip);
 
     const elProps = useMemo(
       () => ({
@@ -80,7 +81,7 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
         "data-color": color ?? "",
         "data-panel": panelId,
         "data-floating": isFloating,
-        "data-active": isActive || (aria as KeyValue)["data-active"],
+        "data-active": isTrue(isActive || (aria as KeyValue)["data-active"]),
         "data-disabled": isDisabled,
         "data-clickable": isClickable,
         onClick: isCollapsable && !menuCollapsed ? toggleCollapse : onClick,
@@ -106,7 +107,7 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
     const innerEl = useMemo(
       () => (
         <Fragment>
-          <AxIcon icon={icon} />
+          {iconEl ?? <span />}
           <div className="ax-menu__item__label">
             <AxText.Marked mark={mark}>{label}</AxText.Marked>
             {info && <span className="ax-menu__item__subtext">{info}</span>}
@@ -116,15 +117,18 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
           {showCaret && (
             <div className="ax-menu__item__caret">
               <AxIcon
+                className="flippable"
                 icon={
-                  isCollapsable && !isCollapsed ? AppIcons.iconCaretDown : AppIcons.iconCaretRight
+                  (isCollapsable && !isCollapsed) || showCaret === "bottom"
+                    ? AppIcons.iconCaretDown
+                    : AppIcons.iconCaretRight
                 }
               />
             </div>
           )}
         </Fragment>
       ),
-      [appendLabel, badgeEl, icon, info, isCollapsable, isCollapsed, label, mark, showCaret]
+      [appendLabel, badgeEl, iconEl, info, isCollapsable, isCollapsed, label, mark, showCaret]
     );
 
     return (
@@ -134,7 +138,7 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
             {innerEl}
           </a>
         ) : (
-          <NavLink to={to} {...elProps}>
+          <NavLink end to={to} {...elProps}>
             {innerEl}
           </NavLink>
         )}
@@ -145,11 +149,22 @@ const MenuItemInner: FC<MenuItemProps & KeyValue> = forwardRef<
 MenuItemInner.displayName = "AxMenu.Item.Inner";
 
 /**
- * Menu item
+ * Menus item
  * @internal
  */
 export const AxMenuItem: FC<MenuItemProps> = forwardRef<HTMLAnchorElement, MenuItemProps>(
-  ({ panelId, isFloating, defaultCollapsed = true, isCollapsable, children, ...props }, ref) => {
+  (
+    {
+      panelId,
+      isFloating,
+      defaultCollapsed = true,
+      placement = "end",
+      isCollapsable,
+      children,
+      ...props
+    }: AnyObject,
+    ref
+  ) => {
     const [collapsed, toggleCollapse] = usePropToggle(defaultCollapsed);
     const menuCollapsed = isTrue((props as AnyObject)["data-collapsed"]);
     const floating = isTrue(isFloating || menuCollapsed) && !!children;
@@ -165,11 +180,11 @@ export const AxMenuItem: FC<MenuItemProps> = forwardRef<HTMLAnchorElement, MenuI
               closeOnClick: true,
               usePortal: true,
               updateAnchor: true,
-              placement: "right-start",
+              placement: placement === "bottom" ? "bottom-start" : "right-start",
               resize: false
             }
           : {},
-      [floating]
+      [floating, placement]
     );
 
     return (
@@ -177,7 +192,7 @@ export const AxMenuItem: FC<MenuItemProps> = forwardRef<HTMLAnchorElement, MenuI
         <MenuItemInner
           ref={ref}
           panelId={panelId}
-          showCaret={showCaret}
+          showCaret={showCaret && placement}
           isFloating={floating}
           isCollapsed={collapsed}
           isCollapsable={isCollapsable}
@@ -186,7 +201,7 @@ export const AxMenuItem: FC<MenuItemProps> = forwardRef<HTMLAnchorElement, MenuI
           toggleCollapse={toggleCollapse}
           {...props}
         />
-        {(!collapsed || !isCollapsable || floating) && <div className="ax-menu">{children}</div>}
+        {((isCollapsable && !collapsed) || floating) && <div className="ax-menu">{children}</div>}
       </Wrapper>
     );
   }

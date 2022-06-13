@@ -19,6 +19,12 @@
   @import url($local-font-serif);
 }
 
+
+html:root {
+  --gutter: #{0px};
+  font-size: $base-font-size;
+}
+
 #{$prefix}-root {
   box-sizing: border-box;
 
@@ -31,11 +37,6 @@
 
   *:focus-visible {
     outline: none;
-  }
-
-  &:root {
-    --gutter: #{0px};
-    font-size: $base-font-size;
   }
 
   cursor: default;

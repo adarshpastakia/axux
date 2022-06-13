@@ -53,4 +53,4 @@ AxViewport.displayName = "AxViewport";
 AxViewport.Header.displayName = "AxViewport.Header";
 AxViewport.Footer.displayName = "AxViewport.Footer";
 AxViewport.Banner.displayName = "AxViewport.Banner";
-AxViewport.Menu.displayName = "AxViewport.Menu";
+AxViewport.Menu.displayName = "AxViewport.Menus";

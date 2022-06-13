@@ -70,6 +70,7 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
   const {
     isOpen,
     setOpen,
+    listRef,
     inputRef,
     inputLabel,
     innerOptions,
@@ -107,7 +108,6 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
       }}
     >
       <AxFieldWrapper
-        ref={refPopperEl}
         label={label}
         hint={hint}
         appendLabel={appendLabel}
@@ -124,7 +124,7 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
         error={error}
       >
         {children}
-        <div className="ax-select__tagContainer">
+        <div className="ax-select__tagContainer" ref={refPopperEl}>
           {inputLabel.map((o: KeyValue, index: number) => (
             <AxTag
               key={o.value}
@@ -160,12 +160,12 @@ const TagField: FC<SelectCommonProps & WrapperProps & FieldStateProps & InnerPro
               tabIndex={-1}
               icon={AppIcons.iconCaretDown}
               isDisabled={isDisabled || isReadonly}
-              onClick={() => setOpen(isEditable)}
+              onClick={() => [inputRef.current?.focus(), setOpen(true)]}
             />
           </div>
         )}
       </AxFieldWrapper>
-      <div onClickCapture={handleClick} className="ax-select__popover">
+      <div onClickCapture={handleClick} className="ax-select__popover" ref={listRef}>
         {!hideDropdown &&
           innerOptions.map((opt, index) => (
             <AxSelectOption

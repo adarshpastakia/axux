@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isNumber, isRtl } from "@axux/utilities";
+import { isRtl } from "@axux/utilities";
 import {
   Children,
   cloneElement,
@@ -25,7 +25,7 @@ import { ElementProps, IconProps, RefProp, Size } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
-export interface ModalProps extends ElementProps, IconProps, RefProp<HTMLDivElement> {
+export interface ModalProps extends ElementProps, IconProps<JSX.Element>, RefProp<HTMLDivElement> {
   /**
    * Panel id
    */
@@ -55,7 +55,19 @@ interface ExtendedFC extends FC<ModalProps> {
 
 export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
   (
-    { children, className, icon, title, isLoading, onClose, onNavigate, size, height, width },
+    {
+      children,
+      className,
+      icon,
+      rtlFlip,
+      title,
+      isLoading,
+      onClose,
+      onNavigate,
+      size,
+      height,
+      width
+    },
     ref
   ) => {
     const maskRef = useRef<HTMLDivElement>(null);
@@ -79,12 +91,12 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
         });
       } else {
         return (
-          <AxHeader title={title} icon={icon} size="lg">
+          <AxHeader title={title} icon={icon} rtlFlip={rtlFlip} size="lg">
             {actions}
           </AxHeader>
         );
       }
-    }, [children, icon, onClose, title]);
+    }, [children, icon, rtlFlip, onClose, title]);
 
     const childs = useMemo(
       () =>
@@ -96,8 +108,8 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
 
     const styles = useMemo(() => {
       return {
-        height: isNumber(height) ? `${height}rem` : height,
-        width: isNumber(width) ? `${width}rem` : width
+        height,
+        width
       };
     }, [height, width]);
 
@@ -152,6 +164,7 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
                 <AxButton
                   type="link"
                   tabIndex={-1}
+                  className="flippable"
                   icon={AppIcons.iconCaretLeft}
                   onClick={() => onNavigate("prev")}
                 />
@@ -159,9 +172,10 @@ export const AxModal: ExtendedFC = forwardRef<HTMLDivElement, ModalProps>(
               <div className="ax-modal__body">{childs}</div>
               {onNavigate && (
                 <AxButton
-                  data-end="true"
-                  tabIndex={-1}
                   type="link"
+                  tabIndex={-1}
+                  data-end="true"
+                  className="flippable"
                   icon={AppIcons.iconCaretRight}
                   onClick={() => onNavigate("next")}
                 />

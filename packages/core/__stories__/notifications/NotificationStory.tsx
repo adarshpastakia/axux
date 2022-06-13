@@ -38,7 +38,18 @@ ToastStory.args = {
 const AlertTemplate: Story<AlertProps> = (props) => {
   const { alert } = useAxNotificationService();
 
-  return <AxButton onClick={() => alert(props)}>Show Alert</AxButton>;
+  return (
+    <AxButton
+      onClick={() =>
+        alert({
+          ...props,
+          extraActions: [<AxButton key="next">Next</AxButton>, <AxButton key="prev">Prev</AxButton>]
+        })
+      }
+    >
+      Show Alert
+    </AxButton>
+  );
 };
 export const AlertStory = AlertTemplate.bind({});
 AlertStory.args = {

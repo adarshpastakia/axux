@@ -26,7 +26,8 @@ export namespace Format {
     if (isNil(number)) {
       return "";
     }
-    return numeral(number).format(format);
+    const prefix = `${number}`.startsWith("+") ? "+" : "";
+    return prefix + numeral(number).format(format);
   };
 
   export const phone = (value?: string) => {

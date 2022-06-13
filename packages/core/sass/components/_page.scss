@@ -7,10 +7,14 @@
   &-page {
     display: grid;
     grid-area: page;
-    grid-template-areas: "title" "loader" "content";
-    grid-template-rows: auto auto 1fr;
+    grid-template-areas: "title" "content";
+    grid-template-rows: auto 1fr;
     overflow: hidden;
     position: relative;
+
+    &#{$prefix}-paper {
+      margin: 0.375em;
+    }
 
     &__header {
       align-items: center;
@@ -20,10 +24,18 @@
       grid-template-areas: "icon title actions";
       grid-template-columns: auto 1fr auto;
       padding: 0 $base-spacing * 0.5;
+
+      &:not(:empty) ~ #{$prefix}-loader--progress {
+        top: 1.5em;
+      }
     }
 
     &__icon {
       grid-area: icon;
+    }
+
+    & > #{$prefix}-loader--progress {
+      bottom: unset;
     }
 
     &__title {
@@ -48,14 +60,6 @@
     &__body {
       @include section();
     }
-
-    & > #{$prefix}-loader--progress {
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-      z-index: 9;
-    }
   }
 
   &-content {
@@ -73,7 +77,7 @@
       text-align: center;
 
       > #{$prefix}-icon {
-        font-size: 2.5em;
+        font-size: 5em;
       }
 
       > h3 {

@@ -6,7 +6,7 @@
 import { useMemo } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
-import { AllColors, IconProps, VFC } from "../types";
+import { AllColors, BooleanCallback, IconProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
@@ -31,6 +31,10 @@ export interface MessageProps extends IconProps {
    * Full width message
    */
   block?: boolean;
+  /**
+   * Extra action button
+   */
+  extraActions?: JSX.Element;
 }
 
 /**
@@ -41,16 +45,19 @@ export interface MessageProps extends IconProps {
  * @param icon
  * @param color
  * @param block
+ * @param extraActions
  * @param onClose
  * @constructor
  */
-export const AxMessage: VFC<MessageProps & { [key: string]: AnyObject }> = ({
+export const AxMessage: VFC<MessageProps & { onClose?: BooleanCallback }> = ({
   title,
   text,
   dismissLabel,
   icon,
+  rtlFlip,
   color = "invert",
   block,
+  extraActions,
   onClose
 }) => {
   const classes = useMemo(() => {
@@ -65,15 +72,16 @@ export const AxMessage: VFC<MessageProps & { [key: string]: AnyObject }> = ({
   }, [block, color]);
   return (
     <div className={classes} data-color={color}>
-      {icon && <AxIcon icon={icon} size="sm" />}
+      {icon && <AxIcon icon={icon} size="md" rtlFlip={rtlFlip} />}
       {title && <b>{title}</b>}
       <span>{text}</span>
+      <div onClickCapture={() => onClose?.(false)}>{extraActions}</div>
       <AxButton
         icon={!dismissLabel ? AppIcons.iconClose : undefined}
         size="sm"
         type="link"
         label={dismissLabel}
-        onClick={onClose}
+        onClick={() => onClose?.(true)}
       />
     </div>
   );

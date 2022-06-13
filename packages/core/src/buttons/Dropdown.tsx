@@ -7,14 +7,12 @@ import { FC, useMemo } from "react";
 import { AxPopper } from "../internals/Popper";
 import { PopoverProps } from "../overlays/Popover";
 import { AxPanelStack } from "../panels/PanelStack";
-import { ElementProps } from "../types";
 import { AxButton, ButtonProps } from "./Button";
 
 /** @internal */
 export interface DropdownProps
   extends Omit<ButtonProps, "value" | "href" | "target" | "download">,
-    Omit<PopoverProps, "resize" | "triggerSelector">,
-    ElementProps {
+    Omit<PopoverProps, "resize" | "triggerSelector"> {
   //
 }
 
@@ -45,7 +43,7 @@ export const AxDropdown: FC<DropdownProps> = ({ className, children, ...props })
   }, [props]);
 
   return (
-    <AxPopper {...elProps.popoverProps} closeOnClick resize trigger="click">
+    <AxPopper {...elProps.popoverProps} closeOnClick updateAnchor resize trigger="click">
       <AxButton {...elProps.buttonProps} className="ax-dropdown" />
       <AxPanelStack className={className}>{children}</AxPanelStack>
     </AxPopper>

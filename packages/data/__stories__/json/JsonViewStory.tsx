@@ -25,6 +25,7 @@ const Template: Story<JsonViewProps> = (props) => {
                 _score_: 75.69
               },
               number: 99.18,
+              integer: 123456789,
               string: LIPSUM.line,
               date: "2020-03-04T12:48:00.000",
               relative: "$year|$now",

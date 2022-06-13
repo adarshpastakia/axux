@@ -3,58 +3,99 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { AxAvatar } from "@axux/core";
+import { AxAvatar, AxTextLoader } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { CSSProperties, FC, isValidElement, memo, useEffect, useMemo, useState } from "react";
+import { FC, isValidElement, useLayoutEffect, useMemo, useRef, useState } from "react";
 
-export interface TimelineEntryProps {
-  noline?: boolean;
-  reverse?: boolean;
+interface EntryProps {
+  index: number;
   avatar?: string | JSX.Element;
-  index?: number;
-  style?: CSSProperties;
-  isScrolling?: boolean;
-  measure: () => void;
+  avatarBg?: string;
+  avatarColor?: string;
+  reverse?: boolean;
 }
 
-export const TimelineEntry: FC<TimelineEntryProps> = memo(
-  ({ children, isScrolling, measure, avatar, index, style, noline, reverse }) => {
-    const [eventRef, setEventRef] = useState<HTMLElement | null>(null);
-    const entryIcon = useMemo(
-      () =>
-        isValidElement(avatar) ? (
-          avatar
-        ) : (
-          <AxAvatar bg="lightest" color="medium" title="" icon={avatar ?? AppIcons.iconFace} />
-        ),
-      [avatar]
-    );
+export const TimelineEntry: FC<EntryProps> = ({
+  avatar,
+  avatarBg,
+  avatarColor,
+  reverse,
+  children,
+  index
+}) => {
+  const eventRef = useRef<HTMLElement>(null);
+  const entryIcon = useMemo(
+    () =>
+      isValidElement(avatar) ? (
+        avatar
+      ) : (
+        <AxAvatar
+          bg={avatarBg ?? "lightest"}
+          color={avatarColor ?? "medium"}
+          title=""
+          icon={avatar ?? AppIcons.iconFace}
+        />
+      ),
+    [avatar, avatarBg, avatarColor]
+  );
 
-    useEffect(() => {
-      if (ResizeObserver && !isScrolling) {
-        if (eventRef) {
-          const el = eventRef;
-          const ob = new ResizeObserver(() => {
-            measure && measure();
-          });
-          ob.observe(el);
-          return () => ob.disconnect();
-        }
+  const [visible, setVisible] = useState(false);
+  useLayoutEffect(() => {
+    if (eventRef.current) {
+      const el: AnyObject = eventRef.current;
+      let timer: AnyObject;
+      let obResize: ResizeObserver;
+      let obIntersection: IntersectionObserver;
+      if (ResizeObserver) {
+        obResize = new ResizeObserver(() => {
+          const { offsetHeight: height } = el;
+          try {
+            (el as AnyObject).attributeStyleMap.set("contain-intrinsic-size", height + "px");
+          } catch (e) {
+            el.style.minHeight = height + "px";
+          }
+        });
+        obResize.observe(el);
       }
-    }, [eventRef, isScrolling, measure, index]);
+      if (IntersectionObserver) {
+        const scrollerRef = el.closest(".ax-timeline__panel") as HTMLElement;
+        obIntersection = new IntersectionObserver(
+          (entries) => {
+            const visible = entries.pop()?.isIntersecting;
+            clearTimeout(timer);
+            setVisible(false);
+            try {
+              el.attributeStyleMap.set("content-visibility", visible ? "visible" : "hidden");
+            } catch (e) {
+              el.style.visibility = visible ? "visible" : "hidden";
+            }
+            timer = setTimeout(() => setVisible(!!visible), 200);
+          },
+          {
+            threshold: 0.25,
+            rootMargin: `${scrollerRef.offsetHeight * 1.5}px 0px ${
+              scrollerRef.offsetHeight * 1.5
+            }px 0px`,
+            root: scrollerRef
+          }
+        );
+        obIntersection.observe(el);
+      }
+      return () => {
+        clearTimeout(timer);
+        obResize?.disconnect();
+        obIntersection?.disconnect();
+      };
+    }
+  }, [index]);
 
-    return (
-      <div
-        className={`ax-timeline__entry`}
-        data-reverse={reverse}
-        data-noline={noline}
-        style={style}
-      >
-        <div className="ax-timeline__entry--icon">{entryIcon}</div>
-        <section ref={setEventRef} className="ax-timeline__entry--body">
-          {children}
-        </section>
-      </div>
-    );
-  }
-);
+  return (
+    <div className="ax-timeline__entry" data-reverse={reverse} data-index={index}>
+      <div className="ax-timeline__entry--icon">{entryIcon}</div>
+      <section ref={eventRef} className="ax-timeline__entry--body">
+        {visible && children}
+        {!visible && <AxTextLoader />}
+      </section>
+    </div>
+  );
+};

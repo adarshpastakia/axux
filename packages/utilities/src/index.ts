@@ -5,7 +5,8 @@
 
 /* istanbul ignore file */
 
-export { getLogger } from "./logger";
+export { useLogger } from "./useLogger";
+export { useEffectDebugger, useLayoutEffectDebugger } from "./useEffectDebugger";
 export * from "./_ascii";
 export * from "./_tokenize";
 export * from "./_interpolate";

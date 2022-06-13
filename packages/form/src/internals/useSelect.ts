@@ -32,6 +32,7 @@ export const useSelect = <T = KeyValue>(
     autoFocus?: boolean;
   }
 ) => {
+  const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const {
@@ -269,8 +270,30 @@ export const useSelect = <T = KeyValue>(
         if (multiple && !!target.value) {
           allowCustom && createOption(target.value);
         } else {
+          const opt = listRef.current?.querySelector('[data-hilight="true"]') as HTMLElement;
+          if (opt) {
+            opt.click();
+            setOpen(false);
+            return e.preventDefault();
+          }
           onEnterPressed && onEnterPressed();
         }
+      } else if (code === "ArrowDown" || code === "ArrowUp") {
+        setOpen(true);
+        const opt = (listRef.current?.querySelector('[data-hilight="true"]') ??
+          listRef.current?.querySelector('[data-selected="true"]')) as HTMLElement;
+        if (opt) {
+          opt.dataset.hilight = "false";
+        }
+        let el = null;
+        if (code === "ArrowDown") {
+          el = (opt?.nextElementSibling ?? listRef.current?.firstElementChild) as HTMLElement;
+        }
+        if (code === "ArrowUp") {
+          el = (opt?.previousElementSibling ?? listRef.current?.lastElementChild) as HTMLElement;
+        }
+        el && (el.dataset.hilight = "true") && el.scrollIntoView({ block: "nearest" });
+        e.preventDefault();
       }
     },
     [multiple, value, onChange, onEnterPressed, allowCustom, createOption]
@@ -290,6 +313,7 @@ export const useSelect = <T = KeyValue>(
   return {
     isOpen,
     setOpen,
+    listRef,
     inputRef,
     inputLabel,
     isQuerying,

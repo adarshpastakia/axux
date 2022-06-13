@@ -6,20 +6,19 @@
 #{$prefix}-popper {
   $base: #{$prefix}-popper;
 
+  $minAlpha: if($ax-theme == dark, 0.3, 0.05);
+  $maxAlpha: if($ax-theme == dark, 0.6, 0.25);
+
   &[data-popper-placement^="top"] #{$base}--body {
-    box-shadow: 0 0 0 1px rgba($color-shadow, 0.3), 0 -2px 4px rgba($color-shadow, 0.6),
-      0 -8px 24px rgba($color-shadow, 0.6);
+    box-shadow: 0 0 0 1px rgba($color-shadow, $minAlpha), 0 -2px 4px rgba($color-shadow, $maxAlpha);
   }
   &[data-popper-placement^="bottom"] #{$base}--body {
-    box-shadow: 0 0 0 1px rgba($color-shadow, 0.3), 0 2px 4px rgba($color-shadow, 0.6),
-      0 8px 24px rgba($color-shadow, 0.6);
+    box-shadow: 0 0 0 1px rgba($color-shadow, $minAlpha), 0 2px 4px rgba($color-shadow, $maxAlpha);
   }
   &[data-popper-placement^="left"] #{$base}--body {
-    box-shadow: 0 0 0 1px rgba($color-shadow, 0.3), -2px 0 4px rgba($color-shadow, 0.6),
-      -8px 0 24px rgba($color-shadow, 0.6);
+    box-shadow: 0 0 0 1px rgba($color-shadow, $minAlpha), -2px 0 4px rgba($color-shadow, $maxAlpha);
   }
   &[data-popper-placement^="right"] #{$base}--body {
-    box-shadow: 0 0 0 1px rgba($color-shadow, 0.3), 2px 0 4px rgba($color-shadow, 0.6),
-      8px 0 24px rgba($color-shadow, 0.6);
+    box-shadow: 0 0 0 1px rgba($color-shadow, $minAlpha), 2px 0 4px rgba($color-shadow, $maxAlpha);
   }
 }

@@ -6,6 +6,7 @@
 #{$prefix}-code {
   &__editor {
     .react-monaco-editor-container {
+      direction: ltr;
       grid-area: content;
     }
 

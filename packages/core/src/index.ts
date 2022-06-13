@@ -36,6 +36,7 @@ export { AxText } from "./typography/Text";
 export { AxLink } from "./typography/Link";
 export { AxCallout } from "./panels/Callout";
 export { AxHeading } from "./typography/Heading";
+export { AxEllipsis } from "./typography/Ellipsis";
 
 // Layout
 export { AxBox } from "./layout/Box";
@@ -63,7 +64,6 @@ export { AxCollapsable } from "./panels/Collapsable";
 export { AxButton } from "./buttons/Button";
 export { AxTag } from "./buttons/Tag";
 export { AxMenu } from "./menu/Menu";
-export type { MenuItemType } from "./menu/MenuItem";
 
 // Overlays
 export { AxPopover } from "./overlays/Popover";

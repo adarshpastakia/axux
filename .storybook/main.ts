@@ -18,6 +18,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-jest",
+    '@storybook/addon-a11y',
     "./addon-theme/register.tsx"
   ],
   // @ts-ignore
@@ -34,7 +35,7 @@ module.exports = {
     config.plugins.push(
       new MonacoWebpackPlugin({
         // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
-        languages: ["json", "javascript", "css", "html", "text", "markdown", "typescript"]
+        languages: ["json", "text", "markdown"]
       })
     );
 

@@ -9,12 +9,13 @@ import {
   Title
 } from "@storybook/addon-docs";
 import { AxGridView } from "../../src";
-import { mdiComment, mdiStar } from "@mdi/js";
-import { records } from "./records";
-import { LIPSUM } from "../../../../storybook/components/Lipsum";
-import { AxButton, AxContent, AxPage, AxPanel, AxText, AxViewport } from "@axux/core";
+import { GridStory } from "./GridStory";
 
-<Meta title="@data/Grid" component={AxGridView} parameters={{ jest: ["Grid.test.tsx"] }} />
+<Meta
+  title="@data/Grid"
+  component={AxGridView}
+  parameters={{ jest: ["Grid.test.tsx"], a11y: { disable: true } }}
+/>
 
 <Anchor storyId="data-grid--grid">
   <Title>Grid</Title>
@@ -24,43 +25,10 @@ import { AxButton, AxContent, AxPage, AxPanel, AxText, AxViewport } from "@axux/
 
 <Canvas>
   <Story name="Grid" parameters={{ layout: "none" }} height="30rem">
-    <AxViewport>
-      <AxPage>
-        <AxGridView list={records} sortOrder="asc">
-          {(props) => (
-            <AxGridView.Item {...props}>
-              <div className="ax-flex">
-                <AxPanel title={`Grid cell ${props.index}`} className="ax-col ax-col--fill" paper>
-                  <AxContent>
-                    <div className="ax-row ax-gutter">
-                      <img
-                        alt="img"
-                        className="ax-col ax-col--auto"
-                        src="https://picsum.photos/id/128/172"
-                        width={128}
-                        height={172}
-                      />
-                      <div className="ax-col ax-col--fill">
-                        <AxText clip={4}>{LIPSUM.line}</AxText>
-                      </div>
-                    </div>
-                  </AxContent>
-                </AxPanel>
-                <div className="ax-col ax-col--auto ax-padding--x--xs">
-                  <AxButton.Group vertical>
-                    <AxButton icon={mdiStar} />
-                    <AxButton icon={mdiComment} />
-                  </AxButton.Group>
-                </div>
-              </div>
-            </AxGridView.Item>
-          )}
-        </AxGridView>
-      </AxPage>
-    </AxViewport>
+    {GridStory}
   </Story>
 </Canvas>
 
 <Heading>Props</Heading>
 
-<ArgsTable of={AxGridView} sort="requiredFirst" />
+<ArgsTable sort="requiredFirst" components={{ AxGridView, "AxGridView.Item": AxGridView.Item }} />

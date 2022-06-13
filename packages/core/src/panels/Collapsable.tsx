@@ -27,6 +27,7 @@ export const AxCollapsable: FC<CollapsableProps> = ({
   return (
     <AxBox className={`ax-collapsable ${className}`}>
       <div
+        aria-label="Toggle collapse"
         className="ax-collapsable__head ax-row ax-row--middle ax-gutter--sm ax-clickable"
         onClick={toggleCollapse}
       >

@@ -3,7 +3,16 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { Children, cloneElement, FC, MouseEvent, useCallback, useMemo, useRef, useState } from "react";
+import {
+  Children,
+  cloneElement,
+  FC,
+  MouseEvent,
+  useCallback,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import { ElementProps } from "../types";
 
 /**
@@ -27,24 +36,29 @@ export const AxPanelStack: FC<ElementProps> = ({ children, className, ...aria })
     fireUpdate();
   }, [fireUpdate, history]);
 
+  const panels = useMemo(() => Children.toArray(children), [children]);
+  const currentPanel = useMemo<AnyObject>(
+    () => panels.find((p: AnyObject) => p.props.panelId === history[0]) ?? panels[0],
+    [history, panels]
+  );
+
   const checkMenuClick = useCallback(
     (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.dataset.panel) {
-        setHistory([target.dataset.panel, ...history]);
+        if (target.dataset.panel === "back") {
+          goBack();
+        }
+        if (panels.find((p: AnyObject) => p.props.panelId === target.dataset.panel)) {
+          setHistory([target.dataset.panel, ...history]);
+        }
         fireUpdate();
         e.stopPropagation();
         e.preventDefault();
         return false;
       }
     },
-    [fireUpdate, history]
-  );
-
-  const panels = useMemo(() => Children.toArray(children), [children]);
-  const currentPanel = useMemo<AnyObject>(
-    () => panels.find((p: AnyObject) => p.props.panelId === history[0]) ?? panels[0],
-    [history, panels]
+    [fireUpdate, goBack, history, panels]
   );
 
   return (

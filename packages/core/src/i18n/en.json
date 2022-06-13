@@ -1,7 +1,16 @@
 {
   "locale": {
     "en": "English",
-    "ar": "عربى"
+    "ar": "عربى",
+    "de": "Deutsche",
+    "es": "Español",
+    "fr": "Français",
+    "it": "Italiano",
+    "jp": "日本語",
+    "ko": "한국어",
+    "pt": "Português",
+    "ru": "Pусский",
+    "zh": "中国人"
   },
   "options": {
     "theme": "Switch Theme",

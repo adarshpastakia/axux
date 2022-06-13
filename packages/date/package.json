@@ -1,6 +1,6 @@
 {
   "name": "@axux/date",
-  "version": "0.0.24",
+  "version": "0.2.15",
   "description": "AxUx: Date package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -26,25 +26,24 @@
     "watch": "yarn build:lib -w"
   },
   "dependencies": {
-    "@axux/core": "^0.0.24",
-    "@axux/form": "^0.0.24",
-    "@axux/utilities": "^0.0.24",
-    "date-fns": "^2.23.0"
+    "@axux/core": "^0.2.15",
+    "@axux/form": "^0.2.15",
+    "@axux/utilities": "^0.2.7",
+    "date-fns": "^2.28.0"
   },
   "peerDependencies": {
-    "i18next": "^20.4.0",
-    "react": "next",
-    "react-dom": "next",
-    "react-i18next": "^11.11.4"
+    "i18next": "^20.6.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-i18next": "^11.16.2"
   },
   "devDependencies": {
-    "@types/react": "^17.0.19",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
     "@types/react-i18next": "^8.1.0"
   },
   "engines": {
-    "node": ">=10.22.0 <=16.0.0",
+    "node": ">=10.22.0",
     "npm": ">=7.0.0"
-  },
-  "gitHead": "3d6263afa73bea21d7c9b9a765fe7b870051f59f"
+  }
 }

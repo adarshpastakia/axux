@@ -60,6 +60,7 @@
     border-radius: $base-border-radius;
     display: inline-block;
     font-family: $font-family-mono;
+    font-size: inherit;
     line-height: 1.25;
     padding: 0 0.25em;
     @include text-select();
@@ -82,9 +83,11 @@
   }
 
   abbr {
+    border-bottom: 1px dashed currentColor;
     cursor: help;
     display: inline-block;
-    text-decoration: underline dotted;
+    line-height: 1.25;
+    text-decoration: none;
   }
 
   ul,

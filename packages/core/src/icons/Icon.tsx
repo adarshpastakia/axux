@@ -4,7 +4,8 @@
 // @license   : MIT
 
 import { isColor, isNumber, isString, isSvgPath, isTrue } from "@axux/utilities";
-import { forwardRef, isValidElement, MouseEventHandler, useMemo } from "react";
+import { forwardRef, MouseEventHandler, useMemo } from "react";
+import { BadgeType, useBadge } from "../internals/useBadge";
 import { AllColors, ElementProps, RefProp, Size, SizeList, VFC } from "../types";
 
 /** @internal */
@@ -13,6 +14,10 @@ export interface IconProps extends RefProp, ElementProps {
    * SVG path or image url or icon font class
    */
   icon: string | JSX.Element;
+  /**
+   * Background
+   */
+  bg?: AllColors;
   /**
    * Color
    */
@@ -41,20 +46,18 @@ export interface IconProps extends RefProp, ElementProps {
    * Click handler
    */
   onClick?: MouseEventHandler;
+
+  /**
+   * Badge indicator
+   */
+  badge?: BadgeType;
+
+  role?: string;
+  rtlFlip?: boolean;
 }
 
 /**
  * Icon
- * @param icon
- * @param color
- * @param size
- * @param viewBox
- * @param useImage
- * @param className
- * @param spin
- * @param round
- * @param onClick
- * @constructor
  * @internal
  */
 export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
@@ -62,20 +65,28 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
     {
       icon,
       color,
+      bg,
       size,
+      rtlFlip,
       useImage,
       viewBox = "0 0 24 24",
       className,
       round,
       spin,
       onClick,
+      badge,
+      role,
       ...aria
     },
     ref
   ) => {
+    const badgeEl = useBadge(badge);
     const classes = useMemo(() => {
       const cls = ["ax-icon", className ?? ""];
-      if (color) {
+      if (bg && !isColor(bg)) {
+        cls.push(`ax-bg--${bg}`);
+        cls.push(color && !isColor(color) ? `ax-color--${color}` : `ax-color--contrast`);
+      } else if (color && !isColor(color)) {
         cls.push(`ax-color--${color}`);
       }
       if (round) {
@@ -90,35 +101,32 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
       if (isNumber(spin)) {
         cls.push("ax-anim--spin-step");
       }
+      if (rtlFlip) {
+        cls.push("flippable");
+      }
       return cls.join(" ");
-    }, [className, color, round, size, spin]);
+    }, [className, color, round, rtlFlip, size, spin]);
     const isSvg = useMemo(() => {
       return isSvgPath(icon);
     }, [icon]);
 
     const iconEl = useMemo(() => {
-      if (!isString(icon) && isValidElement(icon)) {
-        return icon;
+      if (!isString(icon)) {
+        throw Error("Invalid icon expected string");
       }
       return isSvg ? (
         <svg viewBox={viewBox}>
           <path fill="currentColor" d={icon.toString()} />
         </svg>
       ) : useImage ||
+        icon?.toString().startsWith("http") ||
         icon?.toString().includes(".svg") ||
         icon?.toString().includes(".png") ||
         icon?.toString().startsWith("data:image") ? (
         <img src={icon.toString()} alt={icon.toString()} loading="lazy" />
       ) : icon?.toString().length <= 4 ? (
-        <svg viewBox="0 0 1em 1em">
-          <text
-            x="50%"
-            y="50%"
-            dy=".075em"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            style={{ fontSize: ".75em" }}
-          >
+        <svg>
+          <text x="50%" y="50%" dy=".075em" dominantBaseline="middle" textAnchor="middle">
             {icon}
           </text>
         </svg>
@@ -129,14 +137,14 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
 
     const styles = useMemo(() => {
       const s: KeyValue = {};
+      if (bg && isColor(bg)) {
+        s.backgroundColor = bg;
+      }
       if (color && isColor(color)) {
         s.color = color;
       }
-      if (isString(size) && !SizeList.includes(size)) {
+      if (!SizeList.includes(`${size}`)) {
         s.fontSize = size;
-      }
-      if (isNumber(size)) {
-        s.fontSize = `${size}rem`;
       }
       if (spin) {
         s["--spin-steps"] = spin;
@@ -145,8 +153,16 @@ export const AxIcon: VFC<IconProps> = forwardRef<HTMLElement, IconProps>(
     }, [color, size, spin]);
 
     return (
-      <div {...aria} className={classes} onClick={onClick} ref={ref as AnyObject} style={styles}>
+      <div
+        {...aria}
+        role={role}
+        className={classes}
+        onClick={onClick}
+        ref={ref as AnyObject}
+        style={styles}
+      >
         {iconEl}
+        {badgeEl}
       </div>
     );
   }

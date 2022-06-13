@@ -3,7 +3,7 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { ReactNodeArray, useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
@@ -21,7 +21,7 @@ export interface AlertProps extends IconProps {
   okLabel?: string;
   cancelLabel?: string;
 
-  extraActions?: ReactNodeArray;
+  extraActions?: JSX.Element[];
 }
 
 /**
@@ -31,6 +31,7 @@ export interface AlertProps extends IconProps {
  * @param type
  * @param color
  * @param icon
+ * @param extraActions
  * @param okLabel
  * @param cancelLabel
  * @param onClose
@@ -42,6 +43,8 @@ export const AxAlert: VFC<AlertProps & { [key: string]: AnyObject }> = ({
   type = "alert",
   color = "primary",
   icon,
+  rtlFlip,
+  extraActions,
   okLabel,
   cancelLabel,
   onClose
@@ -80,7 +83,7 @@ export const AxAlert: VFC<AlertProps & { [key: string]: AnyObject }> = ({
     <div className="ax-alert" data-color={color}>
       <AlertClose onClick={() => handleClose(false)} />
       <div className="ax-alert__icon">
-        <AxIcon icon={icon || iconType} color={color} />
+        <AxIcon icon={icon || iconType} color={color} rtlFlip={rtlFlip} />
       </div>
       {title && <div className="ax-alert__title">{title}</div>}
       {text && <p className="ax-alert__text">{text}</p>}
@@ -93,6 +96,7 @@ export const AxAlert: VFC<AlertProps & { [key: string]: AnyObject }> = ({
         }
       />
       <div className="ax-alert__footer">
+        <div onClickCapture={() => onClose?.(false)}>{extraActions}</div>
         {type === "confirm" && (
           <AxButton
             type="link"

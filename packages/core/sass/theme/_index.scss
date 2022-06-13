@@ -19,7 +19,18 @@
   }
 }
 
+@keyframes #{$ax-theme}FocusRingAnimate {
+  0% {
+    box-shadow: 0 0 0 5px $color-empty, 0 0 2px 6px $color-primary;
+  }
+  100% {
+    box-shadow: 0 0 0 2px $color-empty, 0 0 2px 3px $color-primary;
+  }
+}
+
 @at-root #{$root} {
+  $focusRing: 350ms cubic-bezier(0.594, 0.0452, 0.249, 1) 150ms 1 normal forwards #{$ax-theme}FocusRingAnimate;
+
   @import "typography";
   @import "menu";
   @import "page";

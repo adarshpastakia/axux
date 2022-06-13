@@ -81,7 +81,7 @@ export const HeaderCell: VFC<GridColumn> = ({
   return (
     <div
       ref={elementRef}
-      className="ax-grid__header--cell"
+      className="ax-datagrid__header--cell"
       style={{
         flex: width || widths[name] ? `0 0 ${width ?? widths[name]}` : undefined,
         minWidth,
@@ -90,7 +90,7 @@ export const HeaderCell: VFC<GridColumn> = ({
     >
       <AxTooltip content={tooltipContent} placement="bottom-start" isDisabled={!tooltip} usePortal>
         <div
-          className="ax-grid__header--label"
+          className="ax-datagrid__header--label"
           data-sortable={isSortable}
           onClick={() => isSortable && onSort(name)}
         >
@@ -98,7 +98,7 @@ export const HeaderCell: VFC<GridColumn> = ({
           {isPrimary && <AxIcon icon={AppIcons.iconPrimaryKey} />}
           <label>{label}</label>
           {isSortable && (
-            <div className="ax-grid__header--sort" data-sort={sort.name === name && sort.order}>
+            <div className="ax-datagrid__header--sort" data-sort={sort.name === name && sort.order}>
               <span>▼</span>
               <span>▲</span>
             </div>
@@ -107,13 +107,13 @@ export const HeaderCell: VFC<GridColumn> = ({
       </AxTooltip>
       {isFilterable && filterOptions && (
         <AxButton
-          className="ax-grid__header--filter"
+          className="ax-datagrid__header--filter"
           icon={AppIcons.iconFilter}
           color="primary"
           type="link"
         />
       )}
-      {isResizeable && <div className="ax-grid__header--resize" ref={resizeHandleRef} />}
+      {isResizeable && <div className="ax-datagrid__header--resize" ref={resizeHandleRef} />}
     </div>
   );
 };

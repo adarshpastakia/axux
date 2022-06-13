@@ -4,26 +4,9 @@
 // @license   : MIT
 
 #{$prefix}-form {
-  --columns: 2;
-  display: grid;
-  grid-auto-flow: row;
-  grid-gap: 0 0.5em;
-  grid-template-columns: repeat(var(--columns), minmax(8em, 1fr));
-  margin: 0 auto;
+  display: contents;
 
-  @each $breakpoint, $size in $breakpoints {
-    @media only screen and (min-width: $size) {
-      &[data-fluid="false"] {
-        max-width: if($breakpoint==xs, 100%, $size - 32px);
-      }
-    }
-  }
-
-  @media only screen and (max-width: 420px) {
-    grid-template-columns: 1fr;
-  }
-
-  @media only screen and (max-width: 600px) {
-    max-width: 100% !important;
+  #{$prefix}-field {
+    margin-bottom: 0.5em;
   }
 }

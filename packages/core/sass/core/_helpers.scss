@@ -278,6 +278,10 @@
     @include make-spacing(margin, $base-spacing, "--", \@#{$breakpoint});
     @include make-spacing(padding, 0, "--none", \@#{$breakpoint});
     @include make-spacing(padding, $base-spacing, "--", \@#{$breakpoint});
+
+    #{$prefix}-hidden\@#{$breakpoint} {
+      display: none;
+    }
   }
 
   @each $sizeLabel, $ratio in $size-ratio {

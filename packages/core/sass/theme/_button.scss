@@ -10,7 +10,7 @@
     #{$base}__inner {
       background-color: $base-bg;
       background-image: linear-gradient(180deg, rgba($white, 0.05), rgba($black, 0.03));
-      box-shadow: 0 0 0 1px rgba($base-border-color, 0.5);
+      box-shadow: 0 0 1px 1px $base-border-color;
       color: $color;
 
       &[data-icon-hilight="true"] {
@@ -59,7 +59,9 @@
     }
 
     #{$base}__inner:active,
-    #{$base}__inner[data-active="true"] {
+    #{$base}__inner[data-open="true"],
+    #{$base}__inner[data-active="true"],
+    &[data-active="true"] #{$base}__inner {
       background-color: darker($color, 0.3);
       background-image: linear-gradient(0deg, rgba($base-color, 0.1), rgba($base-color, 0));
       box-shadow: 1px 1px 2px rgba(#060409, 0.75) inset, -1px -1px 2px rgba(#060409, 0.5) inset;
@@ -80,5 +82,9 @@
 #{$prefix}-button {
   &[data-disabled="true"] {
     background-color: rgba($color-empty, 0.1);
+  }
+
+  &:focus-within {
+    animation: $focusRing;
   }
 }

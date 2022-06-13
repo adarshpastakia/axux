@@ -18,8 +18,13 @@ exports[`Button renders basic button 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -46,8 +51,13 @@ exports[`Button renders block 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -73,8 +83,13 @@ exports[`Button renders color 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -108,8 +123,13 @@ exports[`Button renders disabled 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -142,8 +162,13 @@ exports[`Button renders icon align 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -176,8 +201,13 @@ exports[`Button renders icon hilight 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -210,8 +240,13 @@ exports[`Button renders link 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </a>
@@ -226,7 +261,6 @@ exports[`Button renders new tab link 1`] = `
     data-size="default"
     data-style="default"
     data-theme="default"
-    target="_blank"
   >
     <a
       class="ax-button__inner"
@@ -246,8 +280,13 @@ exports[`Button renders new tab link 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </a>
@@ -264,6 +303,7 @@ exports[`Button renders only icon 1`] = `
     data-theme="default"
   >
     <button
+      aria-label="Icon button"
       class="ax-button__inner"
       data-icon-align="start"
       data-icon-hilight="false"
@@ -273,14 +313,9 @@ exports[`Button renders only icon 1`] = `
       <div
         class="ax-icon ax-button__icon"
       >
-        <svg
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21"
-            fill="currentColor"
-          />
-        </svg>
+        <i
+          class="mdi mdi-bell"
+        />
       </div>
     </button>
   </div>
@@ -305,8 +340,13 @@ exports[`Button renders size 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -332,8 +372,13 @@ exports[`Button renders style 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -366,8 +411,13 @@ exports[`Button renders with icon 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -413,8 +463,13 @@ exports[`Button renders with spinner 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Click Me!
+          </span>
         </span>
       </div>
     </button>
@@ -440,31 +495,33 @@ exports[`Button renders with tooltip 1`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Tooltip!
+          </span>
         </span>
       </div>
     </button>
   </div>
   <div
-    class="ax-popper ax-tooltip ax-bg--darkest ax-color--empty "
-    data-popper-escaped="true"
-    data-popper-placement="bottom"
-    data-popper-reference-hidden="true"
+    class="ax-popper ax-root ax-tooltip ax-bg--darkest ax-color--empty "
     data-show="true"
     data-show-arrow="true"
-    style="position: fixed; left: 0px; top: 0px; min-width: 0; transform: translate(0px, 10px);"
+    style="position: fixed; left: 0px; top: 0px; min-width: 0;"
   >
     <div
       class="ax-popper--body"
     >
       <span>
-        Test tooltip
+        This is a clickable button
       </span>
     </div>
     <div
       class="ax-popper--arrow"
-      style="position: absolute; left: 0px; transform: translate(0px, 0px);"
+      style="position: absolute;"
     />
   </div>
 </div>
@@ -488,8 +545,13 @@ exports[`Button renders with tooltip 2`] = `
       <div
         class="ax-button__label"
       >
-        <span>
-          Button
+        <span
+          class="ax-ellipsis--middle"
+          data-enabled="false"
+        >
+          <span>
+            Tooltip!
+          </span>
         </span>
       </div>
     </button>

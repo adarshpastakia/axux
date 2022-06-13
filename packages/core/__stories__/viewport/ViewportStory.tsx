@@ -10,10 +10,12 @@ import {
   mdiFolderOpen,
   mdiLifebuoy,
   mdiMagnify,
-  mdiPlus
+  mdiPlus,
+  mdiToggleSwitch,
+  mdiToggleSwitchOffOutline
 } from "@mdi/js";
 import { Story } from "@storybook/react";
-import { useEffect } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { MemoryRouter } from "react-router-dom";
 import {
   AxAvatar,
@@ -62,12 +64,19 @@ const Spotlight = () => {
 
 const Header = () => {
   const { openSpotlight } = useAxGlobals();
+  const [state, setState] = useState(false);
   return (
     <AxViewport.Header icon="poster.png">
-      <AxButton badge={{ color: "danger", value: 9 }} color="primary" icon={mdiBell} />
+      <AxButton
+        badge={{ color: "danger", value: 9 }}
+        color="primary"
+        icon={mdiBell}
+        aria-label="Notifications"
+      />
       <AxButton
         color="primary"
         icon={mdiMagnify}
+        aria-label="Search"
         tooltip={{
           content: (
             <span>
@@ -78,12 +87,23 @@ const Header = () => {
         onClick={openSpotlight}
       />
       <AxPopover showArrow placement="bottom-end" closeOnClick>
-        <AxAvatar image="https://picsum.photos/id/515/200" title="User Name" bg="indigo" />
+        <AxAvatar
+          image="https://picsum.photos/id/515/200"
+          title="User Name"
+          bg="indigo"
+          aria-label="Profile"
+        />
         <AxMenu size="md">
           <AxMenu.Item
             label="Profile"
             icon={mdiAccount}
             appendLabel={<AxHotKeyLabel keyCombo="ctrl+shift+p" />}
+          />
+          <AxDivider />
+          <AxMenu.Item
+            label="Toggle something"
+            onClick={() => setState(!state)}
+            icon={state ? mdiToggleSwitch : mdiToggleSwitchOffOutline}
           />
           <AxDivider />
           <AxThemeToggle isMenu />
@@ -124,7 +144,7 @@ const Menu = () => {
 const Page = () => {
   const { addItem } = useAxBreadcrumbService();
   useEffect(() => {
-    addItem({ icon: "mdi mdi-home", to: "#/1" });
+    addItem({ icon: "mdi mdi-home", to: "#/1", "aria-label": "Home" });
     addItem({ label: "Page", to: "#/2" });
     addItem({ label: "Section", to: "#/3" });
     addItem({ label: "Here", to: "#/4" });
@@ -162,7 +182,7 @@ const Page = () => {
   );
 };
 
-const Template: Story<ViewportProps> = (props) => (
+const Template: Story<PropsWithChildren<ViewportProps>> = (props) => (
   <MemoryRouter>
     <AxViewport {...props}>
       <AxViewport.Banner color="secondary">Test Banner</AxViewport.Banner>

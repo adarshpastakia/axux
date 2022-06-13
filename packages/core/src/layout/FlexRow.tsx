@@ -3,7 +3,6 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isNumber } from "@axux/utilities";
 import { FC, forwardRef, useMemo } from "react";
 import { AlignItem, ElementProps, Gutter, JustifyContent, RefProp } from "../types";
 
@@ -12,7 +11,7 @@ export interface FlexRowProps extends ElementProps, RefProp<HTMLDivElement> {
   /**
    * Wrap columns
    */
-  wrap?: boolean;
+  noWrap?: boolean;
   /**
    * Arrange reverse order
    */
@@ -51,7 +50,7 @@ export const AxFlexRow: FC<FlexRowProps> = forwardRef<HTMLDivElement, FlexRowPro
   (
     {
       children,
-      wrap = true,
+      noWrap = false,
       reverse = false,
       vertical = false,
       align = "",
@@ -66,7 +65,7 @@ export const AxFlexRow: FC<FlexRowProps> = forwardRef<HTMLDivElement, FlexRowPro
   ) => {
     const classes = useMemo(() => {
       const cls = ["ax-row", className ?? ""];
-      if (wrap === false) {
+      if (noWrap) {
         cls.push(`ax-row--nowrap`);
       }
       if (vertical) {
@@ -85,12 +84,12 @@ export const AxFlexRow: FC<FlexRowProps> = forwardRef<HTMLDivElement, FlexRowPro
         cls.push(`ax-gutter--${gutter}`);
       }
       return cls.join(" ");
-    }, [className, wrap, vertical, reverse, align, justify, gutter]);
+    }, [className, noWrap, vertical, reverse, align, justify, gutter]);
 
     const styles = useMemo(() => {
       return {
-        height: isNumber(height) ? `${height}rem` : height,
-        minHeight: isNumber(minHeight) ? `${minHeight}rem` : minHeight
+        height,
+        minHeight
       };
     }, [height, minHeight]);
 

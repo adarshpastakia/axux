@@ -4,18 +4,14 @@
 // @license   : MIT
 
 #{$prefix}-viewport {
-  bottom: 0;
   display: grid;
   grid-template-areas: "banner banner" "header header" "menu breadcrumbs" "menu page" "menu footer";
   grid-template-columns: auto 1fr;
   grid-template-rows: auto auto auto 1fr auto;
-  left: 0;
   overflow: hidden;
-  position: fixed;
-  right: 0;
-  top: 0;
   transform: translate3d(0, 0, 0);
   z-index: 0;
+  @include position(fixed, 0);
 
   &__banner {
     display: flex;
@@ -27,7 +23,8 @@
 
     > span {
       flex: 0 0 auto;
-      font-size: 0.75em;
+      font-size: 0.875em;
+      line-height: 1.25;
       padding: 0.125em 1em;
     }
 
@@ -53,10 +50,17 @@
 
     &__titleBox {
       align-items: center;
+      color: inherit;
       display: flex;
       grid-area: title-box;
       line-height: 1;
       padding: $base-spacing * 0.25 $base-spacing * 0.5;
+      @include noselect();
+
+      &:visited,
+      &:active {
+        color: inherit;
+      }
     }
 
     &__optionsBox {
@@ -109,7 +113,6 @@
   &__menu {
     display: grid;
     grid-area: menu;
-    grid-gap: 0.25em;
     grid-template-rows: 1fr auto auto;
     min-width: 12em;
     overflow: hidden;
@@ -118,7 +121,14 @@
     #{$prefix}-menu {
       &__item {
         line-height: 1.5;
+        #{$prefix}-icon {
+          font-size: 1.25em;
+        }
       }
+    }
+
+    #{$prefix}-button {
+      border-radius: 0;
     }
 
     &[data-collapsed="true"] {
@@ -129,7 +139,7 @@
         &__item {
           padding: 0.5em;
           #{$prefix}-icon {
-            font-size: 1.25em;
+            font-size: 1.5em;
             line-height: 1;
           }
           &__label,

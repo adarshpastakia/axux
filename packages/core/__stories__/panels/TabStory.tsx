@@ -7,10 +7,8 @@ import { mdiAccountBox } from "@mdi/js";
 import { Story } from "@storybook/react";
 import { PropsWithChildren } from "react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
-import { AxPage, AxViewport } from "../../dist";
-import { AxContent, AxHeading } from "../../src";
+import { AxContent, AxHeading, AxPage, AxTabPanel, AxViewport } from "../../src";
 import { TabPanelProps } from "../../src/panels/TabPanel";
-import { AxTabPanel } from "../../src";
 
 const Template: Story<PropsWithChildren<TabPanelProps>> = (props) => (
   <AxViewport>

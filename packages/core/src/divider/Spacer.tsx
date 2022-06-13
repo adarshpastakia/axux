@@ -15,7 +15,7 @@ interface ExtendedFC extends FC<{ size?: Size; children?: never }> {
 /** @internal */
 export const AxSpacer: ExtendedFC = ({ size }) =>
   (
-    <div className={`ax-margin${size ? "--" + size : ""}`} style={{ width: 1, height: 1 }} />
+    <div className={`ax-spacer ax-margin${size ? "--" + size : ""}`} style={{ width: 1, height: 1 }} />
   ) as AnyObject;
 AxSpacer.Flex = Flex;
 

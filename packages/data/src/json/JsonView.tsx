@@ -48,9 +48,9 @@ const JsonValue: VFC<JsonObjectProps> = ({
       if (!isNil(ret)) return ret;
     }
 
-    if (isNumber(value)) return Format.number(value);
+    if (isNumber(value) || /^[+-]?\d+(\.\d+)?$/.test(`${value}`)) return Format.number(value);
     if (isBoolean(value)) return !!value ? "Yes" : "No";
-    if (DateUtils.isValid(value))
+    if (DateUtils.isValid(value, true))
       return (
         <AxDateDisplay date={DateUtils.parse(value) as AnyObject} format="dd MMM yyyy HH:mm:ss" />
       );
@@ -99,7 +99,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
           {canCopy && <AxCopy text={value} />}
         </span>
       </div>
-      {score && <AxMeter showLabel value={score} color="primary" border />}
+      {!!score && <AxMeter showLabel value={score} color="primary" border />}
     </div>
   );
 };

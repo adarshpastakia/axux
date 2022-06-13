@@ -6,7 +6,6 @@
 #{$prefix}-field {
   $base: #{$prefix}-field;
   flex: 1 1 auto;
-  margin-bottom: 0.5em;
 
   & #{$base} {
     margin: 0;
@@ -130,11 +129,10 @@
     }
   }
   &__error {
+    font-weight: 600;
     grid-area: error;
-    padding: 0.25em;
-    #{$prefix}-icon {
-      margin-top: -1px;
-    }
+    padding: 0.25em 0.5em;
+    padding-inline-end: 0.25em;
   }
   &__clear {
     align-self: center;
@@ -169,11 +167,8 @@
   }
 
   &__strength {
-    bottom: -3px;
     height: 2px;
-    left: 0;
-    position: absolute;
-    right: 0;
+    @include position(absolute, null 0 -3px);
 
     &::after {
       content: "";

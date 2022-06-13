@@ -10,6 +10,7 @@ import { BadgeType, useBadge } from "../internals/useBadge";
 import { useWithTooltip, WithTooltipProps } from "../internals/useWithTooltip";
 import { BaseColor, Color, ColorPalette, ElementProps, IconProps, RefProp, Size } from "../types";
 import { AppIcons } from "../types/appIcons";
+import { AxEllipsis } from "../typography/Ellipsis";
 
 /** @internal */
 export interface TagProps extends RefProp, IconProps, ElementProps, WithTooltipProps {
@@ -55,6 +56,7 @@ export const AxTag: FC<TagProps> = forwardRef<HTMLElement, TagProps>(
   (
     {
       icon,
+      rtlFlip,
       children,
       isDisabled,
       onClick,
@@ -71,7 +73,15 @@ export const AxTag: FC<TagProps> = forwardRef<HTMLElement, TagProps>(
   ) => {
     const { Wrapper, tooltipProps } = useWithTooltip(tooltip, ref);
     const badgeEl = useBadge(badge);
-
+    const classes = useMemo(() => {
+      const cls = ["ax-tag", className];
+      if (color && !isColor(color)) {
+        cls.push(`ax-color--${color}`);
+      } else {
+        cls.push("ax-color--dark");
+      }
+      return cls.join(" ");
+    }, [className, color]);
     const styles = useMemo(() => {
       const s: KeyValue = {};
       if (color && isColor(color)) {
@@ -84,7 +94,7 @@ export const AxTag: FC<TagProps> = forwardRef<HTMLElement, TagProps>(
       <Wrapper {...tooltipProps}>
         <div
           ref={ref as AnyObject}
-          className={`ax-tag ax-color--${color} ${className ?? ""}`}
+          className={classes}
           data-size={size}
           data-clickable={!!onClick}
           data-solid={fillColor}
@@ -93,12 +103,19 @@ export const AxTag: FC<TagProps> = forwardRef<HTMLElement, TagProps>(
           {...aria}
         >
           <div className="ax-tag__inner" onClick={onClick}>
-            {icon && <AxIcon icon={icon} />}
-            <span>{children}</span>
+            {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
+            <span>
+              <AxEllipsis>{children}</AxEllipsis>
+            </span>
           </div>
           {badgeEl}
           {onRemove && (
-            <AxIcon className="ax-tag__close" icon={AppIcons.iconClose} onClick={onRemove} />
+            <AxIcon
+              role="remove"
+              className="ax-tag__close"
+              icon={AppIcons.iconClose}
+              onClick={onRemove}
+            />
           )}
         </div>
       </Wrapper>

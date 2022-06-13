@@ -51,7 +51,7 @@ const ToggleItemElement: VFC<
   const badgeEl = useBadge(item.badge);
 
   return (
-    <div className="ax-flex ax-row--middle ax-checkList__item" data-disabled={item.disabled}>
+    <div className="ax-row ax-row--middle ax-checkList__item" data-disabled={item.disabled}>
       <div className="ax-col--auto ax-checkList__icons">
         {selected === undefined && (
           <AxIcon size="md" icon={AppIcons.iconCheckboxOff} color="muted" />
@@ -111,7 +111,7 @@ const CheckItemElement: VFC<{ item: Item; selected: boolean; onCheck: EmptyCallb
 
   return (
     <div
-      className="ax-flex ax-row--middle ax-checkList__item"
+      className="ax-row ax-row--middle ax-checkList__item"
       onClick={onCheck}
       data-disabled={item.disabled}
     >

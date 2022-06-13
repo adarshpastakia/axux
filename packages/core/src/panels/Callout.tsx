@@ -30,22 +30,18 @@ export interface CalloutProps extends ElementProps, IconProps {
 
 /**
  * Notification toast
- * @param title
- * @param text
- * @param icon
- * @param color
- * @param aria
- * @constructor
+ * @internal
  */
 export const AxCallout: FC<CalloutProps> = ({
   title,
   icon,
+  rtlFlip,
   color = "primary",
   isClosable,
   onClose,
   className,
   children,
-  ...aria
+  ...props
 }) => {
   const [closed, setClosed] = useState(false);
   const handleClose = useCallback(() => {
@@ -53,11 +49,11 @@ export const AxCallout: FC<CalloutProps> = ({
     onClose && onClose();
   }, [onClose]);
   return closed ? null : (
-    <div className={`ax-callout ${className ?? ""}`} data-color={color} {...aria}>
+    <div className={`ax-callout ${className ?? ""}`} data-color={color} {...props}>
       {isClosable && <AlertClose onClick={handleClose} />}
       {icon && (
         <div className="ax-callout__icon">
-          <AxIcon icon={icon} />
+          <AxIcon icon={icon} rtlFlip={rtlFlip} />
         </div>
       )}
       {title && <div className="ax-callout__title">{title}</div>}

@@ -104,7 +104,13 @@
       @extend #{$prefix}-bg--base;
       max-height: 50vh;
       max-width: 50vw;
+      min-width: 180px;
       overflow: auto;
+
+      > #{$prefix}-menu,
+      > #{$prefix}-panel__stack > #{$prefix}-menu {
+        min-width: 9rem;
+      }
     }
 
     #{$base}--arrow {
@@ -113,9 +119,11 @@
   }
 
   &#{$prefix}-tooltip {
+    font-size: 0.875rem;
+    border-radius: $base-border-radius;
+    pointer-events: none;
+    @extend #{$prefix}-shadow--2;
     #{$base}--body {
-      @extend #{$prefix}-shadow--2;
-      border-radius: $base-border-radius;
       font-size: 1em;
       padding: 0.25em 0.5em;
     }

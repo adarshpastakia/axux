@@ -85,12 +85,14 @@
       &::before {
         content: "︎";
         height: 0.5em;
-        left: 0;
-        position: absolute;
-        top: 50%;
         transform: translate(-0.25em, -0.25em) rotate(45deg);
         width: 0.5em;
         z-index: 0;
+        @include position(absolute, 50% null null null);
+
+        @at-root [dir="rtl"] & {
+          transform: translate(0.25em, -0.25em) rotate(45deg);
+        }
       }
     }
 
@@ -146,10 +148,8 @@
       &::before,
       #{$base}--hilight {
         height: 0.25em;
-        left: 0;
-        right: 0;
-        top: 50%;
         transform: translateY(-50%);
+        @include position(null, 50% 0 null);
       }
 
       &::before {
@@ -161,21 +161,30 @@
       top: 50%;
       transform: translate(1em, -50%);
 
+      @at-root [dir="rtl"] & {
+        transform: translate(-1em, -50%);
+      }
+
       &[data-align="start"] {
         transform: translate(calc(-1 * (100% + 1em)), -50%);
 
+        @at-root [dir="rtl"] & {
+          transform: translate(calc(100% + 1em), -50%);
+        }
+
         &::before {
-          left: unset;
-          right: 0;
           transform: translate(0.25em, -0.25em) rotate(45deg);
+          @include position(null, 50% 0 null null);
+
+          @at-root [dir="rtl"] & {
+            transform: translate(-0.25em, -0.25em) rotate(45deg);
+          }
         }
       }
 
       &-wrapper {
         height: 2em;
-        left: 0.5em;
-        right: 0.5em;
-        top: 0;
+        @include position(null, 0 0.5em null);
       }
     }
 
@@ -191,8 +200,7 @@
         }
 
         &::before {
-          left: 0.25em;
-          top: -1.9em;
+          @include position(relative, -1.9em null null 0.25em);
         }
       }
     }
@@ -234,6 +242,10 @@
     #{$base}--value {
       transform: translate(2em, 0.5em);
 
+      @at-root [dir="rtl"] & {
+        transform: translate(-2em, 0.5em);
+      }
+
       &-wrapper {
         bottom: 0.5em;
         left: 0;
@@ -248,23 +260,26 @@
 
       button {
         span {
-          left: 0.25em;
           transform: translateY(-50%);
+          width: 2em;
+          @include position(null, null null null 0.25em);
         }
 
         &::before {
-          left: -1.8em;
-          top: 0.25em;
+          @include position(null, 0.25em null null -1.8em);
         }
       }
     }
 
     #{$prefix}-field__input {
-      bottom: 0;
-      left: 2em;
-      position: absolute;
       transform: rotate(270deg);
       transform-origin: 0 100%;
+      @include position(absolute, null null 0 100%);
+
+      @at-root [dir="rtl"] & {
+        transform: rotate(90deg);
+        transform-origin: 100% 100%;
+      }
     }
   }
 }

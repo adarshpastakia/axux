@@ -21,9 +21,9 @@
     @extend #{$prefix}-border--e;
     display: grid;
     grid-area: side-s;
-    grid-template-areas: "head resize" "loader resize" "body resize" "foot resize";
+    grid-template-areas: "head resize" "body resize" "foot resize";
     grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
     overflow: hidden;
     position: relative;
 
@@ -36,7 +36,6 @@
       grid-area: head;
       grid-template-areas: "title actions toggle";
       grid-template-columns: 1fr auto auto;
-      z-index: 7;
       @include noselect();
       @extend #{$prefix}-bg--base;
       @extend #{$prefix}-border--b;
@@ -73,7 +72,7 @@
 
     &--placeholder {
       grid-area: body;
-      z-index: 6;
+      z-index: 2;
       @extend #{$prefix}-bg--base;
     }
 
@@ -130,6 +129,10 @@
           display: none;
         }
 
+        &--header {
+          z-index: 3;
+        }
+
         &--title {
           left: 1em;
           position: absolute;
@@ -139,18 +142,13 @@
         }
 
         &--body {
-          bottom: 0;
           grid-area: unset;
-          left: 0;
-          position: absolute;
-          top: 0;
           transform: translateX(-100%);
           transition: transform 500ms;
           z-index: -1;
+          @include position(absolute, 0 null 0 0);
 
           @at-root [dir="rtl"] & {
-            left: unset;
-            right: 0;
             transform: translateX(100%);
           }
         }
@@ -159,7 +157,7 @@
       &[data-flyout="true"] #{$base}--body {
         box-shadow: 2px 0 25px rgba(0, 0, 0, 0.5);
         transform: translateX($collapsedWidth);
-        z-index: 5;
+        z-index: 1;
 
         @at-root [dir="rtl"] & {
           box-shadow: -2px 0 25px rgba(0, 0, 0, 0.5);
@@ -172,7 +170,7 @@
       @extend #{$prefix}-border--s;
       border-inline-end: none;
       grid-area: side-e;
-      grid-template-areas: "resize head" "resize loader" "resize body" "reszie foot";
+      grid-template-areas: "resize head" "resize body" "reszie foot";
       grid-template-columns: auto 1fr;
 
       #{$base} {
@@ -196,25 +194,22 @@
           }
 
           &--body {
-            left: unset;
-            right: 0;
-            transform: translateX(100%);
+            transform: translateX($collapsedWidth);
+            @include position(null, null null 0);
 
             @at-root [dir="rtl"] & {
-              left: 0;
-              right: unset;
-              transform: translateX(-100%);
+              transform: translateX(-1 * $collapsedWidth);
             }
           }
         }
 
         &[data-flyout="true"] #{$base}--body {
           box-shadow: -2px 0 25px rgba(0, 0, 0, 0.5);
-          transform: translateX(-1 * $collapsedWidth);
+          transform: translateX(calc(-100% - 1px));
 
           @at-root [dir="rtl"] & {
             box-shadow: 2px 0 25px rgba(0, 0, 0, 0.5);
-            transform: translateX($collapsedWidth);
+            transform: translateX(calc(100% + 1px));
           }
         }
       }

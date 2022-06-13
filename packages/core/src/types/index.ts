@@ -5,6 +5,7 @@
 
 import {
   AriaAttributes,
+  DOMAttributes,
   FC,
   HTMLAttributeAnchorTarget,
   HTMLAttributes,
@@ -100,7 +101,7 @@ export type EmptyCallback = () => void;
 export type BooleanReturn = () => boolean | void;
 export type BooleanCallback = (b: boolean) => void;
 
-export type IconType = "blank" | string | JSX.Element;
+export type IconType = "blank" | string;
 
 export const SizeList = ["none", "xxs", "xs", "sm", "md", "lg", "xl", "xxl"];
 
@@ -109,6 +110,19 @@ export interface ElementProps extends AriaAttributes {
    * CSS class name
    */
   className?: HTMLAttributes<HTMLElement>["className"];
+
+  onClick?: DOMAttributes<HTMLElement>["onClick"];
+  onDoubleClick?: DOMAttributes<HTMLElement>["onDoubleClick"];
+  onContextMenu?: DOMAttributes<HTMLElement>["onContextMenu"];
+
+  onMouseDown?: DOMAttributes<HTMLElement>["onMouseDown"];
+  onMouseUp?: DOMAttributes<HTMLElement>["onMouseUp"];
+  onMouseEnter?: DOMAttributes<HTMLElement>["onMouseEnter"];
+  onMouseLeave?: DOMAttributes<HTMLElement>["onMouseLeave"];
+
+  onKeyDown?: DOMAttributes<HTMLElement>["onKeyDown"];
+  onKeyUp?: DOMAttributes<HTMLElement>["onKeyUp"];
+  onScroll?: DOMAttributes<HTMLElement>["onScroll"];
 }
 
 export interface AnchorProps {
@@ -181,11 +195,15 @@ export interface MarginProps {
   marginEnd?: Spacing | string | true;
 }
 
-export interface IconProps {
+export interface IconProps<T = undefined> {
   /**
    * Icon svg path (24x24) | font class | component
    */
-  icon?: IconType;
+  icon?: IconType | T;
+  /**
+   * Flip icon in RTL
+   */
+  rtlFlip?: boolean;
 }
 
 export interface CollapseProps {

@@ -4,12 +4,13 @@
 // @license   : MIT
 
 #{$prefix}-button {
+  border-radius: $base-border-radius;
   display: inline-flex;
   font-size: 1em;
   margin: 0.125em;
   position: relative;
-  @include noselect();
   vertical-align: middle;
+  @include noselect();
 
   $base: #{$prefix}-button;
 
@@ -68,6 +69,7 @@
     align-items: center;
     appearance: none;
     border: none;
+    border-radius: $base-border-radius;
     cursor: pointer;
     display: flex;
     flex: 1;
@@ -79,25 +81,6 @@
     max-width: 10em;
     overflow: hidden;
     padding: 0;
-
-    &:first-child {
-      border-bottom-left-radius: $base-border-radius;
-      border-top-left-radius: $base-border-radius;
-
-      @at-root [dir="rtl"] & {
-        border-bottom-right-radius: $base-border-radius;
-        border-top-right-radius: $base-border-radius;
-      }
-    }
-    &:last-child {
-      border-bottom-right-radius: $base-border-radius;
-      border-top-right-radius: $base-border-radius;
-
-      @at-root [dir="rtl"] & {
-        border-bottom-left-radius: $base-border-radius;
-        border-top-left-radius: $base-border-radius;
-      }
-    }
 
     &[data-icon-align="end"] {
       #{$base}__icon,
@@ -158,6 +141,7 @@
   &__spinner {
     order: 0;
     padding: 0.25em;
+    transform: scale(1.125);
   }
 
   &__caret {
@@ -168,10 +152,10 @@
 
   &__label {
     align-self: center;
-    line-height: 1em;
+    line-height: 1.1em;
     order: 1;
+    overflow: hidden;
     padding: 0.25em 1em;
-    @include ellipsis();
 
     > span {
       font-size: 1em;
@@ -186,33 +170,50 @@
     margin-inline-start: -0.5em;
     order: 3;
     pointer-events: none;
-    position: absolute;
-    right: 0.25em;
-
-    @at-root [dir="rtl"] & {
-      left: 0.25em;
-      right: unset;
-    }
+    @include position(absolute, null 0.25em null null);
 
     &:not(:empty) {
       font-size: 0.625em;
-      right: -0.25em;
-      top: -0.25em;
-
-      @at-root [dir="rtl"] & {
-        left: -0.25em;
-        right: unset;
-      }
+      @include position(absolute, -0.25em -0.25em null null);
     }
   }
 
   &__group {
-    display: flex;
+    display: inline-flex;
     flex-flow: row nowrap;
     margin: 0.125em;
 
     #{$base} {
+      border-radius: 0;
       margin: 0;
+
+      &__inner {
+        border-radius: 0;
+      }
+
+      &:first-child #{$base}__inner {
+        border-bottom-left-radius: $base-border-radius;
+        border-top-left-radius: $base-border-radius;
+
+        @at-root [dir="rtl"] & {
+          border-bottom-right-radius: $base-border-radius;
+          border-top-right-radius: $base-border-radius;
+        }
+      }
+
+      &:last-child #{$base}__inner {
+        border-bottom-right-radius: $base-border-radius;
+        border-top-right-radius: $base-border-radius;
+
+        @at-root [dir="rtl"] & {
+          border-bottom-left-radius: $base-border-radius;
+          border-top-left-radius: $base-border-radius;
+        }
+      }
+
+      &:focus-within {
+        z-index: 2;
+      }
     }
 
     &[data-vertical="true"] {

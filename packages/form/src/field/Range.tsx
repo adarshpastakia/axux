@@ -126,8 +126,8 @@ export const AxSliderRange: VFC<RangeFieldProps> = memo(
                       width
                     }}
                   >
-                    <div className="ax-field__range--handle" data-pos="min"/>
-                    <div className="ax-field__range--handle" data-pos="max"/>
+                    <div className="ax-field__range--handle" data-pos="min" />
+                    <div className="ax-field__range--handle" data-pos="max" />
                   </div>
                 </div>
                 {showLabel && <span>{Format.number(max)}</span>}

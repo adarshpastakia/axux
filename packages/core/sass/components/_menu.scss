@@ -12,11 +12,17 @@
 
   $base: #{$prefix}-menu;
 
-  &[data-size="md"] {
-    font-size: 1em;
-  }
-  &[data-size="lg"] {
+  &[data-size="md"],
+  &__bar[data-size="md"] {
     font-size: 1.25em;
+  }
+  &[data-size="lg"],
+  &__bar[data-size="lg"] {
+    font-size: 1.5em;
+  }
+
+  &__bar {
+    padding: 0;
   }
 
   &__item + #{$base} {
@@ -47,18 +53,25 @@
     }
   }
 
+  &__text,
   &__item {
-    $base: #{$prefix}-menu__item;
-
     align-items: center;
-    cursor: pointer;
     display: grid;
     grid-auto-flow: column;
-    grid-gap: 0 $base-spacing * 0.5;
+    grid-gap: 0 0.25em;
     grid-template-areas: ". label";
     grid-template-columns: auto 1fr;
     line-height: 1.25;
     padding: 0.25em 0.5em;
+  }
+
+  &__text {
+    font-weight: $font-weight-medium;
+  }
+
+  &__item {
+    cursor: pointer;
+    $base: #{$prefix}-menu__item;
 
     &[data-clickable="false"] {
       pointer-events: none;
@@ -72,13 +85,12 @@
       pointer-events: none;
     }
 
-    span#{$prefix}-icon {
-      align-self: start;
+    #{$prefix}-icon {
+      line-height: 1;
     }
 
     &__label {
       grid-area: label;
-      padding-inline-end: 1.5em;
       @include noselect();
       > span {
         display: block;
@@ -100,6 +112,13 @@
     &[data-disabled="true"] {
       opacity: 0.5;
       pointer-events: none;
+    }
+  }
+
+  &[data-with-icons="true"] {
+    > #{$prefix}-menu__text,
+    > #{$prefix}-menu__item {
+      grid-template-columns: 1em 1fr;
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Meta, Title } from "@storybook/addon-docs";
 import { AxCopy, AxIcon } from "@axux/core";
 import { AppIcons } from "@axux/core/src/types/appIcons";
+import { Countries } from "@axux/utilities";
 
 <Meta title="AxUx/Icons" />
 
@@ -9,7 +10,7 @@ import { AppIcons } from "@axux/core/src/types/appIcons";
   Icons
 </Title>
 
-<div className="ax-flex">
+<div className="ax-row">
   {Object.entries(AppIcons)
     .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([key, icon]) => (

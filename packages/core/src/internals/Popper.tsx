@@ -23,26 +23,57 @@ import { EmptyCallback } from "../types";
 
 /** @internal */
 export interface Props {
+  /**
+   * Overlay trigger
+   */
   trigger?: "hover" | "click" | "contextmenu";
+  /**
+   * custom element selector for acting as overlay trigger
+   */
+  triggerSelector?: string;
+  /**
+   * Overlay placement
+   * @values "top" | "bottom" | "right" | "left" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "right-start" | "right-end" | "left-start" | "left-end"
+   */
   placement?: Placement;
+  /**
+   * use isOpen to manually control overlay visibility
+   */
   isOpen?: boolean;
+  /**
+   * disable overlay
+   */
   isDisabled?: boolean;
+  /**
+   * Force overlay minWidth to anchor width
+   */
   resize?: boolean;
+  /**
+   * CSS classname
+   */
   className?: string;
+  /**
+   * Callback handler onOpen
+   */
+  onOpen?: EmptyCallback;
+  /**
+   * Callback handler onClose
+   */
+  onClose?: EmptyCallback;
+  /**
+   * Pass anchor element ref
+   */
+  inheritRef?: Ref<HTMLElement>;
   forceRender?: boolean;
   closeOnClick?: boolean;
   preventClose?: boolean;
-  triggerSelector?: string;
   showArrow?: boolean;
   usePortal?: boolean;
   updateAnchor?: boolean;
   autoTrigger?: boolean;
-  inheritRef?: Ref<HTMLElement>;
-  onOpen?: EmptyCallback;
-  onClose?: EmptyCallback;
 }
 
-export const AxPopper: FC<Props & KeyValue> = ({
+export const AxPopper: FC<Props> = ({
   children,
   trigger,
   placement = "auto",
@@ -58,7 +89,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
   triggerSelector,
   forceRender,
   preventClose = false,
-  usePortal = false,
+  usePortal: portal = false,
   updateAnchor,
   autoTrigger = true,
   ...props
@@ -90,7 +121,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
       },
       {
         name: "preventOverflow",
-        enabled: trigger !== "hover"
+        enabled: true
       },
       {
         name: "offset",
@@ -102,18 +133,17 @@ export const AxPopper: FC<Props & KeyValue> = ({
     ]
   });
 
+  const usePortal = useMemo(
+    () => (trigger !== "hover" ? withinDomTree(triggerEl, ".ax-viewport") : portal),
+    [portal, trigger, triggerEl]
+  );
   const anchorEl = useMemo(() => {
+    // Find trigger element to attach mouse events
     if (triggerEl) {
       let triggerButton: HTMLElement =
         (triggerSelector ? triggerEl.querySelector(triggerSelector) : undefined) || triggerEl;
 
-      if (triggerEl.classList.contains("ax-button") && trigger !== "hover") {
-        triggerButton =
-          triggerEl.querySelector(".ax-button__split") ||
-          triggerEl.querySelector(".ax-button__inner") ||
-          triggerButton;
-      }
-      if (triggerEl.classList.contains("ax-button__inner")) {
+      if (triggerEl.classList.contains("ax-button__inner") && trigger !== "hover") {
         triggerButton =
           triggerEl.parentElement?.querySelector(".ax-button__split") || triggerButton;
       }
@@ -151,17 +181,28 @@ export const AxPopper: FC<Props & KeyValue> = ({
   }, [resize, triggerEl]);
 
   useLayoutEffect(() => {
-    if (trigger !== "hover") {
+    if (trigger !== "hover" && open) {
       open && forceUpdate && forceUpdate();
     }
-    anchorEl &&
-      anchorEl.dispatchEvent(new Event(open ? "innershow" : "innerhide", { bubbles: true }));
-  }, [open, forceUpdate, anchorEl, trigger]);
+    // fire inner hide/show event for anchors with multiple overlays (tooltip + overlay)
+    trigger !== "hover" &&
+      triggerEl &&
+      triggerEl.dispatchEvent(new Event(open ? "innershow" : "innerhide", { bubbles: true }));
+  }, [open, forceUpdate, triggerEl, trigger]);
+
+  useEffect(() => {
+    const updater = () => forceUpdate && forceUpdate();
+    triggerEl && triggerEl.addEventListener("updatePopper", updater);
+    popperEl && popperEl.addEventListener("updatePopper", updater);
+
+    return () => {
+      triggerEl && triggerEl.removeEventListener("updatePopper", updater);
+      popperEl && popperEl.removeEventListener("updatePopper", updater);
+    };
+  }, [forceUpdate, triggerEl, popperEl]);
 
   useLayoutEffect(() => {
     if (anchorEl) {
-      popperEl && popperEl.addEventListener("updatePopper", () => forceUpdate && forceUpdate());
-
       if (trigger !== "hover") {
         const handler = (e: MouseEvent) => {
           if (e.button === (trigger === "click" ? 0 : 2)) {
@@ -169,6 +210,16 @@ export const AxPopper: FC<Props & KeyValue> = ({
             open && onClose && onClose();
             !open && onOpen && onOpen();
             return trigger === "click";
+          }
+        };
+
+        const closePrevious = (e: MouseEvent) => {
+          const canClose = !withinElement(e.target as HTMLElement, anchorEl, popperEl);
+          if (isVisible(popperEl) && canClose) {
+            refCloseTimer.current = setTimeout(() => {
+              setOpen(false);
+              onClose && onClose();
+            }, 10);
           }
         };
 
@@ -194,23 +245,25 @@ export const AxPopper: FC<Props & KeyValue> = ({
         anchorEl.dataset.clickable = "true";
         trigger && autoTrigger && anchorEl.addEventListener(trigger, handler);
         open && !preventClose && document.addEventListener("mouseup", forceClose);
+        open && !preventClose && document.addEventListener("mousedown", closePrevious);
 
         return () => {
           trigger && anchorEl.removeEventListener(trigger, handler);
           document.removeEventListener("mouseup", forceClose);
+          document.removeEventListener("mousedown", closePrevious);
         };
       }
       if (trigger === "hover") {
-        const handlerOpen = () => isOpen === undefined && setOpen(true);
-        const handlerClose = () => isOpen === undefined && setOpen(false);
+        const handlerOpen = () => setOpen(true);
+        const handlerClose = () => setOpen(false);
         const handlerShow = () => {
           setInnerOpen(true);
           setOpen(false);
         };
         const handlerHide = () => setInnerOpen(false);
 
-        anchorEl.addEventListener("mouseover", handlerOpen);
-        anchorEl.addEventListener("mouseout", handlerClose);
+        autoTrigger && anchorEl.addEventListener("mouseover", handlerOpen);
+        autoTrigger && anchorEl.addEventListener("mouseout", handlerClose);
         anchorEl.addEventListener("innershow", handlerShow);
         anchorEl.addEventListener("innerhide", handlerHide);
 
@@ -225,21 +278,20 @@ export const AxPopper: FC<Props & KeyValue> = ({
   }, [
     trigger,
     triggerSelector,
-    popperEl,
     closeOnClick,
     preventClose,
     onOpen,
     onClose,
-    forceUpdate,
-    anchorEl,
     open,
-    isOpen,
-    autoTrigger
+    autoTrigger,
+    triggerEl,
+    popperEl,
+    anchorEl
   ]);
 
   const triggerProps = useMemo(() => {
     if (updateAnchor && anchorEl) {
-      anchorEl.dataset.active = `${open}`;
+      anchorEl.dataset.open = `${open}`;
       return {
         "data-popover-anchor": "true",
         "data-popover": "true"
@@ -251,7 +303,7 @@ export const AxPopper: FC<Props & KeyValue> = ({
   const popperBody = useMemo(
     () => (
       <div
-        className={`ax-popper ${className ?? ""}`}
+        className={`ax-popper ax-root ${className ?? ""}`}
         data-show={open && !innerOpen && !isDisabled}
         ref={setPopperEl}
         data-show-arrow={showArrow}

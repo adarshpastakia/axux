@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
-import { Color, IconProps, VFC } from "../types";
+import { BooleanCallback, Color, EmptyCallback, IconProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
@@ -52,12 +52,15 @@ export interface ToastProps extends IconProps {
  * @param onClose
  * @constructor
  */
-export const AxToast: VFC<ToastProps & { [key: string]: AnyObject }> = ({
+export const AxToast: VFC<
+  ToastProps & { onClose?: BooleanCallback; onCloseAll?: EmptyCallback }
+> = ({
   title,
   text,
   okLabel,
   cancelLabel,
   icon,
+  rtlFlip,
   type = "alert",
   color = "primary",
   extraActions,
@@ -98,7 +101,7 @@ export const AxToast: VFC<ToastProps & { [key: string]: AnyObject }> = ({
         />
       </div>
       <div className="ax-toast__icon">
-        <AxIcon icon={icon ?? iconType} />
+        <AxIcon icon={icon ?? iconType} rtlFlip={rtlFlip} />
       </div>
       {title && <div className="ax-toast__title">{title}</div>}
       <span className="ax-toast__text">{text}</span>

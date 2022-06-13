@@ -3,7 +3,6 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { isNumber } from "@axux/utilities";
 import { FC, forwardRef, useMemo } from "react";
 import { makePadding } from "../helpers";
 import { AlignItem, ElementProps, PaddingProps, RefProp } from "../types";
@@ -112,6 +111,8 @@ export const AxFlexCol: FC<FlexColProps> = forwardRef<HTMLDivElement, FlexColPro
           .toString()
           .split(" ")
           .forEach((s) => cls.push(`ax-col--${s}`));
+      } else if (!flex) {
+        cls.push(`ax-col--auto`);
       }
       cls.push(
         makePadding({
@@ -142,11 +143,11 @@ export const AxFlexCol: FC<FlexColProps> = forwardRef<HTMLDivElement, FlexColPro
 
     const styles = useMemo(() => {
       return {
-        height: isNumber(height) ? `${height}rem` : height,
-        minHeight: isNumber(minHeight) ? `${minHeight}rem` : minHeight,
-        width: isNumber(width) ? `${width}rem` : width,
-        maxWidth: isNumber(maxWidth) ? `${maxWidth}rem` : maxWidth,
-        minWidth: isNumber(minWidth) ? `${minWidth}rem` : minWidth
+        height,
+        minHeight,
+        width,
+        maxWidth,
+        minWidth
       };
     }, [height, maxWidth, minHeight, minWidth, width]);
 

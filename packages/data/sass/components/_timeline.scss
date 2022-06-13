@@ -42,7 +42,10 @@
 
     #{$prefix}-loader__text {
       margin: 0 0.25em;
-      margin-inline-start: 2.75em;
+    }
+
+    &[data-noline="true"] #{$base}__entry--icon::before {
+      display: none;
     }
   }
 
@@ -65,14 +68,11 @@
 
       &::before {
         background-color: currentColor;
-        bottom: 0;
         content: "";
-        left: calc(50% - 1px);
         opacity: 0.25;
-        position: absolute;
-        top: 0;
         width: 2px;
         z-index: 0;
+        @include position(absolute, 0 null 0 calc(50% - 1px));
       }
     }
 
@@ -85,19 +85,11 @@
 
     &--body {
       align-self: flex-start;
+      contain-intrinsic-size: 2rem;
+      content-visibility: hidden;
       flex: 1 1 1em;
       margin: 2px 0.5em 1em;
-    }
-
-    &--side {
-      flex: 0 0 auto;
-      padding-inline-end: 1rem;
-      padding-top: 0.25em;
-    }
-
-    &--body[data-collapse="true"] + #{$base}__entry--side {
-      height: 0;
-      overflow: hidden;
+      min-height: 2rem;
     }
 
     &[data-reverse="true"] {
@@ -107,10 +99,6 @@
         padding-inline-end: 0;
         padding-inline-start: 1rem;
       }
-    }
-
-    &[data-noline="true"] #{$base}__entry--icon::before {
-      display: none;
     }
 
     &:first-child #{$base}__entry--icon::before {

@@ -6,12 +6,12 @@
 import { FC, Fragment, useMemo } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxDivider } from "../divider/Divider";
-import { AxIcon } from "../icons/Icon";
+import { useIcon } from "../hooks/useIcon";
 import { AllColors, ElementProps, EmptyCallback, IconProps } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /** @internal */
-export interface HeaderProps extends IconProps, ElementProps {
+export interface HeaderProps extends IconProps<JSX.Element>, ElementProps {
   /**
    * Header title
    */
@@ -37,29 +37,16 @@ export interface HeaderProps extends IconProps, ElementProps {
    */
   size?: "md" | "lg";
   onBack?: EmptyCallback;
-  onClick?: EmptyCallback;
 }
 
 /**
  * Header bar
- * @param title
- * @param icon
- * @param children
- * @param bg
- * @param color
- * @param size
- * @param onBack
- * @param iconBg
- * @param iconColor
- * @param onClick
- * @param className
- * @param aria-*
- * @constructor
  * @internal
  */
 export const AxHeader: FC<HeaderProps> = ({
   title,
   icon,
+  rtlFlip,
   children,
   bg,
   color,
@@ -69,7 +56,7 @@ export const AxHeader: FC<HeaderProps> = ({
   iconColor,
   onClick,
   className,
-  ...aria
+  ...props
 }) => {
   const classes = useMemo(() => {
     const cls = ["ax-header", className ?? ""];
@@ -98,9 +85,10 @@ export const AxHeader: FC<HeaderProps> = ({
     }
     return cls.join(" ");
   }, [iconBg, iconColor]);
+  const iconEl = useIcon(icon, iconClasses, rtlFlip);
 
   return (
-    <div className={classes} {...aria}>
+    <div className={classes} {...props}>
       {onBack && (
         <Fragment>
           <AxButton
@@ -108,16 +96,13 @@ export const AxHeader: FC<HeaderProps> = ({
             icon={AppIcons.iconCaretLeft}
             color="primary"
             onClick={onBack}
-            className="ax-header__back ax-prevent-close"
+            aria-label="Back"
+            className="ax-header__back ax-prevent-close flippable"
           />
           <AxDivider vertical />
         </Fragment>
       )}
-      {icon && (
-        <div className={iconClasses}>
-          <AxIcon icon={icon} />
-        </div>
-      )}
+      {iconEl}
       <div className={`ax-header__title ${!!onClick ? "ax-clickable" : ""}`} onClick={onClick}>
         {title}
       </div>

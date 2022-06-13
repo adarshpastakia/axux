@@ -25,6 +25,13 @@ export interface BoxProps extends ElementProps, MarginProps, PaddingProps, RefPr
    * Text align
    */
   align?: TextAlign;
+
+  width?: string | number;
+  height?: string | number;
+  minWidth?: string | number;
+  minHeight?: string | number;
+  maxWidth?: string | number;
+  maxHeight?: string | number;
 }
 
 /**
@@ -62,6 +69,12 @@ export const AxBox: FC<BoxProps> = forwardRef<HTMLDivElement, BoxProps>(
       bg,
       color,
       align,
+      width,
+      height,
+      minWidth,
+      minHeight,
+      maxWidth,
+      maxHeight,
       margin,
       marginX,
       marginY,
@@ -137,7 +150,12 @@ export const AxBox: FC<BoxProps> = forwardRef<HTMLDivElement, BoxProps>(
     ]);
 
     return (
-      <div ref={ref} className={classes} {...aria}>
+      <div
+        ref={ref}
+        className={classes}
+        style={{ width, height, minWidth, minHeight, maxWidth, maxHeight }}
+        {...aria}
+      >
         {children}
       </div>
     );

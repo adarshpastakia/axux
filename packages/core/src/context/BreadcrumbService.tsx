@@ -4,13 +4,8 @@
 // @license   : MIT
 
 import { createContext, FC, useCallback, useContext, useReducer } from "react";
-import { IconProps } from "../types";
+import { Breadcrumb } from "../appbars/Breadcrumbs";
 
-/** @internal */
-export interface Breadcrumb extends IconProps {
-  to: string;
-  label?: string | JSX.Element;
-}
 /** @internal */
 export interface BreadcrumbContextProps {
   items: Breadcrumb[];

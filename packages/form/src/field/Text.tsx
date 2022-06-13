@@ -18,6 +18,8 @@ export interface TextFieldProps extends ControllerProps, WrapperProps, FieldStat
    * Input type
    */
   type?: "text" | "password" | "url" | "email" | "search";
+
+  maxLength?: number;
 }
 
 /**
@@ -35,6 +37,7 @@ export const AxTextField: FC<TextFieldProps> = memo(
     value,
     onClear,
     onChange,
+    maxLength,
     onEnterPressed,
     allowClear,
     name,
@@ -70,6 +73,7 @@ export const AxTextField: FC<TextFieldProps> = memo(
               size={1}
               type={type}
               formNoValidate
+              maxLength={maxLength}
               disabled={isDisabled}
               readOnly={isReadonly}
               placeholder={placeholder}

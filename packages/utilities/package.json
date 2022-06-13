@@ -1,6 +1,6 @@
 {
   "name": "@axux/utilities",
-  "version": "0.0.24",
+  "version": "0.2.7",
   "description": "AxUx UI: Utility package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,11 +24,11 @@
     "watch": "yarn build:lib -w"
   },
   "dependencies": {
-    "date-fns": "^2.23.0",
-    "libphonenumber-js": "1.9.34",
+    "date-fns": "^2.28.0",
+    "libphonenumber-js": "^1.9.50",
     "numeral": "^2.0.6"
   },
   "devDependencies": {
-    "@types/numeral": "^2.0.1"
+    "@types/numeral": "^2.0.2"
   }
 }

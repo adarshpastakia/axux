@@ -8,7 +8,7 @@
     background-color: rgba($color, 0.05);
     border-radius: $base-border-radius;
     box-shadow: 0 0 2px $color inset;
-    color: $color;
+    color: if($ax-theme == "dark", lighter($color, 0.15), darker($color, 0.15));
     overflow: hidden;
 
     #{$prefix}-alert--close #{$prefix}-button__inner {

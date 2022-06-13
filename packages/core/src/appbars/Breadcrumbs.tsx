@@ -3,14 +3,14 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { FC, useMemo } from "react";
+import { AriaAttributes, FC, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { AxIcon } from "../icons/Icon";
 import { AxBox } from "../layout/Box";
 import { AxPopover } from "../overlays/Popover";
 import { EmptyCallback, IconProps } from "../types";
 
-interface Breadcrumb extends IconProps {
+export interface Breadcrumb extends IconProps, AriaAttributes {
   to?: string;
   onClick?: EmptyCallback;
   label?: string | JSX.Element;
@@ -28,20 +28,22 @@ const LinkItem = ({
   className = "ax-breadcrumb__item",
   index = 0,
   icon,
+  rtlFlip,
   label,
-  onClick
+  onClick,
+  ...aria
 }: AnyObject) =>
   to ? (
-    <NavLink key={i} to={to} className={className} data-index={index} onClick={onClick}>
+    <NavLink key={i} to={to} className={className} data-index={index} onClick={onClick} {...aria}>
       <div title={label}>
-        {icon && <AxIcon icon={icon} />}
+        {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} size="md" />}
         {label && <span>{label}</span>}
       </div>
     </NavLink>
   ) : (
-    <a key={i} className={className} data-index={index} onClick={onClick}>
+    <a key={i} className={className} data-index={index} onClick={onClick} {...aria}>
       <div title={label}>
-        {icon && <AxIcon icon={icon} />}
+        {icon && <AxIcon icon={icon} size="md" />}
         {label && <span>{label}</span>}
       </div>
     </a>
@@ -53,8 +55,9 @@ const LinkPopover = ({ rest }: { rest: Breadcrumb[] }) => (
       <div>...</div>
     </div>
     <AxBox>
-      {rest.map(({ to = "", onClick, icon, label }, i) => (
+      {rest.map(({ to = "", onClick, icon, label, ...aria }, i) => (
         <LinkItem
+          {...aria}
           key={i}
           to={to}
           className="ax-breadcrumb__link"
@@ -79,25 +82,29 @@ export const AxBreadcrumbBar: FC<Props> = ({ items, actions = [], theme = "class
   return (
     <div className="ax-breadcrumb__bar" data-theme={theme}>
       <div>
-        {start.map(({ to, icon, label, onClick }, i) => (
+        {start.map(({ to, icon, label, onClick, rtlFlip, ...aria }, i) => (
           <LinkItem
             key={i}
             to={to}
             icon={icon}
+            rtlFlip={rtlFlip}
             label={label}
             index={start.length - i + 4}
             onClick={onClick}
+            {...aria}
           />
         ))}
         {rest.length > 0 && <LinkPopover rest={rest} />}
-        {end.map(({ to, icon, label, onClick }, i) => (
+        {end.map(({ to, icon, label, onClick, rtlFlip, ...aria }, i) => (
           <LinkItem
             key={i}
             to={to}
             icon={icon}
+            rtlFlip={rtlFlip}
             label={label}
             index={end.length - i + 4}
             onClick={onClick}
+            {...aria}
           />
         ))}
       </div>

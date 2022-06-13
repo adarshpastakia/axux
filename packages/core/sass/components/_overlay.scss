@@ -6,12 +6,8 @@
 #{$prefix}-overlay {
   &__mask {
     background: none;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
     z-index: 45;
+    @include position(fixed, 0);
 
     &[data-show="true"] {
       backdrop-filter: blur(1px);
@@ -24,17 +20,13 @@
 
   &__container {
     background: none;
-    bottom: 0;
     display: flex;
     justify-content: flex-end;
-    left: 0;
     overflow: visible;
     padding: 0.5em;
     pointer-events: none;
-    position: fixed;
-    right: 0;
-    top: 0;
     z-index: 99;
+    @include position(fixed, 0);
 
     > div {
       flex: 0 0 auto;
@@ -123,24 +115,19 @@
 
 #{$prefix}-flyout {
   border-radius: $base-border-radius;
-  bottom: 0;
   display: grid;
-  grid-template-areas: "header" "loader" "body";
+  grid-template-areas: "header" "loader" "content";
   grid-template-rows: auto auto 1fr;
   max-width: 80vw;
   min-width: 15em;
   opacity: 0;
   overflow: hidden;
-  position: absolute;
-  right: 0;
-  top: 0;
   transform: translateX(100%);
   transition: transform 0.5s;
   width: 30em;
+  @include position(absolute, 0 0 0 null);
 
   @at-root [dir="rtl"] & {
-    left: 0;
-    right: unset;
     transform: translateX(-100%);
   }
 
@@ -156,23 +143,6 @@
 
   &[data-show="true"] {
     transform: translateX(0);
-  }
-
-  &__wrapper {
-    display: grid;
-    grid-area: body;
-    grid-template-areas: ". content .";
-    grid-template-columns: auto 1fr auto;
-    overflow: hidden;
-
-    > #{$prefix}-button {
-      margin: 0;
-
-      #{$prefix}-button__inner {
-        border-radius: 0 !important;
-        font-size: 1.5em;
-      }
-    }
   }
 
   &__body {

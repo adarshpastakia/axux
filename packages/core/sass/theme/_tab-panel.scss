@@ -16,18 +16,17 @@
       box-shadow: 0 1px 0 $color-secondary inset;
     }
 
-    @at-root [dir="rtl"] &[data-align="end"],
-      &[data-align="start"] {
+    &[data-align="start"] {
       box-shadow: -1px 0 0 $color-secondary inset;
     }
-    @at-root [dir="rtl"] &[data-align="start"],
-      &[data-align="end"] {
+    &[data-align="end"] {
       box-shadow: 1px 0 0 $color-secondary inset;
     }
 
     #{$base}__button {
       background-color: $base-bg;
       box-shadow: $border;
+      color: $color-primary;
 
       &[data-active="false"]:hover {
         background-color: rgba($base-bg, 0.5);
@@ -65,8 +64,7 @@
         }
       }
 
-      @at-root [dir="rtl"] &[data-align="end"],
-        &[data-align="start"] {
+      &[data-align="start"] {
         #{$base}__button:hover {
           box-shadow: -1px 0 0 $color-secondary inset;
         }
@@ -74,8 +72,7 @@
           box-shadow: -3px 0 0 $color-secondary inset;
         }
       }
-      @at-root [dir="rtl"] &[data-align="start"],
-        &[data-align="end"] {
+      &[data-align="end"] {
         #{$base}__button:hover {
           box-shadow: 1px 0 0 $color-secondary inset;
         }
@@ -104,5 +101,24 @@
   &__button[data-disabled="true"] {
     background-color: rgba($body-bg, 0.5) !important;
     color: $color-muted !important;
+  }
+}
+
+@at-root &[dir="rtl"] #{$prefix}-tab__bar[data-align="end"] {
+  box-shadow: -1px 0 0 $color-secondary inset;
+  #{$prefix}-tab__button:hover {
+    box-shadow: -1px 0 0 $color-secondary inset;
+  }
+  #{$prefix}-tab__button[data-active="true"] {
+    box-shadow: -3px 0 0 $color-secondary inset;
+  }
+}
+@at-root &[dir="rtl"] #{$prefix}-tab__bar[data-align="start"] {
+  box-shadow: 1px 0 0 $color-secondary inset;
+  #{$prefix}-tab__button:hover {
+    box-shadow: 1px 0 0 $color-secondary inset;
+  }
+  #{$prefix}-tab__button[data-active="true"] {
+    box-shadow: 3px 0 0 $color-secondary inset;
   }
 }

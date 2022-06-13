@@ -3,12 +3,12 @@
 // @copyright : 2021
 // @license   : MIT
 
-#{$prefix}-grid {
+#{$prefix}-datagrid {
   &__panel {
     display: grid;
     grid-area: content;
-    grid-template-areas: "head" "loader" "content" "foot";
-    grid-template-rows: min-content min-content 1fr min-content;
+    grid-template-areas: "head" "content" "foot";
+    grid-template-rows: min-content 1fr min-content;
     overflow: auto;
     position: relative;
   }
@@ -18,11 +18,16 @@
     flex-flow: row nowrap;
     position: sticky;
     top: 0;
-    @include noselect();
     z-index: 5;
+    @include noselect();
 
     #{$prefix}-button {
       margin: 0;
+    }
+
+    #{$prefix}-loader--progress {
+      bottom: 0;
+      top: unset;
     }
 
     &--cell {

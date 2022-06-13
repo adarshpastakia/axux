@@ -19,12 +19,13 @@ describe("get values by JSON path", () => {
       "test.array": [{ field: "string" }, { field: "number" }, { field: "boolean" }]
     }
   };
-  it("should get by path", (done) => {
+  it("should get default values", (done) => {
     expect(getByPath({}, "prop", "default")).toBe("default");
     expect(getByPath({ props: "test" }, "prop", "default")).toBe("default");
+    // will return empty array, reason: outer prop value is array type
     expect(
       getByPath({ props: [{ prop1: "temp" }, {}, "temp"] }, "props.prop.type", "default")
-    ).toBe("default");
+    ).toStrictEqual([]);
     done();
   });
 

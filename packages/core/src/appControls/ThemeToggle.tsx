@@ -3,28 +3,25 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
-import { Globals } from "../context/Globals";
 import { AxMenuItem } from "../menu/MenuItem";
 import { ElementProps, VFC } from "../types";
 import { AppIcons } from "../types/appIcons";
+import { useAxGlobals } from "../context/Globals";
 
 /**
  * Toggle between light and dark themes
- * @param className
- * @param isMenu
- * @constructor
+ * @internal
  */
 export const AxThemeToggle: VFC<ElementProps & { isMenu?: boolean }> = ({ className, isMenu }) => {
-  const { toggleTheme } = useContext(Globals);
+  const { toggleTheme, theme } = useAxGlobals();
   const { t } = useTranslation("core");
   return isMenu ? (
     <AxMenuItem
       label={t("options.theme")}
       onClick={toggleTheme}
-      icon={AppIcons.iconTheme}
+      icon={theme === "dark" ? AppIcons.iconSun : AppIcons.iconMoon}
       className={className}
     />
   ) : (
@@ -32,7 +29,7 @@ export const AxThemeToggle: VFC<ElementProps & { isMenu?: boolean }> = ({ classN
       type="link"
       color="primary"
       onClick={toggleTheme}
-      icon={AppIcons.iconTheme}
+      icon={theme === "dark" ? AppIcons.iconSun : AppIcons.iconMoon}
       className={className}
     />
   );

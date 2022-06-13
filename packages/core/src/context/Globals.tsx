@@ -99,7 +99,12 @@ const defaultLocale = () => {
 
 /** @internal */
 export const Globals = createContext<
-  GlobalProps & GlobalMethods & { showSpotlight?: boolean; setShowSpotlight: BooleanCallback }
+  GlobalProps &
+    GlobalMethods & {
+      theme: "dark" | "light";
+      showSpotlight?: boolean;
+      setShowSpotlight: BooleanCallback;
+    }
 >({} as AnyObject);
 
 /** @internal */
@@ -113,7 +118,7 @@ export const GlobalProvider: FC<Partial<GlobalProps>> = ({
   defaultTitle,
   description
 }) => {
-  const theme = useRef<State["theme"]>(defaultTheme());
+  const [theme, setTheme] = useState<State["theme"]>(defaultTheme());
   const locale = useRef<State["locale"]>(defaultLocale());
 
   useEffect(() => {
@@ -122,9 +127,9 @@ export const GlobalProvider: FC<Partial<GlobalProps>> = ({
       !document.documentElement.classList.contains("ax-dark") &&
       !document.documentElement.classList.contains("ax-light")
     ) {
-      document.documentElement.classList.add(`ax-${theme.current}`);
+      document.documentElement.classList.add(`ax-${theme}`);
     } else {
-      theme.current = document.documentElement.classList.contains("ax-light") ? "light" : "dark";
+      setTheme(document.documentElement.classList.contains("ax-light") ? "light" : "dark");
     }
     i18next.changeLanguage(locale.current).then(() => {
       document.documentElement.dir = i18next.dir();
@@ -132,10 +137,11 @@ export const GlobalProvider: FC<Partial<GlobalProps>> = ({
   }, []);
 
   const toggleTheme = useCallback(() => {
-    theme.current = theme.current === "dark" ? "light" : "dark";
-    localStorage.setItem(KEY_THEME, theme.current);
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem(KEY_THEME, newTheme);
     document.documentElement.classList.remove("ax-light", "ax-dark");
-    document.documentElement.classList.add(`ax-${theme.current}`);
+    document.documentElement.classList.add(`ax-${newTheme}`);
   }, [theme]);
   const changeLocale = useCallback((locale: string) => {
     i18next.changeLanguage(locale).then(() => {
@@ -155,6 +161,7 @@ export const GlobalProvider: FC<Partial<GlobalProps>> = ({
         dateLocale,
         errorElement,
         breadcrumbTheme,
+        theme,
         toggleTheme,
         changeLocale,
         showSpotlight,

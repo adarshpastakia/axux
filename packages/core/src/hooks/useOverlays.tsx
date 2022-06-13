@@ -9,10 +9,6 @@ import { render, unmountComponentAtNode } from "react-dom";
 
 export const useAxOverlays = () => {
   const openOverlay = (modalOrFlyout: ReactNode) => {
-    if (!["AxModal", "AxFlyout"].includes((modalOrFlyout as AnyObject).type.displayName ?? "")) {
-      throw Error("Invalid overlay element");
-    }
-
     const el = document.createElement("div");
     document.body.appendChild(el);
 

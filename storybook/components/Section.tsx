@@ -3,12 +3,16 @@
 // @copyright : 2021
 // @license   : MIT
 
-import { Heading } from "@storybook/addon-docs";
 import { FC } from "react";
+import { AxBox, AxDivider, AxHeading, AxSpacer } from "@axux/core";
 
 export const Section: FC<{ title: string }> = ({ children, title }) => (
-  <div className="ax-container ax-margin--b--lg">
-    <Heading>{title}</Heading>
-    <div>{children}</div>
-  </div>
+  <AxBox marginBottom="xxl">
+    <AxHeading level={2} color="primary">
+      {title}
+    </AxHeading>
+    <AxDivider rainbow />
+    <AxSpacer />
+    {children}
+  </AxBox>
 );

@@ -31,9 +31,6 @@ describe("interpolation test", () => {
   });
 
   it("should tokenize", (done) => {
-    console.log(tokenize(ES, ES_MARK));
-    console.log(tokenize(RU, RU_MARK));
-    console.log(tokenize(AR, AR_MARK));
     done();
   });
 });

@@ -15,8 +15,8 @@
     background-color: $input-bg;
     background-image: linear-gradient(
       180deg,
-      rgba($base-shadow-color, 0.2),
-      rgba($input-bg, 0) 0.25em
+      rgba($black, 0.5),
+      rgba($input-bg, 0) 0.125em
     );
     box-shadow: 0 0 1px $color-muted inset;
     color: $input-color;
@@ -45,6 +45,9 @@
     }
   }
 
+  &__error {
+    color: $color-danger;
+  }
   &__hint {
     color: $color-muted;
   }
@@ -81,12 +84,12 @@
 
   &__switch {
     background-color: $base-bg;
-    box-shadow: 0 0 1px $base-color inset;
+    box-shadow: 0 0 1px $base-color;
     color: $input-color;
 
     &--handle {
       background-color: $input-bg;
-      box-shadow: 0 0 1px $base-color inset, 0 1px 1px rgba($base-color, 0.25);
+      box-shadow: 0 0 1px $base-color, 0 1px 1px rgba($base-color, 0.25);
     }
   }
 
@@ -137,7 +140,18 @@
 #{$prefix}-select {
   &__option {
     &:hover {
+      background-color: rgba($color-primary, 0.15);
+    }
+    &[data-disable="true"] {
+      background-color: $base-bg;
+      color: $color-muted;
+    }
+    &[data-hilight="true"] {
       background-color: rgba($color-primary, 0.25);
+    }
+    &[data-selected="true"] {
+      background-color: $color-primary;
+      color: $white;
     }
   }
   &__popover {

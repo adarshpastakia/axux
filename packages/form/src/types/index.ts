@@ -147,11 +147,11 @@ export interface SelectCommonProps<T = KeyValue> {
   /**
    * Options list
    */
-  options?: KeyValue[];
+  options?: T[];
   /**
    * Options query callback
    */
-  onQuery?: (query: string) => Promise<KeyValue[]> | KeyValue[];
+  onQuery?: (query: string) => Promise<T[]> | T[];
 
   /**
    * Selected value as object

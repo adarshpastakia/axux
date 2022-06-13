@@ -7,14 +7,18 @@
   $base: #{$prefix}-field;
 
   &__option {
+    &[data-invalid="true"] > #{$prefix}-icon {
+      color: $color-danger;
+    }
+
     input:checked {
       & ~ [data-check="on"] {
         color: $color-primary;
       }
     }
 
-    &:hover #{$prefix}-icon,
-    &:focus #{$prefix}-icon {
+    &:hover > #{$prefix}-icon,
+    &:focus > #{$prefix}-icon {
       color: $color-primary;
     }
 
@@ -140,16 +144,13 @@
   }
 }
 
-#{$prefix}-select {
-  &__option {
-    &[data-disable="true"] {
-      background-color: $base-bg;
-      color: $color-muted;
-    }
-
-    &[data-selected="true"] {
-      background-color: $color-primary;
-      color: $white;
-    }
+@at-root &[dir="rtl"] {
+  #{$prefix}-field__slider[data-vertical="false"]
+    #{$prefix}-field__slider--value[data-align="start"]
+    div {
+    box-shadow: 1px 0 0 1px $color-lightest;
+  }
+  #{$prefix}-field__slider--value div {
+    box-shadow: -1px 0 0 1px $color-lightest;
   }
 }

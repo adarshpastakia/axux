@@ -1,11 +1,11 @@
 import { Heading, Meta, Title } from "@storybook/addon-docs";
 import { AxFlexBox, AxHeading } from "../src";
-import viewport from "./assets/viewport.svg";
-import page from "./assets/page.svg";
-import grid from "./assets/grid.svg";
-import panel from "./assets/panel.svg";
-import button from "./assets/button.svg";
-import dropdown from "./assets/dropdown.svg";
+import viewport from "../../../storybook/assets/viewport.svg";
+import page from "../../../storybook/assets/page.svg";
+import grid from "../../../storybook/assets/grid.svg";
+import panel from "../../../storybook/assets/panel.svg";
+import button from "../../../storybook/assets/button.svg";
+import dropdown from "../../../storybook/assets/dropdown.svg";
 
 <Meta title="@core/Introduction" />
 
@@ -15,7 +15,7 @@ import dropdown from "./assets/dropdown.svg";
   <AxFlexBox>
     <AxFlexBox.Row>
       <AxFlexBox.Col span="6@md">
-        <AxFlexBox.Row wrap={false}>
+        <AxFlexBox.Row noWrap>
           <AxFlexBox.Col flex="auto">
             <img alt="icon" src={viewport} height={96} />
           </AxFlexBox.Col>
@@ -26,7 +26,7 @@ import dropdown from "./assets/dropdown.svg";
         </AxFlexBox.Row>
       </AxFlexBox.Col>
       <AxFlexBox.Col span="6@md">
-        <AxFlexBox.Row wrap={false} className="">
+        <AxFlexBox.Row noWrap className="">
           <AxFlexBox.Col flex="fill" className="ax-padding--t">
             <AxHeading>Pages</AxHeading>
             <p>Application route pages with sections</p>
@@ -37,7 +37,7 @@ import dropdown from "./assets/dropdown.svg";
         </AxFlexBox.Row>
       </AxFlexBox.Col>
       <AxFlexBox.Col span="6@md">
-        <AxFlexBox.Row wrap={false}>
+        <AxFlexBox.Row noWrap>
           <AxFlexBox.Col flex="auto">
             <img alt="icon" src={grid} height={96} />
           </AxFlexBox.Col>
@@ -48,7 +48,7 @@ import dropdown from "./assets/dropdown.svg";
         </AxFlexBox.Row>
       </AxFlexBox.Col>
       <AxFlexBox.Col span="6@md">
-        <AxFlexBox.Row wrap={false}>
+        <AxFlexBox.Row noWrap>
           <AxFlexBox.Col flex="fill" className="ax-padding--t">
             <AxHeading>Panels</AxHeading>
             <p>Tabbed panels</p>
@@ -64,7 +64,7 @@ import dropdown from "./assets/dropdown.svg";
           href="?path=/docs/core-buttons-button--button"
           className="ax-block ax-color--base ax-hover--secondary ax-hover--bg-lightest"
         >
-          <AxFlexBox.Row wrap={false}>
+          <AxFlexBox.Row noWrap>
             <AxFlexBox.Col flex="auto">
               <img alt="icon" src={button} height={96} />
             </AxFlexBox.Col>
@@ -76,7 +76,7 @@ import dropdown from "./assets/dropdown.svg";
         </a>
       </AxFlexBox.Col>
       <AxFlexBox.Col span="6@md">
-        <AxFlexBox.Row wrap={false}>
+        <AxFlexBox.Row noWrap>
           <AxFlexBox.Col flex="fill" className="ax-padding--t">
             <AxHeading>Overlays</AxHeading>
             <p>Overlay dropdowns and tooltips</p>

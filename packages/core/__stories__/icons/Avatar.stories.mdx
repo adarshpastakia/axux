@@ -8,10 +8,20 @@ import {
   Story,
   Title
 } from "@storybook/addon-docs";
-import { AxAvatar, COLOR } from "../../src";
-import { BasicStory, IconStory, ImageStory } from "./AvatarStory";
-import { mdiAccount } from "@mdi/js";
-import { PALETTE } from "../../../../storybook/stylings/theming-items"; import { AxBox } from "../../dist/layout/Box";
+import { AxAvatar, AxFlexBox, AxIcon } from "../../src";
+import { BasicStory, IconStory, ImageStory, SizeStory } from "./AvatarStory";
+import {
+  mdiAccount,
+  mdiAccountVoice,
+  mdiAlert,
+  mdiBell,
+  mdiBullseye,
+  mdiCardAccountPhone,
+  mdiFaceRecognition,
+  mdiFlask,
+  mdiNumeric1Circle
+} from "@mdi/js";
+import { PALETTE, THEME } from "../../../../storybook/stylings/theming-items";
 
 <Meta title="@core/Icons/Avatar" component={AxAvatar} parameters={{ jest: ["Avatar.test.tsx"] }} />
 
@@ -23,21 +33,7 @@ import { PALETTE } from "../../../../storybook/stylings/theming-items"; import {
 
 <Canvas>
   <Story name="Avatar">{BasicStory}</Story>
-</Canvas>
-
-<Anchor storyId="core-icons-avatar--basic">
-  <Heading>Icon</Heading>
-</Anchor>
-
-<Canvas>
   <Story name="Icon">{IconStory}</Story>
-</Canvas>
-
-<Anchor storyId="core-icons-avatar--image">
-  <Heading>Image</Heading>
-</Anchor>
-
-<Canvas>
   <Story name="Image">{ImageStory}</Story>
 </Canvas>
 
@@ -46,12 +42,31 @@ import { PALETTE } from "../../../../storybook/stylings/theming-items"; import {
 </Anchor>
 
 <Canvas>
-  <Story name="Sizes">
-    <AxAvatar title="Username" icon={mdiAccount} size="sm" />
-    <AxAvatar title="Username" icon={mdiAccount} size="default" />
-    <AxAvatar title="Username" icon={mdiAccount} size="md" />
-    <AxAvatar title="Username" icon={mdiAccount} size="lg" />
-    <AxAvatar title="Username" icon={mdiAccount} size="xl" />
+  <Story name="Sizes">{SizeStory}</Story>
+</Canvas>
+
+<Anchor storyId="core-icons-avatar--infographs">
+  <Heading>Infographs</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Infographs">
+    <AxAvatar
+      title="Username"
+      icon={mdiAccount}
+      size="5rem"
+      className="ax-margin"
+      infograph={{
+        top: mdiBell,
+        topEnd: <AxIcon bg="danger" color="white" icon={mdiBullseye} />,
+        bottomStart: mdiAccountVoice,
+        start: mdiCardAccountPhone,
+        end: mdiFlask,
+        bottom: <AxIcon bg="warning" color="white" icon={mdiAlert} />,
+        topStart: <AxIcon bg="info" color="white" icon={mdiNumeric1Circle} />,
+        bottomEnd: mdiFaceRecognition
+      }}
+    />
   </Story>
 </Canvas>
 
@@ -61,26 +76,36 @@ import { PALETTE } from "../../../../storybook/stylings/theming-items"; import {
 
 <Canvas>
   <Story name="Themes">
-    <AxBox margin>
-      {Object.values(COLOR).map((color) => (
-        <AxAvatar title="Username" icon={mdiAccount} key={color} color={color} />
-      ))}
-    </AxBox>
-    <AxBox margin>
-      {Object.values(PALETTE).map((color) => (
-        <AxAvatar title="Username" icon={mdiAccount} key={color} color={color} />
-      ))}
-    </AxBox>
-    <AxBox margin>
-      {Object.values(COLOR).map((color) => (
-        <AxAvatar title="Username" icon={mdiAccount} key={color} bg={color} />
-      ))}
-    </AxBox>
-    <AxBox margin>
-      {Object.values(PALETTE).map((color) => (
-        <AxAvatar title="Username" icon={mdiAccount} key={color} bg={color} />
-      ))}
-    </AxBox>
+    <AxFlexBox>
+      <AxFlexBox.Row>
+        {Object.values(THEME).map((color) => (
+          <AxFlexBox.Col key={color} flex="auto">
+            <AxAvatar title="Username" icon={mdiAccount} color={color} />
+          </AxFlexBox.Col>
+        ))}
+      </AxFlexBox.Row>
+      <AxFlexBox.Row>
+        {Object.values(THEME).map((color) => (
+          <AxFlexBox.Col key={color} flex="auto">
+            <AxAvatar title="Username" icon={mdiAccount} bg={color} />
+          </AxFlexBox.Col>
+        ))}
+      </AxFlexBox.Row>
+      <AxFlexBox.Row>
+        {Object.values(PALETTE).map((color) => (
+          <AxFlexBox.Col key={color} flex="auto">
+            <AxAvatar title="Username" icon={mdiAccount} color={color} />
+          </AxFlexBox.Col>
+        ))}
+      </AxFlexBox.Row>
+      <AxFlexBox.Row>
+        {Object.values(PALETTE).map((color) => (
+          <AxFlexBox.Col key={color} flex="auto">
+            <AxAvatar title="Username" icon={mdiAccount} bg={color} />
+          </AxFlexBox.Col>
+        ))}
+      </AxFlexBox.Row>
+    </AxFlexBox>
   </Story>
 </Canvas>
 

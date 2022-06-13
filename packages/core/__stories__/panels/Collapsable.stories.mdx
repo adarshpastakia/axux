@@ -1,0 +1,32 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title
+} from "@storybook/addon-docs";
+import { AxCollapsable } from "../../src";
+import { CollapsableStory } from "./Collapsable";
+
+<Meta
+  title="@core/Panels/Collapsable"
+  component={AxCollapsable}
+  parameters={{ jest: ["Collapsable.test.tsx"] }}
+/>
+
+<Anchor storyId="core-panels-collapsable--collapsable">
+  <Title>Collapsable</Title>
+</Anchor>
+
+<Description of={AxCollapsable} />
+
+<Canvas>
+  <Story name="Collapsable">{CollapsableStory}</Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable of={AxCollapsable} sort="requiredFirst" />

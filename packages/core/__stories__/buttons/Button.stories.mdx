@@ -8,15 +8,22 @@ import {
   Story,
   Title
 } from "@storybook/addon-docs";
-import { AxButton, COLOR } from "../../src";
+import { AxButton, AxFlexBox } from "../../src";
 import {
+  ButtonSizes,
+  ButtonStates,
   ButtonStory,
+  ButtonStyles,
+  ButtonThemes,
+  ButtonVariants,
+  DropdownStory,
+  IconStyles,
   OnlyIconStory,
   WithBadgeStory,
   WithIconStory,
   WithTooltipStory
 } from "./ButtonStory";
-import { mdiBell } from "@mdi/js";
+import { StateLabel } from "../../../../storybook/components";
 
 <Meta
   title="@core/Buttons/Button"
@@ -32,37 +39,9 @@ import { mdiBell } from "@mdi/js";
 
 <Canvas>
   <Story name="Button">{ButtonStory}</Story>
-</Canvas>
-
-<Anchor storyId="core-buttons-button--with-icon">
-  <Heading>With Icon</Heading>
-</Anchor>
-
-<Canvas>
-  <Story name="With Icon">{WithIconStory}</Story>
-</Canvas>
-
-<Anchor storyId="core-buttons-button--only-icon">
-  <Heading>Icon Only</Heading>
-</Anchor>
-
-<Canvas>
   <Story name="Only Icon">{OnlyIconStory}</Story>
-</Canvas>
-
-<Anchor storyId="core-buttons-button--with-tooltip">
-  <Heading>With Tooltip</Heading>
-</Anchor>
-
-<Canvas>
+  <Story name="With Icon">{WithIconStory}</Story>
   <Story name="With Tooltip">{WithTooltipStory}</Story>
-</Canvas>
-
-<Anchor storyId="core-buttons-button--with-badge">
-  <Heading>With Badge</Heading>
-</Anchor>
-
-<Canvas>
   <Story name="With Badge">{WithBadgeStory}</Story>
 </Canvas>
 
@@ -71,42 +50,15 @@ import { mdiBell } from "@mdi/js";
 </Anchor>
 
 <Canvas>
-  <Story name="Styles">
-    <div>
-      <AxButton type="default">Default</AxButton>
-      <AxButton type="outline">Outline</AxButton>
-      <AxButton type="solid">Solid</AxButton>
-      <AxButton type="link">Link</AxButton>
-    </div>
-    <div>
-      <AxButton data-popover="true" type="default">
-        Default
-      </AxButton>
-      <AxButton data-popover="true" type="outline">
-        Outline
-      </AxButton>
-      <AxButton data-popover="true" type="solid">
-        Solid
-      </AxButton>
-      <AxButton data-popover="true" type="link">
-        Link
-      </AxButton>
-    </div>
-    <div>
-      <AxButton split data-popover="true" type="default">
-        Default
-      </AxButton>
-      <AxButton split data-popover="true" type="outline">
-        Outline
-      </AxButton>
-      <AxButton split data-popover="true" type="solid">
-        Solid
-      </AxButton>
-      <AxButton split data-popover="true" type="link">
-        Link
-      </AxButton>
-    </div>
-  </Story>
+  <Story name="Styles">{ButtonStyles.bind({})}</Story>
+</Canvas>
+
+<Anchor storyId="core-buttons-button--dropdown">
+  <Heading>Dropdown</Heading>
+</Anchor>
+
+<Canvas>
+  <Story name="Dropdown">{DropdownStory.bind({})}</Story>
 </Canvas>
 
 <Anchor storyId="core-buttons-button--icon-styles">
@@ -114,24 +66,7 @@ import { mdiBell } from "@mdi/js";
 </Anchor>
 
 <Canvas>
-  <Story name="Icon Styles">
-    <AxButton icon={mdiBell}>Button</AxButton>
-    <AxButton icon={mdiBell} iconAlign="end">
-      Button
-    </AxButton>
-    <AxButton icon={mdiBell} iconHilight>
-      Button
-    </AxButton>
-    <AxButton icon={mdiBell} iconHilight iconAlign="end">
-      Button
-    </AxButton>
-    <AxButton type="solid" icon={mdiBell} iconHilight>
-      Button
-    </AxButton>
-    <AxButton type="solid" icon={mdiBell} iconHilight iconAlign="end">
-      Button
-    </AxButton>
-  </Story>
+  <Story name="Icon Styles">{IconStyles.bind({})}</Story>
 </Canvas>
 
 <Anchor storyId="core-buttons-button--sizes">
@@ -139,12 +74,7 @@ import { mdiBell } from "@mdi/js";
 </Anchor>
 
 <Canvas>
-  <Story name="Sizes">
-    <AxButton size="sm">Small</AxButton>
-    <AxButton size="default">Default</AxButton>
-    <AxButton size="md">Medium</AxButton>
-    <AxButton size="lg">Large</AxButton>
-  </Story>
+  <Story name="Sizes">{ButtonSizes.bind({})}</Story>
 </Canvas>
 
 <Anchor storyId="core-buttons-button--themes">
@@ -152,22 +82,7 @@ import { mdiBell } from "@mdi/js";
 </Anchor>
 
 <Canvas>
-  <Story name="Themes">
-    <div>
-      {Object.values(COLOR).map((color) => (
-        <AxButton key={color} color={color}>
-          {color}
-        </AxButton>
-      ))}
-    </div>
-    <div>
-      {Object.values(COLOR).map((color) => (
-        <AxButton key={color} type="solid" color={color}>
-          {color}
-        </AxButton>
-      ))}
-    </div>
-  </Story>
+  <Story name="Themes">{ButtonThemes.bind({})}</Story>
 </Canvas>
 
 <Anchor storyId="core-buttons-button--variants">
@@ -175,13 +90,7 @@ import { mdiBell } from "@mdi/js";
 </Anchor>
 
 <Canvas>
-  <Story name="Variants">
-    <AxButton.Positive>Positive Button</AxButton.Positive>
-    <AxButton.Negative>Negative Button</AxButton.Negative>
-    <AxButton.Neutral>Neutral Button</AxButton.Neutral>
-    <AxButton.Action message="Done!">Action Button</AxButton.Action>
-    <AxButton.Confirm message="Are you sure?">Confirm Button</AxButton.Confirm>
-  </Story>
+  <Story name="Variants">{ButtonVariants.bind({})}</Story>
 </Canvas>
 
 <Anchor storyId="core-buttons-button--states">
@@ -189,11 +98,7 @@ import { mdiBell } from "@mdi/js";
 </Anchor>
 
 <Canvas>
-  <Story name="States">
-    <AxButton>Normal</AxButton>
-    <AxButton isLoading>Loading</AxButton>
-    <AxButton isDisabled>Disabled</AxButton>
-  </Story>
+  <Story name="States">{ButtonStates.bind({})}</Story>
 </Canvas>
 
 <Heading>Props</Heading>

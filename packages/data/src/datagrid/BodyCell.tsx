@@ -54,7 +54,7 @@ export const BodyCell: VFC<GridColumn & { record: KeyValue }> = ({
   return (
     <div
       data-align={align}
-      className="ax-grid__body--cell"
+      className="ax-datagrid__body--cell"
       style={{ flex: widths[name] ? `0 0 ${widths[name]}` : undefined, minWidth, maxWidth }}
     >
       <label>{content}</label>

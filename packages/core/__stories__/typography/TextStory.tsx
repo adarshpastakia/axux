@@ -8,8 +8,13 @@ import { PropsWithChildren } from "react";
 import { LIPSUM } from "../../../../storybook/components/Lipsum";
 import { AxText } from "../../src";
 import { TextProps } from "../../src/typography/Text";
+import { AxBox } from "../../dist";
 
-const Template: Story<PropsWithChildren<TextProps>> = (props) => <AxText {...props} />;
+const Template: Story<PropsWithChildren<TextProps>> = (props) => (
+  <AxBox maxWidth={960}>
+    <AxText {...props} />
+  </AxBox>
+);
 
 export const TextStory = Template.bind({});
 TextStory.args = {
@@ -31,6 +36,12 @@ ColorStory.args = {
   block: true,
   color: "secondary",
   bg: "lightest"
+};
+
+export const ClipStory = Template.bind({});
+ClipStory.args = {
+  children: LIPSUM.para,
+  clip: 3
 };
 
 export default { title: "Example/Text", component: AxText };

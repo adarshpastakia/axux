@@ -30,18 +30,14 @@
 }
 
 #{$prefix}-loader {
-  bottom: 0;
   cursor: wait;
   display: grid;
   font-size: 1.5em;
-  left: 0;
   line-height: 1;
   place-content: center;
   place-items: center;
-  position: absolute;
-  right: 0;
-  top: 0;
   z-index: 9999;
+  @include position(absolute, 0);
 
   &[data-size="lg"] {
     font-size: 3em;
@@ -54,17 +50,15 @@
     grid-area: loader;
     height: 4px;
     overflow: hidden;
-    position: relative;
+    z-index: 10;
+    @include position(absolute, 0 0 null);
 
     &::before {
       background-color: currentColor;
-      bottom: 1px;
       content: "";
-      left: 0;
-      position: absolute;
-      top: 1px;
       transform: scaleX(0) translateX(0%);
       width: 100%;
+      @include position(absolute, 1px null 1px 0);
       @include animation(infinite-progress 1s ease-in-out infinite);
     }
   }
@@ -80,17 +74,14 @@
   }
 
   &__app {
-    bottom: 0;
     display: grid;
     height: 100vh;
-    left: 0;
     place-content: center;
     place-items: center;
-    position: fixed;
-    right: 0;
-    top: 0;
+    text-align: center;
     width: 100vw;
     z-index: 9999;
+    @include position(fixed, 0);
 
     &--indicator {
       height: 0.25em;
@@ -105,6 +96,12 @@
         position: absolute;
         @include animation(app-loader 2s linear infinite);
       }
+    }
+
+    > div > small {
+      font-size: 1rem !important;
+      font-weight: 300 !important;
+      margin-bottom: 1rem;
     }
   }
 
@@ -123,12 +120,9 @@
     }
 
     &::after {
-      bottom: 0;
       content: "";
-      left: 0;
-      position: absolute;
-      top: 0;
       width: 18em;
+      @include position(absolute, 0 null 0 0);
       @include animation(text-load 1s linear infinite);
     }
   }

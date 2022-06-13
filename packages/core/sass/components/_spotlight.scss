@@ -6,16 +6,12 @@
 #{$prefix}-spotlight {
   align-items: start;
   backdrop-filter: blur(1px);
-  bottom: 0;
   display: grid;
   justify-items: center;
-  left: 0;
   overflow: hidden;
   padding: 20vh 10vw;
-  position: fixed;
-  right: 0;
-  top: 0;
   z-index: 9999;
+  @include position(fixed, 0);
 
   &__wrapper {
     border-radius: $base-border-radius;
@@ -34,6 +30,8 @@
     font-size: 1.5em;
 
     > input {
+      background: none;
+      border: 0;
       flex: 1 1 1em;
       font-size: inherit;
       padding: 0.25em;
