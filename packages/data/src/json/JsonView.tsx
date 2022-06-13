@@ -17,6 +17,7 @@ export interface JsonViewProps extends ElementProps {
   collapseDefault?: boolean;
   emptyDisplay?: JSX.Element;
   labeler?: (key: string) => string;
+  dateProperties?: string[];
   formatter?: (key?: string, value?: AnyObject) => string | JSX.Element;
   copy?: true | string[];
   filters?: true | string[];
@@ -34,6 +35,7 @@ const JsonValue: VFC<JsonObjectProps> = ({
   value,
   label,
   score,
+  dateProperties,
   propName = [],
   labeler,
   formatter,
@@ -48,15 +50,19 @@ const JsonValue: VFC<JsonObjectProps> = ({
       if (!isNil(ret)) return ret;
     }
 
+    const fullPropName = propName.join(".").toLowerCase();
+    const isDate =
+      fullPropName.includes("date") || dateProperties?.some((dp) => dp === fullPropName);
+
     if (isNumber(value) || /^[+-]?\d+(\.\d+)?$/.test(`${value}`)) return Format.number(value);
     if (isBoolean(value)) return !!value ? "Yes" : "No";
-    if (DateUtils.isValid(value, true))
+    if (isDate && DateUtils.isValid(value))
       return (
         <AxDateDisplay date={DateUtils.parse(value) as AnyObject} format="dd MMM yyyy HH:mm:ss" />
       );
 
     return value.toString();
-  }, [formatter, propName, value]);
+  }, [formatter, propName, value, dateProperties]);
   const canFilter = useMemo(
     () =>
       !isEmpty(value) && propName && (filters === true || filters?.includes?.(propName.join("."))),
