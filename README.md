@@ -1,4 +1,4 @@
-# ![Logo](./assets/poster.png)
+# ![Logo](./assets/poster-dark.png)
 
 ---
 
@@ -128,8 +128,8 @@ root.render(
 
 ## Dependencies
 
-- ### react@18
-- ### tailwindcss
+- ### [react@18](//reactjs.org)
+- ### [tailwindcss](//tailwindcss.com)
 
 #### CSS tooling
 
