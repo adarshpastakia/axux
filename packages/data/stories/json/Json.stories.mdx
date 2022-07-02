@@ -1,0 +1,25 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import { useState, useEffect } from "react";
+import { AxJsonView } from "../../src";
+import { JsonStory } from "./JsonStory";
+
+<Meta title="@data/Json View" component={AxJsonView} />
+
+<Title>Json View</Title>
+
+<Canvas>
+  <Story name="Json View" height="32rem">
+    {JsonStory}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxJsonView} />

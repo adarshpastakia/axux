@@ -1,0 +1,49 @@
+/*
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+.prismjs > code {
+  font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+  font-size: 1em;
+  line-height: 1.5;
+  text-align: left;
+  user-select: text;
+  white-space: pre;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  margin: 0.5em 0;
+  overflow: auto;
+  padding: 1em;
+}
+
+/* Inline code */
+*:not(pre) > code[class*="language-"] {
+  border-radius: 0.3em;
+  padding: 0.1em;
+  white-space: normal;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  & .token.important,
+  & .token.bold {
+    font-weight: 600;
+  }
+
+  & .token.italic {
+    font-style: italic;
+  }
+
+  & .token.entity {
+    cursor: help;
+  }
+}

@@ -1,0 +1,80 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+/******************* viewport *******************/
+@layer components {
+  .ax-viewport {
+    @apply panel fixed inset-0 w-full h-full bg-bw-100 dark:bg-bw-800;
+    grid-template-areas: "head head head" "crumbbar crumbbar crumbbar" "side-s content side-e" "foot foot foot";
+    grid-template-rows: auto auto 1fr auto;
+
+    & ::-webkit-scrollbar {
+      @apply w-2 h-2;
+    }
+    & ::-webkit-scrollbar-track {
+      @apply bg-bw-400/20;
+    }
+    & ::-webkit-scrollbar-thumb {
+      @apply bg-bw-500/70 hover:bg-bw-400/70 active:bg-bw-600/70 dark:active:bg-bw-300/70;
+    }
+    & ::-webkit-scrollbar-corner {
+      @apply bg-bw-500/50;
+    }
+
+    & .ax-banner {
+      @apply absolute top-0 left-1/2 -translate-x-1/2 shadow-sm leading-none py-1 px-4 text-sm min-w-[12em] max-w-[70%] rounded-b-md;
+
+      & span:last-child {
+        @apply ltr:ml-4 rtl:mr-4;
+      }
+    }
+
+    & .ax-page {
+      @apply overflow-hidden grid-area-[content];
+    }
+  }
+}
+
+/******************* page *******************/
+@layer components {
+  .ax-page {
+    @apply panel bg-base;
+
+    &.ax-paper + .ax-footer {
+      @apply -mt-2;
+    }
+  }
+}
+
+/******************* error boundary *******************/
+@layer components {
+  .ax-error-boundary {
+    @apply grid overflow-hidden p-3 rounded bg-repeat shadow-md bg-danger-600;
+    grid-template-rows: 1fr;
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgba(255 255 255 / 0.5) 0 8px,
+      rgba(255 255 255 / 0.2) 8px 24px
+    );
+
+    & > div {
+      @apply grid overflow-hidden bg-base rounded;
+      grid-template-rows: auto auto 1fr;
+    }
+
+    & hr,
+    & pre {
+      @apply m-0;
+    }
+  }
+
+  .ax-page > .ax-error-boundary,
+  .ax-viewport > .ax-error-boundary {
+    @apply grid-area-[content] max-h-[80%] max-w-[80%] place-self-center;
+  }
+}

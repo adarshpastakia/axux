@@ -1,0 +1,247 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+/******************* animated circles *******************/
+@layer components {
+  @keyframes check-stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes check-scale {
+    0%,
+    100% {
+      transform: none;
+    }
+    50% {
+      transform: scale3d(1.1, 1.1, 1);
+    }
+  }
+
+  @keyframes check-fill {
+    100% {
+      box-shadow: inset 0px 0px 0px 1em currentColor;
+    }
+  }
+
+  @keyframes progress-animate {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: 1em;
+    }
+  }
+
+  .check-animation {
+    @apply inline-block w-[1.5em] h-[1.5em] rounded-[50%] stroke-bw-0 fill-transparent;
+    stroke-width: 4px;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px currentColor;
+    animation: check-fill 0.4s ease-in-out 0.4s forwards,
+      check-scale 0.3s ease-in-out 0.9s both;
+  }
+  .check-animation__circle {
+    @apply stroke-current fill-transparent;
+    stroke-width: 8px;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-miterlimit: 10;
+    animation: check-stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  }
+  .check-animation__icon {
+    @apply origin-center;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: check-stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+  }
+}
+
+/******************* loading bars *******************/
+@layer components {
+  @keyframes bar-animation {
+    0% {
+      @apply h-2;
+    }
+    60% {
+      @apply h-2;
+    }
+    80% {
+      @apply h-6;
+    }
+
+    100% {
+      @apply h-2;
+    }
+  }
+
+  .bar-animation {
+    @apply inline-flex items-end h-8 text-bw-500;
+
+    & li {
+      @apply list-none w-2 h-2 mx-0.5 opacity-75 bg-current;
+      animation: bar-animation 1.1s ease-in-out infinite;
+    }
+    & li:nth-child(1) {
+      animation-delay: -1.2s;
+    }
+    & li:nth-child(2) {
+      animation-delay: -1s;
+    }
+    & li:nth-child(3) {
+      animation-delay: -0.8s;
+    }
+    & li:nth-child(4) {
+      animation-delay: -0.6s;
+    }
+  }
+}
+
+/******************* loading spinner *******************/
+@layer components {
+  @keyframes spinner-animation {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .spinner-animation {
+    @apply inline-block relative w-[1em] h-[1em] rounded-[50%] border-[0.125em] border-transparent border-t-current border-opacity-75 leading-none
+    after:content-[""] after:absolute after:-inset-[0.125em] after:rounded-[50%] after:border-[0.125em] after:border-current after:opacity-30;
+    animation: spinner-animation 1.5s cubic-bezier(0.65, 0.25, 0.45, 0) infinite;
+  }
+}
+
+@layer components {
+  @keyframes loading-indicator {
+    from {
+      transform: translateX(calc(-100% * var(--multiplier)));
+    }
+
+    to {
+      transform: translateX(calc(100% * var(--multiplier)));
+    }
+  }
+
+  .loading-indicator {
+    --multiplier: 1;
+    @apply grid-area-[loader] relative;
+
+    & > div {
+      @apply absolute z-10 bg-base py-px inset-0 after:h-0.5 after:block after:bg-primary-500;
+      height: calc(0.125rem + 2px);
+      &:after {
+        animation: loading-indicator 1s cubic-bezier(0.65, 0, 0.45, 1) infinite;
+      }
+    }
+  }
+
+  [dir="rtl"] .loading-indicator {
+    --multiplier: -1;
+  }
+}
+
+@layer components {
+  .card-animation {
+    & > div {
+      @apply max-w-lg text-bw-200 dark:text-bw-700;
+    }
+  }
+}
+
+/******************* progress bar/circle *******************/
+@layer components {
+  [class^="progress-"] span {
+    @apply flex w-full h-full items-center justify-center select-none font-bold;
+  }
+
+  .progress-circle {
+    @apply inline-block w-[4em] h-[4em] relative;
+
+    & > span {
+      @apply text-bw-600 dark:text-bw-300;
+      font-size: 0.625em;
+    }
+
+    & > svg {
+      @apply absolute inset-0 w-full h-full;
+
+      & circle {
+        transition: stroke-dashoffset 0.5s;
+      }
+    }
+  }
+
+  .progress-bar {
+    @apply block w-3/4 h-[1em] mx-auto relative rounded bg-bw-200 dark:bg-bw-700 overflow-hidden whitespace-nowrap;
+
+    & > span {
+      @apply inline-block z-10 text-bw-1000 dark:text-bw-0 w-auto align-text-top sticky ltr:right-0 rtl:left-0;
+      font-size: 0.5em;
+      line-height: 0.5em;
+      padding: 0.75em;
+      vertical-align: top;
+    }
+
+    &:before,
+    &:after {
+      width: calc(var(--progress) * 1%);
+      transition: width 0.5s;
+    }
+
+    &:before {
+      @apply z-0 inline-block bg-current h-full align-top;
+      content: "";
+    }
+
+    &:after[data-animate="true"] {
+      @apply z-0 absolute inset-y-0 ltr:left-0 rtl:right-0;
+      content: "";
+      background-image: linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 1em 1em;
+      animation: progress-animate 1s linear infinite;
+    }
+  }
+}
+
+/******************* progress colors/sizes *******************/
+@layer utilities {
+  [class^="progress-"][data-size="md"] {
+    @apply text-2xl;
+  }
+  [class^="progress-"][data-size="lg"] {
+    @apply text-3xl;
+  }
+  [class^="progress-"][data-size="xl"] {
+    @apply text-4xl;
+  }
+
+  [class^="progress-"][data-color="primary"] {
+    @apply text-primary-500;
+  }
+  [class^="progress-"][data-color="accent"] {
+    @apply text-accent-500;
+  }
+  [class^="progress-"][data-color="danger"] {
+    @apply text-danger-500;
+  }
+  [class^="progress-"][data-color="success"] {
+    @apply text-success-500;
+  }
+  [class^="progress-"][data-color="warning"] {
+    @apply text-warning-500;
+  }
+}

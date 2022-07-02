@@ -1,0 +1,68 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import { AxFlyout, AxModal } from "../../src";
+import { ModalStory, FlyoutStory, ModalSource, FlyoutSource } from "./Overlay";
+
+<Meta title="@core/Overlays" parameters={{ jest: ["Overlay.test.tsx"] }} />
+
+<Title>Overlays</Title>
+
+<Heading storyId="core-overlays--1-modal">Modal</Heading>
+
+<Canvas>
+  <Story
+    name="1.Modal"
+    args={{
+      title: "My Modal",
+      icon: "",
+    }}
+    parameters={{
+      docs: {
+        source: {
+          language: "tsx",
+          code: ModalSource,
+        },
+      },
+    }}
+  >
+    {ModalStory.bind({})}
+  </Story>
+</Canvas>
+
+<Heading storyId="core-overlays--2-flyout">Flyout</Heading>
+
+<Canvas>
+  <Story
+    name="2.Flyout"
+    args={{
+      title: "My Flyout",
+      icon: "",
+    }}
+    parameters={{
+      docs: {
+        source: {
+          language: "tsx",
+          code: FlyoutSource,
+        },
+      },
+    }}
+  >
+    {FlyoutStory.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxModal,
+    AxFlyout,
+  }}
+/>

@@ -1,0 +1,91 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import { useState, useEffect } from "react";
+import { AxAnimation, AxBadge, AxProgress } from "../src";
+
+<Meta title="@core/Animations" />
+
+<Title>Animations</Title>
+
+<Heading storyId="core-animations--1a-check">Animated Circles</Heading>
+
+<Canvas>
+  <Story name="1a.Check">
+    <AxAnimation.Check className="text-success-500" />
+  </Story>
+  <Story name="1b.Cross">
+    <AxAnimation.Cross className="text-danger-500" />
+  </Story>
+  <Story name="1c.Info">
+    <AxAnimation.Info className="text-primary-500" />
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxAnimation.Check} />
+
+<Heading storyId="core-animations--2-a-bars">Animated Indicators</Heading>
+
+<Canvas>
+  <Story name="2a.Bars">
+    <AxAnimation.Bars className="text-primary-500" />
+  </Story>
+  <Story name="2b.Spinner">
+    <AxAnimation.Spinner className="text-4xl text-accent-500" />
+  </Story>
+  <Story name="2c.Card">
+    <AxAnimation.Card className="w-64" showIcon />
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxAnimation.Bars} />
+
+<Heading storyId="core-animations--3-a-progress-circle">Progress</Heading>
+
+export const CircleTemplate = (args) => {
+  const [value, setValue] = useState(24);
+  useEffect(() => {
+    const tmr = setInterval(() => {
+      setValue(Math.random() * 100);
+    }, 5000);
+    return () => {
+      clearInterval(tmr);
+    };
+  }, []);
+  return <AxProgress.Circle size="md" value={value} />;
+};
+const CircleStory = CircleTemplate.bind({});
+CircleStory.args = {};
+
+export const BarTemplate = (args) => {
+  const [value, setValue] = useState(24);
+  useEffect(() => {
+    const tmr = setInterval(() => {
+      setValue(Math.random() * 100);
+    }, 5000);
+    return () => {
+      clearInterval(tmr);
+    };
+  }, []);
+  return (
+    <div style={{ width: "40rem" }}>
+      <AxProgress.Bar size="md" value={value} animate />
+    </div>
+  );
+};
+const BarStory = BarTemplate.bind({});
+BarStory.args = {};
+
+<Canvas>
+  <Story name="3a.Progress Circle">{CircleStory}</Story>
+  <Story name="3b.Progress Bar">{BarStory}</Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxProgress.Bar} />

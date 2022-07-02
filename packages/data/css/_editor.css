@@ -1,0 +1,28 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-editor {
+    & .react-monaco-editor-container {
+      direction: ltr;
+      grid-area: content;
+    }
+
+    & .monaco-editor .folded-background {
+      opacity: 0.5;
+    }
+
+    & .monaco-findInput textarea {
+      min-height: unset;
+      resize: initial;
+    }
+  }
+  .ax-editor__tools {
+    @apply bg-base;
+  }
+}

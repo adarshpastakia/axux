@@ -1,0 +1,71 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import { AxPanel } from "../../src";
+import {
+  PanelStory,
+  PanelHeaderStory,
+  PanelVariantStory,
+  PanelGroupStory,
+  PanelStackStory,
+} from "./Panel";
+
+<Meta
+  title="@core/Panels/Panel"
+  component={AxPanel}
+  parameters={{ jest: ["Panel.test.tsx"] }}
+/>
+
+<Title>Panels</Title>
+
+<Description of={AxPanel} />
+
+<Canvas>
+  <Story name="1.Panel">{PanelStory.bind({})}</Story>
+</Canvas>
+
+<Heading storyId="core-panels-panel--2-with-header">Panel with Header</Heading>
+
+<Canvas>
+  <Story name="2.With Header">{PanelHeaderStory.bind({})}</Story>
+</Canvas>
+
+<Heading storyId="core-panels-panel--3-expand-collapse">
+  Expand/Collapse Panel
+</Heading>
+
+<Canvas>
+  <Story name="3.Expand Collapse">{PanelVariantStory.bind({})}</Story>
+</Canvas>
+
+<Heading storyId="core-panels-panel--4-panel-group">Panel Group</Heading>
+
+<Canvas>
+  <Story name="4.Panel Group" args={{}}>
+    {PanelGroupStory.bind({})}
+  </Story>
+</Canvas>
+
+<Heading storyId="core-panels-panel--5-panel-stack">Panel Stack</Heading>
+
+<Canvas>
+  <Story name="5.Panel Stack" args={{}}>
+    {PanelStackStory.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxPanel,
+    "AxPanel.Group": AxPanel.Group,
+    "AxPanel.Stack": AxPanel.Stack,
+  }}
+/>

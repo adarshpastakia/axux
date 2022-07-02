@@ -1,0 +1,310 @@
+/*
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-button {
+    @apply align-middle m-1 relative inline-block select-none max-w-full print:hidden;
+
+    & .ax-button__label {
+      @apply transition-colors z-10;
+      line-height: 1.2;
+    }
+
+    & .ax-button__inner {
+      @apply flex items-center justify-center py-[0.25em] px-[1em] gap-1 z-10 transition-colors font-medium
+        shadow shadow-bw-400 dark:shadow-black active:shadow-inner active:shadow-bw-500 rounded
+        focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2;
+      min-height: 2em;
+      min-width: 2em;
+      max-width: 15em;
+
+      &[tabindex="-1"] {
+        @apply focus-visible:outline-0;
+      }
+
+      & * {
+        @apply pointer-events-none;
+      }
+    }
+
+    & .ax-button__inner:active {
+      & .ax-button__label,
+      & .ax-button__icon {
+        @apply translate-y-px;
+      }
+    }
+
+    & .ax-button__loader {
+      @apply absolute inset-px overflow-hidden z-0 rounded bg-primary-700;
+      background-image: linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 1em 1em;
+      animation: progress-animate 1s linear infinite;
+    }
+
+    & .ax-badge {
+      @apply absolute -top-0 ltr:-right-0 rtl:-left-0 ltr:translate-x-1/3 rtl:-translate-x-1/3 -translate-y-1/2;
+    }
+
+    &[data-square="true"] .ax-button__inner {
+      @apply p-[0.25em] justify-center;
+      width: 2em;
+      height: 2em;
+    }
+  }
+
+  .ax-button__inner[data-action-done="true"] {
+    & .ax-button__icon,
+    & .ax-button__label {
+      @apply text-transparent;
+    }
+    & ~ .animated-svg {
+      @apply absolute inset-0 flex justify-center items-center;
+    }
+  }
+
+  .ax-button__group {
+    @apply m-0.5 relative inline-flex flex-nowrap print:hidden;
+
+    & > .ax-button {
+      @apply m-0;
+
+      & > .ax-button__inner {
+        @apply rounded-none z-0;
+
+        &:hover {
+          @apply z-10;
+        }
+      }
+
+      &:first-child > .ax-button__inner {
+        @apply ltr:rounded-l rtl:rounded-r;
+      }
+      &:last-child > .ax-button__inner {
+        @apply ltr:rounded-r rtl:rounded-l;
+      }
+    }
+  }
+}
+
+/******************* light colors *******************/
+@layer utilities {
+  .ax-button[data-type="link"] .ax-button__inner {
+    @apply shadow-none;
+  }
+  .light .ax-button {
+    & .ax-button__inner {
+      @apply bg-bw-50 text-primary-600 hover:bg-primary-100 active:bg-primary-300 focus-visible:outline-primary-500;
+    }
+    &[data-type="link"] .ax-button__inner {
+      @apply shadow-none bg-bw-100/30 hover:bg-bw-100 active:bg-bw-200;
+    }
+
+    &[data-color="accent"] .ax-button__inner {
+      @apply text-accent-600 hover:bg-accent-100 active:bg-accent-300 focus-visible:outline-accent-500;
+    }
+    &[data-color="danger"] .ax-button__inner {
+      @apply text-danger-600 hover:bg-danger-100 active:bg-danger-300 focus-visible:outline-danger-500;
+    }
+    &[data-color="success"] .ax-button__inner {
+      @apply text-success-600 hover:bg-success-100 active:bg-success-300 focus-visible:outline-success-500;
+    }
+    &[data-color="warning"] .ax-button__inner {
+      @apply text-warning-600 hover:bg-warning-100 active:bg-warning-300 focus-visible:outline-warning-500;
+    }
+
+    &[data-type="solid"] .ax-button__inner {
+      @apply bg-primary-500 hover:bg-primary-400 active:bg-primary-700 text-bw-50;
+    }
+    &[data-color="accent"][data-type="solid"] .ax-button__inner {
+      @apply bg-accent-500 hover:bg-accent-400 active:bg-accent-700 text-bw-50;
+    }
+    &[data-color="danger"][data-type="solid"] .ax-button__inner {
+      @apply bg-danger-500 hover:bg-danger-400 active:bg-danger-700 text-bw-50;
+    }
+    &[data-color="success"][data-type="solid"] .ax-button__inner {
+      @apply bg-success-600 hover:bg-success-500 active:bg-success-700 text-bw-50;
+    }
+    &[data-color="warning"][data-type="solid"] .ax-button__inner {
+      @apply bg-warning-600 hover:bg-warning-500 active:bg-warning-700 text-bw-50;
+    }
+
+    &[data-active="true"] .ax-button__inner,
+    & .ax-button__inner[data-popover-open="true"] {
+      @apply pointer-events-none shadow-inner bg-primary-200;
+    }
+    &[data-active="true"][data-color="accent"] .ax-button__inner,
+    &[data-color="accent"] .ax-button__inner[data-popover-open="true"] {
+      @apply bg-accent-200;
+    }
+    &[data-active="true"][data-color="danger"] .ax-button__inner,
+    &[data-color="danger"] .ax-button__inner[data-popover-open="true"] {
+      @apply bg-danger-200;
+    }
+    &[data-active="true"][data-color="warning"] .ax-button__inner,
+    &[data-color="warning"] .ax-button__inner[data-popover-open="true"] {
+      @apply bg-warning-200;
+    }
+    &[data-active="true"][data-color="success"] .ax-button__inner,
+    &[data-color="success"] .ax-button__inner[data-popover-open="true"] {
+      @apply bg-success-200;
+    }
+  }
+  .dark .ax-button {
+    & .ax-button__inner {
+      @apply bg-bw-800 text-primary-300 hover:bg-primary-800 active:bg-primary-900 focus-visible:outline-primary-500;
+    }
+    &[data-type="link"] .ax-button__inner {
+      @apply shadow-none bg-bw-800/30 hover:bg-bw-800 active:bg-bw-900;
+    }
+
+    &[data-color="accent"] .ax-button__inner {
+      @apply text-accent-300 hover:bg-accent-800 active:bg-accent-900 focus-visible:outline-accent-500;
+    }
+    &[data-color="danger"] .ax-button__inner {
+      @apply text-danger-400 hover:bg-danger-800 active:bg-danger-900 focus-visible:outline-danger-500;
+    }
+    &[data-color="success"] .ax-button__inner {
+      @apply text-success-400 hover:bg-success-800 active:bg-success-900 focus-visible:outline-success-500;
+    }
+    &[data-color="warning"] .ax-button__inner {
+      @apply text-warning-400 hover:bg-warning-800 active:bg-warning-900 focus-visible:outline-warning-500;
+    }
+
+    &[data-type="solid"] .ax-button__inner {
+      @apply bg-primary-700 hover:bg-primary-600 active:bg-primary-900;
+    }
+    &[data-color="accent"][data-type="solid"] .ax-button__inner {
+      @apply bg-accent-700 hover:bg-accent-600 active:bg-accent-900 text-bw-50;
+    }
+    &[data-color="danger"][data-type="solid"] .ax-button__inner {
+      @apply bg-danger-700 hover:bg-danger-600 active:bg-danger-900 text-bw-50;
+    }
+    &[data-color="success"][data-type="solid"] .ax-button__inner {
+      @apply bg-success-700 hover:bg-success-600 active:bg-success-900 text-bw-50;
+    }
+    &[data-color="warning"][data-type="solid"] .ax-button__inner {
+      @apply bg-warning-700 hover:bg-warning-600 active:bg-warning-900 text-bw-50;
+    }
+
+    &[data-active="true"] .ax-button__inner,
+    & .ax-button__inner[data-popover-open="true"] {
+      @apply pointer-events-none shadow-inner shadow-black bg-primary-700;
+    }
+    &[data-active="true"][data-color="accent"] .ax-button__inner,
+    &[data-color="accent"] .ax-button__inner[data-popover-open="true"] {
+      @apply bg-accent-700;
+    }
+    &[data-active="true"][data-color="danger"] .ax-button__inner,
+    &[data-color="danger"] .ax-button__inner[data-popover-open="true"] {
+      @apply bg-danger-700;
+    }
+    &[data-active="true"][data-color="warning"] .ax-button__inner,
+    &[data-color="warning"] .ax-button__inner[data-popover-open="true"] {
+      @apply bg-warning-700;
+    }
+    &[data-active="true"][data-color="success"] .ax-button__inner,
+    &[data-color="success"] .ax-button__inner[data-popover-open="true"] {
+      @apply bg-success-700;
+    }
+  }
+}
+
+@layer utilities {
+  .ax-button[data-size="sm"] {
+    @apply text-xs;
+  }
+  .ax-button[data-size="md"] {
+    @apply text-md;
+  }
+  .ax-button[data-size="lg"] {
+    @apply text-lg;
+  }
+  .ax-button[data-block="true"] {
+    @apply block;
+
+    & .ax-button__inner {
+      @apply max-w-none;
+    }
+  }
+
+  .ax-button[data-type="outline"] .ax-button__inner {
+    @apply border border-current;
+  }
+
+  .ax-button[data-round="true"] .ax-button__inner,
+  .ax-button[data-round="true"] .ax-button__loader {
+    @apply rounded-full;
+  }
+
+  .ax-button[data-icon-align="end"] .ax-button__inner {
+    @apply flex-row-reverse;
+  }
+
+  .ax-button[data-icon-align="top"] .ax-button__inner {
+    @apply flex-col;
+  }
+
+  .ax-button[data-disabled="true"] {
+    @apply cursor-not-allowed;
+  }
+  .ax-button[data-disabled="true"] .ax-button__inner {
+    @apply pointer-events-none opacity-30;
+  }
+
+  .ax-button[data-loading="true"] {
+    @apply cursor-wait;
+
+    & .spinner-animation {
+      @apply -m-0.5 h-5 w-5;
+      font-size: 12px;
+    }
+  }
+  .ax-button[data-loading="true"] .ax-button__inner {
+    @apply pointer-events-none ring-1 ring-bw-200 dark:ring-bw-700 shadow-sm;
+  }
+  .ax-button[data-loading="true"][data-spinner="false"] .ax-button__inner {
+    @apply text-bw-100;
+  }
+
+  .ax-button[data-type="solid"] .ax-button__inner,
+  .ax-button[data-invert="true"] .ax-button__inner {
+    @apply text-bw-50;
+  }
+
+  .ax-button[data-color="accent"] .ax-button__loader {
+    @apply bg-accent-700;
+  }
+  .ax-button[data-color="danger"] .ax-button__loader {
+    @apply bg-danger-700;
+  }
+  .ax-button[data-color="success"] .ax-button__loader {
+    @apply bg-success-700;
+  }
+  .ax-button[data-color="warning"] .ax-button__loader {
+    @apply bg-warning-700;
+  }
+
+  .ax-button > .ax-button__loader {
+    & ~ .ax-button__inner {
+      @apply !bg-transparent;
+    }
+  }
+
+  div[class*="bg-"] .ax-button[data-type="link"] .ax-button__inner {
+    @apply bg-bw-500 bg-opacity-0 text-inherit hover:bg-opacity-25;
+  }
+}

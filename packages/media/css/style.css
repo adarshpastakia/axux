@@ -1,0 +1,141 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-media {
+    @apply grid-area-[content] bg-gray-900 grid relative overflow-hidden;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+
+    & canvas {
+      @apply pointer-events-none;
+    }
+
+    &[data-error="true"] > .ax-media__container {
+      @apply opacity-0 pointer-events-none;
+    }
+  }
+
+  .ax-media__overlay {
+    @apply absolute rounded-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 p-4 leading-none text-white bg-stone-100/20 backdrop-blur;
+  }
+
+  .ax-media__tools {
+    @apply pt-8 absolute bottom-0 left-0 right-0 select-none cursor-default;
+    transform: translateY(calc(100% - 2rem));
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: translateY(0);
+    }
+
+    & > div {
+      @apply relative flex bg-gray-900/50 backdrop-blur p-2 text-white justify-center items-center;
+    }
+
+    & .ax-media__tool {
+      @apply cursor-pointer text-primary-300 hover:text-primary-500 hover:bg-stone-100/10 p-1 text-md;
+    }
+  }
+
+  /******************* thumbnail *******************/
+  .ax-thumbnail {
+    @apply bg-gray-900 text-gray-100 relative ring-1 ring-offset-1 ring-gray-500/50 rounded-sm;
+
+    & img {
+      @apply w-full h-full object-contain;
+      &[data-colorset="dark_transparent"] {
+        @apply bg-gray-100 text-gray-900;
+      }
+    }
+
+    & .ax-thumbnail--spinner {
+      @apply absolute inset-0 m-auto z-10 h-8 w-8 p-1 bg-gray-900/70 backdrop-blur rounded-full leading-none;
+
+      & .spinner-animation {
+        @apply w-full h-full;
+        font-size: 10px;
+      }
+    }
+
+    &[data-reel="true"] {
+      &::before,
+      &::after {
+        @apply absolute inset-x-0 h-2 backdrop-blur;
+        content: "";
+        background-color: rgb(67 39 23 / 80);
+        background-image: linear-gradient(
+          90deg,
+          transparent 0,
+          transparent 2px,
+          white 2px,
+          white 6px,
+          transparent 6px,
+          transparent 8px
+        );
+        background-repeat: repeat-x;
+        background-size: 8px 4px;
+        background-position: left center;
+      }
+      &::before {
+        @apply top-0;
+      }
+      &::after {
+        @apply bottom-0;
+      }
+    }
+  }
+}
+
+@layer components {
+  .ax-image__scroller {
+    @apply overflow-auto grid place-items-center m-2;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .ax-image__container {
+    @apply relative overflow-hidden cursor-grab;
+
+    & img,
+    & canvas {
+      @apply absolute top-1/2 left-1/2 object-contain max-w-none pointer-events-none;
+      transform: translate(-50%, -50%) rotate(var(--rotate));
+    }
+  }
+
+  .ax-image__zoom {
+    @apply relative -my-2 py-2;
+
+    & .ax-image__zoomMeter {
+      @apply hidden z-10 absolute overflow-hidden -translate-x-1/2 bottom-10 bg-gray-900/80 backdrop-blur-md w-[12rem] h-[6rem] rounded-t-full;
+
+      & svg {
+        width: 12rem;
+        height: 12rem;
+      }
+
+      & span {
+        @apply absolute top-0 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-sm py-px px-1;
+      }
+    }
+
+    &:hover .ax-image__zoomMeter,
+    & .ax-image__zoomMeter:hover {
+      @apply block;
+    }
+  }
+}
+
+@layer utilities {
+  .ax-media {
+    &[data-colorset="dark_transparent"] {
+      @apply bg-gray-100;
+    }
+  }
+}

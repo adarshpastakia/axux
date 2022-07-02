@@ -1,0 +1,116 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .popover {
+    @apply z-50;
+  }
+  .popover__container {
+    @apply relative overflow-hidden rounded shadow-2xl dark:shadow-black ring-1 ring-bw-500/20 z-0 bg-base;
+  }
+  .popover__arrow {
+    @apply relative shadow-lg z-10 border-transparent text-bw-50 dark:text-bw-900;
+    width: 10px;
+    height: 10px;
+  }
+  .popover__arrow::before {
+    @apply absolute -inset-px text-black/20 dark:text-white/20;
+    content: "";
+    border: 6px solid;
+    border-color: inherit;
+  }
+  .popover__arrow::after {
+    @apply absolute inset-0;
+    content: "";
+    border: 5px solid;
+    border-color: inherit;
+  }
+
+  .popover[data-popper-placement^="top"] {
+    & .popover__arrow {
+      border-top-color: currentColor;
+      bottom: -10px;
+    }
+    & .popover__arrow::after {
+      margin-top: -1px;
+    }
+  }
+  .popover[data-popper-placement^="bottom"] {
+    & .popover__arrow {
+      border-bottom-color: currentColor;
+      top: -10px;
+    }
+    & .popover__arrow::after {
+      margin-bottom: -1px;
+    }
+  }
+  .popover[data-popper-placement^="left"] {
+    & .popover__arrow {
+      border-left-color: currentColor;
+      right: -10px;
+    }
+    & .popover__arrow::after {
+      margin-left: -1px;
+    }
+  }
+  .popover[data-popper-placement^="right"] {
+    & .popover__arrow {
+      border-right-color: currentColor;
+      left: -10px;
+    }
+    & .popover__arrow::after {
+      margin-right: -1px;
+    }
+  }
+
+  .tooltip {
+    @apply pointer-events-none;
+
+    & .popover__container {
+      @apply bg-invert text-invert text-sm py-1 px-2;
+    }
+    & .popover__arrow {
+      @apply text-bw-900 dark:text-bw-50;
+    }
+  }
+}
+
+@layer utilities {
+  .tooltip[data-color="info"] {
+    & .popover__container {
+      @apply bg-primary-700 dark:bg-primary-100 dark:text-primary-800;
+    }
+    & .popover__arrow {
+      @apply text-primary-700 dark:text-primary-100;
+    }
+  }
+  .tooltip[data-color="danger"] {
+    & .popover__container {
+      @apply bg-danger-700 dark:bg-danger-100 dark:text-danger-800;
+    }
+    & .popover__arrow {
+      @apply text-danger-700 dark:text-danger-100;
+    }
+  }
+  .tooltip[data-color="success"] {
+    & .popover__container {
+      @apply bg-success-700 dark:bg-success-100 dark:text-success-800;
+    }
+    & .popover__arrow {
+      @apply text-success-700 dark:text-success-100;
+    }
+  }
+  .tooltip[data-color="warning"] {
+    & .popover__container {
+      @apply bg-warning-700 dark:bg-warning-100 dark:text-warning-800;
+    }
+    & .popover__arrow {
+      @apply text-warning-700 dark:text-warning-100;
+    }
+  }
+}

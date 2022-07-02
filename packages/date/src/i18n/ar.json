@@ -1,0 +1,14 @@
+{
+  "label": {
+    "prevMonth": "الشهر الماضى",
+    "prevYear": "السنة الماضية",
+    "prevDecade": "العقد السابق",
+    "nextMonth": "الشهر القادم",
+    "nextYear": "العام القادم",
+    "nextDecade": "العقد القادم",
+    "today": "اليوم",
+    "hijri": "هجري",
+    "gregorian": "ميلادي"
+  },
+  "number": {}
+}

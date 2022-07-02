@@ -1,0 +1,22 @@
+/*
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@import "./_reset.css";
+@import "./_icon.css";
+@import "./_animations.css";
+@import "./_typography.css";
+@import "./_flexbox.css";
+@import "./_badge.css";
+@import "./_popover.css";
+@import "./_button.css";
+@import "./_panels.css";
+@import "./_tag.css";
+@import "./_overlays.css";
+@import "./_viewport.css";
+@import "./_components.css";
+@import "./_helpers.css";

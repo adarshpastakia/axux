@@ -1,0 +1,19 @@
+import { Title, Canvas, Story } from "@storybook/addon-docs";
+import { ImageStory } from "./ImageStory";
+import { AxImageViewer } from "../../src";
+
+<Meta
+  title="@media/Image Viewer"
+  component={AxImageViewer}
+  parameters={{ jest: ["Image.test.tsx"] }}
+/>
+
+<Title>Image Viewer</Title>
+
+<Canvas>
+  <Story name="Image Viewer" height="32rem" parameters={{ layout: "none" }}>
+    {ImageStory.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxImageViewer} />

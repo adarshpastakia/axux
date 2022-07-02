@@ -1,0 +1,23 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-icon {
+    @apply inline-block leading-none relative select-none align-middle text-center;
+
+    & > i,
+    & > svg,
+    & > img {
+      @apply block h-[1em] w-[1em] overflow-hidden pointer-events-none object-contain fill-current;
+    }
+
+    &[data-flip="true"] {
+      @apply rtl:-scale-x-100;
+    }
+  }
+}

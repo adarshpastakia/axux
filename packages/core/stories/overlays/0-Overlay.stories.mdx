@@ -1,0 +1,90 @@
+import {
+  ArgsTable,
+  Description,
+  Heading,
+  Meta,
+  Subheading,
+  Title,
+} from "@storybook/addon-docs";
+import { useOverlayService } from "../../src";
+import { AxToast } from "../../src/overlays/Toast";
+import { AxMessage } from "../../src/overlays/Message";
+import { AxAlert } from "../../src/overlays/Alert";
+
+<Meta
+  title="@core/Overlays/useOverlayService"
+  parameters={{ jest: ["Toast.test.tsx", "Message.test.tsx"] }}
+/>
+
+<Title>useOverlayService</Title>
+
+<Description of={useOverlayService} />
+
+```tsx
+import { AxButton, useOverlayService, OverlayProps } from "@axux/core";
+
+const MyModal = ({
+  data,
+  onClose,
+  ...modalProps
+}: OverlayProps<{ title: string; data: KeyValue }>) => {
+  const handleClose = () => {
+    onClose({ status: "done", result: [] });
+  };
+  return (
+    <AxModal {...modalProps} onClose={handleClose}>
+      <AxContent>
+        <AxText>{LIPSUM}</AxText>
+      </AxContent>
+    </AxModal>
+  );
+};
+
+const MyFlyout = ({
+  data,
+  onClose,
+  ...flyoutProps
+}: OverlayProps<{ title: string; data: KeyValue }>) => {
+  const handleClose = () => {
+    onClose({ status: "done", result: [] });
+  };
+  return (
+    <AxFlyout size="md" {...flyoutProps} onClose={handleClose}>
+      <AxContent>
+        <AxText>{LIPSUM}</AxText>
+      </AxContent>
+    </AxFlyout>
+  );
+};
+
+export const Element = () => {
+  const { openOverlay } = useOverlayService();
+  const openModal = () => {
+    // Open overlay pass additional props
+    openOverlay(MyModal, { title: "My Modal", data: {} }).then(
+      (returnValue) => {
+        // promise is resolved with value passed to onClose
+      }
+    );
+  };
+  const openFlyout = () => {
+    // Open overlay pass additional props
+    openOverlay(MyFlyout, { title: "My Flyout", data: {} }).then(
+      (returnValue) => {
+        // promise is resolved with value passed to onClose
+      }
+    );
+  };
+
+  return (
+    <div>
+      <AxButton onClick={openModal}>Open Modal</AxButton>
+      <AxButton onClick={openFlyout}>Open Flyout</AxButton>
+    </div>
+  );
+};
+```
+
+<Heading>Props</Heading>
+
+<ArgsTable sort="requiredFirst" components={{ AxToast, AxMessage, AxAlert }} />

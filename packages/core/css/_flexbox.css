@@ -1,0 +1,301 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-flexbox {
+    --gutter: theme(spacing.2);
+    padding: var(--gutter);
+  }
+  .ax-flexbox[data-fluid="false"] {
+    @apply container mx-auto;
+  }
+
+  .ax-row {
+    @apply flex flex-wrap;
+    margin: calc(-0.5 * var(--gutter));
+
+    & + & {
+      margin-top: calc(0.5 * var(--gutter));
+    }
+  }
+
+  .ax-col {
+    @apply flex-initial;
+    margin: calc(0.5 * var(--gutter));
+  }
+}
+
+.ax-row[data-nowrap="true"] {
+  @apply flex-nowrap;
+}
+
+.ax-row[data-orient="col"] {
+  @apply flex-col;
+}
+.ax-row[data-orient="row-reverse"] {
+  @apply flex-row-reverse;
+}
+.ax-row[data-orient="col-reverse"] {
+  @apply flex-col-reverse;
+}
+
+.ax-row[data-align="start"] {
+  @apply items-start;
+}
+.ax-row[data-align="end"] {
+  @apply items-end;
+}
+.ax-row[data-align="middle"] {
+  @apply items-center;
+}
+.ax-row[data-align="stretch"] {
+  @apply items-stretch;
+}
+
+.ax-row[data-justify="start"] {
+  @apply justify-start;
+}
+.ax-row[data-justify="end"] {
+  @apply justify-end;
+}
+.ax-row[data-justify="center"] {
+  @apply justify-center;
+}
+.ax-row[data-justify="spaced"] {
+  @apply justify-between;
+}
+
+.ax-col--auto {
+  @apply flex-initial;
+}
+.ax-col--fill {
+  @apply flex-1;
+}
+.ax-col--full {
+  flex: 1 1 100%;
+}
+
+.ax-col[data-align="start"] {
+  @apply self-start;
+}
+.ax-col[data-align="end"] {
+  @apply self-end;
+}
+.ax-col[data-align="middle"] {
+  @apply self-center;
+}
+.ax-col[data-align="stretch"] {
+  @apply self-stretch basis-1/12;
+}
+
+.gutter--none {
+  --gutter: 0px;
+}
+.gutter--sm {
+  --gutter: theme(spacing.1);
+}
+.gutter--md {
+  --gutter: theme(spacing.3);
+}
+.gutter--lg {
+  --gutter: theme(spacing.4);
+}
+
+/* col spans */
+.ax-col--1 {
+  flex-basis: calc((1 / 12) * 100% - var(--gutter));
+}
+.ax-col--2 {
+  flex-basis: calc((2 / 12) * 100% - var(--gutter));
+}
+.ax-col--3 {
+  flex-basis: calc((3 / 12) * 100% - var(--gutter));
+}
+.ax-col--4 {
+  flex-basis: calc((4 / 12) * 100% - var(--gutter));
+}
+.ax-col--5 {
+  flex-basis: calc((5 / 12) * 100% - var(--gutter));
+}
+.ax-col--6 {
+  flex-basis: calc((6 / 12) * 100% - var(--gutter));
+}
+.ax-col--7 {
+  flex-basis: calc((7 / 12) * 100% - var(--gutter));
+}
+.ax-col--8 {
+  flex-basis: calc((8 / 12) * 100% - var(--gutter));
+}
+.ax-col--9 {
+  flex-basis: calc((9 / 12) * 100% - var(--gutter));
+}
+.ax-col--10 {
+  flex-basis: calc((10 / 12) * 100% - var(--gutter));
+}
+.ax-col--11 {
+  flex-basis: calc((11 / 12) * 100% - var(--gutter));
+}
+.ax-col--12 {
+  flex-basis: calc((12 / 12) * 100% - var(--gutter));
+}
+
+@media screen(sm) {
+  .ax-col--sm\:1 {
+    flex-basis: calc((1 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:2 {
+    flex-basis: calc((2 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:3 {
+    flex-basis: calc((3 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:4 {
+    flex-basis: calc((4 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:5 {
+    flex-basis: calc((5 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:6 {
+    flex-basis: calc((6 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:7 {
+    flex-basis: calc((7 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:8 {
+    flex-basis: calc((8 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:9 {
+    flex-basis: calc((9 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:10 {
+    flex-basis: calc((10 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:11 {
+    flex-basis: calc((11 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--sm\:12 {
+    flex-basis: calc((12 / 12) * 100% - var(--gutter));
+  }
+}
+
+@media screen(md) {
+  .ax-col--md\:1 {
+    flex-basis: calc((1 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:2 {
+    flex-basis: calc((2 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:3 {
+    flex-basis: calc((3 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:4 {
+    flex-basis: calc((4 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:5 {
+    flex-basis: calc((5 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:6 {
+    flex-basis: calc((6 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:7 {
+    flex-basis: calc((7 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:8 {
+    flex-basis: calc((8 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:9 {
+    flex-basis: calc((9 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:10 {
+    flex-basis: calc((10 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:11 {
+    flex-basis: calc((11 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--md\:12 {
+    flex-basis: calc((12 / 12) * 100% - var(--gutter));
+  }
+}
+
+@media screen(lg) {
+  .ax-col--lg\:1 {
+    flex-basis: calc((1 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:2 {
+    flex-basis: calc((2 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:3 {
+    flex-basis: calc((3 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:4 {
+    flex-basis: calc((4 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:5 {
+    flex-basis: calc((5 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:6 {
+    flex-basis: calc((6 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:7 {
+    flex-basis: calc((7 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:8 {
+    flex-basis: calc((8 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:9 {
+    flex-basis: calc((9 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:10 {
+    flex-basis: calc((10 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:11 {
+    flex-basis: calc((11 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--lg\:12 {
+    flex-basis: calc((12 / 12) * 100% - var(--gutter));
+  }
+}
+
+@media screen(xl) {
+  .ax-col--xl\:1 {
+    flex-basis: calc((1 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:2 {
+    flex-basis: calc((2 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:3 {
+    flex-basis: calc((3 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:4 {
+    flex-basis: calc((4 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:5 {
+    flex-basis: calc((5 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:6 {
+    flex-basis: calc((6 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:7 {
+    flex-basis: calc((7 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:8 {
+    flex-basis: calc((8 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:9 {
+    flex-basis: calc((9 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:10 {
+    flex-basis: calc((10 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:11 {
+    flex-basis: calc((11 / 12) * 100% - var(--gutter));
+  }
+  .ax-col--xl\:12 {
+    flex-basis: calc((12 / 12) * 100% - var(--gutter));
+  }
+}

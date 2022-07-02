@@ -1,0 +1,126 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+/******************* heading sizes *******************/
+@layer base {
+  .ax-text {
+    & h1 {
+      @apply text-4xl font-semibold text-inherit mb-4;
+    }
+    & h2 {
+      @apply text-3xl font-semibold text-inherit mb-4;
+    }
+    & h3 {
+      @apply text-2xl font-semibold text-inherit mb-4;
+    }
+    & h4 {
+      @apply text-xl font-semibold text-inherit mb-4;
+    }
+    & h5 {
+      @apply text-lg font-semibold text-inherit mb-4;
+    }
+    & h6 {
+      @apply text-base font-semibold text-inherit mb-4;
+    }
+  }
+}
+
+/******************* text components *******************/
+@layer components {
+  .ax-ellipsis {
+    @apply flex overflow-hidden whitespace-nowrap;
+
+    & > bdi:last-child {
+      @apply hidden;
+    }
+  }
+
+  .ax-text {
+    & .ax-text__moreLink {
+      @apply text-xs print:hidden;
+      text-align: end;
+
+      & a {
+        @apply cursor-pointer text-accent-600 dark:text-accent-400 select-none underline-offset-2
+         hover:text-accent-700 dark:hover:text-accent-300 hover:underline;
+      }
+    }
+
+    & .ax-copy {
+      font-size: 0.625em;
+
+      & > .ax-button__inner {
+        /* @apply !p-0 !w-[1.5em] !h-[1.5em] min-w-0 min-h-0; */
+      }
+    }
+  }
+
+  .ax-mark mark {
+    @apply bg-accent-200 dark:bg-accent-900 text-inherit;
+  }
+
+  .ax-abbr abbr {
+    @apply text-accent-700 dark:text-accent-300 border-b border-dashed border-current cursor-help;
+  }
+}
+
+@layer utilities {
+  .ax-ellipsis[data-break="true"] {
+    @apply !pointer-events-auto;
+
+    & > bdi:first-child {
+      @apply inline-block truncate;
+      flex: 2 1 1em;
+      min-width: 24px;
+
+      & > p,
+      & > h1,
+      & > h2,
+      & > h3,
+      & > h4,
+      & > h5,
+      & > h6,
+      & > div {
+        @apply block truncate;
+      }
+    }
+    & > bdi:last-child {
+      @apply inline-block overflow-hidden text-clip;
+      direction: rtl;
+      flex: 1 1 1em;
+    }
+  }
+
+  [dir="rtl"] .ax-ellipsis[data-break="true"] > bdi:last-child {
+    direction: ltr;
+  }
+
+  .ax-text {
+    & div[data-clip="none"] {
+      @apply line-clamp-none;
+    }
+    & div[data-clip="1"] {
+      @apply line-clamp-1;
+    }
+    & div[data-clip="2"] {
+      @apply line-clamp-2;
+    }
+    & div[data-clip="3"] {
+      @apply line-clamp-3;
+    }
+    & div[data-clip="4"] {
+      @apply line-clamp-4;
+    }
+    & div[data-clip="5"] {
+      @apply line-clamp-5;
+    }
+    & div[data-clip="6"] {
+      @apply line-clamp-6;
+    }
+  }
+}

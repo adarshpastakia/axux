@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig",
+  "include": ["./packages/**/*.ts", "./packages/**/*.tsx"],
+  "compilerOptions": {
+    "noEmit": true,
+    "paths": {
+      "@jest": ["./jest/*"]
+    }
+  }
+}
