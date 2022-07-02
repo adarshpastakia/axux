@@ -18,7 +18,7 @@
 [![yarn](https://img.shields.io/badge/yarn-2C8EBB.svg?style=flat-square&labelColor=333&logo=yarn)](https://yarnpkg.com/)
 [![react](https://img.shields.io/badge/react-61DAFB.svg?style=flat-square&labelColor=333&logo=react)](http://reactjs.org/)
 [![ts](https://img.shields.io/badge/typescript-3178C6.svg?style=flat-square&labelColor=333&logo=typescript)](https://typescriptlang.org/)
-[![emotion](https://img.shields.io/badge/scss-c69.svg?style=flat-square&labelColor=333&logo=sass)](https://sass-lang.com/)
+[![emotion](https://img.shields.io/badge/tailwindcss-06B6D4.svg?style=flat-square&labelColor=333&logo=tailwindcss)](https://tailwindcss.com/)
 [![prettier](https://img.shields.io/badge/prettier-EA4C89.svg?style=flat-square&labelColor=333&logo=prettier)](https://prettier.io/)
 [![codeclimate](https://img.shields.io/badge/code%20climate-272425.svg?style=flat-square&labelColor=333&logo=code%20climate)](http://codeclimate.com/)
 
