@@ -1,0 +1,85 @@
+/*
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "@axux/core/css/style.css";
+@import "@axux/data/css/style.css";
+@import "@axux/date/css/style.css";
+@import "@axux/form/css/style.css";
+@import "@axux/media/css/style.css";
+@import "@axux/utilities/css/flags.css";
+
+@import "./_prism-dark.css";
+@import "./_prism-light.css";
+
+.sb-show-main {
+  & div {
+    @apply selection:bg-accent-400 dark:selection:bg-accent-700 selection:text-white;
+  }
+  & .sbdocs.sbdocs.sbdocs-wrapper {
+    @apply bg-[#ffffff] dark:bg-[#1e272e];
+  }
+  & .os-host.os-host {
+    @apply bg-gray-100 dark:bg-gray-700;
+  }
+  & .sbdocs-preview.sbdocs-preview {
+    @apply bg-transparent shadow shadow-gray-300 dark:shadow-gray-700 border-0;
+  }
+  & .docblock-code-toggle.docblock-code-toggle {
+    @apply bg-gray-100 dark:bg-gray-800 text-primary-800 dark:text-primary-100;
+  }
+
+  & .docblock-source.docblock-source {
+    @apply border-bw-200 dark:border-bw-700;
+
+    & > div {
+      @apply bg-transparent;
+    }
+
+    & button {
+      @apply bg-black text-white;
+    }
+  }
+
+  & .docs-story.docs-story {
+    @apply bg-component;
+  }
+
+  & .docs-story.docs-story > div {
+    @apply bg-transparent;
+  }
+
+  & .innerZoomElementWrapper.innerZoomElementWrapper > div:only-child {
+    @apply w-full mb-6;
+  }
+
+  & .docblock-argstable.docblock-argstable {
+    @apply bg-gray-50 dark:bg-gray-800 shadow shadow-gray-300 dark:shadow-gray-800 mx-0;
+
+    & thead th {
+      @apply text-gray-800 dark:text-gray-100 bg-gray-100 dark:bg-gray-700;
+    }
+    & tbody {
+      @apply bg-transparent shadow shadow-gray-300 dark:shadow-gray-700 border-0;
+    }
+    & tbody tr {
+      @apply border-gray-100 dark:border-gray-700;
+    }
+    & tbody td {
+      @apply text-gray-800 dark:text-gray-100 bg-transparent;
+    }
+    & tbody td:last-child > div > span,
+    & tbody td > div > div > span,
+    & tbody td > div > span {
+      @apply text-gray-800 dark:text-gray-100 bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-zinc-700;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-pagination {
+    @apply inline-flex items-center;
+
+    & > button {
+      @apply leading-none text-sm hover:bg-primary-500/20 w-8 h-8 rounded-full;
+
+      &[data-disabled="true"] {
+        @apply text-bw-500/50 pointer-events-none;
+      }
+      &[data-active="true"] {
+        @apply bg-primary-500/50;
+      }
+    }
+
+    & > span {
+      @apply leading-none inline-block w-8 text-center text-bw-500/70;
+    }
+  }
+}

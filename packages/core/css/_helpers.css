@@ -1,0 +1,80 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer utilities {
+  [data-clickable="true"] {
+    @apply cursor-pointer;
+  }
+  .close-x {
+    @apply inline-block leading-none cursor-pointer opacity-50 hover:opacity-100 z-10 ltr:ml-2 rtl:mr-2 ltr:float-right rtl:float-left select-none;
+    font-size: 1em;
+  }
+  .ax-paper {
+    @apply shadow m-1.5 rounded-sm;
+  }
+  .hide-scroll {
+    &::-webkit-scrollbar {
+      @apply !w-0 !h-0;
+    }
+  }
+  [data-active-shadow="true"] {
+    @apply ring-1 ring-offset-2 ring-primary-500/70 ring-offset-primary-200 dark:ring-offset-primary-900;
+  }
+  /* Base Colors */
+  .bg-base {
+    @apply bg-bw-50 dark:bg-bw-900 ring-offset-bw-50 dark:ring-offset-bw-900;
+  }
+  .bg-component {
+    @apply bg-bw-0 dark:bg-bw-1000 ring-offset-bw-0 dark:ring-offset-bw-1000;
+  }
+  .bg-primary {
+    @apply bg-primary-300 dark:bg-primary-700;
+  }
+  .bg-accent {
+    @apply bg-accent-300 dark:bg-accent-700;
+  }
+  .bg-danger {
+    @apply bg-danger-300 dark:bg-danger-700;
+  }
+  .bg-warning {
+    @apply bg-warning-300 dark:bg-warning-700;
+  }
+  .bg-success {
+    @apply bg-success-300 dark:bg-success-700;
+  }
+  .bg-invert {
+    @apply bg-bw-900 dark:bg-bw-50 ring-offset-bw-900 dark:ring-offset-bw-50;
+  }
+  .bg-muted {
+    @apply bg-bw-300 dark:bg-bw-700 ring-offset-bw-500;
+  }
+  .text-primary {
+    @apply text-primary-700 dark:text-primary-300;
+  }
+  .text-accent {
+    @apply text-accent-700 dark:text-accent-300;
+  }
+  .text-danger {
+    @apply text-danger-700 dark:text-danger-300;
+  }
+  .text-warning {
+    @apply text-warning-700 dark:text-warning-300;
+  }
+  .text-success {
+    @apply text-success-700 dark:text-success-300;
+  }
+  .text-invert {
+    @apply text-bw-0 dark:text-bw-1000;
+  }
+  .text-muted {
+    @apply text-bw-600 dark:text-bw-400;
+  }
+  .text-default {
+    @apply text-bw-900 dark:text-bw-50;
+  }
+}

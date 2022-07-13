@@ -1,0 +1,40 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import { useState, useEffect } from "react";
+import { AxGridView } from "../../src";
+import { GridStory, TempItem } from "./GridStory";
+
+<Meta
+  title="@data/Virtual/GridView"
+  component={AxGridView}
+  parameters={{ jest: ["Grid.test.tsx"] }}
+/>
+
+<Title>Virtual Gird View</Title>
+
+<Canvas>
+  <Story
+    name="GridView"
+    height="32rem"
+    args={{ count: 10 }}
+    parameters={{ layout: "none" }}
+  >
+    {GridStory.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxGridView,
+    "AxGridView.Item": TempItem,
+  }}
+/>

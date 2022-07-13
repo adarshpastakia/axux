@@ -1,0 +1,44 @@
+import { Title, Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { VideoStory } from "./VideoStory";
+import { AxVideoPlayer } from "../../src";
+
+<Meta
+  title="@media/Video Player"
+  component={AxVideoPlayer}
+  parameters={{ jest: ["Video.test.tsx"] }}
+/>
+
+<Title>Video Player</Title>
+
+<Canvas>
+  <Story name="Video Player" height="32rem" parameters={{ layout: "none" }}>
+    {VideoStory}
+  </Story>
+</Canvas>
+
+> ### Drawing boxes and hilighting areas
+
+```tsx
+import { AxVideoPlayer, VideoPlayerRef } from "@axux/media";
+
+const VideoTemplate = () => {
+  const videoRef = useRef<VideoPlayerRef>(null);
+
+  // draw boxes [x,y,w,h]
+  videoRef.current.drawBox("0,0,96,128", { stroke: "#fc0" });
+  videoRef.current.drawBox([20, 50, 96, 128], { stroke: "#fc0000" });
+
+  // hilight image area
+  videoRef.current.drawBox("40,90,96,128");
+
+  // unhilight area and redraw original boxes
+  videoRef.current.unhilight();
+
+  // clear all boxes and hilights
+  videoRef.current.clear();
+
+  return <AxVideoPlayer src="..." ref={videoRef} />;
+};
+```
+
+<ArgsTable sort="requiredFirst" of={AxVideoPlayer} />

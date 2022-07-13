@@ -1,0 +1,19 @@
+{
+  "linter_codeclimate.enabled": false,
+  "search.exclude": {
+    "**/coverage": true
+  },
+  "colorize.languages": [
+    "css",
+    "sass",
+    "scss",
+    "less",
+    "postcss",
+    "sss",
+    "stylus",
+    "xml",
+    "svg",
+    "typescript",
+    "typescriptreact"
+  ]
+}

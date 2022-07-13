@@ -1,0 +1,216 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import { useState, useEffect } from "react";
+import { AxText, AxFlexBox, AxIcon, AxDivider } from "../src";
+
+export const LIPSUM =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vehicula nulla luctus sem congue iaculis. Praesent lobortis gravida nibh non sodales. Ut lacinia nulla ac pellentesque ullamcorper. Phasellus non quam lorem. Etiam consectetur dapibus dapibus. Nunc diam libero, facilisis a rhoncus eget, fermentum non lacus. Quisque scelerisque hendrerit ipsum, et lobortis diam venenatis at. Sed facilisis lectus vitae nisl vestibulum ultrices. Vivamus luctus neque ut dolor blandit sodales.\n\nDonec maximus, dui laoreet maximus hendrerit, mauris mi varius ex, a dapibus est ex eget tellus. Sed nisl purus, cursus sed dictum a, egestas et turpis. Praesent scelerisque placerat cursus. Phasellus et dui vel velit faucibus venenatis eu mattis ante. Maecenas eget vulputate dolor. Duis eu lobortis nisl. Vestibulum ullamcorper tristique rutrum. Mauris non est et neque cursus lobortis eu sed neque. Duis risus erat, malesuada eu nisi in, efficitur egestas eros.\n\nDonec scelerisque sit amet dolor in pulvinar. Integer id dolor lorem. Morbi dignissim lorem id tincidunt porttitor. Curabitur feugiat, dui et varius finibus, nisi ante rutrum elit, ac venenatis libero massa nec elit. Vivamus tincidunt libero quis nulla lobortis aliquet. Vestibulum felis nisl, ultricies ut lacus in, viverra elementum justo. Proin ut nisi enim.";
+
+<Meta title="@core/Typography" />
+
+<Title>Typography</Title>
+
+<Heading storyId="core-typography--1-text">Text Block</Heading>
+
+<Description of={AxText} />
+
+<Canvas>
+  <Story name="1.Text" args={{ className: "", clip: 6 }}>
+    {((args) => (
+      <div className="mx-auto" style={{ width: 600 }}>
+        <AxText {...args}>
+          <h1>Text block heading</h1>
+          <AxText>{LIPSUM}</AxText>
+        </AxText>
+      </div>
+    )).bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxText} />
+
+<Heading storyId="core-typography--2-a-ellipsis">Text Ellipsis</Heading>
+
+<Description of={AxText.Ellipsis} />
+
+<Canvas>
+  <Story name="2a.Ellipsis" args={{ className: "text-lg mx-auto", width: 260 }}>
+    {((args) => (
+      <AxText.Ellipsis {...args}>
+        This is very long text that is broken in the middle
+      </AxText.Ellipsis>
+    )).bind({})}
+  </Story>
+  <Story
+    name="2b.Ellipsis multiple spans"
+    args={{ className: "text-lg mx-auto", width: 260 }}
+  >
+    {((args) => (
+      <AxText.Ellipsis {...args}>
+        <span className="font-medium">This is </span>
+        <span className="underline decoration-wavy decoration-2 decoration-primary-500">
+          very long
+        </span>
+        <span className="text-primary-500 font-bold"> text </span>
+        <span>that is broken in the middle</span>
+      </AxText.Ellipsis>
+    )).bind({})}
+  </Story>
+  <Story
+    name="2c.Ellipsis multiple lines"
+    args={{ className: "text-lg mx-auto", width: 260 }}
+  >
+    {((args) => (
+      <AxText.Ellipsis {...args}>
+        <h1>
+          <span>This is very long</span>
+          <span className="text-primary-500 font-bold"> text </span>
+          <span>that is broken in the middle</span>
+        </h1>
+        <p>
+          <span>This is very long</span>
+          <span className="text-primary-500 font-bold"> text </span>
+          <span>
+            that is broken in the middle and is even langer than the previous
+          </span>
+        </p>
+      </AxText.Ellipsis>
+    )).bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxText.Ellipsis} />
+
+<Heading storyId="core-typography--3-marked">Marked Text</Heading>
+
+<Description of={AxText.Mark} />
+
+<Canvas>
+  <Story
+    name="3.Marked"
+    args={{ className: "text-lg", mark: ["ipsum", "dolor"] }}
+  >
+    {((args) => (
+      <div className="mx-auto" style={{ width: 600 }}>
+        <AxText clip={5}>
+          <AxText.Mark {...args}>{LIPSUM}</AxText.Mark>
+        </AxText>
+      </div>
+    )).bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxText.Mark} />
+
+<Heading storyId="core-typography--4-abbreviate">Abbreviation Text</Heading>
+
+<Description of={AxText.Abbr} />
+
+<Canvas>
+  <Story
+    name="4.Abbreviate"
+    args={{
+      className: "text-lg",
+      abbr: [
+        ["ipsum", "Some title"],
+        ["lorem", "Another title", "#4169e1"],
+      ],
+    }}
+  >
+    {((args) => (
+      <div className="mx-auto" style={{ width: 600 }}>
+        <AxText clip={5}>
+          <AxText.Abbr {...args}>{LIPSUM}</AxText.Abbr>
+        </AxText>
+      </div>
+    )).bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxText.Abbr} />
+
+<Heading storyId="core-typography--5-copy">Copy Text</Heading>
+
+<Description of={AxText.Copy} />
+
+<Canvas>
+  <Story
+    name="5.Copy"
+    args={{
+      className: "text-lg",
+    }}
+  >
+    {((args) => (
+      <div className="mx-auto" style={{ width: 600 }}>
+        <AxText clip={5} {...args}>
+          <AxText.Copy text={LIPSUM} />
+          {LIPSUM}
+        </AxText>
+      </div>
+    )).bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxText.Copy} />
+
+<Heading storyId="core-typography--6-a-badge">Badges</Heading>
+
+<Description of={AxText.Badge} />
+
+<Canvas>
+  <Story name="6a.Badge">
+    <AxText.Badge>9</AxText.Badge>
+  </Story>
+  <Story name="6b.Badge Color">
+    <AxText.Badge color="primary">new</AxText.Badge>
+  </Story>
+  <Story name="6c.Badge Icon">
+    <AxText.Badge color="danger" icon="mdi mdi-bell" />
+  </Story>
+  <Story name="6d.Badge Ping">
+    <AxFlexBox.Row>
+      <AxFlexBox.Col>
+        <AxText.Badge ping color="success" />
+      </AxFlexBox.Col>
+      <AxDivider />
+      <AxFlexBox.Col>
+        <AxText.Badge ping color="primary">
+          new
+        </AxText.Badge>
+      </AxFlexBox.Col>
+      <AxDivider />
+      <AxFlexBox.Col>
+        <AxText.Badge ping color="danger" icon="mdi mdi-bell" />
+      </AxFlexBox.Col>
+    </AxFlexBox.Row>
+  </Story>
+  <Story name="6e.Badge Infograph">
+    <AxFlexBox.Row>
+      <AxFlexBox.Col className="relative ax-badge-reveal">
+        <AxText.Badge color="primary" icon="mdi mdi-comment" placement="top-start" />
+        <AxText.Badge color="accent" icon="mdi mdi-bell-circle" placement="top" />
+        <AxText.Badge color="warning" icon="mdi mdi-lock" placement="top-end" />
+        <AxText.Badge color="danger" icon="mdi mdi-camera" placement="start" />
+        <AxText.Badge color="primary" icon="mdi mdi-car" placement="end" />
+        <AxText.Badge color="accent" icon="mdi mdi-credit-card" placement="bottom-start" />
+        <AxText.Badge color="success" icon="mdi mdi-bell" placement="bottom" />
+        <AxText.Badge color="danger" icon="mdi mdi-bell" placement="bottom-end" />
+        <AxIcon
+          size={64}
+          icon="mdi mdi-account-circle"
+          className="text-rose-700"
+        />
+      </AxFlexBox.Col>
+    </AxFlexBox.Row>
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxText.Badge} />

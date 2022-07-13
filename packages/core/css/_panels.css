@@ -1,0 +1,241 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-panel {
+    @apply grid relative overflow-hidden border rounded bg-component;
+    grid-template-areas: "head" "loader" "content" "foot";
+    grid-template-rows: auto auto 1fr auto;
+
+    &[data-expanded="true"] {
+      @apply fixed inset-4 shadow-xl z-20 !w-auto !h-auto !max-h-full !max-w-full;
+    }
+
+    & .ax-header > .ax-title {
+      @apply flex-1;
+    }
+  }
+
+  .ax-panel__group {
+    @apply flex flex-col flex-nowrap overflow-auto grid-area-[content];
+
+    & .ax-panel {
+      @apply rounded-none;
+
+      & + & {
+        @apply -mt-px;
+      }
+
+      &:first-child {
+        @apply rounded-t;
+      }
+      &:last-child {
+        @apply rounded-b;
+      }
+
+      &[data-collapsed="true"] {
+        flex: 0 0 auto;
+
+        & > .ax-header {
+          @apply cursor-pointer;
+        }
+      }
+      &[data-collapsed="false"] {
+        flex: 1 0 12rem;
+
+        & .toggle-collapse {
+          @apply opacity-10 pointer-events-none;
+        }
+      }
+    }
+  }
+}
+
+/******************* tab panels *******************/
+@layer components {
+  .ax-tab__panel {
+    @apply grid-area-[content] grid overflow-hidden;
+
+    &[data-placement="top"] {
+      grid-template-areas: "bar" "content";
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+    &[data-placement="bottom"] {
+      grid-template-areas: "content" "bar";
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr auto;
+    }
+    &[data-placement="start"] {
+      grid-template-areas: "bar content";
+      grid-template-columns: auto 1fr;
+      grid-template-rows: 1fr;
+    }
+    &[data-placement="end"] {
+      grid-template-areas: "content bar";
+      grid-template-columns: 1fr auto;
+      grid-template-rows: 1fr;
+    }
+
+    &[data-placement="top"],
+    &[data-placement="bottom"] {
+      & .ax-tab__bar {
+        @apply flex-row overflow-x-auto;
+      }
+    }
+    &[data-placement="start"],
+    &[data-placement="end"] {
+      & .ax-tab__bar {
+        @apply flex-col overflow-y-auto;
+      }
+    }
+
+    &[data-align="start"] {
+      & .ax-tab__bar {
+        @apply justify-start;
+      }
+    }
+    &[data-align="center"] {
+      & .ax-tab__bar {
+        @apply justify-center;
+      }
+    }
+    &[data-align="end"] {
+      & .ax-tab__bar {
+        @apply justify-end;
+      }
+    }
+  }
+  .ax-tab__bar {
+    @apply grid-area-[bar] relative bg-base flex flex-nowrap items-stretch gap-2 overflow-hidden text-accent-600 dark:text-accent-400 hide-scroll;
+  }
+  .ax-tab__body {
+    @apply panel bg-component;
+  }
+  .ax-tab__button {
+    @apply inline-flex flex-none relative z-10 overflow-hidden cursor-pointer px-2 py-1 font-medium gap-2 text-center align-middle select-none items-center;
+
+    & .close-x {
+      @apply !m-0;
+    }
+
+    &[data-active="true"] {
+      @apply opacity-100;
+    }
+    &[data-disabled="true"] {
+      @apply opacity-50 pointer-events-none text-bw-500;
+    }
+  }
+}
+@layer utilities {
+  .ax-tab__panel {
+    &[data-style="outline"] {
+      & .ax-tab__button {
+        @apply outline outline-transparent outline-offset-[-2px];
+
+        &[data-active="true"] {
+          @apply outline-current;
+        }
+      }
+    }
+    &[data-style="solid"] {
+      & .ax-tab__button[data-active="true"] {
+        @apply bg-current;
+
+        & * {
+          @apply text-bw-50 dark:text-bw-900;
+        }
+      }
+    }
+    &[data-placement="top"] {
+      & .ax-tab__bar {
+        @apply items-end pt-px;
+        box-shadow: 0 -1px 0 theme(colors.bw.500 / 0.2) inset;
+      }
+
+      & .ax-tab__button {
+        @apply rounded-t;
+
+        &:hover,
+        &[data-active="true"] {
+          box-shadow: 0 -1px 0 currentColor inset, 0 1px 0 currentColor;
+        }
+        &[data-active="true"] {
+          @apply -translate-y-px;
+        }
+      }
+    }
+    &[data-placement="bottom"] {
+      & .ax-tab__bar {
+        @apply items-start pb-px;
+        box-shadow: 0 1px 0 theme(colors.bw.500 / 0.2) inset;
+      }
+
+      & .ax-tab__button {
+        @apply rounded-b;
+
+        &:hover,
+        &[data-active="true"] {
+          box-shadow: 0 1px 0 currentColor inset, 0 -1px 0 currentColor;
+        }
+        &[data-active="true"] {
+          @apply translate-y-px;
+        }
+      }
+    }
+    &[data-placement="start"],
+    &[data-placement="end"] {
+      & .ax-tab__bar {
+        @apply items-stretch;
+      }
+
+      & .ax-tab__button {
+        @apply flex-col;
+      }
+    }
+  }
+  [dir="ltr"] .ax-tab__panel[data-placement="start"],
+  [dir="rtl"] .ax-tab__panel[data-placement="end"] {
+    & .ax-tab__bar {
+      @apply pl-px;
+      box-shadow: -1px 0 0 theme(colors.bw.500 / 0.2) inset;
+    }
+
+    & .ax-tab__button {
+      @apply rounded-l-full;
+
+      &:hover,
+      &[data-active="true"] {
+        box-shadow: -1px 0 0 currentColor inset, 1px 0 0 currentColor;
+      }
+      &[data-active="true"] {
+        @apply -translate-x-px;
+      }
+    }
+  }
+
+  [dir="rtl"] .ax-tab__panel[data-placement="start"],
+  [dir="ltr"] .ax-tab__panel[data-placement="end"] {
+    & .ax-tab__bar {
+      @apply pr-px;
+      box-shadow: 1px 0 0 theme(colors.bw.500 / 0.2) inset;
+    }
+
+    & .ax-tab__button {
+      @apply rounded-r-full;
+
+      &:hover,
+      &[data-active="true"] {
+        box-shadow: 1px 0 0 currentColor inset, -1px 0 0 currentColor;
+      }
+      &[data-active="true"] {
+        @apply translate-x-px;
+      }
+    }
+  }
+}

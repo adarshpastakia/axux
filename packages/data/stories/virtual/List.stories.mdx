@@ -1,0 +1,47 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import { useState, useEffect } from "react";
+import { AxList } from "../../src";
+import { ListStory, ListHorizontalStory, TempItem } from "./ListStory";
+
+<Meta
+  title="@data/Virtual/List"
+  component={AxList}
+  parameters={{ jest: ["List.test.tsx"] }}
+/>
+
+<Title>Virtual List</Title>
+
+<Canvas>
+  <Story name="1.Vertical List" height="32rem">
+    {ListStory}
+  </Story>
+</Canvas>
+
+<Heading>Horizontal Layout</Heading>
+
+<Canvas>
+  <Story
+    name="2.Horizontal List"
+    height="14rem"
+    parameters={{ layout: "none" }}
+  >
+    {ListHorizontalStory}
+  </Story>
+</Canvas>
+
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxList,
+    "AxList.Item": TempItem,
+  }}
+/>

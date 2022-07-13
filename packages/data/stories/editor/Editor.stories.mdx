@@ -1,0 +1,43 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import { useState, useEffect } from "react";
+import { AxCallout } from "@axux/core";
+import { AxEditor } from "../../src";
+import { EditorStory } from "./EditorStory";
+
+<Meta title="@data/Editor" component={AxEditor} />
+
+<Title>Monaco Editor</Title>
+
+<Canvas>
+  <Story name="Editor" height="32rem" parameters={{ layout: "none" }}>
+    {EditorStory}
+  </Story>
+</Canvas>
+
+<AxCallout color="danger" title="NOTE">
+  Use <code>editorRef</code> to call validate before saving edited text
+</AxCallout>
+
+```tsx
+import {AxEditor, EditorRef} from "@axux/data";
+const Component = () => {
+  const ref = useRef<editorRef>();
+
+  onSave = () => {
+    ref.validate() && doSave(ref.getValue());
+  }
+
+  return <AxEditor editorRef={ref} ... />
+}
+```
+
+<ArgsTable sort="requiredFirst" of={AxEditor} />

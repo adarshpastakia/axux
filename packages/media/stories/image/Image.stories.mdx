@@ -1,0 +1,44 @@
+import { Title, Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { ImageStory } from "./ImageStory";
+import { AxImageViewer } from "../../src";
+
+<Meta
+  title="@media/Image Viewer"
+  component={AxImageViewer}
+  parameters={{ jest: ["Image.test.tsx"] }}
+/>
+
+<Title>Image Viewer</Title>
+
+<Canvas>
+  <Story name="Image Viewer" height="32rem" parameters={{ layout: "none" }}>
+    {ImageStory}
+  </Story>
+</Canvas>
+
+> ### Drawing boxes and hilighting areas
+
+```tsx
+import { AxImageViewer, ImageViewerRef } from "@axux/media";
+
+const ImageTemplate = () => {
+  const imageRef = useRef<ImageViewerRef>(null);
+
+  // draw boxes [x,y,w,h]
+  imageRef.current.drawBox("0,0,96,128", { stroke: "#fc0" });
+  imageRef.current.drawBox([20, 50, 96, 128], { stroke: "#fc0000" });
+
+  // hilight image area
+  imageRef.current.drawBox("40,90,96,128");
+
+  // unhilight area and redraw original boxes
+  imageRef.current.unhilight();
+
+  // clear all boxes and hilights
+  imageRef.current.clear();
+
+  return <AxImageViewer src="..." ref={imageRef} />;
+};
+```
+
+<ArgsTable sort="requiredFirst" of={AxImageViewer} />

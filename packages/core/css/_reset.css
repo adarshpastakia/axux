@@ -1,0 +1,56 @@
+/*
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer base {
+  html {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .light {
+    @apply bg-bw-50 text-bw-900;
+  }
+  .dark {
+    @apply bg-bw-900 text-bw-50;
+  }
+
+  body {
+    margin: 0;
+    width: 100vw;
+    min-height: 100vh;
+    @apply align-baseline antialiased selection:bg-accent-400 dark:selection:bg-accent-700 selection:text-white print:!bg-white print:!text-black;
+  }
+
+  *,
+  :after,
+  :before {
+    @apply border-bw-200 dark:border-bw-700 ring-offset-bw-50 dark:ring-offset-bw-900 print:border-bw-200 outline-0;
+  }
+}
+
+@layer utilities {
+  svg {
+    display: inline-block;
+    fill: currentColor;
+    height: 1em;
+    width: 1em;
+  }
+
+  a.ax-link {
+    @apply cursor-pointer text-accent-600 dark:text-accent-400 select-none underline-offset-2
+     hover:text-accent-700 dark:hover:text-accent-300 hover:underline;
+  }
+
+  hr {
+    @apply my-4 bg-none border-y h-px border-t-bw-100 border-b-bw-400 dark:border-t-bw-600 dark:border-b-bw-900 scale-y-50;
+  }
+
+  label {
+    cursor: inherit;
+  }
+}

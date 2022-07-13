@@ -1,0 +1,41 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-json {
+    @apply p-4;
+  }
+
+  .ax-json__property {
+    @apply mb-2 last:mb-0;
+
+    & & {
+      @apply ltr:ml-4 rtl:mr-4;
+    }
+
+    & .ax-json__property--label {
+      @apply block text-sm text-muted;
+
+      & .ax-button {
+        @apply my-0 ltr:first-of-type:ml-4 rtl:first-of-type:mr-4;
+
+        & .ax-button__inner {
+          @apply p-1 w-fit h-fit min-w-fit min-h-fit;
+        }
+      }
+    }
+
+    & .ax-collapsable__head .ax-icon {
+      @apply px-0;
+    }
+  }
+
+  .ax-json__empty {
+    @apply text-bw-400 dark:text-bw-600;
+  }
+}

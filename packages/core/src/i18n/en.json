@@ -1,0 +1,38 @@
+{
+  "locale": {
+    "en": "English",
+    "ar": "عربى",
+    "de": "Deutsche",
+    "es": "Español",
+    "fr": "Français",
+    "it": "Italiano",
+    "jp": "日本語",
+    "ko": "한국어",
+    "pt": "Português",
+    "ru": "Pусский",
+    "zh": "中国人"
+  },
+  "options": {
+    "theme": "Switch Theme",
+    "locale": "Change Locale"
+  },
+  "error": {
+    "title": "OOPS! We broke something"
+  },
+  "action": {
+    "ok": "OK",
+    "add": "Add New",
+    "more": "Show more",
+    "less": "Show less",
+    "save": "Save",
+    "back": "Back",
+    "copy": "Copy",
+    "copied": "Copied",
+    "close": "Close",
+    "apply": "Apply",
+    "delete": "Delete",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "preview": "Preview"
+  }
+}

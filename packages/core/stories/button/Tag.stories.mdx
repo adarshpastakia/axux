@@ -1,0 +1,45 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import { AxTag, AxHotKey } from "../../src";
+import { TagStory, ColorStory, ColorValueStory } from "./Tag";
+
+<Meta
+  title="@core/Buttons/Tag"
+  component={AxTag}
+  parameters={{ jest: ["Tag.test.tsx"] }}
+/>
+
+<Title>Tag</Title>
+
+<Description of={AxTag} />
+
+<Canvas>
+  <Story name="1.Tag">{TagStory}</Story>
+  <Story name="2.Color">{ColorStory}</Story>
+  <Story name="3.Color value">{ColorValueStory}</Story>
+</Canvas>
+
+<Heading storyId="core-buttons-tag--4-hotkey-label">Hotkey Labels</Heading>
+
+<Canvas>
+  <Story name="4.Hotkey Label">
+    <AxHotKey.Label keyCombo="enter" />
+    <AxHotKey.Label keyCombo="escape" />
+    <AxHotKey.Label keyCombo="shift+left" />
+    <AxHotKey.Label keyCombo="shift+right" />
+    <AxHotKey.Label keyCombo="alt+0" />
+    <AxHotKey.Label keyCombo="shift+backspace" />
+  </Story>
+</Canvas>
+
+<Heading>Props</Heading>
+
+<ArgsTable sort="requiredFirst" of={AxTag} />

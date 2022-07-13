@@ -1,0 +1,179 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-side {
+    @apply grid overflow-hidden relative z-10;
+    grid-template-rows: auto 1fr;
+
+    & .ax-side__header {
+      @apply grid items-center select-none border-b gap-0 z-10 relative;
+      grid-template-areas: "icon title actions toggle";
+      grid-template-columns: auto 1fr auto auto;
+
+      & .ax-side__actions {
+        & > .ax-button {
+          @apply m-0;
+
+          & > .ax-button__inner {
+            height: 1.5em;
+            min-width: 1em;
+            min-height: 1em;
+          }
+          &[data-square="true"] > .ax-button__inner {
+            width: 1.5em;
+          }
+        }
+      }
+    }
+
+    & .ax-side__body {
+      @apply grid grid-area-[body] overflow-hidden bg-component;
+      grid-template-areas: "loader" "head" "content" "foot";
+      grid-template-rows: auto auto 1fr auto;
+      grid-template-columns: 1fr;
+
+      & .ax-menu {
+        @apply grid-area-[content];
+      }
+    }
+
+    & .ax-side__placeholder {
+      @apply grid-area-[body] z-[2];
+    }
+    & .ax-side__icon {
+      @apply grid-area-[icon] p-1;
+    }
+    & .ax-side__title {
+      @apply grid-area-[title] px-1;
+    }
+    & .ax-side__actions {
+      @apply grid-area-[actions] leading-none;
+    }
+    & .ax-side__toggle {
+      @apply grid-area-[toggle];
+    }
+
+    & .ax-side__resizeHandle {
+      @apply grid-area-[resize] cursor-col-resize overflow-hidden relative w-1 bg-bw-100 dark:bg-bw-800;
+
+      &::before {
+        @apply bg-bw-500 rounded h-full max-h-20 w-2 z-10 absolute -translate-y-1/2 top-1/2;
+        content: "";
+      }
+
+      &:hover {
+        @apply opacity-50;
+      }
+    }
+
+    &[data-align="start"] {
+      @apply grid-area-[side-s];
+      grid-template-areas: "head resize" "body resize";
+      grid-template-columns: 1fr auto;
+
+      & .ax-side__header {
+        grid-template-areas: "icon title actions toggle";
+        grid-template-columns: auto 1fr auto auto;
+      }
+
+      & .ax-side__body,
+      & .ax-side__header,
+      & .ax-side__placeholder {
+        @apply ltr:border-r rtl:border-l;
+      }
+
+      & .ax-side__resizeHandle {
+        &::before {
+          @apply ltr:-translate-x-1 rtl:translate-x-1;
+        }
+      }
+    }
+    &[data-align="end"] {
+      @apply grid-area-[side-e];
+      grid-template-areas: "resize head" "resize body";
+      grid-template-columns: auto 1fr;
+
+      & .ax-side__header {
+        grid-template-areas: "toggle icon title actions";
+        grid-template-columns: auto auto 1fr auto;
+      }
+      & .ax-side__body,
+      & .ax-side__header,
+      & .ax-side__placeholder {
+        @apply ltr:border-l rtl:border-r;
+      }
+
+      & .ax-side__resizeHandle {
+        &::before {
+          @apply translate-x-0;
+        }
+      }
+    }
+
+    &[data-collapsed="true"] {
+      @apply overflow-visible w-8 min-w-0;
+
+      & .ax-side__resizeHandle,
+      & .ax-side__actions,
+      & .ax-side__icon {
+        @apply hidden;
+      }
+
+      & .ax-side__header {
+        @apply absolute w-full;
+      }
+
+      & .ax-side__title {
+        @apply absolute z-10;
+        left: 1em;
+        top: 1em;
+        transform-origin: 0 50%;
+      }
+
+      & .ax-side__toggle .ax-button__inner {
+        @apply w-8;
+      }
+
+      & .ax-side__body {
+        @apply absolute inset-0 transition-transform -z-10;
+      }
+    }
+  }
+
+  [dir="ltr"] .ax-side[data-align="start"][data-collapsed="true"],
+  [dir="rtl"] .ax-side[data-align="end"][data-collapsed="true"] {
+    & .ax-side__title {
+      transform: rotate(-90deg) translateX(-100%);
+    }
+
+    & .ax-side__body {
+      @apply right-[unset] -translate-x-full;
+      grid-area: unset;
+    }
+
+    &[data-flyout="true"] .ax-side__body {
+      @apply z-0 translate-x-0 pl-8 shadow-xl shadow-black;
+    }
+  }
+
+  [dir="ltr"] .ax-side[data-align="end"][data-collapsed="true"],
+  [dir="rtl"] .ax-side[data-align="start"][data-collapsed="true"] {
+    & .ax-side__title {
+      transform: rotate(90deg) translateY(120%);
+    }
+
+    & .ax-side__body {
+      @apply left-[unset] translate-x-full;
+    }
+
+    &[data-flyout="true"] .ax-side__body {
+      @apply z-0 -translate-x-0 pr-8 shadow-xl shadow-black;
+    }
+  }
+}

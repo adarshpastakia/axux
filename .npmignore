@@ -1,0 +1,5 @@
+**/src
+**/tests
+**/stories
+**/tsconfig.json
+**/tsconfig.build.json

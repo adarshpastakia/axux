@@ -1,0 +1,81 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-checkList {
+    & .ax-checkList__item {
+      @apply flex flex-nowrap gap-1 items-center cursor-pointer select-none;
+
+      & .ax-icon {
+        @apply text-lg;
+      }
+
+      & .ax-checkList__checkbox {
+        @apply text-muted leading-none;
+
+        &[data-type="multiple"] + & {
+          @apply hidden;
+        }
+      }
+
+      &[data-disabled="true"] {
+        @apply text-muted opacity-50 pointer-events-none;
+      }
+
+      & label {
+        @apply flex-auto truncate ltr:pr-4 rtl:pl-4;
+      }
+
+      & .ax-badge__label {
+        @apply bg-accent-500/30;
+        & > span {
+          @apply text-default;
+        }
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .ax-checkList__item {
+    & .ax-icon[data-type="multiple"][data-selected="1"] {
+      @apply text-primary-500/90;
+    }
+    & .ax-icon[data-type="multiple"][data-selected="-1"] {
+      @apply text-danger-500/90;
+    }
+
+    &:hover .ax-checkList__checkbox {
+      &[data-type="multiple"] {
+        @apply hidden;
+      }
+      &[data-type="multiple"] + & {
+        @apply block;
+      }
+    }
+    &:active .ax-checkList__checkbox {
+      &[data-type="checkbox"] {
+        @apply text-primary-600 dark:text-primary-600;
+      }
+    }
+
+    & .ax-icon[data-type="checkbox"],
+    & .ax-icon[data-type="positive"] {
+      &[data-selected="true"],
+      &:hover {
+        @apply text-primary-500;
+      }
+    }
+    & .ax-icon[data-type="negative"] {
+      &[data-selected="true"],
+      &:hover {
+        @apply text-danger-500;
+      }
+    }
+  }
+}

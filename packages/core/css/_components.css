@@ -1,0 +1,161 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+/******************* panel loader *******************/
+@layer components {
+  .ax-loader {
+    @apply inset-0 flex flex-col items-center justify-center cursor-wait bg-bw-0/0 z-50;
+
+    & > div {
+      @apply px-8 py-4 rounded shadow border bg-bw-50/75 dark:bg-bw-900/75 backdrop-blur text-center;
+    }
+  }
+}
+
+/******************* section *******************/
+@layer components {
+  .ax-section {
+    @apply panel;
+  }
+}
+
+/******************* content *******************/
+@layer components {
+  .ax-content {
+    @apply overflow-auto grid-area-[content] p-4;
+
+    &[data-padding="none"] {
+      @apply p-0;
+    }
+    &[data-padding="sm"] {
+      @apply p-2;
+    }
+    &[data-padding="md"] {
+      @apply p-6;
+    }
+    &[data-padding="lg"] {
+      @apply p-8;
+    }
+  }
+}
+
+/******************* empty content *******************/
+@layer components {
+  .ax-empty {
+    @apply grid-area-[content] my-4 mx-auto p-4 place-self-center text-lg text-center text-muted;
+
+    & .ax-empty__icon {
+      font-size: 4em;
+    }
+    & .ax-empty__title {
+      @apply font-medium py-1 text-default;
+      font-size: 1.325em;
+    }
+    & .ax-empty__message {
+      @apply text-muted py-2;
+    }
+    & .ax-empty__actions {
+      @apply flex justify-center gap-1;
+    }
+
+    &[data-size="sm"] {
+      @apply text-sm;
+    }
+    &[data-size="md"] {
+      @apply text-md;
+    }
+  }
+}
+
+/******************* header *******************/
+@layer components {
+  .ax-header {
+    @apply flex grid-area-[head] items-center border-b bg-base;
+    z-index: 2;
+
+    & > .ax-title {
+      @apply select-none px-2;
+    }
+    & > .ax-flexbox,
+    & > .ax-row {
+      @apply flex-1;
+    }
+
+    & > .ax-icon {
+      @apply p-1;
+    }
+
+    & .ax-button {
+      @apply m-0;
+
+      & > .ax-button__inner {
+        height: 1.5em;
+        min-width: 1em;
+        min-height: 1em;
+      }
+      &[data-square="true"] > .ax-button__inner {
+        width: 1.5em;
+      }
+    }
+  }
+}
+
+/******************* footer *******************/
+@layer components {
+  .ax-footer {
+    @apply flex gap-1 grid-area-[foot] justify-between border-t;
+    z-index: 2;
+  }
+}
+
+/******************* card *******************/
+@layer components {
+  .ax-card {
+    @apply m-1 block relative rounded bg-component;
+
+    &:not([data-plain="true"]) {
+      @apply border shadow-sm;
+    }
+
+    &[data-clickable="true"] {
+      @apply cursor-pointer shadow-sm shadow-bw-200 dark:shadow-black hover:shadow-md hover:-translate-y-px
+       active:translate-y-0 active:shadow-inner;
+    }
+  }
+}
+
+/******************* collapsable *******************/
+@layer components {
+  .ax-collapsable {
+    & .ax-collapsable__head {
+      @apply flex flex-nowrap items-start gap-1 cursor-pointer;
+
+      & > div {
+        @apply flex-1 flex flex-nowrap items-start gap-1;
+      }
+
+      & .ax-title {
+        @apply flex-1 select-none;
+      }
+
+      & > .ax-icon {
+        @apply p-1 text-sm;
+      }
+      & .ax-button {
+        @apply m-0;
+      }
+    }
+    & .ax-collapsable__body {
+      @apply p-2;
+
+      & > .ax-content {
+        @apply p-0;
+      }
+    }
+  }
+}

@@ -1,0 +1,166 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-breadcrumb {
+    @apply flex flex-nowrap select-none items-center px-2 text-base;
+
+    & .ax-breadcrumb__item {
+      @apply flex items-center max-w-[12rem] my-0.5 cursor-pointer;
+
+      & > * {
+        @apply flex flex-auto items-center leading-5 flex-nowrap overflow-hidden;
+
+        & > label {
+          @apply truncate flex-auto;
+        }
+
+        & > .ax-badge {
+          @apply mx-px text-xs;
+        }
+      }
+    }
+
+    & > .ax-breadcrumb__item:last-child {
+      @apply pointer-events-none;
+    }
+
+    &:not([data-theme="modern"]) {
+      & .ax-breadcrumb__item {
+        @apply last:text-muted;
+
+        &::after {
+          @apply px-1 text-bw-500 origin-center inline-block;
+          content: "⦊";
+        }
+        &:last-child {
+          &::after {
+            content: unset;
+          }
+          & > * {
+            @apply text-muted;
+          }
+        }
+
+        & > * {
+          @apply text-primary-600 hover:text-primary-500 active:text-primary-700
+          dark:text-primary-300 dark:hover:text-primary-500 dark:active:text-primary-700;
+        }
+      }
+    }
+
+    &[data-theme="modern"] {
+      & .ax-breadcrumb__item {
+        &:nth-child(1) {
+          @apply text-crumb-1;
+          & > * {
+            @apply bg-crumb-1;
+          }
+        }
+        &:nth-child(2) {
+          @apply text-crumb-2;
+          & > * {
+            @apply bg-crumb-2;
+          }
+        }
+        &:nth-child(3) {
+          @apply text-crumb-3;
+          & > * {
+            @apply bg-crumb-3;
+          }
+        }
+        &:nth-child(4) {
+          @apply text-crumb-4;
+          & > * {
+            @apply bg-crumb-4;
+          }
+        }
+        &:nth-child(5) {
+          @apply text-crumb-5;
+          & > * {
+            @apply bg-crumb-5;
+          }
+        }
+        &:nth-child(6) {
+          @apply text-crumb-6;
+          & > * {
+            @apply bg-crumb-6;
+          }
+        }
+        &:nth-child(7) {
+          @apply text-crumb-7;
+          & > * {
+            @apply bg-crumb-7;
+          }
+        }
+        &:nth-child(8) {
+          @apply text-crumb-8;
+          & > * {
+            @apply bg-crumb-8;
+          }
+        }
+        &:nth-child(9) {
+          @apply text-crumb-9;
+          & > * {
+            @apply bg-crumb-9;
+          }
+        }
+        &:hover {
+          @apply text-primary-600;
+          & > * {
+            @apply bg-primary-600;
+          }
+        }
+
+        &::after,
+        &::before {
+          border: 0.625rem solid;
+          display: inline-block;
+          content: "";
+          height: 1.25rem;
+        }
+        &::before {
+          border-color: currentColor;
+          border-inline-start-color: transparent;
+        }
+        &::after {
+          border-color: transparent;
+          border-inline-start-color: currentColor;
+        }
+        &:first-child::before {
+          border-color: currentColor;
+          border-end-start-radius: 0.25rem;
+          border-start-start-radius: 0.25rem;
+          border-width: 0 0.75rem 0 0;
+        }
+        &:not(:first-child) {
+          margin-inline-start: -1rem;
+        }
+
+        & > * {
+          @apply text-white;
+          margin-inline-start: -0.25em;
+          padding-inline-end: 0.25em;
+        }
+      }
+    }
+  }
+
+  .ax-breadcrumb__dropdown.ax-breadcrumb__dropdown
+    > .ax-breadcrumb__item.ax-breadcrumb__item {
+    @apply bg-component m-0 p-0;
+
+    & > * {
+      @apply text-primary-600 dark:text-primary-300 hover:bg-primary-200 dark:hover:bg-primary-700 active:bg-primary-300 dark:active:bg-primary-900 bg-component py-1 px-2;
+    }
+    &::after,
+    &::before {
+      content: unset !important;
+    }
+  }
+}

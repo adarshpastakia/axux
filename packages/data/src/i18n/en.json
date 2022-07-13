@@ -1,0 +1,33 @@
+{
+  "label": {
+    "noRecords": "No Records"
+  },
+  "tree": {
+    "noItems": "No items",
+    "error": "Error loading items",
+    "loading": "Loading items..."
+  },
+  "grid": {
+    "empty": "No records found"
+  },
+  "json": {
+    "empty": "No data properties",
+    "true": "Yes",
+    "false": "No"
+  },
+  "histogram": {
+    "empty": "No histograms"
+  },
+  "action": {
+    "find": "Find...",
+    "copy": "Copy Value",
+    "filter": "Filter...",
+    "showShortcuts": "Keyboard shortcuts...",
+    "collapseAll": "Collapse All",
+    "expandAll": "Expand All",
+    "checkAll": "Check All",
+    "uncheckAll": "Uncheck All",
+    "addFilter": "Add Filter",
+    "addFilterNot": "Add not Filter"
+  }
+}

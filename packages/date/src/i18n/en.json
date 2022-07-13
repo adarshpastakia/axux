@@ -1,0 +1,13 @@
+{
+  "label": {
+    "prevMonth": "Previous Month",
+    "prevYear": "Previous Year",
+    "prevDecade": "Previous Decade",
+    "nextMonth": "Next Month",
+    "nextYear": "Next Year",
+    "nextDecade": "Next Decade",
+    "today": "Today",
+    "hijri": "Hijri",
+    "gregorian": "Gregorian"
+  }
+}

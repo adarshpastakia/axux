@@ -1,0 +1,85 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-menu {
+    @apply overflow-y-auto overflow-x-hidden;
+  }
+  .ax-menu__item {
+    @apply flex gap-1 px-2 py-1 items-center whitespace-nowrap select-none cursor-pointer text-base;
+
+    &[data-active="true"] {
+      @apply bg-primary-500/30 active:bg-primary-500/50;
+    }
+    & > * {
+      @apply pointer-events-none;
+    }
+
+    & .ax-menu__label {
+      @apply ltr:pr-4 rtl:pl-4;
+    }
+  }
+  .ax-menu__group {
+    @apply flex gap-1 py-1 items-center whitespace-nowrap select-none font-medium;
+
+    &[data-plain="false"] {
+      @apply px-2 cursor-pointer;
+    }
+
+    &[data-plain="true"] {
+      @apply text-sm text-muted;
+
+      &::after,
+      &::before {
+        @apply h-px bg-bw-500/50 w-6;
+        content: "";
+      }
+      &::after {
+        @apply flex-auto;
+      }
+
+      & .ax-menu__label {
+        @apply flex-initial min-w-0;
+      }
+    }
+
+    &[data-popover-open="true"] {
+      @apply bg-primary-500/20;
+    }
+  }
+  .ax-menu__label {
+    @apply flex-auto;
+  }
+
+  .ax-menu__mini {
+    @apply relative select-none cursor-pointer;
+
+    &[data-active="true"],
+    &:hover {
+      @apply bg-primary-500/30 active:bg-primary-500/50;
+    }
+    & .ax-menu__icon {
+      @apply text-xl p-2 pointer-events-none;
+    }
+
+    & .ax-badge {
+      @apply absolute top-0 ltr:right-0 rtl:right-0;
+    }
+
+    &[data-popover-open="true"] {
+      @apply bg-primary-500/20;
+    }
+  }
+
+  .light .ax-menu__popover {
+    box-shadow: 0.25rem 0.25rem 1rem 0 theme(colors.bw.500);
+  }
+  .dark .ax-menu__popover {
+    box-shadow: 0.25rem 0.25rem 1rem 0 theme(colors.bw.900);
+  }
+}

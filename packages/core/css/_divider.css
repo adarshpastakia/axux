@@ -1,0 +1,100 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-divider {
+    @apply flex flex-nowrap items-center self-stretch select-none my-4 text-bw-700 dark:text-bw-200;
+
+    & > hr {
+      @apply flex-auto bg-none border-y h-px scale-y-50 opacity-50 m-0
+        border-b-current border-t-bw-400 dark:border-b-current dark:border-t-bw-800 
+        border-r-current border-l-bw-400 dark:border-r-current dark:border-l-bw-800;
+    }
+
+    & > span {
+      @apply flex-initial leading-none px-2;
+    }
+  }
+
+  .ax-divider[data-vertical="true"],
+  .ax-header > .ax-divider,
+  .ax-row > .ax-divider {
+    @apply flex-col self-stretch mx-4 my-0;
+
+    & > hr {
+      @apply w-px h-0 border-y-0 border-x scale-x-50 scale-y-90;
+    }
+  }
+
+  .ax-divider[data-has-label="true"][data-align="start"] hr:first-of-type,
+  .ax-divider[data-has-label="true"][data-align="end"] hr:last-of-type {
+    @apply flex-initial basis-4;
+  }
+
+  .ax-divider[data-rainbow="true"] {
+    & > hr {
+      @apply border-0 h-0.5 scale-100;
+      background: linear-gradient(
+        90deg,
+        theme(colors.blue.500) 0%,
+        theme(colors.blue.500) 17%,
+        theme(colors.sky.500) 17%,
+        theme(colors.sky.500) 34%,
+        theme(colors.green.500) 34%,
+        theme(colors.green.500) 51%,
+        theme(colors.yellow.500) 51%,
+        theme(colors.yellow.500) 67%,
+        theme(colors.orange.500) 67%,
+        theme(colors.orange.500) 83%,
+        theme(colors.red.500) 83%,
+        theme(colors.red.500) 100%
+      );
+    }
+    &[data-has-label="true"] hr:first-of-type {
+      background: linear-gradient(
+        90deg,
+        theme(colors.blue.500) 0%,
+        theme(colors.blue.500) 33%,
+        theme(colors.sky.500) 33%,
+        theme(colors.sky.500) 66%,
+        theme(colors.green.500) 66%,
+        theme(colors.green.500) 100%
+      );
+    }
+    &[data-has-label="true"] hr:last-of-type {
+      background: linear-gradient(
+        90deg,
+        theme(colors.yellow.500) 0%,
+        theme(colors.yellow.500) 33%,
+        theme(colors.orange.500) 33%,
+        theme(colors.orange.500) 66%,
+        theme(colors.red.500) 66%,
+        theme(colors.red.500) 100%
+      );
+    }
+  }
+}
+
+@layer utilities {
+  .ax-divider[data-size="sm"] {
+    &[data-vertical="true"] {
+      @apply mx-2;
+    }
+    &:not([data-vertical="true"]) {
+      @apply my-2;
+    }
+  }
+  .ax-divider[data-size="xs"] {
+    &[data-vertical="true"] {
+      @apply mx-1;
+    }
+    &:not([data-vertical="true"]) {
+      @apply my-1;
+    }
+  }
+}

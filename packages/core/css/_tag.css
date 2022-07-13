@@ -1,0 +1,127 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-tag {
+    @apply inline-flex relative overflow-hidden text-sm px-1 py-px m-0.5 text-center align-middle select-none items-center
+        before:absolute before:rounded before:inset-0 before:opacity-10 before:bg-current before:z-[0]
+        after:absolute after:rounded after:inset-0 after:opacity-30 after:border after:border-current after:z-[1]
+        text-bw-600 dark:text-bw-300;
+
+    & > label {
+      @apply px-1 inline-block z-10;
+    }
+
+    & > .close-x {
+      @apply ltr:ml-1 rtl:mr-1 leading-none;
+    }
+  }
+
+  .ax-hotkey__label {
+    @apply bg-gray-200/50 text-gray-500 dark:bg-gray-900/50 dark:text-gray-300 text-xs py-px px-2 inline-block border rounded mx-px;
+    direction: ltr;
+  }
+}
+
+@layer utilities {
+  .ax-tag {
+    &[data-size="sm"] {
+      @apply text-xs;
+    }
+    &[data-size="md"] {
+      @apply text-base;
+    }
+
+    &[data-fill="true"] {
+      @apply before:opacity-75 after:opacity-100;
+
+      & > .ax-icon,
+      & > label,
+      & > span {
+        @apply text-bw-0;
+      }
+    }
+
+    &[data-clickable="true"] {
+      @apply hover:before:opacity-25;
+      &[data-disabled="true"] {
+        @apply opacity-50 pointer-events-none;
+      }
+    }
+    &[data-fill="true"][data-clickable="true"] {
+      @apply hover:before:opacity-95;
+    }
+
+    &[data-color="primary"] {
+      @apply text-primary-600 dark:text-primary-400;
+    }
+    &[data-color="accent"] {
+      @apply text-accent-600 dark:text-accent-400;
+    }
+    &[data-color="danger"] {
+      @apply text-danger-600 dark:text-danger-400;
+    }
+    &[data-color="success"] {
+      @apply text-success-600 dark:text-success-400;
+    }
+    &[data-color="warning"] {
+      @apply text-warning-600 dark:text-warning-400;
+    }
+    &[data-color="red"] {
+      @apply text-red-600 dark:text-red-400;
+    }
+    &[data-color="orange"] {
+      @apply text-orange-600 dark:text-orange-400;
+    }
+    &[data-color="amber"] {
+      @apply text-amber-600 dark:text-amber-400;
+    }
+    &[data-color="yellow"] {
+      @apply text-yellow-600 dark:text-yellow-400;
+    }
+    &[data-color="lime"] {
+      @apply text-lime-600 dark:text-lime-400;
+    }
+    &[data-color="green"] {
+      @apply text-green-600 dark:text-green-400;
+    }
+    &[data-color="emerald"] {
+      @apply text-emerald-600 dark:text-emerald-400;
+    }
+    &[data-color="teal"] {
+      @apply text-teal-600 dark:text-teal-400;
+    }
+    &[data-color="cyan"] {
+      @apply text-cyan-600 dark:text-cyan-400;
+    }
+    &[data-color="sky"] {
+      @apply text-sky-600 dark:text-sky-400;
+    }
+    &[data-color="blue"] {
+      @apply text-blue-600 dark:text-blue-400;
+    }
+    &[data-color="indigo"] {
+      @apply text-indigo-600 dark:text-indigo-400;
+    }
+    &[data-color="violet"] {
+      @apply text-violet-600 dark:text-violet-400;
+    }
+    &[data-color="purple"] {
+      @apply text-purple-600 dark:text-purple-400;
+    }
+    &[data-color="fuchsia"] {
+      @apply text-fuchsia-600 dark:text-fuchsia-400;
+    }
+    &[data-color="pink"] {
+      @apply text-pink-600 dark:text-pink-400;
+    }
+    &[data-color="rose"] {
+      @apply text-rose-600 dark:text-rose-400;
+    }
+  }
+}

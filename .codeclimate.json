@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "similar-code": {
+      "enabled": false
+    }
+  },
+  "exclude_patterns": [
+    ".github/",
+    ".storybook/",
+    "assets/",
+    "coverage/",
+    "jest/",
+    "**/node_modules/",
+    "storybook/",
+    "**/stories/",
+    "**/tests/",
+    "**/dist/",
+    "**/LICENSE",
+    "**/*.d.ts",
+    "**/*.lock",
+    "**/*.css",
+    "**/*.js",
+    "**/*.json",
+    "**/*.md",
+    "*.config.js",
+    ".editorconfig",
+    ".gitignore",
+    ".npmignore",
+    ".codeclimate.json",
+    "**/_countries.ts",
+    "**/hijri-date.js"
+  ]
+}

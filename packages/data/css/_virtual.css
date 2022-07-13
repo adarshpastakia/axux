@@ -1,0 +1,97 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-virtual__container {
+    @apply grid-area-[content] grid overflow-hidden bg-base;
+
+    & .ax-virtual__wrapper {
+      @apply grid justify-center p-4;
+      grid-template-columns: minmax(auto, 1100px) auto;
+
+      & > div:first-child {
+        @apply relative;
+      }
+      & > div:first-child > div {
+        @apply relative mx-auto;
+      }
+    }
+
+    & .ax-timeline__item {
+      @apply flex flex-nowrap;
+
+      &[data-size="sm"] .ax-timeline__avatar {
+        @apply scale-75;
+      }
+      &[data-size="md"] .ax-timeline__avatar {
+        @apply scale-125 translate-y-1;
+      }
+
+      &[data-reverse="true"] {
+        @apply flex-row-reverse;
+      }
+
+      & > div:first-child {
+        @apply text-muted relative mx-2;
+
+        & > .ax-icon {
+          @apply text-2xl rounded-full leading-none p-1;
+
+          &:not([class*="bg-"]) {
+            @apply bg-bw-100 dark:bg-bw-800;
+          }
+
+          &:not([class*="text-"]) {
+            @apply text-bw-300 dark:text-bw-700;
+          }
+        }
+      }
+      & > div:last-child {
+        @apply flex-1 pb-4;
+      }
+
+      &:not([data-noline="true"]) > div:first-child {
+        @apply before:absolute before:w-px before:bg-bw-500 before:bg-opacity-50 before:top-0 before:bottom-0 before:left-1/2 before:z-0;
+      }
+      &[data-last-child="true"] > div:first-child {
+        @apply before:hidden;
+      }
+    }
+
+    & .ax-grid__item {
+      @apply p-2;
+    }
+
+    & .ax-list__item {
+      @apply inline-block;
+    }
+
+    & .ax-list__sticky {
+      @apply sticky inline-block top-0 ltr:left-0 rtl:right-0 bg-base z-10;
+
+      &[data-layout="vertical"] {
+        @apply min-w-full;
+      }
+      &[data-layout="horizontal"] {
+        @apply min-h-full;
+      }
+    }
+  }
+
+  .ax-virtual__scroll {
+    @apply flex items-end;
+
+    & > div:first-child {
+      @apply sticky bottom-0;
+
+      & .ax-button__inner {
+        @apply p-1 w-auto h-auto;
+      }
+    }
+  }
+}
