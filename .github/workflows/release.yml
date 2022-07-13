@@ -4,15 +4,7 @@ name: Release
 on:
   # Triggers the workflow on publish/prerelease tag
   release:
-    types: [published, prereleased]
-
-  workflow_call:
-    inputs:
-      version:
-        description: 'Version bump (major | minor | patch | prerelease)'
-        default: 'prerelease'
-        required: true
-        type: string
+    types: [published]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -45,9 +37,7 @@ jobs:
 
       - name: Build packages
         run: |
-          yarn release ${{ inputs.version }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          yarn dist
 
       # Runs a set of commands using the runners shell
       - name: Publish release
