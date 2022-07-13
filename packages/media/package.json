@@ -1,6 +1,6 @@
 {
   "name": "@axux/media",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "description": "axux: Media players",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,9 +24,9 @@
     "watch": "yarn build -w"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.4",
-    "@axux/data": "^2.0.0-beta.4",
-    "@axux/utilities": "^2.0.0-beta.4",
+    "@axux/core": "^2.0.0-beta.5",
+    "@axux/data": "^2.0.0-beta.5",
+    "@axux/utilities": "^2.0.0-beta.5",
     "wavesurfer.js": "^6.2.0"
   },
   "peerDependencies": {
