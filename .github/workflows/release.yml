@@ -49,3 +49,10 @@ jobs:
           lerna publish from-package --yes
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Rebase development branch
+        run: |
+          git checkout dev
+          git fetch
+          git rebase origin/main -q
+          git push
