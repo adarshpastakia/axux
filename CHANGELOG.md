@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.3](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2022-07-13)
+
+
+### Bug Fixes
+
+* **workflow:** syntax error (skip-ci) ([60a433e](https://github.com/adarshpastakia/axux/commit/60a433e20f22c6bd5e9d0d008f1fb89711ea7769))
+
+
+
+
+
 # [2.0.0-beta.2](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2022-07-13)
 
 **Note:** Version bump only for package axux
