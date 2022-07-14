@@ -10,6 +10,7 @@
 import { isEmpty, isString } from "@axux/utilities";
 import { Placement } from "@popperjs/core";
 import { Fragment, useCallback, useMemo } from "react";
+import { PopoverProps } from "../overlays/Popover";
 import { AxTooltip } from "../overlays/Tooltip";
 import { ChildProp, TooltipType } from "../types";
 
@@ -28,12 +29,15 @@ export const useTooltip = (
 
   /******************* tooltip wrapper *******************/
   const el = useCallback(
-    ({ children }: ChildProp) => {
+    ({
+      children,
+      innerRef,
+    }: ChildProp & { innerRef?: PopoverProps["innerRef"] }) => {
       if (isEmpty(props)) {
         return <Fragment>{children}</Fragment>;
       }
       return (
-        <AxTooltip {...props} isDisabled={isDisabled}>
+        <AxTooltip {...props} innerRef={innerRef} isDisabled={isDisabled}>
           {children}
         </AxTooltip>
       );

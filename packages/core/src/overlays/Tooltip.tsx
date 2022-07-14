@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { FC, forwardRef } from "react";
+import { FC, forwardRef, RefObject } from "react";
 import { ChildProp, ElementProps, TooltipProps as TP } from "../types";
-import { AxPopover } from "./Popover";
+import { AxPopover, PopoverProps } from "./Popover";
 
 export interface TooltipProps extends TP, ChildProp, ElementProps {
   /**
@@ -19,6 +19,10 @@ export interface TooltipProps extends TP, ChildProp, ElementProps {
    * disable
    */
   isDisabled?: boolean;
+  /**
+   * inner element ref
+   */
+  innerRef?: PopoverProps["innerRef"];
 }
 
 /**
@@ -34,8 +38,7 @@ export const AxTooltip: FC<TooltipProps> = forwardRef<
       content,
       color,
       isDisabled,
-      // @ts-ignore
-      popoverRef,
+      innerRef,
       // @ts-ignore
       "data-popover-open": parentOpen,
       ...rest
@@ -49,8 +52,8 @@ export const AxTooltip: FC<TooltipProps> = forwardRef<
         trigger="hover"
         data-color={color}
         isDisabled={isDisabled || parentOpen}
+        innerRef={innerRef}
         // @ts-ignore
-        popoverRef={ref}
         popoverClassName="tooltip"
       >
         {children}

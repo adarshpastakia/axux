@@ -100,7 +100,7 @@ export const Tab: FC<TabProps> = ({
   }, [label]);
 
   return (
-    <Wrapper>
+    <Wrapper innerRef={buttonRef}>
       <button
         {...rest}
         ref={buttonRef}

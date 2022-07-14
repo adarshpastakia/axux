@@ -104,7 +104,7 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
 
     /******************* component *******************/
     return (
-      <Wrapper>
+      <Wrapper innerRef={ref}>
         <div
           arial-label={children}
           {...rest}
