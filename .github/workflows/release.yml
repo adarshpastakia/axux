@@ -54,6 +54,6 @@ jobs:
         run: |
           git checkout dev
           git fetch
+          git pull
           git rebase origin/main -q
-          git pull --rebase
-          git push
+          git push -ff
