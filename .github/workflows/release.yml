@@ -55,4 +55,5 @@ jobs:
           git checkout dev
           git fetch
           git rebase origin/main -q
+          git pull --rebase
           git push
