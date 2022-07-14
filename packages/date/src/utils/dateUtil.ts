@@ -129,7 +129,7 @@ export namespace DateUtil {
     return formatted;
   };
 
-  export const startOfDay = (date: Date, isHijri: boolean) => {
+  export const startOfDay = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       return hdate.toGregorian();
@@ -138,7 +138,7 @@ export namespace DateUtil {
     }
   };
 
-  export const startOfWeek = (date: Date, isHijri: boolean) => {
+  export const startOfWeek = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.subtractDays(hdate.day);
@@ -148,7 +148,7 @@ export namespace DateUtil {
     }
   };
 
-  export const startOfMonth = (date: Date, isHijri: boolean) => {
+  export const startOfMonth = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.date = 1;
@@ -158,7 +158,7 @@ export namespace DateUtil {
     }
   };
 
-  export const startOfYear = (date: Date, isHijri: boolean) => {
+  export const startOfYear = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.date = 1;
@@ -169,7 +169,7 @@ export namespace DateUtil {
     }
   };
 
-  export const startOfDecade = (date: Date, isHijri: boolean) => {
+  export const startOfDecade = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.date = 1;
@@ -181,7 +181,7 @@ export namespace DateUtil {
     }
   };
 
-  export const startOfCentury = (date: Date, isHijri: boolean) => {
+  export const startOfCentury = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.date = 1;
@@ -193,7 +193,7 @@ export namespace DateUtil {
     }
   };
 
-  export const endOfDay = (date: Date, isHijri: boolean) => {
+  export const endOfDay = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       return _endOfDay(hdate.toGregorian());
@@ -202,7 +202,7 @@ export namespace DateUtil {
     }
   };
 
-  export const endOfWeek = (date: Date, isHijri: boolean) => {
+  export const endOfWeek = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.addDays(6 - hdate.day);
@@ -212,7 +212,7 @@ export namespace DateUtil {
     }
   };
 
-  export const endOfMonth = (date: Date, isHijri: boolean) => {
+  export const endOfMonth = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.month += 1;
@@ -224,7 +224,7 @@ export namespace DateUtil {
     }
   };
 
-  export const endOfYear = (date: Date, isHijri: boolean) => {
+  export const endOfYear = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.year += 1;
@@ -237,7 +237,7 @@ export namespace DateUtil {
     }
   };
 
-  export const endOfDecade = (date: Date, isHijri: boolean) => {
+  export const endOfDecade = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.year += 10 - (hdate.year % 10);
@@ -250,7 +250,7 @@ export namespace DateUtil {
     }
   };
 
-  export const endOfCentury = (date: Date, isHijri: boolean) => {
+  export const endOfCentury = (date: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.year += 100 - (hdate.year % 100);
@@ -263,7 +263,7 @@ export namespace DateUtil {
     }
   };
 
-  export const addDays = (date: Date, d: number, isHijri: boolean) => {
+  export const addDays = (date: Date, d: number, isHijri: boolean = false) => {
     if (isHijri) {
       return addHijriDays(date, d).toGregorian();
     } else {
@@ -271,7 +271,7 @@ export namespace DateUtil {
     }
   };
 
-  export const addWeeks = (date: Date, d: number, isHijri: boolean) => {
+  export const addWeeks = (date: Date, d: number, isHijri: boolean = false) => {
     if (isHijri) {
       return addHijriDays(date, d * 7).toGregorian();
     } else {
@@ -279,7 +279,7 @@ export namespace DateUtil {
     }
   };
 
-  export const addMonths = (date: Date, d: number, isHijri: boolean) => {
+  export const addMonths = (date: Date, d: number, isHijri: boolean = false) => {
     if (isHijri) {
       return addHijriMonth(date, d).toGregorian();
     } else {
@@ -287,7 +287,7 @@ export namespace DateUtil {
     }
   };
 
-  export const addYears = (date: Date, d: number, isHijri: boolean) => {
+  export const addYears = (date: Date, d: number, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       hdate.year += d;
@@ -297,7 +297,7 @@ export namespace DateUtil {
     }
   };
 
-  export const getWeek = (date: Date, locale: string, isHijri: boolean) => {
+  export const getWeek = (date: Date, locale: string, isHijri: boolean = false) => {
     let ret = "";
     if (isHijri) {
       const start = startOfYear(date, isHijri);
@@ -311,7 +311,7 @@ export namespace DateUtil {
     return ret;
   };
 
-  export const isSameMonth = (date: Date, compare: Date, isHijri: boolean) => {
+  export const isSameMonth = (date: Date, compare: Date, isHijri: boolean = false) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       const hcompare = compare.toHijri().ignoreTime();
