@@ -8,7 +8,6 @@
 
 const plugin = require("tailwindcss/plugin");
 const colors = require("tailwindcss/colors");
-const { color } = require("@storybook/theming");
 
 module.exports = plugin(
   ({ addUtilities, matchUtilities, theme }) => {
