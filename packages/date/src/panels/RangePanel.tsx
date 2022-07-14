@@ -151,6 +151,7 @@ export const AxRangePanel: FC<RangeProps> = ({
           if (isAfter(start, end)) {
             [start, end] = [end, start];
           }
+          end = DateUtil.endOfDay(end);
           setPageDate({
             start,
             end: DateUtil.isSameMonth(start, end, isHijri)
