@@ -14,6 +14,7 @@ import {
   cloneElement,
   FC,
   Fragment,
+  Ref,
   useEffect,
   useImperativeHandle,
   useLayoutEffect,
@@ -48,6 +49,10 @@ export interface PopoverProps extends ChildrenProp, ElementProps {
    * hide arrow
    */
   hideArrow?: boolean;
+  /**
+   * inner element ref
+   */
+  innerRef?: Ref<HTMLElement>;
 }
 
 /**
@@ -64,8 +69,7 @@ export const AxPopover: FC<PopoverProps> & { Dismiss: FC<ChildProp> } = ({
   placement = "bottom",
   // @ts-ignore
   popoverClassName,
-  // @ts-ignore
-  popoverRef,
+  innerRef,
   ...rest
 }) => {
   const {
@@ -102,8 +106,7 @@ export const AxPopover: FC<PopoverProps> & { Dismiss: FC<ChildProp> } = ({
     () => Children.toArray(children) as AnyObject[],
     [children]
   );
-  useImperativeHandle(popoverRef, () => referenceElement, [referenceElement]);
-  // useImperativeHandle(anchorEl.ref, () => referenceElement, [referenceElement]);
+  useImperativeHandle(innerRef, () => referenceElement, [referenceElement]);
 
   useEffect(() => {
     if (popperElement) {

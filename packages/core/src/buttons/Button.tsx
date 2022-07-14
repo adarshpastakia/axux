@@ -157,7 +157,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
 
   /******************* component *******************/
   return (
-    <Wrapper>
+    <Wrapper innerRef={ref}>
       {hotKey && <AxHotKey keyCombo={hotKey} handler={onClick} />}
       <div
         data-type={type}
