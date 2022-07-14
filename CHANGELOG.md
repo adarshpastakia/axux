@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2022-07-14)
+
+
+### Bug Fixes
+
+* **DateUtils:** default isHijri to false ([f44199c](https://github.com/adarshpastakia/axux/commit/f44199c552bdc911e6d1e32c7af37f2bed066a90))
+* **Popover:** pass innerRef to get anchor button ref ([6f5e31f](https://github.com/adarshpastakia/axux/commit/6f5e31fad09d154349644a1608ae0012df99094b))
+* **RangePanel:** set selected end date to endOfDay ([a600de1](https://github.com/adarshpastakia/axux/commit/a600de1b2253db7acfa79c4e114c7fe2bee53d46))
+* **TabPanel:** tab change events missing activeTab id ([66ee3e1](https://github.com/adarshpastakia/axux/commit/66ee3e13115cf83127155ce220946bc8df14b9c4))
+
+
+
+
+
 # [2.0.0-beta.5](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2022-07-13)
 
 **Note:** Version bump only for package axux

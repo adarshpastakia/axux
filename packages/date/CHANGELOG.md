@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2022-07-14)
+
+
+### Bug Fixes
+
+* **DateUtils:** default isHijri to false ([f44199c](https://github.com/adarshpastakia/axux/commit/f44199c552bdc911e6d1e32c7af37f2bed066a90))
+* **RangePanel:** set selected end date to endOfDay ([a600de1](https://github.com/adarshpastakia/axux/commit/a600de1b2253db7acfa79c4e114c7fe2bee53d46))
+
+
+
+
+
 # [2.0.0-beta.5](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2022-07-13)
 
 **Note:** Version bump only for package @axux/date

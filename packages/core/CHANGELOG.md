@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2022-07-14)
+
+
+### Bug Fixes
+
+* **Popover:** pass innerRef to get anchor button ref ([6f5e31f](https://github.com/adarshpastakia/axux/commit/6f5e31fad09d154349644a1608ae0012df99094b))
+* **TabPanel:** tab change events missing activeTab id ([66ee3e1](https://github.com/adarshpastakia/axux/commit/66ee3e13115cf83127155ce220946bc8df14b9c4))
+
+
+
+
+
 # [2.0.0-beta.5](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2022-07-13)
 
 **Note:** Version bump only for package @axux/core
