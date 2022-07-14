@@ -150,9 +150,9 @@ export const AxTabPanel: FC<TabPanelProps> & { Tab: FC<TabProps> } = ({
 
   useLayoutEffect(() => {
     startTransition(() => {
-      if (activeTab) {
+      if (active) {
         const el = panelRef.current;
-        onActiveChange && onActiveChange(activeTab);
+        onActiveChange && onActiveChange(active);
         setTimeout(
           () =>
             el &&
@@ -161,7 +161,7 @@ export const AxTabPanel: FC<TabPanelProps> & { Tab: FC<TabProps> } = ({
         );
       }
     });
-  }, [activeTab]);
+  }, [active]);
 
   useEffect(() => {
     if (activeTab && activeTab in tabMap) {
@@ -190,7 +190,7 @@ export const AxTabPanel: FC<TabPanelProps> & { Tab: FC<TabProps> } = ({
         setActive(id);
       }
     },
-    [onBeforeChange]
+    [onBeforeChange, active]
   );
 
   return (
