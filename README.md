@@ -141,6 +141,7 @@ Add `.postcssrc.json` to project
 ```json
 // .postcssrc.json
 {
+  "extends": ["@parcel/config-default"],
   "plugins": {
     "postcss-import": true,
     "tailwindcss/nesting": "postcss-nesting",
