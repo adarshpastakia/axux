@@ -33,11 +33,11 @@ module.exports = plugin(
     theme: {
       extend: {
         colors: {
-          primary: colors.sky,
-          accent: colors.pink,
-          danger: colors.red,
-          warning: colors.amber,
-          success: colors.green,
+          primary: { ...colors.sky },
+          accent: { ...colors.pink },
+          danger: { ...colors.red },
+          warning: { ...colors.amber },
+          success: { ...colors.green },
           white: "#ffffff",
           black: "#0e141c",
           bw: {
