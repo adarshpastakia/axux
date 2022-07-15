@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { AxIcon } from "../../src/icons/Icon";
+import { AxIcon } from "../icons/Icon";
 import {
   ChildrenProp,
   CloseX,
