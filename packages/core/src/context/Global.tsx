@@ -143,7 +143,7 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
       const newTheme = forceTheme ?? (theme === "dark" ? "light" : "dark");
       setTheme(newTheme);
       localStorage.setItem(KEY_THEME, newTheme);
-      document.documentElement.classList.remove("ax-light", "ax-dark");
+      document.documentElement.classList.remove("light", "dark");
       document.documentElement.classList.add(`ax-${newTheme}`);
     },
     [theme]
