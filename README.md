@@ -44,7 +44,10 @@ Add `tailwind.config` to project
 // tailwind.config.js
 const colors = require("tailwindcss/colors");
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/@axux/**/dist/**/*.js",
+  ],
   theme: {
     extend: {
       colors: {
@@ -127,6 +130,7 @@ Add `.parcelrc.json` to project
 ```json
 // .parcelrc.json
 {
+  "extends": ["@parcel/config-default"],
   "compressors": {
     "*.{html,css,js,svg,map}": [
       "@parcel/compressor-gzip",
@@ -141,7 +145,6 @@ Add `.postcssrc.json` to project
 ```json
 // .postcssrc.json
 {
-  "extends": ["@parcel/config-default"],
   "plugins": {
     "postcss-import": true,
     "tailwindcss/nesting": "postcss-nesting",
