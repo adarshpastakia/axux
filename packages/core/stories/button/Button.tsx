@@ -6,7 +6,6 @@
  * @license   : MIT
  */
 
-import { Menu } from "@headlessui/react";
 import { ComponentStory } from "@storybook/react";
 import { AxButton, AxFlexBox } from "../../src";
 import { HotKeyWrapper } from "../../src/hotkeys/HotKeyWrapper";
