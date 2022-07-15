@@ -38,27 +38,13 @@ npm install @axux/core @axux/data @axux/form @axux/utilies
 yarn add @axux/core @axux/data @axux/form @axux/utilies
 ```
 
-Add `postcss.config` to project
-
-```js
-// postcss.config.js
-module.exports = {
-  plugins: {
-    "postcss-import": {},
-    "tailwindcss/nesting": "postcss-nesting",
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-};
-```
-
 Add `tailwind.config` to project
 
 ```js
 // tailwind.config.js
 const colors = require("tailwindcss/colors");
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx,mdx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -123,6 +109,58 @@ root.render(
   </StrictMode>
 );
 ```
+
+---
+
+## Build with Parcel
+
+```bash
+# using npm
+npm install parcel @parcel/compressor-brotli @parcel/compressor-gzip postcss postcss-import postcss-nesting --save-dev
+
+# using yarn
+yarn add parcel @parcel/compressor-brotli @parcel/compressor-gzip postcss postcss-import postcss-nesting --dev
+```
+
+Add `.parcelrc.json` to project
+
+```json
+// .parcelrc.json
+{
+  "compressors": {
+    "*.{html,css,js,svg,map}": [
+      "@parcel/compressor-gzip",
+      "@parcel/compressor-brotli"
+    ]
+  }
+}
+```
+
+Add `.postcssrc.json` to project
+
+```json
+// .postcssrc.json
+{
+  "plugins": {
+    "postcss-import": true,
+    "tailwindcss/nesting": "postcss-nesting",
+    "tailwindcss": true
+  }
+}
+```
+
+```json
+// package.json
+{
+  "source": "./public/index.html",
+  "scripts": {
+    "start": "parcel -p 3000",
+    "build": "parcel build"
+  }
+}
+```
+
+> ## Known Issue: doesn't work work with CRA
 
 ---
 
