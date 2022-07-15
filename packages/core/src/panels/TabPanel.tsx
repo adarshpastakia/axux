@@ -20,7 +20,7 @@ import {
   useState,
   useTransition,
 } from "react";
-import { AxIcon } from "../../src/icons/Icon";
+import { AxIcon } from "../icons/Icon";
 import { useBadge } from "../hooks/useBadge";
 import { useTooltip } from "../hooks/useTooltip";
 import {
