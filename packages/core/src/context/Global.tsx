@@ -144,7 +144,7 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
       setTheme(newTheme);
       localStorage.setItem(KEY_THEME, newTheme);
       document.documentElement.classList.remove("light", "dark");
-      document.documentElement.classList.add(`ax-${newTheme}`);
+      document.documentElement.classList.add(newTheme);
     },
     [theme]
   );
