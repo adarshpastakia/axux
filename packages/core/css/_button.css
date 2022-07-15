@@ -60,9 +60,11 @@
     }
 
     &[data-square="true"] .ax-button__inner {
-      @apply p-[0.25em] justify-center;
-      width: 2em;
-      height: 2em;
+      @apply p-[0.25em] justify-center w-fit h-fit;
+    }
+    &[data-square="true"].flush .ax-button__inner {
+      @apply p-1 justify-center min-w-fit min-h-fit;
+      font-size: 1.5em;
     }
   }
 
@@ -279,7 +281,7 @@
     }
 
     &[data-type="solid"] .ax-button__inner {
-      @apply bg-primary-700 hover:bg-primary-600 active:bg-primary-900;
+      @apply bg-primary-700 hover:bg-primary-600 active:bg-primary-900 text-bw-50;
     }
     &[data-color="accent"][data-type="solid"] .ax-button__inner {
       @apply bg-accent-700 hover:bg-accent-600 active:bg-accent-900 text-bw-50;
