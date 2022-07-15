@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.10](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.9...v2.0.0-beta.10) (2022-07-15)
+
+
+### Bug Fixes
+
+* **AppContext:** toggle theme wrong className ([142db61](https://github.com/adarshpastakia/axux/commit/142db610a28ef07df8adbd6c75c74abb91a85ebc))
+
+
+
+
+
 # [2.0.0-beta.9](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2022-07-15)
 
 
