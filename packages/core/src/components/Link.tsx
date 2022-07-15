@@ -58,3 +58,4 @@ export const Link = forwardRef<
     </Fragment>
   );
 });
+Link.displayName = "LinkWrapper";

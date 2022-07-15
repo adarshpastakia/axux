@@ -48,3 +48,4 @@ export const AxCard = forwardRef<HTMLElement, CardProps>(
     return <Link {...props} ref={ref} />;
   }
 );
+AxCard.displayName = "AxCard";
