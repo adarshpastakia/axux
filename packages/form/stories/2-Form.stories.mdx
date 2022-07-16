@@ -1,0 +1,28 @@
+import {
+  Title,
+  Canvas,
+  Story,
+  Meta,
+  ArgsTable,
+  Description,
+  Heading,
+} from "@storybook/addon-docs";
+import { action } from "@storybook/addon-actions";
+import { AxForm } from "../src";
+import { LoginStory } from "./form/FormStory";
+
+<Meta
+  title="@form/Form"
+  component={AxForm}
+  parameters={{ jest: ["Form.test.tsx"] }}
+/>
+
+<Title>Forms</Title>
+
+<Description of={AxForm} />
+
+<Heading storyId="form-form--login">Simple Login</Heading>
+
+<Canvas>
+  <Story name="Login">{LoginStory}</Story>
+</Canvas>
