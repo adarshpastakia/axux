@@ -153,7 +153,7 @@ export const AxAudioPlayer = forwardRef<
       const surfer = Wavesurfer(containerRef.current!, timelineRef.current!);
       setWavesurfer(surfer);
       return () => {
-        surfer.instance?.destroy();
+        surfer.destroy();
       };
     }, []);
 
