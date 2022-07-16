@@ -1,6 +1,6 @@
 {
   "name": "@axux/form",
-  "version": "2.0.0-beta.10",
+  "version": "2.0.0-beta.11",
   "description": "axux: Form components",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -23,8 +23,8 @@
     "watch": "yarn build -w"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.10",
-    "@axux/utilities": "^2.0.0-beta.10",
+    "@axux/core": "^2.0.0-beta.11",
+    "@axux/utilities": "^2.0.0-beta.11",
     "@hookform/resolvers": "^2.9.3",
     "react-hook-form": "^7.33.0",
     "yup": "^0.32.11"

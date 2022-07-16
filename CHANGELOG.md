@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.11](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.10...v2.0.0-beta.11) (2022-07-16)
+
+
+### Bug Fixes
+
+* **AppContext:** toggle theme wrong className ([617d486](https://github.com/adarshpastakia/axux/commit/617d48634621d6eeb16d5dd8e822bf2f927157a1))
+* **Button:** create default wrapper as 'button' ([610b077](https://github.com/adarshpastakia/axux/commit/610b0777a6575668630a1bebcf9dfb9caae538ce))
+* **Form:** add default submit button, create formRef ([757b397](https://github.com/adarshpastakia/axux/commit/757b397e6432a54fe6e64b4a508a18abe53b4de5))
+
+
+
+
+
 # [2.0.0-beta.10](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.9...v2.0.0-beta.10) (2022-07-15)
 
 
