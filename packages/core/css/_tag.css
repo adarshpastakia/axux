@@ -23,7 +23,7 @@
   }
 
   .ax-hotkey__label {
-    @apply bg-gray-200/50 text-gray-500 dark:bg-gray-900/50 dark:text-gray-300 text-xs py-px px-2 inline-block border rounded mx-px;
+    @apply bg-gray-200/50 text-gray-500 dark:bg-gray-900/50 dark:text-gray-300 text-xs py-px px-2 inline-block border rounded mx-px select-none;
     direction: ltr;
   }
 }
