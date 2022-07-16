@@ -14,15 +14,28 @@ import {
   FC,
   PropsWithChildren,
   ReactElement,
+  Ref,
+  useImperativeHandle,
 } from "react";
 import {
   Controller as HFController,
+  DeepPartial,
   FormProvider,
   useForm,
 } from "react-hook-form";
 import * as yup from "yup";
 
+interface FormRef<K> {
+  reset: () => void;
+  submit: () => void;
+  validate: () => Promise<boolean>;
+  getValues: () => K;
+  setValue: (key: keyof K, value: AnyObject) => void;
+  setValues: (values: K) => void;
+}
+
 export interface FormProps<K = KeyValue> extends ElementProps {
+  formRef?: Ref<FormRef<K>>;
   /**
    * form data schema
    */
@@ -62,31 +75,47 @@ export const Controller: FC<ControllerProps> = ({ name, children }) => {
   );
 };
 
-export const AxForm: FC<FormProps> & { Controller: typeof Controller } = <
-  K extends KeyValue
->({
+export const AxForm = <K extends KeyValue>({
+  formRef,
   schema,
   children,
   defaultValues,
   isSubmitting,
-  onSubmit,
+  onSubmit = () => undefined,
   ...rest
 }: PropsWithChildren<FormProps<K>>) => {
   const form = useForm({
     resolver: schema && yupResolver(schema),
-    defaultValues: defaultValues as any,
+    defaultValues: defaultValues as DeepPartial<K>,
   });
+
+  useImperativeHandle(
+    formRef,
+    () => ({
+      reset: () => form.reset(defaultValues),
+      submit: () => form.handleSubmit(onSubmit),
+      validate: () => form.trigger(),
+      getValues: () => form.getValues(),
+      setValues: (v) => form.reset(v),
+      setValue: (k, v) =>
+        form.setValue(k as AnyObject, v, {
+          shouldDirty: false,
+          shouldTouch: false,
+        }),
+    }),
+    [onSubmit, form, defaultValues]
+  );
 
   return (
     <FormProvider {...form}>
       <form
-        onSubmit={onSubmit && form.handleSubmit(onSubmit)}
-        action="none"
+        onSubmit={form.handleSubmit(onSubmit)}
         autoComplete="off"
         data-disabled={isSubmitting}
         {...rest}
       >
         {children}
+        <input type="submit" className="absolute invisible" />
       </form>
     </FormProvider>
   );
