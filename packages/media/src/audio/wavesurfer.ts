@@ -154,6 +154,11 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
       } catch (_) {
         //
       }
+      try {
+        instance.regions.clear();
+      } catch (_) {
+        //
+      }
 
       return new Promise<void>((resolve) => {
         instance.load(src, undefined, undefined, undefined);
