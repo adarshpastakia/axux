@@ -30,7 +30,12 @@ import {
 import { LIPSUM } from "../overlays/Overlay";
 
 const toolAction = [
-  <AxButton key="action" color="invert" type="link" icon="mdi mdi-backspace" />,
+  <AxButton
+    key="action"
+    color="invert"
+    style="link"
+    icon="mdi mdi-backspace"
+  />,
 ];
 
 const Menu = () => {
@@ -110,14 +115,14 @@ export const ViewportStory: ComponentStory<typeof AxViewport> = (props) => {
   return (
     <AxViewport {...props}>
       <AxHeader className="bg-component text-2xl">
-        <AxButton icon="logo.png" type="link" onClick={openFlyout} />
+        <AxButton icon="logo.png" style="link" onClick={openFlyout} />
         <AxTitle className="text-primary-700 dark:text-primary-400 font-light">
           Application Title
         </AxTitle>
         <div className="flex-1" />
         <AxButton.Dropdown
           icon="mdi mdi-account-circle"
-          type="link"
+          style="link"
           color="primary"
         >
           <AxMenu.Item label="Action 1" />
@@ -221,7 +226,7 @@ export const ViewportStory: ComponentStory<typeof AxViewport> = (props) => {
                   <AxTitle>Test collapse</AxTitle>
                   <AxButton
                     size="sm"
-                    type="link"
+                    style="link"
                     icon="mdi mdi-plus"
                     stopPropagation
                   />
