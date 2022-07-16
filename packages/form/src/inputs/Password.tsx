@@ -38,7 +38,7 @@ export const Password: FC<PasswordProps> = memo(
             >
               <AxButton
                 color="warning"
-                type="link"
+                style="link"
                 noTabFocus
                 aria-label={t(show ? "password.hide" : "password.show")}
                 icon={show ? Icons.iconEyeOff : Icons.iconEyeOn}

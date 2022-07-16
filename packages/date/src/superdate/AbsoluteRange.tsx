@@ -34,7 +34,7 @@ export const AbsoluteRange: FC<Omit<RelativeProps, "type" | "presets">> = ({
         <AxPopover.Dismiss>
           <AxButton
             size="sm"
-            type="solid"
+            style="solid"
             isDisabled={!parsed}
             onClick={() => onChange && onChange(DateMath.convert(parsed))}
           >

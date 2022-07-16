@@ -140,14 +140,14 @@ const JsonValue = ({
         {canFilter && (
           <Fragment>
             <AxButton
-              type="link"
+              style="link"
               color="success"
               icon={AppIcons.iconMagnifyPlus}
               tooltip={t("action.addFilter")}
               onClick={() => onFilter(fullProp, filterValue)}
             />
             <AxButton
-              type="link"
+              style="link"
               color="danger"
               icon={AppIcons.iconMagnifyMinus}
               tooltip={t("action.addFilterNot")}

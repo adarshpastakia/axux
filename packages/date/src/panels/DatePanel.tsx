@@ -203,7 +203,7 @@ export const AxDatePanel: FC<DateProps> = ({
           {showHijriToggle && (
             <AxButton
               size="sm"
-              type="link"
+              style="link"
               color="primary"
               onClick={() => {
                 setHijri(!isHijri);
@@ -216,7 +216,7 @@ export const AxDatePanel: FC<DateProps> = ({
         {page === PageType.DATE && canSelectToday && (
           <AxButton
             size="sm"
-            type="link"
+            style="link"
             color="primary"
             onClick={() => selectDate(new Date())}
           >
@@ -226,7 +226,7 @@ export const AxDatePanel: FC<DateProps> = ({
         {page !== PageType.DATE && (
           <AxButton
             size="sm"
-            type="link"
+            style="link"
             color="primary"
             onClick={() => setPage(PageType.DATE)}
           >

@@ -107,11 +107,11 @@ export const AxAlert: FC<AlertProps> = ({
       <div className="ax-alert__footer">
         <div onClickCapture={() => onClose?.(false)}>{actions}</div>
         {type === "confirm" && (
-          <AxButton type="link" color={color} onClick={() => closeModal(false)}>
+          <AxButton style="link" color={color} onClick={() => closeModal(false)}>
             {cancelText}
           </AxButton>
         )}
-        <AxButton type="solid" color={color} onClick={() => closeModal(true)}>
+        <AxButton style="solid" color={color} onClick={() => closeModal(true)}>
           {okText}
         </AxButton>
       </div>

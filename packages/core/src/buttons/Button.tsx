@@ -54,7 +54,7 @@ export interface ButtonProps extends ElementProps, IconProp {
   /**
    * button style
    */
-  type?: "outline" | "solid" | "link";
+  style?: "outline" | "solid" | "link";
   /**
    * icon alignment
    */
@@ -122,7 +122,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
 } = forwardRef<HTMLElement, ButtonProps>((props, ref) => {
   const {
     icon,
-    type,
+    style,
     size,
     children,
     color,
@@ -160,7 +160,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     <Wrapper innerRef={ref}>
       {hotKey && <AxHotKey keyCombo={hotKey} handler={onClick} />}
       <div
-        data-type={type}
+        data-type={style}
         data-size={size}
         data-color={color}
         data-active={isActive}

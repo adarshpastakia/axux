@@ -141,7 +141,7 @@ export const AxModal: FC<ModalProps> = ({
             {onNavigate && (
               <AxButton
                 rtlFlip
-                type="link"
+                style="link"
                 icon={AppIcons.iconCaretLeft}
                 onClick={() => onNavigate("prev")}
                 aria-label={isRtl ? "next" : "previous"}
@@ -151,7 +151,7 @@ export const AxModal: FC<ModalProps> = ({
             {onNavigate && (
               <AxButton
                 rtlFlip
-                type="link"
+                style="link"
                 icon={AppIcons.iconCaretRight}
                 onClick={() => onNavigate("next")}
                 aria-label={isRtl ? "previous" : "next"}
