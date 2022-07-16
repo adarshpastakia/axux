@@ -179,6 +179,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
           aria-label={children}
           {...rest}
           ref={ref}
+          as="button"
           role="button"
           hotKey={hotKey}
           className="ax-button__inner"

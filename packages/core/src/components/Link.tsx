@@ -31,13 +31,15 @@ export interface LinkProps {
    */
   target?: HTMLAnchorElement["target"];
 
+  as?: React.ElementType;
+
   hotKey?: string;
 }
 
 export const Link = forwardRef<
   HTMLElement,
   LinkProps & ElementProps & ChildrenProp & HTMLAttributes<HTMLElement>
->(({ to, href, hotKey, ...props }, ref) => {
+>(({ to, href, hotKey, as: T = "div", ...props }, ref) => {
   const linkRef = useRef<HTMLElement>(null);
   useImperativeHandle(ref, () => linkRef.current!, [linkRef]);
   return (
@@ -53,7 +55,7 @@ export const Link = forwardRef<
       ) : !!href ? (
         <a {...props} ref={linkRef as AnyObject} href={href} />
       ) : (
-        <div {...props} ref={linkRef as AnyObject} />
+        <T {...props} ref={linkRef as AnyObject} />
       )}
     </Fragment>
   );
