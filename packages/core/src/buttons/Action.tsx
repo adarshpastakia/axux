@@ -34,7 +34,7 @@ export const ActionButton: FC<ActionProps> = ({
   onClick,
   message,
   color,
-  type,
+  style,
   tooltip,
   actionType = "success",
   children,
@@ -87,7 +87,7 @@ export const ActionButton: FC<ActionProps> = ({
         data-active={actionDone}
         data-action-done={actionDone}
         color={actionDone ? actionType : color}
-        type={actionDone ? "solid" : type}
+        style={actionDone ? "solid" : style}
         data-extra={
           actionDone && (
             <div className="animated-svg">

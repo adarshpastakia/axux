@@ -32,7 +32,7 @@ const DatePanel = (props: AnyObject) => {
         <span />
         {props.page !== PageType.DATE && (
           <AxButton
-            type="link"
+            style="link"
             size="sm"
             color="primary"
             onClick={props.setPage}
@@ -208,7 +208,7 @@ export const AxRangePanel: FC<RangeProps> = ({
             <AxButton
               key={key}
               size="sm"
-              type="link"
+              style="link"
               color="primary"
               onClick={() => selectDate(value)}
             >
@@ -222,7 +222,7 @@ export const AxRangePanel: FC<RangeProps> = ({
           {showHijriToggle && (
             <AxButton
               size="sm"
-              type="link"
+              style="link"
               color="primary"
               onClick={() => {
                 setHijri(!isHijri);
@@ -235,7 +235,7 @@ export const AxRangePanel: FC<RangeProps> = ({
         {hilight && (
           <AxButton
             size="sm"
-            type="link"
+            style="link"
             color="primary"
             onClick={() => setHilight(undefined)}
           >

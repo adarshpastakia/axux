@@ -34,7 +34,7 @@ export const Copy: FC<CopyProps> = ({ text, tooltip }) => {
   /******************* component *******************/
   return (
     <ActionButton
-      type="link"
+      style="link"
       className="ax-copy"
       icon={AppIcons.iconCopy}
       tooltip={tooltip ?? t("action.copy")}

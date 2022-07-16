@@ -24,14 +24,14 @@ export const TreeTools = memo(
       <div className="ax-tree__tools">
         <AxButton
           size="sm"
-          type="link"
+          style="link"
           onClick={onExpand}
           icon={AppIcons.iconExpandAll}
           tooltip={t("action.expandAll")}
         />
         <AxButton
           size="sm"
-          type="link"
+          style="link"
           onClick={onCollapse}
           icon={AppIcons.iconCollapseAll}
           tooltip={t("action.collapseAll")}
@@ -41,14 +41,14 @@ export const TreeTools = memo(
             <AxDivider vertical size="xs" />
             <AxButton
               size="sm"
-              type="link"
+              style="link"
               onClick={onUncheckAll}
               icon={AppIcons.iconCheckboxOff}
               tooltip={t("action.uncheckAll")}
             />
             <AxButton
               size="sm"
-              type="link"
+              style="link"
               onClick={onCheckAll}
               icon={AppIcons.iconCheckAll}
               tooltip={t("action.checkAll")}

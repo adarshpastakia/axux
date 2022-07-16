@@ -62,7 +62,7 @@ export const DateHeader = (props: Partial<DateContext>) => {
         <AxButton
           size="sm"
           data-pos="first"
-          type="link"
+          style="link"
           color="primary"
           rtlFlip
           isDisabled={headDisabled && headDisabled(-12)}
@@ -73,7 +73,7 @@ export const DateHeader = (props: Partial<DateContext>) => {
       <AxButton
         size="sm"
         data-pos="prev"
-        type="link"
+        style="link"
         color="primary"
         rtlFlip
         isDisabled={headDisabled && headDisabled(-1)}
@@ -90,7 +90,7 @@ export const DateHeader = (props: Partial<DateContext>) => {
       <AxButton
         size="sm"
         data-pos="next"
-        type="link"
+        style="link"
         color="primary"
         rtlFlip
         isDisabled={headDisabled && headDisabled(1)}
@@ -101,7 +101,7 @@ export const DateHeader = (props: Partial<DateContext>) => {
         <AxButton
           size="sm"
           data-pos="last"
-          type="link"
+          style="link"
           color="primary"
           rtlFlip
           isDisabled={headDisabled && headDisabled(12)}

@@ -184,7 +184,7 @@ export const AxAside: FC<AsideProps> = ({
           <div className="ax-side__actions">{actions}</div>
           {isCollapsable && (
             <AxButton
-              type="link"
+              style="link"
               aria-label="Toggle collapse"
               className="ax-side__toggle flippable"
               rtlFlip

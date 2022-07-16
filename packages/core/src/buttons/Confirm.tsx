@@ -62,7 +62,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
           <Popover.Button>
             <AxButton
               size="sm"
-              type="link"
+              style="link"
               color={actionType}
               onClick={() => onClick?.(false)}
             >
@@ -72,7 +72,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
           <Popover.Button>
             <AxButton
               size="sm"
-              type="solid"
+              style="solid"
               color={actionType}
               onClick={() => onClick?.(true)}
             >

@@ -122,7 +122,7 @@ export const AxToast: FC<ToastProps> = ({
         )}
         <AxButton
           size="sm"
-          type="solid"
+          style="solid"
           color={color}
           onClick={() => closeToast(true)}
         >

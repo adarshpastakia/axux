@@ -53,7 +53,7 @@ export const RelativeRange: FC<RelativeProps> = ({ date, onChange }) => {
       </AxContent>
       <AxFooter className="flex justify-end">
         <AxPopover.Dismiss>
-          <AxButton type="solid" size="sm" onClick={applyRelative}>
+          <AxButton style="solid" size="sm" onClick={applyRelative}>
             {t("core:action.apply")}
           </AxButton>
         </AxPopover.Dismiss>

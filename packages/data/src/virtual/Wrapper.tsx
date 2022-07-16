@@ -78,28 +78,28 @@ export const Wrapper = forwardRef(({ children, ...props }: KeyValue, ref) => {
         <div>
           <AxButton.Group isVertical>
             <AxButton
-              type="link"
+              style="link"
               aria-label="scroll to top"
               icon={AppIcons.iconChevronUp}
               onClick={() => fireEvent("scrollFirst")}
               isDisabled={noScrollUp}
             />
             <AxButton
-              type="link"
+              style="link"
               aria-label="scroll up"
               icon={AppIcons.iconCaretUp}
               onClick={() => fireEvent("scrollUp")}
               isDisabled={noScrollUp}
             />
             <AxButton
-              type="link"
+              style="link"
               aria-label="scroll down"
               icon={AppIcons.iconCaretDown}
               onClick={() => fireEvent("scrollDown")}
               isDisabled={noScrollDown}
             />
             <AxButton
-              type="link"
+              style="link"
               aria-label="scroll to bottom"
               icon={AppIcons.iconChevronDown}
               onClick={() => fireEvent("scrollLast")}

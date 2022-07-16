@@ -57,7 +57,7 @@ export const Search: FC<SearchProps> = memo(
         {children}
         <Addon align="end">
           <AxButton
-            type="link"
+            style="link"
             noTabFocus
             icon={AppIcons.iconSearch}
             onClick={handleQuery}

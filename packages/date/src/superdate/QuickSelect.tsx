@@ -65,7 +65,7 @@ export const QuickSelect: FC<RelativeProps> = ({ date, onChange, presets }) => {
         onChange={setQuickDate}
       >
         <AxPopover.Dismiss>
-          <AxButton type="solid" onClick={applyRelative}>
+          <AxButton style="solid" onClick={applyRelative}>
             {t("core:action.apply")}
           </AxButton>
         </AxPopover.Dismiss>
