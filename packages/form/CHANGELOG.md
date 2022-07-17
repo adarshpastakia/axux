@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.13](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.12...v2.0.0-beta.13) (2022-07-17)
+
+
+### Bug Fixes
+
+* **Form:** add onChange, pass through inputRef in controller ([8aedaee](https://github.com/adarshpastakia/axux/commit/8aedaeee5488bda2d138d8241a57c89f2d901f59))
+
+
+
+
+
 # [2.0.0-beta.12](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.11...v2.0.0-beta.12) (2022-07-16)
 
 

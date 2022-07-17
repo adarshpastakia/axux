@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.13](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.12...v2.0.0-beta.13) (2022-07-17)
+
+
+### Bug Fixes
+
+* **Flyout:** hide header when no title prop ([78fe8e5](https://github.com/adarshpastakia/axux/commit/78fe8e5de3c801ed96c09891f1af85fc73fca50b))
+* **Form:** add onChange, pass through inputRef in controller ([8aedaee](https://github.com/adarshpastakia/axux/commit/8aedaeee5488bda2d138d8241a57c89f2d901f59))
+* **Menu:** separate hover/active dataset, add title component ([816a658](https://github.com/adarshpastakia/axux/commit/816a6584ea1b7048e60bccc3464c93a32c4f75ee))
+
+
+
+
+
 # [2.0.0-beta.12](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.11...v2.0.0-beta.12) (2022-07-16)
 
 
