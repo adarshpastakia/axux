@@ -7,7 +7,8 @@
  */
 
 import { FC } from "react";
-import { render, unmountComponentAtNode } from "react-dom";
+import { unmountComponentAtNode } from "react-dom";
+import { createRoot } from "react-dom/client";
 
 type OverlayComponent = FC<{
   onClose: () => void;
@@ -30,7 +31,7 @@ export const useOverlayService = () => {
           resolve();
         }, 250);
       };
-      render(<ModalOrFlyout {...props} onClose={handleClose} />, el);
+      createRoot(el).render(<ModalOrFlyout {...props} onClose={handleClose} />);
       requestAnimationFrame(
         () => ((el.firstElementChild as HTMLElement).dataset.show = "true")
       );
