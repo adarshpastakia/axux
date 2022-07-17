@@ -107,20 +107,22 @@ export const AxFlyout = forwardRef<OverlayRef, FlyoutProps>(
             style={{ width }}
             onClick={(e) => e.stopPropagation()}
           >
-            <AxHeader className={`ax-flyout__header ${headerClass ?? ""}`}>
-              {icon && (
-                <AxIcon
-                  icon={icon}
-                  rtlFlip={rtlFlip}
-                  bg={iconBg}
-                  color={iconColor}
-                  className={`ax-flyout__icon ${iconClass ?? ""}`}
-                />
-              )}
-              <AxTitle className="ax-flyout__title">{title}</AxTitle>
-              <div className="ax-flyout__actions">{actions}</div>
-              {CloseX(onClose)}
-            </AxHeader>
+            {title && (
+              <AxHeader className={`ax-flyout__header ${headerClass ?? ""}`}>
+                {icon && (
+                  <AxIcon
+                    icon={icon}
+                    rtlFlip={rtlFlip}
+                    bg={iconBg}
+                    color={iconColor}
+                    className={`ax-flyout__icon ${iconClass ?? ""}`}
+                  />
+                )}
+                <AxTitle className="ax-flyout__title">{title}</AxTitle>
+                <div className="ax-flyout__actions">{actions}</div>
+                {CloseX(onClose)}
+              </AxHeader>
+            )}
             {children}
           </div>
         </HotKeyWrapper>
