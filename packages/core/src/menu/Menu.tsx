@@ -14,6 +14,7 @@ import { useBadge } from "../hooks/useBadge";
 import { AxHotKey } from "../hotkeys/HotKey";
 import { AxIcon } from "../icons/Icon";
 import { AxTooltip } from "../overlays/Tooltip";
+import { ChildProp, ElementProps } from "../types";
 import { Ellipsis } from "../typography/Ellipsis";
 import { MenuGroup } from "./MenuGroup";
 import { MenuItemProps, MenuProps } from "./types";
@@ -46,7 +47,8 @@ const MenuItem: FC<MenuItemProps> = ({
           data-id={id}
           hotKey={hotKey}
           className={`ax-menu__item ${className ?? ""}`}
-          data-active={isActive || active}
+          data-hover={active}
+          data-active={isActive}
           data-disabled={isDisabled}
           data-popover-open={popoverOpen}
         >
@@ -94,7 +96,8 @@ const MenuMini: FC<MenuItemProps> = ({
             data-id={id}
             hotKey={hotKey}
             className={`ax-menu__mini ${className ?? ""}`}
-            data-active={isActive || active}
+            data-hover={active}
+            data-active={isActive}
             data-disabled={isDisabled}
             data-popover-open={popoverOpen}
           >
@@ -111,10 +114,15 @@ const MenuMini: FC<MenuItemProps> = ({
   );
 };
 
+const MenuTitle: FC<ElementProps & ChildProp> = ({ children, className }) => {
+  return <div className={`px-4 text-muted ${className ?? ""}`}>{children}</div>;
+};
+
 export const AxMenu: FC<MenuProps> & {
   Item: typeof MenuItem;
   Mini: typeof MenuMini;
   Group: typeof MenuGroup;
+  Title: typeof MenuTitle;
 } = ({ children, onClick, className, ...rest }) => {
   const handleMenuClick = useCallback((e: MouseEvent) => {
     const id = (e.target as HTMLElement).dataset.id;
@@ -137,7 +145,9 @@ export const AxMenu: FC<MenuProps> & {
 AxMenu.Item = MenuItem;
 AxMenu.Mini = MenuMini;
 AxMenu.Group = MenuGroup;
+AxMenu.Title = MenuTitle;
 
 AxMenu.Item.displayName = "AxMenu.Item";
 AxMenu.Mini.displayName = "AxMenu.Mini";
 AxMenu.Group.displayName = "AxMenu.Group";
+AxMenu.Title.displayName = "AxMenu.Title";
