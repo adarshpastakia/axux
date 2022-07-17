@@ -6,10 +6,9 @@
  * @license   : MIT
  */
 
-import { forwardRef, useImperativeHandle } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import { AxHeader } from "../components/Header";
 import { AxTitle } from "../components/Title";
-import { useIsRtl } from "../hooks/useIsRtl";
 import { AxHotKey } from "../hotkeys/HotKey";
 import { HotKeyWrapper } from "../hotkeys/HotKeyWrapper";
 import { AxIcon } from "../icons/Icon";
@@ -50,7 +49,6 @@ export interface FlyoutProps extends ElementProps, IconProp, ChildProp {
    * icon class
    */
   iconClass?: HTMLDivElement["className"];
-
   /**
    * flyout size
    */
@@ -85,19 +83,27 @@ export const AxFlyout = forwardRef<OverlayRef, FlyoutProps>(
       iconClass,
       iconColor,
       onClose,
+      ...rest
     },
     ref
   ) => {
-    const isRtl = useIsRtl();
+    const flyoutRef = useRef<HTMLDivElement>(null);
     useImperativeHandle(
       ref,
       () => ({
         close: onClose!,
+        open: () =>
+          flyoutRef.current && (flyoutRef.current.dataset.show = "true"),
       }),
       [onClose]
     );
     return (
-      <div className="ax-overlay__mask" onClick={onClose}>
+      <div
+        {...rest}
+        className="ax-overlay__mask"
+        onClick={onClose}
+        ref={flyoutRef}
+      >
         <HotKeyWrapper>
           <AxHotKey global keyCombo="esc" handler={onClose} />
           <div
