@@ -129,9 +129,9 @@
   .ax-flyout {
     @apply grid overflow-hidden border-x shadow-xl relative max-w-[80vw] min-w-[12rem]
       ltr:-translate-x-full rtl:translate-x-full opacity-0 bg-base shadow-bw-400 dark:shadow-black;
-    grid-template-areas: "head" "content";
+    grid-template-areas: "head" "content" "foot";
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr auto;
     transition: opacity 0.15s, transform 0.25s;
 
     & .ax-flyout__header {
