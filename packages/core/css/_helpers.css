@@ -72,7 +72,7 @@
     @apply text-bw-0 dark:text-bw-1000;
   }
   .text-muted {
-    @apply text-bw-600 dark:text-bw-400;
+    @apply text-bw-600 dark:text-bw-300;
   }
   .text-default {
     @apply text-bw-900 dark:text-bw-50;
