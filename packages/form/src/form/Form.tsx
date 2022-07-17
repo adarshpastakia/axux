@@ -15,7 +15,9 @@ import {
   PropsWithChildren,
   ReactElement,
   Ref,
+  useEffect,
   useImperativeHandle,
+  useTransition,
 } from "react";
 import {
   Controller as HFController,
@@ -45,9 +47,9 @@ export interface FormProps<K = KeyValue> extends ElementProps {
    */
   defaultValues?: K;
   /**
-   * disable form input when submitting in progress
+   * change callback
    */
-  isSubmitting?: boolean;
+  onChange?: (values: K) => void;
   /**
    * submit callback after successful validation
    */
@@ -63,12 +65,34 @@ export const Controller: FC<ControllerProps> = ({ name, children }) => {
   return (
     <HFController
       name={name}
-      render={({ field: { ref, ...field }, fieldState: { error } }) =>
+      render={({
+        field: { ref, onChange, ...field },
+        fieldState: { error },
+        formState: { isSubmitting },
+      }) =>
         cloneElement(Children.only(children), {
           ...field,
-          inputRef: ref,
+          inputRef: (el: AnyObject) => {
+            ref(el);
+            try {
+              if (
+                children.props.inputRef &&
+                "current" in children.props.inputRef
+              )
+                children.props.inputRef.current = el;
+              if (children.props.inputRef?.prototype)
+                children.props.inputRef(el);
+            } catch (_) {
+              //
+            }
+          },
+          isDisabled: isSubmitting,
           isInvalid: !!error?.message,
           error: error?.message,
+          onChange: (v: AnyObject) => {
+            onChange(v);
+            children.props.onChange?.(v);
+          },
         })
       }
     />
@@ -80,14 +104,23 @@ export const AxForm = <K extends KeyValue>({
   schema,
   children,
   defaultValues,
-  isSubmitting,
   onSubmit = () => undefined,
+  onChange,
   ...rest
 }: PropsWithChildren<FormProps<K>>) => {
   const form = useForm({
     resolver: schema && yupResolver(schema),
     defaultValues: defaultValues as DeepPartial<K>,
   });
+
+  const [pending, startTransition] = useTransition();
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      console.log("watch change", value);
+      startTransition(() => onChange?.(value as K));
+    });
+    return () => subscription.unsubscribe();
+  }, [form.watch]);
 
   useImperativeHandle(
     formRef,
@@ -108,12 +141,7 @@ export const AxForm = <K extends KeyValue>({
 
   return (
     <FormProvider {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        autoComplete="off"
-        data-disabled={isSubmitting}
-        {...rest}
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off" {...rest}>
         {children}
         <input type="submit" className="absolute invisible" />
       </form>
