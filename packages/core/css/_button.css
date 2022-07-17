@@ -116,7 +116,7 @@
     @apply block;
 
     & .ax-button__inner {
-      @apply max-w-none;
+      @apply max-w-none w-full;
     }
   }
 
