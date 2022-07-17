@@ -54,7 +54,7 @@
   }
 
   .ax-menu__mini {
-    @apply relative select-none cursor-pointer;
+    @apply relative select-none cursor-pointer block;
 
     & .ax-menu__icon {
       @apply text-xl p-2 pointer-events-none;
@@ -75,6 +75,7 @@
     &[data-hover="true"] {
       @apply bg-primary-500/20 active:bg-primary-500/50;
     }
+    &.active,
     &[data-active="true"] {
       @apply bg-primary-700/70 text-white pointer-events-none;
     }
