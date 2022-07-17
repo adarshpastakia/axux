@@ -29,7 +29,7 @@ export interface InputProps<K = string> {
   /**
    * input element ref
    */
-  inputRef?: React.Ref<HTMLInputElement>;
+  inputRef?: React.Ref<AnyObject>;
   /**
    * field placeholder text
    */
