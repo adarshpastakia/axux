@@ -13,7 +13,7 @@ import {
   useImperativeHandle,
   useRef,
 } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useInRouterContext } from "react-router-dom";
 import { AxHotKey } from "../hotkeys/HotKey";
 import { ChildrenProp, ElementProps } from "../types";
 
@@ -39,25 +39,42 @@ export interface LinkProps {
 export const Link = forwardRef<
   HTMLElement,
   LinkProps & ElementProps & ChildrenProp & HTMLAttributes<HTMLElement>
->(({ to, href, hotKey, as: T = "div", ...props }, ref) => {
-  const linkRef = useRef<HTMLElement>(null);
-  useImperativeHandle(ref, () => linkRef.current!, [linkRef]);
-  return (
-    <Fragment>
-      {hotKey && (
-        <AxHotKey
-          keyCombo={hotKey}
-          handler={() => linkRef.current?.click?.()}
-        />
-      )}
-      {!!to ? (
-        <NavLink {...props} ref={linkRef as AnyObject} to={to} />
-      ) : !!href ? (
-        <a {...props} ref={linkRef as AnyObject} href={href} />
-      ) : (
-        <T {...props} ref={linkRef as AnyObject} />
-      )}
-    </Fragment>
-  );
-});
+>(
+  (
+    { to, href, hotKey, as: T = "div", onClick, onMouseDown, ...props },
+    ref
+  ) => {
+    const linkRef = useRef<HTMLElement>(null);
+    const isInrouter = useInRouterContext();
+    useImperativeHandle(ref, () => linkRef.current!, [linkRef]);
+    return (
+      <Fragment>
+        {hotKey && (
+          <AxHotKey
+            keyCombo={hotKey}
+            handler={() => linkRef.current?.click?.()}
+          />
+        )}
+        {isInrouter && !!to ? (
+          <NavLink {...props} ref={linkRef as AnyObject} to={to} />
+        ) : !!href ? (
+          <a
+            {...props}
+            ref={linkRef as AnyObject}
+            href={href}
+            onClick={onClick}
+            onMouseDown={onMouseDown}
+          />
+        ) : (
+          <T
+            {...props}
+            ref={linkRef as AnyObject}
+            onClick={onClick}
+            onMouseDown={onMouseDown}
+          />
+        )}
+      </Fragment>
+    );
+  }
+);
 Link.displayName = "LinkWrapper";
