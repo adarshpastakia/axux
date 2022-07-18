@@ -32,7 +32,7 @@ const CollapseGroup: FC<MenuGroupProps> = ({
   return (
     <Fragment>
       <div
-        className="ax-menu__group"
+        className="ax-menu__group prevent-close"
         data-plain="false"
         onClick={toggleCollapse}
       >
@@ -62,7 +62,7 @@ const PlainGroup: FC<MenuGroupProps> = ({
 }) => {
   return (
     <Fragment>
-      <div className="ax-menu__group" data-plain="true">
+      <div className="ax-menu__group prevent-close" data-plain="true">
         {icon && (
           <AxIcon
             className="ax-menu__icon"
@@ -98,7 +98,7 @@ const FloatingGroup: FC<MenuGroupProps> = ({
       <Menu.Button as={Fragment} {...{ ref: setReferenceElement }}>
         {({ open }) => (
           <div
-            className="ax-menu__group"
+            className="ax-menu__group prevent-close"
             data-plain="false"
             data-popover-open={open}
           >
