@@ -8,6 +8,7 @@
 
 import { ComponentStory } from "@storybook/react";
 import { Fragment } from "react";
+import { MemoryRouter, Outlet, Route, Routes } from "react-router-dom";
 import {
   AxAside,
   AxBreadcrumb,
@@ -42,6 +43,17 @@ const Menu = () => {
   return (
     <Fragment>
       <AxMenu>
+        <AxMenu.Mini to="/" label="Home" icon="mdi mdi-home" />
+        <AxMenu.Mini
+          to="/404"
+          label="Empty"
+          icon="mdi mdi-minus-circle-outline"
+        />
+        <AxMenu.Mini
+          to="/next"
+          label="Next"
+          icon="mdi mdi-arrow-right-bold-outline"
+        />
         <AxMenu.Mini
           className="text-accent"
           label="Action 1"
@@ -77,10 +89,15 @@ const Menu = () => {
 
 const MyFlyout = ({ onClose }: KeyValue) => {
   return (
-    <AxFlyout size="sm" onClose={onClose}>
+    <AxFlyout size="sm" onClose={onClose} closeOnClick>
       <AxContent padding="none">
         <AxMenu onClick={() => onClose?.()}>
-          <AxMenu.Item label="Action 1" icon="mdi mdi-bell" />
+          <AxMenu.Item to="/" label="Home" icon="mdi mdi-home" />
+          <AxMenu.Item
+            to="/404"
+            label="Empty"
+            icon="mdi mdi-minus-circle-outline"
+          />
           <AxMenu.Item label="Action 2" badge="new" />
           <AxMenu.Item label="Action 3" hotKey="shift+K" />
           <AxMenu.Group label="Grouped">
@@ -106,14 +123,45 @@ const MyFlyout = ({ onClose }: KeyValue) => {
   );
 };
 
-export const ViewportStory: ComponentStory<typeof AxViewport> = (props) => {
-  const { openOverlay } = useOverlayService();
+const Home = () => {
+  return (
+    <AxContent>
+      <AxText>{LIPSUM}</AxText>
+      <AxText>{LIPSUM}</AxText>
+      <AxText>{LIPSUM}</AxText>
+      <AxText>{LIPSUM}</AxText>
+      <AxText>{LIPSUM}</AxText>
+      <AxText>{LIPSUM}</AxText>
+      <AxText>{LIPSUM}</AxText>
+      <AxText>{LIPSUM}</AxText>
+      <AxText>{LIPSUM}</AxText>
+      <AxText>{LIPSUM}</AxText>
+      <AxText>{LIPSUM}</AxText>
+    </AxContent>
+  );
+};
+
+const Empty = () => {
+  return (
+    <AxContent>
+      <AxContent.Empty
+        type="exclaim"
+        title="Empty Message"
+        message="Some message goes here"
+      />
+    </AxContent>
+  );
+};
+
+const Viewport = (props: KeyValue) => {
+  const { openOverlay, Overlay } = useOverlayService();
   const openFlyout = () => {
     // Open overlay pass additional props
     openOverlay(MyFlyout);
   };
   return (
     <AxViewport {...props}>
+      {Overlay}
       <AxHeader className="bg-component text-2xl">
         <AxButton icon="logo.png" style="link" onClick={openFlyout} />
         <AxTitle className="text-primary-700 dark:text-primary-400 font-light">
@@ -174,25 +222,7 @@ export const ViewportStory: ComponentStory<typeof AxViewport> = (props) => {
             </AxFlexBox.Row>
           </AxFlexBox>
         </AxHeader>
-        <AxContent>
-          <AxContent.Empty
-            type="exclaim"
-            title="Empty Message"
-            message="Some message goes here"
-          />
-          <AxDivider />
-          <AxText>{LIPSUM}</AxText>
-          <AxText>{LIPSUM}</AxText>
-          <AxText>{LIPSUM}</AxText>
-          <AxText>{LIPSUM}</AxText>
-          <AxText>{LIPSUM}</AxText>
-          <AxText>{LIPSUM}</AxText>
-          <AxText>{LIPSUM}</AxText>
-          <AxText>{LIPSUM}</AxText>
-          <AxText>{LIPSUM}</AxText>
-          <AxText>{LIPSUM}</AxText>
-          <AxText>{LIPSUM}</AxText>
-        </AxContent>
+        <Outlet />
         <AxAside
           width="20rem"
           title="Start"
@@ -249,6 +279,19 @@ export const ViewportStory: ComponentStory<typeof AxViewport> = (props) => {
         </AxAside>
       </AxPage>
     </AxViewport>
+  );
+};
+
+export const ViewportStory: ComponentStory<typeof AxViewport> = (props) => {
+  return (
+    <MemoryRouter>
+      <Routes>
+        <Route path="/" element={<Viewport {...props} />}>
+          <Route index element={<Home />} />
+          <Route path="/*" element={<Empty />} />
+        </Route>
+      </Routes>
+    </MemoryRouter>
   );
 };
 
