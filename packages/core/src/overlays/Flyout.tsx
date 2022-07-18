@@ -6,7 +6,13 @@
  * @license   : MIT
  */
 
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import {
+  forwardRef,
+  MouseEvent,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import { AxHeader } from "../components/Header";
 import { AxTitle } from "../components/Title";
 import { AxHotKey } from "../hotkeys/HotKey";
@@ -62,6 +68,10 @@ export interface FlyoutProps extends ElementProps, IconProp, ChildProp {
    */
   width?: string | number;
   /**
+   * close on click capture
+   */
+  closeOnClick?: boolean;
+  /**
    * close handler
    */
   onClose?: EmptyCallback;
@@ -82,6 +92,7 @@ export const AxFlyout = forwardRef<OverlayRef, FlyoutProps>(
       iconBg,
       iconClass,
       iconColor,
+      closeOnClick,
       onClose,
       ...rest
     },
@@ -97,12 +108,26 @@ export const AxFlyout = forwardRef<OverlayRef, FlyoutProps>(
       }),
       [onClose]
     );
+
+    const tryClose = useCallback(
+      (e: MouseEvent) => {
+        if (
+          closeOnClick &&
+          !(e.target as HTMLElement).closest(".prevent-close")
+        ) {
+          onClose?.();
+        }
+      },
+      [closeOnClick, onClose]
+    );
+
     return (
       <div
         {...rest}
         className="ax-overlay__mask"
         onClick={onClose}
         ref={flyoutRef}
+        onClickCapture={tryClose}
       >
         <HotKeyWrapper>
           <AxHotKey global keyCombo="esc" handler={onClose} />
