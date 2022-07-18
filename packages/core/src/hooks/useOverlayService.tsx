@@ -6,9 +6,8 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
-import { unmountComponentAtNode } from "react-dom";
-import { createRoot } from "react-dom/client";
+import { FC, useState } from "react";
+import { createPortal, unmountComponentAtNode } from "react-dom";
 
 type OverlayComponent = FC<{
   onClose: () => void;
@@ -16,6 +15,7 @@ type OverlayComponent = FC<{
 }>;
 
 export const useOverlayService = () => {
+  const [Overlay, setOverlay] = useState<AnyObject>();
   const openOverlay = (
     ModalOrFlyout: OverlayComponent,
     props: KeyValue = {}
@@ -27,16 +27,19 @@ export const useOverlayService = () => {
         (el.firstElementChild as HTMLElement).dataset.show = "";
         setTimeout(() => {
           unmountComponentAtNode(el);
+          setOverlay(undefined);
           el.remove();
           resolve();
         }, 250);
       };
-      createRoot(el).render(<ModalOrFlyout {...props} onClose={handleClose} />);
+      setOverlay(
+        createPortal(<ModalOrFlyout {...props} onClose={handleClose} />, el)
+      );
       requestAnimationFrame(
         () => ((el.firstElementChild as HTMLElement).dataset.show = "true")
       );
     });
   };
 
-  return { openOverlay };
+  return { openOverlay, Overlay };
 };
