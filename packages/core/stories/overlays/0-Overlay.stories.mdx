@@ -58,7 +58,7 @@ const MyFlyout = ({
 };
 
 export const Element = () => {
-  const { openOverlay } = useOverlayService();
+  const { openOverlay, Overlay } = useOverlayService();
   const openModal = () => {
     // Open overlay pass additional props
     openOverlay(MyModal, { title: "My Modal", data: {} }).then(
@@ -78,6 +78,7 @@ export const Element = () => {
 
   return (
     <div>
+      {Overlay}
       <AxButton onClick={openModal}>Open Modal</AxButton>
       <AxButton onClick={openFlyout}>Open Flyout</AxButton>
     </div>
