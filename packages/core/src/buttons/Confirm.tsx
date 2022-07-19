@@ -8,7 +8,7 @@
 
 import { Popover } from "@headlessui/react";
 import { Placement } from "@popperjs/core";
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { AxPopover } from "../overlays/Popover";
 import { BooleanCallback } from "../types";
@@ -59,7 +59,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
       <div className="p-2">
         <p>{message}</p>
         <div>
-          <Popover.Button>
+          <Popover.Button as={Fragment}>
             <AxButton
               size="sm"
               style="link"
@@ -69,7 +69,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
               {cancelLabel ?? t("action.cancel")}
             </AxButton>
           </Popover.Button>
-          <Popover.Button>
+          <Popover.Button as={Fragment}>
             <AxButton
               size="sm"
               style="solid"
