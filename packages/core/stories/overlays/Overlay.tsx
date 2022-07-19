@@ -8,6 +8,7 @@
 
 import { action } from "@storybook/addon-actions";
 import { ComponentStory } from "@storybook/react";
+import { Fragment } from "react";
 import {
   AxButton,
   AxContent,
@@ -30,12 +31,17 @@ export const ModalStory: ComponentStory<typeof AxModal> = (props) => {
     </AxModal>
   );
 
-  const { openOverlay } = useOverlayService();
+  const { openOverlay, Overlay } = useOverlayService();
   const openModal = () => {
     // Open overlay pass additional props
     openOverlay(MyModal, props);
   };
-  return <AxButton onClick={openModal}>Open Modal</AxButton>;
+  return (
+    <Fragment>
+      {Overlay}
+      <AxButton onClick={openModal}>Open Modal</AxButton>
+    </Fragment>
+  );
 };
 export const ModalSource = `
 const MyModal = (modalProps: KeyValue) => (
@@ -46,12 +52,17 @@ const MyModal = (modalProps: KeyValue) => (
   </AxModal>
 );
 
-const { openOverlay } = useOverlayService();
+const { openOverlay, Overlay } = useOverlayService();
 const openModal = () => {
   // Open overlay pass additional props
   openOverlay(MyModal, { title: "My Modal" });
 };
-return <AxButton onClick={openModal}>Open Modal</AxButton>;
+return (
+  <Fragment>
+    {Overlay}
+    <AxButton onClick={openModal}>Open Modal</AxButton>
+  </Fragment>
+);
 `;
 
 export const FlyoutStory: ComponentStory<typeof AxFlyout> = (props) => {
@@ -63,12 +74,17 @@ export const FlyoutStory: ComponentStory<typeof AxFlyout> = (props) => {
     </AxFlyout>
   );
 
-  const { openOverlay } = useOverlayService();
+  const { openOverlay, Overlay } = useOverlayService();
   const openFlyout = () => {
     // Open overlay pass additional props
     openOverlay(MyFlyout, props);
   };
-  return <AxButton onClick={openFlyout}>Open Flyout</AxButton>;
+  return (
+    <Fragment>
+      {Overlay}
+      <AxButton onClick={openFlyout}>Open Flyout</AxButton>
+    </Fragment>
+  );
 };
 export const FlyoutSource = `
 const MyFlyout = (flyoutProps: KeyValue) => (
@@ -84,5 +100,10 @@ const openFlyout = () => {
   // Open overlay pass additional props
   openOverlay(MyFlyout, { title: "My Flyout" });
 };
-return <AxButton onClick={openFlyout}>Open Flyout</AxButton>;
+return (
+  <Fragment>
+    {Overlay}
+    <AxButton onClick={openFlyout}>Open Flyout</AxButton>
+  </Fragment>
+);
 `;
