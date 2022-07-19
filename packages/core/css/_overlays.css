@@ -17,7 +17,8 @@
       & .ax-alert,
       & .ax-modal,
       & .ax-flyout {
-        @apply opacity-100 translate-x-0 translate-y-0;
+        @apply opacity-100;
+        transform: none;
       }
     }
   }

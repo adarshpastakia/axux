@@ -8,7 +8,7 @@
 
 import { Menu } from "@headlessui/react";
 import { Placement } from "@popperjs/core";
-import { FC, Fragment } from "react";
+import { FC, Fragment, MouseEvent, useCallback, useEffect } from "react";
 import { usePopover } from "../hooks/usePopover";
 import { MenuChildren } from "../menu/types";
 import { AxButton, ButtonProps } from "./Button";
@@ -37,12 +37,27 @@ export const DropdownButton: FC<DropdownProps> = ({
   label,
   ...rest
 }) => {
-  const { attributes, setPopperElement, setReferenceElement, styles } =
-    usePopover({
-      placement,
-      sameWidth: true,
-      hideArrow: true,
+  const {
+    attributes,
+    setPopperElement,
+    setReferenceElement,
+    popperElement,
+    referenceElement,
+    styles,
+  } = usePopover({
+    placement,
+    sameWidth: true,
+    hideArrow: true,
+  });
+  const handleMenuClick = useCallback((e: MouseEvent) => {
+    const id = (e.target as HTMLElement).dataset.id;
+    id && onClick?.(id);
+  }, []);
+  useEffect(() => {
+    popperElement?.addEventListener("closeParentGroup", () => {
+      referenceElement?.click();
     });
+  }, [popperElement, referenceElement]);
   return (
     <Menu as={Fragment}>
       <Menu.Button as={Fragment} {...{ ref: setReferenceElement }}>
@@ -53,8 +68,9 @@ export const DropdownButton: FC<DropdownProps> = ({
         )}
       </Menu.Button>
       <Menu.Items
+        onClick={handleMenuClick}
         className={`popover ax-button__dropdown`}
-        ref={setPopperElement}
+        ref={setPopperElement as AnyObject}
         style={styles.popper}
         {...attributes.popper}
       >

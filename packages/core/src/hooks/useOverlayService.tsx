@@ -26,7 +26,6 @@ export const useOverlayService = () => {
       const handleClose = () => {
         (el.firstElementChild as HTMLElement).dataset.show = "";
         setTimeout(() => {
-          unmountComponentAtNode(el);
           setOverlay(undefined);
           el.remove();
           resolve();

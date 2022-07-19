@@ -105,6 +105,14 @@
   }
 }
 
+@layer utilities {
+  .ax-header[class*="text-white"] {
+    & .ax-button > .ax-button__inner {
+      color: inherit;
+    }
+  }
+}
+
 /******************* footer *******************/
 @layer components {
   .ax-footer {
