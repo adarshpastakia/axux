@@ -133,8 +133,9 @@ export const AxMenu: FC<MenuProps> & {
       <Menu.Items
         static
         {...rest}
-        className={`ax-menu ${className ?? ""}`}
         onClick={handleMenuClick}
+        ref={(el: AnyObject) => el?.focus()}
+        className={`ax-menu ${className ?? ""}`}
       >
         {children}
       </Menu.Items>
