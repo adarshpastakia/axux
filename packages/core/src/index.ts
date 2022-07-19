@@ -30,6 +30,7 @@ export { useIsRtl } from "./hooks/useIsRtl";
 export { useNotificationService } from "./hooks/useNotificationService";
 export { useOverlayService } from "./hooks/useOverlayService";
 export { useResizeObserver } from "./hooks/useResizeObserver";
+export { useLocalStorage, useSessionStorage } from "./hooks/useStorage";
 export { AxHotKey } from "./hotkeys/HotKey";
 export { addTranslationBundle } from "./i18n";
 export { AxIcon } from "./icons/Icon";

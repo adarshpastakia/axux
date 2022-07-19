@@ -39,13 +39,15 @@ const rtlFlip: Modifier<"rtlFlip", KeyValue> = {
   fn: ({ state }: KeyValue) => {
     if (isRtl()) {
       const hash: KeyValue = {
-        end: "start",
-        start: "end",
+        "top-end": "top-start",
+        "top-start": "top-end",
+        "bottom-end": "bottom-start",
+        "bottom-start": "bottom-end",
         left: "right",
         right: "left",
       };
-      state.placement = state.placement.replace(
-        /start|end|left|right/g,
+      state.options.placement = state.placement.replace(
+        /top-start|top-end|bottom-start|bottom-end|left|right/g,
         (matched: string) => hash[matched]
       );
     }
@@ -61,9 +63,9 @@ export const usePopover = (
     placement: "bottom",
   }
 ) => {
-  const [referenceElement, setReferenceElement] = useState<any>();
-  const [popperElement, setPopperElement] = useState<any>();
-  const [arrowElement, setArrowElement] = useState<any>();
+  const [referenceElement, setReferenceElement] = useState<HTMLElement>();
+  const [popperElement, setPopperElement] = useState<HTMLElement>();
+  const [arrowElement, setArrowElement] = useState<HTMLElement>();
 
   /******************* popperjs *******************/
   const { styles, attributes, forceUpdate } = usePopper(
@@ -88,6 +90,7 @@ export const usePopover = (
           },
         },
         { name: "rtlFlip" },
+        { name: "flip" },
         { name: "sameWidth", enabled: !!options.sameWidth },
       ],
     }

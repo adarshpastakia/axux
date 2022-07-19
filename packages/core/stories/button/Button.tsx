@@ -6,8 +6,16 @@
  * @license   : MIT
  */
 
+import { action } from "@storybook/addon-actions";
 import { ComponentStory } from "@storybook/react";
-import { AxButton, AxFlexBox } from "../../src";
+import {
+  AxButton,
+  AxContent,
+  AxFlexBox,
+  AxHeader,
+  AxPanel,
+  AxTitle,
+} from "../../src";
 import { HotKeyWrapper } from "../../src/hotkeys/HotKeyWrapper";
 import { AxMenu } from "../../src/menu/Menu";
 
@@ -267,11 +275,54 @@ export const ButtonActions: ComponentStory<AnyObject> = (props) => (
         </AxButton.Confirm>
       </AxFlexBox.Col>
       <AxFlexBox.Col>
-        <AxButton.Dropdown {...props} label="Click Me">
-          <AxMenu.Item label="Action 1" icon="mdi mdi-bell" />
-          <AxMenu.Item label="Action 2" badge="new" />
-          <AxMenu.Item label="Action 3" hotKey="shift+K" />
-          <AxMenu.Item label="Action 4" />
+        <AxButton.Dropdown
+          {...props}
+          label="Click Me"
+          onClick={action("menuClick")}
+        >
+          <AxMenu.Item id="menu1" label="Action 1" icon="mdi mdi-bell" />
+          <AxMenu.Item id="menu2" label="Action 2" badge="new" />
+          <AxMenu.Group label="Grouped" type="collapsable">
+            <AxMenu.Item id="menu3" label="Action 3" />
+            <AxMenu.Item id="menu4" label="Action 4" />
+            <AxMenu.Item id="menu5" label="Action 5" />
+          </AxMenu.Group>
+        </AxButton.Dropdown>
+      </AxFlexBox.Col>
+      <AxFlexBox.Col>
+        <AxButton.Dropdown
+          {...props}
+          label="Click Me"
+          onClick={action("menuClick")}
+        >
+          <AxPanel.Stack>
+            <AxPanel panelId="one">
+              <AxContent padding="none">
+                <AxMenu.Item id="menu1" label="Action 1" icon="mdi mdi-bell" />
+                <AxMenu.Item id="menu2" label="Action 2" badge="new" />
+                <AxMenu.Item
+                  data-panel="two"
+                  label="Action Next"
+                  hotKey="shift+K"
+                />
+                <AxMenu.Group label="Grouped" type="floating">
+                  <AxMenu.Item id="menu3" label="Action 3" />
+                  <AxMenu.Item id="menu4" label="Action 4" />
+                  <AxMenu.Item id="menu5" label="Action 5" />
+                </AxMenu.Group>
+              </AxContent>
+            </AxPanel>
+            <AxPanel panelId="two">
+              <AxHeader>
+                <AxTitle>Menu Next</AxTitle>
+              </AxHeader>
+              <AxContent padding="none">
+                <AxMenu.Item id="next1" label="Action 1" icon="mdi mdi-bell" />
+                <AxMenu.Item id="next2" label="Action 2" badge="new" />
+                <AxMenu.Item id="next3" label="Action 3" hotKey="shift+K" />
+              </AxContent>
+            </AxPanel>
+          </AxPanel.Stack>
         </AxButton.Dropdown>
       </AxFlexBox.Col>
     </AxFlexBox.Row>

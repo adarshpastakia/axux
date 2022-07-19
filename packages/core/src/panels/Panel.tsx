@@ -132,7 +132,7 @@ export const AxPanel: FC<PanelProps> & {
           isExpanded: expanded,
           onBack,
           onClose,
-          onClick: !expanded && toggleCollapse,
+          onClick: isCollapsable && !expanded && toggleCollapse,
           onCollapse: isCollapsable && toggleCollapse,
           onExpand: isExpandable && toggleExpand,
         })}

@@ -106,7 +106,9 @@ export const AxPopover: FC<PopoverProps> & { Dismiss: FC<ChildProp> } = ({
     () => Children.toArray(children) as AnyObject[],
     [children]
   );
-  useImperativeHandle(innerRef, () => referenceElement, [referenceElement]);
+  useImperativeHandle(innerRef, () => referenceElement as AnyObject, [
+    referenceElement,
+  ]);
 
   useEffect(() => {
     if (popperElement) {
@@ -136,7 +138,7 @@ export const AxPopover: FC<PopoverProps> & { Dismiss: FC<ChildProp> } = ({
               tabIndex={-1}
               static={isStatic}
               className={`popover ${popoverClassName ?? ""}`}
-              ref={setPopperElement}
+              ref={setPopperElement as AnyObject}
               style={styles.popper}
               {...attributes.popper}
             >
@@ -145,7 +147,7 @@ export const AxPopover: FC<PopoverProps> & { Dismiss: FC<ChildProp> } = ({
               </div>
               {!hideArrow && (
                 <div
-                  ref={setArrowElement}
+                  ref={setArrowElement as AnyObject}
                   className="popover__arrow"
                   style={styles.arrow}
                   {...attributes.arrow}

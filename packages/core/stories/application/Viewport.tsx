@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { action } from "@storybook/addon-actions";
 import { ComponentStory } from "@storybook/react";
 import { Fragment } from "react";
 import { MemoryRouter, Outlet, Route, Routes } from "react-router-dom";
@@ -91,7 +92,7 @@ const MyFlyout = ({ onClose }: KeyValue) => {
   return (
     <AxFlyout size="sm" onClose={onClose} closeOnClick>
       <AxContent padding="none">
-        <AxMenu onClick={() => onClose?.()}>
+        <AxMenu onClick={(e) => (onClose?.(), action("menuClick")(e))}>
           <AxMenu.Item to="/" label="Home" icon="mdi mdi-home" />
           <AxMenu.Item
             to="/404"
@@ -107,15 +108,15 @@ const MyFlyout = ({ onClose }: KeyValue) => {
           </AxMenu.Group>
           <AxDivider size="xs" />
           <AxMenu.Group label="Collapsing" type="collapsable">
-            <AxMenu.Item label="Action 1" />
-            <AxMenu.Item label="Action 2" />
-            <AxMenu.Item label="Action 3" />
+            <AxMenu.Item id="c1" label="Action 1" />
+            <AxMenu.Item id="c1" label="Action 2" />
+            <AxMenu.Item id="c1" label="Action 3" />
           </AxMenu.Group>
           <AxDivider size="xs" />
           <AxMenu.Group label="Floating" type="floating">
-            <AxMenu.Item id="1" label="Action 1" />
-            <AxMenu.Item label="Action 2" />
-            <AxMenu.Item label="Action 3" />
+            <AxMenu.Item id="f1" label="Action 1" />
+            <AxMenu.Item id="f1" label="Action 2" />
+            <AxMenu.Item id="f1" label="Action 3" />
           </AxMenu.Group>
         </AxMenu>
       </AxContent>
@@ -172,10 +173,16 @@ const Viewport = (props: KeyValue) => {
           icon="mdi mdi-account-circle"
           style="link"
           color="primary"
+          onClick={action("profileMenu")}
         >
-          <AxMenu.Item label="Action 1" />
-          <AxMenu.Item label="Action 2" />
-          <AxMenu.Item label="Action 3" />
+          <AxMenu.Item id="f1" label="Action 1" />
+          <AxMenu.Item id="f2" label="Action 2" />
+          <AxMenu.Item id="f3" label="Action 3" />
+          <AxMenu.Group label="Grouped" type="floating">
+            <AxMenu.Item id="f4" label="Action 4" />
+            <AxMenu.Item id="f5" label="Action 5" />
+            <AxMenu.Item id="f6" label="Action 6" />
+          </AxMenu.Group>
         </AxButton.Dropdown>
       </AxHeader>
       <AxAside width="auto">

@@ -8,7 +8,7 @@
 
 import { iconToken } from "@axux/utilities";
 import { Menu } from "@headlessui/react";
-import { FC, Fragment, MouseEvent, useCallback } from "react";
+import { FC, Fragment, MouseEvent, useCallback, useState } from "react";
 import { Link } from "../components/Link";
 import { useBadge } from "../hooks/useBadge";
 import { AxHotKey } from "../hotkeys/HotKey";
@@ -18,6 +18,14 @@ import { ChildProp, ElementProps } from "../types";
 import { Ellipsis } from "../typography/Ellipsis";
 import { MenuGroup } from "./MenuGroup";
 import { MenuItemProps, MenuProps } from "./types";
+
+const FakeItem = (props: KeyValue) => {
+  return (
+    <div className={props.disabled ? "pointer-events-none" : ""}>
+      {props.children({})}
+    </div>
+  );
+};
 
 const MenuItem: FC<MenuItemProps> = ({
   id,
@@ -34,36 +42,43 @@ const MenuItem: FC<MenuItemProps> = ({
   // @ts-ignore
   "data-extra": extra,
   // @ts-ignore
+  "data-panel": panelId,
+  // @ts-ignore
   "data-popover-open": popoverOpen,
   ...rest
 }) => {
   const Badge = useBadge(badge);
 
-  return (
-    <Menu.Item disabled={isDisabled}>
-      {({ active }) => (
-        <Link
-          {...rest}
-          data-id={id}
-          hotKey={hotKey}
-          className={`ax-menu__item ${className ?? ""}`}
-          data-hover={active}
-          data-active={isActive}
-          data-disabled={isDisabled}
-          data-popover-open={popoverOpen}
-        >
-          <AxIcon
-            className="ax-menu__icon"
-            icon={icon ?? ""}
-            rtlFlip={rtlFlip}
-          />
+  const T = !!panelId ? FakeItem : Menu.Item;
 
-          <Ellipsis className="ax-menu__label">{label}</Ellipsis>
-          {Badge}
-          {hotKey && <AxHotKey.Label keyCombo={hotKey} />}
-        </Link>
+  return (
+    <T as={Fragment} disabled={isDisabled}>
+      {({ active }) => (
+        <div>
+          <Link
+            {...rest}
+            data-id={id}
+            hotKey={hotKey}
+            className={`ax-menu__item ${className ?? ""}`}
+            data-hover={active}
+            data-panel={panelId}
+            data-active={isActive}
+            data-disabled={isDisabled}
+            data-popover-open={popoverOpen}
+          >
+            <AxIcon
+              className="ax-menu__icon"
+              icon={icon ?? ""}
+              rtlFlip={rtlFlip}
+            />
+
+            <Ellipsis className="ax-menu__label">{label}</Ellipsis>
+            {Badge}
+            {hotKey && <AxHotKey.Label keyCombo={hotKey} />}
+          </Link>
+        </div>
       )}
-    </Menu.Item>
+    </T>
   );
 };
 
@@ -89,25 +104,27 @@ const MenuMini: FC<MenuItemProps> = ({
 
   return (
     <AxTooltip content={label} placement="right">
-      <Menu.Item disabled={isDisabled}>
+      <Menu.Item as={Fragment} disabled={isDisabled}>
         {({ active }) => (
-          <Link
-            {...rest}
-            data-id={id}
-            hotKey={hotKey}
-            className={`ax-menu__mini ${className ?? ""}`}
-            data-hover={active}
-            data-active={isActive}
-            data-disabled={isDisabled}
-            data-popover-open={popoverOpen}
-          >
-            <AxIcon
-              className="ax-menu__icon"
-              icon={icon ?? iconToken(label)}
-              rtlFlip={rtlFlip}
-            />
-            {Badge}
-          </Link>
+          <div>
+            <Link
+              {...rest}
+              data-id={id}
+              hotKey={hotKey}
+              className={`ax-menu__mini ${className ?? ""}`}
+              data-hover={active}
+              data-active={isActive}
+              data-disabled={isDisabled}
+              data-popover-open={popoverOpen}
+            >
+              <AxIcon
+                className="ax-menu__icon"
+                icon={icon ?? iconToken(label)}
+                rtlFlip={rtlFlip}
+              />
+              {Badge}
+            </Link>
+          </div>
         )}
       </Menu.Item>
     </AxTooltip>
