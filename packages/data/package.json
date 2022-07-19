@@ -1,6 +1,6 @@
 {
   "name": "@axux/data",
-  "version": "2.0.0-beta.13",
+  "version": "2.0.0-beta.14",
   "description": "axux: Data package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -23,9 +23,9 @@
     "watch": "yarn build -w"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.13",
-    "@axux/date": "^2.0.0-beta.13",
-    "@axux/utilities": "^2.0.0-beta.13",
+    "@axux/core": "^2.0.0-beta.14",
+    "@axux/date": "^2.0.0-beta.14",
+    "@axux/utilities": "^2.0.0-beta.14",
     "@headlessui/react": "^1.6.4",
     "react-monaco-editor": "^0.48.0",
     "react-virtualized": "^9.22.3",

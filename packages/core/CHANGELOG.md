@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.14](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.13...v2.0.0-beta.14) (2022-07-19)
+
+
+### Bug Fixes
+
+* **Flyout:** add open method to ref ([c2cab67](https://github.com/adarshpastakia/axux/commit/c2cab67afd4fe47d42a13122623aa0d351165437))
+* **Link:** check inRouterContext to render NavLink ([8fc168e](https://github.com/adarshpastakia/axux/commit/8fc168ed2ab1689a9096c745f086a3b8519748c4))
+* **Link:** click and mousedown handler ([fc968ee](https://github.com/adarshpastakia/axux/commit/fc968eeb5a8e60d5261e2c905d109e8acfd16ef9))
+* **Menu:** default focus on render ([c827ad6](https://github.com/adarshpastakia/axux/commit/c827ad617e0660bcb570a469bafba8afed3e9f9f))
+* **MenuGroup:** add prevent-close className for menu groups within flyout ([78f6fcf](https://github.com/adarshpastakia/axux/commit/78f6fcfd60d9fa6e81622a73f263c2dda6feeb63))
+* **OverlayService:** pass overlay portal to contain with react-router when needed ([4ef8ace](https://github.com/adarshpastakia/axux/commit/4ef8acebe5b7aa8483b37fd2683461cd725643ea))
+* **overlayService:** use createRoot instead of render ([ec707c0](https://github.com/adarshpastakia/axux/commit/ec707c0e7105ca9f74ce47ebc3bd6134f3ff504a))
+
+
+### Features
+
+* **Flyout:** add closeOnClick ([838ecb4](https://github.com/adarshpastakia/axux/commit/838ecb446814985f8aedf4d844fab48d7f71157d))
+
+
+
+
+
 # [2.0.0-beta.13](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.12...v2.0.0-beta.13) (2022-07-17)
 
 
