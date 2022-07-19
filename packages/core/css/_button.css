@@ -82,14 +82,10 @@
     @apply m-0.5 relative inline-flex flex-nowrap print:hidden;
 
     & > .ax-button {
-      @apply m-0;
+      @apply m-0 z-0 focus-within:z-[1];
 
       & > .ax-button__inner {
-        @apply rounded-none z-0;
-
-        &:hover {
-          @apply z-10;
-        }
+        @apply rounded-none;
       }
 
       &:first-child > .ax-button__inner {

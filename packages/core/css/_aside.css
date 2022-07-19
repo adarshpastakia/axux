@@ -44,7 +44,7 @@
     }
 
     & .ax-side__placeholder {
-      @apply grid-area-[body] z-[2];
+      @apply grid-area-[body] z-[2] bg-base;
     }
     & .ax-side__icon {
       @apply grid-area-[icon] p-1;
