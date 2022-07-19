@@ -56,7 +56,13 @@ export const Link = forwardRef<
           />
         )}
         {isInrouter && !!to ? (
-          <NavLink {...props} ref={linkRef as AnyObject} to={to} />
+          <NavLink
+            {...props}
+            ref={linkRef as AnyObject}
+            to={to}
+            onClick={onClick}
+            onMouseDown={onMouseDown}
+          />
         ) : !!href ? (
           <a
             {...props}
