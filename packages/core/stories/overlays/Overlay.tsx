@@ -14,7 +14,6 @@ import {
   AxContent,
   AxFlyout,
   AxModal,
-  AxPanel,
   AxText,
   useOverlayService,
 } from "../../src";
@@ -31,10 +30,10 @@ export const ModalStory: ComponentStory<typeof AxModal> = (props) => {
     </AxModal>
   );
 
-  const { openOverlay, Overlay } = useOverlayService();
+  const [Overlay, openOverlay] = useOverlayService(MyModal);
   const openModal = () => {
     // Open overlay pass additional props
-    openOverlay(MyModal, props);
+    openOverlay(props);
   };
   return (
     <Fragment>
@@ -52,10 +51,10 @@ const MyModal = (modalProps: KeyValue) => (
   </AxModal>
 );
 
-const { openOverlay, Overlay } = useOverlayService();
+const [Overlay, openOverlay] = useOverlayService(MyModal);
 const openModal = () => {
   // Open overlay pass additional props
-  openOverlay(MyModal, { title: "My Modal" });
+  openOverlay(props);
 };
 return (
   <Fragment>
@@ -74,10 +73,10 @@ export const FlyoutStory: ComponentStory<typeof AxFlyout> = (props) => {
     </AxFlyout>
   );
 
-  const { openOverlay, Overlay } = useOverlayService();
+  const [Overlay, openOverlay] = useOverlayService(MyFlyout);
   const openFlyout = () => {
     // Open overlay pass additional props
-    openOverlay(MyFlyout, props);
+    openOverlay(props);
   };
   return (
     <Fragment>
@@ -95,10 +94,10 @@ const MyFlyout = (flyoutProps: KeyValue) => (
   </AxFlyout>
 );
 
-const { openOverlay } = useOverlayService();
+const [Overlay, openOverlay] = useOverlayService(MyFlyout);
 const openFlyout = () => {
   // Open overlay pass additional props
-  openOverlay(MyFlyout, { title: "My Flyout" });
+  openOverlay(props);
 };
 return (
   <Fragment>

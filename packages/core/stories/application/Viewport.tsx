@@ -155,10 +155,10 @@ const Empty = () => {
 };
 
 const Viewport = (props: KeyValue) => {
-  const { openOverlay, Overlay } = useOverlayService();
+  const [Overlay, openOverlay] = useOverlayService(MyFlyout);
   const openFlyout = () => {
     // Open overlay pass additional props
-    openOverlay(MyFlyout);
+    openOverlay();
   };
   return (
     <AxViewport {...props}>
