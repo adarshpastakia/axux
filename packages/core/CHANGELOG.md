@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.16](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.15...v2.0.0-beta.16) (2022-07-20)
+
+
+### Bug Fixes
+
+* **OverlayService:** make like useState for multiple overlays in view ([ea52ff5](https://github.com/adarshpastakia/axux/commit/ea52ff59b1b37c6a0fd9e1773ed7fcdbfe99d952))
+
+
+
+
+
 # [2.0.0-beta.15](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.14...v2.0.0-beta.15) (2022-07-20)
 
 
