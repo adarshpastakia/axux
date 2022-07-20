@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.15](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.14...v2.0.0-beta.15) (2022-07-20)
+
+
+### Bug Fixes
+
+* irritating bug ([7e185ff](https://github.com/adarshpastakia/axux/commit/7e185ffcb186691942bd136ab6cfe7c7c3b95a83))
+
+
+
+
+
 # [2.0.0-beta.14](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.13...v2.0.0-beta.14) (2022-07-19)
 
 **Note:** Version bump only for package @axux/date
