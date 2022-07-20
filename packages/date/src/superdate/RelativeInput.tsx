@@ -30,13 +30,13 @@ const Select = ({ options, value, onChange, width }: KeyValue) => {
         <div className="relative ax-field__wrapper" style={{ width }}>
           <Listbox.Button
             className="ax-field__input m-0 px-2"
-            ref={setReferenceElement}
+            ref={setReferenceElement as AnyObject}
           >
             <span className="block truncate">{options[value]}</span>
           </Listbox.Button>
           <Listbox.Options
             className="bg-base ring-1 ring-bw-500/20 z-10 shadow-lg"
-            ref={setPopperElement}
+            ref={setPopperElement as AnyObject}
             style={styles.popper}
             {...attributes.popper}
           >
