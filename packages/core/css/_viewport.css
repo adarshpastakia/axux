@@ -52,13 +52,6 @@
 @layer components {
   .ax-page {
     @apply panel bg-base z-0;
-
-    &.ax-paper ~ .ax-footer {
-      @apply -mt-2;
-    }
-    &.ax-paper ~ .ax-breadcrumb {
-      @apply -mb-1;
-    }
   }
 }
 
