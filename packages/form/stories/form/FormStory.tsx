@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { AxButton } from "@axux/core";
 import { action } from "@storybook/addon-actions";
 import { ComponentStory } from "@storybook/react";
 import * as yup from "yup";
@@ -20,13 +21,14 @@ type ILoginSchema = yup.InferType<typeof LoginSchema>;
 
 const SampleLogin: ComponentStory<typeof AxForm<ILoginSchema>> = (props) => (
   <div style={{ width: "32rem" }}>
-    <AxForm {...props} onSubmit={action("onSubmit")} schema={LoginSchema} formRef={undefined}>
+    <AxForm {...props} onSubmit={action("onSubmit")} onChange={action("onChange")} schema={LoginSchema} formRef={undefined}>
       <AxForm.Controller name="username">
         <AxField.Text autoFocus label="Username" />
       </AxForm.Controller>
       <AxForm.Controller name="password">
         <AxField.Password label="Password" />
       </AxForm.Controller>
+      <AxButton>Validate</AxButton>
     </AxForm>
   </div>
 );

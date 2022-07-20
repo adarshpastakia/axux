@@ -15,6 +15,7 @@ import {
   PropsWithChildren,
   ReactElement,
   Ref,
+  useCallback,
   useEffect,
   useImperativeHandle,
   useTransition,
@@ -73,7 +74,7 @@ export const Controller: FC<ControllerProps> = ({ name, children }) => {
         cloneElement(Children.only(children), {
           ...field,
           inputRef: (el: AnyObject) => {
-            ref(el);
+            el && ref(el);
             try {
               if (
                 children.props.inputRef &&
@@ -109,6 +110,7 @@ export const AxForm = <K extends KeyValue>({
   ...rest
 }: PropsWithChildren<FormProps<K>>) => {
   const form = useForm({
+    shouldFocusError: true,
     resolver: schema && yupResolver(schema),
     defaultValues: defaultValues as DeepPartial<K>,
   });
@@ -138,9 +140,26 @@ export const AxForm = <K extends KeyValue>({
     [onSubmit, form, defaultValues]
   );
 
+  const onInvalid = useCallback((_: AnyObject, e: AnyObject) => {
+    const el = e.target;
+    setTimeout(
+      () =>
+        el
+          .querySelector(
+            "input[data-invalid='true'],textarea[data-invalid='true']"
+          )
+          ?.focus(),
+      10
+    );
+  }, []);
+
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off" {...rest}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit, onInvalid)}
+        autoComplete="off"
+        {...rest}
+      >
         {children}
         <input type="submit" className="absolute invisible" />
       </form>

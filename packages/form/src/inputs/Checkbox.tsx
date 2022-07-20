@@ -63,6 +63,7 @@ export const Checkbox: FC<CheckboxProps> = memo(
           checked={actualValue}
           disabled={isDisabled}
           className="ax-field__input"
+          data-invalid={isInvalid}
           onChange={handleChange}
         />
         <AxIcon data-check="off" icon={Icons.iconCheckboxOff} />
