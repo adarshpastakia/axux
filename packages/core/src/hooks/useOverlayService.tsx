@@ -6,20 +6,19 @@
  * @license   : MIT
  */
 
-import { FC, useState } from "react";
-import { createPortal, unmountComponentAtNode } from "react-dom";
+import { FC, ReactElement, useState } from "react";
+import { createPortal } from "react-dom";
 
 type OverlayComponent = FC<{
   onClose: () => void;
   [key: string]: AnyObject;
 }>;
 
-export const useOverlayService = () => {
+export const useOverlayService = (
+  ModalOrFlyout: OverlayComponent
+): [Overlay: ReactElement, openOverlay: (props?: KeyValue) => void] => {
   const [Overlay, setOverlay] = useState<AnyObject>();
-  const openOverlay = (
-    ModalOrFlyout: OverlayComponent,
-    props: KeyValue = {}
-  ) => {
+  const openOverlay = (props: KeyValue = {}) => {
     const el = document.createElement("div");
     document.body.appendChild(el);
     return new Promise<void>((resolve) => {
@@ -40,5 +39,5 @@ export const useOverlayService = () => {
     });
   };
 
-  return { openOverlay, Overlay };
+  return [Overlay, openOverlay];
 };
