@@ -157,6 +157,7 @@ export const AxForm = <K extends KeyValue>({
     <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit, onInvalid)}
+        data-loading={form.formState.isSubmitting}
         autoComplete="off"
         {...rest}
       >
