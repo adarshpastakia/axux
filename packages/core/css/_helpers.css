@@ -25,6 +25,13 @@
   [data-active-shadow="true"] {
     @apply ring-1 ring-offset-2 ring-primary-500/70 ring-offset-primary-200 dark:ring-offset-primary-900;
   }
+  [data-loading="true"] {
+    @apply cursor-wait;
+
+    & > * {
+      @apply pointer-events-none;
+    }
+  }
   /* Base Colors */
   .bg-base {
     @apply bg-bw-50 dark:bg-bw-900 ring-offset-bw-50 dark:ring-offset-bw-900;
