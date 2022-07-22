@@ -135,7 +135,7 @@ const CheckItem: FC<
 
 export const AxCheckList: FC<CheckListProps> = ({
   items,
-  maxCount,
+  maxCount = 0,
   allowNegative,
   selected,
   nonselected,
@@ -193,7 +193,7 @@ export const AxCheckList: FC<CheckListProps> = ({
         }
         return 0;
       })
-      .slice(0, showMore ? undefined : maxCount);
+      .slice(0, !showMore && maxCount > 0 ? maxCount : undefined);
   }, [items, selection, maxCount, showMore]);
 
   return (
@@ -206,7 +206,7 @@ export const AxCheckList: FC<CheckListProps> = ({
           selected={selection[item.id]}
         />
       ))}
-      {maxCount && items.length > maxCount && (
+      {maxCount > 0 && items.length > maxCount && (
         <div className="ax-moreLink">
           <a onClick={() => setShowMore(!showMore)}>
             ...{t(`action.${showMore ? "less" : "more"}`)}
