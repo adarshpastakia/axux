@@ -8,7 +8,7 @@
 
 import { iconToken } from "@axux/utilities";
 import { Menu } from "@headlessui/react";
-import { FC, Fragment, MouseEvent, useCallback, useState } from "react";
+import { FC, Fragment, MouseEvent, useCallback } from "react";
 import { Link } from "../components/Link";
 import { useBadge } from "../hooks/useBadge";
 import { AxHotKey } from "../hotkeys/HotKey";
@@ -54,7 +54,7 @@ const MenuItem: FC<MenuItemProps> = ({
   return (
     <T as={Fragment} disabled={isDisabled}>
       {({ active }) => (
-        <div>
+        <div className="contents">
           <Link
             {...rest}
             data-id={id}
@@ -106,7 +106,7 @@ const MenuMini: FC<MenuItemProps> = ({
     <AxTooltip content={label} placement="right">
       <Menu.Item as={Fragment} disabled={isDisabled}>
         {({ active }) => (
-          <div>
+          <div className="contents">
             <Link
               {...rest}
               data-id={id}
