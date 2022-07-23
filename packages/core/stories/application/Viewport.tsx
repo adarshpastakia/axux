@@ -190,7 +190,7 @@ const Viewport = (props: KeyValue) => {
       </AxAside>
       <AxPage isPaper>
         <AxHeader>
-          <AxFlexBox gutter="sm">
+          <AxFlexBox gutter="sm" fluid>
             <AxFlexBox.Row align="center">
               <AxFlexBox.Col>Toolbar Head</AxFlexBox.Col>
               <AxDivider size="xs" vertical />
