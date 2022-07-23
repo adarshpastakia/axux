@@ -34,6 +34,8 @@ export interface LinkProps {
   as?: React.ElementType;
 
   hotKey?: string;
+
+  type?: "button" | "submit" | "reset";
 }
 
 export const Link = forwardRef<
@@ -41,7 +43,7 @@ export const Link = forwardRef<
   LinkProps & ElementProps & ChildrenProp & HTMLAttributes<HTMLElement>
 >(
   (
-    { to, href, hotKey, as: T = "div", onClick, onMouseDown, ...props },
+    { to, href, hotKey, as: T = "div", onClick, onMouseDown, type, ...props },
     ref
   ) => {
     const linkRef = useRef<HTMLElement>(null);
@@ -74,6 +76,7 @@ export const Link = forwardRef<
         ) : (
           <T
             {...props}
+            type={type}
             ref={linkRef as AnyObject}
             onClick={onClick}
             onMouseDown={onMouseDown}
