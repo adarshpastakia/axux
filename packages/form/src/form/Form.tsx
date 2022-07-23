@@ -28,8 +28,9 @@ import {
 } from "react-hook-form";
 import * as yup from "yup";
 
-interface FormRef<K> {
+export interface FormRef<K> {
   reset: () => void;
+  clear: () => void;
   submit: () => void;
   validate: () => Promise<boolean>;
   getValues: () => K;
@@ -126,7 +127,8 @@ export const AxForm = <K extends KeyValue>({
   useImperativeHandle(
     formRef,
     () => ({
-      reset: () => form.reset(defaultValues),
+      reset: () => (form.reset(defaultValues), form.clearErrors()),
+      clear: () => (form.reset({} as AnyObject), form.clearErrors()),
       submit: () => form.handleSubmit(onSubmit),
       validate: () => form.trigger(),
       getValues: () => form.getValues(),
@@ -158,6 +160,7 @@ export const AxForm = <K extends KeyValue>({
       <form
         onSubmit={form.handleSubmit(onSubmit, onInvalid)}
         data-loading={form.formState.isSubmitting}
+        className="ax-form contents"
         autoComplete="off"
         {...rest}
       >

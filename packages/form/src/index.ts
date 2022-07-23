@@ -39,6 +39,7 @@ export const AxField = {
 };
 
 export { AxForm } from "./form/Form";
+export type { FormRef } from "./form/Form";
 
 AxField.Container.displayName = "AxField.Container";
 AxField.Addon.displayName = "AxField.Addon";
