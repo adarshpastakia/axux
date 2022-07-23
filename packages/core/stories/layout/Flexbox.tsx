@@ -127,8 +127,8 @@ export const AlignmentStory: ComponentStory<AnyObject> = () => {
         <AxFlexBox.Col flex="fill" className={colClass} align="start">
           Start
         </AxFlexBox.Col>
-        <AxFlexBox.Col flex="fill" className={colClass} align="middle">
-          Middle
+        <AxFlexBox.Col flex="fill" className={colClass} align="center">
+          Center
         </AxFlexBox.Col>
         <AxFlexBox.Col flex="fill" className={colClass} align="end">
           End
@@ -177,15 +177,15 @@ export const JustifyStory: ComponentStory<AnyObject> = () => {
           End
         </AxFlexBox.Col>
       </AxFlexBox.Row>
-      <AxFlexBox.Row justify="spaced">
+      <AxFlexBox.Row justify="between">
         <AxFlexBox.Col width="6em" className={colClass}>
-          Spaced
+          Between
         </AxFlexBox.Col>
         <AxFlexBox.Col width="6em" className={colClass}>
-          Spaced
+          Between
         </AxFlexBox.Col>
         <AxFlexBox.Col width="6em" className={colClass}>
-          Spaced
+          Between
         </AxFlexBox.Col>
       </AxFlexBox.Row>
     </AxFlexBox>
