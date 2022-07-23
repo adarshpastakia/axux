@@ -63,7 +63,7 @@ export interface ControllerProps {
   children: ReactElement;
 }
 
-export const Controller: FC<ControllerProps> = ({ name, children }) => {
+export const AxController: FC<ControllerProps> = ({ name, children }) => {
   return (
     <HFController
       name={name}
@@ -170,7 +170,4 @@ export const AxForm = <K extends KeyValue>({
     </FormProvider>
   );
 };
-AxForm.Controller = Controller;
-
-AxForm.displayName = "AxForm";
-AxForm.Controller.displayName = "AxForm.Controller";
+AxForm.Controller = AxController;
