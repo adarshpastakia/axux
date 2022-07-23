@@ -1,0 +1,89 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-histogram {
+    @apply flex flex-col;
+  }
+
+  .ax-histogram__item {
+    @apply flex;
+
+    & .ax-icon {
+      @apply text-md text-muted;
+    }
+
+    & .ax-icon[data-type="positive"] {
+      @apply hover:text-success-600/70;
+      &[data-selected="true"] {
+        @apply text-success-600/90;
+      }
+    }
+    & .ax-icon[data-type="negative"] {
+      @apply hover:text-danger-600/70;
+      &[data-selected="true"] {
+        @apply text-danger-600/90;
+      }
+    }
+
+    & .ax-histogram__checkbox {
+      @apply hidden cursor-pointer;
+    }
+
+    &:hover .ax-histogram__checkbox {
+      @apply block;
+    }
+  }
+
+  .ax-histogram__meter {
+    @apply my-px h-6 flex-1 ltr:bg-gradient-to-r rtl:bg-gradient-to-l flex items-center relative select-none mix-blend-luminosity;
+
+    &::before {
+      @apply overflow-hidden absolute inset-0 ltr:border-l-2 rtl:border-r-2 bg-bw-0/70 dark:bg-bw-1000/70;
+      content: "";
+    }
+
+    & > label {
+      @apply flex-1 truncate text-sm px-1 z-[1];
+    }
+
+    & > span {
+      @apply text-xs px-1 z-[1];
+      font-variant-numeric: tabular-nums;
+    }
+
+    &[data-clickable] {
+      @apply cursor-pointer;
+    }
+
+    &[data-color="primary"] {
+      @apply from-primary-400/50 to-primary-500/20 before:border-primary-500;
+    }
+    &[data-color="accent"] {
+      @apply from-accent-400/50 to-accent-500/20 before:border-accent-500;
+    }
+    &[data-color="danger"] {
+      @apply from-danger-400/50 to-danger-500/20 before:border-danger-500;
+    }
+    &[data-color="success"] {
+      @apply from-success-400/50 to-success-500/20 before:border-success-500;
+    }
+    &[data-color="warning"] {
+      @apply from-warning-400/50 to-warning-500/20 before:border-warning-500;
+    }
+  }
+
+  [dir="ltr"] .ax-histogram__meter::before {
+    left: calc(var(--meter) * 100%);
+    transition: left 1s ease-in 0.5s;
+  }
+  [dir="rtl"] .ax-histogram__meter::before {
+    right: calc(var(--meter) * 100%);
+    transition: right 1s ease-in 0.5s;
+  }
+}
