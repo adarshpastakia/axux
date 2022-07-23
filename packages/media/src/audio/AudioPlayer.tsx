@@ -21,6 +21,7 @@ import {
   useTransition,
 } from "react";
 import { Icons } from "../types/icons";
+import { Loading } from "./Loading";
 import { Tools } from "./Tools";
 import { Wavesurfer, WavesurferInstance } from "./wavesurfer";
 
@@ -281,9 +282,9 @@ export const AxAudioPlayer = forwardRef<
             />
           )}
 
-          {state.isLoading && (
+          {state.isLoading && wavesurfer && (
             <div className="ax-media__overlay">
-              <AxAnimation.Bars />
+              <Loading wavesurfer={wavesurfer} />
             </div>
           )}
           {state.isErrored && (
