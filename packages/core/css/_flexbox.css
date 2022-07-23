@@ -44,6 +44,32 @@
   @apply flex-col-reverse;
 }
 
+.ax-row[data-align="start"] {
+  @apply items-start;
+}
+.ax-row[data-align="end"] {
+  @apply items-end;
+}
+.ax-row[data-align="center"] {
+  @apply items-center;
+}
+.ax-row[data-align="stretch"] {
+  @apply items-stretch;
+}
+
+.ax-row[data-justify="start"] {
+  @apply justify-start;
+}
+.ax-row[data-justify="end"] {
+  @apply justify-end;
+}
+.ax-row[data-justify="center"] {
+  @apply justify-center;
+}
+.ax-row[data-justify="between"] {
+  @apply justify-between;
+}
+
 .ax-col--auto {
   @apply flex-initial;
 }
@@ -52,6 +78,19 @@
 }
 .ax-col--full {
   flex: 1 1 100%;
+}
+
+.ax-col[data-align="start"] {
+  @apply self-start;
+}
+.ax-col[data-align="end"] {
+  @apply self-end;
+}
+.ax-col[data-align="center"] {
+  @apply self-center;
+}
+.ax-col[data-align="stretch"] {
+  @apply self-stretch;
 }
 
 .gutter--none {

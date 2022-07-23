@@ -64,9 +64,6 @@ export const FlexboxCol = forwardRef<HTMLDivElement, FlexboxColProps>(
     /******************* class map *******************/
     const classes = useMemo(() => {
       const cls = ["ax-col", className ?? ""];
-      if (align) {
-        cls.push(`self-${align}`);
-      }
       if (flex) {
         cls.push(`ax-col--${flex}`);
       } else if (span) {
@@ -76,7 +73,7 @@ export const FlexboxCol = forwardRef<HTMLDivElement, FlexboxColProps>(
           .forEach((s) => cls.push(`ax-col--${s}`));
       }
       return cls.join(" ");
-    }, [className, flex, span, align]);
+    }, [className, flex, span]);
 
     /******************* style map *******************/
     const styles = useMemo(() => {
@@ -96,6 +93,7 @@ export const FlexboxCol = forwardRef<HTMLDivElement, FlexboxColProps>(
         ref={ref}
         role="presentation"
         className={classes}
+        data-align={align}
         style={styles}
       >
         {children}
