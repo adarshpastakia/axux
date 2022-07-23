@@ -9,7 +9,8 @@ import {
 } from "@storybook/addon-docs";
 import { action } from "@storybook/addon-actions";
 import { AxForm } from "../src";
-import { LoginStory } from "./form/FormStory";
+import { FormStory } from "./form/FormStory";
+import { LoginStory } from "./form/LoginStory";
 
 <Meta
   title="@form/Form"
@@ -26,3 +27,19 @@ import { LoginStory } from "./form/FormStory";
 <Canvas>
   <Story name="Login">{LoginStory}</Story>
 </Canvas>
+
+<Heading storyId="form-form--sample-form">Sample Form</Heading>
+
+<Canvas>
+  <Story name="Sample Form" height="24rem">
+    {FormStory}
+  </Story>
+</Canvas>
+
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxForm,
+    "AxForm.Controller": AxForm.Controller,
+  }}
+/>
