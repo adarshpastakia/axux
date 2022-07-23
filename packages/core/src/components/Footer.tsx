@@ -12,7 +12,14 @@ import { ChildrenProp, ElementProps } from "../types";
 /**
  * footer panel
  */
-export const AxFooter: FC<ElementProps & ChildrenProp> = ({
-  className,
-  ...rest
-}) => <div {...rest} className={`ax-footer ${className ?? ""}`} />;
+export const AxFooter: FC<
+  ElementProps &
+    ChildrenProp & {
+      justify?: "start" | "end" | "center" | "between";
+    }
+> = ({ className, justify, ...rest }) => (
+  <div
+    {...rest}
+    className={`ax-footer justify-${justify} ${className ?? ""}`}
+  />
+);
