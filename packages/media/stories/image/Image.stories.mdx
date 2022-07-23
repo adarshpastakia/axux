@@ -29,7 +29,7 @@ const ImageTemplate = () => {
   imageRef.current.drawBox([20, 50, 96, 128], { stroke: "#fc0000" });
 
   // hilight image area
-  imageRef.current.drawBox("40,90,96,128");
+  imageRef.current.hilight("40,90,96,128");
 
   // unhilight area and redraw original boxes
   imageRef.current.unhilight();
