@@ -54,7 +54,7 @@ const MenuItem: FC<MenuItemProps> = ({
   return (
     <T as={Fragment} disabled={isDisabled}>
       {({ active }) => (
-        <div className="contents">
+        <div>
           <Link
             {...rest}
             data-id={id}
@@ -106,7 +106,7 @@ const MenuMini: FC<MenuItemProps> = ({
     <AxTooltip content={label} placement="right">
       <Menu.Item as={Fragment} disabled={isDisabled}>
         {({ active }) => (
-          <div className="contents">
+          <div>
             <Link
               {...rest}
               data-id={id}
