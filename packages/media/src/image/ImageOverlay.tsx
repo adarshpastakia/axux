@@ -38,11 +38,11 @@ export const ImageOverlay: FC<OverlayProps> = ({
   rotate,
   onLoad,
   onError,
-  containerHeight,
-  containerWidth,
+  containerHeight = 0,
+  containerWidth = 0,
 }) => {
   const isRtl = useIsRtl();
-  const [overlaySize, setOverlaySize] = useState<number | string>("50%");
+  const [overlaySize, setOverlaySize] = useState<number>(containerHeight / 2);
   const overlayRef = useRef<HTMLDivElement>(null);
   const resizeHandleRef = useRef<HTMLDivElement>(null);
   const [orientVertical, setOrientVertical] = useState(true);
@@ -68,9 +68,16 @@ export const ImageOverlay: FC<OverlayProps> = ({
     [height, width, rotate]
   );
 
+  const togglePos = useMemo(() => {
+    return Math.max(
+      6,
+      Math.min(overlaySize, orientVertical ? containerHeight : containerWidth)
+    );
+  }, [orientVertical, containerHeight, containerWidth, overlaySize]);
+
   useEffect(() => {
-    setOverlaySize("50%");
-  }, [src, orientVertical]);
+    setOverlaySize((orientVertical ? containerHeight : containerWidth) / 2);
+  }, [src, orientVertical, containerHeight, containerWidth]);
 
   return (
     <Fragment>
@@ -109,8 +116,8 @@ export const ImageOverlay: FC<OverlayProps> = ({
       <div
         className="ax-image__overlay--orient"
         style={{
-          top: orientVertical ? overlaySize : undefined,
-          [isRtl ? "right" : "left"]: !orientVertical ? overlaySize : undefined,
+          top: orientVertical ? togglePos : undefined,
+          [isRtl ? "right" : "left"]: !orientVertical ? togglePos : undefined,
         }}
       >
         <AxIcon
