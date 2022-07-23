@@ -58,17 +58,12 @@ export const FlexboxRow = forwardRef<HTMLDivElement, FlexboxRowProps>(
   ) => {
     /******************* class map *******************/
     const classes = useMemo(() => {
-      const cls = [
-        "ax-row",
-        `items-${align}`,
-        `justify-${justify}`,
-        className ?? "",
-      ];
+      const cls = ["ax-row", className ?? ""];
       if (gutter) {
         cls.push(`gutter--${gutter}`);
       }
       return cls.join(" ");
-    }, [gutter, className, align, justify]);
+    }, [gutter, className]);
 
     /******************* style map *******************/
     const styles = useMemo(() => {
@@ -87,6 +82,8 @@ export const FlexboxRow = forwardRef<HTMLDivElement, FlexboxRowProps>(
         role="presentation"
         data-nowrap={noWrap}
         data-orient={orient}
+        data-align={align}
+        data-justify={justify}
         className={classes}
       >
         {children}
