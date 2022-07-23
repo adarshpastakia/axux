@@ -33,11 +33,11 @@ export interface FlexboxRowProps extends ElementProps, ChildrenProp {
   /**
    * y-axis alignment
    */
-  align?: "start" | "end" | "middle" | "stretch";
+  align?: "start" | "end" | "center" | "stretch";
   /**
    * x-axis alignment
    */
-  justify?: "start" | "end" | "center" | "spaced";
+  justify?: "start" | "end" | "center" | "between";
 }
 
 export const FlexboxRow = forwardRef<HTMLDivElement, FlexboxRowProps>(
@@ -58,12 +58,17 @@ export const FlexboxRow = forwardRef<HTMLDivElement, FlexboxRowProps>(
   ) => {
     /******************* class map *******************/
     const classes = useMemo(() => {
-      const cls = ["ax-row", className ?? ""];
+      const cls = [
+        "ax-row",
+        `items-${align}`,
+        `justify-${justify}`,
+        className ?? "",
+      ];
       if (gutter) {
         cls.push(`gutter--${gutter}`);
       }
       return cls.join(" ");
-    }, [gutter, className]);
+    }, [gutter, className, align, justify]);
 
     /******************* style map *******************/
     const styles = useMemo(() => {
@@ -82,8 +87,6 @@ export const FlexboxRow = forwardRef<HTMLDivElement, FlexboxRowProps>(
         role="presentation"
         data-nowrap={noWrap}
         data-orient={orient}
-        data-align={align}
-        data-justify={justify}
         className={classes}
       >
         {children}
