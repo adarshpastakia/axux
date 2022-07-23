@@ -10,6 +10,7 @@ import "./i18n";
 
 export { AxCheckList } from "./checklist/CheckList";
 export { AxEditor } from "./editor/Editor";
+export { AxHistogram } from "./histogram/Histogram";
 export { usePagination } from "./hooks/usePagination";
 export { AxJsonView } from "./json/JsonView";
 export { AxPagination } from "./pagination/Pagination";

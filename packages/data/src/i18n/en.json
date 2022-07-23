@@ -15,6 +15,9 @@
     "true": "Yes",
     "false": "No"
   },
+  "checkList": {
+    "empty": "No list items"
+  },
   "histogram": {
     "empty": "No histograms"
   },

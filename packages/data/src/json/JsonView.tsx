@@ -49,6 +49,10 @@ export interface JsonViewProps extends ElementProps {
    */
   filters?: true | string[];
   /**
+   * message for empty json
+   */
+  emptyMessage?: string;
+  /**
    * on filter callback
    */
   onFilter?: (key: string, value: AnyObject, negate: boolean) => void;
@@ -238,6 +242,7 @@ export const AxJsonView: FC<JsonViewProps> = ({
   formatter,
   labeler,
   onFilter,
+  emptyMessage,
   ...rest
 }) => {
   const { t } = useTranslation("data");
@@ -249,7 +254,10 @@ export const AxJsonView: FC<JsonViewProps> = ({
           {...{ copy, dateProperties, filters, formatter, labeler, onFilter }}
         />
       ) : (
-        <AxContent.Empty message={t("json.empty")} />
+        <AxContent.Empty
+          className="text-sm"
+          message={emptyMessage ?? t("json.empty")}
+        />
       )}
     </div>
   );

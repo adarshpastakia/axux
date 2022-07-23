@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxIcon } from "@axux/core";
+import { AxContent, AxIcon } from "@axux/core";
 import { useBadge } from "@axux/core/dist/hooks/useBadge";
 import { BadgeType } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
@@ -15,13 +15,12 @@ import {
   FC,
   Fragment,
   isValidElement,
-  useCallback,
   useEffect,
   useMemo,
   useState,
-  useTransition,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { SelectableProps, useSelectableList } from "../hooks/useSelectableList";
 
 export interface CheckListItem extends KeyValue {
   id: string;
@@ -33,25 +32,23 @@ export interface CheckListItem extends KeyValue {
 
 // TODO: CheckList-implement search
 
-export interface CheckListProps {
+export interface CheckListProps extends SelectableProps {
   /**
    * list items
    */
   items: CheckListItem[];
   /**
-   * selected item ids
-   */
-  selected?: string[];
-  /**
-   * selected negative item ids
-   */
-  nonselected?: string[];
-  /**
    * allow negative selections
    */
   allowNegative?: boolean;
+  /**
+   * max list items
+   */
   maxCount?: number;
-  onChange?: (ids: string[], nonIds?: string[]) => void;
+  /**
+   * message for empty list
+   */
+  emptyMessage?: string;
 }
 
 const CheckItem: FC<
@@ -134,53 +131,19 @@ const CheckItem: FC<
 };
 
 export const AxCheckList: FC<CheckListProps> = ({
-  items,
+  items = [],
   maxCount = 0,
   allowNegative,
-  selected,
-  nonselected,
-  onChange,
+  emptyMessage,
+  ...props
 }) => {
-  const { t } = useTranslation("core");
-  const [selection, setSelection] = useState<KeyValue<AnyObject>>({});
+  const { t } = useTranslation("data");
+  const { selection, toggleSelection } = useSelectableList({ items, ...props });
   const [showMore, setShowMore] = useState(false);
-  const [pending, startTransition] = useTransition();
+
   useEffect(() => {
     setShowMore(false);
-    setSelection(
-      items.reduce(
-        (ret, { id }) => ({
-          ...ret,
-          [id]: selected?.includes(id) ? 1 : nonselected?.includes(id) ? -1 : 0,
-        }),
-        {}
-      )
-    );
-  }, [items, selected, nonselected]);
-
-  const toggleSelection = useCallback(
-    (id: string, check: 1 | -1) => {
-      const newSelection = { ...selection, [id]: 0 };
-      if (selection[id] === 0) newSelection[id] = 1;
-      if (selection[id] !== 0) newSelection[id] = 0;
-      if (check) {
-        newSelection[id] = check;
-        if (selection[id] === 1 && check === 1) newSelection[id] = 0;
-        if (selection[id] === -1 && check === -1) newSelection[id] = 0;
-      }
-      setSelection(newSelection);
-      const change: string[][] = [[], []];
-      Object.entries(newSelection).forEach(([id, select]) =>
-        select === 1
-          ? change[0].push(id)
-          : select === -1
-          ? change[1].push(id)
-          : undefined
-      );
-      startTransition(() => onChange?.(change[0], change[1]));
-    },
-    [selection]
-  );
+  }, [items]);
 
   const listItems = useMemo(() => {
     return [...items]
@@ -209,9 +172,15 @@ export const AxCheckList: FC<CheckListProps> = ({
       {maxCount > 0 && items.length > maxCount && (
         <div className="ax-moreLink">
           <a onClick={() => setShowMore(!showMore)}>
-            ...{t(`action.${showMore ? "less" : "more"}`)}
+            ...{t(`core:action.${showMore ? "less" : "more"}`)}
           </a>
         </div>
+      )}
+      {listItems.length === 0 && (
+        <AxContent.Empty
+          className="text-sm"
+          message={emptyMessage ?? t("checkList.empty")}
+        />
       )}
     </div>
   );
