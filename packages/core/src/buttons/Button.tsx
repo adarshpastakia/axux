@@ -60,6 +60,10 @@ export interface ButtonProps extends ElementProps, IconProp {
    */
   iconAlign?: "start" | "end" | "top";
   /**
+   * button type
+   */
+  type?: "button" | "submit" | "reset";
+  /**
    * full width
    */
   fullWidth?: boolean;
@@ -125,6 +129,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     style,
     size,
     children,
+    type = "button",
     color,
     rtlFlip,
     noTabFocus,
@@ -179,6 +184,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
           aria-label={children}
           {...rest}
           ref={ref}
+          type={type}
           as="button"
           role="button"
           hotKey={hotKey}
