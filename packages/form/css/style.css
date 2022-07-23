@@ -164,9 +164,10 @@
 
   /******************* options *******************/
   .ax-field__options {
-    @apply grid grid-flow-row;
+    @apply grid grid-flow-row flex-1;
+    order: 3;
     grid-gap: 0 0.25rem;
-    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
 
     &[data-vertical="true"] {
       grid-template-columns: 1fr;
