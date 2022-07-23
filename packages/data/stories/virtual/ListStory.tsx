@@ -32,26 +32,26 @@ const ListTemplate: ComponentStory<typeof AxList> = (props) => {
           {({ data, ...props }) => (
             <AxList.Item {...props}>
               <AxCard className="p-2 w-72 h-40">
-                <AxFlexBox.Row className="text-lg font-semibold" align="middle">
+                <AxFlexBox.Row className="text-lg font-semibold" align="center">
                   <AxIcon icon={`flag ${data.iso3}`} className="ring-1" />
                   <AxText.Ellipsis className="flex-1 px-2">
                     {data.name}
                   </AxText.Ellipsis>
                   <AxText>&nbsp;{data.emoji}</AxText>
                 </AxFlexBox.Row>
-                <AxFlexBox.Row justify="spaced" align="middle">
+                <AxFlexBox.Row justify="between" align="center">
                   <AxText>{data.fullname}</AxText>
                   <AxText className="text-sm text-muted">
                     {data.continent}
                   </AxText>
                 </AxFlexBox.Row>
-                <AxFlexBox.Row justify="spaced">
+                <AxFlexBox.Row justify="between">
                   <AxText className="text-sm text-muted">{data.capital}</AxText>
                   <AxText className="text-sm text-muted">
                     {data.iso2}/{data.iso3}
                   </AxText>
                 </AxFlexBox.Row>
-                <AxFlexBox.Row justify="spaced">
+                <AxFlexBox.Row justify="between">
                   <AxText className="text-sm text-muted">{data.phone}</AxText>
                   <AxText className="text-sm text-muted">
                     {data.currency}

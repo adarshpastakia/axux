@@ -40,7 +40,7 @@ WithIconStory.args = {
 
 export const ButtonSizes: ComponentStory<AnyObject> = (props) => (
   <AxFlexBox>
-    <AxFlexBox.Row align="middle">
+    <AxFlexBox.Row align="center">
       <AxFlexBox.Col>
         <AxButton {...props} size="sm">
           Small Button!
@@ -67,7 +67,7 @@ export const ButtonSizes: ComponentStory<AnyObject> = (props) => (
 
 export const ButtonStyles: ComponentStory<AnyObject> = (props) => (
   <AxFlexBox>
-    <AxFlexBox.Row align="middle">
+    <AxFlexBox.Row align="center">
       <AxFlexBox.Col>
         <AxButton {...props} style={undefined}>
           Normal Button!
@@ -99,7 +99,7 @@ export const ButtonStyles: ComponentStory<AnyObject> = (props) => (
 
 export const ButtonStates: ComponentStory<AnyObject> = (props) => (
   <AxFlexBox>
-    <AxFlexBox.Row align="middle">
+    <AxFlexBox.Row align="center">
       <AxFlexBox.Col>
         <AxButton {...props} isDisabled>
           Disabled State!
@@ -126,7 +126,7 @@ export const ButtonStates: ComponentStory<AnyObject> = (props) => (
 
 export const ButtonColors: ComponentStory<AnyObject> = (props) => (
   <AxFlexBox>
-    <AxFlexBox.Row align="middle">
+    <AxFlexBox.Row align="center">
       <AxFlexBox.Col>
         <AxButton {...props} color="primary">
           Normal Button!
