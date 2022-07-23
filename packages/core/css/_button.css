@@ -30,11 +30,15 @@
       & * {
         @apply pointer-events-none;
       }
+
+      & .ax-button__caret {
+        @apply order-last;
+        margin-inline-end: -0.5em;
+      }
     }
 
     & .ax-button__inner:active {
-      & .ax-button__label,
-      & .ax-button__icon {
+      & > * {
         @apply translate-y-px;
       }
     }
@@ -127,6 +131,10 @@
 
   .ax-button[data-icon-align="end"] .ax-button__inner {
     @apply flex-row-reverse;
+
+    & .ax-button__caret {
+      @apply order-first;
+    }
   }
 
   .ax-button[data-icon-align="top"] .ax-button__inner {

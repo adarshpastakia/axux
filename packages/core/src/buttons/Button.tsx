@@ -24,6 +24,7 @@ import {
   Size,
   TooltipType,
 } from "../types";
+import { AppIcons } from "../types/appIcons";
 import { Ellipsis } from "../typography/Ellipsis";
 import { ActionButton } from "./Action";
 import { ConfirmButton } from "./Confirm";
@@ -88,6 +89,10 @@ export interface ButtonProps extends ElementProps, IconProp {
    */
   invertColor?: boolean;
   /**
+   * show dropdown caret
+   */
+  showCaret?: boolean;
+  /**
    * use loading spinner
    */
   useSpinner?: boolean;
@@ -139,6 +144,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     isRound,
     isLoading,
     isDisabled,
+    showCaret,
     tooltip,
     badge,
     fullWidth,
@@ -203,6 +209,12 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
             <Ellipsis className="ax-button__label">{children}</Ellipsis>
           )}
           {hotKey && <AxHotKey.Label keyCombo={hotKey} />}
+          {showCaret && (
+            <AxIcon
+              className="ax-button__caret"
+              icon={AppIcons.iconCaretDown}
+            />
+          )}
         </Link>
         {Badge}
         {extra}

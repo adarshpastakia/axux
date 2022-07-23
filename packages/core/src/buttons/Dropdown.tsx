@@ -35,6 +35,7 @@ export const DropdownButton: FC<DropdownProps> = ({
   placement = "bottom-start",
   onClick,
   label,
+  showCaret = true,
   ...rest
 }) => {
   const {
@@ -62,7 +63,7 @@ export const DropdownButton: FC<DropdownProps> = ({
     <Menu as={Fragment}>
       <Menu.Button as={Fragment} {...{ ref: setReferenceElement }}>
         {({ open }) => (
-          <AxButton {...rest} data-popover-open={open}>
+          <AxButton {...rest} data-popover-open={open} showCaret={showCaret}>
             {label}
           </AxButton>
         )}
