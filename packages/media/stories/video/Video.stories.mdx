@@ -29,7 +29,7 @@ const VideoTemplate = () => {
   videoRef.current.drawBox([20, 50, 96, 128], { stroke: "#fc0000" });
 
   // hilight image area
-  videoRef.current.drawBox("40,90,96,128");
+  videoRef.current.hilight("40,90,96,128");
 
   // unhilight area and redraw original boxes
   videoRef.current.unhilight();
