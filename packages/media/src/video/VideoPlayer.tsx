@@ -227,7 +227,7 @@ export const AxVideoPlayer = forwardRef<
           onContextMenuCapture={(e) => e.preventDefault()}
         >
           <div
-            className="ax-media__container"
+            className="ax-media__container ax-video__wrapper"
             onClick={() =>
               videoRef.current?.paused
                 ? videoRef.current?.play()
