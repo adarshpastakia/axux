@@ -46,7 +46,6 @@ export const Number: FC<NumberProps> = memo(
     isRequired,
     className,
     value,
-    defaultValue,
     placeholder,
     onChange,
     inputRef,
@@ -61,14 +60,14 @@ export const Number: FC<NumberProps> = memo(
     onEnterPressed,
     ...rest
   }) => {
-    const [actualValue, setActualValue] = useState(defaultValue ?? "");
+    const [actualValue, setActualValue] = useState<number>();
     const [pending, startTransition] = useTransition();
     useEffect(() => {
-      setActualValue(value ?? "");
+      setActualValue(value);
     }, [value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
-        setActualValue(e?.target.valueAsNumber ?? "");
+        setActualValue(e?.target.valueAsNumber);
         onChange &&
           startTransition(() => onChange(e?.target.valueAsNumber ?? undefined));
       },

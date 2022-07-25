@@ -53,7 +53,6 @@ export const File: FC<FileProps> = memo(
     labelAppend,
     isRequired,
     value,
-    defaultValue,
     placeholder,
     onChange,
     inputRef,

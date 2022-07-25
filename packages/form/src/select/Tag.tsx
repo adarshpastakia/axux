@@ -38,7 +38,6 @@ export const TagInput = <T extends AnyObject>({
   labelAppend,
   isRequired,
   value,
-  defaultValue,
   placeholder,
   options,
   labelProperty = "label",
@@ -88,7 +87,7 @@ export const TagInput = <T extends AnyObject>({
   /******************* set actualValue when value changes *******************/
   useEffect(() => {
     setActualValue(
-      (value ?? defaultValue ?? [])
+      (value ?? [])
         .map((val) => {
           if (matcher) return flatList.find((option) => matcher(option, val));
           return flatList.find((option) =>
@@ -190,6 +189,11 @@ export const TagInput = <T extends AnyObject>({
       </FieldWrapper>
       <Combobox.Options
         ref={setPopperElement as AnyObject}
+        onMouseUp={(e: AnyObject) =>
+          e.currentTarget.parentElement
+            .querySelector(".ax-field__input")
+            ?.focus()
+        }
         className="ax-select__dropdown"
         style={styles.popper}
       >
