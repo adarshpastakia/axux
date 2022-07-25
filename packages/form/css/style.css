@@ -416,6 +416,33 @@
     }
   }
 
+  /******************* select *******************/
+  .ax-select__dropdown {
+    @apply bg-component overflow-auto rounded shadow-2xl dark:shadow-black ring-1 ring-bw-500/20 z-50;
+  }
+  .ax-select__group {
+    @apply px-2 py-1 text-muted text-sm;
+  }
+  .ax-select__handle {
+    @apply m-px px-1 text-muted bg-base self-stretch flex items-center justify-center cursor-pointer;
+    & > .ax-icon {
+      @apply !p-0;
+    }
+  }
+  .ax-select__option {
+    @apply px-2 py-1 cursor-pointer;
+
+    &[data-active="true"] {
+      @apply bg-primary-500/10;
+    }
+    &[data-selected="true"] {
+      @apply bg-primary-500/50 pointer-events-none;
+    }
+  }
+  .ax-select__tag {
+    @apply m-1 text-bw-900 dark:text-bw-50 before:bg-bw-50 dark:before:bg-bw-900 before:opacity-100;
+  }
+
   /*******************  *******************/
   .ax-field__error {
     @apply ltr:ml-2 rtl:mr-2 order-2 text-danger-700 dark:text-danger-300 text-md leading-[0];
