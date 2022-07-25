@@ -19,6 +19,8 @@ import { Slider } from "./inputs/Slider";
 import { Switch } from "./inputs/Switch";
 import { Text } from "./inputs/Text";
 import { Textarea } from "./inputs/Textarea";
+import { Select } from "./select/Select";
+import { Tag } from "./select/Tag";
 
 import "./i18n";
 
@@ -36,6 +38,8 @@ export const AxField = {
   Checkbox,
   Radio,
   Switch,
+  Select,
+  Tag,
 };
 
 export { AxForm } from "./form/Form";

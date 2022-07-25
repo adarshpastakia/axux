@@ -2,5 +2,10 @@
   "password": {
     "show": "Show password",
     "hide": "Hide password"
+  },
+  "select": {
+    "emptyList": "No options available",
+    "notFound": "No options found for ",
+    "createOption": "Create new option for "
   }
 }

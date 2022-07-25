@@ -20,6 +20,7 @@ import { AxField, AxForm, FormRef } from "../../src";
 
 const FormSchema = new yup.ObjectSchema({
   text: yup.string().required(),
+  select: yup.string().required(),
   password: yup.string().required(),
   options: yup.string().required(),
   check: yup.boolean().required(),
@@ -58,7 +59,7 @@ const Template: ComponentStory<typeof AxForm> = () => {
         >
           <AxSection>
             <AxContent>
-              <AxFlexBox fluid={false}>
+              <AxFlexBox fluid={false} maxWidth="48rem">
                 <AxFlexBox.Row gutter="md">
                   <AxFlexBox.Col span="md:6">
                     <AxForm.Controller name="text">
@@ -126,14 +127,49 @@ const Template: ComponentStory<typeof AxForm> = () => {
                   </AxFlexBox.Col>
                   <AxFlexBox.Col span="md:6">
                     <AxForm.Controller name="options">
-                      <AxField.Options
-                        label="Radio Options"
-                        allowClear
-                      >
+                      <AxField.Options label="Radio Options" allowClear>
                         <AxField.Radio value="1" label="First" />
                         <AxField.Radio value="2" label="Second" />
                         <AxField.Radio value="3" label="Third" />
                       </AxField.Options>
+                    </AxForm.Controller>
+                  </AxFlexBox.Col>
+                  <AxFlexBox.Col span="md:6">
+                    <AxForm.Controller name="select">
+                      <AxField.Select
+                        isEditable
+                        allowCreate
+                        label="Select List"
+                        options={[
+                          { value: "first", label: "This is first" },
+                          "second",
+                          { label: "Grouped", items: ["third", "fourth"] },
+                        ]}
+                        defaultValue="first"
+                        allowClear
+                        onChange={action("select:onChange")}
+                        onSelect={action("select:onSelect")}
+                        onCreateOption={action("select:onCreateOption")}
+                      />
+                    </AxForm.Controller>
+                  </AxFlexBox.Col>
+                  <AxFlexBox.Col span="md:6">
+                    <AxForm.Controller name="tag">
+                      <AxField.Tag
+                        isEditable
+                        allowCreate
+                        label="Select List"
+                        options={[
+                          { value: "first", label: "This is first" },
+                          "second",
+                          { label: "Grouped", items: ["third", "fourth"] },
+                        ]}
+                        defaultValue={["first"]}
+                        allowClear
+                        onChange={action("select:onChange")}
+                        onSelect={action("select:onSelect")}
+                        onCreateOption={action("select:onCreateOption")}
+                      />
                     </AxForm.Controller>
                   </AxFlexBox.Col>
                 </AxFlexBox.Row>
