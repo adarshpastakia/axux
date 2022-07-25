@@ -36,7 +36,7 @@
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@headlessui/react": "^1.6.4",
-    "@mdi/font": "^6.7.96",
+    "@mdi/font": "^7.0.96",
     "@storybook/addon-a11y": "^6.5.9",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "next",

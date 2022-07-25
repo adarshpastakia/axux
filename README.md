@@ -7,7 +7,7 @@
 [![Issues](https://img.shields.io/github/issues/adarshpastakia/axux.svg?logoColor=blue&style=social&logo=github "GitHub Issues")](https://github.com/adarshpastakia/axux/issues)
 
 ![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&labelColor=333&logo=none)
-![node](https://img.shields.io/badge/node-≥15.0.0-blue.svg?style=flat-square&labelColor=333&logo=none)
+![node](https://img.shields.io/badge/node-≥17.0.0-blue.svg?style=flat-square&labelColor=333&logo=none)
 ![Build](https://img.shields.io/github/workflow/status/adarshpastakia/axux/Build%20and%20Deploy?style=flat-square&logo=github&labelColor=333&label=build)
 ![Deps](https://img.shields.io/librariesio/github/adarshpastakia/axux?style=flat-square&logo=libraries.io&logoColor=fff&labelColor=333&label=dependencies)
 ![Maintain](https://img.shields.io/codeclimate/maintainability/adarshpastakia/axux?style=flat-square&logo=code%20climate&labelColor=333&label=maintainability)
