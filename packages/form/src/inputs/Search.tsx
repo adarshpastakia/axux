@@ -30,11 +30,15 @@ export const Search: FC<SearchProps> = memo(
     const [query, setQuery] = useState(props.value);
     const [pending, startTransition] = useTransition();
 
-    const handleChange = useCallback((value?: string) => {
-      startTransition(() => {
+    const handleChange = useCallback(
+      (value?: string) => {
         setQuery(value);
-      });
-    }, []);
+        startTransition(() => {
+          !value && onSearch?.();
+        });
+      },
+      [onSearch]
+    );
     const handleQuery = useCallback(() => {
       startTransition(() => {
         onSearch?.(query);

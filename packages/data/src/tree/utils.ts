@@ -103,11 +103,11 @@ export const createIdMap = (nodes: InternalNode[]) => {
 export const createNodeList = (nodes: InternalNode[]) => {
   const list: InternalNode[] = [];
   nodes.forEach((node) => {
-    list.push(node);
-    if (node.isOpen) {
+    node.isFiltered !== false && list.push(node);
+    if (node.isOpen || node.isFiltered === true) {
       if (node.children && node.children.length > 0) {
         list.push(...createNodeList(node.children));
-      } else {
+      } else if (node.isFiltered === undefined && !node.isLeaf) {
         list.push(
           refactorNode({
             node: { isLeaf: true },
@@ -154,8 +154,13 @@ export const toggleProperty = (
   checkChildren = false
 ) => {
   nodes.forEach((node) => {
-    // @ts-ignore
-    if (prop in node && (!checkChildren || !!node.children)) node[prop] = value;
+    if (
+      prop in node &&
+      // @ts-ignore
+      (!checkChildren || (checkChildren && node.children?.length > 0))
+    )
+      // @ts-ignore
+      node[prop] = value;
     if (node.children)
       toggleProperty(node.children, prop, value, checkChildren);
   });
