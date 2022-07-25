@@ -20,7 +20,7 @@
 /******************* section *******************/
 @layer components {
   .ax-section {
-    @apply panel;
+    @apply panel relative;
   }
 }
 
