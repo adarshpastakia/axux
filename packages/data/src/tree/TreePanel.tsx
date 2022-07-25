@@ -36,8 +36,6 @@ import {
   toggleProperty,
 } from "./utils";
 
-// TODO: TreePanel-implement search
-
 export interface TreeProps extends ElementProps {
   /**
    * tree data
