@@ -53,6 +53,7 @@ export const Number: FC<NumberProps> = memo(
     info,
     error,
     width,
+    isPlain,
     isDisabled,
     isReadOnly,
     allowClear,
@@ -79,6 +80,7 @@ export const Number: FC<NumberProps> = memo(
         error={error}
         label={label}
         width={width}
+        isPlain={isPlain}
         labelAppend={labelAppend}
         className={className}
         disabled={isDisabled}

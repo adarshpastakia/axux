@@ -21,6 +21,7 @@ interface WrapperProps extends ChildrenProp {
   isInvalid?: boolean;
   disabled?: boolean;
   canClear?: boolean;
+  isPlain?: boolean;
   error?: string;
   width?: number | string;
   onClear?: () => void;
@@ -36,6 +37,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
     disabled,
     onClear,
     width,
+    isPlain,
     wrapperRef,
     ...rest
   }) => {
@@ -51,11 +53,12 @@ export const FieldWrapper: FC<WrapperProps> = memo(
       [onClear]
     );
     return (
-      <Container width={width} {...rest}>
+      <Container width={width} {...rest} data-plain={isPlain}>
         <div
           className="ax-field__wrapper"
           data-invalid={isInvalid}
           data-disabled={disabled}
+          data-plain={isPlain}
           ref={wrapperRef}
         >
           {error && (

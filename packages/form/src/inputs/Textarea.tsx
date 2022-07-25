@@ -43,6 +43,7 @@ export const Textarea: FC<TextareaProps> = memo(
     info,
     error,
     width,
+    isPlain,
     isDisabled,
     isReadOnly,
     allowClear,
@@ -69,6 +70,7 @@ export const Textarea: FC<TextareaProps> = memo(
         error={error}
         label={label}
         width={width}
+        isPlain={isPlain}
         className={className}
         disabled={isDisabled}
         labelAppend={labelAppend}
