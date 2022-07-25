@@ -20,6 +20,18 @@ export interface FlexboxProps extends ElementProps, ChildrenProp {
    * gutter size
    */
   gutter?: Gutter;
+  /**
+   * fixed width
+   */
+  width?: number | string;
+  /**
+   * min width
+   */
+  minWidth?: number | string;
+  /**
+   * max width
+   */
+  maxWidth?: number | string;
 }
 
 /**
@@ -29,7 +41,19 @@ export const AxFlexBox: ForwardRefExoticComponent<FlexboxProps> & {
   Row: typeof FlexboxRow;
   Col: typeof FlexboxCol;
 } = forwardRef<HTMLDivElement, FlexboxProps>(
-  ({ fluid, gutter = "nm", className, children, ...rest }, ref) => {
+  (
+    {
+      fluid,
+      gutter = "nm",
+      className,
+      children,
+      width,
+      minWidth,
+      maxWidth,
+      ...rest
+    },
+    ref
+  ) => {
     /******************* class map *******************/
     const classes = useMemo(() => {
       const cls = ["ax-flexbox", className ?? ""];
@@ -47,6 +71,7 @@ export const AxFlexBox: ForwardRefExoticComponent<FlexboxProps> & {
         className={classes}
         data-fluid={fluid}
         ref={ref}
+        style={{ width, minWidth, maxWidth }}
       >
         {children}
       </div>
