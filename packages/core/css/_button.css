@@ -88,15 +88,14 @@
     & > .ax-button {
       @apply m-0 z-0 focus-within:z-[1];
 
-      & > .ax-button__inner {
-        @apply rounded-none;
-      }
-
       &:first-child > .ax-button__inner {
-        @apply ltr:rounded-l rtl:rounded-r;
+        @apply ltr:rounded-r-none rtl:rounded-l-none;
       }
       &:last-child > .ax-button__inner {
-        @apply ltr:rounded-r rtl:rounded-l;
+        @apply ltr:rounded-l-none rtl:rounded-r-none;
+      }
+      &:not(:first-child):not(:last-child) > .ax-button__inner {
+        @apply rounded-none;
       }
     }
   }
