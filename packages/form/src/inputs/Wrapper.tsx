@@ -8,7 +8,7 @@
 
 import { AxIcon, AxTooltip } from "@axux/core";
 import { ChildrenProp } from "@axux/core/dist/types";
-import { FC, memo, MouseEvent, ReactNode, useCallback } from "react";
+import { FC, memo, MouseEvent, ReactNode, Ref, useCallback } from "react";
 import { Icons } from "../types/icons";
 import { Container } from "./Container";
 
@@ -24,6 +24,7 @@ interface WrapperProps extends ChildrenProp {
   error?: string;
   width?: number | string;
   onClear?: () => void;
+  wrapperRef?: Ref<HTMLDivElement>;
 }
 
 export const FieldWrapper: FC<WrapperProps> = memo(
@@ -35,6 +36,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
     disabled,
     onClear,
     width,
+    wrapperRef,
     ...rest
   }) => {
     const handleClear = useCallback(
@@ -54,6 +56,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
           className="ax-field__wrapper"
           data-invalid={isInvalid}
           data-disabled={disabled}
+          ref={wrapperRef}
         >
           {error && (
             <div className="ax-field__error">
