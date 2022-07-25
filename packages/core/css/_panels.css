@@ -115,7 +115,7 @@
     @apply grid-area-[bar] relative bg-base flex flex-nowrap items-stretch gap-2 overflow-hidden text-accent-600 dark:text-accent-400 hide-scroll;
   }
   .ax-tab__body {
-    @apply panel bg-component;
+    @apply panel relative bg-component;
   }
   .ax-tab__button {
     @apply inline-flex flex-none relative z-10 overflow-hidden cursor-pointer px-2 py-1 font-medium gap-2 text-center align-middle select-none items-center;

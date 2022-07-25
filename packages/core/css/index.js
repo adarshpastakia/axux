@@ -24,7 +24,6 @@ module.exports = plugin(
           '"loader loader loader" "head head head" "side-s content side-e" "foot foot foot"',
         "grid-template-columns": "auto 1fr auto",
         "grid-template-rows": "auto auto 1fr auto",
-        position: "relative",
         overflow: "hidden",
       },
     });
