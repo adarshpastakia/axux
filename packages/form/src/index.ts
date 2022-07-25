@@ -56,7 +56,7 @@ AxField.File.displayName = "AxField.File";
 AxField.Checkbox.displayName = "AxField.Text";
 AxField.Radio.displayName = "AxField.Radio";
 AxField.Switch.displayName = "AxField.Switch";
+AxField.Select.displayName = "AxField.Select";
+AxField.Tag.displayName = "AxField.Tag";
 
-// TODO: Field-select component
-// TODO: Field-combo component
 // TODO: Field-suggest component
