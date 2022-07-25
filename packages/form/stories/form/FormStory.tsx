@@ -8,6 +8,7 @@ import {
   AxContent,
   AxFlexBox,
   AxFooter,
+  AxIcon,
   AxPage,
   AxSection,
   AxViewport,
@@ -141,15 +142,59 @@ const Template: ComponentStory<typeof AxForm> = () => {
                         allowCreate
                         label="Select List"
                         options={[
-                          { value: "first", label: "This is first" },
-                          "second",
-                          { label: "Grouped", items: ["third", "fourth"] },
+                          {
+                            value: "first",
+                            label: "This is first",
+                            icon: "mdi-numeric-1-circle",
+                          },
+                          {
+                            value: "second",
+                            label: "This is second",
+                            icon: "mdi-numeric-2-circle",
+                          },
+                          {
+                            label: "Playoff",
+                            items: [
+                              {
+                                value: "third",
+                                label: "This is third",
+                                icon: "mdi-numeric-3-circle",
+                              },
+                              {
+                                value: "fourth",
+                                label: "This is fourth",
+                                icon: "mdi-numeric-4-circle",
+                              },
+                            ],
+                          },
                         ]}
-                        defaultValue="first"
                         allowClear
                         onChange={action("select:onChange")}
                         onSelect={action("select:onSelect")}
                         onCreateOption={action("select:onCreateOption")}
+                        renderer={(item) => (
+                          <div>
+                            <div className="flex gap-1 items-center">
+                              <AxIcon
+                                icon={`mdi ${item.icon}`}
+                                className="text-lg"
+                                color={
+                                  item.value === "first"
+                                    ? "#ffc30b"
+                                    : item.value === "second"
+                                    ? "#adadc7"
+                                    : item.value === "third"
+                                    ? "#b2560c"
+                                    : "#9a7b4f"
+                                }
+                              />
+                              <label className="flex-auto">{item.label}</label>
+                            </div>
+                            <div className="text-xs text-muted">
+                              This is some test to describe option
+                            </div>
+                          </div>
+                        )}
                       />
                     </AxForm.Controller>
                   </AxFlexBox.Col>
@@ -164,7 +209,6 @@ const Template: ComponentStory<typeof AxForm> = () => {
                           "second",
                           { label: "Grouped", items: ["third", "fourth"] },
                         ]}
-                        defaultValue={["first"]}
                         allowClear
                         onChange={action("select:onChange")}
                         onSelect={action("select:onSelect")}
