@@ -26,5 +26,4 @@ export type { ListRef } from "./virtual/List";
 export type { TimelineRef } from "./virtual/Timeline";
 
 
-// TODO: Histogram component
 // TODO: Datagrid component

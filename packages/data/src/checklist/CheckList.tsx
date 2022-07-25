@@ -30,8 +30,6 @@ export interface CheckListItem extends KeyValue {
   isDisabled?: boolean;
 }
 
-// TODO: CheckList-implement search
-
 export interface CheckListProps extends SelectableProps {
   /**
    * list items
@@ -161,9 +159,10 @@ export const AxCheckList: FC<CheckListProps> = ({
 
   return (
     <div className="ax-checkList">
-      {listItems.map((item) => (
+      {listItems.map((item, index) => (
         <CheckItem
           {...item}
+          key={index}
           onClick={toggleSelection}
           allowNegative={allowNegative}
           selected={selection[item.id]}
