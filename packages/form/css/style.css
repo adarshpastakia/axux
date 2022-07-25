@@ -64,8 +64,10 @@
     @apply bg-bw-100/20 dark:bg-bw-700/20 relative flex flex-nowrap items-center rounded-[inherit]
         after:content-[""] after:h-0.5 after:rounded-b-sm after:bg-primary-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:w-0 after:transition-[width] after:duration-500
         focus-within:bg-white focus-within:dark:bg-black focus-within:after:w-full print:hidden shadow-bw-300 dark:shadow-black;
-    box-shadow: 0 1px 1px var(--tw-shadow-color) inset;
 
+    &:not([data-plain="true"]) {
+      box-shadow: 0 1px 1px var(--tw-shadow-color) inset;
+    }
     &[data-disabled="true"] {
       @apply pointer-events-none before:absolute before:inset-0 before:pointer-events-auto before:cursor-not-allowed before:bg-bw-500/20 before:rounded-[inherit];
     }
@@ -99,7 +101,7 @@
     }
 
     & .ax-field__container--row {
-      @apply flex flex-nowrap items-center border rounded-[inherit] border-bw-100 dark:border-bw-800;
+      @apply flex flex-nowrap items-center border border-bw-100 dark:border-bw-800;
 
       &[data-vertical="true"] {
         @apply flex-col items-stretch;
@@ -110,6 +112,11 @@
           &:not(:first-child) {
             @apply border-t;
           }
+        }
+      }
+      &:not([data-plain="true"]) {
+        & .ax-field__container--row {
+          @apply rounded-[inherit];
         }
       }
     }

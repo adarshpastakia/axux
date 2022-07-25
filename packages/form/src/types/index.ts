@@ -66,7 +66,10 @@ export interface InputProps<K = string> {
    * field width
    */
   width?: number | string;
-
+  /**
+   * plain styling
+   */
+  isPlain?: boolean;
   /**
    * on value changed
    */

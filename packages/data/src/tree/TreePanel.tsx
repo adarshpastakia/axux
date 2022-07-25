@@ -277,6 +277,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
         />
         {isSearchable && (
           <AxField.Search
+            isPlain
             onSearch={(search) =>
               dispatch({ type: "search", search, index: 0 })
             }

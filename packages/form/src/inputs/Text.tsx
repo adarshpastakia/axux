@@ -42,6 +42,7 @@ export const Text: FC<TextProps> = memo(
     info,
     error,
     width,
+    isPlain,
     isDisabled,
     isReadOnly,
     allowClear,
@@ -68,6 +69,7 @@ export const Text: FC<TextProps> = memo(
         error={error}
         label={label}
         width={width}
+        isPlain={isPlain}
         className={className}
         labelAppend={labelAppend}
         isInvalid={isInvalid}
