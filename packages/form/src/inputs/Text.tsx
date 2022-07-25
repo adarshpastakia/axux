@@ -34,7 +34,6 @@ export const Text: FC<TextProps> = memo(
     labelAppend,
     isRequired,
     value,
-    defaultValue,
     placeholder,
     onChange,
     inputRef,
@@ -50,7 +49,7 @@ export const Text: FC<TextProps> = memo(
     onEnterPressed,
     ...rest
   }) => {
-    const [actualValue, setActualValue] = useState(defaultValue ?? "");
+    const [actualValue, setActualValue] = useState("");
     const [pending, startTransition] = useTransition();
     useEffect(() => {
       setActualValue(value ?? "");

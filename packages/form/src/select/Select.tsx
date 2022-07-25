@@ -39,7 +39,6 @@ export const SelectInput = <T extends AnyObject>({
   labelAppend,
   isRequired,
   value,
-  defaultValue,
   placeholder,
   options,
   labelProperty = "label",
@@ -89,9 +88,8 @@ export const SelectInput = <T extends AnyObject>({
   useEffect(() => {
     setActualValue(
       flatList.find((option) => {
-        if (matcher && (value || defaultValue))
-          return matcher(option, value ?? defaultValue ?? "");
-        return defaultMatcher(option, value ?? defaultValue, valueProperty);
+        if (matcher) return matcher(option, value ?? "");
+        return defaultMatcher(option, value, valueProperty);
       })
     );
   }, [value, valueProperty]);

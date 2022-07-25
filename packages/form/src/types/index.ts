@@ -39,10 +39,6 @@ export interface InputProps<K = string> {
    */
   value?: K;
   /**
-   * default field value
-   */
-  defaultValue?: K;
-  /**
    * show clear button
    */
   allowClear?: boolean;
