@@ -8,6 +8,8 @@
 
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
 import { ElementProps } from "@axux/core/dist/types";
+import { AxField } from "@axux/form";
+import { matchString } from "@axux/utilities";
 import {
   FC,
   memo,
@@ -170,6 +172,22 @@ export const AxTreePanel: FC<TreeProps> = memo(
               action.id && onSelect?.(action.id);
             });
         }
+        if (action.type === "search") {
+          Array.from(state.treeMap.values()).forEach((item) => {
+            item.isFiltered = action.search
+              ? matchString(item.node.label, action.search)
+              : undefined;
+            if (item.parent && item.isFiltered) {
+              let parent = state.treeMap.get(item.parent);
+              while (parent) {
+                parent.isFiltered = true;
+                parent = state.treeMap.get(parent.parent ?? "");
+              }
+            }
+          });
+          state.autoScroll = true;
+          state.items = createNodeList(state.treeData);
+        }
         return { ...state };
       },
       [onLoad, onSelect, fireCheckChange]
@@ -257,6 +275,14 @@ export const AxTreePanel: FC<TreeProps> = memo(
           onCheckAll={() => dispatch({ type: "checkAll", index: 0 })}
           onUncheckAll={() => dispatch({ type: "uncheckAll", index: 0 })}
         />
+        {isSearchable && (
+          <AxField.Search
+            onSearch={(search) =>
+              dispatch({ type: "search", search, index: 0 })
+            }
+            className="ax-tree__search"
+          />
+        )}
         <div className="ax-tree__list">
           <AutoSizer>
             {({ width, height }) => (

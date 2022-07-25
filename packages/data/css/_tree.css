@@ -9,7 +9,7 @@
 @layer components {
   .ax-tree__panel {
     @apply grid-area-[content] overflow-hidden grid bg-component;
-    grid-template-areas: "search" "tools" "tree";
+    grid-template-areas: "tools" "search" "tree";
     grid-template-rows: auto auto 1fr;
 
     & .ax-tree__search {

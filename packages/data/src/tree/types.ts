@@ -19,6 +19,7 @@ export interface TreeState {
 export interface TreeActions {
   type:
     | "select"
+    | "search"
     | "check"
     | "loadItems"
     | "loadError"
@@ -30,6 +31,7 @@ export interface TreeActions {
     | "uncheckAll";
   index: number;
   id?: string;
+  search?: string;
   items?: TreeNodeType[];
   propChange?: boolean;
 }
@@ -56,6 +58,7 @@ export interface InternalNode {
   isError?: boolean;
   isLoading?: boolean;
   isSelected: boolean;
+  isFiltered?: boolean;
   childSelected: boolean;
   isChecked: 0 | 1 | 2;
   lines: (0 | 1)[];
