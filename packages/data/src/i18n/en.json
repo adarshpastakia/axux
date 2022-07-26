@@ -7,8 +7,8 @@
     "error": "Error loading items",
     "loading": "Loading items..."
   },
-  "grid": {
-    "empty": "No records found"
+  "datagrid": {
+    "empty": "No records available"
   },
   "json": {
     "empty": "No data properties",
