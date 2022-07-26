@@ -22,6 +22,7 @@ export const AxCollapsable: FC<CollapsableProps> = ({
   className = "",
   isCollapsed = true,
   onCollapse,
+  ...rest
 }) => {
   const [collapsed, toggleCollapse] = usePropToggle(isCollapsed, onCollapse);
 
@@ -37,7 +38,7 @@ export const AxCollapsable: FC<CollapsableProps> = ({
 
   /******************* component *******************/
   return (
-    <div className={`ax-collapsable ${className ?? ""}`}>
+    <div {...rest} className={`ax-collapsable ${className ?? ""}`}>
       <div
         role="button"
         onClick={toggleCollapse}
