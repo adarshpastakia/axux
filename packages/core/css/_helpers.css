@@ -15,7 +15,7 @@
     font-size: 1em;
   }
   .ax-paper {
-    @apply shadow m-1.5 rounded-sm;
+    @apply shadow m-1.5 rounded-sm ring-1 ring-bw-200 dark:ring-bw-900;
   }
   .hide-scroll {
     &::-webkit-scrollbar {
