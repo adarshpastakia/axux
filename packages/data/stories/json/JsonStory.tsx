@@ -33,6 +33,11 @@ JsonStory.args = {
     d: "test",
     e: { a: 2, b: 3 },
     f: [1, 2, 3],
+    f2: [
+      { a: 2, b: 3 },
+      { a: 2, b: 3 },
+      { a: 2, b: 3 },
+    ],
     g: undefined,
     h: 33.45,
     i: "+99.18",
