@@ -11,10 +11,21 @@
     @apply p-4;
   }
 
+  .ax-json__value[data-inline="true"] {
+    @apply flex flex-nowrap;
+
+    & .ax-collapsable__head {
+      @apply basis-48 flex-none;
+    }
+    & .ax-collapsable__body {
+      @apply flex-auto pt-0;
+    }
+  }
+
   .ax-json__property {
     @apply mb-2 last:mb-0;
 
-    & & {
+    & .ax-collapsable .ax-collapsable {
       @apply ltr:ml-4 rtl:mr-4;
     }
 

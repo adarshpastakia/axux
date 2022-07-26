@@ -36,6 +36,19 @@ export interface JsonViewProps extends ElementProps {
    */
   json: AnyObject;
   /**
+   * display inline
+   */
+  isInline?: boolean;
+  /**
+   * label fixed width when using inline
+   */
+  labelWidth?: number | string;
+  /**
+   * display object properties as tree
+   * @default true
+   */
+  showPropertyTree?: boolean;
+  /**
    * properties to format as dates
    * (default format applied to property name containing `date` | `time`)
    */
@@ -79,6 +92,9 @@ const JsonValue = ({
   formatter,
   dateProperties,
   onFilter,
+  isInline,
+  labelWidth,
+  showPropertyTree,
 }: KeyValue) => {
   const { t } = useTranslation("data");
 
@@ -92,8 +108,8 @@ const JsonValue = ({
   );
 
   const label = useMemo(
-    () => labeler?.(fullProp) ?? prop,
-    [labeler, fullProp, prop]
+    () => (labeler?.(fullProp) ?? showPropertyTree ? prop : fullProp),
+    [labeler, fullProp, prop, showPropertyTree]
   );
 
   const display = useMemo(() => {
@@ -106,8 +122,7 @@ const JsonValue = ({
     }
 
     let ret = actualValue;
-    if (isNumber(actualValue) || /^[+-]?\d+(\.\d+)?$/.test(`${actualValue}`))
-      ret = Format.number(actualValue);
+    if (isNumber(actualValue)) ret = Format.number(actualValue);
     if (isBoolean(actualValue))
       ret = !!actualValue ? t("json.true") : t("json.false");
 
@@ -119,8 +134,12 @@ const JsonValue = ({
       return <AxDateDisplay date={value} />;
     }
 
-    if (actualValue.toString().length > 128) {
-      ret = <AxText clip={3}>{actualValue}</AxText>;
+    if (isArray(actualValue)) {
+      ret = `[${actualValue.join(", ")}]`;
+    }
+
+    if (ret.length > 128) {
+      ret = <AxText clip={3}>{ret}</AxText>;
     }
 
     return (
@@ -137,8 +156,12 @@ const JsonValue = ({
   );
 
   return (
-    <AxCollapsable className="ax-json__value" isCollapsed={false}>
-      <label className="ax-json__property--label">
+    <AxCollapsable
+      className="ax-json__value"
+      isCollapsed={false}
+      data-inline={isInline}
+    >
+      <label className="ax-json__property--label" style={{ width: labelWidth }}>
         <span>{label}</span>
         {canCopy && <AxText.Copy text={value} tooltip={t("action.copy")} />}
         {canFilter && (
@@ -173,13 +196,19 @@ const JsonEmptyObject = ({ type = "object" }) => {
   );
 };
 
-const JsonProperty = ({ prop = "", value, keys = [], ...props }: KeyValue) => {
+const JsonProperty = ({
+  prop = "",
+  value,
+  keys = [],
+  showPropertyTree,
+  ...props
+}: KeyValue) => {
   const type = useMemo(() => {
     if (isObject(value) && "_label_" in value && "_score_" in value) {
       return "value";
     }
     if (isArray(value)) {
-      return "object";
+      return isObject(value[0]) ? "object" : "value";
     }
     if (isObject(value)) {
       return "object";
@@ -191,19 +220,33 @@ const JsonProperty = ({ prop = "", value, keys = [], ...props }: KeyValue) => {
     <div className="ax-json__property">
       {type === "value" && (
         <JsonValue
+          {...props}
           prop={prop}
           value={value}
           fullProp={[...keys, prop].join(".")}
-          {...props}
+          showPropertyTree={showPropertyTree}
         />
       )}
-      {type === "object" && (
+      {showPropertyTree && type === "object" && (
         <AxCollapsable isCollapsed={false}>
           <label className="ax-json__property--label">
             {props.labeler?.([...keys, prop].join(".")) ?? prop}
           </label>
-          <JsonObject json={value} keys={[...keys, prop]} {...props} />
+          <JsonObject
+            {...props}
+            json={value}
+            keys={[...keys, prop]}
+            showPropertyTree={showPropertyTree}
+          />
         </AxCollapsable>
+      )}
+      {!showPropertyTree && type === "object" && (
+        <JsonObject
+          {...props}
+          json={value}
+          keys={[...keys, prop]}
+          showPropertyTree={showPropertyTree}
+        />
       )}
     </div>
   );
@@ -219,11 +262,11 @@ const JsonObject = ({ json = {}, keys = [], ...props }: KeyValue) => {
     <Fragment>
       {properties.map(([key, value]) => (
         <JsonProperty
+          {...props}
           key={key}
-          prop={key}
+          prop={isObject(json) ? key : `[${key}]`}
           value={value}
           keys={keys}
-          {...props}
         />
       ))}
       {properties.length === 0 && (
@@ -239,10 +282,13 @@ export const AxJsonView: FC<JsonViewProps> = ({
   copy,
   dateProperties,
   filters,
+  isInline,
+  labelWidth,
   formatter,
   labeler,
   onFilter,
   emptyMessage,
+  showPropertyTree = true,
   ...rest
 }) => {
   const { t } = useTranslation("data");
@@ -251,7 +297,17 @@ export const AxJsonView: FC<JsonViewProps> = ({
       {!isEmpty(json) ? (
         <JsonObject
           json={json}
-          {...{ copy, dateProperties, filters, formatter, labeler, onFilter }}
+          {...{
+            copy,
+            dateProperties,
+            filters,
+            formatter,
+            labeler,
+            onFilter,
+            isInline,
+            labelWidth,
+            showPropertyTree,
+          }}
         />
       ) : (
         <AxContent.Empty
