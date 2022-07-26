@@ -31,7 +31,6 @@ export const Options: FC<OptionsProps> = memo(
     labelAppend,
     isRequired,
     value,
-    defaultValue,
     placeholder,
     inputRef,
     isInvalid,

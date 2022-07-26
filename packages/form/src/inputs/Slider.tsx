@@ -74,7 +74,6 @@ export const Slider: FC<SliderProps> = memo(
     isRequired,
     className,
     value,
-    defaultValue,
     onChange,
     inputRef,
     isInvalid,
@@ -96,7 +95,7 @@ export const Slider: FC<SliderProps> = memo(
     max = 100,
     ...rest
   }) => {
-    const [actualValue, setActualValue] = useState(defaultValue ?? 0);
+    const [actualValue, setActualValue] = useState(0);
     const [displayValue, setDisplayValue] = useState(false);
     const [pending, startTransition] = useTransition();
     useEffect(() => {
