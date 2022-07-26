@@ -1,0 +1,123 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-datagrid {
+    @apply grid-area-[content] relative grid overflow-hidden;
+
+    & .ax-datagrid__wrapper {
+      @apply bg-component grid overflow-auto relative;
+      grid-template-areas: "head" "body" "foot";
+      grid-template-rows: min-content 1fr min-content;
+    }
+
+    & .ax-datagrid__header {
+      @apply grid-area-[head] flex flex-nowrap sticky top-0 z-10 select-none bg-primary-100 dark:bg-primary-900;
+    }
+    & .ax-datagrid__footer {
+      @apply grid-area-[foot] flex flex-nowrap sticky bottom-0 z-10 select-none;
+    }
+    & .ax-datagrid__body {
+      @apply grid-area-[body] z-0 flex flex-col;
+    }
+
+    & .ax-empty {
+      @apply grid-area-[body];
+    }
+
+    & .ax-datagrid__sticky {
+      @apply flex flex-nowrap sticky z-10;
+
+      &[data-align="start"] {
+        @apply ltr:left-0 rtl:right-0;
+      }
+      &[data-align="end"] {
+        @apply ltr:right-0 rtl:left-0;
+      }
+    }
+
+    /******************* header cell *******************/
+    & .ax-datagrid__header--cell {
+      @apply flex items-center flex-initial flex-nowrap overflow-hidden ltr:border-r rtl:border-l border-bw-500/50;
+      line-height: 2em;
+    }
+    & .ax-datagrid__header--label {
+      @apply flex items-center flex-1 flex-nowrap overflow-hidden px-1;
+
+      & > * {
+        @apply pointer-events-none;
+      }
+
+      & > label {
+        @apply truncate px-1;
+      }
+
+      &[data-sortable="true"] {
+        @apply cursor-pointer;
+      }
+
+      & .ax-datagrid__header--sort {
+        @apply text-xs px-0.5;
+        letter-spacing: -0.25em;
+
+        & span {
+          @apply opacity-30;
+        }
+
+        &[data-sort="desc"] span:first-child,
+        &[data-sort="asc"] span:last-child {
+          @apply opacity-50;
+        }
+      }
+    }
+    & .ax-datagrid__header--resize {
+      @apply self-stretch cursor-col-resize opacity-50 w-0.5;
+      box-shadow: 2px 0 2px theme(colors.bw.500) inset;
+    }
+
+    & .ax-datagrid__row {
+      @apply odd:bg-bw-500/5;
+    }
+
+    & .ax-datagrid__row--flex {
+      @apply flex flex-nowrap select-none;
+
+      &[data-selectable] {
+        @apply hover:bg-primary-500/10;
+      }
+
+      & .ax-datagrid__body--cell {
+        @apply px-2 truncate ltr:border-r rtl:border-l border-bw-500/20;
+        line-height: 2em;
+
+        &[data-align="start"] {
+          @apply text-start;
+        }
+        &[data-align="center"] {
+          @apply text-center;
+        }
+        &[data-align="end"] {
+          @apply text-end;
+        }
+      }
+    }
+
+    & .ax-datagrid__loader {
+      @apply absolute top-[2em] ltr:left-0 overflow-hidden h-1;
+      width: calc(100% - 0.5rem);
+    }
+
+    & .ax-datagrid__resize--ghost {
+      @apply absolute inset-0 hidden z-20 cursor-col-resize;
+
+      & > div {
+        @apply absolute inset-y-0 bg-bw-500/10 border-primary-500/20 ltr:border-r-2 rtl:border-l-2;
+      }
+    }
+  }
+}
