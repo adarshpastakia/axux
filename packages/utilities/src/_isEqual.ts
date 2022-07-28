@@ -55,18 +55,25 @@ export const matchString = (base: string, match: string) => {
  * compare values
  * @internal
  */
-export const compareValues = (aValue: AnyObject, bValue: AnyObject) => {
-  // return 0 when equal, allowing for multiple sorting properties
-  if (aValue === bValue) return 0;
-  // if numbers check greater
-  if (isNumber(aValue) && isNumber(bValue)) {
-    return aValue > bValue ? 1 : -1;
-  }
-  // if boolean sort true first
-  if (isBoolean(aValue) && isBoolean(bValue)) {
-    return aValue === true ? -1 : 1;
-  }
-  const _a = ascii(aValue).toLowerCase();
-  const _b = ascii(bValue).toLowerCase();
-  return _a.localeCompare(_b);
-};
+export const compareValues =
+  (order: "asc" | "desc" = "asc", key?: string) =>
+  (a: AnyObject, b: AnyObject) => {
+    const aValue = key ? a[key] : a;
+    const bValue = key ? b[key] : b;
+
+    const bigger = order === "asc" ? 1 : -1;
+    const smaller = order === "desc" ? 1 : -1;
+    // return 0 when equal, allowing for multiple sorting properties
+    if (aValue === bValue) return 0;
+    // if numbers check greater
+    if (isNumber(aValue) && isNumber(bValue)) {
+      return aValue > bValue ? bigger : smaller;
+    }
+    // if boolean sort true first
+    if (isBoolean(aValue) && isBoolean(bValue)) {
+      return aValue === true ? smaller : bigger;
+    }
+    const _a = ascii(aValue).toLowerCase();
+    const _b = ascii(bValue).toLowerCase();
+    return _a.localeCompare(_b) === 1 ? bigger : smaller;
+  };
