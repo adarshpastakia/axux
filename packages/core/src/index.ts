@@ -7,6 +7,7 @@
  */
 
 export { AxAnimation, AxProgress } from "./animations";
+export { AxErrorBoundary } from "./application/ErrorBoundary";
 export { AxPage } from "./application/Page";
 export { AxViewport } from "./application/Viewport";
 export { AxButton } from "./buttons/Button";
