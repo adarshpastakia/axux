@@ -73,7 +73,10 @@ const ErrorStack = ({ stack }: KeyValue) => {
  * Error boundary wrapper
  */
 export class AxErrorBoundary extends Component<
-  { errorElement?: ComponentType<{ error?: string }> } & ChildrenProp,
+  {
+    errorElement?: ComponentType<{ error?: string }>;
+    isMinimal: boolean;
+  } & ChildrenProp,
   { hasError: boolean; error?: string; stack?: AnyObject }
 > {
   public static getDerivedStateFromError(error: Error) {
@@ -92,15 +95,14 @@ export class AxErrorBoundary extends Component<
   render() {
     const env = process.env.NODE_ENV;
     if (this.state.hasError) {
-      const { errorElement } = this.props;
+      const { errorElement: E, isMinimal } = this.props;
       // You can render any custom fallback UI
-      return (
+      return isMinimal && E ? (
+        <E error={this.state.error} />
+      ) : (
         <div className="ax-error-boundary">
           <div>
-            <ErrorMessage
-              error={this.state.error}
-              errorElement={errorElement}
-            />
+            <ErrorMessage error={this.state.error} errorElement={E} />
             {env === "development" && <ErrorStack stack={this.state.stack} />}
           </div>
         </div>
