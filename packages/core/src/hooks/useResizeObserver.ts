@@ -14,9 +14,10 @@ import {
   useTransition,
 } from "react";
 import ResizeObserver from "resize-observer-polyfill";
+import { SizeObject } from "../types";
 
 export const useResizeObserver = <T extends HTMLElement = HTMLDivElement>(
-  onResize: (size: { width: number; height: number }) => void
+  onResize: (size: SizeObject) => void
 ): RefObject<T> => {
   const ref = useRef<T>(null);
   const [pending, startTransition] = useTransition();
