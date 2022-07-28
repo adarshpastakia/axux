@@ -47,6 +47,11 @@ export interface MouseProps {
   onClick?: () => CallbackReturn;
 }
 
+export interface SizeObject {
+  width: number;
+  height: number;
+}
+
 export interface IconProp {
   /**
    * icon
