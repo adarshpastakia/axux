@@ -8,7 +8,7 @@
 
 import { iconToken } from "@axux/utilities";
 import { Menu } from "@headlessui/react";
-import { FC, Fragment, MouseEvent, useCallback } from "react";
+import { FC, Fragment, MouseEvent, ReactNode, useCallback } from "react";
 import { Link } from "../components/Link";
 import { useBadge } from "../hooks/useBadge";
 import { AxHotKey } from "../hotkeys/HotKey";
@@ -27,11 +27,12 @@ const FakeItem = (props: KeyValue) => {
   );
 };
 
-const MenuItem: FC<MenuItemProps> = ({
+const MenuItem: FC<MenuItemProps<ReactNode>> = ({
   id,
   label,
   icon,
   badge,
+  append,
   className,
   hotKey,
   isActive,
@@ -74,6 +75,7 @@ const MenuItem: FC<MenuItemProps> = ({
 
             <Ellipsis className="ax-menu__label">{label}</Ellipsis>
             {Badge}
+            {append}
             {hotKey && <AxHotKey.Label keyCombo={hotKey} />}
           </Link>
         </div>

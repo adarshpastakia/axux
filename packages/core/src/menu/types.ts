@@ -20,7 +20,10 @@ export type MenuChildren =
   | ReactElement<MenuItemProps | MenuGroupProps | typeof AxDivider>
   | undefined;
 
-export interface MenuItemProps extends ElementProps, IconProp, MouseProps {
+export interface MenuItemProps<T = string>
+  extends ElementProps,
+    IconProp,
+    MouseProps {
   /**
    * menu label
    */
@@ -28,7 +31,7 @@ export interface MenuItemProps extends ElementProps, IconProp, MouseProps {
   /**
    * menu label
    */
-  label: string;
+  label: T;
   /**
    * routing path
    */
@@ -57,6 +60,10 @@ export interface MenuItemProps extends ElementProps, IconProp, MouseProps {
    * hot key
    */
   hotKey?: string;
+  /**
+   * append element
+   */
+  append?: ReactElement;
   children?: MenuChildren | MenuChildren[];
 }
 
