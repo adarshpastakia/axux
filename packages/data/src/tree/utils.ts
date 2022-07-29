@@ -9,9 +9,9 @@
 import { compareValues } from "@axux/utilities";
 import { InternalNode, TreeNodeType } from "./types";
 
-const sorter = (a: KeyValue, b: KeyValue) => {
+const sorter = (a: TreeNodeType, b: TreeNodeType) => {
   if (!!a.isLeaf !== !!b.isLeaf) return !!a.isLeaf ? 1 : -1;
-  return compareValues(a.label, b.label);
+  return compareValues()(a.label, b.label);
 };
 export const refactorNode = ({
   node: { children, ...node },

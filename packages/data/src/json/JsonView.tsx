@@ -254,7 +254,7 @@ const JsonProperty = ({
 
 const JsonObject = ({ json = {}, keys = [], ...props }: KeyValue) => {
   const properties = useMemo(
-    () => Object.entries(json).sort(([a], [b]) => compareValues(a, b)),
+    () => Object.entries(json).sort(([a], [b]) => compareValues()(a, b)),
     [json]
   );
 
