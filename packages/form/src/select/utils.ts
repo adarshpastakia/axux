@@ -21,7 +21,6 @@ export interface BaseSelectProps<T> extends ElementProps, ChildrenProp {
 
   matcher?: (option: T, value: string) => boolean;
   renderer?: (option: T) => ReactElement;
-  makeLabel?: (option: T) => string;
 
   onQuery?: (text: string) => T[];
   onCreateOption?: (text: string) => void;
@@ -29,9 +28,11 @@ export interface BaseSelectProps<T> extends ElementProps, ChildrenProp {
 
 export interface SelectProps<T> extends BaseSelectProps<T>, InputProps {
   onSelect?: (option: T) => void;
+  makeLabel?: (option: T) => string;
 }
 export interface TagProps<T> extends BaseSelectProps<T>, InputProps<string[]> {
   onSelect?: (option: T[]) => void;
+  makeLabel?: (option: T) => string | ReactElement;
 }
 
 export const CreatePlaceholder = "~create_option~";

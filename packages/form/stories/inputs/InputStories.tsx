@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { Countries, Country } from "@axux/utilities";
 import { action } from "@storybook/addon-actions";
 import { ComponentStory } from "@storybook/react";
 import { Fragment } from "react";
@@ -14,7 +15,6 @@ import { AxField } from "../../src";
 const TextTemplate: ComponentStory<typeof AxField.Text> = (props) => (
   <AxField.Text {...props} width="32rem" onChange={action("onChange")} />
 );
-
 export const TextStory = TextTemplate.bind({});
 TextStory.args = {
   label: "Text input",
@@ -32,7 +32,6 @@ TextStory.args = {
 const TextareaTemplate: ComponentStory<typeof AxField.Textarea> = (props) => (
   <AxField.Textarea {...props} width="32rem" onChange={action("onChange")} />
 );
-
 export const TextareaStory = TextareaTemplate.bind({});
 TextareaStory.args = {
   label: "Textarea input",
@@ -51,7 +50,6 @@ TextareaStory.args = {
 const PasswordTemplate: ComponentStory<typeof AxField.Password> = (props) => (
   <AxField.Password {...props} width="32rem" onChange={action("onChange")} />
 );
-
 export const PasswordStory = PasswordTemplate.bind({});
 PasswordStory.args = {
   label: "Password input",
@@ -71,7 +69,6 @@ PasswordStory.args = {
 const NumberTemplate: ComponentStory<typeof AxField.Number> = (props) => (
   <AxField.Number {...props} width="32rem" onChange={action("onChange")} />
 );
-
 export const NumberStory = NumberTemplate.bind({});
 NumberStory.args = {
   label: "Number input",
@@ -92,7 +89,6 @@ NumberStory.args = {
 const SearchTemplate: ComponentStory<typeof AxField.Search> = (props) => (
   <AxField.Search {...props} width="32rem" onSearch={action("onSearch")} />
 );
-
 export const SearchStory = SearchTemplate.bind({});
 SearchStory.args = {
   label: "Search input",
@@ -107,10 +103,92 @@ SearchStory.args = {
   isRequired: false,
 };
 
+const SelectTemplate: ComponentStory<typeof AxField.Select<Country>> = (props) => (
+  <AxField.Select {...props} width="32rem" onSelect={action("onSelect")} />
+);
+export const SelectStory = SelectTemplate.bind({});
+SelectStory.args = {
+  label: "Select input",
+  placeholder: "Select value....",
+  error: "",
+  info: "",
+  valueProperty: "iso2",
+  labelProperty: "name",
+  options: Object.entries(Countries.list.reduce<KeyValue>((r,c) => ({...r,
+    [c.continent] :[...(r[c.continent]??[]), c]
+  }),{})).map(([label, items]) => ({label,items})),
+  renderer: (c) => (
+    <div>
+      {Countries.emoji(c.iso2)}&nbsp;{c.name}
+    </div>
+  ),
+  makeLabel: (c) => (
+    `${c.emoji} ${c.name}`
+  ),
+  allowClear:true,
+  autoFocus: false,
+  isInvalid: false,
+  isEditable: true,
+  isDisabled: false,
+  isReadOnly: false,
+  isRequired: false,
+};
+
+const TagTemplate: ComponentStory<typeof AxField.Tag<Country>> = (props) => (
+  <AxField.Tag {...props} width="32rem" onSelect={action("onSelect")} />
+);
+export const TagStory = TagTemplate.bind({});
+TagStory.args = {
+  label: "Tag input",
+  placeholder: "Select value....",
+  error: "",
+  info: "",
+  valueProperty: "iso2",
+  labelProperty: "name",
+  options: Countries.list,
+  renderer: (c) => (
+    <div>
+      {Countries.emoji(c.iso2)}&nbsp;{c.name}
+    </div>
+  ),
+  makeLabel: (c) => (
+    <div>
+      {Countries.emoji(c.iso2)}&nbsp;{c.name}
+    </div>
+  ),
+  allowClear:true,
+  autoFocus: false,
+  isInvalid: false,
+  isEditable: true,
+  isDisabled: false,
+  isReadOnly: false,
+  isRequired: false,
+};
+
+const SuggestTemplate: ComponentStory<typeof AxField.Suggest> = (props) => (
+  <AxField.Suggest {...props} width="32rem" onSearch={action("onSearch")} onQuery={e=>{action("onQuery")(e);return []}} />
+);
+export const SuggestStory = SuggestTemplate.bind({});
+SuggestStory.args = {
+  label: "Suggest input",
+  placeholder: "Search for something....",
+  error: "",
+  info: "",
+  defaultItems:[
+    {value:"Games", info:"Search latest games"},
+    {value:"Dev Tools", info:"Search latest developer tools"},
+  ],
+  allowClear: true,
+  autoFocus: false,
+  isInvalid: false,
+  isDisabled: false,
+  isReadOnly: false,
+  isRequired: false,
+};
+
 const SliderTemplate: ComponentStory<typeof AxField.Slider> = (props) => (
   <AxField.Slider {...props} width="32rem" onChange={action("onChange")} />
 );
-
 export const SliderStory = SliderTemplate.bind({});
 SliderStory.args = {
   label: "Slider input",
@@ -131,7 +209,6 @@ SliderStory.args = {
 const FileTemplate: ComponentStory<typeof AxField.File> = (props) => (
   <AxField.File {...props} width="32rem" onChange={action("onChange")} />
 );
-
 export const FileStory = FileTemplate.bind({});
 FileStory.args = {
   label: "File input",
@@ -150,7 +227,6 @@ FileStory.args = {
 const CheckboxTemplate: ComponentStory<typeof AxField.Checkbox> = (props) => (
   <AxField.Checkbox {...props} onChange={action("onChange")} />
 );
-
 export const CheckboxStory = CheckboxTemplate.bind({});
 CheckboxStory.args = {
   label: "Checkbox label",
@@ -182,7 +258,6 @@ const RadioTemplate: ComponentStory<typeof AxField.Radio> = (props) => (
     />
   </Fragment>
 );
-
 export const RadioStory = RadioTemplate.bind({});
 RadioStory.args = {
   label: "Radio label",
@@ -194,7 +269,6 @@ RadioStory.args = {
 const SwitchTemplate: ComponentStory<typeof AxField.Switch> = (props) => (
   <AxField.Switch {...props} onChange={action("onChange")} />
 );
-
 export const SwitchStory = SwitchTemplate.bind({});
 SwitchStory.args = {
   label: "Switch label",
@@ -219,7 +293,6 @@ const ContainerTemplate: ComponentStory<typeof AxField.Container> = (props) => (
     </AxField.Text>
   </AxField.Container>
 );
-
 export const ContainerStory = ContainerTemplate.bind({});
 ContainerStory.args = {
   label: "Switch label",

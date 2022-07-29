@@ -425,7 +425,7 @@
 
   /******************* select *******************/
   .ax-select__dropdown {
-    @apply bg-component overflow-auto rounded shadow-2xl dark:shadow-black ring-1 ring-bw-500/20 z-50;
+    @apply bg-component overflow-auto rounded shadow-2xl dark:shadow-black ring-1 ring-bw-500/20 z-50 max-h-64;
   }
   .ax-select__group {
     @apply px-2 py-1 text-muted text-sm;
