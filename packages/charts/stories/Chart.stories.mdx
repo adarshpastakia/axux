@@ -1,0 +1,93 @@
+import {
+  Anchor,
+  ArgsTable,
+  Canvas,
+  Description,
+  Heading,
+  Meta,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import { useState, useEffect } from "react";
+import { DataSeriesStory } from "./charts/DataSeries";
+import { TimeSeriesStory } from "./charts/TimeSeries";
+import { TimeSliderStory } from "./charts/TimeSlider";
+import { CountSeriesStory } from "./charts/CountSeries";
+import { ActivityMapStory } from "./charts/ActivityMap";
+import { WordBubbleStory } from "./charts/WordBubble";
+import { MapSeriesStory } from "./charts/MapSeries";
+import { AxChart } from "../src";
+
+<Meta title="@charts" />
+
+<Title>Charts</Title>
+
+<Heading>Data Series</Heading>
+
+<Canvas>
+  <Story name="Data Series" height={600}>
+    {DataSeriesStory}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxChart.DataSeries} />
+
+<Heading>Count Series</Heading>
+
+<Canvas>
+  <Story name="Count Series" height={600}>
+    {CountSeriesStory}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxChart.CountSeries} />
+
+<Heading>Time Series</Heading>
+
+<Canvas>
+  <Story name="Time Series" height={400}>
+    {TimeSeriesStory}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxChart.TimeSeries} />
+
+<Heading>Time Slider</Heading>
+
+<Canvas>
+  <Story name="Time Slider" height={400}>
+    {TimeSliderStory}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxChart.TimeSlider} />
+
+<Heading>Activity Map</Heading>
+
+<Canvas>
+  <Story name="Activity Map" height={600}>
+    {ActivityMapStory}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxChart.ActivityMap} />
+
+<Heading>Word Bubble</Heading>
+
+<Canvas>
+  <Story name="Word Bubble" height={600}>
+    {WordBubbleStory}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxChart.WordBubble} />
+
+<Heading>Map Series</Heading>
+
+<Canvas>
+  <Story name="Map Series" height={600}>
+    {MapSeriesStory}
+  </Story>
+</Canvas>
+
+<ArgsTable sort="requiredFirst" of={AxChart.MapSeries} />

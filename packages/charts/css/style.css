@@ -1,0 +1,93 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-chart__wrapper {
+    @apply grid-area-[content] grid overflow-hidden;
+    grid-template-rows: auto 1fr;
+
+    & > div {
+      @apply relative;
+    }
+
+    & > div:last-child > div:last-child {
+      @apply bg-component !font-sans;
+    }
+
+    & textarea {
+      @apply !font-sans;
+    }
+
+    & h4 ~ div:last-child {
+      @apply !top-0 ltr:!right-0 rtl:!left-0 ltr:!left-auto rtl:!right-auto !bottom-auto;
+
+      & > div {
+        @apply !m-1;
+      }
+    }
+  }
+
+  .ax-chart__toolbar {
+    @apply flex flex-nowrap items-center justify-end bg-bw-50 dark:bg-bw-900;
+
+    & > label {
+      @apply flex-auto px-2 text-muted;
+    }
+  }
+
+  .ax-chart__dataTable {
+    @apply border-separate border-spacing-1 mx-auto;
+
+    & th {
+      @apply whitespace-nowrap;
+    }
+
+    & td {
+      @apply py-px px-1 bg-bw-500/10 min-w-[4rem] text-center;
+    }
+  }
+
+  .ax-chart__dataCards {
+    @apply flex flex-wrap justify-center gap-2 p-2;
+
+    & > div {
+      @apply py-1 px-2 rounded ring-1;
+
+      & > label {
+        @apply font-medium text-sm text-muted block;
+      }
+      & > span {
+        @apply text-lg;
+      }
+    }
+  }
+
+  .ax-chart__error {
+    @apply text-sm p-8;
+
+    & > label {
+      @apply bg-danger-500 text-white py-1 px-2 mx-2 rounded;
+    }
+  }
+
+  .ax-chart__slider {
+    @apply h-6 py-2 px-2;
+
+    & > input {
+      @apply appearance-none block overflow-hidden w-32;
+
+      &::-webkit-slider-runnable-track {
+        @apply bg-bw-100 dark:bg-bw-800 h-2;
+      }
+      &::-webkit-slider-thumb {
+        @apply appearance-none h-6 w-1 -top-2 rounded-sm bg-bw-700 dark:bg-bw-300 hover:bg-primary-500 cursor-ew-resize;
+        box-shadow: -8rem 0 0 8rem theme(colors.primary.500);
+      }
+    }
+  }
+}
