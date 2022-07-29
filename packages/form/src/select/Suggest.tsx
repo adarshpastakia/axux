@@ -25,15 +25,17 @@ import { FieldWrapper } from "../inputs/Wrapper";
 import { Options } from "./Option";
 import { SelectProps } from "./utils";
 
-type SuggestItem = {
+export type SuggestItem = {
   value: string;
+  label: string;
   info?: string;
 };
 
 export interface SuggestProps
   extends Omit<
-    SelectProps<SuggestItem>,
+    SelectProps<SuggestItem | string>,
     | "value"
+    | "options"
     | "allowCreate"
     | "isEditable"
     | "labelProperty"
@@ -45,6 +47,7 @@ export interface SuggestProps
     | "onSelect"
     | "onCreateOption"
   > {
+  options?: (SuggestItem | string)[];
   defaultItems?: SuggestItem[];
   onSearch: (value: string) => void;
 }
@@ -54,7 +57,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   labelAppend,
   isRequired,
   placeholder,
-  options,
+  options = [],
   autoFocus,
   onSearch,
   onQuery,
@@ -75,7 +78,7 @@ export const SuggestInput: FC<SuggestProps> = ({
 }) => {
   const { t } = useTranslation("form");
   const [actualValue, setActualValue] = useState("");
-  const [items, setItems] = useState<SuggestItem[]>([]);
+  const [items, setItems] = useState<(SuggestItem | string)[]>(options);
 
   const { styles, setPopperElement, setReferenceElement } = usePopover({
     hideArrow: true,
@@ -87,7 +90,7 @@ export const SuggestInput: FC<SuggestProps> = ({
     () =>
       debounce((query: string) => {
         const ret = onQuery?.(query);
-        Promise.resolve(ret).then((resp) => setItems(resp ?? []));
+        Promise.resolve(ret).then((resp) => resp && setItems(resp));
       }),
     [onQuery]
   );
@@ -96,6 +99,25 @@ export const SuggestInput: FC<SuggestProps> = ({
     () => debounce((query: string) => onSearch(query), 100),
     [onSearch]
   );
+
+  const itemRenderer = useCallback(
+    (item: SuggestItem) => (
+      <div>
+        <label className="block">{item.label ?? item.value ?? item}</label>
+        {item.info && <small>{item.info}</small>}
+      </div>
+    ),
+    []
+  );
+
+  const itemList = useMemo(() => {
+    const list = [];
+    actualValue && list.push(actualValue);
+    list.push(
+      ...items.filter((it: AnyObject) => (it.value ?? it) !== actualValue)
+    );
+    return list;
+  }, [items, actualValue]);
 
   /******************* change actualValue *******************/
   const handleChange = useCallback(
@@ -155,36 +177,14 @@ export const SuggestInput: FC<SuggestProps> = ({
         className="ax-select__dropdown"
         style={styles.popper}
       >
-        {actualValue && (
-          <Fragment>
-            <Options hideEmpty options={[actualValue]} />
-            <AxDivider size="xs" />
-          </Fragment>
+        {itemList.length > 0 && (
+          <Options hideEmpty options={itemList} renderer={itemRenderer} />
         )}
-        {items.length > 0 && (
-          <Options
-            hideEmpty
-            options={items}
-            renderer={(item) => (
-              <div>
-                <label className="block">{item.value}</label>
-                {item.info && <small>{item.info}</small>}
-              </div>
-            )}
-          />
+        {itemList.length > 0 && defaultItems.length > 0 && (
+          <AxDivider size="xs" />
         )}
-        {items.length > 0 && defaultItems.length > 0 && <AxDivider size="xs" />}
         {defaultItems.length > 0 && (
-          <Options
-            hideEmpty
-            options={defaultItems}
-            renderer={(item) => (
-              <div>
-                <label className="block">{item.value}</label>
-                {item.info && <small>{item.info}</small>}
-              </div>
-            )}
-          />
+          <Options hideEmpty options={defaultItems} renderer={itemRenderer} />
         )}
       </Combobox.Options>
     </Combobox>
