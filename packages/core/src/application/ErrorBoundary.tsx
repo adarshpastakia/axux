@@ -75,7 +75,7 @@ const ErrorStack = ({ stack }: KeyValue) => {
 export class AxErrorBoundary extends Component<
   {
     errorElement?: ComponentType<{ error?: string }>;
-    isMinimal: boolean;
+    isMinimal?: boolean;
   } & ChildrenProp,
   { hasError: boolean; error?: string; stack?: AnyObject }
 > {
