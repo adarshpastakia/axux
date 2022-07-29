@@ -72,6 +72,10 @@ export namespace Format {
   export const percent = (number?: string | number) => {
     return numberFormat(number, "0,0[.]00%");
   };
+  /******************* format date using `date-fns` *******************/
+  export const date = (date?: Date | string | number, fmt = "d-M-y") => {
+    return date ? format(new Date(date), fmt) : "";
+  };
   /******************* format time duration from total seconds/milliseconds *******************/
   export const duration = (number?: string | number, isFraction?: boolean) => {
     if (isNil(number)) {
