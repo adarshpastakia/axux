@@ -22,9 +22,9 @@
   "action": {
     "ok": "OK",
     "add": "Add New",
+    "save": "Save",
     "more": "Show more",
     "less": "Show less",
-    "save": "Save",
     "back": "Back",
     "copy": "Copy",
     "copied": "Copied",

@@ -1,1 +1,36 @@
-{}
+{
+  "label": {
+    "noRecords": "لا تسجيلات"
+  },
+  "tree": {
+    "noItems": "لا توجد عناصر",
+    "error": "خطأ في تحميل العناصر",
+    "loading": "تحميل العناصر…"
+  },
+  "datagrid": {
+    "empty": "لا توجد سجلات متاحة"
+  },
+  "json": {
+    "empty": "لا توجد خصائص بيانات",
+    "true": "نعم",
+    "false": "رقم"
+  },
+  "checkList": {
+    "empty": "لا توجد عناصر قائمة"
+  },
+  "histogram": {
+    "empty": "لا توجد رسوم بيانية"
+  },
+  "action": {
+    "find": "تجد…",
+    "copy": "قيمة النسخ",
+    "filter": "منقي…",
+    "showShortcuts": "اختصارات لوحة المفاتيح…",
+    "collapseAll": "انهيار جميع",
+    "expandAll": "توسيع الكل",
+    "checkAll": "تحقق من الكل",
+    "uncheckAll": "الغاءالكل",
+    "addFilter": "أضف عامل تصفية",
+    "addFilterNot": "إضافة لا تصفية"
+  }
+}
