@@ -20,9 +20,9 @@ import {
   useState,
   useTransition,
 } from "react";
-import { AxIcon } from "../icons/Icon";
 import { useBadge } from "../hooks/useBadge";
 import { useTooltip } from "../hooks/useTooltip";
+import { AxIcon } from "../icons/Icon";
 import {
   BadgeType,
   CallbackReturn,
@@ -181,11 +181,11 @@ export const AxTabPanel: FC<TabPanelProps> & { Tab: FC<TabProps> } = ({
     (id: string) => {
       if (onBeforeChange) {
         const ret = onBeforeChange(active, id);
-        if (ret instanceof Promise) {
-          ret.then((b) => b && setActive(id));
-        } else if (!isFalse(ret)) {
-          setActive(id);
-        }
+        Promise.resolve(ret).then((b) => {
+          if (!isFalse(b)) {
+            setActive(id);
+          }
+        });
       } else {
         setActive(id);
       }

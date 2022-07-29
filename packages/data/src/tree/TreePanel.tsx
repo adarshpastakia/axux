@@ -232,15 +232,15 @@ export const AxTreePanel: FC<TreeProps> = memo(
           parent.children?.length === 0 &&
           startTransition(() => {
             const ret = parent.node.id && onLoad?.(parent.node.id);
-            if (ret instanceof Promise) {
-              ret
-                .then((items) => dispatch({ type: "loadItems", index, items }))
-                .catch(() => dispatch({ type: "loadError", index }));
-            } else if (ret) {
-              dispatch({ type: "loadItems", index, items: ret });
-            } else {
-              dispatch({ type: "loadError", index });
-            }
+            Promise.resolve(ret)
+              .then((resp) => {
+                if (resp) {
+                  dispatch({ type: "loadItems", index, items: resp });
+                } else {
+                  dispatch({ type: "loadError", index });
+                }
+              })
+              .catch(() => dispatch({ type: "loadError", index }));
           });
       },
       [state, onLoad]

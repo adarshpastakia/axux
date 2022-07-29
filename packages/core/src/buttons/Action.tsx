@@ -7,14 +7,7 @@
  */
 
 import { isString } from "@axux/utilities";
-import {
-  FC,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { AxAnimation } from "../animations";
 import { AxTooltip } from "../overlays/Tooltip";
 import { AxButton, ButtonProps } from "./Button";
@@ -43,21 +36,14 @@ export const ActionButton: FC<ActionProps> = ({
   const [actionDone, setActionDone] = useState(false);
 
   /******************* handle click *******************/
-  const doClick = useCallback(
-    () => {
-      const ret = onClick?.();
-      if (ret instanceof Promise) {
-        ret.then((b) => {
-          if (b !== false) {
-            setActionDone(true);
-          }
-        });
-      } else if (ret !== false) {
+  const doClick = useCallback(() => {
+    const ret = onClick?.();
+    Promise.resolve(ret).then((b) => {
+      if (b !== false) {
         setActionDone(true);
       }
-    },
-    [onClick]
-  );
+    });
+  }, [onClick]);
 
   /******************* reset done state on timeout *******************/
   useEffect(() => {
