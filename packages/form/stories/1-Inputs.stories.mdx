@@ -20,6 +20,9 @@ import {
   RadioStory,
   SwitchStory,
   SearchStory,
+  SelectStory,
+  TagStory,
+  SuggestStory,
   ContainerStory,
 } from "./inputs/InputStories";
 
@@ -61,6 +64,30 @@ import {
 
 <Canvas>
   <Story name="Search">{SearchStory}</Story>
+</Canvas>
+
+<Heading storyId="form-inputs--select">Select</Heading>
+
+<Description of={AxField.Select} />
+
+<Canvas>
+  <Story name="Select">{SelectStory}</Story>
+</Canvas>
+
+<Heading storyId="form-inputs--tag">Tag</Heading>
+
+<Description of={AxField.Tag} />
+
+<Canvas>
+  <Story name="Tag">{TagStory}</Story>
+</Canvas>
+
+<Heading storyId="form-inputs--suggest">Suggest</Heading>
+
+<Description of={AxField.Suggest} />
+
+<Canvas>
+  <Story name="Suggest">{SuggestStory}</Story>
 </Canvas>
 
 <Heading storyId="form-inputs--number">Number</Heading>

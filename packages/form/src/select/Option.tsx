@@ -17,7 +17,8 @@ export const Options = ({
   labelProperty,
   allowCreate,
   query,
-}: BaseSelectProps<AnyObject> & { query: string }) => {
+  hideEmpty = false,
+}: BaseSelectProps<AnyObject> & { query?: string; hideEmpty?: boolean }) => {
   const { t } = useTranslation("form");
   const makeOption = useCallback(
     (option: AnyObject, index: number) => (
@@ -47,7 +48,7 @@ export const Options = ({
           makeOption(option, index)
         )
       )}
-      {options.length === 0 && (
+      {!hideEmpty && options.length === 0 && (
         <Combobox.Option value={CreatePlaceholder}>
           <div className="ax-select__group">
             {t(allowCreate ? "select.createOption" : "select.notFound")}

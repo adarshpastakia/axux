@@ -18,7 +18,7 @@ import {
 import { BaseSelectProps, getLabel } from "./utils";
 
 export const useSelect = ({
-  options,
+  options = [],
   labelProperty,
   onQuery,
   onCreateOption,
@@ -58,9 +58,10 @@ export const useSelect = ({
             matchString(getLabel(item, labelProperty), query)
           );
           items.length > 0 && filteredList.push({ label: option.label, items });
+        } else {
+          matchString(getLabel(option, labelProperty), query) &&
+            filteredList.push(option);
         }
-        matchString(getLabel(option, labelProperty), query) &&
-          filteredList.push(option);
       });
       setList(filteredList);
     },

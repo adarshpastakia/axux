@@ -20,6 +20,7 @@ import { Switch } from "./inputs/Switch";
 import { Text } from "./inputs/Text";
 import { Textarea } from "./inputs/Textarea";
 import { Select } from "./select/Select";
+import { Suggest } from "./select/Suggest";
 import { Tag } from "./select/Tag";
 
 import "./i18n";
@@ -39,6 +40,7 @@ export const AxField = {
   Radio,
   Switch,
   Select,
+  Suggest,
   Tag,
 };
 
@@ -57,6 +59,7 @@ AxField.Checkbox.displayName = "AxField.Text";
 AxField.Radio.displayName = "AxField.Radio";
 AxField.Switch.displayName = "AxField.Switch";
 AxField.Select.displayName = "AxField.Select";
+AxField.Suggest.displayName = "AxField.Suggest";
 AxField.Tag.displayName = "AxField.Tag";
 
 // TODO: Field-suggest component
