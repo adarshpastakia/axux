@@ -174,9 +174,10 @@ SuggestStory.args = {
   placeholder: "Search for something....",
   error: "",
   info: "",
+  options:["category: latest", "category: trending"],
   defaultItems:[
-    {value:"Games", info:"Search latest games"},
-    {value:"Dev Tools", info:"Search latest developer tools"},
+    {value:"category: games",label:"Games", info:"Search latest games"},
+    {value:"category: dev",label:"Dev Tools", info:"Search latest developer tools"},
   ],
   allowClear: true,
   autoFocus: false,
