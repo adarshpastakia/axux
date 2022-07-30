@@ -1,0 +1,11 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [2.0.0-beta.17](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.16...v2.0.0-beta.17) (2022-07-30)
+
+
+### Features
+
+* **Searchbar:** created searchbar module ([89dd8f7](https://github.com/adarshpastakia/axux/commit/89dd8f70cfc06173ffa40b3855e2123fb4e6dafd))

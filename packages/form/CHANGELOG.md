@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.17](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.16...v2.0.0-beta.17) (2022-07-30)
+
+
+### Bug Fixes
+
+* **Addon:** add empty-addon to required/optional labels ([3e8f222](https://github.com/adarshpastakia/axux/commit/3e8f222d8a82ba68c2b15259be14596381f7d90d))
+* **Checkbox,Switch:** allow update via value prop ([f064b5c](https://github.com/adarshpastakia/axux/commit/f064b5cba2fc8e97c1133146263f32c2ade7f8f0))
+* **FieldOptions:** apply flex and order ([5973a5c](https://github.com/adarshpastakia/axux/commit/5973a5ccfc84e02cee08e24c7d2ac3d0bdf6d84e))
+* **FormController:** passthru disabled/invalid props ([4216f06](https://github.com/adarshpastakia/axux/commit/4216f068f7038923c15cdcb355ab02f31b7117bc))
+* **Form:** focus first invalid input ([d7f0184](https://github.com/adarshpastakia/axux/commit/d7f018436afaccdd33c484476b4fbdb110113074))
+* **Form:** show wait cursor on isSubmitting ([004d670](https://github.com/adarshpastakia/axux/commit/004d6707af4c102b3a46c9f961dbdb9c9144c4fe))
+* **Input:** added isPlain prop ([00a36d8](https://github.com/adarshpastakia/axux/commit/00a36d822edb7f5f7e9fe89a6fb95c3daadbf4fe))
+* **Inputs:** remove 'defaultValue' will be taken care of by form ([42e19ee](https://github.com/adarshpastakia/axux/commit/42e19ee4bed5788684c885afb7d9a60b9db2e660))
+* **InputWrapper:** add ref prop ([b686002](https://github.com/adarshpastakia/axux/commit/b686002c5d381142f920d23e048c14179cf8cd8a))
+* **Number:** uncontrolled input error ([0a089a3](https://github.com/adarshpastakia/axux/commit/0a089a3cc671ddc8b1ce62ba8909420469fac749))
+* **Select,Tag:** allow create ([c16ca39](https://github.com/adarshpastakia/axux/commit/c16ca390f3d55e23ed2a4160f6865abacdc3cad6))
+* **Select,Tag:** onQuery return promise or list ([e015ee0](https://github.com/adarshpastakia/axux/commit/e015ee05edc6f012b6c53cc60951890c480ad027))
+* **Select:** return undefined on clear ([778f7ec](https://github.com/adarshpastakia/axux/commit/778f7ec7d89c7642fbeb22f8d3c1960953a8ac1c))
+* **Select:** update list when list prop changes ([ef9762b](https://github.com/adarshpastakia/axux/commit/ef9762bb5b81ffa33ccd952dd6acb301ae54b41a))
+* **Slider,Options:** remove defaultValue prop ([c8a015f](https://github.com/adarshpastakia/axux/commit/c8a015f9a69fab396e6bc7b1eebdfb47eb3d03be))
+* **Suggest:** add value prop ([23ea067](https://github.com/adarshpastakia/axux/commit/23ea067550b300c9ed77fe64b91468b8ae95f10b))
+* **Suggest:** check selected in list ([65faa32](https://github.com/adarshpastakia/axux/commit/65faa32dd62813c1dc220fde102d22af13390d23))
+* **Tag:** tag container flex order ([ce8d38a](https://github.com/adarshpastakia/axux/commit/ce8d38a9c3ebebdd492f7c119a4b2d0a561fa883))
+* **TreePanel:** added search functionality ([e53ce64](https://github.com/adarshpastakia/axux/commit/e53ce64f705154374826232b5f8fde2583c02eec))
+* **Wrapper:** set maxWidth ([56aecdb](https://github.com/adarshpastakia/axux/commit/56aecdbd7a8e19502de8b5949b801a0583246bc1))
+
+
+### Features
+
+* **Suggest:** added auto-complete suggest input ([2e3fea7](https://github.com/adarshpastakia/axux/commit/2e3fea7d1d52a6b084a43032eae13909c2d91282))
+
+
+
+
+
 # [2.0.0-beta.16](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.15...v2.0.0-beta.16) (2022-07-20)
 
 **Note:** Version bump only for package @axux/form

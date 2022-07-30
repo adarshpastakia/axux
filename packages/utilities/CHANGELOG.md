@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.17](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.16...v2.0.0-beta.17) (2022-07-30)
+
+
+### Bug Fixes
+
+* **compareValues:** accept optional property key ([b62fa53](https://github.com/adarshpastakia/axux/commit/b62fa53996adf9885a6decf84b938e8d2e89728b))
+
+
+### Features
+
+* **Format:** add date formatter ([a3330b8](https://github.com/adarshpastakia/axux/commit/a3330b8d83b75f1b12e3645e5bbb1baa0e80c5be))
+
+
+
+
+
 # [2.0.0-beta.16](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.15...v2.0.0-beta.16) (2022-07-20)
 
 **Note:** Version bump only for package @axux/utilities

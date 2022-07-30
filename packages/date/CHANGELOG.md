@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.17](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.16...v2.0.0-beta.17) (2022-07-30)
+
+
+### Bug Fixes
+
+* **SuperDate:** button style prop ([2e2af2e](https://github.com/adarshpastakia/axux/commit/2e2af2e6dbf980602ad93c7913c11dccd7476aa5))
+
+
+
+
+
 # [2.0.0-beta.16](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.15...v2.0.0-beta.16) (2022-07-20)
 
 **Note:** Version bump only for package @axux/date

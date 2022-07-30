@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.17](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.16...v2.0.0-beta.17) (2022-07-30)
+
+
+### Bug Fixes
+
+* **Addon:** add empty-addon to required/optional labels ([3e8f222](https://github.com/adarshpastakia/axux/commit/3e8f222d8a82ba68c2b15259be14596381f7d90d))
+* **AudioPlayer:** change loader to circular progress ([012c0f3](https://github.com/adarshpastakia/axux/commit/012c0f3b3d5db6a914e7c480b47aed385510214e))
+* **Button:** add ref prop ([ad3ae82](https://github.com/adarshpastakia/axux/commit/ad3ae82b2f6549d19b7411007347aa81cc345582))
+* **Button:** add showCaret prop for dropdowns ([982945a](https://github.com/adarshpastakia/axux/commit/982945af4c82d4210d01be2d97cc5465416c7ee7))
+* **Button:** add type prop ([69d0601](https://github.com/adarshpastakia/axux/commit/69d0601ad48c53c8dfcf3b61807690c6cbd89fb5))
+* **ButtonGroup:** fix rounded button group ([34242db](https://github.com/adarshpastakia/axux/commit/34242db7051707e4062851b9b85731b5a8b4f13a))
+* **Checkbox,Switch:** allow update via value prop ([f064b5c](https://github.com/adarshpastakia/axux/commit/f064b5cba2fc8e97c1133146263f32c2ade7f8f0))
+* **CheckList:** handle maxCount not above 0 ([dec3909](https://github.com/adarshpastakia/axux/commit/dec3909acb6b71c25e271411ba730cc47474da08))
+* **Collapsable:** add aria props ([84d064d](https://github.com/adarshpastakia/axux/commit/84d064dbb870f688873208529cfdebfa26ff878e))
+* compareValues ([e8a49cb](https://github.com/adarshpastakia/axux/commit/e8a49cbffa5005b2f15bff4ee9a3d525fca44d25))
+* **compareValues:** accept optional property key ([b62fa53](https://github.com/adarshpastakia/axux/commit/b62fa53996adf9885a6decf84b938e8d2e89728b))
+* **Dropdown:** add dropdownClassName ([0f001a1](https://github.com/adarshpastakia/axux/commit/0f001a1aa341f95bd634bbf571d62829fd5a9a42))
+* **ErrorBoundary:** add minimal prop ([a873ca0](https://github.com/adarshpastakia/axux/commit/a873ca0928dc5932433d5f627d1980af4516f15b))
+* **ErrorBoundary:** isMinimal prop optional ([bef0e62](https://github.com/adarshpastakia/axux/commit/bef0e62cd0e92caaec27863715df0185b20a719f))
+* export ErrorBoundary ([4785d7c](https://github.com/adarshpastakia/axux/commit/4785d7c40aa187518b1e9a535a271cd7a00641dc))
+* **FieldOptions:** apply flex and order ([5973a5c](https://github.com/adarshpastakia/axux/commit/5973a5ccfc84e02cee08e24c7d2ac3d0bdf6d84e))
+* **FlexBox:** add width, min/max width props ([ac4cd8e](https://github.com/adarshpastakia/axux/commit/ac4cd8e072855576d50657d7a6a2f676cc3bb7ac))
+* **FlexBox:** align/justify css fix ([e1ce6f9](https://github.com/adarshpastakia/axux/commit/e1ce6f9c7d1a69c460cc924fb3c5f92214b6a397))
+* **FlexBox:** correct align/justify values ([6a5bb4d](https://github.com/adarshpastakia/axux/commit/6a5bb4d4d79678524c02abd6a022718e9df2c466))
+* **Footer:** add justify prop ([af2a285](https://github.com/adarshpastakia/axux/commit/af2a285790d796c4c1318faef2bf37277852d1b9))
+* **FormController:** passthru disabled/invalid props ([4216f06](https://github.com/adarshpastakia/axux/commit/4216f068f7038923c15cdcb355ab02f31b7117bc))
+* **Form:** focus first invalid input ([d7f0184](https://github.com/adarshpastakia/axux/commit/d7f018436afaccdd33c484476b4fbdb110113074))
+* **Form:** show wait cursor on isSubmitting ([004d670](https://github.com/adarshpastakia/axux/commit/004d6707af4c102b3a46c9f961dbdb9c9144c4fe))
+* **ImageOverlay:** set min/max position for toggle ([aec9c48](https://github.com/adarshpastakia/axux/commit/aec9c48b3f24e62f7dbd90e718f8d6da43b1d54d))
+* **Input:** added isPlain prop ([00a36d8](https://github.com/adarshpastakia/axux/commit/00a36d822edb7f5f7e9fe89a6fb95c3daadbf4fe))
+* **Inputs:** remove 'defaultValue' will be taken care of by form ([42e19ee](https://github.com/adarshpastakia/axux/commit/42e19ee4bed5788684c885afb7d9a60b9db2e660))
+* **InputWrapper:** add ref prop ([b686002](https://github.com/adarshpastakia/axux/commit/b686002c5d381142f920d23e048c14179cf8cd8a))
+* **JsonView:** add inline style, propertyTree flag ([57b97d1](https://github.com/adarshpastakia/axux/commit/57b97d15db6df9c2647167519964e97b10870f08))
+* **Menu:** accept false ad menu item ([b3974c4](https://github.com/adarshpastakia/axux/commit/b3974c4b63b1c86b1eb8d1b7655bd6cd4499f9e6))
+* **MenuItem:** apply display contents for wrapper div ([30bed9b](https://github.com/adarshpastakia/axux/commit/30bed9bd06cb47300e20e2b82cf282d98eeffd9c))
+* **MenuItem:** change label type to ReactNode ([f9a67bf](https://github.com/adarshpastakia/axux/commit/f9a67bfe5e1705a7631a0e7deb87bdb4242dc898))
+* **Menu:** mistake adding display contents ([b3744cd](https://github.com/adarshpastakia/axux/commit/b3744cd673531c26300f7c8167aa76d3f1daf64e))
+* **Number:** uncontrolled input error ([0a089a3](https://github.com/adarshpastakia/axux/commit/0a089a3cc671ddc8b1ce62ba8909420469fac749))
+* **Pagination:** added minimal display ([70b2412](https://github.com/adarshpastakia/axux/commit/70b2412cc0a65ba17e94fc297aa1a299077f818f))
+* **Panel:** added forwardRef ([3515d5b](https://github.com/adarshpastakia/axux/commit/3515d5b60c8e08aa63406ef3fd9a978b144e28e5))
+* **PanelStack:** capture click to check panelKey in target ([14aea2d](https://github.com/adarshpastakia/axux/commit/14aea2dbe137fd6fb8ad666abb4a37ae986bcd57))
+* **Popover:** add forwardRef for Popover.Dismiss, unmount on close ([aba5c8e](https://github.com/adarshpastakia/axux/commit/aba5c8e1cbb466b5db75795e0e80b055b07c8f1d))
+* **ResizeObserver:** add size typing ([7b6a3c9](https://github.com/adarshpastakia/axux/commit/7b6a3c944a061e779a556b908ae306849d01d231))
+* **Select,Tag:** allow create ([c16ca39](https://github.com/adarshpastakia/axux/commit/c16ca390f3d55e23ed2a4160f6865abacdc3cad6))
+* **Select,Tag:** onQuery return promise or list ([e015ee0](https://github.com/adarshpastakia/axux/commit/e015ee05edc6f012b6c53cc60951890c480ad027))
+* **Select:** return undefined on clear ([778f7ec](https://github.com/adarshpastakia/axux/commit/778f7ec7d89c7642fbeb22f8d3c1960953a8ac1c))
+* **Select:** update list when list prop changes ([ef9762b](https://github.com/adarshpastakia/axux/commit/ef9762bb5b81ffa33ccd952dd6acb301ae54b41a))
+* **Slider,Options:** remove defaultValue prop ([c8a015f](https://github.com/adarshpastakia/axux/commit/c8a015f9a69fab396e6bc7b1eebdfb47eb3d03be))
+* **Suggest:** add value prop ([23ea067](https://github.com/adarshpastakia/axux/commit/23ea067550b300c9ed77fe64b91468b8ae95f10b))
+* **Suggest:** check selected in list ([65faa32](https://github.com/adarshpastakia/axux/commit/65faa32dd62813c1dc220fde102d22af13390d23))
+* **SuperDate:** button style prop ([2e2af2e](https://github.com/adarshpastakia/axux/commit/2e2af2e6dbf980602ad93c7913c11dccd7476aa5))
+* **Tag:** tag container flex order ([ce8d38a](https://github.com/adarshpastakia/axux/commit/ce8d38a9c3ebebdd492f7c119a4b2d0a561fa883))
+* **TreePanel:** added search functionality ([e53ce64](https://github.com/adarshpastakia/axux/commit/e53ce64f705154374826232b5f8fde2583c02eec))
+* **Wrapper:** set maxWidth ([56aecdb](https://github.com/adarshpastakia/axux/commit/56aecdbd7a8e19502de8b5949b801a0583246bc1))
+
+
+### Features
+
+* **Charts:** added chart library ([eae6d10](https://github.com/adarshpastakia/axux/commit/eae6d1014ebf3e5a63369689296fb9602e7499e7))
+* **Datagrid:** added datagrid component ([b63cf29](https://github.com/adarshpastakia/axux/commit/b63cf290841c5c3fa16cf54c73f84e3405b88b8f))
+* **Format:** add date formatter ([a3330b8](https://github.com/adarshpastakia/axux/commit/a3330b8d83b75f1b12e3645e5bbb1baa0e80c5be))
+* **Histogram:** added histogram component ([1ad83d0](https://github.com/adarshpastakia/axux/commit/1ad83d04be3f181b3c4a02140b504016f8cc2093))
+* **Searchbar:** created searchbar module ([89dd8f7](https://github.com/adarshpastakia/axux/commit/89dd8f70cfc06173ffa40b3855e2123fb4e6dafd))
+* **Suggest:** added auto-complete suggest input ([2e3fea7](https://github.com/adarshpastakia/axux/commit/2e3fea7d1d52a6b084a43032eae13909c2d91282))
+* **useFilteredList:** added hook for filtered lists ([a44c7eb](https://github.com/adarshpastakia/axux/commit/a44c7eb1b45e6e94b15f16ff02bc0f138860f656))
+
+
+
+
+
 # [2.0.0-beta.16](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.15...v2.0.0-beta.16) (2022-07-20)
 
 
