@@ -22,7 +22,7 @@ export interface BaseSelectProps<T> extends ElementProps, ChildrenProp {
   matcher?: (option: T, value: string) => boolean;
   renderer?: (option: T) => ReactElement;
 
-  onQuery?: (text: string) => T[];
+  onQuery?: (text: string) => Promise<T[]> | T[];
   onCreateOption?: (text: string) => void;
 }
 
