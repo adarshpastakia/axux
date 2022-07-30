@@ -13,6 +13,8 @@ import {
   Children,
   cloneElement,
   FC,
+  forwardRef,
+  ForwardRefExoticComponent,
   Fragment,
   Ref,
   useEffect,
@@ -22,7 +24,7 @@ import {
   useState,
 } from "react";
 import { usePopover } from "../hooks/usePopover";
-import { ChildProp, ChildrenProp, ElementProps } from "../types";
+import { ChildProp, ChildrenProp, ElementProps, RefProp } from "../types";
 
 export interface PopoverProps extends ChildrenProp, ElementProps {
   /**
@@ -58,7 +60,9 @@ export interface PopoverProps extends ChildrenProp, ElementProps {
 /**
  * popover control
  */
-export const AxPopover: FC<PopoverProps> & { Dismiss: FC<ChildProp> } = ({
+export const AxPopover: FC<PopoverProps> & {
+  Dismiss: ForwardRefExoticComponent<ChildProp & RefProp>;
+} = ({
   children,
   className,
   isOpen,
@@ -143,7 +147,7 @@ export const AxPopover: FC<PopoverProps> & { Dismiss: FC<ChildProp> } = ({
               {...attributes.popper}
             >
               <div className={`popover__container ${className ?? ""}`}>
-                {popperEl}
+                {(open || _open) && popperEl}
               </div>
               {!hideArrow && (
                 <div
@@ -160,7 +164,9 @@ export const AxPopover: FC<PopoverProps> & { Dismiss: FC<ChildProp> } = ({
     </Popover>
   );
 };
-AxPopover.Dismiss = (props) => <Popover.Button {...props} as={Fragment} />;
+AxPopover.Dismiss = forwardRef<HTMLElement, AnyObject>((props, ref) => (
+  <Popover.Button {...props} ref={ref} as={Fragment} />
+));
 
 AxPopover.displayName = "AxPopover";
 AxPopover.Dismiss.displayName = "AxPopover.Dismiss";
