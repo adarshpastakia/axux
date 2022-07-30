@@ -22,6 +22,9 @@
       @apply !w-0 !h-0;
     }
   }
+  .fixed-numbers {
+    font-variant-numeric: tabular-nums;
+  }
   [data-active-shadow="true"] {
     @apply ring-1 ring-offset-2 ring-primary-500/70 ring-offset-primary-200 dark:ring-offset-primary-900;
   }
