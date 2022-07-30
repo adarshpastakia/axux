@@ -23,8 +23,8 @@ export const useSelect = ({
   onQuery,
   onCreateOption,
 }: BaseSelectProps<AnyObject>) => {
-  const originalList = useRef<AnyObject[]>(options);
-  const [list, setList] = useState<AnyObject[]>(options);
+  const originalList = useRef<AnyObject[]>([]);
+  const [list, setList] = useState<AnyObject[]>([]);
   const [query, setQuery] = useState("");
   const [pending, startTransition] = useTransition();
 
@@ -33,12 +33,15 @@ export const useSelect = ({
     setList(originalList.current);
   }, [options]);
 
-  const createOption = useCallback(() => {
-    originalList.current = [...originalList.current, query];
-    setList(originalList.current);
-    onCreateOption && startTransition(() => onCreateOption(query));
-    return query as AnyObject;
-  }, [query]);
+  const createOption = useCallback(
+    (value: AnyObject) => {
+      originalList.current = [...originalList.current, value];
+      setList(originalList.current);
+      onCreateOption && startTransition(() => onCreateOption(value));
+      return value as AnyObject;
+    },
+    [onCreateOption]
+  );
 
   /******************* options flat list *******************/
   const flatList = useMemo(
@@ -51,6 +54,10 @@ export const useSelect = ({
     (query: string) => {
       setQuery(query);
       if (isEmpty(query)) return setList(originalList.current ?? []);
+
+      if (onQuery) {
+        return Promise.resolve(onQuery(query)).then((list) => setList(list));
+      }
 
       const filteredList: AnyObject[] = [];
       originalList.current.forEach((option) => {

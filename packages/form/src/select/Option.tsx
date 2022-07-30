@@ -38,6 +38,14 @@ export const Options = ({
   );
   return (
     <Fragment>
+      {allowCreate && query && (
+        <Combobox.Option value={CreatePlaceholder}>
+          <div className="ax-select__option">
+            {t("select.createOption")}
+            <b>{query}</b>
+          </div>
+        </Combobox.Option>
+      )}
       {options.map((option, index) =>
         option.items ? (
           <Fragment key={index}>
@@ -48,13 +56,8 @@ export const Options = ({
           makeOption(option, index)
         )
       )}
-      {!hideEmpty && options.length === 0 && (
-        <Combobox.Option value={CreatePlaceholder}>
-          <div className="ax-select__group">
-            {t(allowCreate ? "select.createOption" : "select.notFound")}
-            <b>{query}</b>
-          </div>
-        </Combobox.Option>
+      {!hideEmpty && !allowCreate && options.length === 0 && (
+        <div className="ax-select__empty">{t("select.emptyList")}</div>
       )}
     </Fragment>
   );

@@ -67,7 +67,6 @@ export const SelectInput = <T extends AnyObject>({
   onEnterPressed,
   ...rest
 }: SelectProps<T>) => {
-  const { t } = useTranslation("form");
   const [actualValue, setActualValue] = useState<T>();
   const [pending, startTransition] = useTransition();
   const { flatList, list, query, createOption, onQueryChange } = useSelect({
@@ -85,25 +84,26 @@ export const SelectInput = <T extends AnyObject>({
 
   /******************* set actualValue when value changes *******************/
   useEffect(() => {
-    setActualValue(
-      flatList.find((option) => {
-        if (matcher) return matcher(option, value ?? "");
-        return defaultMatcher(option, value, valueProperty);
-      })
-    );
-  }, [value, valueProperty]);
+    let val = flatList.find((option) => {
+      if (matcher) return matcher(option, value ?? "");
+      return defaultMatcher(option, value, valueProperty);
+    });
+    if (value && !val && allowCreate) val = createOption(value);
+    setActualValue(val);
+  }, [value, valueProperty, flatList, allowCreate]);
 
   /******************* change actualValue *******************/
   const handleChange = useCallback(
     (option?: T) => {
       onQueryChange("");
-      const newValue = option === CreatePlaceholder ? createOption() : option;
+      const newValue =
+        option === CreatePlaceholder ? createOption(query) : option;
       setActualValue(newValue);
       onSelect && newValue && startTransition(() => onSelect(newValue));
       onChange &&
         startTransition(() => onChange(getValue(newValue, valueProperty)));
     },
-    [onChange, createOption, valueProperty]
+    [onChange, createOption, valueProperty, query]
   );
 
   /******************* display label *******************/
@@ -168,18 +168,13 @@ export const SelectInput = <T extends AnyObject>({
         className="ax-select__dropdown"
         style={styles.popper}
       >
-        {options.length > 0 && (
-          <Options
-            query={query}
-            options={list}
-            renderer={renderer}
-            allowCreate={allowCreate}
-            labelProperty={labelProperty}
-          />
-        )}
-        {options.length === 0 && (
-          <div className="ax-select__empty">{t("select.emptyList")}</div>
-        )}
+        <Options
+          query={query}
+          options={list}
+          renderer={renderer}
+          allowCreate={allowCreate}
+          labelProperty={labelProperty}
+        />
       </Combobox.Options>
     </Combobox>
   );
