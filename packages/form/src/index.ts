@@ -61,5 +61,3 @@ AxField.Switch.displayName = "AxField.Switch";
 AxField.Select.displayName = "AxField.Select";
 AxField.Suggest.displayName = "AxField.Suggest";
 AxField.Tag.displayName = "AxField.Tag";
-
-// TODO: Field-suggest component
