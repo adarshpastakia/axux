@@ -6,7 +6,14 @@
  * @license   : MIT
  */
 
-import { Children, cloneElement, FC, ReactElement, useMemo } from "react";
+import {
+  Children,
+  cloneElement,
+  FC,
+  forwardRef,
+  ReactElement,
+  useMemo,
+} from "react";
 import { Indicator } from "../animations";
 import { AxHeader } from "../components/Header";
 import { usePropToggle } from "../hooks/usePropToggle";
@@ -74,72 +81,82 @@ export interface PanelProps
 export const AxPanel: FC<PanelProps> & {
   Group: typeof PanelGroup;
   Stack: typeof PanelStack;
-} = ({
-  children,
-  className,
-  isPaper,
-  isActive,
-  isLoading,
-  panelId,
-  isCollapsable,
-  isExpandable,
-  isCollapsed,
-  onCollapse,
-  isExpanded,
-  onExpand,
-  height,
-  width,
-  minHeight,
-  minWidth,
-  maxHeight,
-  maxWidth,
-  // @ts-ignore
-  onBack,
-  onClose,
-  ...rest
-}) => {
-  const [collapsed, toggleCollapse] = usePropToggle(
-    isCollapsed,
-    onCollapse,
-    panelId
-  );
-  const [expanded, toggleExpand] = usePropToggle(isExpanded, onExpand, panelId);
+} = forwardRef<HTMLDivElement, PanelProps>(
+  (
+    {
+      children,
+      className,
+      isPaper,
+      isActive,
+      isLoading,
+      panelId,
+      isCollapsable,
+      isExpandable,
+      isCollapsed,
+      onCollapse,
+      isExpanded,
+      onExpand,
+      height,
+      width,
+      minHeight,
+      minWidth,
+      maxHeight,
+      maxWidth,
+      // @ts-ignore
+      onBack,
+      onClose,
+      ...rest
+    },
+    ref
+  ) => {
+    const [collapsed, toggleCollapse] = usePropToggle(
+      isCollapsed,
+      onCollapse,
+      panelId
+    );
+    const [expanded, toggleExpand] = usePropToggle(
+      isExpanded,
+      onExpand,
+      panelId
+    );
 
-  const [head, body] = useMemo(() => {
-    const matcher =
-      (match = true) =>
-      (child: AnyObject) =>
-        (child && "type" in child && child.type === AxHeader) === match;
-    return [
-      Children.toArray(children).find(matcher(true)) as ReactElement,
-      Children.toArray(children).filter(matcher(false)),
-    ];
-  }, [children]);
+    const [head, body] = useMemo(() => {
+      const matcher =
+        (match = true) =>
+        (child: AnyObject) =>
+          (child && "type" in child && child.type === AxHeader) === match;
+      return [
+        Children.toArray(children).find(matcher(true)) as ReactElement,
+        Children.toArray(children).filter(matcher(false)),
+      ];
+    }, [children]);
 
-  return (
-    <div
-      {...rest}
-      data-expanded={expanded}
-      data-collapsed={!expanded && collapsed}
-      data-active-shadow={isActive}
-      style={{ height, width, minHeight, minWidth, maxHeight, maxWidth }}
-      className={`ax-panel ${isPaper ? "ax-paper" : ""} ${className ?? ""}`}
-    >
-      {isLoading && <Indicator />}
-      {head &&
-        cloneElement(head, {
-          isCollapsed: !expanded && collapsed,
-          isExpanded: expanded,
-          onBack,
-          onClose,
-          onClick: isCollapsable && !expanded && toggleCollapse,
-          onCollapse: isCollapsable && toggleCollapse,
-          onExpand: isExpandable && toggleExpand,
-        })}
-      {(!head || !collapsed || expanded) && body}
-    </div>
-  );
-};
+    return (
+      <div
+        {...rest}
+        ref={ref}
+        data-expanded={expanded}
+        data-collapsed={!expanded && collapsed}
+        data-active-shadow={isActive}
+        style={{ height, width, minHeight, minWidth, maxHeight, maxWidth }}
+        className={`ax-panel ${isPaper ? "ax-paper" : ""} ${className ?? ""}`}
+      >
+        {isLoading && <Indicator />}
+        {head &&
+          cloneElement(head, {
+            isCollapsed: !expanded && collapsed,
+            isExpanded: expanded,
+            onBack,
+            onClose,
+            onClick: isCollapsable && !expanded && toggleCollapse,
+            onCollapse: isCollapsable && toggleCollapse,
+            onExpand: isExpandable && toggleExpand,
+          })}
+        {(!head || !collapsed || expanded) && body}
+      </div>
+    );
+  }
+) as AnyObject;
 
 AxPanel.Group = PanelGroup;
 AxPanel.Stack = PanelStack;
