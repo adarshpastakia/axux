@@ -1,6 +1,6 @@
 {
   "verbose": true,
-  "collectCoverage": true,
+  "collectCoverage": false,
   "testEnvironment": "jsdom",
   "setupFilesAfterEnv": ["./jest/setup.ts"],
   "roots": ["<rootDir>/packages"],

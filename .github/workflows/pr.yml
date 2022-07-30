@@ -36,4 +36,4 @@ jobs:
           yarn bootstrap
 
       - name: Run test
-        run: yarn test --coverage=false
+        run: yarn test

@@ -13,7 +13,7 @@
     "storybook": "start-storybook -p 6003 --no-manager-cache",
     "prebuild": "yarn test --json --outputFile=./.storybook/jest-test-results.json",
     "build": "build-storybook -o ./build",
-    "watch:test": "jest --ci --runInBand --detectOpenHandles --watchAll --coverage=false --json --outputFile=./.storybook/jest-test-results.json",
+    "watch:test": "jest --ci --runInBand --detectOpenHandles --watchAll --json --outputFile=./.storybook/jest-test-results.json",
     "watch:lib": "lerna run watch --parallel",
     "watch": "npm-run-all -c --parallel watch:test watch:lib",
     "pretest": "lerna run build --stream",
