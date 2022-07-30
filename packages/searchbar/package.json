@@ -1,6 +1,6 @@
 {
   "name": "@axux/searchbar",
-  "version": "2.0.0-beta.19",
+  "version": "2.0.0-beta.20",
   "description": "axux: SearchBar",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -23,10 +23,10 @@
     "watch": "yarn build -w"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.19",
-    "@axux/date": "^2.0.0-beta.19",
-    "@axux/form": "^2.0.0-beta.19",
-    "@axux/utilities": "^2.0.0-beta.19"
+    "@axux/core": "^2.0.0-beta.20",
+    "@axux/date": "^2.0.0-beta.20",
+    "@axux/form": "^2.0.0-beta.20",
+    "@axux/utilities": "^2.0.0-beta.20"
   },
   "peerDependencies": {
     "i18next": "^21.8.8",

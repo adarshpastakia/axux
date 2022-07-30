@@ -1,6 +1,6 @@
 {
   "name": "@axux/date",
-  "version": "2.0.0-beta.19",
+  "version": "2.0.0-beta.20",
   "description": "axux: Date package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -23,9 +23,9 @@
     "watch": "yarn build -w"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.19",
-    "@axux/form": "^2.0.0-beta.19",
-    "@axux/utilities": "^2.0.0-beta.19",
+    "@axux/core": "^2.0.0-beta.20",
+    "@axux/form": "^2.0.0-beta.20",
+    "@axux/utilities": "^2.0.0-beta.20",
     "date-fns": "^2.28.0"
   },
   "peerDependencies": {
