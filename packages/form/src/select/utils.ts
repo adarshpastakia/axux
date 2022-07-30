@@ -49,7 +49,7 @@ export const defaultMatcher = (
 
 /******************* get option value *******************/
 export const getValue = (option: AnyObject, prop?: string) =>
-  !option ? "" : option[prop ?? ""] ?? option;
+  !option ? undefined : option[prop ?? ""] ?? option;
 
 /******************* get option label *******************/
 export const getLabel = (option: AnyObject, prop?: string) =>
