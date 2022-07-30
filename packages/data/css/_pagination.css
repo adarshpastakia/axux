@@ -26,8 +26,7 @@
     }
 
     & > label {
-      @apply leading-none inline-block px-1 text-center text-sm select-none;
-      font-variant-numeric: tabular-nums;
+      @apply leading-none inline-block px-1 text-center text-sm select-none fixed-numbers ;
     }
   }
 }

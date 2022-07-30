@@ -276,8 +276,7 @@
   }
 
   .ax-video__timeDisplay {
-    @apply justify-center flex gap-1;
-    font-variant-numeric: tabular-nums;
+    @apply justify-center flex gap-1 fixed-numbers;
   }
 }
 
@@ -314,8 +313,7 @@
     @apply flex flex-row h-[192px] justify-center overflow-x-auto;
 
     & .ax-field__slider--label {
-      @apply text-xs;
-      font-variant-numeric: tabular-nums;
+      @apply text-xs fixed-numbers;
     }
     & .ax-field__slider--dots {
       @apply hidden;

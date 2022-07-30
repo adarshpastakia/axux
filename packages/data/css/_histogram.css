@@ -53,8 +53,7 @@
     }
 
     & > span {
-      @apply text-xs px-1 z-[1];
-      font-variant-numeric: tabular-nums;
+      @apply text-xs px-1 z-[1] fixed-numbers ;
     }
 
     &[data-clickable] {
