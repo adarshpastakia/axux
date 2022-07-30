@@ -15,7 +15,6 @@ import {
   AxTitle,
   AxViewport,
 } from "@axux/core";
-import { AxThumbnail } from "@axux/media";
 import { ComponentStory } from "@storybook/react";
 import { useCallback, useEffect, useState } from "react";
 import { AxGridView } from "../../src";
@@ -57,10 +56,11 @@ export const GridStory: ComponentStory<typeof AxGridView> = ({ count }) => {
                 <AxFlexBox>
                   <AxFlexBox.Row>
                     <AxFlexBox.Col flex="auto">
-                      <AxThumbnail
+                      <img
                         height={96}
                         width={128}
-                        isNsfw={props.index % 3 === 0}
+                        loading="lazy"
+                        className="border-4 border-bw-500 object-contain"
                         src={`https://picsum.photos/id/${props.index}/192/108`}
                       />
                     </AxFlexBox.Col>
