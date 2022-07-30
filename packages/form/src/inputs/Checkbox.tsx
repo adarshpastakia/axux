@@ -36,13 +36,15 @@ export const Checkbox: FC<CheckboxProps> = memo(
     inputRef,
     label,
     onChange,
+    // @ts-ignore
+    value,
     ...rest
   }) => {
-    const [actualValue, setActualValue] = useState(isChecked ?? false);
+    const [actualValue, setActualValue] = useState(value ?? isChecked ?? false);
     const [pending, startTransition] = useTransition();
     useEffect(() => {
-      setActualValue(isChecked ?? false);
-    }, [isChecked]);
+      setActualValue(value ?? isChecked ?? false);
+    }, [value, isChecked]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         setActualValue(e?.target.checked ?? false);
