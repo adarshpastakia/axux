@@ -1,0 +1,47 @@
+{
+  "name": "@axux/pagemaker",
+  "version": "2.0.0-beta.16",
+  "description": "axux: PageMaker",
+  "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "private": true,
+  "directories": {
+    "src": "src",
+    "test": "tests"
+  },
+  "files": [
+    "css",
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "prebuild": "rm -rf ./dist",
+    "build": "tsc -p ./tsconfig.build.json",
+    "watch": "yarn build -w"
+  },
+  "dependencies": {
+    "@axux/core": "^2.0.0-beta.16",
+    "@axux/form": "^2.0.0-beta.16",
+    "@axux/utilities": "^2.0.0-beta.16"
+  },
+  "peerDependencies": {
+    "i18next": "^21.8.8",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-i18next": "^11.17.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.10",
+    "@types/react-dom": "^18.0.5",
+    "@types/react-i18next": "^8.1.0",
+    "@types/react-router-dom": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=17",
+    "npm": ">=8"
+  }
+}
