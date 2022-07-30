@@ -90,6 +90,7 @@ export const PanelStack: FC<PanelStackProps> = ({
         e.preventDefault();
         return false;
       }
+      return true;
     },
     [goBack, history, panels, onBack]
   );
@@ -98,7 +99,7 @@ export const PanelStack: FC<PanelStackProps> = ({
     <div
       {...rest}
       ref={stackRef}
-      onClick={checkMenuClick}
+      onClickCapture={checkMenuClick}
       className={`ax-panel__stack ${className ?? ""}`}
     >
       {currentPanel &&
