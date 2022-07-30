@@ -3,8 +3,6 @@
 # compiled output
 dist/
 build/
-demo/
-charts/
 *.tsbuildinfo
 /tmp
 /out-tsc
