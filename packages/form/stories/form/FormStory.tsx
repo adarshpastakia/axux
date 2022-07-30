@@ -22,6 +22,7 @@ import { AxField, AxForm, FormRef } from "../../src";
 const FormSchema = new yup.ObjectSchema({
   text: yup.string().required(),
   select: yup.string().required(),
+  tag: yup.array().required().min(1),
   password: yup.string().required(),
   options: yup.string().required(),
   check: yup.boolean().required(),
