@@ -61,14 +61,14 @@ export const Number: FC<NumberProps> = memo(
     onEnterPressed,
     ...rest
   }) => {
-    const [actualValue, setActualValue] = useState<number>();
+    const [actualValue, setActualValue] = useState<number>("" as AnyObject);
     const [pending, startTransition] = useTransition();
     useEffect(() => {
-      setActualValue(value);
+      setActualValue(value ?? ("" as AnyObject));
     }, [value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
-        setActualValue(e?.target.valueAsNumber);
+        setActualValue(e?.target.valueAsNumber ?? ("" as AnyObject));
         onChange &&
           startTransition(() => onChange(e?.target.valueAsNumber ?? undefined));
       },
