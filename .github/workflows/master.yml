@@ -39,7 +39,7 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.COVERAGE_TOKEN }}
         with:
-          coverageCommand: yarn test
+          coverageCommand: yarn test --coverage
 
       # Push build folder to gh-pages
       - name: Deploy to GitHub Pages
