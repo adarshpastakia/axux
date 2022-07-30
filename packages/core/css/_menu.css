@@ -79,6 +79,10 @@
     &[data-active="true"] {
       @apply bg-primary-700/70 text-white pointer-events-none;
     }
+
+    &[data-disabled="true"] {
+      @apply text-muted opacity-70 pointer-events-none;
+    }
   }
 
   .light .ax-menu__popover {
