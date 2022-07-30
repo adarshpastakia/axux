@@ -17,6 +17,7 @@ import {
   Fragment,
   memo,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -34,7 +35,6 @@ export type SuggestItem = {
 export interface SuggestProps
   extends Omit<
     SelectProps<SuggestItem | string>,
-    | "value"
     | "options"
     | "allowCreate"
     | "isEditable"
@@ -58,12 +58,12 @@ export const SuggestInput: FC<SuggestProps> = ({
   isRequired,
   placeholder,
   options = [],
-  autoFocus,
   onSearch,
   onQuery,
   inputRef,
   isInvalid,
   className,
+  value,
   // @ts-ignore
   name,
   info,
@@ -77,8 +77,12 @@ export const SuggestInput: FC<SuggestProps> = ({
   ...rest
 }) => {
   const { t } = useTranslation("form");
-  const [actualValue, setActualValue] = useState("");
-  const [items, setItems] = useState<(SuggestItem | string)[]>(options);
+  const [actualValue, setActualValue] = useState(value);
+  const [items, setItems] = useState<(SuggestItem | string)[]>([]);
+
+  useEffect(() => {
+    setItems(options);
+  }, [options]);
 
   const { styles, setPopperElement, setReferenceElement } = usePopover({
     hideArrow: true,
@@ -150,7 +154,7 @@ export const SuggestInput: FC<SuggestProps> = ({
         disabled={isDisabled}
         onClear={() => (setActualValue(""), onSearch(""))}
         wrapperRef={setReferenceElement as AnyObject}
-        canClear={allowClear && !isEmpty(actualValue)}
+        canClear={!isEmpty(actualValue)}
       >
         <Combobox.Input
           ref={inputRef}
