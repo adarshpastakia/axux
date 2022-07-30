@@ -8,7 +8,7 @@
 
 import { AxIcon, AxTag } from "@axux/core";
 import { usePopover } from "@axux/core/dist/hooks/usePopover";
-import { isEmpty } from "@axux/utilities";
+import { isArray, isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import { Combobox } from "@headlessui/react";
 import {
@@ -66,7 +66,6 @@ export const TagInput = <T extends AnyObject>({
   onEnterPressed,
   ...rest
 }: TagProps<T>) => {
-  const { t } = useTranslation("form");
   const [actualValue, setActualValue] = useState<T[]>([]);
   const [pending, startTransition] = useTransition();
   const { flatList, list, query, createOption, onQueryChange } = useSelect({
@@ -85,24 +84,29 @@ export const TagInput = <T extends AnyObject>({
 
   /******************* set actualValue when value changes *******************/
   useEffect(() => {
+    if (!isArray(value)) return setActualValue([]);
     setActualValue(
       (value ?? [])
         .map((val) => {
-          if (matcher) return flatList.find((option) => matcher(option, val));
-          return flatList.find((option) =>
-            defaultMatcher(option, val, valueProperty)
-          );
+          const ret = matcher
+            ? flatList.find((option) => matcher(option, val))
+            : flatList.find((option) =>
+                defaultMatcher(option, val, valueProperty)
+              );
+          if (ret) return ret;
+          if (allowCreate) return createOption(val);
+          return null;
         })
         .filter(Boolean)
     );
-  }, [value, valueProperty]);
+  }, [value, valueProperty, flatList, allowCreate]);
 
   /******************* change actualValue *******************/
   const handleChange = useCallback(
     (options: T[] = []) => {
       onQueryChange("");
       const newValue = options.map((option) =>
-        option === CreatePlaceholder ? createOption() : option
+        option === CreatePlaceholder ? createOption(query) : option
       );
       setActualValue(newValue);
       onSelect && newValue && startTransition(() => onSelect(newValue));
@@ -112,7 +116,7 @@ export const TagInput = <T extends AnyObject>({
         );
       setTimeout(() => forceUpdate?.(), 100);
     },
-    [onChange, createOption, forceUpdate, valueProperty]
+    [onChange, createOption, forceUpdate, valueProperty, query]
   );
 
   /******************* display label *******************/
@@ -196,18 +200,13 @@ export const TagInput = <T extends AnyObject>({
         className="ax-select__dropdown"
         style={styles.popper}
       >
-        {options.length > 0 && (
-          <Options
-            query={query}
-            options={list}
-            renderer={renderer}
-            allowCreate={allowCreate}
-            labelProperty={labelProperty}
-          />
-        )}
-        {options.length === 0 && (
-          <div className="ax-select__empty">{t("select.emptyList")}</div>
-        )}
+        <Options
+          query={query}
+          options={list}
+          renderer={renderer}
+          allowCreate={allowCreate}
+          labelProperty={labelProperty}
+        />
       </Combobox.Options>
     </Combobox>
   );
