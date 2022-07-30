@@ -120,7 +120,7 @@
   }
 
   .ax-button[data-type="outline"] .ax-button__inner {
-    @apply border border-current;
+    @apply ring-1 ring-inset ring-current;
   }
 
   .ax-button[data-round="true"] .ax-button__inner,
