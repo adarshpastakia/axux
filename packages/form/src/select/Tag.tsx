@@ -42,7 +42,6 @@ export const TagInput = <T extends AnyObject>({
   options,
   labelProperty = "label",
   valueProperty = "value",
-  autoFocus,
   matcher,
   renderer,
   makeLabel,
@@ -206,7 +205,9 @@ export const TagInput = <T extends AnyObject>({
             labelProperty={labelProperty}
           />
         )}
-        {options.length === 0 && <div>{t("select.emptyList")}</div>}
+        {options.length === 0 && (
+          <div className="ax-select__empty">{t("select.emptyList")}</div>
+        )}
       </Combobox.Options>
     </Combobox>
   );

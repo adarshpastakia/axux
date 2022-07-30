@@ -30,6 +30,7 @@ export const useSelect = ({
 
   useEffect(() => {
     originalList.current = options;
+    setList(originalList.current);
   }, [options]);
 
   const createOption = useCallback(() => {
