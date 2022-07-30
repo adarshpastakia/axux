@@ -21,6 +21,7 @@ import {
   ElementProps,
   EmptyCallback,
   IconProp,
+  RefProp,
   Size,
   TooltipType,
 } from "../types";
@@ -30,7 +31,7 @@ import { ActionButton } from "./Action";
 import { ConfirmButton } from "./Confirm";
 import { DropdownButton } from "./Dropdown";
 
-export interface ButtonProps extends ElementProps, IconProp {
+export interface ButtonProps extends ElementProps, IconProp, RefProp {
   children?: string;
   /**
    * routing path
