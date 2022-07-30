@@ -1,0 +1,61 @@
+{
+  "placeholder": "Search term...",
+  "label": {
+    "filters": "Filters",
+    "all_filters": "All Filters",
+    "field": "Field",
+    "operator": "Operator",
+    "value": "Value",
+    "label": "Label",
+    "optional": "Optional",
+    "add": "Add Filter",
+    "compare": "Compare With",
+    "switchValue": "Static Value",
+    "switchCompare": "Compare Field",
+    "edit": "Edit",
+    "invert": "Invert Include/Exclude",
+    "removeAll": "Remove All",
+    "enableAll": "Enable All",
+    "disableAll": "Disable All",
+    "remove": "Remove",
+    "enable": "Enable",
+    "disable": "Disable",
+    "exclude": "Exclude",
+    "include": "Include",
+    "refresh": "Refresh",
+    "update": "Update",
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "validate": {
+    "field": "Field required",
+    "operator": "Operator required",
+    "value": "Value required",
+    "compare": "Compare field required",
+    "label": "Label required"
+  },
+  "operator": {
+    "EXISTS": "Exists",
+    "IS": "Is",
+    "IN": "In",
+    "LT": "<",
+    "GT": ">",
+    "LTE": "≤",
+    "GTE": "≥",
+    "INCLUDES": "Includes",
+    "STARTS": "Starts with",
+    "ENDS": "Ends with",
+    "WITHIN": "Within",
+    "BETWEEN": "Between"
+  },
+  "type": {
+    "string": "String",
+    "int": "Int",
+    "float": "Float",
+    "number": "Number",
+    "boolean": "Bool",
+    "date": "Date",
+    "geo": "GeoJSON"
+  }
+}

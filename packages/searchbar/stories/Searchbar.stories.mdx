@@ -1,0 +1,37 @@
+import {
+  Title,
+  Canvas,
+  Story,
+  Meta,
+  ArgsTable,
+  Description,
+  Heading,
+} from "@storybook/addon-docs";
+import { action } from "@storybook/addon-actions";
+import { AxSearchBar } from "../src";
+import { SearchbarStory } from "./SearchbarStory";
+
+<Meta
+  title="@searchbar/Searchbar"
+  component={AxSearchBar}
+  parameters={{ jest: ["Searchbar.test.tsx"] }}
+/>
+
+<Title>Searchbar</Title>
+
+<Description of={AxSearchBar} />
+
+<Heading>Searchbar</Heading>
+
+<Canvas>
+  <Story name="Searchbar" parameters={{ layout: "padded" }}>
+    {SearchbarStory.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxSearchBar,
+  }}
+/>

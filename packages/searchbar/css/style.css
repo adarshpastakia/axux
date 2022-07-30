@@ -1,0 +1,88 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-searchbar {
+    & .ax-filterButton__count {
+      @apply rounded-full bg-bw-500 text-white text-xs px-1 pb-px;
+
+      &[data-active="true"] {
+        @apply bg-accent-500 text-white;
+      }
+    }
+  }
+
+  .ax-filterbar {
+    @apply flex;
+
+    & .ax-filter__wrapper {
+      @apply flex flex-1 items-center flex-wrap gap-1 py-1;
+    }
+    & .ax-filter__addButton {
+      @apply border-dashed px-2 py-px;
+    }
+
+    & .ax-filter__deleteButton {
+      @apply text-danger-700 dark:text-danger-400;
+    }
+
+    & .ax-filter__menu .ax-menu__item {
+      @apply text-sm;
+    }
+  }
+
+  .ax-filter__tag {
+    @apply inline-flex relative select-none text-sm items-center rounded border border-bw-500/30 hover:bg-bw-500/10 cursor-pointer;
+
+    & > div {
+      @apply px-1 max-w-[12rem] truncate;
+    }
+
+    &[data-type="include"] {
+      @apply bg-primary-500/10 border-primary-500/50;
+    }
+    &[data-type="exclude"] {
+      @apply bg-danger-500/10 border-danger-500/50;
+    }
+    &[data-disabled="true"] {
+      @apply opacity-50;
+
+      & > div {
+        @apply line-through;
+      }
+    }
+
+    & .ax-filter__tag--close {
+      @apply inline-block px-1 text-md leading-[0.875] opacity-30 hover:opacity-50 w-[1em] h-[1em];
+    }
+  }
+}
+
+@layer utilities {
+  .ax-searchbar {
+    & .ax-button > .ax-button__inner {
+      @apply shadow-none;
+    }
+
+    & .ax-filterButton .ax-button__inner {
+      @apply ring-bw-400 dark:ring-bw-600;
+
+      & .ax-button__label bdi:first-child {
+        @apply flex items-center;
+      }
+
+      &[data-enabled="false"] .ax-button__label {
+        @apply text-bw-600 dark:text-bw-400;
+      }
+
+      &[data-enabled="true"] {
+        @apply ring-accent-500;
+      }
+    }
+  }
+}

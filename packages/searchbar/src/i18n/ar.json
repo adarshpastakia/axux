@@ -1,0 +1,55 @@
+{
+  "placeholder": "مصطلح البحث...",
+  "label": {
+    "filters": "مرشحات",
+    "all_filters": "جميع المرشحات",
+    "field": "حقل",
+    "exclude": "استبعد",
+    "operator": "المشغل أو العامل",
+    "value": "القيمة",
+    "label": "ابيl",
+    "add": "إضافة مرشح",
+    "edit": "Edit",
+    "invert": "Invert Include/Exclude",
+    "remove_all": "حذف الكل",
+    "enable_all": "تمكين الكل",
+    "disable_all": "أوقف عمل الكل",
+    "remove": "إزالة",
+    "enable": "ممكن",
+    "disable": "تعطيل",
+    "include": "تتضمن",
+    "apply": "تطبيق",
+    "cancel": "إلغاء",
+    "delete": "حذف"
+  },
+  "validate": {
+    "field": "حقل مطلوب",
+    "operator": "عامل مطلوب",
+    "value": "القيمة المطلوبة",
+    "compare": "مقارنة الحقل المطلوب",
+    "label": "التصنيف مطلوب"
+  },
+  "operator": {
+    "EXISTS": "موجود",
+    "IS": "يكون",
+    "IN": "في",
+    "LT": "<",
+    "GT": ">",
+    "LTE": "≤",
+    "GTE": "≥",
+    "INCLUDES": "يشمل",
+    "STARTS": "ابدا ب",
+    "ENDS": "ينتهي مع",
+    "WITHIN": "في غضون",
+    "BETWEEN": "بين هذا وذاك"
+  },
+  "type": {
+    "string": "سلسلة",
+    "int": "كثافة العمليات",
+    "float": "يطفو",
+    "number": "رقم",
+    "boolean": "منطقي",
+    "date": "تاريخ",
+    "geo": "GeoJSON"
+  }
+}
