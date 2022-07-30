@@ -11,6 +11,7 @@ import { Placement } from "@popperjs/core";
 import { FC, Fragment, MouseEvent, useCallback, useEffect } from "react";
 import { usePopover } from "../hooks/usePopover";
 import { MenuChildren } from "../menu/types";
+import { ElementProps } from "../types";
 import { AxButton, ButtonProps } from "./Button";
 
 export interface DropdownProps
@@ -25,6 +26,10 @@ export interface DropdownProps
    */
   placement?: Placement;
   /**
+   * popover className
+   */
+  dropdownClassName?: ElementProps["className"];
+  /**
    * click handler
    */
   onClick?: (key: string) => void;
@@ -33,6 +38,7 @@ export interface DropdownProps
 export const DropdownButton: FC<DropdownProps> = ({
   children,
   placement = "bottom-start",
+  dropdownClassName,
   onClick,
   label,
   showCaret = true,
@@ -70,7 +76,7 @@ export const DropdownButton: FC<DropdownProps> = ({
       </Menu.Button>
       <Menu.Items
         onClick={handleMenuClick}
-        className={`popover ax-button__dropdown`}
+        className={`popover ax-button__dropdown ${dropdownClassName ?? ""}`}
         ref={setPopperElement as AnyObject}
         style={styles.popper}
         {...attributes.popper}
