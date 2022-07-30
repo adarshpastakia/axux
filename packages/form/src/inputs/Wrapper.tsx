@@ -53,7 +53,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
       [onClear]
     );
     return (
-      <Container width={width} {...rest} data-plain={isPlain}>
+      <Container width={width} maxWidth={width} {...rest} data-plain={isPlain}>
         <div
           className="ax-field__wrapper"
           data-invalid={isInvalid}
