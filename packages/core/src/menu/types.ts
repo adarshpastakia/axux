@@ -18,7 +18,8 @@ import {
 
 export type MenuChildren =
   | ReactElement<MenuItemProps | MenuGroupProps | typeof AxDivider>
-  | undefined;
+  | undefined
+  | false;
 
 export interface MenuItemProps<T = string>
   extends ElementProps,
