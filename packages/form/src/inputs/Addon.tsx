@@ -29,6 +29,8 @@ export interface AddonProps extends ElementProps, IconProp, ChildrenProp {
    * show spinner
    */
   showSpinner?: boolean;
+
+  showWhenEmpty?: boolean;
 }
 
 export const Addon: FC<AddonProps> = memo(
@@ -37,6 +39,7 @@ export const Addon: FC<AddonProps> = memo(
     rtlFlip,
     color,
     align = "start",
+    showWhenEmpty,
     showSpinner,
     children,
     className,
@@ -59,8 +62,10 @@ export const Addon: FC<AddonProps> = memo(
     return (
       <div
         onClick={focus}
-        data-align={align}
-        className={`ax-field__addon ${className ?? ""}`}
+        data-align={showWhenEmpty ? "end" : align}
+        className={`ax-field__addon ${showWhenEmpty ? "empty-addon" : ""} ${
+          className ?? ""
+        }`}
         {...rest}
       >
         {showSpinner && <AxAnimation.Spinner className="text-primary" />}
