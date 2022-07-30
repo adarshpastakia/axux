@@ -17,7 +17,7 @@
     "watch:lib": "lerna run watch --parallel",
     "watch": "npm-run-all -c --parallel watch:test watch:lib",
     "pretest": "lerna run build --stream",
-    "test": "jest --ci --runInBand --detectOpenHandles",
+    "test": "jest --ci --runInBand --detectOpenHandles --forceExit",
     "dist": "lerna run build --stream",
     "release": "lerna version --conventional-commits --yes --preid=beta -m \"chore(release): %v\""
   },
