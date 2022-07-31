@@ -9,7 +9,7 @@
 import { Combobox } from "@headlessui/react";
 import { Fragment, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { BaseSelectProps, CreatePlaceholder, getLabel } from "./utils";
+import { BaseSelectProps, getLabel } from "./utils";
 
 export const Options = ({
   options,
@@ -26,8 +26,8 @@ export const Options = ({
         {({ active, selected }) => (
           <div
             className="ax-select__option"
-            data-active={active}
             data-selected={selected}
+            data-active={active}
           >
             {renderer ? renderer(option) : getLabel(option, labelProperty)}
           </div>
@@ -39,11 +39,13 @@ export const Options = ({
   return (
     <Fragment>
       {allowCreate && query && (
-        <Combobox.Option value={CreatePlaceholder}>
-          <div className="ax-select__option">
-            {t("select.createOption")}
-            <b>{query}</b>
-          </div>
+        <Combobox.Option value={query}>
+          {({ active }) => (
+            <div className="ax-select__option" data-active={active}>
+              {t("select.createOption")}
+              <b>{query}</b>
+            </div>
+          )}
         </Combobox.Option>
       )}
       {options.map((option, index) =>

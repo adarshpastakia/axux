@@ -35,8 +35,6 @@ export interface TagProps<T> extends BaseSelectProps<T>, InputProps<string[]> {
   makeLabel?: (option: T) => string | ReactElement;
 }
 
-export const CreatePlaceholder = "~create_option~";
-
 /******************* default option matcher *******************/
 export const defaultMatcher = (
   option: AnyObject,

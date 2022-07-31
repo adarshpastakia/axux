@@ -33,22 +33,6 @@ export const useSelect = ({
     setList(originalList.current);
   }, [options]);
 
-  const createOption = useCallback(
-    (value: AnyObject) => {
-      originalList.current = [...originalList.current, value];
-      setList(originalList.current);
-      onCreateOption && startTransition(() => onCreateOption(value));
-      return value as AnyObject;
-    },
-    [onCreateOption]
-  );
-
-  /******************* options flat list *******************/
-  const flatList = useMemo(
-    () => originalList.current.map((option) => option.items ?? option).flat(2),
-    [originalList.current]
-  );
-
   /******************* filter list *******************/
   const onQueryChange = useCallback(
     (query: string) => {
@@ -76,5 +60,9 @@ export const useSelect = ({
     [labelProperty, onQuery]
   );
 
-  return { list, flatList, query, createOption, onQueryChange };
+  return {
+    list,
+    query,
+    onQueryChange,
+  };
 };
