@@ -65,6 +65,9 @@ const MapSeriesChart: FC<MapSeriesProps> = ({
           roam: "move",
           colorBy: "data",
           nameProperty: "name",
+          emphasis: {
+            label: { show: false },
+          },
           select: {
             disabled: true,
           },
@@ -95,7 +98,7 @@ const MapSeriesChart: FC<MapSeriesProps> = ({
           <input
             type="range"
             min={1.25}
-            max={5}
+            max={24}
             step={0.25}
             value={zoom}
             onChange={(e) => setZoom(e.target.valueAsNumber)}
