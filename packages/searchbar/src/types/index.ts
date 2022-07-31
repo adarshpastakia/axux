@@ -123,20 +123,20 @@ interface BaseFilter {
   type: "filter" | "query";
   label?: string;
   isDisabled?: boolean;
-  isTimeField?: boolean;
-  isNegative?: boolean;
-  isRequired?: boolean;
 }
 export interface FilterByField extends BaseFilter {
   type: "filter";
   field: string;
   operator: EnumOperator;
   value?: FilterValue;
+  isTimeField?: boolean;
+  isNegative?: boolean;
+  isRequired?: boolean;
 }
 export interface FilterByQuery extends BaseFilter {
   type: "query";
   label: string;
-  query?: string;
+  query?: KeyValue;
 }
 
 export type FilterObject = FilterByField | FilterByQuery;

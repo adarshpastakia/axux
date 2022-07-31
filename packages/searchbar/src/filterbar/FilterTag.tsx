@@ -14,6 +14,7 @@ import { useSearchContext } from "../context";
 import { FilterObject } from "../types";
 import { FilterForm } from "./FilterForm";
 import { FilterMenu } from "./FilterMenu";
+import { QueryView } from "./QueryView";
 
 export const FilterTag = memo(
   ({ index, ...filter }: FilterObject & { index: number }) => {
@@ -38,13 +39,17 @@ export const FilterTag = memo(
         <div
           className="ax-filter__tag"
           data-disabled={filter.isDisabled}
-          data-type={filter.isNegative ? "exclude" : "include"}
+          data-type={
+            filter.type === "filter" && filter.isNegative
+              ? "exclude"
+              : "include"
+          }
         >
           <AxField.Checkbox
-            isInvalid={filter.isNegative}
+            isInvalid={filter.type === "filter" && filter.isNegative}
             isChecked={!filter.isDisabled}
             // @ts-ignore
-            onMouseDown={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             onChange={(e) => updateFilter(index, { isDisabled: !e })}
           />
           <div>{label}</div>
@@ -55,21 +60,24 @@ export const FilterTag = memo(
             &times;
           </span>
         </div>
-        <AxPanel.Stack>
-          <AxPopover.Dismiss>
-            <AxPanel panelId="menu">
-              <FilterMenu index={index} {...filter} />
+        {filter.type === "query" && <QueryView index={index} {...filter} />}
+        {filter.type === "filter" && (
+          <AxPanel.Stack>
+            <AxPopover.Dismiss>
+              <AxPanel panelId="menu">
+                <FilterMenu index={index} {...filter} />
+              </AxPanel>
+            </AxPopover.Dismiss>
+            <AxPanel panelId="edit" width="32rem">
+              <AxHeader>
+                <AxTitle>{t("label.edit")}</AxTitle>
+              </AxHeader>
+              <AxContent padding="none">
+                <FilterForm index={index} {...(filter as AnyObject)} />
+              </AxContent>
             </AxPanel>
-          </AxPopover.Dismiss>
-          <AxPanel panelId="edit" width="32rem">
-            <AxHeader>
-              <AxTitle>{t("label.edit")}</AxTitle>
-            </AxHeader>
-            <AxContent padding="none">
-              <FilterForm index={index} {...(filter as AnyObject)} />
-            </AxContent>
-          </AxPanel>
-        </AxPanel.Stack>
+          </AxPanel.Stack>
+        )}
       </AxPopover>
     );
   }

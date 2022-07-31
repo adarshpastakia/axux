@@ -10,18 +10,16 @@ import { AxDivider, AxMenu } from "@axux/core";
 import { Fragment, memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context";
-import { EnumFieldType, FilterObject } from "../types";
+import { EnumFieldType, FilterByField, FilterObject } from "../types";
 import { Icons } from "../types/icons";
 
 export const FilterMenu = memo(
-  ({ index, ...filter }: FilterObject & { index: number }) => {
+  ({ index, ...filter }: FilterByField & { index: number }) => {
     const { t } = useTranslation("searchbar");
     const { updateFilter, removeFilter, fields } = useSearchContext();
 
     const canEdit = useMemo(() => {
       if (fields.length === 0) return false;
-      if (filter.type === "query") return false;
-
       const field = fields.find((f) => f.field === filter.field ?? "");
       return field?.type !== EnumFieldType.GEO;
     }, [filter]);
