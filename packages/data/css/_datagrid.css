@@ -26,6 +26,13 @@
       @apply grid-area-[body] z-0 flex flex-col;
     }
 
+    & .ax-datagrid__fixStart {
+      @apply sticky ltr:left-0 rtl:right-0 flex flex-nowrap select-none bg-inherit z-10 ltr:border-r rtl:border-l border-bw-500/20;
+    }
+    & .ax-datagrid__fixEnd {
+      @apply sticky ltr:right-0 rtl:left-0 flex flex-nowrap select-none bg-inherit z-10 ltr:border-l rtl:border-r border-bw-500/20;
+    }
+
     & .ax-empty {
       @apply grid-area-[body];
     }
@@ -81,14 +88,14 @@
     }
 
     & .ax-datagrid__row {
-      @apply odd:bg-bw-500/5;
+      @apply odd:bg-bw-0 even:bg-bw-50 dark:odd:bg-bw-1000 dark:even:bg-bw-900;
     }
 
     & .ax-datagrid__row--flex {
-      @apply flex flex-nowrap select-none;
+      @apply flex flex-nowrap select-none bg-inherit;
 
       &[data-selectable] {
-        @apply hover:bg-primary-500/10;
+        @apply hover:bg-primary-100 dark:hover:bg-primary-800;
       }
 
       & .ax-datagrid__body--cell {
