@@ -125,7 +125,7 @@ export const SearchContextProvider: React.FC<
 
   const toggleDisable = (value: boolean) => {
     const newFilters = filters.map((f) =>
-      f.isRequired ? f : { ...f, isDisabled: value }
+      f.type === "filter" && f.isRequired ? f : { ...f, isDisabled: value }
     );
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
@@ -134,7 +134,11 @@ export const SearchContextProvider: React.FC<
 
   const toggleExclude = () => {
     const newFilters = filters.map((f) =>
-      f.isRequired ? f : { ...f, isNegative: !f.isNegative }
+      f.type === "filter"
+        ? f.isRequired
+          ? f
+          : { ...f, isNegative: !f.isNegative }
+        : f
     );
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
@@ -142,7 +146,9 @@ export const SearchContextProvider: React.FC<
   };
 
   const removeAll = () => {
-    const newFilters = filters.filter((f) => f.isRequired);
+    const newFilters = filters.filter(
+      (f) => f.type === "filter" && f.isRequired
+    );
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
     onSearch?.({ query, filters: newFilters });
