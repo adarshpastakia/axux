@@ -20,18 +20,11 @@ import {
   useState,
   useTransition,
 } from "react";
-import { useTranslation } from "react-i18next";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { Icons } from "../types/icons";
 import { Options } from "./Option";
 import { useSelect } from "./useSelect";
-import {
-  CreatePlaceholder,
-  defaultMatcher,
-  getLabel,
-  getValue,
-  TagProps,
-} from "./utils";
+import { defaultMatcher, getLabel, getValue, TagProps } from "./utils";
 
 export const TagInput = <T extends AnyObject>({
   label,
@@ -68,7 +61,7 @@ export const TagInput = <T extends AnyObject>({
 }: TagProps<T>) => {
   const [actualValue, setActualValue] = useState<T[]>([]);
   const [pending, startTransition] = useTransition();
-  const { flatList, list, query, createOption, onQueryChange } = useSelect({
+  const { list, query, onQueryChange } = useSelect({
     options,
     labelProperty,
     onQuery,
@@ -85,6 +78,7 @@ export const TagInput = <T extends AnyObject>({
   /******************* set actualValue when value changes *******************/
   useEffect(() => {
     if (!isArray(value)) return setActualValue([]);
+    const flatList = options.map((o: AnyObject) => o.items ?? o).flat(2);
     setActualValue(
       (value ?? [])
         .map((val) => {
@@ -94,29 +88,28 @@ export const TagInput = <T extends AnyObject>({
                 defaultMatcher(option, val, valueProperty)
               );
           if (ret) return ret;
-          if (allowCreate) return createOption(val);
+          if (allowCreate) return val;
           return null;
         })
         .filter(Boolean)
     );
-  }, [value, valueProperty, flatList, allowCreate]);
+  }, [value, valueProperty, options, allowCreate]);
 
   /******************* change actualValue *******************/
   const handleChange = useCallback(
     (options: T[] = []) => {
       onQueryChange("");
-      const newValue = options.map((option) =>
-        option === CreatePlaceholder ? createOption(query) : option
-      );
-      setActualValue(newValue);
-      onSelect && newValue && startTransition(() => onSelect(newValue));
+      setActualValue(options);
+      onSelect && options && startTransition(() => onSelect(options));
       onChange &&
         startTransition(() =>
-          onChange(newValue.map((value) => getValue(value, valueProperty)))
+          onChange(
+            options.map((value: AnyObject) => getValue(value, valueProperty))
+          )
         );
       setTimeout(() => forceUpdate?.(), 100);
     },
-    [onChange, createOption, forceUpdate, valueProperty, query]
+    [onChange, forceUpdate, valueProperty, query]
   );
 
   /******************* display label *******************/
@@ -135,6 +128,7 @@ export const TagInput = <T extends AnyObject>({
       disabled={isDisabled}
       name={name}
       as={Fragment}
+      nullable
       multiple
     >
       <FieldWrapper

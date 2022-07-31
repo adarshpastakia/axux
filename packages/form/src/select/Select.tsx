@@ -21,18 +21,11 @@ import {
   useState,
   useTransition,
 } from "react";
-import { useTranslation } from "react-i18next";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { Icons } from "../types/icons";
 import { Options } from "./Option";
 import { useSelect } from "./useSelect";
-import {
-  CreatePlaceholder,
-  defaultMatcher,
-  getLabel,
-  getValue,
-  SelectProps,
-} from "./utils";
+import { defaultMatcher, getLabel, getValue, SelectProps } from "./utils";
 
 export const SelectInput = <T extends AnyObject>({
   label,
@@ -69,7 +62,7 @@ export const SelectInput = <T extends AnyObject>({
 }: SelectProps<T>) => {
   const [actualValue, setActualValue] = useState<T>();
   const [pending, startTransition] = useTransition();
-  const { flatList, list, query, createOption, onQueryChange } = useSelect({
+  const { list, query, onQueryChange } = useSelect({
     options,
     labelProperty,
     onQuery,
@@ -84,26 +77,27 @@ export const SelectInput = <T extends AnyObject>({
 
   /******************* set actualValue when value changes *******************/
   useEffect(() => {
-    let val = flatList.find((option) => {
-      if (matcher) return matcher(option, value ?? "");
-      return defaultMatcher(option, value, valueProperty);
-    });
-    if (value && !val && allowCreate) val = createOption(value);
+    let val = options
+      .map((o: AnyObject) => o.items ?? o)
+      .flat(2)
+      .find((option) => {
+        if (matcher) return matcher(option, value ?? "");
+        return defaultMatcher(option, value, valueProperty);
+      });
+    if (value && !val && allowCreate) val = value;
     setActualValue(val);
-  }, [value, valueProperty, flatList, allowCreate]);
+  }, [value, valueProperty, options, allowCreate]);
 
   /******************* change actualValue *******************/
   const handleChange = useCallback(
     (option?: T) => {
       onQueryChange("");
-      const newValue =
-        option === CreatePlaceholder ? createOption(query) : option;
-      setActualValue(newValue);
-      onSelect && newValue && startTransition(() => onSelect(newValue));
+      setActualValue(option);
+      onSelect && option && startTransition(() => onSelect(option));
       onChange &&
-        startTransition(() => onChange(getValue(newValue, valueProperty)));
+        startTransition(() => onChange(getValue(option, valueProperty)));
     },
-    [onChange, createOption, valueProperty, query]
+    [onChange, valueProperty, query]
   );
 
   /******************* display label *******************/
@@ -119,6 +113,7 @@ export const SelectInput = <T extends AnyObject>({
       disabled={isDisabled}
       name={name}
       as={Fragment}
+      nullable
     >
       <FieldWrapper
         info={info}
