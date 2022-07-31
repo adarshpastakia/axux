@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.21](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.20...v2.0.0-beta.21) (2022-07-31)
+
+
+### Bug Fixes
+
+* **Checkbox:** input zindex ([a28ef81](https://github.com/adarshpastakia/axux/commit/a28ef810a3f941cff2fe0849978213ff93891ede))
+* **Datagrid:** add locked columns ([407c009](https://github.com/adarshpastakia/axux/commit/407c0096c4b9fd0f64675d0b1dce0b10a20acd0d))
+* **MapChart:** hide label ([7d9c2ea](https://github.com/adarshpastakia/axux/commit/7d9c2ea5304d914b22db813fcff8b673b0d68a01))
+* **Searchbar:** add query viewer ([eab5f1a](https://github.com/adarshpastakia/axux/commit/eab5f1a96eb2143bbf37d38dfd3ed9e1533d9bcc))
+* **Searchbar:** check filter type ([dfdd59a](https://github.com/adarshpastakia/axux/commit/dfdd59aeb2b6004c90b804418a3f67f954182c61))
+* **Select:** fix create option ([3140757](https://github.com/adarshpastakia/axux/commit/3140757ba9bb8710f13a1c51c58cd680d04086c2))
+* **Tag:** tag remove implemented ([ba566a4](https://github.com/adarshpastakia/axux/commit/ba566a4db810e8162f840881d0d3a113360b785d))
+
+
+
+
+
 # [2.0.0-beta.20](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.19...v2.0.0-beta.20) (2022-07-30)
 
 **Note:** Version bump only for package axux

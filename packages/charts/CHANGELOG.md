@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.21](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.20...v2.0.0-beta.21) (2022-07-31)
+
+
+### Bug Fixes
+
+* **MapChart:** hide label ([7d9c2ea](https://github.com/adarshpastakia/axux/commit/7d9c2ea5304d914b22db813fcff8b673b0d68a01))
+
+
+
+
+
 # [2.0.0-beta.20](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.19...v2.0.0-beta.20) (2022-07-30)
 
 **Note:** Version bump only for package @axux/charts

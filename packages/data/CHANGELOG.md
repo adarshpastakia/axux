@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.21](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.20...v2.0.0-beta.21) (2022-07-31)
+
+
+### Bug Fixes
+
+* **Datagrid:** add locked columns ([407c009](https://github.com/adarshpastakia/axux/commit/407c0096c4b9fd0f64675d0b1dce0b10a20acd0d))
+
+
+
+
+
 # [2.0.0-beta.20](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.19...v2.0.0-beta.20) (2022-07-30)
 
 **Note:** Version bump only for package @axux/data
