@@ -9,11 +9,11 @@
 import { AxIcon, AxTag } from "@axux/core";
 import { usePopover } from "@axux/core/dist/hooks/usePopover";
 import { isArray, isEmpty } from "@axux/utilities";
-import { handleEnter } from "@axux/utilities/dist/handlers";
 import { Combobox } from "@headlessui/react";
 import {
   FocusEvent,
   Fragment,
+  KeyboardEvent,
   memo,
   useCallback,
   useEffect,
@@ -121,6 +121,34 @@ export const TagInput = <T extends AnyObject>({
     [makeLabel, labelProperty]
   );
 
+  const handleRemove = useCallback(
+    (index = -1) => {
+      const newValue = [...actualValue];
+      newValue.splice(index, 1);
+      setActualValue(newValue);
+      onChange &&
+        startTransition(() =>
+          onChange(
+            newValue.map((value: AnyObject) => getValue(value, valueProperty))
+          )
+        );
+      setTimeout(() => forceUpdate?.(), 100);
+    },
+    [actualValue]
+  );
+
+  const handleKeyPress = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      if (!e.target.value && e.key === "Backspace") {
+        handleRemove();
+      }
+      if (!e.target.value && e.key === "Enter") {
+        onEnterPressed?.(e);
+      }
+    },
+    [handleRemove, onEnterPressed]
+  );
+
   return (
     <Combobox
       value={actualValue}
@@ -150,7 +178,7 @@ export const TagInput = <T extends AnyObject>({
             <AxTag
               key={i}
               className="ax-select__tag"
-              onRemove={() => undefined}
+              onRemove={() => handleRemove(i)}
             >
               {displayLabel(option)}
             </AxTag>
@@ -169,7 +197,7 @@ export const TagInput = <T extends AnyObject>({
             data-invalid={isInvalid}
             className="ax-field__input flex-auto min-w-fit"
             autoComplete="off"
-            onKeyDown={handleEnter(onEnterPressed)}
+            onKeyDown={handleKeyPress}
             onChange={(e) => onQueryChange(e.target.value)}
             onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
             {...rest}
