@@ -259,7 +259,7 @@
     }
 
     & input {
-      @apply absolute opacity-0;
+      @apply absolute opacity-0 z-[1] cursor-pointer;
 
       &[type="radio"] ~ .ax-icon {
         @apply rounded-full;
