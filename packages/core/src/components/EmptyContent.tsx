@@ -99,6 +99,7 @@ const DefaultExclamation = () => (
 
 /** @internal */
 export interface EmptyContentProps extends IconProp, ElementProps {
+  iconClassName?: ElementProps["className"];
   /**
    * title text
    */
@@ -126,6 +127,7 @@ export const EmptyContent: FC<EmptyContentProps> = ({
   title,
   message,
   actions = [],
+  iconClassName,
   type,
   size,
   rtlFlip,
@@ -138,7 +140,9 @@ export const EmptyContent: FC<EmptyContentProps> = ({
   }, [type]);
   return (
     <div className={`ax-empty ${className ?? ""}`} data-size={size}>
-      {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
+      {icon && (
+        <AxIcon icon={icon} rtlFlip={rtlFlip} className={`ax-empty__icon ${iconClassName}`} />
+      )}
       {!icon && (
         <span className="ax-empty__icon">
           <DefaultIcon />
