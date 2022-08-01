@@ -59,13 +59,13 @@
     }
 
     &.empty-addon {
-      @apply text-muted opacity-50;
+      @apply text-sm text-muted opacity-70;
     }
   }
 
   /******************* wrapper *******************/
   .ax-field__wrapper {
-    @apply bg-bw-100/20 dark:bg-bw-700/20 relative flex flex-nowrap items-center rounded-[inherit]
+    @apply bg-bw-50 dark:bg-bw-900 relative flex flex-nowrap items-center rounded-[inherit]
         after:content-[""] after:h-0.5 after:rounded-b-sm after:bg-primary-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:w-0 after:transition-[width] after:duration-500
         focus-within:bg-white focus-within:dark:bg-black focus-within:after:w-full print:hidden shadow-bw-300 dark:shadow-black;
 
@@ -171,10 +171,6 @@
   .ax-field__input {
     @apply flex-auto text-justify py-1 px-0 mx-2 border-none focus:border-none focus:outline-none focus:ring-0 bg-transparent focus-visible:outline-none order-3
         placeholder:text-bw-500 dark:placeholder:text-bw-400 appearance-none;
-
-    &:autofill {
-      transition: background-color 999999s 0s, color 999999s 0s;
-    }
 
     &:not(:placeholder-shown) ~ .empty-addon {
       @apply hidden;
@@ -536,5 +532,30 @@
   .ax-field__list ~ .ax-field__clear,
   .ax-field__input[type="number"] ~ .ax-field__clear {
     @apply absolute inset-y-0 ltr:right-4 rtl:left-4;
+  }
+}
+
+@layer utilities {
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    height: calc(100% - 2px);
+    margin-top: 1px;
+    margin-bottom: 1px;
+  }
+  .light input:-webkit-autofill {
+    -webkit-text-fill-color: theme(colors.amber.700);
+    box-shadow: 0 0 0 999em theme(colors.bw.50) inset;
+  }
+  .light input:-webkit-autofill:focus {
+    -webkit-text-fill-color: theme(colors.amber.700);
+    box-shadow: 0 0 0 999em theme(colors.white) inset;
+  }
+  .dark input:-webkit-autofill {
+    -webkit-text-fill-color: theme(colors.amber.200);
+    box-shadow: 0 0 0 999em theme(colors.bw.900) inset;
+  }
+  .dark input:-webkit-autofill:focus {
+    -webkit-text-fill-color: theme(colors.amber.200);
+    box-shadow: 0 0 0 999em theme(colors.black) inset;
   }
 }
