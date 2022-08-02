@@ -80,6 +80,7 @@ describe("check type test", () => {
   });
   it("should check svg path", (done) => {
     expect(isSvgPath("M9 9z")).toBeTruthy();
+    expect(isSvgPath("M9,56.8-89.12 9z")).toBeTruthy();
     expect(isSvgPath("1,1 45z")).toBeFalsy();
     done();
   });
