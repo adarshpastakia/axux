@@ -28,6 +28,7 @@
 
     & .ax-button > .ax-button__inner {
       height: 2em;
+      min-width: 2em;
     }
   }
 
