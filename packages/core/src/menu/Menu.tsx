@@ -59,7 +59,6 @@ const MenuItem: FC<MenuItemProps<ReactNode>> = ({
           <Link
             {...rest}
             data-id={id}
-            hotKey={hotKey}
             className={`ax-menu__item ${className ?? ""}`}
             data-hover={active}
             data-panel={panelId}
@@ -112,7 +111,6 @@ const MenuMini: FC<MenuItemProps> = ({
             <Link
               {...rest}
               data-id={id}
-              hotKey={hotKey}
               className={`ax-menu__mini ${className ?? ""}`}
               data-hover={active}
               data-active={isActive}

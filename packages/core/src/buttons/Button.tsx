@@ -117,6 +117,10 @@ export interface ButtonProps extends ElementProps, IconProp, RefProp {
    * dont propagate click event
    */
   stopPropagation?: boolean;
+  /**
+   * navlink route state
+   */
+  state?: KeyValue;
 
   onClick?: EmptyCallback;
 }
@@ -194,7 +198,6 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
           type={type}
           as="button"
           role="button"
-          hotKey={hotKey}
           className="ax-button__inner"
           data-popover-open={popoverOpen}
           onClick={handleClick(onClick, { stopPropagation })}
