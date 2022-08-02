@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.23](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.22...v2.0.0-beta.23) (2022-08-02)
+
+
+### Bug Fixes
+
+* **LinkWrapper:** added route state prop ([ad520d2](https://github.com/adarshpastakia/axux/commit/ad520d22217305643ce9a051a3c7bd82e737bb66))
+
+
+
+
+
 # [2.0.0-beta.22](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.21...v2.0.0-beta.22) (2022-08-02)
 
 

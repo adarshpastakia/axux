@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.23](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.22...v2.0.0-beta.23) (2022-08-02)
+
+
+### Bug Fixes
+
+* **Searchbar:** layout change ([ab69e14](https://github.com/adarshpastakia/axux/commit/ab69e1474282b561ea83fa11de4d6b93a5f99eea))
+
+
+
+
+
 # [2.0.0-beta.22](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.21...v2.0.0-beta.22) (2022-08-02)
 
 **Note:** Version bump only for package @axux/searchbar
