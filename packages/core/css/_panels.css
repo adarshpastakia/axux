@@ -11,6 +11,7 @@
     @apply grid relative overflow-hidden border rounded bg-component;
     grid-template-areas: "head" "loader" "content" "foot";
     grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 1fr;
 
     &[data-expanded="true"] {
       @apply fixed inset-4 shadow-xl z-20 !w-auto !h-auto !max-h-full !max-w-full;
