@@ -1,6 +1,6 @@
 {
   "name": "@axux/charts",
-  "version": "2.0.0-beta.21",
+  "version": "2.0.0-beta.22",
   "description": "axux: Charts",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -23,8 +23,8 @@
     "watch": "yarn build -w"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.21",
-    "@axux/utilities": "^2.0.0-beta.21",
+    "@axux/core": "^2.0.0-beta.22",
+    "@axux/utilities": "^2.0.0-beta.22",
     "echarts": "^5.3.3",
     "echarts-wordcloud": "^2.0.0"
   },

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.22](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.21...v2.0.0-beta.22) (2022-08-02)
+
+
+### Bug Fixes
+
+* **EmptyContent:** added icon className prop ([e21e33c](https://github.com/adarshpastakia/axux/commit/e21e33cb97fe79576d1616e2f1a5a2423ff14349))
+* **LinkWrapper:** remove hotkey ([2803487](https://github.com/adarshpastakia/axux/commit/2803487abf88bc7b25e6e309e4665066ca89babe))
+
+
+
+
+
 # [2.0.0-beta.21](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.20...v2.0.0-beta.21) (2022-07-31)
 
 **Note:** Version bump only for package @axux/core
