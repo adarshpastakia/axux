@@ -29,10 +29,12 @@ export interface LinkProps {
    * navigation target
    */
   target?: HTMLAnchorElement["target"];
+  /**
+   * navlink route state
+   */
+  state?: KeyValue;
 
   as?: React.ElementType;
-
-  hotKey?: string;
 
   type?: "button" | "submit" | "reset";
 }
@@ -42,7 +44,16 @@ export const Link = forwardRef<
   LinkProps & ElementProps & ChildrenProp & HTMLAttributes<HTMLElement>
 >(
   (
-    { to, href, hotKey, as: T = "div", onClick, onMouseDown, type, ...props },
+    {
+      to,
+      href,
+      state,
+      as: T = "div",
+      onClick,
+      onMouseDown,
+      type,
+      ...props
+    },
     ref
   ) => {
     const linkRef = useRef<HTMLElement>(null);
@@ -55,6 +66,7 @@ export const Link = forwardRef<
             {...props}
             ref={linkRef as AnyObject}
             to={to}
+            state={state}
             onClick={onClick}
             onMouseDown={onMouseDown}
           />

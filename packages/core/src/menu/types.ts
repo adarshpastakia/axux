@@ -65,6 +65,10 @@ export interface MenuItemProps<T = string>
    * append element
    */
   append?: ReactElement;
+  /**
+   * navlink route state
+   */
+  state?: KeyValue;
   children?: MenuChildren | MenuChildren[];
 }
 

@@ -31,6 +31,10 @@ export interface CardProps extends ElementProps, MouseProps, ChildrenProp {
    * highlight shadow
    */
   isActive?: boolean;
+  /**
+   * navlink route state
+   */
+  state?: KeyValue;
 }
 
 export const AxCard = forwardRef<HTMLElement, CardProps>(
