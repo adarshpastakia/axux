@@ -75,7 +75,7 @@ export const isColor = (color: string) =>
   color.startsWith("#") || color.startsWith("rgb") || color === "transparent";
 
 export const isSvgPath = (value: AnyObject): value is string => {
-  return typeof value === "string" && value.match(/^[Mm]\d.*[\dzZ]$/) !== null;
+  return typeof value === "string" && value.match(/^[Mm][\d-. ].*[\dzZ]$/) !== null;
 };
 
 export const isRtl = () => {
