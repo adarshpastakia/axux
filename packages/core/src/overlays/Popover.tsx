@@ -23,6 +23,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 import { usePopover } from "../hooks/usePopover";
 import { ChildProp, ChildrenProp, ElementProps, RefProp } from "../types";
 
@@ -136,29 +137,32 @@ export const AxPopover: FC<PopoverProps> & {
               onMouseLeave: () => isStatic && isEmpty(isOpen) && setOpen(false),
             })}
           </Popover.Button>
-          {!isDisabled && ((isStatic && open) || (!isStatic && _open)) && (
-            <Popover.Panel
-              {...rest}
-              tabIndex={-1}
-              static={isStatic}
-              className={`popover ${popoverClassName ?? ""}`}
-              ref={setPopperElement as AnyObject}
-              style={styles.popper}
-              {...attributes.popper}
-            >
-              <div className={`popover__container ${className ?? ""}`}>
-                {(open || _open) && popperEl}
-              </div>
-              {!hideArrow && (
-                <div
-                  ref={setArrowElement as AnyObject}
-                  className="popover__arrow"
-                  style={styles.arrow}
-                  {...attributes.arrow}
-                />
-              )}
-            </Popover.Panel>
-          )}
+          {!isDisabled &&
+            ((isStatic && open) || (!isStatic && _open)) &&
+            createPortal(
+              <Popover.Panel
+                {...rest}
+                tabIndex={-1}
+                static={isStatic}
+                className={`popover ${popoverClassName ?? ""}`}
+                ref={setPopperElement as AnyObject}
+                style={styles.popper}
+                {...attributes.popper}
+              >
+                <div className={`popover__container ${className ?? ""}`}>
+                  {(open || _open) && popperEl}
+                </div>
+                {!hideArrow && (
+                  <div
+                    ref={setArrowElement as AnyObject}
+                    className="popover__arrow"
+                    style={styles.arrow}
+                    {...attributes.arrow}
+                  />
+                )}
+              </Popover.Panel>,
+              document.body
+            )}
         </Fragment>
       )}
     </Popover>

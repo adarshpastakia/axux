@@ -9,6 +9,7 @@
 import { iconToken } from "@axux/utilities";
 import { Menu } from "@headlessui/react";
 import { FC, Fragment } from "react";
+import { createPortal } from "react-dom";
 import { usePopover } from "../hooks/usePopover";
 import { usePropToggle } from "../hooks/usePropToggle";
 import { AxIcon } from "../icons/Icon";
@@ -116,21 +117,24 @@ const FloatingGroup: FC<MenuGroupProps> = ({
           </div>
         )}
       </Menu.Button>
-      <Menu.Items
-        className={`popover ax-menu__popover`}
-        ref={setPopperElement as AnyObject}
-        onClick={() =>
-          referenceElement?.dispatchEvent(
-            new Event("closeParentGroup", { bubbles: true })
-          )
-        }
-        style={styles.popper}
-        {...attributes.popper}
-      >
-        <div {...rest} className={`popover__container ${className ?? ""}`}>
-          {children}
-        </div>
-      </Menu.Items>
+      {createPortal(
+        <Menu.Items
+          className={`popover ax-menu__popover`}
+          ref={setPopperElement as AnyObject}
+          onClick={() =>
+            referenceElement?.dispatchEvent(
+              new Event("closeParentGroup", { bubbles: true })
+            )
+          }
+          style={styles.popper}
+          {...attributes.popper}
+        >
+          <div {...rest} className={`popover__container ${className ?? ""}`}>
+            {children}
+          </div>
+        </Menu.Items>,
+        document.body
+      )}
     </Menu>
   );
 };
@@ -154,7 +158,11 @@ const MiniGroup: FC<MenuGroupProps> = ({
       <Menu.Button as={Fragment} {...{ ref: setReferenceElement }}>
         {({ open }) => (
           <div className="ax-menu__mini" data-popover-open={open}>
-            <AxTooltip content={label} placement="right">
+            <AxTooltip
+              content={label}
+              placement="right"
+              data-popover-open={open}
+            >
               <div
                 onClick={(e) => e.currentTarget.dispatchEvent(e.nativeEvent)}
               >
@@ -168,16 +176,19 @@ const MiniGroup: FC<MenuGroupProps> = ({
           </div>
         )}
       </Menu.Button>
-      <Menu.Items
-        className={`popover ax-menu__popover`}
-        ref={setPopperElement as AnyObject}
-        style={styles.popper}
-        {...attributes.popper}
-      >
-        <div className={`popover__container ${className ?? ""}`} {...rest}>
-          {children}
-        </div>
-      </Menu.Items>
+      {createPortal(
+        <Menu.Items
+          className={`popover ax-menu__popover`}
+          ref={setPopperElement as AnyObject}
+          style={styles.popper}
+          {...attributes.popper}
+        >
+          <div className={`popover__container ${className ?? ""}`} {...rest}>
+            {children}
+          </div>
+        </Menu.Items>,
+        document.body
+      )}
     </Menu>
   );
 };
