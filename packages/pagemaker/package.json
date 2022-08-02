@@ -21,7 +21,7 @@
   "scripts": {
     "prebuild": "rm -rf ./dist",
     "build": "tsc -p ./tsconfig.build.json",
-    "watch": "yarn build -w"
+    "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
     "@axux/core": "^2.0.0-beta.22",
