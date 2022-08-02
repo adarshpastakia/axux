@@ -90,8 +90,7 @@
       }
     }
     & > bdi:last-child {
-      @apply inline-block overflow-hidden text-clip;
-      direction: rtl;
+      @apply inline-flex justify-end overflow-hidden text-clip;
       flex: 1 1 1em;
     }
   }
