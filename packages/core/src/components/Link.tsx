@@ -14,7 +14,6 @@ import {
   useRef,
 } from "react";
 import { NavLink, useInRouterContext } from "react-router-dom";
-import { AxHotKey } from "../hotkeys/HotKey";
 import { ChildrenProp, ElementProps } from "../types";
 
 export interface LinkProps {
@@ -51,12 +50,6 @@ export const Link = forwardRef<
     useImperativeHandle(ref, () => linkRef.current!, [linkRef]);
     return (
       <Fragment>
-        {hotKey && (
-          <AxHotKey
-            keyCombo={hotKey}
-            handler={() => linkRef.current?.click?.()}
-          />
-        )}
         {isInrouter && !!to ? (
           <NavLink
             {...props}
