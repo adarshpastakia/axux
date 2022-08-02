@@ -22,17 +22,23 @@ export const SearchWrapper: FC<Partial<SearchProps>> = ({
   hideFilters,
 }) => {
   return (
-    <AxField.Container className="ax-searchbar">
-      {!hideFilters && <FilterButton />}
-      {prepend}
-      <SearchInput />
-      <SearchButton />
+    <div className="ax-searchbar">
+      <AxField.Container>
+        {!hideFilters && <FilterButton />}
+        {prepend}
+        <SearchInput />
+        <SearchButton />
+      </AxField.Container>
       {append}
       {actions && (
-        <AxButton.Dropdown style="link" showCaret={false} icon={Icons.iconMenu}>
+        <AxButton.Dropdown
+          style="outline"
+          showCaret={false}
+          icon={Icons.iconMenu}
+        >
           {actions}
         </AxButton.Dropdown>
       )}
-    </AxField.Container>
+    </div>
   );
 };

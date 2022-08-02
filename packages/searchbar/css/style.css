@@ -8,12 +8,26 @@
 
 @layer components {
   .ax-searchbar {
+    @apply flex flex-1 gap-1;
+
     & .ax-filterButton__count {
       @apply rounded-full bg-bw-500 text-white text-xs px-1 pb-px;
 
       &[data-active="true"] {
         @apply bg-accent-500 text-white;
       }
+    }
+
+    & > .ax-field__container {
+      @apply flex-1;
+    }
+
+    & > .ax-button {
+      @apply m-0;
+    }
+
+    & .ax-button > .ax-button__inner {
+      height: 2em;
     }
   }
 
@@ -70,7 +84,7 @@
     }
 
     & .ax-filterButton .ax-button__inner {
-      @apply ring-bw-400 dark:ring-bw-600;
+      @apply shadow-none ring-bw-400 dark:ring-bw-600;
 
       & .ax-button__label bdi:first-child {
         @apply flex items-center;
