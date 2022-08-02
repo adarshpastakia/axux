@@ -7,6 +7,7 @@
  */
 
 import { ButtonProps } from "@axux/core/dist/buttons/Button";
+import { ElementProps } from "@axux/core/dist/types";
 
 export enum PageType {
   DATE,
@@ -88,7 +89,9 @@ export type CalendarEvent = {
 export interface RelativeProps extends Omit<BaseProps, "min" | "max"> {
   date?: string;
   type?: "button" | "tag";
+  color?: ButtonProps["color"];
   style?: ButtonProps["style"];
+  className?: ElementProps["className"];
   isDisabled?: boolean;
   defaultView?: Type.QUICK | Type.RELATIVE | Type.ABSOLUTE;
   presets?: { [label: string]: string };
