@@ -24,9 +24,12 @@ export const AxSuperDate: FC<RelativeProps> = ({
   onChange,
   date = "$now|$now",
   events,
+  style,
+  color,
   defaultView,
   presets,
   isDisabled,
+  className,
   ...props
 }) => {
   const {
@@ -61,13 +64,14 @@ export const AxSuperDate: FC<RelativeProps> = ({
   const wrapperProps = useMemo(() => {
     const ret: KeyValue = {
       icon: Icons.iconClock,
-      color: "primary",
+      style,
+      color,
       tooltip,
       isDisabled: isDisabled,
-      className: "ax-superdate__button",
+      className: `ax-superdate__button ${className ?? ""}`,
     };
     return ret;
-  }, [tooltip, type, isDisabled]);
+  }, [tooltip, style, color, className, isDisabled]);
   const updatePopup = useCallback(() => {
     if (panelRef.current) {
       const el = panelRef.current;
