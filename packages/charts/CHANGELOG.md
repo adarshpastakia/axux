@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.24](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.23...v2.0.0-beta.24) (2022-08-03)
+
+
+### Bug Fixes
+
+* **TimeSlider:** hide axis lines (skip-ci) ([23f14d4](https://github.com/adarshpastakia/axux/commit/23f14d4152e3186f00dfdede5ad0698f62493370))
+
+
+
+
+
 # [2.0.0-beta.23](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.22...v2.0.0-beta.23) (2022-08-02)
 
 **Note:** Version bump only for package @axux/charts

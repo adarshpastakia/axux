@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.24](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.23...v2.0.0-beta.24) (2022-08-03)
+
+
+### Bug Fixes
+
+* **isSvg:** corrected regex ([9045334](https://github.com/adarshpastakia/axux/commit/9045334a644891adf66f58933111798c293da139))
+* **Popover:** use portal ([e99d3f8](https://github.com/adarshpastakia/axux/commit/e99d3f804121efbda7d7a84d19d96896d240f247))
+* **TimeSlider:** hide axis lines (skip-ci) ([23f14d4](https://github.com/adarshpastakia/axux/commit/23f14d4152e3186f00dfdede5ad0698f62493370))
+* **useIsDark:** use MutationObserver ([15c8cb5](https://github.com/adarshpastakia/axux/commit/15c8cb58ac6b625a6d5e054890cba7d83ae1f3f8))
+
+
+
+
+
 # [2.0.0-beta.23](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.22...v2.0.0-beta.23) (2022-08-02)
 
 

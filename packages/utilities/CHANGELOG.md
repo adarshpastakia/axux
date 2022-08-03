@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.24](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.23...v2.0.0-beta.24) (2022-08-03)
+
+
+### Bug Fixes
+
+* **isSvg:** corrected regex ([9045334](https://github.com/adarshpastakia/axux/commit/9045334a644891adf66f58933111798c293da139))
+
+
+
+
+
 # [2.0.0-beta.23](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.22...v2.0.0-beta.23) (2022-08-02)
 
 **Note:** Version bump only for package @axux/utilities
