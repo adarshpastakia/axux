@@ -74,7 +74,13 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
       axisLabel: {
         show: false,
       },
+      axisLine: {
+        show: false,
+      },
       axisTick: {
+        show: false,
+      },
+      splitLine: {
         show: false,
       },
       nameLocation: "center",
