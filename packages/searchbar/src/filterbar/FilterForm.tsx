@@ -177,6 +177,7 @@ export const FilterForm = ({
 
   return (
     <AxForm
+      className="bg-component"
       formRef={formRef}
       schema={FilterSchema}
       defaultValues={filter as AnyObject}
