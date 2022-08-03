@@ -62,11 +62,18 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
 
     const categoryAxis: AnyObject = {
       type: "time",
-      nameGap: 24,
+      nameGap: 0,
       nameLocation: "center",
       axisTick: {
         show: false,
       },
+      axisLabel: {
+        inside: true,
+      },
+      axisLine: {
+        show: false,
+      },
+      position: "bottom",
     } as EChartOption.XAxis;
     const valueAxis: AnyObject = {
       type: "value",
@@ -102,7 +109,7 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
         top: 4,
         left: 0,
         right: 0,
-        bottom: "50%",
+        bottom: "35%",
       },
       xAxis: categoryAxis,
       yAxis: valueAxis,
