@@ -170,6 +170,7 @@ const Viewport = (props: KeyValue) => {
         </AxTitle>
         <div className="flex-1" />
         <AxButton.Dropdown
+          showCaret={false}
           icon="mdi mdi-account-circle"
           style="link"
           color="primary"

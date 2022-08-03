@@ -23,6 +23,7 @@ const filters = [
     field: "text",
     operator: EnumOperator.IS,
     value: "yes",
+    isGlobal: true,
   },
   {
     type: "filter" as AnyObject,
@@ -43,6 +44,11 @@ const filters = [
     operator: EnumOperator.IS,
     value: 9,
   },
+  {
+    type: "query" as AnyObject,
+    label: "field query",
+    query: { field: "field", match: "test" },
+  },
 ];
 
 export const SearchbarStory = () => {
@@ -62,9 +68,7 @@ export const SearchbarStory = () => {
           options={["All", "Table 1", "Table 2", "Table 3"]}
         />
       }
-      append={
-        <AxSuperDate className="min-w-[12rem]" style="outline" />
-      }
+      append={<AxSuperDate className="min-w-[12rem]" style="outline" />}
       actions={[
         <AxMenu.Item
           key="open"
