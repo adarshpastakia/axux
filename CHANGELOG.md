@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.26](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.25...v2.0.0-beta.26) (2022-08-03)
+
+
+### Bug Fixes
+
+* **Menu:** menu dropdowns forward onclick ([2d4bf72](https://github.com/adarshpastakia/axux/commit/2d4bf72bfc31920bd644c3b5baba23a984c8d95d))
+* **useIsDark:** run check theme on load ([83aef2d](https://github.com/adarshpastakia/axux/commit/83aef2d672e3a36ef4667b970d1417c36d815fef))
+
+
+
+
+
 # [2.0.0-beta.25](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.24...v2.0.0-beta.25) (2022-08-03)
 
 

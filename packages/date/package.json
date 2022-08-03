@@ -1,6 +1,6 @@
 {
   "name": "@axux/date",
-  "version": "2.0.0-beta.25",
+  "version": "2.0.0-beta.26",
   "description": "axux: Date package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -23,9 +23,9 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.25",
-    "@axux/form": "^2.0.0-beta.25",
-    "@axux/utilities": "^2.0.0-beta.25",
+    "@axux/core": "^2.0.0-beta.26",
+    "@axux/form": "^2.0.0-beta.26",
+    "@axux/utilities": "^2.0.0-beta.26",
     "date-fns": "^2.28.0"
   },
   "peerDependencies": {
