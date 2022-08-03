@@ -21,6 +21,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { Options } from "./Option";
@@ -176,21 +177,24 @@ export const SuggestInput: FC<SuggestProps> = ({
         />
         {children}
       </FieldWrapper>
-      <Combobox.Options
-        ref={setPopperElement as AnyObject}
-        className="ax-select__dropdown"
-        style={styles.popper}
-      >
-        {itemList.length > 0 && (
-          <Options hideEmpty options={itemList} renderer={itemRenderer} />
-        )}
-        {itemList.length > 0 && defaultItems.length > 0 && (
-          <AxDivider size="xs" />
-        )}
-        {defaultItems.length > 0 && (
-          <Options hideEmpty options={defaultItems} renderer={itemRenderer} />
-        )}
-      </Combobox.Options>
+      {createPortal(
+        <Combobox.Options
+          ref={setPopperElement as AnyObject}
+          className="ax-select__dropdown"
+          style={styles.popper}
+        >
+          {itemList.length > 0 && (
+            <Options hideEmpty options={itemList} renderer={itemRenderer} />
+          )}
+          {itemList.length > 0 && defaultItems.length > 0 && (
+            <AxDivider size="xs" />
+          )}
+          {defaultItems.length > 0 && (
+            <Options hideEmpty options={defaultItems} renderer={itemRenderer} />
+          )}
+        </Combobox.Options>,
+        document.body
+      )}
     </Combobox>
   );
 };
