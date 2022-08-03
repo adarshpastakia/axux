@@ -60,7 +60,7 @@
     }
 
     & .ax-side__resizeHandle {
-      @apply grid-area-[resize] cursor-col-resize overflow-hidden relative w-1 bg-bw-100 dark:bg-bw-800;
+      @apply grid-area-[resize] cursor-col-resize overflow-hidden relative w-1 bg-bw-200 dark:bg-bw-700;
 
       &::before {
         @apply bg-bw-500 rounded h-full max-h-20 w-2 z-10 absolute -translate-y-1/2 top-1/2;
