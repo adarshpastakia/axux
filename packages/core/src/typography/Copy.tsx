@@ -8,22 +8,18 @@
 
 import { FC, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { ActionButton } from "../buttons/Action";
-import { TooltipType } from "../types";
+import { ActionButton, ActionProps } from "../buttons/Action";
 import { AppIcons } from "../types/appIcons";
 
-export interface CopyProps {
+export interface CopyProps
+  extends Omit<ActionProps, "style" | "icon" | "message" | "onClick"> {
   /**
    * text value to copy
    */
   text: string;
-  /**
-   * tooltip
-   */
-  tooltip?: TooltipType;
 }
 
-export const Copy: FC<CopyProps> = ({ text, tooltip }) => {
+export const Copy: FC<CopyProps> = ({ text, tooltip, className, ...rest }) => {
   const { t } = useTranslation("core");
 
   /******************* handle copy *******************/
@@ -34,8 +30,9 @@ export const Copy: FC<CopyProps> = ({ text, tooltip }) => {
   /******************* component *******************/
   return (
     <ActionButton
+      {...rest}
       style="link"
-      className="ax-copy"
+      className={`ax-copy ${className ?? ""}`}
       icon={AppIcons.iconCopy}
       tooltip={tooltip ?? t("action.copy")}
       message={t("action.copied")}
