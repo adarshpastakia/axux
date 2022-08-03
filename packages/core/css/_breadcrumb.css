@@ -156,7 +156,7 @@
     @apply bg-component m-0 p-0;
 
     & > * {
-      @apply text-primary-600 dark:text-primary-300 hover:bg-primary-200 dark:hover:bg-primary-700 active:bg-primary-300 dark:active:bg-primary-900 bg-component py-1 px-2;
+      @apply text-primary-600 dark:text-primary-300 hover:bg-primary-200 dark:hover:bg-primary-700 active:bg-primary-300 dark:active:bg-primary-900 bg-component py-1 px-2 cursor-pointer;
     }
     &::after,
     &::before {
