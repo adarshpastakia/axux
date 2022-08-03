@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.25](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.24...v2.0.0-beta.25) (2022-08-03)
+
+
+### Bug Fixes
+
+* **Searchbar:** add copy button, apply bg to query display ([964e67b](https://github.com/adarshpastakia/axux/commit/964e67b2d327314dbdb7a39c0ec96344a8ea640f))
+* **Searchbar:** add isGlobal prop for filters ([bcf846c](https://github.com/adarshpastakia/axux/commit/bcf846ca84b7c504296ce4b37523024d8b8e0998))
+* **Searchbar:** apply bg to filter form ([c71a89f](https://github.com/adarshpastakia/axux/commit/c71a89f98473196fbd76b8a212131f025bd4727d))
+
+
+
+
+
 # [2.0.0-beta.24](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.23...v2.0.0-beta.24) (2022-08-03)
 
 **Note:** Version bump only for package @axux/searchbar

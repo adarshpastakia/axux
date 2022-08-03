@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.25](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.24...v2.0.0-beta.25) (2022-08-03)
+
+
+### Bug Fixes
+
+* **SelectInput:** use portal ([554a490](https://github.com/adarshpastakia/axux/commit/554a490219acef790a95c7dee107c94977112210))
+* **Suggest:** use portal ([a7f8f15](https://github.com/adarshpastakia/axux/commit/a7f8f15562aed98fe7cc038a915feb11d36cc9eb))
+* **TagInput:** use portal ([47873ed](https://github.com/adarshpastakia/axux/commit/47873ed2c4b4091dd1c99e45b9f6bdf41a34428f))
+
+
+
+
+
 # [2.0.0-beta.24](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.23...v2.0.0-beta.24) (2022-08-03)
 
 **Note:** Version bump only for package @axux/form

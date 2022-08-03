@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.25](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.24...v2.0.0-beta.25) (2022-08-03)
+
+
+### Bug Fixes
+
+* **Copy:** expose button props ([dc05f81](https://github.com/adarshpastakia/axux/commit/dc05f8197b91bfc684ca8ae41f6633a1e8be96a2))
+* **Dropdown:** use portal ([dc52cbc](https://github.com/adarshpastakia/axux/commit/dc52cbc2f86a559d49e68fbeb8e7bb168a005ecb))
+
+
+
+
+
 # [2.0.0-beta.24](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.23...v2.0.0-beta.24) (2022-08-03)
 
 

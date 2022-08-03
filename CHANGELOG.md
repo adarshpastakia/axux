@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.25](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.24...v2.0.0-beta.25) (2022-08-03)
+
+
+### Bug Fixes
+
+* **Copy:** expose button props ([dc05f81](https://github.com/adarshpastakia/axux/commit/dc05f8197b91bfc684ca8ae41f6633a1e8be96a2))
+* **Dropdown:** use portal ([dc52cbc](https://github.com/adarshpastakia/axux/commit/dc52cbc2f86a559d49e68fbeb8e7bb168a005ecb))
+* **Searchbar:** add copy button, apply bg to query display ([964e67b](https://github.com/adarshpastakia/axux/commit/964e67b2d327314dbdb7a39c0ec96344a8ea640f))
+* **Searchbar:** add isGlobal prop for filters ([bcf846c](https://github.com/adarshpastakia/axux/commit/bcf846ca84b7c504296ce4b37523024d8b8e0998))
+* **Searchbar:** apply bg to filter form ([c71a89f](https://github.com/adarshpastakia/axux/commit/c71a89f98473196fbd76b8a212131f025bd4727d))
+* **SelectInput:** use portal ([554a490](https://github.com/adarshpastakia/axux/commit/554a490219acef790a95c7dee107c94977112210))
+* **Suggest:** use portal ([a7f8f15](https://github.com/adarshpastakia/axux/commit/a7f8f15562aed98fe7cc038a915feb11d36cc9eb))
+* **TagInput:** use portal ([47873ed](https://github.com/adarshpastakia/axux/commit/47873ed2c4b4091dd1c99e45b9f6bdf41a34428f))
+
+
+
+
+
 # [2.0.0-beta.24](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.23...v2.0.0-beta.24) (2022-08-03)
 
 
