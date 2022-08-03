@@ -20,6 +20,7 @@ export const useIsDark = () => {
     if (MutationObserver) {
       const ob = new MutationObserver(checkTheme);
       ob.observe(document.documentElement, { attributes: true });
+      checkTheme();
       return () => {
         ob.disconnect();
       };
