@@ -164,7 +164,13 @@ const MiniGroup: FC<MenuGroupProps> = ({
               data-popover-open={open}
             >
               <div
-                onClick={(e) => e.currentTarget.dispatchEvent(e.nativeEvent)}
+                onClick={(e) => {
+                  e.currentTarget
+                    .closest(".ax-menu__mini")
+                    ?.dispatchEvent(
+                      new MouseEvent(e.nativeEvent.type, e.nativeEvent)
+                    );
+                }}
               >
                 <AxIcon
                   className="ax-menu__icon"

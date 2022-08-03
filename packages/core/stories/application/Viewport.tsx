@@ -43,7 +43,7 @@ const toolAction = [
 const Menu = () => {
   return (
     <Fragment>
-      <AxMenu>
+      <AxMenu onClick={action("sideMenu")}>
         <AxMenu.Mini to="/" label="Home" icon="mdi mdi-home" />
         <AxMenu.Mini
           to="/404"
@@ -56,16 +56,17 @@ const Menu = () => {
           icon="mdi mdi-arrow-right-bold-outline"
         />
         <AxMenu.Mini
+          id="side1"
           className="text-accent"
           label="Action 1"
           icon="mdi mdi-bell"
         />
-        <AxMenu.Mini label="Action 2" badge={{ ping: true }} />
-        <AxMenu.Mini label="Action 3" hotKey="shift+K" />
+        <AxMenu.Mini id="side2" label="Action 2" badge={{ ping: true }} />
+        <AxMenu.Mini id="side3" label="Action 3" hotKey="shift+K" />
         <AxMenu.Group label="Floating" type="mini">
-          <AxMenu.Item id="1" label="Action 1" />
-          <AxMenu.Item label="Action 2" />
-          <AxMenu.Item label="Action 3" />
+          <AxMenu.Item id="side3.1" label="Action 1" />
+          <AxMenu.Item id="side3.2" label="Action 2" />
+          <AxMenu.Item id="side3.3" label="Action 3" />
         </AxMenu.Group>
       </AxMenu>
       <AxFooter>
@@ -180,7 +181,10 @@ const Viewport = (props: KeyValue) => {
           <AxMenu.Item id="f2" label="Action 2" />
           <AxMenu.Item id="f3" label="Action 3" />
           <AxMenu.Group label="Grouped" type="floating">
-            <AxMenu.Item id="f4" label="Action 4" />
+            <AxMenu.Item
+              label="Action 4"
+              onClick={action("profileMenu")}
+            />
             <AxMenu.Item id="f5" label="Action 5" />
             <AxMenu.Item id="f6" label="Action 6" />
           </AxMenu.Group>

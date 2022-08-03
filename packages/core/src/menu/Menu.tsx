@@ -8,7 +8,13 @@
 
 import { iconToken } from "@axux/utilities";
 import { Menu } from "@headlessui/react";
-import { FC, Fragment, MouseEvent, ReactNode, useCallback } from "react";
+import {
+  FC,
+  Fragment,
+  MouseEvent as ReactMouseEvent,
+  ReactNode,
+  useCallback,
+} from "react";
 import { Link } from "../components/Link";
 import { useBadge } from "../hooks/useBadge";
 import { AxHotKey } from "../hotkeys/HotKey";
@@ -38,6 +44,7 @@ const MenuItem: FC<MenuItemProps<ReactNode>> = ({
   isActive,
   isDisabled,
   rtlFlip,
+  onClick,
   // @ts-ignore
   popoverRef,
   // @ts-ignore
@@ -55,7 +62,7 @@ const MenuItem: FC<MenuItemProps<ReactNode>> = ({
   return (
     <T as={Fragment} disabled={isDisabled}>
       {({ active }) => (
-        <div>
+        <div onMouseUp={onClick}>
           <Link
             {...rest}
             data-id={id}
@@ -141,7 +148,7 @@ export const AxMenu: FC<MenuProps> & {
   Group: typeof MenuGroup;
   Title: typeof MenuTitle;
 } = ({ children, onClick, className, ...rest }) => {
-  const handleMenuClick = useCallback((e: MouseEvent) => {
+  const handleMenuClick = useCallback((e: ReactMouseEvent) => {
     const id = (e.target as HTMLElement).dataset.id;
     id && onClick?.(id);
   }, []);
@@ -150,7 +157,7 @@ export const AxMenu: FC<MenuProps> & {
       <Menu.Items
         static
         {...rest}
-        onClick={handleMenuClick}
+        onMouseUp={handleMenuClick}
         ref={(el: AnyObject) => el?.focus()}
         className={`ax-menu ${className ?? ""}`}
       >
