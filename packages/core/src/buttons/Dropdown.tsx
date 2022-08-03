@@ -77,7 +77,7 @@ export const DropdownButton: FC<DropdownProps> = ({
       </Menu.Button>
       {createPortal(
         <Menu.Items
-          onClick={handleMenuClick}
+          onMouseUp={handleMenuClick}
           className={`popover ax-button__dropdown ${dropdownClassName ?? ""}`}
           ref={setPopperElement as AnyObject}
           style={styles.popper}
