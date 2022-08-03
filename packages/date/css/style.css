@@ -8,12 +8,12 @@
 
 @layer components {
   .ax-date {
-    @apply inline-grid border border-bw-500/10 rounded-sm align-top w-64 select-none;
+    @apply inline-grid bg-component border border-bw-500/10 rounded-sm align-top w-64 select-none;
     grid-template-rows: auto 1fr auto;
   }
 
   .ax-date__range {
-    @apply inline-grid border border-bw-500/10 rounded-sm align-top select-none;
+    @apply inline-grid bg-component border border-bw-500/10 rounded-sm align-top select-none;
     grid-template-columns: auto auto auto;
     grid-template-rows: 1fr auto;
 
@@ -89,11 +89,11 @@
   }
 
   .ax-date__footer {
-    @apply flex justify-between bg-bw-100/30 dark:bg-bw-800/30;
+    @apply flex justify-between bg-bw-50/30 dark:bg-bw-900/30;
   }
 
   .ax-date__wkhead {
-    @apply grid grid-area-[wkhead] text-center bg-bw-500/20 text-bw-600 dark:text-bw-400;
+    @apply grid grid-area-[wkhead] text-center bg-bw-500/10 text-bw-600 dark:text-bw-400;
     grid-gap: 0.25rem;
     grid-template-rows: repeat(6, auto);
 
