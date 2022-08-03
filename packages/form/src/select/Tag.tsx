@@ -20,6 +20,7 @@ import {
   useState,
   useTransition,
 } from "react";
+import { createPortal } from "react-dom";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { Icons } from "../types/icons";
 import { Options } from "./Option";
@@ -212,24 +213,27 @@ export const TagInput = <T extends AnyObject>({
           <AxIcon icon={Icons.iconDropdown} />
         </Combobox.Button>
       </FieldWrapper>
-      <Combobox.Options
-        ref={setPopperElement as AnyObject}
-        onMouseUp={(e: AnyObject) =>
-          e.currentTarget.parentElement
-            .querySelector(".ax-field__input")
-            ?.focus()
-        }
-        className="ax-select__dropdown"
-        style={styles.popper}
-      >
-        <Options
-          query={query}
-          options={list}
-          renderer={renderer}
-          allowCreate={allowCreate}
-          labelProperty={labelProperty}
-        />
-      </Combobox.Options>
+      {createPortal(
+        <Combobox.Options
+          ref={setPopperElement as AnyObject}
+          onMouseUp={(e: AnyObject) =>
+            e.currentTarget.parentElement
+              .querySelector(".ax-field__input")
+              ?.focus()
+          }
+          className="ax-select__dropdown"
+          style={styles.popper}
+        >
+          <Options
+            query={query}
+            options={list}
+            renderer={renderer}
+            allowCreate={allowCreate}
+            labelProperty={labelProperty}
+          />
+        </Combobox.Options>,
+        document.body
+      )}
     </Combobox>
   );
 };
