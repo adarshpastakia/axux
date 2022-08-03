@@ -94,9 +94,8 @@
       @apply m-0;
 
       & > .ax-button__inner {
-        height: 1.5em;
+        min-height: 1.5em;
         min-width: 1em;
-        min-height: 1em;
       }
       &[data-square="true"] > .ax-button__inner {
         width: 1.5em;
