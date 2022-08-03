@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxButton, AxPopover } from "@axux/core";
+import { AxButton, AxPopover, AxText } from "@axux/core";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context";
@@ -22,8 +22,13 @@ export const QueryView = ({
   const view = useMemo(() => JSON.stringify(query, null, 2), [query]);
 
   return (
-    <div className="p-2">
-      <pre className="overflow-auto border border-bw-500/50 shadow-inner text-sm p-4 max-h-[24rem] max-w-[48rem] min-w-[24rem]">
+    <div className="p-2 bg-component">
+      <AxText.Copy
+        size="sm"
+        text={view}
+        className="absolute top-2 ltr:right-2 rtl:left-2"
+      />
+      <pre className="overflow-auto bg-base border border-bw-500/50 shadow-inner text-sm p-2 max-h-[24rem] max-w-[48rem] min-w-[24rem]">
         {view}
       </pre>
       <AxPopover.Dismiss>
