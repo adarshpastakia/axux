@@ -39,7 +39,7 @@
       @apply flex flex-1 items-center flex-wrap gap-1 py-1;
     }
     & .ax-filter__addButton {
-      @apply border-dashed px-2 py-px;
+      @apply border-dashed px-2 py-px border-bw-500/50;
     }
 
     & .ax-filter__deleteButton {
@@ -60,9 +60,28 @@
 
     &[data-type="include"] {
       @apply bg-primary-500/10 border-primary-500/50;
+
+      &[data-global="true"] {
+        @apply bg-primary-600/90;
+      }
     }
     &[data-type="exclude"] {
       @apply bg-danger-500/10 border-danger-500/50;
+
+      &[data-global="true"] {
+        @apply bg-danger-600/90;
+
+        & .ax-field__option .ax-icon {
+          @apply text-white;
+        }
+      }
+    }
+    &[data-global="true"] {
+      @apply text-white;
+
+      & .ax-field__option .ax-icon {
+        @apply text-white;
+      }
     }
     &[data-disabled="true"] {
       @apply opacity-50;
@@ -73,7 +92,7 @@
     }
 
     & .ax-filter__tag--close {
-      @apply inline-block px-1 text-md leading-[0.875] opacity-30 hover:opacity-50 w-[1em] h-[1em];
+      @apply inline-block px-1 text-md leading-[0.875] opacity-50 hover:opacity-70 w-[1em] h-[1em];
     }
   }
 }
