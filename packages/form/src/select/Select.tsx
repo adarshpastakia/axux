@@ -21,6 +21,7 @@ import {
   useState,
   useTransition,
 } from "react";
+import { createPortal } from "react-dom";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { Icons } from "../types/icons";
 import { Options } from "./Option";
@@ -158,19 +159,22 @@ export const SelectInput = <T extends AnyObject>({
           <AxIcon icon={Icons.iconDropdown} />
         </Combobox.Button>
       </FieldWrapper>
-      <Combobox.Options
-        ref={setPopperElement as AnyObject}
-        className="ax-select__dropdown"
-        style={styles.popper}
-      >
-        <Options
-          query={query}
-          options={list}
-          renderer={renderer}
-          allowCreate={allowCreate}
-          labelProperty={labelProperty}
-        />
-      </Combobox.Options>
+      {createPortal(
+        <Combobox.Options
+          ref={setPopperElement as AnyObject}
+          className="ax-select__dropdown"
+          style={styles.popper}
+        >
+          <Options
+            query={query}
+            options={list}
+            renderer={renderer}
+            allowCreate={allowCreate}
+            labelProperty={labelProperty}
+          />
+        </Combobox.Options>,
+        document.body
+      )}
     </Combobox>
   );
 };
