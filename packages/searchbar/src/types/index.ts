@@ -122,21 +122,21 @@ export interface FilterField {
 interface BaseFilter {
   type: "filter" | "query";
   label?: string;
+  isGlobal?: boolean;
   isDisabled?: boolean;
+  isNegative?: boolean;
+  isRequired?: boolean;
 }
 export interface FilterByField extends BaseFilter {
   type: "filter";
   field: string;
   operator: EnumOperator;
   value?: FilterValue;
-  isTimeField?: boolean;
-  isNegative?: boolean;
-  isRequired?: boolean;
 }
 export interface FilterByQuery extends BaseFilter {
   type: "query";
   label: string;
-  query?: KeyValue;
+  query: KeyValue;
 }
 
 export type FilterObject = FilterByField | FilterByQuery;

@@ -22,8 +22,14 @@ export const FilterTag = memo(
     const { updateFilter, removeFilter } = useSearchContext();
 
     const label = useMemo(() => {
+      if (filter.type === "query")
+        return (
+          <Fragment>
+            <b>Query&nbsp;</b>
+            <span>{filter.label}</span>
+          </Fragment>
+        );
       if (filter.label) return filter.label;
-      if (filter.type === "query") return "Query";
 
       return (
         <Fragment>
@@ -39,6 +45,7 @@ export const FilterTag = memo(
         <div
           className="ax-filter__tag"
           data-disabled={filter.isDisabled}
+          data-global={filter.isGlobal}
           data-type={
             filter.type === "filter" && filter.isNegative
               ? "exclude"
@@ -53,12 +60,14 @@ export const FilterTag = memo(
             onChange={(e) => updateFilter(index, { isDisabled: !e })}
           />
           <div>{label}</div>
-          <span
-            className="ax-filter__tag--close"
-            onClick={(e) => (removeFilter(index), e.preventDefault())}
-          >
-            &times;
-          </span>
+          {!filter.isRequired && (
+            <span
+              className="ax-filter__tag--close"
+              onClick={(e) => (removeFilter(index), e.preventDefault())}
+            >
+              &times;
+            </span>
+          )}
         </div>
         {filter.type === "query" && <QueryView index={index} {...filter} />}
         {filter.type === "filter" && (
