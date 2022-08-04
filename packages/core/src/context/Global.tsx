@@ -14,7 +14,6 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -117,11 +116,13 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
   const [calendar, setCalendar] = useState<State["calendar"]>(
     defaultCalendar ?? systemCalendar()
   );
-  const locale = useRef<State["locale"]>(defaultLocale ?? systemLocale());
+  const [locale, setLocale] = useState<State["locale"]>(
+    defaultLocale ?? systemLocale()
+  );
 
   /******************* set initial theme and locale dir  *******************/
   useEffect(() => {
-    document.documentElement.lang = locale.current;
+    document.documentElement.lang = locale;
     if (
       !document.documentElement.classList.contains("dark") &&
       !document.documentElement.classList.contains("light")
@@ -132,7 +133,7 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
         document.documentElement.classList.contains("light") ? "light" : "dark"
       );
     }
-    i18next.changeLanguage(locale.current).then(() => {
+    i18next.changeLanguage(locale).then(() => {
       document.documentElement.dir = i18next.dir();
     });
   }, []);
@@ -155,6 +156,7 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
       localStorage.setItem(KEY_LOCALE, locale);
       document.documentElement.lang = locale;
       document.documentElement.dir = i18next.dir();
+      setLocale(locale);
     });
   }, []);
 
@@ -174,7 +176,7 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
         errorElement,
         currentTheme: theme,
         currentCalendar: calendar,
-        currentLocale: locale.current,
+        currentLocale: locale,
       }}
     >
       <HelmetProvider>
