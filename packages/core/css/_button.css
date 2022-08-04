@@ -192,7 +192,7 @@
     }
   }
 
-  div[class*="bg-"] .ax-button[data-type="link"] .ax-button__inner {
+  div[class*="bg-"] > .ax-button[data-type="link"] .ax-button__inner {
     &:not([data-popover-open="true"]) {
       @apply bg-bw-300 dark:bg-bw-700 bg-opacity-0 dark:bg-opacity-0 hover:bg-opacity-25 dark:hover:bg-opacity-25;
     }
