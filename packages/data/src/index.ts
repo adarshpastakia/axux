@@ -12,6 +12,7 @@ export { AxCheckList } from "./checklist/CheckList";
 export { AxDatagrid } from "./datagrid/Datagrid";
 export { AxEditor } from "./editor/Editor";
 export { AxHistogram } from "./histogram/Histogram";
+export { useFilteredList } from "./hooks/useFilteredList";
 export { usePagination } from "./hooks/usePagination";
 export { AxJsonView } from "./json/JsonView";
 export { AxPagination } from "./pagination/Pagination";
