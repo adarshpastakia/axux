@@ -47,7 +47,7 @@ const filters = [
   {
     type: "query" as AnyObject,
     label: "field query",
-    query: { field: "field", match: "test" },
+    query: [{ field: "field", match: "test" }],
   },
 ];
 

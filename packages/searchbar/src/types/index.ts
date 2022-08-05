@@ -120,6 +120,7 @@ export interface FilterField {
 }
 
 interface BaseFilter {
+  id?: string;
   type: "filter" | "query";
   label?: string;
   isGlobal?: boolean;
@@ -136,7 +137,7 @@ export interface FilterByField extends BaseFilter {
 export interface FilterByQuery extends BaseFilter {
   type: "query";
   label: string;
-  query: KeyValue;
+  query: KeyValue[];
 }
 
 export type FilterObject = FilterByField | FilterByQuery;
@@ -228,6 +229,11 @@ export interface FilterProps {
    * (Required when filter bar enabled)
    */
   fields?: FilterField[];
+
+  /**
+   * Editable filters
+   */
+  isEditable?: boolean;
 
   /**
    * Disable component

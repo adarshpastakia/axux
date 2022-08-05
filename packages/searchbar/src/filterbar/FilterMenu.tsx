@@ -10,19 +10,25 @@ import { AxDivider, AxMenu } from "@axux/core";
 import { Fragment, memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context";
-import { EnumFieldType, FilterByField, FilterObject } from "../types";
+import { EnumFieldType, FilterObject } from "../types";
 import { Icons } from "../types/icons";
 
 export const FilterMenu = memo(
-  ({ index, ...filter }: FilterByField & { index: number }) => {
+  ({ index, ...filter }: FilterObject & { index: number }) => {
     const { t } = useTranslation("searchbar");
-    const { updateFilter, removeFilter, fields } = useSearchContext();
+    const { updateFilter, removeFilter, fields, isEditable } =
+      useSearchContext();
 
     const canEdit = useMemo(() => {
-      if (fields.length === 0) return false;
-      const field = fields.find((f) => f.field === filter.field ?? "");
+      if (fields.length === 0 || !isEditable) return false;
+      const field = fields.find(
+        (f) => (filter.type === "filter" && f.field === filter.field) ?? ""
+      );
       return field?.type !== EnumFieldType.GEO;
-    }, [filter]);
+    }, [filter, isEditable]);
+    const canView = useMemo(() => {
+      return !canEdit || filter.type === "query";
+    }, [filter, canEdit]);
 
     return (
       <AxMenu className="ax-filter__menu">
@@ -32,6 +38,16 @@ export const FilterMenu = memo(
               data-panel="edit"
               icon={Icons.iconPencil}
               label={t("label.edit")}
+            />
+            <AxDivider size="xs" />
+          </Fragment>
+        )}
+        {canView && (
+          <Fragment>
+            <AxMenu.Item
+              data-panel="view"
+              icon={Icons.iconPencil}
+              label={t("label.view")}
             />
             <AxDivider size="xs" />
           </Fragment>
