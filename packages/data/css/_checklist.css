@@ -18,7 +18,7 @@
       & .ax-checkList__checkbox {
         @apply text-muted leading-none;
 
-        &[data-type="multiple"] + & {
+        &[data-type="multiple"] + .ax-checkList__checkbox {
           @apply hidden;
         }
       }
@@ -27,7 +27,7 @@
         @apply text-muted opacity-50 pointer-events-none;
       }
 
-      & label {
+      & > label {
         @apply flex-auto truncate ltr:pr-4 rtl:pl-4;
       }
 
@@ -54,8 +54,8 @@
       &[data-type="multiple"] {
         @apply hidden;
       }
-      &[data-type="multiple"] + & {
-        @apply block;
+      &[data-type="multiple"] + .ax-checkList__checkbox {
+        @apply block whitespace-nowrap;
       }
     }
     &:active .ax-checkList__checkbox {
