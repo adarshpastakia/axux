@@ -10,6 +10,7 @@
     "optional": "Optional",
     "add": "Add Filter",
     "edit": "Edit",
+    "view": "View",
     "invert": "Invert Include/Exclude",
     "removeAll": "Remove All",
     "enableAll": "Enable All",

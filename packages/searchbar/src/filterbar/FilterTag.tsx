@@ -69,24 +69,29 @@ export const FilterTag = memo(
             </span>
           )}
         </div>
-        {filter.type === "query" && <QueryView index={index} {...filter} />}
-        {filter.type === "filter" && (
-          <AxPanel.Stack>
-            <AxPopover.Dismiss>
-              <AxPanel panelId="menu">
-                <FilterMenu index={index} {...filter} />
-              </AxPanel>
-            </AxPopover.Dismiss>
-            <AxPanel panelId="edit" width="32rem">
-              <AxHeader>
-                <AxTitle>{t("label.edit")}</AxTitle>
-              </AxHeader>
-              <AxContent padding="none">
-                <FilterForm index={index} {...(filter as AnyObject)} />
-              </AxContent>
+        <AxPanel.Stack>
+          <AxPopover.Dismiss>
+            <AxPanel panelId="menu">
+              <FilterMenu index={index} {...filter} />
             </AxPanel>
-          </AxPanel.Stack>
-        )}
+          </AxPopover.Dismiss>
+          <AxPanel panelId="edit" width="32rem">
+            <AxHeader>
+              <AxTitle>{t("label.edit")}</AxTitle>
+            </AxHeader>
+            <AxContent padding="none">
+              <FilterForm index={index} {...(filter as AnyObject)} />
+            </AxContent>
+          </AxPanel>
+          <AxPanel panelId="view" width="32rem">
+            <AxHeader>
+              <AxTitle>{t("label.view")}</AxTitle>
+            </AxHeader>
+            <AxContent padding="none">
+              <QueryView index={index} {...(filter as AnyObject)} />
+            </AxContent>
+          </AxPanel>
+        </AxPanel.Stack>
       </AxPopover>
     );
   }

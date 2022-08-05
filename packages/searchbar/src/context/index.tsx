@@ -29,6 +29,7 @@ interface Context {
   defaultQueryList: QueryOption[];
 
   isDirty: boolean;
+  isEditable: boolean;
 
   query: string;
   history: string[];
@@ -66,6 +67,7 @@ export const SearchContextProvider: React.FC<
   historyCount = 20,
   defaultQueryList = [],
   isCollapsed = false,
+  isEditable = false,
   fields = [],
   onQuery,
   onSearch,
@@ -166,6 +168,7 @@ export const SearchContextProvider: React.FC<
           query,
           fields,
           history,
+          isEditable,
           updateQuery,
           onQuery,
           handleSearch,

@@ -16,7 +16,7 @@ import { GlobalMenu } from "./GlobalMenu";
 
 export const FilterWrapper: FC<Partial<FilterProps>> = ({}) => {
   const { t } = useTranslation("searchbar");
-  const { showFilters, filters, fields } = useSearchContext();
+  const { showFilters, filters, fields, isEditable } = useSearchContext();
 
   if (!showFilters) return null;
 
@@ -28,7 +28,7 @@ export const FilterWrapper: FC<Partial<FilterProps>> = ({}) => {
         {filters.map((filter, index) => (
           <FilterTag {...filter} index={index} key={index} />
         ))}
-        {fields.length > 0 && <AddFilter />}
+        {isEditable && fields.length > 0 && <AddFilter />}
       </div>
     </div>
   );
