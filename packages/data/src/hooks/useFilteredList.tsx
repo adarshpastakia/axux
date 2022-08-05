@@ -7,7 +7,7 @@
  */
 
 import { isEmpty, matchString } from "@axux/utilities";
-import { useCallback, useState, useTransition } from "react";
+import { useCallback, useEffect, useState, useTransition } from "react";
 
 const filterList = (items: AnyObject[], query: string, matcher?: AnyObject) => {
   const newList: AnyObject[] = [];
@@ -29,6 +29,10 @@ export const useFilteredList = <T extends KeyValue = AnyObject>(
   const [search, setSearch] = useState("");
   const [filteredList, setFilteredList] = useState(items);
   const [isSearching, startTransition] = useTransition();
+
+  useEffect(() => {
+    startTransition(() => setFilteredList(items));
+  }, [items]);
 
   const filterItems = useCallback(
     (query: string) => {
