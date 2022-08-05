@@ -19,7 +19,7 @@
     @apply flex flex-wrap;
     margin: calc(-0.5 * var(--gutter));
 
-    & + & {
+    & + .ax-row {
       margin-top: calc(0.5 * var(--gutter));
     }
   }

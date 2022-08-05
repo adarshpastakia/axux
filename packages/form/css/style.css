@@ -100,7 +100,7 @@
   .ax-field__container {
     @apply rounded;
 
-    & + & {
+    & + .ax-field__container {
       @apply mt-4;
     }
 

@@ -28,7 +28,7 @@
     & .ax-panel {
       @apply rounded-none;
 
-      & + & {
+      & + .ax-panel {
         @apply -mt-px;
       }
 
@@ -47,7 +47,8 @@
         }
       }
       &[data-collapsed="false"] {
-        flex: 1 0 12rem;
+        flex: 0 1 auto;
+        min-height: 12rem;
 
         & .toggle-collapse {
           @apply opacity-10 pointer-events-none;
