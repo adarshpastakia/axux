@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.27](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.26...v2.0.0-beta.27) (2022-08-06)
+
+
+### Bug Fixes
+
+* **Searchbar:** update query filter ([dbd11cc](https://github.com/adarshpastakia/axux/commit/dbd11cc747d660b6f0d357713869e0cd980f3bd2))
+
+
+
+
+
 # [2.0.0-beta.26](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.25...v2.0.0-beta.26) (2022-08-03)
 
 **Note:** Version bump only for package @axux/searchbar

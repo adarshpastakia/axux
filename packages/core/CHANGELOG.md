@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.27](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.26...v2.0.0-beta.27) (2022-08-06)
+
+
+### Bug Fixes
+
+* **Context:** locale state ([2cc6fdc](https://github.com/adarshpastakia/axux/commit/2cc6fdcefb56a1f734aa4ac969f47f3abc8133c4))
+
+
+
+
+
 # [2.0.0-beta.26](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.25...v2.0.0-beta.26) (2022-08-03)
 
 

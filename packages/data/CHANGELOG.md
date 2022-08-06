@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.27](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.26...v2.0.0-beta.27) (2022-08-06)
+
+
+### Bug Fixes
+
+* **useFilteredList:** export ([53e665c](https://github.com/adarshpastakia/axux/commit/53e665c2c9ffff99378ea5d0de72b0c3b3e802c2))
+* **useFilteredList:** update list on prop change ([f0b7d69](https://github.com/adarshpastakia/axux/commit/f0b7d690a99b00b502ea8c16163c072ab19e785a))
+
+
+
+
+
 # [2.0.0-beta.26](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.25...v2.0.0-beta.26) (2022-08-03)
 
 **Note:** Version bump only for package @axux/data
