@@ -27,12 +27,16 @@ export const useLocalStorage = <T>(
 
   useEffect(() => {
     setValue(
-      getValue(localStorage.getItem(key) ?? `${defaultValue}`) as AnyObject
+      JSON.parse(
+        getValue(
+          localStorage.getItem(key) ?? JSON.stringify(defaultValue)
+        ) as AnyObject
+      )
     );
   }, [key, defaultValue]);
 
   const changeValue = (value: T) => {
-    localStorage.setItem(key, value as AnyObject);
+    localStorage.setItem(key, JSON.stringify(value));
     setValue(value);
   };
 
@@ -47,12 +51,16 @@ export const useSessionStorage = <T>(
 
   useEffect(() => {
     setValue(
-      getValue(sessionStorage.getItem(key) ?? `${defaultValue}`) as AnyObject
+      JSON.parse(
+        getValue(
+          sessionStorage.getItem(key) ?? JSON.stringify(defaultValue)
+        ) as AnyObject
+      )
     );
   }, [key, defaultValue]);
 
   const changeValue = (value: T) => {
-    sessionStorage.setItem(key, value as AnyObject);
+    sessionStorage.setItem(key, JSON.stringify(value));
     setValue(value);
   };
 
