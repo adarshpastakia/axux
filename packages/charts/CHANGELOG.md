@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.28](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.27...v2.0.0-beta.28) (2022-08-08)
+
+
+### Bug Fixes
+
+* **TimeSlider:** update size and line style ([a99b98a](https://github.com/adarshpastakia/axux/commit/a99b98a16a2942c6e2cdbbf597b68f2468451505))
+
+
+
+
+
 # [2.0.0-beta.27](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.26...v2.0.0-beta.27) (2022-08-06)
 
 **Note:** Version bump only for package @axux/charts

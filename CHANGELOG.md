@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.28](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.27...v2.0.0-beta.28) (2022-08-08)
+
+
+### Bug Fixes
+
+* **Searchbar:** history storage key ([8e55aa9](https://github.com/adarshpastakia/axux/commit/8e55aa9b274e80c831285aa07df53c89ddb269ff))
+* **Select:** dropdown max height ([77b320f](https://github.com/adarshpastakia/axux/commit/77b320fadf35335523c5bdf1c9ecf4a8aa47c146))
+* **TimeSlider:** update size and line style ([a99b98a](https://github.com/adarshpastakia/axux/commit/a99b98a16a2942c6e2cdbbf597b68f2468451505))
+* **useStorage:** store as json string ([abb38d3](https://github.com/adarshpastakia/axux/commit/abb38d38f9bdc3cdf8a2263a0997ab0f9511c158))
+
+
+
+
+
 # [2.0.0-beta.27](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.26...v2.0.0-beta.27) (2022-08-06)
 
 

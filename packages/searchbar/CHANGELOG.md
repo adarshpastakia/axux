@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.28](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.27...v2.0.0-beta.28) (2022-08-08)
+
+
+### Bug Fixes
+
+* **Searchbar:** history storage key ([8e55aa9](https://github.com/adarshpastakia/axux/commit/8e55aa9b274e80c831285aa07df53c89ddb269ff))
+
+
+
+
+
 # [2.0.0-beta.27](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.26...v2.0.0-beta.27) (2022-08-06)
 
 
