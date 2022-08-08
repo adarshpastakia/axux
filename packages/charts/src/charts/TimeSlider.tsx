@@ -99,7 +99,7 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
         symbol: "none",
         type: "line",
         smooth: true,
-        lineStyle: { width: 0 },
+        lineStyle: { width: 2 },
         data,
       } as AnyObject,
     ];
@@ -109,7 +109,7 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
         top: 4,
         left: 0,
         right: 0,
-        bottom: "35%",
+        bottom: "50%",
       },
       xAxis: categoryAxis,
       yAxis: valueAxis,
@@ -123,7 +123,7 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
       dataZoom: [
         {
           type: "slider",
-          height: "30%",
+          height: "45%",
           bottom: 4,
           left: 2,
           right: 8,
