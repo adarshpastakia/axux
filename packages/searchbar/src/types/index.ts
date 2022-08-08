@@ -166,6 +166,12 @@ export interface SearchProps {
   historyCount?: number;
 
   /**
+   * Search history storage key
+   * @default: "ax:search"
+   */
+  historyKey: string;
+
+  /**
    * Add-on before search input
    */
   prepend?: ReactElement;
