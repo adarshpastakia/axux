@@ -6,18 +6,12 @@
  * @license   : MIT
  */
 
+import { useLocalStorage } from "@axux/core";
 import { ChildrenProp } from "@axux/core/dist/types";
 import i18next from "i18next";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { I18nextProvider } from "react-i18next";
 import {
-  EnumFieldType,
   FilterField,
   FilterObject,
   FilterProps,
@@ -69,6 +63,7 @@ export const SearchContextProvider: React.FC<
   isCollapsed = false,
   isEditable = false,
   fields = [],
+  historyKey = "ax:search",
   onQuery,
   onSearch,
   onFilterChanged,
@@ -78,11 +73,15 @@ export const SearchContextProvider: React.FC<
   const [isDirty, setDirty] = useState(false);
   const [showFilters, setShowFilters] = useState(!isCollapsed);
 
-  const [history, setHistory] = useState<string[]>([]);
+  const [history, setHistory] = useLocalStorage<string[]>(historyKey, []);
 
-  // useEffect(() => {
-  //   onSearch?.({ query, filters });
-  // }, [query, filters]);
+  useEffect(() => {
+    setFilters(_filters);
+  }, [_filters]);
+
+  useEffect(() => {
+    setQuery(_query);
+  }, [_query]);
 
   const handleSearch = useCallback(() => {
     setDirty(false);
