@@ -8,7 +8,7 @@
 
 @layer components {
   .ax-histogram {
-    @apply flex flex-col;
+    @apply flex flex-col overflow-x-hidden;
   }
 
   .ax-histogram__item {
@@ -41,7 +41,7 @@
   }
 
   .ax-histogram__meter {
-    @apply my-px h-6 flex-1 ltr:bg-gradient-to-r rtl:bg-gradient-to-l flex items-center relative select-none mix-blend-luminosity;
+    @apply my-px h-6 flex-1 ltr:bg-gradient-to-r rtl:bg-gradient-to-l flex items-center relative select-none;
 
     &::before {
       @apply overflow-hidden absolute inset-0 ltr:border-l-2 rtl:border-r-2 bg-bw-0/70 dark:bg-bw-1000/70;

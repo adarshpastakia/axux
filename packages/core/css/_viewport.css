@@ -78,6 +78,7 @@
   }
 
   .ax-page > .ax-error-boundary,
+  .ax-section > .ax-error-boundary,
   .ax-viewport > .ax-error-boundary {
     @apply grid-area-[content] max-h-[80%] max-w-[80%] place-self-center;
   }
