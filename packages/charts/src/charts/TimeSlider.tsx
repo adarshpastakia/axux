@@ -7,6 +7,7 @@
  */
 
 import { debounce, isEmpty } from "@axux/utilities";
+import { endOfDay, startOfDay } from "date-fns";
 import { EChartOption, EChartsType } from "echarts";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { BaseChart } from "../types";
@@ -48,7 +49,10 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
         const zoom = chart.getOption().dataZoom?.[0] as AnyObject;
         const startValue = Math.floor(zoom.startValue);
         const endValue = Math.ceil(zoom.endValue + (24 * 60 * 60 * 1000 - 1));
-        handleBrush({ start: new Date(startValue), end: new Date(endValue) });
+        handleBrush({
+          start: startOfDay(new Date(startValue)),
+          end: endOfDay(new Date(endValue)),
+        });
         setRange({ startValue, endValue });
       });
       return () => {
