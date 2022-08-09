@@ -25,7 +25,6 @@ export const FilterTag = memo(
       if (filter.type === "query")
         return (
           <Fragment>
-            <b>Query&nbsp;</b>
             <span>{filter.label}</span>
           </Fragment>
         );
@@ -46,14 +45,10 @@ export const FilterTag = memo(
           className="ax-filter__tag"
           data-disabled={filter.isDisabled}
           data-global={filter.isGlobal}
-          data-type={
-            filter.type === "filter" && filter.isNegative
-              ? "exclude"
-              : "include"
-          }
+          data-type={filter.isNegative ? "exclude" : "include"}
         >
           <AxField.Checkbox
-            isInvalid={filter.type === "filter" && filter.isNegative}
+            isInvalid={filter.isNegative}
             isChecked={!filter.isDisabled}
             // @ts-ignore
             onClick={(e) => e.stopPropagation()}

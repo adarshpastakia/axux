@@ -8,34 +8,34 @@
 
 import { useLocalStorage } from "@axux/core";
 import { ChildrenProp } from "@axux/core/dist/types";
+import { SuggestItem } from "@axux/form/dist/select/Suggest";
 import i18next from "i18next";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import { I18nextProvider } from "react-i18next";
-import {
-  FilterField,
-  FilterObject,
-  FilterProps,
-  QueryOption,
-  SearchProps,
-} from "../types";
+import { FilterField, FilterObject, FilterProps, SearchProps } from "../types";
 
 interface Context {
-  defaultQueryList: QueryOption[];
+  defaultQueryList: SuggestItem[];
 
   isDirty: boolean;
   isEditable: boolean;
 
   query: string;
-  history: string[];
-  updateQuery: (q: string) => void;
+  options: string[];
+  handleSelect: (q?: string) => void;
+  updateQuery: (q: string) => Promise<SuggestItem[]> | SuggestItem[];
 
   showFilters: boolean;
   setShowFilters: (b: boolean) => void;
 
   fields: FilterField[];
   filters: FilterObject[];
-
-  onQuery: SearchProps["onQuery"];
 
   handleSearch: () => void;
 
@@ -51,6 +51,8 @@ interface Context {
 export const SearchContext = React.createContext<Context>({} as AnyObject);
 
 export const useSearchContext = () => useContext(SearchContext);
+
+const blankHistory: AnyObject[] = [];
 
 export const SearchContextProvider: React.FC<
   Partial<SearchProps & FilterProps> & ChildrenProp
@@ -73,7 +75,12 @@ export const SearchContextProvider: React.FC<
   const [isDirty, setDirty] = useState(false);
   const [showFilters, setShowFilters] = useState(!isCollapsed);
 
-  const [history, setHistory] = useLocalStorage<string[]>(historyKey, []);
+  const [isPending, startTransition] = useTransition();
+  const [history, setHistory] = useLocalStorage<string[]>(
+    historyKey,
+    blankHistory
+  );
+  const [options, setOptions] = useState<string[]>([]);
 
   useEffect(() => {
     setFilters(_filters);
@@ -83,18 +90,40 @@ export const SearchContextProvider: React.FC<
     setQuery(_query);
   }, [_query]);
 
+  useEffect(() => {
+    setOptions(history);
+  }, [history]);
+
+  const handleSelect = useCallback(
+    (query: string = "") => {
+      setDirty(false);
+      setQuery(query);
+      onSearch?.({ query, filters });
+    },
+    [filters, onSearch]
+  );
+
   const handleSearch = useCallback(() => {
     setDirty(false);
+    !!query &&
+      setHistory([
+        query,
+        ...history.filter((h) => h !== query).slice(0, historyCount - 1),
+      ]);
+    setQuery(query);
     onSearch?.({ query, filters });
   }, [query, filters, onSearch]);
 
   const updateQuery = (query: string) => {
-    setHistory([
+    const newHistory = [
       query,
       ...history.filter((h) => h !== query).slice(0, historyCount - 1),
-    ]);
-    setQuery(query);
-    onSearch?.({ query, filters });
+    ];
+    setDirty(true);
+    startTransition(() => {
+      setOptions(newHistory.filter((h) => h.includes(query)));
+    });
+    return onQuery?.(query) ?? [];
   };
 
   const updateFilter = (index: number, filter: Partial<FilterObject>) => {
@@ -166,10 +195,10 @@ export const SearchContextProvider: React.FC<
           isDirty,
           query,
           fields,
-          history,
+          options,
           isEditable,
+          handleSelect,
           updateQuery,
-          onQuery,
           handleSearch,
           updateFilter,
           addFilter,

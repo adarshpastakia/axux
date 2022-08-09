@@ -16,18 +16,19 @@ export const SearchInput = () => {
   const {
     defaultQueryList = [],
     query,
-    history,
+    options,
+    handleSelect,
     updateQuery,
-    onQuery,
   } = useSearchContext();
 
   return (
     <AxField.Suggest
       placeholder={t("placeholder")}
-      onSearch={updateQuery}
       value={query ?? ""}
-      options={history}
-      onQuery={onQuery as AnyObject}
+      options={options}
+      onClear={handleSelect}
+      onQuery={updateQuery}
+      onSelect={handleSelect}
       defaultItems={defaultQueryList as AnyObject}
     >
       <AxField.Addon className="text-muted" icon={Icons.iconConsole} />

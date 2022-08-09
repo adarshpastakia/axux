@@ -11,7 +11,7 @@
     @apply flex flex-1 gap-1;
 
     & .ax-filterButton__count {
-      @apply rounded-full bg-bw-500 text-white text-xs px-1 pb-px;
+      @apply rounded-full fixed-numbers bg-bw-500 text-white text-xs px-1 pb-px min-w-[1rem] text-center;
 
       &[data-active="true"] {
         @apply bg-accent-500 text-white;
