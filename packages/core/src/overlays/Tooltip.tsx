@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { FC, forwardRef, RefObject } from "react";
+import { FC, forwardRef } from "react";
 import { ChildProp, ElementProps, TooltipProps as TP } from "../types";
 import { AxPopover, PopoverProps } from "./Popover";
 
@@ -62,3 +62,4 @@ export const AxTooltip: FC<TooltipProps> = forwardRef<
     );
   }
 );
+AxTooltip.displayName = "AxTooltip";

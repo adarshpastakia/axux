@@ -28,3 +28,4 @@ export const AxSection = forwardRef<HTMLDivElement, SectionProps>(
     </div>
   )
 );
+AxSection.displayName = "AxSection";
