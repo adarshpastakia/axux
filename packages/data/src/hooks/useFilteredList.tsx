@@ -31,7 +31,7 @@ export const useFilteredList = <T extends KeyValue = AnyObject>(
   const [isSearching, startTransition] = useTransition();
 
   useEffect(() => {
-    startTransition(() => setFilteredList(items));
+    setFilteredList(items);
   }, [items]);
 
   const filterItems = useCallback(
