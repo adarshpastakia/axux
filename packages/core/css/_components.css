@@ -20,14 +20,14 @@
 /******************* section *******************/
 @layer components {
   .ax-section {
-    @apply panel relative;
+    @apply panel relative z-0;
   }
 }
 
 /******************* content *******************/
 @layer components {
   .ax-content {
-    @apply overflow-auto grid-area-[content] p-4;
+    @apply overflow-auto grid-area-[content] p-4 z-0;
 
     &[data-padding="none"] {
       @apply p-0;
@@ -90,7 +90,7 @@
       @apply p-1;
     }
 
-    & .ax-button {
+    & > .ax-button {
       @apply m-0;
 
       & > .ax-button__inner {
