@@ -30,8 +30,13 @@ export const QueryView = ({
         value = `[${filter.value?.join(" - ")}]`;
       }
 
+      if (filter.operator === EnumOperator.IN && isArray(filter.value)) {
+        value = `[${filter.value?.join(", ")}]`;
+      }
+
       return (
         <Fragment>
+          {filter.isNegative && <b>NOT&nbsp;</b>}
           <span>{filter.field}</span>
           <b>&nbsp;{t(`operator.${filter.operator}`)}&nbsp;</b>
           <div>{value}</div>

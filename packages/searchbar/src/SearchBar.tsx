@@ -12,13 +12,13 @@ import { FilterWrapper } from "./filterbar/FilterWrapper";
 import { SearchWrapper } from "./searchbar/SearchWrapper";
 import { FilterProps, SearchProps } from "./types";
 
-export const AxSearchBar: FC<
-  SearchProps &
-    Omit<
-      FilterProps,
-      "onFilterAdded" | "onFilterRemoved" | "onFilterUpdate" | "onFilterChanged"
-    >
-> = ({ append, prepend, actions, hideFilters, ...props }) => {
+export const AxSearchBar: FC<SearchProps & FilterProps> = ({
+  append,
+  prepend,
+  actions,
+  hideFilters,
+  ...props
+}) => {
   return (
     <SearchContextProvider {...props}>
       <SearchWrapper

@@ -16,7 +16,7 @@ export const SearchButton = () => {
 
   return (
     <AxButton
-      color={isDirty ? "success" : "primary"}
+      color={isDirty ? "warning" : "primary"}
       style="solid"
       onClick={handleSearch}
     >

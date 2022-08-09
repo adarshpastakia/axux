@@ -7,6 +7,7 @@
  */
 
 import { MenuChildren } from "@axux/core/dist/menu/types";
+import { SuggestItem } from "@axux/form/dist/select/Suggest";
 import { ReactElement } from "react";
 
 export enum EnumFieldType {
@@ -147,12 +148,6 @@ export interface QueryObject {
   filters: FilterObject[];
 }
 
-export interface QueryOption {
-  label?: string;
-  value: string;
-  description?: string;
-}
-
 export interface SearchProps {
   /**
    * Query string
@@ -169,7 +164,7 @@ export interface SearchProps {
    * Search history storage key
    * @default: "ax:search"
    */
-  historyKey: string;
+  historyKey?: string;
 
   /**
    * Add-on before search input
@@ -215,12 +210,12 @@ export interface SearchProps {
   /**
    * Default query items for suggest
    */
-  defaultQueryList?: QueryOption[];
+  defaultQueryList?: SuggestItem[];
   /**
    * On query string change event
    * @param query
    */
-  onQuery?: (query: string) => Promise<QueryOption[]> | QueryOption[];
+  onQuery?: (query: string) => Promise<SuggestItem[]> | SuggestItem[];
 }
 
 export interface FilterProps {
