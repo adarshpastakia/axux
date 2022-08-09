@@ -6,18 +6,7 @@
  * @license   : MIT
  */
 
-import { isTrue } from "@axux/utilities";
 import { useEffect, useState } from "react";
-
-const getValue = (value: string = "") => {
-  if (value === "true" || value === "false") {
-    return isTrue(value);
-  }
-  if (!isNaN(parseFloat(value))) {
-    return parseFloat(value);
-  }
-  return value;
-};
 
 export const useLocalStorage = <T>(
   key: string,
@@ -27,11 +16,7 @@ export const useLocalStorage = <T>(
 
   useEffect(() => {
     setValue(
-      JSON.parse(
-        getValue(
-          localStorage.getItem(key) ?? JSON.stringify(defaultValue)
-        ) as AnyObject
-      )
+      JSON.parse(localStorage.getItem(key) as AnyObject) ?? defaultValue
     );
   }, [key, defaultValue]);
 
@@ -51,11 +36,7 @@ export const useSessionStorage = <T>(
 
   useEffect(() => {
     setValue(
-      JSON.parse(
-        getValue(
-          sessionStorage.getItem(key) ?? JSON.stringify(defaultValue)
-        ) as AnyObject
-      )
+      JSON.parse(sessionStorage.getItem(key) as AnyObject) ?? defaultValue
     );
   }, [key, defaultValue]);
 
