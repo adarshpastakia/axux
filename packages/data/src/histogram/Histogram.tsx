@@ -10,7 +10,7 @@ import { AxContent, AxIcon } from "@axux/core";
 import { Color } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { Format } from "@axux/utilities";
-import { FC, Fragment, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { SelectableProps, useSelectableList } from "../hooks/useSelectableList";
 
@@ -85,19 +85,13 @@ const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
           <AxIcon
             data-type="positive"
             onClick={(e) => (onClick(id, 1), e.stopPropagation())}
-            icon={
-              selected === 1 ? AppIcons.iconCheckPlus : AppIcons.iconExpandPlus
-            }
+            icon={AppIcons.iconMagnifyPlus}
             data-selected={selected === 1}
           />
           <AxIcon
             data-type="negative"
             onClick={(e) => (onClick(id, -1), e.stopPropagation())}
-            icon={
-              selected === -1
-                ? AppIcons.iconCheckMinus
-                : AppIcons.iconCollapseMinus
-            }
+            icon={AppIcons.iconMagnifyMinus}
             data-selected={selected === -1}
           />
         </div>
@@ -113,9 +107,9 @@ const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
         style={{ "--meter": meter } as AnyObject}
         className="ax-histogram__meter"
         data-clickable={!!onClick}
-        onClick={() => onClick(id, allowNegative ? 1 : 0)}
+        onClick={() => onClick?.(id, allowNegative ? 1 : 0)}
         onContextMenu={(e) => (
-          allowNegative && onClick(id, allowNegative ? -1 : 0),
+          allowNegative && onClick?.(id, allowNegative ? -1 : 0),
           e.preventDefault()
         )}
       >
