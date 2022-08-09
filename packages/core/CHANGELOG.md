@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.29](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.28...v2.0.0-beta.29) (2022-08-09)
+
+
+### Bug Fixes
+
+* **useStorage:** set values as JSON string ([dbda41f](https://github.com/adarshpastakia/axux/commit/dbda41ffa7a4daa07c1c927eb6c8644310fa4468))
+
+
+
+
+
 # [2.0.0-beta.28](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.27...v2.0.0-beta.28) (2022-08-08)
 
 

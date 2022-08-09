@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.29](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.28...v2.0.0-beta.29) (2022-08-09)
+
+
+### Bug Fixes
+
+* **Histogram:** update button icons ([4ad1c81](https://github.com/adarshpastakia/axux/commit/4ad1c815085d7097db7fa907eda2432977ff5d76))
+* **Searchbar:** updates ([7550950](https://github.com/adarshpastakia/axux/commit/75509506a4377aef4354e6aa49af7acace14cd4d))
+* **Suggest:** accept string as item ([3d19c3c](https://github.com/adarshpastakia/axux/commit/3d19c3cfde11710e4a5a2bdcb1a411c63094dff5))
+* **TimeSlider:** brush date start/end day ([0a91e51](https://github.com/adarshpastakia/axux/commit/0a91e516a175c341ca7679534d24a652715ca4ca))
+* **useStorage:** set values as JSON string ([dbda41f](https://github.com/adarshpastakia/axux/commit/dbda41ffa7a4daa07c1c927eb6c8644310fa4468))
+
+
+
+
+
 # [2.0.0-beta.28](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.27...v2.0.0-beta.28) (2022-08-08)
 
 
