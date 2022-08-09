@@ -27,15 +27,17 @@ import { FieldWrapper } from "../inputs/Wrapper";
 import { Options } from "./Option";
 import { SelectProps } from "./utils";
 
-export type SuggestItem = {
-  value: string;
-  label: string;
-  info?: string;
-};
+export type SuggestItem =
+  | {
+      value: string;
+      label: string;
+      info?: string;
+    }
+  | string;
 
 export interface SuggestProps
   extends Omit<
-    SelectProps<SuggestItem | string>,
+    SelectProps<SuggestItem>,
     | "options"
     | "allowCreate"
     | "isEditable"
@@ -48,9 +50,10 @@ export interface SuggestProps
     | "onSelect"
     | "onCreateOption"
   > {
-  options?: (SuggestItem | string)[];
+  options?: SuggestItem[];
   defaultItems?: SuggestItem[];
-  onSearch: (value: string) => void;
+  onClear?: () => void;
+  onSelect?: (value: string) => void;
 }
 
 export const SuggestInput: FC<SuggestProps> = ({
@@ -59,7 +62,8 @@ export const SuggestInput: FC<SuggestProps> = ({
   isRequired,
   placeholder,
   options = [],
-  onSearch,
+  onClear,
+  onSelect,
   onQuery,
   inputRef,
   isInvalid,
@@ -80,6 +84,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   const { t } = useTranslation("form");
   const [actualValue, setActualValue] = useState(value);
   const [items, setItems] = useState<(SuggestItem | string)[]>([]);
+  const [queryItems, setQueryItems] = useState<(SuggestItem | string)[]>([]);
 
   useEffect(() => {
     setItems(options);
@@ -95,18 +100,18 @@ export const SuggestInput: FC<SuggestProps> = ({
     () =>
       debounce((query: string) => {
         const ret = onQuery?.(query);
-        Promise.resolve(ret).then((resp) => resp && setItems(resp));
+        Promise.resolve(ret).then((resp) => resp && setQueryItems(resp));
       }),
     [onQuery]
   );
 
-  const searchCallback = useMemo(
-    () => debounce((query: string) => onSearch(query), 100),
-    [onSearch]
+  const selectCallback = useMemo(
+    () => debounce((query: string) => onSelect?.(query), 100),
+    [onSelect]
   );
 
   const itemRenderer = useCallback(
-    (item: SuggestItem) => (
+    (item: KeyValue) => (
       <div>
         <label className="block">{item.label ?? item.value ?? item}</label>
         {item.info && <small>{item.info}</small>}
@@ -137,7 +142,7 @@ export const SuggestInput: FC<SuggestProps> = ({
     <Combobox
       value={actualValue}
       onChange={(e: AnyObject) => (
-        setActualValue(e.value ?? e), searchCallback(e.value ?? e)
+        setActualValue(e.value ?? e), selectCallback(e.value ?? e)
       )}
       disabled={isDisabled}
       name={name}
@@ -153,7 +158,7 @@ export const SuggestInput: FC<SuggestProps> = ({
         isInvalid={isInvalid}
         isRequired={isRequired}
         disabled={isDisabled}
-        onClear={() => (setActualValue(""), onSearch(""))}
+        onClear={() => (setActualValue(""), onClear?.())}
         wrapperRef={setReferenceElement as AnyObject}
         canClear={!isEmpty(actualValue)}
       >
@@ -170,7 +175,7 @@ export const SuggestInput: FC<SuggestProps> = ({
           data-invalid={isInvalid}
           className="ax-field__input"
           autoComplete="off"
-          onKeyDown={handleEnter(() => searchCallback(actualValue))}
+          onKeyDown={handleEnter(() => selectCallback(actualValue))}
           onChange={(e) => handleChange(e.target.value)}
           onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
           {...rest}
@@ -183,12 +188,14 @@ export const SuggestInput: FC<SuggestProps> = ({
           className="ax-select__dropdown"
           style={styles.popper}
         >
-          {itemList.length > 0 && (
-            <Options hideEmpty options={itemList} renderer={itemRenderer} />
+          <Options options={itemList} renderer={itemRenderer} />
+          {queryItems.length > 0 && (
+            <Fragment>
+              <AxDivider size="xs" />
+              <Options hideEmpty options={queryItems} renderer={itemRenderer} />
+            </Fragment>
           )}
-          {itemList.length > 0 && defaultItems.length > 0 && (
-            <AxDivider size="xs" />
-          )}
+          {defaultItems.length > 0 && <AxDivider size="xs" />}
           {defaultItems.length > 0 && (
             <Options hideEmpty options={defaultItems} renderer={itemRenderer} />
           )}
