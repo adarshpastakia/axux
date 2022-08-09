@@ -27,10 +27,10 @@
     }
 
     & .ax-datagrid__fixStart {
-      @apply sticky ltr:left-0 rtl:right-0 flex flex-nowrap select-none bg-inherit z-10 ltr:border-r rtl:border-l border-bw-500/20;
+      @apply sticky ltr:left-0 rtl:right-0 flex flex-nowrap select-none bg-inherit z-[2] ltr:border-r rtl:border-l border-bw-500/20;
     }
     & .ax-datagrid__fixEnd {
-      @apply sticky ltr:right-0 rtl:left-0 flex flex-nowrap select-none bg-inherit z-10 ltr:border-l rtl:border-r border-bw-500/20;
+      @apply sticky ltr:right-0 rtl:left-0 flex flex-nowrap select-none bg-inherit z-[2] ltr:border-l rtl:border-r border-bw-500/20;
     }
 
     & .ax-empty {
