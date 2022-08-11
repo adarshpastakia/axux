@@ -84,13 +84,13 @@ const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
         <div className="ax-histogram__checkbox">
           <AxIcon
             data-type="positive"
-            onClick={(e) => (onClick(id, 1), e.stopPropagation())}
+            onClick={(e) => (onClick?.(id, false), e.stopPropagation())}
             icon={AppIcons.iconMagnifyPlus}
             data-selected={selected === 1}
           />
           <AxIcon
             data-type="negative"
-            onClick={(e) => (onClick(id, -1), e.stopPropagation())}
+            onClick={(e) => (onClick?.(id, true), e.stopPropagation())}
             icon={AppIcons.iconMagnifyMinus}
             data-selected={selected === -1}
           />
@@ -107,10 +107,9 @@ const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
         style={{ "--meter": meter } as AnyObject}
         className="ax-histogram__meter"
         data-clickable={!!onClick}
-        onClick={() => onClick?.(id, allowNegative ? 1 : 0)}
+        onClick={() => onClick?.(id, false)}
         onContextMenu={(e) => (
-          allowNegative && onClick?.(id, allowNegative ? -1 : 0),
-          e.preventDefault()
+          allowNegative && onClick?.(id, true), e.preventDefault()
         )}
       >
         <label>{label}&nbsp;</label>
@@ -155,7 +154,7 @@ export const AxHistogram: FC<HistogramProps> = ({
           color={color}
           positiveColor={positiveColor}
           negativeColor={negativeColor}
-          onClick={props.onChange ? toggleSelection : undefined}
+          onClick={props.onChange ? toggleSelection : props.onClick}
           allowNegative={allowNegative}
           selected={selection[item.id]}
         />

@@ -25,6 +25,8 @@ export interface SelectableProps {
    * change callback
    */
   onChange?: (ids: string[], nonIds?: string[]) => void;
+
+  onClick?: (id: string, isNegative: boolean) => void;
 }
 
 export const useSelectableList = ({
@@ -32,6 +34,7 @@ export const useSelectableList = ({
   selected,
   nonselected,
   onChange,
+  onClick,
 }: SelectableProps) => {
   const [selection, setSelection] = useState<KeyValue<AnyObject>>({});
   const [pending, startTransition] = useTransition();
@@ -48,7 +51,8 @@ export const useSelectableList = ({
   }, [items, selected, nonselected]);
 
   const toggleSelection = useCallback(
-    (id: string, check: 1 | -1) => {
+    (id: string, isNegative = false) => {
+      const check = isNegative ? -1 : 1;
       const newSelection = { ...selection, [id]: 0 };
       if (selection[id] === 0) newSelection[id] = 1;
       if (selection[id] !== 0) newSelection[id] = 0;
@@ -66,7 +70,10 @@ export const useSelectableList = ({
           ? change[1].push(id)
           : undefined
       );
-      startTransition(() => onChange?.(change[0], change[1]));
+      startTransition(() => {
+        onClick?.(id, isNegative);
+        onChange?.(change[0], change[1]);
+      });
     },
     [selection]
   );
