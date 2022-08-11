@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.31](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.30...v2.0.0-beta.31) (2022-08-11)
+
+
+### Bug Fixes
+
+* **CheckList,Histogram:** add onClick prop ([1f5d6cd](https://github.com/adarshpastakia/axux/commit/1f5d6cd8101a2248def9b4203aed72a38633ebc7))
+
+
+
+
+
 # [2.0.0-beta.30](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.29...v2.0.0-beta.30) (2022-08-09)
 
 **Note:** Version bump only for package @axux/data

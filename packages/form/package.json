@@ -1,6 +1,6 @@
 {
   "name": "@axux/form",
-  "version": "2.0.0-beta.30",
+  "version": "2.0.0-beta.31",
   "description": "axux: Form components",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -23,8 +23,8 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.30",
-    "@axux/utilities": "^2.0.0-beta.30",
+    "@axux/core": "^2.0.0-beta.31",
+    "@axux/utilities": "^2.0.0-beta.31",
     "@hookform/resolvers": "^2.9.3",
     "react-hook-form": "^7.33.0",
     "yup": "^0.32.11"
