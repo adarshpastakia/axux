@@ -211,6 +211,7 @@ export const SuggestInput: FC<SuggestProps> = ({
           {defaultItems.length > 0 &&
             defaultItems.map((item: AnyObject, index) => (
               <Combobox.Option
+                key={`default_${index}`}
                 value={`default_${index}`}
                 onClick={() => onClick?.(item)}
               >
