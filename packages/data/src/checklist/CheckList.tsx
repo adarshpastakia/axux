@@ -69,9 +69,9 @@ const CheckItem: FC<
     <div
       className="ax-checkList__item"
       data-disabled={isDisabled}
-      onClick={() => onClick(id, allowNegative ? 1 : 0)}
+      onClick={() => onClick(id, false)}
       onContextMenu={(e) => (
-        allowNegative && onClick(id, allowNegative ? -1 : 0), e.preventDefault()
+        allowNegative && onClick(id, true), e.preventDefault()
       )}
     >
       {!allowNegative && (
@@ -99,7 +99,7 @@ const CheckItem: FC<
           <div className="ax-checkList__checkbox">
             <AxIcon
               data-type="positive"
-              onClick={(e) => (onClick(id, 1), e.stopPropagation())}
+              onClick={(e) => (onClick(id, false), e.stopPropagation())}
               icon={
                 selected === 1
                   ? AppIcons.iconCheckPlus
@@ -109,7 +109,7 @@ const CheckItem: FC<
             />
             <AxIcon
               data-type="negative"
-              onClick={(e) => (onClick(id, -1), e.stopPropagation())}
+              onClick={(e) => (onClick(id, true), e.stopPropagation())}
               icon={
                 selected === -1
                   ? AppIcons.iconCheckMinus
