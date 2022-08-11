@@ -11,6 +11,7 @@ import { SuggestItem } from "@axux/form/dist/select/Suggest";
 import { ReactElement } from "react";
 
 export enum EnumFieldType {
+  KEYWORD = "KEYWORD",
   STRING = "string",
   INT = "int",
   FLOAT = "float",
@@ -38,6 +39,7 @@ export enum EnumOperator {
  * @internal
  */
 export const TypeOperators: { [key in EnumFieldType]: EnumOperator[] } = {
+  [EnumFieldType.KEYWORD]: [EnumOperator.IS, EnumOperator.IN],
   [EnumFieldType.STRING]: [
     EnumOperator.IS,
     EnumOperator.IN,
@@ -211,6 +213,7 @@ export interface SearchProps {
    * Default query items for suggest
    */
   defaultQueryList?: SuggestItem[];
+  onDefaultClick?: (query: SuggestItem) => void;
   /**
    * On query string change event
    * @param query

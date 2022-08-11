@@ -22,6 +22,7 @@ import { FilterField, FilterObject, FilterProps, SearchProps } from "../types";
 
 interface Context {
   defaultQueryList: SuggestItem[];
+  onDefaultClick: SearchProps["onDefaultClick"];
 
   isDirty: boolean;
   isEditable: boolean;
@@ -68,6 +69,7 @@ export const SearchContextProvider: React.FC<
   historyKey = "ax:search",
   onQuery,
   onSearch,
+  onDefaultClick,
   onFilterChanged,
 }) => {
   const [query, setQuery] = useState(_query);
@@ -202,6 +204,7 @@ export const SearchContextProvider: React.FC<
           handleSearch,
           updateFilter,
           addFilter,
+          onDefaultClick,
           removeFilter,
           toggleDisable,
           toggleExclude,
