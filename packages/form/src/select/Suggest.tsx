@@ -53,6 +53,7 @@ export interface SuggestProps
   options?: SuggestItem[];
   defaultItems?: SuggestItem[];
   onClear?: () => void;
+  onClick?: (item: SuggestItem) => void;
   onSelect?: (value: string) => void;
 }
 
@@ -65,6 +66,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   onClear,
   onSelect,
   onQuery,
+  onClick,
   inputRef,
   isInvalid,
   className,
@@ -111,7 +113,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   );
 
   const itemRenderer = useCallback(
-    (item: KeyValue) => (
+    (item: AnyObject) => (
       <div>
         <label className="block">{item.label ?? item.value ?? item}</label>
         {item.info && <small>{item.info}</small>}
@@ -130,10 +132,22 @@ export const SuggestInput: FC<SuggestProps> = ({
   }, [items, actualValue]);
 
   /******************* change actualValue *******************/
-  const handleChange = useCallback(
+  const handleQueryChange = useCallback(
     (newValue = "") => {
       setActualValue(newValue);
       queryCallback(newValue);
+    },
+    [queryCallback]
+  );
+  const handleSelectChange = useCallback(
+    (newValue = "") => {
+      if (newValue.startsWith("default_")) {
+        setActualValue("");
+        selectCallback("");
+      } else {
+        setActualValue(newValue);
+        selectCallback(newValue);
+      }
     },
     [queryCallback]
   );
@@ -141,9 +155,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   return (
     <Combobox
       value={actualValue}
-      onChange={(e: AnyObject) => (
-        setActualValue(e.value ?? e), selectCallback(e.value ?? e)
-      )}
+      onChange={(e: AnyObject) => handleSelectChange(e.value ?? e)}
       disabled={isDisabled}
       name={name}
       as={Fragment}
@@ -176,7 +188,7 @@ export const SuggestInput: FC<SuggestProps> = ({
           className="ax-field__input"
           autoComplete="off"
           onKeyDown={handleEnter(() => selectCallback(actualValue))}
-          onChange={(e) => handleChange(e.target.value)}
+          onChange={(e) => handleQueryChange(e.target.value)}
           onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
           {...rest}
         />
@@ -196,9 +208,23 @@ export const SuggestInput: FC<SuggestProps> = ({
             </Fragment>
           )}
           {defaultItems.length > 0 && <AxDivider size="xs" />}
-          {defaultItems.length > 0 && (
-            <Options hideEmpty options={defaultItems} renderer={itemRenderer} />
-          )}
+          {defaultItems.length > 0 &&
+            defaultItems.map((item: AnyObject, index) => (
+              <Combobox.Option
+                value={`default_${index}`}
+                onClick={() => onClick?.(item)}
+              >
+                {({ active, selected }) => (
+                  <div
+                    className="ax-select__option"
+                    data-selected={selected}
+                    data-active={active}
+                  >
+                    {itemRenderer(item)}
+                  </div>
+                )}
+              </Combobox.Option>
+            ))}
         </Combobox.Options>,
         document.body
       )}
