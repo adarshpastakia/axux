@@ -60,7 +60,7 @@ addParameters({
   actions: { argTypesRegex: "^on.*" },
   backgrounds: { disable: true, grid: { disable: true } },
   docs: {
-    container: ({ children, context }) => {
+    container: ({ children, context }: any) => {
       return (
         <I18nextProvider i18n={i18n}>
           <DC context={context}>{children}</DC>
