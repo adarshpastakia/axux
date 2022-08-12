@@ -8,7 +8,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **Suggest,Searchbar:** add defaultClick prop ([77519cc](https://github.com/adarshpastakia/axux/commit/77519cc717d6710c1fd78411ca0c8542e2ad09bd))
+* **Suggest,Searchbar:** ~~add defaultClick prop ([77519cc](https://github.com/adarshpastakia/axux/commit/77519cc717d6710c1fd78411ca0c8542e2ad09bd))~~
 
 
 

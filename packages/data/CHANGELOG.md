@@ -8,7 +8,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **CheckList,Histogram:** add onClick prop ([1f5d6cd](https://github.com/adarshpastakia/axux/commit/1f5d6cd8101a2248def9b4203aed72a38633ebc7))
+* **CheckList,Histogram:** ~~add onClick prop ([1f5d6cd](https://github.com/adarshpastakia/axux/commit/1f5d6cd8101a2248def9b4203aed72a38633ebc7))~~
 
 
 
