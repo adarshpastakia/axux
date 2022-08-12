@@ -37,8 +37,11 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
     const defaultStart = data?.[0]?.[0]?.getTime() ?? 0;
     const defaultEnd = data?.[data.length - 1]?.[0]?.getTime() ?? 32;
     setRange({
-      startValue: sliderRange?.start.getTime() ?? defaultStart,
-      endValue: sliderRange?.end.getTime() ?? defaultEnd,
+      startValue: Math.max(
+        sliderRange?.start.getTime() ?? defaultStart,
+        defaultStart
+      ),
+      endValue: Math.min(sliderRange?.end.getTime() ?? defaultEnd, defaultEnd),
     });
   }, [sliderRange, data]);
 
@@ -142,7 +145,13 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
     };
   }, [data, range]);
 
-  return <ChartContainer options={options} chartRef={chartRef} />;
+  return (
+    <ChartContainer
+      options={options}
+      chartRef={chartRef}
+      isEmpty={isEmpty(data)}
+    />
+  );
 };
 
 export const TimeSlider: FC<TimeSliderProps> = (props) => (
