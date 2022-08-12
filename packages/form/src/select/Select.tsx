@@ -92,11 +92,14 @@ export const SelectInput = <T extends AnyObject>({
   /******************* change actualValue *******************/
   const handleChange = useCallback(
     (option?: T) => {
-      onQueryChange("");
-      setActualValue(option);
-      onSelect && option && startTransition(() => onSelect(option));
-      onChange &&
-        startTransition(() => onChange(getValue(option, valueProperty)));
+      Promise.resolve(option && onSelect?.(option)).then((b) => {
+        if (b !== false) {
+          onChange &&
+            startTransition(() => onChange(getValue(option, valueProperty)));
+          setActualValue(option);
+          onQueryChange("");
+        }
+      });
     },
     [onChange, valueProperty, query]
   );

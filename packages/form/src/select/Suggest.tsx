@@ -46,15 +46,10 @@ export interface SuggestProps
     | "matcher"
     | "renderer"
     | "makeLabel"
-    | "onChange"
-    | "onSelect"
     | "onCreateOption"
   > {
   options?: SuggestItem[];
   defaultItems?: SuggestItem[];
-  onClear?: () => void;
-  onClick?: (item: SuggestItem) => void;
-  onSelect?: (value: string) => void;
 }
 
 export const SuggestInput: FC<SuggestProps> = ({
@@ -63,10 +58,9 @@ export const SuggestInput: FC<SuggestProps> = ({
   isRequired,
   placeholder,
   options = [],
-  onClear,
   onSelect,
+  onChange,
   onQuery,
-  onClick,
   inputRef,
   isInvalid,
   className,
@@ -89,6 +83,9 @@ export const SuggestInput: FC<SuggestProps> = ({
   const [queryItems, setQueryItems] = useState<(SuggestItem | string)[]>([]);
 
   useEffect(() => {
+    setActualValue(value);
+  }, [value]);
+  useEffect(() => {
     setItems(options);
   }, [options]);
 
@@ -105,11 +102,6 @@ export const SuggestInput: FC<SuggestProps> = ({
         Promise.resolve(ret).then((resp) => resp && setQueryItems(resp));
       }),
     [onQuery]
-  );
-
-  const selectCallback = useMemo(
-    () => debounce((query: string) => onSelect?.(query), 100),
-    [onSelect]
   );
 
   const itemRenderer = useCallback(
@@ -140,14 +132,13 @@ export const SuggestInput: FC<SuggestProps> = ({
     [queryCallback]
   );
   const handleSelectChange = useCallback(
-    (newValue = "") => {
-      if (newValue.startsWith("default_")) {
-        setActualValue("");
-        selectCallback("");
-      } else {
-        setActualValue(newValue);
-        selectCallback(newValue);
-      }
+    (newValue: AnyObject = "") => {
+      Promise.resolve(onSelect?.(newValue)).then((b) => {
+        if (b !== false) {
+          onChange?.(newValue.value ?? newValue);
+          setActualValue(newValue.value ?? newValue);
+        }
+      });
     },
     [queryCallback]
   );
@@ -155,7 +146,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   return (
     <Combobox
       value={actualValue}
-      onChange={(e: AnyObject) => handleSelectChange(e.value ?? e)}
+      onChange={(e: AnyObject) => handleSelectChange(e)}
       disabled={isDisabled}
       name={name}
       as={Fragment}
@@ -170,7 +161,7 @@ export const SuggestInput: FC<SuggestProps> = ({
         isInvalid={isInvalid}
         isRequired={isRequired}
         disabled={isDisabled}
-        onClear={() => (setActualValue(""), onClear?.())}
+        onClear={() => handleSelectChange("")}
         wrapperRef={setReferenceElement as AnyObject}
         canClear={!isEmpty(actualValue)}
       >
@@ -187,7 +178,7 @@ export const SuggestInput: FC<SuggestProps> = ({
           data-invalid={isInvalid}
           className="ax-field__input"
           autoComplete="off"
-          onKeyDown={handleEnter(() => selectCallback(actualValue))}
+          onKeyDown={handleEnter(() => handleQueryChange?.(actualValue))}
           onChange={(e) => handleQueryChange(e.target.value)}
           onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
           {...rest}
@@ -208,31 +199,16 @@ export const SuggestInput: FC<SuggestProps> = ({
             </Fragment>
           )}
           {defaultItems.length > 0 && <AxDivider size="xs" />}
-          {defaultItems.length > 0 &&
-            defaultItems.map((item: AnyObject, index) => (
-              <Combobox.Option
-                key={`default_${index}`}
-                value={`default_${index}`}
-                onClick={() => onClick?.(item)}
-              >
-                {({ active, selected }) => (
-                  <div
-                    className="ax-select__option"
-                    data-selected={selected}
-                    data-active={active}
-                  >
-                    {itemRenderer(item)}
-                  </div>
-                )}
-              </Combobox.Option>
-            ))}
+          {defaultItems.length > 0 && (
+            <Options hideEmpty options={defaultItems} renderer={itemRenderer} />
+          )}
         </Combobox.Options>,
         document.body
       )}
     </Combobox>
   );
 };
-SuggestInput.displayName = "AxField.Select";
+SuggestInput.displayName = "AxField.Suggest";
 
 const GenericMemo: <T>(c: T) => T = memo;
 
