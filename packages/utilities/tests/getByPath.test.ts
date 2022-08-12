@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { getByPath } from "../src";
+import { getByPath, getValue } from "../src";
 
 describe("get values by JSON path", () => {
   const tester = {
@@ -17,6 +17,7 @@ describe("get values by JSON path", () => {
           age: 18,
         },
         "my.field": "yes",
+        blank: undefined,
       },
       "some.field": "yes",
       "test.array": [
@@ -41,6 +42,7 @@ describe("get values by JSON path", () => {
   });
 
   it("should get inner path", (done) => {
+    expect(getByPath(tester, "inner.blank")).toBe(undefined);
     expect(getByPath(tester, "outer.inner.main.name")).toBe("Test");
     expect(getByPath(tester, "outer.inner.main.age")).toBe(18);
     expect(getByPath(tester, "outer.inner.main.gender")).toBe(undefined);
@@ -50,11 +52,20 @@ describe("get values by JSON path", () => {
   it("should get inner path with . in name", (done) => {
     expect(getByPath(tester, "outer.some.field")).toBe("yes");
     expect(getByPath(tester, "outer.inner.my.field")).toBe("yes");
+    expect(getByPath(tester, "outer.test.array.0")).toStrictEqual({
+      field: "string",
+    });
     expect(getByPath(tester, "outer.test.array.field")).toStrictEqual([
       "string",
       "number",
       "boolean",
     ]);
+    done();
+  });
+
+  it("should get first no null value", (done) => {
+    expect(getValue(undefined, "yes", null)).toBe("yes");
+    expect(getValue(null, 0, undefined, "yes", null)).toBe(0);
     done();
   });
 });

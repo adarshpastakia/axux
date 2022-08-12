@@ -8,12 +8,14 @@
 
 import {
   isBoolean,
+  isColor,
   isEmpty,
   isFalse,
   isNil,
   isNull,
   isNumber,
   isObject,
+  isRtl,
   isString,
   isSvgPath,
   isTrue,
@@ -82,6 +84,15 @@ describe("check type test", () => {
     expect(isSvgPath("M9 9z")).toBeTruthy();
     expect(isSvgPath("M9,56.8-89.12 9z")).toBeTruthy();
     expect(isSvgPath("1,1 45z")).toBeFalsy();
+    done();
+  });
+  it("should check color", (done) => {
+    expect(isColor("blue")).toBeFalsy();
+    expect(isColor("#fc9832")).toBeTruthy();
+    done();
+  });
+  it("should check rtl", (done) => {
+    expect(isRtl()).toBeFalsy();
     done();
   });
 });
