@@ -8,12 +8,12 @@
 
 import { differenceInDays, format, parseISO } from "date-fns";
 import { CountryCode, parsePhoneNumberFromString } from "libphonenumber-js";
-import numeral from "numeral";
+import * as numeral from "numeral";
 import { isEmpty, isNil } from "./_isType";
 
 export namespace Format {
   /******************* get phone number object using `libphonenumber-js` *******************/
-  const getPhone = (value = "", country = "ae") => {
+  const getPhone = (value: string, country = "ae") => {
     const phone = value.match(/^[0+]/)
       ? value.replace(/^00/, "+")
       : `+${value}`;
@@ -22,7 +22,6 @@ export namespace Format {
       ? number
       : {
           country: "",
-          formatNational: () => value,
           formatInternational: () => value,
         };
   };
@@ -55,7 +54,7 @@ export namespace Format {
     const phone = getPhone(value);
     return (
       <>
-        <span className={` flag ${phone.country ?? ""}`} />
+        <span className={` flag ${phone.country}`} />
         &nbsp;<span>{phone.formatInternational()}</span>
       </>
     );
@@ -83,7 +82,7 @@ export namespace Format {
     }
     const value = parseFloat(`${number}`) * (isFraction ? 1000 : 1);
     if (!isNaN(value)) {
-      return makeDuration(value, "HH:mm:ss.SSS");
+      return makeDuration(value);
     }
     return "00:00.000";
   };
