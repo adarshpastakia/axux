@@ -169,6 +169,11 @@ export interface SearchProps {
   historyKey?: string;
 
   /**
+   * Default query items for suggest
+   */
+  defaultQueryList?: SuggestItem[];
+
+  /**
    * Add-on before search input
    */
   prepend?: ReactElement;
@@ -204,16 +209,15 @@ export interface SearchProps {
   onCollapsed?: (collapsed: boolean) => void;
 
   /**
+   * On suggestion select
+   */
+  onSelect?: (item: SuggestItem) => Promise<boolean> | boolean | void;
+
+  /**
    * On search event
    * @param queryObject
    */
   onSearch?: (queryObject: QueryObject) => void;
-
-  /**
-   * Default query items for suggest
-   */
-  defaultQueryList?: SuggestItem[];
-  onDefaultClick?: (query: SuggestItem) => void;
   /**
    * On query string change event
    * @param query

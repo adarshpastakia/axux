@@ -9,6 +9,7 @@
 import { AxMenu } from "@axux/core";
 import { AxSuperDate } from "@axux/date";
 import { AxField } from "@axux/form";
+import { isString } from "@axux/utilities";
 import { action } from "@storybook/addon-actions";
 import { AxSearchBar, EnumFieldType, EnumOperator } from "../src";
 
@@ -54,9 +55,25 @@ const filters = [
 export const SearchbarStory = () => {
   return (
     <AxSearchBar
-      onQuery={() => {
-        action("onQuery");
+      onQuery={(e) => {
+        action("onQuery")(e);
         return [];
+      }}
+      defaultQueryList={[
+        {
+          value: "category: games",
+          label: "Games",
+          info: "Search latest games",
+        },
+        {
+          value: "category: dev",
+          label: "Dev Tools",
+          info: "Search latest developer tools",
+        },
+      ]}
+      onSelect={(item) => {
+        action("onSelect")(item);
+        return isString(item);
       }}
       onSearch={action("onSearch")}
       filters={filters}
