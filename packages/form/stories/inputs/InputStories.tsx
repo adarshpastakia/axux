@@ -87,7 +87,7 @@ NumberStory.args = {
 };
 
 const SearchTemplate: ComponentStory<typeof AxField.Search> = (props) => (
-  <AxField.Search {...props} width="32rem" onSearch={action("onSearch")} />
+  <AxField.Search {...props} width="32rem" onQuery={action("onQuery")} />
 );
 export const SearchStory = SearchTemplate.bind({});
 SearchStory.args = {
@@ -104,7 +104,7 @@ SearchStory.args = {
 };
 
 const SelectTemplate: ComponentStory<typeof AxField.Select<Country>> = (props) => (
-  <AxField.Select {...props} width="32rem" onSelect={action("onSelect")} />
+  <AxField.Select {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} onQuery={e=>{action("onQuery")(e);return []}} />
 );
 export const SelectStory = SelectTemplate.bind({});
 SelectStory.args = {
@@ -135,7 +135,7 @@ SelectStory.args = {
 };
 
 const TagTemplate: ComponentStory<typeof AxField.Tag<Country>> = (props) => (
-  <AxField.Tag {...props} width="32rem" onSelect={action("onSelect")} />
+  <AxField.Tag {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} onQuery={e=>{action("onQuery")(e);return []}} />
 );
 export const TagStory = TagTemplate.bind({});
 TagStory.args = {
@@ -153,10 +153,11 @@ TagStory.args = {
   ),
   makeLabel: (c) => (
     <div>
-      {Countries.emoji(c.iso2)}&nbsp;{c.name}
+      {c.iso2 ? Countries.emoji(c.iso2)+" "+c.name : c.toString()}
     </div>
   ),
-  allowClear:true,
+  allowCreate: true,
+  allowClear: true,
   autoFocus: false,
   isInvalid: false,
   isEditable: true,
@@ -166,7 +167,7 @@ TagStory.args = {
 };
 
 const SuggestTemplate: ComponentStory<typeof AxField.Suggest> = (props) => (
-  <AxField.Suggest {...props} width="32rem" onSearch={action("onSearch")} onQuery={e=>{action("onQuery")(e);return []}} />
+  <AxField.Suggest {...props} width="32rem" onQuery={e=>{action("onQuery")(e);return []}} onSelect={action("onSelect")} onChange={action("onChange")} />
 );
 export const SuggestStory = SuggestTemplate.bind({});
 SuggestStory.args = {

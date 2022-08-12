@@ -99,16 +99,21 @@ export const TagInput = <T extends AnyObject>({
   /******************* change actualValue *******************/
   const handleChange = useCallback(
     (options: T[] = []) => {
-      onQueryChange("");
-      setActualValue(options);
-      onSelect && options && startTransition(() => onSelect(options));
-      onChange &&
-        startTransition(() =>
-          onChange(
-            options.map((value: AnyObject) => getValue(value, valueProperty))
-          )
-        );
-      setTimeout(() => forceUpdate?.(), 100);
+      Promise.resolve(onSelect?.(options)).then((b) => {
+        if (b !== false) {
+          onChange &&
+            startTransition(() =>
+              onChange(
+                options.map((value: AnyObject) =>
+                  getValue(value, valueProperty)
+                )
+              )
+            );
+          setActualValue(options);
+          onQueryChange("");
+          setTimeout(() => forceUpdate?.(), 100);
+        }
+      });
     },
     [onChange, forceUpdate, valueProperty, query]
   );

@@ -27,11 +27,11 @@ export interface BaseSelectProps<T> extends ElementProps, ChildrenProp {
 }
 
 export interface SelectProps<T> extends BaseSelectProps<T>, InputProps {
-  onSelect?: (option: T) => void;
+  onSelect?: (option: T) => Promise<boolean> | boolean | void;
   makeLabel?: (option: T) => string;
 }
 export interface TagProps<T> extends BaseSelectProps<T>, InputProps<string[]> {
-  onSelect?: (option: T[]) => void;
+  onSelect?: (option: T[]) => Promise<boolean> | boolean | void;
   makeLabel?: (option: T) => string | ReactElement;
 }
 

@@ -6,22 +6,14 @@
  * @license   : MIT
  */
 
-import { isEmpty, matchString } from "@axux/utilities";
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  useTransition,
-} from "react";
+import { debounce, isEmpty, matchString } from "@axux/utilities";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { BaseSelectProps, getLabel } from "./utils";
 
 export const useSelect = ({
   options = [],
   labelProperty,
   onQuery,
-  onCreateOption,
 }: BaseSelectProps<AnyObject>) => {
   const originalList = useRef<AnyObject[]>([]);
   const [list, setList] = useState<AnyObject[]>([]);
@@ -33,6 +25,13 @@ export const useSelect = ({
     setList(originalList.current);
   }, [options]);
 
+  const handleQuery = useCallback(
+    debounce((query: string) => {
+      Promise.resolve(onQuery?.(query)).then((list) => list && setList(list));
+    }, 200),
+    [onQuery]
+  );
+
   /******************* filter list *******************/
   const onQueryChange = useCallback(
     (query: string) => {
@@ -40,7 +39,7 @@ export const useSelect = ({
       if (isEmpty(query)) return setList(originalList.current ?? []);
 
       if (onQuery) {
-        return Promise.resolve(onQuery(query)).then((list) => setList(list));
+        return handleQuery(query);
       }
 
       const filteredList: AnyObject[] = [];
@@ -57,7 +56,7 @@ export const useSelect = ({
       });
       setList(filteredList);
     },
-    [labelProperty, onQuery]
+    [labelProperty, handleQuery]
   );
 
   return {
