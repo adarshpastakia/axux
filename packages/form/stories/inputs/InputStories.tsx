@@ -87,7 +87,7 @@ NumberStory.args = {
 };
 
 const SearchTemplate: ComponentStory<typeof AxField.Search> = (props) => (
-  <AxField.Search {...props} width="32rem" onSearch={action("onQuery")} />
+  <AxField.Search {...props} width="32rem" onSearch={action("onSearch")} />
 );
 export const SearchStory = SearchTemplate.bind({});
 SearchStory.args = {
@@ -297,7 +297,7 @@ const ContainerTemplate: ComponentStory<typeof AxField.Container> = (props) => (
 );
 export const ContainerStory = ContainerTemplate.bind({});
 ContainerStory.args = {
-  label: "Switch label",
+  label: "Container label",
   info: "",
   isRequired: false,
   isVertical: false,
