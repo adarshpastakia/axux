@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof AxChart.TimeSlider> = () => {
   const loadData = useCallback(() => {
     const categories = Array.from(
       Array(365 * 3),
-      (_, i) => new Date(2021, 0, i + 1)
+      (_, i) => new Date(2022, 0, i + 1)
     );
 
     setData(
@@ -29,7 +29,7 @@ const Template: ComponentStory<typeof AxChart.TimeSlider> = () => {
     loadData();
   }, []);
   return (
-    <AxPanel width={1024} maxWidth={1024} height={96}>
+    <AxPanel width={1024} maxWidth={1024} height={128}>
       <AxHeader>
         <AxTitle>Time Slider chart</AxTitle>
         <AxButton style="link" icon="mdi mdi-refresh" onClick={loadData} />
@@ -37,7 +37,7 @@ const Template: ComponentStory<typeof AxChart.TimeSlider> = () => {
       <AxChart.TimeSlider
         data={data}
         onBrush={action("onBrush")}
-        range={{ start: new Date(2021, 0, 1), end: new Date(2021, 12, 31) }}
+        range={{ start: new Date(2021, 0, 1), end: new Date(2022, 1, 18) }}
       />
     </AxPanel>
   );
