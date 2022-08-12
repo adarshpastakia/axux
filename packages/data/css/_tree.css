@@ -13,7 +13,7 @@
     grid-template-rows: auto auto 1fr;
 
     & .ax-tree__search {
-      @apply grid-area-[search];
+      @apply grid-area-[search] border-b;
     }
     & .ax-tree__tools {
       @apply grid-area-[tools] flex bg-base border-b text-sm;
