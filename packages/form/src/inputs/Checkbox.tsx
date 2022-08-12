@@ -8,7 +8,15 @@
 
 import { AxIcon, AxTooltip } from "@axux/core";
 import { ElementProps } from "@axux/core/dist/types";
-import { ChangeEvent, FC, memo, useCallback, useTransition } from "react";
+import {
+  ChangeEvent,
+  FC,
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import { OptionProps } from "../types";
 import { Icons } from "../types/icons";
 
@@ -32,9 +40,14 @@ export const Checkbox: FC<CheckboxProps> = memo(
     value,
     ...rest
   }) => {
+    const [actualValue, setActualValue] = useState(value ?? isChecked ?? false);
     const [pending, startTransition] = useTransition();
+    useEffect(() => {
+      setActualValue(value ?? isChecked ?? false);
+    }, [value, isChecked]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
+        setActualValue(e?.target.checked ?? false);
         onChange && startTransition(() => onChange(e?.target.checked ?? false));
       },
       [onChange]
@@ -49,7 +62,7 @@ export const Checkbox: FC<CheckboxProps> = memo(
           {...rest}
           ref={inputRef}
           type="checkbox"
-          checked={value ?? isChecked ?? false}
+          checked={actualValue}
           disabled={isDisabled}
           className="ax-field__input"
           data-invalid={isInvalid}
