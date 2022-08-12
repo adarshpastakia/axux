@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`format test should format phone 1`] = `
+<React.Fragment>
+  <span
+    className=" flag "
+  />
+   
+  <span>
+    99123
+  </span>
+</React.Fragment>
+`;
+
+exports[`format test should format phone 2`] = `
+<React.Fragment>
+  <span
+    className=" flag AE"
+  />
+   
+  <span>
+    +971 50 249 1824
+  </span>
+</React.Fragment>
+`;
+
+exports[`format test should format phone 3`] = `
+<React.Fragment>
+  <span
+    className=" flag AE"
+  />
+   
+  <span>
+    +971 50 249 1824
+  </span>
+</React.Fragment>
+`;
