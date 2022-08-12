@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { isEqual } from "../src";
+import { compareValues, isEqual, matchString } from "../src";
 
 describe("isEqual test", () => {
   it("should check string", (done) => {
@@ -62,6 +62,30 @@ describe("isEqual test", () => {
     expect(
       isEqual({ ...obj, temp: [1, 2] }, { ...obj, temp: [1] })
     ).toBeFalsy();
+    done();
+  });
+
+  it("should match string", (done) => {
+    expect(matchString("mañana", "manana")).toBeTruthy();
+    expect(matchString("São Tomé", "sao tome")).toBeTruthy();
+    done();
+  });
+
+  it("should compare", (done) => {
+    expect(compareValues()("testing", "testing")).toBe(0);
+    expect(compareValues()("testing", "completed")).toBe(1);
+    expect(compareValues()("abacus", "completed")).toBe(-1);
+    expect(compareValues("desc")("testing", "completed")).toBe(-1);
+
+    expect(compareValues()(9, 4)).toBe(1);
+    expect(compareValues()(false, true)).toBe(1);
+    expect(compareValues()(9, 24)).toBe(-1);
+    expect(compareValues()(true, false)).toBe(-1);
+
+    expect(
+      compareValues("asc", "field")({ field: "a value" }, { field: "b value" })
+    ).toBe(-1);
+
     done();
   });
 });
