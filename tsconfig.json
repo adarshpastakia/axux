@@ -18,5 +18,6 @@
     "noEmit": true,
     "typeRoots": ["node_modules/@types", "@types"]
   },
+  "include": ["**/*.ts", "**/*.tsx", ".storybook/preview.tsx"],
   "files": ["./@types/global.d.ts"]
 }
