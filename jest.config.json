@@ -16,6 +16,7 @@
     "\\.svg$": "jest-transform-stub"
   },
   "modulePaths": ["<rootDir>/packages", "<rootDir>/node_modules"],
+  "modulePathIgnorePatterns": ["<rootDir>/packages/*/dist"],
   "collectCoverageFrom": [
     "packages/**/src/**/*.{ts,tsx}",
     "!**/@types/**/*",
@@ -23,8 +24,8 @@
     "!**/*.d.ts"
   ],
   "coveragePathIgnorePatterns": [
-    "__tests__/",
-    "__stories__/",
+    "tests/",
+    "stories/",
     "types/",
     "helpers/",
     "internals/",
