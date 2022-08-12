@@ -11,7 +11,7 @@ import { isEmpty } from "./_isType";
 export const dedupe = (list: AnyObject[], key?: string) => {
   const ret = Object.values(
     list.reduce<KeyValue>(
-      (r, c) => ({ ...r, [key ? c[key] : c]: key && !c[key] ? r[key] : c }),
+      (r, c) => ({ ...r, [key ? c[key] : c]: c }),
       {}
     )
   );
