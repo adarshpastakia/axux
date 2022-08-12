@@ -46,7 +46,7 @@ export const Text: FC<TextProps> = memo(
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         onChange &&
-          startTransition(() => onChange(e?.target.value ?? undefined));
+          startTransition(() => onChange(e?.target.value ?? ""));
       },
       [onChange]
     );

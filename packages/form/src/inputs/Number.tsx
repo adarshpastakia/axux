@@ -57,7 +57,9 @@ export const Number: FC<NumberProps> = memo(
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         onChange &&
-          startTransition(() => onChange(e?.target.valueAsNumber ?? undefined));
+          startTransition(() =>
+            onChange(e?.target.valueAsNumber ?? ("" as AnyObject))
+          );
       },
       [onChange]
     );
