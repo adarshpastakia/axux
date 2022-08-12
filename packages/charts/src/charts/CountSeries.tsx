@@ -108,6 +108,8 @@ const CountSeriesChart: FC<CountSeriesProps> = ({
       theme={theme}
       options={options}
       chartRef={chartRef}
+      isEmpty={isEmpty(data)}
+      emptyIcon={Icons.Pie}
       dataTableRenderer={countRenderer}
       onClick={(e) => onClick?.(e.data.id ?? e.seriesId)}
     >

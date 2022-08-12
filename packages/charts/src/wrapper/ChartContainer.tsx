@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { useIsDark, useResizeObserver } from "@axux/core";
+import { AxContent, useIsDark, useResizeObserver } from "@axux/core";
 import { SizeObject } from "@axux/core/dist/types";
 import * as echarts from "echarts";
 import { EChartOption, EChartsType } from "echarts";
@@ -23,6 +23,7 @@ import {
 } from "react";
 import { registerThemes } from "../theme";
 import { Theme } from "../types";
+import { Icons } from "../types/icons";
 import { ChartToolbar } from "./ChartToolbar";
 
 const defaultOptions = {
@@ -64,10 +65,14 @@ export const ChartContainer = ({
   children,
   onResize,
   onClick,
+  isEmpty,
+  emptyIcon,
   chartRef: _ref,
   dataTableRenderer,
 }: {
   theme?: Theme;
+  isEmpty?: boolean;
+  emptyIcon?: string;
   options: EChartOption;
   children?: ReactElement<typeof ChartToolbar>;
   chartRef?: RefObject<EChartsType>;
@@ -132,6 +137,12 @@ export const ChartContainer = ({
     <Fragment>
       <div>{children}</div>
       <div ref={containerRef} />
+      {isEmpty && (
+        <AxContent.Empty
+          icon={emptyIcon ?? Icons.Line}
+          message="Empty chart"
+        />
+      )}
     </Fragment>
   );
 };

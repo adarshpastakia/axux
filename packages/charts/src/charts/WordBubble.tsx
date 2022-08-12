@@ -12,14 +12,13 @@ import { EChartOption } from "echarts";
 import { FC, useMemo } from "react";
 import { ChartPalette } from "../theme";
 import { BaseChart, CountType } from "../types";
+import { Icons } from "../types/icons";
 import { countRenderer } from "../types/utils";
 import { ChartContainer } from "../wrapper/ChartContainer";
 import { ChartToolbar } from "../wrapper/ChartToolbar";
 import { ChartWrapper } from "../wrapper/ChartWrapper";
 
-export interface WordBubbleProps
-  extends Omit<BaseChart, "theme">,
-    CountType {
+export interface WordBubbleProps extends Omit<BaseChart, "theme">, CountType {
   onClick?: (key: string) => void;
 }
 
@@ -64,6 +63,8 @@ const WordBubbleChart: FC<WordBubbleProps> = ({ data, title, onClick }) => {
   return (
     <ChartContainer
       options={options}
+      isEmpty={isEmpty(data)}
+      emptyIcon={Icons.ActivityScatter}
       dataTableRenderer={countRenderer}
       onClick={(e) => onClick?.(e?.name ?? "")}
     >

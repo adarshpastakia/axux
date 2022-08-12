@@ -216,6 +216,8 @@ const ActivityMapChart: FC<ActivityMapProps> = ({
       theme={theme}
       options={options}
       chartRef={chartRef}
+      isEmpty={isEmpty(data)}
+      emptyIcon={Icons.ActivityScatter}
       dataTableRenderer={activityRenderer}
       onClick={(e) => onClick?.(e.seriesIndex, e.dataIndex)}
     >

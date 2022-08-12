@@ -121,6 +121,8 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
       theme={theme}
       options={options}
       chartRef={chartRef}
+      isEmpty={isEmpty(data)}
+      emptyIcon={Icons.Column}
       dataTableRenderer={seriesRenderer}
       onClick={(e) => onClick?.({ category: e.name, series: e.seriesId })}
     >

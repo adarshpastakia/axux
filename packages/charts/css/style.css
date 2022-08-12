@@ -30,6 +30,14 @@
         @apply !m-1;
       }
     }
+
+    & > .ax-empty {
+      @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm m-0 p-0 text-muted;
+
+      & .ax-empty__icon {
+        @apply text-4xl leading-none opacity-50;
+      }
+    }
   }
 
   .ax-chart__toolbar {
