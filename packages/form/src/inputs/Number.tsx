@@ -9,15 +9,7 @@
 import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
 import { isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
-import {
-  ChangeEvent,
-  FC,
-  memo,
-  useCallback,
-  useEffect,
-  useState,
-  useTransition,
-} from "react";
+import { ChangeEvent, FC, memo, useCallback, useTransition } from "react";
 import { InputProps } from "../types";
 import { FieldWrapper } from "./Wrapper";
 
@@ -61,14 +53,9 @@ export const Number: FC<NumberProps> = memo(
     onEnterPressed,
     ...rest
   }) => {
-    const [actualValue, setActualValue] = useState<number>("" as AnyObject);
     const [pending, startTransition] = useTransition();
-    useEffect(() => {
-      setActualValue(value ?? ("" as AnyObject));
-    }, [value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
-        setActualValue(e?.target.valueAsNumber ?? ("" as AnyObject));
         onChange &&
           startTransition(() => onChange(e?.target.valueAsNumber ?? undefined));
       },
@@ -87,7 +74,7 @@ export const Number: FC<NumberProps> = memo(
         isInvalid={isInvalid}
         isRequired={isRequired}
         onClear={handleChange}
-        canClear={allowClear && !isEmpty(actualValue)}
+        canClear={allowClear && !isEmpty(value)}
       >
         <input
           ref={inputRef}
@@ -97,7 +84,7 @@ export const Number: FC<NumberProps> = memo(
           aria-readonly={isReadOnly}
           aria-required={isRequired}
           aria-errormessage={error}
-          value={actualValue}
+          value={value}
           placeholder={placeholder}
           disabled={isDisabled}
           readOnly={isReadOnly}

@@ -9,15 +9,7 @@
 import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
 import { isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
-import {
-  ChangeEvent,
-  FC,
-  memo,
-  useCallback,
-  useEffect,
-  useState,
-  useTransition,
-} from "react";
+import { ChangeEvent, FC, memo, useCallback, useTransition } from "react";
 import { InputProps } from "../types";
 import { FieldWrapper } from "./Wrapper";
 
@@ -51,14 +43,9 @@ export const Textarea: FC<TextareaProps> = memo(
     onEnterPressed,
     ...rest
   }) => {
-    const [actualValue, setActualValue] = useState("");
     const [pending, startTransition] = useTransition();
-    useEffect(() => {
-      setActualValue(value ?? "");
-    }, [value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLTextAreaElement>) => {
-        setActualValue(e?.target.value ?? "");
         onChange &&
           startTransition(() => onChange(e?.target.value ?? undefined));
       },
@@ -77,7 +64,7 @@ export const Textarea: FC<TextareaProps> = memo(
         isInvalid={isInvalid}
         isRequired={isRequired}
         onClear={handleChange}
-        canClear={allowClear && !isEmpty(actualValue)}
+        canClear={allowClear && !isEmpty(value)}
       >
         <textarea
           ref={inputRef as any}
@@ -86,7 +73,7 @@ export const Textarea: FC<TextareaProps> = memo(
           aria-readonly={isReadOnly}
           aria-required={isRequired}
           aria-errormessage={error}
-          value={actualValue}
+          value={value}
           placeholder={placeholder}
           disabled={isDisabled}
           readOnly={isReadOnly}
