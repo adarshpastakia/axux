@@ -61,6 +61,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   onSelect,
   onChange,
   onQuery,
+  onEnterPressed,
   inputRef,
   isInvalid,
   className,
@@ -151,59 +152,71 @@ export const SuggestInput: FC<SuggestProps> = ({
       name={name}
       as={Fragment}
     >
-      <FieldWrapper
-        info={info}
-        error={error}
-        label={label}
-        width={width}
-        className={className}
-        labelAppend={labelAppend}
-        isInvalid={isInvalid}
-        isRequired={isRequired}
-        disabled={isDisabled}
-        onClear={() => handleSelectChange("")}
-        wrapperRef={setReferenceElement as AnyObject}
-        canClear={!isEmpty(actualValue)}
-      >
-        <Combobox.Input
-          ref={inputRef}
-          aria-label={label}
-          aria-disabled={isDisabled}
-          aria-readonly={isReadOnly}
-          aria-required={isRequired}
-          aria-errormessage={error}
-          size={1}
-          placeholder={placeholder}
-          disabled={isDisabled}
-          data-invalid={isInvalid}
-          className="ax-field__input"
-          autoComplete="off"
-          onKeyDown={handleEnter(() => handleQueryChange?.(actualValue))}
-          onChange={(e) => handleQueryChange(e.target.value)}
-          onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
-          {...rest}
-        />
-        {children}
-      </FieldWrapper>
-      {createPortal(
-        <Combobox.Options
-          ref={setPopperElement as AnyObject}
-          className="ax-select__dropdown"
-          style={styles.popper}
-        >
-          <Options options={itemList} renderer={itemRenderer} />
-          {queryItems.length > 0 && (
-            <Fragment>
-              <AxDivider size="xs" />
-              <Options hideEmpty options={queryItems} renderer={itemRenderer} />
-            </Fragment>
+      {({ open }) => (
+        <Fragment>
+          <FieldWrapper
+            info={info}
+            error={error}
+            label={label}
+            width={width}
+            className={className}
+            labelAppend={labelAppend}
+            isInvalid={isInvalid}
+            isRequired={isRequired}
+            disabled={isDisabled}
+            onClear={() => handleSelectChange("")}
+            wrapperRef={setReferenceElement as AnyObject}
+            canClear={!isEmpty(actualValue)}
+          >
+            <Combobox.Input
+              ref={inputRef}
+              aria-label={label}
+              aria-disabled={isDisabled}
+              aria-readonly={isReadOnly}
+              aria-required={isRequired}
+              aria-errormessage={error}
+              size={1}
+              placeholder={placeholder}
+              disabled={isDisabled}
+              data-invalid={isInvalid}
+              className="ax-field__input"
+              autoComplete="off"
+              onChange={(e) => handleQueryChange(e.target.value)}
+              onKeyDown={!open ? handleEnter(onEnterPressed) : undefined}
+              onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
+              {...rest}
+            />
+            {children}
+          </FieldWrapper>
+          {createPortal(
+            <Combobox.Options
+              ref={setPopperElement as AnyObject}
+              className="ax-select__dropdown"
+              style={styles.popper}
+            >
+              <Options options={itemList} renderer={itemRenderer} />
+              {queryItems.length > 0 && (
+                <Fragment>
+                  <AxDivider size="xs" />
+                  <Options
+                    hideEmpty
+                    options={queryItems}
+                    renderer={itemRenderer}
+                  />
+                </Fragment>
+              )}
+              {defaultItems.length > 0 && <AxDivider size="xs" />}
+              {defaultItems.length > 0 && (
+                <Options
+                  hideEmpty
+                  options={defaultItems}
+                  renderer={itemRenderer}
+                />
+              )}
+            </Combobox.Options>,
+            document.body
           )}
-          {defaultItems.length > 0 && <AxDivider size="xs" />}
-          {defaultItems.length > 0 && (
-            <Options hideEmpty options={defaultItems} renderer={itemRenderer} />
-          )}
-        </Combobox.Options>,
-        document.body
+        </Fragment>
       )}
     </Combobox>
   );
