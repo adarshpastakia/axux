@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.32](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.31...v2.0.0-beta.32) (2022-08-12)
+
+
+### Bug Fixes
+
+* **Charts:** add empty message ([169fbcd](https://github.com/adarshpastakia/axux/commit/169fbcd0e0ffecd94e9a2fd62f4ee0044611e792))
+* **TimeSlider:** check range between min/max date in data ([94b130b](https://github.com/adarshpastakia/axux/commit/94b130b4ed7b1c61cde03227a61f83db00be8c69))
+
+
+
+
+
 # [2.0.0-beta.31](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.30...v2.0.0-beta.31) (2022-08-11)
 
 **Note:** Version bump only for package @axux/charts

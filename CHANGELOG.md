@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.32](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.31...v2.0.0-beta.32) (2022-08-12)
+
+
+### Bug Fixes
+
+* **Charts:** add empty message ([169fbcd](https://github.com/adarshpastakia/axux/commit/169fbcd0e0ffecd94e9a2fd62f4ee0044611e792))
+* **Inputs:** remove value state ([214a22e](https://github.com/adarshpastakia/axux/commit/214a22e00b76695f95817bd87303538b13cbc955))
+* **Searchbar:** handle events onQuery, onSelect, onSearch ([57c4947](https://github.com/adarshpastakia/axux/commit/57c49471f0e1688007866de7a00a2cb5cdeb8e7f))
+* **SearchInput:** handle search ([46397a7](https://github.com/adarshpastakia/axux/commit/46397a7a087fa5b91bde175cf73008905d4c6d92))
+* **SelectableList:** remove selection state ([75acba3](https://github.com/adarshpastakia/axux/commit/75acba373297cb5973a6c1861fc07673d76406dc))
+* **SelectInputs:** select callback with boolean return ([049d374](https://github.com/adarshpastakia/axux/commit/049d37415da140f209ccbc46013568abdf9d6349))
+* **Suggest:** use onEnterPressed prop ([675ee5d](https://github.com/adarshpastakia/axux/commit/675ee5d36718cc88f476515ebf478d474a77a20a))
+* **TimeSlider:** check range between min/max date in data ([94b130b](https://github.com/adarshpastakia/axux/commit/94b130b4ed7b1c61cde03227a61f83db00be8c69))
+
+
+
+
+
 # [2.0.0-beta.31](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.30...v2.0.0-beta.31) (2022-08-11)
 
 

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.32](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.31...v2.0.0-beta.32) (2022-08-12)
+
+
+### Bug Fixes
+
+* **Inputs:** remove value state ([214a22e](https://github.com/adarshpastakia/axux/commit/214a22e00b76695f95817bd87303538b13cbc955))
+* **SearchInput:** handle search ([46397a7](https://github.com/adarshpastakia/axux/commit/46397a7a087fa5b91bde175cf73008905d4c6d92))
+* **SelectInputs:** select callback with boolean return ([049d374](https://github.com/adarshpastakia/axux/commit/049d37415da140f209ccbc46013568abdf9d6349))
+* **Suggest:** use onEnterPressed prop ([675ee5d](https://github.com/adarshpastakia/axux/commit/675ee5d36718cc88f476515ebf478d474a77a20a))
+
+
+
+
+
 # [2.0.0-beta.31](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.30...v2.0.0-beta.31) (2022-08-11)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.32](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.31...v2.0.0-beta.32) (2022-08-12)
+
+
+### Bug Fixes
+
+* **Searchbar:** handle events onQuery, onSelect, onSearch ([57c4947](https://github.com/adarshpastakia/axux/commit/57c49471f0e1688007866de7a00a2cb5cdeb8e7f))
+
+
+
+
+
 # [2.0.0-beta.31](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.30...v2.0.0-beta.31) (2022-08-11)
 
 

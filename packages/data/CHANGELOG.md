@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.32](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.31...v2.0.0-beta.32) (2022-08-12)
+
+
+### Bug Fixes
+
+* **SelectableList:** remove selection state ([75acba3](https://github.com/adarshpastakia/axux/commit/75acba373297cb5973a6c1861fc07673d76406dc))
+
+
+
+
+
 # [2.0.0-beta.31](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.30...v2.0.0-beta.31) (2022-08-11)
 
 
