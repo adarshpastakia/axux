@@ -25,7 +25,9 @@ export interface SelectableProps {
    * change callback
    */
   onChange?: (ids: string[], nonIds?: string[]) => void;
-
+  /**
+   * item click callback
+   */
   onClick?: (id: string, isNegative: boolean) => void;
 }
 
@@ -43,7 +45,11 @@ export const useSelectableList = ({
       items.reduce(
         (ret, { id }) => ({
           ...ret,
-          [id]: selected?.includes(id) ? 1 : nonselected?.includes(id) ? -1 : 0,
+          [id]: selected?.includes?.(id)
+            ? 1
+            : nonselected?.includes?.(id)
+            ? -1
+            : 0,
         }),
         {}
       )
@@ -61,7 +67,6 @@ export const useSelectableList = ({
         if (selection[id] === 1 && check === 1) newSelection[id] = 0;
         if (selection[id] === -1 && check === -1) newSelection[id] = 0;
       }
-      setSelection(newSelection);
       const change: string[][] = [[], []];
       Object.entries(newSelection).forEach(([id, select]) =>
         select === 1
