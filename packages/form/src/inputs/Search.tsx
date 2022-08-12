@@ -21,7 +21,7 @@ export interface SearchProps
   icon?: string;
   isSearching?: boolean;
   /**
-   * Show view password toggle
+   * search callback
    */
   onSearch?: (query?: string) => void;
 }
@@ -43,7 +43,7 @@ export const Search: FC<SearchProps> = memo(
           handleSearch(value);
         });
       },
-      [onSearch]
+      [handleSearch]
     );
     const handleQuery = useCallback(() => {
       startTransition(() => {
