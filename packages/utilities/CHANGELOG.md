@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.33](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.32...v2.0.0-beta.33) (2022-08-12)
+
+
+### Bug Fixes
+
+* **dedupe:** update ([d2c4a34](https://github.com/adarshpastakia/axux/commit/d2c4a344556618a5d659eb40b9b8e764acaf2793))
+* **Format:** update ([e96c086](https://github.com/adarshpastakia/axux/commit/e96c0868e730a30a88c4b106e2fee7c8546520c2))
+* **getBoundingBox:** update ([96ae4a4](https://github.com/adarshpastakia/axux/commit/96ae4a4b0f6f62533f54152eefdd33f84165f5ba))
+
+
+
+
+
 # [2.0.0-beta.32](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.31...v2.0.0-beta.32) (2022-08-12)
 
 **Note:** Version bump only for package @axux/utilities
