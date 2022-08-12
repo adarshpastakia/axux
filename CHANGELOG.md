@@ -8,9 +8,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **CheckList,Histogram:** add onClick prop ([1f5d6cd](https://github.com/adarshpastakia/axux/commit/1f5d6cd8101a2248def9b4203aed72a38633ebc7))
-* **Suggest,Searchbar:** add defaultClick prop ([77519cc](https://github.com/adarshpastakia/axux/commit/77519cc717d6710c1fd78411ca0c8542e2ad09bd))
-* **Suggest:** default item list key ([36dd0db](https://github.com/adarshpastakia/axux/commit/36dd0dbb3fd00b8946c10a0d2aaec4a433357622))
+* **CheckList,Histogram:** ~~add onClick prop ([1f5d6cd](https://github.com/adarshpastakia/axux/commit/1f5d6cd8101a2248def9b4203aed72a38633ebc7))~~
+* **Suggest,Searchbar:** ~~add defaultClick prop ([77519cc](https://github.com/adarshpastakia/axux/commit/77519cc717d6710c1fd78411ca0c8542e2ad09bd))~~
+* **Suggest:** ~~default item list key ([36dd0db](https://github.com/adarshpastakia/axux/commit/36dd0dbb3fd00b8946c10a0d2aaec4a433357622))~~
 
 
 
