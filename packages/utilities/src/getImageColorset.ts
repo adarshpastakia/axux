@@ -6,6 +6,8 @@
  * @license   : MIT
  */
 
+/* istanbul ignore file */
+
 export const getImageColorset = (el: HTMLImageElement) => {
   // create canvas
   const canvas = document.createElement("canvas");
