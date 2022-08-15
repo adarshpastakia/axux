@@ -64,7 +64,7 @@ export const BodyCell = memo(
         className="ax-datagrid__body--cell"
         style={{ minWidth, maxWidth, width }}
       >
-        <label>{content}</label>
+        <span>{content}</span>
       </div>
     );
   }
