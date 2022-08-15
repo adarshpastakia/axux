@@ -6,7 +6,6 @@
  * @license   : MIT
  */
 
-import { Indicator } from "@axux/core/dist/animations";
 import { ChildrenProp } from "@axux/core/dist/types";
 import {
   createContext,
@@ -43,7 +42,6 @@ export const DatagridProvider: FC<KeyValue & ChildrenProp> = ({
   children,
   columns = [],
   data = [],
-  isLoading,
   className,
   isSelectable,
   onRowSelect,
@@ -101,12 +99,6 @@ export const DatagridProvider: FC<KeyValue & ChildrenProp> = ({
         <div className={`ax-datagrid__wrapper ${className ?? ""}`}>
           {children}
         </div>
-
-        {isLoading && (
-          <div className="ax-datagrid__loader">
-            <Indicator />
-          </div>
-        )}
         <div className="ax-datagrid__resize--ghost" ref={ghostRef}>
           <div />
         </div>

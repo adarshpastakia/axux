@@ -7,6 +7,7 @@
  */
 
 import { AxContent } from "@axux/core";
+import { Indicator } from "@axux/core/dist/animations";
 import { ElementProps } from "@axux/core/dist/types";
 import { isString } from "@axux/utilities";
 import { Fragment, memo, ReactElement, ReactNode } from "react";
@@ -36,6 +37,7 @@ export const AxDatagridComponent = <T extends KeyValue>({
   data = [],
   emptyDisplay,
   children,
+  isLoading,
   ...props
 }: DatagridProps<T>) => {
   const { t } = useTranslation("data");
@@ -43,7 +45,14 @@ export const AxDatagridComponent = <T extends KeyValue>({
     <DatagridProvider {...props} data={data} onRowExpand={children}>
       <Header />
       {data.length > 0 && <Body />}
-      {data.length === 0 && (
+
+      {isLoading && (
+        <div className="ax-datagrid__loader">
+          <Indicator />
+        </div>
+      )}
+
+      {!isLoading && data.length === 0 && (
         <Fragment>
           {emptyDisplay && !isString(emptyDisplay) ? (
             emptyDisplay
