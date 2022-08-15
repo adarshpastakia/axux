@@ -77,7 +77,10 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
   }, [chartRef.current, onBrush]);
 
   const options = useMemo<EChartOption>(() => {
-    if (isEmpty(data)) return {};
+    if (isEmpty(data)) {
+      chartRef.current?.clear();
+      return {};
+    }
 
     const stack = type.includes("stacked") ? "stack" : undefined;
 

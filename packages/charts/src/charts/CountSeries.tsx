@@ -47,7 +47,10 @@ const CountSeriesChart: FC<CountSeriesProps> = ({
       chartRef.current?.clear();
     }
 
-    if (isEmpty(data)) return {};
+    if (isEmpty(data)) {
+      chartRef.current?.clear();
+      return {};
+    }
 
     const sorted = data?.sort(compareValues("desc", "count"));
 
