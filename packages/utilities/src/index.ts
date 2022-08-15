@@ -14,9 +14,11 @@ export {
 } from "./useEffectDebugger";
 export { useLogger } from "./useLogger";
 export * from "./_ascii";
+export * from "./_boundingBox";
 export { default as Countries } from "./_countries";
 export type { Country } from "./_countries";
 export * from "./_debounce";
+export * from "./_dedupe";
 export { _fetch as fetch } from "./_fetch";
 export * from "./_format";
 export * from "./_getByPath";
@@ -25,10 +27,3 @@ export * from "./_interpolate";
 export * from "./_isEqual";
 export * from "./_isType";
 export * from "./_tokenize";
-export * from "./_dedupe";
-export * from "./_boundingBox";
-
-import { default as Countries } from "./_countries";
-
-// @ts-ignore
-window.Countries = Countries;

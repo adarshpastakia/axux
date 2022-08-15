@@ -32,6 +32,7 @@ export namespace Format {
       return "";
     }
     const prefix = `${number}`.startsWith("+") ? "+" : "";
+    // @ts-ignore
     return prefix + numeral(number).format(format);
   };
 
