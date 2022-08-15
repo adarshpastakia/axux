@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxContent, AxIcon } from "@axux/core";
+import { AxAnimation, AxContent, AxIcon, AxLoader } from "@axux/core";
 import { Color } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { Format } from "@axux/utilities";
@@ -54,6 +54,8 @@ export interface HistogramProps extends SelectableProps {
    * message for empty list
    */
   emptyMessage?: string;
+
+  isLoading?: boolean;
 }
 
 const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
@@ -128,6 +130,7 @@ export const AxHistogram: FC<HistogramProps> = ({
   negativeColor = "danger",
   color = "primary",
   emptyMessage,
+  isLoading,
   ...props
 }) => {
   const { t } = useTranslation("data");
@@ -159,7 +162,12 @@ export const AxHistogram: FC<HistogramProps> = ({
           selected={selection[item.id]}
         />
       ))}
-      {items.length === 0 && (
+      {isLoading && (
+        <AxLoader>
+          <AxAnimation.Bars />
+        </AxLoader>
+      )}
+      {!isLoading && items.length === 0 && (
         <AxContent.Empty
           className="text-sm"
           message={emptyMessage ?? t("histogram.empty")}
