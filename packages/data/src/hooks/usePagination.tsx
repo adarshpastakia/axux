@@ -40,7 +40,7 @@ export const usePagination = ({
 
   /******************* calculate total pages *******************/
   const totalPages = useMemo(
-    () => Math.ceil(totalRecords / perPage),
+    () => Math.max(1, Math.ceil(totalRecords / perPage)),
     [totalRecords, perPage]
   );
 
