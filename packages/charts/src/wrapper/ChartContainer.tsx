@@ -83,10 +83,13 @@ export const ChartContainer = ({
   const [chartRef, setChartRef] = useState<EChartsType>();
   const isDark = useIsDark();
 
-  const handleResize = useCallback((size: SizeObject) => {
-    onResize?.(size);
-    chartRef?.resize(size);
-  }, []);
+  const handleResize = useCallback(
+    (size: SizeObject) => {
+      onResize?.(size);
+      chartRef?.resize(size);
+    },
+    [chartRef]
+  );
   const containerRef = useResizeObserver(handleResize);
 
   useImperativeHandle(_ref, () => chartRef!, [chartRef]);
@@ -136,12 +139,9 @@ export const ChartContainer = ({
   return (
     <Fragment>
       <div>{children}</div>
-      <div ref={containerRef} />
+      <div ref={containerRef} className="overflow-hidden" />
       {isEmpty && (
-        <AxContent.Empty
-          icon={emptyIcon ?? Icons.Line}
-          message="Empty chart"
-        />
+        <AxContent.Empty icon={emptyIcon ?? Icons.Line} message="Empty chart" />
       )}
     </Fragment>
   );
