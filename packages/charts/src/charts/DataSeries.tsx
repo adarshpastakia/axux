@@ -56,7 +56,10 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
     if (type === "radar") {
       chartRef.current?.clear();
     }
-    if (isEmpty(data)) return {};
+    if (isEmpty(data)) {
+      chartRef.current?.clear();
+      return {};
+    }
 
     const stack = type.includes("stacked") ? "stack" : undefined;
 

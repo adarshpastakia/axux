@@ -34,8 +34,9 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
   );
 
   useEffect(() => {
-    const defaultStart = data?.[0]?.[0]?.getTime() ?? 0;
-    const defaultEnd = data?.[data.length - 1]?.[0]?.getTime() ?? 32;
+    const defaultStart = data.length > 0 ? data?.[0]?.[0]?.getTime() : 0;
+    const defaultEnd =
+      data.length > 0 ? data?.[data.length - 1]?.[0]?.getTime() : 32;
     setRange({
       startValue: Math.max(
         sliderRange?.start.getTime() ?? defaultStart,
@@ -65,7 +66,10 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
   }, [chartRef.current, handleBrush]);
 
   const options = useMemo<EChartOption>(() => {
-    if (isEmpty(data)) return {};
+    if (isEmpty(data)) {
+      chartRef.current?.clear();
+      return {};
+    }
 
     const categoryAxis: AnyObject = {
       type: "time",
