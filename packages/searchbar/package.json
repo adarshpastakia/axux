@@ -1,6 +1,6 @@
 {
   "name": "@axux/searchbar",
-  "version": "2.0.0-beta.33",
+  "version": "2.0.0-beta.34",
   "description": "axux: SearchBar",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -23,10 +23,10 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.33",
-    "@axux/date": "^2.0.0-beta.33",
-    "@axux/form": "^2.0.0-beta.33",
-    "@axux/utilities": "^2.0.0-beta.33"
+    "@axux/core": "^2.0.0-beta.34",
+    "@axux/date": "^2.0.0-beta.34",
+    "@axux/form": "^2.0.0-beta.34",
+    "@axux/utilities": "^2.0.0-beta.34"
   },
   "peerDependencies": {
     "i18next": "^21.8.8",

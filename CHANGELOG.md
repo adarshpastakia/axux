@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.34](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.33...v2.0.0-beta.34) (2022-08-16)
+
+
+### Bug Fixes
+
+* **Charts:** clear chart if data is empty ([705dad5](https://github.com/adarshpastakia/axux/commit/705dad57c2dc601b4f650ae4e5f0a782939b59d5))
+* **Charts:** resize container ([07c1f5a](https://github.com/adarshpastakia/axux/commit/07c1f5afa3a3ce48f661deb17cec3be2ef829ddd))
+* **Datagrid, Histogram:** add loader ([6caa455](https://github.com/adarshpastakia/axux/commit/6caa455fa98f022731cc20ce43c01e5510f0c89c))
+* **Datagrid:** body cell span ([f168c1a](https://github.com/adarshpastakia/axux/commit/f168c1a2a607cf16ad2f54be897d926043915728))
+* **Pagination:** min page 0 ([5d03328](https://github.com/adarshpastakia/axux/commit/5d033286c9def397c5465fa5b811d3c925917f64))
+
+
+
+
+
 # [2.0.0-beta.33](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.32...v2.0.0-beta.33) (2022-08-12)
 
 
