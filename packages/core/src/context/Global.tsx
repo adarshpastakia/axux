@@ -70,6 +70,11 @@ interface GlobalContextType {
    */
   errorElement: GlobalProps["errorElement"];
 
+  /**
+   * close all open overlays
+   */
+  closeOverlays: () => void;
+
   currentTheme: State["theme"];
   currentLocale: string;
   currentCalendar: State["calendar"];
@@ -166,10 +171,18 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
     localStorage.setItem(KEY_CALENDAR, calendar);
   }, []);
 
+  const closeOverlays = useCallback(() => {
+    const el = document.body.querySelectorAll(".ax-overlay__container > *");
+    el.forEach((e) => {
+      e.remove();
+    });
+  }, []);
+
   /******************* context provider *******************/
   return (
     <GlobalContext.Provider
       value={{
+        closeOverlays,
         toggleTheme,
         changeLocale,
         changeCalendar,

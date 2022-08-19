@@ -8,7 +8,7 @@
 
 import { isObject, isString } from "@axux/utilities";
 import { useMemo } from "react";
-import { render, unmountComponentAtNode } from "react-dom";
+import { createPortal, render, unmountComponentAtNode } from "react-dom";
 import { AlertProps, AxAlert } from "../overlays/Alert";
 import { AxMessage, MessageProps } from "../overlays/Message";
 import { AxToast, ToastProps } from "../overlays/Toast";
@@ -23,6 +23,19 @@ export const useNotificationService = () => {
     }
     return { message: "" };
   };
+
+  /******************* message container *******************/
+  const overlayContainer = useMemo(() => {
+    let el = document.body.querySelector(
+      ".ax-overlay__container"
+    ) as HTMLElement;
+    if (!el) {
+      el = document.createElement("div");
+      el.className = "ax-overlay__container";
+      document.body.appendChild(el);
+    }
+    return el;
+  }, []);
 
   /******************* message container *******************/
   const messageContainer = useMemo(() => {
@@ -56,19 +69,18 @@ export const useNotificationService = () => {
   const alert = (props: AlertProps) => {
     const el = document.createElement("div");
     el.className = "ax-overlay__mask";
-    document.body.appendChild(el);
+    overlayContainer.appendChild(el);
     return new Promise<boolean>((resolve) => {
       const onClose = (b = false) => {
         el.dataset.show = "";
         setTimeout(() => {
-          unmountComponentAtNode(el);
           el.remove();
         }, 250);
         resolve(b);
       };
       el.onclick = () => onClose();
       // @ts-ignore
-      render(<AxAlert {...props} onClose={onClose} />, el);
+      createPortal(<AxAlert {...props} onClose={onClose} />, el);
       requestAnimationFrame(() => (el.dataset.show = "true"));
     });
   };
@@ -101,7 +113,9 @@ export const useNotificationService = () => {
   /******************* toasts *******************/
   const onCloseAll = () => {
     toastContainer
-      .querySelectorAll<HTMLButtonElement>(".ax-toast__close > .close-x:last-child")
+      .querySelectorAll<HTMLButtonElement>(
+        ".ax-toast__close > .close-x:last-child"
+      )
       .forEach((b) => b.click());
   };
 
