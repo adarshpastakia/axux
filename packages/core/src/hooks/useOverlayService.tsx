@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { FC, ReactElement, useState } from "react";
+import { FC, ReactElement, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 
 type OverlayComponent = FC<{
@@ -18,9 +18,23 @@ export const useOverlayService = (
   ModalOrFlyout: OverlayComponent
 ): [Overlay: ReactElement, openOverlay: (props?: KeyValue) => void] => {
   const [Overlay, setOverlay] = useState<AnyObject>();
+
+  /******************* message container *******************/
+  const overlayContainer = useMemo(() => {
+    let el = document.body.querySelector(
+      ".ax-overlay__container"
+    ) as HTMLElement;
+    if (!el) {
+      el = document.createElement("div");
+      el.className = "ax-overlay__container";
+      document.body.appendChild(el);
+    }
+    return el;
+  }, []);
+
   const openOverlay = (props: KeyValue = {}) => {
     const el = document.createElement("div");
-    document.body.appendChild(el);
+    overlayContainer.appendChild(el);
     return new Promise<void>((resolve) => {
       const handleClose = () => {
         (el.firstElementChild as HTMLElement).dataset.show = "";
