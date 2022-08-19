@@ -67,7 +67,7 @@
       @apply p-[0.25em] justify-center w-fit h-fit;
     }
     &[data-square="true"].flush .ax-button__inner {
-      @apply p-0.5 justify-center min-w-fit min-h-fit;
+      @apply p-0.5 justify-center;
       & .ax-button__icon {
         font-size: 1.5em;
       }
