@@ -70,7 +70,7 @@
         focus-within:bg-white focus-within:dark:bg-black focus-within:after:w-full print:hidden shadow-bw-100 dark:shadow-[#000];
 
     &:not([data-plain="true"]) {
-      box-shadow: 0 1px 0 var(--tw-shadow-color) inset;
+      box-shadow: 0 1px 0 1px var(--tw-shadow-color) inset;
     }
     &[data-disabled="true"] {
       @apply pointer-events-none before:absolute before:inset-0 before:pointer-events-auto before:cursor-not-allowed before:bg-bw-500/20 before:rounded-[inherit];
@@ -482,7 +482,7 @@
     }
   }
   .ax-field__clear {
-    @apply ltr:pr-2 rtl:pl-2 py-1 order-4 opacity-50 hover:opacity-75 cursor-pointer;
+    @apply ltr:pr-2 rtl:pl-2 py-1 order-4 opacity-50 hover:opacity-75 cursor-pointer select-none;
   }
 
   .ax-field__strength {

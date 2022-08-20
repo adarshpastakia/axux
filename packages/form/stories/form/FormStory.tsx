@@ -138,7 +138,7 @@ const Template: ComponentStory<typeof AxForm> = () => {
                   </AxFlexBox.Col>
                   <AxFlexBox.Col span="md:6">
                     <AxForm.Controller name="select">
-                      <AxField.Select
+                      <AxField.Combo
                         isEditable
                         allowCreate
                         label="Select List"
@@ -204,7 +204,7 @@ const Template: ComponentStory<typeof AxForm> = () => {
                       <AxField.Tag
                         isEditable
                         allowCreate
-                        label="Select List"
+                        label="Tag List"
                         options={[
                           { value: "first", label: "This is first" },
                           "second",

@@ -19,6 +19,7 @@ import { Slider } from "./inputs/Slider";
 import { Switch } from "./inputs/Switch";
 import { Text } from "./inputs/Text";
 import { Textarea } from "./inputs/Textarea";
+import { Combo } from "./select/Combo";
 import { Select } from "./select/Select";
 import { Suggest } from "./select/Suggest";
 import { Tag } from "./select/Tag";
@@ -39,6 +40,7 @@ export const AxField = {
   Checkbox,
   Radio,
   Switch,
+  Combo,
   Select,
   Suggest,
   Tag,
@@ -60,6 +62,7 @@ AxField.Options.displayName = "AxField.Options";
 AxField.Checkbox.displayName = "AxField.Text";
 AxField.Radio.displayName = "AxField.Radio";
 AxField.Switch.displayName = "AxField.Switch";
+AxField.Combo.displayName = "AxField.Combo";
 AxField.Select.displayName = "AxField.Select";
 AxField.Suggest.displayName = "AxField.Suggest";
 AxField.Tag.displayName = "AxField.Tag";

@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { AxIcon } from "@axux/core";
 import { Countries, Country } from "@axux/utilities";
 import { action } from "@storybook/addon-actions";
 import { ComponentStory } from "@storybook/react";
@@ -103,8 +104,19 @@ SearchStory.args = {
   isRequired: false,
 };
 
-const SelectTemplate: ComponentStory<typeof AxField.Select<Country>> = (props) => (
-  <AxField.Select {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} onQuery={e=>{action("onQuery")(e);return []}} />
+const SelectIcons:KeyValue = {
+  first: "mdi-numeric-1-circle",
+  second: "mdi-numeric-2-circle",
+  third: "mdi-numeric-3-circle",
+}
+const SelectColor:KeyValue = {
+  first: "#ffc30b",
+  second: "#adadc7",
+  third: "#b2560c",
+}
+
+const SelectTemplate: ComponentStory<typeof AxField.Select<string>> = (props) => (
+  <AxField.Select {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} />
 );
 export const SelectStory = SelectTemplate.bind({});
 SelectStory.args = {
@@ -112,6 +124,48 @@ SelectStory.args = {
   placeholder: "Select value....",
   error: "",
   info: "",
+  value:"first",
+  options: ["first", "second","third"],
+  makeLabel: (item) => (
+    <div className="flex gap-1 items-center">
+      <AxIcon
+        icon={`mdi ${SelectIcons[item]}`}
+        className="text-lg"
+        color={SelectColor[item]
+        }
+      />
+      <label className="flex-auto">{item}</label>
+    </div>
+  ),
+  renderer: (item) => (
+    <div className="flex gap-1 items-center">
+      <AxIcon
+        icon={`mdi ${SelectIcons[item]}`}
+        className="text-lg"
+        color={SelectColor[item]
+        }
+      />
+      <label className="flex-auto">{item}</label>
+    </div>
+  ),
+  allowClear:true,
+  autoFocus: false,
+  isInvalid: false,
+  isEditable: true,
+  isDisabled: false,
+  isReadOnly: false,
+  isRequired: false,
+};
+
+const ComboTemplate: ComponentStory<typeof AxField.Combo<Country>> = (props) => (
+  <AxField.Combo {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} onQuery={e=>{action("onQuery")(e);return []}} />
+);
+export const ComboStory = ComboTemplate.bind({});
+ComboStory.args = {
+  label: "Combo input",
+  placeholder: "Combo value....",
+  error: "",
+  info: "",value:"AE",
   valueProperty: "iso2",
   labelProperty: "name",
   options: Object.entries(Countries.list.reduce<KeyValue>((r,c) => ({...r,
