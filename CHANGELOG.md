@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.35](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.34...v2.0.0-beta.35) (2022-08-20)
+
+
+### Bug Fixes
+
+* **Button:** flush style ([88f8fed](https://github.com/adarshpastakia/axux/commit/88f8fede1b83b6e094cc7939bc16bbdd1f59963e))
+* **Overlays:** add closeOverlays to global context ([40530e4](https://github.com/adarshpastakia/axux/commit/40530e40a0168cb9ec9db1eab0293a0cac5a2975))
+
+
+### Features
+
+* **Select:** added simple select input ([f80907e](https://github.com/adarshpastakia/axux/commit/f80907e4b2063db4d3d037d0eb8671f78f598834))
+
+
+
+
+
 # [2.0.0-beta.34](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.33...v2.0.0-beta.34) (2022-08-16)
 
 

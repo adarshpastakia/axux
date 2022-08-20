@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.35](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.34...v2.0.0-beta.35) (2022-08-20)
+
+**Note:** Version bump only for package @axux/media
+
+
+
+
+
 # [2.0.0-beta.34](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.33...v2.0.0-beta.34) (2022-08-16)
 
 **Note:** Version bump only for package @axux/media
