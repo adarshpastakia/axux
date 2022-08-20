@@ -45,7 +45,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
       (e: MouseEvent<HTMLDivElement>) => {
         (
           e.currentTarget.parentElement?.querySelector(
-            "input,textarea"
+            "input,textarea,button"
           ) as HTMLElement
         )?.focus();
         onClear?.();

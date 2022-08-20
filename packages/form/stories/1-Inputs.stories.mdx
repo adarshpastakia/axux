@@ -21,6 +21,7 @@ import {
   SwitchStory,
   SearchStory,
   SelectStory,
+  ComboStory,
   TagStory,
   SuggestStory,
   ContainerStory,
@@ -72,6 +73,14 @@ import {
 
 <Canvas>
   <Story name="Select">{SelectStory}</Story>
+</Canvas>
+
+<Heading storyId="form-inputs--combo">Combo</Heading>
+
+<Description of={AxField.Combo} />
+
+<Canvas>
+  <Story name="Combo">{ComboStory}</Story>
 </Canvas>
 
 <Heading storyId="form-inputs--tag">Tag</Heading>

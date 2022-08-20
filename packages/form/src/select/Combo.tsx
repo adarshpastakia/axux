@@ -9,11 +9,12 @@
 import { AxIcon } from "@axux/core";
 import { usePopover } from "@axux/core/dist/hooks/usePopover";
 import { isEmpty } from "@axux/utilities";
-import { Listbox } from "@headlessui/react";
+import { handleEnter } from "@axux/utilities/dist/handlers";
+import { Combobox } from "@headlessui/react";
 import {
+  FocusEvent,
   Fragment,
   memo,
-  ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -21,12 +22,13 @@ import {
   useTransition,
 } from "react";
 import { createPortal } from "react-dom";
-import { useTranslation } from "react-i18next";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { Icons } from "../types/icons";
+import { Options } from "./Option";
+import { useSelect } from "./useSelect";
 import { defaultMatcher, getLabel, getValue, SelectProps } from "./utils";
 
-export const SelectInput = <T extends AnyObject>({
+export const ComboInput = <T extends AnyObject>({
   label,
   labelAppend,
   isRequired,
@@ -58,12 +60,15 @@ export const SelectInput = <T extends AnyObject>({
   children,
   onEnterPressed,
   ...rest
-}: Omit<SelectProps<T>, "makeLabel"> & {
-  makeLabel?: (item: T) => ReactNode;
-}) => {
-  const { t } = useTranslation("form");
+}: SelectProps<T>) => {
   const [actualValue, setActualValue] = useState<T>();
   const [pending, startTransition] = useTransition();
+  const { list, query, onQueryChange } = useSelect({
+    options,
+    labelProperty,
+    onQuery,
+    onCreateOption,
+  });
 
   const { styles, setPopperElement, setReferenceElement } = usePopover({
     hideArrow: true,
@@ -92,10 +97,11 @@ export const SelectInput = <T extends AnyObject>({
           onChange &&
             startTransition(() => onChange(getValue(option, valueProperty)));
           setActualValue(option);
+          onQueryChange("");
         }
       });
     },
-    [onChange, valueProperty]
+    [onChange, valueProperty, query]
   );
 
   /******************* display label *******************/
@@ -104,31 +110,14 @@ export const SelectInput = <T extends AnyObject>({
     return getLabel(actualValue, labelProperty);
   }, [makeLabel, labelProperty, actualValue]);
 
-  /******************* make select option *******************/
-  const makeOption = useCallback(
-    (option: AnyObject, index: number) => (
-      <Listbox.Option value={option} key={index}>
-        {({ active, selected }) => (
-          <div
-            className="ax-select__option"
-            data-selected={selected}
-            data-active={active}
-          >
-            {renderer ? renderer(option) : getLabel(option, labelProperty)}
-          </div>
-        )}
-      </Listbox.Option>
-    ),
-    [renderer, labelProperty]
-  );
-
   return (
-    <Listbox
+    <Combobox
       value={actualValue}
       onChange={handleChange}
       disabled={isDisabled}
       name={name}
       as={Fragment}
+      nullable
     >
       <FieldWrapper
         info={info}
@@ -144,48 +133,56 @@ export const SelectInput = <T extends AnyObject>({
         wrapperRef={setReferenceElement as AnyObject}
         canClear={allowClear && !isEmpty(actualValue)}
       >
-        <div
+        <Combobox.Input
+          ref={inputRef}
+          aria-label={label}
+          aria-disabled={isDisabled}
+          aria-readonly={isReadOnly}
+          aria-required={isRequired}
+          aria-errormessage={error}
+          size={1}
+          placeholder={placeholder}
+          disabled={isDisabled}
+          readOnly={!isEditable && !allowCreate}
+          data-invalid={isInvalid}
+          className="ax-field__input"
+          autoComplete="off"
+          onKeyDown={handleEnter(onEnterPressed)}
+          displayValue={() => displayLabel}
+          onChange={(e) => onQueryChange(e.target.value)}
+          onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
+          {...rest}
+        />
+        {children}
+        <Combobox.Button
+          as="div"
+          className="ax-field__addon ax-select__handle"
           data-align="end"
-          className="ax-field__addon ax-select__handle pointer-events-none"
         >
           <AxIcon icon={Icons.iconDropdown} />
-        </div>
-        <Listbox.Button className="absolute inset-0 opacity-0" />
-        <span ref={inputRef} className="ax-field__input truncate">
-          {displayLabel}
-          {!displayLabel && (
-            <span className="text-muted">{placeholder}&nbsp;</span>
-          )}
-        </span>
-        {children}
+        </Combobox.Button>
       </FieldWrapper>
       {createPortal(
-        <Listbox.Options
+        <Combobox.Options
           ref={setPopperElement as AnyObject}
           className="ax-select__dropdown"
           style={styles.popper}
         >
-          {options.map((option: AnyObject, index) =>
-            option.items ? (
-              <Fragment key={index}>
-                <div className="ax-select__group">{option.label}</div>
-                {option.items.map(makeOption)}
-              </Fragment>
-            ) : (
-              makeOption(option, index)
-            )
-          )}
-          {options.length === 0 && (
-            <div className="ax-select__empty">{t("select.emptyList")}</div>
-          )}
-        </Listbox.Options>,
+          <Options
+            query={query}
+            options={list}
+            renderer={renderer}
+            allowCreate={allowCreate}
+            labelProperty={labelProperty}
+          />
+        </Combobox.Options>,
         document.body
       )}
-    </Listbox>
+    </Combobox>
   );
 };
-SelectInput.displayName = "AxField.Select";
+ComboInput.displayName = "AxField.Combo";
 
 const GenericMemo: <T>(c: T) => T = memo;
 
-export const Select = GenericMemo(SelectInput);
+export const Combo = GenericMemo(ComboInput);
