@@ -26,7 +26,7 @@
     @apply h-8 grid items-center select-none z-50 -top-8 inset-x-0 absolute bg-bw-500/10;
     grid-template-columns: auto 1fr auto;
 
-    small {
+    & small {
       @apply px-1 truncate;
     }
   }
@@ -101,19 +101,18 @@
     }
 
     &[data-type="heading"] {
-      @apply truncate font-medium;
+      @apply font-medium;
       line-height: 1.25;
 
       & > div:first-child {
-        display: flex;
-        flex-flow: row nowrap;
+        @apply flex flex-nowrap;
 
         & > i {
           margin-inline-end: 8px;
         }
 
         & > div {
-          flex: 1;
+          @apply flex-1 truncate;
 
           &:focus {
             outline: none;
