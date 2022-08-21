@@ -27,7 +27,7 @@ export const HeaderCell = memo(
     label,
     minWidth,
     maxWidth,
-  }: DatagridColumn<AnyObject> & KeyValue) => {
+  }: DatagridColumn<AnyObject>) => {
     const { startResize, widths, sort, onSort } = useDatagridContext();
 
     const width = useMemo(
@@ -66,6 +66,7 @@ export const HeaderCell = memo(
           <div
             className="ax-datagrid__header--label"
             data-sortable={isSortable}
+            data-centered={!label && !!icon}
             onClick={handleClick(handleSort)}
           >
             {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}

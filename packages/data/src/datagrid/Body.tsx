@@ -6,13 +6,24 @@
  * @license   : MIT
  */
 
-import { memo } from "react";
-import { BodyCell } from "./BodyCell";
+import { memo, useMemo } from "react";
 import { BodyRow } from "./BodyRow";
 import { useDatagridContext } from "./Context";
+import { EmptyRow } from "./EmptyRow";
 
 export const Body = memo(() => {
-  const { data, columns } = useDatagridContext();
+  const { data, columns, onRowExpand } = useDatagridContext();
+
+  const [start, end, cols] = useMemo(
+    () => [
+      columns.filter(
+        (col) => col.isLocked === true || col.isLocked === "start"
+      ),
+      columns.filter((col) => col.isLocked === "end"),
+      columns.filter((col) => !col.isLocked),
+    ],
+    [columns]
+  );
 
   return (
     <div className="ax-datagrid__body">
@@ -20,19 +31,7 @@ export const Body = memo(() => {
         <BodyRow key={row} record={record} />
       ))}
 
-      <div className="ax-datagrid__row flex-1">
-        <div className="ax-datagrid__row--flex min-h-full">
-          {columns.map(({ name }, column) => (
-            <BodyCell
-              key={column}
-              record={{}}
-              label=""
-              type="string"
-              name={name}
-            />
-          ))}
-        </div>
-      </div>
+      <EmptyRow />
     </div>
   );
 });
