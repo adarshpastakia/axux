@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.37](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.36...v2.0.0-beta.37) (2022-08-21)
+
+
+### Bug Fixes
+
+* **NotificationService:** replace ReactDOM.render with createRoot ([1da5665](https://github.com/adarshpastakia/axux/commit/1da56655b05770a8dc1d33cf3ff41fae7fddaf41))
+* **PageMaker:** use rem font size for headings ([35dfd35](https://github.com/adarshpastakia/axux/commit/35dfd35e354ec1b5e249f8f2f214359c4359d624))
+
+
+
+
+
 # [2.0.0-beta.36](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.35...v2.0.0-beta.36) (2022-08-21)
 
 
