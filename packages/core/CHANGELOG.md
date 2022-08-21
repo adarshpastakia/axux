@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.36](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.35...v2.0.0-beta.36) (2022-08-21)
+
+
+### Features
+
+* **PageMaker:** added page maker ([884b5f5](https://github.com/adarshpastakia/axux/commit/884b5f5db18e6784102d690c4ea188d50421b564))
+
+
+
+
+
 # [2.0.0-beta.35](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.34...v2.0.0-beta.35) (2022-08-20)
 
 
