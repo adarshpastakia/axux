@@ -13,7 +13,7 @@ export const Divider: FC<IDividerConfig> = memo((item) => {
   const style = useMemo(
     () => ({
       color: color || "inherit",
-      fontSize: size || 13,
+      fontSize: `${size || 1}rem`,
     }),
     [color, size]
   );

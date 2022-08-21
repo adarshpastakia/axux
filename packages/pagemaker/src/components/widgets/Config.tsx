@@ -80,10 +80,11 @@ export const Config = memo(() => {
         {[EnumTypes.DIVIDER, EnumTypes.HEADING].includes(selected.type) && (
           <AxField.Slider
             label={t("config.size")}
-            min={8}
-            max={42}
+            min={0.75}
+            max={4}
+            step={0.25}
             showValue
-            value={selected.size || 13}
+            value={selected.size || 1}
             onChange={(value) => updateField("size", value)}
           />
         )}

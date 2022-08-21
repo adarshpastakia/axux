@@ -24,7 +24,7 @@ const config: PageConfig = [
     type: EnumTypes.HEADING,
     title: "Heading",
     color: "#487eb0",
-    size: 18,
+    size: 1.5,
   },
   {
     id: "row-1",
