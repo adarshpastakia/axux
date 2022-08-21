@@ -43,6 +43,7 @@ const config: PageConfig = [
             title: "Tile head",
             bordered: true,
             expandable: false,
+            aspect: "4 / 3",
             color: "#227093",
           },
         ],

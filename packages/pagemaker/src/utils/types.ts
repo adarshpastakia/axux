@@ -59,6 +59,7 @@ export interface ITileConfig extends IItem {
   iconCls?: string;
   bordered?: boolean;
   expandable?: boolean;
+  aspect?: "0" | "1 / 1" | "4 / 3" | "16 / 9";
   widgetId: string;
 }
 

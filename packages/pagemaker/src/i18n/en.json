@@ -23,6 +23,7 @@
     "colSpan": "Col span",
     "height": "Row Height",
     "border": "Bordered",
-    "expand": "Expandable"
+    "expand": "Expandable",
+    "aspect": "Aspect Ratio"
   }
 }
