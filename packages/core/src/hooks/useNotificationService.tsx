@@ -8,7 +8,8 @@
 
 import { isObject, isString } from "@axux/utilities";
 import { useMemo } from "react";
-import { createPortal, render, unmountComponentAtNode } from "react-dom";
+import { createPortal } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { AlertProps, AxAlert } from "../overlays/Alert";
 import { AxMessage, MessageProps } from "../overlays/Message";
 import { AxToast, ToastProps } from "../overlays/Toast";
@@ -92,17 +93,18 @@ export const useNotificationService = () => {
       let timerRef: AnyObject = null;
       const el = document.createElement("div");
       messageContainer.appendChild(el);
+      const root = createRoot(el);
       const onClose = (b = true) => {
         el.dataset.show = "";
         setTimeout(() => {
-          unmountComponentAtNode(el);
+          root.unmount();
           el.remove();
         }, 250);
         clearTimeout(timerRef);
         resolve(b);
       };
       // @ts-ignore
-      render(<AxMessage {...obj} onClose={onClose} />, el);
+      root.render(<AxMessage {...obj} onClose={onClose} />);
       requestAnimationFrame(() => (el.dataset.show = "true"));
       if (timeout > 0) {
         timerRef = setTimeout(onClose, timeout);
@@ -125,19 +127,19 @@ export const useNotificationService = () => {
       let timerRef: AnyObject = null;
       const el = document.createElement("div");
       toastContainer.appendChild(el);
+      const root = createRoot(el);
       const onClose = (b = false) => {
         el.dataset.show = "";
         setTimeout(() => {
-          unmountComponentAtNode(el);
+          root.unmount();
           el.remove();
         }, 250);
         clearTimeout(timerRef);
         resolve(b);
       };
-      render(
+      root.render(
         // @ts-ignore
-        <AxToast {...obj} onClose={onClose} onCloseAll={onCloseAll} />,
-        el
+        <AxToast {...obj} onClose={onClose} onCloseAll={onCloseAll} />
       );
       requestAnimationFrame(() => (el.dataset.show = "true"));
       if (obj.type !== "confirm" && timeout > 0) {
