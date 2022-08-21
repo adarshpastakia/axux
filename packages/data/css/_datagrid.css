@@ -56,6 +56,10 @@
     & .ax-datagrid__header--label {
       @apply flex items-center flex-1 flex-nowrap overflow-hidden px-1;
 
+      &[data-centered="true"] {
+        @apply justify-center;
+      }
+
       & > * {
         @apply pointer-events-none;
       }

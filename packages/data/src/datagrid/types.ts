@@ -10,8 +10,8 @@ import { IconProp } from "@axux/core/dist/types";
 import { ReactNode } from "react";
 
 export interface DatagridColumn<T> extends IconProp {
-  name: keyof T;
-  label: string;
+  name: keyof T | string;
+  label: ReactNode;
   tooltip?: true | string;
   valueMap?: KeyValue<ReactNode>;
   type?: "string" | "number" | "date" | "boolean";

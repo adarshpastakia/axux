@@ -7,7 +7,7 @@
  */
 
 import { AxDateDisplay } from "@axux/date";
-import { Format, isTrue } from "@axux/utilities";
+import { Format, getByPath, isTrue } from "@axux/utilities";
 import { memo, useMemo } from "react";
 import { useDatagridContext } from "./Context";
 import { DatagridColumn } from "./types";
@@ -35,7 +35,7 @@ export const BodyCell = memo(
     );
 
     const content = useMemo(() => {
-      const value = record[name.toString()];
+      const value = getByPath(record, name.toString());
       if (render) {
         return render(value, record);
       }
