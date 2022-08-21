@@ -7,10 +7,9 @@
  */
 
 import { FC, Fragment } from "react";
-import { ElementProps } from "../types";
+import { ChildProp, ElementProps } from "../types";
 
-export interface DividerProps extends ElementProps {
-  children?: string;
+export interface DividerProps extends ElementProps, ChildProp {
   rainbow?: boolean;
   vertical?: boolean;
   size?: "xs" | "sm";
