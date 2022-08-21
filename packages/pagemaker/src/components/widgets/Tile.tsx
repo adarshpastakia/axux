@@ -34,7 +34,7 @@ export const Tile: FC<ITileConfig> = memo((item) => {
 
   return (
     <Item item={item}>
-      <AxPanel isExpandable={!isEditing}>
+      <AxPanel isExpandable={!isEditing && item.expandable}>
         <AxHeader className="page-maker__tileHead ax-header" {...{ style }}>
           {item.iconCls && <AxIcon icon={item.iconCls} />}
           <AxTitle>{item.title}</AxTitle>
