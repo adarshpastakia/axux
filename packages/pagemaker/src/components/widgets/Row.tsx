@@ -43,12 +43,14 @@ export const Row: FC<IRowConfig> = memo((item) => {
     }
   };
 
-  const onResizeEnd = () => {
+  const onResizeEnd = (e: MouseEvent) => {
     if (refEl.current) {
       updateConfig(id, "height", refEl.current.clientHeight);
       refEl.current.dataset.resizing = "false";
     }
     setResizing(false);
+    e.preventDefault();
+    e.stopPropagation();
     document.body.style.cursor = "unset";
     document.removeEventListener("mousemove", onResize);
     document.removeEventListener("mouseup", onResizeEnd);

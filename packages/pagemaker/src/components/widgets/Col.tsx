@@ -46,7 +46,7 @@ export const Col: FC<IColConfig> = memo((item) => {
     }
   };
 
-  const onResizeEnd = () => {
+  const onResizeEnd = (e: MouseEvent) => {
     if (refEl.current) {
       updateConfig(
         id,
@@ -54,6 +54,8 @@ export const Col: FC<IColConfig> = memo((item) => {
         parseInt(refEl.current.dataset.span ?? "3", 10)
       );
     }
+    e.preventDefault();
+    e.stopPropagation();
     document.body.style.cursor = "unset";
     document.removeEventListener("mousemove", onResize);
     document.removeEventListener("mouseup", onResizeEnd);
