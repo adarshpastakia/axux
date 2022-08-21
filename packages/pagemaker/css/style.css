@@ -1,0 +1,211 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .page-maker__container {
+    @apply bg-component;
+  }
+
+  .page-maker__grid {
+    @apply grid gap-2 min-h-full grid-flow-row;
+    align-content: start;
+  }
+
+  .page-maker___tileBody {
+    @apply grid overflow-hidden;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .page-maker__head {
+    @apply h-8 grid items-center select-none z-50 -top-8 inset-x-0 absolute bg-bw-500/10;
+    grid-template-columns: auto 1fr auto;
+
+    small {
+      @apply px-1 truncate;
+    }
+  }
+
+  .page-maker__resizer {
+    @apply hidden absolute before:block before:bg-bw-500/50 hover:bg-bw-500/50 hover:before:bg-primary-500/50;
+  }
+
+  .page-maker__item {
+    box-sizing: content-box;
+    position: relative;
+
+    &[data-type="row"] {
+      position: relative;
+      min-height: 32px;
+      display: grid;
+
+      & .page-maker__rowContainer {
+        display: grid;
+        grid-gap: 8px;
+        grid-auto-flow: column;
+        grid-template-columns: repeat(12, 1fr);
+      }
+
+      & > .page-maker__resizer {
+        height: 5px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        cursor: row-resize;
+
+        &:before {
+          width: 24px;
+          height: 5px;
+          left: 50%;
+          position: relative;
+          transform: translateX(-50%);
+        }
+      }
+    }
+
+    &[data-type="col"] {
+      display: grid;
+      grid-gap: 8px;
+      min-height: 8px;
+      grid-auto-flow: row;
+
+      & > .page-maker__resizer {
+        width: 5px;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        cursor: col-resize;
+
+        &:before {
+          height: 24px;
+          width: 5px;
+          top: 50%;
+          position: relative;
+          transform: translateY(-50%);
+        }
+      }
+    }
+
+    &[data-type="col"] > &[data-type="row"] {
+      align-self: start;
+    }
+
+    &[data-type="tile"] {
+      display: grid;
+      grid-template-rows: 1fr;
+    }
+
+    &[data-type="heading"] {
+      @apply truncate font-medium;
+      line-height: 1.25;
+
+      & > div:first-child {
+        display: flex;
+        flex-flow: row nowrap;
+
+        & > i {
+          margin-inline-end: 8px;
+        }
+
+        & > div {
+          flex: 1;
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 1px theme(colors.primary.500/50);
+          }
+        }
+      }
+    }
+  }
+
+  .page-maker__widgetList {
+    display: grid;
+    overflow: hidden;
+    grid-template-rows: auto auto 1fr;
+
+    & .page-maker__widgetList--card {
+      @apply border p-2 cursor-pointer text-center bg-base;
+
+      &:hover {
+        @apply border-primary-500/50 bg-component;
+      }
+    }
+
+    & .page-maker__widgetList--grid {
+      display: grid;
+      padding: 8px;
+      grid-gap: 8px;
+      grid-auto-flow: row;
+      grid-template-columns: 1fr 1fr;
+
+      &:last-child {
+        overflow: auto;
+      }
+
+      > span {
+        @apply text-accent-500 place-self-center;
+      }
+    }
+  }
+
+  .page-maker__page[data-editing="true"] {
+    & .page-maker__ghost {
+      @apply bg-bw-500/10 border-dashed border-2 border-primary-500/50 min-h-[2rem];
+    }
+
+    & .page-maker__item[data-type="row"] .page-maker__ghost {
+      grid-column-end: span 3;
+    }
+
+    & .page-maker__grid {
+      @apply select-none;
+    }
+
+    & .page-maker__item {
+      @apply mt-8 p-2 outline-dashed outline-1 outline-bw-500/50;
+
+      &[data-resizing="true"] {
+        @apply p-0;
+
+        & .page-maker__rowContainer {
+          @apply overflow-hidden;
+        }
+
+        & .page-maker__item {
+          @apply m-0;
+
+          & > .page-maker__head,
+          & > .page-maker__empty {
+            @apply hidden;
+          }
+        }
+      }
+
+      &[data-dragging="true"] > :first-child {
+        @apply hidden;
+      }
+
+      &[data-hover="true"] {
+        @apply outline-primary-500;
+
+        & > .page-maker__resizer {
+          @apply block;
+        }
+      }
+
+      &[data-selected="true"] {
+        @apply outline-1 outline-primary-500;
+      }
+    }
+  }
+
+  .page-maker__emptyCol {
+    @apply place-self-center text-center text-muted;
+  }
+}

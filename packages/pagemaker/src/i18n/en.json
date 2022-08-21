@@ -1,0 +1,28 @@
+{
+  "label": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "preview": "Preview",
+    "row": "Row",
+    "col": "Column",
+    "heading": "Heading",
+    "divider": "Divider",
+    "widgets": "Widgets",
+    "config": "Config",
+    "addNew": "Add New Widget",
+    "noWidgets": "No widgets available",
+    "drag": "Drag a widget from the sidebar"
+  },
+  "config": {
+    "title": "Title",
+    "color": "Color",
+    "info": "Info Tooltip",
+    "icon": "Icon class",
+    "size": "Text size",
+    "colSpan": "Col span",
+    "height": "Row Height",
+    "border": "Bordered",
+    "expand": "Expandable"
+  }
+}

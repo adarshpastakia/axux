@@ -1,0 +1,35 @@
+import {
+  Title,
+  Canvas,
+  Story,
+  Meta,
+  ArgsTable,
+  Description,
+  Heading,
+} from "@storybook/addon-docs";
+import { action } from "@storybook/addon-actions";
+import { AxPageMaker } from "../src";
+import { PageMakerStory } from "./PageMakerStory";
+
+<Meta
+  title="@pagemaker/Page Maker"
+  component={AxPageMaker}
+  parameters={{ jest: ["PageMaker.test.tsx"] }}
+/>
+
+<Title>Page Maker</Title>
+
+<Description of={AxPageMaker} />
+
+<Canvas>
+  <Story name="Page Maker" height="32rem" parameters={{ layout: "none" }}>
+    {PageMakerStory}
+  </Story>
+</Canvas>
+
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    AxPageMaker,
+  }}
+/>
