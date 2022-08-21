@@ -122,11 +122,25 @@ export const Config = memo(() => {
               value={selected.info}
               onChange={(value) => updateField("info", value)}
             />
-            <AxField.Switch
-              label={t("config.expand")}
-              isChecked={selected.expandable}
-              onChange={(checked) => updateField("expandable", checked)}
-            />
+            <AxField.Container data-plain="true">
+              <AxField.Switch
+                label={t("config.expand")}
+                isChecked={selected.expandable}
+                onChange={(checked) => updateField("expandable", checked)}
+              />
+            </AxField.Container>
+            <AxField.Options
+              name="aspect"
+              info="When using aspect-ratio ensure row is auto height"
+              label={t("config.aspect")}
+              value={selected.aspect}
+              onChange={(value) => updateField("aspect", value)}
+            >
+              <AxField.Radio value="0" label="None" />
+              <AxField.Radio value="1 / 1" label="1:1" />
+              <AxField.Radio value="4 / 3" label="4:3" />
+              <AxField.Radio value="16 / 9" label="16:9" />
+            </AxField.Options>
           </Fragment>
         )}
       </AxForm>
