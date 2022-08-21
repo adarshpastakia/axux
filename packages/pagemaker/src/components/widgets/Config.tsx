@@ -116,7 +116,8 @@ export const Config = memo(() => {
         )}
         {selected.type === EnumTypes.TILE && (
           <Fragment>
-            <AxField.Text
+            <AxField.Textarea
+              rows={5}
               label={t("config.info")}
               value={selected.info}
               onChange={(value) => updateField("info", value)}

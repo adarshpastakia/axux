@@ -26,8 +26,9 @@ export const Aside: FC = memo(() => {
     <AxAside width="18rem" align="end" className="page-maker__aside">
       <AxPanel.Group>
         {selected && (
-          <AxPanel maxHeight="50%">
+          <AxPanel maxHeight="70%">
             <div className="ax-header">
+              <AxTitle>{t("label.config")}</AxTitle>
               <AxButton
                 rtlFlip
                 style="link"
