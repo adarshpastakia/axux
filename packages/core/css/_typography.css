@@ -35,7 +35,7 @@
   .ax-ellipsis {
     @apply flex overflow-hidden whitespace-nowrap;
 
-    & > bdi:last-child {
+    & > div:last-child {
       @apply hidden;
     }
   }
@@ -73,25 +73,11 @@
   .ax-ellipsis[data-break="true"] {
     @apply !pointer-events-auto;
 
-    & > bdi:first-child {
-      @apply inline-block truncate;
-      flex: 2 1 1em;
-      min-width: 24px;
-
-      & > p,
-      & > h1,
-      & > h2,
-      & > h3,
-      & > h4,
-      & > h5,
-      & > h6,
-      & > div {
-        @apply block truncate;
-      }
+    & > div:first-child {
+      @apply inline-block truncate flex-auto;
     }
-    & > bdi:last-child {
-      @apply inline-flex justify-end overflow-hidden text-clip;
-      flex: 1 1 1em;
+    & > div:last-child {
+      @apply flex-initial;
     }
   }
 
