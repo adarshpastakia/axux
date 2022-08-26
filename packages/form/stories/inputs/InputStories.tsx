@@ -158,7 +158,7 @@ SelectStory.args = {
 };
 
 const ComboTemplate: ComponentStory<typeof AxField.Combo<Country>> = (props) => (
-  <AxField.Combo {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} onQuery={e=>{action("onQuery")(e);return []}} />
+  <AxField.Combo {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} />
 );
 export const ComboStory = ComboTemplate.bind({});
 ComboStory.args = {
@@ -189,7 +189,7 @@ ComboStory.args = {
 };
 
 const TagTemplate: ComponentStory<typeof AxField.Tag<Country>> = (props) => (
-  <AxField.Tag {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} onQuery={e=>{action("onQuery")(e);return []}} />
+  <AxField.Tag {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} />
 );
 export const TagStory = TagTemplate.bind({});
 TagStory.args = {
