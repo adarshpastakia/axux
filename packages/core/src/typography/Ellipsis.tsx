@@ -7,7 +7,7 @@
  */
 
 import { calculateTextWidth } from "@axux/utilities/dist/dom";
-import { FC, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { FC, useLayoutEffect, useRef, useState } from "react";
 import ResizeObserver from "resize-observer-polyfill";
 import { ChildrenProp, ElementProps } from "../types";
 
@@ -61,12 +61,6 @@ export const Ellipsis: FC<EllipsisProps> = ({
     };
   }, [children]);
 
-  const endText = useMemo(
-    () =>
-      (refContainer.current?.firstElementChild as HTMLElement)?.innerText ?? "",
-    [children]
-  );
-
   /******************* component *******************/
   return (
     <div
@@ -82,7 +76,6 @@ export const Ellipsis: FC<EllipsisProps> = ({
       style={{ width, minWidth, maxWidth }}
     >
       <div>{children}</div>
-      <div>{endText.substr(-1 * Math.max(3, endText.length / 3))}</div>
     </div>
   );
 };
