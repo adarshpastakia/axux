@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.38](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.37...v2.0.0-beta.38) (2022-08-27)
+
+
+### Bug Fixes
+
+* **Ellipsis:** remove second div (skip-ci) ([ca12785](https://github.com/adarshpastakia/axux/commit/ca127852c2b2f051a85e6ba70abebf8a759c2e79))
+* **Ellipsis:** revert to  truncate ([f9006c9](https://github.com/adarshpastakia/axux/commit/f9006c9b4486ea8edfb7ff74321079b79052a326))
+
+
+
+
+
 # [2.0.0-beta.37](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.36...v2.0.0-beta.37) (2022-08-21)
 
 
