@@ -66,6 +66,10 @@
 
       & > label {
         @apply truncate px-1;
+
+        & > .ax-icon {
+          @apply text-lg;
+        }
       }
 
       &[data-sortable="true"] {
