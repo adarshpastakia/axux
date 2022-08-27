@@ -6,14 +6,11 @@ import {
   Subheading,
   Title,
 } from "@storybook/addon-docs";
-import { useOverlayService } from "../../src";
-import { AxToast } from "../../src/overlays/Toast";
-import { AxMessage } from "../../src/overlays/Message";
-import { AxAlert } from "../../src/overlays/Alert";
+import { useOverlayService, AxModal, AxFlyout } from "../../src";
 
 <Meta
   title="@core/Overlays/useOverlayService"
-  parameters={{ jest: ["Toast.test.tsx", "Message.test.tsx"] }}
+  parameters={{ jest: ["Modal.test.tsx", "Flyout.test.tsx"] }}
 />
 
 <Title>useOverlayService</Title>
@@ -62,19 +59,15 @@ export const Element = () => {
   const [Flyout, openFlyoutOverlay] = useOverlayService(MyFlyout);
   const openModal = () => {
     // Open overlay pass additional props
-    openModalOverlay({ title: "My Modal", data: {} }).then(
-      (returnValue) => {
-        // promise is resolved with value passed to onClose
-      }
-    );
+    openModalOverlay({ title: "My Modal", data: {} }).then((returnValue) => {
+      // promise is resolved with value passed to onClose
+    });
   };
   const openFlyout = () => {
     // Open overlay pass additional props
-    openFlyoutOverlay({ title: "My Flyout", data: {} }).then(
-      (returnValue) => {
-        // promise is resolved with value passed to onClose
-      }
-    );
+    openFlyoutOverlay({ title: "My Flyout", data: {} }).then((returnValue) => {
+      // promise is resolved with value passed to onClose
+    });
   };
 
   return (
@@ -89,4 +82,4 @@ export const Element = () => {
 
 <Heading>Props</Heading>
 
-<ArgsTable sort="requiredFirst" components={{ AxToast, AxMessage, AxAlert }} />
+<ArgsTable sort="requiredFirst" components={{ AxModal, AxFlyout }} />
