@@ -8,10 +8,10 @@
 
 import { calculateTextWidth } from "@axux/utilities/dist/dom";
 import { FC, useLayoutEffect, useRef, useState } from "react";
-import ResizeObserver from "resize-observer-polyfill";
-import { ChildrenProp, ElementProps } from "../types";
+import { ElementProps } from "../types";
 
-export interface EllipsisProps extends ElementProps, ChildrenProp {
+export interface EllipsisProps extends ElementProps {
+  children: string;
   /**
    * width
    */
@@ -75,7 +75,7 @@ export const Ellipsis: FC<EllipsisProps> = ({
       className={`ax-text ax-ellipsis ${className ?? ""}`}
       style={{ width, minWidth, maxWidth }}
     >
-      <div>{children}</div>
+      <span>{children}</span>
     </div>
   );
 };
