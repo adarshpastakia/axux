@@ -132,7 +132,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
   Action: typeof ActionButton;
   Confirm: typeof ConfirmButton;
   Dropdown: typeof DropdownButton;
-  Group: FC<ChildrenProp & { isVertical?: boolean }>;
+  Group: FC<ChildrenProp & ElementProps & { isVertical?: boolean }>;
 } = forwardRef<HTMLElement, ButtonProps>((props, ref) => {
   const {
     icon,
@@ -229,8 +229,11 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
 AxButton.Action = ActionButton;
 AxButton.Confirm = ConfirmButton;
 AxButton.Dropdown = DropdownButton;
-AxButton.Group = ({ children, isVertical = false }) => (
-  <div className={`ax-button__group ${isVertical ? "flex-col" : ""}`}>
+AxButton.Group = ({ children, isVertical = false, className = "" }) => (
+  <div
+    className={`ax-button__group ${className ?? ""}`}
+    data-vertical={isVertical}
+  >
     {children}
   </div>
 );
