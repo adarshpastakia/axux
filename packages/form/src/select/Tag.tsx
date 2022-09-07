@@ -145,10 +145,10 @@ export const TagInput = <T extends AnyObject>({
 
   const handleKeyPress = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
-      if (!e.target.value && e.key === "Backspace") {
+      if (!e.currentTarget.value && e.key === "Backspace") {
         handleRemove();
       }
-      if (!e.target.value && e.key === "Enter") {
+      if (!e.currentTarget.value && e.key === "Enter") {
         onEnterPressed?.(e);
       }
     },
@@ -158,11 +158,10 @@ export const TagInput = <T extends AnyObject>({
   return (
     <Combobox
       value={actualValue}
-      onChange={handleChange}
+      onChange={handleChange as AnyObject}
       disabled={isDisabled}
       name={name}
       as={Fragment}
-      nullable
       multiple
     >
       <FieldWrapper
