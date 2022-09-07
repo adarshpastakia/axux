@@ -79,7 +79,7 @@
     z-index: 2;
 
     & > .ax-title {
-      @apply select-none px-2;
+      @apply select-none px-2 truncate;
     }
     & > .ax-flexbox,
     & > .ax-row {
