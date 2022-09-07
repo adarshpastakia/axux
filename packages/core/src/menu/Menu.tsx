@@ -21,7 +21,6 @@ import { AxHotKey } from "../hotkeys/HotKey";
 import { AxIcon } from "../icons/Icon";
 import { AxTooltip } from "../overlays/Tooltip";
 import { ChildProp, ElementProps } from "../types";
-import { Ellipsis } from "../typography/Ellipsis";
 import { MenuGroup } from "./MenuGroup";
 import { MenuItemProps, MenuProps } from "./types";
 
@@ -79,7 +78,7 @@ const MenuItem: FC<MenuItemProps<ReactNode>> = ({
               rtlFlip={rtlFlip}
             />
 
-            <Ellipsis className="ax-menu__label">{label}</Ellipsis>
+            <div className="ax-menu__label">{label}</div>
             {Badge}
             {append}
             {hotKey && <AxHotKey.Label keyCombo={hotKey} />}

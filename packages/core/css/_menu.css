@@ -18,7 +18,7 @@
     }
 
     & .ax-menu__label {
-      @apply ltr:pr-4 rtl:pl-4;
+      @apply ltr:pr-4 rtl:pl-4 truncate;
     }
   }
   .ax-menu__group {
@@ -41,7 +41,7 @@
       }
 
       & .ax-menu__label {
-        @apply flex-initial min-w-0;
+        @apply flex-initial min-w-0 truncate;
       }
     }
 

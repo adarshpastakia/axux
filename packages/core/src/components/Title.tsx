@@ -16,4 +16,4 @@ import { Ellipsis } from "../typography/Ellipsis";
 export const AxTitle: FC<ElementProps & ChildrenProp> = ({
   className,
   ...rest
-}) => <Ellipsis {...rest} className={`ax-title ${className ?? ""}`} />;
+}) => <div {...rest} className={`ax-title ${className ?? ""}`} />;
