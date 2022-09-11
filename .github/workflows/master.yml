@@ -21,7 +21,7 @@ jobs:
       - name: Use node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "17.0.0"
+          node-version: "18.1.0"
 
       # Runs a set of commands using the runners shell
       - name: Install packages

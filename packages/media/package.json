@@ -42,7 +42,7 @@
     "@types/wavesurfer.js": "^6.0.3"
   },
   "engines": {
-    "node": ">=17",
+    "node": ">=18",
     "npm": ">=8"
   }
 }
