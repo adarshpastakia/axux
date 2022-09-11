@@ -1,6 +1,6 @@
 {
   "name": "@axux/map",
-  "version": "2.0.0-beta.39",
+  "version": "2.0.0-beta.40",
   "description": "axux: Map viewers",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,8 +24,8 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.39",
-    "@axux/utilities": "^2.0.0-beta.39",
+    "@axux/core": "^2.0.0-beta.40",
+    "@axux/utilities": "^2.0.0-beta.40",
     "@mapbox/mapbox-gl-draw": "^1.3.0",
     "@turf/circle": "^6.5.0",
     "@turf/distance": "^6.5.0",
