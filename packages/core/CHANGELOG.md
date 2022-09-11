@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.39](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.38...v2.0.0-beta.39) (2022-09-11)
+
+
+### Bug Fixes
+
+* **AxEllipsis:** force children as string ([86db1a5](https://github.com/adarshpastakia/axux/commit/86db1a513fcecb803d169051fd9d508af598ec71))
+* **ButtonGroup:** update vertical styling and className ([8c8ac80](https://github.com/adarshpastakia/axux/commit/8c8ac80d15f2e824acf8ef740950c35feaa76bc2))
+
+
+
+
+
 # [2.0.0-beta.38](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.37...v2.0.0-beta.38) (2022-08-27)
 
 
