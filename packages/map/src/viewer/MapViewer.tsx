@@ -7,6 +7,7 @@
  */
 
 import { debounce } from "@axux/utilities";
+import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import maplibregl, { LngLatLike, Map, StyleSpecification } from "maplibre-gl";
 import {
   createContext,
@@ -20,6 +21,8 @@ import {
 import { Basemaps } from "../components/Basemaps";
 import { Draw } from "../components/Draw";
 import { Zoom } from "../components/Zoom";
+import { DrawCircle } from "../utils/DrawCircle";
+import { DrawRectangle } from "../utils/DrawRectangle";
 
 interface MapSource extends Omit<StyleSpecification, "version"> {
   thumbnail: string;
@@ -44,9 +47,11 @@ const DEFAULT_VIEWPORT: MapViewport = {
   zoom: 9, // starting zoom,
 };
 
-const MapContext = createContext<{ map: Map; viewport: MapViewport }>(
-  {} as AnyObject
-);
+const MapContext = createContext<{
+  map: Map;
+  draw: MapboxDraw;
+  viewport: MapViewport;
+}>({} as AnyObject);
 
 export const useMapContext = () => useContext(MapContext);
 
@@ -59,6 +64,7 @@ export const AxMapViewer: FC<MapViewerProps> = ({
 }) => {
   const refContainer = useRef<HTMLDivElement>(null);
   const refMap = useRef<Map>();
+  const refDraw = useRef<MapboxDraw>();
   const [map, setMap] = useState<Map>();
 
   const handleViewportChange = useMemo(
@@ -95,6 +101,18 @@ export const AxMapViewer: FC<MapViewerProps> = ({
         refMap.current?.on("zoomend", handleViewportChange);
       });
 
+      refDraw.current = new MapboxDraw({
+        displayControlsDefault: false,
+        boxSelect: false,
+        defaultMode: "simple_select",
+        modes: {
+          "draw-circle": DrawCircle,
+          "draw-rectangle": DrawRectangle,
+          ...MapboxDraw.modes,
+        },
+      });
+      refMap.current.addControl(refDraw.current as AnyObject);
+
       setMap(refMap.current);
 
       return () => {
@@ -104,7 +122,9 @@ export const AxMapViewer: FC<MapViewerProps> = ({
   }, [refContainer, sources]);
 
   return (
-    <MapContext.Provider value={{ map: map!, viewport: defaultViewport }}>
+    <MapContext.Provider
+      value={{ map: map!, draw: refDraw.current!, viewport: defaultViewport }}
+    >
       <div className="ax-mapviewer" onContextMenu={(e) => e.preventDefault()}>
         <div ref={refContainer} className="ax-mapviewer__container" />
 
@@ -117,10 +137,9 @@ export const AxMapViewer: FC<MapViewerProps> = ({
         {map && (
           <div className="ax-mapviewer__tools" data-align="end">
             <Basemaps sources={sources} />
+            <Draw />
           </div>
         )}
-
-        <Draw />
       </div>
     </MapContext.Provider>
   );

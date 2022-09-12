@@ -2,52 +2,26 @@ import { uuid } from "@axux/utilities";
 import circle from "@turf/circle";
 import distance from "@turf/distance";
 import { point } from "@turf/helpers";
+import { DrawingBase } from "./DrawingBase";
 
 const DragCircleMode: KeyValue = {};
 
 DragCircleMode.onSetup = function (opts: KeyValue) {
-  this.updateUIClasses({ mouse: "drag" });
-  this.activateUIButton("polygon");
-  this.setActionableState({
-    trash: true,
-  });
+  const currentId = uuid();
+  DrawingBase.startDrawing(this, currentId, "circle");
   return {
-    currentId: undefined,
-    currentCenter: [],
+    currentId,
+    startPoint: [],
     initiallySelectedFeatureIds: opts.featureIds || [],
   };
 };
 
-DragCircleMode.onMouseDown = DragCircleMode.onTouchStart = function (
-  state: KeyValue,
-  e: KeyValue
-) {
-  if (e.originalEvent.ctrlKey) {
-    state.currentId = uuid();
-    state.currentCenter = [e.lngLat.lng, e.lngLat.lat];
-    this.addFeature(
-      this.newFeature({
-        type: "Feature",
-        id: state.currentId,
-        properties: {},
-        geometry: {
-          coordinates: [],
-          type: "Polygon",
-        },
-      } as GeoJSON.Feature)
-    );
-    this.updateUIClasses({ mouse: "add" });
-    e.originalEvent.stopPropagation();
-    e.originalEvent.preventDefault();
-    return false;
-  }
+DragCircleMode.onMouseDown = function (state: KeyValue, e: KeyValue) {
+  state.startPoint = [e.lngLat.lng, e.lngLat.lat];
 };
 
-DragCircleMode.onDrag = DragCircleMode.onMouseMove = function (
-  state: KeyValue,
-  e: KeyValue
-) {
-  const center = state.currentCenter;
+DragCircleMode.onDrag = function (state: KeyValue, e: KeyValue) {
+  const center = state.startPoint;
   if (center?.length > 0) {
     const distanceInKm = distance(
       point(center),
@@ -57,38 +31,31 @@ DragCircleMode.onDrag = DragCircleMode.onMouseMove = function (
     const circleFeature = circle(center, distanceInKm);
     const feature = this.getFeature(state.currentId);
     if (feature) {
-      this.updateUIClasses({ mouse: "add" });
       feature.properties.distance = distanceInKm.toFixed(2);
       feature.incomingCoords(circleFeature.geometry.coordinates);
     }
-  } else {
-    this.updateUIClasses({ mouse: "drag" });
   }
 };
 
-DragCircleMode.onMouseUp = DragCircleMode.onTouchEnd = function (
-  state: KeyValue,
-  e: KeyValue
-) {
-  state.currentCenter = [];
-  this.updateUIClasses({ mouse: "drag" });
+DragCircleMode.onMouseUp = function (state: KeyValue, e: KeyValue) {
+  state.startPoint = [];
   const feature = this.getFeature(state.currentId);
   this.map.fire("draw.create", {
-    action: "move",
-    features: feature,
+    features: [feature],
   });
-  return this.changeMode("draw-circle", {
-    featureIds: [...state.initiallySelectedFeatureIds, state.currentId],
-  });
+  return DrawingBase.stopDrawing(this);
 };
 
-DragCircleMode.onClick = DragCircleMode.onTap = function (
-  state: KeyValue,
-  e: KeyValue
-) {
-  // don't draw the circle if its a tap or click event
-  state.currentCenter = [];
-  this.updateUIClasses({ mouse: "drag" });
+DragCircleMode.onClick = function (state: KeyValue, e: KeyValue) {
+  state.startPoint = [];
+  return DrawingBase.stopDrawing(this, state.currentId);
+};
+
+DragCircleMode.onKeyUp = function (state: KeyValue, e: KeyValue) {
+  if (e.keyCode === 27) {
+    state.startPoint = [];
+    return DrawingBase.stopDrawing(this, state.currentId);
+  }
 };
 
 DragCircleMode.toDisplayFeatures = function (
