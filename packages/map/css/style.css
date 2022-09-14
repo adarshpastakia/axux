@@ -21,22 +21,26 @@
     }
 
     & > .ax-mapviewer__tools {
-      @apply p-2 flex flex-col gap-2;
+      @apply p-2 flex gap-2 justify-start;
 
       &[data-align="start"] {
-        @apply grid-area-[side-s];
+        @apply grid-area-[side-s] flex-col;
       }
 
       &[data-align="end"] {
-        @apply grid-area-[side-e];
+        @apply grid-area-[side-e] flex-col;
       }
 
       &[data-align="head"] {
-        @apply grid-area-[head];
+        @apply grid-area-[head] flex-row;
+
+        & .ax-tag {
+          @apply before:bg-bw-50 dark:before:bg-bw-800 dark:before:text-bw-50 before:opacity-100;
+        }
       }
 
       &[data-align="foot"] {
-        @apply grid-area-[foot];
+        @apply grid-area-[foot] flex-row;
       }
     }
 

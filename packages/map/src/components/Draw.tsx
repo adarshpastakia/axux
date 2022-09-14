@@ -8,6 +8,7 @@
 
 import { AxButton } from "@axux/core";
 import { useEffect, useState } from "react";
+import { DRAG_MODES } from "../drawModes";
 import { useMapContext } from "../viewer/MapViewer";
 
 const iconRectangle =
@@ -41,7 +42,7 @@ export const Draw = () => {
         className="flush"
         isActive={active === "circle"}
         onClick={() => {
-          draw?.changeMode("draw-circle");
+          draw?.changeMode(DRAG_MODES.DRAW_CIRCLE);
         }}
       />
       <AxButton
@@ -49,7 +50,7 @@ export const Draw = () => {
         className="flush"
         isActive={active === "rectangle"}
         onClick={() => {
-          draw?.changeMode("draw-rectangle");
+          draw?.changeMode(DRAG_MODES.DRAW_RECTANGLE);
         }}
       />
     </AxButton.Group>

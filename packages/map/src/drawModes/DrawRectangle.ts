@@ -1,9 +1,17 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
 import { uuid } from "@axux/utilities";
 import { DrawingBase } from "./DrawingBase";
 
-const DragRectangleMode: KeyValue = {};
+const DrawRectangleMode: KeyValue = {};
 
-DragRectangleMode.onSetup = function (opts: KeyValue) {
+DrawRectangleMode.onSetup = function (opts: KeyValue) {
   const currentId = uuid();
   DrawingBase.startDrawing(this, currentId, "rectangle");
   return {
@@ -13,11 +21,11 @@ DragRectangleMode.onSetup = function (opts: KeyValue) {
   };
 };
 
-DragRectangleMode.onMouseDown = function (state: KeyValue, e: KeyValue) {
+DrawRectangleMode.onMouseDown = function (state: KeyValue, e: KeyValue) {
   state.startPoint = [e.lngLat.lng, e.lngLat.lat];
 };
 
-DragRectangleMode.onDrag = function (state: KeyValue, e: KeyValue) {
+DrawRectangleMode.onDrag = function (state: KeyValue, e: KeyValue) {
   const startPoint = state.startPoint;
   if (startPoint?.length > 0) {
     const feature = this.getFeature(state.currentId);
@@ -31,7 +39,7 @@ DragRectangleMode.onDrag = function (state: KeyValue, e: KeyValue) {
   }
 };
 
-DragRectangleMode.onMouseUp = function (state: KeyValue, e: KeyValue) {
+DrawRectangleMode.onMouseUp = function (state: KeyValue, e: KeyValue) {
   state.startPoint = [];
   const feature = this.getFeature(state.currentId);
   this.map.fire("draw.create", {
@@ -40,19 +48,19 @@ DragRectangleMode.onMouseUp = function (state: KeyValue, e: KeyValue) {
   return DrawingBase.stopDrawing(this);
 };
 
-DragRectangleMode.onClick = function (state: KeyValue, e: KeyValue) {
+DrawRectangleMode.onClick = function (state: KeyValue, e: KeyValue) {
   state.startPoint = [];
   return DrawingBase.stopDrawing(this, state.currentId);
 };
 
-DragRectangleMode.onKeyUp = function (state: KeyValue, e: KeyValue) {
+DrawRectangleMode.onKeyUp = function (state: KeyValue, e: KeyValue) {
   if (e.keyCode === 27) {
     state.startPoint = [];
     return DrawingBase.stopDrawing(this, state.currentId);
   }
 };
 
-DragRectangleMode.toDisplayFeatures = function (
+DrawRectangleMode.toDisplayFeatures = function (
   state: KeyValue,
   geojson: KeyValue,
   display: AnyObject
@@ -62,4 +70,4 @@ DragRectangleMode.toDisplayFeatures = function (
   return display(geojson);
 };
 
-export const DrawRectangle = DragRectangleMode as MapboxDraw.DrawCustomMode;
+export const DrawRectangle = DrawRectangleMode as MapboxDraw.DrawCustomMode;
