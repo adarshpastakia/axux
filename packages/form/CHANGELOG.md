@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.41](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.40...v2.0.0-beta.41) (2022-09-14)
+
+
+### Bug Fixes
+
+* headless-react version ([aef4a01](https://github.com/adarshpastakia/axux/commit/aef4a01883eec34b2afb00e210e452bdfc446408))
+
+
+
+
+
 # [2.0.0-beta.40](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.39...v2.0.0-beta.40) (2022-09-11)
 
 **Note:** Version bump only for package @axux/form
