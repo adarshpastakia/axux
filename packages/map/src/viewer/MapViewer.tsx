@@ -6,12 +6,15 @@
  * @license   : MIT
  */
 
+import { AxButton, AxContent } from "@axux/core";
 import { debounce } from "@axux/utilities";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import maplibregl, { LngLatLike, Map, StyleSpecification } from "maplibre-gl";
 import {
   createContext,
   FC,
+  Fragment,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -20,9 +23,15 @@ import {
 } from "react";
 import { Basemaps } from "../components/Basemaps";
 import { Draw } from "../components/Draw";
+import { FilterBar } from "../components/FilterBar";
 import { Zoom } from "../components/Zoom";
-import { DrawCircle } from "../utils/DrawCircle";
-import { DrawRectangle } from "../utils/DrawRectangle";
+import {
+  DragCircle,
+  DRAG_MODES,
+  DrawCircle,
+  DrawRectangle,
+  Hilight,
+} from "../drawModes";
 
 interface MapSource extends Omit<StyleSpecification, "version"> {
   thumbnail: string;
@@ -33,6 +42,9 @@ interface MapViewport {
   center: LngLatLike;
   zoom: number;
 }
+
+const iconError =
+  "M9,3L3.36,4.9C3.15,4.97 3,5.15 3,5.38V20.5A0.5,0.5 0 0,0 3.5,21L3.66,20.97L9,18.9L15,21L20.64,19.1C20.85,19.03 21,18.85 21,18.62V3.5A0.5,0.5 0 0,0 20.5,3L20.34,3.03L15,5.1L9,3M8,5.45V17.15L5,18.31V6.46L8,5.45M10,5.47L14,6.87V18.53L10,17.13V5.47M19,5.7V17.54L16,18.55V6.86L19,5.7M7.46,6.3L5.57,6.97V9.12L7.46,8.45V6.3M7.46,9.05L5.57,9.72V11.87L7.46,11.2V9.05M7.46,11.8L5.57,12.47V14.62L7.46,13.95V11.8M7.46,14.55L5.57,15.22V17.37L7.46,16.7V14.55Z";
 
 export interface MapViewerProps {
   sources: MapSource[];
@@ -66,6 +78,7 @@ export const AxMapViewer: FC<MapViewerProps> = ({
   const refMap = useRef<Map>();
   const refDraw = useRef<MapboxDraw>();
   const [map, setMap] = useState<Map>();
+  const [error, setError] = useState<string>();
 
   const handleViewportChange = useMemo(
     () =>
@@ -81,8 +94,11 @@ export const AxMapViewer: FC<MapViewerProps> = ({
     [onViewportChange]
   );
 
-  useEffect(() => {
+  const loadMap = useCallback(() => {
     if (refContainer.current) {
+      setError("");
+      refMap.current?.remove();
+
       refMap.current = new maplibregl.Map({
         container: refContainer.current,
         style: {
@@ -104,22 +120,71 @@ export const AxMapViewer: FC<MapViewerProps> = ({
       refDraw.current = new MapboxDraw({
         displayControlsDefault: false,
         boxSelect: false,
-        defaultMode: "simple_select",
+        defaultMode: DRAG_MODES.DRAG_CIRCLE,
         modes: {
-          "draw-circle": DrawCircle,
-          "draw-rectangle": DrawRectangle,
-          ...MapboxDraw.modes,
+          [DRAG_MODES.HILIGHT]: Hilight,
+          [DRAG_MODES.DRAG_CIRCLE]: DragCircle,
+          [DRAG_MODES.DRAW_CIRCLE]: DrawCircle,
+          [DRAG_MODES.DRAW_RECTANGLE]: DrawRectangle,
         },
+        styles: [
+          {
+            id: "highlight-border",
+            type: "line",
+            filter: ["all", ["==", "active", "true"]],
+            paint: {
+              "line-color": "#f97316",
+              "line-dasharray": [4, 4],
+              "line-width": 2,
+            },
+          },
+          {
+            id: "border",
+            type: "line",
+            filter: ["all", ["!=", "active", "true"]],
+            paint: {
+              "line-color": "#0ea5e9",
+              "line-width": 2,
+            },
+          },
+          {
+            id: "highlight-fill",
+            type: "fill",
+            filter: ["all", ["==", "active", "true"]],
+            paint: {
+              "fill-color": "#f97316",
+              "fill-opacity": 0.1,
+            },
+          },
+          {
+            id: "fill",
+            type: "fill",
+            filter: ["all", ["!=", "active", "true"]],
+            paint: {
+              "fill-color": "#0ea5e9",
+              "fill-opacity": 0.1,
+            },
+          },
+        ],
       });
       refMap.current.addControl(refDraw.current as AnyObject);
 
-      setMap(refMap.current);
+      refMap.current.once("load", () => {
+        setMap(refMap.current);
+      });
 
-      return () => {
-        refMap.current?.remove();
-      };
+      refMap.current.on("error", ({ error }) => {
+        setError(error.message);
+      });
     }
-  }, [refContainer, sources]);
+  }, [sources]);
+
+  useEffect(() => {
+    loadMap();
+    return () => {
+      refMap.current?.remove();
+    };
+  }, [refContainer, loadMap]);
 
   return (
     <MapContext.Provider
@@ -129,16 +194,25 @@ export const AxMapViewer: FC<MapViewerProps> = ({
         <div ref={refContainer} className="ax-mapviewer__container" />
 
         {map && (
-          <div className="ax-mapviewer__tools" data-align="start">
-            <Zoom />
-          </div>
+          <Fragment>
+            <div className="ax-mapviewer__tools" data-align="start">
+              <Zoom />
+            </div>
+            <div className="ax-mapviewer__tools" data-align="end">
+              <Basemaps sources={sources} />
+              <Draw />
+            </div>
+            <FilterBar />
+          </Fragment>
         )}
 
-        {map && (
-          <div className="ax-mapviewer__tools" data-align="end">
-            <Basemaps sources={sources} />
-            <Draw />
-          </div>
+        {error && (
+          <AxContent.Empty
+            message={error}
+            icon={iconError}
+            title="MapLibre"
+            actions={[<AxButton onClick={loadMap}>Reload</AxButton>]}
+          />
         )}
       </div>
     </MapContext.Provider>

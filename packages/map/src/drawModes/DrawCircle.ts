@@ -1,12 +1,20 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
 import { uuid } from "@axux/utilities";
 import circle from "@turf/circle";
 import distance from "@turf/distance";
 import { point } from "@turf/helpers";
 import { DrawingBase } from "./DrawingBase";
 
-const DragCircleMode: KeyValue = {};
+const DrawCircleMode: KeyValue = {};
 
-DragCircleMode.onSetup = function (opts: KeyValue) {
+DrawCircleMode.onSetup = function (opts: KeyValue) {
   const currentId = uuid();
   DrawingBase.startDrawing(this, currentId, "circle");
   return {
@@ -16,11 +24,11 @@ DragCircleMode.onSetup = function (opts: KeyValue) {
   };
 };
 
-DragCircleMode.onMouseDown = function (state: KeyValue, e: KeyValue) {
+DrawCircleMode.onMouseDown = function (state: KeyValue, e: KeyValue) {
   state.startPoint = [e.lngLat.lng, e.lngLat.lat];
 };
 
-DragCircleMode.onDrag = function (state: KeyValue, e: KeyValue) {
+DrawCircleMode.onDrag = function (state: KeyValue, e: KeyValue) {
   const center = state.startPoint;
   if (center?.length > 0) {
     const distanceInKm = distance(
@@ -37,7 +45,7 @@ DragCircleMode.onDrag = function (state: KeyValue, e: KeyValue) {
   }
 };
 
-DragCircleMode.onMouseUp = function (state: KeyValue, e: KeyValue) {
+DrawCircleMode.onMouseUp = function (state: KeyValue, e: KeyValue) {
   state.startPoint = [];
   const feature = this.getFeature(state.currentId);
   this.map.fire("draw.create", {
@@ -46,19 +54,19 @@ DragCircleMode.onMouseUp = function (state: KeyValue, e: KeyValue) {
   return DrawingBase.stopDrawing(this);
 };
 
-DragCircleMode.onClick = function (state: KeyValue, e: KeyValue) {
+DrawCircleMode.onClick = function (state: KeyValue, e: KeyValue) {
   state.startPoint = [];
   return DrawingBase.stopDrawing(this, state.currentId);
 };
 
-DragCircleMode.onKeyUp = function (state: KeyValue, e: KeyValue) {
+DrawCircleMode.onKeyUp = function (state: KeyValue, e: KeyValue) {
   if (e.keyCode === 27) {
     state.startPoint = [];
     return DrawingBase.stopDrawing(this, state.currentId);
   }
 };
 
-DragCircleMode.toDisplayFeatures = function (
+DrawCircleMode.toDisplayFeatures = function (
   state: KeyValue,
   geojson: KeyValue,
   display: AnyObject
@@ -68,4 +76,4 @@ DragCircleMode.toDisplayFeatures = function (
   return display(geojson);
 };
 
-export const DrawCircle = DragCircleMode as MapboxDraw.DrawCustomMode;
+export const DrawCircle = DrawCircleMode as MapboxDraw.DrawCustomMode;

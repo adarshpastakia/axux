@@ -1,8 +1,17 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+import { DRAG_MODES } from ".";
+
 type MapDrawContext = MapboxDraw.DrawCustomModeThis & { map: mapboxgl.Map };
 
 export const DrawingBase: KeyValue = {
-  startDrawing: (ctx: MapDrawContext, id: string, type: string) => {
-    ctx.activateUIButton(type);
+  startDrawing: (ctx: MapDrawContext, id: string, label: string) => {
     ctx.updateUIClasses({ mouse: "add" });
     ctx.setActionableState({
       trash: true,
@@ -13,9 +22,10 @@ export const DrawingBase: KeyValue = {
     ctx.addFeature(
       ctx.newFeature({
         id,
-        type,
+        type: "Feature",
         properties: {
-          type: "circle",
+          meta: "feature",
+          label,
         },
         geometry: {
           coordinates: [],
@@ -23,14 +33,13 @@ export const DrawingBase: KeyValue = {
         },
       } as GeoJSON.Feature)
     );
-    ctx.map.fire("draw.start", { drawType: type });
+    ctx.map.fire("draw.start", { drawType: label });
   },
   stopDrawing: (ctx: MapDrawContext, id: string) => {
     id && ctx.deleteFeature(id);
-    ctx.activateUIButton();
     ctx.map.dragPan.enable();
     ctx.updateUIClasses({ mouse: "drag" });
     ctx.map.fire("draw.stop");
-    return ctx.changeMode("simple_select");
+    return ctx.changeMode(DRAG_MODES.DRAG_CIRCLE as AnyObject);
   },
 };
