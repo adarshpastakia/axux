@@ -165,6 +165,15 @@ export const AxMapViewer: FC<MapViewerProps> = ({
               "fill-opacity": 0.1,
             },
           },
+          {
+            id: "hover",
+            type: "fill",
+            filter: ["all", ["==", "hover", "true"]],
+            paint: {
+              "fill-color": "#0ea5e9",
+              "fill-opacity": 0.3,
+            },
+          },
         ],
       });
       refMap.current.addControl(refDraw.current as AnyObject);
