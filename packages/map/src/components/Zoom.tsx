@@ -11,7 +11,7 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import { useMapContext } from "../viewer/MapViewer";
 
 export const Zoom = () => {
-  const { map, viewport } = useMapContext();
+  const { map, draw, viewport } = useMapContext();
   const [zoomLevel, setZoomLevel] = useState(0);
 
   useEffect(() => {
