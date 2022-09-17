@@ -55,7 +55,6 @@ export const FilterBar = () => {
     (id: string) => {
       const feature = draw.get(id);
       if (feature) {
-        console.log(feature);
         draw.changeMode(DRAG_MODES.HILIGHT, { featureId: id });
       }
     },

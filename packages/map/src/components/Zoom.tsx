@@ -7,6 +7,9 @@
  */
 
 import { AxButton } from "@axux/core";
+import { isString } from "@axux/utilities";
+import bbox from "@turf/bbox";
+import { GeoJSONSource } from "maplibre-gl";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { useMapContext } from "../viewer/MapViewer";
 
@@ -35,6 +38,21 @@ export const Zoom = () => {
   }, [map]);
 
   const resetView = useCallback(() => {
+    const source = map.getSource("ax-geojson") as GeoJSONSource;
+    if (source) {
+      if (isString(source._data)) {
+        fetch(source._data)
+          .then((resp) => resp.json())
+          .then((resp) => {
+            const extent = bbox(resp) as AnyObject;
+            map.fitBounds(extent, { padding: 48 });
+          });
+      } else {
+        const extent = bbox(source._data) as AnyObject;
+        map.fitBounds(extent, { padding: 48 });
+      }
+      return;
+    }
     map.easeTo(viewport, { resetView: true });
   }, [viewport, map]);
 

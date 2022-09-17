@@ -14,6 +14,7 @@ import {
   createContext,
   FC,
   Fragment,
+  ReactElement,
   useCallback,
   useContext,
   useEffect,
@@ -32,8 +33,11 @@ import {
   DrawRectangle,
   Hilight,
 } from "../drawModes";
+import { ClustermapProps } from "../layers/Clustermap";
+import { HeatmapProps } from "../layers/Heatmap";
 
 interface MapSource extends Omit<StyleSpecification, "version"> {
+  id: string;
   thumbnail: string;
   label: string;
 }
@@ -47,7 +51,11 @@ const iconError =
   "M9,3L3.36,4.9C3.15,4.97 3,5.15 3,5.38V20.5A0.5,0.5 0 0,0 3.5,21L3.66,20.97L9,18.9L15,21L20.64,19.1C20.85,19.03 21,18.85 21,18.62V3.5A0.5,0.5 0 0,0 20.5,3L20.34,3.03L15,5.1L9,3M8,5.45V17.15L5,18.31V6.46L8,5.45M10,5.47L14,6.87V18.53L10,17.13V5.47M19,5.7V17.54L16,18.55V6.86L19,5.7M7.46,6.3L5.57,6.97V9.12L7.46,8.45V6.3M7.46,9.05L5.57,9.72V11.87L7.46,11.2V9.05M7.46,11.8L5.57,12.47V14.62L7.46,13.95V11.8M7.46,14.55L5.57,15.22V17.37L7.46,16.7V14.55Z";
 
 export interface MapViewerProps {
+  children?: ReactElement<HeatmapProps | ClustermapProps>;
+
   sources: MapSource[];
+  defaultSource: string;
+
   minZoom: number;
   maxZoom: number;
   defaultViewport?: MapViewport;
@@ -63,16 +71,20 @@ const MapContext = createContext<{
   map: Map;
   draw: MapboxDraw;
   viewport: MapViewport;
+  minZoom: number;
+  maxZoom: number;
 }>({} as AnyObject);
 
 export const useMapContext = () => useContext(MapContext);
 
-export const AxMapViewer: FC<MapViewerProps> = ({
+export const MapViewer: FC<MapViewerProps> = ({
   sources = [],
   minZoom = 1,
   maxZoom = 18,
+  defaultSource,
   defaultViewport = DEFAULT_VIEWPORT,
   onViewportChange,
+  children,
 }) => {
   const refContainer = useRef<HTMLDivElement>(null);
   const refMap = useRef<Map>();
@@ -97,13 +109,14 @@ export const AxMapViewer: FC<MapViewerProps> = ({
   const loadMap = useCallback(() => {
     if (refContainer.current) {
       setError("");
-      refMap.current?.remove();
+
+      const source = sources.find((s) => s.id === defaultSource) ?? sources[0];
 
       refMap.current = new maplibregl.Map({
         container: refContainer.current,
         style: {
           version: 8,
-          ...sources[0],
+          ...source,
         },
         minZoom,
         maxZoom,
@@ -129,22 +142,12 @@ export const AxMapViewer: FC<MapViewerProps> = ({
         },
         styles: [
           {
-            id: "highlight-border",
-            type: "line",
-            filter: ["all", ["==", "active", "true"]],
-            paint: {
-              "line-color": "#f97316",
-              "line-dasharray": [4, 4],
-              "line-width": 2,
-            },
-          },
-          {
-            id: "border",
-            type: "line",
+            id: "fill",
+            type: "fill",
             filter: ["all", ["!=", "active", "true"]],
             paint: {
-              "line-color": "#0ea5e9",
-              "line-width": 2,
+              "fill-color": "#d946ef",
+              "fill-opacity": 0.1,
             },
           },
           {
@@ -157,12 +160,22 @@ export const AxMapViewer: FC<MapViewerProps> = ({
             },
           },
           {
-            id: "fill",
-            type: "fill",
+            id: "border",
+            type: "line",
             filter: ["all", ["!=", "active", "true"]],
             paint: {
-              "fill-color": "#0ea5e9",
-              "fill-opacity": 0.1,
+              "line-color": "#d946ef",
+              "line-width": 2,
+            },
+          },
+          {
+            id: "highlight-border",
+            type: "line",
+            filter: ["all", ["==", "active", "true"]],
+            paint: {
+              "line-color": "#f97316",
+              "line-dasharray": [4, 4],
+              "line-width": 2,
             },
           },
           {
@@ -170,7 +183,7 @@ export const AxMapViewer: FC<MapViewerProps> = ({
             type: "fill",
             filter: ["all", ["==", "hover", "true"]],
             paint: {
-              "fill-color": "#0ea5e9",
+              "fill-color": "#d946ef",
               "fill-opacity": 0.3,
             },
           },
@@ -183,21 +196,43 @@ export const AxMapViewer: FC<MapViewerProps> = ({
       });
 
       refMap.current.on("error", ({ error }) => {
+        try {
+          refMap.current?.remove();
+        } catch (_) {
+          //
+        }
+        setMap(undefined);
         setError(error.message);
       });
+
+      // @ts-ignore
+      window.mapref = refMap.current;
+      // @ts-ignore
+      window.drawref = refDraw.current;
     }
-  }, [sources]);
+  }, [sources, defaultSource]);
 
   useEffect(() => {
+    setError("");
     loadMap();
     return () => {
-      refMap.current?.remove();
+      try {
+        refMap.current?.remove();
+      } catch (_) {
+        //
+      }
     };
   }, [refContainer, loadMap]);
 
   return (
     <MapContext.Provider
-      value={{ map: map!, draw: refDraw.current!, viewport: defaultViewport }}
+      value={{
+        map: map!,
+        draw: refDraw.current!,
+        viewport: defaultViewport,
+        minZoom,
+        maxZoom,
+      }}
     >
       <div className="ax-mapviewer" onContextMenu={(e) => e.preventDefault()}>
         <div ref={refContainer} className="ax-mapviewer__container" />
@@ -206,12 +241,14 @@ export const AxMapViewer: FC<MapViewerProps> = ({
           <Fragment>
             <div className="ax-mapviewer__tools" data-align="start">
               <Zoom />
+              <Draw />
             </div>
             <div className="ax-mapviewer__tools" data-align="end">
               <Basemaps sources={sources} />
-              <Draw />
             </div>
             <FilterBar />
+
+            {children}
           </Fragment>
         )}
 
@@ -220,10 +257,16 @@ export const AxMapViewer: FC<MapViewerProps> = ({
             message={error}
             icon={iconError}
             title="MapLibre"
-            actions={[<AxButton onClick={loadMap}>Reload</AxButton>]}
+            actions={[
+              <AxButton key="reload" onClick={loadMap}>
+                Reload
+              </AxButton>,
+            ]}
           />
         )}
       </div>
     </MapContext.Provider>
   );
 };
+
+MapViewer.displayName = "AxMap.Viewer";

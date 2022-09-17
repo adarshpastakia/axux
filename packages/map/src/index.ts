@@ -6,4 +6,12 @@
  * @license   : MIT
  */
 
-export { AxMapViewer } from "./viewer/MapViewer";
+import { Clustermap } from "./layers/Clustermap";
+import { Heatmap } from "./layers/Heatmap";
+import { MapViewer } from "./viewer/MapViewer";
+
+export const AxMap = {
+  Viewer: MapViewer,
+  Heatmap: Heatmap,
+  Clustermap: Clustermap,
+};
