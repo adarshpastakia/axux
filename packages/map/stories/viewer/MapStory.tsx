@@ -9,9 +9,9 @@
 import { AxViewport } from "@axux/core";
 import { ComponentStory } from "@storybook/react";
 import { useEffect, useState } from "react";
-import { AxMapViewer } from "../../src";
+import { AxMap } from "../../src";
 
-const MapTemplate: ComponentStory<typeof AxMapViewer> = (props) => {
+const MapTemplate: ComponentStory<typeof AxMap.Viewer> = (props) => {
   const [sources, setSources] = useState<AnyObject[]>();
 
   useEffect(() => {
@@ -29,6 +29,8 @@ const MapTemplate: ComponentStory<typeof AxMapViewer> = (props) => {
             id: "raster",
             label: "Raster Style",
             thumbnail: "thumbs/thumb-ras.png",
+            glyphs:
+              "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
             sources: {
               "raster-tiles": {
                 type: "raster",
@@ -56,7 +58,11 @@ const MapTemplate: ComponentStory<typeof AxMapViewer> = (props) => {
 
   return (
     <AxViewport>
-      {sources && <AxMapViewer {...props} sources={sources} />}
+      {sources && (
+        <AxMap.Viewer {...props} sources={sources}>
+          <AxMap.Clustermap data="https://maplibre.org/maplibre-gl-js-docs/assets/earthquakes.geojson" />
+        </AxMap.Viewer>
+      )}
     </AxViewport>
   );
 };
@@ -64,4 +70,4 @@ const MapTemplate: ComponentStory<typeof AxMapViewer> = (props) => {
 export const MapStory = MapTemplate.bind({});
 MapStory.args = {};
 
-export default { title: "AxVideoPlayer", component: AxMapViewer };
+export default { title: "AxMap", component: AxMap.Viewer };

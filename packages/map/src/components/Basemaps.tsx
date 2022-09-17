@@ -18,10 +18,14 @@ export const Basemaps = ({ sources }: KeyValue<AnyObject[]>) => {
 
   const handleChange = useCallback(
     (source: AnyObject) => {
-      map.setStyle({
-        version: 8,
-        ...source,
-      });
+      map
+        .setStyle({
+          version: 8,
+          ...source,
+        })
+        .once("styledata", () => {
+          setTimeout(() => map.fire("basemap.change"), 10);
+        });
     },
     [sources, map]
   );
@@ -34,7 +38,11 @@ export const Basemaps = ({ sources }: KeyValue<AnyObject[]>) => {
       placement="left-start"
     >
       {sources.map((s) => (
-        <div key={s.id} onClick={() => handleChange(s)} className="ax-mapviewer__basemap--thumb">
+        <div
+          key={s.id}
+          onClick={() => handleChange(s)}
+          className="ax-mapviewer__basemap--thumb"
+        >
           <img src={s.thumbnail} height={32} />
           {s.label}
         </div>

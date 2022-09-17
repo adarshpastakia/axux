@@ -1,10 +1,10 @@
 import { Title, Canvas, Story, ArgsTable } from "@storybook/addon-docs";
 import { MapStory } from "./MapStory";
-import { AxMapViewer } from "../../src";
+import { AxMap } from "../../src";
 
 <Meta
   title="@map/Map Viewer"
-  component={AxMapViewer}
+  component={AxMap.Viewer}
   parameters={{ jest: ["Map.test.tsx"] }}
 />
 
@@ -16,4 +16,4 @@ import { AxMapViewer } from "../../src";
   </Story>
 </Canvas>
 
-<ArgsTable sort="requiredFirst" of={AxMapViewer} />
+<ArgsTable sort="requiredFirst" of={AxMap.Viewer} />

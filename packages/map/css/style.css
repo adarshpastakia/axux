@@ -12,7 +12,7 @@
 @layer utilities {
   .ax-mapviewer {
     @apply relative grid grid-area-[content];
-    grid-template-areas: "side-s head side-e" "side-s . side-e" "foot foot foot";
+    grid-template-areas: "side-s head side-e" "side-s content side-e" "foot foot foot";
     grid-template-rows: auto 1fr auto;
     grid-template-columns: auto 1fr auto;
 
