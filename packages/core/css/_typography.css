@@ -33,11 +33,7 @@
 /******************* text components *******************/
 @layer components {
   .ax-ellipsis {
-    @apply flex overflow-hidden whitespace-nowrap;
-
-    & > div:last-child {
-      @apply hidden;
-    }
+    @apply truncate;
   }
 
   .ax-text {

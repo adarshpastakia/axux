@@ -27,7 +27,7 @@
 /******************* content *******************/
 @layer components {
   .ax-content {
-    @apply overflow-auto grid-area-[content] p-4 z-0;
+    @apply overflow-auto grid-area-[content] p-4;
 
     &[data-padding="none"] {
       @apply p-0;
@@ -76,7 +76,6 @@
 @layer components {
   .ax-header {
     @apply flex grid-area-[head] items-center border-b bg-base;
-    z-index: 2;
 
     & > .ax-title {
       @apply select-none px-2 truncate;
@@ -116,7 +115,6 @@
 @layer components {
   .ax-footer {
     @apply flex gap-1 grid-area-[foot] justify-between border-t;
-    z-index: 2;
   }
 }
 
