@@ -124,7 +124,7 @@ export const Heatmap: FC<HeatmapProps> = ({
           [e.point.x - 8, e.point.y - 8],
           [e.point.x + 8, e.point.y + 8],
         ];
-        var features = map.queryRenderedFeatures(bounds, {
+        const features = map.queryRenderedFeatures(bounds, {
           layers: ["ax-points"],
         });
         console.log(features);

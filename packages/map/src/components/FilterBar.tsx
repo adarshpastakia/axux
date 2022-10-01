@@ -39,8 +39,8 @@ export const FilterBar = () => {
     (id: string) => {
       const feature = draw.get(id) as GeoJSON.Feature<GeoJSON.Polygon>;
       if (feature) {
-        var coordinates = feature.geometry.coordinates[0];
-        var bounds = coordinates.reduce((bounds: LngLatBounds, coord) => {
+        const coordinates = feature.geometry.coordinates[0];
+        const bounds = coordinates.reduce((bounds: LngLatBounds, coord) => {
           return bounds.extend(coord as AnyObject);
         }, new LngLatBounds(coordinates[0], coordinates[0]));
 

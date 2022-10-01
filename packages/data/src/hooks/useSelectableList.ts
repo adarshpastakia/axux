@@ -38,7 +38,7 @@ export const useSelectableList = ({
   onChange,
   onClick,
 }: SelectableProps) => {
-  const [selection, setSelection] = useState<KeyValue<AnyObject>>({});
+  const [selection, setSelection] = useState<KeyValue>({});
   const [pending, startTransition] = useTransition();
   useEffect(() => {
     setSelection(

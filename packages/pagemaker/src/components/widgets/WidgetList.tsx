@@ -5,10 +5,10 @@
 
 import { AxIcon } from "@axux/core";
 import { AxField } from "@axux/form";
+import { matchString } from "@axux/utilities";
 import { FC, memo, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { EnumTypes } from "../..";
-import { matchString } from "../../../../utilities/dist";
 import { iconColumn, iconDivider, iconRow, iconText } from "../../utils/icons";
 import { IWidgetObject } from "../../utils/types";
 import { usePageContext } from "../context";

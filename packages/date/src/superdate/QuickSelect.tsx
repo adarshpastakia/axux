@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxButton, AxContent, AxDivider, AxPanel, AxPopover } from "@axux/core";
+import { AxButton, AxContent, AxDivider, AxPopover } from "@axux/core";
 import { AxField } from "@axux/form";
 import { isString } from "@axux/utilities";
 import { FC, MouseEvent, useCallback, useEffect, useState } from "react";

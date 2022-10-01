@@ -10,7 +10,7 @@ import { AxButton, AxDivider } from "@axux/core";
 import { isArray, isEmpty } from "@axux/utilities";
 import { EChartOption, EChartsType } from "echarts";
 import { FC, useMemo, useRef, useState } from "react";
-import { ChartPalette } from "../theme/palettes";
+import { ChartPalette } from "../theme";
 import { BaseChart } from "../types";
 import { Icons } from "../types/icons";
 import { activityRenderer } from "../types/utils";

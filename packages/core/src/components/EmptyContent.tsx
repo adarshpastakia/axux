@@ -8,7 +8,7 @@
 
 import { cloneElement, FC, ReactElement, useMemo } from "react";
 import { AxIcon } from "../icons/Icon";
-import { Color, ElementProps, IconProp } from "../types";
+import { ElementProps, IconProp } from "../types";
 
 const DefaultInbox = () => (
   <svg version="1.1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -141,7 +141,11 @@ export const EmptyContent: FC<EmptyContentProps> = ({
   return (
     <div className={`ax-empty ${className ?? ""}`} data-size={size}>
       {icon && (
-        <AxIcon icon={icon} rtlFlip={rtlFlip} className={`ax-empty__icon ${iconClassName}`} />
+        <AxIcon
+          icon={icon}
+          rtlFlip={rtlFlip}
+          className={`ax-empty__icon ${iconClassName}`}
+        />
       )}
       {!icon && (
         <span className="ax-empty__icon">
