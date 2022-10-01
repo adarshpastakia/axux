@@ -19,7 +19,6 @@ export type Theme =
   | "warming"
   | "sunrise"
   | "ocean"
-  | "ocean"
   | "wine";
 
 export interface BaseChart {

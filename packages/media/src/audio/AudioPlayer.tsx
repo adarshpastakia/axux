@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxAnimation, AxIcon, useDebounce } from "@axux/core";
+import { AxIcon, useDebounce } from "@axux/core";
 import { HotKeyWrapper } from "@axux/core/dist/hotkeys/HotKeyWrapper";
 import {
   forwardRef,

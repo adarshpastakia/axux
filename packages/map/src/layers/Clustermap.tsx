@@ -107,10 +107,10 @@ export const Clustermap: FC<ClustermapProps> = ({
       );
 
       map.on("click", "ax-geojson", (e) => {
-        var features = map.queryRenderedFeatures(e.point, {
+        const features = map.queryRenderedFeatures(e.point, {
           layers: ["ax-geojson"],
         });
-        var clusterId = features[0].properties.cluster_id;
+        const clusterId = features[0].properties.cluster_id;
         (map.getSource("ax-geojson") as GeoJSONSource).getClusterExpansionZoom(
           clusterId,
           (err, zoom) => {

@@ -11,7 +11,7 @@ import { FC, Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AxRangePanel } from "../panels/RangePanel";
 import { ParsedDate, RelativeProps } from "../types";
-import { DateMath } from "../utils/dateMath";
+import { DateMath } from "../utils";
 
 export const AbsoluteRange: FC<Omit<RelativeProps, "type" | "presets">> = ({
   date,

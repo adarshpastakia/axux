@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { ascii, iconToken, tokenize } from "../src";
+import { iconToken, tokenize } from "../src";
 
 describe("tokenize test", () => {
   it("should tokenize text", (done) => {

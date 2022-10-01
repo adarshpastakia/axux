@@ -8,7 +8,6 @@
 
 import { FC } from "react";
 import { ChildrenProp, ElementProps } from "../types";
-import { Ellipsis } from "../typography/Ellipsis";
 
 /**
  * title
