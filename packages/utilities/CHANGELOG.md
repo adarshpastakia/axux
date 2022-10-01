@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.42](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.41...v2.0.0-beta.42) (2022-10-01)
+
+
+### Features
+
+* render template interpolation ([057bbba](https://github.com/adarshpastakia/axux/commit/057bbba540a3824298cd54b4f65298fbfefc3e78))
+
+
+
+
+
 # [2.0.0-beta.41](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.40...v2.0.0-beta.41) (2022-09-14)
 
 **Note:** Version bump only for package @axux/utilities

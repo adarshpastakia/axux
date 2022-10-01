@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.42](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.41...v2.0.0-beta.42) (2022-10-01)
+
+
+### Bug Fixes
+
+* **MapViewer:** Cluster/Heatmap layers ([b9c3e58](https://github.com/adarshpastakia/axux/commit/b9c3e58153199780d59e00af4e8b7a776ae147fc))
+
+
+
+
+
 # [2.0.0-beta.41](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.40...v2.0.0-beta.41) (2022-09-14)
 
 

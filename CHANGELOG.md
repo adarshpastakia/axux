@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.42](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.41...v2.0.0-beta.42) (2022-10-01)
+
+
+### Bug Fixes
+
+* **MapViewer:** Cluster/Heatmap layers ([b9c3e58](https://github.com/adarshpastakia/axux/commit/b9c3e58153199780d59e00af4e8b7a776ae147fc))
+* recenter debounce on zoom ([b80ce34](https://github.com/adarshpastakia/axux/commit/b80ce34c48d07f9320bdb5edbd964da862e1a8b1))
+
+
+### Features
+
+* render template interpolation ([057bbba](https://github.com/adarshpastakia/axux/commit/057bbba540a3824298cd54b4f65298fbfefc3e78))
+
+
+
+
+
 # [2.0.0-beta.41](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.40...v2.0.0-beta.41) (2022-09-14)
 
 
