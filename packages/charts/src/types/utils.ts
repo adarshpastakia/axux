@@ -80,7 +80,6 @@ export const timeSeriesRenderer = (opt: KeyValue) => {
 };
 
 export const activityRenderer = (opt: KeyValue) => {
-  console.log(opt);
   const axis = opt.xAxis[0];
   const series = opt.series;
   const table = ['<table class="ax-chart__dataTable"><thead><tr><th></th>'];
