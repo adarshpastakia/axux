@@ -21,9 +21,18 @@ const VideoTemplate: ComponentStory<typeof AxVideoPlayer> = (props) => {
   );
 };
 
+const markers: [number, number][] = new Array(250)
+  .fill([])
+  .map((_, i) => [Math.random() * 596, Math.random()]);
+const scenes: [number, string][] = new Array(250)
+  .fill([])
+  .map((_, i) => [Math.random() * 596, "https://picsum.photos/192/108"]);
+
 export const VideoStory = VideoTemplate.bind({});
 VideoStory.args = {
   src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  markers,
+  scenes,
 };
 
 export default { title: "AxVideoPlayer", component: AxVideoPlayer };
