@@ -13,6 +13,7 @@ import {
   useResizeObserver,
 } from "@axux/core";
 import { HotKeyWrapper } from "@axux/core/dist/hotkeys/HotKeyWrapper";
+import { debounce } from "@axux/utilities";
 import { getImageColorset } from "@axux/utilities/dist/getImageColorset";
 import {
   forwardRef,
@@ -28,12 +29,11 @@ import {
   useTransition,
 } from "react";
 import { CanvasRef } from "../canvas/Canvas";
-import { Image } from "./Image";
-import { Tools } from "./Tools";
-
 import { NsfwOverlay } from "../nsfw/NsfwOverlay";
 import { Icons } from "../types/icons";
+import { Image } from "./Image";
 import { ImageOverlay } from "./ImageOverlay";
+import { Tools } from "./Tools";
 
 type Rotation = 0 | 90 | 180 | 270;
 
@@ -137,6 +137,7 @@ export const AxImageViewer = forwardRef<
       el.scrollTo({
         top: (el.scrollHeight - (el.offsetHeight - 16)) / 2,
         left: (el.scrollWidth - (el.offsetWidth - 16)) / 2,
+        behavior: "smooth",
       });
     }
   }, []);
@@ -150,7 +151,7 @@ export const AxImageViewer = forwardRef<
         state.zoom = Math.min(5, Math.max(0, action.payload));
         state = { ...state, ...calculateSize(state.rotate, state.zoom) };
         startTransition(() => {
-          setTimeout(recenter, 50);
+          debounce(recenter, 200)();
         });
       }
       if (action.type === "rotate") {
