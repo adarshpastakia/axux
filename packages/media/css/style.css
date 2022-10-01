@@ -253,7 +253,7 @@
   }
 
   .ax-video__scenes {
-    @apply outline-hidden relative flex flex-col;
+    @apply outline-hidden relative flex flex-col bg-bw-1000;
 
     & > .ax-icon {
       @apply bg-bw-900 text-white rounded-t-full mx-auto self-center px-4 text-lg hover:bg-bw-700 cursor-pointer;
