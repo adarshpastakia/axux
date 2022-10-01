@@ -43,7 +43,7 @@ export const seriesRenderer = (opt: KeyValue) => {
   table.push(...series.map((s: KeyValue) => `<th>${s.name ?? s.id}</th>`));
   table.push("</tr></thead><tbody>");
   if (axis?.data) {
-    axis.data.forEach((ax: string, i: number) => {
+    axis.data.forEach((ax: string) => {
       table.push(`<tr><th>${ax}</th>`);
       table.push(...series.map((s: KeyValue) => `<td>${s.data[0]}</td>`));
       table.push("</tr>");
@@ -63,9 +63,6 @@ export const seriesRenderer = (opt: KeyValue) => {
 };
 
 export const timeSeriesRenderer = (opt: KeyValue) => {
-  const radar = opt.radar?.[0];
-  const axis =
-    opt.xAxis?.[0].type !== "value" ? opt.xAxis?.[0] : opt.yAxis?.[0];
   const series = opt.series;
   const table = ['<table class="ax-chart__dataTable"><thead><tr><th></th>'];
   table.push(...series.map((s: KeyValue) => `<th>${s.name ?? s.id}</th>`));
