@@ -71,6 +71,7 @@ export const useNotificationService = () => {
     const el = document.createElement("div");
     el.className = "ax-overlay__mask";
     overlayContainer.appendChild(el);
+    const root = createRoot(el);
     return new Promise<boolean>((resolve) => {
       const onClose = (b = false) => {
         el.dataset.show = "";
@@ -81,7 +82,7 @@ export const useNotificationService = () => {
       };
       el.onclick = () => onClose();
       // @ts-ignore
-      createPortal(<AxAlert {...props} onClose={onClose} />, el);
+      root.render(<AxAlert {...props} onClose={onClose} />);
       requestAnimationFrame(() => (el.dataset.show = "true"));
     });
   };
