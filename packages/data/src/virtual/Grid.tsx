@@ -45,6 +45,7 @@ export interface GridItemProps extends ChildrenProp {
 export interface GridProps extends ElementProps {
   children: (props: GridItemProps) => ReactElement;
   listRef?: Ref<GridRef | undefined>;
+  colWidth?: number;
   /**
    * item count
    */
@@ -98,6 +99,7 @@ export const AxGridView: FC<GridProps> & { Item: typeof Item } = memo(
     className,
     children,
     count,
+    colWidth = 550,
     listRef: ref,
     isLoading,
     onLoadMore,
@@ -171,8 +173,8 @@ export const AxGridView: FC<GridProps> & { Item: typeof Item } = memo(
       >
         <AutoSizer>
           {({ width, height }) => {
-            let colCount = 2;
-            if (width < 960) colCount = 1;
+            let colCount = Math.floor((width - 84) / colWidth);
+            // if (width < 960) colCount = 1;
             return (
               <Grid
                 ref={setList}
@@ -190,7 +192,7 @@ export const AxGridView: FC<GridProps> & { Item: typeof Item } = memo(
                   } as AnyObject)
                 }
                 outerElementType={Wrapper}
-                columnWidth={() => Math.min(550, (width - 78) / colCount)}
+                columnWidth={() => Math.min(colWidth, (width - 84) / colCount)}
                 rowHeight={(index) =>
                   Math.max(
                     ...(cache.get(index) ?? []),

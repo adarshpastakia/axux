@@ -12,7 +12,7 @@
 
     & .ax-virtual__wrapper {
       @apply grid justify-center p-4;
-      grid-template-columns: minmax(auto, 1100px) auto;
+      grid-template-columns: auto auto;
 
       & > div:first-child {
         @apply relative;
