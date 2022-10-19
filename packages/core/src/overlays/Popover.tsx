@@ -56,6 +56,8 @@ export interface PopoverProps extends ChildrenProp, ElementProps {
    * inner element ref
    */
   innerRef?: Ref<HTMLElement>;
+
+  popoverClassName?: HTMLElement["className"];
 }
 
 /**
