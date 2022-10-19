@@ -9,11 +9,12 @@
 import { AxTooltip } from "@axux/core";
 import { useGlobals } from "@axux/core/dist/context/Global";
 import { ElementProps } from "@axux/core/dist/types";
-import { FC, useMemo } from "react";
+import { RefProp } from "@axux/core/src/types";
+import { FC, forwardRef, useMemo } from "react";
 import { DateLike } from "../types";
 import { DateMath } from "../utils";
 
-export interface DateDisplayProps extends ElementProps {
+export interface DateDisplayProps extends ElementProps, RefProp {
   /**
    * date value
    */
@@ -24,28 +25,31 @@ export interface DateDisplayProps extends ElementProps {
   format?: string;
 }
 
-export const AxDateDisplay: FC<DateDisplayProps> = ({
-  date,
-  format = "eee, MMM dd yyyy, HH:mm:ss aaa",
-  className,
-  ...rest
-}) => {
-  const { currentCalendar, currentLocale } = useGlobals();
+export const AxDateDisplay: FC<DateDisplayProps> = forwardRef(
+  (
+    { date, format = "eee, MMM dd yyyy, HH:mm:ss aaa", className, ...rest },
+    ref
+  ) => {
+    const { currentCalendar, currentLocale } = useGlobals();
 
-  const isHijri = useMemo(() => currentCalendar === "hijri", [currentCalendar]);
+    const isHijri = useMemo(
+      () => currentCalendar === "hijri",
+      [currentCalendar]
+    );
 
-  const dateLabel = useMemo(() => {
-    return DateMath.toString(date, format, currentLocale) ?? "";
-  }, [date, currentLocale, format]);
-  const hijriLabel = useMemo(() => {
-    return DateMath.toHijri(date, format, currentLocale) ?? "";
-  }, [date, currentLocale, format]);
+    const dateLabel = useMemo(() => {
+      return DateMath.toString(date, format, currentLocale) ?? "";
+    }, [date, currentLocale, format]);
+    const hijriLabel = useMemo(() => {
+      return DateMath.toHijri(date, format, currentLocale) ?? "";
+    }, [date, currentLocale, format]);
 
-  return (
-    <AxTooltip content={isHijri ? dateLabel : hijriLabel}>
-      <span {...rest} className={`inline-block ${className ?? ""}`}>
-        {isHijri ? hijriLabel : dateLabel}
-      </span>
-    </AxTooltip>
-  );
-};
+    return (
+      <AxTooltip content={isHijri ? dateLabel : hijriLabel} innerRef={ref}>
+        <span {...rest} className={`inline-block ${className ?? ""}`}>
+          {isHijri ? hijriLabel : dateLabel}
+        </span>
+      </AxTooltip>
+    );
+  }
+);
