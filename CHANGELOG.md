@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.43](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.42...v2.0.0-beta.43) (2022-10-19)
+
+
+### Bug Fixes
+
+* alert render ([afb392a](https://github.com/adarshpastakia/axux/commit/afb392a068421d339e3e19a6c3d8a00af2d8bbec))
+* expose popoverClassName ([2fd7a37](https://github.com/adarshpastakia/axux/commit/2fd7a37a77527e4e3bd1a6cf07af53ebd149efa1))
+* forward ref ([84cc13c](https://github.com/adarshpastakia/axux/commit/84cc13c2b2191fdb8ef3d53ca6dca83ac1b3ea01))
+* scroll top on data change ([c3377c3](https://github.com/adarshpastakia/axux/commit/c3377c38f575a658d0b20af70b6b15174e7e7774))
+
+
+
+
+
 # [2.0.0-beta.42](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.41...v2.0.0-beta.42) (2022-10-01)
 
 

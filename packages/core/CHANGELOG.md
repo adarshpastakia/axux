@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.43](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.42...v2.0.0-beta.43) (2022-10-19)
+
+
+### Bug Fixes
+
+* alert render ([afb392a](https://github.com/adarshpastakia/axux/commit/afb392a068421d339e3e19a6c3d8a00af2d8bbec))
+* expose popoverClassName ([2fd7a37](https://github.com/adarshpastakia/axux/commit/2fd7a37a77527e4e3bd1a6cf07af53ebd149efa1))
+
+
+
+
+
 # [2.0.0-beta.42](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.41...v2.0.0-beta.42) (2022-10-01)
 
 **Note:** Version bump only for package @axux/core
