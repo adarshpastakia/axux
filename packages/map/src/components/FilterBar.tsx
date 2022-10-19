@@ -42,7 +42,7 @@ export const FilterBar = () => {
         const coordinates = feature.geometry.coordinates[0];
         const bounds = coordinates.reduce((bounds: LngLatBounds, coord) => {
           return bounds.extend(coord as AnyObject);
-        }, new LngLatBounds(coordinates[0], coordinates[0]));
+        }, new LngLatBounds(coordinates[0], coordinates[1]));
 
         map.fitBounds(bounds, {
           padding: 64,
