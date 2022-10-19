@@ -52,6 +52,14 @@ export const DatagridProvider: FC<KeyValue & ChildrenProp> = ({
 }) => {
   const ghostRef = useRef<HTMLDivElement>(null);
   const [widths, setWidths] = useState<Map<string, number>>(new Map());
+  const refBody = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    refBody.current?.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  }, [data]);
 
   useEffect(() => {
     setWidths(
@@ -96,7 +104,10 @@ export const DatagridProvider: FC<KeyValue & ChildrenProp> = ({
       }}
     >
       <div className={`ax-datagrid ${className ?? ""}`}>
-        <div className={`ax-datagrid__wrapper ${className ?? ""}`}>
+        <div
+          className={`ax-datagrid__wrapper ${className ?? ""}`}
+          ref={refBody}
+        >
           {children}
         </div>
         <div className="ax-datagrid__resize--ghost" ref={ghostRef}>
