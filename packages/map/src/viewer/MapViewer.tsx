@@ -146,7 +146,7 @@ export const MapViewer: FC<MapViewerProps> = ({
             type: "fill",
             filter: ["all", ["!=", "active", "true"]],
             paint: {
-              "fill-color": "#d946ef",
+              "fill-color": "#be185d",
               "fill-opacity": 0.1,
             },
           },
@@ -164,7 +164,7 @@ export const MapViewer: FC<MapViewerProps> = ({
             type: "line",
             filter: ["all", ["!=", "active", "true"]],
             paint: {
-              "line-color": "#d946ef",
+              "line-color": "#be185d",
               "line-width": 2,
             },
           },
@@ -183,7 +183,7 @@ export const MapViewer: FC<MapViewerProps> = ({
             type: "fill",
             filter: ["all", ["==", "hover", "true"]],
             paint: {
-              "fill-color": "#d946ef",
+              "fill-color": "#be185d",
               "fill-opacity": 0.3,
             },
           },

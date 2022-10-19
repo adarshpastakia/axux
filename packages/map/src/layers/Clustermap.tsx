@@ -97,7 +97,7 @@ export const Clustermap: FC<ClustermapProps> = ({
           source: "ax-geojson",
           filter: ["!", ["has", "point_count"]],
           paint: {
-            "circle-radius": 16,
+            "circle-radius": 8,
             "circle-color": "rgb(178,24,43)",
             "circle-stroke-color": "white",
             "circle-stroke-width": 1,
@@ -111,15 +111,19 @@ export const Clustermap: FC<ClustermapProps> = ({
           layers: ["ax-geojson"],
         });
         const clusterId = features[0].properties.cluster_id;
-        (map.getSource("ax-geojson") as GeoJSONSource).getClusterExpansionZoom(
+        const pointCount = features[0].properties.point_count;
+        (map.getSource("ax-geojson") as GeoJSONSource).getClusterLeaves(
           clusterId,
+          pointCount,
+          0,
           (err, zoom) => {
             if (err) return;
+            console.log("===", zoom);
 
-            map.easeTo({
-              center: (features[0].geometry as AnyObject).coordinates,
-              zoom: Math.min(maxZoom, zoom ?? 1),
-            });
+            // map.easeTo({
+            //   center: (features[0].geometry as AnyObject).coordinates,
+            //   zoom: Math.min(maxZoom, zoom ?? 1),
+            // });
           }
         );
       });
