@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.44](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.43...v2.0.0-beta.44) (2022-10-19)
+
+
+### Bug Fixes
+
+* virtual grid colWidth ([74aaf6e](https://github.com/adarshpastakia/axux/commit/74aaf6e3d6b0ef212d2114833d33f4743bebece3))
+* virtual timeline container width ([024fe4a](https://github.com/adarshpastakia/axux/commit/024fe4accf1f561300c91c6f967c04ae5f9c6fc9))
+
+
+
+
+
 # [2.0.0-beta.43](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.42...v2.0.0-beta.43) (2022-10-19)
 
 
