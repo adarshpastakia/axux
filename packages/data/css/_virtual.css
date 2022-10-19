@@ -10,6 +10,10 @@
   .ax-virtual__container {
     @apply grid-area-[content] grid overflow-hidden bg-base;
 
+    &.ax-timeline .ax-virtual__wrapper {
+      grid-template-columns: minmax(auto, 1100px) auto;
+    }
+
     & .ax-virtual__wrapper {
       @apply grid justify-center p-4;
       grid-template-columns: auto auto;

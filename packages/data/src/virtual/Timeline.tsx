@@ -210,7 +210,7 @@ export const AxTimeline: FC<TimelineProps> & { Item: typeof Item } = memo(
       <div
         {...rest}
         ref={containerRef}
-        className={`ax-virtual__container ${className ?? ""}`}
+        className={`ax-virtual__container ax-timeline ${className ?? ""}`}
       >
         <AutoSizer>
           {({ width, height }) => (
