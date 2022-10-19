@@ -6,24 +6,13 @@
  * @license   : MIT
  */
 
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import { BodyRow } from "./BodyRow";
 import { useDatagridContext } from "./Context";
 import { EmptyRow } from "./EmptyRow";
 
 export const Body = memo(() => {
-  const { data, columns, onRowExpand } = useDatagridContext();
-
-  const [start, end, cols] = useMemo(
-    () => [
-      columns.filter(
-        (col) => col.isLocked === true || col.isLocked === "start"
-      ),
-      columns.filter((col) => col.isLocked === "end"),
-      columns.filter((col) => !col.isLocked),
-    ],
-    [columns]
-  );
+  const { data } = useDatagridContext();
 
   return (
     <div className="ax-datagrid__body">
