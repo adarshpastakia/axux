@@ -37,6 +37,8 @@
   }
 
   .ax-text {
+    @apply select-text;
+
     & .ax-copy {
       font-size: 0.625em;
 

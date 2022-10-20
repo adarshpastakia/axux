@@ -84,7 +84,7 @@ export const AxText: FC<TextProps> & {
       className={`ax-text ${className ?? ""}`}
     >
       <div ref={refContainer} data-clip={showMore ? "none" : clip ?? "none"}>
-        <span>
+        <div>
           {Children.map(children, (child) => (
             <Fragment>
               {isString(child) && (
@@ -94,10 +94,10 @@ export const AxText: FC<TextProps> & {
                   }}
                 />
               )}
-              {!isString(child) && <span>{child}</span>}
+              {!isString(child) && <>{child}</>}
             </Fragment>
           ))}
-        </span>
+        </div>
       </div>
       {clipped && (
         <div className="ax-moreLink">
