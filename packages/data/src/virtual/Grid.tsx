@@ -193,12 +193,7 @@ export const AxGridView: FC<GridProps> & { Item: typeof Item } = memo(
                 }
                 outerElementType={Wrapper}
                 columnWidth={() => Math.min(colWidth, (width - 84) / colCount)}
-                rowHeight={(index) =>
-                  Math.max(
-                    ...(cache.get(index) ?? []),
-                    Math.max(...Array.from(cache.values()).flat(), 48)
-                  )
-                }
+                rowHeight={(index) => Math.max(...(cache.get(index) ?? []), 48)}
               />
             );
           }}
