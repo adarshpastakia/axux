@@ -15,13 +15,15 @@ import {
   EmptyCallback,
 } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
+import memoize from "memoize-one";
 import {
   CSSProperties,
-  FC,
   memo,
   ReactElement,
   Ref,
+  startTransition,
   useCallback,
+  useDeferredValue,
   useEffect,
   useImperativeHandle,
   useLayoutEffect,
@@ -63,13 +65,13 @@ export interface TimelineItemProps
   iconClassName?: HTMLElement["className"];
 }
 
-export interface TimelineProps extends ElementProps {
-  children: (props: TimelineItemProps) => ReactElement;
+export interface TimelineProps<T> extends ElementProps {
+  children: (props: TimelineItemProps & { data: T }) => ReactElement;
   listRef?: Ref<TimelineRef | undefined>;
   /**
-   * item count
+   * data list
    */
-  count: number;
+  items: T[];
   /**
    * loading state
    */
@@ -144,102 +146,114 @@ const Item = memo(
   areEqual
 );
 
+const createItemList = memoize((items) => items);
+
 /**
  * Timeline virtual list
  */
-export const AxTimeline: FC<TimelineProps> & { Item: typeof Item } = memo(
-  ({
-    className,
-    children,
-    count,
-    isLoading,
-    onLoadMore,
-    listRef: ref,
-    ...rest
-  }: TimelineProps) => {
-    const isRtl = useIsRtl();
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [listRef, setList] = useState<AnyObject>();
-    const cache = useMemo(() => new Map<number, number>(), []);
+const AxTimelineComponent = <T extends KeyValue>({
+  className,
+  children,
+  items,
+  isLoading,
+  onLoadMore,
+  listRef: ref,
+  ...rest
+}: TimelineProps<T>) => {
+  const isRtl = useIsRtl();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [listRef, setList] = useState<AnyObject>();
+  const cache = useMemo(() => new Map<number, number>(), []);
 
-    useEffect(() => {
-      listRef?._outerRef.setLoading(isLoading);
-    }, [listRef, isLoading]);
+  const count = useDeferredValue(items.length);
+  const itemList = createItemList(items);
 
-    useImperativeHandle(ref, () => listRef, [listRef]);
+  useEffect(() => {
+    listRef?._outerRef.setLoading(isLoading);
+  }, [listRef, isLoading]);
 
-    /******************* list handlers *******************/
-    useEffect(() => {
-      const el = containerRef.current;
-      const handlers = {
-        scrollFirst: () => listRef.scrollToItem(0),
-        scrollLast: () => listRef.scrollToItem(count),
-        scrollDown: () =>
-          listRef.scrollTo(listRef.state.scrollOffset + listRef.props.height),
-        scrollUp: () =>
-          listRef.scrollTo(listRef.state.scrollOffset - listRef.props.height),
-        loadMore: () => !isLoading && onLoadMore?.(),
-      };
-      el?.addEventListener("scrollFirst", handlers.scrollFirst);
-      el?.addEventListener("scrollLast", handlers.scrollLast);
-      el?.addEventListener("scrollDown", handlers.scrollDown);
-      el?.addEventListener("scrollUp", handlers.scrollUp);
-      el?.addEventListener("loadMore", handlers.loadMore);
+  useImperativeHandle(ref, () => listRef, [listRef]);
 
-      return () => {
-        el?.removeEventListener("scrollFirst", handlers.scrollFirst);
-        el?.removeEventListener("scrollLast", handlers.scrollLast);
-        el?.removeEventListener("scrollDown", handlers.scrollDown);
-        el?.removeEventListener("scrollUp", handlers.scrollUp);
-        el?.removeEventListener("loadMore", handlers.loadMore);
-      };
-    }, [listRef, count, isLoading, onLoadMore]);
+  /******************* list handlers *******************/
+  useEffect(() => {
+    const el = containerRef.current;
+    const handlers = {
+      scrollFirst: () => listRef.scrollToItem(0),
+      scrollLast: () => listRef.scrollToItem(count),
+      scrollDown: () =>
+        listRef.scrollTo(listRef.state.scrollOffset + listRef.props.height),
+      scrollUp: () =>
+        listRef.scrollTo(listRef.state.scrollOffset - listRef.props.height),
+      loadMore: () => !isLoading && onLoadMore?.(),
+    };
+    el?.addEventListener("scrollFirst", handlers.scrollFirst);
+    el?.addEventListener("scrollLast", handlers.scrollLast);
+    el?.addEventListener("scrollDown", handlers.scrollDown);
+    el?.addEventListener("scrollUp", handlers.scrollUp);
+    el?.addEventListener("loadMore", handlers.loadMore);
 
-    /******************* item height cache *******************/
-    const updateCache = useCallback(
-      (index: number, height: number) => {
-        if (height !== (cache.get(index) ?? 48)) {
-          cache.set(index, height);
-          listRef.resetAfterIndex(index);
-        }
-      },
-      [listRef]
-    );
+    return () => {
+      el?.removeEventListener("scrollFirst", handlers.scrollFirst);
+      el?.removeEventListener("scrollLast", handlers.scrollLast);
+      el?.removeEventListener("scrollDown", handlers.scrollDown);
+      el?.removeEventListener("scrollUp", handlers.scrollUp);
+      el?.removeEventListener("loadMore", handlers.loadMore);
+    };
+  }, [listRef, count, isLoading, onLoadMore]);
 
-    return (
-      <div
-        {...rest}
-        ref={containerRef}
-        className={`ax-virtual__container ax-timeline ${className ?? ""}`}
-      >
-        <AutoSizer>
-          {({ width, height }) => (
-            <List
-              ref={setList}
-              useIsScrolling
-              width={width}
-              height={height}
-              itemCount={count}
-              direction={isRtl ? "rtl" : "ltr"}
-              children={(props) =>
-                children({
-                  ...props,
-                  updateHeight: updateCache,
-                  lastChild: props.index === count - 1,
-                } as AnyObject)
-              }
-              outerElementType={Wrapper}
-              itemSize={(index) =>
-                cache.get(index) ?? Math.max(48, ...Array.from(cache.values()))
-              }
-            />
-          )}
-        </AutoSizer>
-      </div>
-    );
-  }
-) as AnyObject;
+  /******************* item height cache *******************/
+  const updateCache = useCallback(
+    (index: number, height: number) => {
+      if (height !== (cache.get(index) ?? 48)) {
+        cache.set(index, height);
+        listRef.resetAfterIndex(index);
+      }
+    },
+    [listRef]
+  );
+
+  return (
+    <div
+      {...rest}
+      ref={containerRef}
+      className={`ax-virtual__container ax-timeline ${className ?? ""}`}
+    >
+      <AutoSizer>
+        {({ width, height }) => (
+          <List
+            ref={setList}
+            useIsScrolling
+            width={width}
+            height={height}
+            itemCount={count}
+            itemData={itemList}
+            direction={isRtl ? "rtl" : "ltr"}
+            children={(props) =>
+              children({
+                ...props,
+                updateHeight: updateCache,
+                data:
+                  props.data.length > props.index
+                    ? props.data[props.index]
+                    : null,
+                lastChild: props.index === count - 1,
+              } as AnyObject)
+            }
+            outerElementType={Wrapper}
+            itemSize={(index) =>
+              cache.get(index) ?? Math.max(48, ...Array.from(cache.values()))
+            }
+          />
+        )}
+      </AutoSizer>
+    </div>
+  );
+};
+AxTimelineComponent.displayName = "AxTimeline";
+
+const GenericMemo: <T>(c: T) => T & { Item: typeof Item } = memo;
+
+export const AxTimeline = GenericMemo(AxTimelineComponent);
+
 AxTimeline.Item = Item;
-
-AxTimeline.displayName = "AxTimeline";
 AxTimeline.Item.displayName = "AxTimeline.Item";

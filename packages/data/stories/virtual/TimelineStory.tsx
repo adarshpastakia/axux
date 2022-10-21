@@ -27,7 +27,8 @@ export const TempItem = (props: TimelineItemProps) => undefined;
 export const LIPSUM =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vehicula nulla luctus sem congue iaculis. Praesent lobortis gravida nibh non sodales. Ut lacinia nulla ac pellentesque ullamcorper. Phasellus non quam lorem. Etiam consectetur dapibus dapibus. Nunc diam libero, facilisis a rhoncus eget, fermentum non lacus.";
 
-export const TimelineStory: ComponentStory<typeof AxTimeline> = ({ count }) => {
+const count = 10;
+export const TimelineStory: ComponentStory<typeof AxTimeline> = ({}) => {
   const [isLoading, setLoading] = useState(false);
   const [recordCount, setCount] = useState(0);
   const listRef = useRef<TimelineRef>();
@@ -66,7 +67,7 @@ export const TimelineStory: ComponentStory<typeof AxTimeline> = ({ count }) => {
       </AxHeader>
       <AxTimeline
         listRef={listRef}
-        count={recordCount}
+        items={new Array(recordCount).fill(null)}
         onLoadMore={loadMore}
         isLoading={isLoading}
       >

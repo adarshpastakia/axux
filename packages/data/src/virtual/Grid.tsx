@@ -12,13 +12,14 @@ import {
   ElementProps,
   EmptyCallback,
 } from "@axux/core/dist/types";
+import memoize from "memoize-one";
 import {
   CSSProperties,
-  FC,
   memo,
   ReactElement,
   Ref,
   useCallback,
+  useDeferredValue,
   useEffect,
   useImperativeHandle,
   useLayoutEffect,
@@ -42,14 +43,14 @@ export interface GridItemProps extends ChildrenProp {
   updateHeight: (rowIndex: number, columnIndex: number, height: number) => void;
 }
 
-export interface GridProps extends ElementProps {
-  children: (props: GridItemProps) => ReactElement;
+export interface GridProps<T> extends ElementProps {
+  children: (props: GridItemProps & { data: T }) => ReactElement;
   listRef?: Ref<GridRef | undefined>;
   colWidth?: number;
   /**
-   * item count
+   * data list
    */
-  count: number;
+  items: T[];
   /**
    * loading state
    */
@@ -91,118 +92,132 @@ const Item = memo(
   areEqual
 );
 
+const createItemList = memoize((items) => items);
+
 /**
  * Grid virtual list
  */
-export const AxGridView: FC<GridProps> & { Item: typeof Item } = memo(
-  ({
-    className,
-    children,
-    count,
-    colWidth = 550,
-    listRef: ref,
-    isLoading,
-    onLoadMore,
-    ...rest
-  }: GridProps) => {
-    const isRtl = useIsRtl();
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [listRef, setList] = useState<AnyObject>();
-    const cache = useMemo(() => new Map<number, number[]>(), []);
+const AxGridViewComponent = <T extends KeyValue>({
+  className,
+  children,
+  items,
+  colWidth = 550,
+  listRef: ref,
+  isLoading,
+  onLoadMore,
+  ...rest
+}: GridProps<T>) => {
+  const isRtl = useIsRtl();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [listRef, setList] = useState<AnyObject>();
+  const cache = useMemo(() => new Map<number, number[]>(), []);
 
-    useEffect(() => {
-      listRef?._outerRef?.setLoading(isLoading);
-    }, [listRef, isLoading]);
+  const count = useDeferredValue(items.length);
+  const itemList = createItemList(items);
 
-    useImperativeHandle(ref, () => listRef, [listRef]);
+  useEffect(() => {
+    listRef?._outerRef?.setLoading(isLoading);
+  }, [listRef, isLoading]);
 
-    /******************* list handlers *******************/
-    useEffect(() => {
-      const el = containerRef.current;
-      const handlers = {
-        scrollFirst: () =>
-          listRef.scrollToItem({ rowIndex: 0, columnIndex: 0 }),
-        scrollLast: () =>
-          listRef.scrollToItem({
-            rowIndex: listRef.props.rowCount,
-            columnIndex: 0,
-          }),
-        scrollDown: () =>
-          listRef.scrollTo({
-            scrollTop: listRef.state.scrollTop + listRef.props.height,
-          }),
-        scrollUp: () =>
-          listRef.scrollTo({
-            scrollTop: listRef.state.scrollTop - listRef.props.height,
-          }),
-        loadMore: () => !isLoading && onLoadMore?.(),
-      };
-      el?.addEventListener("scrollFirst", handlers.scrollFirst);
-      el?.addEventListener("scrollLast", handlers.scrollLast);
-      el?.addEventListener("scrollDown", handlers.scrollDown);
-      el?.addEventListener("scrollUp", handlers.scrollUp);
-      el?.addEventListener("loadMore", handlers.loadMore);
+  useImperativeHandle(ref, () => listRef, [listRef]);
 
-      return () => {
-        el?.removeEventListener("scrollFirst", handlers.scrollFirst);
-        el?.removeEventListener("scrollLast", handlers.scrollLast);
-        el?.removeEventListener("scrollDown", handlers.scrollDown);
-        el?.removeEventListener("scrollUp", handlers.scrollUp);
-        el?.removeEventListener("loadMore", handlers.loadMore);
-      };
-    }, [listRef, count, isLoading, onLoadMore]);
+  /******************* list handlers *******************/
+  useEffect(() => {
+    const el = containerRef.current;
+    const handlers = {
+      scrollFirst: () => listRef.scrollToItem({ rowIndex: 0, columnIndex: 0 }),
+      scrollLast: () =>
+        listRef.scrollToItem({
+          rowIndex: listRef.props.rowCount,
+          columnIndex: 0,
+        }),
+      scrollDown: () =>
+        listRef.scrollTo({
+          scrollTop: listRef.state.scrollTop + listRef.props.height,
+        }),
+      scrollUp: () =>
+        listRef.scrollTo({
+          scrollTop: listRef.state.scrollTop - listRef.props.height,
+        }),
+      loadMore: () => !isLoading && onLoadMore?.(),
+    };
+    el?.addEventListener("scrollFirst", handlers.scrollFirst);
+    el?.addEventListener("scrollLast", handlers.scrollLast);
+    el?.addEventListener("scrollDown", handlers.scrollDown);
+    el?.addEventListener("scrollUp", handlers.scrollUp);
+    el?.addEventListener("loadMore", handlers.loadMore);
 
-    /******************* item height cache *******************/
-    const updateCache = useCallback(
-      (rowIndex: number, columnIndex: number, height: number) => {
-        const size = cache.get(rowIndex) ?? [];
-        if (height !== size[columnIndex] ?? 48) {
-          size[columnIndex] = height;
-          cache.set(rowIndex, size);
-          listRef.resetAfterRowIndex(rowIndex);
-        }
-      },
-      [listRef]
-    );
+    return () => {
+      el?.removeEventListener("scrollFirst", handlers.scrollFirst);
+      el?.removeEventListener("scrollLast", handlers.scrollLast);
+      el?.removeEventListener("scrollDown", handlers.scrollDown);
+      el?.removeEventListener("scrollUp", handlers.scrollUp);
+      el?.removeEventListener("loadMore", handlers.loadMore);
+    };
+  }, [listRef, count, isLoading, onLoadMore]);
 
-    return (
-      <div
-        {...rest}
-        ref={containerRef}
-        className={`ax-virtual__container ${className ?? ""}`}
-      >
-        <AutoSizer>
-          {({ width, height }) => {
-            let colCount = Math.floor((width - 84) / colWidth);
-            // if (width < 960) colCount = 1;
-            return (
-              <Grid
-                ref={setList}
-                useIsScrolling
-                width={width}
-                height={height}
-                rowCount={Math.ceil(count / colCount)}
-                columnCount={colCount}
-                direction={isRtl ? "rtl" : "ltr"}
-                children={(props) =>
-                  children({
-                    ...props,
-                    index: props.rowIndex * colCount + props.columnIndex,
-                    updateHeight: updateCache,
-                  } as AnyObject)
-                }
-                outerElementType={Wrapper}
-                columnWidth={() => Math.min(colWidth, (width - 84) / colCount)}
-                rowHeight={(index) => Math.max(...(cache.get(index) ?? []), 48)}
-              />
-            );
-          }}
-        </AutoSizer>
-      </div>
-    );
-  }
-) as AnyObject;
+  /******************* item height cache *******************/
+  const updateCache = useCallback(
+    (rowIndex: number, columnIndex: number, height: number) => {
+      const size = cache.get(rowIndex) ?? [];
+      if (height !== size[columnIndex] ?? 48) {
+        size[columnIndex] = height;
+        cache.set(rowIndex, size);
+        listRef.resetAfterRowIndex(rowIndex);
+      }
+    },
+    [listRef]
+  );
+
+  return (
+    <div
+      {...rest}
+      ref={containerRef}
+      className={`ax-virtual__container ${className ?? ""}`}
+    >
+      <AutoSizer>
+        {({ width, height }) => {
+          let colCount = Math.floor((width - 84) / colWidth);
+          return (
+            <Grid
+              ref={setList}
+              useIsScrolling
+              width={width}
+              height={height}
+              rowCount={Math.ceil(count / colCount)}
+              itemData={itemList}
+              columnCount={colCount}
+              direction={isRtl ? "rtl" : "ltr"}
+              children={(props) =>
+                children({
+                  ...props,
+                  index: props.rowIndex * colCount + props.columnIndex,
+                  data:
+                    props.data.length >
+                    props.rowIndex * colCount + props.columnIndex
+                      ? props.data[
+                          props.rowIndex * colCount + props.columnIndex
+                        ]
+                      : null,
+                  updateHeight: updateCache,
+                } as AnyObject)
+              }
+              outerElementType={Wrapper}
+              columnWidth={() => Math.min(colWidth, (width - 84) / colCount)}
+              rowHeight={(index) => Math.max(...(cache.get(index) ?? []), 48)}
+            />
+          );
+        }}
+      </AutoSizer>
+    </div>
+  );
+};
+
+AxGridViewComponent.displayName = "AxGridView";
+
+const GenericMemo: <T>(c: T) => T & { Item: typeof Item } = memo;
+
+export const AxGridView = GenericMemo(AxGridViewComponent);
+
 AxGridView.Item = Item;
-
-AxGridView.displayName = "AxGridView";
 AxGridView.Item.displayName = "AxGridView.Item";
