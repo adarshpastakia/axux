@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.45](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.44...v2.0.0-beta.45) (2022-10-21)
+
+
+### Bug Fixes
+
+* text select ([8c53be4](https://github.com/adarshpastakia/axux/commit/8c53be4f9bec8635d8de0154f9e3ec86b70cb89d))
+* virtual grid container min width ([c5ed12f](https://github.com/adarshpastakia/axux/commit/c5ed12fb1cb7f14c02d544a6dd4b744d4dd46728))
+* virtual lists ([3ab0475](https://github.com/adarshpastakia/axux/commit/3ab0475a02dee58b706a078be09d8c00931dbea3))
+
+
+
+
+
 # [2.0.0-beta.44](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.43...v2.0.0-beta.44) (2022-10-19)
 
 

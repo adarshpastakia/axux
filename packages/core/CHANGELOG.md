@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.45](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.44...v2.0.0-beta.45) (2022-10-21)
+
+
+### Bug Fixes
+
+* text select ([8c53be4](https://github.com/adarshpastakia/axux/commit/8c53be4f9bec8635d8de0154f9e3ec86b70cb89d))
+
+
+
+
+
 # [2.0.0-beta.44](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.43...v2.0.0-beta.44) (2022-10-19)
 
 **Note:** Version bump only for package @axux/core
