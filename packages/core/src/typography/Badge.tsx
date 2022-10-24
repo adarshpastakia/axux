@@ -8,9 +8,9 @@
 
 import { FC } from "react";
 import { AxIcon } from "../icons/Icon";
-import { BadgeProps as BP } from "../types";
+import { BadgeProps as BP, ElementProps } from "../types";
 
-export interface BadgeProps extends Omit<BP, "value"> {
+export interface BadgeProps extends Omit<BP, "value">, ElementProps {
   children?: string | number;
   /**
    * placement
@@ -35,11 +35,12 @@ export const Badge: FC<BadgeProps> = ({
   ping,
   icon,
   placement,
+  className,
 }) => {
   /******************* component *******************/
   return (
     <span
-      className="ax-badge"
+      className={`ax-badge ${className ?? ""}`}
       data-color={color}
       data-is-icon={!!icon}
       data-placement={placement}
