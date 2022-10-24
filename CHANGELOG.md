@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.46](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.45...v2.0.0-beta.46) (2022-10-24)
+
+
+### Bug Fixes
+
+* **AxBadge:** add className prop ([1d17333](https://github.com/adarshpastakia/axux/commit/1d1733342dbdf1af2a9aa0e193c55193cb2ded3f))
+* **AxTabPanel:** children prop can be false ([3962edf](https://github.com/adarshpastakia/axux/commit/3962edf58b0becd870c459abfe9bb1fd07820ef9))
+
+
+
+
+
 # [2.0.0-beta.45](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.44...v2.0.0-beta.45) (2022-10-21)
 
 
