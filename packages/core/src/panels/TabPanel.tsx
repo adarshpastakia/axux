@@ -43,7 +43,7 @@ export interface TabProps extends ChildrenProp, IconProp, ElementProps {
   onClose?: EmptyCallback;
 }
 
-type TabChildren = ReactElement<TabProps> | undefined;
+type TabChildren = ReactElement<TabProps> | false | undefined;
 
 export interface TabPanelProps extends ElementProps {
   children: TabChildren | TabChildren[];
@@ -204,15 +204,17 @@ export const AxTabPanel: FC<TabPanelProps> & { Tab: FC<TabProps> } = ({
     >
       <div className={`ax-tab__bar ${barClassName ?? ""}`}>
         {prepend}
-        {Children.toArray(children).map((tab: AnyObject) =>
-          cloneElement(tab, {
-            onClick: changeTab,
-            key: tab.props.id || tab.key,
-            id: tab.props.id ?? tab.key,
-            isVertical: placement === "start" || placement === "end",
-            isActive: (tab.props.id ?? tab.key) === active,
-          } as AnyObject)
-        )}
+        {Children.toArray(children)
+          .filter(Boolean)
+          .map((tab: AnyObject) =>
+            cloneElement(tab, {
+              onClick: changeTab,
+              key: tab.props.id || tab.key,
+              id: tab.props.id ?? tab.key,
+              isVertical: placement === "start" || placement === "end",
+              isActive: (tab.props.id ?? tab.key) === active,
+            } as AnyObject)
+          )}
         {append}
       </div>
       <div className="ax-tab__body">
