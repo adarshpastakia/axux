@@ -8,6 +8,7 @@
 
 import "./i18n";
 
+export { AxFilterBar } from "./FilterBar";
 export { AxSearchBar } from "./SearchBar";
 export { EnumFieldType, EnumOperator } from "./types";
 export type { FilterField, FilterObject } from "./types";
