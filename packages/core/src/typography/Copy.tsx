@@ -28,7 +28,7 @@ export const Copy: FC<CopyProps> = ({ text, tooltip, className, ...rest }) => {
   }, [text]);
 
   /******************* component *******************/
-  return (
+  return !!text ? (
     <ActionButton
       {...rest}
       style="link"
@@ -39,5 +39,5 @@ export const Copy: FC<CopyProps> = ({ text, tooltip, className, ...rest }) => {
       onClick={doCopy}
       stopPropagation
     />
-  );
+  ) : null;
 };
