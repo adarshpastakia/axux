@@ -152,7 +152,6 @@ export const AxTabPanel: FC<TabPanelProps> & { Tab: FC<TabProps> } = ({
     startTransition(() => {
       if (active) {
         const el = panelRef.current;
-        onActiveChange && onActiveChange(active);
         setTimeout(
           () =>
             el &&
@@ -184,13 +183,15 @@ export const AxTabPanel: FC<TabPanelProps> & { Tab: FC<TabProps> } = ({
         Promise.resolve(ret).then((b) => {
           if (!isFalse(b)) {
             setActive(id);
+            onActiveChange && onActiveChange(id);
           }
         });
       } else {
         setActive(id);
+        onActiveChange && onActiveChange(id);
       }
     },
-    [onBeforeChange, active]
+    [onBeforeChange, onActiveChange, active]
   );
 
   return (
