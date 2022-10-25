@@ -156,7 +156,7 @@
     }
     &[data-placement="top"] {
       & .ax-tab__bar {
-        @apply items-end pt-px;
+        @apply items-end pt-px mb-1;
         box-shadow: 0 -1px 0 theme(colors.bw.500 / 0.2) inset;
       }
 
@@ -174,7 +174,7 @@
     }
     &[data-placement="bottom"] {
       & .ax-tab__bar {
-        @apply items-start pb-px;
+        @apply items-start pb-px mt-1;
         box-shadow: 0 1px 0 theme(colors.bw.500 / 0.2) inset;
       }
 
@@ -204,7 +204,7 @@
   [dir="ltr"] .ax-tab__panel[data-placement="start"],
   [dir="rtl"] .ax-tab__panel[data-placement="end"] {
     & .ax-tab__bar {
-      @apply pl-px;
+      @apply pl-px mr-1;
       box-shadow: -1px 0 0 theme(colors.bw.500 / 0.2) inset;
     }
 
@@ -224,7 +224,7 @@
   [dir="rtl"] .ax-tab__panel[data-placement="start"],
   [dir="ltr"] .ax-tab__panel[data-placement="end"] {
     & .ax-tab__bar {
-      @apply pr-px;
+      @apply pr-px ml-1;
       box-shadow: 1px 0 0 theme(colors.bw.500 / 0.2) inset;
     }
 
