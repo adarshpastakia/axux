@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.47](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.46...v2.0.0-beta.47) (2022-10-25)
+
+
+### Bug Fixes
+
+* **CopyAction:** dont render button when text is blank ([fbde9cb](https://github.com/adarshpastakia/axux/commit/fbde9cb429efacb21078ce87f0d207b4e672df48))
+* **TabPanel:** fire change event on user interaction only ([49f2e44](https://github.com/adarshpastakia/axux/commit/49f2e44e0e7cb3b9a01b4ec9cbd8ced224c4318c))
+
+
+### Features
+
+* add FilterBar ([80258c1](https://github.com/adarshpastakia/axux/commit/80258c1fd612cf9da5245829eaf6c73668fb9252))
+
+
+
+
+
 # [2.0.0-beta.46](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.45...v2.0.0-beta.46) (2022-10-24)
 
 

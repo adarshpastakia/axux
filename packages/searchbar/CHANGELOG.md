@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.47](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.46...v2.0.0-beta.47) (2022-10-25)
+
+
+### Features
+
+* add FilterBar ([80258c1](https://github.com/adarshpastakia/axux/commit/80258c1fd612cf9da5245829eaf6c73668fb9252))
+
+
+
+
+
 # [2.0.0-beta.46](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.45...v2.0.0-beta.46) (2022-10-24)
 
 **Note:** Version bump only for package @axux/searchbar
