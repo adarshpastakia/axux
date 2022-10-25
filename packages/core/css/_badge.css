@@ -27,7 +27,6 @@
 
     & > span {
       @apply text-bw-0;
-      vertical-align: 0.1em;
     }
 
     & > .ax-icon {
