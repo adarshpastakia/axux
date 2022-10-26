@@ -104,12 +104,12 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
     const series = data?.map(
       (item) =>
         ({
-          id: item.key,
+          id: item.id,
           stack,
           areaStyle: {},
           symbol: "none",
           type: _type === "column" ? "bar" : _type,
-          name: item.label ?? item.key,
+          name: item.label ?? item.id,
           data: item.values,
         } as AnyObject)
     );

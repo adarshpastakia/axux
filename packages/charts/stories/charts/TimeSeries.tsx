@@ -24,7 +24,7 @@ const Template: ComponentStory<typeof AxChart.TimeSeries> = () => {
       categories,
       data: [
         {
-          key: faker.datatype.string(5),
+          id: faker.datatype.string(5),
           label: faker.random.word(),
           values: categories.map((c) => [
             c,
@@ -32,7 +32,7 @@ const Template: ComponentStory<typeof AxChart.TimeSeries> = () => {
           ]),
         },
         {
-          key: faker.datatype.string(5),
+          id: faker.datatype.string(5),
           label: faker.random.word(),
           values: categories.map((c) => [
             c,
@@ -40,7 +40,7 @@ const Template: ComponentStory<typeof AxChart.TimeSeries> = () => {
           ]),
         },
         {
-          key: faker.datatype.string(5),
+          id: faker.datatype.string(5),
           label: faker.random.word(),
           values: categories.map((c) => [
             c,

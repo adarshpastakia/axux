@@ -95,14 +95,14 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
           } as AnyObject);
 
     const series = data?.map((item, index) => ({
-      id: item.key,
+      id: item.id,
       stack,
       areaStyle: !!stacked ? {} : undefined,
       type: _type === "column" ? "bar" : _type,
-      name: item.label ?? item.key,
+      name: item.label ?? item.id,
       data:
         _type === "radar"
-          ? [{ value: item.values, id: item.key, name: item.label ?? item.key }]
+          ? [{ value: item.values, id: item.id, name: item.label ?? item.id }]
           : item.values,
     }));
 

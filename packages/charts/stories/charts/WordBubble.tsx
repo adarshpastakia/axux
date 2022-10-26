@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof AxChart.WordBubble> = () => {
   const loadData = useCallback(() => {
     setData(
       Array.from(Array(Math.ceil(Math.random() * 49)), (_, key) => ({
-        key,
+        id: key,
         label: faker.random.word(),
         count: faker.datatype.number({ min: 99, max: 499 }),
       }))

@@ -74,14 +74,14 @@ const CountSeriesChart: FC<CountSeriesProps> = ({
               type: "pie",
               name: title ?? "Count Series",
               data: sorted.map((item, index) => ({
-                id: item.key,
+                id: item.id,
                 value: item.count,
-                name: item.label ?? item.key,
+                name: item.label ?? item.id,
               })),
             },
           ]
         : sorted.map((item, index) => ({
-            id: item.key,
+            id: item.id,
             type: "bar",
             label: {
               show: true,
@@ -96,7 +96,7 @@ const CountSeriesChart: FC<CountSeriesProps> = ({
                 value: item.count,
               },
             ],
-            name: item.label ?? item.key,
+            name: item.label ?? item.id,
           }));
     return {
       series,
