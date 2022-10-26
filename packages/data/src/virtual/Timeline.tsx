@@ -68,6 +68,7 @@ export interface TimelineItemProps
 export interface TimelineProps<T> extends ElementProps {
   children: (props: TimelineItemProps & { data: T }) => ReactElement;
   listRef?: Ref<TimelineRef | undefined>;
+  minHeight?: number;
   /**
    * data list
    */
@@ -155,6 +156,7 @@ const AxTimelineComponent = <T extends KeyValue>({
   className,
   children,
   items,
+  minHeight = 48,
   isLoading,
   onLoadMore,
   listRef: ref,
@@ -204,7 +206,7 @@ const AxTimelineComponent = <T extends KeyValue>({
   /******************* item height cache *******************/
   const updateCache = useCallback(
     (index: number, height: number) => {
-      if (height !== (cache.get(index) ?? 48)) {
+      if (height !== (cache.get(index) ?? minHeight)) {
         cache.set(index, height);
         listRef.resetAfterIndex(index);
       }
@@ -241,7 +243,8 @@ const AxTimelineComponent = <T extends KeyValue>({
             }
             outerElementType={Wrapper}
             itemSize={(index) =>
-              cache.get(index) ?? Math.max(48, ...Array.from(cache.values()))
+              cache.get(index) ??
+              Math.max(minHeight, ...Array.from(cache.values()))
             }
           />
         )}

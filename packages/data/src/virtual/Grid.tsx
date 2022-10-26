@@ -46,6 +46,7 @@ export interface GridItemProps extends ChildrenProp {
 export interface GridProps<T> extends ElementProps {
   children: (props: GridItemProps & { data: T }) => ReactElement;
   listRef?: Ref<GridRef | undefined>;
+  colHeight?: number;
   colWidth?: number;
   /**
    * data list
@@ -101,6 +102,7 @@ const AxGridViewComponent = <T extends KeyValue>({
   className,
   children,
   items,
+  colHeight = 48,
   colWidth = 550,
   listRef: ref,
   isLoading,
@@ -160,7 +162,7 @@ const AxGridViewComponent = <T extends KeyValue>({
   const updateCache = useCallback(
     (rowIndex: number, columnIndex: number, height: number) => {
       const size = cache.get(rowIndex) ?? [];
-      if (height !== size[columnIndex] ?? 48) {
+      if (height !== size[columnIndex] ?? colHeight) {
         size[columnIndex] = height;
         cache.set(rowIndex, size);
         listRef.resetAfterRowIndex(rowIndex);
@@ -204,7 +206,9 @@ const AxGridViewComponent = <T extends KeyValue>({
               }
               outerElementType={Wrapper}
               columnWidth={() => Math.min(colWidth, (width - 84) / colCount)}
-              rowHeight={(index) => Math.max(...(cache.get(index) ?? []), 48)}
+              rowHeight={(index) =>
+                Math.max(...(cache.get(index) ?? []), colHeight)
+              }
             />
           );
         }}
