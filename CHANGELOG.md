@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.48](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.47...v2.0.0-beta.48) (2022-10-26)
+
+
+### Bug Fixes
+
+* add min height prop for virtual lists ([00f6c12](https://github.com/adarshpastakia/axux/commit/00f6c129aed00bfad58769f5375e70fb1965770b))
+* chart data structure ([bd803b5](https://github.com/adarshpastakia/axux/commit/bd803b5c2ce3c427f0b1fd22b0b45f16575f3424))
+
+
+
+
+
 # [2.0.0-beta.47](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.46...v2.0.0-beta.47) (2022-10-25)
 
 
