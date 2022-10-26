@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof AxChart.CountSeries> = () => {
   const loadData = useCallback(() => {
     setData(
       Array.from(Array(Math.ceil(24)), (_, i) => ({
-        key: `key-${i}`,
+        id: `key-${i}`,
         label: faker.random.word(),
         count: faker.datatype.number({ min: 99, max: 499 }),
       }))

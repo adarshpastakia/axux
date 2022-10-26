@@ -71,7 +71,7 @@ const MapSeriesChart: FC<MapSeriesProps> = ({
           select: {
             disabled: true,
           },
-          data: data.map(({ key, count: value }) => ({
+          data: data.map(({ id: key, count: value }) => ({
             name: Countries.name(key),
             id: key,
             value,

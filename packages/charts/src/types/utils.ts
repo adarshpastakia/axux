@@ -53,7 +53,10 @@ export const seriesRenderer = (opt: KeyValue) => {
     radar.indicator.forEach((ax: KeyValue, i: number) => {
       table.push(`<tr><th>${ax.name}</th>`);
       table.push(
-        ...series.map((s: KeyValue) => `<td>${s.data[0].value[i]}</td>`)
+        ...series.map(
+          (s: KeyValue) =>
+            `<td>${(s.data[0] ?? { value: [] }).value[i] ?? 0}</td>`
+        )
       );
       table.push("</tr>");
     });
@@ -69,7 +72,9 @@ export const timeSeriesRenderer = (opt: KeyValue) => {
   table.push("</tr></thead><tbody>");
   series[0].data.forEach((ax: AnyObject, i: number) => {
     table.push(`<tr><th>${Format.date(ax[0])}</th>`);
-    series.forEach((s: KeyValue) => table.push(`<td>${s.data[i][1]}</td>`));
+    series.forEach((s: KeyValue) =>
+      table.push(`<td>${(s.data[i] ?? [])[1] ?? 0}</td>`)
+    );
     table.push("</tr>");
   });
   table.push("</tbody></table>");
@@ -85,7 +90,7 @@ export const activityRenderer = (opt: KeyValue) => {
   table.push(
     ...axis.data.map((s: string, i: number) => [
       `<tr><th>${s}</th>`,
-      ...series.map((s: KeyValue) => `<td>${s.data[i][2]}</td>`),
+      ...series.map((s: KeyValue) => `<td>${(s.data[i] ?? [])[2] ?? 0}</td>`),
       "</tr>",
     ])
   );

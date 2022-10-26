@@ -51,7 +51,7 @@ const WordBubbleChart: FC<WordBubbleProps> = ({ data, title, onClick }) => {
           },
           data: data
             .sort(compareValues("desc", "count"))
-            .map(({ key, label, count }, index) => ({
+            .map(({ id: key, label, count }, index) => ({
               name: label ?? key,
               value: count,
             })),

@@ -24,21 +24,21 @@ const Template: ComponentStory<typeof AxChart.DataSeries> = () => {
       categories,
       data: [
         {
-          key: faker.datatype.string(5),
+          id: faker.datatype.string(5),
           label: faker.random.word(),
           values: categories.map(() =>
             faker.datatype.number({ min: 100, max: 500 })
           ),
         },
         {
-          key: faker.datatype.string(5),
+          id: faker.datatype.string(5),
           label: faker.random.word(),
           values: categories.map(() =>
             faker.datatype.number({ min: 100, max: 500 })
           ),
         },
         {
-          key: faker.datatype.string(5),
+          id: faker.datatype.string(5),
           label: faker.random.word(),
           values: categories.map(() =>
             faker.datatype.number({ min: 100, max: 500 })

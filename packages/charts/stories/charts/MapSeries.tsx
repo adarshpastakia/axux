@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof AxChart.MapSeries> = () => {
   const loadData = useCallback(() => {
     setData(
       Array.from(Array(Math.ceil(24)), (_, i) => ({
-        key: faker.address.countryCode("alpha-2"),
+        id: faker.address.countryCode("alpha-2"),
         count: faker.datatype.number({ min: 99, max: 499 }),
       }))
     );
