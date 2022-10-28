@@ -10,13 +10,16 @@ import { FC, ReactElement, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 
 type OverlayComponent = FC<{
-  onClose: () => void;
+  onClose: (args: AnyObject) => void;
   [key: string]: AnyObject;
 }>;
 
 export const useOverlayService = (
   ModalOrFlyout: OverlayComponent
-): [Overlay: ReactElement, openOverlay: (props?: KeyValue) => void] => {
+): [
+  Overlay: ReactElement,
+  openOverlay: (props?: KeyValue) => Promise<AnyObject>
+] => {
   const [Overlay, setOverlay] = useState<AnyObject>();
 
   /******************* message container *******************/
@@ -35,14 +38,14 @@ export const useOverlayService = (
   const openOverlay = (props: KeyValue = {}) => {
     const el = document.createElement("div");
     overlayContainer.appendChild(el);
-    return new Promise<void>((resolve) => {
-      const handleClose = () => {
+    return new Promise((resolve) => {
+      const handleClose = (args: AnyObject) => {
         (el.firstElementChild as HTMLElement).dataset.show = "";
         setTimeout(() => {
           setOverlay(undefined);
           el.remove();
-          resolve();
-        }, 250);
+          resolve(args);
+        }, 20);
       };
       setOverlay(
         createPortal(<ModalOrFlyout {...props} onClose={handleClose} />, el)
