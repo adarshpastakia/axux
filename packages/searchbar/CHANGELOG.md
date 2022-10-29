@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.49](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.48...v2.0.0-beta.49) (2022-10-29)
+
+
+### Bug Fixes
+
+* **FilterBar:** sort global filters at start ([5a5c161](https://github.com/adarshpastakia/axux/commit/5a5c161fa8c8eb3d373406daeeb2d48f820d1518))
+
+
+
+
+
 # [2.0.0-beta.48](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.47...v2.0.0-beta.48) (2022-10-26)
 
 **Note:** Version bump only for package @axux/searchbar
