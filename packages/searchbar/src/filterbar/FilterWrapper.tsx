@@ -6,12 +6,16 @@
  * @license   : MIT
  */
 
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context";
+import { FilterProps } from "../types";
 import { AddFilter } from "./AddFilter";
 import { FilterTag } from "./FilterTag";
 import { GlobalMenu } from "./GlobalMenu";
 
-export const FilterWrapper = () => {
+export const FilterWrapper: FC<Partial<FilterProps>> = ({}) => {
+  const { t } = useTranslation("searchbar");
   const { showFilters, filters, fields, isEditable } = useSearchContext();
 
   if (!showFilters) return null;
@@ -21,11 +25,9 @@ export const FilterWrapper = () => {
       <GlobalMenu />
 
       <div className="ax-filter__wrapper">
-        {filters
-          .sort((a) => (a.isGlobal === true ? -1 : 1))
-          .map((filter, index) => (
-            <FilterTag {...filter} index={index} key={index} />
-          ))}
+        {filters.map((filter, index) => (
+          <FilterTag {...filter} index={index} key={index} />
+        ))}
         {isEditable && fields.length > 0 && <AddFilter />}
       </div>
     </div>
