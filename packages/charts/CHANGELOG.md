@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.50](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.49...v2.0.0-beta.50) (2022-10-30)
+
+
+### Bug Fixes
+
+* **ActivityMap:** max point size 48 ([fae08e8](https://github.com/adarshpastakia/axux/commit/fae08e81d06b91a17257e7f76211fa8d0864efb3))
+* **TimeSlider:** set range 0 when range not between min/max dates ([4e75be7](https://github.com/adarshpastakia/axux/commit/4e75be75fe625b8b9322ad6eb465e514ce88eaba))
+
+
+
+
+
 # [2.0.0-beta.49](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.48...v2.0.0-beta.49) (2022-10-29)
 
 **Note:** Version bump only for package @axux/charts
