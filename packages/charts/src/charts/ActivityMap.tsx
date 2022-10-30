@@ -167,7 +167,7 @@ const ActivityMapChart: FC<ActivityMapProps> = ({
         symbolSize: function (dataItem: number[]) {
           return dataItem[2] === 0
             ? 0
-            : Math.max(4, (dataItem[2] / total) * 256);
+            : Math.min(Math.max(4, (dataItem[2] / total) * 256), 48);
         },
         data: points,
       };
