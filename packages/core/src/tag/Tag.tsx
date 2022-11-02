@@ -81,6 +81,7 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
       fill,
       size,
       icon,
+      rtlFlip,
       color,
       tooltip,
       onClick,
@@ -120,7 +121,7 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
           onClick={onClick}
           style={styles}
         >
-          {icon && <AxIcon icon={icon} />}
+          {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
           <label>{children}</label>
           {onRemove && CloseX(onRemove)}
         </div>
