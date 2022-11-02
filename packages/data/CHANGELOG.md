@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.51](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.50...v2.0.0-beta.51) (2022-11-02)
+
+**Note:** Version bump only for package @axux/data
+
+
+
+
+
 # [2.0.0-beta.50](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.49...v2.0.0-beta.50) (2022-10-30)
 
 **Note:** Version bump only for package @axux/data

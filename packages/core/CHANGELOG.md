@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.51](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.50...v2.0.0-beta.51) (2022-11-02)
+
+
+### Bug Fixes
+
+* **Breadcrumb:** export item type ([f05b567](https://github.com/adarshpastakia/axux/commit/f05b567451ab85dde6213b945fea5123be0a73d9))
+* **Breadcrumb:** render default item as 'a' ([42177dd](https://github.com/adarshpastakia/axux/commit/42177dd928586541bd5beb1dd2f898e74db25f16))
+* **Tag:** pass rtlFlip to icon ([d991411](https://github.com/adarshpastakia/axux/commit/d991411c4b9068024445796f9aa237e9f4aad92a))
+
+
+
+
+
 # [2.0.0-beta.50](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.49...v2.0.0-beta.50) (2022-10-30)
 
 **Note:** Version bump only for package @axux/core
