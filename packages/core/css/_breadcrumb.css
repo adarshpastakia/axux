@@ -11,10 +11,10 @@
     @apply flex flex-nowrap select-none items-center px-2 text-base;
 
     & .ax-breadcrumb__item {
-      @apply flex items-center max-w-[12rem] my-0.5 cursor-pointer;
+      @apply flex items-center max-w-[12rem] my-0.5;
 
-      & > * {
-        @apply flex flex-auto items-center leading-5 flex-nowrap overflow-hidden;
+      & > a {
+        @apply flex flex-auto gap-1 cursor-pointer items-center leading-5 font-medium flex-nowrap overflow-hidden;
 
         & > label {
           @apply truncate flex-auto;
@@ -35,8 +35,8 @@
         @apply last:text-muted;
 
         &::after {
-          @apply px-1 text-bw-500 origin-center inline-block;
-          content: "⦊";
+          @apply px-2 text-bw-500 origin-center inline-block;
+          content: "/";
         }
         &:last-child {
           &::after {
@@ -47,7 +47,7 @@
           }
         }
 
-        & > * {
+        & > a {
           @apply text-primary-600 hover:text-primary-500 active:text-primary-700
           dark:text-primary-300 dark:hover:text-primary-500 dark:active:text-primary-700;
         }
