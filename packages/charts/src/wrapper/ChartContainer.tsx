@@ -118,7 +118,7 @@ export const ChartContainer = ({
     if (chart) {
       onClick && chart.on("click", onClick);
       return () => {
-        chart.off("click");
+        !chart.isDisposed() && chart.off("click");
       };
     }
   }, [onClick]);
