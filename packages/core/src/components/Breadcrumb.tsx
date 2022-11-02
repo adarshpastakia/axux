@@ -32,7 +32,7 @@ const Crumb = (
   index: number = 0
 ) => (
   <div className="ax-breadcrumb__item" key={index}>
-    <Link to={to} onClick={onClick}>
+    <Link to={to} onClick={onClick} as="a">
       {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
       <label>{label}</label>
       {badge && useBadge(badge)}
