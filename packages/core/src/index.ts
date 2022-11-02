@@ -13,6 +13,7 @@ export { AxViewport } from "./application/Viewport";
 export { AxButton } from "./buttons/Button";
 export { AxAside } from "./components/Aside";
 export { AxBreadcrumb } from "./components/Breadcrumb";
+export type { BreadcrumbItem } from "./components/Breadcrumb";
 export { AxCallout } from "./components/Callout";
 export { AxCard } from "./components/Card";
 export { AxCollapsable } from "./components/Collapsable";

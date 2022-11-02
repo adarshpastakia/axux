@@ -13,7 +13,7 @@ import { AxPopover } from "../overlays/Popover";
 import { BadgeType, EmptyCallback } from "../types";
 import { Link } from "./Link";
 
-interface BreadcrumbItem {
+export interface BreadcrumbItem {
   to?: string;
   icon?: string;
   rtlFlip?: boolean;
