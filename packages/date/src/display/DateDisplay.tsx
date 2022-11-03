@@ -45,7 +45,7 @@ export const AxDateDisplay: FC<DateDisplayProps> = forwardRef(
     }, [date, currentLocale, format]);
 
     return (
-      <AxTooltip content={isHijri ? dateLabel : hijriLabel} innerRef={ref}>
+      <AxTooltip content={isHijri ? dateLabel : hijriLabel} ref={ref}>
         <span {...rest} className={`inline-block ${className ?? ""}`}>
           {isHijri ? hijriLabel : dateLabel}
         </span>
