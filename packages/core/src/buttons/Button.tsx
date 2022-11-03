@@ -161,6 +161,8 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     // @ts-ignore
     popoverRef,
     // @ts-ignore
+    innerRef,
+    // @ts-ignore
     "data-extra": extra,
     // @ts-ignore
     "data-popover-open": popoverOpen,
@@ -174,7 +176,6 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
   /******************* component *******************/
   return (
     <Wrapper innerRef={ref}>
-      {hotKey && <AxHotKey keyCombo={hotKey} handler={onClick} />}
       <div
         data-type={style}
         data-size={size}
@@ -190,11 +191,12 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
         data-invert={invertColor}
         className={`ax-button ${className ?? ""}`}
       >
+        {hotKey && <AxHotKey keyCombo={hotKey} handler={onClick} />}
         {!useSpinner && isLoading && <div className="ax-button__loader" />}
         <Link
           aria-label={children}
           {...rest}
-          ref={ref}
+          {...{ ref: !tooltip ? ref : undefined }}
           type={type}
           as="button"
           role="button"

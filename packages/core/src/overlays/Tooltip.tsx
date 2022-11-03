@@ -6,59 +6,156 @@
  * @license   : MIT
  */
 
-import { FC, forwardRef } from "react";
-import { ChildProp, ElementProps, TooltipProps as TP } from "../types";
-import { AxPopover, PopoverProps } from "./Popover";
+import { Placement } from "@popperjs/core";
+import {
+  Children,
+  cloneElement,
+  FC,
+  forwardRef,
+  Fragment,
+  useEffect,
+  useImperativeHandle,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
+import { createPortal } from "react-dom";
+import { usePopover } from "../hooks/usePopover";
+import { ChildProp, ElementProps, RefProp, TooltipProps as TP } from "../types";
 
-export interface TooltipProps extends TP, ChildProp, ElementProps {
+export interface TooltipProps
+  extends TP,
+    ChildProp,
+    ElementProps,
+    RefProp<HTMLElement> {
   /**
    * force open
    */
   isOpen?: boolean;
   /**
+   * popover placement
+   */
+  placement?: Placement;
+  /**
    * disable
    */
   isDisabled?: boolean;
   /**
-   * inner element ref
+   * same width as target
    */
-  innerRef?: PopoverProps["innerRef"];
+  sameWidth?: boolean;
+  /**
+   * hide arrow
+   */
+  hideArrow?: boolean;
 }
 
 /**
  * simple tooltips
  */
 export const AxTooltip: FC<TooltipProps> = forwardRef<
-  HTMLDivElement,
+  HTMLElement,
   TooltipProps
 >(
   (
     {
       children,
       content,
+      className,
+      hideArrow = false,
+      sameWidth = false,
+      isDisabled = false,
+      placement = "bottom",
+      isOpen,
       color,
-      isDisabled,
-      innerRef,
       // @ts-ignore
       "data-popover-open": parentOpen,
       ...rest
     },
     ref
   ) => {
+    const refEl = useRef<HTMLElement>(null);
+    const {
+      attributes,
+      forceUpdate,
+      popperElement,
+      referenceElement,
+      setArrowElement,
+      setPopperElement,
+      setReferenceElement,
+      styles,
+    } = usePopover({
+      placement,
+      sameWidth,
+      hideArrow,
+    });
+    const [open, setOpen] = useState(false);
+    const [_, startTransition] = useTransition();
+
+    useEffect(() => {
+      setOpen(!!isOpen);
+    }, [isOpen]);
+
+    const [anchorEl] = useMemo(
+      () => Children.toArray(children) as AnyObject[],
+      [children]
+    );
+    useImperativeHandle(ref, () => refEl.current as AnyObject, [refEl]);
+
+    useLayoutEffect(() => {
+      setReferenceElement(refEl.current as AnyObject);
+    }, [refEl]);
+
+    useEffect(() => {
+      if (popperElement) {
+        const cb = () => forceUpdate?.();
+        popperElement.addEventListener("updatePopper", cb);
+        return () => {
+          popperElement.removeEventListener("updatePopper", cb);
+        };
+      }
+    }, [popperElement]);
+
+    useLayoutEffect(() => {
+      setTimeout(() => forceUpdate?.(), 0);
+    }, [content]);
+
     /******************* component *******************/
     return (
-      <AxPopover
-        {...rest}
-        trigger="hover"
-        data-color={color}
-        isDisabled={isDisabled || parentOpen}
-        innerRef={innerRef}
-        // @ts-ignore
-        popoverClassName="tooltip"
-      >
-        {children}
-        {content}
-      </AxPopover>
+      <Fragment>
+        {cloneElement(anchorEl as AnyObject, {
+          ref: refEl,
+          onMouseEnter: () => !isDisabled && setOpen(true),
+          onMouseLeave: () => !isDisabled && !isOpen && setOpen(false),
+        })}
+        {open &&
+          createPortal(
+            <div
+              {...rest}
+              tabIndex={-1}
+              data-color={color}
+              className="popover tooltip"
+              ref={setPopperElement as AnyObject}
+              style={styles.popper}
+              {...attributes.popper}
+            >
+              <div className={`popover__container ${className ?? ""}`}>
+                {content}
+              </div>
+              {!hideArrow && (
+                <div
+                  ref={setArrowElement as AnyObject}
+                  className="popover__arrow"
+                  style={styles.arrow}
+                  {...attributes.arrow}
+                />
+              )}
+            </div>,
+            document.body
+          )}
+      </Fragment>
     );
   }
 );
