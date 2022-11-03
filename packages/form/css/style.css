@@ -276,8 +276,10 @@
 
   /******************* switch *******************/
   .ax-field__switch {
-    @apply relative grid rounded-full h-[1.25rem] min-w-[2.5rem] bg-bw-100 dark:bg-bw-800 text-primary-500 text-sm whitespace-nowrap
+    @apply relative grid rounded-full h-[1.25em] min-w-[2.5em] bg-bw-100 dark:bg-bw-800 text-primary-500 whitespace-nowrap
     before:content-[attr(data-on)] after:content-[attr(data-off)];
+    font-size: 0.875em;
+    line-height: 1.25em;
     grid-template-columns: 1fr 1fr;
     transition: background-color 200ms;
     box-shadow: 0 0 1px theme(colors.bw.500);
@@ -295,8 +297,8 @@
     }
 
     & .ax-field__switch--handle {
-      @apply rounded-full h-[1rem] shadow bg-bw-0 dark:bg-bw-1000 absolute top-[0.125rem] ltr:left-[0.125rem] rtl:right-[.125rem];
-      width: calc(50% - 0.125rem);
+      @apply rounded-full h-[1em] shadow bg-bw-0 dark:bg-bw-1000 absolute top-[0.125em] ltr:left-[0.125em] rtl:right-[.125em];
+      width: calc(50% - 0.125em);
       box-shadow: 0 0 1px theme(colors.bw.500);
       transition: transform 200ms;
     }
