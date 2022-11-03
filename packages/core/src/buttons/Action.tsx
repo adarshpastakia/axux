@@ -63,7 +63,7 @@ export const ActionButton: FC<ActionProps> = ({
   return (
     <AxTooltip
       {...tooltipContent}
-      isDisabled={!actionDone && !tooltip}
+      isDisabled={!tooltip}
       isOpen={actionDone || undefined}
       placement="top"
     >

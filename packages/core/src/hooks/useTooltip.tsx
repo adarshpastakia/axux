@@ -37,7 +37,7 @@ export const useTooltip = (
         return <Fragment>{children}</Fragment>;
       }
       return (
-        <AxTooltip {...props} innerRef={innerRef} isDisabled={isDisabled}>
+        <AxTooltip {...props} ref={innerRef} isDisabled={isDisabled}>
           {children}
         </AxTooltip>
       );

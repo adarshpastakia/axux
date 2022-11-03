@@ -6,7 +6,6 @@
  * @license   : MIT
  */
 
-import { isEmpty } from "@axux/utilities";
 import { Popover } from "@headlessui/react";
 import { Placement } from "@popperjs/core";
 import {
@@ -19,9 +18,7 @@ import {
   Ref,
   useEffect,
   useImperativeHandle,
-  useLayoutEffect,
   useMemo,
-  useState,
 } from "react";
 import { createPortal } from "react-dom";
 import { usePopover } from "../hooks/usePopover";
@@ -33,17 +30,9 @@ export interface PopoverProps extends ChildrenProp, ElementProps {
    */
   placement?: Placement;
   /**
-   * force open
-   */
-  isOpen?: boolean;
-  /**
    * disable
    */
   isDisabled?: boolean;
-  /**
-   * trigger
-   */
-  trigger?: "click" | "hover";
   /**
    * same width as target
    */
@@ -68,11 +57,9 @@ export const AxPopover: FC<PopoverProps> & {
 } = ({
   children,
   className,
-  isOpen,
   hideArrow = false,
   sameWidth = false,
   isDisabled = false,
-  trigger = "click",
   placement = "bottom",
   // @ts-ignore
   popoverClassName,
@@ -93,16 +80,6 @@ export const AxPopover: FC<PopoverProps> & {
     sameWidth,
     hideArrow,
   });
-  const [open, setOpen] = useState(false);
-  const isStatic = useMemo(
-    () => trigger === "hover" || !isEmpty(isOpen),
-    [trigger]
-  );
-
-  /******************* reset open *******************/
-  useLayoutEffect(() => {
-    setOpen(!isEmpty(isOpen) && isOpen);
-  }, [isOpen]);
 
   /******************* check for children count *******************/
   if (Children.toArray(children).length !== 2) {
@@ -134,18 +111,15 @@ export const AxPopover: FC<PopoverProps> & {
         <Fragment>
           <Popover.Button as={Fragment} {...{ ref: setReferenceElement }}>
             {cloneElement(anchorEl as AnyObject, {
-              "data-popover-open": trigger !== "hover" && (_open || open),
-              onMouseEnter: () => isStatic && isEmpty(isOpen) && setOpen(true),
-              onMouseLeave: () => isStatic && isEmpty(isOpen) && setOpen(false),
+              "data-popover-open": _open,
             })}
           </Popover.Button>
           {!isDisabled &&
-            ((isStatic && open) || (!isStatic && _open)) &&
+            _open &&
             createPortal(
               <Popover.Panel
                 {...rest}
                 tabIndex={-1}
-                static={isStatic}
                 className={`popover ${popoverClassName ?? ""}`}
                 ref={setPopperElement as AnyObject}
                 style={styles.popper}
