@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.52](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.51...v2.0.0-beta.52) (2022-11-03)
+
+
+### Bug Fixes
+
+* **Tooltip:** use popperjs for tooltip ([56061d4](https://github.com/adarshpastakia/axux/commit/56061d4d403626ff0bc718efbf575dbcf57b4d30))
+
+
+
+
+
 # [2.0.0-beta.51](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.50...v2.0.0-beta.51) (2022-11-02)
 
 

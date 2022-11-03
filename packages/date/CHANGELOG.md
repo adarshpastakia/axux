@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.52](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.51...v2.0.0-beta.52) (2022-11-03)
+
+
+### Bug Fixes
+
+* **DateDisplay:** tooltip prop ([2488b0e](https://github.com/adarshpastakia/axux/commit/2488b0ef9eef303e14200c57b96ec4a85fc087e8))
+
+
+
+
+
 # [2.0.0-beta.51](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.50...v2.0.0-beta.51) (2022-11-02)
 
 **Note:** Version bump only for package @axux/date
