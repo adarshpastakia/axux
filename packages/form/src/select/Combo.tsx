@@ -86,7 +86,7 @@ export const ComboInput = <T extends AnyObject>({
         return defaultMatcher(option, value, valueProperty);
       });
     if (value && !val && allowCreate) val = value;
-    setActualValue(val);
+    setActualValue(val ?? {});
   }, [value, valueProperty, options, allowCreate]);
 
   /******************* change actualValue *******************/
@@ -106,7 +106,7 @@ export const ComboInput = <T extends AnyObject>({
 
   /******************* display label *******************/
   const displayLabel = useMemo(() => {
-    if (makeLabel && actualValue) return makeLabel(actualValue);
+    if (makeLabel && !isEmpty(actualValue)) return makeLabel(actualValue);
     return getLabel(actualValue, labelProperty);
   }, [makeLabel, labelProperty, actualValue]);
 
