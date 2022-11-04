@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.53](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.52...v2.0.0-beta.53) (2022-11-04)
+
+
+### Bug Fixes
+
+* **CheckList:** add sortItems prop to enable sorting ([48b4514](https://github.com/adarshpastakia/axux/commit/48b4514076eae981bb8aece57034d818941cefed))
+* **DateDisplay:** correct ref prop for tooltip ([e911325](https://github.com/adarshpastakia/axux/commit/e911325e31b9d007c900672ea76d2c773e9ceb02))
+* **Popovers:** fix popover->tooltip->anchor ([8fef8e6](https://github.com/adarshpastakia/axux/commit/8fef8e6b0aa2a95fb3df0ca578ceef0acb455349))
+* **Select/Combo:** check empty value before calling make label ([059879d](https://github.com/adarshpastakia/axux/commit/059879dca0a972748493d540f9857bd473723e58))
+* **Select:** default value ([e32c901](https://github.com/adarshpastakia/axux/commit/e32c9016785654ecdd69311ad6aa7b3b3c411325))
+* **Tooltip:** hide tooltip if outer popover is open ([b96f073](https://github.com/adarshpastakia/axux/commit/b96f073b3ce77e70d5df862a2d002dbd3bd44590))
+
+
+
+
+
 # [2.0.0-beta.52](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.51...v2.0.0-beta.52) (2022-11-03)
 
 
