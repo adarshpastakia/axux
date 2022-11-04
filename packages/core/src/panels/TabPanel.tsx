@@ -78,7 +78,6 @@ export const Tab: FC<TabProps> = ({
   isVertical,
   ...rest
 }) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
   const Badge = useBadge(badge);
   const Wrapper = useTooltip(
     isVertical ? tooltip ?? label : tooltip,
@@ -100,10 +99,9 @@ export const Tab: FC<TabProps> = ({
   }, [label]);
 
   return (
-    <Wrapper innerRef={buttonRef}>
+    <Wrapper>
       <button
         {...rest}
-        ref={buttonRef}
         className={`ax-tab__button ${className ?? ""}`}
         data-active={isActive}
         data-disabled={isDisabled}

@@ -42,6 +42,7 @@ export const DropdownButton: FC<DropdownProps> = ({
   dropdownClassName,
   onClick,
   label,
+  isDisabled,
   showCaret = true,
   ...rest
 }) => {
@@ -68,24 +69,35 @@ export const DropdownButton: FC<DropdownProps> = ({
   }, [popperElement, referenceElement]);
   return (
     <Menu as={Fragment}>
-      <Menu.Button as={Fragment} {...{ ref: setReferenceElement }}>
-        {({ open }) => (
-          <AxButton {...rest} data-popover-open={open} showCaret={showCaret}>
-            {label}
-          </AxButton>
-        )}
-      </Menu.Button>
-      {createPortal(
-        <Menu.Items
-          onMouseUp={handleMenuClick}
-          className={`popover ax-button__dropdown ${dropdownClassName ?? ""}`}
-          ref={setPopperElement as AnyObject}
-          style={styles.popper}
-          {...attributes.popper}
-        >
-          <div className="popover__container">{children}</div>
-        </Menu.Items>,
-        document.body
+      {({ open }) => (
+        <Fragment>
+          <Menu.Button as={Fragment} {...{ ref: setReferenceElement }}>
+            <AxButton
+              {...rest}
+              isDisabled={isDisabled}
+              data-popover-open={open}
+              showCaret={showCaret}
+            >
+              {label}
+            </AxButton>
+          </Menu.Button>
+          {!isDisabled &&
+            open &&
+            createPortal(
+              <Menu.Items
+                onMouseUp={handleMenuClick}
+                className={`popover ax-button__dropdown ${
+                  dropdownClassName ?? ""
+                }`}
+                ref={setPopperElement as AnyObject}
+                style={styles.popper}
+                {...attributes.popper}
+              >
+                <div className="popover__container">{children}</div>
+              </Menu.Items>,
+              document.body
+            )}
+        </Fragment>
       )}
     </Menu>
   );

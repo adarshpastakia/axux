@@ -17,16 +17,7 @@ interface AbbrTextProps {
 }
 
 const AbbrText = forwardRef<HTMLElement, AbbrTextProps>(
-  (
-    {
-      color,
-      children,
-      // @ts-ignore
-      popoverRef,
-      ...rest
-    },
-    ref
-  ) => (
+  ({ color, children, ...rest }, ref) => (
     <abbr
       {...rest}
       ref={ref}
