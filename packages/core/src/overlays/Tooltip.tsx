@@ -123,7 +123,8 @@ export const AxTooltip: FC<TooltipProps> = ({
         onMouseEnter: () => !isDisabled && setOpen(true),
         onMouseLeave: () => !isDisabled && !isOpen && setOpen(false),
       })}
-      {open &&
+      {!parentOpen &&
+        open &&
         createPortal(
           <div
             {...rest}
