@@ -54,7 +54,7 @@ export const AxDateDisplay: FC<DateDisplayProps> = forwardRef(
     return (
       <AxTooltip
         content={isHijri ? dateLabel : hijriLabel}
-        ref={ref}
+        {...{ innerRef: ref }}
         data-popover-open={openPopover}
       >
         <span {...rest} className={`inline-block ${className ?? ""}`}>
