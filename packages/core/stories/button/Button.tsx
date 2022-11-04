@@ -278,6 +278,7 @@ export const ButtonActions: ComponentStory<AnyObject> = (props) => (
         <AxButton.Dropdown
           {...props}
           label="Click Me"
+          tooltip="Test me"
           onClick={action("menuClick")}
         >
           <AxMenu.Item id="menu1" label="Action 1" icon="mdi mdi-bell" />

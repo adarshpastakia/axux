@@ -27,7 +27,14 @@ export interface DateDisplayProps extends ElementProps, RefProp {
 
 export const AxDateDisplay: FC<DateDisplayProps> = forwardRef(
   (
-    { date, format = "eee, MMM dd yyyy, HH:mm:ss aaa", className, ...rest },
+    {
+      date,
+      format = "eee, MMM dd yyyy, HH:mm:ss aaa",
+      className,
+      // @ts-ignore
+      "data-popover-open": openPopover,
+      ...rest
+    },
     ref
   ) => {
     const { currentCalendar, currentLocale } = useGlobals();
@@ -45,7 +52,11 @@ export const AxDateDisplay: FC<DateDisplayProps> = forwardRef(
     }, [date, currentLocale, format]);
 
     return (
-      <AxTooltip content={isHijri ? dateLabel : hijriLabel} ref={ref}>
+      <AxTooltip
+        content={isHijri ? dateLabel : hijriLabel}
+        ref={ref}
+        data-popover-open={openPopover}
+      >
         <span {...rest} className={`inline-block ${className ?? ""}`}>
           {isHijri ? hijriLabel : dateLabel}
         </span>

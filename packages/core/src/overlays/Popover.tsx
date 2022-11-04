@@ -15,9 +15,7 @@ import {
   forwardRef,
   ForwardRefExoticComponent,
   Fragment,
-  Ref,
   useEffect,
-  useImperativeHandle,
   useMemo,
 } from "react";
 import { createPortal } from "react-dom";
@@ -41,10 +39,6 @@ export interface PopoverProps extends ChildrenProp, ElementProps {
    * hide arrow
    */
   hideArrow?: boolean;
-  /**
-   * inner element ref
-   */
-  innerRef?: Ref<HTMLElement>;
 
   popoverClassName?: HTMLElement["className"];
 }
@@ -63,7 +57,6 @@ export const AxPopover: FC<PopoverProps> & {
   placement = "bottom",
   // @ts-ignore
   popoverClassName,
-  innerRef,
   ...rest
 }) => {
   const {
@@ -90,9 +83,6 @@ export const AxPopover: FC<PopoverProps> & {
     () => Children.toArray(children) as AnyObject[],
     [children]
   );
-  useImperativeHandle(innerRef, () => referenceElement as AnyObject, [
-    referenceElement,
-  ]);
 
   useEffect(() => {
     if (popperElement) {
@@ -107,15 +97,15 @@ export const AxPopover: FC<PopoverProps> & {
   /******************* component *******************/
   return (
     <Popover as={Fragment}>
-      {({ open: _open }) => (
+      {({ open }) => (
         <Fragment>
           <Popover.Button as={Fragment} {...{ ref: setReferenceElement }}>
             {cloneElement(anchorEl as AnyObject, {
-              "data-popover-open": _open,
+              "data-popover-open": open,
             })}
           </Popover.Button>
           {!isDisabled &&
-            _open &&
+            open &&
             createPortal(
               <Popover.Panel
                 {...rest}
@@ -126,7 +116,7 @@ export const AxPopover: FC<PopoverProps> & {
                 {...attributes.popper}
               >
                 <div className={`popover__container ${className ?? ""}`}>
-                  {(open || _open) && popperEl}
+                  {open && popperEl}
                 </div>
                 {!hideArrow && (
                   <div

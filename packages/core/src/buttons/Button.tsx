@@ -159,10 +159,6 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     useSpinner,
     stopPropagation = false,
     // @ts-ignore
-    popoverRef,
-    // @ts-ignore
-    innerRef,
-    // @ts-ignore
     "data-extra": extra,
     // @ts-ignore
     "data-popover-open": popoverOpen,
@@ -196,7 +192,6 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
         <Link
           aria-label={children}
           {...rest}
-          {...{ ref: !tooltip ? ref : undefined }}
           type={type}
           as="button"
           role="button"

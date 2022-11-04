@@ -45,8 +45,6 @@ const MenuItem: FC<MenuItemProps<ReactNode>> = ({
   rtlFlip,
   onClick,
   // @ts-ignore
-  popoverRef,
-  // @ts-ignore
   "data-extra": extra,
   // @ts-ignore
   "data-panel": panelId,
@@ -99,8 +97,6 @@ const MenuMini: FC<MenuItemProps> = ({
   isActive,
   isDisabled,
   rtlFlip,
-  // @ts-ignore
-  popoverRef,
   // @ts-ignore
   "data-extra": extra,
   // @ts-ignore
