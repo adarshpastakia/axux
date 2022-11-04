@@ -61,7 +61,7 @@ export const ComboInput = <T extends AnyObject>({
   onEnterPressed,
   ...rest
 }: SelectProps<T>) => {
-  const [actualValue, setActualValue] = useState<T>();
+  const [actualValue, setActualValue] = useState<T>({} as AnyObject);
   const [pending, startTransition] = useTransition();
   const { list, query, onQueryChange } = useSelect({
     options,
@@ -96,7 +96,7 @@ export const ComboInput = <T extends AnyObject>({
         if (b !== false) {
           onChange &&
             startTransition(() => onChange(getValue(option, valueProperty)));
-          setActualValue(option);
+          setActualValue(option ?? ({} as T));
           onQueryChange("");
         }
       });

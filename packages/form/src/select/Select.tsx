@@ -62,7 +62,7 @@ export const SelectInput = <T extends AnyObject>({
   makeLabel?: (item: T) => ReactNode;
 }) => {
   const { t } = useTranslation("form");
-  const [actualValue, setActualValue] = useState<T>();
+  const [actualValue, setActualValue] = useState<T>("" as AnyObject);
   const [pending, startTransition] = useTransition();
 
   const { styles, setPopperElement, setReferenceElement } = usePopover({
@@ -91,7 +91,7 @@ export const SelectInput = <T extends AnyObject>({
         if (b !== false) {
           onChange &&
             startTransition(() => onChange(getValue(option, valueProperty)));
-          setActualValue(option);
+          setActualValue(option ?? ("" as AnyObject));
         }
       });
     },

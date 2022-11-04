@@ -7,6 +7,7 @@
  */
 
 import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
+import { isEmpty, isObject } from "@axux/utilities";
 import { ReactElement } from "react";
 import { InputProps } from "../types";
 
@@ -51,4 +52,4 @@ export const getValue = (option: AnyObject, prop?: string) =>
 
 /******************* get option label *******************/
 export const getLabel = (option: AnyObject, prop?: string) =>
-  !option ? "" : option[prop ?? ""] ?? option;
+  isEmpty(option) ? "" : isObject(option) ? option[prop ?? ""] : option;
