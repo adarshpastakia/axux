@@ -47,6 +47,8 @@ export interface CheckListProps extends SelectableProps {
    * message for empty list
    */
   emptyMessage?: string;
+
+  sortItems?: boolean;
 }
 
 const CheckItem: FC<
@@ -133,6 +135,7 @@ export const AxCheckList: FC<CheckListProps> = ({
   maxCount = 0,
   allowNegative,
   emptyMessage,
+  sortItems = true,
   ...props
 }) => {
   const { t } = useTranslation("data");
@@ -146,7 +149,7 @@ export const AxCheckList: FC<CheckListProps> = ({
   const listItems = useMemo(() => {
     return [...items]
       .sort((a, b) => {
-        if (selection[a.id] !== selection[b.id]) {
+        if (sortItems && selection[a.id] !== selection[b.id]) {
           if (selection[a.id] === 1) return -1;
           if (selection[b.id] === 1) return 1;
           if (selection[a.id] === -1) return -1;
@@ -155,7 +158,7 @@ export const AxCheckList: FC<CheckListProps> = ({
         return 0;
       })
       .slice(0, !showMore && maxCount > 0 ? maxCount : undefined);
-  }, [items, selection, maxCount, showMore]);
+  }, [items, selection, maxCount, showMore, sortItems]);
 
   return (
     <div className="ax-checkList">
