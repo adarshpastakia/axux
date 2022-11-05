@@ -75,7 +75,7 @@ export const DropdownButton: FC<DropdownProps> = ({
             <AxButton
               {...rest}
               isDisabled={isDisabled}
-              data-popover-open={open}
+              data-popover-open={!isDisabled && open}
               showCaret={showCaret}
             >
               {label}
