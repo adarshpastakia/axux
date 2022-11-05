@@ -45,7 +45,7 @@ export const useOverlayService = (
           setOverlay(undefined);
           el.remove();
           resolve(args);
-        }, 20);
+        }, 250);
       };
       setOverlay(
         createPortal(<ModalOrFlyout {...props} onClose={handleClose} />, el)
