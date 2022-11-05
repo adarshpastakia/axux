@@ -44,6 +44,7 @@ export const ComboInput = <T extends AnyObject>({
   onSelect,
   onQuery,
   onCreateOption,
+  usePortal,
   allowCreate,
   inputRef,
   isInvalid,
@@ -110,6 +111,25 @@ export const ComboInput = <T extends AnyObject>({
     return getLabel(actualValue, labelProperty);
   }, [makeLabel, labelProperty, actualValue]);
 
+  const optionDropdown = useMemo(
+    () => (
+      <Combobox.Options
+        ref={setPopperElement as AnyObject}
+        className="ax-select__dropdown"
+        style={styles.popper}
+      >
+        <Options
+          query={query}
+          options={list}
+          renderer={renderer}
+          allowCreate={allowCreate}
+          labelProperty={labelProperty}
+        />
+      </Combobox.Options>
+    ),
+    [query, list, styles, renderer, allowCreate, labelProperty]
+  );
+
   return (
     <Combobox
       value={actualValue}
@@ -162,22 +182,8 @@ export const ComboInput = <T extends AnyObject>({
           <AxIcon icon={Icons.iconDropdown} />
         </Combobox.Button>
       </FieldWrapper>
-      {createPortal(
-        <Combobox.Options
-          ref={setPopperElement as AnyObject}
-          className="ax-select__dropdown"
-          style={styles.popper}
-        >
-          <Options
-            query={query}
-            options={list}
-            renderer={renderer}
-            allowCreate={allowCreate}
-            labelProperty={labelProperty}
-          />
-        </Combobox.Options>,
-        document.body
-      )}
+      {usePortal && createPortal(optionDropdown, document.body)}
+      {!usePortal && optionDropdown}
     </Combobox>
   );
 };

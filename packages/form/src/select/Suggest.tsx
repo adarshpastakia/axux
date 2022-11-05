@@ -62,6 +62,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   onChange,
   onQuery,
   onEnterPressed,
+  usePortal,
   inputRef,
   isInvalid,
   className,
@@ -144,6 +145,29 @@ export const SuggestInput: FC<SuggestProps> = ({
     [queryCallback]
   );
 
+  const optionDropdown = useMemo(
+    () => (
+      <Combobox.Options
+        ref={setPopperElement as AnyObject}
+        className="ax-select__dropdown"
+        style={styles.popper}
+      >
+        <Options options={itemList} renderer={itemRenderer} />
+        {queryItems.length > 0 && (
+          <Fragment>
+            <AxDivider size="xs" />
+            <Options hideEmpty options={queryItems} renderer={itemRenderer} />
+          </Fragment>
+        )}
+        {defaultItems.length > 0 && <AxDivider size="xs" />}
+        {defaultItems.length > 0 && (
+          <Options hideEmpty options={defaultItems} renderer={itemRenderer} />
+        )}
+      </Combobox.Options>
+    ),
+    [styles, itemList, itemRenderer, queryItems, defaultItems]
+  );
+
   return (
     <Combobox
       value={actualValue}
@@ -188,34 +212,8 @@ export const SuggestInput: FC<SuggestProps> = ({
             />
             {children}
           </FieldWrapper>
-          {createPortal(
-            <Combobox.Options
-              ref={setPopperElement as AnyObject}
-              className="ax-select__dropdown"
-              style={styles.popper}
-            >
-              <Options options={itemList} renderer={itemRenderer} />
-              {queryItems.length > 0 && (
-                <Fragment>
-                  <AxDivider size="xs" />
-                  <Options
-                    hideEmpty
-                    options={queryItems}
-                    renderer={itemRenderer}
-                  />
-                </Fragment>
-              )}
-              {defaultItems.length > 0 && <AxDivider size="xs" />}
-              {defaultItems.length > 0 && (
-                <Options
-                  hideEmpty
-                  options={defaultItems}
-                  renderer={itemRenderer}
-                />
-              )}
-            </Combobox.Options>,
-            document.body
-          )}
+          {usePortal && createPortal(optionDropdown, document.body)}
+          {!usePortal && optionDropdown}
         </Fragment>
       )}
     </Combobox>

@@ -42,6 +42,7 @@ export const SelectInput = <T extends AnyObject>({
   onSelect,
   onQuery,
   onCreateOption,
+  usePortal,
   allowCreate,
   inputRef,
   isInvalid,
@@ -122,6 +123,31 @@ export const SelectInput = <T extends AnyObject>({
     [renderer, labelProperty]
   );
 
+  const optionDropdown = useMemo(
+    () => (
+      <Listbox.Options
+        ref={setPopperElement as AnyObject}
+        className="ax-select__dropdown"
+        style={styles.popper}
+      >
+        {options.map((option: AnyObject, index) =>
+          option.items ? (
+            <Fragment key={index}>
+              <div className="ax-select__group">{option.label}</div>
+              {option.items.map(makeOption)}
+            </Fragment>
+          ) : (
+            makeOption(option, index)
+          )
+        )}
+        {options.length === 0 && (
+          <div className="ax-select__empty">{t("select.emptyList")}</div>
+        )}
+      </Listbox.Options>
+    ),
+    [options, makeOption, styles]
+  );
+
   return (
     <Listbox
       value={actualValue}
@@ -181,6 +207,8 @@ export const SelectInput = <T extends AnyObject>({
         </Listbox.Options>,
         document.body
       )}
+      {usePortal && createPortal(optionDropdown, document.body)}
+      {!usePortal && optionDropdown}
     </Listbox>
   );
 };
