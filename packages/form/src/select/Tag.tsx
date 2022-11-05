@@ -17,6 +17,7 @@ import {
   memo,
   useCallback,
   useEffect,
+  useMemo,
   useState,
   useTransition,
 } from "react";
@@ -43,6 +44,7 @@ export const TagInput = <T extends AnyObject>({
   onSelect,
   onQuery,
   onCreateOption,
+  usePortal,
   allowCreate,
   inputRef,
   isInvalid,
@@ -155,6 +157,30 @@ export const TagInput = <T extends AnyObject>({
     [handleRemove, onEnterPressed]
   );
 
+  const optionDropdown = useMemo(
+    () => (
+      <Combobox.Options
+        ref={setPopperElement as AnyObject}
+        onMouseUp={(e: AnyObject) =>
+          e.currentTarget.parentElement
+            .querySelector(".ax-field__input")
+            ?.focus()
+        }
+        className="ax-select__dropdown"
+        style={styles.popper}
+      >
+        <Options
+          query={query}
+          options={list}
+          renderer={renderer}
+          allowCreate={allowCreate}
+          labelProperty={labelProperty}
+        />
+      </Combobox.Options>
+    ),
+    [query, list, styles, renderer, allowCreate, labelProperty]
+  );
+
   return (
     <Combobox
       value={actualValue}
@@ -217,27 +243,8 @@ export const TagInput = <T extends AnyObject>({
           <AxIcon icon={Icons.iconDropdown} />
         </Combobox.Button>
       </FieldWrapper>
-      {createPortal(
-        <Combobox.Options
-          ref={setPopperElement as AnyObject}
-          onMouseUp={(e: AnyObject) =>
-            e.currentTarget.parentElement
-              .querySelector(".ax-field__input")
-              ?.focus()
-          }
-          className="ax-select__dropdown"
-          style={styles.popper}
-        >
-          <Options
-            query={query}
-            options={list}
-            renderer={renderer}
-            allowCreate={allowCreate}
-            labelProperty={labelProperty}
-          />
-        </Combobox.Options>,
-        document.body
-      )}
+      {usePortal && createPortal(optionDropdown, document.body)}
+      {!usePortal && optionDropdown}
     </Combobox>
   );
 };

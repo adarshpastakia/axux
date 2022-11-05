@@ -20,6 +20,8 @@ export interface BaseSelectProps<T> extends ElementProps, ChildrenProp {
   labelProperty?: string;
   valueProperty?: string;
 
+  usePortal?: boolean;
+
   matcher?: (option: T, value: string) => boolean;
   renderer?: (option: T) => ReactElement;
 
