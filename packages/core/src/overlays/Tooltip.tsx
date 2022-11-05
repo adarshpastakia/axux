@@ -16,6 +16,7 @@ import {
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { createPortal } from "react-dom";
@@ -87,6 +88,14 @@ export const AxTooltip: FC<TooltipProps> = ({
   useEffect(() => {
     setOpen(!!isOpen);
   }, [isOpen]);
+
+  const timer = useRef<AnyObject>();
+  useLayoutEffect(() => {
+    clearTimeout(timer.current);
+    if (open) {
+      timer.current = setTimeout(() => setOpen(false), 2000);
+    }
+  }, [open]);
 
   const [anchorEl] = useMemo(
     () => Children.toArray(children) as AnyObject[],
