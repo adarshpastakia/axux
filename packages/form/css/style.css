@@ -108,7 +108,11 @@
       @apply flex flex-nowrap items-center border border-bw-200 dark:border-bw-700;
 
       & > .ax-button {
-        @apply m-0;
+        @apply m-0 self-stretch;
+
+        & > .ax-button__inner {
+          @apply h-full;
+        }
 
         &:first-child > .ax-button__inner {
           @apply ltr:rounded-r-none rtl:rounded-l-none;
