@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.54](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.53...v2.0.0-beta.54) (2022-11-06)
+
+
+### Bug Fixes
+
+* **List/Combo:** add usePortal prop, default true ([6708e1f](https://github.com/adarshpastakia/axux/commit/6708e1f6f79ff50e90fa5f00d9f088290a153819))
+
+
+
+
+
 # [2.0.0-beta.53](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.52...v2.0.0-beta.53) (2022-11-04)
 
 

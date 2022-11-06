@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.54](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.53...v2.0.0-beta.54) (2022-11-06)
+
+
+### Bug Fixes
+
+* **CodeEditor:** use @monaco-editor/react ([6f84afb](https://github.com/adarshpastakia/axux/commit/6f84afbbe3b431b4c27c065fe321e14b39db5824))
+
+
+
+
+
 # [2.0.0-beta.53](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.52...v2.0.0-beta.53) (2022-11-04)
 
 

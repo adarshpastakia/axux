@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.54](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.53...v2.0.0-beta.54) (2022-11-06)
+
+
+### Bug Fixes
+
+* **Dropdown:** popover-open false when disabled ([baf9e67](https://github.com/adarshpastakia/axux/commit/baf9e679b432033024322aef5880cb7d1cc69ac0))
+* **Overlay:** close timeout ([485a67a](https://github.com/adarshpastakia/axux/commit/485a67a5bb96b223a6faecdb868490347366967b))
+* **Tooltip:** auto hide timeout wrapped in try/catch ([bb43bdc](https://github.com/adarshpastakia/axux/commit/bb43bdce3d64e9a102b3232ad0b7b653af68e9c5))
+* **Tooltip:** hide timeout ([8040417](https://github.com/adarshpastakia/axux/commit/804041730ce4b2ac61a9de7a10caca328cc5fe44))
+
+
+
+
+
 # [2.0.0-beta.53](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.52...v2.0.0-beta.53) (2022-11-04)
 
 
