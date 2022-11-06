@@ -10,38 +10,37 @@ import { AxButton, AxDivider, AxHeader } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { FC, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { monaco } from "react-monaco-editor";
 
 export const Tools: FC<{
-  editor?: monaco.editor.IStandaloneCodeEditor;
+  editor?: AnyObject;
 }> = ({ editor }) => {
   const { t } = useTranslation("data");
 
   const foldAll = useCallback(() => {
     if (editor) {
-      editor.trigger("fold", "editor.foldLevel2", null);
+      editor.getAction("editor.foldLevel2")?.run();
     }
   }, [editor]);
   const unfoldAll = useCallback(() => {
     if (editor) {
-      editor.trigger("unfold", "editor.unfoldAll", null);
+      editor.getAction("editor.unfoldAll")?.run();
     }
   }, [editor]);
   const search = useCallback(() => {
     if (editor) {
-      editor.trigger("find", "actions.find", null);
+      editor.getAction("actions.find")?.run();
     }
   }, [editor]);
   const commandPalette = useCallback(() => {
     if (editor) {
       editor.focus();
-      editor.trigger("quickCommand", "editor.action.quickCommand", null);
+      editor.getAction("editor.action.quickCommand")?.run();
     }
   }, [editor]);
 
   return (
     <AxHeader>
-      <div className="flex-1"/>
+      <div className="flex-1" />
       <AxButton.Group>
         <AxButton
           style="link"

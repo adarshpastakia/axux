@@ -8,7 +8,7 @@
 
 @layer components {
   .ax-editor {
-    & .react-monaco-editor-container {
+    & > section {
       direction: ltr;
       grid-area: content;
     }
