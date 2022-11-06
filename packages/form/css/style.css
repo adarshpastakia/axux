@@ -541,7 +541,7 @@
   }
   .ax-field__list ~ .ax-field__clear,
   .ax-field__input[type="number"] ~ .ax-field__clear {
-    @apply absolute inset-y-0 ltr:right-4 rtl:left-4;
+    @apply absolute inset-y-0 ltr:right-5 rtl:left-5;
   }
 }
 

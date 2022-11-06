@@ -102,8 +102,8 @@
     & .ax-datagrid__row--flex {
       @apply flex flex-nowrap select-none bg-inherit;
 
-      &[data-selectable] {
-        @apply hover:bg-primary-100 dark:hover:bg-primary-800;
+      &[data-selectable]:hover .ax-datagrid__body--cell {
+        @apply bg-primary-500/10;
       }
 
       & .ax-datagrid__body--cell {
