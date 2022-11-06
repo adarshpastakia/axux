@@ -6,9 +6,15 @@
  * @license   : MIT
  */
 
-import { AxSection, useDebounce, useResizeObserver } from "@axux/core";
+import {
+  AxSection,
+  useDebounce,
+  useIsDark,
+  useResizeObserver,
+} from "@axux/core";
 import { ElementProps } from "@axux/core/dist/types";
 import { isString } from "@axux/utilities";
+import MonacoEditor from "@monaco-editor/react";
 import {
   FC,
   Ref,
@@ -19,7 +25,6 @@ import {
   useMemo,
   useState,
 } from "react";
-import MonacoEditor, { monaco } from "react-monaco-editor";
 import { Tools } from "./Tools";
 
 export interface EditorRef {
@@ -65,7 +70,8 @@ export const AxEditor: FC<EditorProps> = ({
   language = "json",
   onChange,
 }) => {
-  const [editorRef, setEditorRef] = useState<MonacoEditor>();
+  const [editorRef, setEditorRef] = useState<AnyObject>();
+  const isDark = useIsDark();
 
   useImperativeHandle(
     ref,
@@ -76,8 +82,8 @@ export const AxEditor: FC<EditorProps> = ({
       validate() {
         const model = editorRef?.editor?.getModel();
         if (model) {
-          const markers = monaco.editor.getModelMarkers(model as AnyObject);
-          return markers.length === 0;
+          const markers = editorRef?.editor.getModelMarkers(model as AnyObject);
+          return markers?.length === 0;
         }
         return true;
       },
@@ -86,13 +92,10 @@ export const AxEditor: FC<EditorProps> = ({
   );
 
   /******************* watch theme change *******************/
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("");
   useLayoutEffect(() => {
-    const [r, g, b]: [number, number, number] = getComputedStyle(
-      document.documentElement
-    ).backgroundColor.match(/\d?\d?\d/g) as AnyObject;
-    setTheme(r < 100 && g < 100 && b < 100 ? "vs-dark" : "light");
-  });
+    editorRef && setTheme(isDark ? "vs-dark" : "light");
+  }, [isDark, editorRef]);
 
   /******************* watch editor container resize *******************/
   const resizeHandler = useCallback(
@@ -115,11 +118,11 @@ export const AxEditor: FC<EditorProps> = ({
 
   return (
     <AxSection isLoading={isLoading}>
-      {!hideToolbar && <Tools editor={editorRef?.editor} />}
+      {!hideToolbar && <Tools editor={editorRef} />}
       <AxSection ref={containerRef} className="ax-editor">
         <MonacoEditor
-          ref={(e) => setEditorRef(e as AnyObject)}
-          defaultValue={codeValue}
+          onMount={(e) => !!e && setEditorRef(e)}
+          value={codeValue}
           language={language}
           onChange={handleChange}
           theme={theme}

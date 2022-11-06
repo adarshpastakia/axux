@@ -7,10 +7,14 @@
  */
 
 import { AxViewport } from "@axux/core";
-import { Countries } from "@axux/utilities";
 import { ComponentStory } from "@storybook/react";
-import { AxEditor } from "../../src";
 import json from "../../package.json";
+import { AxEditor } from "../../src";
+
+import { loader } from "@monaco-editor/react";
+import * as monaco from "monaco-editor";
+
+loader.config({ monaco });
 
 export const Template: ComponentStory<typeof AxEditor> = (props) => {
   return (
