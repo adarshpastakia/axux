@@ -157,5 +157,5 @@ export const useNotificationService = () => {
     return toast({ ...obj, color: "danger" }, timeout);
   };
 
-  return { alert, message, toast, toastError };
+  return { alert, message, toast, toastError, cloaseAll: onCloseAll };
 };
