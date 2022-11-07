@@ -85,7 +85,7 @@
   }
 
   .ax-button__group {
-    @apply m-1 relative inline-flex flex-nowrap print:hidden bg-component rounded;
+    @apply m-1 relative inline-flex flex-nowrap print:hidden rounded leading-none;
 
     &[data-vertical="false"] {
       & > .ax-button {
@@ -233,6 +233,9 @@
       @apply shadow-none bg-bw-100/30 hover:bg-bw-100 active:bg-bw-200;
     }
 
+    &[data-color="primary"] .ax-button__inner {
+      @apply text-primary-600 hover:bg-primary-100 active:bg-primary-300 focus-visible:outline-primary-500;
+    }
     &[data-color="accent"] .ax-button__inner {
       @apply text-accent-600 hover:bg-accent-100 active:bg-accent-300 focus-visible:outline-accent-500;
     }
@@ -291,6 +294,9 @@
       @apply shadow-none bg-bw-800/30 hover:bg-bw-800 active:bg-bw-900;
     }
 
+    &[data-color="primary"] .ax-button__inner {
+      @apply text-primary-300 hover:bg-primary-800 active:bg-primary-900 focus-visible:outline-primary-500;
+    }
     &[data-color="accent"] .ax-button__inner {
       @apply text-accent-300 hover:bg-accent-800 active:bg-accent-900 focus-visible:outline-accent-500;
     }

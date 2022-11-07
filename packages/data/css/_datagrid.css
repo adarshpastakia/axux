@@ -17,7 +17,7 @@
     }
 
     & .ax-datagrid__header {
-      @apply grid-area-[head] flex flex-nowrap sticky top-0 z-10 select-none bg-primary-100 dark:bg-primary-900;
+      @apply grid-area-[head] flex flex-nowrap sticky top-0 z-10 select-none bg-primary-100 dark:bg-primary-800;
     }
     & .ax-datagrid__footer {
       @apply grid-area-[foot] flex flex-nowrap sticky bottom-0 z-10 select-none;
@@ -96,15 +96,11 @@
     }
 
     & .ax-datagrid__row {
-      @apply odd:bg-bw-0 even:bg-bw-50 dark:odd:bg-bw-1000 dark:even:bg-bw-900;
+      @apply odd:bg-bw-0 even:bg-bw-50 dark:odd:bg-bw-1000 dark:even:bg-bw-900 hover:bg-primary-50 hover:dark:bg-primary-900;
     }
 
     & .ax-datagrid__row--flex {
-      @apply flex flex-nowrap select-none bg-inherit;
-
-      &[data-selectable]:hover .ax-datagrid__body--cell {
-        @apply bg-primary-500/10;
-      }
+      @apply flex flex-nowrap select-none;
 
       & .ax-datagrid__body--cell {
         @apply px-2 truncate ltr:border-r rtl:border-l border-bw-500/20;
