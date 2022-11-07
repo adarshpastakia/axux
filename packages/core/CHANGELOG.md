@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.55](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.54...v2.0.0-beta.55) (2022-11-07)
+
+
+### Bug Fixes
+
+* **Dropdown:** remove portal ([c7a8a9e](https://github.com/adarshpastakia/axux/commit/c7a8a9ea821ce51c93f4836d0089f6f3f91a1962))
+* **NotificationService:** export closeAll ([d737a68](https://github.com/adarshpastakia/axux/commit/d737a680a8b0ef2dd00c72574a3dc9748edb73cf))
+* spelling mistake ([a87362d](https://github.com/adarshpastakia/axux/commit/a87362df87b9c90582cea82fab8bbee3da9d30fa))
+* **Tooltip:** isOpen state update ([a5290c0](https://github.com/adarshpastakia/axux/commit/a5290c0e727cc346a7551a6b258dea9ef02b590d))
+
+
+
+
+
 # [2.0.0-beta.54](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.53...v2.0.0-beta.54) (2022-11-06)
 
 
