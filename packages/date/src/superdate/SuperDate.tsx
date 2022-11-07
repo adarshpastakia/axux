@@ -49,7 +49,7 @@ export const AxSuperDate: FC<RelativeProps> = ({
         ? DateMath.toHijri(value, undefined, language)
         : DateMath.toString(value, undefined, language),
     ],
-    [language, value, language, isHijri]
+    [language, value, isHijri]
   );
   const activeTab = useMemo<Type>(
     () => defaultView || superDateType(value),
