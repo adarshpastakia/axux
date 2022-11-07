@@ -81,22 +81,19 @@ export const DropdownButton: FC<DropdownProps> = ({
               {label}
             </AxButton>
           </Menu.Button>
-          {!isDisabled &&
-            open &&
-            createPortal(
-              <Menu.Items
-                onMouseUp={handleMenuClick}
-                className={`popover ax-button__dropdown ${
-                  dropdownClassName ?? ""
-                }`}
-                ref={setPopperElement as AnyObject}
-                style={styles.popper}
-                {...attributes.popper}
-              >
-                <div className="popover__container">{children}</div>
-              </Menu.Items>,
-              document.body
-            )}
+          {!isDisabled && open && (
+            <Menu.Items
+              onMouseUp={handleMenuClick}
+              className={`popover ax-button__dropdown ${
+                dropdownClassName ?? ""
+              }`}
+              ref={setPopperElement as AnyObject}
+              style={styles.popper}
+              {...attributes.popper}
+            >
+              <div className="popover__container">{children}</div>
+            </Menu.Items>
+          )}
         </Fragment>
       )}
     </Menu>
