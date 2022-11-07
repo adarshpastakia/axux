@@ -85,8 +85,8 @@ export const AxTooltip: FC<TooltipProps> = ({
   });
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    setOpen(!!isOpen);
+  useLayoutEffect(() => {
+    !!isOpen && setOpen(true);
   }, [isOpen]);
 
   const timer = useRef<AnyObject>();
