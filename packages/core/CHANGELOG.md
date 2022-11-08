@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.56](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.55...v2.0.0-beta.56) (2022-11-08)
+
+
+### Bug Fixes
+
+* **Tooltip:** try wrapping state change in timeout ([4d39d10](https://github.com/adarshpastakia/axux/commit/4d39d10f9e6ba3d1563a24a17d64cfaf1c8418da))
+
+
+
+
+
 # [2.0.0-beta.55](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.54...v2.0.0-beta.55) (2022-11-07)
 
 

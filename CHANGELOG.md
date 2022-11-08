@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.56](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.55...v2.0.0-beta.56) (2022-11-08)
+
+
+### Bug Fixes
+
+* **Inputs:** hide invalid marker when disabled ([f8d0994](https://github.com/adarshpastakia/axux/commit/f8d0994fedad8fd7ae9ebb2f258fb29a48c39da3))
+* **Select:** double list bug ([6b43e20](https://github.com/adarshpastakia/axux/commit/6b43e205e2ccb9185e32e5d191eb011f01f35e68))
+* **Tooltip:** try wrapping state change in timeout ([4d39d10](https://github.com/adarshpastakia/axux/commit/4d39d10f9e6ba3d1563a24a17d64cfaf1c8418da))
+
+
+
+
+
 # [2.0.0-beta.55](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.54...v2.0.0-beta.55) (2022-11-07)
 
 
