@@ -53,7 +53,7 @@ export const Options: FC<OptionsProps> = memo(
         width={width}
         className={`ax-field--plain ${className ?? ""}`}
         labelAppend={labelAppend}
-        isInvalid={isInvalid}
+        isInvalid={!isDisabled && isInvalid}
         isRequired={isRequired}
         disabled={isDisabled}
       >

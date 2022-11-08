@@ -42,7 +42,7 @@ export const Radio: FC<RadioProps> = memo(
     return (
       <label
         data-disabled={isDisabled}
-        data-invalid={isInvalid}
+        data-invalid={!isDisabled && isInvalid}
         className={`ax-field__option ${className ?? ""}`}
       >
         <input
