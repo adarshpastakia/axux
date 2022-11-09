@@ -85,12 +85,28 @@
 }
 
 @layer utilities {
-  .tooltip[data-color="info"] {
+  .tooltip[data-color="primary"] {
     & .popover__container {
       @apply bg-primary-700 dark:bg-primary-100 dark:text-primary-800;
     }
     & .popover__arrow {
       @apply text-primary-700 dark:text-primary-100;
+    }
+  }
+  .tooltip[data-color="accent"] {
+    & .popover__container {
+      @apply bg-accent-700 dark:bg-accent-100 dark:text-accent-800;
+    }
+    & .popover__arrow {
+      @apply text-accent-700 dark:text-accent-100;
+    }
+  }
+  .tooltip[data-color="info"] {
+    & .popover__container {
+      @apply bg-cyan-700 dark:bg-cyan-100 dark:text-cyan-800;
+    }
+    & .popover__arrow {
+      @apply text-cyan-700 dark:text-cyan-100;
     }
   }
   .tooltip[data-color="danger"] {
