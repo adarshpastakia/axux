@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.58](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.57...v2.0.0-beta.58) (2022-11-09)
+
+
+### Bug Fixes
+
+* **Callout,Popover:** add 'info' color ([db3f7eb](https://github.com/adarshpastakia/axux/commit/db3f7eb18a5a5ad2c153dd02337afb78a78a0c2c))
+* **GlobalContext:** closeOverlays includes toasts/mesages ([b63a4c8](https://github.com/adarshpastakia/axux/commit/b63a4c8b368df82c3170498c38266d6b15b57522))
+
+
+### Reverts
+
+* **Tooltip:** remove debounce for set initial state ([1007bb2](https://github.com/adarshpastakia/axux/commit/1007bb2be35a48c4c1169c33e63d75271cbc9ad6))
+
+
+
+
+
 # [2.0.0-beta.57](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.56...v2.0.0-beta.57) (2022-11-09)
 
 
