@@ -73,11 +73,13 @@ export interface TooltipProps {
   /**
    * color
    */
-  color?: Color;
+  color?: Color | "info";
   /**
    * placement
    */
   placement?: Placement;
+
+  autoHide?: boolean;
 }
 
 export interface BadgeProps {

@@ -13,7 +13,7 @@ export interface CalloutProps extends ElementProps, IconProp, ChildrenProp {
   /**
    * callout color
    */
-  color?: Color;
+  color?: Color | "info";
   /**
    * callout title
    */

@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { debounce } from "@axux/utilities";
 import { Placement } from "@popperjs/core";
 import {
   Children,
@@ -62,6 +63,7 @@ export const AxTooltip: FC<TooltipProps> = ({
   isDisabled = false,
   placement = "bottom",
   isOpen,
+  autoHide,
   color,
   // @ts-ignore
   innerRef,
@@ -86,22 +88,13 @@ export const AxTooltip: FC<TooltipProps> = ({
   const [open, setOpen] = useState(false);
 
   useLayoutEffect(() => {
-    if (isOpen !== undefined) {
-      try {
-        const tmr = setTimeout(() => setOpen(isOpen), 10);
-        return () => {
-          clearTimeout(tmr);
-        };
-      } catch (e) {
-        //
-      }
-    }
+    debounce(() => setOpen(!!isOpen));
   }, [isOpen]);
 
   const timer = useRef<AnyObject>();
   useLayoutEffect(() => {
     clearTimeout(timer.current);
-    if (open) {
+    if (open && autoHide) {
       timer.current = setTimeout(() => {
         try {
           setOpen(false);
@@ -110,7 +103,7 @@ export const AxTooltip: FC<TooltipProps> = ({
         }
       }, 2000);
     }
-  }, [open]);
+  }, [open, autoHide]);
 
   const [anchorEl] = useMemo(
     () => Children.toArray(children) as AnyObject[],
