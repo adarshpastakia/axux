@@ -23,6 +23,7 @@ import { Icons } from "../types/icons";
 export interface ImageProps {
   src: string;
   poster?: string;
+  isNsfw: boolean;
   isFit: boolean;
   isPlaying: boolean;
   videoRef: RefObject<HTMLVideoElement>;
@@ -32,7 +33,17 @@ export interface ImageProps {
 }
 
 export const Video: FC<ImageProps> = memo(
-  ({ src, poster, videoRef, canvasRef, isPlaying, isFit, onLoad, onError }) => {
+  ({
+    src,
+    poster,
+    videoRef,
+    canvasRef,
+    isPlaying,
+    isFit,
+    isNsfw,
+    onLoad,
+    onError,
+  }) => {
     const overlayRef = useRef<HTMLElement>(null);
     const [style, setStyle] = useState({ width: 0, height: 0 });
     const [isSeeking, setSeeking] = useState(false);
@@ -65,7 +76,7 @@ export const Video: FC<ImageProps> = memo(
           ref={videoRef}
           poster={poster}
           controls={false}
-          autoPlay
+          autoPlay={!isNsfw}
           data-fit={isFit}
           controlsList="nodownload,nofullscreen"
           preload="metadata"

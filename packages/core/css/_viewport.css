@@ -13,19 +13,6 @@
     grid-template-areas: "head head head" "crumbbar crumbbar crumbbar" "side-s content side-e" "foot foot foot";
     grid-template-rows: auto auto 1fr auto;
 
-    & ::-webkit-scrollbar {
-      @apply w-2 h-2;
-    }
-    & ::-webkit-scrollbar-track {
-      @apply bg-bw-400/20;
-    }
-    & ::-webkit-scrollbar-thumb {
-      @apply bg-bw-500/70 hover:bg-bw-400/70 active:bg-bw-600/70 dark:active:bg-bw-300/70;
-    }
-    & ::-webkit-scrollbar-corner {
-      @apply bg-bw-500/50;
-    }
-
     & .ax-banner {
       @apply absolute top-0 left-1/2 -translate-x-1/2 shadow-sm leading-none py-1 px-4 text-sm min-w-[12em] max-w-[70%] rounded-b-md;
 

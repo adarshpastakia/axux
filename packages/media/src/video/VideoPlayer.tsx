@@ -241,6 +241,7 @@ export const AxVideoPlayer = forwardRef<
               isPlaying={state.isPlaying}
               videoRef={videoRef}
               canvasRef={canvasRef}
+              isNsfw={!!isNsfw}
               onLoad={handleLoad}
               onError={handleError}
             />
