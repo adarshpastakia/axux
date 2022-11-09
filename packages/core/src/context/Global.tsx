@@ -172,10 +172,13 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
   }, []);
 
   const closeOverlays = useCallback(() => {
-    const el = document.body.querySelectorAll(".ax-overlay__container > *");
-    el.forEach((e) => {
-      e.remove();
-    });
+    document.body
+      .querySelectorAll(
+        ".ax-overlay__container > *, .ax-notification__container > *"
+      )
+      ?.forEach((e) => {
+        e.remove();
+      });
   }, []);
 
   /******************* context provider *******************/
