@@ -86,13 +86,15 @@ export const AxTooltip: FC<TooltipProps> = ({
   const [open, setOpen] = useState(false);
 
   useLayoutEffect(() => {
-    try {
-      const tmr = setTimeout(() => setOpen(true), 10);
-      return () => {
-        clearTimeout(tmr);
-      };
-    } catch (e) {
-      //
+    if (isOpen !== undefined) {
+      try {
+        const tmr = setTimeout(() => setOpen(isOpen), 10);
+        return () => {
+          clearTimeout(tmr);
+        };
+      } catch (e) {
+        //
+      }
     }
   }, [isOpen]);
 
