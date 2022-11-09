@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.59](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.58...v2.0.0-beta.59) (2022-11-09)
+
+
+### Bug Fixes
+
+* **VideoPlayer:** autoPlay when not nsfw ([bb58c92](https://github.com/adarshpastakia/axux/commit/bb58c9218e6ae265e52e57ae8540371dc8d818ea))
+
+
+
+
+
 # [2.0.0-beta.58](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.57...v2.0.0-beta.58) (2022-11-09)
 
 **Note:** Version bump only for package @axux/media
