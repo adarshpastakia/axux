@@ -6,7 +6,6 @@
  * @license   : MIT
  */
 
-import { debounce } from "@axux/utilities";
 import { Placement } from "@popperjs/core";
 import {
   Children,
@@ -88,7 +87,7 @@ export const AxTooltip: FC<TooltipProps> = ({
   const [open, setOpen] = useState(false);
 
   useLayoutEffect(() => {
-    debounce(() => setOpen(!!isOpen));
+    setOpen(!!isOpen);
   }, [isOpen]);
 
   const timer = useRef<AnyObject>();
