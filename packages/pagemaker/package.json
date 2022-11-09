@@ -1,6 +1,6 @@
 {
   "name": "@axux/pagemaker",
-  "version": "2.0.0-beta.56",
+  "version": "2.0.0-beta.57",
   "description": "axux: PageMaker",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,9 +24,9 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.56",
-    "@axux/form": "^2.0.0-beta.56",
-    "@axux/utilities": "^2.0.0-beta.56",
+    "@axux/core": "^2.0.0-beta.57",
+    "@axux/form": "^2.0.0-beta.57",
+    "@axux/utilities": "^2.0.0-beta.57",
     "react-color": "^2.19.3"
   },
   "peerDependencies": {

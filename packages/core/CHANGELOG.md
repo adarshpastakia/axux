@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.57](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.56...v2.0.0-beta.57) (2022-11-09)
+
+
+### Bug Fixes
+
+* **Tooltip:** display bug (skip-ci) ([5b92e44](https://github.com/adarshpastakia/axux/commit/5b92e448f620c1b12e4aaed7d8b5e14cd6124410))
+
+
+
+
+
 # [2.0.0-beta.56](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.55...v2.0.0-beta.56) (2022-11-08)
 
 
