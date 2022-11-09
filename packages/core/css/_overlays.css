@@ -10,17 +10,6 @@
 @layer components {
   .ax-overlay__mask {
     @apply fixed inset-0 bg-bw-50/50 dark:bg-bw-900/50 z-50 grid;
-
-    &[data-show="true"] {
-      @apply backdrop-blur-[1px];
-
-      & .ax-alert,
-      & .ax-modal,
-      & .ax-flyout {
-        @apply opacity-100;
-        transform: none;
-      }
-    }
   }
 
   .ax-notification__container {
@@ -59,6 +48,21 @@
 
       & > div {
         transition: margin 0.4s, opacity 0.3s 0.2s;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .ax-overlay__mask {
+    &[data-show="true"] {
+      @apply backdrop-blur-[1px];
+
+      & .ax-alert,
+      & .ax-modal,
+      & .ax-flyout {
+        @apply opacity-100;
+        transform: none;
       }
     }
   }
@@ -134,6 +138,10 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     transition: opacity 0.15s, transform 0.25s;
+
+    &[data-align="end"] {
+      @apply justify-self-end ltr:translate-x-full rtl:-translate-x-full;
+    }
 
     & .ax-flyout__header {
       @apply grid items-center select-none border-b gap-0 z-10 relative;

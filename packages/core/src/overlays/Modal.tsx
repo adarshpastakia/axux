@@ -106,15 +106,11 @@ export const AxModal: FC<ModalProps> = ({
     <div className="ax-overlay__mask" onClick={onClose}>
       <HotKeyWrapper>
         <AxHotKey global keyCombo="esc" handler={onClose} />
-        <AxHotKey
-          global
-          keyCombo="left"
-          handler={() => onNavigate?.(isRtl ? "next" : "prev")}
-        />
+        <AxHotKey global keyCombo="left" handler={() => onNavigate?.("prev")} />
         <AxHotKey
           global
           keyCombo="right"
-          handler={() => onNavigate?.(isRtl ? "prev" : "next")}
+          handler={() => onNavigate?.("next")}
         />
         <div
           className="ax-modal"

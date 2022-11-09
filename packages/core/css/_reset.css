@@ -24,6 +24,19 @@
     width: 100vw;
     min-height: 100vh;
     @apply align-baseline antialiased selection:bg-accent-400 dark:selection:bg-accent-700 selection:text-white print:!bg-white print:!text-black;
+
+    & ::-webkit-scrollbar {
+      @apply w-2 h-2;
+    }
+    & ::-webkit-scrollbar-track {
+      @apply bg-bw-400/20;
+    }
+    & ::-webkit-scrollbar-thumb {
+      @apply bg-bw-500/70 hover:bg-bw-400/70 active:bg-bw-600/70 dark:active:bg-bw-300/70;
+    }
+    & ::-webkit-scrollbar-corner {
+      @apply bg-bw-500/50;
+    }
   }
 
   *,

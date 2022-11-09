@@ -85,7 +85,7 @@
     @apply bg-bw-100 dark:bg-bw-800 relative ring-1 ring-offset-1 ring-slate-300 dark:ring-slate-600 rounded-sm;
 
     & img {
-      @apply w-full h-full object-contain;
+      @apply max-w-full max-h-full absolute inset-0 m-auto;
       &[data-colorset="dark_transparent"] {
         @apply bg-gray-100 text-gray-900;
       }

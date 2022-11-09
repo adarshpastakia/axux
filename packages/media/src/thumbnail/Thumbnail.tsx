@@ -9,7 +9,14 @@
 import { AxAnimation } from "@axux/core";
 import { ElementProps } from "@axux/core/dist/types";
 import { getImageColorset } from "@axux/utilities/dist/getImageColorset";
-import { FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
+import {
+  FC,
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import { NsfwOverlay } from "../nsfw/NsfwOverlay";
 
 export interface ThumbnailProps extends ElementProps {
@@ -17,6 +24,10 @@ export interface ThumbnailProps extends ElementProps {
    * thumbnail source
    */
   src?: string;
+  /**
+   * fallback image
+   */
+  fallback?: string;
   /**
    * thumbnail width
    */
@@ -36,20 +47,42 @@ export interface ThumbnailProps extends ElementProps {
 }
 
 export const AxThumbnail: FC<ThumbnailProps> = ({
-  src,
+  src: _src,
   height,
   width,
   showReel,
   className,
+  fallback,
   isNsfw,
   ...rest
 }) => {
-  const [isLoading, setLoading] = useState(false);
+  const [src, setSrc] = useState<string>();
+  const [_, startTransition] = useTransition();
+  const [isErrored, setErrored] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setSrc("");
+    startTransition(() => {
+      setLoading(true);
+      setErrored(false);
+      setSrc(_src);
+    });
+  }, [_src]);
+
   useEffect(() => setLoading(true), [src]);
   const loadHandler = useCallback((e: SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.dataset.colorset = getImageColorset(e.currentTarget);
     setLoading(false);
   }, []);
+  const handleError = useCallback(() => {
+    startTransition(() => {
+      setErrored(true);
+      setLoading(false);
+      setSrc(fallback);
+    });
+  }, [fallback]);
+
   return (
     <div
       {...rest}
@@ -62,6 +95,8 @@ export const AxThumbnail: FC<ThumbnailProps> = ({
         loading="lazy"
         crossOrigin="anonymous"
         onLoad={loadHandler}
+        onError={src ? handleError : undefined}
+        className={isErrored ? "bg-component" : ""}
       />
       {isLoading && (
         <div className="ax-thumbnail--spinner">
