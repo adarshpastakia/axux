@@ -7,45 +7,136 @@
  */
 /* istanbul ignore file */
 
-import { isEmpty, isString } from "@axux/utilities";
+import { isString, isTrue } from "@axux/utilities";
 import { Placement } from "@popperjs/core";
-import { cloneElement, Fragment, Ref, useCallback, useMemo } from "react";
-import { AxTooltip } from "../overlays/Tooltip";
-import { ChildProp, TooltipType } from "../types";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createRoot, Root } from "react-dom/client";
+import { TooltipType } from "../types";
+import { usePopover } from "./usePopover";
 
-export const useTooltip = (
-  options?: TooltipType,
-  isDisabled = false,
-  placement: Placement = "top"
-) => {
-  /******************* normalize tooltip props *******************/
-  const props = useMemo(() => {
-    if (isString(options)) {
-      return { content: options, placement };
-    }
-    return options;
-  }, [options, placement]);
+export const getTooltipProps = (tooltip?: TooltipType) => {
+  if (isString(tooltip)) {
+    return { "data-tooltip": tooltip, "data-tooltip-placement": "bottom" };
+  }
+  if (tooltip) {
+    const {
+      content,
+      placement = "bottom",
+      color = "",
+      autoHide = false,
+    } = tooltip;
+    return {
+      "data-tooltip": content,
+      "data-tooltip-placement": placement,
+      "data-tooltip-color": color,
+      "data-tooltip-hide": autoHide,
+    };
+  }
+  return {};
+};
 
-  /******************* tooltip wrapper *******************/
-  const el = useCallback(
-    ({ children, ...rest }: ChildProp & { innerRef?: Ref<HTMLElement> }) => {
-      if (isEmpty(props)) {
-        return (
-          <Fragment>
-            {cloneElement(children as AnyObject, { ref: rest.innerRef })}
-          </Fragment>
-        );
+export const useTooltipWatcher = () => {
+  const refEl = useRef<HTMLDivElement>();
+  const refTimer = useRef<AnyObject>();
+  const refPortal = useRef<Root>();
+  const [isOpen, setOpen] = useState(false);
+  const [content, setContent] = useState<string>();
+  const [placement, setPlacement] = useState<Placement>("bottom");
+  const [color, setColor] = useState<string>();
+
+  const {
+    attributes,
+    setArrowElement,
+    setPopperElement,
+    setReferenceElement,
+    styles,
+  } = usePopover({
+    placement,
+  });
+
+  const removeTooltip = useCallback(() => {
+    if (refPortal.current) {
+      try {
+        refPortal.current.unmount();
+      } catch (_) {
+        //
       }
-      return (
-        <AxTooltip {...props} {...rest} isDisabled={isDisabled}>
-          {children}
-        </AxTooltip>
-      );
-    },
-    [props, isDisabled]
-  );
-  // @ts-ignore
-  el.displayName = "Tooltip.Wrapper";
+      clearTimeout(refTimer.current);
+      refEl.current?.remove();
+      refPortal.current = undefined;
+      setPopperElement(undefined);
+    }
+  }, []);
 
-  return el;
+  const cbEnter = useCallback((e: MouseEvent) => {
+    const target = (e.target as HTMLElement).closest(
+      "[data-tooltip]"
+    ) as HTMLElement;
+    if (
+      target &&
+      !isTrue(target.dataset.disabled) &&
+      !isTrue(target.dataset.popoverOpen)
+    ) {
+      removeTooltip();
+      setPlacement(target.dataset.tooltipPlacement as AnyObject);
+      setContent(target.dataset.tooltip);
+      setColor(target.dataset.tooltipColor);
+      setReferenceElement(target);
+      setOpen(true);
+
+      if (isTrue(target.dataset.tooltipHide)) {
+        refTimer.current = setTimeout(() => removeTooltip(), 2000);
+      }
+    }
+  }, []);
+  const cbLeave = useCallback((e: MouseEvent) => {
+    const target = (e.target as HTMLElement).closest(
+      "[data-tooltip]"
+    ) as HTMLElement;
+    if (target) {
+      removeTooltip();
+      setOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("mouseover", cbEnter);
+    document.addEventListener("mouseout", cbLeave);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen && !!content) {
+      refEl.current = document.createElement("div");
+      document.body.appendChild(refEl.current);
+      refPortal.current = createRoot(refEl.current);
+    }
+  }, [isOpen, content]);
+
+  useEffect(() => {
+    if (refPortal.current) {
+      refPortal.current.render(
+        <div
+          tabIndex={-1}
+          data-color={color}
+          ref={setPopperElement as AnyObject}
+          className="popover tooltip"
+          style={styles.popper}
+          {...attributes.popper}
+        >
+          <div className={`popover__container`}>{content}</div>
+          <div
+            ref={setArrowElement as AnyObject}
+            className="popover__arrow"
+            style={styles.arrow}
+            {...attributes.arrow}
+          />
+        </div>
+      );
+    }
+  }, [isOpen, content, color, attributes, styles]);
+
+  return () => {
+    document.removeEventListener("mouseover", cbEnter);
+    document.removeEventListener("mouseout", cbLeave);
+  };
 };

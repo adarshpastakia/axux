@@ -21,7 +21,7 @@ import {
   useTransition,
 } from "react";
 import { useBadge } from "../hooks/useBadge";
-import { useTooltip } from "../hooks/useTooltip";
+import { getTooltipProps } from "../hooks/useTooltip";
 import { AxIcon } from "../icons/Icon";
 import {
   BadgeType,
@@ -79,11 +79,7 @@ export const Tab: FC<TabProps> = ({
   ...rest
 }) => {
   const Badge = useBadge(badge);
-  const Wrapper = useTooltip(
-    isVertical ? tooltip ?? label : tooltip,
-    isDisabled,
-    isVertical ? "right" : "bottom"
-  );
+  const tooltipProps = useMemo(() => getTooltipProps(tooltip), [tooltip]);
 
   const fallback = useMemo(() => {
     if (label) {
@@ -99,22 +95,21 @@ export const Tab: FC<TabProps> = ({
   }, [label]);
 
   return (
-    <Wrapper>
-      <button
-        {...rest}
-        className={`ax-tab__button ${className ?? ""}`}
-        data-active={isActive}
-        data-disabled={isDisabled}
-        onClick={() => onClick(id)}
-      >
-        {(isVertical || icon) && (
-          <AxIcon rtlFlip={rtlFlip} icon={icon ?? fallback} />
-        )}
-        {!isVertical && label && <label>{label}</label>}
-        {Badge}
-        {onClose && CloseX(onClose)}
-      </button>
-    </Wrapper>
+    <button
+      {...rest}
+      {...tooltipProps}
+      className={`ax-tab__button ${className ?? ""}`}
+      data-active={isActive}
+      data-disabled={isDisabled}
+      onClick={() => onClick(id)}
+    >
+      {(isVertical || icon) && (
+        <AxIcon rtlFlip={rtlFlip} icon={icon ?? fallback} />
+      )}
+      {!isVertical && label && <label>{label}</label>}
+      {Badge}
+      {onClose && CloseX(onClose)}
+    </button>
   );
 };
 

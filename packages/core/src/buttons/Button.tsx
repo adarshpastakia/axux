@@ -11,7 +11,7 @@ import { FC, forwardRef, ForwardRefExoticComponent, useMemo } from "react";
 import { AxAnimation } from "../animations";
 import { Link } from "../components/Link";
 import { useBadge } from "../hooks/useBadge";
-import { useTooltip } from "../hooks/useTooltip";
+import { getTooltipProps } from "../hooks/useTooltip";
 import { AxHotKey } from "../hotkeys/HotKey";
 import { AxIcon } from "../icons/Icon";
 import {
@@ -166,61 +166,60 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
   } = props;
 
   const Badge = useBadge(badge);
-  const Wrapper = useTooltip(tooltip, isDisabled || popoverOpen);
   const isSquare = useMemo(() => !!icon && !children, [icon, children]);
+
+  const tooltipProps = useMemo(() => getTooltipProps(tooltip), [tooltip]);
 
   /******************* component *******************/
   return (
-    <Wrapper innerRef={ref}>
-      <div
-        data-type={style}
-        data-size={size}
-        data-color={color}
-        data-active={isActive}
-        data-round={isRound}
-        data-block={fullWidth}
-        data-square={isSquare}
-        data-spinner={!!useSpinner}
-        data-loading={isLoading}
-        data-disabled={isDisabled}
-        data-icon-align={iconAlign}
-        data-invert={invertColor}
-        className={`ax-button ${className ?? ""}`}
+    <div
+      data-type={style}
+      data-size={size}
+      data-color={color}
+      data-active={isActive}
+      data-round={isRound}
+      data-block={fullWidth}
+      data-square={isSquare}
+      data-spinner={!!useSpinner}
+      data-loading={isLoading}
+      data-disabled={isDisabled}
+      data-icon-align={iconAlign}
+      data-invert={invertColor}
+      className={`ax-button ${className ?? ""}`}
+    >
+      {hotKey && <AxHotKey keyCombo={hotKey} handler={onClick} />}
+      {!useSpinner && isLoading && <div className="ax-button__loader" />}
+      <Link
+        aria-label={children}
+        {...rest}
+        type={type}
+        as="button"
+        role="button"
+        ref={ref}
+        className="ax-button__inner"
+        onClick={handleClick(onClick, { stopPropagation })}
+        data-disabled={isDisabled || isLoading}
+        data-popover-open={popoverOpen}
+        {...tooltipProps}
+        tabIndex={noTabFocus ? -1 : 0}
       >
-        {hotKey && <AxHotKey keyCombo={hotKey} handler={onClick} />}
-        {!useSpinner && isLoading && <div className="ax-button__loader" />}
-        <Link
-          aria-label={children}
-          {...rest}
-          type={type}
-          as="button"
-          role="button"
-          className="ax-button__inner"
-          data-popover-open={popoverOpen}
-          onClick={handleClick(onClick, { stopPropagation })}
-          tabIndex={noTabFocus ? -1 : 0}
-        >
-          {!(useSpinner && isLoading) && icon && (
-            <AxIcon className="ax-button__icon" rtlFlip={rtlFlip} icon={icon} />
-          )}
-          {useSpinner && isLoading && (
-            <AxAnimation.Spinner className="ax-button__icon" />
-          )}
-          {children && (
-            <Ellipsis className="ax-button__label">{children}</Ellipsis>
-          )}
-          {hotKey && <AxHotKey.Label keyCombo={hotKey} />}
-          {showCaret && (
-            <AxIcon
-              className="ax-button__caret"
-              icon={AppIcons.iconCaretDown}
-            />
-          )}
-        </Link>
-        {Badge}
-        {extra}
-      </div>
-    </Wrapper>
+        {!(useSpinner && isLoading) && icon && (
+          <AxIcon className="ax-button__icon" rtlFlip={rtlFlip} icon={icon} />
+        )}
+        {useSpinner && isLoading && (
+          <AxAnimation.Spinner className="ax-button__icon" />
+        )}
+        {children && (
+          <Ellipsis className="ax-button__label">{children}</Ellipsis>
+        )}
+        {hotKey && <AxHotKey.Label keyCombo={hotKey} />}
+        {showCaret && (
+          <AxIcon className="ax-button__caret" icon={AppIcons.iconCaretDown} />
+        )}
+      </Link>
+      {Badge}
+      {extra}
+    </div>
   );
 }) as AnyObject;
 AxButton.Action = ActionButton;

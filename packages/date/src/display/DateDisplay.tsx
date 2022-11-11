@@ -6,7 +6,6 @@
  * @license   : MIT
  */
 
-import { AxTooltip } from "@axux/core";
 import { useGlobals } from "@axux/core/dist/context/Global";
 import { ElementProps } from "@axux/core/dist/types";
 import { RefProp } from "@axux/core/src/types";
@@ -52,15 +51,14 @@ export const AxDateDisplay: FC<DateDisplayProps> = forwardRef(
     }, [date, currentLocale, format]);
 
     return (
-      <AxTooltip
-        content={isHijri ? dateLabel : hijriLabel}
-        {...{ innerRef: ref }}
+      <span
+        {...rest}
+        className={`inline-block ${className ?? ""}`}
+        data-tooltip={isHijri ? dateLabel : hijriLabel}
         data-popover-open={openPopover}
       >
-        <span {...rest} className={`inline-block ${className ?? ""}`}>
-          {isHijri ? hijriLabel : dateLabel}
-        </span>
-      </AxTooltip>
+        {isHijri ? hijriLabel : dateLabel}
+      </span>
     );
   }
 );

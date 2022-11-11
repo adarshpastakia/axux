@@ -8,7 +8,7 @@
 
 import { isColor } from "@axux/utilities";
 import { forwardRef, ForwardRefExoticComponent, useMemo } from "react";
-import { useTooltip } from "../hooks/useTooltip";
+import { getTooltipProps } from "../hooks/useTooltip";
 import { AxIcon } from "../icons/Icon";
 import {
   CloseX,
@@ -93,7 +93,6 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
     },
     ref
   ) => {
-    const Wrapper = useTooltip(tooltip, isDisabled || popoverOpen);
     /******************* build style map *******************/
     const styles = useMemo(() => {
       const s: KeyValue = {};
@@ -103,29 +102,30 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
       return s;
     }, [color]);
 
+    const tooltipProps = useMemo(() => getTooltipProps(tooltip), [tooltip]);
+
     /******************* component *******************/
     return (
-      <Wrapper innerRef={ref}>
-        <div
-          arial-label={children}
-          {...rest}
-          ref={ref}
-          role="term"
-          className={`ax-tag ${className ?? ""}`}
-          data-fill={fill}
-          data-size={size}
-          data-color={color}
-          data-clickable={!!onClick}
-          data-disabled={isDisabled}
-          data-popover-open={popoverOpen}
-          onClick={onClick}
-          style={styles}
-        >
-          {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
-          <label>{children}</label>
-          {onRemove && CloseX(onRemove)}
-        </div>
-      </Wrapper>
+      <div
+        arial-label={children}
+        {...rest}
+        {...tooltipProps}
+        ref={ref}
+        role="term"
+        className={`ax-tag ${className ?? ""}`}
+        data-fill={fill}
+        data-size={size}
+        data-color={color}
+        data-clickable={!!onClick}
+        data-disabled={isDisabled}
+        data-popover-open={popoverOpen}
+        onClick={onClick}
+        style={styles}
+      >
+        {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
+        <label>{children}</label>
+        {onRemove && CloseX(onRemove)}
+      </div>
     );
   }
 );

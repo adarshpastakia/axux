@@ -190,6 +190,13 @@ export const ButtonTooltip: ComponentStory<AnyObject> = (props) => (
           Danger Tooltip!
         </AxButton>
       </AxFlexBox.Col>
+      <AxFlexBox.Col>
+        <AxButton.Group>
+          <AxButton tooltip="First">First</AxButton>
+          <AxButton tooltip="Second">Second</AxButton>
+          <AxButton tooltip="Third">Third</AxButton>
+        </AxButton.Group>
+      </AxFlexBox.Col>
     </AxFlexBox.Row>
   </AxFlexBox>
 );

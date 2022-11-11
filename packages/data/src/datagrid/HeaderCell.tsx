@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxIcon, AxTooltip } from "@axux/core";
+import { AxIcon } from "@axux/core";
 import { handleClick } from "@axux/utilities/dist/handlers";
 import { Fragment, memo, useCallback, useMemo } from "react";
 import { useDatagridContext } from "./Context";
@@ -58,31 +58,27 @@ export const HeaderCell = memo(
         className="ax-datagrid__header--cell"
         style={{ minWidth, maxWidth, width }}
       >
-        <AxTooltip
-          content={tooltipContent}
-          placement="bottom-start"
-          isDisabled={!tooltip}
+        <div
+          className="ax-datagrid__header--label"
+          data-sortable={isSortable}
+          data-centered={!label && !!icon}
+          onClick={handleClick(handleSort)}
+          data-tooltip={tooltipContent}
+          data-tooltip-placement="bottom-start"
         >
-          <div
-            className="ax-datagrid__header--label"
-            data-sortable={isSortable}
-            data-centered={!label && !!icon}
-            onClick={handleClick(handleSort)}
-          >
-            {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
-            {isPrimary && <AxIcon rtlFlip icon={KEY} />}
-            <label>{label}</label>
-            {isSortable && (
-              <div
-                className="ax-datagrid__header--sort"
-                data-sort={sort?.name === name && sort?.order}
-              >
-                <span>▼</span>
-                <span>▲</span>
-              </div>
-            )}
-          </div>
-        </AxTooltip>
+          {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
+          {isPrimary && <AxIcon rtlFlip icon={KEY} />}
+          <label>{label}</label>
+          {isSortable && (
+            <div
+              className="ax-datagrid__header--sort"
+              data-sort={sort?.name === name && sort?.order}
+            >
+              <span>▼</span>
+              <span>▲</span>
+            </div>
+          )}
+        </div>
         {isResizeable && (
           <div
             onMouseDown={startResize}

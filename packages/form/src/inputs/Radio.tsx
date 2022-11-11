@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxIcon, AxTooltip } from "@axux/core";
+import { AxIcon } from "@axux/core";
 import { ElementProps } from "@axux/core/dist/types";
 import { FC, FormEvent, memo, useCallback } from "react";
 import { OptionProps } from "../types";
@@ -57,9 +57,13 @@ export const Radio: FC<RadioProps> = memo(
         <AxIcon data-check="off" icon={Icons.iconRadioOff} />
         <AxIcon data-check="on" icon={Icons.iconRadioOn} />
         {error && (
-          <AxTooltip color="danger" content={error} placement="bottom">
-            <AxIcon className="ax-field__error" icon={Icons.iconError} />
-          </AxTooltip>
+          <AxIcon
+            className="ax-field__error"
+            icon={Icons.iconError}
+            data-tooltip={error}
+            data-tooltip-color="danger"
+            data-tooltip-placement="bottom"
+          />
         )}
         {label && <span className="ax-field__option--label">{label}</span>}
       </label>
