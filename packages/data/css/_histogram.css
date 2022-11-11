@@ -38,6 +38,10 @@
     &:hover .ax-histogram__checkbox {
       @apply block;
     }
+
+    &[data-disabled="true"] {
+      @apply text-muted pointer-events-none;
+    }
   }
 
   .ax-histogram__meter {
@@ -53,7 +57,7 @@
     }
 
     & > span {
-      @apply text-xs px-1 z-[1] fixed-numbers ;
+      @apply text-xs px-1 z-[1] fixed-numbers;
     }
 
     &[data-clickable] {
