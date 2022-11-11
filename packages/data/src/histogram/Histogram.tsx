@@ -81,7 +81,7 @@ const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
   );
 
   return (
-    <div className="ax-histogram__item">
+    <div className="ax-histogram__item" data-disabled={count === 0}>
       {allowNegative && (
         <div className="ax-histogram__checkbox">
           <AxIcon
