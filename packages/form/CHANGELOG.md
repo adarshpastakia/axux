@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.60](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.59...v2.0.0-beta.60) (2022-11-11)
+
+
+### Bug Fixes
+
+* **Tooltip:** use global mouse event for lightweight tooltips ([ea58c50](https://github.com/adarshpastakia/axux/commit/ea58c50e3ab24827a6b0641dba9d6e9a87cd1c6a))
+
+
+
+
+
 # [2.0.0-beta.59](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.58...v2.0.0-beta.59) (2022-11-09)
 
 **Note:** Version bump only for package @axux/form

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.60](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.59...v2.0.0-beta.60) (2022-11-11)
+
+
+### Bug Fixes
+
+* **Histogram:** disable when count 0 ([e80297f](https://github.com/adarshpastakia/axux/commit/e80297f3ecf6585c51f2a773a910573c0d6a16b6))
+* **Media:** canvas resize, alpha calculation ([d962954](https://github.com/adarshpastakia/axux/commit/d962954a9134b5e2498a958f81ab8f84c44c88ff))
+* **Thumbnail:** set fallback when errored ([f41b8ef](https://github.com/adarshpastakia/axux/commit/f41b8ef042f8e6fea75133555b36b0fb055967e6))
+* **Tooltip:** use global mouse event for lightweight tooltips ([ea58c50](https://github.com/adarshpastakia/axux/commit/ea58c50e3ab24827a6b0641dba9d6e9a87cd1c6a))
+* **useFilteredList:** attempt search on items change ([97ee9e1](https://github.com/adarshpastakia/axux/commit/97ee9e1fdaf55d17639a8c01622cb439fdf377df))
+
+
+
+
+
 # [2.0.0-beta.59](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.58...v2.0.0-beta.59) (2022-11-09)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.60](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.59...v2.0.0-beta.60) (2022-11-11)
+
+
+### Bug Fixes
+
+* **Media:** canvas resize, alpha calculation ([d962954](https://github.com/adarshpastakia/axux/commit/d962954a9134b5e2498a958f81ab8f84c44c88ff))
+
+
+
+
+
 # [2.0.0-beta.59](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.58...v2.0.0-beta.59) (2022-11-09)
 
 **Note:** Version bump only for package @axux/utilities
