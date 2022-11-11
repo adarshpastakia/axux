@@ -112,6 +112,7 @@
       &::after {
         @apply absolute inset-x-0 h-2 backdrop-blur;
         content: "";
+        z-index: 1;
         background-color: rgb(67 39 23 / 80);
         background-image: linear-gradient(
           90deg,
