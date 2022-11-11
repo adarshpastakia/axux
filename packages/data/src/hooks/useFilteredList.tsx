@@ -30,10 +30,6 @@ export const useFilteredList = <T extends KeyValue = AnyObject>(
   const [filteredList, setFilteredList] = useState(items);
   const [isSearching, startTransition] = useTransition();
 
-  useEffect(() => {
-    setFilteredList(items);
-  }, [items]);
-
   const filterItems = useCallback(
     (query: string) => {
       if (isEmpty(query)) setFilteredList(items);
@@ -41,6 +37,10 @@ export const useFilteredList = <T extends KeyValue = AnyObject>(
     },
     [items, matcher]
   );
+
+  useEffect(() => {
+    startTransition(() => filterItems(search ?? ""));
+  }, [items]);
 
   const onSearch = useCallback(
     (query?: string) => {
