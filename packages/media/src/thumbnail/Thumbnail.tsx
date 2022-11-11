@@ -58,14 +58,12 @@ export const AxThumbnail: FC<ThumbnailProps> = ({
 }) => {
   const [src, setSrc] = useState<string>();
   const [_, startTransition] = useTransition();
-  const [isErrored, setErrored] = useState(false);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     setSrc("");
     startTransition(() => {
       setLoading(true);
-      setErrored(false);
       setSrc(_src);
     });
   }, [_src]);
@@ -79,8 +77,6 @@ export const AxThumbnail: FC<ThumbnailProps> = ({
   }, []);
   const handleError = useCallback(() => {
     startTransition(() => {
-      setErrored(true);
-      setLoading(false);
       setSrc(fallback);
     });
   }, [fallback]);
@@ -98,7 +94,6 @@ export const AxThumbnail: FC<ThumbnailProps> = ({
         crossOrigin="anonymous"
         onLoad={loadHandler}
         onError={src ? handleError : undefined}
-        className={isErrored ? "bg-component" : ""}
       />
       {isLoading && (
         <div className="ax-thumbnail--spinner">
