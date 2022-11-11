@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxAnimation, AxIcon, useResizeObserver } from "@axux/core";
+import { AxAnimation, AxIcon } from "@axux/core";
 import {
   FC,
   memo,
@@ -20,11 +20,12 @@ import {
 import { Canvas, CanvasRef } from "../canvas/Canvas";
 import { Icons } from "../types/icons";
 
-export interface ImageProps {
+export interface VideoProps {
   src: string;
   poster?: string;
   isNsfw: boolean;
   isFit: boolean;
+  isLoading: boolean;
   isPlaying: boolean;
   videoRef: RefObject<HTMLVideoElement>;
   canvasRef: RefObject<CanvasRef>;
@@ -32,13 +33,14 @@ export interface ImageProps {
   onError: ReactEventHandler;
 }
 
-export const Video: FC<ImageProps> = memo(
+export const Video: FC<VideoProps> = memo(
   ({
     src,
     poster,
     videoRef,
     canvasRef,
     isPlaying,
+    isLoading,
     isFit,
     isNsfw,
     onLoad,
@@ -56,7 +58,17 @@ export const Video: FC<ImageProps> = memo(
           height: videoRef.current.offsetHeight,
         });
     }, []);
-    const containerRef = useResizeObserver(resizeHandler);
+
+    useEffect(() => {
+      if (videoRef.current) {
+        const ob = new ResizeObserver(resizeHandler);
+        ob.observe(videoRef.current);
+
+        return () => {
+          ob.disconnect();
+        };
+      }
+    }, []);
 
     useEffect(() => {
       overlayRef.current && (overlayRef.current.dataset.show = "true");
@@ -70,7 +82,7 @@ export const Video: FC<ImageProps> = memo(
     }, []);
 
     return (
-      <div className="ax-video__container" ref={containerRef}>
+      <div className="ax-video__container">
         <video
           src={src}
           ref={videoRef}

@@ -18,7 +18,12 @@ export const NsfwOverlay = ({ isNsfw = false }) => {
   }, [isNsfw]);
 
   return showNsfw ? (
-    <div className="ax-media__nsfw" onClick={() => setShowNsfw(false)}>
+    <div
+      className="ax-media__nsfw"
+      onClick={(e) => (
+        setShowNsfw(false), e.stopPropagation(), e.preventDefault
+      )}
+    >
       <div>
         <div>Not Safe For Work</div>
         <AxIcon size={48} icon={Icons.iconNsfw} />

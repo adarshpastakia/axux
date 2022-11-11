@@ -239,6 +239,7 @@ export const AxVideoPlayer = forwardRef<
               poster={poster}
               isFit={state.isFit}
               isPlaying={state.isPlaying}
+              isLoading={state.isLoading}
               videoRef={videoRef}
               canvasRef={canvasRef}
               isNsfw={!!isNsfw}
