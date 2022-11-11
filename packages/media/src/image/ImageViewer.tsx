@@ -6,12 +6,7 @@
  * @license   : MIT
  */
 
-import {
-  AxAnimation,
-  AxIcon,
-  useDebounce,
-  useResizeObserver,
-} from "@axux/core";
+import { AxAnimation, AxIcon, useDebounce } from "@axux/core";
 import { HotKeyWrapper } from "@axux/core/dist/hotkeys/HotKeyWrapper";
 import { debounce } from "@axux/utilities";
 import { getImageColorset } from "@axux/utilities/dist/getImageColorset";
@@ -21,6 +16,7 @@ import {
   RefObject,
   SyntheticEvent,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
@@ -85,6 +81,7 @@ export const AxImageViewer = forwardRef<
 >(({ src, overlaySrc, isNsfw, onLoad, onError, onChange }, ref) => {
   const canvasRef = useRef<CanvasRef>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const [pending, startTransition] = useTransition();
 
@@ -200,7 +197,16 @@ export const AxImageViewer = forwardRef<
     },
     [changeCallback, state.isLoaded]
   );
-  const containerRef = useResizeObserver(resizeHandler);
+  useEffect(() => {
+    if (imageRef.current) {
+      const ob = new ResizeObserver(resizeHandler);
+      ob.observe(imageRef.current);
+
+      return () => {
+        ob.disconnect();
+      };
+    }
+  }, []);
 
   useImperativeHandle(
     ref,

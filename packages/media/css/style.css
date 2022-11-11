@@ -89,6 +89,9 @@
       &[data-colorset="dark_transparent"] {
         @apply bg-gray-100 text-gray-900;
       }
+      &[data-colorset="light_transparent"] {
+        @apply bg-slate-800 dark:bg-transparent;
+      }
     }
 
     & .ax-thumbnail--spinner {

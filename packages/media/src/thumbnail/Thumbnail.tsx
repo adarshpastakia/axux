@@ -73,7 +73,9 @@ export const AxThumbnail: FC<ThumbnailProps> = ({
   useEffect(() => setLoading(true), [src]);
   const loadHandler = useCallback((e: SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.dataset.colorset = getImageColorset(e.currentTarget);
-    setLoading(false);
+    startTransition(() => {
+      setLoading(false);
+    });
   }, []);
   const handleError = useCallback(() => {
     startTransition(() => {
