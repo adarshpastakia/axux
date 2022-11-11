@@ -17,7 +17,7 @@ import {
   useLayoutEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 import { createPortal } from "react-dom";
 import { usePopover } from "../hooks/usePopover";
@@ -61,8 +61,8 @@ export const AxTooltip: FC<TooltipProps> = ({
   sameWidth = false,
   isDisabled = false,
   placement = "bottom",
-  isOpen,
-  autoHide,
+  isOpen = false,
+  autoHide = false,
   color,
   // @ts-ignore
   innerRef,
@@ -81,8 +81,6 @@ export const AxTooltip: FC<TooltipProps> = ({
     styles,
   } = usePopover({
     placement,
-    sameWidth,
-    hideArrow,
   });
   const [open, setOpen] = useState(false);
 
@@ -120,8 +118,8 @@ export const AxTooltip: FC<TooltipProps> = ({
   }, [popperElement]);
 
   useLayoutEffect(() => {
-    setTimeout(() => forceUpdate?.(), 0);
-  }, [content]);
+    open && setTimeout(() => forceUpdate?.(), 0);
+  }, [open, content]);
 
   useImperativeHandle(
     innerRef,

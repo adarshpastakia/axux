@@ -6,14 +6,13 @@
  * @license   : MIT
  */
 
-import { iconToken } from "@axux/utilities";
+import { iconToken, isEmpty } from "@axux/utilities";
 import { Menu } from "@headlessui/react";
 import { FC, Fragment } from "react";
 import { createPortal } from "react-dom";
 import { usePopover } from "../hooks/usePopover";
 import { usePropToggle } from "../hooks/usePropToggle";
 import { AxIcon } from "../icons/Icon";
-import { AxTooltip } from "../overlays/Tooltip";
 import { AppIcons } from "../types/appIcons";
 import { Ellipsis } from "../typography/Ellipsis";
 import { MenuGroupProps } from "./types";
@@ -157,28 +156,28 @@ const MiniGroup: FC<MenuGroupProps> = ({
     <Menu as={Fragment}>
       <Menu.Button as={Fragment} {...{ ref: setReferenceElement }}>
         {({ open }) => (
-          <div className="ax-menu__mini" data-popover-open={open}>
-            <AxTooltip
-              content={label}
-              placement="right"
-              data-popover-open={open}
+          <div
+            className="ax-menu__mini"
+            data-popover-open={open}
+            data-tooltip={label}
+            data-tooltip-placement="right"
+            aria-controls={label}
+          >
+            <div
+              onClick={(e) => {
+                e.currentTarget
+                  .closest(".ax-menu__mini")
+                  ?.dispatchEvent(
+                    new MouseEvent(e.nativeEvent.type, e.nativeEvent)
+                  );
+              }}
             >
-              <div
-                onClick={(e) => {
-                  e.currentTarget
-                    .closest(".ax-menu__mini")
-                    ?.dispatchEvent(
-                      new MouseEvent(e.nativeEvent.type, e.nativeEvent)
-                    );
-                }}
-              >
-                <AxIcon
-                  className="ax-menu__icon"
-                  icon={icon ?? iconToken(label)}
-                  rtlFlip={rtlFlip}
-                />
-              </div>
-            </AxTooltip>
+              <AxIcon
+                className="ax-menu__icon"
+                icon={icon ?? iconToken(label)}
+                rtlFlip={rtlFlip}
+              />
+            </div>
           </div>
         )}
       </Menu.Button>

@@ -57,7 +57,11 @@ const rtlFlip: Modifier<"rtlFlip", KeyValue> = {
 defaultModifiers.push(sameWidthModifier as AnyObject, rtlFlip as AnyObject);
 
 export const usePopover = (
-  options: { placement: Placement; sameWidth: boolean; hideArrow: boolean } = {
+  options: {
+    placement?: Placement;
+    sameWidth?: boolean;
+    hideArrow?: boolean;
+  } = {
     hideArrow: false,
     sameWidth: false,
     placement: "bottom",
@@ -68,11 +72,11 @@ export const usePopover = (
   const [arrowElement, setArrowElement] = useState<HTMLElement>();
 
   /******************* popperjs *******************/
-  const { styles, attributes, forceUpdate } = usePopper(
+  const { styles, attributes, forceUpdate, update } = usePopper(
     referenceElement,
     popperElement,
     {
-      placement: options.placement,
+      placement: options.placement ?? "bottom",
       strategy: "fixed",
       modifiers: [
         {
@@ -101,6 +105,7 @@ export const usePopover = (
     attributes,
     popperElement,
     referenceElement,
+    update,
     forceUpdate,
     setArrowElement,
     setPopperElement,

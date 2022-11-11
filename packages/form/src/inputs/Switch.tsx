@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxIcon, AxTooltip } from "@axux/core";
+import { AxIcon } from "@axux/core";
 import { Color, ElementProps } from "@axux/core/dist/types";
 import {
   ChangeEvent,
@@ -90,9 +90,13 @@ export const Switch: FC<SwitchProps> = memo(
           <div className="ax-field__switch--handle" />
         </div>
         {error && (
-          <AxTooltip color="danger" content={error} placement="bottom">
-            <AxIcon className="ax-field__error" icon={Icons.iconError} />
-          </AxTooltip>
+          <AxIcon
+            className="ax-field__error"
+            icon={Icons.iconError}
+            data-tooltip={error}
+            data-tooltip-color="danger"
+            data-tooltip-placement="bottom"
+          />
         )}
         {label && <span className="ax-field__option--label">{label}</span>}
       </label>

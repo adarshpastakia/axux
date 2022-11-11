@@ -8,7 +8,6 @@
 
 import { isColor, isEmpty, isString, tokenize } from "@axux/utilities";
 import { FC, forwardRef, Fragment, useCallback, useMemo } from "react";
-import { AxTooltip } from "../overlays/Tooltip";
 import { ElementProps } from "../types";
 
 interface AbbrTextProps {
@@ -58,15 +57,19 @@ export const Abbr: FC<AbbrProps> = ({
     (text: string, tooltip: string, color = "") => {
       if (renderer) {
         return (
-          <AxTooltip content={tooltip} placement="top">
+          <span data-tooltip={tooltip} data-tooltip-placement="top">
             {renderer([text, color])}
-          </AxTooltip>
+          </span>
         );
       }
       return (
-        <AxTooltip content={tooltip} placement="top">
-          <AbbrText color={color}>{text}</AbbrText>
-        </AxTooltip>
+        <AbbrText
+          color={color}
+          data-tooltip={tooltip}
+          data-tooltip-placement="top"
+        >
+          {text}
+        </AbbrText>
       );
     },
     [renderer]

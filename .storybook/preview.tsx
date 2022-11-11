@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { useTooltipWatcher } from "@axux/core/src/hooks/useTooltip";
 import "@mdi/font/css/materialdesignicons.min.css";
 import {
   Anchor,
@@ -18,12 +19,12 @@ import { withTests } from "@storybook/addon-jest";
 import { addons } from "@storybook/addons";
 import { addParameters } from "@storybook/react";
 import { create } from "@storybook/theming";
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { I18nextProvider } from "react-i18next";
+import colors from "tailwindcss/colors";
 import { default as i18n } from "./i18n";
 import results from "./jest-test-results.json";
 import "./styles/styles.css";
-import colors from "tailwindcss/colors";
 
 const brandTitle = "AxUx UI Framework";
 const reset = {
@@ -96,9 +97,9 @@ addParameters({
           </div>
         );
       },
-      Canvas: ({ withToolbar, ...props }: any) => (
-        <Canvas {...props} withToolbar={true} />
-      ),
+      Canvas: ({ withToolbar, ...props }: any) => {
+        return <Canvas {...props} withToolbar={true} />;
+      },
       PropRow: (props: any) => <span {...props} className="text-teal-500" />,
     },
   },

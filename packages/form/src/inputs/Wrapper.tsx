@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxIcon, AxTooltip } from "@axux/core";
+import { AxIcon } from "@axux/core";
 import { ChildrenProp } from "@axux/core/dist/types";
 import { FC, memo, MouseEvent, ReactNode, Ref, useCallback } from "react";
 import { Icons } from "../types/icons";
@@ -63,9 +63,12 @@ export const FieldWrapper: FC<WrapperProps> = memo(
         >
           {error && (
             <div className="ax-field__error">
-              <AxTooltip content={error} color="danger">
-                <AxIcon icon={Icons.iconError} />
-              </AxTooltip>
+              <AxIcon
+                icon={Icons.iconError}
+                data-tooltip={error}
+                data-tooltip-color="danger"
+                data-tooltip-placement="bottom"
+              />
             </div>
           )}
           {children}
