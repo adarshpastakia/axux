@@ -103,6 +103,10 @@
       }
     }
 
+    & .ax-thumbnail--reload {
+      @apply absolute inset-0 m-auto z-10 h-8 w-8 p-0.5 text-2xl cursor-pointer bg-gray-900/70 text-white backdrop-blur rounded-full leading-none;
+    }
+
     & .ax-media__nsfw > div {
       @apply scale-75;
     }
