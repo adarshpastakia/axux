@@ -56,6 +56,11 @@ export interface HistogramProps extends SelectableProps {
   emptyMessage?: string;
 
   isLoading?: boolean;
+
+  /**
+   * disable item when count is 0
+   */
+  allowDisable?: boolean;
 }
 
 const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
@@ -68,6 +73,7 @@ const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
   allowNegative,
   positiveColor,
   negativeColor,
+  allowDisable,
   selected = 0,
   onClick,
 }) => {
@@ -81,7 +87,10 @@ const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
   );
 
   return (
-    <div className="ax-histogram__item" data-disabled={count === 0}>
+    <div
+      className="ax-histogram__item"
+      data-disabled={allowDisable && count === 0}
+    >
       {allowNegative && (
         <div className="ax-histogram__checkbox">
           <AxIcon
