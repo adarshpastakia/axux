@@ -8,7 +8,7 @@
 
 import { AxIcon } from "@axux/core";
 import { handleClick } from "@axux/utilities/dist/handlers";
-import { Fragment, memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { useDatagridContext } from "./Context";
 import { DatagridColumn } from "./types";
 
@@ -36,12 +36,10 @@ export const HeaderCell = memo(
     );
 
     const tooltipContent = useMemo(
-      () => (
-        <Fragment>
-          {isPrimary && <AxIcon icon={KEY} />}
-          <label>{tooltip !== true ? tooltip : label}</label>
-        </Fragment>
-      ),
+      () =>
+        !!tooltip
+          ? `${isPrimary ? "🔑" : ""}${tooltip !== true ? tooltip : label}`
+          : "",
       [isPrimary, label, tooltip]
     );
 
