@@ -62,11 +62,13 @@ export const AxMeter: FC<MeterProps> = ({
         <div
           key={step}
           className="ax-meter--bar"
-          data-active={Math.round(activeCount) >= step}
+          data-active={activeCount >= step}
           style={{ width: `${Math.min((activeCount - step) * 100, 100)}%` }}
         />
       ))}
-      {!hideLabel && <label className="ax-meter--label">{Format.percent(value / 100)}</label>}
+      {!hideLabel && (
+        <label className="ax-meter--label">{Format.percent(value / 100)}</label>
+      )}
     </div>
   );
 };
