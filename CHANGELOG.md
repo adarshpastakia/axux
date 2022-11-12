@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.61](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.60...v2.0.0-beta.61) (2022-11-12)
+
+
+### Bug Fixes
+
+* **Datagrid:** fix header tooltip ([1f28474](https://github.com/adarshpastakia/axux/commit/1f284745662316505254228ae38ef227d7bbe8fd))
+* **Histogram:** make disable optional ([50d45ce](https://github.com/adarshpastakia/axux/commit/50d45ce74872d7b7db79a86f4ac010c9afd9fc19))
+* **Meter:** correct active check ([6ba8785](https://github.com/adarshpastakia/axux/commit/6ba878559dd699657b0bf576cc2b3fc421b1fb0c))
+
+
+
+
+
 # [2.0.0-beta.60](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.59...v2.0.0-beta.60) (2022-11-11)
 
 
