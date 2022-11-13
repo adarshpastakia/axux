@@ -17,7 +17,7 @@ export interface CalloutProps extends ElementProps, IconProp, ChildrenProp {
   /**
    * callout title
    */
-  title?: string;
+  title?: JSX.Element;
   /**
    * single line layout
    */
