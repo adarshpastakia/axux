@@ -21,7 +21,6 @@ import {
   memo,
   ReactElement,
   Ref,
-  startTransition,
   useCallback,
   useDeferredValue,
   useEffect,
@@ -36,7 +35,9 @@ import { areEqual, VariableSizeList as List } from "react-window";
 import ResizeObserver from "resize-observer-polyfill";
 import { Wrapper } from "./Wrapper";
 
-export type TimelineRef = Pick<List, "scrollTo" | "scrollToItem">;
+export type TimelineRef = Pick<List, "scrollTo" | "scrollToItem"> & {
+  hilight: (index: number) => void;
+};
 
 export interface TimelineItemProps
   extends ChildrenProp,
@@ -128,6 +129,7 @@ const Item = memo(
           {...rest}
           ref={itemRef}
           data-size={size}
+          data-index={index}
           data-noline={noLine}
           data-reverse={reverse}
           data-last-child={lastChild}
@@ -174,7 +176,38 @@ const AxTimelineComponent = <T extends KeyValue>({
     listRef?._outerRef.setLoading(isLoading);
   }, [listRef, isLoading]);
 
-  useImperativeHandle(ref, () => listRef, [listRef]);
+  useImperativeHandle(
+    ref,
+    () => {
+      let tmr: AnyObject;
+      return {
+        hilight: (idx: number) => {
+          if (idx >= 0) {
+            listRef.scrollToItem(idx, "center");
+            clearTimeout(tmr);
+            containerRef.current
+              ?.querySelector(`.hilight`)
+              ?.classList.remove("hilight");
+            setTimeout(() => {
+              containerRef.current
+                ?.querySelector(`[data-index="${idx}"]`)
+                ?.classList.add("hilight");
+              tmr = setTimeout(
+                () =>
+                  containerRef.current
+                    ?.querySelector(`[data-index="${idx}"]`)
+                    ?.classList.remove("hilight"),
+                2000
+              );
+            }, 500);
+          }
+        },
+        scrollTo: listRef?.scrollTo.bind(listRef),
+        scrollToItem: listRef?.scrollToItem.bind(listRef),
+      };
+    },
+    [listRef]
+  );
 
   /******************* list handlers *******************/
   useEffect(() => {

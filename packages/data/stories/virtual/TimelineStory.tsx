@@ -63,6 +63,13 @@ export const TimelineStory: ComponentStory<typeof AxTimeline> = ({}) => {
           <AxButton onClick={() => listRef.current?.scrollToItem(recordCount)}>
             Scroll Bottom
           </AxButton>
+          <AxButton
+            onClick={() =>
+              listRef.current?.hilight(Math.floor(Math.random() * recordCount))
+            }
+          >
+            Random Hilight
+          </AxButton>
         </div>
       </AxHeader>
       <AxTimeline

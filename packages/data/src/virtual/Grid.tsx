@@ -26,13 +26,16 @@ import {
   useMemo,
   useRef,
   useState,
+  useTransition,
 } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { areEqual, VariableSizeGrid as Grid } from "react-window";
 import ResizeObserver from "resize-observer-polyfill";
 import { Wrapper } from "./Wrapper";
 
-export type GridRef = Pick<Grid, "scrollTo" | "scrollToItem">;
+export type GridRef = Pick<Grid, "scrollTo" | "scrollToItem"> & {
+  hilight: (index: number) => void;
+};
 
 export interface GridItemProps extends ChildrenProp {
   style: CSSProperties;
@@ -64,7 +67,14 @@ export interface GridProps<T> extends ElementProps {
 
 /******************* Timeline item *******************/
 const Item = memo(
-  ({ style, rowIndex, columnIndex, children, updateHeight }: GridItemProps) => {
+  ({
+    style,
+    index,
+    rowIndex,
+    columnIndex,
+    children,
+    updateHeight,
+  }: GridItemProps) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
     /******************* calculate height on resize *******************/
@@ -84,7 +94,7 @@ const Item = memo(
     /******************* component *******************/
     return (
       <div style={style} className="overflow-hidden">
-        <div ref={itemRef} className="ax-grid__item">
+        <div ref={itemRef} className="ax-grid__item" data-index={index}>
           {children}
         </div>
       </div>
@@ -113,15 +123,53 @@ const AxGridViewComponent = <T extends KeyValue>({
   const containerRef = useRef<HTMLDivElement>(null);
   const [listRef, setList] = useState<AnyObject>();
   const cache = useMemo(() => new Map<number, number[]>(), []);
+  const [_, startTransition] = useTransition();
 
   const count = useDeferredValue(items.length);
   const itemList = createItemList(items);
+
+  const colCount = useRef(0);
 
   useEffect(() => {
     listRef?._outerRef?.setLoading(isLoading);
   }, [listRef, isLoading]);
 
-  useImperativeHandle(ref, () => listRef, [listRef]);
+  useImperativeHandle(
+    ref,
+    () => {
+      let tmr: AnyObject;
+      return {
+        hilight: (idx: number) => {
+          if (idx >= 0) {
+            listRef.scrollToItem({
+              align: "center",
+              rowIndex: Math.floor(idx / (colCount.current || 1)),
+              columnIndex: 0,
+            });
+            clearTimeout(tmr);
+            containerRef.current
+              ?.querySelector(`.hilight`)
+              ?.classList.remove("hilight");
+            setTimeout(() => {
+              containerRef.current
+                ?.querySelector(`[data-index="${idx}"]`)
+                ?.classList.add("hilight");
+              tmr = setTimeout(
+                () =>
+                  containerRef.current
+                    ?.querySelector(`[data-index="${idx}"]`)
+                    ?.classList.remove("hilight"),
+                2000
+              );
+            }, 500);
+          }
+        },
+        scrollTo: listRef.scrollTo.bind(listRef),
+        scrollToItem: listRef.scrollToItem.bind(listRef),
+      };
+    },
+    [listRef]
+  );
 
   /******************* list handlers *******************/
   useEffect(() => {
@@ -179,33 +227,31 @@ const AxGridViewComponent = <T extends KeyValue>({
     >
       <AutoSizer>
         {({ width, height }) => {
-          let colCount = Math.floor((width - 84) / colWidth);
+          let cc = Math.floor((width - 84) / colWidth);
+          colCount.current = cc;
           return (
             <Grid
               ref={setList}
               useIsScrolling
               width={width}
               height={height}
-              rowCount={Math.ceil(count / colCount)}
+              rowCount={Math.ceil(count / cc)}
               itemData={itemList}
-              columnCount={colCount}
+              columnCount={cc}
               direction={isRtl ? "rtl" : "ltr"}
               children={(props) =>
                 children({
                   ...props,
-                  index: props.rowIndex * colCount + props.columnIndex,
+                  index: props.rowIndex * cc + props.columnIndex,
                   data:
-                    props.data.length >
-                    props.rowIndex * colCount + props.columnIndex
-                      ? props.data[
-                          props.rowIndex * colCount + props.columnIndex
-                        ]
+                    props.data.length > props.rowIndex * cc + props.columnIndex
+                      ? props.data[props.rowIndex * cc + props.columnIndex]
                       : null,
                   updateHeight: updateCache,
                 } as AnyObject)
               }
               outerElementType={Wrapper}
-              columnWidth={() => Math.min(colWidth, (width - 84) / colCount)}
+              columnWidth={() => Math.min(colWidth, (width - 84) / cc)}
               rowHeight={(index) =>
                 Math.max(...(cache.get(index) ?? []), colHeight)
               }
