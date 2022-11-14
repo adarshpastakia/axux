@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.62](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.61...v2.0.0-beta.62) (2022-11-14)
+
+
+### Bug Fixes
+
+* **Thumbnail:** fix load error handling ([db1d882](https://github.com/adarshpastakia/axux/commit/db1d882ca777dfc615f5b1722e95507fdc7b93a7))
+
+
+### Features
+
+* **MediaCanvas:** added draw/hilight polygon ([5977164](https://github.com/adarshpastakia/axux/commit/5977164be9bf98d870a429c0a33e05e524a25e60))
+
+
+
+
+
 # [2.0.0-beta.61](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.60...v2.0.0-beta.61) (2022-11-12)
 
 **Note:** Version bump only for package @axux/media

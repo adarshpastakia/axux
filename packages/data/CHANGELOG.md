@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.62](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.61...v2.0.0-beta.62) (2022-11-14)
+
+
+### Bug Fixes
+
+* **Histogram:** `enableSorting` prop to sort by count + name ([dfea2f4](https://github.com/adarshpastakia/axux/commit/dfea2f4725515508d707fd698c8dafea03763bea))
+* **VirtualList:** add hilight method to ref ([6668055](https://github.com/adarshpastakia/axux/commit/6668055967e125c546a7efdb206564c4cb7caeca))
+
+
+
+
+
 # [2.0.0-beta.61](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.60...v2.0.0-beta.61) (2022-11-12)
 
 
