@@ -17,7 +17,7 @@ export interface CalloutProps extends ElementProps, IconProp, ChildrenProp {
   /**
    * callout title
    */
-  title?: JSX.Element;
+  title?: string;
   /**
    * single line layout
    */
@@ -37,19 +37,19 @@ export const AxCallout: FC<CalloutProps> = ({
 }) => {
   return (
     <div
-      className={`callout ${className ?? ""}`}
+      className={`ax-callout ${className ?? ""}`}
       data-color={color}
       data-inline={inline}
       {...rest}
     >
-      {onClose && <div className="callout__close">{CloseX(onClose)}</div>}
+      {onClose && <div className="ax-callout__close">{CloseX(onClose)}</div>}
       {(title || icon) && (
-        <div className="callout__title">
+        <div className="ax-callout__title">
           {icon && <AxIcon icon={icon} />}
           <span>{title}</span>
         </div>
       )}
-      <p>{children}</p>
+      <div className="ax-callout__body">{children}</div>
     </div>
   );
 };
