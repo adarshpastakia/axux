@@ -61,6 +61,8 @@ export interface HistogramProps extends SelectableProps {
    * disable item when count is 0
    */
   allowDisable?: boolean;
+
+  enableSorting?: boolean;
 }
 
 const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
@@ -138,6 +140,7 @@ export const AxHistogram: FC<HistogramProps> = ({
   positiveColor = "success",
   negativeColor = "danger",
   color = "primary",
+  enableSorting,
   emptyMessage,
   isLoading,
   ...props
@@ -146,7 +149,15 @@ export const AxHistogram: FC<HistogramProps> = ({
   const { selection, toggleSelection } = useSelectableList({ items, ...props });
 
   const listItems = useMemo(() => {
-    return [...items].sort((a, b) => (a.count > b.count ? -1 : 1));
+    if (enableSorting)
+      return [...items].sort((a, b) => {
+        if (a.count === b.count)
+          return a.label
+            .toLocaleLowerCase()
+            .localeCompare(b.label.toLocaleLowerCase());
+        return a.count > b.count ? -1 : 1;
+      });
+    return items;
   }, [items, selection]);
 
   const totalValue = useMemo(() => {
