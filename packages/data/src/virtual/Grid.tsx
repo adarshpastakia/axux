@@ -138,35 +138,37 @@ const AxGridViewComponent = <T extends KeyValue>({
     ref,
     () => {
       let tmr: AnyObject;
-      return {
-        hilight: (idx: number) => {
-          if (idx >= 0) {
-            listRef.scrollToItem({
-              align: "center",
-              rowIndex: Math.floor(idx / (colCount.current || 1)),
-              columnIndex: 0,
-            });
-            clearTimeout(tmr);
-            containerRef.current
-              ?.querySelector(`.hilight`)
-              ?.classList.remove("hilight");
-            setTimeout(() => {
+      return (
+        listRef && {
+          hilight: (idx: number) => {
+            if (idx >= 0) {
+              listRef.scrollToItem({
+                align: "center",
+                rowIndex: Math.floor(idx / (colCount.current || 1)),
+                columnIndex: 0,
+              });
+              clearTimeout(tmr);
               containerRef.current
-                ?.querySelector(`[data-index="${idx}"]`)
-                ?.classList.add("hilight");
-              tmr = setTimeout(
-                () =>
-                  containerRef.current
-                    ?.querySelector(`[data-index="${idx}"]`)
-                    ?.classList.remove("hilight"),
-                2000
-              );
-            }, 500);
-          }
-        },
-        scrollTo: listRef.scrollTo.bind(listRef),
-        scrollToItem: listRef.scrollToItem.bind(listRef),
-      };
+                ?.querySelector(`.hilight`)
+                ?.classList.remove("hilight");
+              setTimeout(() => {
+                containerRef.current
+                  ?.querySelector(`[data-index="${idx}"]`)
+                  ?.classList.add("hilight");
+                tmr = setTimeout(
+                  () =>
+                    containerRef.current
+                      ?.querySelector(`[data-index="${idx}"]`)
+                      ?.classList.remove("hilight"),
+                  2000
+                );
+              }, 500);
+            }
+          },
+          scrollTo: (...args) => listRef?.scrollTo(...args),
+          scrollToItem: (...args) => listRef?.scrollToItem(...args),
+        }
+      );
     },
     [listRef]
   );
