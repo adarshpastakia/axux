@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.63](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.62...v2.0.0-beta.63) (2022-11-15)
+
+
+### Bug Fixes
+
+* **VirtualList:** imperativeRef methods ([ff38b17](https://github.com/adarshpastakia/axux/commit/ff38b17b5c5606779e2f554a3769a70fc403b334))
+
+
+
+
+
 # [2.0.0-beta.62](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.61...v2.0.0-beta.62) (2022-11-14)
 
 
