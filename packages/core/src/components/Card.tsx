@@ -8,33 +8,18 @@
 
 import { forwardRef, useMemo } from "react";
 import { ChildrenProp, ElementProps, MouseProps } from "../types";
-import { Link } from "./Link";
+import { Link, LinkProps } from "./Link";
 
 export interface CardProps extends ElementProps, MouseProps, ChildrenProp {
-  /**
-   * routing path
-   */
-  to?: string;
-  /**
-   * navigation url
-   */
-  href?: string;
-  /**
-   * navigation target
-   */
-  target?: HTMLAnchorElement["target"];
-  /**
-   * no border/shadow
-   */
   isPlain?: boolean;
   /**
    * highlight shadow
    */
   isActive?: boolean;
   /**
-   * navlink route state
+   * navigation props
    */
-  state?: KeyValue;
+  nav?: LinkProps;
 }
 
 export const AxCard = forwardRef<HTMLElement, CardProps>(

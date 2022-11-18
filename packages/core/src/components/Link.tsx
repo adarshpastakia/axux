@@ -33,21 +33,23 @@ export interface LinkProps {
    * navlink route state
    */
   state?: KeyValue;
+  replace?: boolean;
+  download?: boolean;
+}
 
+interface LinkWrapperProps {
   as?: React.ElementType;
-
+  nav?: LinkProps;
   type?: "button" | "submit" | "reset";
 }
 
 export const Link = forwardRef<
   HTMLElement,
-  LinkProps & ElementProps & ChildrenProp & HTMLAttributes<HTMLElement>
+  LinkWrapperProps & ElementProps & ChildrenProp & HTMLAttributes<HTMLElement>
 >(
   (
     {
-      to,
-      href,
-      state,
+      nav: { to, href, state, replace, download, target } = {},
       as: T = "div",
       onClick,
       onMouseDown,
@@ -67,6 +69,9 @@ export const Link = forwardRef<
             ref={linkRef as AnyObject}
             to={to}
             state={state}
+            target={target}
+            replace={replace}
+            download={download}
             onClick={onClick}
             onMouseDown={onMouseDown}
           />
@@ -75,6 +80,8 @@ export const Link = forwardRef<
             {...props}
             ref={linkRef as AnyObject}
             href={href}
+            target={target}
+            download={download}
             onClick={onClick}
             onMouseDown={onMouseDown}
           />

@@ -8,6 +8,7 @@
 
 import { ReactElement } from "react";
 import { AxDivider } from "../components/Divider";
+import { LinkProps } from "../components/Link";
 import {
   BadgeType,
   CollapseProps,
@@ -34,18 +35,6 @@ export interface MenuItemProps<T = string>
    */
   label: T;
   /**
-   * routing path
-   */
-  to?: string;
-  /**
-   * navigation url
-   */
-  href?: string;
-  /**
-   * navigation target
-   */
-  target?: HTMLAnchorElement["target"];
-  /**
    * active state
    */
   isActive?: boolean;
@@ -66,9 +55,9 @@ export interface MenuItemProps<T = string>
    */
   append?: ReactElement;
   /**
-   * navlink route state
+   * navigation props
    */
-  state?: KeyValue;
+  nav?: LinkProps;
   children?: MenuChildren | MenuChildren[];
 }
 

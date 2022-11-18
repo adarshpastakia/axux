@@ -9,7 +9,7 @@
 import { handleClick } from "@axux/utilities/dist/handlers";
 import { FC, forwardRef, ForwardRefExoticComponent, useMemo } from "react";
 import { AxAnimation } from "../animations";
-import { Link } from "../components/Link";
+import { Link, LinkProps } from "../components/Link";
 import { useBadge } from "../hooks/useBadge";
 import { getTooltipProps } from "../hooks/useTooltip";
 import { AxHotKey } from "../hotkeys/HotKey";
@@ -33,18 +33,6 @@ import { DropdownButton } from "./Dropdown";
 
 export interface ButtonProps extends ElementProps, IconProp, RefProp {
   children?: string;
-  /**
-   * routing path
-   */
-  to?: string;
-  /**
-   * navigation url
-   */
-  href?: string;
-  /**
-   * navigation target
-   */
-  target?: HTMLAnchorElement["target"];
   /**
    * size
    */
@@ -118,9 +106,9 @@ export interface ButtonProps extends ElementProps, IconProp, RefProp {
    */
   stopPropagation?: boolean;
   /**
-   * navlink route state
+   * navigation props
    */
-  state?: KeyValue;
+  nav?: LinkProps;
 
   onClick?: EmptyCallback;
 }
