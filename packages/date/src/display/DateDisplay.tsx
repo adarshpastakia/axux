@@ -53,6 +53,7 @@ export const AxDateDisplay: FC<DateDisplayProps> = forwardRef(
     return (
       <span
         {...rest}
+        ref={ref}
         className={`inline-block ${className ?? ""}`}
         data-tooltip={isHijri ? dateLabel : hijriLabel}
         data-popover-open={openPopover}
