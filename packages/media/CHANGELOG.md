@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.64](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.63...v2.0.0-beta.64) (2022-11-18)
+
+
+### Bug Fixes
+
+* **MediaCanvas:** fix drawBox/drawPolygon ([2b8b078](https://github.com/adarshpastakia/axux/commit/2b8b0788f06a95357b3a666bab598b5377161659))
+* **MediaCanvas:** update polygon stroke width ([f24a6f5](https://github.com/adarshpastakia/axux/commit/f24a6f50fd5d9bcaaf53ea07aefe4643e18ce3dc))
+
+
+
+
+
 # [2.0.0-beta.63](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.62...v2.0.0-beta.63) (2022-11-15)
 
 **Note:** Version bump only for package @axux/media

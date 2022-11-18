@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.64](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.63...v2.0.0-beta.64) (2022-11-18)
+
+
+### Bug Fixes
+
+* **isEmpty:** filter nulls from array ([2e21727](https://github.com/adarshpastakia/axux/commit/2e21727a2bc6d707a812f007354eb11a9df5e06e))
+
+
+
+
+
 # [2.0.0-beta.63](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.62...v2.0.0-beta.63) (2022-11-15)
 
 **Note:** Version bump only for package @axux/utilities
