@@ -90,18 +90,19 @@ export const useTooltipWatcher = () => {
     }
   }, []);
   const cbLeave = useCallback((e: MouseEvent) => {
-    const target = (e.target as HTMLElement).closest(
-      "[data-tooltip]"
-    ) as HTMLElement;
-    if (target) {
-      removeTooltip();
-      setOpen(false);
-    }
+    removeTooltip();
+    setOpen(false);
   }, []);
 
   useEffect(() => {
     document.addEventListener("mouseover", cbEnter);
     document.addEventListener("mouseout", cbLeave);
+    document.addEventListener("mousedown", cbLeave);
+    return () => {
+      document.removeEventListener("mouseover", cbEnter);
+      document.removeEventListener("mouseout", cbLeave);
+      document.removeEventListener("mousedown", cbLeave);
+    };
   }, []);
 
   useEffect(() => {
