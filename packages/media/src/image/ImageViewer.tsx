@@ -134,7 +134,7 @@ export const AxImageViewer = forwardRef<
       el.scrollTo({
         top: (el.scrollHeight - (el.offsetHeight - 16)) / 2,
         left: (el.scrollWidth - (el.offsetWidth - 16)) / 2,
-        behavior: "smooth",
+        behavior: "auto",
       });
     }
   }, []);

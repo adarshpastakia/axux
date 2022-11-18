@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxAnimation, AxIcon, useDebounce } from "@axux/core";
+import { AxAnimation, AxIcon } from "@axux/core";
 import { HotKeyWrapper } from "@axux/core/dist/hotkeys/HotKeyWrapper";
 import {
   forwardRef,
@@ -25,6 +25,7 @@ import {
 import { CanvasRef } from "../canvas/Canvas";
 import { Video } from "./Video";
 
+import { isEmpty } from "@axux/utilities";
 import { NsfwOverlay } from "../nsfw/NsfwOverlay";
 import { Icons } from "../types/icons";
 import { SceneList } from "./SceneList";
@@ -32,13 +33,14 @@ import { Tools } from "./Tools";
 
 interface PlayerState {
   isFit: boolean;
+  showVtt: boolean;
   isLoading: boolean;
   isPlaying: boolean;
   isErrored: boolean;
 }
 
 interface PlayerActions {
-  type: "init" | "loaded" | "errored" | "play" | "pause" | "fit";
+  type: "init" | "loaded" | "errored" | "play" | "pause" | "fit" | "vtt";
   payload?: AnyObject;
 }
 
@@ -70,6 +72,10 @@ export interface VideoPlayerProps {
    */
   markers?: [time: number, score: number][];
   /**
+   *
+   */
+  vttText?: string;
+  /**
    * onChange playback time
    */
   onChange?: (currentTime: number) => void;
@@ -88,6 +94,7 @@ export const AxVideoPlayer = forwardRef<
       src,
       poster,
       isNsfw,
+      vttText,
       markers = [],
       scenes = [],
       onLoad,
@@ -103,14 +110,13 @@ export const AxVideoPlayer = forwardRef<
 
     const [pending, startTransition] = useTransition();
 
-    const changeCallback = useDebounce(onChange);
-
     const initState = useCallback(
       () =>
         ({
           isLoading: true,
           isErrored: false,
           isFit: false,
+          showVtt: false,
           isPlaying: false,
         } as AnyObject),
       []
@@ -136,7 +142,10 @@ export const AxVideoPlayer = forwardRef<
           state.isPlaying = false;
         }
         if (action.type === "fit") {
-          state.isFit = !state.isFit;
+          state.isFit = action.payload;
+        }
+        if (action.type === "vtt") {
+          state.showVtt = action.payload;
         }
         return { ...state };
       },
@@ -149,6 +158,7 @@ export const AxVideoPlayer = forwardRef<
         loaded: false,
         error: false,
         isFit: false,
+        showVtt: false,
         isPlaying: false,
       },
       initState
@@ -159,8 +169,8 @@ export const AxVideoPlayer = forwardRef<
       () =>
         canvasRef.current
           ? {
-              play: videoRef.current?.play(),
-              pause: videoRef.current?.pause(),
+              play: () => videoRef.current?.play(),
+              pause: () => videoRef.current?.pause(),
               ...canvasRef.current,
             }
           : (null as AnyObject),
@@ -237,14 +247,16 @@ export const AxVideoPlayer = forwardRef<
             <Video
               src={src}
               poster={poster}
+              vttText={vttText}
               isFit={state.isFit}
+              showVtt={state.showVtt}
               isPlaying={state.isPlaying}
-              isLoading={state.isLoading}
               videoRef={videoRef}
               canvasRef={canvasRef}
               isNsfw={!!isNsfw}
               onLoad={handleLoad}
               onError={handleError}
+              onChange={() => onChange?.(videoRef.current?.currentTime ?? 0)}
             />
           </div>
 
@@ -258,7 +270,12 @@ export const AxVideoPlayer = forwardRef<
             isDisabled={disableTools}
             isPlaying={state.isPlaying}
             isFit={state.isFit}
-            onToggleFit={() => dispatch({ type: "fit" })}
+            showVtt={state.showVtt}
+            hasVtt={!isEmpty(vttText)}
+            onToggleSrt={() =>
+              dispatch({ type: "vtt", payload: !state.showVtt })
+            }
+            onToggleFit={() => dispatch({ type: "fit", payload: !state.isFit })}
           />
 
           {state.isLoading && (

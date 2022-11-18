@@ -24,9 +24,12 @@ export interface ToolsProps {
   isFit: boolean;
   isPlaying: boolean;
   isDisabled: boolean;
+  showVtt: boolean;
+  hasVtt: boolean;
   videoRef: RefObject<HTMLVideoElement>;
   markers?: [time: number, score: number][];
   onToggleFit: () => void;
+  onToggleSrt: () => void;
 }
 
 /*
@@ -37,7 +40,17 @@ Shift+. +5frames (0.165 secs)
 */
 
 export const Tools: FC<ToolsProps> = memo(
-  ({ isPlaying, isDisabled, videoRef, isFit, markers = [], onToggleFit }) => {
+  ({
+    isPlaying,
+    isDisabled,
+    videoRef,
+    isFit,
+    markers = [],
+    onToggleFit,
+    onToggleSrt,
+    showVtt,
+    hasVtt,
+  }) => {
     const [time, setTime] = useState(0);
     const [speed, setSpeed] = useState(0);
     const [volume, setVolume] = useState(0);
@@ -193,6 +206,14 @@ export const Tools: FC<ToolsProps> = memo(
             icon={Icons.iconFitToView}
             onClick={onToggleFit}
           />
+          {hasVtt && (
+            <AxIcon
+              data-active={showVtt}
+              className="ax-media__tool"
+              icon={Icons.iconSrt}
+              onClick={onToggleSrt}
+            />
+          )}
           <AxDivider vertical size="xs" />
           <TimeSlider
             duration={duration}

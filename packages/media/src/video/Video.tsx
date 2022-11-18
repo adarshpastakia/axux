@@ -17,6 +17,7 @@ import {
   useRef,
   useState,
 } from "react";
+// @ts-ignore
 import { Canvas, CanvasRef } from "../canvas/Canvas";
 import { Icons } from "../types/icons";
 
@@ -25,12 +26,14 @@ export interface VideoProps {
   poster?: string;
   isNsfw: boolean;
   isFit: boolean;
-  isLoading: boolean;
+  showVtt: boolean;
   isPlaying: boolean;
+  vttText?: string;
   videoRef: RefObject<HTMLVideoElement>;
   canvasRef: RefObject<CanvasRef>;
   onLoad: ReactEventHandler;
   onError: ReactEventHandler;
+  onChange: ReactEventHandler;
 }
 
 export const Video: FC<VideoProps> = memo(
@@ -40,11 +43,13 @@ export const Video: FC<VideoProps> = memo(
     videoRef,
     canvasRef,
     isPlaying,
-    isLoading,
     isFit,
     isNsfw,
+    showVtt,
+    vttText,
     onLoad,
     onError,
+    onChange,
   }) => {
     const overlayRef = useRef<HTMLElement>(null);
     const [style, setStyle] = useState({ width: 0, height: 0 });
@@ -81,6 +86,19 @@ export const Video: FC<VideoProps> = memo(
       setSeeking(!!videoRef.current?.seeking);
     }, []);
 
+    const [vttSrc, setVtt] = useState<AnyObject>();
+    useEffect(() => {
+      if (vttText) {
+        const vtt = URL.createObjectURL(
+          new Blob([vttText], { type: "text/vtt" })
+        );
+        setVtt(vtt);
+        return () => {
+          URL.revokeObjectURL(vtt);
+        };
+      }
+    }, [vttText]);
+
     return (
       <div className="ax-video__container">
         <video
@@ -96,8 +114,11 @@ export const Video: FC<VideoProps> = memo(
           onSeeking={handleSeek}
           onSeeked={handleSeek}
           onLoadedMetadata={onLoad}
+          onTimeUpdate={onChange}
           onError={onError}
-        />
+        >
+          {showVtt && <track src={vttSrc} default />}
+        </video>
         <Canvas canvas={canvasRef} media={videoRef} style={style} />
 
         <AxIcon
