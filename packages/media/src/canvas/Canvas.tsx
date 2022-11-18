@@ -224,7 +224,7 @@ export const Canvas: FC<CanvasProps> = memo(({ style, media, canvas }) => {
           context.globalCompositeOperation = "source-over";
         }
         if (polygon) {
-          context.lineWidth = 3;
+          context.lineWidth = 2;
           context.strokeStyle = options?.stroke ?? "#fc0";
           context.beginPath();
           polygon.forEach((box, i) => {
