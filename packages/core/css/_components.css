@@ -141,7 +141,7 @@
       @apply flex flex-nowrap items-start gap-1 cursor-pointer;
 
       & > div {
-        @apply flex-1 flex flex-nowrap items-start gap-1;
+        @apply flex-1;
       }
 
       & .ax-title {
