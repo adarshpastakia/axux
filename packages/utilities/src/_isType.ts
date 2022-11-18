@@ -21,7 +21,7 @@ export const isEmpty = (val: AnyObject): val is undefined => {
   if (isNil(val) || val === "") {
     return true;
   }
-  if (Array.isArray(val) && val.length === 0) {
+  if (Array.isArray(val) && val.filter(Boolean).length === 0) {
     return true;
   }
   if (val instanceof Map || val instanceof Set) return val.size === 0;
