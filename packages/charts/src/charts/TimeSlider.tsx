@@ -38,11 +38,11 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
     const defaultEnd =
       data.length > 0 ? data?.[data.length - 1]?.[0]?.getTime() : 32;
 
-    const getRangeValue = (v: number = 0) =>
-      v >= defaultStart && v <= defaultEnd ? v : 0;
+    const getRangeValue = (v: number = 0, def = 0) =>
+      v >= defaultStart && v <= defaultEnd ? v : def;
     setRange({
-      startValue: getRangeValue(sliderRange?.start.getTime()),
-      endValue: getRangeValue(sliderRange?.end.getTime()),
+      startValue: getRangeValue(sliderRange?.start.getTime(), defaultStart),
+      endValue: getRangeValue(sliderRange?.end.getTime(), defaultEnd),
     });
   }, [sliderRange, data]);
 
