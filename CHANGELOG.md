@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.65](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.64...v2.0.0-beta.65) (2022-11-19)
+
+
+### Bug Fixes
+
+* **Collapsable:** add `isDisabled` prop ([8058e48](https://github.com/adarshpastakia/axux/commit/8058e48b721262012eedf45bee4ed14fb9e1f454))
+* **MediaCanvas:** correct reposition on overflow ([f0a7ce3](https://github.com/adarshpastakia/axux/commit/f0a7ce39910221c2d8967c4d5a74a32d6480f930))
+* **Timeslider:** correct default selected region ([9992e47](https://github.com/adarshpastakia/axux/commit/9992e4786ed31d0c5d91b2e8d645746c5f63a315))
+* **useTooltip:** hide on mousedown ([5cb7ac5](https://github.com/adarshpastakia/axux/commit/5cb7ac562d8c43e96fb1de04d18a04e04d588da6))
+
+
+### Features
+
+* **VideoPlayer:** added vtt captions support ([b4816a5](https://github.com/adarshpastakia/axux/commit/b4816a57c6a8bd23ab66230a52395e8fb514ad5f))
+
+
+
+
+
 # [2.0.0-beta.64](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.63...v2.0.0-beta.64) (2022-11-18)
 
 

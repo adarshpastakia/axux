@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.65](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.64...v2.0.0-beta.65) (2022-11-19)
+
+
+### Bug Fixes
+
+* **Collapsable:** add `isDisabled` prop ([8058e48](https://github.com/adarshpastakia/axux/commit/8058e48b721262012eedf45bee4ed14fb9e1f454))
+* **useTooltip:** hide on mousedown ([5cb7ac5](https://github.com/adarshpastakia/axux/commit/5cb7ac562d8c43e96fb1de04d18a04e04d588da6))
+
+
+
+
+
 # [2.0.0-beta.64](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.63...v2.0.0-beta.64) (2022-11-18)
 
 

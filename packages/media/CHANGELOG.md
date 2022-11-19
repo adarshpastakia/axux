@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.65](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.64...v2.0.0-beta.65) (2022-11-19)
+
+
+### Bug Fixes
+
+* **MediaCanvas:** correct reposition on overflow ([f0a7ce3](https://github.com/adarshpastakia/axux/commit/f0a7ce39910221c2d8967c4d5a74a32d6480f930))
+
+
+### Features
+
+* **VideoPlayer:** added vtt captions support ([b4816a5](https://github.com/adarshpastakia/axux/commit/b4816a57c6a8bd23ab66230a52395e8fb514ad5f))
+
+
+
+
+
 # [2.0.0-beta.64](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.63...v2.0.0-beta.64) (2022-11-18)
 
 
