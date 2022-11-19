@@ -191,7 +191,7 @@ export const Canvas: FC<CanvasProps> = memo(({ style, media, canvas }) => {
           if (options.labelTop) {
             const labelX = x - 1;
             let labelY = y - 18;
-            if (labelY < 0) labelY += 21;
+            if (labelY < 0) labelY += 18;
             context.fillStyle = options.colorTop ?? "rgb(0 0 0 / 0.5)";
             context.fillRect(labelX, labelY, w + 2, 18);
             context.fillStyle = "#ffffff";
@@ -208,7 +208,7 @@ export const Canvas: FC<CanvasProps> = memo(({ style, media, canvas }) => {
           if (options.labelBottom) {
             const labelX = x - 1;
             let labelY = y + h;
-            if (labelY > context.canvas.height) labelY -= 21;
+            if (labelY > context.canvas.height) labelY -= 18;
             context.fillStyle = options.colorBottom ?? "rgb(0 0 0 / 0.5)";
             context.fillRect(labelX, labelY, w + 2, 18);
             context.fillStyle = "#ffffff";
