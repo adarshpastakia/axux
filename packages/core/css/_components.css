@@ -140,6 +140,14 @@
     & .ax-collapsable__head {
       @apply flex flex-nowrap items-start gap-1 cursor-pointer;
 
+      &[data-disabled="true"] {
+        @apply cursor-default;
+
+        & > .ax-icon {
+          @apply text-muted;
+        }
+      }
+
       & > div {
         @apply flex-1;
       }

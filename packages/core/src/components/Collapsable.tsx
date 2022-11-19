@@ -15,11 +15,14 @@ import { AppIcons } from "../types/appIcons";
 export interface CollapsableProps
   extends Omit<CollapseProps, "isCollapsable">,
     ElementProps,
-    ChildrenProp {}
+    ChildrenProp {
+  isDisabled?: boolean;
+}
 
 export const AxCollapsable: FC<CollapsableProps> = ({
   children,
   className = "",
+  isDisabled = false,
   isCollapsed = true,
   onCollapse,
   ...rest
@@ -41,12 +44,19 @@ export const AxCollapsable: FC<CollapsableProps> = ({
     <div {...rest} className={`ax-collapsable ${className ?? ""}`}>
       <div
         role="button"
-        onClick={toggleCollapse}
+        onClick={isDisabled ? undefined : toggleCollapse}
         aria-label="Toggle collapse"
         className="ax-collapsable__head"
+        data-disabled={isDisabled}
       >
         <AxIcon
-          icon={collapsed ? AppIcons.iconCaretUp : AppIcons.iconCaretDown}
+          icon={
+            isDisabled
+              ? "M20 14H4V10H20"
+              : collapsed
+              ? AppIcons.iconCaretUp
+              : AppIcons.iconCaretDown
+          }
         />
         {head}
       </div>
