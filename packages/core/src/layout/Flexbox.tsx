@@ -54,7 +54,7 @@ export const AxFlexBox: ForwardRefExoticComponent<FlexboxProps> & {
     },
     ref
   ) => {
-    /******************* class map *******************/
+    /** ***************** class map *******************/
     const classes = useMemo(() => {
       const cls = ["ax-flexbox", className ?? ""];
       if (gutter) {
@@ -63,7 +63,7 @@ export const AxFlexBox: ForwardRefExoticComponent<FlexboxProps> & {
       return cls.join(" ");
     }, [fluid, gutter, className]);
 
-    /******************* component *******************/
+    /** ***************** component *******************/
     return (
       <div
         {...rest}

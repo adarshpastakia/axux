@@ -24,3 +24,4 @@ export const Body = memo(() => {
     </div>
   );
 });
+Body.displayName = "AxDatagrid.Body";

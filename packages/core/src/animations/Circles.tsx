@@ -19,7 +19,7 @@ export interface CircleProps {
  * animated tick
  */
 export const Check: FC<CircleProps> = ({ className }) => {
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <svg
       className={`check-animation ${className ?? ""}`}
@@ -40,7 +40,7 @@ export const Check: FC<CircleProps> = ({ className }) => {
  * animated cross
  */
 export const Cross: FC<CircleProps> = ({ className }) => {
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <svg
       className={`check-animation ${className ?? ""}`}
@@ -61,7 +61,7 @@ export const Cross: FC<CircleProps> = ({ className }) => {
  * animated info
  */
 export const Info: FC<CircleProps> = ({ className }) => {
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <svg
       className={`check-animation ${className ?? ""}`}

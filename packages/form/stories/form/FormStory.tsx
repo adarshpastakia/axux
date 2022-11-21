@@ -221,13 +221,13 @@ const Template: ComponentStory<typeof AxForm> = () => {
               </AxFlexBox>
             </AxContent>
             <AxFooter justify="end">
-              <AxButton style="link" onClick={handleClear}>
+              <AxButton variant="link" onClick={handleClear}>
                 Clear
               </AxButton>
               <AxButton type="reset" onClick={handleReset}>
                 Reset
               </AxButton>
-              <AxButton style="solid" type="submit">
+              <AxButton variant="solid" type="submit">
                 Submit
               </AxButton>
             </AxFooter>

@@ -30,7 +30,7 @@ export type ListRef = Pick<List, "scrollTo" | "scrollToItem">;
 export interface ListItemProps extends ChildrenProp, ElementProps {
   style: CSSProperties;
   index: number;
-  isScrolling: boolean;
+  isScrolling?: boolean;
   updateSize: (index: number, size: [width: number, height: number]) => void;
 }
 
@@ -51,7 +51,8 @@ export interface ListProps<T> extends ElementProps {
   layout?: "vertical" | "horizontal";
 }
 
-/******************* List item *******************/
+/** ***************** List item *******************/
+// eslint-disable-next-line react/display-name
 const Item = memo(
   ({
     style,
@@ -64,21 +65,21 @@ const Item = memo(
   }: ListItemProps) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
-    /******************* calculate height on resize *******************/
+    /** ***************** calculate height on resize *******************/
     useLayoutEffect(() => {
       const ob = new ResizeObserver(() => {
         const el = itemRef.current;
-        if (el) {
+        if (el != null) {
           updateSize?.(index, [el.offsetWidth, el.offsetHeight]);
         }
       });
-      itemRef.current && ob.observe(itemRef.current);
+      itemRef.current != null && ob.observe(itemRef.current);
       return () => {
         ob.disconnect();
       };
     }, [index, parent]);
 
-    /******************* component *******************/
+    /** ***************** component *******************/
     return (
       <div style={style} className="overflow-hidden">
         <div
@@ -112,7 +113,7 @@ const AxListComponent = <T extends KeyValue>({
 
   useImperativeHandle(ref, () => listRef, [listRef]);
 
-  /******************* item height cache *******************/
+  /** ***************** item height cache *******************/
   const updateCache = useCallback(
     (index: number, [width, height]: [number, number]) => {
       if (
@@ -132,6 +133,7 @@ const AxListComponent = <T extends KeyValue>({
     [layout]
   );
 
+  // eslint-disable-next-line react/display-name
   const StickyList = forwardRef<HTMLDivElement, KeyValue>(
     ({ children: innerChildren, ...rest }, ref) => {
       return (
@@ -164,15 +166,16 @@ const AxListComponent = <T extends KeyValue>({
             itemCount={items.length}
             direction={isRtl ? "rtl" : "ltr"}
             innerElementType={StickyList}
-            children={(props) =>
+            itemSize={getSize}
+          >
+            {(props) =>
               children({
                 ...props,
                 data: items[props.index],
                 updateSize: updateCache,
-              } as AnyObject)
+              })
             }
-            itemSize={getSize}
-          />
+          </List>
         )}
       </AutoSizer>
     </div>

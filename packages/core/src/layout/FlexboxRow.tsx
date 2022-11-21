@@ -40,6 +40,7 @@ export interface FlexboxRowProps extends ElementProps, ChildrenProp {
   justify?: "start" | "end" | "center" | "between";
 }
 
+// eslint-disable-next-line react/display-name
 export const FlexboxRow = forwardRef<HTMLDivElement, FlexboxRowProps>(
   (
     {
@@ -56,7 +57,7 @@ export const FlexboxRow = forwardRef<HTMLDivElement, FlexboxRowProps>(
     },
     ref
   ) => {
-    /******************* class map *******************/
+    /** ***************** class map *******************/
     const classes = useMemo(() => {
       const cls = ["ax-row", className ?? ""];
       if (gutter) {
@@ -65,7 +66,7 @@ export const FlexboxRow = forwardRef<HTMLDivElement, FlexboxRowProps>(
       return cls.join(" ");
     }, [gutter, className]);
 
-    /******************* style map *******************/
+    /** ***************** style map *******************/
     const styles = useMemo(() => {
       return {
         height,
@@ -73,7 +74,7 @@ export const FlexboxRow = forwardRef<HTMLDivElement, FlexboxRowProps>(
       };
     }, [height, minHeight]);
 
-    /******************* component *******************/
+    /** ***************** component *******************/
     return (
       <div
         {...rest}

@@ -37,7 +37,7 @@ export const Badge: FC<BadgeProps> = ({
   placement,
   className,
 }) => {
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <span
       className={`ax-badge ${className ?? ""}`}

@@ -19,6 +19,7 @@ export interface RadioProps extends ElementProps, OptionProps<string | number> {
   name?: string;
 }
 
+// eslint-disable-next-line react/display-name
 export const Radio: FC<RadioProps> = memo(
   ({
     isInvalid,
@@ -30,11 +31,11 @@ export const Radio: FC<RadioProps> = memo(
     label,
     onChange,
     ...rest
-  }) => {
+  }: RadioProps) => {
     const handleChange = useCallback(
       (e?: FormEvent<HTMLInputElement>) => {
         e?.currentTarget.checked &&
-          onChange &&
+          onChange != null &&
           onChange(e?.currentTarget.value ?? "");
       },
       [onChange]

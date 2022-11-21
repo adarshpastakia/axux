@@ -15,10 +15,10 @@ export const debounce = (
   fn: (...rest: AnyObject) => AnyObject,
   timeout = 500
 ) => {
-  /******************* create debounce timer id using callback hash *******************/
+  /** ***************** create debounce timer id using callback hash *******************/
   let _timer: AnyObject;
 
-  /******************* return debounced function *******************/
+  /** ***************** return debounced function *******************/
   const cb = (...args: AnyObject) => {
     _timer && clearTimeout(_timer);
     _timer = window.setTimeout(() => fn?.(...args), timeout);

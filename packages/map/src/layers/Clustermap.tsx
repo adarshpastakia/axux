@@ -13,10 +13,7 @@ import { PALETTES } from "../constants/Palette";
 import { useMapContext } from "../viewer/MapViewer";
 
 export interface ClustermapProps {
-  data:
-    | ({ coords: LngLatLike } & KeyValue)[]
-    | GeoJSON.FeatureCollection
-    | string;
+  data: Array<{ coords: LngLatLike } & KeyValue> | GeoJSON.FeatureCollection;
 
   palette?: string[];
 }
@@ -29,7 +26,7 @@ export const Clustermap: FC<ClustermapProps> = ({
   data,
   palette = PALETTES.GlobalWarming,
 }) => {
-  const { map, maxZoom } = useMapContext();
+  const { map } = useMapContext();
 
   const loadLayers = useCallback(() => {
     if (map) {
@@ -147,7 +144,7 @@ export const Clustermap: FC<ClustermapProps> = ({
           properties: { ...rest },
         }));
       } else {
-        sourceData = data as AnyObject;
+        sourceData = data;
       }
 
       source.once("data", () => {

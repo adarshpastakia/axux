@@ -31,7 +31,7 @@ export const Row: FC<IRowConfig> = memo((item) => {
 
   const onResize = (evt: MouseEvent) => {
     const newY = evt.clientY;
-    if (refEl.current && refEl.current.lastElementChild) {
+    if (refEl.current?.lastElementChild != null) {
       const diff = newY - startY;
       const newHeight = refEl.current.clientHeight;
       if (newHeight + diff < 32) {
@@ -44,7 +44,7 @@ export const Row: FC<IRowConfig> = memo((item) => {
   };
 
   const onResizeEnd = (e: MouseEvent) => {
-    if (refEl.current) {
+    if (refEl.current != null) {
       updateConfig(id, "height", refEl.current.clientHeight);
       refEl.current.dataset.resizing = "false";
     }
@@ -58,7 +58,7 @@ export const Row: FC<IRowConfig> = memo((item) => {
 
   const onResizeStart = (e: ME) => {
     startY = e.clientY;
-    if (refEl.current) {
+    if (refEl.current != null) {
       refEl.current.dataset.resizing = "true";
     }
     setResizing(true);
@@ -75,7 +75,9 @@ export const Row: FC<IRowConfig> = memo((item) => {
       style={{ [isEditing && !isResizing ? "minHeight" : "height"]: rowHeight }}
     >
       <div className="page-maker__rowContainer">
-        {children && children.map((item) => <Col key={item.id} {...item} />)}
+        {children?.map((item) => (
+          <Col key={item.id} {...item} />
+        ))}
       </div>
       {isEditing && (
         <div className="page-maker__resizer" onMouseDown={onResizeStart} />

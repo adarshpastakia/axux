@@ -21,14 +21,23 @@ export interface ImageProps {
 }
 
 export const Image: FC<ImageProps> = memo(
-  ({ src, imageRef, canvasRef, onLoad, onError, width, height, rotate }) => {
+  ({
+    src,
+    imageRef,
+    canvasRef,
+    onLoad,
+    onError,
+    width,
+    height,
+    rotate,
+  }: ImageProps) => {
     const startDrag = (e: React.MouseEvent) => {
       const target = e.currentTarget as HTMLDivElement;
       let startX = e.clientX;
       let startY = e.clientY;
 
       const doDrag = (ev: MouseEvent) => {
-        if (target.parentElement) {
+        if (target.parentElement != null) {
           target.parentElement.scrollTop -= Math.floor(ev.clientY - startY);
           target.parentElement.scrollLeft -= Math.floor(ev.clientX - startX);
           startX = ev.clientX;
@@ -78,3 +87,4 @@ export const Image: FC<ImageProps> = memo(
     );
   }
 );
+Image.displayName = "AxImage.Image";

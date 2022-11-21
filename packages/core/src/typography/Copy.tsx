@@ -22,16 +22,16 @@ export interface CopyProps
 export const Copy: FC<CopyProps> = ({ text, tooltip, className, ...rest }) => {
   const { t } = useTranslation("core");
 
-  /******************* handle copy *******************/
+  /** ***************** handle copy *******************/
   const doCopy = useCallback(() => {
-    navigator.clipboard.writeText(text);
+    void navigator.clipboard.writeText(text);
   }, [text]);
 
-  /******************* component *******************/
-  return !!text ? (
+  /** ***************** component *******************/
+  return text ? (
     <ActionButton
       {...rest}
-      style="link"
+      variant="link"
       className={`ax-copy ${className ?? ""}`}
       icon={AppIcons.iconCopy}
       tooltip={tooltip ?? t("action.copy")}

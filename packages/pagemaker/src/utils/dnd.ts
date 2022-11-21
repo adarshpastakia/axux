@@ -82,7 +82,7 @@ const getCorrectParent = (target: HTMLElement, dragId: string) => {
 };
 
 const getNearestNode = (target: HTMLElement, types?: EnumTypes[]) => {
-  const typeCheck = types || [
+  const typeCheck = types ?? [
     EnumTypes.ROW,
     EnumTypes.COL,
     EnumTypes.TILE,
@@ -101,13 +101,13 @@ const calculatePosition = (
   isRow: boolean
 ) => {
   const rect = neighbor.getBoundingClientRect();
-  if (neighbor.parentElement) {
+  if (neighbor.parentElement != null) {
     if (isRow && evt.clientY < rect.top + rect.height / 2) {
       neighbor.parentElement.insertBefore(ghost, neighbor);
     } else if (!isRow && evt.clientX < rect.left + rect.width / 2) {
       neighbor.parentElement.insertBefore(ghost, neighbor);
     } else {
-      if (neighbor.nextElementSibling) {
+      if (neighbor.nextElementSibling != null) {
         neighbor.parentElement.insertBefore(ghost, neighbor.nextElementSibling);
       } else {
         neighbor.parentElement.appendChild(ghost);
@@ -141,7 +141,10 @@ const getColNeighbor = (evt: DragEvent, neighbor: HTMLElement) => {
     neighbor = getNearestNode(neighbor, [EnumTypes.COL]);
   }
 
-  if (neighbor.dataset.type === EnumTypes.ROW && neighbor.firstElementChild) {
+  if (
+    neighbor.dataset.type === EnumTypes.ROW &&
+    neighbor.firstElementChild != null
+  ) {
     neighbor.firstElementChild.appendChild(ghost);
   } else {
     calculatePosition(evt, neighbor, false);
@@ -163,7 +166,7 @@ const getTilePosition = (evt: DragEvent, neighbor: HTMLElement) => {
     neighbor.appendChild(ghost);
   } else if (
     neighbor.dataset.type === EnumTypes.ROW &&
-    neighbor.firstElementChild
+    neighbor.firstElementChild != null
   ) {
     neighbor.firstElementChild.appendChild(ghost);
   } else {
@@ -179,7 +182,9 @@ export const onDragOver = (evt: DragEvent, dragging: IDragObject) => {
   const target = evt.target as HTMLElement;
   if (target !== ghost) {
     const node = getNearestNode(
-      dragging.item ? getCorrectParent(target, dragging.item.id) : target
+      dragging.item != null
+        ? getCorrectParent(target, dragging.item.id)
+        : target
     );
     if (node) {
       switch (dragging.type) {
@@ -200,7 +205,7 @@ export const onDragOver = (evt: DragEvent, dragging: IDragObject) => {
 
 export const onDrop = (dragging: IDragObject) => {
   const parent = ghost.parentElement;
-  if (parent) {
+  if (parent != null) {
     const index = Array.from(parent.children).indexOf(ghost);
     const nearest = getNearestNode(ghost);
     const { id, type } = nearest
@@ -209,8 +214,8 @@ export const onDrop = (dragging: IDragObject) => {
     ghost.remove();
     return {
       index,
-      id: id,
-      move: dragging.item ? dragging.item.id : undefined,
+      id,
+      move: dragging.item != null ? dragging.item.id : undefined,
       item: getNodeConfig(dragging, type as EnumTypes),
     };
   }
@@ -218,7 +223,7 @@ export const onDrop = (dragging: IDragObject) => {
 
 export const onDragLeave = (evt: DragEvent) => {
   if (
-    evt.relatedTarget &&
+    evt.relatedTarget != null &&
     (evt.relatedTarget as HTMLElement).dataset.type === EnumTypes.PAGE
   ) {
     ghost.remove();

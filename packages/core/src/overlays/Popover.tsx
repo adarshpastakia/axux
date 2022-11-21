@@ -55,15 +55,13 @@ export const AxPopover: FC<PopoverProps> & {
   sameWidth = false,
   isDisabled = false,
   placement = "bottom",
-  // @ts-ignore
   popoverClassName,
   ...rest
-}) => {
+}: PopoverProps) => {
   const {
     attributes,
     forceUpdate,
     popperElement,
-    referenceElement,
     setArrowElement,
     setPopperElement,
     setReferenceElement,
@@ -74,7 +72,7 @@ export const AxPopover: FC<PopoverProps> & {
     hideArrow,
   });
 
-  /******************* check for children count *******************/
+  /** ***************** check for children count *******************/
   if (Children.toArray(children).length !== 2) {
     throw new Error("Two child elements required");
   }
@@ -85,7 +83,7 @@ export const AxPopover: FC<PopoverProps> & {
   );
 
   useEffect(() => {
-    if (popperElement) {
+    if (popperElement != null) {
       const cb = () => forceUpdate?.();
       popperElement.addEventListener("updatePopper", cb);
       return () => {
@@ -94,13 +92,13 @@ export const AxPopover: FC<PopoverProps> & {
     }
   }, [popperElement]);
 
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <Popover as={Fragment}>
       {({ open }) => (
         <Fragment>
           <Popover.Button as={Fragment} {...{ ref: setReferenceElement }}>
-            {cloneElement(anchorEl as AnyObject, {
+            {cloneElement(anchorEl, {
               "data-popover-open": open,
             })}
           </Popover.Button>

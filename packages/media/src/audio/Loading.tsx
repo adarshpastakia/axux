@@ -24,3 +24,4 @@ export const Loading = memo(
     return <AxProgress.Circle value={progress} />;
   }
 );
+Loading.displayName = "AxAudio.Loading";

@@ -9,8 +9,7 @@
 import { FC } from "react";
 import { SearchContextProvider } from "./context";
 import { FilterWrapper } from "./filterbar/FilterWrapper";
-import { SearchWrapper } from "./searchbar/SearchWrapper";
-import { FilterProps, SearchProps } from "./types";
+import { FilterProps } from "./types";
 
 export const AxFilterBar: FC<FilterProps> = ({ ...props }) => {
   return (

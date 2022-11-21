@@ -56,16 +56,17 @@ export const DateHeader = (props: Partial<DateContext>) => {
     }
   }, [i18next.language, isHijri, page, pageDate]);
 
+  const newLocal = headDisabled != null;
   return (
     <div className="ax-date__header" data-page={page}>
       {page === PageType.DATE && (
         <AxButton
           size="sm"
           data-pos="first"
-          style="link"
+          variant="link"
           color="primary"
           rtlFlip
-          isDisabled={headDisabled && headDisabled(-12)}
+          isDisabled={newLocal && headDisabled(-12)}
           onClick={() => changePageDate?.(-12)}
           icon={AppIcons.iconChevronLeft}
         />
@@ -73,27 +74,27 @@ export const DateHeader = (props: Partial<DateContext>) => {
       <AxButton
         size="sm"
         data-pos="prev"
-        style="link"
+        variant="link"
         color="primary"
         rtlFlip
-        isDisabled={headDisabled && headDisabled(-1)}
+        isDisabled={headDisabled?.(-1)}
         onClick={() => changePageDate?.(-1)}
         icon={AppIcons.iconCaretLeft}
       />
       <div
         className="ax-date__header--label"
         onClick={changePage}
-        data-disabled={!changePage || page === PageType.DECADE}
+        data-disabled={changePage == null || page === PageType.DECADE}
       >
         {headLabel}
       </div>
       <AxButton
         size="sm"
         data-pos="next"
-        style="link"
+        variant="link"
         color="primary"
         rtlFlip
-        isDisabled={headDisabled && headDisabled(1)}
+        isDisabled={headDisabled?.(1)}
         onClick={() => changePageDate?.(1)}
         icon={AppIcons.iconCaretRight}
       />
@@ -101,10 +102,10 @@ export const DateHeader = (props: Partial<DateContext>) => {
         <AxButton
           size="sm"
           data-pos="last"
-          style="link"
+          variant="link"
           color="primary"
           rtlFlip
-          isDisabled={headDisabled && headDisabled(12)}
+          isDisabled={headDisabled?.(12)}
           onClick={() => changePageDate?.(12)}
           icon={AppIcons.iconChevronRight}
         />

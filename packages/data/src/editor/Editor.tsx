@@ -82,7 +82,7 @@ export const AxEditor: FC<EditorProps> = ({
       validate() {
         const model = editorRef?.editor?.getModel();
         if (model) {
-          const markers = editorRef?.editor.getModelMarkers(model as AnyObject);
+          const markers = editorRef?.editor.getModelMarkers(model );
           return markers?.length === 0;
         }
         return true;
@@ -91,20 +91,20 @@ export const AxEditor: FC<EditorProps> = ({
     [editorRef]
   );
 
-  /******************* watch theme change *******************/
+  /** ***************** watch theme change *******************/
   const [theme, setTheme] = useState("");
   useLayoutEffect(() => {
     editorRef && setTheme(isDark ? "vs-dark" : "light");
   }, [isDark, editorRef]);
 
-  /******************* watch editor container resize *******************/
+  /** ***************** watch editor container resize *******************/
   const resizeHandler = useCallback(
     (size: AnyObject) => editorRef?.editor?.layout(size),
     [editorRef]
   );
   const containerRef = useResizeObserver(resizeHandler);
 
-  /******************* defer value and pass to editor as defaultValue *******************/
+  /** ***************** defer value and pass to editor as defaultValue *******************/
   const deferredValue = useDeferredValue(value);
   const codeValue = useMemo(
     () =>

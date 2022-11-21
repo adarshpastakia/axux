@@ -46,7 +46,7 @@ export interface TimelineItemProps
   style: CSSProperties;
   index: number;
   lastChild: boolean;
-  isScrolling: boolean;
+  isScrolling?: boolean;
   updateHeight: (index: number, height: number) => void;
   /**
    * avatar size
@@ -84,7 +84,8 @@ export interface TimelineProps<T> extends ElementProps {
   onLoadMore?: EmptyCallback;
 }
 
-/******************* Timeline item *******************/
+/** ***************** Timeline item *******************/
+// eslint-disable-next-line react/display-name
 const Item = memo(
   ({
     style,
@@ -108,21 +109,21 @@ const Item = memo(
   }: TimelineItemProps) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
-    /******************* calculate height on resize *******************/
+    /** ***************** calculate height on resize *******************/
     useLayoutEffect(() => {
       const ob = new ResizeObserver(() => {
         const el = itemRef.current;
-        if (el) {
+        if (el != null) {
           updateHeight(index, el.offsetHeight);
         }
       });
-      itemRef.current && ob.observe(itemRef.current);
+      itemRef.current != null && ob.observe(itemRef.current);
       return () => {
         ob.disconnect();
       };
     }, [index, parent]);
 
-    /******************* component *******************/
+    /** ***************** component *******************/
     return (
       <div style={style} className="overflow-hidden">
         <div
@@ -137,7 +138,7 @@ const Item = memo(
         >
           <div className={isScrolling ? "animate-pulse" : ""}>
             <AxIcon
-              className={`ax-timeline__avatar ${iconClassName}`}
+              className={`ax-timeline__avatar ${iconClassName ?? ""}`}
               {...{ icon, bg, color, rtlFlip, viewBox, animate }}
             />
           </div>
@@ -211,17 +212,18 @@ const AxTimelineComponent = <T extends KeyValue>({
     [listRef]
   );
 
-  /******************* list handlers *******************/
+  /** ***************** list handlers *******************/
   useEffect(() => {
     const el = containerRef.current;
     const handlers = {
       scrollFirst: () => listRef.scrollToItem(0),
       scrollLast: () => listRef.scrollToItem(count),
       scrollDown: () =>
+        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
         listRef.scrollTo(listRef.state.scrollOffset + listRef.props.height),
       scrollUp: () =>
         listRef.scrollTo(listRef.state.scrollOffset - listRef.props.height),
-      loadMore: () => !isLoading && onLoadMore?.(),
+      loadMore: () => () => !isLoading && onLoadMore?.(),
     };
     el?.addEventListener("scrollFirst", handlers.scrollFirst);
     el?.addEventListener("scrollLast", handlers.scrollLast);
@@ -238,7 +240,7 @@ const AxTimelineComponent = <T extends KeyValue>({
     };
   }, [listRef, count, isLoading, onLoadMore]);
 
-  /******************* item height cache *******************/
+  /** ***************** item height cache *******************/
   const updateCache = useCallback(
     (index: number, height: number) => {
       if (height !== (cache.get(index) ?? minHeight)) {
@@ -265,7 +267,13 @@ const AxTimelineComponent = <T extends KeyValue>({
             itemCount={count}
             itemData={itemList}
             direction={isRtl ? "rtl" : "ltr"}
-            children={(props) =>
+            outerElementType={Wrapper}
+            itemSize={(index) =>
+              cache.get(index) ??
+              Math.max(minHeight, ...Array.from(cache.values()))
+            }
+          >
+            {(props) =>
               children({
                 ...props,
                 updateHeight: updateCache,
@@ -274,14 +282,9 @@ const AxTimelineComponent = <T extends KeyValue>({
                     ? props.data[props.index]
                     : null,
                 lastChild: props.index === count - 1,
-              } as AnyObject)
+              })
             }
-            outerElementType={Wrapper}
-            itemSize={(index) =>
-              cache.get(index) ??
-              Math.max(minHeight, ...Array.from(cache.values()))
-            }
-          />
+          </List>
         )}
       </AutoSizer>
     </div>

@@ -24,11 +24,11 @@ export interface PageProps extends ElementProps, ChildrenProp {
 export const AxPage: FC<PageProps> = ({
   children,
   className,
-  isPaper,
-  isLoading,
+  isPaper = false,
+  isLoading = false,
   ...rest
 }) => {
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <div
       {...rest}

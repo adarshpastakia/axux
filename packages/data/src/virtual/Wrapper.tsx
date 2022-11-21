@@ -37,7 +37,7 @@ export const Wrapper = forwardRef(
     const [noScrollDown, setNoScrollDown] = useState(true);
     useLayoutEffect(() => {
       const el = scrollerRef.current;
-      if (el) {
+      if (el != null) {
         const cb = () => {
           setNoScrollUp(el.scrollTop === 0);
           setNoScrollDown(el.scrollTop + el.offsetHeight >= el.scrollHeight);
@@ -79,28 +79,28 @@ export const Wrapper = forwardRef(
           <div>
             <AxButton.Group isVertical>
               <AxButton
-                style="link"
+                variant="link"
                 aria-label="scroll to top"
                 icon={AppIcons.iconChevronUp}
                 onClick={() => fireEvent("scrollFirst")}
                 isDisabled={noScrollUp}
               />
               <AxButton
-                style="link"
+                variant="link"
                 aria-label="scroll up"
                 icon={AppIcons.iconCaretUp}
                 onClick={() => fireEvent("scrollUp")}
                 isDisabled={noScrollUp}
               />
               <AxButton
-                style="link"
+                variant="link"
                 aria-label="scroll down"
                 icon={AppIcons.iconCaretDown}
                 onClick={() => fireEvent("scrollDown")}
                 isDisabled={noScrollDown}
               />
               <AxButton
-                style="link"
+                variant="link"
                 aria-label="scroll to bottom"
                 icon={AppIcons.iconChevronDown}
                 onClick={() => fireEvent("scrollLast")}

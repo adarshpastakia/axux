@@ -28,7 +28,7 @@ export const Header = memo(() => {
   return (
     <div className="ax-datagrid__header">
       <div className="ax-datagrid__fixStart">
-        {!!onRowExpand && (
+        {!(onRowExpand == null) && (
           <div className="ax-datagrid__header--cell px-2">
             <AxIcon icon="" />
           </div>
@@ -48,3 +48,4 @@ export const Header = memo(() => {
     </div>
   );
 });
+Header.displayName = "AxDatagrid.Header";

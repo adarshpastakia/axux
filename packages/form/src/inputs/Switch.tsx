@@ -37,6 +37,7 @@ export interface SwitchProps
   offLabel?: string;
 }
 
+// eslint-disable-next-line react/display-name
 export const Switch: FC<SwitchProps> = memo(
   ({
     isInvalid,
@@ -50,19 +51,20 @@ export const Switch: FC<SwitchProps> = memo(
     inputRef,
     label,
     onChange,
-    // @ts-ignore
+    // @ts-expect-error
     value,
     ...rest
-  }) => {
+  }: SwitchProps) => {
     const [actualValue, setActualValue] = useState(value ?? isChecked ?? false);
-    const [pending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
     useEffect(() => {
       setActualValue(value ?? isChecked ?? false);
     }, [value, isChecked]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         setActualValue(e?.target.checked ?? false);
-        onChange && startTransition(() => onChange(e?.target.checked ?? false));
+        onChange != null &&
+          startTransition(() => onChange(e?.target.checked ?? false));
       },
       [onChange]
     );

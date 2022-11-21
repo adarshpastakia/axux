@@ -12,7 +12,7 @@ import { useCallback, useEffect, useState, useTransition } from "react";
 const filterList = (items: AnyObject[], query: string, matcher?: AnyObject) => {
   const newList: AnyObject[] = [];
   items.forEach((item) => {
-    if (matcher && matcher(item, query)) {
+    if (matcher?.(item, query)) {
       return newList.push(item);
     }
     if (matchString(item.label ?? item.toString(), query)) {

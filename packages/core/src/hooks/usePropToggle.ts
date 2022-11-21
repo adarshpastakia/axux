@@ -7,7 +7,7 @@
  */
 
 import { useCallback, useLayoutEffect, useState } from "react";
-import { CallbackReturn, EmptyCallback } from "../types";
+import { CallbackReturn } from "../types";
 
 /**
  * hook to control boolean props
@@ -18,20 +18,20 @@ import { CallbackReturn, EmptyCallback } from "../types";
  */
 export const usePropToggle = (
   isOn = false,
-  callback?: (is: boolean, key?: string) => CallbackReturn,
+  onToggle?: (is: boolean, key?: string) => CallbackReturn,
   key?: string
-): [boolean, EmptyCallback] => {
+): [boolean, () => void] => {
   const [toggleOn, setToggleOn] = useState(isOn);
 
-  /******************* update toggle state on change *******************/
+  /** ***************** update toggle state on change *******************/
   useLayoutEffect(() => {
     setToggleOn(isOn);
   }, [isOn]);
 
-  /******************* toggle handler *******************/
+  /** ***************** toggle handler *******************/
   const doToggle = useCallback(() => {
-    if (!callback || callback(!toggleOn, key) !== false) setToggleOn(!toggleOn);
-  }, [toggleOn, callback, key]);
+    if (onToggle?.(!toggleOn, key) !== false) setToggleOn(!toggleOn);
+  }, [toggleOn, onToggle, key]);
 
   return [toggleOn, doToggle];
 };

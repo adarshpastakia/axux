@@ -32,7 +32,7 @@ export const SearchWrapper: FC<Partial<SearchProps>> = ({
       {append}
       {actions && (
         <AxButton.Dropdown
-          style="outline"
+          variant="outline"
           showCaret={false}
           icon={Icons.iconMenu}
         >

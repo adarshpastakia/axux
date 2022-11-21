@@ -26,14 +26,14 @@ export const TimeSlider: FC<TimeSliderProps> = ({
 
   useEffect(() => {
     const resize = () => {
-      if (canvasRef.current) {
+      if (canvasRef.current != null) {
         canvasRef.current.width = canvasRef.current.offsetWidth;
         canvasRef.current.height = canvasRef.current.offsetHeight;
       }
     };
 
     const ob = new ResizeObserver(resize);
-    canvasRef.current && ob.observe(canvasRef.current);
+    (canvasRef.current != null) && ob.observe(canvasRef.current);
 
     return () => {
       ob.disconnect();
@@ -42,7 +42,7 @@ export const TimeSlider: FC<TimeSliderProps> = ({
 
   useEffect(() => {
     const context = canvasRef.current?.getContext("2d");
-    context &&
+    (context != null) &&
       duration > 0 &&
       markers.forEach((marker) => {
         const [time, size] = marker;

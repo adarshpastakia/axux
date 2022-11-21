@@ -57,7 +57,7 @@ export const EventCalendar: FC<Pick<RelativeProps, "events" | "onChange">> = ({
             message="No events available for selected year"
           />
         )}
-        {list.map(({ icon, label, start, end }, idx) => (
+        {list.map(({ icon, label, start = "$now", end = "$now" }, idx) => (
           <AxPopover.Dismiss key={`${idx}-${label}`}>
             <div
               className="flex items-center hover:bg-primary-500/20 mb-1 px-2 cursor-pointer select-none"

@@ -28,7 +28,7 @@ export const EmptyRow = () => {
     <div className="ax-datagrid__row flex-1">
       <div className="ax-datagrid__row--flex min-h-full">
         <div className="ax-datagrid__fixStart">
-          {!!onRowExpand && (
+          {!(onRowExpand == null) && (
             <div className="ax-datagrid__body--cell">
               <AxIcon icon="" />
             </div>

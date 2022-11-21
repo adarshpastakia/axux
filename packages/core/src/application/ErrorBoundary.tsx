@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useGlobals } from "../context/Global";
 import { ChildrenProp } from "../types";
 
-const ErrorIcon = () => (
+const ErrorIcon: FC = () => (
   <svg
     version="1.1"
     x="0px"
@@ -46,7 +46,7 @@ const DefaultError: FC<{ error?: string }> = ({ error }) => {
   );
 };
 
-const ErrorMessage = ({ error, errorElement }: KeyValue) => {
+const ErrorMessage: FC<KeyValue> = ({ error, errorElement }) => {
   const { errorElement: globalError } = useGlobals();
   const EE = useMemo(() => errorElement ?? globalError ?? DefaultError, []);
   return (
@@ -61,7 +61,7 @@ const ErrorMessage = ({ error, errorElement }: KeyValue) => {
   );
 };
 
-const ErrorStack = ({ stack }: KeyValue) => {
+const ErrorStack: FC<KeyValue> = ({ stack }) => {
   return (
     <div className="p-4 overflow-auto border-t">
       <pre>{stack}</pre>
@@ -95,9 +95,9 @@ export class AxErrorBoundary extends Component<
   render() {
     const env = process.env.NODE_ENV;
     if (this.state.hasError) {
-      const { errorElement: E, isMinimal } = this.props;
+      const { errorElement: E, isMinimal = false } = this.props;
       // You can render any custom fallback UI
-      return isMinimal && E ? (
+      return isMinimal && E != null ? (
         <E error={this.state.error} />
       ) : (
         <div className="ax-error-boundary">

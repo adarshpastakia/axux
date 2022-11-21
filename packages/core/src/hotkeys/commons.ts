@@ -6,6 +6,8 @@
  * @license   : MIT
  */
 
+import { EmptyCallback } from "../types";
+
 export interface HotKey {
   /**
    * Hot key combination
@@ -22,7 +24,7 @@ export interface HotKey {
   /**
    * Callback handler
    */
-  handler?: () => void;
+  handler?: EmptyCallback;
 }
 
 export const reduceHotKey = ({ keyCombo, global, handler }: HotKey) => {

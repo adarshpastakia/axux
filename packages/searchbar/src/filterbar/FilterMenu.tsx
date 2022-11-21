@@ -82,3 +82,4 @@ export const FilterMenu = memo(
     );
   }
 );
+FilterMenu.displayName = "FilterMenu";

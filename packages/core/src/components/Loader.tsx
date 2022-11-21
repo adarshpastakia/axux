@@ -22,7 +22,7 @@ export const AxLoader: FC<LoaderProps> = ({
   position = "absolute",
   ...rest
 }) => {
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <div {...rest} className={`ax-loader ${position}`} aria-hidden="true">
       <div className={className}>{children}</div>

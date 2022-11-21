@@ -54,7 +54,7 @@ const Template: ComponentStory<typeof AxChart.DataSeries> = () => {
     <AxPanel width={600} height={600}>
       <AxHeader>
         <AxTitle>Data Series chart</AxTitle>
-        <AxButton style="link" icon="mdi mdi-refresh" onClick={loadData} />
+        <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />
       </AxHeader>
       <AxChart.DataSeries {...data} onClick={action("onClick")} />
     </AxPanel>

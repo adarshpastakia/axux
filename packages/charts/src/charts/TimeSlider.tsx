@@ -15,7 +15,7 @@ import { ChartContainer } from "../wrapper/ChartContainer";
 import { ChartWrapper } from "../wrapper/ChartWrapper";
 
 export interface TimeSliderProps extends BaseChart {
-  data: [Date, number][];
+  data: Array<[Date, number]>;
   range?: { start: Date; end: Date };
   onBrush?: (range: { start: Date; end: Date }) => void;
 }
@@ -50,14 +50,18 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
     const chart = chartRef.current;
     if (chart && !chart?.isDisposed()) {
       chart.on("datazoom", () => {
-        const zoom = chart.getOption().dataZoom?.[0] as AnyObject;
-        const startValue = Math.floor(zoom.startValue);
-        const endValue = Math.ceil(zoom.endValue + (24 * 60 * 60 * 1000 - 1));
-        handleBrush({
-          start: startOfDay(new Date(startValue)),
-          end: endOfDay(new Date(endValue)),
-        });
-        setRange({ startValue, endValue });
+        const zoom = chart.getOption().dataZoom?.[0];
+        if (zoom) {
+          const startValue = Math.floor(zoom.startValue as number);
+          const endValue = Math.ceil(
+            (zoom.endValue as number) + (24 * 60 * 60 * 1000 - 1)
+          );
+          handleBrush({
+            start: startOfDay(new Date(startValue)),
+            end: endOfDay(new Date(endValue)),
+          });
+          setRange({ startValue, endValue });
+        }
       });
       return () => {
         !chart.isDisposed() && chart.off("datazoom");

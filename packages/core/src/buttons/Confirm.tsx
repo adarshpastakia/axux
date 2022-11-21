@@ -52,7 +52,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
   ...props
 }) => {
   const { t } = useTranslation("core");
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <AxPopover placement={placement}>
       <AxButton {...props}>{children}</AxButton>
@@ -62,7 +62,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
           <Popover.Button as={Fragment}>
             <AxButton
               size="sm"
-              style="link"
+              variant="link"
               color={actionType}
               onClick={() => onClick?.(false)}
             >
@@ -72,7 +72,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
           <Popover.Button as={Fragment}>
             <AxButton
               size="sm"
-              style="solid"
+              variant="solid"
               color={actionType}
               onClick={() => onClick?.(true)}
             >

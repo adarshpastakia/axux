@@ -43,19 +43,19 @@ export const AxText: FC<TextProps> & {
   Mark: typeof Mark;
   Abbr: typeof Abbr;
   Copy: typeof Copy;
-} = ({ children, className, clip, ...rest }) => {
+} = ({ children, className, clip, ...rest }: TextProps) => {
   const { t } = useTranslation("core");
   const refContainer = useRef<HTMLDivElement>(null);
   const [clipped, setClipped] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
-  /******************* reset clip state *******************/
+  /** ***************** reset clip state *******************/
   useEffect(() => {
     setClipped(false);
     setShowMore(false);
   }, [children, clip]);
 
-  /******************* check text height if clip enabled *******************/
+  /** ***************** check text height if clip enabled *******************/
   const checkHeight = useCallback(() => {
     const el = refContainer.current as HTMLElement;
     if (el && clip && !showMore) {
@@ -66,7 +66,7 @@ export const AxText: FC<TextProps> & {
     }
   }, [clip, showMore]);
 
-  /******************* observe element resize to recalculate height *******************/
+  /** ***************** observe element resize to recalculate height *******************/
   useLayoutEffect(() => {
     const ob = new ResizeObserver(checkHeight);
     ob.observe(refContainer.current as HTMLElement);
@@ -76,7 +76,7 @@ export const AxText: FC<TextProps> & {
     };
   }, [children, checkHeight]);
 
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <div
       {...rest}

@@ -71,26 +71,26 @@ export enum DateParts {
 }
 
 export interface DatePart {
-  diff?: number | undefined;
-  op?: string | undefined;
+  diff?: number;
+  op?: string;
   part?: DateParts;
 }
 
 export type DateLike = string | number | Date | undefined;
 export type ParsedDate = Date | undefined;
 
-export type CalendarEvent = {
+export interface CalendarEvent {
   icon: string;
   label: string;
   start: string | number;
   end: string | number;
-};
+}
 
 export interface RelativeProps extends Omit<BaseProps, "min" | "max"> {
   date?: string;
   type?: "button" | "tag";
   color?: ButtonProps["color"];
-  style?: ButtonProps["style"];
+  variant?: ButtonProps["variant"];
   className?: ElementProps["className"];
   isDisabled?: boolean;
   defaultView?: Type.QUICK | Type.RELATIVE | Type.ABSOLUTE;

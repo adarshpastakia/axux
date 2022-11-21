@@ -71,7 +71,7 @@ export const compareValues =
     }
     // if boolean sort true first
     if (isBoolean(aValue) && isBoolean(bValue)) {
-      return aValue === true ? smaller : bigger;
+      return aValue ? smaller : bigger;
     }
     const _a = ascii(aValue).toLowerCase();
     const _b = ascii(bValue).toLowerCase();

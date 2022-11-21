@@ -69,7 +69,7 @@ export const ButtonStyles: ComponentStory<AnyObject> = (props) => (
   <AxFlexBox>
     <AxFlexBox.Row align="center">
       <AxFlexBox.Col>
-        <AxButton {...props} style={undefined}>
+        <AxButton {...props} variant={undefined}>
           Normal Button!
         </AxButton>
       </AxFlexBox.Col>
@@ -79,17 +79,17 @@ export const ButtonStyles: ComponentStory<AnyObject> = (props) => (
         </AxButton>
       </AxFlexBox.Col>
       <AxFlexBox.Col>
-        <AxButton {...props} style="outline">
+        <AxButton {...props} variant="outline">
           Outline Button!
         </AxButton>
       </AxFlexBox.Col>
       <AxFlexBox.Col>
-        <AxButton {...props} style="solid">
+        <AxButton {...props} variant="solid">
           Solid Button!
         </AxButton>
       </AxFlexBox.Col>
       <AxFlexBox.Col>
-        <AxButton {...props} style="link">
+        <AxButton {...props} variant="link">
           Link Button!
         </AxButton>
       </AxFlexBox.Col>

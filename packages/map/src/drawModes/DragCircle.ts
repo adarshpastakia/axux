@@ -68,7 +68,7 @@ DragCircleMode.toDisplayFeatures = function (
   display: AnyObject
 ) {
   const isActivePolygon = geojson.properties.id === state.currentId;
-  geojson.properties.active = `${isActivePolygon}`;
+  geojson.properties.active = isActivePolygon ? "true" : "false";
   return display(geojson);
 };
 

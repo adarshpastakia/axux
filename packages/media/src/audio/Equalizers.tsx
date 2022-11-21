@@ -49,6 +49,7 @@ const EqSlider = memo(
     </div>
   )
 );
+EqSlider.displayName = "AxAudio.EQSlider";
 
 export const Equalizers = memo(
   ({
@@ -141,7 +142,7 @@ export const Equalizers = memo(
         const splitFilters = [];
         const gainNodes = [];
         const channels =
-          // @ts-ignore
+          // @ts-expect-error
           wavesurfer.instance.backend.buffer.numberOfChannels ?? 1;
         if (channels > 1) {
           const channelSplitterNode = backendAc.createChannelSplitter(channels);
@@ -170,7 +171,7 @@ export const Equalizers = memo(
         wavesurfer.instance.on("ready", createFilters);
         return () => {
           try {
-            // @ts-ignore
+            // @ts-expect-error
             wavesurfer.instance.backend.disconnectFilters();
           } catch (e) {
             //
@@ -247,7 +248,7 @@ export const Equalizers = memo(
 
     const toggleChannel = useCallback(
       (channel: number, value: number) => {
-        if (channelGains) {
+        if (channelGains != null) {
           const filter = channelGains[channel];
           filter.gain.value = value / 100;
           setChannelGains([...channelGains]);
@@ -258,7 +259,7 @@ export const Equalizers = memo(
 
     return isVisible ? (
       <div className="ax-audio__equalizers">
-        {channelGains && (
+        {channelGains != null && (
           <Fragment>
             {channelGains.map((gainNode, idx) => (
               <EqSlider
@@ -310,3 +311,4 @@ export const Equalizers = memo(
     ) : null;
   }
 );
+Equalizers.displayName = "AxAudio.Equalizers";

@@ -29,7 +29,7 @@ export const Options = ({
             data-selected={selected}
             data-active={active}
           >
-            {renderer ? renderer(option) : getLabel(option, labelProperty)}
+            {(renderer != null) ? renderer(option) : getLabel(option, labelProperty)}
           </div>
         )}
       </Combobox.Option>

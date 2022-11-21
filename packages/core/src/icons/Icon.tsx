@@ -48,7 +48,7 @@ export const AxIcon: FC<IconProps & RefProp> = forwardRef<
       icon,
       bg,
       color,
-      size,
+      size = "",
       rtlFlip,
       viewBox = "0 0 24 24",
       className,
@@ -57,7 +57,7 @@ export const AxIcon: FC<IconProps & RefProp> = forwardRef<
     },
     ref
   ) => {
-    /******************* style map *******************/
+    /** ***************** style map *******************/
     const styles = useMemo(() => {
       const s: KeyValue = {};
       if (bg && isColor(bg)) {
@@ -72,12 +72,12 @@ export const AxIcon: FC<IconProps & RefProp> = forwardRef<
       return s;
     }, [color, size]);
 
-    /******************* check if icon is svg path *******************/
+    /** ***************** check if icon is svg path *******************/
     const isSvg = useMemo(() => {
       return isSvgPath(icon);
     }, [icon]);
 
-    /******************* render icon *******************/
+    /** ***************** render icon *******************/
     const iconEl = useMemo(() => {
       if (!isString(icon)) {
         throw Error("Invalid icon expected string");
@@ -109,7 +109,7 @@ export const AxIcon: FC<IconProps & RefProp> = forwardRef<
       );
     }, [icon, isSvg, viewBox]);
 
-    /******************* component *******************/
+    /** ***************** component *******************/
     return (
       <span
         {...rest}

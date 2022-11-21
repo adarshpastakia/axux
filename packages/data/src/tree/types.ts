@@ -45,7 +45,7 @@ export interface TreeNodeType extends IconProp {
   iconOpen?: string;
   iconClosed?: string;
   isDisabled?: boolean;
-  children?: Array<TreeNodeType>;
+  children?: TreeNodeType[];
 }
 
 export interface InternalNode {
@@ -61,7 +61,7 @@ export interface InternalNode {
   isFiltered?: boolean;
   childSelected: boolean;
   isChecked: 0 | 1 | 2;
-  lines: (0 | 1)[];
+  lines: Array<0 | 1>;
   children?: InternalNode[];
   node: Omit<TreeNodeType, "children">;
 }

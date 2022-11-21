@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { ChildrenProp } from "@axux/core/dist/types";
+import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
 import {
   createContext,
   FC,
@@ -22,7 +22,7 @@ import { DatagridColumn } from "./types";
 import { useResizer } from "./useResizer";
 
 interface ContextType {
-  columns: DatagridColumn<AnyObject>[];
+  columns: Array<DatagridColumn<AnyObject>>;
   data: KeyValue[];
   widths: Map<string, number>;
 
@@ -38,7 +38,7 @@ interface ContextType {
 
 const DatagridContext = createContext<ContextType>({} as ContextType);
 
-export const DatagridProvider: FC<KeyValue & ChildrenProp> = ({
+export const DatagridProvider: FC<KeyValue & ElementProps & ChildrenProp> = ({
   children,
   columns = [],
   data = [],
@@ -80,7 +80,7 @@ export const DatagridProvider: FC<KeyValue & ChildrenProp> = ({
         ".ax-datagrid__header--cell"
       ) as HTMLElement;
       if (colEl) {
-        ghostRef.current &&
+        ghostRef.current != null &&
           useResizer(colEl, ghostRef.current, (width) => {
             setWidths(new Map(widths.set(colEl.dataset.name ?? "", width)));
           });

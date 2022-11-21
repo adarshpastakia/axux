@@ -50,7 +50,7 @@ export const FilterTag = memo(
           <AxField.Checkbox
             isInvalid={filter.isNegative}
             isChecked={!filter.isDisabled}
-            // @ts-ignore
+            // @ts-expect-error
             onClick={(e) => e.stopPropagation()}
             onChange={(e) => updateFilter(index, { isDisabled: !e })}
           />
@@ -91,3 +91,4 @@ export const FilterTag = memo(
     );
   }
 );
+FilterTag.displayName = "FilterTag";

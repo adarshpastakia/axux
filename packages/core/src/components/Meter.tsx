@@ -37,11 +37,11 @@ export const AxMeter: FC<MeterProps> = ({
   className,
   ...rest
 }) => {
-  /******************* calculate active meter dots *******************/
+  /** ***************** calculate active meter dots *******************/
   const activeCount = useMemo(() => {
     return value / 16.67;
   }, [value]);
-  /******************* build style map *******************/
+  /** ***************** build style map *******************/
   const styles = useMemo(() => {
     const s: KeyValue = {};
     if (color && isColor(color)) {

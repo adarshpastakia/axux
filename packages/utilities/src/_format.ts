@@ -12,28 +12,27 @@ import * as numeral from "numeral";
 import { Countries } from ".";
 import { isEmpty, isNil } from "./_isType";
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Format {
-  /******************* get phone number object using `libphonenumber-js` *******************/
+  /** ***************** get phone number object using `libphonenumber-js` *******************/
   const getPhone = (value: string, country = "ae") => {
-    const phone = value.match(/^[0+]/)
-      ? value.replace(/^00/, "+")
-      : `+${value}`;
+    const phone =
+      value.match(/^[0+]/) != null ? value.replace(/^00/, "+") : `+${value}`;
     const number = parsePhoneNumberFromString(phone, country as CountryCode);
-    return number
-      ? number
-      : {
-          country: "",
-          formatInternational: () => value,
-        };
+    return (
+      number ?? {
+        country: "",
+        formatInternational: () => value,
+      }
+    );
   };
 
-  /******************* common number format method using `numeral` *******************/
+  /** ***************** common number format method using `numeral` *******************/
   const numberFormat = (number?: string | number, format = "0,0[.]00a") => {
     if (isNil(number)) {
       return "";
     }
     const prefix = `${number}`.startsWith("+") ? "+" : "";
-    // @ts-ignore
     return prefix + numeral(number).format(format);
   };
 
@@ -50,33 +49,33 @@ export namespace Format {
     }
   };
 
-  /******************* format phone number using `libphonenumber-js` *******************/
+  /** ***************** format phone number using `libphonenumber-js` *******************/
   export const phone = (value?: string, useCss = false) => {
     if (isEmpty(value) || !/^[\d+\s\-()]+$/.test(value)) return undefined;
     const phone = getPhone(value);
     return `${
       useCss
-        ? `<span class="flag ${phone.country}"></span>`
+        ? `<span class="flag ${phone.country ?? ""}"></span>`
         : Countries.emoji(phone.country ?? "")
     } ${phone.formatInternational()}`;
   };
-  /******************* format whole number using `numeral` *******************/
+  /** ***************** format whole number using `numeral` *******************/
   export const number = (number?: string | number, format?: string) => {
     return numberFormat(number, format);
   };
-  /******************* format bytes using `numeral` *******************/
+  /** ***************** format bytes using `numeral` *******************/
   export const bytes = (number?: string | number) => {
     return numberFormat(number, "0,0[.]00b");
   };
-  /******************* format percentage using `numeral` *******************/
+  /** ***************** format percentage using `numeral` *******************/
   export const percent = (number?: string | number) => {
     return numberFormat(number, "0,0[.]00%");
   };
-  /******************* format date using `date-fns` *******************/
+  /** ***************** format date using `date-fns` *******************/
   export const date = (date?: Date | string | number, fmt = "d-M-y") => {
     return date ? format(new Date(date), fmt) : "";
   };
-  /******************* format time duration from total seconds/milliseconds *******************/
+  /** ***************** format time duration from total seconds/milliseconds *******************/
   export const duration = (number?: string | number, isFraction?: boolean) => {
     if (isNil(number)) {
       return "00:00.000";

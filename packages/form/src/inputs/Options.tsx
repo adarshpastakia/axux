@@ -22,6 +22,7 @@ export interface OptionsProps extends ChildrenProp, InputProps, ElementProps {
   name?: string;
 }
 
+// eslint-disable-next-line react/display-name
 export const Options: FC<OptionsProps> = memo(
   ({
     vertical,
@@ -44,7 +45,7 @@ export const Options: FC<OptionsProps> = memo(
     children,
     onEnterPressed,
     ...rest
-  }) => {
+  }: OptionsProps) => {
     return (
       <FieldWrapper
         info={info}

@@ -15,6 +15,7 @@ interface AbbrTextProps {
   color?: string;
 }
 
+// eslint-disable-next-line react/display-name
 const AbbrText = forwardRef<HTMLElement, AbbrTextProps>(
   ({ color, children, ...rest }, ref) => (
     <abbr
@@ -35,7 +36,7 @@ export interface AbbrProps extends ElementProps {
    *
    * [textPart, tooltip, color (class name or color string)]
    */
-  abbr: [textPart: string, tooltip: string, color?: string][];
+  abbr: Array<[textPart: string, tooltip: string, color?: string]>;
   /**
    * renderer callback
    */
@@ -52,10 +53,10 @@ export const Abbr: FC<AbbrProps> = ({
   renderer,
   ...rest
 }) => {
-  /******************* abbr text renderer *******************/
+  /** ***************** abbr text renderer *******************/
   const abbrRender = useCallback(
     (text: string, tooltip: string, color = "") => {
-      if (renderer) {
+      if (renderer != null) {
         return (
           <span data-tooltip={tooltip} data-tooltip-placement="top">
             {renderer([text, color])}
@@ -75,7 +76,7 @@ export const Abbr: FC<AbbrProps> = ({
     [renderer]
   );
 
-  /******************* tokenize text with abbr list *******************/
+  /** ***************** tokenize text with abbr list *******************/
   const inner = useMemo(() => {
     if (isString(children)) {
       if (!isEmpty(abbr)) {
@@ -115,7 +116,7 @@ export const Abbr: FC<AbbrProps> = ({
     return children;
   }, [children, abbr, abbrRender]);
 
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <span {...rest} className={`ax-abbr ${className ?? ""}`}>
       <bdi>{inner}</bdi>

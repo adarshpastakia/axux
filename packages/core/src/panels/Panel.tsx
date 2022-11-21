@@ -102,7 +102,7 @@ export const AxPanel: FC<PanelProps> & {
       minWidth,
       maxHeight,
       maxWidth,
-      // @ts-ignore
+      // @ts-expect-error
       onBack,
       onClose,
       ...rest

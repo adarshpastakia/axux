@@ -77,7 +77,7 @@ export const SearchContextProvider: React.FC<
   const [isDirty, setDirty] = useState(false);
   const [showFilters, setShowFilters] = useState(!isCollapsed);
 
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [history, setHistory] = useLocalStorage<string[]>(
     historyKey,
     blankHistory
@@ -133,8 +133,8 @@ export const SearchContextProvider: React.FC<
     const oldFilter = filters[index];
     newFilters.splice(index, 1, {
       ...oldFilter,
-      ...filter,
-    } as AnyObject);
+      ...(filter as AnyObject),
+    });
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
     onSearch?.({ query, filters: newFilters });
@@ -143,7 +143,7 @@ export const SearchContextProvider: React.FC<
   const addFilter = (filter: FilterObject) => {
     const newFilters = [...filters, filter];
     setFilters(newFilters);
-    onFilterChanged && onFilterChanged(newFilters);
+    onFilterChanged?.(newFilters);
     onSearch?.({ query, filters: newFilters });
   };
 
@@ -151,7 +151,7 @@ export const SearchContextProvider: React.FC<
     const newFilters = [...filters];
     newFilters.splice(index, 1);
     setFilters(newFilters);
-    onFilterChanged && onFilterChanged(newFilters);
+    onFilterChanged?.(newFilters);
     onSearch?.({ query, filters: newFilters });
   };
 

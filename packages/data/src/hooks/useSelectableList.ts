@@ -39,7 +39,7 @@ export const useSelectableList = ({
   onClick,
 }: SelectableProps) => {
   const [selection, setSelection] = useState<KeyValue>({});
-  const [pending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   useEffect(() => {
     setSelection(
       items.reduce(

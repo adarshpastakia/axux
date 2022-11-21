@@ -10,6 +10,7 @@ import { isString } from "@axux/utilities";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { AxAnimation } from "../animations";
 import { AxTooltip } from "../overlays/Tooltip";
+import { HandleCallback } from "../types";
 import { AxButton, ButtonProps } from "./Button";
 
 export interface ActionProps extends ButtonProps {
@@ -21,13 +22,15 @@ export interface ActionProps extends ButtonProps {
    * action type
    */
   actionType?: "danger" | "success";
+
+  onClick?: HandleCallback;
 }
 
 export const ActionButton: FC<ActionProps> = ({
   onClick,
   message,
   color,
-  style,
+  variant: style,
   tooltip,
   actionType = "success",
   children,
@@ -35,17 +38,17 @@ export const ActionButton: FC<ActionProps> = ({
 }) => {
   const [actionDone, setActionDone] = useState(false);
 
-  /******************* handle click *******************/
+  /** ***************** handle click *******************/
   const doClick = useCallback(() => {
     const ret = onClick?.();
-    Promise.resolve(ret).then((b) => {
+    void Promise.resolve(ret).then((b) => {
       if (b !== false) {
         setActionDone(true);
       }
     });
   }, [onClick]);
 
-  /******************* reset done state on timeout *******************/
+  /** ***************** reset done state on timeout *******************/
   useEffect(() => {
     if (actionDone) {
       const timer = setTimeout(() => setActionDone(false), 2000);
@@ -53,13 +56,13 @@ export const ActionButton: FC<ActionProps> = ({
     }
   }, [actionDone]);
 
-  /******************* normalize tooltip content *******************/
+  /** ***************** normalize tooltip content *******************/
   const tooltipContent = useMemo(() => {
     if (actionDone || !tooltip) return { content: message };
     return isString(tooltip) ? { content: tooltip } : tooltip;
   }, [message, tooltip, actionDone]);
 
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <AxTooltip
       {...tooltipContent}
@@ -73,7 +76,7 @@ export const ActionButton: FC<ActionProps> = ({
         data-active={actionDone}
         data-action-done={actionDone}
         color={actionDone ? actionType : color}
-        style={actionDone ? "solid" : style}
+        variant={actionDone ? "solid" : style}
         data-extra={
           actionDone && (
             <div className="animated-svg">

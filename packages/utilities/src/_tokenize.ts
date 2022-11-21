@@ -23,8 +23,8 @@ export const tokenize = (str: string, keywords?: string | string[]) => {
     // escape regex control characters
     let escapedKey = key.replace(/([+*.?^$()[\]\\!&|\-=])/gm, "\\$1");
     // place token within word boundaries if start/end with alpha-numeric
-    if (key.match(/^[a-z0-9]/i)) escapedKey = `\\b${escapedKey}`;
-    if (key.match(/[a-z0-9]$/i)) escapedKey = `${escapedKey}\\b`;
+    if (key.match(/^[a-z0-9]/i) != null) escapedKey = `\\b${escapedKey}`;
+    if (key.match(/[a-z0-9]$/i) != null) escapedKey = `${escapedKey}\\b`;
     return escapedKey;
   });
   const regx = new RegExp(`(${keyMap.join("|")})`, "img");

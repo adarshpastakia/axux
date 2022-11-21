@@ -13,7 +13,7 @@ import { BadgeType } from "../types";
 import { Badge } from "../typography/Badge";
 
 export const useBadge = (options?: BadgeType) => {
-  /******************* normalize badge props *******************/
+  /** ***************** normalize badge props *******************/
   const props = useMemo(() => {
     if (isEmpty(options)) return null;
 
@@ -23,6 +23,6 @@ export const useBadge = (options?: BadgeType) => {
     return { ...options, children: options.value };
   }, [options]);
 
-  /******************* render badge *******************/
+  /** ***************** render badge *******************/
   return props && <Badge {...props} />;
 };

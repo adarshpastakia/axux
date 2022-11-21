@@ -13,12 +13,12 @@ import { Format } from "@axux/utilities";
 import { FC, memo, RefObject, useState } from "react";
 
 interface SceneListProps {
-  scenes?: [time: number, poster: string][];
+  scenes?: Array<[time: number, poster: string]>;
   videoRef: RefObject<HTMLVideoElement>;
 }
 
 export const SceneList: FC<SceneListProps> = memo(
-  ({ videoRef, scenes = [] }) => {
+  ({ videoRef, scenes = [] }: SceneListProps) => {
     const [show, setShow] = useState(false);
     return (
       <div className="ax-video__scenes">
@@ -39,7 +39,8 @@ export const SceneList: FC<SceneListProps> = memo(
                   src={data[1]}
                   loading="lazy"
                   onClick={() =>
-                    videoRef.current && (videoRef.current.currentTime = data[0])
+                    videoRef.current != null &&
+                    (videoRef.current.currentTime = data[0])
                   }
                 />
               </AxList.Item>
@@ -50,3 +51,4 @@ export const SceneList: FC<SceneListProps> = memo(
     );
   }
 );
+SceneList.displayName = "AxVideo.Scenes";

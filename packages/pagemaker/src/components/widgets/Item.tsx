@@ -18,71 +18,73 @@ import { IItem } from "../../utils/types";
 import { usePageContext } from "../context";
 import { EditHead } from "./EditHead";
 
-export const Item: FC<
-  {
-    item: IItem;
-    expanded?: boolean;
-    style?: CSSProperties;
-    itemRef?: MutableRefObject<HTMLDivElement | null>;
-  } & ChildrenProp
-> = memo(({ item, children, style, itemRef, expanded = false, ...rest }) => {
-  const [hover, setHover] = useState(false);
-  const { isEditing, editConfig, selected, removeConfig, setDragging } =
-    usePageContext();
-  const { id, type } = item;
+interface Props extends ChildrenProp {
+  item: IItem;
+  expanded?: boolean;
+  style?: CSSProperties;
+  itemRef?: MutableRefObject<HTMLDivElement | null>;
+}
 
-  const isSelected = useMemo(
-    () => selected && id === selected.id,
-    [id, selected]
-  );
+export const Item: FC<Props> = memo(
+  ({ item, children, style, itemRef, expanded = false, ...rest }: Props) => {
+    const [hover, setHover] = useState(false);
+    const { isEditing, editConfig, selected, removeConfig, setDragging } =
+      usePageContext();
+    const { id, type } = item;
 
-  const onClick = useCallback(
-    (e: MouseEvent) => {
-      if (isEditing) {
-        editConfig(id);
-        e.stopPropagation();
-      }
-    },
-    [isEditing, editConfig, id]
-  );
+    const isSelected = useMemo(
+      () => selected && id === selected.id,
+      [id, selected]
+    );
 
-  const onMouseOver = useCallback(
-    (e: MouseEvent) => {
-      if (isEditing) {
-        setHover(true);
-        e.stopPropagation();
-      }
-    },
-    [isEditing]
-  );
+    const onClick = useCallback(
+      (e: MouseEvent) => {
+        if (isEditing) {
+          editConfig(id);
+          e.stopPropagation();
+        }
+      },
+      [isEditing, editConfig, id]
+    );
 
-  return (
-    <div
-      ref={itemRef}
-      className={`page-maker__item`}
-      data-id={id}
-      data-type={type}
-      data-hover={hover}
-      data-expanded={expanded}
-      data-selected={isSelected}
-      style={style}
-      {...rest}
-      onClick={onClick}
-      onMouseOver={onMouseOver}
-      onMouseOut={() => setHover(false)}
-    >
-      {children}
-      {isEditing && (
-        <EditHead
-          title={type}
-          onRemove={() => removeConfig(id)}
-          onDragStart={(e) => [
-            setDragging({ type, item }),
-            e.stopPropagation(),
-          ]}
-        />
-      )}
-    </div>
-  );
-});
+    const onMouseOver = useCallback(
+      (e: MouseEvent) => {
+        if (isEditing) {
+          setHover(true);
+          e.stopPropagation();
+        }
+      },
+      [isEditing]
+    );
+
+    return (
+      <div
+        ref={itemRef}
+        className={`page-maker__item`}
+        data-id={id}
+        data-type={type}
+        data-hover={hover}
+        data-expanded={expanded}
+        data-selected={isSelected}
+        style={style}
+        {...rest}
+        onClick={onClick}
+        onMouseOver={onMouseOver}
+        onMouseOut={() => setHover(false)}
+      >
+        {children}
+        {isEditing && (
+          <EditHead
+            title={type}
+            onRemove={() => removeConfig(id)}
+            onDragStart={(e) => [
+              setDragging({ type, item }),
+              e.stopPropagation(),
+            ]}
+          />
+        )}
+      </div>
+    );
+  }
+);
 Item.displayName = "AxPageMaker.Item";

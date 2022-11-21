@@ -116,7 +116,7 @@ export const AxForm = <K extends KeyValue>({
     defaultValues: defaultValues as DeepPartial<K>,
   });
 
-  const [pending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   useEffect(() => {
     const subscription = form.watch((value) => {
       startTransition(() => onChange?.(value as K));
@@ -130,7 +130,7 @@ export const AxForm = <K extends KeyValue>({
       reset: () => (form.reset(defaultValues), form.clearErrors()),
       clear: () => (form.reset({} as AnyObject), form.clearErrors()),
       submit: () => form.handleSubmit(onSubmit),
-      validate: () => form.trigger(),
+      validate: async () => await form.trigger(),
       getValues: () => form.getValues(),
       setValues: (v) => form.reset(v),
       setValue: (k, v) =>
@@ -158,7 +158,7 @@ export const AxForm = <K extends KeyValue>({
   return (
     <FormProvider {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit, onInvalid)}
+        onSubmit={() => form.handleSubmit(onSubmit, onInvalid)}
         data-loading={form.formState.isSubmitting}
         className="ax-form contents"
         autoComplete="off"

@@ -45,8 +45,8 @@ export const Spinner: FC<LoaderProps> = ({ className }) => {
  * card loading
  */
 export const Card: FC<LoaderProps & { showIcon?: boolean }> = ({
-  className,
-  showIcon,
+  className = "",
+  showIcon = false,
 }) => {
   return (
     <div className="card-animation">

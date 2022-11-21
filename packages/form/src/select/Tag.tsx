@@ -50,7 +50,7 @@ export const TagInput = <T extends AnyObject>({
   isInvalid,
   className,
   isEditable,
-  // @ts-ignore
+  // @ts-expect-error
   name,
   info,
   error,
@@ -63,7 +63,7 @@ export const TagInput = <T extends AnyObject>({
   ...rest
 }: TagProps<T>) => {
   const [actualValue, setActualValue] = useState<T[]>([]);
-  const [pending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const { list, query, onQueryChange } = useSelect({
     options,
     labelProperty,
@@ -78,18 +78,19 @@ export const TagInput = <T extends AnyObject>({
       placement: "bottom-start",
     });
 
-  /******************* set actualValue when value changes *******************/
+  /** ***************** set actualValue when value changes *******************/
   useEffect(() => {
     if (!isArray(value)) return setActualValue([]);
     const flatList = options.map((o: AnyObject) => o.items ?? o).flat(2);
     setActualValue(
       (value ?? [])
         .map((val) => {
-          const ret = matcher
-            ? flatList.find((option) => matcher(option, val))
-            : flatList.find((option) =>
-                defaultMatcher(option, val, valueProperty)
-              );
+          const ret =
+            matcher != null
+              ? flatList.find((option) => matcher(option, val))
+              : flatList.find((option) =>
+                  defaultMatcher(option, val, valueProperty)
+                );
           if (ret) return ret;
           if (allowCreate) return val;
           return null;
@@ -98,12 +99,12 @@ export const TagInput = <T extends AnyObject>({
     );
   }, [value, valueProperty, options, allowCreate]);
 
-  /******************* change actualValue *******************/
+  /** ***************** change actualValue *******************/
   const handleChange = useCallback(
     (options: T[] = []) => {
-      Promise.resolve(onSelect?.(options)).then((b) => {
+      void Promise.resolve(onSelect?.(options)).then((b) => {
         if (b !== false) {
-          onChange &&
+          onChange != null &&
             startTransition(() =>
               onChange(
                 options.map((value: AnyObject) =>
@@ -120,10 +121,10 @@ export const TagInput = <T extends AnyObject>({
     [onChange, forceUpdate, valueProperty, query]
   );
 
-  /******************* display label *******************/
+  /** ***************** display label *******************/
   const displayLabel = useCallback(
     (option: T) => {
-      if (makeLabel && !isEmpty(actualValue)) return makeLabel(option);
+      if (makeLabel != null && !isEmpty(actualValue)) return makeLabel(option);
       return getLabel(option, labelProperty);
     },
     [makeLabel, labelProperty]
@@ -134,7 +135,7 @@ export const TagInput = <T extends AnyObject>({
       const newValue = [...actualValue];
       newValue.splice(index, 1);
       setActualValue(newValue);
-      onChange &&
+      onChange != null &&
         startTransition(() =>
           onChange(
             newValue.map((value: AnyObject) => getValue(value, valueProperty))

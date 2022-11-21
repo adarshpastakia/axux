@@ -47,13 +47,13 @@ interface IContext {
 
 const findDeep = (obj: PageItem[], id: string): PageItem | undefined => {
   const find = obj.find((o) => o.id === id);
-  if (find) {
+  if (find != null) {
     return find;
   } else {
     for (let i = 0; i < obj.length; i++) {
       if ("children" in obj[i] && Array.isArray(obj[i].children)) {
         const _inner = findDeep(obj[i].children, id);
-        if (_inner) {
+        if (_inner != null) {
           return _inner;
         }
       }
@@ -114,21 +114,21 @@ export const ContextProvider: FC<IProps> = ({
     const newConfig = [...(removeDeep(config, id) as AnyObject)];
     setConfig(newConfig);
     setSelected(undefined);
-    onChange && onChange(newConfig);
+    onChange?.(newConfig);
   };
 
   const updateConfig = (id: string, key: keyof PageItem, value: AnyObject) => {
     const _o = findDeep(config, id);
-    if (_o) {
+    if (_o != null) {
       _o[key] = value;
       setSelected({ ..._o });
       setConfig([...config]);
-      onChange && onChange([...config]);
+      onChange?.([...config]);
     }
   };
 
   const addItem = (opt?: DropObject) => {
-    if (opt) {
+    if (opt != null) {
       const { id, item, index, move } = opt;
       let newConfig = [...config];
       if (move) {
@@ -136,9 +136,13 @@ export const ContextProvider: FC<IProps> = ({
       }
       if (id) {
         const _o = findDeep(newConfig, id);
-        if (_o && Array.isArray(_o.children) && _o.children.length > 0) {
+        if (
+          _o != null &&
+          Array.isArray(_o.children) &&
+          _o.children.length > 0
+        ) {
           _o.children.splice(index, 0, item as AnyObject);
-        } else if (_o) {
+        } else if (_o != null) {
           _o.children = [item];
         }
       } else {
@@ -146,28 +150,27 @@ export const ContextProvider: FC<IProps> = ({
       }
       setDragging(undefined);
       setConfig(newConfig);
-      onChange && onChange(newConfig);
+      onChange?.(newConfig);
     }
   };
 
   const addWidget = (colId: string) => {
-    onAdd &&
-      onAdd((widget) => {
-        const newTile = getNodeConfig(
-          {
-            widgetId: widget.id,
-            title: widget.title,
-            type: EnumTypes.TILE,
-          },
-          EnumTypes.COL
-        );
-        updateConfig(colId, "children", [newTile]);
-        setSelected(newTile);
-      });
+    onAdd?.((widget) => {
+      const newTile = getNodeConfig(
+        {
+          widgetId: widget.id,
+          title: widget.title,
+          type: EnumTypes.TILE,
+        },
+        EnumTypes.COL
+      );
+      updateConfig(colId, "children", [newTile]);
+      setSelected(newTile);
+    });
   };
 
   const editWidget = (widgetId: string) => {
-    onEdit && onEdit(widgetId);
+    onEdit?.(widgetId);
   };
 
   const findWidget = (widgetId: string) => {

@@ -18,7 +18,7 @@ export const GlobalMenu = () => {
 
   return (
     <AxButton.Dropdown
-      style="link"
+      variant="link"
       isDisabled={filters.length === 0}
       dropdownClassName="ax-filter__menu"
       className="flush"

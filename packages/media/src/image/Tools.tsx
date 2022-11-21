@@ -21,14 +21,14 @@ export interface ToolsProps {
 }
 
 export const Tools: FC<ToolsProps> = memo(
-  ({ zoom, rotate, onZoom, onRotate, isDisabled, disableZoom }) => {
+  ({ zoom, rotate, onZoom, onRotate, isDisabled, disableZoom }: ToolsProps) => {
     const startDrag = (e: React.MouseEvent) => {
       const target = e.currentTarget as HTMLDivElement;
       let startX = e.clientX;
       let zoomStart = zoom || 1;
 
       const doDrag = (ev: MouseEvent) => {
-        if (target.parentElement) {
+        if (target.parentElement != null) {
           zoomStart += (startX - ev.clientX) * 0.05;
           onZoom(Math.max(0.1, Math.min(5, zoomStart)));
           startX = ev.clientX;
@@ -117,3 +117,4 @@ export const Tools: FC<ToolsProps> = memo(
     );
   }
 );
+Tools.displayName = "AxImage.Tools";

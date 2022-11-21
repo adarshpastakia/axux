@@ -33,6 +33,7 @@ export interface AddonProps extends ElementProps, IconProp, ChildrenProp {
   showWhenEmpty?: boolean;
 }
 
+// eslint-disable-next-line react/display-name
 export const Addon: FC<AddonProps> = memo(
   ({
     icon,
@@ -44,7 +45,7 @@ export const Addon: FC<AddonProps> = memo(
     children,
     className,
     ...rest
-  }) => {
+  }: AddonProps) => {
     const focus = useCallback((e: MouseEvent) => {
       (
         e.currentTarget.parentElement?.querySelector(

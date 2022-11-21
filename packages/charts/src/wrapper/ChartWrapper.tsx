@@ -8,9 +8,9 @@
 
 import { AxErrorBoundary } from "@axux/core/dist/application/ErrorBoundary";
 import "echarts-wordcloud";
-import { ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
-const Error = ({ error = "" }) => {
+const Error: FC<{ error?: string }> = ({ error = "" }) => {
   return (
     <div className="ax-chart__error">
       <label>Error</label> <span>{error}</span>

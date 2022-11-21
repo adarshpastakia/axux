@@ -27,7 +27,7 @@ export interface ToolsProps {
   showVtt: boolean;
   hasVtt: boolean;
   videoRef: RefObject<HTMLVideoElement>;
-  markers?: [time: number, score: number][];
+  markers?: Array<[time: number, score: number]>;
   onToggleFit: () => void;
   onToggleSrt: () => void;
 }
@@ -50,7 +50,7 @@ export const Tools: FC<ToolsProps> = memo(
     onToggleSrt,
     showVtt,
     hasVtt,
-  }) => {
+  }: ToolsProps) => {
     const [time, setTime] = useState(0);
     const [speed, setSpeed] = useState(0);
     const [volume, setVolume] = useState(0);
@@ -85,19 +85,19 @@ export const Tools: FC<ToolsProps> = memo(
       (newTime = 0) => {
         const time = Math.min(duration, Math.max(0, newTime));
         setTime(time);
-        videoRef.current && (videoRef.current.currentTime = time);
+        videoRef.current != null && (videoRef.current.currentTime = time);
       },
       [duration]
     );
     const handleVolume = useCallback((newVolume = 0) => {
       const volume = Math.min(1, Math.max(0, newVolume));
       setVolume(volume);
-      videoRef.current && (videoRef.current.volume = volume);
+      videoRef.current != null && (videoRef.current.volume = volume);
     }, []);
     const handleSpeed = useCallback((newSpeed = 0) => {
       const speed = Math.min(5, Math.max(0, newSpeed));
       setSpeed(speed);
-      videoRef.current && (videoRef.current.playbackRate = speed);
+      videoRef.current != null && (videoRef.current.playbackRate = speed);
     }, []);
 
     const volumeIcon = useMemo(() => {
@@ -112,9 +112,11 @@ export const Tools: FC<ToolsProps> = memo(
         <AxHotKey
           global
           keyCombo="space"
-          handler={() =>
-            isPlaying ? videoRef.current?.pause() : videoRef.current?.play()
-          }
+          handler={() => {
+            isPlaying
+              ? videoRef.current?.pause()
+              : videoRef.current?.play().then();
+          }}
         />
         <AxHotKey global keyCombo="f" handler={onToggleFit} />
         <AxHotKey global keyCombo="x" handler={handleVolume} />
@@ -163,7 +165,9 @@ export const Tools: FC<ToolsProps> = memo(
             <AxIcon
               className="ax-media__tool"
               icon={Icons.iconPlay}
-              onClick={() => videoRef.current?.play()}
+              onClick={() => {
+                void videoRef.current?.play();
+              }}
             />
           )}
           <AxDivider vertical size="xs" />
@@ -231,3 +235,4 @@ export const Tools: FC<ToolsProps> = memo(
     );
   }
 );
+Tools.displayName = "AxVideo.Tools";

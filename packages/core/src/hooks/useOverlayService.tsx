@@ -22,7 +22,7 @@ export const useOverlayService = (
 ] => {
   const [Overlay, setOverlay] = useState<AnyObject>();
 
-  /******************* message container *******************/
+  /** ***************** message container *******************/
   const overlayContainer = useMemo(() => {
     let el = document.body.querySelector(
       ".ax-overlay__container"
@@ -35,10 +35,10 @@ export const useOverlayService = (
     return el;
   }, []);
 
-  const openOverlay = (props: KeyValue = {}) => {
+  const openOverlay = async (props: KeyValue = {}) => {
     const el = document.createElement("div");
     overlayContainer.appendChild(el);
-    return new Promise((resolve) => {
+    return await new Promise((resolve) => {
       const handleClose = (args: AnyObject) => {
         (el.firstElementChild as HTMLElement).dataset.show = "";
         setTimeout(() => {

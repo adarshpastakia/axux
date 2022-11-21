@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxIcon, useDebounce } from "@axux/core";
+import { AxIcon } from "@axux/core";
 import { HotKeyWrapper } from "@axux/core/dist/hotkeys/HotKeyWrapper";
 import {
   forwardRef,
@@ -51,11 +51,11 @@ export interface AudioPlayerProps {
   /**
    * channel colors
    */
-  colors?: [wave: string, progress: string][];
+  colors?: Array<[wave: string, progress: string]>;
   /**
    * scene list
    */
-  regions?: { id: string; start: number; end: number; channel?: number }[];
+  regions?: Array<{ id: string; start: number; end: number; channel?: number }>;
   /**
    * onChange playback time
    */
@@ -84,16 +84,14 @@ export const AxAudioPlayer = forwardRef<
       onPlay,
       onRegionStart,
       onRegionEnd,
-    },
+    }: AudioPlayerProps,
     ref
   ) => {
-    const [pending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const timelineRef = useRef<HTMLDivElement>(null);
     const [wavesurfer, setWavesurfer] = useState<WavesurferInstance>();
-
-    const changeCallback = useDebounce(onChange);
 
     const initState = useCallback(
       () =>
@@ -149,18 +147,21 @@ export const AxAudioPlayer = forwardRef<
       []
     );
 
-    /******************* initialize wavesurfer *******************/
+    /** ***************** initialize wavesurfer *******************/
     useEffect(() => {
-      const surfer = Wavesurfer(containerRef.current!, timelineRef.current!);
+      const surfer = Wavesurfer(
+        containerRef.current as HTMLElement,
+        timelineRef.current as HTMLElement
+      );
       setWavesurfer(surfer);
       return () => {
         surfer.destroy();
       };
     }, []);
 
-    /******************* handle load *******************/
+    /** ***************** handle load *******************/
     useEffect(() => {
-      if (wavesurfer) {
+      if (wavesurfer != null) {
         const handler = () => {
           dispatch({ type: "loaded" });
           startTransition(() => onLoad?.());
@@ -173,9 +174,9 @@ export const AxAudioPlayer = forwardRef<
       }
     }, [wavesurfer, onLoad]);
 
-    /******************* handle error *******************/
+    /** ***************** handle error *******************/
     useEffect(() => {
-      if (wavesurfer) {
+      if (wavesurfer != null) {
         const handler = () => {
           dispatch({ type: "errored" });
           startTransition(() => onError?.());
@@ -188,9 +189,9 @@ export const AxAudioPlayer = forwardRef<
       }
     }, [wavesurfer, onError]);
 
-    /******************* handle play *******************/
+    /** ***************** handle play *******************/
     useEffect(() => {
-      if (wavesurfer) {
+      if (wavesurfer != null) {
         const handler = () => {
           dispatch({ type: "play" });
           startTransition(() => onPlay?.());
@@ -203,9 +204,9 @@ export const AxAudioPlayer = forwardRef<
       }
     }, [wavesurfer, onPlay]);
 
-    /******************* handle pause *******************/
+    /** ***************** handle pause *******************/
     useEffect(() => {
-      if (wavesurfer) {
+      if (wavesurfer != null) {
         const handler = () => {
           dispatch({ type: "pause" });
           startTransition(() => onPause?.());
@@ -218,9 +219,9 @@ export const AxAudioPlayer = forwardRef<
       }
     }, [wavesurfer, onPause]);
 
-    /******************* handle region in/out *******************/
+    /** ***************** handle region in/out *******************/
     useEffect(() => {
-      if (wavesurfer) {
+      if (wavesurfer != null) {
         const handleIn = (region: KeyValue) => {
           startTransition(() => onRegionStart?.(region.id));
         };
@@ -237,14 +238,14 @@ export const AxAudioPlayer = forwardRef<
       }
     }, [wavesurfer, onRegionStart, onRegionEnd]);
 
-    /******************* colors change *******************/
+    /** ***************** colors change *******************/
     useLayoutEffect(() => {
-      if (wavesurfer) {
+      if (wavesurfer != null) {
         wavesurfer.setColors(colors);
       }
     }, [wavesurfer, colors]);
 
-    /******************* regions change *******************/
+    /** ***************** regions change *******************/
     useLayoutEffect(() => {
       if (wavesurfer?.instance.isReady) {
         wavesurfer.setRegions(regions);
@@ -255,12 +256,12 @@ export const AxAudioPlayer = forwardRef<
       }
     }, [wavesurfer, regions]);
 
-    /******************* source change *******************/
+    /** ***************** source change *******************/
     useLayoutEffect(() => {
-      if (wavesurfer) {
+      if (wavesurfer != null) {
         dispatch({ type: "init" });
         startTransition(() => {
-          wavesurfer.loadAudio(src);
+          void wavesurfer.loadAudio(src);
         });
       }
     }, [src, wavesurfer]);
@@ -274,7 +275,7 @@ export const AxAudioPlayer = forwardRef<
         >
           <div className="ax-audio__container" ref={containerRef} />
           <div className="ax-audio__timeline" ref={timelineRef} />
-          {wavesurfer && (
+          {wavesurfer != null && (
             <Tools
               isDisabled={state.isErrored || state.isLoading}
               isPlaying={state.isPlaying}
@@ -282,7 +283,7 @@ export const AxAudioPlayer = forwardRef<
             />
           )}
 
-          {state.isLoading && wavesurfer && (
+          {state.isLoading && wavesurfer != null && (
             <div className="ax-media__overlay">
               <Loading wavesurfer={wavesurfer} />
             </div>
@@ -297,3 +298,4 @@ export const AxAudioPlayer = forwardRef<
     );
   }
 );
+AxAudioPlayer.displayName = "AxAudio.Player";

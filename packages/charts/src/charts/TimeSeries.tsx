@@ -84,7 +84,7 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
 
     const stack = type.includes("stacked") ? "stack" : undefined;
 
-    const [_type, stacked] = type.split("-");
+    const [_type] = type.split("-");
     const categoryAxis: AnyObject = {
       name: categoryAxisName,
       type: "time",
@@ -145,7 +145,7 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
         <label>{title}</label>
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.Line}
           isActive={type === "line"}
@@ -153,7 +153,7 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.Column}
           isActive={type === "column"}
@@ -161,7 +161,7 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.LineStacked}
           isActive={type === "line-stacked"}
@@ -169,7 +169,7 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.ColumnStacked}
           isActive={type === "column-stacked"}

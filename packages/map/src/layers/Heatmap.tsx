@@ -13,10 +13,7 @@ import { PALETTES } from "../constants/Palette";
 import { useMapContext } from "../viewer/MapViewer";
 
 export interface HeatmapProps {
-  data:
-    | ({ coords: LngLatLike } & KeyValue)[]
-    | GeoJSON.FeatureCollection
-    | string;
+  data: Array<{ coords: LngLatLike } & KeyValue> | GeoJSON.FeatureCollection;
 
   palette?: string[];
 }
@@ -149,7 +146,7 @@ export const Heatmap: FC<HeatmapProps> = ({
           properties: { ...rest, timestamp: Date.parse(timestamp) },
         }));
       } else {
-        sourceData = data as AnyObject;
+        sourceData = data;
       }
 
       source.once("data", () => {

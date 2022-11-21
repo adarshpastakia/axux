@@ -34,7 +34,7 @@ export default {
    */
   toIso2(code: string) {
     const ctry = this.find(code);
-    return ctry ? ctry.iso2 : undefined;
+    return ctry != null ? ctry.iso2 : undefined;
   },
   /**
    * Get iso3 code
@@ -42,7 +42,7 @@ export default {
    */
   toIso3(code: string) {
     const ctry = this.find(code);
-    return ctry ? ctry.iso3 : undefined;
+    return ctry != null ? ctry.iso3 : undefined;
   },
   /**
    * Country flag emoji
@@ -50,7 +50,7 @@ export default {
    */
   emoji(code: string) {
     const ctry = this.find(code);
-    return ctry ? ctry.emoji : "🏳️";
+    return ctry != null ? ctry.emoji : "🏳️";
   },
   /**
    * Get country name
@@ -58,7 +58,7 @@ export default {
    */
   name: function (code: string) {
     const ctry = this.find(code);
-    return ctry ? ctry.name : code;
+    return ctry != null ? ctry.name : code;
   },
   /**
    * Find country by code
@@ -77,7 +77,7 @@ export default {
   find(code: string): Country | undefined {
     return this.list.find(
       (ct) =>
-        (ct.alt || "__").toLowerCase() === code.toLowerCase() ||
+        (ct.alt ?? "__").toLowerCase() === code.toLowerCase() ||
         ct.iso3.toLowerCase() === code.toLowerCase() ||
         ct.iso2.toLowerCase() === code.toLowerCase()
     );

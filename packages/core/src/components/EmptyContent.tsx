@@ -144,7 +144,7 @@ export const EmptyContent: FC<EmptyContentProps> = ({
         <AxIcon
           icon={icon}
           rtlFlip={rtlFlip}
-          className={`ax-empty__icon ${iconClassName}`}
+          className={`ax-empty__icon ${iconClassName ?? ""}`}
         />
       )}
       {!icon && (

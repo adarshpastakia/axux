@@ -29,7 +29,7 @@ export const AxCard = forwardRef<HTMLElement, CardProps>(
         ...rest,
         "data-plain": isPlain,
         "data-active-shadow": isActive,
-        "data-clickable": !!rest.onClick,
+        "data-clickable": !(rest.onClick == null),
         className: `ax-card ${className ?? ""}`,
       }),
       [rest, isPlain, isActive, className]

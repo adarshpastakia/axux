@@ -6,25 +6,6 @@
  * @license   : MIT
  */
 
-interface Options {
-  /**
-   * is vertical resize
-   */
-  isReverse?: boolean;
-  /**
-   * is vertical resize
-   */
-  isVertical?: boolean;
-  /**
-   * callback on drag start
-   */
-  onStart?: () => void;
-  /**
-   * callback on drag end
-   */
-  onEnd?: () => void;
-}
-
 export const useResizer = (
   colEl: HTMLElement,
   ghostEl: HTMLElement,
@@ -32,16 +13,15 @@ export const useResizer = (
 ) => {
   const placeholder = ghostEl.firstElementChild as HTMLElement;
   const isRtl = getComputedStyle(colEl).direction === "rtl";
-  const scrollTo = ghostEl.closest(".ax-datagrid")?.scrollLeft ?? 0;
 
   const onResize = (evt: MouseEvent) => {
-    /******************* check if reverse enabled of RTL *******************/
+    /** ***************** check if reverse enabled of RTL *******************/
     const box = colEl.getBoundingClientRect();
     const x = evt.clientX - (isRtl ? box.left : box.right);
     placeholder.style.width = `${colEl.offsetWidth + x}px`;
   };
 
-  /******************* dettach handlers on mouseup *******************/
+  /** ***************** dettach handlers on mouseup *******************/
   const onResizeEnd = () => {
     callback(placeholder.offsetWidth);
     ghostEl.style.display = "none";
@@ -49,9 +29,9 @@ export const useResizer = (
     document.removeEventListener("mouseup", onResizeEnd);
   };
 
-  /******************* attach handlers *******************/
+  /** ***************** attach handlers *******************/
   const box = colEl.getBoundingClientRect();
-  if (isRtl && colEl.parentElement) {
+  if (isRtl && colEl.parentElement != null) {
     placeholder.style.left = "unset";
     placeholder.style.right = `${box.right}px`;
   } else {

@@ -7,11 +7,11 @@
  */
 import { useLogger } from "@axux/utilities";
 import WaveSurfer from "wavesurfer.js";
-// @ts-ignore
+// @ts-expect-error
 import CursorPlugin from "wavesurfer.js/dist/plugin/wavesurfer.cursor";
-// @ts-ignore
+// @ts-expect-error
 import RegionsPlugin from "wavesurfer.js/dist/plugin/wavesurfer.regions";
-// @ts-ignore
+// @ts-expect-error
 import TimelinePlugin from "wavesurfer.js/dist/plugin/wavesurfer.timeline";
 
 const CHANNEL_COLORS = [
@@ -44,7 +44,7 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
       },
     }),
   ];
-  timeline &&
+  (timeline != null) &&
     plugins.push(
       TimelinePlugin.create({
         container: timeline,
@@ -57,7 +57,7 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
 
   logger.debug("create instance");
   const instance = WaveSurfer.create({
-    container: container,
+    container,
     scrollParent: true,
     responsive: true,
     backend: "WebAudio",
@@ -87,7 +87,7 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
     plugins,
   });
   instance.on("ready", () => {
-    // @ts-ignore
+    // @ts-expect-error
     const channels = instance.backend.buffer.numberOfChannels;
     instance.setHeight(200 / channels);
   });
@@ -107,7 +107,7 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
     region.remove();
   });
 
-  /******************* destroy *******************/
+  /** ***************** destroy *******************/
   const destroy = () => {
     try {
       instance?.destroy();
@@ -116,17 +116,17 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
     }
   };
 
-  /******************* set wave colors *******************/
-  const setColors = (colors?: [wave: string, progress: string][]) => {
+  /** ***************** set wave colors *******************/
+  const setColors = (colors?: Array<[wave: string, progress: string]>) => {
     colors?.forEach(([wave, progress], idx) => {
       instance?.setWaveColor(wave, idx);
       instance?.setProgressColor(progress, idx);
     });
   };
 
-  /******************* set wave regions *******************/
+  /** ***************** set wave regions *******************/
   const setRegions = (
-    regions?: { id: string; start: number; end: number; channel?: number }[]
+    regions?: Array<{ id: string; start: number; end: number; channel?: number }>
   ) => {
     instance.regions.clear();
     regions?.forEach(({ channel = -1, ...region }) => {
@@ -140,8 +140,8 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
     });
   };
 
-  /******************* load audio file *******************/
-  const loadAudio = (src: string) => {
+  /** ***************** load audio file *******************/
+  const loadAudio = async (src: string) => {
     const tmr = logger.timer("load audio");
     if (instance) {
       try {
@@ -160,7 +160,7 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
         //
       }
 
-      return new Promise<void>((resolve) => {
+      return await new Promise<void>((resolve) => {
         instance.load(src, undefined, undefined, undefined);
         instance.once("ready", () => {
           tmr.end();
@@ -168,7 +168,7 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
         });
       });
     }
-    return Promise.resolve();
+    return await Promise.resolve();
   };
 
   return {

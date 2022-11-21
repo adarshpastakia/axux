@@ -39,20 +39,20 @@ export const QuickSelect: FC<RelativeProps> = ({ date, onChange, presets }) => {
 
   const applyRelative = useCallback(() => {
     if (quickDate) {
-      onChange && onChange(makeSuperDate(quickDate));
+      onChange?.(makeSuperDate(quickDate));
     }
   }, [quickDate, onChange]);
   const selectPreset = useCallback(
     (e: MouseEvent<HTMLElement>) => {
       const { preset = DateParts.NOW } = e.currentTarget.dataset;
-      onChange && onChange(`${preset}|${preset}`);
+      onChange?.(`${preset}|${preset}`);
     },
     [onChange]
   );
   const selectCustomPreset = useCallback(
     (e: MouseEvent<HTMLElement>) => {
-      const { preset } = e.currentTarget.dataset;
-      onChange && onChange(`${preset}`);
+      const { preset = "$now" } = e.currentTarget.dataset;
+      onChange?.(`${preset}`);
     },
     [onChange]
   );
@@ -65,7 +65,7 @@ export const QuickSelect: FC<RelativeProps> = ({ date, onChange, presets }) => {
         onChange={setQuickDate}
       >
         <AxPopover.Dismiss>
-          <AxButton style="solid" onClick={applyRelative}>
+          <AxButton variant="solid" onClick={applyRelative}>
             {t("core:action.apply")}
           </AxButton>
         </AxPopover.Dismiss>
@@ -76,7 +76,7 @@ export const QuickSelect: FC<RelativeProps> = ({ date, onChange, presets }) => {
         className="ax-field--plain"
         isVertical
       >
-        {!presets &&
+        {presets == null &&
           Presets.map((p, i) => (
             <div key={i} className="ax-superdate__links">
               {p.map((key) => (
@@ -92,7 +92,7 @@ export const QuickSelect: FC<RelativeProps> = ({ date, onChange, presets }) => {
               ))}
             </div>
           ))}
-        {presets && (
+        {presets != null && (
           <div className="ax-superdate__links">
             {Object.entries(presets).map(([key, preset]) => (
               <AxPopover.Dismiss key={key}>

@@ -43,27 +43,27 @@ export const Tools: FC<{
       <div className="flex-1" />
       <AxButton.Group>
         <AxButton
-          style="link"
+          variant="link"
           onClick={search}
           tooltip={t("action.find")}
           icon={AppIcons.iconSearch}
         />
         <AxDivider size="xs" />
         <AxButton
-          style="link"
+          variant="link"
           onClick={foldAll}
           tooltip={t("action.collapseAll")}
           icon={AppIcons.iconCollapseAll}
         />
         <AxButton
-          style="link"
+          variant="link"
           onClick={unfoldAll}
           tooltip={t("action.expandAll")}
           icon={AppIcons.iconExpandAll}
         />
         <AxDivider size="xs" />
         <AxButton
-          style="link"
+          variant="link"
           onClick={commandPalette}
           tooltip={t("action.showShortcuts")}
           icon={AppIcons.iconQuestion}

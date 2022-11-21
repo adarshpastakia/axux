@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-export const ZoomMeter = ({ zoom = 0 }) => {
+export const ZoomMeter = ({ zoom = 0 }: { zoom?: number }) => {
   return (
     <svg
       viewBox="0 0 500 500"

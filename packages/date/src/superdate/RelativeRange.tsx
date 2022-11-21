@@ -33,7 +33,7 @@ export const RelativeRange: FC<RelativeProps> = ({ date, onChange }) => {
 
   const applyRelative = useCallback(() => {
     if (startDate && endDate) {
-      onChange && onChange(makeSuperDate(startDate, endDate));
+      onChange?.(makeSuperDate(startDate, endDate));
     }
   }, [startDate, endDate, onChange]);
 
@@ -53,7 +53,7 @@ export const RelativeRange: FC<RelativeProps> = ({ date, onChange }) => {
       </AxContent>
       <AxFooter className="flex justify-end">
         <AxPopover.Dismiss>
-          <AxButton style="solid" size="sm" onClick={applyRelative}>
+          <AxButton variant="solid" size="sm" onClick={applyRelative}>
             {t("core:action.apply")}
           </AxButton>
         </AxPopover.Dismiss>

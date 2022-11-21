@@ -12,7 +12,11 @@ import { useMemo } from "react";
 import { PageType } from "../types";
 import { DateUtil } from "../utils";
 
-export const DateCell = ({ date = new Date(), isMuted = false, ...props }) => {
+export const DateCell = ({
+  date = new Date(),
+  isMuted = false,
+  ...props
+}: KeyValue) => {
   const {
     page,
     selected,
@@ -29,10 +33,7 @@ export const DateCell = ({ date = new Date(), isMuted = false, ...props }) => {
     () => selected && isSameDay(date, selected),
     [date, selected]
   );
-  const isDisabled = useMemo(
-    () => dateDisabled && dateDisabled(date),
-    [date, dateDisabled]
-  );
+  const isDisabled = useMemo(() => dateDisabled?.(date), [date, dateDisabled]);
 
   const isHilightEdge = useMemo(() => {
     if (!isMuted) {

@@ -12,6 +12,6 @@ import { MapViewer } from "./viewer/MapViewer";
 
 export const AxMap = {
   Viewer: MapViewer,
-  Heatmap: Heatmap,
-  Clustermap: Clustermap,
+  Heatmap,
+  Clustermap,
 };

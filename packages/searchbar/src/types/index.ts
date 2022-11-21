@@ -211,7 +211,8 @@ export interface SearchProps {
   /**
    * On suggestion select
    */
-  onSelect?: (item: SuggestItem) => Promise<boolean> | boolean | void;
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  onSelect?: (item: SuggestItem) => Promise<boolean> | boolean;
 
   /**
    * On search event

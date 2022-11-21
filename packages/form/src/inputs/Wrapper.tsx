@@ -40,7 +40,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
     isPlain,
     wrapperRef,
     ...rest
-  }) => {
+  }: WrapperProps) => {
     const handleClear = useCallback(
       (e: MouseEvent<HTMLDivElement>) => {
         (

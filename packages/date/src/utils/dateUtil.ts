@@ -60,6 +60,7 @@ const Locales: KeyValue = {
   zh,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DateUtil {
   const translateNumber = (d: string) => {
     return d
@@ -119,9 +120,8 @@ export namespace DateUtil {
     isHijri?: boolean
   ) => {
     let formatted = "";
-    const loc = locale?.split("-")[0] ?? "en";
     const dt = parseDate(date as AnyObject);
-    if (dt) {
+    if (dt != null) {
       formatted = isHijri
         ? formatHijri(dt, fmt, locale)
         : formatGregorian(dt, fmt, locale);
@@ -279,7 +279,11 @@ export namespace DateUtil {
     }
   };
 
-  export const addMonths = (date: Date, d: number, isHijri: boolean = false) => {
+  export const addMonths = (
+    date: Date,
+    d: number,
+    isHijri: boolean = false
+  ) => {
     if (isHijri) {
       return addHijriMonth(date, d).toGregorian();
     } else {
@@ -297,7 +301,11 @@ export namespace DateUtil {
     }
   };
 
-  export const getWeek = (date: Date, locale: string, isHijri: boolean = false) => {
+  export const getWeek = (
+    date: Date,
+    locale: string,
+    isHijri: boolean = false
+  ) => {
     let ret = "";
     if (isHijri) {
       const start = startOfYear(date, isHijri);
@@ -311,7 +319,11 @@ export namespace DateUtil {
     return ret;
   };
 
-  export const isSameMonth = (date: Date, compare: Date, isHijri: boolean = false) => {
+  export const isSameMonth = (
+    date: Date,
+    compare: Date,
+    isHijri: boolean = false
+  ) => {
     if (isHijri) {
       const hdate = date.toHijri().ignoreTime();
       const hcompare = compare.toHijri().ignoreTime();
@@ -337,8 +349,8 @@ export namespace DateUtil {
     }
     const [start, end] = methods;
     return (
-      (!!min && isBefore(start(date), start(min))) ||
-      (!!max && isAfter(end(date), end(max)))
+      (!(min == null) && isBefore(start(date), start(min))) ||
+      (!(max == null) && isAfter(end(date), end(max)))
     );
   };
 }

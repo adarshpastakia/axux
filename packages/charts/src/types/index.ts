@@ -27,18 +27,18 @@ export interface BaseChart {
 }
 
 export interface CountType {
-  data: { id: string; label?: string; count: number }[];
+  data: Array<{ id: string; label?: string; count: number }>;
 }
 
 export interface SeriesType {
   categoryAxisName?: string;
   valueAxisName?: string;
   categories: string[];
-  data: { id: string; label?: string; values: number[] }[];
+  data: Array<{ id: string; label?: string; values: number[] }>;
 }
 
 export interface TimeSeriesType {
   categoryAxisName?: string;
   valueAxisName?: string;
-  data: { id: string; label?: string; values: [Date, number][] }[];
+  data: Array<{ id: string; label?: string; values: Array<[Date, number]> }>;
 }

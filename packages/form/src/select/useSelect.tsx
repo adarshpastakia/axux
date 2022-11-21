@@ -7,7 +7,7 @@
  */
 
 import { debounce, isEmpty, matchString } from "@axux/utilities";
-import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { BaseSelectProps, getLabel } from "./utils";
 
 export const useSelect = ({
@@ -18,7 +18,6 @@ export const useSelect = ({
   const originalList = useRef<AnyObject[]>([]);
   const [list, setList] = useState<AnyObject[]>([]);
   const [query, setQuery] = useState("");
-  const [pending, startTransition] = useTransition();
 
   useEffect(() => {
     originalList.current = options;
@@ -27,18 +26,20 @@ export const useSelect = ({
 
   const handleQuery = useCallback(
     debounce((query: string) => {
-      Promise.resolve(onQuery?.(query)).then((list) => list && setList(list));
+      void Promise.resolve(onQuery?.(query)).then(
+        (list) => list != null && setList(list)
+      );
     }, 200),
     [onQuery]
   );
 
-  /******************* filter list *******************/
+  /** ***************** filter list *******************/
   const onQueryChange = useCallback(
     (query: string) => {
       setQuery(query);
       if (isEmpty(query)) return setList(originalList.current ?? []);
 
-      if (onQuery) {
+      if (onQuery != null) {
         return handleQuery(query);
       }
 

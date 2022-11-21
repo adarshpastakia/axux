@@ -40,7 +40,7 @@ export const Ellipsis: FC<EllipsisProps> = ({
   const refContainer = useRef<HTMLDivElement>(null);
   const [applyEllipsis, setApplyEllipsis] = useState(false);
 
-  /******************* check text width *******************/
+  /** ***************** check text width *******************/
   const checkWidth = useRef(() => {
     const el = refContainer.current as HTMLElement;
     if (el) {
@@ -51,7 +51,7 @@ export const Ellipsis: FC<EllipsisProps> = ({
     }
   });
 
-  /******************* observe element resize to recalculate width *******************/
+  /** ***************** observe element resize to recalculate width *******************/
   useLayoutEffect(() => {
     const ob = new ResizeObserver(checkWidth.current);
     ob.observe(refContainer.current as HTMLElement);
@@ -61,7 +61,7 @@ export const Ellipsis: FC<EllipsisProps> = ({
     };
   }, [children]);
 
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <div
       {...rest}

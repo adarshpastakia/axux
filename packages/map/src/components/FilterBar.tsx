@@ -41,7 +41,7 @@ export const FilterBar = () => {
       if (feature) {
         const coordinates = feature.geometry.coordinates[0];
         const bounds = coordinates.reduce((bounds: LngLatBounds, coord) => {
-          return bounds.extend(coord as AnyObject);
+          return bounds.extend(coord as [number, number, number, number]);
         }, new LngLatBounds(coordinates[0], coordinates[1]));
 
         map.fitBounds(bounds, {
@@ -75,14 +75,14 @@ export const FilterBar = () => {
       {features.map((feature) => (
         <AxTag
           key={feature.id}
-          onRemove={() => onDelete(`${feature.id}`)}
-          onClick={() => onFeatureClick(`${feature.id}`)}
+          onRemove={() => onDelete(`${feature.id as string}`)}
+          onClick={() => onFeatureClick(`${feature.id as string}`)}
         >
           {
             (
               <span
-                onMouseOver={() => onMouseOver(`${feature.id}`)}
-                onMouseOut={() => onMouseOut(`${feature.id}`)}
+                onMouseOver={() => onMouseOver(`${feature.id as string}`)}
+                onMouseOut={() => onMouseOut(`${feature.id as string}`)}
               >
                 {feature.properties?.label}
               </span>

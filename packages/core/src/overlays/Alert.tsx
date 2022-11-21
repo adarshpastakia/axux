@@ -54,7 +54,7 @@ export const AxAlert: FC<AlertProps> = ({
   rtlFlip,
   okLabel,
   cancelLabel,
-  // @ts-ignore
+  // @ts-expect-error
   onClose,
 }) => {
   const { t } = useTranslation("core");
@@ -91,13 +91,13 @@ export const AxAlert: FC<AlertProps> = ({
     <div className="ax-alert" data-color={color}>
       {CloseX(closeModal)}
       <div className="ax-alert__icon">
-        <AxIcon icon={icon || iconType} color={color} rtlFlip={rtlFlip} />
+        <AxIcon icon={icon ?? iconType} color={color} rtlFlip={rtlFlip} />
       </div>
       {title && <div className="ax-alert__title">{title}</div>}
       {message && <p className="ax-alert__message">{message}</p>}
       <input
         className="ax-alert__input"
-        ref={(e) => e && setTimeout(() => e.focus(), 100)}
+        ref={(e) => e != null && setTimeout(() => e.focus(), 100)}
         onBlur={(e) => e.target.focus()}
         onKeyDown={(e) =>
           (e.key === "Enter" || e.key === "Escape") &&
@@ -107,11 +107,19 @@ export const AxAlert: FC<AlertProps> = ({
       <div className="ax-alert__footer">
         <div onClickCapture={() => onClose?.(false)}>{actions}</div>
         {type === "confirm" && (
-          <AxButton style="link" color={color} onClick={() => closeModal(false)}>
+          <AxButton
+            variant="link"
+            color={color}
+            onClick={() => closeModal(false)}
+          >
             {cancelText}
           </AxButton>
         )}
-        <AxButton style="solid" color={color} onClick={() => closeModal(true)}>
+        <AxButton
+          variant="solid"
+          color={color}
+          onClick={() => closeModal(true)}
+        >
           {okText}
         </AxButton>
       </div>

@@ -37,7 +37,7 @@ export const Col: FC<IColConfig> = memo((item) => {
 
   const onResize = (evt: MouseEvent) => {
     const newX = evt.clientX;
-    if (refEl.current && refEl.current.parentElement) {
+    if (refEl.current?.parentElement != null) {
       const box = refEl.current.getBoundingClientRect();
       const minWidth = Math.round(refEl.current.parentElement.offsetWidth / 12);
       let newSpan = Math.floor((newX - (box.left - minWidth)) / minWidth) || 1;
@@ -47,7 +47,7 @@ export const Col: FC<IColConfig> = memo((item) => {
   };
 
   const onResizeEnd = (e: MouseEvent) => {
-    if (refEl.current) {
+    if (refEl.current != null) {
       updateConfig(
         id,
         "colSpan",
@@ -70,7 +70,9 @@ export const Col: FC<IColConfig> = memo((item) => {
 
   const isStretched = useMemo(() => {
     return (
-      children && children.length > 0 && children[0].type === EnumTypes.TILE
+      children != null &&
+      children.length > 0 &&
+      children[0].type === EnumTypes.TILE
     );
   }, [children]);
 
@@ -99,7 +101,7 @@ export const Col: FC<IColConfig> = memo((item) => {
               return null;
           }
         })}
-      {isEditing && (!children || children.length === 0) && (
+      {isEditing && (children == null || children.length === 0) && (
         <div className="page-maker__emptyCol">
           <div>{t("label.drag")}</div>
           <AxDivider size="sm" align="center">

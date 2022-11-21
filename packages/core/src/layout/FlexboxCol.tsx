@@ -44,6 +44,7 @@ export interface FlexboxColProps extends ElementProps, ChildrenProp {
   maxWidth?: number | string;
 }
 
+// eslint-disable-next-line react/display-name
 export const FlexboxCol = forwardRef<HTMLDivElement, FlexboxColProps>(
   (
     {
@@ -61,7 +62,7 @@ export const FlexboxCol = forwardRef<HTMLDivElement, FlexboxColProps>(
     },
     ref
   ) => {
-    /******************* class map *******************/
+    /** ***************** class map *******************/
     const classes = useMemo(() => {
       const cls = ["ax-col", className ?? ""];
       if (flex) {
@@ -75,7 +76,7 @@ export const FlexboxCol = forwardRef<HTMLDivElement, FlexboxColProps>(
       return cls.join(" ");
     }, [className, flex, span]);
 
-    /******************* style map *******************/
+    /** ***************** style map *******************/
     const styles = useMemo(() => {
       return {
         height,
@@ -86,7 +87,7 @@ export const FlexboxCol = forwardRef<HTMLDivElement, FlexboxColProps>(
       };
     }, [width, minWidth, maxWidth, height, minHeight]);
 
-    /******************* component *******************/
+    /** ***************** component *******************/
     return (
       <div
         {...rest}

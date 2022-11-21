@@ -49,7 +49,7 @@ export const BodyRow = memo(({ record }: KeyValue) => {
         }
       >
         <div className="ax-datagrid__fixStart">
-          {!!onRowExpand && (
+          {!(onRowExpand == null) && (
             <div
               className="ax-datagrid__body--cell cursor-pointer"
               onClick={handleClick(handleExpand, { stopPropagation: true })}
@@ -80,3 +80,4 @@ export const BodyRow = memo(({ record }: KeyValue) => {
     </div>
   );
 });
+BodyRow.displayName = "AxDatagrid.BodyRow";

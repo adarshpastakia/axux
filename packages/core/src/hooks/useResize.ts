@@ -30,56 +30,56 @@ interface Options {
 
 export const useResize = (
   resizeRef: RefObject<HTMLElement>,
-  callback: (diff: { x: number; y: number }) => void,
+  onResize: (diff: { x: number; y: number }) => void,
   { isReverse = false, isVertical = false, onStart, onEnd }: Options
 ) => {
   const isRtl = useIsRtl();
 
-  const onResize = useCallback(
+  const onResizing = useCallback(
     (evt: MouseEvent) => {
-      if (resizeRef.current) {
-        /******************* check if reverse enabled of RTL *******************/
+      if (resizeRef.current != null) {
+        /** ***************** check if reverse enabled of RTL *******************/
         const reversed = ((isRtl ? 1 : 0) ^ (isReverse ? 1 : 0)) === 1;
         const box = resizeRef.current.getBoundingClientRect();
         const x =
           (evt.clientX - (reversed ? box.left : box.right)) *
           (reversed ? -1 : 1);
         const y = evt.clientY - box.bottom;
-        callback({ x, y });
+        onResize({ x, y });
       }
     },
-    [callback, isRtl, isReverse, resizeRef]
+    [onResize, isRtl, isReverse, resizeRef]
   );
 
-  /******************* dettach handlers on mouseup *******************/
+  /** ***************** dettach handlers on mouseup *******************/
   const onResizeEnd = useCallback(() => {
     document.body.style.cursor = "unset";
-    document.removeEventListener("mousemove", onResize);
+    document.removeEventListener("mousemove", onResizing);
     document.removeEventListener("mouseup", onResizeEnd);
-    onEnd && onEnd();
-  }, [onEnd, onResize]);
+    onEnd?.();
+  }, [onEnd, onResizing]);
 
-  /******************* attach handlers on mousedown *******************/
+  /** ***************** attach handlers on mousedown *******************/
   const onResizeStart = useCallback(
     (e: MouseEvent) => {
       e.preventDefault();
       document.body.style.cursor = isVertical ? "row-resize" : "col-resize";
-      document.addEventListener("mousemove", onResize);
+      document.addEventListener("mousemove", onResizing);
       document.addEventListener("mouseup", onResizeEnd);
-      onStart && onStart();
+      onStart?.();
     },
-    [onResize, onResizeEnd, onStart]
+    [onResizing, onResizeEnd, onStart]
   );
 
-  /******************* attach event handler *******************/
+  /** ***************** attach event handler *******************/
   useEffect(() => {
-    if (resizeRef.current) {
+    if (resizeRef.current != null) {
       const ref = resizeRef.current;
       ref.addEventListener("mousedown", onResizeStart);
 
       return () => ref.removeEventListener("mousedown", onResizeStart);
     }
-  }, [onResize, onResizeStart, resizeRef]);
+  }, [onResizing, onResizeStart, resizeRef]);
 
   return null;
 };

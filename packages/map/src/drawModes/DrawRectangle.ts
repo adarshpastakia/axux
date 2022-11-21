@@ -30,11 +30,11 @@ DrawRectangleMode.onDrag = function (state: KeyValue, e: KeyValue) {
   if (startPoint?.length > 0) {
     const feature = this.getFeature(state.currentId);
     if (feature) {
-      feature.updateCoordinate("0.0", startPoint[0], startPoint[1]); //minX, minY - the starting point
+      feature.updateCoordinate("0.0", startPoint[0], startPoint[1]); // minX, minY - the starting point
       feature.updateCoordinate("0.1", e.lngLat.lng, startPoint[1]); // maxX, minY
       feature.updateCoordinate("0.2", e.lngLat.lng, e.lngLat.lat); // maxX, maxY
       feature.updateCoordinate("0.3", startPoint[0], e.lngLat.lat); // minX,maxY
-      feature.updateCoordinate("0.4", startPoint[0], startPoint[1]); //minX,minY - ending point (equals to starting point)
+      feature.updateCoordinate("0.4", startPoint[0], startPoint[1]); // minX,minY - ending point (equals to starting point)
     }
   }
 };
@@ -66,7 +66,7 @@ DrawRectangleMode.toDisplayFeatures = function (
   display: AnyObject
 ) {
   const isActivePolygon = geojson.properties.id === state.currentId;
-  geojson.properties.active = `${isActivePolygon}`;
+  geojson.properties.active = isActivePolygon ? "true" : "false";
   return display(geojson);
 };
 

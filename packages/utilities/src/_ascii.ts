@@ -10,7 +10,7 @@
 import { isEmpty } from "./_isType";
 
 
-/******************* latin-ascii conversions *******************/
+/** ***************** latin-ascii conversions *******************/
 const conversions = {
   AE: "Æ|Ǽ",
   Ae: "Ä",

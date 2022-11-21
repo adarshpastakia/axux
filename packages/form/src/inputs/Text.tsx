@@ -28,6 +28,7 @@ export interface TextProps extends ElementProps, InputProps, ChildrenProp {
   type?: "text" | "password" | "email" | "url" | "search";
 }
 
+// eslint-disable-next-line react/display-name
 export const Text: FC<TextProps> = memo(
   ({
     label,
@@ -49,16 +50,16 @@ export const Text: FC<TextProps> = memo(
     children,
     onEnterPressed,
     ...rest
-  }) => {
+  }: TextProps) => {
     const [actualValue, setActualValue] = useState("");
-    const [pending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
     useEffect(() => {
       setActualValue(value ?? "");
     }, [value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         setActualValue(e?.target.value ?? "");
-        onChange &&
+        onChange != null &&
           startTransition(() => onChange(e?.target.value ?? ""));
       },
       [onChange]

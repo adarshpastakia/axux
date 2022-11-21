@@ -134,20 +134,20 @@ export const AxModal: FC<ModalProps> = ({
             {CloseX(onClose)}
           </AxHeader>
           <div className="ax-modal__body">
-            {onNavigate && (
+            {(onNavigate != null) && (
               <AxButton
                 rtlFlip
-                style="link"
+                variant="link"
                 icon={AppIcons.iconCaretLeft}
                 onClick={() => onNavigate("prev")}
                 aria-label={isRtl ? "next" : "previous"}
               />
             )}
             {children}
-            {onNavigate && (
+            {(onNavigate != null) && (
               <AxButton
                 rtlFlip
-                style="link"
+                variant="link"
                 icon={AppIcons.iconCaretRight}
                 onClick={() => onNavigate("next")}
                 aria-label={isRtl ? "previous" : "next"}

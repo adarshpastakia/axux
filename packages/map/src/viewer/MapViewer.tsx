@@ -98,8 +98,8 @@ export const MapViewer: FC<MapViewerProps> = ({
         (e) =>
           !e.resetView &&
           onViewportChange?.({
-            center: refMap.current!.getCenter().toArray() as [number, number],
-            zoom: refMap.current!.getZoom(),
+            center: refMap.current?.getCenter().toArray() as [number, number],
+            zoom: refMap.current?.getZoom() ?? defaultViewport.zoom,
           }),
         200
       ),
@@ -107,7 +107,7 @@ export const MapViewer: FC<MapViewerProps> = ({
   );
 
   const loadMap = useCallback(() => {
-    if (refContainer.current) {
+    if (refContainer.current != null) {
       setError("");
 
       const source = sources.find((s) => s.id === defaultSource) ?? sources[0];
@@ -205,9 +205,9 @@ export const MapViewer: FC<MapViewerProps> = ({
         setError(error.message);
       });
 
-      // @ts-ignore
+      // @ts-expect-error
       window.mapref = refMap.current;
-      // @ts-ignore
+      // @ts-expect-error
       window.drawref = refDraw.current;
     }
   }, [sources, defaultSource]);
@@ -227,8 +227,8 @@ export const MapViewer: FC<MapViewerProps> = ({
   return (
     <MapContext.Provider
       value={{
-        map: map!,
-        draw: refDraw.current!,
+        map: map as Map,
+        draw: refDraw.current as MapboxDraw,
         viewport: defaultViewport,
         minZoom,
         maxZoom,

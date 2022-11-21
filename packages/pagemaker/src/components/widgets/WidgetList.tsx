@@ -22,7 +22,7 @@ export const WidgetList: FC = memo(() => {
   const [list, setList] = useState<IWidgetObject[]>([]);
 
   useEffect(() => {
-    if (widgets.length) {
+    if (widgets.length > 0) {
       setList(
         widgets.sort((a, b) =>
           a.title.toUpperCase().localeCompare(b.title.toUpperCase())
@@ -32,7 +32,7 @@ export const WidgetList: FC = memo(() => {
   }, [widgets]);
 
   useLayoutEffect(() => {
-    if (widgets.length) {
+    if (widgets.length > 0) {
       const newList = widgets.sort((a, b) =>
         a.title.toUpperCase().localeCompare(b.title.toUpperCase())
       );

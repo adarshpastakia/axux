@@ -78,264 +78,278 @@ export interface ImageViewerProps {
 export const AxImageViewer = forwardRef<
   ImageViewerRef | null,
   ImageViewerProps
->(({ src, overlaySrc, isNsfw, onLoad, onError, onChange }, ref) => {
-  const canvasRef = useRef<CanvasRef>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+>(
+  (
+    { src, overlaySrc, isNsfw, onLoad, onError, onChange }: ImageViewerProps,
+    ref
+  ) => {
+    const canvasRef = useRef<CanvasRef>(null);
+    const imageRef = useRef<HTMLImageElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
-  const [pending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
 
-  const changeCallback = useDebounce(onChange);
+    const changeCallback = useDebounce(onChange);
 
-  const initState = useCallback(
-    () =>
-      ({
+    const initState = useCallback(
+      () =>
+        ({
+          zoom: 0,
+          rotate: 0,
+          isLoading: true,
+          isLoaded: false,
+          isErrored: false,
+          width: "100%",
+          height: "100%",
+        } as AnyObject),
+      []
+    );
+
+    const calculateSize = useCallback((rotate: number, zoom: number) => {
+      const el = containerRef.current;
+      const img = imageRef.current;
+      if (el != null && img != null && img.naturalWidth) {
+        const turn = rotate % 180 !== 0;
+        let width = turn ? img.naturalHeight : img.naturalWidth;
+        let height = turn ? img.naturalWidth : img.naturalHeight;
+        if (zoom === 0) {
+          const containerWidth = el.offsetWidth - 16;
+          const containerHeight = el.offsetHeight - 16;
+          // if container ratio is more than image ratio height set to container 100%
+          if (containerWidth / containerHeight > width / height) {
+            width = width * (containerHeight / height);
+            height = containerHeight;
+          } else {
+            height = height * (containerWidth / width);
+            width = containerWidth;
+          }
+        } else {
+          width *= zoom;
+          height *= zoom;
+        }
+        return { width, height };
+      }
+      return { width: "100%", height: "100%" } as AnyObject;
+    }, []);
+
+    const recenter = useCallback(() => {
+      const el = containerRef.current;
+      if (el != null) {
+        el.scrollTo({
+          top: (el.scrollHeight - (el.offsetHeight - 16)) / 2,
+          left: (el.scrollWidth - (el.offsetWidth - 16)) / 2,
+          behavior: "auto",
+        });
+      }
+    }, []);
+
+    const reducer = useCallback(
+      (state: ViewerState, action: ViewerActions) => {
+        if (action.type === "init") {
+          state = initState();
+        }
+        if (action.type === "zoom") {
+          state.zoom = Math.min(5, Math.max(0, action.payload));
+          state = { ...state, ...calculateSize(state.rotate, state.zoom) };
+          startTransition(() => {
+            debounce(recenter, 200)();
+          });
+        }
+        if (action.type === "rotate") {
+          state.rotate =
+            action.payload > 270
+              ? 0
+              : action.payload < 0
+              ? 270
+              : action.payload;
+          state = { ...state, ...calculateSize(state.rotate, state.zoom) };
+        }
+        if (action.type === "resize") {
+          state = { ...state, ...calculateSize(state.rotate, state.zoom) };
+        }
+        if (action.type === "loaded") {
+          state.isLoading = false;
+          state.isLoaded = true;
+          state.isErrored = false;
+          state.zoom = 0;
+          state = { ...state, ...calculateSize(state.rotate, state.zoom) };
+        }
+        if (action.type === "errored") {
+          state.isErrored = true;
+          state.isLoading = false;
+        }
+        return { ...state };
+      },
+      [initState]
+    );
+
+    const [state, dispatch] = useReducer(
+      reducer,
+      {
         zoom: 0,
         rotate: 0,
         isLoading: true,
         isLoaded: false,
         isErrored: false,
-        width: "100%",
-        height: "100%",
-      } as AnyObject),
-    []
-  );
+      },
+      initState
+    );
 
-  const calculateSize = useCallback((rotate: number, zoom: number) => {
-    const el = containerRef.current;
-    const img = imageRef.current;
-    if (el && img && img.naturalWidth) {
-      const turn = rotate % 180 !== 0;
-      let width = turn ? img.naturalHeight : img.naturalWidth;
-      let height = turn ? img.naturalWidth : img.naturalHeight;
-      if (zoom === 0) {
-        const containerWidth = el.offsetWidth - 16;
-        const containerHeight = el.offsetHeight - 16;
-        // if container ratio is more than image ratio height set to container 100%
-        if (containerWidth / containerHeight > width / height) {
-          width = width * (containerHeight / height);
-          height = containerHeight;
-        } else {
-          height = height * (containerWidth / width);
-          width = containerWidth;
-        }
-      } else {
-        width *= zoom;
-        height *= zoom;
+    const resizeHandler = useCallback(
+      (size: KeyValue) => {
+        dispatch({ type: "resize", payload: size });
+        state.isLoaded &&
+          startTransition(() => {
+            changeCallback?.("resize");
+          });
+      },
+      [changeCallback, state.isLoaded]
+    );
+    useEffect(() => {
+      if (imageRef.current != null) {
+        const ob = new ResizeObserver(resizeHandler);
+        ob.observe(imageRef.current);
+
+        return () => {
+          ob.disconnect();
+        };
       }
-      return { width, height };
-    }
-    return { width: "100%", height: "100%" } as AnyObject;
-  }, []);
+    }, []);
 
-  const recenter = useCallback(() => {
-    const el = containerRef.current;
-    if (el) {
-      el.scrollTo({
-        top: (el.scrollHeight - (el.offsetHeight - 16)) / 2,
-        left: (el.scrollWidth - (el.offsetWidth - 16)) / 2,
-        behavior: "auto",
-      });
-    }
-  }, []);
+    useImperativeHandle(
+      ref,
+      () =>
+        canvasRef.current != null
+          ? {
+              zoom: (zoom: number) =>
+                !overlaySrc && dispatch({ type: "zoom", payload: zoom }),
+              rotate: (rotation: Rotation) =>
+                dispatch({ type: "rotate", payload: rotation }),
+              ...canvasRef.current,
+            }
+          : (null as AnyObject),
+      []
+    );
 
-  const reducer = useCallback(
-    (state: ViewerState, action: ViewerActions) => {
-      if (action.type === "init") {
-        state = initState();
+    /** ***************** reset zoom and rotate on change of source *******************/
+    useLayoutEffect(() => {
+      dispatch({ type: "init" });
+      canvasRef.current?.clear();
+    }, [src]);
+    useLayoutEffect(() => {
+      if (overlaySrc) {
+        dispatch({ type: "init" });
+        canvasRef.current?.clear();
       }
-      if (action.type === "zoom") {
-        state.zoom = Math.min(5, Math.max(0, action.payload));
-        state = { ...state, ...calculateSize(state.rotate, state.zoom) };
+    }, [overlaySrc]);
+
+    const handleLoad = useCallback(
+      (e: SyntheticEvent<HTMLImageElement>) => {
+        dispatch({ type: "loaded" });
         startTransition(() => {
-          debounce(recenter, 200)();
+          const colorset =
+            imageRef.current != null && getImageColorset(imageRef.current);
+          colorset &&
+            containerRef.current?.parentElement != null &&
+            (containerRef.current.parentElement.dataset.colorset = colorset);
+          onLoad?.(e);
         });
-      }
-      if (action.type === "rotate") {
-        state.rotate =
-          action.payload > 270 ? 0 : action.payload < 0 ? 270 : action.payload;
-        state = { ...state, ...calculateSize(state.rotate, state.zoom) };
-      }
-      if (action.type === "resize") {
-        state = { ...state, ...calculateSize(state.rotate, state.zoom) };
-      }
-      if (action.type === "loaded") {
-        state.isLoading = false;
-        state.isLoaded = true;
-        state.isErrored = false;
-        state.zoom = 0;
-        state = { ...state, ...calculateSize(state.rotate, state.zoom) };
-      }
-      if (action.type === "errored") {
-        state.isErrored = true;
-        state.isLoading = false;
-      }
-      return { ...state };
-    },
-    [initState]
-  );
+      },
+      [onLoad]
+    );
+    const handleError = useCallback(
+      (e: SyntheticEvent<HTMLImageElement>) => {
+        dispatch({ type: "errored" });
+        startTransition(() => onError?.(e));
+      },
+      [onError]
+    );
 
-  const [state, dispatch] = useReducer(
-    reducer,
-    {
-      zoom: 0,
-      rotate: 0,
-      isLoading: true,
-      isLoaded: false,
-      isErrored: false,
-    },
-    initState
-  );
+    const disableTools = useMemo(
+      () => state.isLoading || !!state.isErrored,
+      [state, overlaySrc]
+    );
 
-  const resizeHandler = useCallback(
-    (size: KeyValue) => {
-      dispatch({ type: "resize", payload: size });
-      state.isLoaded &&
-        startTransition(() => {
-          changeCallback?.("resize");
-        });
-    },
-    [changeCallback, state.isLoaded]
-  );
-  useEffect(() => {
-    if (imageRef.current) {
-      const ob = new ResizeObserver(resizeHandler);
-      ob.observe(imageRef.current);
+    const handleZoom = useCallback(
+      (zoom: number) => {
+        dispatch({ type: "zoom", payload: zoom });
+        state.isLoaded &&
+          startTransition(() => {
+            changeCallback("zoom");
+          });
+      },
+      [changeCallback, state.isLoaded]
+    );
+    const handleRotate = useCallback(
+      (rotate: number) => {
+        dispatch({ type: "rotate", payload: rotate });
+        state.isLoaded &&
+          startTransition(() => {
+            changeCallback("rotate");
+          });
+      },
+      [changeCallback, state.isLoaded]
+    );
 
-      return () => {
-        ob.disconnect();
-      };
-    }
-  }, []);
-
-  useImperativeHandle(
-    ref,
-    () =>
-      canvasRef.current
-        ? {
-            zoom: (zoom: number) =>
-              !overlaySrc && dispatch({ type: "zoom", payload: zoom }),
-            rotate: (rotation: Rotation) =>
-              dispatch({ type: "rotate", payload: rotation }),
-            ...canvasRef.current,
-          }
-        : (null as AnyObject),
-    []
-  );
-
-  /******************* reset zoom and rotate on change of source *******************/
-  useLayoutEffect(() => {
-    dispatch({ type: "init" });
-    canvasRef.current?.clear();
-  }, [src]);
-  useLayoutEffect(() => {
-    !!overlaySrc && (dispatch({ type: "init" }), canvasRef.current?.clear());
-  }, [overlaySrc]);
-
-  const handleLoad = useCallback(
-    (e: SyntheticEvent<HTMLImageElement>) => {
-      dispatch({ type: "loaded" });
-      startTransition(() => {
-        const colorset = imageRef.current && getImageColorset(imageRef.current);
-        colorset &&
-          containerRef.current?.parentElement &&
-          (containerRef.current.parentElement.dataset.colorset = colorset);
-        onLoad?.(e);
-      });
-    },
-    [onLoad]
-  );
-  const handleError = useCallback(
-    (e: SyntheticEvent<HTMLImageElement>) => {
-      dispatch({ type: "errored" });
-      startTransition(() => onError?.(e));
-    },
-    [onError]
-  );
-
-  const disableTools = useMemo(
-    () => state.isLoading || !!state.isErrored,
-    [state, overlaySrc]
-  );
-
-  const handleZoom = useCallback(
-    (zoom: number) => {
-      dispatch({ type: "zoom", payload: zoom });
-      state.isLoaded &&
-        startTransition(() => {
-          changeCallback("zoom");
-        });
-    },
-    [changeCallback, state.isLoaded]
-  );
-  const handleRotate = useCallback(
-    (rotate: number) => {
-      dispatch({ type: "rotate", payload: rotate });
-      state.isLoaded &&
-        startTransition(() => {
-          changeCallback("rotate");
-        });
-    },
-    [changeCallback, state.isLoaded]
-  );
-
-  return (
-    <HotKeyWrapper>
-      <div
-        className="ax-media"
-        data-error={state.isErrored}
-        onContextMenuCapture={(e) => e.preventDefault()}
-      >
+    return (
+      <HotKeyWrapper>
         <div
-          className="ax-media__container ax-image__scroller"
-          ref={containerRef}
+          className="ax-media"
+          data-error={state.isErrored}
+          onContextMenuCapture={(e) => e.preventDefault()}
         >
-          <Image
-            src={src}
-            imageRef={imageRef}
-            canvasRef={canvasRef}
-            onLoad={handleLoad}
-            onError={handleError}
-            width={state.width}
-            height={state.height}
+          <div
+            className="ax-media__container ax-image__scroller"
+            ref={containerRef}
+          >
+            <Image
+              src={src}
+              imageRef={imageRef}
+              canvasRef={canvasRef}
+              onLoad={handleLoad}
+              onError={handleError}
+              width={state.width}
+              height={state.height}
+              rotate={state.rotate}
+            />
+          </div>
+
+          {overlaySrc && (
+            <ImageOverlay
+              src={overlaySrc}
+              width={state.width}
+              height={state.height}
+              rotate={state.rotate}
+              onLoad={handleLoad}
+              onError={handleError}
+              containerWidth={containerRef.current?.offsetWidth}
+              containerHeight={containerRef.current?.offsetHeight}
+            />
+          )}
+
+          <Tools
+            disableZoom={!!overlaySrc}
+            isDisabled={disableTools}
+            zoom={state.zoom}
             rotate={state.rotate}
+            onZoom={handleZoom}
+            onRotate={handleRotate}
           />
+
+          {state.isLoading && (
+            <div className="ax-media__overlay">
+              <AxAnimation.Bars />
+            </div>
+          )}
+          {state.isErrored && (
+            <div className="ax-media__overlay">
+              <AxIcon size={48} icon={Icons.iconImage} />
+            </div>
+          )}
+          {isNsfw && <NsfwOverlay isNsfw={isNsfw} />}
         </div>
-
-        {overlaySrc && (
-          <ImageOverlay
-            src={overlaySrc}
-            width={state.width}
-            height={state.height}
-            rotate={state.rotate}
-            onLoad={handleLoad}
-            onError={handleError}
-            containerWidth={containerRef.current?.offsetWidth}
-            containerHeight={containerRef.current?.offsetHeight}
-          />
-        )}
-
-        <Tools
-          disableZoom={!!overlaySrc}
-          isDisabled={disableTools}
-          zoom={state.zoom}
-          rotate={state.rotate}
-          onZoom={handleZoom}
-          onRotate={handleRotate}
-        />
-
-        {state.isLoading && (
-          <div className="ax-media__overlay">
-            <AxAnimation.Bars />
-          </div>
-        )}
-        {state.isErrored && (
-          <div className="ax-media__overlay">
-            <AxIcon size={48} icon={Icons.iconImage} />
-          </div>
-        )}
-        {isNsfw && <NsfwOverlay isNsfw={isNsfw} />}
-      </div>
-    </HotKeyWrapper>
-  );
-});
+      </HotKeyWrapper>
+    );
+  }
+);
+AxImageViewer.displayName = "AxImage.Viewer";

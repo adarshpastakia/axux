@@ -116,7 +116,7 @@ const JsonValue = ({
     if (isEmpty(value)) return <label className="ax-json__empty">null</label>;
     const actualValue = value._label_ ?? value;
     if (formatter) {
-      let ret = formatter?.(fullProp, value);
+      const ret = formatter?.(fullProp, value);
       if (!isNil(ret)) return ret;
       return ret;
     }
@@ -124,13 +124,12 @@ const JsonValue = ({
     let ret = actualValue;
     if (isNumber(actualValue)) ret = Format.number(actualValue);
     if (isBoolean(actualValue))
-      ret = !!actualValue ? t("json.true") : t("json.false");
+      ret = actualValue ? t("json.true") : t("json.false");
 
     if (
       fullProp.toLowerCase().includes("date") ||
       dateProperties?.includes(fullProp)
     ) {
-      const dt = Date.parse(value);
       return <AxDateDisplay date={value} />;
     }
 
@@ -167,14 +166,14 @@ const JsonValue = ({
         {canFilter && (
           <Fragment>
             <AxButton
-              style="link"
+              variant="link"
               color="success"
               icon={AppIcons.iconMagnifyPlus}
               tooltip={t("action.addFilter")}
               onClick={() => onFilter(fullProp, filterValue)}
             />
             <AxButton
-              style="link"
+              variant="link"
               color="danger"
               icon={AppIcons.iconMagnifyMinus}
               tooltip={t("action.addFilterNot")}
@@ -188,7 +187,7 @@ const JsonValue = ({
   );
 };
 
-const JsonEmptyObject = ({ type = "object" }) => {
+const JsonEmptyObject = ({ type = "object" }: { type?: string }) => {
   return (
     <label className="ax-json__empty">
       {type === "object" ? "{empty object}" : "[empty list]"}

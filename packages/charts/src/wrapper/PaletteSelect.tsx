@@ -33,7 +33,7 @@ export const PaletteSelect = ({
       onClick={onClick}
       icon={Icons.iconPalette}
       size="sm"
-      style="link"
+      variant="link"
       showCaret={false}
       className="flush"
     >

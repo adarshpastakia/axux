@@ -9,7 +9,6 @@
 import { Menu } from "@headlessui/react";
 import { Placement } from "@popperjs/core";
 import { FC, Fragment, MouseEvent, useCallback, useEffect } from "react";
-import { createPortal } from "react-dom";
 import { usePopover } from "../hooks/usePopover";
 import { MenuChildren } from "../menu/types";
 import { ElementProps } from "../types";

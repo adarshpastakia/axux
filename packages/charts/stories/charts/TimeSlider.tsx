@@ -32,7 +32,7 @@ const Template: ComponentStory<typeof AxChart.TimeSlider> = () => {
     <AxPanel width={1024} maxWidth={1024} height={128}>
       <AxHeader>
         <AxTitle>Time Slider chart</AxTitle>
-        <AxButton style="link" icon="mdi mdi-refresh" onClick={loadData} />
+        <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />
       </AxHeader>
       <AxChart.TimeSlider
         data={data}

@@ -10,18 +10,21 @@ import { FC } from "react";
 import { ChildrenProp, ElementProps, Gutter } from "../types";
 import { EmptyContent } from "./EmptyContent";
 
+type Props = ElementProps &
+  ChildrenProp & {
+    /**
+     * padding
+     */
+    padding?: Gutter;
+  };
 /**
  * content panel
  */
-export const AxContent: FC<
-  ElementProps &
-    ChildrenProp & {
-      /**
-       * padding
-       */
-      padding?: Gutter;
-    }
-> & { Empty: typeof EmptyContent } = ({ className, padding, ...rest }) => (
+export const AxContent: FC<Props> & { Empty: typeof EmptyContent } = ({
+  className,
+  padding,
+  ...rest
+}: Props) => (
   <div
     {...rest}
     data-padding={padding}

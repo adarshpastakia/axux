@@ -22,7 +22,7 @@ export interface MarkProps extends ElementProps {
  * Tokenize text with marking texts
  */
 export const Mark: FC<MarkProps> = ({ children, className, mark, ...rest }) => {
-  /******************* tokenize text with mark list *******************/
+  /** ***************** tokenize text with mark list *******************/
   const inner = useMemo(() => {
     if (isString(children)) {
       if (!isEmpty(mark)) {
@@ -48,7 +48,7 @@ export const Mark: FC<MarkProps> = ({ children, className, mark, ...rest }) => {
     return children;
   }, [children, mark]);
 
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <span {...rest} className={`ax-mark ${className ?? ""}`}>
       <bdi>{inner}</bdi>

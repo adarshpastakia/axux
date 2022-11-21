@@ -37,7 +37,7 @@ export const HeaderCell = memo(
 
     const tooltipContent = useMemo(
       () =>
-        !!tooltip
+        tooltip
           ? `${isPrimary ? "🔑" : ""}${tooltip !== true ? tooltip : label}`
           : "",
       [isPrimary, label, tooltip]
@@ -87,3 +87,4 @@ export const HeaderCell = memo(
     );
   }
 );
+HeaderCell.displayName = "AxDatagrid.HeaderCell";

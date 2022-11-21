@@ -18,8 +18,8 @@ import { ChartToolbar } from "../wrapper/ChartToolbar";
 import { ChartWrapper } from "../wrapper/ChartWrapper";
 
 import WorldMap from "../types/world.svg";
-fetch(WorldMap)
-  .then((resp) => resp.text())
+void fetch(WorldMap)
+  .then(async (resp) => await resp.text())
   .then((svg) => echarts.registerMap("world", { svg }));
 
 export interface MapSeriesProps extends BaseChart, CountType {
