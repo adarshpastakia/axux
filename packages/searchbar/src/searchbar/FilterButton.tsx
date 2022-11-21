@@ -14,10 +14,10 @@ export const FilterButton = () => {
   const { t } = useTranslation("searchbar");
   const { showFilters, setShowFilters, filters } = useSearchContext();
   return (
-    // @ts-ignore
+    // @ts-expect-error
     <AxButton
       color="accent"
-      style="outline"
+      variant="outline"
       className="ax-filterButton"
       data-enabled={showFilters}
       onClick={() => setShowFilters(!showFilters)}

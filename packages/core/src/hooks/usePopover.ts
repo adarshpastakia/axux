@@ -12,7 +12,7 @@ import { defaultModifiers } from "@popperjs/core/lib/popper";
 import { useState } from "react";
 import { Modifier, usePopper } from "react-popper";
 
-/******************* popperjs: same width modifier *******************/
+/** ***************** popperjs: same width modifier *******************/
 const sameWidthModifier: Modifier<"sameWidth", KeyValue> = {
   name: "sameWidth",
   enabled: true,
@@ -21,6 +21,7 @@ const sameWidthModifier: Modifier<"sameWidth", KeyValue> = {
   fn: ({ state }: KeyValue) => {
     state.styles.popper = {
       ...state.styles.popper,
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       minWidth: `${state.rects.reference.width}px`,
     };
   },
@@ -31,7 +32,7 @@ const sameWidthModifier: Modifier<"sameWidth", KeyValue> = {
   },
 };
 
-/******************* popperjs: rtl flip *******************/
+/** ***************** popperjs: rtl flip *******************/
 const rtlFlip: Modifier<"rtlFlip", KeyValue> = {
   name: "rtlFlip",
   enabled: true,
@@ -71,7 +72,7 @@ export const usePopover = (
   const [popperElement, setPopperElement] = useState<HTMLElement>();
   const [arrowElement, setArrowElement] = useState<HTMLElement>();
 
-  /******************* popperjs *******************/
+  /** ***************** popperjs *******************/
   const { styles, attributes, forceUpdate, update } = usePopper(
     referenceElement,
     popperElement,

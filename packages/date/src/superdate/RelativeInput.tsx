@@ -95,7 +95,7 @@ export const RelativeInput: FC<Props> = ({
   const updateDate = useCallback(
     (field: keyof DatePart, value?: string | number) => {
       const { part, op, diff }: DatePart = { ...dateParts, [field]: value };
-      onChange && onChange(`${part}${op}${diff}`);
+      part && op && diff && onChange?.(`${part}${op}${diff}`);
     },
     [dateParts, onChange]
   );

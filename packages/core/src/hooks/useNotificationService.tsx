@@ -8,14 +8,13 @@
 
 import { isObject, isString } from "@axux/utilities";
 import { useMemo } from "react";
-import { createPortal } from "react-dom";
 import { createRoot } from "react-dom/client";
 import { AlertProps, AxAlert } from "../overlays/Alert";
 import { AxMessage, MessageProps } from "../overlays/Message";
 import { AxToast, ToastProps } from "../overlays/Toast";
 
 export const useNotificationService = () => {
-  /******************* refactor props *******************/
+  /** ***************** refactor props *******************/
   const makeProps = (obj: AnyObject): AnyObject => {
     if (isString(obj)) {
       return { message: obj };
@@ -25,7 +24,7 @@ export const useNotificationService = () => {
     return { message: "" };
   };
 
-  /******************* message container *******************/
+  /** ***************** message container *******************/
   const overlayContainer = useMemo(() => {
     let el = document.body.querySelector(
       ".ax-overlay__container"
@@ -38,7 +37,7 @@ export const useNotificationService = () => {
     return el;
   }, []);
 
-  /******************* message container *******************/
+  /** ***************** message container *******************/
   const messageContainer = useMemo(() => {
     let el = document.body.querySelector(
       ".ax-notification__container[data-mode='message']"
@@ -52,7 +51,7 @@ export const useNotificationService = () => {
     return el;
   }, []);
 
-  /******************* toast container *******************/
+  /** ***************** toast container *******************/
   const toastContainer = useMemo(() => {
     let el = document.body.querySelector(
       ".ax-notification__container[data-mode='toast']"
@@ -66,13 +65,13 @@ export const useNotificationService = () => {
     return el;
   }, []);
 
-  /******************* alert dialog *******************/
-  const alert = (props: AlertProps) => {
+  /** ***************** alert dialog *******************/
+  const alert = async (props: AlertProps) => {
     const el = document.createElement("div");
     el.className = "ax-overlay__mask";
     overlayContainer.appendChild(el);
     const root = createRoot(el);
-    return new Promise<boolean>((resolve) => {
+    return await new Promise<boolean>((resolve) => {
       const onClose = (b = false) => {
         el.dataset.show = "";
         setTimeout(() => {
@@ -81,16 +80,16 @@ export const useNotificationService = () => {
         resolve(b);
       };
       el.onclick = () => onClose();
-      // @ts-ignore
+      // @ts-expect-error
       root.render(<AxAlert {...props} onClose={onClose} />);
       requestAnimationFrame(() => (el.dataset.show = "true"));
     });
   };
 
-  /******************* message *******************/
-  const message = (props: string | MessageProps, timeout = 5000) => {
+  /** ***************** message *******************/
+  const message = async (props: string | MessageProps, timeout = 5000) => {
     const obj: MessageProps = makeProps(props);
-    return new Promise<boolean>((resolve) => {
+    return await new Promise<boolean>((resolve) => {
       let timerRef: AnyObject = null;
       const el = document.createElement("div");
       messageContainer.appendChild(el);
@@ -104,7 +103,7 @@ export const useNotificationService = () => {
         clearTimeout(timerRef);
         resolve(b);
       };
-      // @ts-ignore
+      // @ts-expect-error
       root.render(<AxMessage {...obj} onClose={onClose} />);
       requestAnimationFrame(() => (el.dataset.show = "true"));
       if (timeout > 0) {
@@ -113,7 +112,7 @@ export const useNotificationService = () => {
     });
   };
 
-  /******************* toasts *******************/
+  /** ***************** toasts *******************/
   const onCloseAll = () => {
     toastContainer
       .querySelectorAll<HTMLButtonElement>(
@@ -122,9 +121,9 @@ export const useNotificationService = () => {
       .forEach((b) => b.click());
   };
 
-  const toast = (props: string | ToastProps, timeout = 5000) => {
+  const toast = async (props: string | ToastProps, timeout = 5000) => {
     const obj: ToastProps = makeProps(props);
-    return new Promise<boolean>((resolve) => {
+    return await new Promise<boolean>((resolve) => {
       let timerRef: AnyObject = null;
       const el = document.createElement("div");
       toastContainer.appendChild(el);
@@ -139,7 +138,7 @@ export const useNotificationService = () => {
         resolve(b);
       };
       root.render(
-        // @ts-ignore
+        // @ts-expect-error
         <AxToast {...obj} onClose={onClose} onCloseAll={onCloseAll} />
       );
       requestAnimationFrame(() => (el.dataset.show = "true"));
@@ -149,12 +148,12 @@ export const useNotificationService = () => {
     });
   };
 
-  const toastError = (
+  const toastError = async (
     props: string | Omit<ToastProps, "color">,
     timeout = 30000
   ) => {
     const obj: ToastProps = makeProps(props);
-    return toast({ ...obj, color: "danger" }, timeout);
+    return await toast({ ...obj, color: "danger" }, timeout);
   };
 
   return { alert, message, toast, toastError, closeAll: onCloseAll };

@@ -35,7 +35,7 @@ const Template: ComponentStory<typeof AxChart.ActivityMap> = () => {
     <AxPanel width={600} height={600}>
       <AxHeader>
         <AxTitle>Activity Map chart</AxTitle>
-        <AxButton style="link" icon="mdi mdi-refresh" onClick={loadData} />
+        <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />
       </AxHeader>
       <AxChart.ActivityMap data={data} onClick={action("onClick")} />
     </AxPanel>

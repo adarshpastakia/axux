@@ -120,7 +120,7 @@ const CountSeriesChart: FC<CountSeriesProps> = ({
         <label>{title}</label>
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.Pie}
           isActive={type === "pie"}
@@ -128,7 +128,7 @@ const CountSeriesChart: FC<CountSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.Column}
           isActive={type === "column"}
@@ -136,7 +136,7 @@ const CountSeriesChart: FC<CountSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.Bar}
           isActive={type === "bar"}

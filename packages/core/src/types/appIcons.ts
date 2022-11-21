@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 /* istanbul ignore file */
+/* eslint-disable @typescript-eslint/no-namespace */
 
 export namespace AppIcons {
   export const iconCopy =

@@ -70,11 +70,11 @@ export const Tab: FC<TabProps> = ({
   isDisabled,
   onClose,
   className,
-  // @ts-ignore
+  // @ts-expect-error
   onClick,
-  // @ts-ignore
+  // @ts-expect-error
   isActive,
-  // @ts-ignore
+  // @ts-expect-error
   isVertical,
   ...rest
 }) => {
@@ -108,7 +108,7 @@ export const Tab: FC<TabProps> = ({
       )}
       {!isVertical && label && <label>{label}</label>}
       {Badge}
-      {onClose && CloseX(onClose)}
+      {onClose != null && CloseX(onClose)}
     </button>
   );
 };
@@ -126,7 +126,7 @@ export const AxTabPanel: FC<TabPanelProps> & { Tab: FC<TabProps> } = ({
   onBeforeChange,
   onActiveChange,
   ...rest
-}) => {
+}: TabPanelProps) => {
   const panelRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(activeTab);
   const [, startTransition] = useTransition();
@@ -146,9 +146,7 @@ export const AxTabPanel: FC<TabPanelProps> & { Tab: FC<TabProps> } = ({
       if (active) {
         const el = panelRef.current;
         setTimeout(
-          () =>
-            el &&
-            el.dispatchEvent(new Event("updatePopper", { bubbles: true })),
+          () => el?.dispatchEvent(new Event("updatePopper", { bubbles: true })),
           10
         );
       }
@@ -171,17 +169,17 @@ export const AxTabPanel: FC<TabPanelProps> & { Tab: FC<TabProps> } = ({
 
   const changeTab = useCallback(
     (id: string) => {
-      if (onBeforeChange) {
+      if (onBeforeChange != null) {
         const ret = onBeforeChange(active, id);
-        Promise.resolve(ret).then((b) => {
+        void Promise.resolve(ret).then((b) => {
           if (!isFalse(b)) {
             setActive(id);
-            onActiveChange && onActiveChange(id);
+            onActiveChange?.(id);
           }
         });
       } else {
         setActive(id);
-        onActiveChange && onActiveChange(id);
+        onActiveChange?.(id);
       }
     },
     [onBeforeChange, onActiveChange, active]

@@ -15,7 +15,7 @@ export const AxHotKey: FC<HotKey> & { Label: typeof HotKeyLabel } = ({
   keyCombo,
   global,
   handler,
-}) => {
+}: HotKey) => {
   const { addHotKey, removeHotKey } = useHotKeys();
   useEffect(() => {
     addHotKey?.(keyCombo, handler ?? (() => undefined), global);

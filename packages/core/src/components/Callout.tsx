@@ -42,8 +42,10 @@ export const AxCallout: FC<CalloutProps> = ({
       data-inline={inline}
       {...rest}
     >
-      {onClose && <div className="ax-callout__close">{CloseX(onClose)}</div>}
-      {(title || icon) && (
+      {onClose != null && (
+        <div className="ax-callout__close">{CloseX(onClose)}</div>
+      )}
+      {(!!title || !!icon) && (
         <div className="ax-callout__title">
           {icon && <AxIcon icon={icon} />}
           <span>{title}</span>

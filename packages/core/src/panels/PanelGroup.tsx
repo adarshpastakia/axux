@@ -46,16 +46,16 @@ export const PanelGroup: FC<PanelGroupProps> = ({
   );
 
   useEffect(() => {
-    setExpandedPanel(activePanel || panels[0]);
+    setExpandedPanel(activePanel ?? panels[0]);
   }, [activePanel, panels]);
 
   const changeExpanded = useCallback(
     (collapsed: boolean, id: string, handler?: AnyObject) => {
       if (!collapsed) {
         setExpandedPanel(id);
-        onActiveChange && onActiveChange(id);
+        onActiveChange?.(id);
       }
-      handler && handler(collapsed);
+      handler?.(collapsed);
       return id !== expandedPanel;
     },
     [onActiveChange, expandedPanel]

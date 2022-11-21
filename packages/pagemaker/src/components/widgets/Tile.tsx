@@ -12,6 +12,7 @@ import {
   AxTitle,
   AxTooltip,
 } from "@axux/core";
+import { getValue } from "@axux/utilities";
 import { FC, memo, useMemo } from "react";
 import { iconInfo, iconPencil } from "../../utils/icons";
 import { ITileConfig } from "../../utils/types";
@@ -22,7 +23,7 @@ export const Tile: FC<ITileConfig> = memo((item) => {
   const { isEditing, editWidget, renderWidget, findWidget } = usePageContext();
   const style = useMemo(
     () => ({
-      color: item.color || "inherit",
+      color: getValue(item.color, "inherit"),
     }),
     [item.color]
   );
@@ -49,7 +50,7 @@ export const Tile: FC<ITileConfig> = memo((item) => {
 
           {isEditing && (
             <AxButton
-              style="link"
+              variant="link"
               icon={iconPencil}
               onClick={() => editWidget(item.widgetId)}
             />
@@ -57,7 +58,7 @@ export const Tile: FC<ITileConfig> = memo((item) => {
         </AxHeader>
         <AxContent className="page-maker__tileBody" padding="none">
           {!isEditing && renderWidget(item.widgetId)}
-          {isEditing && widget && (
+          {isEditing && widget != null && (
             <div style={{ placeSelf: "center", textAlign: "center" }}>
               {widget.icon && <AxIcon icon={widget.icon} />}
               <div>{widget.title}</div>

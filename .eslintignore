@@ -1,0 +1,5 @@
+dist/
+jest/
+tests/
+stories/
+*.d.ts

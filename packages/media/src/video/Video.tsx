@@ -17,7 +17,6 @@ import {
   useRef,
   useState,
 } from "react";
-// @ts-ignore
 import { Canvas, CanvasRef } from "../canvas/Canvas";
 import { Icons } from "../types/icons";
 
@@ -50,14 +49,14 @@ export const Video: FC<VideoProps> = memo(
     onLoad,
     onError,
     onChange,
-  }) => {
+  }: VideoProps) => {
     const overlayRef = useRef<HTMLElement>(null);
     const [style, setStyle] = useState({ width: 0, height: 0 });
     const [isSeeking, setSeeking] = useState(false);
 
-    /******************* handle resize *******************/
+    /** ***************** handle resize *******************/
     const resizeHandler = useCallback(() => {
-      videoRef.current &&
+      videoRef.current != null &&
         setStyle({
           width: videoRef.current.offsetWidth,
           height: videoRef.current.offsetHeight,
@@ -65,7 +64,7 @@ export const Video: FC<VideoProps> = memo(
     }, []);
 
     useEffect(() => {
-      if (videoRef.current) {
+      if (videoRef.current != null) {
         const ob = new ResizeObserver(resizeHandler);
         ob.observe(videoRef.current);
 
@@ -76,9 +75,10 @@ export const Video: FC<VideoProps> = memo(
     }, []);
 
     useEffect(() => {
-      overlayRef.current && (overlayRef.current.dataset.show = "true");
+      overlayRef.current != null && (overlayRef.current.dataset.show = "true");
       setTimeout(() => {
-        overlayRef.current && (overlayRef.current.dataset.show = "false");
+        overlayRef.current != null &&
+          (overlayRef.current.dataset.show = "false");
       }, 400);
     }, [isPlaying]);
 
@@ -137,3 +137,4 @@ export const Video: FC<VideoProps> = memo(
     );
   }
 );
+Video.displayName = "AxVideo.Video";

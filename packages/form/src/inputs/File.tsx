@@ -47,6 +47,7 @@ const FileItem = ({ file }: KeyValue) => {
   );
 };
 
+// eslint-disable-next-line react/display-name
 export const File: FC<FileProps> = memo(
   ({
     label,
@@ -69,23 +70,23 @@ export const File: FC<FileProps> = memo(
     children,
     onEnterPressed,
     ...rest
-  }) => {
+  }: FileProps) => {
     const elRef = useRef<HTMLInputElement>(null);
     const [fileSelected, setFileSelected] = useState<KeyValue[]>([]);
 
     const handleClear = useCallback(() => {
-      // @ts-ignore
-      if (elRef.current) elRef.current.value = null;
+      // @ts-expect-error
+      if (elRef.current != null) elRef.current.value = null;
       setFileSelected([]);
-      onChange && onChange(undefined);
+      onChange?.(undefined);
     }, [onChange]);
     const handleChange = useCallback(() => {
-      // @ts-ignore
+      // @ts-expect-error
       setFileSelected(Array.from(elRef.current?.files));
-      onChange && onChange(elRef.current?.files);
+      onChange?.(elRef.current?.files);
     }, [onChange]);
 
-    useImperativeHandle(inputRef, () => elRef.current!);
+    useImperativeHandle(inputRef, () => elRef.current);
 
     return (
       <Fragment>

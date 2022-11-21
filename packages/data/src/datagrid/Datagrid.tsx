@@ -19,7 +19,7 @@ import { DatagridColumn } from "./types";
 
 export interface DatagridProps<T extends KeyValue> extends ElementProps {
   data: T[];
-  columns: DatagridColumn<T>[];
+  columns: Array<DatagridColumn<T>>;
   isLoading?: boolean;
 
   emptyDisplay?: string | ReactElement;

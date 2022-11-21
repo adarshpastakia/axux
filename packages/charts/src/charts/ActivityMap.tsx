@@ -21,7 +21,7 @@ import { PaletteSelect } from "../wrapper/PaletteSelect";
 
 export interface ActivityMapProps extends BaseChart {
   heatmapPalette?: string[];
-  data: [low: number, high: number, count: number][][];
+  data: Array<Array<[low: number, high: number, count: number]>>;
   time?: "day-hour" | "month-day";
   type?: "scatter" | "heatmap";
   /**
@@ -225,7 +225,7 @@ const ActivityMapChart: FC<ActivityMapProps> = ({
         <label>{title}</label>
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.ActivityScatter}
           isActive={type === "scatter"}
@@ -233,7 +233,7 @@ const ActivityMapChart: FC<ActivityMapProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.ActivityCalendar}
           isActive={type === "heatmap"}

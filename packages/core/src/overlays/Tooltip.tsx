@@ -64,9 +64,9 @@ export const AxTooltip: FC<TooltipProps> = ({
   isOpen = false,
   autoHide = false,
   color,
-  // @ts-ignore
+  // @ts-expect-error
   innerRef,
-  // @ts-ignore
+  // @ts-expect-error
   "data-popover-open": parentOpen,
   ...rest
 }) => {
@@ -108,7 +108,7 @@ export const AxTooltip: FC<TooltipProps> = ({
   );
 
   useEffect(() => {
-    if (popperElement) {
+    if (popperElement != null) {
       const cb = () => forceUpdate?.();
       popperElement.addEventListener("updatePopper", cb);
       return () => {
@@ -129,10 +129,10 @@ export const AxTooltip: FC<TooltipProps> = ({
     [innerRef]
   );
 
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <Fragment>
-      {cloneElement(anchorEl as AnyObject, {
+      {cloneElement(anchorEl , {
         ref: setReferenceElement,
         onMouseEnter: () => !isDisabled && setOpen(true),
         onMouseLeave: () => !isDisabled && !isOpen && setOpen(false),

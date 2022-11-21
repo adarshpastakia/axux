@@ -50,7 +50,7 @@ export const ComboInput = <T extends AnyObject>({
   isInvalid,
   className,
   isEditable,
-  // @ts-ignore
+  // @ts-expect-error
   name,
   info,
   error,
@@ -63,7 +63,7 @@ export const ComboInput = <T extends AnyObject>({
   ...rest
 }: SelectProps<T>) => {
   const [actualValue, setActualValue] = useState<T>({} as AnyObject);
-  const [pending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const { list, query, onQueryChange } = useSelect({
     options,
     labelProperty,
@@ -77,25 +77,25 @@ export const ComboInput = <T extends AnyObject>({
     placement: "bottom-start",
   });
 
-  /******************* set actualValue when value changes *******************/
+  /** ***************** set actualValue when value changes *******************/
   useEffect(() => {
     let val = options
       .map((o: AnyObject) => o.items ?? o)
       .flat(2)
       .find((option) => {
-        if (matcher) return matcher(option, value ?? "");
+        if (matcher != null) return matcher(option, value ?? "");
         return defaultMatcher(option, value, valueProperty);
       });
     if (value && !val && allowCreate) val = value;
     setActualValue(val ?? {});
   }, [value, valueProperty, options, allowCreate]);
 
-  /******************* change actualValue *******************/
+  /** ***************** change actualValue *******************/
   const handleChange = useCallback(
     (option?: T) => {
-      Promise.resolve(option && onSelect?.(option)).then((b) => {
+      void Promise.resolve(option && onSelect?.(option)).then((b) => {
         if (b !== false) {
-          onChange &&
+          onChange != null &&
             startTransition(() => onChange(getValue(option, valueProperty)));
           setActualValue(option ?? ({} as T));
           onQueryChange("");
@@ -105,9 +105,10 @@ export const ComboInput = <T extends AnyObject>({
     [onChange, valueProperty, query]
   );
 
-  /******************* display label *******************/
+  /** ***************** display label *******************/
   const displayLabel = useMemo(() => {
-    if (makeLabel && !isEmpty(actualValue)) return makeLabel(actualValue);
+    if (makeLabel != null && !isEmpty(actualValue))
+      return makeLabel(actualValue);
     return getLabel(actualValue, labelProperty);
   }, [makeLabel, labelProperty, actualValue]);
 

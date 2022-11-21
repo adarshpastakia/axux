@@ -35,7 +35,7 @@ const toolAction = [
   <AxButton
     key="action"
     color="invert"
-    style="link"
+    variant="link"
     icon="mdi mdi-backspace"
   />,
 ];
@@ -44,14 +44,14 @@ const Menu = () => {
   return (
     <Fragment>
       <AxMenu onClick={action("sideMenu")}>
-        <AxMenu.Mini to="/" label="Home" icon="mdi mdi-home" />
+        <AxMenu.Mini nav={{ to: "/" }} label="Home" icon="mdi mdi-home" />
         <AxMenu.Mini
-          to="/404"
+          nav={{ to: "/404" }}
           label="Empty"
           icon="mdi mdi-minus-circle-outline"
         />
         <AxMenu.Mini
-          to="/next"
+          nav={{ to: "/next" }}
           label="Next"
           icon="mdi mdi-arrow-right-bold-outline"
         />
@@ -94,9 +94,9 @@ const MyFlyout = ({ onClose }: KeyValue) => {
     <AxFlyout size="sm" onClose={onClose} closeOnClick>
       <AxContent padding="none">
         <AxMenu onClick={(e) => (onClose?.(), action("menuClick")(e))}>
-          <AxMenu.Item to="/" label="Home" icon="mdi mdi-home" />
+          <AxMenu.Item nav={{ to: "/" }} label="Home" icon="mdi mdi-home" />
           <AxMenu.Item
-            to="/404"
+            nav={{ to: "/404" }}
             label="Empty"
             icon="mdi mdi-minus-circle-outline"
           />
@@ -165,7 +165,7 @@ const Viewport = (props: KeyValue) => {
     <AxViewport {...props}>
       {Overlay}
       <AxHeader className="bg-component text-2xl">
-        <AxButton icon="logo.png" style="link" onClick={openFlyout} />
+        <AxButton icon="logo.png" variant="link" onClick={openFlyout} />
         <AxTitle className="text-primary-700 dark:text-primary-400 font-light">
           Application Title
         </AxTitle>
@@ -173,7 +173,7 @@ const Viewport = (props: KeyValue) => {
         <AxButton.Dropdown
           showCaret={false}
           icon="mdi mdi-account-circle"
-          style="link"
+          variant="link"
           color="primary"
           onClick={action("profileMenu")}
         >
@@ -181,10 +181,7 @@ const Viewport = (props: KeyValue) => {
           <AxMenu.Item id="f2" label="Action 2" />
           <AxMenu.Item id="f3" label="Action 3" />
           <AxMenu.Group label="Grouped" type="floating">
-            <AxMenu.Item
-              label="Action 4"
-              onClick={action("profileMenu")}
-            />
+            <AxMenu.Item label="Action 4" onClick={action("profileMenu")} />
             <AxMenu.Item id="f5" label="Action 5" />
             <AxMenu.Item id="f6" label="Action 6" />
           </AxMenu.Group>
@@ -268,7 +265,7 @@ const Viewport = (props: KeyValue) => {
                   <AxTitle>Test collapse</AxTitle>
                   <AxButton
                     size="sm"
-                    style="link"
+                    variant="link"
                     icon="mdi mdi-plus"
                     stopPropagation
                   />

@@ -81,7 +81,11 @@ const GenericChart: FC<GenericProps> = ({
 }) => {
   const chartRef = useRef<EChartsType>(null);
 
-  useImperativeHandle(_ref, () => chartRef.current!, [chartRef.current]);
+  useImperativeHandle<EChartsType | null, EChartsType | null>(
+    _ref,
+    () => chartRef.current,
+    [chartRef.current]
+  );
 
   return (
     <ChartContainer theme={theme} options={options} chartRef={chartRef}>

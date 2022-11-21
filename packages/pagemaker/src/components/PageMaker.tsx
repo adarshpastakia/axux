@@ -16,7 +16,7 @@ import { Page } from "./widgets/Page";
 /**
  * Page maker
  */
-export const AxPageMaker: FC<IProps> = memo((props) => {
+export const AxPageMaker: FC<IProps> = memo((props: IProps) => {
   return (
     <ContextProvider {...props}>
       <AxSection className="page-maker__container">

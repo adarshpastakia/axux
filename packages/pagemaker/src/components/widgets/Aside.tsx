@@ -31,7 +31,7 @@ export const Aside: FC = memo(() => {
               <AxTitle>{t("label.config")}</AxTitle>
               <AxButton
                 rtlFlip
-                style="link"
+                variant="link"
                 className="toggle-close"
                 aria-label="close"
                 stopPropagation

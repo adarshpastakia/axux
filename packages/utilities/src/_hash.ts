@@ -14,9 +14,9 @@ import { isEmpty } from "./_isType";
  * @internal
  */
 export const hash = (str: string) => {
-  let hash = 0,
-    i,
-    chr;
+  let hash = 0;
+    let i;
+    let chr;
   if (isEmpty(str)) return hash;
   for (i = 0; i < str.length; i++) {
     chr = str.charCodeAt(i);

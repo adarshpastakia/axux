@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { iconToken, isEmpty } from "@axux/utilities";
+import { iconToken } from "@axux/utilities";
 import { Menu } from "@headlessui/react";
 import { FC, Fragment } from "react";
 import { createPortal } from "react-dom";

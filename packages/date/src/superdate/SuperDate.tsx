@@ -24,7 +24,7 @@ export const AxSuperDate: FC<RelativeProps> = ({
   onChange,
   date = "$now|$now",
   events,
-  style,
+  variant,
   color,
   defaultView,
   presets,
@@ -37,7 +37,7 @@ export const AxSuperDate: FC<RelativeProps> = ({
     i18n: { language },
   } = useTranslation("superdate");
   const panelRef = useRef<HTMLDivElement>(null);
-  const { currentCalendar, currentLocale } = useGlobals();
+  const { currentCalendar } = useGlobals();
   const isHijri = useMemo(() => currentCalendar === "hijri", [currentCalendar]);
 
   const [value, setValue] = useState<RelativeProps["date"]>(date ?? "$now");
@@ -52,7 +52,7 @@ export const AxSuperDate: FC<RelativeProps> = ({
     [language, value, isHijri]
   );
   const activeTab = useMemo<Type>(
-    () => defaultView || superDateType(value),
+    () => defaultView ?? superDateType(value),
     [defaultView, value]
   );
 
@@ -64,16 +64,16 @@ export const AxSuperDate: FC<RelativeProps> = ({
   const wrapperProps = useMemo(() => {
     const ret: KeyValue = {
       icon: Icons.iconClock,
-      style,
+      variant,
       color,
       tooltip,
-      isDisabled: isDisabled,
+      isDisabled,
       className: `ax-superdate__button ${className ?? ""}`,
     };
     return ret;
-  }, [tooltip, style, color, className, isDisabled]);
+  }, [tooltip, variant, color, className, isDisabled]);
   const updatePopup = useCallback(() => {
-    if (panelRef.current) {
+    if (panelRef.current != null) {
       const el = panelRef.current;
       setTimeout(
         () => el.dispatchEvent(new Event("updatePopper", { bubbles: true })),
@@ -83,7 +83,7 @@ export const AxSuperDate: FC<RelativeProps> = ({
   }, []);
   const afterChange = useCallback(
     (v?: string) => {
-      onChange && onChange(v, DateMath.parseRange(v));
+      onChange?.(v, DateMath.parseRange(v));
       setValue(v);
     },
     [onChange]
@@ -118,7 +118,7 @@ export const AxSuperDate: FC<RelativeProps> = ({
               date={activeTab === Type.ABSOLUTE ? value : undefined}
             />
           </AxTabPanel.Tab>
-          {events && (
+          {events != null && (
             <AxTabPanel.Tab id={Type.EVENTS} label={t("label.events")}>
               <EventCalendar events={events} onChange={afterChange} />
             </AxTabPanel.Tab>

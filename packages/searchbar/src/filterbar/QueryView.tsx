@@ -61,7 +61,7 @@ export const QueryView = ({
       <AxPopover.Dismiss>
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           color="danger"
           onClick={() => removeFilter(index)}
         >

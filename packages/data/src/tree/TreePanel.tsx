@@ -90,11 +90,11 @@ export const AxTreePanel: FC<TreeProps> = memo(
     onLoad,
     onSelect,
     ...rest
-  }) => {
+  }: TreeProps) => {
     const isRtl = useIsRtl();
     const listRef = useRef<List>(null);
     const panelRef = useRef<HTMLDivElement>(null);
-    const [pending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
 
     const initState = useCallback(() => {
       const treeData = refactorTreeData(data);
@@ -120,7 +120,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
       (state: TreeState, action: TreeActions) => {
         state.autoScroll = false;
         if (action.type === "toggleExpand") {
-          return toggleExpand(state, action.index, !!onLoad);
+          return toggleExpand(state, action.index, !(onLoad == null));
         }
         if (action.type === "toggleCheck") {
           toggleCheck(state, action.id);
@@ -177,7 +177,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
               : undefined;
             if (item.parent && item.isFiltered) {
               let parent = state.treeMap.get(item.parent);
-              while (parent) {
+              while (parent != null) {
                 parent.isFiltered = true;
                 parent = state.treeMap.get(parent.parent ?? "");
               }
@@ -205,9 +205,10 @@ export const AxTreePanel: FC<TreeProps> = memo(
 
     const itemHeight = useCallback(
       (el: HTMLDivElement | null) => {
-        const h = el
-          ? parseInt(getComputedStyle(el).fontSize ?? "16") * 1.5
-          : 0;
+        const h =
+          el != null
+            ? parseInt(getComputedStyle(el).fontSize ?? "16") * 1.5
+            : 0;
         return isNaN(h) ? 0 : h;
       },
       [state.items]
@@ -252,7 +253,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
           const item = Array.from(state.treeMap.values()).find(
             (n) => n.isSelected
           );
-          if (item) {
+          if (item != null) {
             const focusIndex = state.items.indexOf(item);
             focusIndex > -1 &&
               listRef.current?.scrollToItem(focusIndex, "center");
@@ -293,7 +294,8 @@ export const AxTreePanel: FC<TreeProps> = memo(
                 itemSize={itemHeight(panelRef.current)}
                 itemCount={state.items.length}
                 direction={isRtl ? "rtl" : "ltr"}
-                children={({ index, style }) => (
+              >
+                {({ index, style }) => (
                   <TreeNode
                     style={style}
                     {...state.items[index]}
@@ -308,7 +310,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
                     onToggleExpand={() => handleExpand(index)}
                   />
                 )}
-              />
+              </List>
             )}
           </AutoSizer>
         </div>
@@ -316,3 +318,4 @@ export const AxTreePanel: FC<TreeProps> = memo(
     );
   }
 );
+AxTreePanel.displayName = "AxTree.Panel";

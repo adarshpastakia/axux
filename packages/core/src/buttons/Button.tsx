@@ -44,7 +44,7 @@ export interface ButtonProps extends ElementProps, IconProp, RefProp {
   /**
    * button style
    */
-  style?: "outline" | "solid" | "link";
+  variant?: "outline" | "solid" | "link";
   /**
    * icon alignment
    */
@@ -124,7 +124,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
 } = forwardRef<HTMLElement, ButtonProps>((props, ref) => {
   const {
     icon,
-    style,
+    variant: style,
     size,
     children,
     type = "button",
@@ -133,10 +133,10 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     noTabFocus,
     iconAlign,
     className,
-    isActive,
-    isRound,
-    isLoading,
-    isDisabled,
+    isActive = false,
+    isRound = false,
+    isLoading = false,
+    isDisabled = false,
     showCaret,
     tooltip,
     badge,
@@ -146,9 +146,9 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     onClick,
     useSpinner,
     stopPropagation = false,
-    // @ts-ignore
+    // @ts-expect-error
     "data-extra": extra,
-    // @ts-ignore
+    // @ts-expect-error
     "data-popover-open": popoverOpen,
     ...rest
   } = props;
@@ -158,7 +158,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
 
   const tooltipProps = useMemo(() => getTooltipProps(tooltip), [tooltip]);
 
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <div
       data-type={style}
@@ -213,7 +213,11 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
 AxButton.Action = ActionButton;
 AxButton.Confirm = ConfirmButton;
 AxButton.Dropdown = DropdownButton;
-AxButton.Group = ({ children, isVertical = false, className = "" }) => (
+AxButton.Group = ({
+  children,
+  isVertical = false,
+  className = "",
+}: { isVertical?: boolean } & ElementProps & ChildrenProp) => (
   <div
     className={`ax-button__group ${className ?? ""}`}
     data-vertical={isVertical}

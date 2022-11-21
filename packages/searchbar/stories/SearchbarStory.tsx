@@ -85,7 +85,7 @@ export const SearchbarStory = () => {
           options={["All", "Table 1", "Table 2", "Table 3"]}
         />
       }
-      append={<AxSuperDate className="min-w-[12rem]" style="outline" />}
+      append={<AxSuperDate className="min-w-[12rem]" variant="outline" />}
       actions={[
         <AxMenu.Item
           key="open"

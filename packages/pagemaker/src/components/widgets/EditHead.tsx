@@ -7,23 +7,27 @@ import { AxButton, AxIcon } from "@axux/core";
 import { DragEventHandler, FC, memo } from "react";
 import { iconDelete, iconDrag } from "../../utils/icons";
 
-export const EditHead: FC<{
+interface Props {
   title: string;
   onRemove: () => void;
   onDragStart: DragEventHandler;
-}> = memo(({ title, onRemove, onDragStart }) => (
-  <div className="page-maker__head" draggable onDragStart={onDragStart}>
-    <AxIcon icon={iconDrag} />
-    <small>{title}</small>
-    <AxButton
-      size="sm"
-      style="link"
-      color="danger"
-      className="flush"
-      icon={iconDelete}
-      stopPropagation
-      onClick={onRemove}
-    />
-  </div>
-));
+}
+
+export const EditHead: FC<Props> = memo(
+  ({ title, onRemove, onDragStart }: Props) => (
+    <div className="page-maker__head" draggable onDragStart={onDragStart}>
+      <AxIcon icon={iconDrag} />
+      <small>{title}</small>
+      <AxButton
+        size="sm"
+        variant="link"
+        color="danger"
+        className="flush"
+        icon={iconDelete}
+        stopPropagation
+        onClick={onRemove}
+      />
+    </div>
+  )
+);
 EditHead.displayName = "AxPageMaker.EditHead";

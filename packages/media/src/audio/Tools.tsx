@@ -28,7 +28,7 @@ Shift+. +5frames (0.165 secs)
 */
 
 export const Tools: FC<ToolsProps> = memo(
-  ({ isPlaying, isDisabled, wavesurfer }) => {
+  ({ isPlaying, isDisabled, wavesurfer }: ToolsProps) => {
     const [time, setTime] = useState(0);
     const [speed, setSpeed] = useState(0);
     const [volume, setVolume] = useState(0);
@@ -86,9 +86,11 @@ export const Tools: FC<ToolsProps> = memo(
         <AxHotKey
           global
           keyCombo="space"
-          handler={() =>
-            isPlaying ? wavesurfer.instance.pause() : wavesurfer.instance.play()
-          }
+          handler={() => {
+            isPlaying
+              ? wavesurfer.instance.pause()
+              : wavesurfer.instance.play()?.then();
+          }}
         />
         <AxHotKey global keyCombo="x" handler={handleVolume} />
         <AxHotKey global keyCombo="," handler={() => handleSeek(time - 5)} />
@@ -136,7 +138,9 @@ export const Tools: FC<ToolsProps> = memo(
             <AxIcon
               className="ax-media__tool"
               icon={Icons.iconPlay}
-              onClick={() => wavesurfer.instance.play()}
+              onClick={() => {
+                void wavesurfer.instance.play();
+              }}
             />
           )}
           <AxDivider vertical size="xs" />
@@ -192,3 +196,4 @@ export const Tools: FC<ToolsProps> = memo(
     );
   }
 );
+Tools.displayName = "AxAudio.Tools";

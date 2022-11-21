@@ -37,16 +37,16 @@ export const ProgressCircle: FC<ProgressProps> = ({
   size = "sm",
   color = "primary",
 }) => {
-  /******************* make sure value is between 0 and 100 *******************/
+  /** ***************** make sure value is between 0 and 100 *******************/
   const actualValue = useMemo(() => Math.min(Math.max(value, 0), 100), [value]);
 
-  /******************* calculate stroke offset by actual value *******************/
+  /** ***************** calculate stroke offset by actual value *******************/
   const strokeDashoffset = useMemo(() => {
     const circumfrence = Math.PI * 2 * 44;
     return circumfrence * (1 - actualValue / 100);
   }, [actualValue]);
 
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <div
       className="progress-circle"
@@ -93,17 +93,22 @@ export const ProgressBar: FC<ProgressProps> = ({
   color = "primary",
   animate,
 }) => {
-  /******************* make sure value is between 0 and 100 *******************/
+  /** ***************** make sure value is between 0 and 100 *******************/
   const actualValue = useMemo(() => Math.min(Math.max(value, 0), 100), [value]);
 
-  /******************* component *******************/
+  const progressVar = useMemo<KeyValue>(
+    () => ({ "--progress": actualValue }),
+    [actualValue]
+  );
+
+  /** ***************** component *******************/
   return (
     <div
       className="progress-bar"
       data-size={size}
       data-color={color}
       data-animate={animate}
-      style={{ "--progress": actualValue } as AnyObject}
+      style={progressVar}
       aria-hidden="true"
     >
       <span>{Format.percent(actualValue / 100)}</span>

@@ -7,15 +7,13 @@
  */
 
 import { FC } from "react";
-import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context";
 import { FilterProps } from "../types";
 import { AddFilter } from "./AddFilter";
 import { FilterTag } from "./FilterTag";
 import { GlobalMenu } from "./GlobalMenu";
 
-export const FilterWrapper: FC<Partial<FilterProps>> = ({}) => {
-  const { t } = useTranslation("searchbar");
+export const FilterWrapper: FC<Partial<FilterProps>> = () => {
   const { showFilters, filters, fields, isEditable } = useSearchContext();
 
   if (!showFilters) return null;

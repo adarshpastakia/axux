@@ -8,7 +8,7 @@
 
 import { isEmpty } from "./_isType";
 
-const _getBox = (box: AnyObject) => {
+const _getBox = (box: AnyObject): number[] => {
   let boundingBox = box;
   if (isEmpty(box)) return [];
   if (typeof box === "string") {

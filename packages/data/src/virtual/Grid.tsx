@@ -26,7 +26,6 @@ import {
   useMemo,
   useRef,
   useState,
-  useTransition,
 } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { areEqual, VariableSizeGrid as Grid } from "react-window";
@@ -42,7 +41,7 @@ export interface GridItemProps extends ChildrenProp {
   index: number;
   rowIndex: number;
   columnIndex: number;
-  isScrolling: boolean;
+  isScrolling?: boolean;
   updateHeight: (rowIndex: number, columnIndex: number, height: number) => void;
 }
 
@@ -65,7 +64,8 @@ export interface GridProps<T> extends ElementProps {
   onLoadMore?: EmptyCallback;
 }
 
-/******************* Timeline item *******************/
+/** ***************** Timeline item *******************/
+// eslint-disable-next-line react/display-name
 const Item = memo(
   ({
     style,
@@ -77,21 +77,21 @@ const Item = memo(
   }: GridItemProps) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
-    /******************* calculate height on resize *******************/
+    /** ***************** calculate height on resize *******************/
     useLayoutEffect(() => {
       const ob = new ResizeObserver(() => {
         const el = itemRef.current;
-        if (el) {
+        if (el != null) {
           updateHeight(rowIndex, columnIndex, el.offsetHeight);
         }
       });
-      itemRef.current && ob.observe(itemRef.current);
+      itemRef.current != null && ob.observe(itemRef.current);
       return () => {
         ob.disconnect();
       };
     }, [rowIndex, columnIndex, parent]);
 
-    /******************* component *******************/
+    /** ***************** component *******************/
     return (
       <div style={style} className="overflow-hidden">
         <div ref={itemRef} className="ax-grid__item" data-index={index}>
@@ -123,7 +123,6 @@ const AxGridViewComponent = <T extends KeyValue>({
   const containerRef = useRef<HTMLDivElement>(null);
   const [listRef, setList] = useState<AnyObject>();
   const cache = useMemo(() => new Map<number, number[]>(), []);
-  const [_, startTransition] = useTransition();
 
   const count = useDeferredValue(items.length);
   const itemList = createItemList(items);
@@ -173,7 +172,7 @@ const AxGridViewComponent = <T extends KeyValue>({
     [listRef]
   );
 
-  /******************* list handlers *******************/
+  /** ***************** list handlers *******************/
   useEffect(() => {
     const el = containerRef.current;
     const handlers = {
@@ -185,13 +184,16 @@ const AxGridViewComponent = <T extends KeyValue>({
         }),
       scrollDown: () =>
         listRef.scrollTo({
+          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
           scrollTop: listRef.state.scrollTop + listRef.props.height,
         }),
       scrollUp: () =>
         listRef.scrollTo({
           scrollTop: listRef.state.scrollTop - listRef.props.height,
         }),
-      loadMore: () => !isLoading && onLoadMore?.(),
+      loadMore: () => {
+        !isLoading && onLoadMore?.();
+      },
     };
     el?.addEventListener("scrollFirst", handlers.scrollFirst);
     el?.addEventListener("scrollLast", handlers.scrollLast);
@@ -208,7 +210,7 @@ const AxGridViewComponent = <T extends KeyValue>({
     };
   }, [listRef, count, isLoading, onLoadMore]);
 
-  /******************* item height cache *******************/
+  /** ***************** item height cache *******************/
   const updateCache = useCallback(
     (rowIndex: number, columnIndex: number, height: number) => {
       const size = cache.get(rowIndex) ?? [];
@@ -229,7 +231,7 @@ const AxGridViewComponent = <T extends KeyValue>({
     >
       <AutoSizer>
         {({ width, height }) => {
-          let cc = Math.floor((width - 84) / colWidth);
+          const cc = Math.floor((width - 84) / colWidth);
           colCount.current = cc;
           return (
             <Grid
@@ -241,7 +243,13 @@ const AxGridViewComponent = <T extends KeyValue>({
               itemData={itemList}
               columnCount={cc}
               direction={isRtl ? "rtl" : "ltr"}
-              children={(props) =>
+              outerElementType={Wrapper}
+              columnWidth={() => Math.min(colWidth, (width - 84) / cc)}
+              rowHeight={(index) =>
+                Math.max(...(cache.get(index) ?? []), colHeight)
+              }
+            >
+              {(props) =>
                 children({
                   ...props,
                   index: props.rowIndex * cc + props.columnIndex,
@@ -250,14 +258,9 @@ const AxGridViewComponent = <T extends KeyValue>({
                       ? props.data[props.rowIndex * cc + props.columnIndex]
                       : null,
                   updateHeight: updateCache,
-                } as AnyObject)
+                })
               }
-              outerElementType={Wrapper}
-              columnWidth={() => Math.min(colWidth, (width - 84) / cc)}
-              rowHeight={(index) =>
-                Math.max(...(cache.get(index) ?? []), colHeight)
-              }
-            />
+            </Grid>
           );
         }}
       </AutoSizer>

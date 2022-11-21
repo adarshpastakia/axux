@@ -12,10 +12,11 @@ import { ReactNode, RefAttributes } from "react";
 import { AxIcon } from "../icons/Icon";
 import { AppIcons } from "./appIcons";
 
+// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 export type CallbackReturn = void | boolean | Promise<boolean | void>;
 export type HandleCallback = () => CallbackReturn;
-export type EmptyCallback = () => CallbackReturn;
-export type BooleanCallback = (truthy: boolean) => CallbackReturn;
+export type EmptyCallback = () => void;
+export type BooleanCallback = (truthy: boolean) => void;
 
 export type Color = "primary" | "accent" | "danger" | "warning" | "success";
 

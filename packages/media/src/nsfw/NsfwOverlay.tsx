@@ -10,7 +10,7 @@ import { AxIcon } from "@axux/core";
 import { useEffect, useState } from "react";
 import { Icons } from "../types/icons";
 
-export const NsfwOverlay = ({ isNsfw = false }) => {
+export const NsfwOverlay = ({ isNsfw = false }: { isNsfw?: boolean }) => {
   const [showNsfw, setShowNsfw] = useState(false);
 
   useEffect(() => {

@@ -55,7 +55,7 @@ export const useTooltipWatcher = () => {
   });
 
   const removeTooltip = useCallback(() => {
-    if (refPortal.current) {
+    if (refPortal.current != null) {
       try {
         refPortal.current.unmount();
       } catch (_) {
@@ -114,7 +114,7 @@ export const useTooltipWatcher = () => {
   }, [isOpen, content]);
 
   useEffect(() => {
-    if (refPortal.current) {
+    if (refPortal.current != null) {
       refPortal.current.render(
         <div
           tabIndex={-1}

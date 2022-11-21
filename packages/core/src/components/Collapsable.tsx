@@ -29,7 +29,7 @@ export const AxCollapsable: FC<CollapsableProps> = ({
 }) => {
   const [collapsed, toggleCollapse] = usePropToggle(isCollapsed, onCollapse);
 
-  /******************* check for children count *******************/
+  /** ***************** check for children count *******************/
   if (Children.toArray(children).length !== 2) {
     throw new Error("Two child elements required");
   }
@@ -39,7 +39,7 @@ export const AxCollapsable: FC<CollapsableProps> = ({
     return childs.length === 1 ? [null, childs[0]] : childs;
   }, [children]);
 
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <div {...rest} className={`ax-collapsable ${className ?? ""}`}>
       <div

@@ -28,7 +28,7 @@ export interface PanelStackProps extends ElementProps, ChildrenProp {
   /**
    * navigate to previous panel in history
    */
-  onBack?: (panelId: string, nextPanelId: string) => boolean | void;
+  onBack?: (panelId: string, nextPanelId: string) => boolean | undefined;
 }
 
 export const PanelStack: FC<PanelStackProps> = ({

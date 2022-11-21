@@ -9,14 +9,14 @@
 
 import { KeyboardEvent, MouseEvent } from "react";
 
-/******************* common handler for enter press *******************/
+/** ***************** common handler for enter press *******************/
 export const handleEnter = (callback?: AnyObject) => {
   return (e: KeyboardEvent) => {
     e.key === "Enter" && callback?.(e);
   };
 };
 
-/******************* common handler for mouse primary click *******************/
+/** ***************** common handler for mouse primary click *******************/
 export const handleClick = (
   callback?: AnyObject,
   { stopPropagation = false }: { stopPropagation?: boolean } = {}

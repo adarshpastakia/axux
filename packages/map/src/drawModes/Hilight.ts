@@ -27,7 +27,7 @@ HilightMode.toDisplayFeatures = function (
   display: AnyObject
 ) {
   const isActivePolygon = geojson.properties.id === state.currentId;
-  geojson.properties.hover = `${isActivePolygon}`;
+  geojson.properties.hover = isActivePolygon ? "true" : "false";
   return display(geojson);
 };
 

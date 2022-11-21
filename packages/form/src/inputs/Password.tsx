@@ -23,8 +23,9 @@ export interface PasswordProps extends Omit<TextProps, "type"> {
   showToggle?: boolean;
 }
 
+// eslint-disable-next-line react/display-name
 export const Password: FC<PasswordProps> = memo(
-  ({ children, strength, showToggle, ...props }) => {
+  ({ children, strength, showToggle, ...props }: PasswordProps) => {
     const { t } = useTranslation("form");
     const [show, setShow] = useState(false);
     return (
@@ -34,7 +35,7 @@ export const Password: FC<PasswordProps> = memo(
           <div className="ax-field__addon" data-align="end">
             <AxButton
               color="warning"
-              style="link"
+              variant="link"
               noTabFocus
               tooltip={t(show ? "password.hide" : "password.show")}
               aria-label={t(show ? "password.hide" : "password.show")}

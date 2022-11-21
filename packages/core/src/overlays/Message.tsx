@@ -7,7 +7,6 @@
  */
 
 import { FC } from "react";
-import { useIsDark } from "../hooks/useIsDark";
 import { AxIcon } from "../icons/Icon";
 import { CloseX, Color, IconProp } from "../types";
 
@@ -49,10 +48,9 @@ export const AxMessage: FC<MessageProps> = ({
   rtlFlip,
   color,
   actions,
-  // @ts-ignore
+  // @ts-expect-error
   onClose,
 }) => {
-  const isDark = useIsDark();
   return (
     <div className="ax-message" data-color={color}>
       {icon && <AxIcon icon={icon} size="md" rtlFlip={rtlFlip} />}

@@ -27,7 +27,7 @@ export const AxViewport: FC<ViewportProps> = ({
       dispose();
     };
   }, []);
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <HotKeyWrapper>
       <div {...rest} className={`ax-viewport ${className ?? ""}`}>

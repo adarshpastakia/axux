@@ -61,7 +61,7 @@ export const TreeNode = memo(
     return (
       <div style={style} className="ax-tree__node">
         {borders}
-        {props.isLeaf === false && (
+        {!props.isLeaf && (
           <div className="ax-tree__spacer" onClick={onToggleExpand}>
             <AxIcon
               icon={
@@ -73,10 +73,12 @@ export const TreeNode = memo(
           </div>
         )}
         {placeholder}
-        {!placeholder && (
+        {placeholder == null && (
           <div
             className="ax-tree__label"
-            onClick={() => (isCheckable ? onToggleCheck(node.id) : onSelect(node.id))}
+            onClick={() =>
+              isCheckable ? onToggleCheck(node.id) : onSelect(node.id)
+            }
             onDoubleClick={onToggleExpand}
             data-selected={!isCheckable && props.isSelected}
             data-disabled={node.isDisabled}
@@ -102,3 +104,4 @@ export const TreeNode = memo(
     );
   }
 );
+TreeNode.displayName = "AxTree.Node";

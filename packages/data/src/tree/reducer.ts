@@ -24,7 +24,7 @@ export const toggleExpand = (
           item.internalId.startsWith(parent.internalId)
         )
     );
-  } else if (parent.children && parent.children?.length > 0) {
+  } else if (parent.children != null && parent.children?.length > 0) {
     state.items.splice(index + 1, 0, ...createNodeList(parent.children));
   } else {
     parent.isLoading = canLoad;
@@ -49,18 +49,19 @@ export const toggleExpand = (
 
 export const toggleCheck = (state: TreeState, id?: string) => {
   const node = state.treeMap.get(state.idMap.get(id ?? "") ?? "");
-  if (node) {
+  if (node != null) {
     node.isChecked = node.isChecked === 0 ? 1 : 0;
-    node.children && toggleProperty(node.children, "isChecked", node.isChecked);
-    let parent = state.treeMap.get(node.parent!);
+    node.children != null &&
+      toggleProperty(node.children, "isChecked", node.isChecked);
+    let parent = state.treeMap.get(node.parent ?? "");
     const parentCheck = parent?.children?.some(
       (n) => n.isChecked !== node.isChecked
     )
       ? 2
       : node.isChecked;
-    while (parent) {
+    while (parent != null) {
       parent.isChecked = parentCheck;
-      parent = state.treeMap.get(parent.parent!);
+      parent = state.treeMap.get(parent.parent ?? "");
     }
   }
   return { ...state };
@@ -68,14 +69,14 @@ export const toggleCheck = (state: TreeState, id?: string) => {
 
 export const toggleSelect = (state: TreeState, id?: string, scroll = false) => {
   const node = state.treeMap.get(state.idMap.get(id ?? "") ?? "");
-  if (node) {
+  if (node != null) {
     Array.from(state.treeMap.values()).forEach((n) => {
       n.isSelected = false;
       n.childSelected = false;
     });
     node.isSelected = true;
-    let parent = state.treeMap.get(node.parent!);
-    while (parent) {
+    let parent = state.treeMap.get(node.parent ?? "");
+    while (parent != null) {
       parent.isOpen = true;
       parent.childSelected = true;
       parent = state.treeMap.get(parent.parent ?? "");

@@ -31,7 +31,7 @@ const Template: ComponentStory<typeof AxChart.CountSeries> = () => {
     <AxPanel width={600} height={600}>
       <AxHeader>
         <AxTitle>Count Series chart</AxTitle>
-        <AxButton style="link" icon="mdi mdi-refresh" onClick={loadData} />
+        <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />
       </AxHeader>
       <AxChart.CountSeries data={data} onClick={action("onClick")} />
     </AxPanel>

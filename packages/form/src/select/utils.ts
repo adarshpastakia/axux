@@ -12,7 +12,7 @@ import { ReactElement } from "react";
 import { InputProps } from "../types";
 
 export interface BaseSelectProps<T> extends ElementProps, ChildrenProp {
-  options: T[] | { label: string; items: T[] }[];
+  options: T[] | Array<{ label: string; items: T[] }>;
 
   allowCreate?: boolean;
   isEditable?: boolean;
@@ -30,28 +30,28 @@ export interface BaseSelectProps<T> extends ElementProps, ChildrenProp {
 }
 
 export interface SelectProps<T> extends BaseSelectProps<T>, InputProps {
-  onSelect?: (option: T) => Promise<boolean> | boolean | void;
+  onSelect?: (option: T) => Promise<boolean> | boolean;
   makeLabel?: (option: T) => string;
 }
 export interface TagProps<T> extends BaseSelectProps<T>, InputProps<string[]> {
-  onSelect?: (option: T[]) => Promise<boolean> | boolean | void;
+  onSelect?: (option: T[]) => Promise<boolean> | boolean;
   makeLabel?: (option: T) => string | ReactElement;
 }
 
-/******************* default option matcher *******************/
+/** ***************** default option matcher *******************/
 export const defaultMatcher = (
   option: AnyObject,
   value?: string,
   prop?: string
 ) =>
-  (Object.hasOwn((option ?? "") as AnyObject, prop ?? "")
+  (Object.hasOwn(option ?? "", prop ?? "")
     ? option[prop as AnyObject]
     : option) === value;
 
-/******************* get option value *******************/
+/** ***************** get option value *******************/
 export const getValue = (option: AnyObject, prop?: string) =>
   !option ? undefined : option[prop ?? ""] ?? option;
 
-/******************* get option label *******************/
+/** ***************** get option label *******************/
 export const getLabel = (option: AnyObject, prop?: string) =>
   isEmpty(option) ? "" : isObject(option) ? option[prop ?? ""] : option;

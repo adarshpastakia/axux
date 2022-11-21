@@ -66,11 +66,11 @@ export interface VideoPlayerProps {
   /**
    * scene list
    */
-  scenes?: [time: number, poster: string][];
+  scenes?: Array<[time: number, poster: string]>;
   /**
    * timeline markers
    */
-  markers?: [time: number, score: number][];
+  markers?: Array<[time: number, score: number]>;
   /**
    *
    */
@@ -102,13 +102,13 @@ export const AxVideoPlayer = forwardRef<
       onChange,
       onPause,
       onPlay,
-    },
+    }: VideoPlayerProps,
     ref
   ) => {
     const canvasRef = useRef<CanvasRef>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
 
-    const [pending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
 
     const initState = useCallback(
       () =>
@@ -167,7 +167,7 @@ export const AxVideoPlayer = forwardRef<
     useImperativeHandle(
       ref,
       () =>
-        canvasRef.current
+        canvasRef.current != null
           ? {
               play: () => videoRef.current?.play(),
               pause: () => videoRef.current?.pause(),
@@ -179,8 +179,8 @@ export const AxVideoPlayer = forwardRef<
 
     useLayoutEffect(() => {
       dispatch({ type: "init" });
-      videoRef.current && (videoRef.current.volume = 0.5);
-      videoRef.current && (videoRef.current.playbackRate = 1);
+      videoRef.current != null && (videoRef.current.volume = 0.5);
+      videoRef.current != null && (videoRef.current.playbackRate = 1);
       canvasRef.current?.clear();
     }, [src]);
 
@@ -238,11 +238,11 @@ export const AxVideoPlayer = forwardRef<
         >
           <div
             className="ax-media__container ax-video__wrapper"
-            onClick={() =>
+            onClick={() => {
               videoRef.current?.paused
                 ? videoRef.current?.play()
-                : videoRef.current?.pause()
-            }
+                : videoRef.current?.pause();
+            }}
           >
             <Video
               src={src}
@@ -294,3 +294,4 @@ export const AxVideoPlayer = forwardRef<
     );
   }
 );
+AxVideoPlayer.displayName = "AxVideo.Player";

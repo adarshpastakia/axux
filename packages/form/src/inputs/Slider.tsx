@@ -67,6 +67,7 @@ export interface SliderProps
   maxLabel?: string;
 }
 
+// eslint-disable-next-line react/display-name
 export const Slider: FC<SliderProps> = memo(
   ({
     label,
@@ -94,17 +95,17 @@ export const Slider: FC<SliderProps> = memo(
     min = 0,
     max = 100,
     ...rest
-  }) => {
+  }: SliderProps) => {
     const [actualValue, setActualValue] = useState(0);
     const [displayValue, setDisplayValue] = useState(false);
-    const [pending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
     useEffect(() => {
       setActualValue(value ?? 0);
     }, [value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         setActualValue(e?.target.valueAsNumber ?? 0);
-        onChange &&
+        onChange != null &&
           startTransition(() => onChange(e?.target.valueAsNumber ?? undefined));
       },
       [onChange]
@@ -118,8 +119,8 @@ export const Slider: FC<SliderProps> = memo(
 
     const dots = useMemo(() => {
       const base = (max - min) / step;
-      let diff = 1,
-        count = Math.min(base + 1, 11);
+      let diff = 1;
+      const count = Math.min(base + 1, 11);
       if (count > 11) diff = Math.ceil(base / 11);
       return new Array(count).fill(null).map((_, i) => i * diff);
     }, [min, max, step]);
@@ -201,7 +202,7 @@ export const Slider: FC<SliderProps> = memo(
                 <span key={i} />
               ))}
             </div>
-            {(showValue || displayValue) && (
+            {(!!showValue || !!displayValue) && (
               <div
                 className="ax-field__slider--value"
                 data-align={hilight > 50 ? "start" : "end"}

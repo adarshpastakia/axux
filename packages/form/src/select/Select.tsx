@@ -48,7 +48,7 @@ export const SelectInput = <T extends AnyObject>({
   isInvalid,
   className,
   isEditable,
-  // @ts-ignore
+  // @ts-expect-error
   name,
   info,
   error,
@@ -64,7 +64,7 @@ export const SelectInput = <T extends AnyObject>({
 }) => {
   const { t } = useTranslation("form");
   const [actualValue, setActualValue] = useState<T>("" as AnyObject);
-  const [pending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const { styles, setPopperElement, setReferenceElement } = usePopover({
     hideArrow: true,
@@ -72,25 +72,25 @@ export const SelectInput = <T extends AnyObject>({
     placement: "bottom-start",
   });
 
-  /******************* set actualValue when value changes *******************/
+  /** ***************** set actualValue when value changes *******************/
   useEffect(() => {
     let val = options
       .map((o: AnyObject) => o.items ?? o)
       .flat(2)
       .find((option) => {
-        if (matcher) return matcher(option, value ?? "");
+        if (matcher != null) return matcher(option, value ?? "");
         return defaultMatcher(option, value, valueProperty);
       });
     if (value && !val && allowCreate) val = value;
     setActualValue(val);
   }, [value, valueProperty, options, allowCreate]);
 
-  /******************* change actualValue *******************/
+  /** ***************** change actualValue *******************/
   const handleChange = useCallback(
     (option?: T) => {
-      Promise.resolve(option && onSelect?.(option)).then((b) => {
+      void Promise.resolve(option && onSelect?.(option)).then((b) => {
         if (b !== false) {
-          onChange &&
+          onChange != null &&
             startTransition(() => onChange(getValue(option, valueProperty)));
           setActualValue(option ?? ("" as AnyObject));
         }
@@ -99,13 +99,14 @@ export const SelectInput = <T extends AnyObject>({
     [onChange, valueProperty]
   );
 
-  /******************* display label *******************/
+  /** ***************** display label *******************/
   const displayLabel = useMemo(() => {
-    if (makeLabel && !isEmpty(actualValue)) return makeLabel(actualValue);
+    if (makeLabel != null && !isEmpty(actualValue))
+      return makeLabel(actualValue);
     return getLabel(actualValue, labelProperty);
   }, [makeLabel, labelProperty, actualValue]);
 
-  /******************* make select option *******************/
+  /** ***************** make select option *******************/
   const makeOption = useCallback(
     (option: AnyObject, index: number) => (
       <Listbox.Option value={option} key={index}>
@@ -115,7 +116,9 @@ export const SelectInput = <T extends AnyObject>({
             data-selected={selected}
             data-active={active}
           >
-            {renderer ? renderer(option) : getLabel(option, labelProperty)}
+            {renderer != null
+              ? renderer(option)
+              : getLabel(option, labelProperty)}
           </div>
         )}
       </Listbox.Option>

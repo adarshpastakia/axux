@@ -11,7 +11,7 @@ import { ReactNode } from "react";
 
 export interface DatagridColumn<T> extends IconProp {
   name: keyof T | string;
-  label: ReactNode;
+  label: string;
   tooltip?: true | string;
   valueMap?: KeyValue<ReactNode>;
   type?: "string" | "number" | "date" | "boolean";

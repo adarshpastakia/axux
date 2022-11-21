@@ -105,7 +105,7 @@ export const AxAside: FC<AsideProps> = ({
   headerClass,
   isLoading,
   className,
-  isCollapsable,
+  isCollapsable = false,
   isCollapsed = false,
   isFlyout,
   onCollapse,
@@ -130,9 +130,9 @@ export const AxAside: FC<AsideProps> = ({
     if (collapsed) {
       if (isFlyout) {
         setPeek(true);
-        onFlyout && onFlyout();
+        void onFlyout?.();
       } else {
-        toggleCollapse();
+        void toggleCollapse();
       }
     }
   }, [isFlyout, collapsed, onFlyout, toggleCollapse]);
@@ -140,7 +140,7 @@ export const AxAside: FC<AsideProps> = ({
   useLayoutEffect(() => {
     if (peek) {
       const handler = (e: MouseEvent) => {
-        if (!(e.target as HTMLElement).closest(".ax-side__body")) {
+        if ((e.target as HTMLElement).closest(".ax-side__body") == null) {
           setPeek(false);
         }
       };
@@ -153,7 +153,7 @@ export const AxAside: FC<AsideProps> = ({
   useResize(
     resizeHandleRef,
     ({ x }) => {
-      if (elementRef.current) {
+      if (elementRef.current != null) {
         setWidth(elementRef.current.offsetWidth + x);
       }
     },
@@ -169,7 +169,7 @@ export const AxAside: FC<AsideProps> = ({
       onClick={tryPeek}
       {...aria}
     >
-      {(title || isCollapsable) && (
+      {(!!title || isCollapsable) && (
         <AxHeader className={`ax-side__header ${headerClass ?? ""}`}>
           {icon && (
             <AxIcon
@@ -184,7 +184,7 @@ export const AxAside: FC<AsideProps> = ({
           <div className="ax-side__actions">{actions}</div>
           {isCollapsable && (
             <AxButton
-              style="link"
+              variant="link"
               aria-label="Toggle collapse"
               className="ax-side__toggle flippable"
               rtlFlip

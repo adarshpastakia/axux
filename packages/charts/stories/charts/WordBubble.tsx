@@ -31,7 +31,7 @@ const Template: ComponentStory<typeof AxChart.WordBubble> = () => {
     <AxPanel width={600} height={600}>
       <AxHeader>
         <AxTitle>Word Bubble chart</AxTitle>
-        <AxButton style="link" icon="mdi mdi-refresh" onClick={loadData} />
+        <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />
       </AxHeader>
       <AxChart.WordBubble data={data} onClick={action("onClick")} />
     </AxPanel>

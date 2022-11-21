@@ -125,7 +125,7 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
     defaultLocale ?? systemLocale()
   );
 
-  /******************* set initial theme and locale dir  *******************/
+  /** ***************** set initial theme and locale dir  *******************/
   useEffect(() => {
     document.documentElement.lang = locale;
     if (
@@ -138,12 +138,12 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
         document.documentElement.classList.contains("light") ? "light" : "dark"
       );
     }
-    i18next.changeLanguage(locale).then(() => {
+    void i18next.changeLanguage(locale).then(() => {
       document.documentElement.dir = i18next.dir();
     });
   }, []);
 
-  /******************* theme toggle *******************/
+  /** ***************** theme toggle *******************/
   const toggleTheme = useCallback(
     (forceTheme?: State["theme"]) => {
       const newTheme = forceTheme ?? (theme === "dark" ? "light" : "dark");
@@ -155,9 +155,9 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
     [theme]
   );
 
-  /******************* change locale *******************/
+  /** ***************** change locale *******************/
   const changeLocale = useCallback((locale: string) => {
-    i18next.changeLanguage(locale).then(() => {
+    void i18next.changeLanguage(locale).then(() => {
       localStorage.setItem(KEY_LOCALE, locale);
       document.documentElement.lang = locale;
       document.documentElement.dir = i18next.dir();
@@ -165,7 +165,7 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
     });
   }, []);
 
-  /******************* change calendar *******************/
+  /** ***************** change calendar *******************/
   const changeCalendar = useCallback((calendar: State["calendar"]) => {
     setCalendar(calendar);
     localStorage.setItem(KEY_CALENDAR, calendar);
@@ -181,7 +181,7 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
       });
   }, []);
 
-  /******************* context provider *******************/
+  /** ***************** context provider *******************/
   return (
     <GlobalContext.Provider
       value={{

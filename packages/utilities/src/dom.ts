@@ -7,12 +7,12 @@
  */
 /* istanbul ignore file */
 
-/******************* get css style property value *******************/
+/** ***************** get css style property value *******************/
 export const getCssStyle = (element: HTMLElement, property: string) => {
   return getComputedStyle(element).getPropertyValue(property);
 };
 
-/******************* calculate full width for given element *******************/
+/** ***************** calculate full width for given element *******************/
 export const calculateTextWidth = (
   element: HTMLElement,
   styleRoot?: HTMLElement
@@ -32,14 +32,14 @@ export const calculateTextWidth = (
   return width;
 };
 
-/******************* calculate full height for given element *******************/
+/** ***************** calculate full height for given element *******************/
 export const calculateTextHeight = (
   element: HTMLElement,
   styleRoot?: HTMLElement
 ) => {
   const clone = element.cloneNode(true) as HTMLElement;
   clone.style.font = getCssStyle(styleRoot ?? element, "font");
-  clone.style.width = element.offsetWidth + "px";
+  clone.style.width = `${element.offsetWidth}px`;
   clone.style.padding = getCssStyle(styleRoot ?? element, "padding");
   clone.style.lineHeight = getCssStyle(styleRoot ?? element, "line-height");
   clone.style.letterSpacing = getCssStyle(

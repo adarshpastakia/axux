@@ -17,7 +17,7 @@ export const AxFooter: FC<
     ChildrenProp & {
       justify?: "start" | "end" | "center" | "between";
     }
-> = ({ className, justify, ...rest }) => (
+> = ({ className, justify = "start", ...rest }) => (
   <div
     {...rest}
     className={`ax-footer justify-${justify} ${className ?? ""}`}

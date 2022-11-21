@@ -97,7 +97,7 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
     const series = data?.map((item, index) => ({
       id: item.id,
       stack,
-      areaStyle: !!stacked ? {} : undefined,
+      areaStyle: stacked ? {} : undefined,
       type: _type === "column" ? "bar" : _type,
       name: item.label ?? item.id,
       data:
@@ -133,7 +133,7 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
         <label>{title}</label>
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.Line}
           isActive={type === "line"}
@@ -141,7 +141,7 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.Column}
           isActive={type === "column"}
@@ -149,7 +149,7 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.Bar}
           isActive={type === "bar"}
@@ -157,7 +157,7 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.Radar}
           isActive={type === "radar"}
@@ -165,7 +165,7 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.LineStacked}
           isActive={type === "line-stacked"}
@@ -173,7 +173,7 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.ColumnStacked}
           isActive={type === "column-stacked"}
@@ -181,7 +181,7 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
         />
         <AxButton
           size="sm"
-          style="link"
+          variant="link"
           className="flush"
           icon={Icons.BarStacked}
           isActive={type === "bar-stacked"}

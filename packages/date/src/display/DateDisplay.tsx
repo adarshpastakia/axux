@@ -7,8 +7,7 @@
  */
 
 import { useGlobals } from "@axux/core/dist/context/Global";
-import { ElementProps } from "@axux/core/dist/types";
-import { RefProp } from "@axux/core/src/types";
+import { ElementProps, RefProp } from "@axux/core/dist/types";
 import { FC, forwardRef, useMemo } from "react";
 import { DateLike } from "../types";
 import { DateMath } from "../utils";
@@ -30,10 +29,10 @@ export const AxDateDisplay: FC<DateDisplayProps> = forwardRef(
       date,
       format = "eee, MMM dd yyyy, HH:mm:ss aaa",
       className,
-      // @ts-ignore
+      // @ts-expect-error
       "data-popover-open": openPopover,
       ...rest
-    },
+    }: DateDisplayProps,
     ref
   ) => {
     const { currentCalendar, currentLocale } = useGlobals();
@@ -63,3 +62,4 @@ export const AxDateDisplay: FC<DateDisplayProps> = forwardRef(
     );
   }
 );
+AxDateDisplay.displayName = "AxDateDisplay";

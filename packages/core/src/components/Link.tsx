@@ -60,7 +60,11 @@ export const Link = forwardRef<
   ) => {
     const linkRef = useRef<HTMLElement>(null);
     const isInrouter = useInRouterContext();
-    useImperativeHandle(ref, () => linkRef.current!, [linkRef]);
+    useImperativeHandle<HTMLElement | null, HTMLElement | null>(
+      ref,
+      () => linkRef.current,
+      [linkRef]
+    );
     return (
       <Fragment>
         {isInrouter && !!to ? (
@@ -75,7 +79,7 @@ export const Link = forwardRef<
             onClick={onClick}
             onMouseDown={onMouseDown}
           />
-        ) : !!href ? (
+        ) : href ? (
           <a
             {...props}
             ref={linkRef as AnyObject}

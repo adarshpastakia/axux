@@ -43,17 +43,17 @@ const MenuItem: FC<MenuItemProps<ReactNode>> = ({
   isDisabled,
   rtlFlip,
   onClick,
-  // @ts-ignore
+  // @ts-expect-error
   "data-extra": extra,
-  // @ts-ignore
+  // @ts-expect-error
   "data-panel": panelId,
-  // @ts-ignore
+  // @ts-expect-error
   "data-popover-open": popoverOpen,
   ...rest
 }) => {
   const Badge = useBadge(badge);
 
-  const T = !!panelId ? FakeItem : Menu.Item;
+  const T = panelId ? FakeItem : Menu.Item;
 
   return (
     <T as={Fragment} disabled={isDisabled}>
@@ -96,9 +96,9 @@ const MenuMini: FC<MenuItemProps> = ({
   isActive,
   isDisabled,
   rtlFlip,
-  // @ts-ignore
+  // @ts-expect-error
   "data-extra": extra,
-  // @ts-ignore
+  // @ts-expect-error
   "data-popover-open": popoverOpen,
   ...rest
 }) => {
@@ -141,7 +141,7 @@ export const AxMenu: FC<MenuProps> & {
   Mini: typeof MenuMini;
   Group: typeof MenuGroup;
   Title: typeof MenuTitle;
-} = ({ children, onClick, className, ...rest }) => {
+} = ({ children, onClick, className, ...rest }: MenuProps) => {
   const handleMenuClick = useCallback((e: ReactMouseEvent) => {
     const id = (e.target as HTMLElement).dataset.id;
     id && onClick?.(id);

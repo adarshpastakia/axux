@@ -22,7 +22,6 @@ import {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
-import { useTranslation } from "react-i18next";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { Options } from "./Option";
 import { SelectProps } from "./utils";
@@ -67,7 +66,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   isInvalid,
   className,
   value,
-  // @ts-ignore
+  // @ts-expect-error
   name,
   info,
   error,
@@ -79,10 +78,9 @@ export const SuggestInput: FC<SuggestProps> = ({
   defaultItems = [],
   ...rest
 }) => {
-  const { t } = useTranslation("form");
   const [actualValue, setActualValue] = useState(value);
-  const [items, setItems] = useState<(SuggestItem | string)[]>([]);
-  const [queryItems, setQueryItems] = useState<(SuggestItem | string)[]>([]);
+  const [items, setItems] = useState<Array<SuggestItem | string>>([]);
+  const [queryItems, setQueryItems] = useState<Array<SuggestItem | string>>([]);
 
   useEffect(() => {
     setActualValue(value);
@@ -101,7 +99,9 @@ export const SuggestInput: FC<SuggestProps> = ({
     () =>
       debounce((query: string) => {
         const ret = onQuery?.(query);
-        Promise.resolve(ret).then((resp) => resp && setQueryItems(resp));
+        void Promise.resolve(ret).then(
+          (resp) => resp != null && setQueryItems(resp)
+        );
       }),
     [onQuery]
   );
@@ -125,7 +125,7 @@ export const SuggestInput: FC<SuggestProps> = ({
     return list;
   }, [items, actualValue]);
 
-  /******************* change actualValue *******************/
+  /** ***************** change actualValue *******************/
   const handleQueryChange = useCallback(
     (newValue = "") => {
       setActualValue(newValue);
@@ -135,7 +135,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   );
   const handleSelectChange = useCallback(
     (newValue: AnyObject = "") => {
-      Promise.resolve(onSelect?.(newValue)).then((b) => {
+      void Promise.resolve(onSelect?.(newValue)).then((b) => {
         if (b !== false) {
           onChange?.(newValue.value ?? newValue);
           setActualValue(newValue.value ?? newValue);

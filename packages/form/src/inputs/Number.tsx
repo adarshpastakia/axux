@@ -39,6 +39,7 @@ export interface NumberProps
   step?: number;
 }
 
+// eslint-disable-next-line react/display-name
 export const Number: FC<NumberProps> = memo(
   ({
     label,
@@ -60,16 +61,16 @@ export const Number: FC<NumberProps> = memo(
     children,
     onEnterPressed,
     ...rest
-  }) => {
+  }: NumberProps) => {
     const [actualValue, setActualValue] = useState<number>("" as AnyObject);
-    const [pending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
     useEffect(() => {
       setActualValue(value ?? ("" as AnyObject));
     }, [value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         setActualValue(e?.target.valueAsNumber ?? ("" as AnyObject));
-        onChange &&
+        onChange != null &&
           startTransition(() =>
             onChange(e?.target.valueAsNumber ?? ("" as AnyObject))
           );

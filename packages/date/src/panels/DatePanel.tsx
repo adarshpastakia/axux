@@ -31,29 +31,29 @@ export const AxDatePanel: FC<DateProps> = ({
   const { currentCalendar } = useGlobals();
   const [isHijri, setHijri] = useState(currentCalendar === "hijri");
   const [selected, setSelected] = useState<Date | undefined>(date);
-  const [pageDate, setPageDate] = useState(date || new Date());
+  const [pageDate, setPageDate] = useState(date ?? new Date());
 
   const [page, setPage] = useState<number>(PageType.DATE);
   const [canSelectToday, setCanSelectToday] = useState(true);
 
   useEffect(() => {
     let current = selected ?? new Date();
-    if (date) {
+    if (date != null) {
       setSelected(date);
       current = date;
     }
-    if (min && isBefore(current, min)) {
+    if (min != null && isBefore(current, min)) {
       setPageDate(DateUtil.startOfMonth(min, isHijri));
-    } else if (max && isAfter(current, max)) {
+    } else if (max != null && isAfter(current, max)) {
       setPageDate(DateUtil.startOfMonth(max, isHijri));
     } else {
       setPageDate(DateUtil.startOfMonth(current, isHijri));
     }
     let canSelect = true;
-    if (min && canSelect) {
+    if (min != null && canSelect) {
       canSelect = isAfter(new Date(), min);
     }
-    if (max && canSelect) {
+    if (max != null && canSelect) {
       canSelect = isBefore(new Date(), max);
     }
     setCanSelectToday(canSelect);
@@ -84,7 +84,7 @@ export const AxDatePanel: FC<DateProps> = ({
       setSelected(dt);
       setPageDate(dt);
       setPage(PageType.DATE);
-      onChange && onChange(dt);
+      onChange?.(dt);
     },
     [onChange]
   );
@@ -100,7 +100,7 @@ export const AxDatePanel: FC<DateProps> = ({
   const dateDisabled = useCallback(
     (dt: Date) => {
       if (page === PageType.DATE) {
-        if (isDisabled && isDisabled(dt)) {
+        if (isDisabled?.(dt)) {
           return true;
         }
       }
@@ -115,12 +115,12 @@ export const AxDatePanel: FC<DateProps> = ({
       if (page === PageType.DATE) {
         const dt = DateUtil.addMonths(pageDate, diff, isHijri);
         return (
-          (!!min &&
+          (!(min == null) &&
             isBefore(
               DateUtil.startOfMonth(dt, isHijri),
               DateUtil.startOfMonth(min, isHijri)
             )) ||
-          (!!max &&
+          (!(max == null) &&
             isAfter(
               DateUtil.endOfMonth(dt, isHijri),
               DateUtil.endOfMonth(max, isHijri)
@@ -130,12 +130,12 @@ export const AxDatePanel: FC<DateProps> = ({
       if (page === PageType.MONTH) {
         const dt = DateUtil.addYears(pageDate, diff, isHijri);
         return (
-          (!!min &&
+          (!(min == null) &&
             isBefore(
               DateUtil.startOfYear(dt, isHijri),
               DateUtil.startOfYear(min, isHijri)
             )) ||
-          (!!max &&
+          (!(max == null) &&
             isAfter(
               DateUtil.endOfYear(dt, isHijri),
               DateUtil.endOfYear(max, isHijri)
@@ -145,12 +145,12 @@ export const AxDatePanel: FC<DateProps> = ({
       if (page === PageType.YEAR) {
         const dt = DateUtil.addYears(pageDate, diff * 10, isHijri);
         return (
-          (!!min &&
+          (!(min == null) &&
             isBefore(
               DateUtil.startOfDecade(dt, isHijri),
               DateUtil.startOfDecade(min, isHijri)
             )) ||
-          (!!max &&
+          (!(max == null) &&
             isAfter(
               DateUtil.endOfDecade(dt, isHijri),
               DateUtil.endOfDecade(max, isHijri)
@@ -160,12 +160,12 @@ export const AxDatePanel: FC<DateProps> = ({
       if (page === PageType.DECADE) {
         const dt = DateUtil.addYears(pageDate, diff * 100, isHijri);
         return (
-          (!!min &&
+          (!(min == null) &&
             isBefore(
               DateUtil.startOfDecade(dt, isHijri),
               DateUtil.startOfDecade(min, isHijri)
             )) ||
-          (!!max &&
+          (!(max == null) &&
             isAfter(
               DateUtil.endOfDecade(dt, isHijri),
               DateUtil.endOfDecade(max, isHijri)
@@ -203,7 +203,7 @@ export const AxDatePanel: FC<DateProps> = ({
           {showHijriToggle && (
             <AxButton
               size="sm"
-              style="link"
+              variant="link"
               color="primary"
               onClick={() => {
                 setHijri(!isHijri);
@@ -216,7 +216,7 @@ export const AxDatePanel: FC<DateProps> = ({
         {page === PageType.DATE && canSelectToday && (
           <AxButton
             size="sm"
-            style="link"
+            variant="link"
             color="primary"
             onClick={() => selectDate(new Date())}
           >
@@ -226,7 +226,7 @@ export const AxDatePanel: FC<DateProps> = ({
         {page !== PageType.DATE && (
           <AxButton
             size="sm"
-            style="link"
+            variant="link"
             color="primary"
             onClick={() => setPage(PageType.DATE)}
           >

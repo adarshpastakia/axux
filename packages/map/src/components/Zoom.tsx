@@ -14,7 +14,7 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import { useMapContext } from "../viewer/MapViewer";
 
 export const Zoom = () => {
-  const { map, draw, viewport } = useMapContext();
+  const { map, viewport } = useMapContext();
   const [zoomLevel, setZoomLevel] = useState(0);
 
   useEffect(() => {
@@ -41,8 +41,8 @@ export const Zoom = () => {
     const source = map.getSource("ax-geojson") as GeoJSONSource;
     if (source) {
       if (isString(source._data)) {
-        fetch(source._data)
-          .then((resp) => resp.json())
+        void fetch(source._data)
+          .then(async (resp) => await resp.json())
           .then((resp) => {
             const extent = bbox(resp) as AnyObject;
             map.fitBounds(extent, { padding: 48 });

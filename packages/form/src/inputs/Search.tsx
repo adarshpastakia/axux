@@ -26,10 +26,11 @@ export interface SearchProps
   onSearch?: (query?: string) => void;
 }
 
+// eslint-disable-next-line react/display-name
 export const Search: FC<SearchProps> = memo(
-  ({ children, icon, isSearching, onSearch, ...props }) => {
+  ({ children, icon, isSearching, onSearch, ...props }: SearchProps) => {
     const [query, setQuery] = useState(props.value);
-    const [pending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
 
     const handleSearch = useMemo(
       () => debounce((q) => onSearch?.(q), 200),
@@ -67,7 +68,7 @@ export const Search: FC<SearchProps> = memo(
         {children}
         <Addon align="end">
           <AxButton
-            style="link"
+            variant="link"
             noTabFocus
             icon={AppIcons.iconSearch}
             onClick={handleQuery}

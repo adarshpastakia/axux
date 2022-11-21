@@ -28,7 +28,7 @@ export const AxDivider: FC<DividerProps> = ({
   className,
   ...rest
 }) => {
-  /******************* component *******************/
+  /** ***************** component *******************/
   return (
     <div
       {...rest}

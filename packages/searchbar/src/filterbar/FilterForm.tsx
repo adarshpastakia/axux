@@ -35,7 +35,7 @@ const FilterSchema = new yup.ObjectSchema({
       then: (schema) =>
         schema.test({
           name: "array-check",
-          message: "${path} is a required field",
+          message: `\${path} is a required field`,
           test: (val = []) => val?.length > 0,
         }),
     }),
@@ -66,12 +66,12 @@ export const FilterForm = ({
   }, [values]);
 
   const operators = useMemo(() => {
-    if (!field) return [];
+    if (field == null) return [];
     return [EnumOperator.EXISTS, ...TypeOperators[field.type]];
   }, [field]);
 
   useEffect(() => {
-    if (field && !values.operator) {
+    if (field != null && !values.operator) {
       formRef.current?.setValue("operator", EnumOperator.EXISTS);
     }
     if (values.operator === EnumOperator.EXISTS && values.value !== undefined) {
@@ -87,7 +87,7 @@ export const FilterForm = ({
   }, [values, field]);
 
   const valueInput = useMemo(() => {
-    if (!field || !values.operator) return null;
+    if (field == null || !values.operator) return null;
     if (values.operator === EnumOperator.EXISTS) return null;
     if (field?.type === EnumFieldType.BOOLEAN) {
       return (
@@ -241,7 +241,7 @@ export const FilterForm = ({
               <AxPopover.Dismiss>
                 <AxButton
                   size="sm"
-                  style="link"
+                  variant="link"
                   color="danger"
                   onClick={() => removeFilter(index)}
                 >
@@ -252,11 +252,11 @@ export const FilterForm = ({
           </AxFlexBox.Col>
           <AxFlexBox.Col flex="auto">
             <AxPopover.Dismiss ref={cancelRef}>
-              <AxButton size="sm" style="link">
+              <AxButton size="sm" variant="link">
                 {t("label.cancel")}
               </AxButton>
             </AxPopover.Dismiss>
-            <AxButton size="sm" style="solid" type="submit">
+            <AxButton size="sm" variant="solid" type="submit">
               {index === -1 ? t("label.add") : t("label.update")}
             </AxButton>
           </AxFlexBox.Col>

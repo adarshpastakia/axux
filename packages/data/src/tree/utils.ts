@@ -10,7 +10,7 @@ import { compareValues } from "@axux/utilities";
 import { InternalNode, TreeNodeType } from "./types";
 
 const sorter = (a: TreeNodeType, b: TreeNodeType) => {
-  if (!!a.isLeaf !== !!b.isLeaf) return !!a.isLeaf ? 1 : -1;
+  if (!!a.isLeaf !== !!b.isLeaf) return a.isLeaf ? 1 : -1;
   return compareValues()(a.label, b.label);
 };
 export const refactorNode = ({
@@ -21,7 +21,11 @@ export const refactorNode = ({
   level = 0,
   lines = [],
   ...rest
-}: KeyValue): InternalNode => {
+}: KeyValue & {
+  level?: number;
+  parent?: string;
+  index?: number;
+}): InternalNode => {
   const internalId = `${parent}.${index}`;
   const innerChildren = children ?? [];
   const newLines = [...lines, isLast ? 0 : 1];
@@ -81,7 +85,7 @@ export const createTreeMap = (nodes: InternalNode[]) => {
   const makeMap = (nodes: InternalNode[]) => {
     nodes.forEach((node) => {
       map.set(node.internalId, node);
-      node.children && makeMap(node.children);
+      node.children != null && makeMap(node.children);
     });
   };
   makeMap(nodes);
@@ -93,7 +97,7 @@ export const createIdMap = (nodes: InternalNode[]) => {
   const makeMap = (nodes: InternalNode[]) => {
     nodes.forEach((node) => {
       node.node.id && map.set(node.node.id, node.internalId);
-      node.children && makeMap(node.children);
+      node.children != null && makeMap(node.children);
     });
   };
   makeMap(nodes);
@@ -105,7 +109,7 @@ export const createNodeList = (nodes: InternalNode[]) => {
   nodes.forEach((node) => {
     node.isFiltered !== false && list.push(node);
     if (node.isOpen || node.isFiltered === true) {
-      if (node.children && node.children.length > 0) {
+      if (node.children != null && node.children.length > 0) {
         list.push(...createNodeList(node.children));
       } else if (node.isFiltered === undefined && !node.isLeaf) {
         list.push(
@@ -128,7 +132,7 @@ export const createNodeList = (nodes: InternalNode[]) => {
 };
 
 export const createChildItems = (parent: InternalNode) => {
-  if (parent.children && parent.children?.length > 0) {
+  if (parent.children != null && parent.children?.length > 0) {
     return createNodeList(parent.children);
   } else {
     return [
@@ -156,12 +160,12 @@ export const toggleProperty = (
   nodes.forEach((node) => {
     if (
       prop in node &&
-      // @ts-ignore
+      // @ts-expect-error
       (!checkChildren || (checkChildren && node.children?.length > 0))
     )
-      // @ts-ignore
+      // @ts-expect-error
       node[prop] = value;
-    if (node.children)
+    if (node.children != null)
       toggleProperty(node.children, prop, value, checkChildren);
   });
 };

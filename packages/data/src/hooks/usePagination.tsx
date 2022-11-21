@@ -36,15 +36,15 @@ export const usePagination = ({
   onChange,
 }: PaginationOptions) => {
   const [page, setPage] = useState(0);
-  const [pending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
-  /******************* calculate total pages *******************/
+  /** ***************** calculate total pages *******************/
   const totalPages = useMemo(
     () => Math.max(1, Math.ceil(totalRecords / perPage)),
     [totalRecords, perPage]
   );
 
-  /******************* calculate ranges *******************/
+  /** ***************** calculate ranges *******************/
   const ranges = useMemo(() => {
     if (totalPages <= TOTAL_PILLS) {
       return [makeRange(0, totalPages)];
@@ -78,7 +78,7 @@ export const usePagination = ({
     return [];
   }, [page, totalPages]);
 
-  /******************* set page *******************/
+  /** ***************** set page *******************/
   useEffect(() => {
     setPage(Math.min(currentPage, totalPages - 1));
   }, [currentPage, totalPages]);

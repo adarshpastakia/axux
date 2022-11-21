@@ -54,9 +54,9 @@ export const AxToast: FC<ToastProps> = ({
   rtlFlip,
   okLabel,
   cancelLabel,
-  // @ts-ignore
+  // @ts-expect-error
   onClose,
-  // @ts-ignore
+  // @ts-expect-error
   onCloseAll,
 }) => {
   const { t } = useTranslation("core");
@@ -96,13 +96,13 @@ export const AxToast: FC<ToastProps> = ({
         {CloseX(closeToast)}
       </div>
       <div className="ax-toast__icon">
-        <AxIcon icon={icon || iconType} rtlFlip={rtlFlip} />
+        <AxIcon icon={icon ?? iconType} rtlFlip={rtlFlip} />
       </div>
       {title && <div className="ax-toast__title">{title}</div>}
       {message && <p className="ax-toast__message">{message}</p>}
       <input
         className="ax-toast__input"
-        ref={(e) => e && setTimeout(() => e.focus(), 100)}
+        ref={(e) => e != null && setTimeout(() => e.focus(), 100)}
         onBlur={(e) => e.target.focus()}
         onKeyDown={(e) =>
           (e.key === "Enter" || e.key === "Escape") &&
@@ -112,17 +112,13 @@ export const AxToast: FC<ToastProps> = ({
       <div className="ax-toast__footer">
         <div onClickCapture={() => onClose?.(false)}>{actions}</div>
         {type === "confirm" && (
-          <AxButton
-            size="sm"
-            color={color}
-            onClick={() => closeToast(false)}
-          >
+          <AxButton size="sm" color={color} onClick={() => closeToast(false)}>
             {cancelText}
           </AxButton>
         )}
         <AxButton
           size="sm"
-          style="solid"
+          variant="solid"
           color={color}
           onClick={() => closeToast(true)}
         >

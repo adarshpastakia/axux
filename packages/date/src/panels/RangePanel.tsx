@@ -32,7 +32,7 @@ const DatePanel = (props: AnyObject) => {
         <span />
         {props.page !== PageType.DATE && (
           <AxButton
-            style="link"
+            variant="link"
             size="sm"
             color="primary"
             onClick={props.setPage}
@@ -69,7 +69,7 @@ export const AxRangePanel: FC<RangeProps> = ({
   });
 
   useEffect(() => {
-    if (date) {
+    if (date != null) {
       setSelected(date);
       const [start, end] = date;
       setPageDate({
@@ -144,10 +144,10 @@ export const AxRangePanel: FC<RangeProps> = ({
         if (Array.isArray(dt)) {
           [start, end] = dt;
         }
-        if (!Array.isArray(dt) && hilight) {
+        if (!Array.isArray(dt) && hilight != null) {
           [start, end] = [hilight[0], dt];
         }
-        if (start && end) {
+        if (start != null && end != null) {
           if (isAfter(start, end)) {
             [start, end] = [end, start];
           }
@@ -160,7 +160,7 @@ export const AxRangePanel: FC<RangeProps> = ({
           });
           setPage({ start: PageType.DATE, end: PageType.DATE });
           setSelected([start, end]);
-          onChange && onChange([start, end]);
+          onChange?.([start, end]);
           setHilight(undefined);
         }
       }
@@ -176,7 +176,7 @@ export const AxRangePanel: FC<RangeProps> = ({
     changePageDate: (i: number) => changePageDate("start", i),
     dateDisabled: (dt: Date) => DateUtil.isDisabled(dt, page.start, min, max),
     selectPage: (d: Date) => selectPage("start", d),
-    mouseOver: (d: Date) => hilight && setHilight([hilight[0], d]),
+    mouseOver: (d: Date) => hilight != null && setHilight([hilight[0], d]),
     selectDate,
     selected,
     hilight,
@@ -190,7 +190,7 @@ export const AxRangePanel: FC<RangeProps> = ({
     changePageDate: (i: number) => changePageDate("end", i),
     dateDisabled: (dt: Date) => DateUtil.isDisabled(dt, page.end, min, max),
     selectPage: (d: Date) => selectPage("end", d),
-    mouseOver: (d: Date) => hilight && setHilight([hilight[0], d]),
+    mouseOver: (d: Date) => hilight != null && setHilight([hilight[0], d]),
     selectDate,
     selected,
     hilight,
@@ -203,12 +203,12 @@ export const AxRangePanel: FC<RangeProps> = ({
       <DatePanel {...propsEnd} />
 
       <div className="ax-date__presets">
-        {presets &&
+        {presets != null &&
           Object.entries(presets).map(([key, value]) => (
             <AxButton
               key={key}
               size="sm"
-              style="link"
+              variant="link"
               color="primary"
               onClick={() => selectDate(value)}
             >
@@ -222,7 +222,7 @@ export const AxRangePanel: FC<RangeProps> = ({
           {showHijriToggle && (
             <AxButton
               size="sm"
-              style="link"
+              variant="link"
               color="primary"
               onClick={() => {
                 setHijri(!isHijri);
@@ -232,10 +232,10 @@ export const AxRangePanel: FC<RangeProps> = ({
             </AxButton>
           )}
         </span>
-        {hilight && (
+        {hilight != null && (
           <AxButton
             size="sm"
-            style="link"
+            variant="link"
             color="primary"
             onClick={() => setHilight(undefined)}
           >

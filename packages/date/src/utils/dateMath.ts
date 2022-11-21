@@ -53,7 +53,7 @@ const isDate = (value: AnyObject, ignoreNumber = false): value is Date => {
 };
 
 /** @internal */
-const isDateLike = (value: AnyObject) => {
+const isDateLike = (value: AnyObject): value is string => {
   return (
     isString(value) &&
     !!value.match(
@@ -67,7 +67,7 @@ export const getDateParts = (dt: DateLike): DatePart | undefined => {
   if (isString(dt)) {
     const parts = dt.match(/(\$[\w]*)([-+])?([0-9]+)?/);
     if (parts) {
-      const [, part, op = "", diff] = parts as AnyObject;
+      const [, part, op = "", diff] = parts;
       return { part: part as DateParts, op, diff: parseInt(diff || "0", 10) };
     }
   }
@@ -85,8 +85,8 @@ export const parseDate = (
   } else if (dt && isDateLike(dt)) {
     const parts = getDateParts(dt);
 
-    if (parts) {
-      const { part, op, diff = 0 } = parts;
+    if (parts != null) {
+      const { part, op = "+", diff = 0 } = parts;
       const diffNum = parseInt(`${op}${diff}`, 10);
       let date = startOfMinute(new Date());
 
@@ -162,9 +162,9 @@ const parseLabel = (dt: DateLike, locale?: string): string => {
   } else if (isDateLike(dt)) {
     const parts = getDateParts(dt);
 
-    if (parts) {
+    if (parts != null) {
       let retVal;
-      const { part, op, diff } = parts;
+      const { part = "$day", op = "+", diff = 0 } = parts;
       const count = parseInt(`${op}${diff}`, 10);
       const t = (k: string, o?: KeyValue) => i18n.t(`superdate:${k}`, o);
       if (part === DateParts.NOW) {
@@ -203,11 +203,18 @@ export const parseDateLabel = (dt: DateLike, locale?: string): string => {
 export const makeSuperDate = (start?: DateLike, end?: DateLike) => {
   const startParsed = parseDate(start);
   const endParsed = parseDate(end);
-  if (start && end && start && end && startParsed && endParsed) {
-    return isBefore(startParsed, endParsed)
-      ? `${start}|${end}`
-      : `${end}|${start}`;
-  } else if (start && !end && isString(start)) {
+  if (
+    start &&
+    end &&
+    start &&
+    end &&
+    startParsed != null &&
+    endParsed != null
+  ) {
+    const st = isDateLike(start) ? start : startParsed.toISOString();
+    const en = isDateLike(end) ? end : endParsed.toISOString();
+    return isBefore(startParsed, endParsed) ? `${st}|${en}` : `${en}|${st}`;
+  } else if (start && !end && isDateLike(start)) {
     return start.includes("-")
       ? `${start}|${DateParts.NOW}`
       : `${DateParts.NOW}|${start}`;
@@ -263,13 +270,14 @@ export const DateMath = {
   convert(dates: [ParsedDate, ParsedDate] | undefined): string {
     if (Array.isArray(dates)) {
       const [start, end] = dates;
-      if (start && end) return `${start.toISOString()}|${end.toISOString()}`;
+      if (start != null && end != null)
+        return `${start.toISOString()}|${end.toISOString()}`;
     }
     return "";
   },
   age(dt: DateLike) {
     const dates = parseDate(dt as AnyObject);
-    if (dates && isDate(dates)) {
+    if (dates != null && isDate(dates)) {
       return formatDistanceToNowStrict(dates);
     }
   },
@@ -277,8 +285,8 @@ export const DateMath = {
     const dates = parseDateLike(dt);
     if (Array.isArray(dates)) {
       const [start, end] = dates;
-      return [start && start.toISOString(), end && end.toISOString()];
-    } else if (dates) {
+      return [start?.toISOString(), end?.toISOString()];
+    } else if (dates != null) {
       return dates.toISOString();
     }
     return undefined;
@@ -288,10 +296,10 @@ export const DateMath = {
     if (Array.isArray(dates)) {
       const [start, end] = dates;
       return [
-        start && DateUtil.format(start, format, locale),
-        end && DateUtil.format(end, format, locale),
+        start != null && DateUtil.format(start, format, locale),
+        end != null && DateUtil.format(end, format, locale),
       ].join(` ${i18n.t(`superdate:separator`, "→")} `);
-    } else if (dates) {
+    } else if (dates != null) {
       return DateUtil.format(dates, format, locale);
     }
     return undefined;
@@ -301,10 +309,10 @@ export const DateMath = {
     if (Array.isArray(dates)) {
       const [start, end] = dates;
       return [
-        start && DateUtil.format(start, format, locale, true),
-        end && DateUtil.format(end, format, locale, true),
+        start != null && DateUtil.format(start, format, locale, true),
+        end != null && DateUtil.format(end, format, locale, true),
       ].join(` ${i18n.t(`superdate:separator`, "→")} `);
-    } else if (dates) {
+    } else if (dates != null) {
       return DateUtil.format(dates, format, locale, true);
     }
     return undefined;

@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Icons {
   export const Column = "M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z";
   export const Bar = "M3 2v20h18v-2h-16v-2h9v-4h-9v-2h13v-4h-13v-2h5v-4h-7z";

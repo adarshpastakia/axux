@@ -87,13 +87,13 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
       onClick,
       onRemove,
       isDisabled,
-      // @ts-ignore
+      // @ts-expect-error
       "data-popover-open": popoverOpen,
       ...rest
     },
     ref
   ) => {
-    /******************* build style map *******************/
+    /** ***************** build style map *******************/
     const styles = useMemo(() => {
       const s: KeyValue = {};
       if (color && isColor(color)) {
@@ -104,10 +104,10 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
 
     const tooltipProps = useMemo(() => getTooltipProps(tooltip), [tooltip]);
 
-    /******************* component *******************/
+    /** ***************** component *******************/
     return (
       <div
-        arial-label={children}
+        aria-label={children}
         {...rest}
         {...tooltipProps}
         ref={ref}
@@ -116,7 +116,7 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
         data-fill={fill}
         data-size={size}
         data-color={color}
-        data-clickable={!!onClick}
+        data-clickable={!(onClick == null)}
         data-disabled={isDisabled}
         data-popover-open={popoverOpen}
         onClick={onClick}
@@ -124,7 +124,7 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
       >
         {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
         <label>{children}</label>
-        {onRemove && CloseX(onRemove)}
+        {onRemove != null && CloseX(onRemove)}
       </div>
     );
   }

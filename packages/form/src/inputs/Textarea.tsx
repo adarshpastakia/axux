@@ -28,6 +28,7 @@ export interface TextareaProps extends ElementProps, InputProps, ChildrenProp {
   rows?: number;
 }
 
+// eslint-disable-next-line react/display-name
 export const Textarea: FC<TextareaProps> = memo(
   ({
     label,
@@ -50,16 +51,16 @@ export const Textarea: FC<TextareaProps> = memo(
     children,
     onEnterPressed,
     ...rest
-  }) => {
+  }: TextareaProps) => {
     const [actualValue, setActualValue] = useState("");
-    const [pending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
     useEffect(() => {
       setActualValue(value ?? "");
     }, [value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLTextAreaElement>) => {
         setActualValue(e?.target.value ?? "");
-        onChange &&
+        onChange != null &&
           startTransition(() => onChange(e?.target.value ?? undefined));
       },
       [onChange]

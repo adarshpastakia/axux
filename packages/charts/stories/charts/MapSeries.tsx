@@ -30,7 +30,7 @@ const Template: ComponentStory<typeof AxChart.MapSeries> = () => {
     <AxPanel width={800} height={400}>
       <AxHeader>
         <AxTitle>Map Series chart</AxTitle>
-        <AxButton style="link" icon="mdi mdi-refresh" onClick={loadData} />
+        <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />
       </AxHeader>
       <AxChart.MapSeries data={data} onClick={action("onClick")} />
     </AxPanel>

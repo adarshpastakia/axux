@@ -39,7 +39,7 @@ export const AxHeader: FC<ElementProps & Partial<ChildrenProp>> = ({
       {onBack && (
         <AxButton
           rtlFlip
-          style="link"
+          variant="link"
           className="toggle-back"
           aria-label="back"
           stopPropagation
@@ -51,7 +51,7 @@ export const AxHeader: FC<ElementProps & Partial<ChildrenProp>> = ({
       {onExpand && (
         <AxButton
           rtlFlip
-          style="link"
+          variant="link"
           className="toggle-expand"
           aria-label="toggle expand"
           stopPropagation
@@ -62,7 +62,7 @@ export const AxHeader: FC<ElementProps & Partial<ChildrenProp>> = ({
       {!isExpanded && onCollapse && (
         <AxButton
           rtlFlip
-          style="link"
+          variant="link"
           className="toggle-collapse"
           aria-label="toggle collapse"
           stopPropagation
@@ -75,7 +75,7 @@ export const AxHeader: FC<ElementProps & Partial<ChildrenProp>> = ({
       {onClose && (
         <AxButton
           rtlFlip
-          style="link"
+          variant="link"
           className="toggle-close"
           aria-label="close"
           stopPropagation

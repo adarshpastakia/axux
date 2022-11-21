@@ -92,7 +92,11 @@ export const ChartContainer = ({
   );
   const containerRef = useResizeObserver(handleResize);
 
-  useImperativeHandle(_ref, () => chartRef!, [chartRef]);
+  useImperativeHandle<EChartsType | undefined, EChartsType | undefined>(
+    _ref,
+    () => chartRef,
+    [chartRef]
+  );
 
   const chartTheme = useMemo(
     () => (isDark ? `${theme}_dark` : theme),
@@ -116,7 +120,7 @@ export const ChartContainer = ({
   useEffect(() => {
     const chart = chartRef;
     if (chart) {
-      onClick && chart.on("click", onClick);
+      onClick != null && chart.on("click", onClick);
       return () => {
         !chart.isDisposed() && chart.off("click");
       };

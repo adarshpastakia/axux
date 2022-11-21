@@ -1,21 +1,23 @@
 // @github   : https://github.com/abdennour/hijri-date
 
+/* eslint-disable */
+
 (function e(t, n, r) {
   function s(o, u) {
     if (!n[o]) {
       if (!t[o]) {
-        var a = typeof require == "function" && require;
+        const a = typeof require === "function" && require;
         if (!u && a) return a(o, !0);
         if (i) return i(o, !0);
-        var f = new Error("Cannot find module '" + o + "'");
+        const f = new Error("Cannot find module '" + o + "'");
         throw ((f.code = "MODULE_NOT_FOUND"), f);
       }
-      var l = (n[o] = { exports: {} });
+      const l = (n[o] = { exports: {} });
       t[o][0].call(
         l.exports,
         function (e) {
-          var n = t[o][1][e];
-          return s(n ? n : e);
+          const n = t[o][1][e];
+          return s(n || e);
         },
         l,
         l.exports,
@@ -27,8 +29,8 @@
     }
     return n[o].exports;
   }
-  var i = typeof require == "function" && require;
-  for (var o = 0; o < r.length; o++) s(r[o]);
+  var i = typeof require === "function" && require;
+  for (let o = 0; o < r.length; o++) s(r[o]);
   return s;
 })(
   {
@@ -52,18 +54,18 @@
           }
           return Math.floor(floatNum + 0.0000001);
         }
-        var delta = 1;
+        const delta = 1;
 
         function GregToIsl(arg) {
-          var d = parseInt(arg.CDay.value);
-          var m = parseInt(arg.CMonth.value);
-          var y = parseInt(arg.CYear.value);
-          var jd = void 0,
-            l = void 0,
-            jd1 = void 0,
-            n = void 0,
-            j = void 0,
-            delta = 1;
+          let d = parseInt(arg.CDay.value);
+          let m = parseInt(arg.CMonth.value);
+          let y = parseInt(arg.CYear.value);
+          let jd = void 0;
+          let l = void 0;
+          let jd1 = void 0;
+          let n = void 0;
+          let j = void 0;
+          const delta = 1;
           if (
             y > 1582 ||
             (y == 1582 && m > 10) ||
@@ -105,20 +107,20 @@
           y = 30 * n + j - 30;
 
           return {
-            d: d,
-            m: m,
-            y: y,
+            d,
+            m,
+            y,
             dateOfWeek: jd1 % 7,
             dayName: weekDay(jd1 % 7),
           };
         }
 
         function IslToGreg(arg) {
-          var d = parseInt(arg.HDay.value);
-          var m = parseInt(arg.HMonth.value);
-          var y = parseInt(arg.HYear.value);
+          let d = parseInt(arg.HDay.value);
+          let m = parseInt(arg.HMonth.value);
+          let y = parseInt(arg.HYear.value);
 
-          var jd =
+          const jd =
             intPart((11 * y + 3) / 30) +
             354 * y +
             30 * m -
@@ -128,11 +130,11 @@
             385 -
             delta;
 
-          var l = void 0,
-            n = void 0,
-            i = void 0,
-            j = void 0,
-            k = void 0;
+          let l = void 0;
+          let n = void 0;
+          let i = void 0;
+          let j = void 0;
+          let k = void 0;
 
           if (jd > 2299160) {
             l = jd + 68569;
@@ -159,9 +161,9 @@
           }
 
           return {
-            d: d,
-            m: m,
-            y: y,
+            d,
+            m,
+            y,
             dateOfWeek: jd % 7,
             dayName: weekDay(jd % 7),
           };
@@ -193,7 +195,7 @@
         }
 
         function GregToHijri(gregDate) {
-          var hijriDate = GregToIsl({
+          const hijriDate = GregToIsl({
             CDay: {
               value: gregDate.getDate(),
             },
@@ -219,7 +221,7 @@
         }
 
         function HijriToGreg(hijriDate) {
-          var gregDate = IslToGreg({
+          const gregDate = IslToGreg({
             HDay: {
               value: hijriDate._date || hijriDate.date,
             },
@@ -254,32 +256,32 @@
         Object.defineProperty(exports, "__esModule", {
           value: true,
         });
-        var dateFormat = (function () {
-          var token =
-              /d{1,2}|e{3,6}|M{1,4}|yy(?:yy)?|([Hhms])\1?|[a]{1,4}|[LloSZ]|('at')|"[^"]*"|'[^']*'/g,
-            timezone =
-              /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
-            timezoneClip = /[^-+\dA-Z]/g,
-            pad = function pad(val, len) {
-              val = String(val);
-              len = len || 2;
-              while (val.length < len) {
-                val = "0" + val;
-              }
-              return val;
-            };
+        const dateFormat = (function () {
+          const token =
+            /d{1,2}|e{3,6}|M{1,4}|yy(?:yy)?|([Hhms])\1?|[a]{1,4}|[LloSZ]|('at')|"[^"]*"|'[^']*'/g;
+          const timezone =
+            /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g;
+          const timezoneClip = /[^-+\dA-Z]/g;
+          const pad = function pad(val, len) {
+            val = String(val);
+            len = len || 2;
+            while (val.length < len) {
+              val = "0" + val;
+            }
+            return val;
+          };
 
           return function (date, mask) {
-            var options =
+            const options =
               arguments.length > 2 && arguments[2] !== undefined
                 ? arguments[2]
                 : {
                     utc: false,
                   };
 
-            var _require$default = require("./HijriDate").default,
-              locales = _require$default.locales,
-              defaultLocale = _require$default.defaultLocale;
+            const _require$default = require("./HijriDate").default;
+            const locales = _require$default.locales;
+            const defaultLocale = _require$default.defaultLocale;
 
             options.locale = options.locale === "ar" ? "ar" : "en";
             if (!locales[options.locale]) {
@@ -302,63 +304,75 @@
               date = undefined;
             }
 
-            mask = String(masks[mask] || mask || masks["default"]);
+            mask = String(masks[mask] || mask || masks.default);
 
             if (mask.slice(0, 4) == "UTC:") {
               mask = mask.slice(4);
               options.utc = true;
             }
 
-            var _ = options.utc ? "getUTC" : "get",
-              d = date[_ + "Date"](),
-              D = date[_ + "Day"](),
-              M = date[_ + "Month"](),
-              mIndex = date[_ + "MonthIndex"](),
-              y = date[_ + "FullYear"](),
-              H = date[_ + "Hours"](),
-              m = date[_ + "Minutes"](),
-              s = date[_ + "Seconds"](),
-              L = date[_ + "Milliseconds"](),
-              o = options.utc ? 0 : date.getTimezoneOffset(),
-              flags = {
-                d: d,
-                dd: pad(d),
-                ee: locales[options.locale].dayNames[D],
-                eee: locales[options.locale].dayNames[D + 7],
-                eeee: locales[options.locale].dayNames[D + 14],
-                eeeeee: locales[options.locale].dayNames[D],
-                M: M,
-                MM: pad(M),
-                MMM: locales[options.locale].monthNames[mIndex],
-                MMMM: locales[options.locale].monthNames[mIndex + 12],
-                yy: String(y).slice(2),
-                yyyy: y,
-                h: H % 12 || 12,
-                hh: pad(H % 12 || 12),
-                H: H,
-                HH: pad(H),
-                m: m,
-                mm: pad(m),
-                s: s,
-                ss: pad(s),
-                l: pad(L, 3),
-                L: pad(L > 99 ? Math.round(L / 10) : L),
-                a: H < 12 ? locales[options.locale].am : locales[options.locale].pm,
-                aa: H < 12 ? locales[options.locale].am : locales[options.locale].pm,
-                aaa: H < 12 ? locales[options.locale].am : locales[options.locale].pm,
-                aaaa: H < 12 ? locales[options.locale].am : locales[options.locale].pm,
-                aaaaa: H < 12 ? locales[options.locale].am : locales[options.locale].pm,
-                "'at'": locales[options.locale].separator,
-                o:
-                  (o > 0 ? "-" : "+") +
-                  pad(
-                    Math.floor(Math.abs(o) / 60) * 100 + (Math.abs(o) % 60),
-                    4
-                  ),
-                S: ["th", "st", "nd", "rd"][
-                  d % 10 > 3 ? 0 : (((d % 100) - (d % 10) != 10) * d) % 10
-                ],
-              };
+            const _ = options.utc ? "getUTC" : "get";
+            const d = date[_ + "Date"]();
+            const D = date[_ + "Day"]();
+            const M = date[_ + "Month"]();
+            const mIndex = date[_ + "MonthIndex"]();
+            const y = date[_ + "FullYear"]();
+            const H = date[_ + "Hours"]();
+            const m = date[_ + "Minutes"]();
+            const s = date[_ + "Seconds"]();
+            const L = date[_ + "Milliseconds"]();
+            const o = options.utc ? 0 : date.getTimezoneOffset();
+            const flags = {
+              d,
+              dd: pad(d),
+              ee: locales[options.locale].dayNames[D],
+              eee: locales[options.locale].dayNames[D + 7],
+              eeee: locales[options.locale].dayNames[D + 14],
+              eeeeee: locales[options.locale].dayNames[D],
+              M,
+              MM: pad(M),
+              MMM: locales[options.locale].monthNames[mIndex],
+              MMMM: locales[options.locale].monthNames[mIndex + 12],
+              yy: String(y).slice(2),
+              yyyy: y,
+              h: H % 12 || 12,
+              hh: pad(H % 12 || 12),
+              H,
+              HH: pad(H),
+              m,
+              mm: pad(m),
+              s,
+              ss: pad(s),
+              l: pad(L, 3),
+              L: pad(L > 99 ? Math.round(L / 10) : L),
+              a:
+                H < 12
+                  ? locales[options.locale].am
+                  : locales[options.locale].pm,
+              aa:
+                H < 12
+                  ? locales[options.locale].am
+                  : locales[options.locale].pm,
+              aaa:
+                H < 12
+                  ? locales[options.locale].am
+                  : locales[options.locale].pm,
+              aaaa:
+                H < 12
+                  ? locales[options.locale].am
+                  : locales[options.locale].pm,
+              aaaaa:
+                H < 12
+                  ? locales[options.locale].am
+                  : locales[options.locale].pm,
+              "'at'": locales[options.locale].separator,
+              o:
+                (o > 0 ? "-" : "+") +
+                pad(Math.floor(Math.abs(o) / 60) * 100 + (Math.abs(o) % 60), 4),
+              S: ["th", "st", "nd", "rd"][
+                d % 10 > 3 ? 0 : (((d % 100) - (d % 10) != 10) * d) % 10
+              ],
+            };
 
             return mask.replace(token, function ($0) {
               return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
@@ -394,7 +408,7 @@
         });
         exports.dateProps = undefined;
 
-        var _typeof =
+        const _typeof =
           typeof Symbol === "function" && typeof Symbol.iterator === "symbol"
             ? function (obj) {
                 return typeof obj;
@@ -408,10 +422,10 @@
                   : typeof obj;
               };
 
-        var _createClass = (function () {
+        const _createClass = (function () {
           function defineProperties(target, props) {
-            for (var i = 0; i < props.length; i++) {
-              var descriptor = props[i];
+            for (let i = 0; i < props.length; i++) {
+              const descriptor = props[i];
               descriptor.enumerable = descriptor.enumerable || false;
               descriptor.configurable = true;
               if ("value" in descriptor) descriptor.writable = true;
@@ -425,17 +439,17 @@
           };
         })();
 
-        var _DateConverter = require("./DateConverter");
+        const _DateConverter = require("./DateConverter");
 
-        var _initializer = require("./initializer");
+        const _initializer = require("./initializer");
 
-        var _initializer2 = _interopRequireDefault(_initializer);
+        const _initializer2 = _interopRequireDefault(_initializer);
 
-        var _FormatDate = require("./FormatDate");
+        const _FormatDate = require("./FormatDate");
 
-        var _FormatDate2 = _interopRequireDefault(_FormatDate);
+        const _FormatDate2 = _interopRequireDefault(_FormatDate);
 
-        var _locales = require("./locales");
+        const _locales = require("./locales");
 
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : { default: obj };
@@ -447,7 +461,7 @@
           }
         }
 
-        var HijriDate = (function () {
+        const HijriDate = (function () {
           function HijriDate() {
             _classCallCheck(this, HijriDate);
 
@@ -460,14 +474,14 @@
               {
                 key: "init",
                 value: function init() {
-                  var _this = this;
+                  const _this = this;
 
-                  var props = {};
+                  let props = {};
                   if (!arguments.length) {
                     props = _initializer2.default.initDefault();
                   } else {
                     try {
-                      var methodNameSuffix = Array.from(arguments)
+                      const methodNameSuffix = Array.from(arguments)
                         .map(function (arg) {
                           return typeof arg === "undefined"
                             ? "undefined"
@@ -576,7 +590,7 @@
               {
                 key: "addDays",
                 value: function addDays(days) {
-                  var _this2 = this;
+                  const _this2 = this;
 
                   if (typeof days === "number")
                     Array.from(
@@ -620,7 +634,7 @@
               {
                 key: "subtractDays",
                 value: function subtractDays(days) {
-                  var _this3 = this;
+                  const _this3 = this;
 
                   Array.from(
                     {
@@ -707,8 +721,8 @@
               {
                 key: "is",
                 value: function is() {
-                  var _arguments = arguments,
-                    _this4 = this;
+                  const _arguments = arguments;
+                  const _this4 = this;
 
                   if (!arguments.length)
                     throw new Error(
@@ -801,9 +815,9 @@
                   return this.__proxy__.getTime();
                 },
                 set: function set(newTime) {
-                  var _this5 = this;
+                  const _this5 = this;
 
-                  var props = _initializer2.default.init_number(newTime);
+                  const props = _initializer2.default.init_number(newTime);
                   Object.keys(props).forEach(function (prop) {
                     _this5["_" + prop] = props[prop];
                   });
@@ -935,10 +949,10 @@
           value: true,
         });
 
-        var _createClass = (function () {
+        const _createClass = (function () {
           function defineProperties(target, props) {
-            for (var i = 0; i < props.length; i++) {
-              var descriptor = props[i];
+            for (let i = 0; i < props.length; i++) {
+              const descriptor = props[i];
               descriptor.enumerable = descriptor.enumerable || false;
               descriptor.configurable = true;
               if ("value" in descriptor) descriptor.writable = true;
@@ -958,7 +972,7 @@
           }
         }
 
-        var StringDateParser = (function () {
+        const StringDateParser = (function () {
           function StringDateParser() {
             _classCallCheck(this, StringDateParser);
           }
@@ -967,12 +981,12 @@
             {
               key: "extract",
               value: function extract(string, format, formatChunk) {
-                var ignoreCase =
+                const ignoreCase =
                   arguments.length > 3 && arguments[3] !== undefined
                     ? arguments[3]
                     : true;
 
-                var targetFormat = ignoreCase ? format.toLowerCase() : format;
+                const targetFormat = ignoreCase ? format.toLowerCase() : format;
                 if (targetFormat.includes(formatChunk)) {
                   return parseInt(
                     string.substr(
@@ -986,7 +1000,7 @@
             {
               key: "extractYear",
               value: function extractYear(dateString, format) {
-                var year = this.extract.apply(
+                let year = this.extract.apply(
                   this,
                   Array.prototype.slice.call(arguments).concat(["yyyy"])
                 );
@@ -1003,7 +1017,7 @@
             {
               key: "extractMonth",
               value: function extractMonth(dateString, format) {
-                var month = this.extract.apply(
+                const month = this.extract.apply(
                   this,
                   Array.prototype.slice.call(arguments).concat(["mm", false])
                 );
@@ -1014,7 +1028,7 @@
             {
               key: "extractDate",
               value: function extractDate(dateString, format) {
-                var date = this.extract.apply(
+                const date = this.extract.apply(
                   this,
                   Array.prototype.slice.call(arguments).concat(["dd", false])
                 );
@@ -1025,7 +1039,7 @@
             {
               key: "extractHours",
               value: function extractHours(dateString, format) {
-                var hours = this.extract.apply(
+                const hours = this.extract.apply(
                   this,
                   Array.prototype.slice.call(arguments).concat(["hh"])
                 );
@@ -1036,7 +1050,7 @@
             {
               key: "extractMinutes",
               value: function extractMinutes(dateString, format) {
-                var minutes = this.extract.apply(
+                const minutes = this.extract.apply(
                   this,
                   Array.prototype.slice.call(arguments).concat(["MM", false])
                 );
@@ -1047,7 +1061,7 @@
             {
               key: "extractSeconds",
               value: function extractSeconds(dateString, format) {
-                var seconds = this.extract.apply(
+                const seconds = this.extract.apply(
                   this,
                   Array.prototype.slice.call(arguments).concat(["ss", false])
                 );
@@ -1058,7 +1072,7 @@
             {
               key: "extractMilliseconds",
               value: function extractMilliseconds(dateString, format) {
-                var milliseconds = this.extract.apply(
+                const milliseconds = this.extract.apply(
                   this,
                   Array.prototype.slice.call(arguments).concat(["SS", false])
                 );
@@ -1084,7 +1098,7 @@
             value: true,
           });
 
-          var _typeof =
+          const _typeof =
             typeof Symbol === "function" && typeof Symbol.iterator === "symbol"
               ? function (obj) {
                   return typeof obj;
@@ -1098,15 +1112,15 @@
                     : typeof obj;
                 };
 
-          var _safe = require("./safe");
+          const _safe = require("./safe");
 
-          var _safe2 = _interopRequireDefault(_safe);
+          const _safe2 = _interopRequireDefault(_safe);
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : { default: obj };
           }
 
-          var globalScope = (function () {
+          const globalScope = (function () {
             if (
               (typeof window === "undefined"
                 ? "undefined"
@@ -1152,10 +1166,10 @@
           value: true,
         });
 
-        var _createClass = (function () {
+        const _createClass = (function () {
           function defineProperties(target, props) {
-            for (var i = 0; i < props.length; i++) {
-              var descriptor = props[i];
+            for (let i = 0; i < props.length; i++) {
+              const descriptor = props[i];
               descriptor.enumerable = descriptor.enumerable || false;
               descriptor.configurable = true;
               if ("value" in descriptor) descriptor.writable = true;
@@ -1169,11 +1183,11 @@
           };
         })();
 
-        var _DateConverter = require("./DateConverter");
+        const _DateConverter = require("./DateConverter");
 
-        var _StringDateParser = require("./StringDateParser");
+        const _StringDateParser = require("./StringDateParser");
 
-        var _StringDateParser2 = _interopRequireDefault(_StringDateParser);
+        const _StringDateParser2 = _interopRequireDefault(_StringDateParser);
 
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : { default: obj };
@@ -1185,8 +1199,8 @@
           }
         }
 
-        var defaultFormat = "yyyy/mm/dd";
-        var defaultProps = {
+        const defaultFormat = "yyyy/mm/dd";
+        const defaultProps = {
           month: 1,
           date: 1,
           hours: 0,
@@ -1195,7 +1209,7 @@
           milliseconds: 0,
         };
 
-        var Initializer = (function () {
+        const Initializer = (function () {
           function Initializer() {
             _classCallCheck(this, Initializer);
           }
@@ -1271,20 +1285,20 @@
             {
               key: "initFromNumbers",
               value: function initFromNumbers(year, month, date) {
-                var hours =
+                const hours =
                   arguments.length > 3 && arguments[3] !== undefined
                     ? arguments[3]
                     : 0;
-                var minutes =
+                const minutes =
                   arguments.length > 4 && arguments[4] !== undefined
                     ? arguments[4]
                     : 0;
-                var _arguments = arguments;
-                var seconds =
+                const _arguments = arguments;
+                const seconds =
                   arguments.length > 5 && arguments[5] !== undefined
                     ? arguments[5]
                     : 0;
-                var milliseconds =
+                const milliseconds =
                   arguments.length > 6 && arguments[6] !== undefined
                     ? arguments[6]
                     : 0;
@@ -1294,25 +1308,25 @@
                 });
 
                 return {
-                  year: year,
-                  month: month,
-                  date: date,
-                  hours: hours,
-                  minutes: minutes,
-                  seconds: seconds,
-                  milliseconds: milliseconds,
+                  year,
+                  month,
+                  date,
+                  hours,
+                  minutes,
+                  seconds,
+                  milliseconds,
                 };
               },
             },
             {
               key: "initFromStrings",
               value: function initFromStrings(dateString) {
-                var format =
+                const format =
                   arguments.length > 1 && arguments[1] !== undefined
                     ? arguments[1]
                     : defaultFormat;
 
-                var props = {};
+                const props = {};
                 props.year = _StringDateParser2.default.extractYear(
                   dateString,
                   format
@@ -1346,7 +1360,7 @@
         Object.defineProperty(exports, "__esModule", {
           value: true,
         });
-        var ar = (exports.ar = {
+        const ar = (exports.ar = {
           dayNames: [
             "ح",
             "ن",
@@ -1401,7 +1415,7 @@
           pm: "م",
         });
 
-        var en = (exports.en = {
+        const en = (exports.en = {
           dayNames: [
             "Su",
             "Mo",
@@ -1467,21 +1481,21 @@
         });
         exports.toHijri = undefined;
 
-        var _HijriDate = require("./HijriDate");
+        const _HijriDate = require("./HijriDate");
 
-        var _HijriDate2 = _interopRequireDefault(_HijriDate);
+        const _HijriDate2 = _interopRequireDefault(_HijriDate);
 
-        var _DateConverter = require("./DateConverter");
+        const _DateConverter = require("./DateConverter");
 
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : { default: obj };
         }
 
-        var toHijri = (exports.toHijri = function toHijri(gregDate) {
-          var _GregToHijri = (0, _DateConverter.GregToHijri)(gregDate),
-            year = _GregToHijri.year,
-            month = _GregToHijri.month,
-            date = _GregToHijri.date;
+        const toHijri = (exports.toHijri = function toHijri(gregDate) {
+          const _GregToHijri = (0, _DateConverter.GregToHijri)(gregDate);
+          const year = _GregToHijri.year;
+          const month = _GregToHijri.month;
+          const date = _GregToHijri.date;
 
           return new _HijriDate2.default(
             year,

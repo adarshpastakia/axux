@@ -102,9 +102,10 @@ export const AxFlyout = forwardRef<OverlayRef, FlyoutProps>(
     useImperativeHandle(
       ref,
       () => ({
-        close: onClose!,
+        close: () => onClose?.(),
         open: () =>
-          flyoutRef.current && (flyoutRef.current.dataset.show = "true"),
+          flyoutRef.current != null &&
+          (flyoutRef.current.dataset.show = "true"),
       }),
       [onClose]
     );
@@ -113,7 +114,7 @@ export const AxFlyout = forwardRef<OverlayRef, FlyoutProps>(
       (e: MouseEvent) => {
         if (
           closeOnClick &&
-          !(e.target as HTMLElement).closest(".prevent-close")
+          (e.target as HTMLElement).closest(".prevent-close") == null
         ) {
           onClose?.();
         }
@@ -161,3 +162,4 @@ export const AxFlyout = forwardRef<OverlayRef, FlyoutProps>(
     );
   }
 );
+AxFlyout.displayName = "AxFlyout";

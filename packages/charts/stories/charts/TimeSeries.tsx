@@ -57,7 +57,7 @@ const Template: ComponentStory<typeof AxChart.TimeSeries> = () => {
     <AxPanel width={1024} maxWidth={1024} height={400}>
       <AxHeader>
         <AxTitle>Time Series chart</AxTitle>
-        <AxButton style="link" icon="mdi mdi-refresh" onClick={loadData} />
+        <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />
       </AxHeader>
       <AxChart.TimeSeries
         {...data}

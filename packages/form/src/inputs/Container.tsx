@@ -44,6 +44,7 @@ export interface ContainerProps extends ElementProps, ChildProp {
   labelAppend?: ReactNode;
 }
 
+// eslint-disable-next-line react/display-name
 export const Container: FC<ContainerProps> = memo(
   ({
     children,
@@ -57,7 +58,7 @@ export const Container: FC<ContainerProps> = memo(
     labelAppend,
     className,
     ...rest
-  }) => {
+  }: ContainerProps) => {
     const onClick = useCallback((e: MouseEvent<HTMLLabelElement>) => {
       (
         e.currentTarget.parentElement?.parentElement?.querySelector(
