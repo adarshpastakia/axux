@@ -1,10 +1,10 @@
-# AxUX UI - Data Module
+# AxUX UI - Date Module
 
 #### Install
 
 ```bash
 # Using
-yarn add @axux/data
+yarn add @axux/date
 ```
 
 #### Usage

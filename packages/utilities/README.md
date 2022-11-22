@@ -4,7 +4,7 @@
 
 ```bash
 # Using
-yarn add @altux-ui/utility
+yarn add @axux/utilities
 ```
 
 #### Usage
