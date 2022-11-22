@@ -18,7 +18,6 @@
     "packageDir": "packages",
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["*.d.ts", "stories/**", "dist/**"],
   "plugins": ["react", "react-hooks"],
   "rules": {
     "no-sequences": "off",
