@@ -11,6 +11,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **ImageColorset:** fix color check logic ([6a88769](https://github.com/adarshpastakia/axux/commit/6a88769a40b47b5afd4228d6aa2dd87d0fbd17b5))
 
 
+### Dev
+* **eslint:** added eslint check
 
 
 
