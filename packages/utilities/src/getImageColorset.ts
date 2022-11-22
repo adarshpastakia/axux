@@ -30,10 +30,10 @@ export const getImageColorset = (el: HTMLImageElement) => {
 
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
-    let r, g, b, maxRgb;
+    let r, g, b;
     let light = 0;
     let dark = 0;
-    const transparent = data?.[4] > 0;
+    const transparent = data?.[4] === 0;
 
     for (let x = 0, len = data.length; x < len; x += 4) {
       if (data[x + 3] === 0) {
@@ -42,8 +42,7 @@ export const getImageColorset = (el: HTMLImageElement) => {
       r = data[x];
       g = data[x + 1];
       b = data[x + 2];
-      maxRgb = Math.max(Math.max(r, g), b);
-      if (maxRgb < 128) dark++;
+      if (Math.max(Math.max(r, g), b) < 128) dark++;
       else light++;
     }
 
