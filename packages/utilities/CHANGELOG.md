@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.66](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.65...v2.0.0-beta.66) (2022-11-22)
+
+
+### Bug Fixes
+
+* **ImageColorset:** fix color check logic ([6a88769](https://github.com/adarshpastakia/axux/commit/6a88769a40b47b5afd4228d6aa2dd87d0fbd17b5))
+
+
+
+
+
 # [2.0.0-beta.65](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.64...v2.0.0-beta.65) (2022-11-19)
 
 **Note:** Version bump only for package @axux/utilities
