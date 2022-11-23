@@ -6,7 +6,6 @@
  * @license   : MIT
  */
 
-import { useTooltipWatcher } from "@axux/core/src/hooks/useTooltip";
 import "@mdi/font/css/materialdesignicons.min.css";
 import {
   Anchor,
@@ -19,7 +18,7 @@ import { withTests } from "@storybook/addon-jest";
 import { addons } from "@storybook/addons";
 import { addParameters } from "@storybook/react";
 import { create } from "@storybook/theming";
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext } from "react";
 import { I18nextProvider } from "react-i18next";
 import colors from "tailwindcss/colors";
 import { default as i18n } from "./i18n";
@@ -142,6 +141,9 @@ channel.on("THEME_TOGGLE", (theme: string) => {
   });
   document.documentElement.classList.remove("light", "dark");
   document.documentElement.classList.add(`${theme}`);
+  (
+    document.getElementById("arcgisCss") as HTMLLinkElement
+  ).href = `@arcgis/esri/themes/${theme}/main.css`;
 });
 
 const originalError = console.error;

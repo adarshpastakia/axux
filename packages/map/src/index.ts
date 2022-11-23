@@ -6,12 +6,14 @@
  * @license   : MIT
  */
 
-import { Clustermap } from "./layers/Clustermap";
-import { Heatmap } from "./layers/Heatmap";
+import { Basemap } from "./tools/Basemap";
 import { MapViewer } from "./viewer/MapViewer";
+
+export { setMapAssets } from "./utils";
 
 export const AxMap = {
   Viewer: MapViewer,
-  Heatmap,
-  Clustermap,
+  tools: {
+    Basemap,
+  },
 };
