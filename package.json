@@ -10,14 +10,15 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "storybook": "start-storybook -p 6003 --no-manager-cache",
-    "build": "build-storybook -o ./build",
+    "storybook": "yarn copy && start-storybook -p 6003 --no-manager-cache",
+    "build": "yarn copy && build-storybook -o ./build",
     "watch:test": "jest --ci --runInBand --detectOpenHandles --watchAll --json --outputFile=./.storybook/jest-test-results.json",
     "watch:lib": "lerna run watch --parallel",
     "watch": "npm-run-all -c --parallel watch:test watch:lib",
     "pretest": "lerna run build --stream",
     "test": "eslint . && jest --ci --runInBand --detectOpenHandles --forceExit",
     "dist": "lerna run build --stream",
+    "copy": "cp -R ./node_modules/@arcgis/core/assets ./assets/@arcgis",
     "release": "lerna version --conventional-commits --yes --preid=beta -m \"chore(release): %v\""
   },
   "resolutions": {

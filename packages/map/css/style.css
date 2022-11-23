@@ -3,63 +3,16 @@
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
  * @copyright : 2022
+ 
  * @license   : MIT
  */
 
-@import "maplibre-gl/dist/maplibre-gl.css";
-@import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
-
-@layer utilities {
+@layer components {
   .ax-mapviewer {
-    @apply relative grid grid-area-[content];
-    grid-template-areas: "side-s head side-e" "side-s content side-e" "foot foot foot";
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: auto 1fr auto;
+    @apply relative grid-area-[content];
 
     & > .ax-mapviewer__container {
       @apply absolute inset-0;
-    }
-
-    & > .ax-mapviewer__tools {
-      @apply p-2 flex gap-2 justify-start;
-
-      &[data-align="start"] {
-        @apply grid-area-[side-s] flex-col;
-      }
-
-      &[data-align="end"] {
-        @apply grid-area-[side-e] flex-col;
-      }
-
-      &[data-align="head"] {
-        @apply grid-area-[head] flex-row;
-
-        & .ax-tag {
-          @apply before:bg-bw-50 dark:before:bg-bw-800 dark:before:text-bw-50 before:opacity-100;
-        }
-      }
-
-      &[data-align="foot"] {
-        @apply grid-area-[foot] flex-row;
-      }
-    }
-
-    & .maplibregl-marker {
-      @apply absolute top-0 left-0 will-change-transform;
-
-      & > svg {
-        @apply shadow-lg fill-accent-500;
-        width: unset;
-        height: unset;
-      }
-    }
-  }
-
-  .ax-mapviewer__basemap--thumb {
-    @apply flex items-center gap-2 px-2 py-1 hover:bg-primary-500/30 cursor-pointer;
-
-    & > img {
-      @apply h-8 w-8 rounded;
     }
   }
 }
