@@ -29,17 +29,17 @@ jobs:
           yarn global add lerna
           yarn bootstrap
 
-      # Runs a set of commands using the runners shell
-      - name: Build storybook
-        run: |
-          yarn build
-
       - name: Run coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.COVERAGE_TOKEN }}
         with:
-          coverageCommand: yarn test --coverage
+          coverageCommand: yarn test --coverage --json --outputFile=./.storybook/jest-test-results.json
+
+      # Runs a set of commands using the runners shell
+      - name: Build storybook
+        run: |
+          yarn build
 
       # Push build folder to gh-pages
       - name: Deploy to GitHub Pages
