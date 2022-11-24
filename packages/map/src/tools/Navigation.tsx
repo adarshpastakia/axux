@@ -9,7 +9,7 @@
 import MapView from "@arcgis/core/views/MapView";
 import { useDebounce } from "@axux/core";
 import { isEqual } from "@axux/utilities";
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { FC, Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { MapViewport } from "../constants/types";
 import { useMapContext } from "../context/MapContext";
 
@@ -99,7 +99,10 @@ const Navigator = () => {
   );
 };
 
-export const Navigation = () => {
+/**
+ * AxMap toolbar view changes with history
+ */
+export const Navigation: FC = () => {
   const refWidget = useRef<HTMLDivElement>(null);
   const { view } = useMapContext();
 

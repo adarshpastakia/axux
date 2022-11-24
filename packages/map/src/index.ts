@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { Action } from "./tools/Action";
 import { Basemap } from "./tools/Basemap";
 import { Navigation } from "./tools/Navigation";
 import { Zoom } from "./tools/Zoom";
@@ -15,5 +16,10 @@ export { setMapAssets } from "./utils";
 
 export const AxMap = {
   Viewer: MapViewer,
-  tools: { Zoom, Basemap, Navigation },
+  tools: { Zoom, Basemap, Navigation, Action },
 };
+MapViewer.displayName = "AxMap.Viewer";
+Action.displayName = "AxMap.tools.Action";
+Basemap.displayName = "AxMap.tools.Basemap";
+Navigation.displayName = "AxMap.tools.Navigation";
+Zoom.displayName = "AxMap.tools.Zoom";

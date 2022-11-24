@@ -13,4 +13,3 @@ import { MapProvider } from "../context/MapContext";
 export const MapViewer: FC<MapViewerProps> = (props) => {
   return <MapProvider {...props}>{/* {children} */}</MapProvider>;
 };
-MapViewer.displayName = "AxMap.Viewer";

@@ -7,10 +7,13 @@
  */
 
 import ZoomWidget from "@arcgis/core/widgets/Zoom";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useMapContext } from "../context/MapContext";
 
-export const Zoom = () => {
+/**
+ * AxMap toolbar zoom controls
+ */
+export const Zoom: FC = () => {
   const { view, basemaps } = useMapContext();
 
   useEffect(() => {
