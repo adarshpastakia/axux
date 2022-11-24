@@ -16,4 +16,13 @@ import { AxMap } from "../../src";
   </Story>
 </Canvas>
 
-<ArgsTable sort="requiredFirst" of={AxMap.Viewer} />
+<ArgsTable
+  sort="requiredFirst"
+  components={{
+    "AxMap.Viewer": AxMap.Viewer,
+    "AxMap.tools.Action": AxMap.tools.Action,
+    "AxMap.tools.Basemap": AxMap.tools.Basemap,
+    "AxMap.tools.Navigation": AxMap.tools.Navigation,
+    "AxMap.tools.Zoom": AxMap.tools.Zoom,
+  }}
+/>

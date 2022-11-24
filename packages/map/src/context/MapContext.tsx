@@ -98,6 +98,20 @@ export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
       ...viewProps,
     });
 
+    void view.when(() => {
+      view.on("key-down", (evt) => {
+        if (evt.key === "Shift" && !evt.repeat) {
+          view.navigation.mouseWheelZoomEnabled = true;
+        }
+      });
+      view.on("key-up", (evt) => {
+        if (evt.key === "Shift") {
+          view.navigation.mouseWheelZoomEnabled = false;
+        }
+      });
+      view.focus();
+    });
+
     startTransition(() => {
       setBasemaps(basemaps);
       setView(view);
