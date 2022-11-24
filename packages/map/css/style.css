@@ -14,9 +14,13 @@
     & > .ax-mapviewer__container {
       @apply absolute inset-0;
     }
-  }
 
-  .esri-widget > .esri-widget--button:not(:first-child) {
-    @apply border-t border-bw-500/20;
+    & .esri-widget > .esri-widget--button:not(:first-child) {
+      @apply border-t border-bw-500/20;
+    }
+
+    & .esri-widget--button:disabled {
+      @apply pointer-events-none opacity-30;
+    }
   }
 }
