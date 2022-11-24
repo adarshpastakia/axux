@@ -17,6 +17,7 @@ const MapTemplate: ComponentStory<typeof AxMap.Viewer> = (props) => {
     <AxViewport>
       <AxMap.Viewer {...props}>
         <AxMap.tools.Basemap />
+        <AxMap.tools.Navigation />
       </AxMap.Viewer>
     </AxViewport>
   );
