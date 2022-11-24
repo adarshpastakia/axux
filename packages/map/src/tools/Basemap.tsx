@@ -15,23 +15,25 @@ export const Basemap = () => {
   const { view, basemaps } = useMapContext();
 
   useEffect(() => {
-    const basemapGallery = new BasemapGallery({
-      view,
-      source: Array.from(basemaps.values()),
-    });
-    const layerExpand = new Expand({
-      view,
-      content: basemapGallery,
-      autoCollapse: true,
-      group: "geomap",
-      expandTooltip: "Open Basemap list",
-      collapseTooltip: "Hide Basemap list",
-    });
-    view.ui?.add(layerExpand, { index: 1, position: "top-trailing" });
+    if (view) {
+      const basemapGallery = new BasemapGallery({
+        view,
+        source: Array.from(basemaps.values()),
+      });
+      const layerExpand = new Expand({
+        view,
+        content: basemapGallery,
+        autoCollapse: true,
+        group: "geomap",
+        expandTooltip: "Open Basemap list",
+        collapseTooltip: "Hide Basemap list",
+      });
+      view.ui.add(layerExpand, { index: 1, position: "top-trailing" });
 
-    return () => {
-      view.ui?.remove(layerExpand);
-    };
+      return () => {
+        view.ui.remove(layerExpand);
+      };
+    }
   }, [view, basemaps]);
 
   return null;

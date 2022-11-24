@@ -31,8 +31,8 @@ import {
 import { makeBasemap } from "../utils";
 
 const MapContext = createContext<{
-  map: GeoMap;
-  view: MapView;
+  map?: GeoMap;
+  view?: MapView;
   basemaps: Map<string, Basemap>;
   defaultViewport: MapViewport;
   viewport: MapViewport;
@@ -53,8 +53,8 @@ export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
   const refContainer = useRef<HTMLDivElement>(null);
   const [, startTransition] = useTransition();
 
-  const [map, setMap] = useState<GeoMap>({} as GeoMap);
-  const [view, setView] = useState<MapView>({} as MapView);
+  const [map, setMap] = useState<GeoMap>();
+  const [view, setView] = useState<MapView>();
   const [basemaps, setBasemaps] = useState<Map<string, Basemap>>(new Map());
 
   const [viewport, setViewport] = useState(DEFAULT_VIEWPORT);
@@ -65,7 +65,7 @@ export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
 
   useLayoutEffect(() => {
     startTransition(() => {
-      void view.goTo?.(viewport);
+      void view?.goTo(viewport);
     });
   }, [view, viewport]);
 
@@ -88,8 +88,6 @@ export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
     });
 
     const viewProps = DefaultViewProps;
-    if (minZoom > 0) viewProps.constraints.minZoom = minZoom;
-    if (maxZoom > 0) viewProps.constraints.maxZoom = maxZoom;
     viewProps.constraints.lods = TileInfo.create({
       spatialReference: new SpatialReference({ wkid: 4326 }),
     }).lods;
@@ -109,7 +107,7 @@ export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
     return () => {
       map.destroy();
     };
-  }, [sources, defaultSource]);
+  }, [sources, defaultSource, minZoom, maxZoom]);
 
   return (
     <MapContext.Provider
