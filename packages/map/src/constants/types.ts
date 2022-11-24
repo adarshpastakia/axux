@@ -55,7 +55,7 @@ export const DefaultViewProps: KeyValue = {
   },
   ui: {
     padding: { left: 15, top: 15, right: 15, bottom: 45 },
-    components: ["zoom"],
+    components: [],
   },
   resizeAlign: "center",
 };
