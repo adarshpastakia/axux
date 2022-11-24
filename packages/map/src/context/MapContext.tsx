@@ -34,6 +34,7 @@ const MapContext = createContext<{
   map: GeoMap;
   view: MapView;
   basemaps: Map<string, Basemap>;
+  defaultViewport: MapViewport;
   viewport: MapViewport;
   minZoom: number;
   maxZoom: number;
@@ -112,7 +113,15 @@ export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
 
   return (
     <MapContext.Provider
-      value={{ minZoom, maxZoom, viewport, map, view, basemaps }}
+      value={{
+        minZoom,
+        maxZoom,
+        viewport,
+        map,
+        view,
+        basemaps,
+        defaultViewport: defaultViewport ?? DEFAULT_VIEWPORT,
+      }}
     >
       <div className="ax-mapviewer">
         <div ref={refContainer} className="ax-mapviewer__container" />

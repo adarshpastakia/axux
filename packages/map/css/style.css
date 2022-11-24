@@ -15,4 +15,8 @@
       @apply absolute inset-0;
     }
   }
+
+  .esri-widget > .esri-widget--button:not(:first-child) {
+    @apply border-t border-bw-500/20;
+  }
 }
