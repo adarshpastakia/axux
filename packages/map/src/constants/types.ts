@@ -6,6 +6,18 @@
  * @license   : MIT
  */
 
+export type LngLatLike =
+  | {
+      lng: number;
+      lat: number;
+    }
+  | {
+      lon: number;
+      lat: number;
+    }
+  | [lon: number | string, lat: number | string]
+  | string;
+
 export interface MapSource {
   id: string;
   title: string;
@@ -15,7 +27,7 @@ export interface MapSource {
 }
 
 export interface MapViewport {
-  center?: [number, number] | string;
+  center?: [lon: number, lat: number];
   zoom?: number;
 }
 
@@ -27,6 +39,12 @@ export interface MapViewerProps {
   maxZoom: number;
   defaultViewport?: MapViewport;
   onViewportChange?: (viewport: MapViewport) => void;
+}
+
+export interface MapEvent extends KeyValue {
+  location: LngLatLike;
+  timestamp?: string | number | Date;
+  group?: string;
 }
 
 export const DEFAULT_VIEWPORT: MapViewport = {
