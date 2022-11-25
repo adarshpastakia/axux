@@ -23,7 +23,7 @@ export const Basemap: FC = () => {
         view,
         source: Array.from(basemaps.values()),
       });
-      const layerExpand = new Expand({
+      const basemapExpand = new Expand({
         view,
         content: basemapGallery,
         autoCollapse: true,
@@ -31,10 +31,10 @@ export const Basemap: FC = () => {
         expandTooltip: "Open Basemap list",
         collapseTooltip: "Hide Basemap list",
       });
-      view.ui.add(layerExpand, { index: 1, position: "top-trailing" });
+      view.ui.add(basemapExpand, { index: 1, position: "top-trailing" });
 
       return () => {
-        view.ui.remove(layerExpand);
+        view.ui.remove(basemapExpand);
       };
     }
   }, [view, basemaps]);
