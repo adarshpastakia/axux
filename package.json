@@ -10,8 +10,8 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "storybook": "yarn copy && start-storybook -p 6003 --no-manager-cache",
-    "build": "yarn copy && build-storybook -o ./build",
+    "storybook": "start-storybook -p 6003 --no-manager-cache",
+    "build": "build-storybook -o ./build",
     "watch:test": "jest --ci --runInBand --detectOpenHandles --watchAll --json --outputFile=./.storybook/jest-test-results.json",
     "watch:lib": "lerna run watch --parallel",
     "watch": "npm-run-all -c --parallel watch:test watch:lib",
