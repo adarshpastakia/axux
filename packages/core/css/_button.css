@@ -85,20 +85,24 @@
   }
 
   .ax-button__group {
-    @apply m-1 relative inline-flex flex-nowrap print:hidden rounded leading-none;
+    @apply m-1 relative inline-flex flex-nowrap print:hidden rounded leading-none shadow shadow-bw-400 dark:shadow-black;
+
+    & > .ax-button > .ax-button__inner:not(:active) {
+      @apply shadow-none border-bw-500/30;
+    }
 
     &[data-vertical="false"] {
       & > .ax-button {
         @apply m-0 z-0 focus-within:z-[1];
 
         &:first-child > .ax-button__inner {
-          @apply ltr:rounded-r-none rtl:rounded-l-none;
+          @apply ltr:rounded-r-none rtl:rounded-l-none ltr:border-r rtl:border-l;
         }
         &:last-child > .ax-button__inner {
-          @apply ltr:rounded-l-none rtl:rounded-r-none;
+          @apply ltr:rounded-l-none rtl:rounded-r-none border-0;
         }
         &:not(:first-child):not(:last-child) > .ax-button__inner {
-          @apply rounded-none;
+          @apply rounded-none ltr:border-r rtl:border-l;
         }
       }
     }
@@ -109,13 +113,13 @@
         @apply m-0 z-0 focus-within:z-[1];
 
         &:first-child > .ax-button__inner {
-          @apply ltr:rounded-b-none rtl:rounded-b-none;
+          @apply ltr:rounded-b-none rtl:rounded-b-none border-b;
         }
         &:last-child > .ax-button__inner {
-          @apply ltr:rounded-t-none rtl:rounded-t-none;
+          @apply ltr:rounded-t-none rtl:rounded-t-none border-0;
         }
         &:not(:first-child):not(:last-child) > .ax-button__inner {
-          @apply rounded-none;
+          @apply rounded-none border-b;
         }
       }
     }
