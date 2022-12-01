@@ -10,7 +10,7 @@ import VectorTileLayer from "@arcgis/core/layers/VectorTileLayer";
 import { FC, useEffect, useRef } from "react";
 import { useMapContext } from "../context/MapContext";
 
-interface Props {
+export interface Props {
   source: string;
   title?: string;
   opacity?: number;

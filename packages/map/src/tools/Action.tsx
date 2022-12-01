@@ -10,7 +10,7 @@ import { AxIcon } from "@axux/core";
 import { FC, useEffect, useRef } from "react";
 import { useMapContext } from "../context/MapContext";
 
-interface Props {
+export interface Props {
   icon: string;
   isDisabled?: boolean;
   position?: "top-start" | "top-end";
