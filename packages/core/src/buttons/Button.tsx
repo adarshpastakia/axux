@@ -215,11 +215,14 @@ AxButton.Confirm = ConfirmButton;
 AxButton.Dropdown = DropdownButton;
 AxButton.Group = ({
   children,
+  isPlain = false,
   isVertical = false,
   className = "",
-}: { isVertical?: boolean } & ElementProps & ChildrenProp) => (
+}: { isVertical?: boolean; isPlain?: boolean } & ElementProps &
+  ChildrenProp) => (
   <div
     className={`ax-button__group ${className ?? ""}`}
+    data-plain={isPlain}
     data-vertical={isVertical}
   >
     {children}

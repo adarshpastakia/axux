@@ -85,10 +85,18 @@
   }
 
   .ax-button__group {
-    @apply m-1 relative inline-flex flex-nowrap print:hidden rounded leading-none shadow shadow-bw-400 dark:shadow-black;
+    @apply m-1 relative inline-flex flex-nowrap print:hidden rounded leading-none;
 
     & > .ax-button > .ax-button__inner:not(:active) {
-      @apply shadow-none border-bw-500/30;
+      @apply shadow-none;
+    }
+
+    &[data-plain="true"] {
+      @apply shadow shadow-bw-400 dark:shadow-black;
+    }
+
+    &[data-plain="false"] > .ax-button > .ax-button__inner:not(:active) {
+      @apply border-bw-500/30;
     }
 
     &[data-vertical="false"] {
