@@ -17,7 +17,7 @@ import { MapEvent } from "../constants/types";
 import { useMapContext } from "../context/MapContext";
 import { makeFeatures, transparentize } from "../utils";
 
-interface Props {
+export interface Props {
   events: MapEvent[];
 
   /**
