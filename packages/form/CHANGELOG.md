@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.67](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.66...v2.0.0-beta.67) (2022-12-01)
+
+
+### Bug Fixes
+
+* **Form:** handle submit bug ([2bb5187](https://github.com/adarshpastakia/axux/commit/2bb5187a9d68aa3ec2cd767e601f023821cdb81d))
+
+
+
+
+
 # [2.0.0-beta.66](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.65...v2.0.0-beta.66) (2022-11-22)
 
 **Note:** Version bump only for package @axux/form
