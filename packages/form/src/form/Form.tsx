@@ -158,7 +158,7 @@ export const AxForm = <K extends KeyValue>({
   return (
     <FormProvider {...form}>
       <form
-        onSubmit={() => form.handleSubmit(onSubmit, onInvalid)}
+        onSubmit={form.handleSubmit(onSubmit, onInvalid) as AnyObject}
         data-loading={form.formState.isSubmitting}
         className="ax-form contents"
         autoComplete="off"
