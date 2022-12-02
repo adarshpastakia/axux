@@ -77,7 +77,7 @@ export const Wrapper = forwardRef(
         </div>
         <div className="ax-virtual__scroll">
           <div>
-            <AxButton.Group isVertical isPlain>
+            <AxButton.Group isVertical  variant="flat">
               <AxButton
                 variant="link"
                 aria-label="scroll to top"

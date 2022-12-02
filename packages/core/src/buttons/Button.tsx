@@ -113,6 +113,11 @@ export interface ButtonProps extends ElementProps, IconProp, RefProp {
   onClick?: EmptyCallback;
 }
 
+export interface ButtonGroupProps extends ElementProps, ChildrenProp {
+  isVertical?: boolean;
+  variant?: "normal" | "flat" | "plain";
+}
+
 /**
  * Action button
  */
@@ -120,7 +125,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
   Action: typeof ActionButton;
   Confirm: typeof ConfirmButton;
   Dropdown: typeof DropdownButton;
-  Group: FC<ChildrenProp & ElementProps & { isVertical?: boolean }>;
+  Group: FC<ButtonGroupProps>;
 } = forwardRef<HTMLElement, ButtonProps>((props, ref) => {
   const {
     icon,
@@ -215,14 +220,13 @@ AxButton.Confirm = ConfirmButton;
 AxButton.Dropdown = DropdownButton;
 AxButton.Group = ({
   children,
-  isPlain = false,
+  variant = "normal",
   isVertical = false,
   className = "",
-}: { isVertical?: boolean; isPlain?: boolean } & ElementProps &
-  ChildrenProp) => (
+}: ButtonGroupProps) => (
   <div
     className={`ax-button__group ${className ?? ""}`}
-    data-plain={isPlain}
+    data-variant={variant}
     data-vertical={isVertical}
   >
     {children}
