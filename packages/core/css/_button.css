@@ -91,12 +91,18 @@
       @apply shadow-none;
     }
 
-    &[data-plain="true"] {
+    &[data-variant="normal"] {
       @apply shadow shadow-bw-400 dark:shadow-black;
     }
+    &[data-variant="flat"] {
+      @apply shadow-sm shadow-bw-400 dark:shadow-black;
+    }
 
-    &[data-plain="false"] > .ax-button > .ax-button__inner:not(:active) {
-      @apply border-bw-500/30;
+    &[data-variant="normal"],
+    &[data-variant="flat"] {
+      & > .ax-button > .ax-button__inner:not(:active) {
+        @apply border-bw-500/30;
+      }
     }
 
     &[data-vertical="false"] {

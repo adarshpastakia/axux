@@ -41,7 +41,7 @@ export const Tools: FC<{
   return (
     <AxHeader>
       <div className="flex-1" />
-      <AxButton.Group isPlain>
+      <AxButton.Group variant="flat">
         <AxButton
           variant="link"
           onClick={search}
