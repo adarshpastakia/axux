@@ -9,7 +9,7 @@
 
 import { isString, isTrue } from "@axux/utilities";
 import { Placement } from "@popperjs/core";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { createRoot, Root } from "react-dom/client";
 import { TooltipType } from "../types";
 import { usePopover } from "./usePopover";
@@ -43,6 +43,7 @@ export const useTooltipWatcher = () => {
   const [content, setContent] = useState<string>();
   const [placement, setPlacement] = useState<Placement>("bottom");
   const [color, setColor] = useState<string>();
+  const [, startTransition] = useTransition();
 
   const {
     attributes,
@@ -65,6 +66,7 @@ export const useTooltipWatcher = () => {
       refEl.current?.remove();
       refPortal.current = undefined;
       setPopperElement(undefined);
+      setOpen(false);
     }
   }, []);
 
@@ -82,16 +84,23 @@ export const useTooltipWatcher = () => {
       setContent(target.dataset.tooltip);
       setColor(target.dataset.tooltipColor);
       setReferenceElement(target);
-      setOpen(true);
+      startTransition(() => {
+        setOpen(true);
 
-      if (isTrue(target.dataset.tooltipHide)) {
-        refTimer.current = setTimeout(() => removeTooltip(), 2000);
-      }
+        if (isTrue(target.dataset.tooltipHide)) {
+          refTimer.current = setTimeout(() => removeTooltip(), 2000);
+        }
+      });
     }
   }, []);
   const cbLeave = useCallback((e: MouseEvent) => {
-    removeTooltip();
-    setOpen(false);
+    const target = (e.target as HTMLElement).closest(
+      "[data-tooltip]"
+    ) as HTMLElement;
+    if (!target) {
+      removeTooltip();
+      setOpen(false);
+    }
   }, []);
 
   useEffect(() => {
