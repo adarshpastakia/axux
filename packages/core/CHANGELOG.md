@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.68](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.67...v2.0.0-beta.68) (2022-12-05)
+
+
+### Bug Fixes
+
+* **ButtonGroup:** add isPlain prop to remove shadow ([8c28aa2](https://github.com/adarshpastakia/axux/commit/8c28aa2d7a95918da0c11c012a3c8fda7eac91b7))
+* **ButtonGroup:** change isPlain to variant ([b482bde](https://github.com/adarshpastakia/axux/commit/b482bde1870e7316547984240860da6278185061))
+* **Tooltip:** fix logic ([bcc8065](https://github.com/adarshpastakia/axux/commit/bcc80655ad8c952ed4f43819242e942fed9ee3dd))
+
+
+
+
+
 # [2.0.0-beta.67](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.66...v2.0.0-beta.67) (2022-12-01)
 
 **Note:** Version bump only for package @axux/core
