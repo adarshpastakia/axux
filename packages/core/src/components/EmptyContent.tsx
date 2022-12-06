@@ -153,7 +153,7 @@ export const EmptyContent: FC<EmptyContentProps> = ({
         </span>
       )}
       {title && <div className="ax-empty__title">{title}</div>}
-      {message && <p className="ax-empty__message">{message}</p>}
+      {message && <div className="ax-empty__message">{message}</div>}
       <div className="ax-empty__actions">
         {actions.map((action) =>
           cloneElement(action as ReactElement, { type: "link" })
