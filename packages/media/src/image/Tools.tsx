@@ -52,7 +52,7 @@ export const Tools: FC<ToolsProps> = memo(
         <AxHotKey
           global
           keyCombo="f"
-          handler={() => !disableZoom && onZoom(0)}
+          handler={() => !disableZoom && onZoom(zoom === 0 ? 1 : 0)}
         />
         <AxHotKey
           global
