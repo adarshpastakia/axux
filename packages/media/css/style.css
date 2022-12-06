@@ -302,7 +302,7 @@
     }
 
     & wave > wave {
-      @apply bg-bw-200/50 !border-r-bw-500/90;
+      @apply bg-bw-500/20 !border-r-bw-500/90;
     }
 
     & cursor {
