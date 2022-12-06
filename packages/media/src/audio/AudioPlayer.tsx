@@ -140,9 +140,9 @@ export const AxAudioPlayer = forwardRef<
     useImperativeHandle(
       ref,
       () => ({
-        play: () => undefined,
-        pause: () => undefined,
-        playRegion: (start, end) => undefined,
+        play: () => wavesurfer?.instance.play(),
+        pause: () => wavesurfer?.instance.pause(),
+        playRegion: (start, end) => wavesurfer?.instance.play(start, end),
       }),
       []
     );
