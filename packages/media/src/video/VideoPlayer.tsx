@@ -170,6 +170,10 @@ export const AxVideoPlayer = forwardRef<
         canvasRef.current != null
           ? {
               play: () => videoRef.current?.play(),
+              playAt: (time: number) =>
+                videoRef.current &&
+                ((videoRef.current.currentTime = time),
+                videoRef.current?.play()),
               pause: () => videoRef.current?.pause(),
               ...canvasRef.current,
             }
