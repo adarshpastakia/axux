@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.69](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.68...v2.0.0-beta.69) (2022-12-06)
+
+
+### Bug Fixes
+
+* **EmptyContent:** replace p with div ([f3c23b2](https://github.com/adarshpastakia/axux/commit/f3c23b243302003257095b45643923e6d0a48b84))
+
+
+
+
+
 # [2.0.0-beta.68](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.67...v2.0.0-beta.68) (2022-12-05)
 
 

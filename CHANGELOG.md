@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.69](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.68...v2.0.0-beta.69) (2022-12-06)
+
+
+### Bug Fixes
+
+* **AudioPlayer:** region colors ([63df58a](https://github.com/adarshpastakia/axux/commit/63df58a6b21c102ffff08252df656e8eb79553a1))
+* **AudioPlayer:** set ref methods ([6d21609](https://github.com/adarshpastakia/axux/commit/6d21609f0a64220d001a89e6c95b8608ea125742))
+* **AuioPlayer:** imperative ref handle ([74f5a23](https://github.com/adarshpastakia/axux/commit/74f5a23f4a11d4fccba44c01178d177289980456))
+* **EmptyContent:** replace p with div ([f3c23b2](https://github.com/adarshpastakia/axux/commit/f3c23b243302003257095b45643923e6d0a48b84))
+* **ImageViewer:** fit to view handler ([06c92ba](https://github.com/adarshpastakia/axux/commit/06c92ba976048bca95353855e378759d31ba3928))
+* **VideoPlayer:** add playAt method to seek and play ([41dca96](https://github.com/adarshpastakia/axux/commit/41dca96702c0d9225e05b09035e6f09003b03b5d))
+* **VideoPlayer:** correct ref typings ([98c55c6](https://github.com/adarshpastakia/axux/commit/98c55c6e4caee7d509233639765241eb2529e239))
+
+
+
+
+
 # [2.0.0-beta.68](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.67...v2.0.0-beta.68) (2022-12-05)
 
 
