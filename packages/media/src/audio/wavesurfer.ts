@@ -44,7 +44,7 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
       },
     }),
   ];
-  (timeline != null) &&
+  timeline != null &&
     plugins.push(
       TimelinePlugin.create({
         container: timeline,
@@ -98,7 +98,7 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
   instance.on("region-click", (region: KeyValue) => {
     const { id, start, end } = region;
     logger.debug("play region", { id, start, end });
-    region.playLoop();
+    region.play();
   });
   instance.on("region-update-end", (region: KeyValue) => {
     const { start, end } = region;
@@ -126,7 +126,12 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
 
   /** ***************** set wave regions *******************/
   const setRegions = (
-    regions?: Array<{ id: string; start: number; end: number; channel?: number }>
+    regions?: Array<{
+      id: string;
+      start: number;
+      end: number;
+      channel?: number;
+    }>
   ) => {
     instance.regions.clear();
     regions?.forEach(({ channel = -1, ...region }) => {
