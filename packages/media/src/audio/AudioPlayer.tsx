@@ -144,7 +144,7 @@ export const AxAudioPlayer = forwardRef<
         pause: () => wavesurfer?.instance.pause(),
         playRegion: (start, end) => wavesurfer?.instance.play(start, end),
       }),
-      []
+      [wavesurfer]
     );
 
     /** ***************** initialize wavesurfer *******************/
@@ -215,6 +215,22 @@ export const AxAudioPlayer = forwardRef<
 
         return () => {
           wavesurfer.instance.un("pause", handler);
+        };
+      }
+    }, [wavesurfer, onPause]);
+
+    /** ***************** handle time change *******************/
+    useEffect(() => {
+      if (wavesurfer != null) {
+        const handler = () => {
+          startTransition(() =>
+            onChange?.(wavesurfer.instance.getCurrentTime())
+          );
+        };
+        wavesurfer.instance.on("audioprocess", handler);
+
+        return () => {
+          wavesurfer.instance.un("audioprocess", handler);
         };
       }
     }, [wavesurfer, onPause]);
