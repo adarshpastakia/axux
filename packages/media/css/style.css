@@ -298,11 +298,11 @@
     @apply bg-component;
 
     & .wavesurfer-region {
-      @apply bg-primary-500/20 border-x border-primary-500/60;
+      @apply border-x border-x-primary-500 opacity-40 border-y-4 border-y-bw-0 dark:border-y-bw-900;
     }
 
     & wave > wave {
-      @apply bg-bw-200/10 !border-r-bw-500/90;
+      @apply bg-bw-200/50 !border-r-bw-500/90;
     }
 
     & cursor {

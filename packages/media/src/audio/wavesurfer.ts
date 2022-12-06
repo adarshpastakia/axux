@@ -138,7 +138,7 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
       instance.regions.add({
         ...region,
         channelIdx: channel,
-        color: "unkn",
+        color: CHANNEL_COLORS[channel][0],
         drag: false,
         resize: false,
       });
