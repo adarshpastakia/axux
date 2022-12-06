@@ -46,6 +46,7 @@ interface PlayerActions {
 
 export interface VideoPlayerRef extends CanvasRef {
   play: () => void;
+  playAt: (time: number) => void;
   pause: () => void;
 }
 
