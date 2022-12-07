@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.71](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.70...v2.0.0-beta.71) (2022-12-07)
+
+
+### Bug Fixes
+
+* **SearchBar:** dont fire onSearch when filters change ([ef25ebc](https://github.com/adarshpastakia/axux/commit/ef25ebc722760007c9bf2c5408c4f82e7001478b))
+
+
+
+
+
 # [2.0.0-beta.70](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.69...v2.0.0-beta.70) (2022-12-07)
 
 **Note:** Version bump only for package @axux/searchbar
