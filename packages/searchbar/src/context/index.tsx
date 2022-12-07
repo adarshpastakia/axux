@@ -137,14 +137,12 @@ export const SearchContextProvider: React.FC<
     });
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
-    onSearch?.({ query, filters: newFilters });
   };
 
   const addFilter = (filter: FilterObject) => {
     const newFilters = [...filters, filter];
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
-    onSearch?.({ query, filters: newFilters });
   };
 
   const removeFilter = (index: number) => {
@@ -152,7 +150,6 @@ export const SearchContextProvider: React.FC<
     newFilters.splice(index, 1);
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
-    onSearch?.({ query, filters: newFilters });
   };
 
   const toggleDisable = (value: boolean) => {
@@ -161,7 +158,6 @@ export const SearchContextProvider: React.FC<
     );
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
-    onSearch?.({ query, filters: newFilters });
   };
 
   const toggleExclude = () => {
@@ -174,7 +170,6 @@ export const SearchContextProvider: React.FC<
     );
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
-    onSearch?.({ query, filters: newFilters });
   };
 
   const removeAll = () => {
@@ -183,7 +178,6 @@ export const SearchContextProvider: React.FC<
     );
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
-    onSearch?.({ query, filters: newFilters });
   };
 
   return (
