@@ -243,7 +243,7 @@ const AxGridViewComponent = <T extends KeyValue>({
               itemData={itemList}
               columnCount={cc}
               direction={isRtl ? "rtl" : "ltr"}
-              outerElementType={Wrapper}
+              outerElementType={Wrapper()}
               columnWidth={() => Math.min(colWidth, (width - 84) / cc)}
               rowHeight={(index) =>
                 Math.max(...(cache.get(index) ?? []), colHeight)

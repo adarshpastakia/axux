@@ -11,11 +11,11 @@
     @apply grid-area-[content] grid overflow-hidden bg-base;
 
     &.ax-timeline .ax-virtual__wrapper {
-      grid-template-columns: minmax(auto, 1100px) auto;
+      grid-template-columns: auto auto;
     }
 
     & .ax-virtual__wrapper {
-      @apply grid justify-center p-4;
+      @apply grid justify-center p-4 gap-2;
       grid-template-columns: auto auto;
 
       & > div:first-child {
@@ -56,7 +56,7 @@
       & > div:first-child {
         @apply text-muted relative mx-2;
 
-        & > .ax-icon {
+        & > .ax-timeline__icon > .ax-icon {
           @apply text-2xl rounded-full leading-none p-1;
 
           &:not([class*="bg-"]) {
@@ -69,7 +69,7 @@
         }
       }
       & > div:last-child {
-        @apply flex-1 p-1 pb-4;
+        @apply flex-1 p-1 pb-4 overflow-hidden;
         & > :first-child {
           @apply outline outline-0 outline-offset-0 outline-primary-500;
           transition: outline-offset 1s;
