@@ -18,8 +18,8 @@ import {
   useState,
 } from "react";
 
-export const Wrapper = forwardRef(
-  ({ children, width, ...props }: KeyValue, ref) => {
+export const Wrapper = (maxWidth = 1100) => {
+  const El = forwardRef(({ children, width, ...props }: KeyValue, ref) => {
     const scrollerRef = useRef<HTMLDivElement>(null);
 
     const [isLoading, setLoading] = useState(false);
@@ -70,37 +70,45 @@ export const Wrapper = forwardRef(
 
     return (
       <div {...props} className="ax-virtual__wrapper" ref={scrollerRef}>
-        <div style={{ minWidth: props.style.width * 0.8 }}>
+        <div style={{ minWidth: Math.min(props.style.width * 0.8, maxWidth) }}>
           {children}
           {isLoading && <AxAnimation.Card showIcon />}
           <div style={{ height: 48 }} />
         </div>
         <div className="ax-virtual__scroll">
           <div>
-            <AxButton.Group isVertical  variant="flat">
+            <AxButton.Group isVertical variant="flat">
               <AxButton
+                size="sm"
                 variant="link"
+                className="flush"
                 aria-label="scroll to top"
                 icon={AppIcons.iconChevronUp}
                 onClick={() => fireEvent("scrollFirst")}
                 isDisabled={noScrollUp}
               />
               <AxButton
+                size="sm"
                 variant="link"
+                className="flush"
                 aria-label="scroll up"
                 icon={AppIcons.iconCaretUp}
                 onClick={() => fireEvent("scrollUp")}
                 isDisabled={noScrollUp}
               />
               <AxButton
+                size="sm"
                 variant="link"
+                className="flush"
                 aria-label="scroll down"
                 icon={AppIcons.iconCaretDown}
                 onClick={() => fireEvent("scrollDown")}
                 isDisabled={noScrollDown}
               />
               <AxButton
+                size="sm"
                 variant="link"
+                className="flush"
                 aria-label="scroll to bottom"
                 icon={AppIcons.iconChevronDown}
                 onClick={() => fireEvent("scrollLast")}
@@ -111,7 +119,8 @@ export const Wrapper = forwardRef(
         </div>
       </div>
     );
-  }
-);
+  });
 
-Wrapper.displayName = "VirtualWrapper";
+  El.displayName = "VirtualWrapper";
+  return El;
+};

@@ -15,11 +15,13 @@ import {
   EmptyCallback,
 } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
+import { isString } from "@axux/utilities";
 import memoize from "memoize-one";
 import {
   CSSProperties,
   memo,
   ReactElement,
+  ReactNode,
   Ref,
   useCallback,
   useDeferredValue,
@@ -42,7 +44,7 @@ export type TimelineRef = Pick<List, "scrollTo" | "scrollToItem"> & {
 export interface TimelineItemProps
   extends ChildrenProp,
     ElementProps,
-    Omit<IconProps, "onClick" | "size"> {
+    Omit<IconProps, "onClick" | "size" | "icon"> {
   style: CSSProperties;
   index: number;
   lastChild: boolean;
@@ -61,6 +63,10 @@ export interface TimelineItemProps
    */
   reverse?: boolean;
   /**
+   * avatar icon
+   */
+  icon?: string | ReactNode;
+  /**
    * icon className
    */
   iconClassName?: HTMLElement["className"];
@@ -70,6 +76,7 @@ export interface TimelineProps<T> extends ElementProps {
   children: (props: TimelineItemProps & { data: T }) => ReactElement;
   listRef?: Ref<TimelineRef | undefined>;
   minHeight?: number;
+  maxWidth?: number;
   /**
    * data list
    */
@@ -134,15 +141,20 @@ const Item = memo(
           data-noline={noLine}
           data-reverse={reverse}
           data-last-child={lastChild}
-          className={`ax-timeline__item ${className ?? ""}`}
+          className="ax-timeline__item"
         >
           <div className={isScrolling ? "animate-pulse" : ""}>
-            <AxIcon
-              className={`ax-timeline__avatar ${iconClassName ?? ""}`}
-              {...{ icon, bg, color, rtlFlip, viewBox, animate }}
-            />
+            <div className="ax-timeline__avatar">
+              {isString(icon) && (
+                <AxIcon
+                  className={iconClassName}
+                  {...{ icon, bg, color, rtlFlip, viewBox, animate }}
+                />
+              )}
+              {!isString(icon) && icon}
+            </div>
           </div>
-          <div>{children}</div>
+          <div className={className}>{children}</div>
         </div>
       </div>
     );
@@ -159,6 +171,7 @@ const AxTimelineComponent = <T extends KeyValue>({
   className,
   children,
   items,
+  maxWidth,
   minHeight = 48,
   isLoading,
   onLoadMore,
@@ -255,6 +268,7 @@ const AxTimelineComponent = <T extends KeyValue>({
     <div
       {...rest}
       ref={containerRef}
+      style={{ "--maxw": maxWidth } as AnyObject}
       className={`ax-virtual__container ax-timeline ${className ?? ""}`}
     >
       <AutoSizer>
@@ -267,7 +281,7 @@ const AxTimelineComponent = <T extends KeyValue>({
             itemCount={count}
             itemData={itemList}
             direction={isRtl ? "rtl" : "ltr"}
-            outerElementType={Wrapper}
+            outerElementType={Wrapper(maxWidth)}
             itemSize={(index) =>
               cache.get(index) ??
               Math.max(minHeight, ...Array.from(cache.values()))
