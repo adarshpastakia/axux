@@ -128,7 +128,7 @@
     }
 
     &[data-clickable="true"] {
-      @apply cursor-pointer shadow-sm shadow-bw-200 dark:shadow-black hover:shadow-md hover:-translate-y-px
+      @apply cursor-pointer shadow-sm shadow-bw-200 dark:shadow-black hover:shadow-md 
        active:translate-y-0 active:shadow-inner;
     }
   }
