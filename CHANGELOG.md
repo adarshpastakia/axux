@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.70](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.69...v2.0.0-beta.70) (2022-12-07)
+
+
+### Bug Fixes
+
+* **VirtualLists:** fixed layout ([7b02892](https://github.com/adarshpastakia/axux/commit/7b028925d2534ca27ba54942dd3575eab670322d))
+
+
+
+
+
 # [2.0.0-beta.69](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.68...v2.0.0-beta.69) (2022-12-06)
 
 
