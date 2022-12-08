@@ -47,7 +47,7 @@ export const getImageColorset = (el: HTMLImageElement) => {
     }
 
     const diff = (light - dark) / (el.naturalWidth * el.naturalHeight);
-    let ret = diff + 0.1 < 0 ? "dark" : "light";
+    let ret = diff < 0 ? "dark" : "light";
     if (transparent) {
       ret += "_transparent";
     }
