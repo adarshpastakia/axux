@@ -236,7 +236,7 @@ const AxTimelineComponent = <T extends KeyValue>({
         listRef.scrollTo(listRef.state.scrollOffset + listRef.props.height),
       scrollUp: () =>
         listRef.scrollTo(listRef.state.scrollOffset - listRef.props.height),
-      loadMore: () => () => !isLoading && onLoadMore?.(),
+      loadMore: () => !isLoading && onLoadMore?.(),
     };
     el?.addEventListener("scrollFirst", handlers.scrollFirst);
     el?.addEventListener("scrollLast", handlers.scrollLast);
@@ -264,6 +264,8 @@ const AxTimelineComponent = <T extends KeyValue>({
     [listRef]
   );
 
+  const outerElement = useMemo(() => Wrapper(maxWidth), [maxWidth]);
+
   return (
     <div
       {...rest}
@@ -281,7 +283,7 @@ const AxTimelineComponent = <T extends KeyValue>({
             itemCount={count}
             itemData={itemList}
             direction={isRtl ? "rtl" : "ltr"}
-            outerElementType={Wrapper(maxWidth)}
+            outerElementType={outerElement}
             itemSize={(index) =>
               cache.get(index) ??
               Math.max(minHeight, ...Array.from(cache.values()))
