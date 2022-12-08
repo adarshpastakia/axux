@@ -33,8 +33,8 @@ export const Wrapper = (maxWidth = 1100) => {
       []
     );
 
-    const [noScrollUp, setNoScrollUp] = useState(true);
-    const [noScrollDown, setNoScrollDown] = useState(true);
+    const [noScrollUp, setNoScrollUp] = useState<boolean>();
+    const [noScrollDown, setNoScrollDown] = useState<boolean>();
     useLayoutEffect(() => {
       const el = scrollerRef.current;
       if (el != null) {

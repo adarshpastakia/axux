@@ -31,7 +31,7 @@ export const GridStory: ComponentStory<typeof AxGridView> = ({}) => {
   const [recordCount, setCount] = useState(0);
 
   useEffect(() => {
-    setCount(0);
+    setCount(10);
   }, [count]);
   const loadMore = useCallback(() => {
     setLoading(true);

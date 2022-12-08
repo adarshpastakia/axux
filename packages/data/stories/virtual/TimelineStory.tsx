@@ -35,7 +35,7 @@ export const TimelineStory: ComponentStory<typeof AxTimeline> = ({}) => {
   const { message } = useNotificationService();
 
   useEffect(() => {
-    setCount(0);
+    setCount(10);
   }, [count]);
   const loadMore = useCallback(() => {
     setLoading(true);
@@ -48,6 +48,7 @@ export const TimelineStory: ComponentStory<typeof AxTimeline> = ({}) => {
     <AxViewport>
       <AxHeader>
         <div className="p-2">
+          <AxButton onClick={() => setCount(recordCount + 10)}>AddMore</AxButton>
           <AxButton
             onClick={() => {
               const idx = Math.floor(Math.random() * recordCount);
