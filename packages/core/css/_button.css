@@ -95,7 +95,7 @@
       @apply shadow shadow-bw-400 dark:shadow-black;
     }
     &[data-variant="flat"] {
-      @apply shadow-sm shadow-bw-400 dark:shadow-black;
+      @apply border border-bw-500/30;
     }
 
     &[data-variant="normal"],
