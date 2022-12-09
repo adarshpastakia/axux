@@ -86,7 +86,7 @@
     }
 
     & > .ax-icon {
-      @apply p-1;
+      @apply m-1;
     }
 
     & > .ax-button {
