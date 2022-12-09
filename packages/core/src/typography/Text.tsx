@@ -13,7 +13,6 @@ import {
   FC,
   Fragment,
   useCallback,
-  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -48,12 +47,6 @@ export const AxText: FC<TextProps> & {
   const refContainer = useRef<HTMLDivElement>(null);
   const [clipped, setClipped] = useState(false);
   const [showMore, setShowMore] = useState(false);
-
-  /** ***************** reset clip state *******************/
-  useEffect(() => {
-    setClipped(false);
-    setShowMore(false);
-  }, [children, clip]);
 
   /** ***************** check text height if clip enabled *******************/
   const checkHeight = useCallback(() => {
@@ -101,7 +94,7 @@ export const AxText: FC<TextProps> & {
       </div>
       {clipped && (
         <div className="ax-moreLink">
-          <a onClick={() => setShowMore(!showMore)}>
+          <a onClick={(e) => (setShowMore(!showMore), e.stopPropagation())}>
             ...{t(`action.${showMore ? "less" : "more"}`)}
           </a>
         </div>
