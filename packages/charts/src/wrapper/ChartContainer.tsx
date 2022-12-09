@@ -6,7 +6,11 @@
  * @license   : MIT
  */
 
-import { AxContent, useIsDark, useResizeObserver } from "@axux/core";
+import {
+  AxContent,
+  useApplicationContext,
+  useResizeObserver,
+} from "@axux/core";
 import { SizeObject } from "@axux/core/dist/types";
 import * as echarts from "echarts";
 import { EChartOption, EChartsType } from "echarts";
@@ -81,7 +85,7 @@ export const ChartContainer = ({
   onResize?: (size: { width: number; height: number }) => void;
 }) => {
   const [chartRef, setChartRef] = useState<EChartsType>();
-  const isDark = useIsDark();
+  const { currentTheme } = useApplicationContext();
 
   const handleResize = useCallback(
     (size: SizeObject) => {
@@ -99,8 +103,8 @@ export const ChartContainer = ({
   );
 
   const chartTheme = useMemo(
-    () => (isDark ? `${theme}_dark` : theme),
-    [theme, isDark]
+    () => (currentTheme === "dark" ? `${theme}_dark` : theme),
+    [theme, currentTheme]
   );
 
   useEffect(() => {
