@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.74](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.73...v2.0.0-beta.74) (2022-12-16)
+
+
+### Bug Fixes
+
+* **AxDatagrid:** disable pointer event on empty row ([92bdb6c](https://github.com/adarshpastakia/axux/commit/92bdb6cdff4f0ef5ffdef7e4a001b14a7ff679ff))
+* **AxTree:** restate state on data prop change ([deab0ad](https://github.com/adarshpastakia/axux/commit/deab0ade23d1c16863aeee6833424d7cfb27a8d7))
+* **AxTree:** update reducer logic, expose treeRef ([d6478de](https://github.com/adarshpastakia/axux/commit/d6478de46836fb2b83ad766571af381e64e3a022))
+
+
+
+
+
 # [2.0.0-beta.73](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.72...v2.0.0-beta.73) (2022-12-10)
 
 **Note:** Version bump only for package @axux/data
