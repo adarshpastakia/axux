@@ -13,8 +13,10 @@ import { matchString } from "@axux/utilities";
 import {
   FC,
   memo,
+  Ref,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useLayoutEffect,
   useReducer,
   useRef,
@@ -31,10 +33,16 @@ import {
   createIdMap,
   createNodeList,
   createTreeMap,
+  getNodeById,
   refactorChildren,
   refactorTreeData,
   toggleProperty,
 } from "./utils";
+
+interface TreeRef {
+  select: (id: string) => void;
+  open: (id: string) => void;
+}
 
 export interface TreeProps extends ElementProps {
   /**
@@ -61,6 +69,8 @@ export interface TreeProps extends ElementProps {
    * addition toolbar actions
    */
   actions?: JSX.Element[];
+
+  treeRef?: Ref<TreeRef | undefined>;
   /**
    * callback for lazy loading tree items
    */
@@ -89,6 +99,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
     onChange,
     onLoad,
     onSelect,
+    treeRef: ref,
     ...rest
   }: TreeProps) => {
     const isRtl = useIsRtl();
@@ -120,31 +131,45 @@ export const AxTreePanel: FC<TreeProps> = memo(
       (state: TreeState, action: TreeActions) => {
         state.autoScroll = false;
         if (action.type === "init" && action.newState) {
-          return action.newState;
+          return { ...action.newState };
         }
         if (action.type === "toggleExpand") {
-          return toggleExpand(state, action.index, !(onLoad == null));
+          return toggleExpand(state, action.id, !(onLoad == null));
+        }
+        if (action.type === "open") {
+          return toggleExpand(state, action.id, !(onLoad == null), true);
         }
         if (action.type === "toggleCheck") {
-          toggleCheck(state, action.id);
+          const newState = toggleCheck(state, action.id);
           startTransition(() =>
-            fireCheckChange?.(Array.from(state.treeMap.values()))
+            fireCheckChange?.(Array.from(newState.treeMap.values()))
           );
+          return newState;
         }
         if (action.type === "loadItems") {
-          const parent = state.items[action.index];
-          parent.isLoading = false;
-          parent.isError = false;
-          refactorChildren(parent, action.items ?? []);
-          state.items.splice(action.index + 1, 1, ...createChildItems(parent));
+          const parent = getNodeById(state, action.id);
+          if (parent) {
+            parent.isLoading = false;
+            parent.isError = false;
+            const index = state.items.indexOf(parent);
+            refactorChildren(parent, action.items ?? []);
+            state.idMap = createIdMap(state.treeData);
+            state.treeMap = createTreeMap(state.treeData);
+            state.items.splice(index + 1, 1, ...createChildItems(parent));
+          }
         }
         if (action.type === "loadError") {
-          const item = state.items[action.index + 1];
-          const parent = state.items[action.index];
-          item.isLoading = false;
-          item.isError = true;
-          parent.isLoading = false;
-          parent.isError = true;
+          const parent = getNodeById(state, action.id);
+          if (parent) {
+            const index = state.items.indexOf(parent);
+            const item = state.items[index + 1];
+            if (item) {
+              item.isLoading = false;
+              item.isError = true;
+            }
+            parent.isLoading = false;
+            parent.isError = true;
+          }
         }
         if (action.type === "expandAll") {
           toggleProperty(state.treeData, "isOpen", true, true);
@@ -156,22 +181,34 @@ export const AxTreePanel: FC<TreeProps> = memo(
         }
         if (action.type === "checkAll") {
           toggleProperty(state.treeData, "isChecked", 1);
-          startTransition(() =>
-            fireCheckChange?.(Array.from(state.treeMap.values()))
+          setTimeout(
+            () =>
+              startTransition(() =>
+                fireCheckChange?.(Array.from(state.treeMap.values()))
+              ),
+            100
           );
         }
         if (action.type === "uncheckAll") {
           toggleProperty(state.treeData, "isChecked", 0);
-          startTransition(() =>
-            fireCheckChange?.(Array.from(state.treeMap.values()))
+          setTimeout(
+            () =>
+              startTransition(() =>
+                fireCheckChange?.(Array.from(state.treeMap.values()))
+              ),
+            100
           );
         }
         if (action.type === "select") {
           toggleSelect(state, action.id, action.propChange);
           !action.propChange &&
-            startTransition(() => {
-              action.id && onSelect?.(action.id);
-            });
+            setTimeout(
+              () =>
+                startTransition(() => {
+                  action.id && onSelect?.(action.id);
+                }),
+              100
+            );
         }
         if (action.type === "search") {
           Array.from(state.treeMap.values()).forEach((item) => {
@@ -207,7 +244,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
     );
 
     useEffect(() => {
-      dispatch({ type: "init", index: 0, newState: initState(data) });
+      dispatch({ type: "init", newState: initState(data) });
     }, [data]);
 
     const itemHeight = useCallback(
@@ -221,34 +258,47 @@ export const AxTreePanel: FC<TreeProps> = memo(
       [state.items]
     );
 
+    useImperativeHandle(
+      ref,
+      () => ({
+        select: (id: string) =>
+          dispatch({ type: "select", id, propChange: true }),
+        open: (id: string) => dispatch({ type: "open", id, propChange: true }),
+      }),
+      []
+    );
+
     useEffect(() => {
       if (selected) {
         dispatch({
           type: "select",
           id: selected,
-          index: 0,
           propChange: true,
         });
       }
-    }, [selected]);
+    }, [data, selected]);
 
     const handleExpand = useCallback(
       (index: number) => {
         const parent = state.items[index];
-        dispatch({ type: "toggleExpand", index });
+        dispatch({ type: "toggleExpand", id: parent.node.id });
         !parent.isOpen &&
           parent.children?.length === 0 &&
           startTransition(() => {
-            const ret = parent.node.id && onLoad?.(parent.node.id);
-            Promise.resolve(ret)
-              .then((resp) => {
-                if (resp) {
-                  dispatch({ type: "loadItems", index, items: resp });
-                } else {
-                  dispatch({ type: "loadError", index });
-                }
-              })
-              .catch(() => dispatch({ type: "loadError", index }));
+            if (parent.node.id) {
+              const ret = onLoad?.(parent.node.id) ?? [];
+              Promise.resolve(ret)
+                .then((resp) => {
+                  dispatch({
+                    type: "loadItems",
+                    id: parent.node.id,
+                    items: resp ?? [],
+                  });
+                })
+                .catch(() =>
+                  dispatch({ type: "loadError", id: parent.node.id })
+                );
+            }
           });
       },
       [state, onLoad]
@@ -276,17 +326,15 @@ export const AxTreePanel: FC<TreeProps> = memo(
       >
         <TreeTools
           isCheckable={isCheckable}
-          onExpand={() => dispatch({ type: "expandAll", index: 0 })}
-          onCollapse={() => dispatch({ type: "collapseAll", index: 0 })}
-          onCheckAll={() => dispatch({ type: "checkAll", index: 0 })}
-          onUncheckAll={() => dispatch({ type: "uncheckAll", index: 0 })}
+          onExpand={() => dispatch({ type: "expandAll" })}
+          onCollapse={() => dispatch({ type: "collapseAll" })}
+          onCheckAll={() => dispatch({ type: "checkAll" })}
+          onUncheckAll={() => dispatch({ type: "uncheckAll" })}
         />
         {isSearchable && (
           <AxField.Search
             isPlain
-            onSearch={(search) =>
-              dispatch({ type: "search", search, index: 0 })
-            }
+            onSearch={(search) => dispatch({ type: "search", search })}
             className="ax-tree__search"
           />
         )}
@@ -308,11 +356,9 @@ export const AxTreePanel: FC<TreeProps> = memo(
                     {...state.items[index]}
                     checkLevel={checkLevel}
                     isCheckable={isCheckable}
-                    onSelect={(id: string) =>
-                      dispatch({ type: "select", index, id })
-                    }
+                    onSelect={(id: string) => dispatch({ type: "select", id })}
                     onToggleCheck={(id: string) =>
-                      dispatch({ type: "toggleCheck", index, id })
+                      dispatch({ type: "toggleCheck", id })
                     }
                     onToggleExpand={() => handleExpand(index)}
                   />

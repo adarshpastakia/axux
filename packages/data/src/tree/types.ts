@@ -19,6 +19,7 @@ export interface TreeState {
 export interface TreeActions {
   type:
     | "init"
+    | "open"
     | "select"
     | "search"
     | "check"
@@ -30,7 +31,6 @@ export interface TreeActions {
     | "collapseAll"
     | "checkAll"
     | "uncheckAll";
-  index: number;
   id?: string;
   search?: string;
   items?: TreeNodeType[];
@@ -44,6 +44,7 @@ export interface TreeNodeType extends IconProp {
   icon?: string;
   badge?: BadgeType;
   isLeaf?: boolean;
+  isOpen?: boolean;
   iconOpen?: string;
   iconClosed?: string;
   isDisabled?: boolean;
