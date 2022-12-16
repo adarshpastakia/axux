@@ -7,49 +7,58 @@
  */
 
 import { TreeState } from "./types";
-import { createNodeList, refactorNode, toggleProperty } from "./utils";
+import {
+  createNodeList,
+  getNodeById,
+  refactorNode,
+  toggleProperty,
+} from "./utils";
 
 export const toggleExpand = (
   state: TreeState,
-  index: number,
-  canLoad: boolean
+  id?: string,
+  canLoad = false,
+  force?: boolean
 ) => {
-  const parent = state.items[index];
-  parent.isOpen = !parent.isOpen;
-  if (!parent.isOpen) {
-    state.items = state.items.filter(
-      (item) =>
-        !(
-          item.internalId !== parent.internalId &&
-          item.internalId.startsWith(parent.internalId)
-        )
-    );
-  } else if (parent.children != null && parent.children?.length > 0) {
-    state.items.splice(index + 1, 0, ...createNodeList(parent.children));
-  } else {
-    parent.isLoading = canLoad;
-    state.items.splice(
-      index + 1,
-      0,
-      refactorNode({
-        node: { isLeaf: true },
-        index: 0,
-        isLast: true,
-        isEmpty: true,
-        isLoading: canLoad,
-        isError: parent.isError,
-        lines: parent.lines,
-        parent: parent.internalId,
-        level: parent.level + 1,
-      })
-    );
+  const parent = getNodeById(state, id);
+  if (parent) {
+    const index = state.items.indexOf(parent);
+    parent.isOpen = force ?? !parent.isOpen;
+    if (!parent.isOpen) {
+      state.items = state.items.filter(
+        (item) =>
+          !(
+            item.internalId !== parent.internalId &&
+            item.internalId.startsWith(parent.internalId)
+          )
+      );
+    } else if (parent.children != null && parent.children?.length > 0) {
+      state.items.splice(index + 1, 0, ...createNodeList(parent.children));
+    } else {
+      parent.isLoading = canLoad;
+      state.items.splice(
+        index + 1,
+        0,
+        refactorNode({
+          node: { isLeaf: true },
+          index: 0,
+          isLast: true,
+          isEmpty: true,
+          isLoading: canLoad,
+          isError: parent.isError,
+          lines: parent.lines,
+          parent: parent.internalId,
+          level: parent.level + 1,
+        })
+      );
+    }
   }
   return { ...state };
 };
 
 export const toggleCheck = (state: TreeState, id?: string) => {
-  const node = state.treeMap.get(state.idMap.get(id ?? "") ?? "");
-  if (node != null) {
+  const node = getNodeById(state, id);
+  if (node) {
     node.isChecked = node.isChecked === 0 ? 1 : 0;
     node.children != null &&
       toggleProperty(node.children, "isChecked", node.isChecked);
@@ -68,8 +77,8 @@ export const toggleCheck = (state: TreeState, id?: string) => {
 };
 
 export const toggleSelect = (state: TreeState, id?: string, scroll = false) => {
-  const node = state.treeMap.get(state.idMap.get(id ?? "") ?? "");
-  if (node != null) {
+  const node = getNodeById(state, id);
+  if (node) {
     Array.from(state.treeMap.values()).forEach((n) => {
       n.isSelected = false;
       n.childSelected = false;
@@ -83,6 +92,7 @@ export const toggleSelect = (state: TreeState, id?: string, scroll = false) => {
     }
     state.items = createNodeList(state.treeData);
     state.autoScroll = scroll;
+    return !node.isLeaf;
   }
   return { ...state };
 };

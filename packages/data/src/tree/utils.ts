@@ -7,7 +7,7 @@
  */
 
 import { compareValues } from "@axux/utilities";
-import { InternalNode, TreeNodeType } from "./types";
+import { InternalNode, TreeNodeType, TreeState } from "./types";
 
 const sorter = (a: TreeNodeType, b: TreeNodeType) => {
   if (!!a.isLeaf !== !!b.isLeaf) return a.isLeaf ? 1 : -1;
@@ -39,7 +39,7 @@ export const refactorNode = ({
     isLeaf: !!node.isLeaf,
     isSelected: false,
     childSelected: false,
-    isOpen: false,
+    isOpen: !!node.isOpen,
     isChecked: 0,
     children: innerChildren
       .sort(sorter)
@@ -168,4 +168,8 @@ export const toggleProperty = (
     if (node.children != null)
       toggleProperty(node.children, prop, value, checkChildren);
   });
+};
+
+export const getNodeById = (state: TreeState, id?: string) => {
+  return state.treeMap.get(state.idMap.get(id ?? "") ?? "");
 };
