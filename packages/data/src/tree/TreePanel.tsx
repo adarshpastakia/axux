@@ -96,13 +96,13 @@ export const AxTreePanel: FC<TreeProps> = memo(
     const panelRef = useRef<HTMLDivElement>(null);
     const [, startTransition] = useTransition();
 
-    const initState = useCallback(() => {
+    const initState = useCallback((data: TreeNodeType[] = []) => {
       const treeData = refactorTreeData(data);
       const treeMap = createTreeMap(treeData);
       const idMap = createIdMap(treeData);
       const items = createNodeList(treeData);
       return { treeData, treeMap, idMap, items, autoScroll: false };
-    }, [data]);
+    }, []);
 
     const fireCheckChange = useCallback(
       (items: InternalNode[]) => {
@@ -119,6 +119,9 @@ export const AxTreePanel: FC<TreeProps> = memo(
     const reducer = useCallback(
       (state: TreeState, action: TreeActions) => {
         state.autoScroll = false;
+        if (action.type === "init" && action.newState) {
+          return action.newState;
+        }
         if (action.type === "toggleExpand") {
           return toggleExpand(state, action.index, !(onLoad == null));
         }
@@ -195,13 +198,17 @@ export const AxTreePanel: FC<TreeProps> = memo(
       reducer,
       {
         treeData: [],
-        treeMap: {},
-        idMap: {},
+        treeMap: new Map(),
+        idMap: new Map(),
         items: [],
         autoScroll: false,
       },
-      initState
+      () => initState()
     );
+
+    useEffect(() => {
+      dispatch({ type: "init", index: 0, newState: initState(data) });
+    }, [data]);
 
     const itemHeight = useCallback(
       (el: HTMLDivElement | null) => {

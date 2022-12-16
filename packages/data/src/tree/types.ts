@@ -18,6 +18,7 @@ export interface TreeState {
 
 export interface TreeActions {
   type:
+    | "init"
     | "select"
     | "search"
     | "check"
@@ -34,6 +35,7 @@ export interface TreeActions {
   search?: string;
   items?: TreeNodeType[];
   propChange?: boolean;
+  newState?: TreeState;
 }
 
 export interface TreeNodeType extends IconProp {
