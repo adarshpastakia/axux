@@ -67,7 +67,7 @@ export const AxDatagridComponent = <T extends KeyValue>({
     </DatagridProvider>
   );
 };
-AxDatagridComponent.displayName = "AxList";
+AxDatagridComponent.displayName = "AxDatagrid";
 
 const GenericMemo: <T>(c: T) => T = memo;
 
