@@ -57,6 +57,10 @@ export interface TreeProps extends ElementProps {
    */
   selected?: string;
   /**
+   * enable select for nodes
+   */
+  nodesSelectable?: boolean;
+  /**
    * show search bar
    */
   isSearchable?: boolean;
@@ -97,6 +101,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
     title,
     actions,
     selected,
+    nodesSelectable,
     isSearchable,
     isCheckable,
     checkLevel = 0,
@@ -361,6 +366,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
                 itemSize={itemHeight(panelRef.current)}
                 itemCount={state.items.length}
                 direction={isRtl ? "rtl" : "ltr"}
+                style={{ paddingBottom: "2rem" }}
               >
                 {({ index, style }) => (
                   <TreeNode
@@ -368,6 +374,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
                     {...state.items[index]}
                     checkLevel={checkLevel}
                     isCheckable={isCheckable}
+                    nodesSelectable={nodesSelectable}
                     onSelect={(id: string) => dispatch({ type: "select", id })}
                     onToggleCheck={(id: string) =>
                       dispatch({ type: "toggleCheck", id })
