@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { isNil } from "@axux/utilities";
 import { TreeState } from "./types";
 import {
   createNodeList,
@@ -32,7 +33,7 @@ export const toggleExpand = (
             item.internalId.startsWith(parent.internalId)
           )
       );
-    } else if (parent.children != null && parent.children?.length > 0) {
+    } else if (!isNil(parent.children)) {
       state.items.splice(index + 1, 0, ...createNodeList(parent.children));
     } else {
       parent.isLoading = canLoad;

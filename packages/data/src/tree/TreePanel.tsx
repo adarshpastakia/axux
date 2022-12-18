@@ -9,7 +9,7 @@
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
 import { ElementProps } from "@axux/core/dist/types";
 import { AxField } from "@axux/form";
-import { matchString } from "@axux/utilities";
+import { isNil, matchString } from "@axux/utilities";
 import {
   FC,
   memo,
@@ -258,16 +258,6 @@ export const AxTreePanel: FC<TreeProps> = memo(
       [state.items]
     );
 
-    useImperativeHandle(
-      ref,
-      () => ({
-        select: (id: string) =>
-          dispatch({ type: "select", id, propChange: true }),
-        open: (id: string) => dispatch({ type: "open", id, propChange: true }),
-      }),
-      []
-    );
-
     useEffect(() => {
       if (selected) {
         dispatch({
@@ -278,30 +268,47 @@ export const AxTreePanel: FC<TreeProps> = memo(
       }
     }, [data, selected]);
 
+    const loadNodes = useCallback(
+      (id?: string) => {
+        startTransition(() => {
+          if (id) {
+            const ret = onLoad?.(id) ?? [];
+            Promise.resolve(ret)
+              .then((resp) => {
+                dispatch({
+                  type: "loadItems",
+                  id,
+                  items: resp ?? [],
+                });
+              })
+              .catch(() => dispatch({ type: "loadError", id }));
+          }
+        });
+      },
+      [onLoad]
+    );
+
     const handleExpand = useCallback(
       (index: number) => {
         const parent = state.items[index];
         dispatch({ type: "toggleExpand", id: parent.node.id });
-        !parent.isOpen &&
-          parent.children?.length === 0 &&
-          startTransition(() => {
-            if (parent.node.id) {
-              const ret = onLoad?.(parent.node.id) ?? [];
-              Promise.resolve(ret)
-                .then((resp) => {
-                  dispatch({
-                    type: "loadItems",
-                    id: parent.node.id,
-                    items: resp ?? [],
-                  });
-                })
-                .catch(() =>
-                  dispatch({ type: "loadError", id: parent.node.id })
-                );
-            }
-          });
+        !parent.isOpen && isNil(parent.children) && loadNodes(parent.node.id);
       },
-      [state, onLoad]
+      [state, loadNodes]
+    );
+
+    useImperativeHandle(
+      ref,
+      () => ({
+        select: (id: string) =>
+          dispatch({ type: "select", id, propChange: true }),
+        open: (id: string) => {
+          dispatch({ type: "open", id, propChange: true });
+          const parent = state.treeMap.get(state.idMap.get(id) ?? "");
+          parent && isNil(parent?.children) && loadNodes(parent.node.id);
+        },
+      }),
+      [state, loadNodes]
     );
 
     useLayoutEffect(() => {

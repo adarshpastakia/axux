@@ -27,7 +27,7 @@ export const refactorNode = ({
   index?: number;
 }): InternalNode => {
   const internalId = `${parent}.${index}`;
-  const innerChildren = children ?? [];
+  const innerChildren = children;
   const newLines = [...lines, isLast ? 0 : 1];
   return {
     internalId,
@@ -42,7 +42,7 @@ export const refactorNode = ({
     isOpen: !!node.isOpen,
     isChecked: 0,
     children: innerChildren
-      .sort(sorter)
+      ?.sort(sorter)
       .map((child: InternalNode, idx: number) =>
         refactorNode({
           node: child,
