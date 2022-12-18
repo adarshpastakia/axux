@@ -8,6 +8,11 @@
 
 import { BadgeType, IconProp } from "@axux/core/dist/types";
 
+export interface TreeRef {
+  select: (id: string) => void;
+  open: (id: string) => void;
+}
+
 export interface TreeState {
   treeData: InternalNode[];
   treeMap: Map<string, InternalNode>;
