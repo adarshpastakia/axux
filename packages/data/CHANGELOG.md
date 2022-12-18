@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.75](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.74...v2.0.0-beta.75) (2022-12-18)
+
+
+### Bug Fixes
+
+* **AxTreePanel:** fix load more when isNode and children is null ([a2c9eb7](https://github.com/adarshpastakia/axux/commit/a2c9eb7e84659d4e5a182835c0705069e7640d2b))
+
+
+
+
+
 # [2.0.0-beta.74](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.73...v2.0.0-beta.74) (2022-12-16)
 
 
