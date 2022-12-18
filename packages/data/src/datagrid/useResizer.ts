@@ -17,7 +17,7 @@ export const useResizer = (
   const onResize = (evt: MouseEvent) => {
     /** ***************** check if reverse enabled of RTL *******************/
     const box = colEl.getBoundingClientRect();
-    const x = evt.clientX - (isRtl ? box.left : box.right);
+    const x = isRtl ? box.left - evt.clientX : evt.clientX - box.right;
     placeholder.style.width = `${colEl.offsetWidth + x}px`;
   };
 
@@ -31,12 +31,15 @@ export const useResizer = (
 
   /** ***************** attach handlers *******************/
   const box = colEl.getBoundingClientRect();
-  if (isRtl && colEl.parentElement != null) {
-    placeholder.style.left = "unset";
-    placeholder.style.right = `${box.right}px`;
-  } else {
-    placeholder.style.right = "unset";
-    placeholder.style.left = `${box.left}px`;
+  if (colEl.parentElement != null) {
+    const parentBox = colEl.parentElement?.getBoundingClientRect();
+    if (isRtl) {
+      placeholder.style.left = "unset";
+      placeholder.style.right = `${parentBox.right - box.right}px`;
+    } else {
+      placeholder.style.right = "unset";
+      placeholder.style.left = `${parentBox.left - box.left}px`;
+    }
   }
   placeholder.style.width = `${colEl.offsetWidth}px`;
   placeholder.style.minWidth = colEl.style.minWidth || "48px";
