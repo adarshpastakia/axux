@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 
 export const TreeTools = memo(
   ({
+    title,
     onExpand,
     onCollapse,
     onCheckAll,
@@ -22,6 +23,7 @@ export const TreeTools = memo(
     const { t } = useTranslation("data");
     return (
       <div className="ax-tree__tools">
+        <div className="flex-1 self-center px-2 truncate">{title}</div>
         <AxButton
           size="sm"
           variant="link"

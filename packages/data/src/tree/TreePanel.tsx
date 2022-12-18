@@ -13,6 +13,7 @@ import { isNil, matchString } from "@axux/utilities";
 import {
   FC,
   memo,
+  ReactNode,
   Ref,
   useCallback,
   useEffect,
@@ -27,7 +28,13 @@ import { FixedSizeList as List } from "react-window";
 import { TreeNode } from "./Node";
 import { toggleCheck, toggleExpand, toggleSelect } from "./reducer";
 import { TreeTools } from "./Tools";
-import { InternalNode, TreeActions, TreeNodeType, TreeState } from "./types";
+import {
+  InternalNode,
+  TreeActions,
+  TreeNodeType,
+  TreeRef,
+  TreeState,
+} from "./types";
 import {
   createChildItems,
   createIdMap,
@@ -39,12 +46,8 @@ import {
   toggleProperty,
 } from "./utils";
 
-interface TreeRef {
-  select: (id: string) => void;
-  open: (id: string) => void;
-}
-
 export interface TreeProps extends ElementProps {
+  title?: ReactNode;
   /**
    * tree data
    */
@@ -91,6 +94,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
   ({
     className,
     data,
+    title,
     actions,
     selected,
     isSearchable,
@@ -332,6 +336,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
         className={`ax-tree__panel ${className ?? ""}`}
       >
         <TreeTools
+          title={title}
           isCheckable={isCheckable}
           onExpand={() => dispatch({ type: "expandAll" })}
           onCollapse={() => dispatch({ type: "collapseAll" })}
