@@ -20,6 +20,7 @@ export const TreeNode = memo(
     checkLevel = 0,
     onToggleCheck,
     onToggleExpand,
+    nodesSelectable,
     onSelect,
     node,
     ...props
@@ -77,7 +78,11 @@ export const TreeNode = memo(
           <div
             className="ax-tree__label"
             onClick={() =>
-              isCheckable ? onToggleCheck(node.id) : onSelect(node.id)
+              isCheckable
+                ? onToggleCheck(node.id)
+                : props.isLeaf || nodesSelectable
+                ? onSelect(node.id)
+                : onToggleExpand(node.id)
             }
             onDoubleClick={onToggleExpand}
             data-selected={!isCheckable && props.isSelected}
