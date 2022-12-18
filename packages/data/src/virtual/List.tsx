@@ -167,6 +167,7 @@ const AxListComponent = <T extends KeyValue>({
             direction={isRtl ? "rtl" : "ltr"}
             innerElementType={StickyList}
             itemSize={getSize}
+            style={{ paddingBottom: "2rem" }}
           >
             {(props) =>
               children({
