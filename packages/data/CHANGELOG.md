@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.76](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.75...v2.0.0-beta.76) (2022-12-18)
+
+
+### Bug Fixes
+
+* **AxDatagrid:** remove span wrapper for cell value ([ca93e8e](https://github.com/adarshpastakia/axux/commit/ca93e8e5ba6ccecee1e3da471b920811c815e005))
+* **AxDatagrid:** resize ghost el positioning ([dd8b178](https://github.com/adarshpastakia/axux/commit/dd8b178e58943243fda1b20d80c6465ab0c3605a))
+* **AxList:** add bottom padding ([d13f072](https://github.com/adarshpastakia/axux/commit/d13f0725db68b3c26fd58c88c33dc136ab9f127b))
+* **AxTreePanel:** add nodeSelectable prop ([d574eda](https://github.com/adarshpastakia/axux/commit/d574edaf59b046bfa350b516471d697538c6b69a))
+* **AxTreePanel:** add title to toolbar ([e36c9db](https://github.com/adarshpastakia/axux/commit/e36c9db84a917e09916dd08801b876137de3024e))
+
+
+
+
+
 # [2.0.0-beta.75](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.74...v2.0.0-beta.75) (2022-12-18)
 
 
