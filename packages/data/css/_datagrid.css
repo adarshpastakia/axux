@@ -97,6 +97,10 @@
 
     & .ax-datagrid__row {
       @apply odd:bg-bw-0 even:bg-bw-50 dark:odd:bg-bw-1000 dark:even:bg-bw-900 hover:bg-primary-50 hover:dark:bg-primary-900;
+
+      &.hilight {
+        @apply outline-2 outline-primary-500 -outline-offset-2 outline;
+      }
     }
 
     & .ax-datagrid__row--flex {

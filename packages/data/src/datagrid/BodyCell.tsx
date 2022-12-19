@@ -14,6 +14,7 @@ import { DatagridColumn } from "./types";
 
 export const BodyCell = memo(
   ({
+    row,
     name,
     minWidth,
     maxWidth,
@@ -34,7 +35,7 @@ export const BodyCell = memo(
     const content = useMemo(() => {
       const value = getByPath(record, name.toString());
       if (render != null) {
-        return render(value, record);
+        return render(value, record, row);
       }
       if (type === "boolean") {
         const map = valueMap ?? { true: "Yes", false: "no" };
@@ -52,7 +53,7 @@ export const BodyCell = memo(
         return Format.number(value, format);
       }
       return value ?? "";
-    }, [name, record, render, format, type, valueMap]);
+    }, [name, record, render, format, row, type, valueMap]);
 
     return (
       <div

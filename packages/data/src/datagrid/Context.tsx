@@ -15,6 +15,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useImperativeHandle,
   useRef,
   useState,
 } from "react";
@@ -48,6 +49,7 @@ export const DatagridProvider: FC<KeyValue & ElementProps & ChildrenProp> = ({
   sort,
   onSort,
   onRowExpand,
+  datagridRef,
   ...props
 }) => {
   const ghostRef = useRef<HTMLDivElement>(null);
@@ -60,6 +62,30 @@ export const DatagridProvider: FC<KeyValue & ElementProps & ChildrenProp> = ({
       behavior: "auto",
     });
   }, [data]);
+
+  useImperativeHandle(
+    datagridRef,
+    () => ({
+      hilight: (row: number) => {
+        refBody.current
+          ?.querySelectorAll(`.ax-datagrid__row.hilight`)
+          .forEach((el) => el?.classList.remove("hilight"));
+        const el = refBody.current?.querySelector(`[data-row="${row}"]`);
+        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+        el?.classList.add("hilight");
+      },
+      unhilight: () => {
+        refBody.current
+          ?.querySelectorAll(`.ax-datagrid__row.hilight`)
+          .forEach((el) => el?.classList.remove("hilight"));
+      },
+      scrollTo: (row: number) => {
+        const el = refBody.current?.querySelector(`[data-row="${row}"]`);
+        el?.scrollIntoView({ behavior: "smooth" });
+      },
+    }),
+    []
+  );
 
   useEffect(() => {
     setWidths(
