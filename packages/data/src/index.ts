@@ -21,12 +21,9 @@ export { AxGridView } from "./virtual/Grid";
 export { AxList } from "./virtual/List";
 export { AxTimeline } from "./virtual/Timeline";
 
-export type { DatagridColumn } from "./datagrid/types";
+export type { DatagridColumn, DatagridRef } from "./datagrid/types";
 export type { EditorRef } from "./editor/Editor";
 export type { TreeNodeType as TreeNode } from "./tree/types";
 export type { GridRef } from "./virtual/Grid";
 export type { ListRef } from "./virtual/List";
 export type { TimelineRef } from "./virtual/Timeline";
-
-
-// TODO: Datagrid component

@@ -13,7 +13,7 @@ import { memo, ReactNode, useCallback, useMemo, useState } from "react";
 import { BodyCell } from "./BodyCell";
 import { useDatagridContext } from "./Context";
 
-export const BodyRow = memo(({ record }: KeyValue) => {
+export const BodyRow = memo(({ row, record }: KeyValue) => {
   const { columns, isSelectable, onRowSelect, onRowExpand } =
     useDatagridContext();
 
@@ -40,7 +40,7 @@ export const BodyRow = memo(({ record }: KeyValue) => {
   );
 
   return (
-    <div className="ax-datagrid__row">
+    <div className="ax-datagrid__row" data-row={row}>
       <div
         className="ax-datagrid__row--flex"
         data-selectable={isSelectable}
@@ -64,15 +64,15 @@ export const BodyRow = memo(({ record }: KeyValue) => {
             </div>
           )}
           {start.map((props, column) => (
-            <BodyCell key={column} {...props} record={record} />
+            <BodyCell key={column} {...props} record={record} row={row} />
           ))}
         </div>
         {cols.map((props, column) => (
-          <BodyCell key={column} {...props} record={record} />
+          <BodyCell key={column} {...props} record={record} row={row} />
         ))}
         <div className="ax-datagrid__fixEnd">
           {end.map((props, column) => (
-            <BodyCell key={column} {...props} record={record} />
+            <BodyCell key={column} {...props} record={record} row={row} />
           ))}
         </div>
       </div>

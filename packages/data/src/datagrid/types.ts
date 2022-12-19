@@ -9,6 +9,12 @@
 import { IconProp } from "@axux/core/dist/types";
 import { ReactNode } from "react";
 
+export interface DatagridRef {
+  hilight: (row: number) => void;
+  unhilight: () => void;
+  scrollTo: (row: number) => void;
+}
+
 export interface DatagridColumn<T> extends IconProp {
   name: keyof T | string;
   label: string;
@@ -24,5 +30,5 @@ export interface DatagridColumn<T> extends IconProp {
   width?: number;
   maxWidth?: number;
   minWidth?: number;
-  render?: (value: AnyObject, record: T) => ReactNode;
+  render?: (value: AnyObject, record: T, row: number) => ReactNode;
 }

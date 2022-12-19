@@ -10,17 +10,19 @@ import { AxContent } from "@axux/core";
 import { Indicator } from "@axux/core/dist/animations";
 import { ElementProps } from "@axux/core/dist/types";
 import { isString } from "@axux/utilities";
-import { Fragment, memo, ReactElement, ReactNode } from "react";
+import { Fragment, memo, ReactElement, ReactNode, Ref } from "react";
 import { useTranslation } from "react-i18next";
 import { Body } from "./Body";
 import { DatagridProvider } from "./Context";
 import { Header } from "./Header";
-import { DatagridColumn } from "./types";
+import { DatagridColumn, DatagridRef } from "./types";
 
 export interface DatagridProps<T extends KeyValue> extends ElementProps {
   data: T[];
   columns: Array<DatagridColumn<T>>;
   isLoading?: boolean;
+
+  datagridRef?: Ref<DatagridRef | undefined>;
 
   emptyDisplay?: string | ReactElement;
 

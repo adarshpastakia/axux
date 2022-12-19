@@ -17,7 +17,7 @@ export const Body = memo(() => {
   return (
     <div className="ax-datagrid__body">
       {data.map((record, row) => (
-        <BodyRow key={row} record={record} />
+        <BodyRow key={row} record={record} row={row} />
       ))}
 
       <EmptyRow />
