@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.78](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.77...v2.0.0-beta.78) (2022-12-20)
+
+
+### Bug Fixes
+
+* **AxList:** memoize list items ([fef6e65](https://github.com/adarshpastakia/axux/commit/fef6e65bc858330a4225b18dc2e4096c787e3477))
+* **AxVideoPlayer:** added seek method to ref ([88cde93](https://github.com/adarshpastakia/axux/commit/88cde93c0c59b42f855ce4f3915c2bf3c10d65a3))
+* **Thumbnail:** add fallback flag on el ([e63beed](https://github.com/adarshpastakia/axux/commit/e63beedc2b07ba65479c06ffbab44c0dddeac5dd))
+
+
+
+
+
 # [2.0.0-beta.77](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.76...v2.0.0-beta.77) (2022-12-19)
 
 
