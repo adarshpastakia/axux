@@ -94,6 +94,10 @@
       }
     }
 
+    &[data-fallback="false"] > img {
+      @apply w-full h-full object-contain;
+    }
+
     & .ax-thumbnail--spinner {
       @apply absolute inset-0 m-auto z-10 h-8 w-8 p-1 bg-gray-900/70 text-white backdrop-blur rounded-full leading-none;
 
