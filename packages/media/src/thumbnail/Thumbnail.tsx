@@ -108,6 +108,7 @@ export const AxThumbnail: FC<ThumbnailProps> = memo(
         {...rest}
         data-reel={showReel}
         style={{ width, height }}
+        data-fallback={isErrored !== 0}
         className={`ax-thumbnail ${className ?? ""}`}
       >
         {isErrored !== 2 && (
