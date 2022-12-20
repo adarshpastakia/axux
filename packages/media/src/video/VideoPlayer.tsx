@@ -47,6 +47,7 @@ interface PlayerActions {
 export interface VideoPlayerRef extends CanvasRef {
   play: () => void;
   playAt: (time: number) => void;
+  seek: (time: number) => void;
   pause: () => void;
 }
 
@@ -170,6 +171,8 @@ export const AxVideoPlayer = forwardRef<
       () =>
         canvasRef.current != null
           ? {
+              seek: (ts: number) =>
+                videoRef.current && (videoRef.current.currentTime = ts),
               play: () => videoRef.current?.play(),
               playAt: (time: number) =>
                 videoRef.current &&
