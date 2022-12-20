@@ -8,6 +8,7 @@
 
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
 import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
+import memoizeOne from "memoize-one";
 import {
   CSSProperties,
   forwardRef,
@@ -15,6 +16,7 @@ import {
   ReactElement,
   Ref,
   useCallback,
+  useDeferredValue,
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
@@ -95,6 +97,8 @@ const Item = memo(
   areEqual
 );
 
+const createItemList = memoizeOne((items) => items);
+
 /**
  * Virtual list
  */
@@ -112,6 +116,9 @@ const AxListComponent = <T extends KeyValue>({
   const cache = useMemo(() => new Map<number, [number, number]>(), []);
 
   useImperativeHandle(ref, () => listRef, [listRef]);
+
+  const count = useDeferredValue(items.length);
+  const itemList = createItemList(items);
 
   /** ***************** item height cache *******************/
   const updateCache = useCallback(
@@ -163,7 +170,8 @@ const AxListComponent = <T extends KeyValue>({
             width={width}
             height={height}
             layout={layout}
-            itemCount={items.length}
+            itemCount={count}
+            itemData={itemList}
             direction={isRtl ? "rtl" : "ltr"}
             innerElementType={StickyList}
             itemSize={getSize}
@@ -172,8 +180,11 @@ const AxListComponent = <T extends KeyValue>({
             {(props) =>
               children({
                 ...props,
-                data: items[props.index],
                 updateSize: updateCache,
+                data:
+                  props.data.length > props.index
+                    ? props.data[props.index]
+                    : null,
               })
             }
           </List>
