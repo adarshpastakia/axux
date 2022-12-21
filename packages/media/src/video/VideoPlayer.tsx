@@ -49,6 +49,9 @@ export interface VideoPlayerRef extends CanvasRef {
   playAt: (time: number) => void;
   seek: (time: number) => void;
   pause: () => void;
+  currentTime: () => number;
+  on: HTMLVideoElement["addEventListener"];
+  off: HTMLVideoElement["removeEventListener"];
 }
 
 export interface VideoPlayerProps {
@@ -179,6 +182,9 @@ export const AxVideoPlayer = forwardRef<
                 ((videoRef.current.currentTime = time),
                 videoRef.current?.play()),
               pause: () => videoRef.current?.pause(),
+              currentTime: () => videoRef.current?.currentTime,
+              on: videoRef.current?.addEventListener,
+              off: videoRef.current?.removeEventListener,
               ...canvasRef.current,
             }
           : (null as AnyObject),
