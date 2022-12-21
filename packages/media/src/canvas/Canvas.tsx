@@ -65,6 +65,12 @@ export const Canvas: FC<CanvasProps> = memo(
           mediaEl.height / mediaEl.naturalHeight
         );
       }
+      if (mediaEl instanceof HTMLVideoElement) {
+        ratio = Math.min(
+          mediaEl.offsetWidth / mediaEl.videoWidth,
+          mediaEl.offsetHeight / mediaEl.videoHeight
+        );
+      }
       return ratio;
     }, [media, style]);
 

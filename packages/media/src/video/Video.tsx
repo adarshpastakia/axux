@@ -56,20 +56,29 @@ export const Video: FC<VideoProps> = memo(
 
     /** ***************** handle resize *******************/
     const resizeHandler = useCallback(() => {
-      videoRef.current != null &&
+      if (videoRef.current != null) {
+        const ratio = Math.min(
+          videoRef.current.offsetWidth /
+            (videoRef.current.videoWidth || videoRef.current.offsetWidth),
+          videoRef.current.offsetHeight /
+            (videoRef.current.videoHeight || videoRef.current.offsetHeight)
+        );
         setStyle({
-          width: videoRef.current.offsetWidth,
-          height: videoRef.current.offsetHeight,
+          width: videoRef.current.videoWidth * ratio,
+          height: videoRef.current.videoHeight * ratio,
         });
+      }
     }, []);
 
     useEffect(() => {
       if (videoRef.current != null) {
+        const el = videoRef.current;
         const ob = new ResizeObserver(resizeHandler);
         ob.observe(videoRef.current);
-
+        el.addEventListener("loadedmetadata", resizeHandler);
         return () => {
           ob.disconnect();
+          el.removeEventListener("loadedmetadata", resizeHandler);
         };
       }
     }, []);
