@@ -183,8 +183,8 @@ export const AxVideoPlayer = forwardRef<
                 videoRef.current?.play()),
               pause: () => videoRef.current?.pause(),
               currentTime: () => videoRef.current?.currentTime,
-              on: videoRef.current?.addEventListener,
-              off: videoRef.current?.removeEventListener,
+              on: videoRef.current?.addEventListener.bind(videoRef.current),
+              off: videoRef.current?.removeEventListener.bind(videoRef.current),
               ...canvasRef.current,
             }
           : (null as AnyObject),
