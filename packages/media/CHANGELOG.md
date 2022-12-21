@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.79](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.78...v2.0.0-beta.79) (2022-12-21)
+
+
+### Bug Fixes
+
+* **VideoPlayer:** calculate aspect ratio on fit toggle ([d698a8c](https://github.com/adarshpastakia/axux/commit/d698a8c67ce9714d1d54220814393593f1fbace8))
+
+
+
+
+
 # [2.0.0-beta.78](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.77...v2.0.0-beta.78) (2022-12-20)
 
 
