@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.80](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.79...v2.0.0-beta.80) (2022-12-22)
+
+
+### Bug Fixes
+
+* **AxPanel:** wrap in body div to apply height/width ([0f13171](https://github.com/adarshpastakia/axux/commit/0f1317186d182954fcad4cae1847dc426ba6e918))
+* **VideoPlayer:** fix ref on/off methods ([2fa04f2](https://github.com/adarshpastakia/axux/commit/2fa04f2713d3b517c49c293ee83de03dd9e91a76))
+
+
+
+
+
 # [2.0.0-beta.79](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.78...v2.0.0-beta.79) (2022-12-21)
 
 
