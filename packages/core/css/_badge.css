@@ -17,8 +17,7 @@
 
   .ax-badge {
     --scale: 1.7;
-    @apply inline-block relative text-xs leading-none pointer-events-none select-none align-middle
-     text-bw-400 dark:text-bw-500;
+    @apply inline-block relative text-xs leading-none pointer-events-none select-none align-middle text-stone-600;
   }
 
   .ax-badge__label {
