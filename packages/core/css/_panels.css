@@ -9,7 +9,7 @@
 @layer components {
   .ax-panel {
     @apply grid relative overflow-hidden border rounded bg-component;
-    grid-template-areas: "head" "loader" "content" "foot";
+    grid-template-areas: "head" "loader" "body";
     grid-template-rows: auto auto 1fr auto;
     grid-template-columns: 1fr;
 
@@ -19,6 +19,13 @@
 
     & .ax-header > .ax-title {
       @apply flex-1;
+    }
+
+    & .ax-panel__body {
+      @apply grid relative overflow-hidden;
+      grid-template-areas: "head" "content" "foot";
+      grid-template-rows: auto 1fr auto;
+      grid-area: body;
     }
   }
 
