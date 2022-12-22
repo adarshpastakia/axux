@@ -121,13 +121,16 @@ export const AxPanel: FC<PanelProps> & {
     );
 
     const [head, body] = useMemo(() => {
-      const matcher =
-        (match = true) =>
+      const header = Children.toArray(children).find(
         (child: AnyObject) =>
-          (child && "type" in child && child.type === AxHeader) === match;
+          child && "type" in child && child.type === AxHeader
+      ) as ReactElement;
+
       return [
-        Children.toArray(children).find(matcher(true)) as ReactElement,
-        Children.toArray(children).filter(matcher(false)),
+        header,
+        Children.toArray(children).filter(
+          (el: AnyObject) => el.key !== header?.key
+        ),
       ];
     }, [children]);
 
@@ -138,7 +141,6 @@ export const AxPanel: FC<PanelProps> & {
         data-expanded={expanded}
         data-collapsed={!expanded && collapsed}
         data-active-shadow={isActive}
-        style={{ height, width, minHeight, minWidth, maxHeight, maxWidth }}
         className={`ax-panel ${isPaper ? "ax-paper" : ""} ${className ?? ""}`}
       >
         {isLoading && <Indicator />}
@@ -152,7 +154,15 @@ export const AxPanel: FC<PanelProps> & {
             onCollapse: isCollapsable && toggleCollapse,
             onExpand: isExpandable && toggleExpand,
           })}
-        {(!head || !collapsed || expanded) && body}
+
+        {(!head || !collapsed || expanded) && (
+          <div
+            className="ax-panel__body"
+            style={{ height, width, minHeight, minWidth, maxHeight, maxWidth }}
+          >
+            {body}
+          </div>
+        )}
       </div>
     );
   }
