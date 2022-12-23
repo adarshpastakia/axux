@@ -15,7 +15,7 @@ import { isEmpty, isNil } from "./_isType";
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Format {
   /** ***************** get phone number object using `libphonenumber-js` *******************/
-  const getPhone = (value: string, country = "ae") => {
+  const getPhone = (value: string, country = "AE") => {
     const phone =
       value.match(/^[0+]/) != null ? value.replace(/^00/, "+") : `+${value}`;
     const number = parsePhoneNumberFromString(phone, country as CountryCode);
@@ -51,7 +51,8 @@ export namespace Format {
 
   /** ***************** format phone number using `libphonenumber-js` *******************/
   export const phone = (value?: string, useCss = false) => {
-    if (isEmpty(value) || !/^[\d+\s\-()]+$/.test(value)) return undefined;
+    if (isEmpty(value) || value.length < 6 || !/^[\d+\s\-()]+$/.test(value))
+      return value;
     const phone = getPhone(value);
     return `${
       useCss
