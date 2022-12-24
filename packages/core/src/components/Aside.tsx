@@ -169,7 +169,7 @@ export const AxAside: FC<AsideProps> = ({
       onClick={tryPeek}
       {...aria}
     >
-      {(!!title || isCollapsable) && (
+      {(!!title || !!isFlyout || !!isCollapsable) && (
         <AxHeader className={`ax-side__header ${headerClass ?? ""}`}>
           {icon && (
             <AxIcon
@@ -182,11 +182,12 @@ export const AxAside: FC<AsideProps> = ({
           )}
           <AxTitle className="ax-side__title">{title}</AxTitle>
           <div className="ax-side__actions">{actions}</div>
-          {isCollapsable && (
+          {(isCollapsable || isFlyout) && (
             <AxButton
               variant="link"
               aria-label="Toggle collapse"
               className="ax-side__toggle flippable"
+              isDisabled={!isCollapsable}
               rtlFlip
               icon={
                 (collapsed && align === "start") ||
