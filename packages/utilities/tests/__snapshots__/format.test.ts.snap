@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`format test should format phone 1`] = `"🏳️ 99123"`;
+exports[`format test should format phone 1`] = `"99123"`;
 
 exports[`format test should format phone 2`] = `"🇦🇪 +971 50 249 1824"`;
 
