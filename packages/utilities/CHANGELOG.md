@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.81](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.80...v2.0.0-beta.81) (2022-12-24)
+
+
+### Bug Fixes
+
+* **Format:** check length, return raw value when invalid ([a55b7e2](https://github.com/adarshpastakia/axux/commit/a55b7e282a5e19e07a525c0501e83b5ed82f0c39))
+
+
+
+
+
 # [2.0.0-beta.80](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.79...v2.0.0-beta.80) (2022-12-22)
 
 **Note:** Version bump only for package @axux/utilities
