@@ -12,7 +12,7 @@ export const useLocalStorage = <T>(
   key: string,
   defaultValue: T
 ): [T, (value: T) => void] => {
-  const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState<T>();
 
   useEffect(() => {
     setValue(
@@ -25,14 +25,14 @@ export const useLocalStorage = <T>(
     setValue(value);
   };
 
-  return [value, changeValue];
+  return [value as T, changeValue];
 };
 
 export const useSessionStorage = <T>(
   key: string,
   defaultValue: T
 ): [T, (value: T) => void] => {
-  const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState<T>();
 
   useEffect(() => {
     setValue(
@@ -45,5 +45,5 @@ export const useSessionStorage = <T>(
     setValue(value);
   };
 
-  return [value, changeValue];
+  return [value as T, changeValue];
 };
