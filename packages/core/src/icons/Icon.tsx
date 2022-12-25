@@ -70,7 +70,7 @@ export const AxIcon: FC<IconProps & RefProp> = forwardRef<
         s.fontSize = size;
       }
       return s;
-    }, [color, size]);
+    }, [bg, color, size]);
 
     /** ***************** check if icon is svg path *******************/
     const isSvg = useMemo(() => {
