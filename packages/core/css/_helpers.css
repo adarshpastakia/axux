@@ -57,6 +57,9 @@
   .bg-accent {
     @apply bg-accent-300 dark:bg-accent-700;
   }
+  .bg-info {
+    @apply bg-sky-300 dark:bg-sky-700;
+  }
   .bg-danger {
     @apply bg-danger-300 dark:bg-danger-700;
   }
@@ -77,6 +80,9 @@
   }
   .text-accent {
     @apply text-accent-700 dark:text-accent-300;
+  }
+  .text-info {
+    @apply text-sky-700 dark:text-sky-300;
   }
   .text-danger {
     @apply text-danger-700 dark:text-danger-300;
