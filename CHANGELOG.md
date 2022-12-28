@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.82](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.81...v2.0.0-beta.82) (2022-12-28)
+
+
+### Bug Fixes
+
+* **useStorage:** set defaultValue in effect ([0abdd32](https://github.com/adarshpastakia/axux/commit/0abdd32f8767e4fccd934c29b7c7a08c4e23e3e9))
+
+
+
+
+
 # [2.0.0-beta.81](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.80...v2.0.0-beta.81) (2022-12-24)
 
 

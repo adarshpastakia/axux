@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.82](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.81...v2.0.0-beta.82) (2022-12-28)
+
+**Note:** Version bump only for package @axux/pagemaker
+
+
+
+
+
 # [2.0.0-beta.81](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.80...v2.0.0-beta.81) (2022-12-24)
 
 **Note:** Version bump only for package @axux/pagemaker
