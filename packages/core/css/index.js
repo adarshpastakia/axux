@@ -38,8 +38,8 @@ module.exports = plugin(
           danger: { ...colors.red },
           warning: { ...colors.amber },
           success: { ...colors.green },
-          white: "#ffffff",
-          black: "#0e141c",
+          white: "#FEFFFF",
+          black: "#121c2b",
           bw: {
             1000: "#172130",
             900: "#1C293A",
