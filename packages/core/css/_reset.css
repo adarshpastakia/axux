@@ -55,8 +55,9 @@
   }
 
   a.ax-link {
-    @apply cursor-pointer text-accent-600 dark:text-accent-400 select-none underline-offset-2
-     hover:text-accent-700 dark:hover:text-accent-300 hover:underline;
+    @apply cursor-pointer text-accent-600 dark:text-accent-400 select-none underline-offset-4 underline decoration-dashed
+     hover:text-accent-700 dark:hover:text-accent-300 hover:decoration-solid;
+    text-decoration-thickness: 1px;
   }
 
   hr {
