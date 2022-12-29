@@ -33,7 +33,7 @@ export const getImageColorset = (el: HTMLImageElement) => {
     let r, g, b;
     let light = 0;
     let dark = 0;
-    const transparent = data?.[4] === 0;
+    const transparent = data?.[3] === 0;
 
     for (let x = 0, len = data.length; x < len; x += 4) {
       if (data[x + 3] === 0) {
