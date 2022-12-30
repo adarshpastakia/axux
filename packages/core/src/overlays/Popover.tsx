@@ -103,7 +103,6 @@ export const AxPopover: FC<PopoverProps> & {
             })}
           </Popover.Button>
           {!isDisabled &&
-            open &&
             createPortal(
               <Popover.Panel
                 {...rest}
