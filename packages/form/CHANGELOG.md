@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.83](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.82...v2.0.0-beta.83) (2022-12-30)
+
+
+### Bug Fixes
+
+* **InputNumber:** NaN warning ([940034f](https://github.com/adarshpastakia/axux/commit/940034f89dbfca8563b44ebd039d3d05ff370e26))
+
+
+
+
+
 # [2.0.0-beta.82](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.81...v2.0.0-beta.82) (2022-12-28)
 
 **Note:** Version bump only for package @axux/form

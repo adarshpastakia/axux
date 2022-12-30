@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.83](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.82...v2.0.0-beta.83) (2022-12-30)
+
+
+### Bug Fixes
+
+* **Modal:** stop event propagation on mask click ([bd70262](https://github.com/adarshpastakia/axux/commit/bd70262cea740105c30d095383e8a4e8fb93d11b))
+* **Popover:** render issue with popover.button within panel ([5b1d2a8](https://github.com/adarshpastakia/axux/commit/5b1d2a808b1ad90d8c3ad421577535c0c30cebf1))
+
+
+
+
+
 # [2.0.0-beta.82](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.81...v2.0.0-beta.82) (2022-12-28)
 
 
