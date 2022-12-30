@@ -149,13 +149,13 @@
     @apply max-h-[90vh] min-w-[24rem];
 
     & .ax-superdate__links {
-      @apply grid place-items-start grid-flow-row flex-1 w-full;
+      @apply grid place-items-start grid-flow-row flex-1 w-full mb-1;
       grid-gap: 0 1em;
       grid-template-columns: repeat(3, auto);
     }
 
     & .ax-superdate--link {
-      @apply place-self-start text-sm whitespace-nowrap;
+      @apply place-self-start text-sm whitespace-nowrap no-underline hover:underline;
     }
 
     & .ax-superdate__relative > .ax-field__container--row {
