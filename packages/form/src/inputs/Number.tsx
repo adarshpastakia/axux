@@ -69,11 +69,10 @@ export const Number: FC<NumberProps> = memo(
     }, [value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
-        setActualValue(e?.target.valueAsNumber ?? ("" as AnyObject));
-        onChange != null &&
-          startTransition(() =>
-            onChange(e?.target.valueAsNumber ?? ("" as AnyObject))
-          );
+        let val: AnyObject = e?.target.valueAsNumber;
+        if (isNaN(val)) val = undefined;
+        setActualValue(val ?? "");
+        onChange != null && startTransition(() => onChange(val));
       },
       [onChange]
     );
