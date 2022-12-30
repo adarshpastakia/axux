@@ -103,7 +103,10 @@ export const AxModal: FC<ModalProps> = ({
 }) => {
   const isRtl = useIsRtl();
   return (
-    <div className="ax-overlay__mask" onClick={onClose}>
+    <div
+      className="ax-overlay__mask"
+      onClick={(e) => (onClose?.(), e.stopPropagation())}
+    >
       <HotKeyWrapper>
         <AxHotKey global keyCombo="esc" handler={onClose} />
         <AxHotKey global keyCombo="left" handler={() => onNavigate?.("prev")} />
@@ -134,7 +137,7 @@ export const AxModal: FC<ModalProps> = ({
             {CloseX(onClose)}
           </AxHeader>
           <div className="ax-modal__body">
-            {(onNavigate != null) && (
+            {onNavigate != null && (
               <AxButton
                 rtlFlip
                 variant="link"
@@ -144,7 +147,7 @@ export const AxModal: FC<ModalProps> = ({
               />
             )}
             {children}
-            {(onNavigate != null) && (
+            {onNavigate != null && (
               <AxButton
                 rtlFlip
                 variant="link"
