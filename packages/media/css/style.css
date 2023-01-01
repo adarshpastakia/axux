@@ -179,7 +179,7 @@
     }
 
     & img {
-      @apply absolute top-1/2 left-1/2 object-contain max-w-none;
+      @apply absolute top-1/2 left-1/2 object-fill max-w-none;
       transform: translate(-50%, -50%) rotate(var(--rotate));
     }
 

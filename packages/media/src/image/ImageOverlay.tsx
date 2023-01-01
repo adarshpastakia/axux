@@ -79,7 +79,7 @@ export const ImageOverlay: FC<OverlayProps> = memo(
 
     useEffect(() => {
       setOverlaySize((orientVertical ? containerHeight : containerWidth) / 2);
-    }, [src, orientVertical, containerHeight, containerWidth]);
+    }, [orientVertical, containerHeight, containerWidth]);
 
     return (
       <Fragment>
