@@ -34,6 +34,7 @@ import { Wrapper } from "./Wrapper";
 
 export type GridRef = Pick<Grid, "scrollTo" | "scrollToItem"> & {
   hilight: (index: number) => void;
+  unhilight: () => void;
 };
 
 export interface GridItemProps extends ChildrenProp {
@@ -136,7 +137,6 @@ const AxGridViewComponent = <T extends KeyValue>({
   useImperativeHandle(
     ref,
     () => {
-      let tmr: AnyObject;
       return (
         listRef && {
           hilight: (idx: number) => {
@@ -146,7 +146,6 @@ const AxGridViewComponent = <T extends KeyValue>({
                 rowIndex: Math.floor(idx / (colCount.current || 1)),
                 columnIndex: 0,
               });
-              clearTimeout(tmr);
               containerRef.current
                 ?.querySelector(`.hilight`)
                 ?.classList.remove("hilight");
@@ -154,16 +153,13 @@ const AxGridViewComponent = <T extends KeyValue>({
                 containerRef.current
                   ?.querySelector(`[data-index="${idx}"]`)
                   ?.classList.add("hilight");
-                tmr = setTimeout(
-                  () =>
-                    containerRef.current
-                      ?.querySelector(`[data-index="${idx}"]`)
-                      ?.classList.remove("hilight"),
-                  2000
-                );
               }, 500);
             }
           },
+          unhilight: () =>
+            containerRef.current
+              ?.querySelector(`.hilight`)
+              ?.classList.remove("hilight"),
           scrollTo: (...args) => listRef?.scrollTo(...args),
           scrollToItem: (...args) => listRef?.scrollToItem(...args),
         }
