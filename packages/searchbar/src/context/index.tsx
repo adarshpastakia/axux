@@ -162,11 +162,7 @@ export const SearchContextProvider: React.FC<
 
   const toggleExclude = () => {
     const newFilters = filters.map((f) =>
-      f.type === "filter"
-        ? f.isRequired
-          ? f
-          : { ...f, isNegative: !f.isNegative }
-        : f
+      f.isRequired ? f : { ...f, isNegative: !f.isNegative }
     );
     setFilters(newFilters);
     onFilterChanged?.(newFilters);
