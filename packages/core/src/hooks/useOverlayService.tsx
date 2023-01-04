@@ -7,7 +7,7 @@
  */
 
 import { FC, ReactElement, useMemo, useState } from "react";
-import { createPortal } from "react-dom";
+import { createRoot } from "react-dom/client";
 
 type OverlayComponent = FC<{
   onClose: (args: AnyObject) => void;
@@ -38,6 +38,7 @@ export const useOverlayService = (
   const openOverlay = async (props: KeyValue = {}) => {
     const el = document.createElement("div");
     overlayContainer.appendChild(el);
+    const root = createRoot(el);
     return await new Promise((resolve) => {
       const handleClose = (args: AnyObject) => {
         (el.firstElementChild as HTMLElement).dataset.show = "";
@@ -48,7 +49,7 @@ export const useOverlayService = (
         }, 250);
       };
       setOverlay(
-        createPortal(<ModalOrFlyout {...props} onClose={handleClose} />, el)
+        root.render(<ModalOrFlyout {...props} onClose={handleClose} />)
       );
       requestAnimationFrame(
         () => ((el.firstElementChild as HTMLElement).dataset.show = "true")
