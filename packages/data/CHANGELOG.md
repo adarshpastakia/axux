@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.84](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.83...v2.0.0-beta.84) (2023-01-04)
+
+
+### Bug Fixes
+
+* **JsonView:** check canCopy against prop or fullProp without oridinal ([17286bc](https://github.com/adarshpastakia/axux/commit/17286bcd7ff10aebbcdabf06862c11b0fc9c1229))
+* **JsonView:** show meter for score>0 ([e2cef99](https://github.com/adarshpastakia/axux/commit/e2cef9949c904236c16921b7711517ee9f1a810a))
+* **VirtualLists:** add unhilight ref method ([fe0fb42](https://github.com/adarshpastakia/axux/commit/fe0fb42eaf0c274c563f6cb13f7a0d62937ce2d8))
+
+
+
+
+
 # [2.0.0-beta.83](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.82...v2.0.0-beta.83) (2022-12-30)
 
 **Note:** Version bump only for package @axux/data

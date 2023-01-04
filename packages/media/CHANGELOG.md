@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.84](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.83...v2.0.0-beta.84) (2023-01-04)
+
+
+### Bug Fixes
+
+* **ImageViewer:** prevent overlay handle reset on overlay change ([31b0d0a](https://github.com/adarshpastakia/axux/commit/31b0d0a918d0919f4096f896ca8edddc5853dcd1))
+* **Thumbnail:** render image if src available ([fbbf792](https://github.com/adarshpastakia/axux/commit/fbbf792e47cf9dcfca95c37e93f8b342f78fc0a9))
+
+
+
+
+
 # [2.0.0-beta.83](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.82...v2.0.0-beta.83) (2022-12-30)
 
 **Note:** Version bump only for package @axux/media

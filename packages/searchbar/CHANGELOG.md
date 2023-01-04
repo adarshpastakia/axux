@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.84](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.83...v2.0.0-beta.84) (2023-01-04)
+
+
+### Bug Fixes
+
+* **FilterBar:** toggle include/exclude ([4c00690](https://github.com/adarshpastakia/axux/commit/4c00690a8a99765bc9ff3212a3a52dd6fd748c61))
+
+
+
+
+
 # [2.0.0-beta.83](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.82...v2.0.0-beta.83) (2022-12-30)
 
 **Note:** Version bump only for package @axux/searchbar

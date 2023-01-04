@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.84](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.83...v2.0.0-beta.84) (2023-01-04)
+
+
+### Bug Fixes
+
+* **OverlayService:** use createRoot ([de0cee2](https://github.com/adarshpastakia/axux/commit/de0cee23dbbd6190d970925ab7b9520f4b1d574e))
+
+
+
+
+
 # [2.0.0-beta.83](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.82...v2.0.0-beta.83) (2022-12-30)
 
 
