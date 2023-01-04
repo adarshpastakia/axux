@@ -39,6 +39,7 @@ import { Wrapper } from "./Wrapper";
 
 export type TimelineRef = Pick<List, "scrollTo" | "scrollToItem"> & {
   hilight: (index: number) => void;
+  unhilight: () => void;
 };
 
 export interface TimelineItemProps
@@ -193,13 +194,11 @@ const AxTimelineComponent = <T extends KeyValue>({
   useImperativeHandle(
     ref,
     () => {
-      let tmr: AnyObject;
       return (
         listRef && {
           hilight: (idx: number) => {
             if (idx >= 0) {
               listRef.scrollToItem(idx, "center");
-              clearTimeout(tmr);
               containerRef.current
                 ?.querySelector(`.hilight`)
                 ?.classList.remove("hilight");
@@ -207,16 +206,13 @@ const AxTimelineComponent = <T extends KeyValue>({
                 containerRef.current
                   ?.querySelector(`[data-index="${idx}"]`)
                   ?.classList.add("hilight");
-                tmr = setTimeout(
-                  () =>
-                    containerRef.current
-                      ?.querySelector(`[data-index="${idx}"]`)
-                      ?.classList.remove("hilight"),
-                  2000
-                );
               }, 500);
             }
           },
+          unhilight: () =>
+            containerRef.current
+              ?.querySelector(`.hilight`)
+              ?.classList.remove("hilight"),
           scrollTo: (...args) => listRef?.scrollTo(...args),
           scrollToItem: (...args) => listRef?.scrollToItem(...args),
         }
