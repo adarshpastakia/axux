@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.86](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.85...v2.0.0-beta.86) (2023-01-04)
+
+
+### Bug Fixes
+
+* **OverlayService:** use portal ([5599a6e](https://github.com/adarshpastakia/axux/commit/5599a6ed1ba537440f55c3b7997c5d70e15c1ddb))
+
+
+
+
+
 # [2.0.0-beta.85](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.84...v2.0.0-beta.85) (2023-01-04)
 
 
