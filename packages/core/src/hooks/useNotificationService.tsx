@@ -32,7 +32,7 @@ export const useNotificationService = () => {
     if (!el) {
       el = document.createElement("div");
       el.className = "ax-overlay__container";
-      document.body.appendChild(el);
+      document.getElementById("root")?.appendChild(el);
     }
     return el;
   }, []);
@@ -46,7 +46,7 @@ export const useNotificationService = () => {
       el = document.createElement("div");
       el.className = "ax-notification__container";
       el.dataset.mode = "message";
-      document.body.appendChild(el);
+      document.getElementById("root")?.appendChild(el);
     }
     return el;
   }, []);
@@ -60,7 +60,7 @@ export const useNotificationService = () => {
       el = document.createElement("div");
       el.className = "ax-notification__container";
       el.dataset.mode = "toast";
-      document.body.appendChild(el);
+      document.getElementById("root")?.appendChild(el);
     }
     return el;
   }, []);
@@ -70,7 +70,6 @@ export const useNotificationService = () => {
     const el = document.createElement("div");
     el.className = "ax-overlay__mask";
     overlayContainer.appendChild(el);
-    const root = createRoot(el);
     return await new Promise<boolean>((resolve) => {
       const onClose = (b = false) => {
         el.dataset.show = "";

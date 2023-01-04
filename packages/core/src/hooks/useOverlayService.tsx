@@ -30,7 +30,7 @@ export const useOverlayService = (
     if (!el) {
       el = document.createElement("div");
       el.className = "ax-overlay__container";
-      document.body.appendChild(el);
+      document.getElementById("root")?.appendChild(el);
     }
     return el;
   }, []);
@@ -44,13 +44,12 @@ export const useOverlayService = (
         (el.firstElementChild as HTMLElement).dataset.show = "";
         setTimeout(() => {
           setOverlay(undefined);
+          root.unmount();
           el.remove();
           resolve(args);
         }, 250);
       };
-      setOverlay(
-        root.render(<ModalOrFlyout {...props} onClose={handleClose} />)
-      );
+      root.render(<ModalOrFlyout {...props} onClose={handleClose} />);
       requestAnimationFrame(
         () => ((el.firstElementChild as HTMLElement).dataset.show = "true")
       );
