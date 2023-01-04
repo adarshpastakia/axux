@@ -98,18 +98,29 @@ const JsonValue = ({
 }: KeyValue) => {
   const { t } = useTranslation("data");
 
+  const propWithoutOrdinal = useMemo(
+    () => fullProp.replace(/\.\d*\./, "."),
+    [fullProp]
+  );
+
   const canCopy = useMemo(
-    () => isTrue(copy) || copy?.includes?.(fullProp),
-    [copy, fullProp]
+    () =>
+      isTrue(copy) ||
+      copy?.includes?.(prop) ||
+      copy?.includes?.(propWithoutOrdinal),
+    [copy, prop, propWithoutOrdinal]
   );
   const canFilter = useMemo(
-    () => isTrue(filters) || filters?.includes?.(fullProp),
-    [filters, fullProp]
+    () =>
+      isTrue(filters) ||
+      filters?.includes?.(prop) ||
+      filters?.includes?.(propWithoutOrdinal),
+    [filters, prop, propWithoutOrdinal]
   );
 
   const label = useMemo(
-    () => (labeler?.(fullProp) ?? showPropertyTree ? prop : fullProp),
-    [labeler, fullProp, prop, showPropertyTree]
+    () => (labeler?.(propWithoutOrdinal) ?? showPropertyTree ? prop : fullProp),
+    [labeler, fullProp, prop, propWithoutOrdinal, showPropertyTree]
   );
 
   const display = useMemo(() => {
