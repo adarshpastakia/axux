@@ -155,7 +155,9 @@ const JsonValue = ({
     return (
       <Fragment>
         {ret}
-        {isObject(value) && <AxMeter size="xs" value={value._score_} />}
+        {isObject(value) && value._score_ > 0 && (
+          <AxMeter size="xs" value={value._score_} />
+        )}
       </Fragment>
     );
   }, [value, formatter, dateProperties, prop, fullProp]);
