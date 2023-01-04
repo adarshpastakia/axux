@@ -111,7 +111,7 @@ export const AxThumbnail: FC<ThumbnailProps> = memo(
         data-fallback={isErrored !== 0}
         className={`ax-thumbnail ${className ?? ""}`}
       >
-        {isErrored !== 2 && (
+        {isErrored !== 2 && src && (
           <img
             src={src}
             loading="lazy"
