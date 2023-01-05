@@ -42,6 +42,8 @@ export interface AlertProps extends IconProp {
    * cancel label
    */
   cancelLabel?: string;
+
+  onClose: (b?: boolean) => void;
 }
 
 export const AxAlert: FC<AlertProps> = ({
@@ -54,7 +56,6 @@ export const AxAlert: FC<AlertProps> = ({
   rtlFlip,
   okLabel,
   cancelLabel,
-  // @ts-expect-error
   onClose,
 }) => {
   const { t } = useTranslation("core");
@@ -88,40 +89,45 @@ export const AxAlert: FC<AlertProps> = ({
   );
 
   return (
-    <div className="ax-alert" data-color={color}>
-      {CloseX(closeModal)}
-      <div className="ax-alert__icon">
-        <AxIcon icon={icon ?? iconType} color={color} rtlFlip={rtlFlip} />
-      </div>
-      {title && <div className="ax-alert__title">{title}</div>}
-      {message && <p className="ax-alert__message">{message}</p>}
-      <input
-        className="ax-alert__input"
-        ref={(e) => e != null && setTimeout(() => e.focus(), 100)}
-        onBlur={(e) => e.target.focus()}
-        onKeyDown={(e) =>
-          (e.key === "Enter" || e.key === "Escape") &&
-          closeModal(e.key === "Enter")
-        }
-      />
-      <div className="ax-alert__footer">
-        <div onClickCapture={() => onClose?.(false)}>{actions}</div>
-        {type === "confirm" && (
+    <div
+      className="ax-overlay__mask"
+      onClick={(e) => (onClose?.(), e.stopPropagation())}
+    >
+      <div className="ax-alert" data-color={color}>
+        {CloseX(closeModal)}
+        <div className="ax-alert__icon">
+          <AxIcon icon={icon ?? iconType} color={color} rtlFlip={rtlFlip} />
+        </div>
+        {title && <div className="ax-alert__title">{title}</div>}
+        {message && <p className="ax-alert__message">{message}</p>}
+        <input
+          className="ax-alert__input"
+          ref={(e) => e != null && setTimeout(() => e.focus(), 100)}
+          onBlur={(e) => e.target.focus()}
+          onKeyDown={(e) =>
+            (e.key === "Enter" || e.key === "Escape") &&
+            closeModal(e.key === "Enter")
+          }
+        />
+        <div className="ax-alert__footer">
+          <div onClickCapture={() => onClose?.(false)}>{actions}</div>
+          {type === "confirm" && (
+            <AxButton
+              variant="link"
+              color={color}
+              onClick={() => closeModal(false)}
+            >
+              {cancelText}
+            </AxButton>
+          )}
           <AxButton
-            variant="link"
+            variant="solid"
             color={color}
-            onClick={() => closeModal(false)}
+            onClick={() => closeModal(true)}
           >
-            {cancelText}
+            {okText}
           </AxButton>
-        )}
-        <AxButton
-          variant="solid"
-          color={color}
-          onClick={() => closeModal(true)}
-        >
-          {okText}
-        </AxButton>
+        </div>
       </div>
     </div>
   );

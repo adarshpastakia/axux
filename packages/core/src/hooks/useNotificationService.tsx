@@ -6,14 +6,15 @@
  * @license   : MIT
  */
 
-import { isObject, isString } from "@axux/utilities";
-import { useMemo } from "react";
-import { createPortal } from "react-dom";
+import { isObject, isString, uuid } from "@axux/utilities";
+import { useGlobals } from "../context/Global";
 import { AlertProps, AxAlert } from "../overlays/Alert";
 import { AxMessage, MessageProps } from "../overlays/Message";
 import { AxToast, ToastProps } from "../overlays/Toast";
 
 export const useNotificationService = () => {
+  const { overlayRef, notificationRef } = useGlobals();
+
   /** ***************** refactor props *******************/
   const makeProps = (obj: AnyObject): AnyObject => {
     if (isString(obj)) {
@@ -24,128 +25,115 @@ export const useNotificationService = () => {
     return { message: "" };
   };
 
-  /** ***************** message container *******************/
-  const overlayContainer = useMemo(() => {
-    let el = document.body.querySelector(
-      ".ax-overlay__container"
-    ) as HTMLElement;
-    if (!el) {
-      el = document.createElement("div");
-      el.className = "ax-overlay__container";
-      document.getElementById("root")?.appendChild(el);
-    }
-    return el;
-  }, []);
-
-  /** ***************** message container *******************/
-  const messageContainer = useMemo(() => {
-    let el = document.body.querySelector(
-      ".ax-notification__container[data-mode='message']"
-    ) as HTMLElement;
-    if (!el) {
-      el = document.createElement("div");
-      el.className = "ax-notification__container";
-      el.dataset.mode = "message";
-      document.getElementById("root")?.appendChild(el);
-    }
-    return el;
-  }, []);
-
-  /** ***************** toast container *******************/
-  const toastContainer = useMemo(() => {
-    let el = document.body.querySelector(
-      ".ax-notification__container[data-mode='toast']"
-    ) as HTMLElement;
-    if (!el) {
-      el = document.createElement("div");
-      el.className = "ax-notification__container";
-      el.dataset.mode = "toast";
-      document.getElementById("root")?.appendChild(el);
-    }
-    return el;
-  }, []);
-
   /** ***************** alert dialog *******************/
-  const alert = async (props: AlertProps) => {
-    const el = document.createElement("div");
-    el.className = "ax-overlay__mask";
-    overlayContainer.appendChild(el);
+  const alert = async (props: Omit<AlertProps, "onClose">) => {
     return await new Promise<boolean>((resolve) => {
-      const onClose = (b = false) => {
-        el.dataset.show = "";
-        setTimeout(() => {
-          el.remove();
-        }, 250);
-        resolve(b);
+      const key = uuid();
+      let rootEl: HTMLElement;
+      const show = (el: AnyObject) => {
+        rootEl = el;
+        el &&
+          requestAnimationFrame(
+            () => ((el.firstElementChild as HTMLElement).dataset.show = "true")
+          );
       };
-      el.onclick = () => onClose();
-      // @ts-expect-error
-      createPortal(<AxAlert {...props} onClose={onClose} />, el);
-      requestAnimationFrame(() => (el.dataset.show = "true"));
+      const handleClose = (b = false) => {
+        rootEl?.firstElementChild &&
+          ((rootEl.firstElementChild as HTMLElement).dataset.show = "");
+        setTimeout(() => {
+          overlayRef.current?.closeAlert(key);
+          resolve(b);
+        }, 250);
+      };
+      overlayRef.current?.showAlert(
+        key,
+        <div key={key} ref={show} className="contents">
+          <AxAlert {...props} onClose={handleClose} />
+        </div>
+      );
     });
   };
 
   /** ***************** message *******************/
-  const message = async (props: string | MessageProps, timeout = 5000) => {
+  const message = async (
+    props: string | Omit<MessageProps, "onClose">,
+    timeout = 5000
+  ) => {
     const obj: MessageProps = makeProps(props);
     return await new Promise<boolean>((resolve) => {
+      const key = uuid();
       let timerRef: AnyObject = null;
-      const el = document.createElement("div");
-      messageContainer.appendChild(el);
-      const onClose = (b = true) => {
-        el.dataset.show = "";
-        setTimeout(() => {
-          el.remove();
-        }, 250);
-        clearTimeout(timerRef);
-        resolve(b);
+      let rootEl: HTMLElement;
+      const show = (el: AnyObject) => {
+        rootEl = el;
+        el &&
+          requestAnimationFrame(() => {
+            (el as HTMLElement).dataset.show = "true";
+          });
       };
-      // @ts-expect-error
-      createPortal(<AxMessage {...obj} onClose={onClose} />, el);
-      requestAnimationFrame(() => (el.dataset.show = "true"));
+      const handleClose = (b = false) => {
+        rootEl && (rootEl.dataset.show = "false");
+        setTimeout(() => {
+          notificationRef.current?.closeMessage(key);
+          clearTimeout(timerRef);
+          resolve(b);
+        }, 250);
+      };
+      notificationRef.current?.showMessage(
+        key,
+        <div key={key} ref={show}>
+          <AxMessage {...obj} onClose={handleClose} />
+        </div>
+      );
       if (timeout > 0) {
-        timerRef = setTimeout(onClose, timeout);
+        timerRef = setTimeout(handleClose, timeout);
       }
     });
   };
 
   /** ***************** toasts *******************/
   const onCloseAll = () => {
-    toastContainer
-      .querySelectorAll<HTMLButtonElement>(
-        ".ax-toast__close > .close-x:last-child"
-      )
-      .forEach((b) => b.click());
+    notificationRef.current?.closeAllToasts();
   };
 
-  const toast = async (props: string | ToastProps, timeout = 5000) => {
+  const toast = async (
+    props: string | Omit<ToastProps, "onClose" | "onCloseAll">,
+    timeout = 5000
+  ) => {
     const obj: ToastProps = makeProps(props);
     return await new Promise<boolean>((resolve) => {
+      const key = uuid();
       let timerRef: AnyObject = null;
-      const el = document.createElement("div");
-      toastContainer.appendChild(el);
-      const onClose = (b = false) => {
-        el.dataset.show = "";
-        setTimeout(() => {
-          el.remove();
-        }, 250);
-        clearTimeout(timerRef);
-        resolve(b);
+      let rootEl: HTMLElement;
+      const show = (el: AnyObject) => {
+        rootEl = el;
+        el &&
+          requestAnimationFrame(() => {
+            (el as HTMLElement).dataset.show = "true";
+          });
       };
-      createPortal(
-        // @ts-expect-error
-        <AxToast {...obj} onClose={onClose} onCloseAll={onCloseAll} />,
-        el
+      const handleClose = (b = false) => {
+        rootEl && (rootEl.dataset.show = "false");
+        setTimeout(() => {
+          notificationRef.current?.closeToast(key);
+          clearTimeout(timerRef);
+          resolve(b);
+        }, 250);
+      };
+      notificationRef.current?.showToast(
+        key,
+        <div key={key} ref={show}>
+          <AxToast {...obj} onClose={handleClose} onCloseAll={onCloseAll} />
+        </div>
       );
-      requestAnimationFrame(() => (el.dataset.show = "true"));
       if (obj.type !== "confirm" && timeout > 0) {
-        timerRef = setTimeout(onClose, timeout);
+        timerRef = setTimeout(handleClose, timeout);
       }
     });
   };
 
   const toastError = async (
-    props: string | Omit<ToastProps, "color">,
+    props: string | Omit<ToastProps, "color" | "onClose" | "onCloseAll">,
     timeout = 30000
   ) => {
     const obj: ToastProps = makeProps(props);

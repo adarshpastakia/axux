@@ -11,13 +11,20 @@ import {
   ComponentType,
   createContext,
   FC,
+  RefObject,
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { ChildrenProp } from "../types";
+import {
+  NotificationContainer,
+  NotificationRef,
+} from "./NotificationContainer";
+import { OverlayContainer, OverlayRef } from "./OverlayContainer";
 
 interface State {
   theme: "light" | "dark";
@@ -78,6 +85,9 @@ interface GlobalContextType {
   currentTheme: State["theme"];
   currentLocale: string;
   currentCalendar: State["calendar"];
+
+  overlayRef: RefObject<OverlayRef>;
+  notificationRef: RefObject<NotificationRef>;
 }
 
 const KEY_THEME = "ax:theme";
@@ -115,6 +125,8 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
   defaultTheme,
   defaultCalendar,
 }) => {
+  const overlayRef = useRef<OverlayRef>(null);
+  const notificationRef = useRef<NotificationRef>(null);
   const [theme, setTheme] = useState<State["theme"]>(
     defaultTheme ?? systemTheme()
   );
@@ -172,13 +184,8 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
   }, []);
 
   const closeOverlays = useCallback(() => {
-    document.body
-      .querySelectorAll(
-        ".ax-overlay__container > *, .ax-notification__container > *"
-      )
-      ?.forEach((e) => {
-        e.remove();
-      });
+    notificationRef.current?.closeAll();
+    overlayRef.current?.closeAll();
   }, []);
 
   /** ***************** context provider *******************/
@@ -193,6 +200,8 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
         currentTheme: theme,
         currentCalendar: calendar,
         currentLocale: locale,
+        notificationRef,
+        overlayRef,
       }}
     >
       <HelmetProvider>
@@ -200,6 +209,10 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
           <meta name="description" content={description} />
         </Helmet>
         {children}
+
+        <div className="ax-overlay__container" />
+        <OverlayContainer itemRef={overlayRef} />
+        <NotificationContainer itemRef={notificationRef} />
       </HelmetProvider>
     </GlobalContext.Provider>
   );
@@ -215,6 +228,11 @@ export const useGlobals = () => useContext(GlobalContext);
  * global application context
  */
 export const useApplicationContext = () => {
-  const { errorElement: _, ...rest } = useContext(GlobalContext);
+  const {
+    errorElement: _1,
+    notificationRef: _2,
+    overlayRef: _3,
+    ...rest
+  } = useContext(GlobalContext);
   return rest;
 };
