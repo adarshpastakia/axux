@@ -6,8 +6,9 @@
  * @license   : MIT
  */
 
-import { FC, ReactElement, useMemo, useState } from "react";
-import { createPortal } from "react-dom";
+import { uuid } from "@axux/utilities";
+import { FC } from "react";
+import { useGlobals } from "../context/Global";
 
 type OverlayComponent = FC<{
   onClose: (args: AnyObject) => void;
@@ -16,45 +17,41 @@ type OverlayComponent = FC<{
 
 export const useOverlayService = (
   ModalOrFlyout: OverlayComponent
-): [
-  Overlay: ReactElement,
-  openOverlay: (props?: KeyValue) => Promise<AnyObject>
-] => {
-  const [Overlay, setOverlay] = useState<AnyObject>();
+): ((props?: KeyValue) => Promise<AnyObject>) => {
+  const { overlayRef } = useGlobals();
 
-  /** ***************** message container *******************/
-  const overlayContainer = useMemo(() => {
-    let el = document.body.querySelector(
-      ".ax-overlay__container"
-    ) as HTMLElement;
-    if (!el) {
-      el = document.createElement("div");
-      el.className = "ax-overlay__container";
-      document.getElementById("root")?.appendChild(el);
-    }
-    return el;
-  }, []);
+  if (!overlayRef)
+    throw Error(
+      "To use overlay service wrap application in AxApplicationProvider"
+    );
 
   const openOverlay = async (props: KeyValue = {}) => {
-    const el = document.createElement("div");
-    overlayContainer.appendChild(el);
     return await new Promise((resolve) => {
+      const key = uuid();
+      let rootEl: HTMLElement;
+      const show = (el: AnyObject) => {
+        rootEl = el;
+        el &&
+          requestAnimationFrame(
+            () => ((el.firstElementChild as HTMLElement).dataset.show = "true")
+          );
+      };
       const handleClose = (args: AnyObject) => {
-        (el.firstElementChild as HTMLElement).dataset.show = "";
+        rootEl?.firstElementChild &&
+          ((rootEl.firstElementChild as HTMLElement).dataset.show = "");
         setTimeout(() => {
-          setOverlay(undefined);
-          el.remove();
+          overlayRef.current?.closeOverlay(key);
           resolve(args);
         }, 250);
       };
-      setOverlay(
-        createPortal(<ModalOrFlyout {...props} onClose={handleClose} />, el)
-      );
-      requestAnimationFrame(
-        () => ((el.firstElementChild as HTMLElement).dataset.show = "true")
+      overlayRef.current?.showOverlay(
+        key,
+        <div key={key} ref={show} className="contents">
+          <ModalOrFlyout {...props} onClose={handleClose} />
+        </div>
       );
     });
   };
 
-  return [Overlay, openOverlay];
+  return openOverlay;
 };

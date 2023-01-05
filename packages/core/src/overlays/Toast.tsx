@@ -42,6 +42,9 @@ export interface ToastProps extends IconProp {
    * cancel label
    */
   cancelLabel?: string;
+
+  onClose: (b?: boolean) => void;
+  onCloseAll: (b?: boolean) => void;
 }
 
 export const AxToast: FC<ToastProps> = ({
@@ -54,9 +57,7 @@ export const AxToast: FC<ToastProps> = ({
   rtlFlip,
   okLabel,
   cancelLabel,
-  // @ts-expect-error
   onClose,
-  // @ts-expect-error
   onCloseAll,
 }) => {
   const { t } = useTranslation("core");

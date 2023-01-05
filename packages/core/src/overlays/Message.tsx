@@ -27,6 +27,8 @@ export interface MessageProps extends IconProp {
    * extra action button
    */
   actions?: JSX.Element[];
+
+  onClose: (b?: boolean) => void;
 }
 
 /**
@@ -48,7 +50,6 @@ export const AxMessage: FC<MessageProps> = ({
   rtlFlip,
   color,
   actions,
-  // @ts-expect-error
   onClose,
 }) => {
   return (
