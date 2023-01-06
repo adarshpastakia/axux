@@ -56,15 +56,19 @@
       & > div:first-child {
         @apply text-muted relative mx-2;
 
-        & > .ax-timeline__icon > .ax-icon {
-          @apply text-2xl rounded-full leading-none p-1;
+        & > .ax-timeline__avatar {
+          @apply text-lg rounded-full leading-none relative;
+
+          & > .ax-icon {
+            @apply p-1;
+          }
 
           &:not([class*="bg-"]) {
             @apply bg-bw-100 dark:bg-bw-800;
           }
 
           &:not([class*="text-"]) {
-            @apply text-bw-300 dark:text-bw-700;
+            @apply text-bw-600 dark:text-bw-400;
           }
         }
       }
