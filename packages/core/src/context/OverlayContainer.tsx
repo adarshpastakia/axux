@@ -33,18 +33,18 @@ export const OverlayContainer: FC<{ itemRef: RefObject<OverlayRef> }> = ({
     itemRef,
     () => ({
       showAlert: (key: string, alert: ReactNode) =>
-        setOverlays({ ...overlays, [key]: alert }),
+        setAlerts({ ...overlays, [key]: alert }),
       showOverlay: (key: string, overlay: ReactNode) =>
-        setAlerts({ ...alerts, [key]: overlay }),
+        setOverlays({ ...alerts, [key]: overlay }),
       closeAlert: (key: string) => {
-        setOverlays(
+        setAlerts(
           Object.fromEntries(
             Object.entries(overlays).filter(([k]) => k !== key)
           )
         );
       },
       closeOverlay: (key: string) => {
-        setAlerts(
+        setOverlays(
           Object.fromEntries(Object.entries(alerts).filter(([k]) => k !== key))
         );
       },

@@ -27,7 +27,7 @@ export const useNotificationService = () => {
 
   /** ***************** alert dialog *******************/
   const alert = async (props: Omit<AlertProps, "onClose">) => {
-    return await new Promise<boolean>((resolve) => {
+    return await new Promise<string | boolean>((resolve) => {
       const key = uuid();
       let rootEl: HTMLElement;
       const show = (el: AnyObject) => {
@@ -37,7 +37,7 @@ export const useNotificationService = () => {
             () => ((el.firstElementChild as HTMLElement).dataset.show = "true")
           );
       };
-      const handleClose = (b = false) => {
+      const handleClose = (b: string | boolean = false) => {
         rootEl?.firstElementChild &&
           ((rootEl.firstElementChild as HTMLElement).dataset.show = "");
         setTimeout(() => {

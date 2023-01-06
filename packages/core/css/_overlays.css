@@ -185,9 +185,9 @@
   .ax-alert {
     @apply grid overflow-hidden p-4 rounded border shadow-xl relative place-self-center max-w-[60vw] min-w-[24rem] max-h-[60vh] 
       -translate-y-48 opacity-0 bg-component text-primary ring-1 ring-offset-4 ring-current;
-    grid-template-areas: "icon title" "icon message" "footer footer";
+    grid-template-areas: "icon title" "icon message" "icon input" "footer footer";
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr auto auto;
     transition: opacity 0.15s, transform 0.25s;
 
     & .ax-alert__icon {
@@ -203,7 +203,7 @@
     }
 
     & .ax-alert__message {
-      @apply grid-area-[message] px-2 ltr:mr-8 rtl:ml-8 overflow-auto;
+      @apply grid-area-[message] px-2 ltr:mr-8 rtl:ml-8 overflow-auto mb-2;
     }
 
     & .ax-alert__footer {
@@ -215,7 +215,12 @@
     }
 
     & .ax-alert__input {
-      @apply absolute -top-full;
+      @apply px-2 py-1 bg-bw-50 dark:bg-bw-900 placeholder:text-bw-500 dark:placeholder:text-bw-400 appearance-none
+      rounded border border-b-2 border-bw-500/30 focus:border-b-current focus:bg-white focus:dark:bg-black;
+
+      &[data-hidden="true"] {
+        @apply absolute -top-full;
+      }
     }
   }
 }

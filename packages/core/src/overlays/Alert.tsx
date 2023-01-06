@@ -6,7 +6,8 @@
  * @license   : MIT
  */
 
-import { FC, useCallback, useMemo } from "react";
+import { getValue } from "@axux/utilities";
+import { FC, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
@@ -17,7 +18,7 @@ export interface AlertProps extends IconProp {
   /**
    * alert type
    */
-  type?: "alert" | "confirm";
+  type?: "alert" | "confirm" | "prompt";
   /**
    * alert color
    */
@@ -42,8 +43,16 @@ export interface AlertProps extends IconProp {
    * cancel label
    */
   cancelLabel?: string;
+  /**
+   * placeholder for prompt
+   */
+  placeholder?: string;
+  /**
+   * default value for prompt
+   */
+  defaultValue?: string;
 
-  onClose: (b?: boolean) => void;
+  onClose: (b?: boolean | string) => void;
 }
 
 export const AxAlert: FC<AlertProps> = ({
@@ -56,11 +65,15 @@ export const AxAlert: FC<AlertProps> = ({
   rtlFlip,
   okLabel,
   cancelLabel,
+  placeholder,
+  defaultValue,
   onClose,
 }) => {
   const { t } = useTranslation("core");
+  const [value, setValue] = useState(defaultValue);
   const iconType = useMemo(() => {
     switch (type) {
+      case "prompt":
       case "confirm":
         return AppIcons.iconQuestion;
       default:
@@ -83,27 +96,36 @@ export const AxAlert: FC<AlertProps> = ({
 
   const closeModal = useCallback(
     (ret = false) => {
-      onClose?.(ret);
+      onClose?.(ret && type === "prompt" ? value : ret);
     },
-    [onClose]
+    [type, value, onClose]
   );
 
   return (
-    <div
-      className="ax-overlay__mask"
-      onClick={(e) => (onClose?.(), e.stopPropagation())}
-    >
-      <div className="ax-alert" data-color={color}>
+    <div className="ax-overlay__mask" onClick={() => closeModal()}>
+      <div
+        className="ax-alert"
+        data-color={color}
+        onClick={(e) => e.stopPropagation()}
+      >
         {CloseX(closeModal)}
         <div className="ax-alert__icon">
-          <AxIcon icon={icon ?? iconType} color={color} rtlFlip={rtlFlip} />
+          <AxIcon
+            icon={getValue(icon, iconType)}
+            color={color}
+            rtlFlip={rtlFlip}
+          />
         </div>
         {title && <div className="ax-alert__title">{title}</div>}
         {message && <p className="ax-alert__message">{message}</p>}
         <input
+          value={value}
+          placeholder={placeholder}
           className="ax-alert__input"
+          data-hidden={type !== "prompt"}
           ref={(e) => e != null && setTimeout(() => e.focus(), 100)}
           onBlur={(e) => e.target.focus()}
+          onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) =>
             (e.key === "Enter" || e.key === "Escape") &&
             closeModal(e.key === "Enter")
@@ -111,7 +133,7 @@ export const AxAlert: FC<AlertProps> = ({
         />
         <div className="ax-alert__footer">
           <div onClickCapture={() => onClose?.(false)}>{actions}</div>
-          {type === "confirm" && (
+          {type !== "alert" && (
             <AxButton
               variant="link"
               color={color}
@@ -132,3 +154,4 @@ export const AxAlert: FC<AlertProps> = ({
     </div>
   );
 };
+AxAlert.displayName = "AxAlert";
