@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { action } from "@storybook/addon-actions";
 import { ComponentStory } from "@storybook/react";
 import {
   AxApplicationProvider,
@@ -16,21 +17,28 @@ import { AxAlert } from "../../src/overlays/Alert";
 import { AxMessage } from "../../src/overlays/Message";
 import { AxToast } from "../../src/overlays/Toast";
 
-export const AlertStoryRender: ComponentStory<typeof AxAlert> = (props) => {
+export const AlertStoryRender = (props: AnyObject) => {
   const { alert } = useNotificationService();
   const openAlert = () => {
     // Open overlay pass additional props
-    alert(props);
+    alert(props).then(action("alert"));
   };
   return <AxButton onClick={openAlert}>Open Alert</AxButton>;
 };
-export const AlertStory: ComponentStory<typeof AxAlert> = (props) => {
+export const AlertTemplate: ComponentStory<typeof AxAlert> = (props) => {
   return (
     <AxApplicationProvider>
       <AlertStoryRender {...props} />
     </AxApplicationProvider>
   );
 };
+export const AlertStory = AlertTemplate.bind({});
+AlertStory.args = {
+  icon: "mdi mdi-check-circle",
+  title: "Alert Message",
+  message: "This is a user message",
+};
+
 export const AlertSource = `
 export const AlertStoryRender: ComponentStory<typeof AxAlert> = (props) => {
   const { alert } = useNotificationService();
@@ -114,3 +122,5 @@ export const ToastStory: ComponentStory<typeof AxToast> = (props) => {
   );
 };
 `;
+
+export default { title: "AxAlert", component: AxAlert };

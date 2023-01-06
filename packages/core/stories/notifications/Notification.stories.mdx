@@ -24,6 +24,7 @@ import { AxToast } from "../../src/overlays/Toast";
 
 <Meta
   title="@core/Notifications"
+  component={AxAlert}
   parameters={{ jest: ["Notification.test.tsx"] }}
 />
 
@@ -34,10 +35,6 @@ import { AxToast } from "../../src/overlays/Toast";
 <Canvas>
   <Story
     name="1.Alert"
-    args={{
-      title: "My Alert",
-      message: "This is a user alert",
-    }}
     parameters={{
       docs: {
         source: {
@@ -47,7 +44,7 @@ import { AxToast } from "../../src/overlays/Toast";
       },
     }}
   >
-    {AlertStory.bind({})}
+    {AlertStory}
   </Story>
 </Canvas>
 
