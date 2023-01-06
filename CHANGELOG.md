@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.87](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.86...v2.0.0-beta.87) (2023-01-06)
+
+
+### Bug Fixes
+
+* **Alert:** added prompt type ([8c98174](https://github.com/adarshpastakia/axux/commit/8c981747c70e330e20bcc493c2284f5f6a3cb807))
+* **Overlays:** fixed overlay/notification service ([d5d94eb](https://github.com/adarshpastakia/axux/commit/d5d94eb50ff954d7ba2c5bf328e49d889beda7d1))
+
+
+
+
+
 # [2.0.0-beta.86](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.85...v2.0.0-beta.86) (2023-01-04)
 
 
