@@ -154,6 +154,9 @@ export const TagInput = <T extends AnyObject>({
       if (!e.currentTarget.value && e.key === "Enter") {
         onEnterPressed?.(e);
       }
+      if (e.currentTarget.value && e.key === "Enter") {
+        (e.target as HTMLInputElement).value = "";
+      }
     },
     [handleRemove, onEnterPressed]
   );
