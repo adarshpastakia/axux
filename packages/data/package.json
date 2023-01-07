@@ -1,6 +1,6 @@
 {
   "name": "@axux/data",
-  "version": "2.0.0-beta.87",
+  "version": "2.0.0-beta.88",
   "description": "axux: Data package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,10 +24,10 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^2.0.0-beta.87",
-    "@axux/date": "^2.0.0-beta.87",
-    "@axux/form": "^2.0.0-beta.87",
-    "@axux/utilities": "^2.0.0-beta.87",
+    "@axux/core": "^2.0.0-beta.88",
+    "@axux/date": "^2.0.0-beta.88",
+    "@axux/form": "^2.0.0-beta.88",
+    "@axux/utilities": "^2.0.0-beta.88",
     "@monaco-editor/loader": "^1.3.2",
     "@monaco-editor/react": "^4.4.6",
     "memoize-one": "^6.0.0",

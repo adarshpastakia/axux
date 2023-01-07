@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.88](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.87...v2.0.0-beta.88) (2023-01-07)
+
+
+### Bug Fixes
+
+* **AxField.Tag:** clear input on option create ([d66041b](https://github.com/adarshpastakia/axux/commit/d66041b8a78d5841c7c416de97310216befc413f))
+
+
+
+
+
 # [2.0.0-beta.87](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.86...v2.0.0-beta.87) (2023-01-06)
 
 **Note:** Version bump only for package @axux/form
