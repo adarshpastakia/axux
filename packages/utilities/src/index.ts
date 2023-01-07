@@ -8,10 +8,6 @@
 
 /* istanbul ignore file */
 
-export {
-  useEffectDebugger,
-  useLayoutEffectDebugger,
-} from "./useEffectDebugger";
 export { useLogger } from "./useLogger";
 export * from "./_ascii";
 export * from "./_boundingBox";

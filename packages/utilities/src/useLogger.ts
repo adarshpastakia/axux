@@ -28,12 +28,12 @@ export const TagColors = {
  */
 export const useLogger = (base: string) => ({
   timer(key: string) {
-    const timerKey = `TIMER::${base} - ${key}`;
+    const timerKey = `${base} - ${key}`;
     console.time(timerKey);
     return {
       log: (...args: AnyObject[]) =>
-        console.timeLog(
-          `%cTIMER::%c${base} - ${key}`,
+        console.log(
+          `%c${base} - %c${key}\n`,
           TypeColors.timer,
           TagColors.timer,
           ...args
