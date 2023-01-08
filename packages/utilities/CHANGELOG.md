@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.89](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.88...v2.0.0-beta.89) (2023-01-08)
+
+
+### Bug Fixes
+
+* logger timer ([34aba60](https://github.com/adarshpastakia/axux/commit/34aba60f8c56a4becf7a19bbd5ca2c0220fa2d22))
+
+
+
+
+
 # [2.0.0-beta.88](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.87...v2.0.0-beta.88) (2023-01-07)
 
 **Note:** Version bump only for package @axux/utilities
