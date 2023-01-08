@@ -18,7 +18,7 @@ import {
   useState,
 } from "react";
 
-export const Wrapper = (maxWidth = 1100) => {
+export const Wrapper = (maxWidth = 1100, hideScroller = false) => {
   const El = forwardRef(({ children, width, ...props }: KeyValue, ref) => {
     const scrollerRef = useRef<HTMLDivElement>(null);
 
@@ -75,48 +75,50 @@ export const Wrapper = (maxWidth = 1100) => {
           {isLoading && <AxAnimation.Card showIcon />}
           <div style={{ height: 48 }} />
         </div>
-        <div className="ax-virtual__scroll">
-          <div>
-            <AxButton.Group isVertical variant="flat">
-              <AxButton
-                size="sm"
-                variant="link"
-                className="flush"
-                aria-label="scroll to top"
-                icon={AppIcons.iconChevronUp}
-                onClick={() => fireEvent("scrollFirst")}
-                isDisabled={noScrollUp}
-              />
-              <AxButton
-                size="sm"
-                variant="link"
-                className="flush"
-                aria-label="scroll up"
-                icon={AppIcons.iconCaretUp}
-                onClick={() => fireEvent("scrollUp")}
-                isDisabled={noScrollUp}
-              />
-              <AxButton
-                size="sm"
-                variant="link"
-                className="flush"
-                aria-label="scroll down"
-                icon={AppIcons.iconCaretDown}
-                onClick={() => fireEvent("scrollDown")}
-                isDisabled={noScrollDown}
-              />
-              <AxButton
-                size="sm"
-                variant="link"
-                className="flush"
-                aria-label="scroll to bottom"
-                icon={AppIcons.iconChevronDown}
-                onClick={() => fireEvent("scrollLast")}
-                isDisabled={noScrollDown}
-              />
-            </AxButton.Group>
+        {!hideScroller && (
+          <div className="ax-virtual__scroll">
+            <div>
+              <AxButton.Group isVertical variant="flat">
+                <AxButton
+                  size="sm"
+                  variant="link"
+                  className="flush"
+                  aria-label="scroll to top"
+                  icon={AppIcons.iconChevronUp}
+                  onClick={() => fireEvent("scrollFirst")}
+                  isDisabled={noScrollUp}
+                />
+                <AxButton
+                  size="sm"
+                  variant="link"
+                  className="flush"
+                  aria-label="scroll up"
+                  icon={AppIcons.iconCaretUp}
+                  onClick={() => fireEvent("scrollUp")}
+                  isDisabled={noScrollUp}
+                />
+                <AxButton
+                  size="sm"
+                  variant="link"
+                  className="flush"
+                  aria-label="scroll down"
+                  icon={AppIcons.iconCaretDown}
+                  onClick={() => fireEvent("scrollDown")}
+                  isDisabled={noScrollDown}
+                />
+                <AxButton
+                  size="sm"
+                  variant="link"
+                  className="flush"
+                  aria-label="scroll to bottom"
+                  icon={AppIcons.iconChevronDown}
+                  onClick={() => fireEvent("scrollLast")}
+                  isDisabled={noScrollDown}
+                />
+              </AxButton.Group>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     );
   });

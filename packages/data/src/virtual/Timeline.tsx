@@ -87,6 +87,10 @@ export interface TimelineProps<T> extends ElementProps {
    */
   isLoading?: boolean;
   /**
+   * hide scroll buttons
+   */
+  hideScroller?: boolean;
+  /**
    * load more callback
    */
   onLoadMore?: EmptyCallback;
@@ -175,6 +179,7 @@ const AxTimelineComponent = <T extends KeyValue>({
   maxWidth,
   minHeight = 48,
   isLoading,
+  hideScroller,
   onLoadMore,
   listRef: ref,
   ...rest
@@ -260,7 +265,10 @@ const AxTimelineComponent = <T extends KeyValue>({
     [listRef]
   );
 
-  const outerElement = useMemo(() => Wrapper(maxWidth), [maxWidth]);
+  const outerElement = useMemo(
+    () => Wrapper(maxWidth, hideScroller),
+    [maxWidth, hideScroller]
+  );
 
   return (
     <div
