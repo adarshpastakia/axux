@@ -100,6 +100,11 @@ export const SearchContextProvider: React.FC<
     (query: string = "") => {
       setDirty(false);
       setQuery(query);
+      !!query &&
+        setHistory([
+          query,
+          ...history.filter((h) => h !== query).slice(0, historyCount - 1),
+        ]);
       onSearch?.({ query, filters });
     },
     [filters, onSearch]
