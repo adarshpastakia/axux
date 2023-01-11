@@ -126,7 +126,7 @@ export const FilterForm = ({
       } else {
         return (
           <AxForm.Controller name="value">
-            <AxField.Select
+            <AxField.Combo
               isEditable
               allowCreate
               allowClear
