@@ -43,7 +43,6 @@ export const SelectInput = <T extends AnyObject>({
   onQuery,
   onCreateOption,
   usePortal,
-  allowCreate,
   inputRef,
   isInvalid,
   className,
@@ -59,7 +58,7 @@ export const SelectInput = <T extends AnyObject>({
   children,
   onEnterPressed,
   ...rest
-}: Omit<SelectProps<T>, "makeLabel"> & {
+}: Omit<SelectProps<T>, "makeLabel" | "allowCreate"> & {
   makeLabel?: (item: T) => ReactNode;
 }) => {
   const { t } = useTranslation("form");
@@ -81,9 +80,9 @@ export const SelectInput = <T extends AnyObject>({
         if (matcher != null) return matcher(option, value ?? "");
         return defaultMatcher(option, value, valueProperty);
       });
-    if (value && !val && allowCreate) val = value;
-    setActualValue(val);
-  }, [value, valueProperty, options, allowCreate]);
+    if (value && !val) val = value;
+    setActualValue(val ?? "");
+  }, [value, valueProperty, options]);
 
   /** ***************** change actualValue *******************/
   const handleChange = useCallback(
