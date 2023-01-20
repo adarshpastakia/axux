@@ -119,7 +119,7 @@ export const SearchContextProvider: React.FC<
       ]);
     setQuery(query);
     onSearch?.({ query, filters });
-  }, [query, filters, onSearch]);
+  }, [query, filters, history, onSearch]);
 
   const updateQuery = (query: string) => {
     const newHistory = [
