@@ -133,7 +133,9 @@ export const useTooltipWatcher = () => {
           style={styles.popper}
           {...attributes.popper}
         >
-          <div className={`popover__container`}>{content}</div>
+          <div className={`popover__container`}>
+            <pre style={{ font: "inherit" }}>{content}</pre>
+          </div>
           <div
             ref={setArrowElement as AnyObject}
             className="popover__arrow"
