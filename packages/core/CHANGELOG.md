@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.91](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.90...v2.0.0-beta.91) (2023-01-21)
+
+
+### Bug Fixes
+
+* **Tooltip:** warp content in pre ([7c204ef](https://github.com/adarshpastakia/axux/commit/7c204ef708b3e5e16cc92c07c963cc4fe9247b29))
+
+
+
+
+
 # [2.0.0-beta.90](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.89...v2.0.0-beta.90) (2023-01-11)
 
 **Note:** Version bump only for package @axux/core

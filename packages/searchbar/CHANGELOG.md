@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.91](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.90...v2.0.0-beta.91) (2023-01-21)
+
+
+### Bug Fixes
+
+* **SearchBar:** callback deps updated ([2f37c13](https://github.com/adarshpastakia/axux/commit/2f37c13c2e889b8dd76d93b316b83782a8b024d5))
+* **SearchBar:** filter form value list combo ([76ffbb5](https://github.com/adarshpastakia/axux/commit/76ffbb5d6fed369afdeaf91053b079a7717fb68c))
+
+
+
+
+
 # [2.0.0-beta.90](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.89...v2.0.0-beta.90) (2023-01-11)
 
 
