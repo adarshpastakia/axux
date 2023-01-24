@@ -28,8 +28,8 @@ export interface SearchProps
 
 // eslint-disable-next-line react/display-name
 export const Search: FC<SearchProps> = memo(
-  ({ children, icon, isSearching, onSearch, ...props }: SearchProps) => {
-    const [query, setQuery] = useState(props.value);
+  ({ children, icon, isSearching, onSearch, value, ...props }: SearchProps) => {
+    const [query, setQuery] = useState(value);
     const [, startTransition] = useTransition();
 
     const handleSearch = useMemo(
@@ -57,6 +57,7 @@ export const Search: FC<SearchProps> = memo(
         {...props}
         allowClear
         type="search"
+        value={query}
         onChange={handleChange}
         onEnterPressed={handleQuery}
       >
