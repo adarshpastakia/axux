@@ -17,6 +17,7 @@ import {
   Fragment,
   memo,
   useCallback,
+  useDeferredValue,
   useEffect,
   useMemo,
   useState,
@@ -78,9 +79,10 @@ export const SuggestInput: FC<SuggestProps> = ({
   defaultItems = [],
   ...rest
 }) => {
-  const [actualValue, setActualValue] = useState(value);
+  const [_actualValue, setActualValue] = useState(value);
   const [items, setItems] = useState<Array<SuggestItem | string>>([]);
   const [queryItems, setQueryItems] = useState<Array<SuggestItem | string>>([]);
+  const actualValue = useDeferredValue(_actualValue);
 
   useEffect(() => {
     setActualValue(value);

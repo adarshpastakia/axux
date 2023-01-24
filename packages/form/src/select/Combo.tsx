@@ -16,6 +16,7 @@ import {
   Fragment,
   memo,
   useCallback,
+  useDeferredValue,
   useEffect,
   useMemo,
   useState,
@@ -62,8 +63,9 @@ export const ComboInput = <T extends AnyObject>({
   onEnterPressed,
   ...rest
 }: SelectProps<T>) => {
-  const [actualValue, setActualValue] = useState<T>({} as AnyObject);
+  const [_actualValue, setActualValue] = useState<T>({} as AnyObject);
   const [, startTransition] = useTransition();
+  const actualValue = useDeferredValue(_actualValue);
   const { list, query, onQueryChange } = useSelect({
     options,
     labelProperty,

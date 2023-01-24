@@ -14,6 +14,7 @@ import {
   FC,
   memo,
   useCallback,
+  useDeferredValue,
   useEffect,
   useState,
   useTransition,
@@ -51,8 +52,9 @@ export const Text: FC<TextProps> = memo(
     onEnterPressed,
     ...rest
   }: TextProps) => {
-    const [actualValue, setActualValue] = useState("");
+    const [_actualValue, setActualValue] = useState("");
     const [, startTransition] = useTransition();
+    const actualValue = useDeferredValue(_actualValue);
     useEffect(() => {
       setActualValue(value ?? "");
     }, [value]);

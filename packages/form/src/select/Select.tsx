@@ -15,6 +15,7 @@ import {
   memo,
   ReactNode,
   useCallback,
+  useDeferredValue,
   useEffect,
   useMemo,
   useState,
@@ -62,8 +63,9 @@ export const SelectInput = <T extends AnyObject>({
   makeLabel?: (item: T) => ReactNode;
 }) => {
   const { t } = useTranslation("form");
-  const [actualValue, setActualValue] = useState<T>("" as AnyObject);
+  const [_actualValue, setActualValue] = useState<T>("" as AnyObject);
   const [, startTransition] = useTransition();
+  const actualValue = useDeferredValue(_actualValue);
 
   const { styles, setPopperElement, setReferenceElement } = usePopover({
     hideArrow: true,

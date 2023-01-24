@@ -14,6 +14,7 @@ import {
   FC,
   memo,
   useCallback,
+  useDeferredValue,
   useEffect,
   useState,
   useTransition,
@@ -52,8 +53,9 @@ export const Textarea: FC<TextareaProps> = memo(
     onEnterPressed,
     ...rest
   }: TextareaProps) => {
-    const [actualValue, setActualValue] = useState("");
+    const [_actualValue, setActualValue] = useState("");
     const [, startTransition] = useTransition();
+    const actualValue = useDeferredValue(_actualValue);
     useEffect(() => {
       setActualValue(value ?? "");
     }, [value]);
