@@ -33,22 +33,22 @@ export const useFilteredList = <T extends KeyValue = AnyObject>(
   const filterItems = useCallback(
     (query: string) => {
       if (isEmpty(query)) setFilteredList(items);
-      setFilteredList(filterList(items, query, matcher));
+      startTransition(() => setFilteredList(filterList(items, query, matcher)));
     },
     [items, matcher]
   );
 
   useEffect(() => {
-    startTransition(() => filterItems(search ?? ""));
+    filterItems(search ?? "");
   }, [items]);
 
   const onSearch = useCallback(
     (query?: string) => {
       setSearch(query ?? "");
-      startTransition(() => filterItems(query ?? ""));
+      filterItems(query ?? "");
     },
     [filterItems]
   );
 
-  return { search, onSearch, filteredList, isSearching };
+  return { onSearch, filteredList, isSearching };
 };
