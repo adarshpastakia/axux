@@ -9,6 +9,7 @@
 import { useLocalStorage } from "@axux/core";
 import { ChildrenProp } from "@axux/core/dist/types";
 import { SuggestItem } from "@axux/form/dist/select/Suggest";
+import { isArray } from "@axux/utilities";
 import i18next from "i18next";
 import React, {
   useCallback,
@@ -100,10 +101,11 @@ export const SearchContextProvider: React.FC<
     (query: string = "") => {
       setDirty(false);
       setQuery(query);
+      const historyList = isArray(history) ? history : [];
       !!query &&
         setHistory([
           query,
-          ...history.filter((h) => h !== query).slice(0, historyCount - 1),
+          ...historyList.filter((h) => h !== query).slice(0, historyCount - 1),
         ]);
       onSearch?.({ query, filters });
     },
@@ -112,22 +114,24 @@ export const SearchContextProvider: React.FC<
 
   const handleSearch = useCallback(() => {
     setDirty(false);
+    const historyList = isArray(history) ? history : [];
     !!query &&
       setHistory([
         query,
-        ...history.filter((h) => h !== query).slice(0, historyCount - 1),
+        ...historyList.filter((h) => h !== query).slice(0, historyCount - 1),
       ]);
     setQuery(query);
     onSearch?.({ query, filters });
   }, [query, filters, history, onSearch]);
 
   const updateQuery = (query: string) => {
+    const historyList = isArray(history) ? history : [];
     const newHistory = [
       query,
-      ...history.filter((h) => h !== query).slice(0, historyCount - 1),
+      ...historyList.filter((h) => h !== query).slice(0, historyCount - 1),
     ];
-    setDirty(true);
     startTransition(() => {
+      setDirty(true);
       setOptions(newHistory.filter((h) => h.includes(query)));
     });
     return onQuery?.(query) ?? [];
