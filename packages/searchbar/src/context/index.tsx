@@ -109,7 +109,7 @@ export const SearchContextProvider: React.FC<
         ]);
       onSearch?.({ query, filters });
     },
-    [filters, onSearch]
+    [filters, history, onSearch]
   );
 
   const handleSearch = useCallback(() => {
