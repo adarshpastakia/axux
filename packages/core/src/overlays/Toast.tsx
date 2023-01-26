@@ -101,15 +101,6 @@ export const AxToast: FC<ToastProps> = ({
       </div>
       {title && <div className="ax-toast__title">{title}</div>}
       {message && <p className="ax-toast__message">{message}</p>}
-      <input
-        className="ax-toast__input"
-        ref={(e) => e != null && setTimeout(() => e.focus(), 100)}
-        onBlur={(e) => e.target.focus()}
-        onKeyDown={(e) =>
-          (e.key === "Enter" || e.key === "Escape") &&
-          closeToast(e.key === "Enter")
-        }
-      />
       <div className="ax-toast__footer">
         <div onClickCapture={() => onClose?.(false)}>{actions}</div>
         {type === "confirm" && (
