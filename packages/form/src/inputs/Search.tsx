@@ -16,9 +16,10 @@ import { Text, TextProps } from "./Text";
 export interface SearchProps
   extends Omit<
     TextProps,
-    "type" | "allowClear" | "onEnterPressed" | "onChange"
+    "type" | "allowClear" | "onEnterPressed" | "onChange"|"value"
   > {
   icon?: string;
+  defaultValue?: string;
   isSearching?: boolean;
   /**
    * search callback
@@ -28,8 +29,8 @@ export interface SearchProps
 
 // eslint-disable-next-line react/display-name
 export const Search: FC<SearchProps> = memo(
-  ({ children, icon, isSearching, onSearch, value, ...props }: SearchProps) => {
-    const [query, setQuery] = useState(value);
+  ({ children, icon, isSearching, onSearch, defaultValue, ...props }: SearchProps) => {
+    const [query, setQuery] = useState(defaultValue);
     const [, startTransition] = useTransition();
 
     const handleSearch = useMemo(
