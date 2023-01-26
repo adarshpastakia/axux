@@ -66,6 +66,11 @@ export const Tools: FC<ToolsProps> = memo(
         />
         <AxHotKey global keyCombo="[" handler={() => onRotate(rotate - 90)} />
         <AxHotKey global keyCombo="]" handler={() => onRotate(rotate + 90)} />
+        <AxHotKey
+          global
+          keyCombo="r"
+          handler={() => (onZoom(0), onRotate(0))}
+        />
         <div className="toolbar">
           <label className="basis-28 text-end">
             Zoom: {zoom === 0 ? "Fit" : `${zoom.toFixed(1)}x`}
