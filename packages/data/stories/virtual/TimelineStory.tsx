@@ -7,6 +7,7 @@
  */
 
 import {
+  AxApplicationProvider,
   AxButton,
   AxContent,
   AxFlexBox,
@@ -32,7 +33,6 @@ export const TimelineStory: ComponentStory<typeof AxTimeline> = ({}) => {
   const [isLoading, setLoading] = useState(false);
   const [recordCount, setCount] = useState(0);
   const listRef = useRef<TimelineRef>();
-  const { message } = useNotificationService();
 
   useEffect(() => {
     setCount(10);
@@ -42,72 +42,79 @@ export const TimelineStory: ComponentStory<typeof AxTimeline> = ({}) => {
     setTimeout(() => {
       setCount(count + recordCount);
       setLoading(false);
-    }, 500);
+    }, 1000);
   }, [recordCount, count]);
   return (
-    <AxViewport>
-      <AxHeader>
-        <div className="p-2">
-          <AxButton onClick={() => setCount(recordCount + 10)}>AddMore</AxButton>
-          <AxButton
-            onClick={() => {
-              const idx = Math.floor(Math.random() * recordCount);
-              message(`Scrolling into view ${idx + 1}`);
-              listRef.current?.scrollToItem(idx);
-            }}
-          >
-            Scroll Random
-          </AxButton>
-          <AxButton onClick={() => listRef.current?.scrollToItem(0)}>
-            Scroll Top
-          </AxButton>
-          <AxButton onClick={() => listRef.current?.scrollToItem(recordCount)}>
-            Scroll Bottom
-          </AxButton>
-          <AxButton
-            onClick={() =>
-              listRef.current?.hilight(Math.floor(Math.random() * recordCount))
-            }
-          >
-            Random Hilight
-          </AxButton>
-        </div>
-      </AxHeader>
-      <AxTimeline
-        listRef={listRef}
-        items={new Array(recordCount).fill(null)}
-        onLoadMore={loadMore}
-        isLoading={isLoading}
-      >
-        {(props) => (
-          <AxTimeline.Item {...props}>
-            <AxPanel isCollapsable>
-              <AxHeader>
-                <AxTitle>List item {props.index + 1}</AxTitle>
-              </AxHeader>
-              <AxContent>
-                <AxFlexBox>
-                  <AxFlexBox.Row>
-                    <AxFlexBox.Col flex="auto">
-                      <img
-                        height={96}
-                        width={128}
-                        loading="lazy"
-                        className="border-4 border-bw-500 object-contain"
-                        src={`https://picsum.photos/id/${props.index}/192/108`}
-                      />
-                    </AxFlexBox.Col>
-                    <AxFlexBox.Col flex="fill">
-                      <AxText clip={6}>{LIPSUM}</AxText>
-                    </AxFlexBox.Col>
-                  </AxFlexBox.Row>
-                </AxFlexBox>
-              </AxContent>
-            </AxPanel>
-          </AxTimeline.Item>
-        )}
-      </AxTimeline>
-    </AxViewport>
+    <AxApplicationProvider>
+      <AxViewport>
+        <AxHeader>
+          <div className="p-2">
+            <AxButton onClick={() => setCount(recordCount + 10)}>
+              AddMore
+            </AxButton>
+            <AxButton
+              onClick={() => {
+                const idx = Math.floor(Math.random() * recordCount);
+                listRef.current?.scrollToItem(idx);
+              }}
+            >
+              Scroll Random
+            </AxButton>
+            <AxButton onClick={() => listRef.current?.scrollToItem(0)}>
+              Scroll Top
+            </AxButton>
+            <AxButton
+              onClick={() => listRef.current?.scrollToItem(recordCount)}
+            >
+              Scroll Bottom
+            </AxButton>
+            <AxButton
+              onClick={() =>
+                listRef.current?.hilight(
+                  Math.floor(Math.random() * recordCount)
+                )
+              }
+            >
+              Random Hilight
+            </AxButton>
+          </div>
+        </AxHeader>
+        <AxTimeline
+          listRef={listRef}
+          items={new Array(recordCount).fill(null)}
+          onLoadMore={loadMore}
+          isLoading={isLoading}
+        >
+          {(props) => (
+            <AxTimeline.Item {...props}>
+              <AxPanel isCollapsable>
+                <AxHeader>
+                  <AxTitle>List item {props.index + 1}</AxTitle>
+                </AxHeader>
+                <AxContent>
+                  <AxFlexBox>
+                    <AxFlexBox.Row>
+                      <AxFlexBox.Col flex="auto">
+                        <img
+                          height={96}
+                          width={128}
+                          loading="lazy"
+                          className="border-4 border-bw-500 object-contain"
+                          src={`https://picsum.photos/id/${props.index}/192/108`}
+                        />
+                      </AxFlexBox.Col>
+                      <AxFlexBox.Col flex="fill">
+                        <AxText clip={6}>{LIPSUM}</AxText>
+                      </AxFlexBox.Col>
+                    </AxFlexBox.Row>
+                  </AxFlexBox>
+                </AxContent>
+              </AxPanel>
+            </AxTimeline.Item>
+          )}
+        </AxTimeline>
+      </AxViewport>
+    </AxApplicationProvider>
   );
 };
 

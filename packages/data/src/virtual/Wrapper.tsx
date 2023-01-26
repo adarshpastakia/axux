@@ -21,6 +21,7 @@ import {
 export const Wrapper = (maxWidth = 1100, hideScroller = false) => {
   const El = forwardRef(({ children, width, ...props }: KeyValue, ref) => {
     const scrollerRef = useRef<HTMLDivElement>(null);
+    const loaderRef = useRef<HTMLDivElement>(null);
 
     const [isLoading, setLoading] = useState(false);
     useImperativeHandle(
@@ -65,15 +66,31 @@ export const Wrapper = (maxWidth = 1100, hideScroller = false) => {
     );
 
     useEffect(() => {
-      noScrollDown && fireEvent("loadMore");
-    }, [noScrollDown]);
+      if (loaderRef.current && scrollerRef.current) {
+        const el = scrollerRef.current;
+        const ob = new IntersectionObserver(
+          (e) => {
+            e.pop()?.isIntersecting && fireEvent("loadMore");
+          },
+          {
+            root: scrollerRef.current,
+            threshold: 1,
+          }
+        );
+        ob.observe(loaderRef.current);
+        return () => {
+          el.scrollTop = el.scrollHeight - (el.offsetHeight + 160);
+          ob.disconnect();
+        };
+      }
+    }, [isLoading]);
 
     return (
       <div {...props} className="ax-virtual__wrapper" ref={scrollerRef}>
         <div style={{ minWidth: Math.min(props.style.width * 0.8, maxWidth) }}>
           {children}
           {isLoading && <AxAnimation.Card showIcon />}
-          <div style={{ height: 48 }} />
+          {!isLoading && <div style={{ height: 48 }} ref={loaderRef} />}
         </div>
         {!hideScroller && (
           <div className="ax-virtual__scroll">
