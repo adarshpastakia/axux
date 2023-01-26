@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.92](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.91...v2.0.0-beta.92) (2023-01-26)
+
+
+### Bug Fixes
+
+* **JsonView:** disable collapsable when inline ([ecb23e1](https://github.com/adarshpastakia/axux/commit/ecb23e11ea4e249e2eb7dfdc0c3b9d29f83a0b6e))
+* **useFilteredList:** use transition when query available ([8f72d15](https://github.com/adarshpastakia/axux/commit/8f72d15d0154c6cf959f85629d206077ded4fcda))
+* **VirtualList:** loadMore using intersectionObserver ([d05e503](https://github.com/adarshpastakia/axux/commit/d05e50364aa5c6b900f8a0b33bdc6190ef69a87b))
+
+
+
+
+
 # [2.0.0-beta.91](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.90...v2.0.0-beta.91) (2023-01-21)
 
 **Note:** Version bump only for package @axux/data

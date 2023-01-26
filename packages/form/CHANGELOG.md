@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.92](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.91...v2.0.0-beta.92) (2023-01-26)
+
+
+### Bug Fixes
+
+* **Inputs:** useDeferredValue ([d11000f](https://github.com/adarshpastakia/axux/commit/d11000faf2f03266a672f617b062f1ba455d8ade))
+* **SearchInput:** use query as value prop ([b36791d](https://github.com/adarshpastakia/axux/commit/b36791d318ef6144a9ad2e24852d23b839169e6e))
+* **Search:** replace value prop with defaultValue ([6531654](https://github.com/adarshpastakia/axux/commit/653165409f9964807b13b816040bfec69a8103ae))
+
+
+
+
+
 # [2.0.0-beta.91](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.90...v2.0.0-beta.91) (2023-01-21)
 
 

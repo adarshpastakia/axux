@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.92](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.91...v2.0.0-beta.92) (2023-01-26)
+
+
+### Bug Fixes
+
+* **Toast:** remove focus catcher ([3921cff](https://github.com/adarshpastakia/axux/commit/3921cfff2f82ca37d25393e214cf3d3f8c9ff765))
+
+
+
+
+
 # [2.0.0-beta.91](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.90...v2.0.0-beta.91) (2023-01-21)
 
 

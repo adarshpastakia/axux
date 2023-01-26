@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.92](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.91...v2.0.0-beta.92) (2023-01-26)
+
+
+### Bug Fixes
+
+* **Dedupe:** filter empty only ([dcaf94a](https://github.com/adarshpastakia/axux/commit/dcaf94ab68f4ee68f6b29beb8a0d79ada3e670a3))
+* **ImageViewer:** add reset zoom+rotate hotkey ([eea89b4](https://github.com/adarshpastakia/axux/commit/eea89b48e94d0845a87fde8f2cc57c8d4e4126a9))
+* **Inputs:** useDeferredValue ([d11000f](https://github.com/adarshpastakia/axux/commit/d11000faf2f03266a672f617b062f1ba455d8ade))
+* **JsonView:** disable collapsable when inline ([ecb23e1](https://github.com/adarshpastakia/axux/commit/ecb23e11ea4e249e2eb7dfdc0c3b9d29f83a0b6e))
+* **SearchBar:** check suggestion history isArray ([f42de37](https://github.com/adarshpastakia/axux/commit/f42de37f2249acdb0ea8bb7a87924dd58a74f119))
+* **SearchBar:** fix suggestion history ([d52de7f](https://github.com/adarshpastakia/axux/commit/d52de7f1a7eb1ce17cc341b542bb02a1426faa53))
+* **SearchInput:** use query as value prop ([b36791d](https://github.com/adarshpastakia/axux/commit/b36791d318ef6144a9ad2e24852d23b839169e6e))
+* **Search:** replace value prop with defaultValue ([6531654](https://github.com/adarshpastakia/axux/commit/653165409f9964807b13b816040bfec69a8103ae))
+* **Toast:** remove focus catcher ([3921cff](https://github.com/adarshpastakia/axux/commit/3921cfff2f82ca37d25393e214cf3d3f8c9ff765))
+* **useFilteredList:** use transition when query available ([8f72d15](https://github.com/adarshpastakia/axux/commit/8f72d15d0154c6cf959f85629d206077ded4fcda))
+* **VirtualList:** loadMore using intersectionObserver ([d05e503](https://github.com/adarshpastakia/axux/commit/d05e50364aa5c6b900f8a0b33bdc6190ef69a87b))
+
+
+
+
+
 # [2.0.0-beta.91](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.90...v2.0.0-beta.91) (2023-01-21)
 
 

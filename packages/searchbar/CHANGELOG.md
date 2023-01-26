@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.92](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.91...v2.0.0-beta.92) (2023-01-26)
+
+
+### Bug Fixes
+
+* **SearchBar:** check suggestion history isArray ([f42de37](https://github.com/adarshpastakia/axux/commit/f42de37f2249acdb0ea8bb7a87924dd58a74f119))
+* **SearchBar:** fix suggestion history ([d52de7f](https://github.com/adarshpastakia/axux/commit/d52de7f1a7eb1ce17cc341b542bb02a1426faa53))
+
+
+
+
+
 # [2.0.0-beta.91](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.90...v2.0.0-beta.91) (2023-01-21)
 
 
