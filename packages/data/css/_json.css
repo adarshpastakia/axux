@@ -16,6 +16,10 @@
 
     & .ax-collapsable__head {
       @apply basis-48 flex-none;
+
+      & .ax-icon {
+        @apply hidden;
+      }
     }
     & .ax-collapsable__body {
       @apply flex-auto pt-0;

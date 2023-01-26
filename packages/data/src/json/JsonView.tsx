@@ -171,6 +171,7 @@ const JsonValue = ({
     <AxCollapsable
       className="ax-json__value"
       isCollapsed={false}
+      isDisabled={isInline}
       data-inline={isInline}
     >
       <label className="ax-json__property--label" style={{ width: labelWidth }}>
@@ -228,6 +229,8 @@ const JsonProperty = ({
     return "value";
   }, [value]);
 
+  const empty = useMemo(() => isEmpty(value), [value]);
+
   return (
     <div className="ax-json__property">
       {type === "value" && (
@@ -239,7 +242,7 @@ const JsonProperty = ({
           showPropertyTree={showPropertyTree}
         />
       )}
-      {showPropertyTree && type === "object" && (
+      {(showPropertyTree || empty) && type === "object" && (
         <AxCollapsable isCollapsed={false}>
           <label className="ax-json__property--label">
             {props.labeler?.([...keys, prop].join(".")) ?? prop}
@@ -252,7 +255,7 @@ const JsonProperty = ({
           />
         </AxCollapsable>
       )}
-      {!showPropertyTree && type === "object" && (
+      {!showPropertyTree && !empty && type === "object" && (
         <JsonObject
           {...props}
           json={value}
