@@ -23,18 +23,21 @@ export const grouped = Countries.list.reduce<KeyValue<Country[]>>((g, c) => {
 
 export const TreeData = [
   {
+    id: "north",
     label: "North",
     isLeaf: false,
     children: [
       {
+        id: "north-east",
         label: "East",
         isLeaf: false,
         children: [
-          { label: "Some1", isLeaf: false, id: "north-east" },
-          { label: "Some2", isLeaf: false, id: "north-east" },
+          { label: "Some1", isLeaf: false, id: "north-east1" },
+          { label: "Some2", isLeaf: false, id: "north-east2" },
         ],
       },
       {
+        id: "north-west",
         label: "West",
         isLeaf: false,
         children: [
@@ -45,23 +48,26 @@ export const TreeData = [
     ],
   },
   {
+    id: "south",
     label: "South",
     isLeaf: false,
     children: [
       {
+        id: "south-east",
         label: "East",
         isLeaf: false,
         children: [
-          { label: "Some1", isLeaf: false, id: "south-east" },
-          { label: "Some2", isLeaf: false, id: "south-east" },
+          { label: "Some1", isLeaf: false, id: "south-east1" },
+          { label: "Some2", isLeaf: false, id: "south-east2" },
         ],
       },
       {
+        id: "south-west",
         label: "West",
         isLeaf: false,
         children: [
-          { label: "Some1", isLeaf: false, id: "south-west" },
-          { label: "Some2", isLeaf: false, id: "south-west" },
+          { label: "Some1", isLeaf: false, id: "south-west1" },
+          { label: "Some2", isLeaf: false, id: "south-west2" },
         ],
       },
     ],
@@ -88,19 +94,21 @@ export const TreeStory: ComponentStory<typeof AxTreePanel> = (props) => {
       setTimeout(() => {
         resolve([
           {
+            id: id + "1",
             label: "Remote Leaf",
             isLeaf: false,
             children: [
-              { label: "Some1", isLeaf: false, id: "remote-east" },
-              { label: "Some2", isLeaf: false, id: "remote-east" },
+              { label: "Some1", isLeaf: false, id: id + "remote-east1" },
+              { label: "Some2", isLeaf: false, id: id + "remote-east2" },
             ],
           },
           {
+            id: id + "2",
             label: "Remote Leaf",
             isLeaf: false,
             children: [
-              { label: "Some1", isLeaf: false, id: "remote-west" },
-              { label: "Some2", isLeaf: false, id: "remote-west" },
+              { label: "Some1", isLeaf: false, id: id + "remote-west1" },
+              { label: "Some2", isLeaf: false, id: id + "remote-west2" },
             ],
           },
         ]);
