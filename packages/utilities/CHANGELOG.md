@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.93](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.92...v2.0.0-beta.93) (2023-01-27)
+
+**Note:** Version bump only for package @axux/utilities
+
+
+
+
+
 # [2.0.0-beta.92](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.91...v2.0.0-beta.92) (2023-01-26)
 
 
