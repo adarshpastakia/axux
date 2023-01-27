@@ -16,13 +16,13 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  useTransition,
 } from "react";
 
 export const Wrapper = (maxWidth = 1100, hideScroller = false) => {
   const El = forwardRef(({ children, width, ...props }: KeyValue, ref) => {
     const scrollerRef = useRef<HTMLDivElement>(null);
-    const loaderRef = useRef<HTMLDivElement>(null);
-
+    const [, startTransition] = useTransition();
     const [isLoading, setLoading] = useState(false);
     useImperativeHandle(
       ref,
@@ -41,7 +41,12 @@ export const Wrapper = (maxWidth = 1100, hideScroller = false) => {
       if (el != null) {
         const cb = () => {
           setNoScrollUp(el.scrollTop === 0);
-          setNoScrollDown(el.scrollTop + el.offsetHeight >= el.scrollHeight);
+          setNoScrollDown(
+            el.scrollTop + el.offsetHeight >= el.scrollHeight - 96
+          );
+          if (el.scrollTop + el.offsetHeight >= el.scrollHeight - 16) {
+            fireEvent("loadMore");
+          }
         };
         el?.addEventListener("scroll", cb);
         cb();
@@ -66,31 +71,22 @@ export const Wrapper = (maxWidth = 1100, hideScroller = false) => {
     );
 
     useEffect(() => {
-      if (loaderRef.current && scrollerRef.current) {
-        const el = scrollerRef.current;
-        const ob = new IntersectionObserver(
-          (e) => {
-            e.pop()?.isIntersecting && fireEvent("loadMore");
-          },
-          {
-            root: scrollerRef.current,
-            threshold: 1,
-          }
-        );
-        ob.observe(loaderRef.current);
-        return () => {
-          el.scrollTop = el.scrollHeight - (el.offsetHeight + 160);
-          ob.disconnect();
-        };
-      }
+      const el = scrollerRef.current;
+      startTransition(() => {
+        if (el && el.scrollTop + el.offsetHeight >= el.scrollHeight - 16) {
+          el.scrollTop -= 96;
+        }
+      });
     }, [isLoading]);
 
     return (
       <div {...props} className="ax-virtual__wrapper" ref={scrollerRef}>
         <div style={{ minWidth: Math.min(props.style.width * 0.8, maxWidth) }}>
           {children}
-          {isLoading && <AxAnimation.Card showIcon />}
-          {!isLoading && <div style={{ height: 48 }} ref={loaderRef} />}
+          <AxAnimation.Card
+            showIcon
+            className={isLoading ? "visible" : "invisible"}
+          />
         </div>
         {!hideScroller && (
           <div className="ax-virtual__scroll">

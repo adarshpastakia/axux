@@ -203,7 +203,7 @@ const AxTimelineComponent = <T extends KeyValue>({
         listRef && {
           hilight: (idx: number) => {
             if (idx >= 0) {
-              listRef.scrollToItem(idx, "center");
+              listRef.scrollToItem(idx, "smart");
               containerRef.current
                 ?.querySelector(`.hilight`)
                 ?.classList.remove("hilight");
@@ -231,7 +231,7 @@ const AxTimelineComponent = <T extends KeyValue>({
     const el = containerRef.current;
     const handlers = {
       scrollFirst: () => listRef.scrollToItem(0),
-      scrollLast: () => listRef.scrollToItem(count),
+      scrollLast: () => listRef.scrollToItem(count, "smart"),
       scrollDown: () =>
         // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
         listRef.scrollTo(listRef.state.scrollOffset + listRef.props.height),
