@@ -142,7 +142,7 @@ const AxGridViewComponent = <T extends KeyValue>({
           hilight: (idx: number) => {
             if (idx >= 0) {
               listRef.scrollToItem({
-                align: "center",
+                align: "smart",
                 rowIndex: Math.floor(idx / (colCount.current || 1)),
                 columnIndex: 0,
               });
@@ -175,6 +175,7 @@ const AxGridViewComponent = <T extends KeyValue>({
       scrollFirst: () => listRef.scrollToItem({ rowIndex: 0, columnIndex: 0 }),
       scrollLast: () =>
         listRef.scrollToItem({
+          align: "smart",
           rowIndex: listRef.props.rowCount,
           columnIndex: 0,
         }),
