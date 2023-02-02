@@ -193,8 +193,8 @@
     }
   }
 
-  textarea.ax-field__input {
-    @apply ltr:mr-0 rtl:ml-0;
+  textarea.ax-field__input ~ .ax-field__clear {
+    @apply self-start;
   }
 
   /******************* options *******************/
