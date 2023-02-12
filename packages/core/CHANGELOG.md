@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.94](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.93...v2.0.0-beta.94) (2023-02-12)
+
+
+### Bug Fixes
+
+* **Confirm:** add stopPropagation to dropdown ([22af24c](https://github.com/adarshpastakia/axux/commit/22af24c5f951f432f084fcdc3d6cdc19cfd9745e))
+* **Popover:** add overlay mask to prevent click under ([11f74f3](https://github.com/adarshpastakia/axux/commit/11f74f3e107873e3b0cdb055e3c83bf8f665998d))
+
+
+
+
+
 # [2.0.0-beta.93](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.92...v2.0.0-beta.93) (2023-01-27)
 
 **Note:** Version bump only for package @axux/core

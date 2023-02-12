@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.94](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.93...v2.0.0-beta.94) (2023-02-12)
+
+
+### Bug Fixes
+
+* **PageMaker:** config panel height ([ae1946d](https://github.com/adarshpastakia/axux/commit/ae1946dbd08e4ca97d6070f549bf3ae1d636cbd6))
+
+
+
+
+
 # [2.0.0-beta.93](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.92...v2.0.0-beta.93) (2023-01-27)
 
 **Note:** Version bump only for package @axux/pagemaker
