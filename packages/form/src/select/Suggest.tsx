@@ -214,6 +214,7 @@ export const SuggestInput: FC<SuggestProps> = ({
             />
             {children}
           </FieldWrapper>
+          {open && <div className="fixed inset-0" />}
           {usePortal && createPortal(optionDropdown, document.body)}
           {!usePortal && optionDropdown}
         </Fragment>

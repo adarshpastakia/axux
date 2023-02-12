@@ -104,26 +104,32 @@ export const AxPopover: FC<PopoverProps> & {
           </Popover.Button>
           {!isDisabled &&
             createPortal(
-              <Popover.Panel
-                {...rest}
-                tabIndex={-1}
-                className={`popover ${popoverClassName ?? ""}`}
-                ref={setPopperElement as AnyObject}
-                style={styles.popper}
-                {...attributes.popper}
-              >
-                <div className={`popover__container ${className ?? ""}`}>
-                  {open && popperEl}
-                </div>
-                {!hideArrow && (
+              <Fragment>
+                {open && <div className="fixed inset-0" />}
+                <Popover.Panel
+                  {...rest}
+                  tabIndex={-1}
+                  className={`popover ${popoverClassName ?? ""}`}
+                  ref={setPopperElement as AnyObject}
+                  style={styles.popper}
+                  {...attributes.popper}
+                >
                   <div
-                    ref={setArrowElement as AnyObject}
-                    className="popover__arrow"
-                    style={styles.arrow}
-                    {...attributes.arrow}
-                  />
-                )}
-              </Popover.Panel>,
+                    className={`popover__container ${className ?? ""}`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {open && popperEl}
+                  </div>
+                  {!hideArrow && (
+                    <div
+                      ref={setArrowElement as AnyObject}
+                      className="popover__arrow"
+                      style={styles.arrow}
+                      {...attributes.arrow}
+                    />
+                  )}
+                </Popover.Panel>
+              </Fragment>,
               document.body
             )}
         </Fragment>
