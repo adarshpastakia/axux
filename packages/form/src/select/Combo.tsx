@@ -142,51 +142,56 @@ export const ComboInput = <T extends AnyObject>({
       as={Fragment}
       nullable
     >
-      <FieldWrapper
-        info={info}
-        error={error}
-        label={label}
-        width={width}
-        className={className}
-        labelAppend={labelAppend}
-        isInvalid={isInvalid}
-        isRequired={isRequired}
-        disabled={isDisabled}
-        onClear={() => handleChange()}
-        wrapperRef={setReferenceElement as AnyObject}
-        canClear={allowClear && !isEmpty(actualValue)}
-      >
-        <Combobox.Input
-          ref={inputRef}
-          aria-label={label}
-          aria-disabled={isDisabled}
-          aria-readonly={isReadOnly}
-          aria-required={isRequired}
-          aria-errormessage={error}
-          size={1}
-          placeholder={placeholder}
-          disabled={isDisabled}
-          readOnly={!isEditable && !allowCreate}
-          data-invalid={isInvalid}
-          className="ax-field__input"
-          autoComplete="off"
-          onKeyDown={handleEnter(onEnterPressed)}
-          displayValue={() => displayLabel}
-          onChange={(e) => onQueryChange(e.target.value)}
-          onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
-          {...rest}
-        />
-        {children}
-        <Combobox.Button
-          as="div"
-          className="ax-field__addon ax-select__handle"
-          data-align="end"
-        >
-          <AxIcon icon={Icons.iconDropdown} />
-        </Combobox.Button>
-      </FieldWrapper>
-      {usePortal && createPortal(optionDropdown, document.body)}
-      {!usePortal && optionDropdown}
+      {({ open }) => (
+        <Fragment>
+          <FieldWrapper
+            info={info}
+            error={error}
+            label={label}
+            width={width}
+            className={className}
+            labelAppend={labelAppend}
+            isInvalid={isInvalid}
+            isRequired={isRequired}
+            disabled={isDisabled}
+            onClear={() => handleChange()}
+            wrapperRef={setReferenceElement as AnyObject}
+            canClear={allowClear && !isEmpty(actualValue)}
+          >
+            <Combobox.Input
+              ref={inputRef}
+              aria-label={label}
+              aria-disabled={isDisabled}
+              aria-readonly={isReadOnly}
+              aria-required={isRequired}
+              aria-errormessage={error}
+              size={1}
+              placeholder={placeholder}
+              disabled={isDisabled}
+              readOnly={!isEditable && !allowCreate}
+              data-invalid={isInvalid}
+              className="ax-field__input"
+              autoComplete="off"
+              onKeyDown={handleEnter(onEnterPressed)}
+              displayValue={() => displayLabel}
+              onChange={(e) => onQueryChange(e.target.value)}
+              onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
+              {...rest}
+            />
+            {children}
+            <Combobox.Button
+              as="div"
+              className="ax-field__addon ax-select__handle"
+              data-align="end"
+            >
+              <AxIcon icon={Icons.iconDropdown} />
+            </Combobox.Button>
+          </FieldWrapper>
+          {open && <div className="fixed inset-0" />}
+          {usePortal && createPortal(optionDropdown, document.body)}
+          {!usePortal && optionDropdown}
+        </Fragment>
+      )}
     </Combobox>
   );
 };

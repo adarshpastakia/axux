@@ -196,61 +196,66 @@ export const TagInput = <T extends AnyObject>({
       as={Fragment}
       multiple
     >
-      <FieldWrapper
-        info={info}
-        error={error}
-        label={label}
-        width={width}
-        className={className}
-        labelAppend={labelAppend}
-        isInvalid={isInvalid}
-        isRequired={isRequired}
-        disabled={isDisabled}
-        onClear={() => handleChange()}
-        wrapperRef={setReferenceElement as AnyObject}
-        canClear={allowClear && !isEmpty(actualValue)}
-      >
-        <div className="flex flex-wrap flex-auto items-center order-3">
-          {actualValue.map((option, i) => (
-            <AxTag
-              key={i}
-              className="ax-select__tag"
-              onRemove={() => handleRemove(i)}
-            >
-              {displayLabel(option)}
-            </AxTag>
-          ))}
-          <Combobox.Input
-            ref={inputRef}
-            aria-label={label}
-            aria-disabled={isDisabled}
-            aria-readonly={isReadOnly}
-            aria-required={isRequired}
-            aria-errormessage={error}
-            size={1}
-            placeholder={placeholder}
+      {({ open }) => (
+        <Fragment>
+          <FieldWrapper
+            info={info}
+            error={error}
+            label={label}
+            width={width}
+            className={className}
+            labelAppend={labelAppend}
+            isInvalid={isInvalid}
+            isRequired={isRequired}
             disabled={isDisabled}
-            readOnly={!isEditable && !allowCreate}
-            data-invalid={isInvalid}
-            className="ax-field__input flex-auto min-w-fit"
-            autoComplete="off"
-            onKeyDown={handleKeyPress}
-            onChange={(e) => onQueryChange(e.target.value)}
-            onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
-            {...rest}
-          />
-        </div>
-        {children}
-        <Combobox.Button
-          as="div"
-          className="ax-field__addon ax-select__handle"
-          data-align="end"
-        >
-          <AxIcon icon={Icons.iconDropdown} />
-        </Combobox.Button>
-      </FieldWrapper>
-      {usePortal && createPortal(optionDropdown, document.body)}
-      {!usePortal && optionDropdown}
+            onClear={() => handleChange()}
+            wrapperRef={setReferenceElement as AnyObject}
+            canClear={allowClear && !isEmpty(actualValue)}
+          >
+            <div className="flex flex-wrap flex-auto items-center order-3">
+              {actualValue.map((option, i) => (
+                <AxTag
+                  key={i}
+                  className="ax-select__tag"
+                  onRemove={() => handleRemove(i)}
+                >
+                  {displayLabel(option)}
+                </AxTag>
+              ))}
+              <Combobox.Input
+                ref={inputRef}
+                aria-label={label}
+                aria-disabled={isDisabled}
+                aria-readonly={isReadOnly}
+                aria-required={isRequired}
+                aria-errormessage={error}
+                size={1}
+                placeholder={placeholder}
+                disabled={isDisabled}
+                readOnly={!isEditable && !allowCreate}
+                data-invalid={isInvalid}
+                className="ax-field__input flex-auto min-w-fit"
+                autoComplete="off"
+                onKeyDown={handleKeyPress}
+                onChange={(e) => onQueryChange(e.target.value)}
+                onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
+                {...rest}
+              />
+            </div>
+            {children}
+            <Combobox.Button
+              as="div"
+              className="ax-field__addon ax-select__handle"
+              data-align="end"
+            >
+              <AxIcon icon={Icons.iconDropdown} />
+            </Combobox.Button>
+          </FieldWrapper>
+          {open && <div className="fixed inset-0" />}
+          {usePortal && createPortal(optionDropdown, document.body)}
+          {!usePortal && optionDropdown}
+        </Fragment>
+      )}
     </Combobox>
   );
 };

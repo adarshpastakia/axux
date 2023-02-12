@@ -160,37 +160,42 @@ export const SelectInput = <T extends AnyObject>({
       name={name}
       as={Fragment}
     >
-      <FieldWrapper
-        info={info}
-        error={error}
-        label={label}
-        width={width}
-        className={className}
-        labelAppend={labelAppend}
-        isInvalid={isInvalid}
-        isRequired={isRequired}
-        disabled={isDisabled}
-        onClear={() => handleChange()}
-        wrapperRef={setReferenceElement as AnyObject}
-        canClear={allowClear && !isEmpty(actualValue)}
-      >
-        <div
-          data-align="end"
-          className="ax-field__addon ax-select__handle pointer-events-none"
-        >
-          <AxIcon icon={Icons.iconDropdown} />
-        </div>
-        <Listbox.Button className="absolute inset-0 opacity-0" />
-        <span ref={inputRef} className="ax-field__input truncate">
-          {displayLabel}
-          {!displayLabel && (
-            <span className="text-muted">{placeholder}&nbsp;</span>
-          )}
-        </span>
-        {children}
-      </FieldWrapper>
-      {usePortal && createPortal(optionDropdown, document.body)}
-      {!usePortal && optionDropdown}
+      {({ open }) => (
+        <Fragment>
+          <FieldWrapper
+            info={info}
+            error={error}
+            label={label}
+            width={width}
+            className={className}
+            labelAppend={labelAppend}
+            isInvalid={isInvalid}
+            isRequired={isRequired}
+            disabled={isDisabled}
+            onClear={() => handleChange()}
+            wrapperRef={setReferenceElement as AnyObject}
+            canClear={allowClear && !isEmpty(actualValue)}
+          >
+            <div
+              data-align="end"
+              className="ax-field__addon ax-select__handle pointer-events-none"
+            >
+              <AxIcon icon={Icons.iconDropdown} />
+            </div>
+            <Listbox.Button className="absolute inset-0 opacity-0" />
+            <span ref={inputRef} className="ax-field__input truncate">
+              {displayLabel}
+              {!displayLabel && (
+                <span className="text-muted">{placeholder}&nbsp;</span>
+              )}
+            </span>
+            {children}
+          </FieldWrapper>
+          {open && <div className="fixed inset-0" />}
+          {usePortal && createPortal(optionDropdown, document.body)}
+          {!usePortal && optionDropdown}
+        </Fragment>
+      )}
     </Listbox>
   );
 };
