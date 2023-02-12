@@ -283,7 +283,7 @@
     @apply relative grid rounded-full h-[1.25em] min-w-[2.5em] bg-bw-100 dark:bg-bw-800 text-primary-500 whitespace-nowrap
     before:content-[attr(data-on)] after:content-[attr(data-off)];
     font-size: 0.875em;
-    line-height: 1.25em;
+    line-height: 1.25em !important;
     grid-template-columns: 1fr 1fr;
     transition: background-color 200ms;
     box-shadow: 0 0 1px theme(colors.bw.500);
