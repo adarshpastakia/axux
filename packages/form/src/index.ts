@@ -8,6 +8,7 @@
 
 import { Addon } from "./inputs/Addon";
 import { Checkbox } from "./inputs/Checkbox";
+import { Color } from "./inputs/Color";
 import { Container } from "./inputs/Container";
 import { File } from "./inputs/File";
 import { Number } from "./inputs/Number";
@@ -30,6 +31,7 @@ export const AxField = {
   Container,
   Addon,
   Text,
+  Color,
   Textarea,
   Password,
   Number,
@@ -66,3 +68,4 @@ AxField.Combo.displayName = "AxField.Combo";
 AxField.Select.displayName = "AxField.Select";
 AxField.Suggest.displayName = "AxField.Suggest";
 AxField.Tag.displayName = "AxField.Tag";
+AxField.Color.displayName = "AxField.Color";

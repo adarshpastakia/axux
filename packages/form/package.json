@@ -28,7 +28,9 @@
     "@axux/utilities": "^2.0.0-beta.94",
     "@headlessui/react": "^1.7.7",
     "@hookform/resolvers": "^2.9.3",
+    "react-color": "^2.19.3",
     "react-hook-form": "^7.33.0",
+    "react-ranger": "^2.1.0",
     "yup": "^0.32.11"
   },
   "peerDependencies": {
@@ -39,6 +41,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.0.10",
+    "@types/react-color": "^3.0.6",
     "@types/react-dom": "^18.0.5",
     "@types/react-i18next": "^8.1.0",
     "@types/react-router-dom": "^5.3.3",
