@@ -68,6 +68,8 @@ export const File: FC<FileProps> = memo(
     isReadOnly,
     allowClear,
     children,
+    inline,
+    labelWidth,
     onEnterPressed,
     ...rest
   }: FileProps) => {
@@ -95,6 +97,8 @@ export const File: FC<FileProps> = memo(
           error={error}
           label={label}
           width={width}
+          inline={inline}
+          labelWidth={labelWidth}
           className={className}
           labelAppend={labelAppend}
           isInvalid={isInvalid}

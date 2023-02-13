@@ -86,6 +86,8 @@ export const Slider: FC<SliderProps> = memo(
     error,
     width,
     color,
+    inline,
+    labelWidth,
     isVertical,
     isDisabled,
     isReadOnly,
@@ -148,6 +150,8 @@ export const Slider: FC<SliderProps> = memo(
         error={error}
         label={label}
         width={width}
+        inline={inline}
+        labelWidth={labelWidth}
         labelAppend={labelAppend}
         className={`ax-field--plain ${className ?? ""}`}
         disabled={isDisabled}

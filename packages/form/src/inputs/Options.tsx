@@ -43,6 +43,8 @@ export const Options: FC<OptionsProps> = memo(
     isReadOnly,
     allowClear,
     children,
+    inline,
+    labelWidth,
     onEnterPressed,
     ...rest
   }: OptionsProps) => {
@@ -52,6 +54,8 @@ export const Options: FC<OptionsProps> = memo(
         error={error}
         label={label}
         width={width}
+        inline={inline}
+        labelWidth={labelWidth}
         className={`ax-field--plain ${className ?? ""}`}
         labelAppend={labelAppend}
         isInvalid={!isDisabled && isInvalid}

@@ -57,6 +57,8 @@ export const SelectInput = <T extends AnyObject>({
   isReadOnly,
   allowClear,
   children,
+  inline,
+  labelWidth,
   onEnterPressed,
   ...rest
 }: Omit<SelectProps<T>, "makeLabel" | "allowCreate"> & {
@@ -172,6 +174,8 @@ export const SelectInput = <T extends AnyObject>({
             isInvalid={isInvalid}
             isRequired={isRequired}
             disabled={isDisabled}
+            inline={inline}
+            labelWidth={labelWidth}
             onClear={() => handleChange()}
             wrapperRef={setReferenceElement as AnyObject}
             canClear={allowClear && !isEmpty(actualValue)}

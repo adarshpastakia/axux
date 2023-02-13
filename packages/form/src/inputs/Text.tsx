@@ -50,6 +50,8 @@ export const Text: FC<TextProps> = memo(
     allowClear,
     children,
     onEnterPressed,
+    inline,
+    labelWidth,
     ...rest
   }: TextProps) => {
     const [_actualValue, setActualValue] = useState("");
@@ -72,6 +74,8 @@ export const Text: FC<TextProps> = memo(
         error={error}
         label={label}
         width={width}
+        inline={inline}
+        labelWidth={labelWidth}
         isPlain={isPlain}
         className={className}
         labelAppend={labelAppend}
