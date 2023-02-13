@@ -30,7 +30,6 @@
     "@hookform/resolvers": "^2.9.3",
     "react-color": "^2.19.3",
     "react-hook-form": "^7.33.0",
-    "react-ranger": "^2.1.0",
     "yup": "^0.32.11"
   },
   "peerDependencies": {

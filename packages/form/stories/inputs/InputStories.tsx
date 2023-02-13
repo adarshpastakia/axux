@@ -276,6 +276,7 @@ SliderStory.args = {
   label: "Slider input",
   error: "",
   info: "",
+  value: [5,20],
   min: 0,
   max: 10,
   step: 0.5,
@@ -287,6 +288,10 @@ SliderStory.args = {
   isDisabled: false,
   isReadOnly: false,
   isRequired: false,
+  showValue: false,
+  showLabels: false,
+  minLabel: "",
+  maxLabel: "",
 };
 
 const FileTemplate: ComponentStory<typeof AxField.File> = (props) => (
