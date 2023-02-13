@@ -42,6 +42,14 @@ export interface ContainerProps extends ElementProps, ChildProp {
    * label extra
    */
   labelAppend?: ReactNode;
+  /**
+   * inline label and input
+   */
+  inline?: boolean;
+  /**
+   * label width for inline
+   */
+  labelWidth?: string;
 }
 
 // eslint-disable-next-line react/display-name
@@ -57,6 +65,8 @@ export const Container: FC<ContainerProps> = memo(
     isRequired,
     labelAppend,
     className,
+    inline,
+    labelWidth,
     ...rest
   }: ContainerProps) => {
     const onClick = useCallback((e: MouseEvent<HTMLLabelElement>) => {
@@ -71,9 +81,10 @@ export const Container: FC<ContainerProps> = memo(
         {...rest}
         className={`ax-field__container ${className ?? ""}`}
         style={{ width, minWidth, maxWidth }}
+        data-inline={inline}
       >
         {label && (
-          <div className="ax-field__label">
+          <div className="ax-field__label" style={{ width: labelWidth }}>
             <label data-required={isRequired} onClick={onClick}>
               {label}
             </label>

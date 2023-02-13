@@ -75,6 +75,8 @@ export const SuggestInput: FC<SuggestProps> = ({
   isDisabled,
   isReadOnly,
   allowClear,
+  inline,
+  labelWidth,
   children,
   defaultItems = [],
   ...rest
@@ -190,6 +192,8 @@ export const SuggestInput: FC<SuggestProps> = ({
             isInvalid={isInvalid}
             isRequired={isRequired}
             disabled={isDisabled}
+            inline={inline}
+            labelWidth={labelWidth}
             onClear={() => handleSelectChange("")}
             wrapperRef={setReferenceElement as AnyObject}
             canClear={!isEmpty(actualValue)}

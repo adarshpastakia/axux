@@ -71,6 +71,14 @@ export interface InputProps<K = string> {
    */
   isPlain?: boolean;
   /**
+   * inline label and input
+   */
+  inline?: boolean;
+  /**
+   * label width for inline
+   */
+  labelWidth?: string;
+  /**
    * on value changed
    */
   onChange?: (value?: K) => void;
@@ -110,6 +118,14 @@ export interface OptionProps<K> {
    * field disabled
    */
   isDisabled?: boolean;
+  /**
+   * inline label and input
+   */
+  inline?: boolean;
+  /**
+   * label width for inline
+   */
+  labelWidth?: string;
 
   /**
    * on value changed

@@ -23,6 +23,7 @@ import {
   SelectStory,
   ComboStory,
   TagStory,
+  ColorStory,
   SuggestStory,
   ContainerStory,
 } from "./inputs/InputStories";
@@ -65,6 +66,14 @@ import {
 
 <Canvas>
   <Story name="Search">{SearchStory}</Story>
+</Canvas>
+
+<Heading storyId="form-inputs--color">Color</Heading>
+
+<Description of={AxField.Color} />
+
+<Canvas>
+  <Story name="Color">{ColorStory}</Story>
 </Canvas>
 
 <Heading storyId="form-inputs--select">Select</Heading>

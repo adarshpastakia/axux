@@ -23,6 +23,8 @@ interface WrapperProps extends ChildrenProp {
   canClear?: boolean;
   isPlain?: boolean;
   error?: string;
+  inline?: boolean;
+  labelWidth?: string;
   width?: number | string;
   onClear?: () => void;
   wrapperRef?: Ref<HTMLDivElement>;

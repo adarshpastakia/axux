@@ -22,6 +22,7 @@ TextStory.args = {
   placeholder: "Text value....",
   error: "",
   info: "",
+  inline: false,
   allowClear: true,
   autoFocus: false,
   isInvalid: false,
@@ -40,6 +41,7 @@ TextareaStory.args = {
   error: "",
   info: "",
   rows: 5,
+  inline: false,
   allowClear: true,
   autoFocus: false,
   isInvalid: false,
@@ -58,6 +60,7 @@ PasswordStory.args = {
   error: "",
   info: "",
   strength: 81,
+  inline: false,
   allowClear: true,
   autoFocus: false,
   isInvalid: false,
@@ -79,6 +82,7 @@ NumberStory.args = {
   min: 0,
   max: 10,
   step: 0.5,
+  inline: false,
   allowClear: true,
   autoFocus: false,
   isInvalid: false,
@@ -96,8 +100,26 @@ SearchStory.args = {
   placeholder: "Search value....",
   error: "",
   info: "",
+  inline: false,
   autoFocus: false,
   isSearching: false,
+  isInvalid: false,
+  isDisabled: false,
+  isReadOnly: false,
+  isRequired: false,
+};
+
+const ColorTemplate: ComponentStory<typeof AxField.Color> = (props) => (
+  <AxField.Color {...props} onChange={action("onChange")} />
+);
+export const ColorStory = ColorTemplate.bind({});
+ColorStory.args = {
+  label: "Color input",
+  value: "#FC0000",
+  error: "",
+  info: "",
+  hideAlpha: false,
+  autoFocus: false,
   isInvalid: false,
   isDisabled: false,
   isReadOnly: false,
@@ -149,6 +171,7 @@ SelectStory.args = {
     </div>
   ),
   allowClear:true,
+  inline: false,
   autoFocus: false,
   isInvalid: false,
   isEditable: true,
@@ -180,6 +203,7 @@ ComboStory.args = {
     `${c.emoji} ${c.name}`
   ),
   allowClear:true,
+  inline: false,
   autoFocus: false,
   isInvalid: false,
   isEditable: true,
@@ -211,6 +235,7 @@ TagStory.args = {
     </div>
   ),
   allowCreate: true,
+  inline: false,
   allowClear: true,
   autoFocus: false,
   isInvalid: false,
@@ -236,6 +261,7 @@ SuggestStory.args = {
   ],
   allowClear: true,
   autoFocus: false,
+  inline: false,
   isInvalid: false,
   isDisabled: false,
   isReadOnly: false,
@@ -254,6 +280,7 @@ SliderStory.args = {
   max: 10,
   step: 0.5,
   height: 144,
+  inline: false,
   isVertical: false,
   autoFocus: false,
   isInvalid: false,
@@ -270,6 +297,7 @@ FileStory.args = {
   label: "File input",
   error: "",
   info: "",
+  inline: false,
   multiple: false,
   showList: false,
   allowClear: true,

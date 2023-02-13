@@ -59,6 +59,8 @@ export const TagInput = <T extends AnyObject>({
   isDisabled,
   isReadOnly,
   allowClear,
+  inline,
+  labelWidth,
   children,
   onEnterPressed,
   ...rest
@@ -203,6 +205,8 @@ export const TagInput = <T extends AnyObject>({
             error={error}
             label={label}
             width={width}
+            inline={inline}
+            labelWidth={labelWidth}
             className={className}
             labelAppend={labelAppend}
             isInvalid={isInvalid}
