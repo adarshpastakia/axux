@@ -349,35 +349,28 @@
 
   /******************* slider *******************/
   .ax-field__slider {
-    @apply flex-auto order-3 flex items-center text-primary-600;
+    @apply flex-auto order-3 flex items-center text-primary-600 select-none;
 
     & .ax-field__slider--wrapper {
       @apply flex-auto relative flex items-center;
-
-      & > .ax-field__slider--hilight {
-        @apply absolute rounded bg-current z-[1];
-
-        &[data-hidden="true"] {
-          @apply hidden;
-        }
-      }
     }
 
     & .ax-field__slider--dots {
-      @apply flex justify-between items-center absolute inset-0 leading-none;
+      @apply absolute inline-block h-1 w-1 rounded-sm bg-bw-800/50 dark:bg-bw-100/50;
+      line-height: 0;
+      z-index: 1;
+    }
 
-      & > span {
-        @apply inline-block h-1 w-1 rounded-sm bg-bw-800/50 dark:bg-bw-100/50;
-        line-height: 0;
+    & .ax-field__slider--hilight {
+      @apply absolute bg-bw-200 dark:bg-black z-[0];
+
+      &[data-hilight="true"] {
+        @apply bg-current z-[1];
       }
     }
 
-    & input {
-      @apply appearance-none flex-auto rounded w-full h-0.5 bg-bw-500/20 z-[2] focus-visible:ring-2 outline-none;
-    }
-
-    & input::-webkit-slider-thumb {
-      @apply bg-current cursor-pointer appearance-none h-3 w-3 rounded-full z-[2];
+    & .ax-field__slider--thumb {
+      @apply bg-current cursor-pointer appearance-none h-3 w-3 rounded-full z-[5] absolute;
 
       &:hover {
         box-shadow: 0 0 2rem rgba(255 255 255 /30%) inset;
@@ -405,19 +398,27 @@
         @apply mx-2 h-8;
 
         & > .ax-field__slider--hilight {
-          @apply h-1 top-1/2 -translate-y-1/2;
+          @apply h-0.5 top-1/2 -translate-y-1/2;
+
+          &[data-hilight="true"] {
+            @apply h-1;
+          }
         }
       }
 
       & .ax-field__slider--dots {
-        @apply inset-x-0;
+        @apply top-1/2 -mt-0.5;
+      }
+
+      & .ax-field__slider--thumb {
+        @apply top-1/2 -mt-1.5 outline-primary-500 outline outline-offset-2 focus:outline-1;
       }
 
       & .ax-field__slider--value {
         @apply top-1/2 -translate-y-1/2;
 
         &[data-align="end"] {
-          margin-inline-start: 1rem;
+          margin-inline-start: 0.75rem;
 
           &:before {
             @apply ltr:-translate-x-[0.125rem] rtl:translate-x-[0.125rem] ltr:left-0 rtl:right-0;
@@ -425,7 +426,7 @@
         }
         &[data-align="start"] {
           @apply ltr:-translate-x-full rtl:translate-x-full;
-          margin-inline-start: -1rem;
+          margin-inline-start: -0.75rem;
 
           &:before {
             @apply ltr:translate-x-[0.125rem] rtl:-translate-x-[0.125rem] ltr:right-0 rtl:left-0;
@@ -437,15 +438,15 @@
     &[data-vertical="true"] {
       @apply flex-col w-8;
 
-      & input {
-        @apply absolute -bottom-1.5 ltr:origin-left rtl:origin-right ltr:-rotate-90 rtl:rotate-90 ltr:translate-x-4 rtl:-translate-x-4;
-      }
-
       & .ax-field__slider--wrapper {
         @apply my-2 w-8;
 
         & > .ax-field__slider--hilight {
-          @apply w-1 -bottom-1 left-1/2 -translate-x-1/2;
+          @apply w-0.5 -bottom-1 left-1/2 -translate-x-1/2;
+
+          &[data-hilight="true"] {
+            @apply w-1;
+          }
         }
       }
 
@@ -454,7 +455,11 @@
       }
 
       & .ax-field__slider--dots {
-        @apply flex-col-reverse;
+        @apply left-1/2 -ml-0.5;
+      }
+
+      & .ax-field__slider--thumb {
+        @apply left-1/2 -ml-1.5;
       }
 
       & .ax-field__slider--value {

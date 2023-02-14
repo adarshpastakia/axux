@@ -276,7 +276,33 @@ SliderStory.args = {
   label: "Slider input",
   error: "",
   info: "",
-  value: [5,20],
+  value: 5,
+  min: 0,
+  max: 10,
+  step: 0.5,
+  height: 144,
+  inline: false,
+  isVertical: false,
+  autoFocus: false,
+  isInvalid: false,
+  isDisabled: false,
+  isReadOnly: false,
+  isRequired: false,
+  showValue: false,
+  showLabels: false,
+  minLabel: "",
+  maxLabel: "",
+};
+
+const RangeTemplate: ComponentStory<typeof AxField.Range> = (props) => (
+  <AxField.Range {...props} width="32rem" onChange={action("onChange")} />
+);
+export const RangeStory = RangeTemplate.bind({});
+RangeStory.args = {
+  label: "Range input",
+  error: "",
+  info: "",
+  value: [1,4],
   min: 0,
   max: 10,
   step: 0.5,
