@@ -22,9 +22,9 @@ import { useRanger } from "../ranger";
 import { InputProps } from "../types";
 import { FieldWrapper } from "./Wrapper";
 
-export interface SliderProps
+export interface RangeProps
   extends ElementProps,
-    Omit<InputProps<number>, "placeholder" | "allowClear"> {
+    Omit<InputProps<[number, number]>, "placeholder" | "allowClear"> {
   /**
    * min value
    */
@@ -68,7 +68,7 @@ export interface SliderProps
 }
 
 // eslint-disable-next-line react/display-name
-export const Slider: FC<SliderProps> = memo(
+export const Range: FC<RangeProps> = memo(
   ({
     label,
     labelAppend,
@@ -97,19 +97,19 @@ export const Slider: FC<SliderProps> = memo(
     min = 0,
     max = 100,
     ...rest
-  }: SliderProps) => {
-    const [actualValue, setActualValue] = useState(0);
+  }: RangeProps) => {
+    const [actualValue, setActualValue] = useState([0, 0]);
     const [displayValue, setDisplayValue] = useState(false);
     const [, startTransition] = useTransition();
     useEffect(() => {
-      setActualValue(value ?? 0);
+      setActualValue(value ?? [0, 0]);
     }, [value]);
     useEffect(() => {
       setDisplayValue(!!showValue);
     }, [showValue]);
     const handleChange = useCallback(
-      (value: number) => {
-        setActualValue(value ?? 0);
+      (value: [number, number]) => {
+        setActualValue(value ?? [0, 0]);
         onChange != null && startTransition(() => onChange(value ?? undefined));
       },
       [onChange]
@@ -133,7 +133,7 @@ export const Slider: FC<SliderProps> = memo(
     );
 
     const rangerInstance = useRanger({
-      values: [actualValue],
+      values: actualValue,
       min,
       max,
       stepSize: step,
@@ -141,7 +141,8 @@ export const Slider: FC<SliderProps> = memo(
       tickSize: Math.max((max - min) / 10, step),
       onDragStart: () => setDisplayValue(true),
       onDragEnd: () => setDisplayValue(!!showValue),
-      onChange: (values: readonly number[]) => handleChange(values[0]),
+      onChange: (values: readonly number[]) =>
+        handleChange([values[0], values[1]]),
     });
 
     return (
@@ -174,7 +175,6 @@ export const Slider: FC<SliderProps> = memo(
               <div
                 key={key}
                 className="ax-field__slider--dots"
-                onClick={() => handleChange(value)}
                 style={styles}
               />
             ))}
@@ -187,7 +187,7 @@ export const Slider: FC<SliderProps> = memo(
               />
             ))}
             {rangerInstance.handles.map(
-              ({ key, value, props, styles, percentage, valueStyles }) => (
+              ({ key, value, props, styles, valueStyles }) => (
                 <Fragment key={key}>
                   <button
                     type="button"
@@ -198,7 +198,7 @@ export const Slider: FC<SliderProps> = memo(
                   {displayValue && (
                     <div
                       className="ax-field__slider--value"
-                      data-align={percentage > 50 ? "start" : "end"}
+                      data-align={key === 0 ? "start" : "end"}
                       style={valueStyles}
                     >
                       {Format.number(value)}

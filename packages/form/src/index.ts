@@ -15,6 +15,7 @@ import { Number } from "./inputs/Number";
 import { Options } from "./inputs/Options";
 import { Password } from "./inputs/Password";
 import { Radio } from "./inputs/Radio";
+import { Range } from "./inputs/Range";
 import { Search } from "./inputs/Search";
 import { Slider } from "./inputs/Slider";
 import { Switch } from "./inputs/Switch";
@@ -36,6 +37,7 @@ export const AxField = {
   Password,
   Number,
   Slider,
+  Range,
   File,
   Search,
   Options,
@@ -58,6 +60,7 @@ AxField.Textarea.displayName = "AxField.Text";
 AxField.Password.displayName = "AxField.Password";
 AxField.Number.displayName = "AxField.Number";
 AxField.Slider.displayName = "AxField.Slider";
+AxField.Range.displayName = "AxField.Range";
 AxField.File.displayName = "AxField.File";
 AxField.Search.displayName = "AxField.Search";
 AxField.Options.displayName = "AxField.Options";
