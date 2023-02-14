@@ -6,6 +6,7 @@
 export const getBoundingClientRect = (element: any) => {
   const rect = element.getBoundingClientRect();
   return {
+    top: Math.ceil(rect.top),
     left: Math.ceil(rect.left),
     right: Math.ceil(rect.right),
     width: Math.ceil(rect.width),

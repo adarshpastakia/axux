@@ -178,9 +178,10 @@ export const Range: FC<RangeProps> = memo(
                 style={styles}
               />
             ))}
-            {rangerInstance.segments.map(({ key, styles, active }) => (
+            {rangerInstance.segments.map(({ key, styles, active, props }) => (
               <div
                 key={key}
+                {...props}
                 data-hilight={active}
                 className="ax-field__slider--hilight"
                 style={styles}
