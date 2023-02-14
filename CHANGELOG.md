@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.94...v2.0.0) (2023-02-14)
+
+
+### Bug Fixes
+
+* **ColorInput:** added simple color input ([39a6c15](https://github.com/adarshpastakia/axux/commit/39a6c15bd721e3d2c3a4e8f8b40b0cb7a4abb487))
+* **ColorInput:** use field width ([0107787](https://github.com/adarshpastakia/axux/commit/0107787defb5909e6bd9821d7221a36f89549131))
+* **RangeSlider:** segment drag ([b25004f](https://github.com/adarshpastakia/axux/commit/b25004ff0aee4c47c472dda384f400241cf243ec))
+* **SliderInput:** change value on track click ([f3cf7c4](https://github.com/adarshpastakia/axux/commit/f3cf7c4b6df299e9bb7448d1dd14dc344ef6d2a0))
+* **Slider:** update slider using react-ranger ([3af90e2](https://github.com/adarshpastakia/axux/commit/3af90e23ccdb62c174e2aaa9b573f8fc11dafdc7))
+
+
+
+
+
 # [2.0.0-beta.94](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.93...v2.0.0-beta.94) (2023-02-12)
 
 
