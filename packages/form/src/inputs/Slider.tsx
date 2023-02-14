@@ -174,7 +174,6 @@ export const Slider: FC<SliderProps> = memo(
               <div
                 key={key}
                 className="ax-field__slider--dots"
-                onClick={() => handleChange(value)}
                 style={styles}
               />
             ))}
