@@ -62,6 +62,7 @@ export const useRanger = (opts: RangerConfig) => {
   const stepSize = "stepSize" in opts ? opts.stepSize : 1;
 
   const [activeHandleIndex, setActiveHandleIndex] = useState<number>();
+  const [segmentStart, setSegmentStart] = useState<[number, number]>();
   const [tempValues, setTempValues] = useState<number[]>();
   const isRtl = useIsRtl();
 
@@ -76,6 +77,7 @@ export const useRanger = (opts: RangerConfig) => {
 
   const getLatest = useGetLatest({
     activeHandleIndex,
+    segmentStart,
     onChange,
     onDrag,
     onDragStart,
@@ -84,6 +86,7 @@ export const useRanger = (opts: RangerConfig) => {
     tempValues,
   });
   const trackElRef = useRef<HTMLDivElement>(null);
+  const segmentElRef = useRef<HTMLDivElement>(null);
   const getValueForClientX = useCallback(
     (clientX: number) => {
       const trackDims = getBoundingClientRect(trackElRef.current);
@@ -203,6 +206,37 @@ export const useRanger = (opts: RangerConfig) => {
     },
     [getLatest, getValueForClientX, roundToStep, values, isVertical]
   );
+  const handleSegmentDrag = useCallback(
+    (e: MouseEvent | TouchEvent) => {
+      const {
+        segmentStart: [segX, segY],
+        tempValues,
+        onDrag,
+      } = getLatest();
+      const { left, bottom } = getBoundingClientRect(segmentElRef.current);
+
+      const clientX =
+        // @ts-expect-error
+        e.type === "touchmove" ? e.changedTouches[0].clientX : e.clientX;
+      const clientY =
+        // @ts-expect-error
+        e.type === "touchmove" ? e.changedTouches[0].clientY : e.clientY;
+
+      const start = getValueForClientX(
+        isVertical ? bottom + (clientY - segY) : left + (clientX - segX)
+      );
+      let diff = roundToStep(start) - tempValues[0];
+      if (+tempValues[1] + diff > max) diff = 0;
+      const newValues = [+tempValues[0] + diff, +tempValues[1] + diff];
+      if (tempValues[0] !== newValues[0] || tempValues[1] !== newValues[1]) {
+        console.log(newValues);
+        onDrag?.(newValues);
+        setTempValues(newValues);
+        setSegmentStart([clientX, clientY]);
+      }
+    },
+    [getLatest, getValueForClientX, roundToStep, values, isVertical, max]
+  );
   const handleKeyDown = useCallback(
     (e: KE, i: number) => {
       const { values, onChange } = getLatest();
@@ -224,26 +258,56 @@ export const useRanger = (opts: RangerConfig) => {
   );
   const handlePress = useCallback(
     (e: ME | TE, i: number) => {
-      const { onDragStart } = getLatest();
-      setActiveHandleIndex(i);
+      const { onDragStart, values } = getLatest();
+      if (i === -1) {
+        const clientX =
+          e.type === "touchmove"
+            ? // @ts-expect-error
+              e.nativeEvent.changedTouches[0].clientX
+            : // @ts-expect-error
+              e.nativeEvent.clientX;
+        const clientY =
+          e.type === "touchmove"
+            ? // @ts-expect-error
+              e.nativeEvent.changedTouches[0].clientY
+            : // @ts-expect-error
+              e.nativeEvent.clientY;
 
+        setTempValues(values);
+        setSegmentStart([clientX, clientY]);
+      } else {
+        setActiveHandleIndex(i);
+      }
       const handleRelease = (e: MouseEvent | TouchEvent) => {
         const { tempValues, onChange, onDragEnd } = getLatest();
 
-        document.removeEventListener("mousemove", handleDrag);
-        document.removeEventListener("touchmove", handleDrag);
+        document.removeEventListener(
+          "mousemove",
+          i === -1 ? handleSegmentDrag : handleDrag
+        );
+        document.removeEventListener(
+          "touchmove",
+          i === -1 ? handleSegmentDrag : handleDrag
+        );
         document.removeEventListener("mouseup", handleRelease);
         document.removeEventListener("touchend", handleRelease);
         const sortedValues = sortNumList(tempValues || values);
         onDragEnd?.();
         onChange?.(sortedValues);
         setActiveHandleIndex(undefined);
+        setSegmentStart(undefined);
         setTempValues(undefined);
       };
 
       onDragStart?.();
-      document.addEventListener("mousemove", handleDrag);
-      document.addEventListener("touchmove", handleDrag);
+      document.addEventListener(
+        "mousemove",
+        i === -1 ? handleSegmentDrag : handleDrag
+      );
+      document.addEventListener(
+        "touchmove",
+        i === -1 ? handleSegmentDrag : handleDrag
+      );
       document.addEventListener("mouseup", handleRelease);
       document.addEventListener("touchend", handleRelease);
     },
@@ -293,10 +357,24 @@ export const useRanger = (opts: RangerConfig) => {
   const segments = useMemo(() => {
     const sortedValues = sortNumList(tempValues ?? values);
     return [...sortedValues, max].map((value, i) => {
+      const active = i === sortedValues.length - 1;
       return {
         key: i,
         value,
-        active: i === sortedValues.length - 1,
+        active,
+        props: active
+          ? {
+              ref: segmentElRef,
+              onMouseDown: (e: ME) => {
+                e.persist();
+                handlePress(e, -1);
+              },
+              onTouchStart: (e: TE) => {
+                e.persist();
+                handlePress(e, -1);
+              },
+            }
+          : {},
         styles: (() => {
           const left = getPercentageForValue(
             sortedValues[i - 1] ? sortedValues[i - 1] : min
