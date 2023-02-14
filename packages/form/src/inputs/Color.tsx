@@ -107,7 +107,7 @@ export const Color: FC<ColorProps> = memo(
         canClear={allowClear && !isEmpty(actualValue)}
       >
         <AxPopover isDisabled={!!isDisabled || !!isReadOnly}>
-          <div className="w-8 h-6 border border-bw-500/70 rounded p-1.5 cursor-pointer">
+          <div className="w-full h-6 border border-bw-500/70 rounded p-1.5 cursor-pointer">
             <div
               className="h-full w-full border border-bw-500/30"
               style={{ backgroundColor: _actualValue }}
