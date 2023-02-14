@@ -370,7 +370,7 @@
     }
 
     & .ax-field__slider--thumb {
-      @apply bg-current cursor-pointer appearance-none h-3 w-3 rounded-full z-[5] absolute;
+      @apply bg-current cursor-pointer appearance-none h-3 w-3 rounded-full z-[3] absolute;
 
       &:hover {
         box-shadow: 0 0 2rem rgba(255 255 255 /30%) inset;
@@ -389,7 +389,7 @@
     }
 
     & .ax-field__slider--value {
-      @apply bg-invert text-invert py-px px-2 text-xs absolute rounded z-[3]
+      @apply bg-invert text-invert py-px px-2 text-xs absolute rounded z-[5]
     before:absolute before:h-1.5 before:w-1.5 before:z-[-1] before:bg-invert before:top-1/2 before:-translate-y-1/2 before:rotate-45;
     }
 

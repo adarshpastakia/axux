@@ -8,6 +8,7 @@ import {
   MouseEvent as ME,
   TouchEvent as TE,
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -204,7 +205,14 @@ export const useRanger = (opts: RangerConfig) => {
       onDrag?.(newValues);
       setTempValues(newValues);
     },
-    [getLatest, getValueForClientX, roundToStep, values, isVertical]
+    [
+      getLatest,
+      getValueForClientX,
+      getValueForClientY,
+      roundToStep,
+      values,
+      isVertical,
+    ]
   );
   const handleSegmentDrag = useCallback(
     (e: MouseEvent | TouchEvent) => {
@@ -222,9 +230,9 @@ export const useRanger = (opts: RangerConfig) => {
         // @ts-expect-error
         e.type === "touchmove" ? e.changedTouches[0].clientY : e.clientY;
 
-      const start = getValueForClientX(
-        isVertical ? bottom + (clientY - segY) : left + (clientX - segX)
-      );
+      const start = isVertical
+        ? getValueForClientX(bottom + (clientY - segY))
+        : getValueForClientX(left + (clientX - segX));
       let diff = roundToStep(start) - tempValues[0];
       if (+tempValues[1] + diff > max) diff = 0;
       const newValues = [+tempValues[0] + diff, +tempValues[1] + diff];
@@ -235,7 +243,15 @@ export const useRanger = (opts: RangerConfig) => {
         setSegmentStart([clientX, clientY]);
       }
     },
-    [getLatest, getValueForClientX, roundToStep, values, isVertical, max]
+    [
+      getLatest,
+      getValueForClientX,
+      getValueForClientY,
+      roundToStep,
+      values,
+      isVertical,
+      max,
+    ]
   );
   const handleKeyDown = useCallback(
     (e: KE, i: number) => {
@@ -319,6 +335,40 @@ export const useRanger = (opts: RangerConfig) => {
     },
     [max, min]
   );
+  const trackClicked = useCallback(
+    (e: MouseEvent | TouchEvent) => {
+      const { onChange, values } = getLatest();
+      const clientX =
+        e.type === "touchmove"
+          ? // @ts-expect-error
+            e.changedTouches[0].clientX
+          : // @ts-expect-error
+            e.clientX;
+      const clientY =
+        e.type === "touchmove"
+          ? // @ts-expect-error
+            e.changedTouches[0].clientY
+          : // @ts-expect-error
+            e.clientY;
+
+      const newValue = isVertical
+        ? getValueForClientY(clientY)
+        : getValueForClientX(clientX);
+      const newRoundedValue = roundToStep(newValue);
+      let newValues = [newRoundedValue];
+      if (values.length === 2) {
+        if (values[0] > newRoundedValue)
+          newValues = [newRoundedValue, values[1]];
+        if (values[1] < newRoundedValue)
+          newValues = [values[0], newRoundedValue];
+      }
+      onChange(newValues);
+    },
+    [getLatest, getValueForClientX, getValueForClientY, isVertical]
+  );
+  useEffect(() => {
+    trackElRef.current?.addEventListener("mousedown", trackClicked);
+  }, [trackClicked]);
   // Build the ticks
   const ticks = useMemo(() => {
     let ticks = controlledTicks ?? steps;
@@ -365,11 +415,13 @@ export const useRanger = (opts: RangerConfig) => {
         props: active
           ? {
               ref: segmentElRef,
-              onMouseDown: (e: ME) => {
+              onMouseDownCapture: (e: ME) => {
+                e.stopPropagation();
                 e.persist();
                 handlePress(e, -1);
               },
-              onTouchStart: (e: TE) => {
+              onTouchStartCapture: (e: TE) => {
+                e.stopPropagation();
                 e.persist();
                 handlePress(e, -1);
               },
@@ -409,14 +461,17 @@ export const useRanger = (opts: RangerConfig) => {
           "aria-valuemax": max,
           "aria-valuenow": value,
           onKeyDown: (e: KE) => {
+            e.stopPropagation();
             e.persist();
             handleKeyDown(e, i);
           },
-          onMouseDown: (e: ME) => {
+          onMouseDownCapture: (e: ME) => {
+            e.stopPropagation();
             e.persist();
             handlePress(e, i);
           },
-          onTouchStart: (e: TE) => {
+          onTouchStartCapture: (e: TE) => {
+            e.stopPropagation();
             e.persist();
             handlePress(e, i);
           },
