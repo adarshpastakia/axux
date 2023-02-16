@@ -64,7 +64,7 @@
       @apply flex flex-nowrap flex-1 overflow-hidden gap-1 px-1 select-none items-center cursor-pointer hover:bg-primary-500/20;
 
       & .ax-ellipsis {
-        @apply flex-1;
+        @apply flex-1 select-none;
       }
 
       &[data-disabled="true"] {

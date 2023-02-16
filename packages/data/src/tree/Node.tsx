@@ -76,7 +76,8 @@ export const TreeNode = memo(
         {placeholder}
         {placeholder == null && (
           <div
-            className="ax-tree__label"
+            {...(node.props ?? {})}
+            className={`ax-tree__label ${node.labelClassName ?? ""}`}
             onClick={() =>
               isCheckable
                 ? onToggleCheck(node.id)
