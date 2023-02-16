@@ -22,3 +22,16 @@ export const flatten = (list: AnyObject[]) => {
 export const flattenAndDedupe = (list: AnyObject[] = [], key?: string) => {
   return dedupe(flatten(list), key);
 };
+
+export const groupBy = <T extends KeyValue>(
+  list: KeyValue[],
+  prop: string,
+  missingKey?: string
+): KeyValue<T[]> => {
+  return list.reduce((r, i) => {
+    const key = i[prop] ?? missingKey;
+    if (!r[key]) r[key] = [];
+    r[key].push(i);
+    return r;
+  }, {});
+};
