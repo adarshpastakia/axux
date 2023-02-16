@@ -20,6 +20,7 @@ export const refactorNode = ({
   parent = "",
   level = 0,
   lines = [],
+  sortable = true,
   ...rest
 }: KeyValue & {
   level?: number;
@@ -27,7 +28,7 @@ export const refactorNode = ({
   index?: number;
 }): InternalNode => {
   const internalId = `${parent}.${index}`;
-  const innerChildren = children;
+  const innerChildren = sortable ? children?.sort(sorter) : children;
   const newLines = [...lines, isLast ? 0 : 1];
   return {
     internalId,
@@ -41,43 +42,49 @@ export const refactorNode = ({
     childSelected: false,
     isOpen: !!node.isOpen,
     isChecked: 0,
-    children: innerChildren
-      ?.sort(sorter)
-      .map((child: InternalNode, idx: number) =>
-        refactorNode({
-          node: child,
-          index: idx,
-          lines: newLines,
-          isLast: idx + 1 === innerChildren.length,
-          parent: internalId,
-          level: level + 1,
-        })
-      ),
-  };
-};
-export const refactorTreeData = (nodes: TreeNodeType[]): InternalNode[] => {
-  return nodes
-    .sort(sorter)
-    .map((node, index) =>
-      refactorNode({ node, index, isLast: index + 1 === nodes.length })
-    );
-};
-export const refactorChildren = (
-  parent: InternalNode,
-  children: TreeNodeType[]
-) => {
-  parent.children = children
-    .sort(sorter)
-    .map((child: TreeNodeType, idx: number) =>
+    children: innerChildren?.map((child: InternalNode, idx: number) =>
       refactorNode({
         node: child,
         index: idx,
-        lines: parent.lines,
-        isLast: idx + 1 === children.length,
-        parent: parent.internalId,
-        level: parent.level + 1,
+        lines: newLines,
+        isLast: idx + 1 === innerChildren.length,
+        parent: internalId,
+        level: level + 1,
+        sortable,
       })
-    );
+    ),
+  };
+};
+export const refactorTreeData = (
+  nodes: TreeNodeType[],
+  sortable: boolean
+): InternalNode[] => {
+  const list = sortable ? nodes.sort(sorter) : nodes;
+  return list.map((node, index) =>
+    refactorNode({
+      node,
+      index,
+      isLast: index + 1 === nodes.length,
+      sortable,
+    })
+  );
+};
+export const refactorChildren = (
+  parent: InternalNode,
+  children: TreeNodeType[],
+  sortable: boolean
+) => {
+  const list = sortable ? children.sort(sorter) : children;
+  parent.children = list.map((child: TreeNodeType, idx: number) =>
+    refactorNode({
+      node: child,
+      index: idx,
+      lines: parent.lines,
+      isLast: idx + 1 === children.length,
+      parent: parent.internalId,
+      level: parent.level + 1,
+    })
+  );
 };
 
 export const createTreeMap = (nodes: InternalNode[]) => {
@@ -104,13 +111,13 @@ export const createIdMap = (nodes: InternalNode[]) => {
   return map;
 };
 
-export const createNodeList = (nodes: InternalNode[]) => {
+export const createNodeList = (nodes: InternalNode[], sortable: boolean) => {
   const list: InternalNode[] = [];
   nodes.forEach((node) => {
     node.isFiltered !== false && list.push(node);
     if (node.isOpen || node.isFiltered === true) {
       if (node.children != null && node.children.length > 0) {
-        list.push(...createNodeList(node.children));
+        list.push(...createNodeList(node.children, sortable));
       } else if (node.isFiltered === undefined && !node.isLeaf) {
         list.push(
           refactorNode({
@@ -123,6 +130,7 @@ export const createNodeList = (nodes: InternalNode[]) => {
             lines: node.lines,
             parent: node.internalId,
             level: node.level + 1,
+            sortable,
           })
         );
       }
@@ -131,9 +139,9 @@ export const createNodeList = (nodes: InternalNode[]) => {
   return list;
 };
 
-export const createChildItems = (parent: InternalNode) => {
+export const createChildItems = (parent: InternalNode, sortable: boolean) => {
   if (parent.children != null && parent.children?.length > 0) {
-    return createNodeList(parent.children);
+    return createNodeList(parent.children, sortable);
   } else {
     return [
       refactorNode({
@@ -146,6 +154,7 @@ export const createChildItems = (parent: InternalNode) => {
         lines: parent.lines,
         parent: parent.internalId,
         level: parent.level + 1,
+        sortable,
       }),
     ];
   }

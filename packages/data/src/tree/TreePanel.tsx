@@ -65,6 +65,10 @@ export interface TreeProps extends ElementProps {
    */
   isSearchable?: boolean;
   /**
+   * enable sorting of nodes
+   */
+  isSortable?: boolean;
+  /**
    * enable checkboxes for nodes
    */
   isCheckable?: boolean;
@@ -102,6 +106,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
     actions,
     selected,
     nodesSelectable,
+    isSortable = true,
     isSearchable,
     isCheckable,
     checkLevel = 0,
@@ -117,10 +122,10 @@ export const AxTreePanel: FC<TreeProps> = memo(
     const [, startTransition] = useTransition();
 
     const initState = useCallback((data: TreeNodeType[] = []) => {
-      const treeData = refactorTreeData(data);
+      const treeData = refactorTreeData(data, isSortable);
       const treeMap = createTreeMap(treeData);
       const idMap = createIdMap(treeData);
-      const items = createNodeList(treeData);
+      const items = createNodeList(treeData, isSortable);
       return { treeData, treeMap, idMap, items, autoScroll: false };
     }, []);
 
@@ -161,10 +166,14 @@ export const AxTreePanel: FC<TreeProps> = memo(
             parent.isLoading = false;
             parent.isError = false;
             const index = state.items.indexOf(parent);
-            refactorChildren(parent, action.items ?? []);
+            refactorChildren(parent, action.items ?? [], isSortable);
             state.idMap = createIdMap(state.treeData);
             state.treeMap = createTreeMap(state.treeData);
-            state.items.splice(index + 1, 1, ...createChildItems(parent));
+            state.items.splice(
+              index + 1,
+              1,
+              ...createChildItems(parent, isSortable)
+            );
           }
         }
         if (action.type === "loadError") {
@@ -182,11 +191,11 @@ export const AxTreePanel: FC<TreeProps> = memo(
         }
         if (action.type === "expandAll") {
           toggleProperty(state.treeData, "isOpen", true, true);
-          state.items = createNodeList(state.treeData);
+          state.items = createNodeList(state.treeData, isSortable);
         }
         if (action.type === "collapseAll") {
           toggleProperty(state.treeData, "isOpen", false);
-          state.items = createNodeList(state.treeData);
+          state.items = createNodeList(state.treeData, isSortable);
         }
         if (action.type === "checkAll") {
           toggleProperty(state.treeData, "isChecked", 1);
@@ -233,7 +242,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
             }
           });
           state.autoScroll = true;
-          state.items = createNodeList(state.treeData);
+          state.items = createNodeList(state.treeData, isSortable);
         }
         return { ...state };
       },
@@ -300,6 +309,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
     const handleExpand = useCallback(
       (index: number) => {
         const parent = state.items[index];
+        console.log(index, parent);
         dispatch({ type: "toggleExpand", id: parent.node.id });
         !parent.isOpen && isNil(parent.children) && loadNodes(parent.node.id);
       },

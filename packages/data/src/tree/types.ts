@@ -53,7 +53,9 @@ export interface TreeNodeType extends IconProp {
   iconOpen?: string;
   iconClosed?: string;
   isDisabled?: boolean;
+  labelClassName?: HTMLElement["className"];
   children?: TreeNodeType[];
+  props?: KeyValue;
 }
 
 export interface InternalNode {
