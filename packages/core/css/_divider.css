@@ -9,14 +9,17 @@
 @layer components {
   .ax-divider {
     @apply flex flex-nowrap items-center self-stretch select-none my-4 text-bw-700 dark:text-bw-200;
+    color: var(--dv-color);
 
     & > hr {
-      @apply flex-auto bg-none border-y h-px scale-y-50 opacity-50 m-0
+      @apply flex-auto bg-none border-t scale-y-50 opacity-50 m-0
         border-b-current border-t-bw-400 dark:border-b-current dark:border-t-bw-800 
         border-r-current border-l-bw-400 dark:border-r-current dark:border-l-bw-800;
+
+      border-bottom-width: calc(var(--dv-width) * 1px);
     }
 
-    & > span {
+    & > div {
       @apply flex-initial leading-none px-2;
     }
   }
@@ -27,13 +30,24 @@
     @apply flex-col self-stretch mx-4 my-0;
 
     & > hr {
-      @apply w-px h-0 border-y-0 border-x scale-x-50 scale-y-90;
+      @apply border-y-0 border-x scale-x-50 scale-y-90;
+      border-right-width: calc(var(--dv-width) * 1px);
     }
   }
 
   .ax-divider[data-has-label="true"][data-align="start"] hr:first-of-type,
   .ax-divider[data-has-label="true"][data-align="end"] hr:last-of-type {
     @apply flex-initial basis-4;
+  }
+
+  .ax-divider[data-bg="true"] {
+    & > div {
+      @apply bg-current;
+
+      & > span {
+        @apply text-invert;
+      }
+    }
   }
 
   .ax-divider[data-rainbow="true"] {

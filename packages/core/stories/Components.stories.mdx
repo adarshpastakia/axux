@@ -44,7 +44,16 @@ export const LIPSUM =
 <Heading storyId="core-page-components--2-divider-label">Divider Label</Heading>
 
 <Canvas>
-  <Story name="2.Divider Label" args={{ className: "", align: "center" }}>
+  <Story
+    name="2.Divider Label"
+    args={{
+      className: "",
+      color: "",
+      align: "center",
+      applyBg: false,
+      width: 1,
+    }}
+  >
     {(args) => (
       <div style={{ width: 600 }}>
         <AxDivider {...args}>Divider label</AxDivider>
