@@ -12,6 +12,9 @@ import { ChildProp, ElementProps } from "../types";
 export interface DividerProps extends ElementProps, ChildProp {
   rainbow?: boolean;
   vertical?: boolean;
+  width?: number;
+  color?: string;
+  applyBg?: boolean;
   size?: "xs" | "sm";
   align?: "start" | "center" | "end";
 }
@@ -24,6 +27,9 @@ export const AxDivider: FC<DividerProps> = ({
   rainbow,
   vertical,
   size,
+  color,
+  width = 1,
+  applyBg,
   align = "start",
   className,
   ...rest
@@ -33,17 +39,21 @@ export const AxDivider: FC<DividerProps> = ({
     <div
       {...rest}
       data-size={size}
+      data-bg={applyBg}
       data-align={align}
       data-rainbow={rainbow}
       data-vertical={vertical}
       data-has-label={!!children}
       className={`ax-divider ${className ?? ""}`}
+      style={{ "--dv-color": color } as AnyObject}
     >
-      <hr />
+      <hr style={{ "--dv-width": width } as AnyObject} />
       {children && (
         <Fragment>
-          <span>{children}</span>
-          <hr />
+          <div>
+            <span>{children}</span>
+          </div>
+          <hr style={{ "--dv-width": width } as AnyObject} />
         </Fragment>
       )}
     </div>
