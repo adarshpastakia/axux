@@ -580,6 +580,11 @@
       & > div > div {
         @apply text-center;
       }
+
+      & span > div {
+        @apply shadow-bw-700/30 dark:shadow-bw-300/30;
+        box-shadow: 0 0 1px 1px var(--tw-shadow-color) inset !important;
+      }
     }
   }
 }

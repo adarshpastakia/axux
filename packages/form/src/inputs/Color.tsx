@@ -37,22 +37,35 @@ export interface ColorProps
 }
 
 const DEFAULT_SWATCHES = [
-  "#40407a",
-  "#706fd3",
-  "#34ace0",
-  "#33d9b2",
-  "#2c2c54",
-  "#474787",
-  "#227093",
-  "#218c74",
-  "#ff5252",
-  "#ff793f",
-  "#ffb142",
-  "#b33939",
-  "#cd6133",
-  "#84817a",
-  "#cc8e35",
-  "#ccae62",
+  "#0c2461",
+  "#2980b9",
+  "#0abde3",
+  "#27ae60",
+  "#6ab04c",
+  "#f7b731",
+  "#fa8231",
+  "#eb3b5a",
+  "#6D214F",
+
+  "#1e3799",
+  "#3498db",
+  "#48dbfb",
+  "#2ecc71",
+  "#badc58",
+  "#fed330",
+  "#fd9644",
+  "#fc5c65",
+  "#B33771",
+
+  "#1e272e",
+  "#2f3542",
+  "#34495e",
+  "#576574",
+  "#7f8c8d",
+  "#95a5a6",
+  "#bdc3c7",
+  "#ecf0f1",
+  "#f5f6fa",
 ];
 
 // eslint-disable-next-line react/display-name
@@ -107,12 +120,14 @@ export const Color: FC<ColorProps> = memo(
         canClear={allowClear && !isEmpty(actualValue)}
       >
         <AxPopover isDisabled={!!isDisabled || !!isReadOnly}>
-          <div className="w-full h-6 border border-bw-500/70 rounded p-1.5 cursor-pointer">
-            <div
-              className="h-full w-full border border-bw-500/30"
-              style={{ backgroundColor: _actualValue }}
-            />
-          </div>
+          {children ?? (
+            <div className="w-full h-6 border border-bw-500/70 rounded p-1.5 cursor-pointer">
+              <div
+                className="h-full w-full border border-bw-500/30"
+                style={{ backgroundColor: _actualValue }}
+              />
+            </div>
+          )}
           <SketchPicker
             width="15rem"
             className="ax-input__color"
@@ -136,7 +151,6 @@ export const Color: FC<ColorProps> = memo(
             onChangeComplete={handleChange}
           />
         </AxPopover>
-        {children}
       </FieldWrapper>
     );
   }
