@@ -237,7 +237,6 @@ export const useRanger = (opts: RangerConfig) => {
       if (+tempValues[1] + diff > max) diff = 0;
       const newValues = [+tempValues[0] + diff, +tempValues[1] + diff];
       if (tempValues[0] !== newValues[0] || tempValues[1] !== newValues[1]) {
-        console.log(newValues);
         onDrag?.(newValues);
         setTempValues(newValues);
         setSegmentStart([clientX, clientY]);
