@@ -7,7 +7,7 @@
  */
 
 import { AxIcon } from "@axux/core";
-import { ElementProps } from "@axux/core/dist/types";
+import { ElementProps, IconProp } from "@axux/core/dist/types";
 import {
   ChangeEvent,
   FC,
@@ -22,6 +22,7 @@ import { Icons } from "../types/icons";
 
 export interface CheckboxProps
   extends ElementProps,
+    IconProp,
     Omit<OptionProps<boolean>, "value"> {
   //
 }
@@ -36,6 +37,8 @@ export const Checkbox: FC<CheckboxProps> = memo(
     error,
     inputRef,
     label,
+    icon,
+    rtlFlip,
     onChange,
     // @ts-expect-error
     value,
@@ -81,6 +84,7 @@ export const Checkbox: FC<CheckboxProps> = memo(
             data-tooltip-placement="bottom"
           />
         )}
+        {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
         {label && <span className="ax-field__option--label">{label}</span>}
       </label>
     );

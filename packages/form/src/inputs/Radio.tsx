@@ -7,12 +7,15 @@
  */
 
 import { AxIcon } from "@axux/core";
-import { ElementProps } from "@axux/core/dist/types";
+import { ElementProps, IconProp } from "@axux/core/dist/types";
 import { FC, FormEvent, memo, useCallback } from "react";
 import { OptionProps } from "../types";
 import { Icons } from "../types/icons";
 
-export interface RadioProps extends ElementProps, OptionProps<string | number> {
+export interface RadioProps
+  extends ElementProps,
+    IconProp,
+    OptionProps<string | number> {
   /**
    * radio group name
    */
@@ -30,6 +33,8 @@ export const Radio: FC<RadioProps> = memo(
     inputRef,
     label,
     onChange,
+    icon,
+    rtlFlip,
     ...rest
   }: RadioProps) => {
     const handleChange = useCallback(
@@ -66,6 +71,7 @@ export const Radio: FC<RadioProps> = memo(
             data-tooltip-placement="bottom"
           />
         )}
+        {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
         {label && <span className="ax-field__option--label">{label}</span>}
       </label>
     );
