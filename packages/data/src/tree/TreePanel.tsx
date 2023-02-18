@@ -309,7 +309,6 @@ export const AxTreePanel: FC<TreeProps> = memo(
     const handleExpand = useCallback(
       (index: number) => {
         const parent = state.items[index];
-        console.log(index, parent);
         dispatch({ type: "toggleExpand", id: parent.node.id });
         !parent.isOpen && isNil(parent.children) && loadNodes(parent.node.id);
       },
