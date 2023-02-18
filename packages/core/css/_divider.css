@@ -8,11 +8,12 @@
 
 @layer components {
   .ax-divider {
-    @apply flex flex-nowrap items-center self-stretch select-none my-4 text-bw-700 dark:text-bw-200;
+    @apply flex flex-nowrap items-center self-stretch select-none my-4;
+    --dv-color: theme(colors.bw.500/0.7);
     color: var(--dv-color);
 
     & > hr {
-      @apply flex-auto bg-none border-t scale-y-50 opacity-50 m-0
+      @apply flex-auto bg-none border-t scale-y-50 m-0
         border-b-current border-t-bw-400 dark:border-b-current dark:border-t-bw-800 
         border-r-current border-l-bw-400 dark:border-r-current dark:border-l-bw-800;
 
@@ -20,7 +21,9 @@
     }
 
     & > div {
-      @apply flex-initial leading-none px-2;
+      @apply flex-initial rounded-full;
+      line-height: 1.5em;
+      padding-inline: 0.5em;
     }
   }
 
@@ -44,7 +47,7 @@
     & > div {
       @apply bg-current;
 
-      & > span {
+      & > * {
         @apply text-invert;
       }
     }
