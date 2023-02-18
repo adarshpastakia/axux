@@ -9,6 +9,7 @@
 import { AxPopover } from "@axux/core";
 import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
 import { isEmpty } from "@axux/utilities";
+import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
   FC,
   memo,
@@ -22,10 +23,7 @@ import { SketchPicker } from "react-color";
 import { InputProps } from "../types";
 import { FieldWrapper } from "./Wrapper";
 
-export interface ColorProps
-  extends ElementProps,
-    Omit<InputProps, "placeholder" | "isPlain">,
-    ChildrenProp {
+export interface ColorProps extends ElementProps, InputProps, ChildrenProp {
   /**
    * color swatches
    */
@@ -34,6 +32,8 @@ export interface ColorProps
    * hide alpha value
    */
   hideAlpha?: boolean;
+
+  showInput?: boolean;
 }
 
 const DEFAULT_SWATCHES = [
@@ -82,11 +82,14 @@ export const Color: FC<ColorProps> = memo(
     info,
     error,
     width,
+    isPlain,
+    placeholder,
     isDisabled,
     isReadOnly,
     allowClear,
     children,
     hideAlpha,
+    showInput,
     swatches = DEFAULT_SWATCHES,
     onEnterPressed,
     ...rest
@@ -98,19 +101,20 @@ export const Color: FC<ColorProps> = memo(
       setActualValue(value ?? ("" as AnyObject));
     }, [value]);
     const handleChange = useCallback(
-      (e?: KeyValue) => {
-        setActualValue(e?.hex ?? "");
-        onChange != null && startTransition(() => onChange(e?.hex));
+      (e?: string) => {
+        setActualValue(e ?? "");
+        onChange != null && startTransition(() => onChange(e));
       },
       [onChange]
     );
+
     return (
       <FieldWrapper
         info={info}
         error={error}
         label={label}
         width={width}
-        isPlain
+        isPlain={isPlain}
         labelAppend={labelAppend}
         className={className}
         disabled={isDisabled}
@@ -119,15 +123,20 @@ export const Color: FC<ColorProps> = memo(
         onClear={handleChange}
         canClear={allowClear && !isEmpty(actualValue)}
       >
-        <AxPopover isDisabled={!!isDisabled || !!isReadOnly}>
-          {children ?? (
-            <div className="w-full h-6 border border-bw-500/70 rounded p-1.5 cursor-pointer">
-              <div
-                className="h-full w-full border border-bw-500/30"
-                style={{ backgroundColor: _actualValue }}
-              />
-            </div>
-          )}
+        <AxPopover
+          isDisabled={!!isDisabled || !!isReadOnly}
+          placement="bottom-start"
+        >
+          <div
+            className={`${
+              showInput ? "w-12" : "w-full"
+            } h-8 p-2 cursor-pointer order-3`}
+          >
+            <div
+              className="h-full w-full border border-bw-500/30"
+              style={{ backgroundColor: actualValue }}
+            />
+          </div>
           <SketchPicker
             width="15rem"
             className="ax-input__color"
@@ -148,9 +157,30 @@ export const Color: FC<ColorProps> = memo(
             color={_actualValue}
             presetColors={swatches}
             disableAlpha={hideAlpha}
-            onChangeComplete={handleChange}
+            onChangeComplete={({ hex }) => handleChange(hex)}
           />
         </AxPopover>
+        {showInput && (
+          <input
+            ref={inputRef}
+            aria-label={label}
+            aria-disabled={isDisabled}
+            aria-readonly={isReadOnly}
+            aria-required={isRequired}
+            aria-errormessage={error}
+            value={actualValue}
+            size={1}
+            placeholder={placeholder}
+            disabled={isDisabled}
+            readOnly={isReadOnly}
+            data-invalid={isInvalid}
+            className="ax-field__input"
+            onChange={(e) => handleChange(e.target.value)}
+            autoComplete="off"
+            onKeyDown={handleEnter(onEnterPressed)}
+            {...rest}
+          />
+        )}
       </FieldWrapper>
     );
   }
