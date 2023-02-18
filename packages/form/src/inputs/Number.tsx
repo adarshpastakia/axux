@@ -14,7 +14,6 @@ import {
   FC,
   memo,
   useCallback,
-  useDeferredValue,
   useEffect,
   useState,
   useTransition,
@@ -63,9 +62,8 @@ export const Number: FC<NumberProps> = memo(
     onEnterPressed,
     ...rest
   }: NumberProps) => {
-    const [_actualValue, setActualValue] = useState<number>("" as AnyObject);
+    const [actualValue, setActualValue] = useState<number>("" as AnyObject);
     const [, startTransition] = useTransition();
-    const actualValue = useDeferredValue(_actualValue);
     useEffect(() => {
       setActualValue(value ?? ("" as AnyObject));
     }, [value]);
