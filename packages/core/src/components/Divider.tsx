@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { isString } from "@axux/utilities";
 import { FC, Fragment } from "react";
 import { ChildProp, ElementProps } from "../types";
 
@@ -50,9 +51,12 @@ export const AxDivider: FC<DividerProps> = ({
       <hr style={{ "--dv-width": width } as AnyObject} />
       {children && (
         <Fragment>
-          <div>
-            <span>{children}</span>
-          </div>
+          {isString(children) && (
+            <div>
+              <span>{children}</span>
+            </div>
+          )}
+          {!isString(children) && children}
           <hr style={{ "--dv-width": width } as AnyObject} />
         </Fragment>
       )}
