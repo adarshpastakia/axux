@@ -110,7 +110,7 @@ SearchStory.args = {
 };
 
 const ColorTemplate: ComponentStory<typeof AxField.Color> = (props) => (
-  <AxField.Color {...props} onChange={action("onChange")} />
+  <AxField.Color {...props} width="32rem" onChange={action("onChange")} />
 );
 export const ColorStory = ColorTemplate.bind({});
 ColorStory.args = {
@@ -118,6 +118,8 @@ ColorStory.args = {
   value: "#FC0000",
   error: "",
   info: "",
+  showInput: true,
+  allowClear: true,
   hideAlpha: false,
   autoFocus: false,
   isInvalid: false,
