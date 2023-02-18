@@ -187,6 +187,7 @@
   .ax-field__input {
     @apply flex-auto py-1 px-0 mx-2 border-none focus:border-none focus:outline-none focus:ring-0 bg-transparent focus-visible:outline-none order-3
         placeholder:text-bw-500 dark:placeholder:text-bw-400 appearance-none;
+    font-style: inherit;
 
     &:not(:placeholder-shown) ~ .empty-addon {
       @apply hidden;
