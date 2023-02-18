@@ -64,9 +64,13 @@ export const Options: FC<OptionsProps> = memo(
       >
         <div {...rest} className="ax-field__options" data-vertical={vertical}>
           {Children.toArray(children).map((child: AnyObject) => {
-            const newProps = { name, ...child.props, checked: false, onChange };
+            const newProps = { ...child.props };
             if (value) {
               newProps.checked = newProps.value === value;
+            }
+            if (name) {
+              newProps.name = name;
+              newProps.onChange = onChange;
             }
             return cloneElement(child, newProps);
           })}
