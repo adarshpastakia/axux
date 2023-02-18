@@ -65,6 +65,8 @@ export interface RangeProps
    * custom max label
    */
   maxLabel?: string;
+
+  onSlide?: (val: number) => void;
 }
 
 // eslint-disable-next-line react/display-name
@@ -91,6 +93,7 @@ export const Range: FC<RangeProps> = memo(
     isVertical,
     isDisabled,
     isReadOnly,
+    onSlide,
     onEnterPressed,
     height = 192,
     step = 1,
@@ -139,6 +142,7 @@ export const Range: FC<RangeProps> = memo(
       stepSize: step,
       vertical: isVertical,
       tickSize: Math.max((max - min) / 10, step),
+      onDrag: (val) => onSlide?.(val[0]),
       onDragStart: () => setDisplayValue(true),
       onDragEnd: () => setDisplayValue(!!showValue),
       onChange: (values: readonly number[]) =>
