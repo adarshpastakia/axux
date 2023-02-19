@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/adarshpastakia/axux/compare/v2.0.0...v2.1.0) (2023-02-19)
+
+
+### Bug Fixes
+
+* **ColorInput:** add input field option ([1dff681](https://github.com/adarshpastakia/axux/commit/1dff6814bad6ee272922e76576eb79800c6d11ce))
+* **ColorInput:** update swatches ([4a03301](https://github.com/adarshpastakia/axux/commit/4a0330136ef50936689b68ae3b0356aa33d30a66))
+* **FieldInput:** remove deferredValue ([d4d8536](https://github.com/adarshpastakia/axux/commit/d4d8536143a21873cb041570e64671b5137b73a7))
+* **FieldOption:** added icon props ([1a311ff](https://github.com/adarshpastakia/axux/commit/1a311ffeb40bd19dd50fba9a64b01d27373449ec))
+* **FieldOptions:** attach child props for radio only ([ab16c9c](https://github.com/adarshpastakia/axux/commit/ab16c9c2a13a849b266079e08d25eece7b08fafd))
+* **Slider:** add onSlide callback ([d0457e2](https://github.com/adarshpastakia/axux/commit/d0457e29b5a8ad2bfd92d40e0335b07fe66efcdd))
+* **SliderHook:** remove coonsole log ([c6fa413](https://github.com/adarshpastakia/axux/commit/c6fa413e5d7cbb0d6ecd49c2c1cc15dca8de683d))
+
+
+
+
+
 # [2.0.0](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.94...v2.0.0) (2023-02-14)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/adarshpastakia/axux/compare/v2.0.0...v2.1.0) (2023-02-19)
+
+
+### Bug Fixes
+
+* **HelperFunction:** groupBy for lists ([491b488](https://github.com/adarshpastakia/axux/commit/491b488bf6943a3ddc75ba09b98073d8cbe3ec3c))
+
+
+
+
+
 # [2.0.0](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.94...v2.0.0) (2023-02-14)
 
 **Note:** Version bump only for package @axux/utilities

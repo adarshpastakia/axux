@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/adarshpastakia/axux/compare/v2.0.0...v2.1.0) (2023-02-19)
+
+
+### Features
+
+* **PageMaker:** update ([d5ad165](https://github.com/adarshpastakia/axux/commit/d5ad165044046d66e4b1f98af2d13e7ef5030d41))
+
+
+
+
+
 # [2.0.0](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.94...v2.0.0) (2023-02-14)
 
 **Note:** Version bump only for package @axux/pagemaker

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/adarshpastakia/axux/compare/v2.0.0...v2.1.0) (2023-02-19)
+
+
+### Bug Fixes
+
+* **TreePanel:** add props isSortable, labelClassName ([37543ee](https://github.com/adarshpastakia/axux/commit/37543ee072484fd4e12983623bff0aa5f80acaf3))
+* **TreePanel:** apply isSortable ([e803165](https://github.com/adarshpastakia/axux/commit/e8031659208a7e09464b28c7275f1f4f70640a34))
+* **TreePanel:** remove console.log ([bbf91b9](https://github.com/adarshpastakia/axux/commit/bbf91b9208361190bcf932e9cdb96ee12cbe2cd5))
+
+
+
+
+
 # [2.0.0](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.94...v2.0.0) (2023-02-14)
 
 **Note:** Version bump only for package @axux/data

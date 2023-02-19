@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/adarshpastakia/axux/compare/v2.0.0...v2.1.0) (2023-02-19)
+
+
+### Bug Fixes
+
+* **Divider:** added props width, color, applyBg to text ([5f5c834](https://github.com/adarshpastakia/axux/commit/5f5c834b5eb06eff29325bc4df3a9faac680d729))
+
+
+
+
+
 # [2.0.0](https://github.com/adarshpastakia/axux/compare/v2.0.0-beta.94...v2.0.0) (2023-02-14)
 
 **Note:** Version bump only for package @axux/core
