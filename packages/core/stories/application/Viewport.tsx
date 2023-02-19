@@ -11,6 +11,7 @@ import { ComponentStory } from "@storybook/react";
 import { Fragment } from "react";
 import { MemoryRouter, Outlet, Route, Routes } from "react-router-dom";
 import {
+  AxApplicationProvider,
   AxAside,
   AxBreadcrumb,
   AxButton,
@@ -155,15 +156,14 @@ const Empty = () => {
   );
 };
 
-const Viewport = (props: KeyValue) => {
-  const [Overlay, openOverlay] = useOverlayService(MyFlyout);
+const Viewport = ({ children, ...props }: KeyValue) => {
+  const openOverlay = useOverlayService(MyFlyout);
   const openFlyout = () => {
     // Open overlay pass additional props
     openOverlay();
   };
   return (
     <AxViewport {...props}>
-      {Overlay}
       <AxHeader className="bg-component text-2xl">
         <AxButton icon="logo.png" variant="link" onClick={openFlyout} />
         <AxTitle className="text-primary-700 dark:text-primary-400 font-light">
@@ -294,12 +294,14 @@ const Viewport = (props: KeyValue) => {
 export const ViewportStory: ComponentStory<typeof AxViewport> = (props) => {
   return (
     <MemoryRouter>
-      <Routes>
-        <Route path="/" element={<Viewport {...props} />}>
-          <Route index element={<Home />} />
-          <Route path="/*" element={<Empty />} />
-        </Route>
-      </Routes>
+      <AxApplicationProvider>
+        <Routes>
+          <Route path="/" element={<Viewport />}>
+            <Route index element={<Home />} />
+            <Route path="/*" element={<Empty />} />
+          </Route>
+        </Routes>
+      </AxApplicationProvider>
     </MemoryRouter>
   );
 };
