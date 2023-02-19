@@ -14,7 +14,8 @@ import {
   useMemo,
   useState,
 } from "react";
-import { IItem } from "../../utils/types";
+import { EnumTypes, IItem } from "../../utils/types";
+import { useColResize } from "../../utils/useColResize";
 import { usePageContext } from "../context";
 import { EditHead } from "./EditHead";
 
@@ -28,8 +29,15 @@ interface Props extends ChildrenProp {
 export const Item: FC<Props> = memo(
   ({ item, children, style, itemRef, expanded = false, ...rest }: Props) => {
     const [hover, setHover] = useState(false);
-    const { isEditing, editConfig, selected, removeConfig, setDragging } =
-      usePageContext();
+    const {
+      isEditing,
+      editConfig,
+      selected,
+      removeConfig,
+      setDragging,
+      dragging,
+    } = usePageContext();
+    const { ref, span, onResizeStart } = useColResize(item.id, item.colSpan);
     const { id, type } = item;
 
     const isSelected = useMemo(
@@ -40,11 +48,11 @@ export const Item: FC<Props> = memo(
     const onClick = useCallback(
       (e: MouseEvent) => {
         if (isEditing) {
-          editConfig(id);
+          editConfig(selected?.id === id ? undefined : id);
           e.stopPropagation();
         }
       },
-      [isEditing, editConfig, id]
+      [isEditing, editConfig, selected, id]
     );
 
     const onMouseOver = useCallback(
@@ -59,20 +67,36 @@ export const Item: FC<Props> = memo(
 
     return (
       <div
-        ref={itemRef}
+        ref={ref}
         className={`page-maker__item`}
         data-id={id}
         data-type={type}
+        data-span={span}
         data-hover={hover}
+        data-dragging={dragging?.item?.id === id}
         data-expanded={expanded}
         data-selected={isSelected}
-        style={style}
+        style={{
+          ...style,
+          aspectRatio: (item as AnyObject).aspect,
+          gridColumnEnd: `span ${span}`,
+        }}
         {...rest}
         onClick={onClick}
         onMouseOver={onMouseOver}
         onMouseOut={() => setHover(false)}
       >
         {children}
+        {isEditing &&
+          ![EnumTypes.DIVIDER, EnumTypes.VDIVIDER, EnumTypes.BREAK].includes(
+            item.type
+          ) && (
+            <div
+              data-type="col"
+              className="page-maker__resizer"
+              onMouseDown={onResizeStart}
+            />
+          )}
         {isEditing && (
           <EditHead
             title={type}

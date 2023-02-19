@@ -3,88 +3,126 @@
 // @copyright : 2020
 // @license   : MIT
 
-import { AxIcon } from "@axux/core";
-import { AxField } from "@axux/form";
-import { matchString } from "@axux/utilities";
-import { FC, memo, useEffect, useLayoutEffect, useState } from "react";
+import { AxTreePanel, TreeNode } from "@axux/data";
+import { groupBy } from "@axux/utilities";
+import { FC, memo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { EnumTypes } from "../..";
-import { iconColumn, iconDivider, iconRow, iconText } from "../../utils/icons";
+import {
+  iconDivider,
+  iconGrid,
+  iconImage,
+  iconPageBreak,
+  iconParagraph,
+  iconText,
+  iconVDivider,
+  iconWidget,
+} from "../../utils/icons";
 import { IWidgetObject } from "../../utils/types";
 import { usePageContext } from "../context";
-import { Card } from "./Card";
+
+const makeTreeNode = (
+  id: string,
+  icon: string,
+  label: string,
+  onDrag: AnyObject
+) =>
+  ({
+    id,
+    icon,
+    label,
+    isLeaf: true,
+    labelClassName: "text-slate-700 dark:text-slate-200",
+    props: {
+      draggable: true,
+      onDragStart: onDrag,
+    },
+  } as TreeNode);
 
 export const WidgetList: FC = memo(() => {
   const { t } = useTranslation("pagemaker");
-  const { widgets } = usePageContext();
+  const { widgets, artifacts, setDragging } = usePageContext();
 
-  const [search, setSearch] = useState("");
-  const [list, setList] = useState<IWidgetObject[]>([]);
+  const [list, setList] = useState<TreeNode[]>([]);
 
   useEffect(() => {
-    if (widgets.length > 0) {
-      setList(
-        widgets.sort((a, b) =>
-          a.title.toUpperCase().localeCompare(b.title.toUpperCase())
-        )
-      );
+    const treeList: TreeNode[] = [
+      {
+        id: "default",
+        label: t("label.default"),
+        isLeaf: false,
+        isOpen: true,
+        labelClassName: "font-medium",
+        children: [
+          makeTreeNode(EnumTypes.HEADING, iconText, t("label.heading"), () =>
+            setDragging({ type: EnumTypes.HEADING })
+          ),
+          makeTreeNode(
+            EnumTypes.PARAGRAPH,
+            iconParagraph,
+            t("label.paragraph"),
+            () => setDragging({ type: EnumTypes.PARAGRAPH })
+          ),
+          makeTreeNode(EnumTypes.IMAGE, iconImage, t("label.image"), () =>
+            setDragging({ type: EnumTypes.IMAGE })
+          ),
+          makeTreeNode(
+            EnumTypes.BREAK,
+            iconPageBreak,
+            t("label.pageBreak"),
+            () => setDragging({ type: EnumTypes.BREAK })
+          ),
+          makeTreeNode(EnumTypes.DIVIDER, iconDivider, t("label.divider"), () =>
+            setDragging({ type: EnumTypes.DIVIDER })
+          ),
+          makeTreeNode(
+            EnumTypes.VDIVIDER,
+            iconVDivider,
+            t("label.divider"),
+            () => setDragging({ type: EnumTypes.VDIVIDER })
+          ),
+          makeTreeNode(EnumTypes.GRID, iconGrid, t("label.grid"), () =>
+            setDragging({ type: EnumTypes.GRID })
+          ),
+        ],
+      },
+    ];
+    if (artifacts.length > 0) {
+      treeList.push({
+        id: "artifacts",
+        label: t("label.artifacts"),
+        isLeaf: false,
+        labelClassName: "font-medium",
+        children: artifacts.map(({ id, title, config }) =>
+          makeTreeNode(id, "", title, () =>
+            setDragging({ config, title, type: config.type })
+          )
+        ),
+      });
     }
+    if (widgets.length > 0) {
+      const grouped = groupBy<IWidgetObject>(
+        widgets,
+        "group",
+        t("label.widgets")
+      );
+      Object.entries(grouped).forEach(([group, items]) => {
+        treeList.push({
+          id: group,
+          label: group,
+          isLeaf: false,
+          labelClassName: "font-medium",
+          children: items.map(({ id, group, ...item }) =>
+            makeTreeNode(id, item.icon ?? iconWidget, item.title, () =>
+              setDragging({ type: EnumTypes.TILE, widgetId: id, ...item })
+            )
+          ),
+        });
+      });
+    }
+    setList(treeList);
   }, [widgets]);
 
-  useLayoutEffect(() => {
-    if (widgets.length > 0) {
-      const newList = widgets.sort((a, b) =>
-        a.title.toUpperCase().localeCompare(b.title.toUpperCase())
-      );
-
-      if (search) {
-        setList(newList.filter((w) => matchString(w.title, search)));
-      } else {
-        setList(newList);
-      }
-    }
-  }, [search, widgets]);
-
-  return (
-    <div className="page-maker__widgetList">
-      <AxField.Search onSearch={(e) => setSearch(e ?? "")} />
-      <div className="page-maker__widgetList--grid">
-        <Card type={EnumTypes.ROW}>
-          <AxIcon icon={iconRow} />
-          <div>{t("label.row")}</div>
-        </Card>
-        <Card type={EnumTypes.COL}>
-          <AxIcon icon={iconColumn} />
-          <div>{t("label.col")}</div>
-        </Card>
-        <Card type={EnumTypes.HEADING}>
-          <AxIcon icon={iconText} />
-          <div>{t("label.heading")}</div>
-        </Card>
-        <Card type={EnumTypes.DIVIDER}>
-          <AxIcon icon={iconDivider} />
-          <div>{t("label.divider")}</div>
-        </Card>
-      </div>
-      <div className="page-maker__widgetList--grid">
-        {list.length === 0 && (
-          <span style={{ gridColumnEnd: "span 2" }}>
-            {t("label.noWidgets")}
-          </span>
-        )}
-        {list.map((widget) => (
-          <Card
-            key={widget.id}
-            type={EnumTypes.TILE}
-            widgetId={widget.id}
-            title={widget.title}
-          >
-            <AxIcon icon={widget.icon ?? ""} />
-            <div>{widget.title}</div>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
+  return <AxTreePanel data={list} isSearchable isSortable={false} />;
 });
 WidgetList.displayName = "AxPageMaker.WidgetList";

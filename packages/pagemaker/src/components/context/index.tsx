@@ -6,9 +6,21 @@
  * @license   : MIT
  */
 
-import { createContext, FC, useContext, useEffect, useState } from "react";
-import { getNodeConfig } from "../../utils/dnd";
 import {
+  Context,
+  createContext,
+  FC,
+  Ref,
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
+import { getNodeConfig } from "../../utils/dnd";
+import { getRawHtml } from "../../utils/getRawHtml";
+import {
+  ArtifactObject,
   EnumTypes,
   IDragObject,
   IProps,
@@ -19,17 +31,20 @@ import {
 
 interface DropObject {
   item: PageItem;
-  index: number;
-  move?: string;
+  pos?: number;
+  grid?: string;
   id?: string;
 }
 
-interface IContext {
+interface IContext<T = PageItem> {
   isEditing: boolean;
   config: PageConfig;
   widgets: IWidgetObject[];
+  artifacts: ArtifactObject[];
 
-  selected?: AnyObject;
+  selected?: T;
+
+  refPageEl: Ref<HTMLDivElement>;
 
   dragging?: AnyObject;
   setDragging: (d?: IDragObject) => void;
@@ -37,7 +52,7 @@ interface IContext {
   editConfig: (id?: string) => void;
   removeConfig: (id: string) => void;
   addItem: (opt?: DropObject) => void;
-  updateConfig: (id: string, key: keyof PageItem, value: AnyObject) => void;
+  updateConfig: (id: string, key: keyof T, value: AnyObject) => void;
 
   addWidget: (colId: string) => void;
   editWidget: (widgetId: string) => void;
@@ -45,10 +60,13 @@ interface IContext {
   renderWidget: (widgetId: string) => JSX.Element;
 }
 
-const findDeep = (obj: PageItem[], id: string): PageItem | undefined => {
+const findDeep = (
+  obj: AnyObject[],
+  id: string
+): { list: PageItem[]; item: PageItem; index: number } | undefined => {
   const find = obj.find((o) => o.id === id);
   if (find != null) {
-    return find;
+    return { list: obj, item: find, index: obj.indexOf(find) };
   } else {
     for (let i = 0; i < obj.length; i++) {
       if ("children" in obj[i] && Array.isArray(obj[i].children)) {
@@ -62,7 +80,7 @@ const findDeep = (obj: PageItem[], id: string): PageItem | undefined => {
   return undefined;
 };
 
-const removeDeep = (obj: PageItem[], id: string): PageItem[] => {
+const removeDeep = (obj: AnyObject[], id: string): PageItem[] => {
   for (let i = 0; i < obj.length; i++) {
     if (obj[i].id === id) {
       return obj.filter((o) => o.id !== id);
@@ -72,24 +90,27 @@ const removeDeep = (obj: PageItem[], id: string): PageItem[] => {
         obj[i] = {
           ...obj[i],
           children: removeDeep(obj[i].children, id),
-        } as AnyObject;
+        };
       }
     }
   }
   return [...obj];
 };
 
-export const PageContext = createContext<IContext>({} as IContext);
+export const PageContext: AnyObject = createContext<IContext>({} as IContext);
 
-export const usePageContext = () => useContext(PageContext);
+export const usePageContext = <T extends PageItem>() =>
+  useContext(PageContext as Context<IContext<T>>);
 
 export const ContextProvider: FC<IProps> = ({
   children,
+  pageRef,
   onEdit,
   onAdd,
   renderWidget,
   onChange,
   widgets = [],
+  artifacts = [],
   isEditing: _isEditing = false,
   config: _config,
 }) => {
@@ -99,6 +120,30 @@ export const ContextProvider: FC<IProps> = ({
   const [isEditing, setIsEditing] = useState(_isEditing);
   const [config, setConfig] = useState(_config);
 
+  const refPageEl = useRef<HTMLElement>(null);
+
+  useImperativeHandle(
+    pageRef,
+    () => ({
+      getRaw: async () => {
+        if (refPageEl.current) {
+          const el = refPageEl.current;
+          const currentEditing = !!isEditing;
+          return await new Promise((resolve) => {
+            setIsEditing(false);
+            setTimeout(() => {
+              const ret = getRawHtml(el);
+              setIsEditing(currentEditing);
+              resolve(ret);
+            }, 100);
+          });
+        }
+        return await Promise.resolve("");
+      },
+    }),
+    [isEditing]
+  );
+
   useEffect(() => {
     setConfig(_config);
   }, [_config]);
@@ -107,7 +152,7 @@ export const ContextProvider: FC<IProps> = ({
   }, [_isEditing]);
 
   const editConfig = (id?: string) => {
-    setSelected(id ? findDeep(config, id) : undefined);
+    setSelected(id ? findDeep(config, id)?.item : undefined);
   };
 
   const removeConfig = (id: string) => {
@@ -118,7 +163,7 @@ export const ContextProvider: FC<IProps> = ({
   };
 
   const updateConfig = (id: string, key: keyof PageItem, value: AnyObject) => {
-    const _o = findDeep(config, id);
+    const _o: AnyObject = findDeep(config, id)?.item;
     if (_o != null) {
       _o[key] = value;
       setSelected({ ..._o });
@@ -129,41 +174,37 @@ export const ContextProvider: FC<IProps> = ({
 
   const addItem = (opt?: DropObject) => {
     if (opt != null) {
-      const { id, item, index, move } = opt;
+      const { id, grid, item, pos } = opt;
       let newConfig = [...config];
-      if (move) {
-        newConfig = removeDeep(newConfig, move) as AnyObject;
-      }
-      if (id) {
-        const _o = findDeep(newConfig, id);
-        if (
-          _o != null &&
-          Array.isArray(_o.children) &&
-          _o.children.length > 0
-        ) {
-          _o.children.splice(index, 0, item as AnyObject);
-        } else if (_o != null) {
-          _o.children = [item];
+      if (item.id !== id) {
+        if (item.id) {
+          newConfig = removeDeep(newConfig, item.id) as AnyObject;
         }
-      } else {
-        newConfig.splice(index, 0, item as AnyObject);
+        if (id) {
+          const found = findDeep(newConfig, id);
+          if (found) found.list.splice(found.index + (pos ?? 0), 0, item);
+        } else if (grid) {
+          const found = findDeep(newConfig, grid);
+          // @ts-expect-error
+          if (found) found.item.children.push(item);
+        } else {
+          newConfig.push(item);
+        }
+        setConfig([...newConfig]);
+        onChange?.(newConfig);
       }
       setDragging(undefined);
-      setConfig(newConfig);
-      onChange?.(newConfig);
     }
   };
 
   const addWidget = (colId: string) => {
     onAdd?.((widget) => {
-      const newTile = getNodeConfig(
-        {
-          widgetId: widget.id,
-          title: widget.title,
-          type: EnumTypes.TILE,
-        },
-        EnumTypes.COL
-      );
+      const newTile = getNodeConfig({
+        widgetId: widget.id,
+        title: widget.title,
+        type: EnumTypes.TILE,
+      });
+      // @ts-expect-error
       updateConfig(colId, "children", [newTile]);
       setSelected(newTile);
     });
@@ -183,6 +224,7 @@ export const ContextProvider: FC<IProps> = ({
         selected,
         isEditing,
         dragging,
+        artifacts,
         setDragging,
         editConfig,
         removeConfig,
@@ -194,6 +236,7 @@ export const ContextProvider: FC<IProps> = ({
         findWidget,
         widgets,
         config,
+        refPageEl,
       }}
     >
       {children}

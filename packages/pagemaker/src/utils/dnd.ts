@@ -14,8 +14,18 @@ import { EnumTypes, IDragObject } from "./types";
 /**
  * Ghost element
  */
-const ghost: HTMLElement = document.createElement("div");
+export const ghost: HTMLElement & { reset: () => HTMLElement } =
+  document.createElement("div") as AnyObject;
 ghost.classList.add("page-maker__ghost");
+ghost.style.top = "-100%";
+ghost.reset = () => {
+  ghost.style.top = "-100%";
+  ghost.style.left = "unset";
+  ghost.style.width = "unset";
+  ghost.style.height = "unset";
+  ghost.dataset.id = undefined;
+  return ghost;
+};
 
 /**
  * generate element id
@@ -27,150 +37,126 @@ const generateId = () =>
 /**
  * get config from drag object
  */
-export const getNodeConfig = (
-  dragging: IDragObject,
-  parentType?: EnumTypes
-) => {
+export const getNodeConfig = (dragging: IDragObject) => {
   let newConfig: AnyObject = { ...dragging.item };
+
+  if (dragging.config) {
+    newConfig = {
+      ...dragging.config,
+      isReadOnly: true,
+      id: generateId(),
+    };
+  }
 
   if (isEmpty(newConfig)) {
     newConfig = {
       type: dragging.type,
       title: dragging.title,
       id: generateId(),
+      colSpan: 12,
     };
+
     if (dragging.type === EnumTypes.TILE)
       newConfig = {
         ...newConfig,
+        icon: dragging.icon,
+        title: dragging.title,
+        colSpan: 3,
         bordered: true,
         expandable: true,
         widgetId: dragging.widgetId,
       };
-    else if (dragging.type === EnumTypes.COL)
+
+    if (dragging.type === EnumTypes.VDIVIDER)
       newConfig = {
         ...newConfig,
+        colSpan: 1,
+      };
+
+    if (dragging.type === EnumTypes.DIVIDER)
+      newConfig = {
+        ...newConfig,
+        align: "center",
+      };
+
+    if (newConfig.type === EnumTypes.GRID)
+      newConfig = {
+        ...newConfig,
+        children: [],
         colSpan: 3,
       };
-    else if (dragging.type === EnumTypes.ROW)
+
+    if (newConfig.type === EnumTypes.IMAGE)
       newConfig = {
         ...newConfig,
-        height: 32,
+        fit: "contain",
+        aspect: "4 / 3",
+        colSpan: 3,
       };
   }
 
-  if (newConfig.type === EnumTypes.TILE && parentType !== EnumTypes.COL) {
-    newConfig = {
-      ...getNodeConfig({ type: EnumTypes.COL }, EnumTypes.ROW),
-      children: [newConfig],
-    };
-  }
-  if (newConfig.type === EnumTypes.COL && parentType !== EnumTypes.ROW) {
-    newConfig = {
-      ...getNodeConfig({ type: EnumTypes.ROW }),
-      children: [newConfig],
-    };
-  }
   return newConfig;
 };
 
-const getCorrectParent = (target: HTMLElement, dragId: string) => {
-  let parent = target;
-  while (parent && parent.dataset.id !== dragId) {
-    parent = parent.parentElement as HTMLElement;
-  }
-  return (parent ? parent.parentElement : target) as HTMLElement;
+const getNearestGrid = (target: HTMLElement) => {
+  return target.closest(".page-maker__grid") as HTMLElement;
 };
 
-const getNearestNode = (target: HTMLElement, types?: EnumTypes[]) => {
-  const typeCheck = types ?? [
-    EnumTypes.ROW,
-    EnumTypes.COL,
-    EnumTypes.TILE,
-    EnumTypes.HEADING,
-    EnumTypes.DIVIDER,
-  ];
-  while (target && !typeCheck.includes(target.dataset.type as EnumTypes)) {
-    target = target.parentElement as HTMLElement;
+const getNearestNode = (target: HTMLElement) => {
+  return target.closest(".page-maker__item") as HTMLElement;
+};
+
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+const calculateGhostPosition = (
+  clientX: number,
+  grid: HTMLElement,
+  neighbor: HTMLElement
+) => {
+  const gridRect = grid.getBoundingClientRect();
+  const rect = neighbor.getBoundingClientRect();
+  const isBefore = clientX < rect.left + rect.width / 2;
+  const edge = isBefore
+    ? rect.left <= gridRect.left
+    : rect.right >= gridRect.right;
+  ghost.dataset.id = neighbor.dataset.id;
+  ghost.dataset.pos = isBefore ? "0" : "1";
+  if (edge) {
+    if (isBefore) ghost.style.top = rect.top - 8 + "px";
+    else ghost.style.top = rect.bottom + "px";
+    ghost.style.left = gridRect.left + "px";
+    ghost.style.width = gridRect.width + "px";
+  } else {
+    ghost.style.top = rect.top + "px";
+    ghost.style.height = rect.height + "px";
+    if (isBefore) ghost.style.left = rect.left - 8 + "px";
+    else ghost.style.left = rect.right + "px";
   }
-  return target;
 };
 
 const calculatePosition = (
   evt: DragEvent,
-  neighbor: HTMLElement,
-  isRow: boolean
+  grid: HTMLElement,
+  neighbor?: HTMLElement
 ) => {
-  const rect = neighbor.getBoundingClientRect();
-  if (neighbor.parentElement != null) {
-    if (isRow && evt.clientY < rect.top + rect.height / 2) {
-      neighbor.parentElement.insertBefore(ghost, neighbor);
-    } else if (!isRow && evt.clientX < rect.left + rect.width / 2) {
-      neighbor.parentElement.insertBefore(ghost, neighbor);
+  const gridRect = grid.getBoundingClientRect();
+  if (neighbor && neighbor !== grid) {
+    calculateGhostPosition(evt.clientX, grid, neighbor);
+  } else {
+    const children = grid.querySelectorAll(":scope > .page-maker__item");
+    const neighbor = [...children].reverse().find((child) => {
+      const { top, bottom } = child.getBoundingClientRect();
+      return evt.clientY >= top && evt.clientY <= bottom;
+    }) as HTMLElement;
+    if (neighbor) {
+      calculateGhostPosition(evt.clientX, grid, neighbor);
     } else {
-      if (neighbor.nextElementSibling != null) {
-        neighbor.parentElement.insertBefore(ghost, neighbor.nextElementSibling);
-      } else {
-        neighbor.parentElement.appendChild(ghost);
-      }
+      const isInner = grid.classList.contains("inner");
+      ghost.dataset.id = "";
+      ghost.dataset.grid = grid.dataset.id ?? "";
+      ghost.style.top = (isInner ? gridRect.top : gridRect.bottom) + "px";
+      ghost.style.left = gridRect.left + "px";
+      ghost.style.width = gridRect.width + "px";
     }
-  }
-};
-
-const getRowNeighbor = (evt: DragEvent, neighbor: HTMLElement) => {
-  const nodeType = neighbor.dataset.type as EnumTypes;
-  const child = neighbor.firstElementChild as HTMLElement;
-
-  if (
-    nodeType === EnumTypes.TILE ||
-    (nodeType === EnumTypes.COL && child.dataset.type === EnumTypes.TILE)
-  ) {
-    neighbor = getNearestNode(neighbor, [EnumTypes.ROW]);
-  }
-
-  if (neighbor.dataset.type === EnumTypes.COL) {
-    neighbor.appendChild(ghost);
-  } else {
-    calculatePosition(evt, neighbor, true);
-  }
-};
-
-const getColNeighbor = (evt: DragEvent, neighbor: HTMLElement) => {
-  const nodeType = neighbor.dataset.type as EnumTypes;
-
-  if (nodeType === EnumTypes.TILE) {
-    neighbor = getNearestNode(neighbor, [EnumTypes.COL]);
-  }
-
-  if (
-    neighbor.dataset.type === EnumTypes.ROW &&
-    neighbor.firstElementChild != null
-  ) {
-    neighbor.firstElementChild.appendChild(ghost);
-  } else {
-    calculatePosition(evt, neighbor, false);
-  }
-};
-
-const getTilePosition = (evt: DragEvent, neighbor: HTMLElement) => {
-  const nodeType = neighbor.dataset.type as EnumTypes;
-  const child = neighbor.firstElementChild as HTMLElement;
-
-  if (
-    nodeType === EnumTypes.TILE ||
-    (nodeType === EnumTypes.COL && child.dataset.type === EnumTypes.TILE)
-  ) {
-    neighbor = getNearestNode(neighbor, [EnumTypes.ROW]);
-  }
-
-  if (neighbor.dataset.type === EnumTypes.COL) {
-    neighbor.appendChild(ghost);
-  } else if (
-    neighbor.dataset.type === EnumTypes.ROW &&
-    neighbor.firstElementChild != null
-  ) {
-    neighbor.firstElementChild.appendChild(ghost);
-  } else {
-    calculatePosition(evt, neighbor, false);
   }
 };
 
@@ -179,55 +165,44 @@ const getTilePosition = (evt: DragEvent, neighbor: HTMLElement) => {
  */
 export const onDragOver = (evt: DragEvent, dragging: IDragObject) => {
   evt.preventDefault();
-  const target = evt.target as HTMLElement;
+  let target = evt.target as HTMLElement;
+  if (target.classList.contains("page-maker__page"))
+    target = target.querySelector(".page-maker__grid") as HTMLElement;
   if (target !== ghost) {
-    const node = getNearestNode(
-      dragging.item != null
-        ? getCorrectParent(target, dragging.item.id)
-        : target
-    );
-    if (node) {
-      switch (dragging.type) {
-        case EnumTypes.ROW:
-        case EnumTypes.HEADING:
-        case EnumTypes.DIVIDER:
-          return getRowNeighbor(evt, node);
-        case EnumTypes.COL:
-          return getColNeighbor(evt, node);
-        case EnumTypes.TILE:
-          return getTilePosition(evt, node);
-      }
-    } else {
-      target.appendChild(ghost);
-    }
+    let grid = getNearestGrid(target);
+    if (dragging.type === EnumTypes.GRID && grid.classList.contains("inner"))
+      grid = getNearestGrid(grid.parentElement as HTMLElement);
+    const node = target !== grid ? getNearestNode(target) : grid;
+    ghost.reset();
+    calculatePosition(evt, grid, node);
   }
 };
 
 export const onDrop = (dragging: IDragObject) => {
   const parent = ghost.parentElement;
   if (parent != null) {
-    const index = Array.from(parent.children).indexOf(ghost);
-    const nearest = getNearestNode(ghost);
-    const { id, type } = nearest
-      ? nearest.dataset
-      : { id: undefined, type: undefined };
-    ghost.remove();
+    const { id, grid, pos = 0 } = ghost.dataset;
+    ghost.reset();
     return {
-      index,
       id,
-      move: dragging.item != null ? dragging.item.id : undefined,
-      item: getNodeConfig(dragging, type as EnumTypes),
+      grid,
+      pos: +pos,
+      item: getNodeConfig(dragging),
     };
   }
 };
 
 export const onDragLeave = (evt: DragEvent) => {
+  ghost.reset();
   if (
     evt.relatedTarget != null &&
     (evt.relatedTarget as HTMLElement).dataset.type === EnumTypes.PAGE
   ) {
-    ghost.remove();
     return true;
   }
   return false;
+};
+
+export const onDragCancel = () => {
+  ghost.reset();
 };

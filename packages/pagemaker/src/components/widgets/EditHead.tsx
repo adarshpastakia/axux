@@ -9,24 +9,38 @@ import { iconDelete, iconDrag } from "../../utils/icons";
 
 interface Props {
   title: string;
+  isLocked?: boolean;
   onRemove: () => void;
   onDragStart: DragEventHandler;
 }
 
 export const EditHead: FC<Props> = memo(
-  ({ title, onRemove, onDragStart }: Props) => (
-    <div className="page-maker__head" draggable onDragStart={onDragStart}>
+  ({ title, isLocked, onRemove, onDragStart }: Props) => (
+    <div
+      className="page-maker__head"
+      ref={(el) =>
+        el &&
+        (el.dataset.top =
+          el?.parentElement && el.parentElement?.offsetTop < 32
+            ? "true"
+            : "false")
+      }
+      draggable
+      onDragStart={onDragStart}
+    >
       <AxIcon icon={iconDrag} />
       <small>{title}</small>
-      <AxButton
-        size="sm"
-        variant="link"
-        color="danger"
-        className="flush"
-        icon={iconDelete}
-        stopPropagation
-        onClick={onRemove}
-      />
+      {!isLocked && (
+        <AxButton
+          size="sm"
+          variant="link"
+          color="danger"
+          className="flush"
+          icon={iconDelete}
+          stopPropagation
+          onClick={onRemove}
+        />
+      )}
     </div>
   )
 );

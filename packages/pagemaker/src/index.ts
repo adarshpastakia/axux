@@ -10,4 +10,9 @@ import "./i18n";
 
 export { AxPageMaker } from "./components/PageMaker";
 export { EnumTypes } from "./utils/types";
-export type { PageConfig, PageItem, WidgetObject } from "./utils/types";
+export type {
+  ArtifactObject,
+  PageConfig,
+  PageItem,
+  WidgetObject,
+} from "./utils/types";

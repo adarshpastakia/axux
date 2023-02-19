@@ -4,28 +4,32 @@
 // @license   : MIT
 
 import { AxDivider } from "@axux/core";
-import { getValue } from "@axux/utilities";
 import { FC, memo, useMemo } from "react";
 import { IDividerConfig } from "../../utils/types";
 import { Item } from "./Item";
 
 export const Divider: FC<IDividerConfig> = memo((item) => {
-  const { title, color, iconCls, size } = item;
+  const { text, color, icon, size, width, align, applyBg } = item;
   const style = useMemo(
     () => ({
-      color: getValue(color, "inherit"),
       fontSize: `${size ?? 1}rem`,
     }),
-    [color, size]
+    [size]
   );
 
   return (
     <Item item={item}>
-      <AxDivider size="sm">
-        {(!!iconCls || !!title) && (
+      <AxDivider
+        size="xs"
+        color={color}
+        width={width}
+        align={align as AnyObject}
+        applyBg={applyBg}
+      >
+        {(!!icon || !!text) && (
           <div style={style}>
-            {iconCls && <i className={iconCls} />}
-            {title && <span>{title}</span>}
+            {icon && <i className={icon} />}
+            {text && <span>{text}</span>}
           </div>
         )}
       </AxDivider>

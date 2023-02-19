@@ -19,7 +19,7 @@ import { Page } from "./widgets/Page";
 export const AxPageMaker: FC<IProps> = memo((props: IProps) => {
   return (
     <ContextProvider {...props}>
-      <AxSection className="page-maker__container">
+      <AxSection className="page-maker__container" data-mode={props.mode}>
         <Page />
 
         {props.isEditing && <Aside />}
