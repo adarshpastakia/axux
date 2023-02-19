@@ -19,6 +19,7 @@ export const toggleExpand = (
   state: TreeState,
   id?: string,
   canLoad = false,
+  isSortable = true,
   force?: boolean
 ) => {
   const parent = getNodeById(state, id);
@@ -34,7 +35,11 @@ export const toggleExpand = (
           )
       );
     } else if (!isNil(parent.children)) {
-      state.items.splice(index + 1, 0, ...createNodeList(parent.children));
+      state.items.splice(
+        index + 1,
+        0,
+        ...createNodeList(parent.children, isSortable)
+      );
     } else {
       parent.isLoading = canLoad;
       state.items.splice(
@@ -77,7 +82,12 @@ export const toggleCheck = (state: TreeState, id?: string) => {
   return { ...state };
 };
 
-export const toggleSelect = (state: TreeState, id?: string, scroll = false) => {
+export const toggleSelect = (
+  state: TreeState,
+  id?: string,
+  isSortable = true,
+  scroll = false
+) => {
   const node = getNodeById(state, id);
   if (node) {
     Array.from(state.treeMap.values()).forEach((n) => {
@@ -91,7 +101,7 @@ export const toggleSelect = (state: TreeState, id?: string, scroll = false) => {
       parent.childSelected = true;
       parent = state.treeMap.get(parent.parent ?? "");
     }
-    state.items = createNodeList(state.treeData);
+    state.items = createNodeList(state.treeData, isSortable);
     state.autoScroll = scroll;
     return !node.isLeaf;
   }

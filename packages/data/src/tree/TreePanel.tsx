@@ -148,10 +148,16 @@ export const AxTreePanel: FC<TreeProps> = memo(
           return { ...action.newState };
         }
         if (action.type === "toggleExpand") {
-          return toggleExpand(state, action.id, !(onLoad == null));
+          return toggleExpand(state, action.id, !(onLoad == null), isSortable);
         }
         if (action.type === "open") {
-          return toggleExpand(state, action.id, !(onLoad == null), true);
+          return toggleExpand(
+            state,
+            action.id,
+            !(onLoad == null),
+            isSortable,
+            true
+          );
         }
         if (action.type === "toggleCheck") {
           const newState = toggleCheck(state, action.id);
@@ -218,7 +224,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
           );
         }
         if (action.type === "select") {
-          toggleSelect(state, action.id, action.propChange);
+          toggleSelect(state, action.id, isSortable, action.propChange);
           !action.propChange &&
             setTimeout(
               () =>
@@ -246,7 +252,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
         }
         return { ...state };
       },
-      [onLoad, onSelect, fireCheckChange]
+      [onLoad, onSelect, fireCheckChange, isSortable]
     );
 
     const [state, dispatch] = useReducer(
