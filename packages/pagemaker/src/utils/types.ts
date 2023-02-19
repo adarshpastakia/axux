@@ -10,45 +10,87 @@ import { ChildrenProp } from "@axux/core/dist/types";
 
 export enum EnumTypes {
   PAGE = "page",
-  ROW = "row",
-  COL = "col",
+  GRID = "grid",
+  BREAK = "break",
   DIVIDER = "divider",
+  VDIVIDER = "vdivider",
   HEADING = "heading",
+  IMAGE = "image",
+  PARAGRAPH = "paragraph",
   TILE = "tile",
 }
+
+enum EnumAlign {
+  CENTER = "center",
+  START = "start",
+  END = "end",
+  JUSTIFY = "justify",
+}
+
+export type AspectType = "0" | "1 / 1" | "4 / 3" | "16 / 9";
+
+export type SpanType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 export interface IItem {
   id: string;
   type: EnumTypes;
-  [key: string]: AnyObject;
+  colSpan?: SpanType;
+  isLocked?: boolean;
+  isReadOnly?: boolean;
 }
 
 export interface IHeadingConfig extends IItem {
   type: EnumTypes.HEADING;
-  title: string;
+  text: string;
   size?: number;
   color?: string;
-  iconCls?: string;
+  icon?: string;
+  isLocked?: boolean;
+
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+
+  align?: EnumAlign;
+}
+
+export interface IParagraphConfig extends IItem {
+  type: EnumTypes.PARAGRAPH;
+  text: string;
+  align?: EnumAlign;
+}
+
+export interface IImageConfig extends IItem {
+  type: EnumTypes.IMAGE;
+  src: string;
+  aspect?: AspectType;
+  fit?: "contain" | "cover" | "fit";
 }
 
 export interface IDividerConfig extends IItem {
   type: EnumTypes.DIVIDER;
-  title?: string;
+  align?: EnumAlign;
+  text?: string;
   size?: number;
+  width?: number;
   color?: string;
-  iconCls?: string;
+  icon?: string;
+  applyBg?: boolean;
 }
 
-export interface IRowConfig extends IItem {
-  type: EnumTypes.ROW;
-  height: number | "auto";
-  children: IColConfig[];
+export interface IVDividerConfig extends IItem {
+  type: EnumTypes.VDIVIDER;
+  width?: number;
+  color?: string;
 }
 
-export interface IColConfig extends IItem {
-  type: EnumTypes.COL;
-  colSpan: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  children?: PageConfig | [ITileConfig];
+export interface IBreakConfig extends IItem {
+  type: EnumTypes.BREAK;
+}
+
+export interface IGridConfig extends IItem {
+  type: EnumTypes.GRID;
+  children: PageItem[];
 }
 
 export interface ITileConfig extends IItem {
@@ -56,38 +98,54 @@ export interface ITileConfig extends IItem {
   title?: string;
   info?: string;
   color?: string;
-  iconCls?: string;
+  icon?: string;
   bordered?: boolean;
   expandable?: boolean;
-  aspect?: "0" | "1 / 1" | "4 / 3" | "16 / 9";
+  aspect?: AspectType;
   widgetId: string;
 }
 
 export interface IWidgetObject {
   id: string;
-  icon: string;
+  group?: string;
+  icon?: string;
   title: string;
+}
+
+export interface IArtifactObject {
+  id: string;
+  icon?: string;
+  title: string;
+  config: Omit<IParagraphConfig, "id"> | Omit<IImageConfig, "id">;
 }
 
 export interface IDragObject {
   type: EnumTypes;
   item?: IItem;
+  icon?: string;
   title?: string;
+  config?: KeyValue;
   widgetId?: string;
 }
 
 export type PageItem =
   | IHeadingConfig
   | IDividerConfig
-  | IRowConfig
-  | IColConfig
+  | IVDividerConfig
+  | IParagraphConfig
+  | IImageConfig
+  | IBreakConfig
+  | IGridConfig
   | ITileConfig;
 
-export type PageConfig = Array<IDividerConfig | IHeadingConfig | IRowConfig>;
+export type PageConfig = PageItem[];
 
 export type WidgetObject = IWidgetObject;
 
+export type ArtifactObject = IArtifactObject;
+
 export interface IProps extends ChildrenProp {
+  mode?: "screen" | "pdf";
   /**
    * Edit mode
    */
@@ -100,6 +158,12 @@ export interface IProps extends ChildrenProp {
    * Widget list
    */
   widgets: WidgetObject[];
+  /**
+   *
+   */
+  artifacts?: ArtifactObject[];
+
+  pageRef?: React.RefObject<{ getRaw: () => Promise<string> } | undefined>;
   /**
    * Render widget tile
    * @param id

@@ -3,149 +3,72 @@
 // @copyright : 2020
 // @license   : MIT
 
-import { AxPopover } from "@axux/core";
-import { AxField, AxForm } from "@axux/form";
-import { Fragment, memo } from "react";
-import { BlockPicker } from "react-color";
+import { AxField } from "@axux/form";
+import { Fragment, memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { EnumTypes } from "../..";
-import { iconColor } from "../../utils/icons";
+import { DividerConfig } from "../config/DividerConfig";
+import { HeadingConfig } from "../config/HeadingConfig";
+import { ImageConfig } from "../config/ImageConfig";
+import { ParagraphConfig } from "../config/ParagraphConfig";
 import { usePageContext } from "../context";
-
-const colors = [
-  "#40407a",
-  "#706fd3",
-  "#f7f1e3",
-  "#34ace0",
-  "#33d9b2",
-  "#2c2c54",
-  "#474787",
-  "#aaa69d",
-  "#227093",
-  "#218c74",
-  "#ff5252",
-  "#ff793f",
-  "#d1ccc0",
-  "#ffb142",
-  "#ffda79",
-  "#b33939",
-  "#cd6133",
-  "#84817a",
-  "#cc8e35",
-  "#ccae62",
-];
 
 export const Config = memo(() => {
   const { t } = useTranslation("pagemaker");
   const { selected, updateConfig } = usePageContext();
 
-  const updateField = (key: string, value: AnyObject) => {
-    selected && updateConfig(selected.id, key as AnyObject, value);
-  };
+  const form = useMemo(() => {
+    switch (selected?.type) {
+      case EnumTypes.DIVIDER:
+        return <DividerConfig />;
+      case EnumTypes.HEADING:
+        return <HeadingConfig />;
+      case EnumTypes.PARAGRAPH:
+        return <ParagraphConfig />;
+      case EnumTypes.IMAGE:
+        return <ImageConfig />;
+      default:
+        return null;
+    }
+  }, [selected]);
 
-  return selected ? (
+  return (
     <div className="page-maker__aside--form">
-      <AxForm>
-        {[EnumTypes.TILE, EnumTypes.DIVIDER, EnumTypes.HEADING].includes(
-          selected.type
-        ) && (
-          <Fragment>
-            <AxField.Text
-              label={t("config.title")}
-              value={selected.title}
-              onChange={(value) => updateField("title", value)}
+      {selected && (
+        <Fragment>
+          {![EnumTypes.DIVIDER, EnumTypes.VDIVIDER, EnumTypes.BREAK].includes(
+            selected.type
+          ) && (
+            <AxField.Slider
+              label={t("config.colSpan")}
+              min={1}
+              max={12}
+              showValue
+              value={selected.colSpan}
+              onSlide={(value) => updateConfig(selected.id, "colSpan", value)}
+              onChange={(value) => updateConfig(selected.id, "colSpan", value)}
             />
-            <AxField.Container label={t("config.color")}>
-              <AxField.Addon icon={iconColor} color={selected.color} />
-              <AxPopover hideArrow placement="bottom-start">
-                <div className="ax-field__container ">
-                  <AxField.Text value={selected.color} isReadOnly />
-                </div>
-                <BlockPicker
-                  colors={colors}
-                  color={selected.color}
-                  onChangeComplete={(c) => updateField("color", c.hex)}
-                />
-              </AxPopover>
-            </AxField.Container>
-            <AxField.Text
-              label={t("config.icon")}
-              value={selected.iconCls}
-              onChange={(value) => updateField("iconCls", value)}
-            >
-              <AxField.Addon icon={selected.iconCls} />
-            </AxField.Text>
-          </Fragment>
-        )}
-        {[EnumTypes.DIVIDER, EnumTypes.HEADING].includes(selected.type) && (
-          <AxField.Slider
-            label={t("config.size")}
-            min={0.75}
-            max={4}
-            step={0.25}
-            showValue
-            value={selected.size || 1}
-            onChange={(value) => updateField("size", value)}
-          />
-        )}
-        {selected.type === EnumTypes.COL && (
-          <AxField.Slider
-            label={t("config.colSpan")}
-            min={1}
-            max={12}
-            showValue
-            value={selected.colSpan}
-            onChange={(value) => updateField("colSpan", value)}
-          />
-        )}
-        {selected.type === EnumTypes.ROW && (
-          <AxField.Container label={t("config.height")}>
-            <AxField.Addon>
-              <AxField.Checkbox
-                isChecked={selected.height === "auto"}
-                onChange={(e) => [updateField("height", e ? "auto" : 32)]}
-              />
-            </AxField.Addon>
-            <AxField.Number
-              min={32}
-              max={800}
-              isDisabled={selected.height === "auto"}
-              value={selected.height}
-              onChange={(value) => updateField("height", value)}
-            />
-          </AxField.Container>
-        )}
-        {selected.type === EnumTypes.TILE && (
-          <Fragment>
-            <AxField.Textarea
-              rows={5}
-              label={t("config.info")}
-              value={selected.info}
-              onChange={(value) => updateField("info", value)}
-            />
-            <AxField.Container data-plain="true">
-              <AxField.Switch
-                label={t("config.expand")}
-                isChecked={selected.expandable}
-                onChange={(checked) => updateField("expandable", checked)}
-              />
-            </AxField.Container>
+          )}
+          {[EnumTypes.IMAGE, EnumTypes.TILE].includes(selected.type) && (
             <AxField.Options
               name="aspect"
-              info="When using aspect-ratio ensure row is auto height"
+              className="align-options"
               label={t("config.aspect")}
-              value={selected.aspect}
-              onChange={(value) => updateField("aspect", value)}
+              value={(selected as AnyObject).aspect ?? "0"}
+              onChange={(value) =>
+                updateConfig(selected.id, "aspect" as AnyObject, value)
+              }
             >
               <AxField.Radio value="0" label="None" />
               <AxField.Radio value="1 / 1" label="1:1" />
               <AxField.Radio value="4 / 3" label="4:3" />
               <AxField.Radio value="16 / 9" label="16:9" />
             </AxField.Options>
-          </Fragment>
-        )}
-      </AxForm>
+          )}
+        </Fragment>
+      )}
+      {form}
     </div>
-  ) : null;
+  );
 });
 Config.displayName = "AxPageMaker.Config";

@@ -6,9 +6,16 @@
  * @license   : MIT
  */
 
-import { AxViewport } from "@axux/core";
+import { AxApplicationProvider, AxViewport } from "@axux/core";
 import { ComponentStory } from "@storybook/react";
-import { AxPageMaker, EnumTypes, PageConfig, WidgetObject } from "../src";
+import { useEffect, useRef } from "react";
+import {
+  ArtifactObject,
+  AxPageMaker,
+  EnumTypes,
+  PageConfig,
+  WidgetObject,
+} from "../src";
 
 const widgets: WidgetObject[] = [
   {
@@ -18,72 +25,67 @@ const widgets: WidgetObject[] = [
   },
 ];
 
+const artifacts: ArtifactObject[] = [
+  {
+    id: "sample-text",
+    title: "Sample text",
+    config: {
+      type: EnumTypes.PARAGRAPH,
+      text: "## Sample text\n\n- Sample markdown formatted text",
+    },
+  },
+];
+
 const config: PageConfig = [
   {
     id: "head-1",
+    colSpan: 12,
     type: EnumTypes.HEADING,
-    title: "Heading",
+    text: "Heading",
     color: "#487eb0",
     size: 1.5,
   },
   {
-    id: "row-1",
-    type: EnumTypes.ROW,
-    height: "auto",
-    children: [
-      {
-        id: "col-1",
-        type: EnumTypes.COL,
-        colSpan: 3,
-        children: [
-          {
-            id: "tile-1",
-            widgetId: widgets[0].id,
-            type: EnumTypes.TILE,
-            title: "Tile head",
-            bordered: true,
-            expandable: false,
-            aspect: "4 / 3",
-            color: "#227093",
-          },
-        ],
-      },
-    ],
+    id: "image-1",
+    colSpan: 3,
+    fit: "cover",
+    aspect: "16 / 9",
+    src: "https://picsum.photos/800/600",
+    type: EnumTypes.IMAGE,
+  },
+  {
+    id: "para-1",
+    colSpan: 9,
+    text: "# Sample header\n- List item\n- List item\n- List item",
+    type: EnumTypes.PARAGRAPH,
   },
   {
     id: "div-1",
+    colSpan: 12,
     type: EnumTypes.DIVIDER,
   },
   {
-    id: "row-2",
-    type: EnumTypes.ROW,
-    height: 400,
-    children: [
-      {
-        id: "col-2",
-        type: EnumTypes.COL,
-        colSpan: 6,
-        children: [
-          {
-            id: "tile-2",
-            widgetId: widgets[0].id,
-            type: EnumTypes.TILE,
-            title: "Tile head",
-            bordered: true,
-            expandable: true,
-            color: "#227093",
-            info: "<b>Information Card</b>\nThis tooltip can display information for the <u>widget</u>\nCan include <em>HTML tags</em>",
-            iconCls: "mdi mdi-chart-pie",
-          },
-        ],
-      },
-      {
-        id: "col-3",
-        type: EnumTypes.COL,
-        colSpan: 6,
-        children: [],
-      },
-    ],
+    id: "tile-1",
+    widgetId: widgets[0].id,
+    type: EnumTypes.TILE,
+    title: "Tile head",
+    bordered: true,
+    expandable: false,
+    aspect: "4 / 3",
+    colSpan: 3,
+    color: "#227093",
+  },
+  {
+    id: "tile-2",
+    widgetId: widgets[0].id,
+    type: EnumTypes.TILE,
+    title: "Tile head",
+    bordered: true,
+    expandable: false,
+    colSpan: 6,
+    color: "#227093",
+    info: "<b>Information Card</b>\nThis tooltip can display information for the <u>widget</u>\nCan include <em>HTML tags</em>",
+    icon: "mdi mdi-chart-pie",
   },
 ];
 
@@ -98,16 +100,27 @@ const addNew = (callback: AnyObject) => {
 };
 
 const Template: ComponentStory<typeof AxPageMaker> = (props) => {
+  const refPage = useRef<AnyObject>();
+  useEffect(() => {
+    document.addEventListener("contextmenu", () => {
+      refPage.current?.getRaw().then(console.log);
+    });
+  }, []);
   return (
-    <AxViewport>
-      <AxPageMaker {...props} />
-    </AxViewport>
+    <AxApplicationProvider>
+      <AxViewport>
+        <AxPageMaker {...props} pageRef={refPage} />
+      </AxViewport>
+    </AxApplicationProvider>
   );
 };
 export const PageMakerStory = Template.bind({});
 PageMakerStory.args = {
+  mode: "pdf",
+  isEditing: true,
   config,
   widgets,
+  artifacts,
   onAdd: addNew,
   renderWidget: (widget) => <div>Widget here - {widget}</div>,
 };

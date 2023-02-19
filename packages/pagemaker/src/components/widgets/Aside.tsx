@@ -7,6 +7,7 @@ import {
   AxAside,
   AxButton,
   AxContent,
+  AxDivider,
   AxHeader,
   AxPanel,
   AxTitle,
@@ -14,13 +15,14 @@ import {
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { FC, memo } from "react";
 import { useTranslation } from "react-i18next";
+import { iconDelete } from "../../utils/icons";
 import { usePageContext } from "../context";
 import { Config } from "./Config";
 import { WidgetList } from "./WidgetList";
 
 export const Aside: FC = memo(() => {
   const { t } = useTranslation("pagemaker");
-  const { selected, editConfig } = usePageContext();
+  const { selected, editConfig, removeConfig } = usePageContext();
 
   return (
     <AxAside width="18rem" align="end" className="page-maker__aside">
@@ -29,6 +31,16 @@ export const Aside: FC = memo(() => {
           <AxPanel>
             <div className="ax-header">
               <AxTitle>{t("label.config")}</AxTitle>
+              <AxButton
+                size="sm"
+                variant="link"
+                color="danger"
+                className="flush"
+                icon={iconDelete}
+                stopPropagation
+                onClick={() => selected && removeConfig(selected.id)}
+              />
+              <AxDivider vertical size="sm" />
               <AxButton
                 rtlFlip
                 variant="link"
@@ -44,7 +56,7 @@ export const Aside: FC = memo(() => {
             </AxContent>
           </AxPanel>
         )}
-        <AxPanel panelId="widgets">
+        <AxPanel panelId="widgets" className="!flex-1">
           <AxHeader>
             <AxTitle>{t("label.widgets")}</AxTitle>
           </AxHeader>

@@ -4,10 +4,14 @@
     "cancel": "Cancel",
     "edit": "Edit",
     "preview": "Preview",
-    "row": "Row",
-    "col": "Column",
+    "grid": "Grid",
+    "image": "Image",
+    "pageBreak": "Page Break",
     "heading": "Heading",
+    "paragraph": "Paragraph",
     "divider": "Divider",
+    "default": "Default",
+    "artifacts": "Artifacts",
     "widgets": "Widgets",
     "config": "Config",
     "addNew": "Add New Widget",
@@ -20,10 +24,14 @@
     "info": "Info Tooltip",
     "icon": "Icon class",
     "size": "Text size",
+    "width": "Size",
     "colSpan": "Col span",
     "height": "Row Height",
     "border": "Bordered",
     "expand": "Expandable",
-    "aspect": "Aspect Ratio"
+    "aspect": "Aspect Ratio",
+    "align": "Text align",
+    "style": "Text style",
+    "applyBg": "Text background"
   }
 }

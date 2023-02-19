@@ -6,14 +6,53 @@
  * @license   : MIT
  */
 
+@import "./_markdown.css";
+
 @layer components {
   .page-maker__container {
-    @apply bg-component;
+    @apply bg-bw-900/50;
+
+    & > .ax-content::-webkit-scrollbar-thumb {
+      @apply bg-bw-200;
+    }
+  }
+
+  .page-maker__page {
+    @apply min-h-full p-4 bg-component;
+  }
+
+  .page-maker__container[data-mode="screen"] .page-maker__page {
+    min-width: 1100px;
+  }
+
+  .page-maker__container[data-mode="pdf"] .page-maker__page {
+    max-width: 8.27in;
+    margin: 0 auto;
+    padding: 1rem 0.135in;
+    border: 0 solid rgba(88 88 88 / 0.3);
+    border-width: 0 1px;
   }
 
   .page-maker__grid {
     @apply grid gap-2 min-h-full grid-flow-row;
+    grid-template-columns: repeat(12, 1fr);
     align-content: start;
+
+    & > .page-maker__item > .page-maker__grid {
+      @apply min-h-[4rem];
+    }
+  }
+
+  .page-maker__aside {
+    & .align-options .ax-field__options {
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      grid-template-columns: unset;
+    }
+  }
+
+  .page-maker__aside--form > .page-maker__aside--form {
+    @apply mt-2 pt-2 border-t;
   }
 
   .page-maker___tileBody {
@@ -23,77 +62,57 @@
   }
 
   .page-maker__head {
-    @apply h-8 grid items-center select-none z-50 -top-8 inset-x-0 absolute bg-bw-500/10;
+    @apply h-8 flex items-center select-none z-50 -top-8 inset-x-0 absolute bg-bw-100 dark:bg-bw-800;
     grid-template-columns: auto 1fr auto;
 
     & small {
-      @apply px-1 truncate;
+      @apply flex-1 px-1 truncate;
+    }
+
+    &[data-top="true"] {
+      @apply top-auto -bottom-8;
     }
   }
 
   .page-maker__resizer {
     @apply hidden absolute before:block before:bg-bw-500/50 hover:bg-bw-500/50 hover:before:bg-primary-500/50;
+
+    &[data-type="col"] {
+      width: 5px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      cursor: col-resize;
+
+      &:before {
+        height: 24px;
+        width: 5px;
+        top: 50%;
+        position: relative;
+        transform: translateY(-50%);
+      }
+    }
+
+    &[data-type="row"] {
+      height: 5px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      cursor: row-resize;
+
+      &:before {
+        width: 24px;
+        height: 5px;
+        left: 50%;
+        position: relative;
+        transform: translateX(-50%);
+      }
+    }
   }
 
   .page-maker__item {
     box-sizing: content-box;
     position: relative;
-
-    &[data-type="row"] {
-      position: relative;
-      min-height: 32px;
-      display: grid;
-
-      & .page-maker__rowContainer {
-        display: grid;
-        grid-gap: 8px;
-        grid-auto-flow: column;
-        grid-template-columns: repeat(12, 1fr);
-      }
-
-      & > .page-maker__resizer {
-        height: 5px;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        cursor: row-resize;
-
-        &:before {
-          width: 24px;
-          height: 5px;
-          left: 50%;
-          position: relative;
-          transform: translateX(-50%);
-        }
-      }
-    }
-
-    &[data-type="col"] {
-      display: grid;
-      grid-gap: 8px;
-      min-height: 8px;
-      grid-auto-flow: row;
-
-      & > .page-maker__resizer {
-        width: 5px;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        cursor: col-resize;
-
-        &:before {
-          height: 24px;
-          width: 5px;
-          top: 50%;
-          position: relative;
-          transform: translateY(-50%);
-        }
-      }
-    }
-
-    &[data-type="col"] > &[data-type="row"] {
-      align-self: start;
-    }
 
     &[data-type="tile"] {
       display: grid;
@@ -101,7 +120,6 @@
     }
 
     &[data-type="heading"] {
-      @apply font-medium;
       line-height: 1.25;
 
       & > div:first-child {
@@ -116,7 +134,7 @@
 
           &:focus {
             outline: none;
-            box-shadow: 0 0 0 1px theme(colors.primary.500/50);
+            box-shadow: 0 0 0 1px theme(colors.primary.500/0.5);
           }
         }
       }
@@ -155,11 +173,7 @@
 
   .page-maker__page[data-editing="true"] {
     & .page-maker__ghost {
-      @apply bg-bw-500/10 border-dashed border-2 border-primary-500/50 min-h-[2rem];
-    }
-
-    & .page-maker__item[data-type="row"] .page-maker__ghost {
-      grid-column-end: span 3;
+      @apply absolute bg-bw-500/10 border-dashed border-4 border-primary-500/50;
     }
 
     & .page-maker__grid {
@@ -167,26 +181,9 @@
     }
 
     & .page-maker__item {
-      @apply mt-8 p-2 outline-dashed outline-1 outline-bw-500/50;
+      @apply p-2 outline-dashed outline-1 outline-bw-500/50;
 
-      &[data-resizing="true"] {
-        @apply p-0;
-
-        & .page-maker__rowContainer {
-          @apply overflow-hidden;
-        }
-
-        & .page-maker__item {
-          @apply m-0;
-
-          & > .page-maker__head,
-          & > .page-maker__empty {
-            @apply hidden;
-          }
-        }
-      }
-
-      &[data-dragging="true"] > :first-child {
+      & > .page-maker__head {
         @apply hidden;
       }
 
@@ -199,7 +196,15 @@
       }
 
       &[data-selected="true"] {
-        @apply outline-1 outline-primary-500;
+        @apply outline outline-primary-500;
+
+        & > .page-maker__head {
+          @apply flex z-50;
+        }
+
+        & > .page-maker__resizer {
+          @apply block;
+        }
       }
     }
   }
