@@ -209,7 +209,7 @@
     @apply m-0 px-2;
   }
   textarea.ax-field__input ~ .ax-field__clear {
-    @apply self-start;
+    @apply self-stretch;
   }
 
   /******************* options *******************/
@@ -563,6 +563,7 @@
   .ax-field__input[type="number"] ~ .ax-field__clear {
     @apply absolute inset-y-0 ltr:right-5 rtl:left-5;
   }
+
 
   .ax-input__color {
     @apply bg-component;

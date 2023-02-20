@@ -130,10 +130,10 @@ export const Color: FC<ColorProps> = memo(
           <div
             className={`${
               showInput ? "w-12" : "w-full"
-            } h-8 p-2 cursor-pointer order-3`}
+            } ax-field__color`}
           >
             <div
-              className="h-full w-full border border-bw-500/30"
+              className="flex-1 border border-bw-500/30"
               style={{ backgroundColor: actualValue }}
             />
           </div>
