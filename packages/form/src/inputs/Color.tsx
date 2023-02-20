@@ -34,6 +34,8 @@ export interface ColorProps extends ElementProps, InputProps, ChildrenProp {
   hideAlpha?: boolean;
 
   showInput?: boolean;
+
+  size?: "sm";
 }
 
 const DEFAULT_SWATCHES = [
@@ -90,6 +92,7 @@ export const Color: FC<ColorProps> = memo(
     children,
     hideAlpha,
     showInput,
+    size,
     swatches = DEFAULT_SWATCHES,
     onEnterPressed,
     ...rest
@@ -128,9 +131,8 @@ export const Color: FC<ColorProps> = memo(
           placement="bottom-start"
         >
           <div
-            className={`${
-              showInput ? "w-12" : "w-full"
-            } ax-field__color`}
+            data-size={size}
+            className={`${showInput ? "w-12" : "w-full"} ax-field__color`}
           >
             <div
               className="flex-1 border border-bw-500/30"

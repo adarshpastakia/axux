@@ -581,8 +581,15 @@
   }
 
   .ax-field__color {
-    @apply flex px-2 py-1.5 cursor-pointer order-3;
-    min-height: 1.5rem;
+    @apply flex p-2 cursor-pointer order-3;
+    min-height: 2rem;
+    min-width: 3rem;
+
+    &[data-size="sm"] {
+      @apply py-1.5;
+      min-height: 1.25rem;
+      min-width: 2rem;
+    }
 
     & ~ .ax-field__clear {
       @apply leading-none;
