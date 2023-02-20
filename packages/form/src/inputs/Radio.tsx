@@ -47,6 +47,7 @@ export const Radio: FC<RadioProps> = memo(
     );
     return (
       <label
+        data-has-icon={!!icon}
         data-disabled={isDisabled}
         data-invalid={!isDisabled && isInvalid}
         className={`ax-field__option ${className ?? ""}`}
@@ -60,8 +61,16 @@ export const Radio: FC<RadioProps> = memo(
           className="ax-field__input"
           onChange={handleChange}
         />
-        <AxIcon data-check="off" icon={Icons.iconRadioOff} />
-        <AxIcon data-check="on" icon={Icons.iconRadioOn} />
+        <AxIcon
+          data-check="off"
+          rtlFlip={rtlFlip}
+          icon={icon ?? Icons.iconRadioOff}
+        />
+        <AxIcon
+          data-check="on"
+          rtlFlip={rtlFlip}
+          icon={icon ?? Icons.iconRadioOn}
+        />
         {error && (
           <AxIcon
             className="ax-field__error"
@@ -71,7 +80,6 @@ export const Radio: FC<RadioProps> = memo(
             data-tooltip-placement="bottom"
           />
         )}
-        {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
         {label && <span className="ax-field__option--label">{label}</span>}
       </label>
     );

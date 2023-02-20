@@ -342,7 +342,10 @@ FileStory.args = {
 };
 
 const CheckboxTemplate: ComponentStory<typeof AxField.Checkbox> = (props) => (
-  <AxField.Checkbox {...props} onChange={action("onChange")} />
+  <div>
+    <AxField.Checkbox {...props} onChange={action("onChange")} />
+    <AxField.Checkbox {...props} onChange={action("onChange")} icon="mdi mdi-eye" iconOff="mdi mdi-eye-off-outline" />
+  </div>
 );
 export const CheckboxStory = CheckboxTemplate.bind({});
 CheckboxStory.args = {
@@ -355,24 +358,49 @@ CheckboxStory.args = {
 
 const RadioTemplate: ComponentStory<typeof AxField.Radio> = (props) => (
   <Fragment>
-    <AxField.Radio
-      {...props}
-      name="test"
-      value="1"
-      onChange={action("onChange")}
-    />
-    <AxField.Radio
-      {...props}
-      name="test"
-      value="2"
-      onChange={action("onChange")}
-    />
-    <AxField.Radio
-      {...props}
-      name="test"
-      value="3"
-      onChange={action("onChange")}
-    />
+    <div>
+      <AxField.Radio
+        {...props}
+        name="test"
+        value="1"
+        onChange={action("onChange")}
+      />
+      <AxField.Radio
+        {...props}
+        name="test"
+        value="2"
+        onChange={action("onChange")}
+      />
+      <AxField.Radio
+        {...props}
+        name="test"
+        value="3"
+        onChange={action("onChange")}
+      />
+    </div>
+    <div>
+      <AxField.Radio
+        {...props}
+        name="test"
+        value="1"
+        icon="mdi mdi-format-bold"
+        onChange={action("onChange")}
+      />
+      <AxField.Radio
+        {...props}
+        name="test"
+        value="2"
+        icon="mdi mdi-format-italic"
+        onChange={action("onChange")}
+      />
+      <AxField.Radio
+        {...props}
+        name="test"
+        value="3"
+        icon="mdi mdi-format-underline"
+        onChange={action("onChange")}
+      />
+    </div>
   </Fragment>
 );
 export const RadioStory = RadioTemplate.bind({});

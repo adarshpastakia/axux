@@ -24,7 +24,7 @@ export interface CheckboxProps
   extends ElementProps,
     IconProp,
     Omit<OptionProps<boolean>, "value"> {
-  //
+  iconOff?: string;
 }
 
 // eslint-disable-next-line react/display-name
@@ -38,6 +38,7 @@ export const Checkbox: FC<CheckboxProps> = memo(
     inputRef,
     label,
     icon,
+    iconOff,
     rtlFlip,
     onChange,
     // @ts-expect-error
@@ -59,6 +60,7 @@ export const Checkbox: FC<CheckboxProps> = memo(
     );
     return (
       <label
+        data-has-icon={!!icon}
         data-disabled={isDisabled}
         data-invalid={!isDisabled && isInvalid}
         className={`ax-field__option ${className ?? ""}`}
@@ -73,8 +75,16 @@ export const Checkbox: FC<CheckboxProps> = memo(
           data-invalid={isInvalid}
           onChange={handleChange}
         />
-        <AxIcon data-check="off" icon={Icons.iconCheckboxOff} />
-        <AxIcon data-check="on" icon={Icons.iconCheckboxOn} />
+        <AxIcon
+          data-check="off"
+          rtlFlip={rtlFlip}
+          icon={iconOff ?? icon ?? Icons.iconCheckboxOff}
+        />
+        <AxIcon
+          data-check="on"
+          rtlFlip={rtlFlip}
+          icon={icon ?? Icons.iconCheckboxOn}
+        />
         {error && (
           <AxIcon
             className="ax-field__error"
@@ -84,7 +94,6 @@ export const Checkbox: FC<CheckboxProps> = memo(
             data-tooltip-placement="bottom"
           />
         )}
-        {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
         {label && <span className="ax-field__option--label">{label}</span>}
       </label>
     );
