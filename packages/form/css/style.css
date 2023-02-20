@@ -236,11 +236,19 @@
     }
 
     & .ax-icon {
-      @apply text-lg cursor-pointer rounded-sm text-primary-700 dark:text-primary-300;
+      @apply text-lg cursor-pointer rounded-sm text-primary-600 dark:text-primary-400;
     }
 
     &:hover .ax-icon {
       @apply text-primary-500;
+    }
+
+    &[data-has-icon="true"] .ax-icon[data-check="on"] {
+      @apply bg-primary-600 dark:bg-primary-400 text-white;
+    }
+
+    &[data-has-icon="true"]:hover .ax-icon[data-check="on"] {
+      @apply bg-primary-500 text-white;
     }
 
     &[data-invalid="true"] {
@@ -251,6 +259,14 @@
 
       &:hover .ax-icon {
         @apply text-danger-500;
+      }
+
+      &[data-has-icon="true"] .ax-icon[data-check="on"] {
+        @apply bg-danger-600 dark:bg-danger-400 text-white;
+      }
+
+      &[data-has-icon="true"]:hover.ax-icon[data-check="on"] {
+        @apply bg-danger-500 text-white;
       }
     }
 
@@ -278,10 +294,10 @@
     }
 
     & input {
-      @apply absolute opacity-0 z-[1] cursor-pointer;
+      @apply absolute !opacity-0 z-[1] cursor-pointer;
 
       &[type="radio"] ~ .ax-icon {
-        @apply rounded-full;
+        @apply rounded;
       }
 
       &:focus-visible {
@@ -564,6 +580,14 @@
     @apply absolute inset-y-0 ltr:right-5 rtl:left-5;
   }
 
+  .ax-field__color {
+    @apply flex px-2 py-1.5 cursor-pointer order-3;
+    min-height: 1.5rem;
+
+    & ~ .ax-field__clear {
+      @apply leading-none;
+    }
+  }
 
   .ax-input__color {
     @apply bg-component;
