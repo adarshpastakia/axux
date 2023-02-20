@@ -60,7 +60,7 @@ export const Checkbox: FC<CheckboxProps> = memo(
     );
     return (
       <label
-        data-has-icon={!!icon}
+        data-has-icon={!!icon && !iconOff}
         data-disabled={isDisabled}
         data-invalid={!isDisabled && isInvalid}
         className={`ax-field__option ${className ?? ""}`}

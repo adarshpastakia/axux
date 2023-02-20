@@ -344,6 +344,7 @@ FileStory.args = {
 const CheckboxTemplate: ComponentStory<typeof AxField.Checkbox> = (props) => (
   <div>
     <AxField.Checkbox {...props} onChange={action("onChange")} />
+    <AxField.Checkbox {...props} onChange={action("onChange")} icon="mdi mdi-marker" />
     <AxField.Checkbox {...props} onChange={action("onChange")} icon="mdi mdi-eye" iconOff="mdi mdi-eye-off-outline" />
   </div>
 );
