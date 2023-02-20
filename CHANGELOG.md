@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/adarshpastakia/axux/compare/v2.1.0...v2.1.1) (2023-02-20)
+
+
+### Bug Fixes
+
+* **ColorInput:** default sizing ([a07c511](https://github.com/adarshpastakia/axux/commit/a07c5112f4626dffdae295b8057a1eb5dfa097ad))
+* **OptionInput:** use icon to represent on/off state ([51a97d7](https://github.com/adarshpastakia/axux/commit/51a97d7baf4234ef69c4273609b753301d50f396))
+
+
+
+
+
 # [2.1.0](https://github.com/adarshpastakia/axux/compare/v2.0.0...v2.1.0) (2023-02-19)
 
 
