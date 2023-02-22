@@ -210,7 +210,6 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
         </Helmet>
         {children}
 
-        <div className="ax-overlay__container" />
         <OverlayContainer itemRef={overlayRef} />
         <NotificationContainer itemRef={notificationRef} />
       </HelmetProvider>
