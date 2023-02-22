@@ -6,13 +6,7 @@
  * @license   : MIT
  */
 
-import {
-  forwardRef,
-  MouseEvent,
-  useCallback,
-  useImperativeHandle,
-  useRef,
-} from "react";
+import { FC, MouseEvent, useCallback, useLayoutEffect, useRef } from "react";
 import { AxHeader } from "../components/Header";
 import { AxTitle } from "../components/Title";
 import { AxHotKey } from "../hotkeys/HotKey";
@@ -25,7 +19,6 @@ import {
   ElementProps,
   EmptyCallback,
   IconProp,
-  OverlayRef,
   Size,
 } from "../types";
 
@@ -77,89 +70,88 @@ export interface FlyoutProps extends ElementProps, IconProp, ChildProp {
   onClose?: EmptyCallback;
 }
 
-export const AxFlyout = forwardRef<OverlayRef, FlyoutProps>(
-  (
-    {
-      children,
-      placement,
-      size,
-      width,
-      title,
-      actions,
-      headerClass,
-      icon,
-      rtlFlip,
-      iconBg,
-      iconClass,
-      iconColor,
-      closeOnClick,
-      onClose,
-      ...rest
+export const AxFlyout: FC<FlyoutProps> = ({
+  children,
+  placement,
+  size,
+  width,
+  title,
+  actions,
+  headerClass,
+  icon,
+  rtlFlip,
+  iconBg,
+  iconClass,
+  iconColor,
+  closeOnClick,
+  onClose,
+  ...rest
+}) => {
+  const maskRef = useRef<HTMLDivElement>(null);
+
+  const handleClose = () => {
+    if (maskRef.current) {
+      maskRef.current.dataset.show = "";
+      setTimeout(() => {
+        onClose?.();
+      }, 250);
+    }
+  };
+
+  useLayoutEffect(() => {
+    const el = maskRef.current;
+    el && requestAnimationFrame(() => (el.dataset.show = "true"));
+  }, []);
+
+  const tryClose = useCallback(
+    (e: MouseEvent) => {
+      if (
+        closeOnClick &&
+        (e.target as HTMLElement).closest(".prevent-close") == null
+      ) {
+        handleClose();
+      }
     },
-    ref
-  ) => {
-    const flyoutRef = useRef<HTMLDivElement>(null);
-    useImperativeHandle(
-      ref,
-      () => ({
-        close: () => onClose?.(),
-        open: () =>
-          flyoutRef.current != null &&
-          (flyoutRef.current.dataset.show = "true"),
-      }),
-      [onClose]
-    );
+    [closeOnClick, handleClose]
+  );
 
-    const tryClose = useCallback(
-      (e: MouseEvent) => {
-        if (
-          closeOnClick &&
-          (e.target as HTMLElement).closest(".prevent-close") == null
-        ) {
-          onClose?.();
-        }
-      },
-      [closeOnClick, onClose]
-    );
-
-    return (
-      <div
-        {...rest}
-        className="ax-overlay__mask"
-        onClick={onClose}
-        ref={flyoutRef}
-        onClickCapture={tryClose}
-      >
-        <HotKeyWrapper>
-          <AxHotKey global keyCombo="esc" handler={onClose} />
-          <div
-            className="ax-flyout"
-            data-size={size}
-            data-align={placement}
-            style={{ width }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {title && (
-              <AxHeader className={`ax-flyout__header ${headerClass ?? ""}`}>
-                {icon && (
-                  <AxIcon
-                    icon={icon}
-                    rtlFlip={rtlFlip}
-                    bg={iconBg}
-                    color={iconColor}
-                    className={`ax-flyout__icon ${iconClass ?? ""}`}
-                  />
-                )}
-                <AxTitle className="ax-flyout__title">{title}</AxTitle>
-                <div className="ax-flyout__actions">{actions}</div>
-                {CloseX(onClose)}
-              </AxHeader>
-            )}
-            {children}
-          </div>
-        </HotKeyWrapper>
-      </div>
-    );
-  }
-);
+  return (
+    <div
+      {...rest}
+      className="ax-overlay__mask"
+      ref={maskRef}
+      onClick={handleClose}
+      onClickCapture={tryClose}
+    >
+      <HotKeyWrapper>
+        <AxHotKey global keyCombo="esc" handler={handleClose} />
+        <div
+          className="ax-flyout"
+          data-size={size}
+          data-align={placement}
+          style={{ width }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {title && (
+            <AxHeader className={`ax-flyout__header ${headerClass ?? ""}`}>
+              {icon && (
+                <AxIcon
+                  icon={icon}
+                  rtlFlip={rtlFlip}
+                  bg={iconBg}
+                  color={iconColor}
+                  className={`ax-flyout__icon ${iconClass ?? ""}`}
+                />
+              )}
+              <AxTitle className="ax-flyout__title">{title}</AxTitle>
+              <div className="ax-flyout__actions">{actions}</div>
+              {CloseX(handleClose)}
+            </AxHeader>
+          )}
+          {children}
+        </div>
+      </HotKeyWrapper>
+    </div>
+  );
+};
 AxFlyout.displayName = "AxFlyout";

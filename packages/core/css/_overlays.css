@@ -9,7 +9,7 @@
 /******************* overlay mask *******************/
 @layer components {
   .ax-overlay__mask {
-    @apply absolute inset-0 bg-bw-50/50 dark:bg-bw-900/50 z-50 grid;
+    @apply fixed inset-0 bg-bw-50/50 dark:bg-bw-900/50 z-50 grid;
   }
 
   .ax-notification__container {

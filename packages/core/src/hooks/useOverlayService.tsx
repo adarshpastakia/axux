@@ -28,27 +28,13 @@ export const useOverlayService = (
   const openOverlay = async (props: KeyValue = {}) => {
     return await new Promise((resolve) => {
       const key = uuid();
-      let rootEl: HTMLElement;
-      const show = (el: AnyObject) => {
-        rootEl = el;
-        el &&
-          requestAnimationFrame(
-            () => ((el.firstElementChild as HTMLElement).dataset.show = "true")
-          );
-      };
       const handleClose = (args: AnyObject) => {
-        rootEl?.firstElementChild &&
-          ((rootEl.firstElementChild as HTMLElement).dataset.show = "");
-        setTimeout(() => {
-          overlayRef.current?.closeOverlay(key);
-          resolve(args);
-        }, 250);
+        overlayRef.current?.closeOverlay(key);
+        resolve(args);
       };
       overlayRef.current?.showOverlay(
         key,
-        <div key={key} ref={show} className="contents">
-          <ModalOrFlyout {...props} onClose={handleClose} />
-        </div>
+        <ModalOrFlyout key={key} {...props} onClose={handleClose} />
       );
     });
   };

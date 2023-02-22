@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
+import { FC, useLayoutEffect, useRef } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxHeader } from "../components/Header";
 import { AxTitle } from "../components/Title";
@@ -102,13 +102,30 @@ export const AxModal: FC<ModalProps> = ({
   onNavigate,
 }) => {
   const isRtl = useIsRtl();
+  const maskRef = useRef<HTMLDivElement>(null);
+
+  const handleClose = () => {
+    if (maskRef.current) {
+      maskRef.current.dataset.show = "";
+      setTimeout(() => {
+        onClose?.();
+      }, 250);
+    }
+  };
+
+  useLayoutEffect(() => {
+    const el = maskRef.current;
+    el && requestAnimationFrame(() => (el.dataset.show = "true"));
+  }, []);
+
   return (
     <div
+      ref={maskRef}
       className="ax-overlay__mask"
-      onClick={(e) => (onClose?.(), e.stopPropagation())}
+      onClick={(e) => (handleClose(), e.stopPropagation())}
     >
       <HotKeyWrapper>
-        <AxHotKey global keyCombo="esc" handler={onClose} />
+        <AxHotKey global keyCombo="esc" handler={handleClose} />
         <AxHotKey global keyCombo="left" handler={() => onNavigate?.("prev")} />
         <AxHotKey
           global
@@ -134,7 +151,7 @@ export const AxModal: FC<ModalProps> = ({
             )}
             <AxTitle className="ax-modal__title">{title}</AxTitle>
             <div className="ax-modal__actions">{actions}</div>
-            {CloseX(onClose)}
+            {CloseX(handleClose)}
           </AxHeader>
           <div className="ax-modal__body">
             {onNavigate != null && (
