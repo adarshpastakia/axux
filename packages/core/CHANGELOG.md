@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.4](https://github.com/adarshpastakia/axux/compare/v2.1.3...v2.1.4) (2023-02-22)
+
+
+### Bug Fixes
+
+* **Overlays:** handle open close ([d701cc8](https://github.com/adarshpastakia/axux/commit/d701cc81da66921432c7d371834d4466db7643d7))
+
+
+
+
+
 ## [2.1.3](https://github.com/adarshpastakia/axux/compare/v2.1.2...v2.1.3) (2023-02-20)
 
 **Note:** Version bump only for package @axux/core
