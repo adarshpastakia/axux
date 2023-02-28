@@ -108,7 +108,7 @@
       @apply flex flex-nowrap gap-2;
 
       & > .ax-field__label {
-        @apply max-w-sm mt-1.5 truncate;
+        @apply basis-36 mt-1.5 truncate;
       }
 
       & > .ax-field__container--row {
@@ -528,7 +528,7 @@
     }
   }
   .ax-field__clear {
-    @apply ltr:pr-2 rtl:pl-2 py-1 order-4 opacity-50 hover:opacity-75 cursor-pointer select-none;
+    @apply ltr:pr-2 rtl:pl-2 py-1 order-4 opacity-50 hover:opacity-75 cursor-pointer select-none leading-none;
   }
 
   .ax-field__strength {
@@ -575,9 +575,11 @@
   button.ax-field__input {
     @apply ltr:pr-6 rtl:pl-6;
   }
-  .ax-field__list ~ .ax-field__clear,
+  .ax-select__handle ~ .ax-field__clear {
+    @apply px-0;
+  }
   .ax-field__input[type="number"] ~ .ax-field__clear {
-    @apply absolute inset-y-0 ltr:right-5 rtl:left-5;
+    @apply absolute inset-y-0.5 ltr:right-5 rtl:left-5;
   }
 
   .ax-field__color {

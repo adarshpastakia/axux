@@ -76,7 +76,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
           {children}
           {canClear && (
             <div className="ax-field__clear" onClick={handleClear}>
-              &times;
+              <AxIcon icon={Icons.iconClear} />
             </div>
           )}
         </div>
