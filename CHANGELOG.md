@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.6](https://github.com/adarshpastakia/axux/compare/v2.1.5...v2.1.6) (2023-03-02)
+
+
+### Bug Fixes
+
+* **Editor:** toolbox button size ([27756c2](https://github.com/adarshpastakia/axux/commit/27756c2752ef8793c1ca4f3685d884316826706a))
+* **Overlays:** fix portal render to have context ([6acf2c9](https://github.com/adarshpastakia/axux/commit/6acf2c911fa38dcb61bc2bdf530162adfec6d3a2))
+* **PageMaker:** paragraph editor model ([cc64a61](https://github.com/adarshpastakia/axux/commit/cc64a61b9f39814ed34a6179703908bd22c93f81))
+
+
+
+
+
 ## [2.1.5](https://github.com/adarshpastakia/axux/compare/v2.1.4...v2.1.5) (2023-02-28)
 
 **Note:** Version bump only for package axux
