@@ -65,7 +65,7 @@ export const Page = memo(() => {
               case EnumTypes.GRID:
                 return <Grid key={item.id} {...item} />;
               case EnumTypes.BREAK:
-                return <Break key={item.id} {...item} />;
+                return isEditing && <Break key={item.id} {...item} />;
               default:
                 return null;
             }
