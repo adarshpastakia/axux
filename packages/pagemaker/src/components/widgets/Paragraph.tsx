@@ -26,7 +26,14 @@ const PLACEHOLDER =
 
 const EditModal = ({ text, onChange, ...props }: KeyValue) => {
   return (
-    <AxModal size="lg" height="80vh" {...props}>
+    <AxModal
+      size="lg"
+      height="80vh"
+      {...props}
+      headerClass="text-md font-bold text-primary"
+      title="Edit Paragraph"
+      icon={iconPencil}
+    >
       <AxEditor value={text} onChange={onChange} language="markdown" />
     </AxModal>
   );
@@ -36,7 +43,7 @@ export const Paragraph: FC<IParagraphConfig> = memo((item) => {
   const { id, text, align } = item;
   const { isEditing, updateConfig } = usePageContext<IParagraphConfig>();
   const [mdtext, setMdtext] = useState(PLACEHOLDER);
-  const openEditor = useOverlayService(EditModal);
+  const [Editor, openEditor] = useOverlayService(EditModal);
 
   useEffect(() => {
     !text
@@ -54,6 +61,7 @@ export const Paragraph: FC<IParagraphConfig> = memo((item) => {
       }}
     >
       <AxText className="markdown-body overflow-auto">{mdtext}</AxText>
+      {Editor}
       {isEditing && !item.isReadOnly && (
         <AxButton
           className="absolute bottom-0 right-0"
