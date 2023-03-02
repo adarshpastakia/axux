@@ -9,11 +9,21 @@
 /******************* overlay mask *******************/
 @layer components {
   .ax-overlay__mask {
-    @apply fixed inset-0 bg-bw-50/50 dark:bg-bw-900/50 z-50 grid;
+    @apply fixed inset-0 z-50 grid;
+    &[data-hide-mask="true"] {
+      @apply pointer-events-none;
+    }
+    &[data-hide-mask="false"] {
+      @apply bg-bw-50/50 dark:bg-bw-900/50;
+    }
+
+    & > div {
+      @apply pointer-events-auto;
+    }
   }
 
   .ax-notification__container {
-    @apply bg-none flex flex-nowrap pointer-events-none absolute inset-0 z-[59] p-2;
+    @apply bg-none flex flex-nowrap pointer-events-none fixed inset-0 z-[59] p-2;
 
     &[data-mode="message"] {
       @apply flex-col-reverse items-center justify-end;
@@ -56,8 +66,9 @@
 @layer utilities {
   .ax-overlay__mask {
     &[data-show="true"] {
-      @apply backdrop-blur-[1px];
-
+      &[data-hide-mask="false"] {
+        @apply backdrop-blur-[1px];
+      }
       & .ax-alert,
       & .ax-modal,
       & .ax-flyout {

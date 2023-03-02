@@ -115,6 +115,8 @@ export const AxModal: FC<ModalProps> = ({
 
   useLayoutEffect(() => {
     const el = maskRef.current;
+    // @ts-expect-error
+    el.close = onClose;
     el && requestAnimationFrame(() => (el.dataset.show = "true"));
   }, []);
 
@@ -136,6 +138,7 @@ export const AxModal: FC<ModalProps> = ({
           className="ax-modal"
           data-size={size}
           tabIndex={0}
+          ref={(el) => el?.focus()}
           style={{ height, width, minHeight, minWidth }}
           onClick={(e) => e.stopPropagation()}
         >

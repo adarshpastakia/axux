@@ -65,6 +65,10 @@ export interface FlyoutProps extends ElementProps, IconProp, ChildProp {
    */
   closeOnClick?: boolean;
   /**
+   * close on click capture
+   */
+  noMask?: boolean;
+  /**
    * close handler
    */
   onClose?: EmptyCallback;
@@ -79,6 +83,7 @@ export const AxFlyout: FC<FlyoutProps> = ({
   actions,
   headerClass,
   icon,
+  noMask = false,
   rtlFlip,
   iconBg,
   iconClass,
@@ -100,6 +105,8 @@ export const AxFlyout: FC<FlyoutProps> = ({
 
   useLayoutEffect(() => {
     const el = maskRef.current;
+    // @ts-expect-error
+    el.close = onClose;
     el && requestAnimationFrame(() => (el.dataset.show = "true"));
   }, []);
 
@@ -120,6 +127,7 @@ export const AxFlyout: FC<FlyoutProps> = ({
       {...rest}
       className="ax-overlay__mask"
       ref={maskRef}
+      data-hide-mask={noMask}
       onClick={handleClose}
       onClickCapture={tryClose}
     >

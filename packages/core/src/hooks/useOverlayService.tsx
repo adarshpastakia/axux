@@ -6,9 +6,8 @@
  * @license   : MIT
  */
 
-import { uuid } from "@axux/utilities";
-import { FC } from "react";
-import { useGlobals } from "../context/Global";
+import { FC, ReactPortal, useCallback, useState } from "react";
+import { createPortal } from "react-dom";
 
 type OverlayComponent = FC<{
   onClose: (args: AnyObject) => void;
@@ -17,27 +16,31 @@ type OverlayComponent = FC<{
 
 export const useOverlayService = (
   ModalOrFlyout: OverlayComponent
-): ((props?: KeyValue) => Promise<AnyObject>) => {
-  const { overlayRef } = useGlobals();
+): [
+  Overlay: ReactPortal | null,
+  openOverlay: (props?: KeyValue) => Promise<AnyObject>
+] => {
+  const [Overlay, setOverlay] = useState<ReactPortal | null>(null);
 
-  if (!overlayRef)
-    throw Error(
-      "To use overlay service wrap application in AxApplicationProvider"
-    );
+  /** ***************** overlay container *******************/
+  const overlayContainer = useCallback(() => {
+    return document.body.querySelector(".ax-overlay__container") as HTMLElement;
+  }, []);
 
   const openOverlay = async (props: KeyValue = {}) => {
     return await new Promise((resolve) => {
-      const key = uuid();
       const handleClose = (args: AnyObject) => {
-        overlayRef.current?.closeOverlay(key);
+        setOverlay(null);
         resolve(args);
       };
-      overlayRef.current?.showOverlay(
-        key,
-        <ModalOrFlyout key={key} {...props} onClose={handleClose} />
+      setOverlay(
+        createPortal(
+          <ModalOrFlyout {...props} onClose={handleClose} />,
+          overlayContainer()
+        )
       );
     });
   };
 
-  return openOverlay;
+  return [Overlay, openOverlay];
 };
