@@ -43,6 +43,7 @@ export const Tools: FC<{
       <div className="flex-1" />
       <AxButton.Group variant="flat">
         <AxButton
+          size="sm"
           variant="link"
           onClick={search}
           tooltip={t("action.find")}
@@ -50,12 +51,14 @@ export const Tools: FC<{
         />
         <AxDivider size="xs" />
         <AxButton
+          size="sm"
           variant="link"
           onClick={foldAll}
           tooltip={t("action.collapseAll")}
           icon={AppIcons.iconCollapseAll}
         />
         <AxButton
+          size="sm"
           variant="link"
           onClick={unfoldAll}
           tooltip={t("action.expandAll")}
@@ -63,6 +66,7 @@ export const Tools: FC<{
         />
         <AxDivider size="xs" />
         <AxButton
+          size="sm"
           variant="link"
           onClick={commandPalette}
           tooltip={t("action.showShortcuts")}
