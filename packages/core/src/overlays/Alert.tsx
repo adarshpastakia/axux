@@ -7,7 +7,7 @@
  */
 
 import { getValue } from "@axux/utilities";
-import { FC, useCallback, useMemo, useState } from "react";
+import { FC, Ref, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
@@ -53,6 +53,8 @@ export interface AlertProps extends IconProp {
   defaultValue?: string;
 
   onClose: (b?: boolean | string) => void;
+
+  rootRef: Ref<HTMLDivElement>;
 }
 
 export const AxAlert: FC<AlertProps> = ({
@@ -68,6 +70,7 @@ export const AxAlert: FC<AlertProps> = ({
   placeholder,
   defaultValue,
   onClose,
+  rootRef,
 }) => {
   const { t } = useTranslation("core");
   const [value, setValue] = useState(defaultValue);
@@ -102,7 +105,11 @@ export const AxAlert: FC<AlertProps> = ({
   );
 
   return (
-    <div className="ax-overlay__mask" onClick={() => closeModal()}>
+    <div
+      className="ax-overlay__mask"
+      ref={rootRef}
+      onClick={() => closeModal()}
+    >
       <div
         className="ax-alert"
         data-color={color}

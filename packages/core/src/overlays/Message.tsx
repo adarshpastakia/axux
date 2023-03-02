@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
+import { FC, Ref } from "react";
 import { AxIcon } from "../icons/Icon";
 import { CloseX, Color, IconProp } from "../types";
 
@@ -29,6 +29,7 @@ export interface MessageProps extends IconProp {
   actions?: JSX.Element[];
 
   onClose: (b?: boolean) => void;
+  rootRef: Ref<HTMLDivElement>;
 }
 
 /**
@@ -51,9 +52,10 @@ export const AxMessage: FC<MessageProps> = ({
   color,
   actions,
   onClose,
+  rootRef,
 }) => {
   return (
-    <div className="ax-message" data-color={color}>
+    <div className="ax-message" data-color={color} ref={rootRef}>
       {icon && <AxIcon icon={icon} size="md" rtlFlip={rtlFlip} />}
       {title && <b>{title}</b>}
       <p>{message}</p>

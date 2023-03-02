@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { FC, useCallback, useMemo } from "react";
+import { FC, Ref, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
@@ -45,6 +45,7 @@ export interface ToastProps extends IconProp {
 
   onClose: (b?: boolean) => void;
   onCloseAll: (b?: boolean) => void;
+  rootRef: Ref<HTMLDivElement>;
 }
 
 export const AxToast: FC<ToastProps> = ({
@@ -59,6 +60,7 @@ export const AxToast: FC<ToastProps> = ({
   cancelLabel,
   onClose,
   onCloseAll,
+  rootRef,
 }) => {
   const { t } = useTranslation("core");
   const iconType = useMemo(() => {
@@ -91,7 +93,7 @@ export const AxToast: FC<ToastProps> = ({
   );
 
   return (
-    <div className="ax-toast" data-color={color}>
+    <div className="ax-toast" data-color={color} ref={rootRef}>
       <div className="ax-toast__close">
         {CloseX(onCloseAll, AppIcons.iconCloseAll)}
         {CloseX(closeToast)}
