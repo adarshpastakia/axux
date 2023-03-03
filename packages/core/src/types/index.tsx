@@ -148,7 +148,7 @@ export const CloseX = (cb?: AnyObject, icon = AppIcons.iconClose) => (
     className="close-x"
     role="button"
     aria-label="close"
-    onClick={(e) => (e.stopPropagation(), cb?.())}
+    onClick={(e) => (e?.stopPropagation(), cb?.())}
   >
     <AxIcon icon={icon} />
   </span>
