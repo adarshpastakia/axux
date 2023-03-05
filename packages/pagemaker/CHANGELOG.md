@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.7](https://github.com/adarshpastakia/axux/compare/v2.1.6...v2.1.7) (2023-03-05)
+
+
+### Bug Fixes
+
+* **PageMaker:** hide break in view mode ([9173c2c](https://github.com/adarshpastakia/axux/commit/9173c2c7c65340e433466f7f429317c80d6f8e8d))
+
+
+
+
+
 ## [2.1.6](https://github.com/adarshpastakia/axux/compare/v2.1.5...v2.1.6) (2023-03-02)
 
 
