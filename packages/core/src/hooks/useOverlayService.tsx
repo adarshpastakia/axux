@@ -27,11 +27,12 @@ export const useOverlayService = (
     return document.body.querySelector(".ax-overlay__container") as HTMLElement;
   }, []);
 
-  const openOverlay = async (props: KeyValue = {}) => {
+  const openOverlay = async ({ onClose, ...props }: KeyValue = {}) => {
     return await new Promise((resolve) => {
       const handleClose = (args: AnyObject) => {
         setOverlay(null);
         resolve(args);
+        onClose?.(args);
       };
       setOverlay(
         createPortal(
