@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.8](https://github.com/adarshpastakia/axux/compare/v2.1.7...v2.1.8) (2023-03-14)
+
+
+### Bug Fixes
+
+* **OverlayService:** call onClose if passed as  prop ([95d21be](https://github.com/adarshpastakia/axux/commit/95d21be2468fa5c66214d35d9d35a303e92f79ad))
+
+
+
+
+
 ## [2.1.7](https://github.com/adarshpastakia/axux/compare/v2.1.6...v2.1.7) (2023-03-05)
 
 

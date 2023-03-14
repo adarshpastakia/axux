@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.8](https://github.com/adarshpastakia/axux/compare/v2.1.7...v2.1.8) (2023-03-14)
+
+
+### Bug Fixes
+
+* **SearchInput:** use value prop ([bc618ab](https://github.com/adarshpastakia/axux/commit/bc618abc06c4e744e571fd8dffeaaf14af36fc71))
+
+
+
+
+
 ## [2.1.7](https://github.com/adarshpastakia/axux/compare/v2.1.6...v2.1.7) (2023-03-05)
 
 **Note:** Version bump only for package @axux/form
