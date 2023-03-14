@@ -17,6 +17,24 @@
     display: none;
   }
 
+  .ax-form[data-inline="true"] {
+    & .ax-field__container {
+      @apply flex flex-wrap gap-2;
+
+      & > .ax-field__label {
+        @apply basis-36 mt-1.5 truncate;
+      }
+
+      & > .ax-field__container--row {
+        @apply flex-1;
+
+        & + small {
+          @apply basis-full;
+        }
+      }
+    }
+  }
+
   /******************* label *******************/
   .ax-field__label {
     @apply flex justify-between flex-nowrap;
@@ -105,7 +123,7 @@
     }
 
     &[data-inline="true"] {
-      @apply flex flex-nowrap gap-2;
+      @apply flex flex-wrap gap-2;
 
       & > .ax-field__label {
         @apply basis-36 mt-1.5 truncate;
@@ -113,6 +131,10 @@
 
       & > .ax-field__container--row {
         @apply flex-1;
+
+        & + small {
+          @apply basis-full;
+        }
       }
     }
 
