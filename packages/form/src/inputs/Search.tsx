@@ -9,15 +9,20 @@
 import { AxButton } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
-import { FC, memo, useCallback, useMemo, useState, useTransition } from "react";
+import {
+  FC,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+} from "react";
 import { Addon } from "./Addon";
 import { Text, TextProps } from "./Text";
 
 export interface SearchProps
-  extends Omit<
-    TextProps,
-    "type" | "allowClear" | "onEnterPressed" | "onChange"|"value"
-  > {
+  extends Omit<TextProps, "type" | "allowClear" | "onEnterPressed"> {
   icon?: string;
   defaultValue?: string;
   isSearching?: boolean;
@@ -29,13 +34,26 @@ export interface SearchProps
 
 // eslint-disable-next-line react/display-name
 export const Search: FC<SearchProps> = memo(
-  ({ children, icon, isSearching, onSearch, defaultValue, ...props }: SearchProps) => {
+  ({
+    children,
+    icon,
+    isSearching,
+    onChange,
+    onSearch,
+    value,
+    defaultValue,
+    ...props
+  }: SearchProps) => {
     const [query, setQuery] = useState(defaultValue);
     const [, startTransition] = useTransition();
 
+    useEffect(() => {
+      setQuery(value ?? "");
+    }, [value]);
+
     const handleSearch = useMemo(
-      () => debounce((q) => onSearch?.(q), 200),
-      [onSearch]
+      () => debounce((q) => onChange?.(q), 200),
+      [onChange]
     );
 
     const handleChange = useCallback(
