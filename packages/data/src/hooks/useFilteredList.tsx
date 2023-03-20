@@ -7,7 +7,13 @@
  */
 
 import { isEmpty, matchString } from "@axux/utilities";
-import { useCallback, useEffect, useState, useTransition } from "react";
+import {
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 
 const filterList = (items: AnyObject[], query: string, matcher?: AnyObject) => {
   const newList: AnyObject[] = [];
@@ -26,9 +32,11 @@ export const useFilteredList = <T extends KeyValue = AnyObject>(
   items: T[],
   matcher?: (item: T, query: string) => boolean
 ) => {
-  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
   const [filteredList, setFilteredList] = useState(items);
   const [isSearching, startTransition] = useTransition();
+
+  const search = useDeferredValue(query);
 
   const filterItems = useCallback(
     (query: string) => {
@@ -40,15 +48,14 @@ export const useFilteredList = <T extends KeyValue = AnyObject>(
 
   useEffect(() => {
     filterItems(search ?? "");
-  }, [items]);
+  }, [items, search]);
 
   const onSearch = useCallback(
     (query?: string) => {
-      setSearch(query ?? "");
-      filterItems(query ?? "");
+      setQuery(query ?? "");
     },
     [filterItems]
   );
 
-  return { onSearch, filteredList, isSearching };
+  return { onSearch, search, filteredList, isSearching };
 };
