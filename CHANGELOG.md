@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.10](https://github.com/adarshpastakia/axux/compare/v2.1.9...v2.1.10) (2023-04-13)
+
+
+### Bug Fixes
+
+* **TreePanel:** search onChange ([2a82b73](https://github.com/adarshpastakia/axux/commit/2a82b738dbd4bbadc70ceda6eaf7b189be4159fe))
+
+
+
+
+
 ## [2.1.9](https://github.com/adarshpastakia/axux/compare/v2.1.8...v2.1.9) (2023-03-20)
 
 
