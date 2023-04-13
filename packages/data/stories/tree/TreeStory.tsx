@@ -86,7 +86,7 @@ export const TreeData = [
   })),
 ];
 
-export const TreeStory: ComponentStory<typeof AxTreePanel> = (props) => {
+const TreeTemplate: ComponentStory<typeof AxTreePanel> = (props) => {
   const loadMore = useCallback((id: string) => {
     if (id === "north-west1") return undefined;
     if (id === "north-west2") return Promise.resolve([]);
@@ -129,6 +129,11 @@ export const TreeStory: ComponentStory<typeof AxTreePanel> = (props) => {
       </AxAside>
     </AxViewport>
   );
+};
+
+export const TreeStory = TreeTemplate.bind({});
+TreeStory.args = {
+  isSearchable: true,
 };
 
 export default { title: "AxTreePanel", component: AxTreePanel };
