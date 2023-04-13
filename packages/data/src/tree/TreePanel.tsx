@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { useDebounce } from "@axux/core";
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
 import { ElementProps } from "@axux/core/dist/types";
 import { AxField } from "@axux/form";
@@ -349,6 +350,10 @@ export const AxTreePanel: FC<TreeProps> = memo(
         });
     }, [state]);
 
+    const onSearch = useDebounce((search) =>
+      dispatch({ type: "search", search })
+    );
+
     return (
       <div
         {...rest}
@@ -366,7 +371,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
         {isSearchable && (
           <AxField.Search
             isPlain
-            onSearch={(search) => dispatch({ type: "search", search })}
+            onChange={onSearch}
             className="ax-tree__search"
           />
         )}
