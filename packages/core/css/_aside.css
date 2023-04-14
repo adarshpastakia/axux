@@ -85,7 +85,7 @@
       & .ax-side__body,
       & .ax-side__header,
       & .ax-side__placeholder {
-        @apply ltr:border-r rtl:border-l;
+        @apply border-e;
       }
 
       & .ax-side__resizeHandle {
@@ -106,7 +106,7 @@
       & .ax-side__body,
       & .ax-side__header,
       & .ax-side__placeholder {
-        @apply ltr:border-l rtl:border-r;
+        @apply border-s;
       }
 
       & .ax-side__resizeHandle {

@@ -24,7 +24,7 @@
     }
 
     & h4 ~ div:last-child {
-      @apply !top-0 ltr:!right-0 rtl:!left-0 ltr:!left-auto rtl:!right-auto !bottom-auto;
+      @apply !top-0 !end-0 !start-auto !bottom-auto;
 
       & > div {
         @apply !m-1;

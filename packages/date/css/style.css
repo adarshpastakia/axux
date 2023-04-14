@@ -40,7 +40,7 @@
     }
 
     & > .ax-date__presets {
-      @apply flex flex-col overflow-auto ltr:border-l rtl:border-r border-bw-500/20;
+      @apply flex flex-col overflow-auto border-s border-bw-500/20;
       grid-row-end: span 2;
     }
 
@@ -131,10 +131,10 @@
       @apply bg-primary-500 text-white pointer-events-none;
     }
     &[data-selected="start"] {
-      @apply ltr:rounded-r-none rtl:rounded-l-none;
+      @apply rounded-e-none;
     }
     &[data-selected="end"] {
-      @apply ltr:rounded-l-none rtl:rounded-r-none;
+      @apply rounded-s-none;
     }
     &:hover {
       @apply bg-primary-500/30;

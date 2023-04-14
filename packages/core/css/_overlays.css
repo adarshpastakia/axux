@@ -210,11 +210,11 @@
     }
 
     & .ax-alert__title {
-      @apply grid-area-[title] text-xl font-semibold p-2 select-none ltr:mr-8 rtl:ml-8;
+      @apply grid-area-[title] text-xl font-semibold p-2 select-none me-8;
     }
 
     & .ax-alert__message {
-      @apply grid-area-[message] px-2 ltr:mr-8 rtl:ml-8 overflow-auto mb-2;
+      @apply grid-area-[message] px-2 me-8 overflow-auto mb-2;
     }
 
     & .ax-alert__footer {
@@ -222,7 +222,7 @@
     }
 
     & .close-x {
-      @apply text-xl absolute mx-2 top-0 ltr:right-0 rtl:left-0;
+      @apply text-xl absolute mx-2 top-0 end-0;
     }
 
     & .ax-alert__input {
@@ -307,7 +307,7 @@
     }
 
     & .ax-toast__title {
-      @apply grid-area-[title] text-md font-semibold px-2 select-none ltr:mr-12 rtl:ml-12;
+      @apply grid-area-[title] text-md font-semibold px-2 select-none me-12;
     }
 
     & .ax-toast__message {
@@ -319,7 +319,7 @@
     }
 
     & .ax-toast__close {
-      @apply text-base absolute py-1 px-2 top-0 ltr:right-0 rtl:left-0;
+      @apply text-base absolute py-1 px-2 top-0 end-0;
     }
 
     & .ax-toast__input {

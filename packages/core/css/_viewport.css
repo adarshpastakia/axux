@@ -17,7 +17,7 @@
       @apply absolute top-0 left-1/2 -translate-x-1/2 shadow-sm leading-none py-1 px-4 text-sm min-w-[12em] max-w-[70%] rounded-b-md;
 
       & span:last-child {
-        @apply ltr:ml-4 rtl:mr-4;
+        @apply ms-4;
       }
     }
 

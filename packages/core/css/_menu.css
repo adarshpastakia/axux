@@ -18,7 +18,7 @@
     }
 
     & .ax-menu__label {
-      @apply ltr:pr-4 rtl:pl-4 truncate;
+      @apply pe-4 truncate;
     }
   }
   .ax-menu__group {
@@ -61,7 +61,7 @@
     }
 
     & .ax-badge {
-      @apply absolute top-0 ltr:right-0 rtl:right-0;
+      @apply absolute top-0 end-0;
     }
 
     &[data-popover-open="true"] {

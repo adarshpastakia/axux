@@ -40,7 +40,7 @@
     @apply bg-bw-400/20;
 
     &:after {
-      @apply ltr:right-auto rtl:left-auto;
+      @apply end-auto;
       width: inherit;
     }
   }

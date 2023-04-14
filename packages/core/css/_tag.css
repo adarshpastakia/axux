@@ -18,7 +18,7 @@
     }
 
     & > .close-x {
-      @apply ltr:ml-1 rtl:mr-1 leading-none;
+      @apply ms-1 leading-none;
     }
   }
 

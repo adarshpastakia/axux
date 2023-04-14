@@ -60,7 +60,7 @@
     }
 
     & .ax-badge {
-      @apply absolute -top-0 ltr:-right-0 rtl:-left-0 ltr:translate-x-1/3 rtl:-translate-x-1/3 -translate-y-1/3;
+      @apply absolute -top-0 -end-0 ltr:translate-x-1/3 rtl:-translate-x-1/3 -translate-y-1/3;
     }
 
     &[data-square="true"] .ax-button__inner {
@@ -110,13 +110,13 @@
         @apply m-0 z-0 focus-within:z-[1];
 
         &:first-child > .ax-button__inner {
-          @apply ltr:rounded-r-none rtl:rounded-l-none ltr:border-r rtl:border-l;
+          @apply rounded-e-none border-e;
         }
         &:last-child > .ax-button__inner {
-          @apply ltr:rounded-l-none rtl:rounded-r-none border-0;
+          @apply rounded-s-none border-0;
         }
         &:not(:first-child):not(:last-child) > .ax-button__inner {
-          @apply rounded-none ltr:border-r rtl:border-l;
+          @apply rounded-none border-e;
         }
       }
     }
@@ -127,10 +127,10 @@
         @apply m-0 z-0 focus-within:z-[1];
 
         &:first-child > .ax-button__inner {
-          @apply ltr:rounded-b-none rtl:rounded-b-none border-b;
+          @apply rounded-b-none border-b;
         }
         &:last-child > .ax-button__inner {
-          @apply ltr:rounded-t-none rtl:rounded-t-none border-0;
+          @apply rounded-t-none border-0;
         }
         &:not(:first-child):not(:last-child) > .ax-button__inner {
           @apply rounded-none border-b;
@@ -227,7 +227,7 @@
 
   .ax-button__inner {
     & .ax-hotkey__label {
-      @apply ltr:-mr-2 rtl:-ml-2;
+      @apply -me-2;
     }
   }
 
