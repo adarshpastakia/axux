@@ -229,7 +229,7 @@ const AxGridViewComponent = <T extends KeyValue>({
       className={`ax-virtual__container ${className ?? ""}`}
     >
       <AutoSizer>
-        {({ width, height }) => {
+        {({ width, height }:AnyObject) => {
           const cc = Math.floor((width - 84) / colWidth);
           colCount.current = cc;
           return (

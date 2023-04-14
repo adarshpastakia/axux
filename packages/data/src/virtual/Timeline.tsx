@@ -278,7 +278,7 @@ const AxTimelineComponent = <T extends KeyValue>({
       className={`ax-virtual__container ax-timeline ${className ?? ""}`}
     >
       <AutoSizer>
-        {({ width, height }) => (
+        {({ width, height }:AnyObject) => (
           <List
             ref={setList}
             useIsScrolling

@@ -38,12 +38,12 @@ export interface FormRef<K> {
   setValues: (values: K) => void;
 }
 
-export interface FormProps<K = KeyValue> extends ElementProps {
+export interface FormProps<K extends KeyValue = KeyValue> extends ElementProps {
   formRef?: Ref<FormRef<K>>;
   /**
    * form data schema
    */
-  schema?: yup.SchemaOf<K>;
+  schema?: yup.ObjectSchema<K>;
   /**
    * default data values
    */
@@ -117,7 +117,7 @@ export const AxForm = <K extends KeyValue>({
 }: PropsWithChildren<FormProps<K>>) => {
   const form = useForm({
     shouldFocusError: true,
-    resolver: schema && yupResolver(schema),
+    resolver: schema && yupResolver(schema as AnyObject),
     defaultValues: defaultValues as DeepPartial<K>,
   });
 

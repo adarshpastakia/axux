@@ -108,7 +108,6 @@ export const AxPopover: FC<PopoverProps> & {
                 {open && <div className="fixed inset-0" />}
                 <Popover.Panel
                   {...rest}
-                  tabIndex={-1}
                   className={`popover ${popoverClassName ?? ""}`}
                   ref={setPopperElement as AnyObject}
                   style={styles.popper}

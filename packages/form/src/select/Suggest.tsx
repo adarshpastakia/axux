@@ -207,7 +207,6 @@ export const SuggestInput: FC<SuggestProps> = ({
               aria-errormessage={error}
               size={1}
               placeholder={placeholder}
-              disabled={isDisabled}
               data-invalid={isInvalid}
               className="ax-field__input"
               autoComplete="off"
