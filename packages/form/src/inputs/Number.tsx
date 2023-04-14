@@ -60,6 +60,8 @@ export const Number: FC<NumberProps> = memo(
     allowClear,
     children,
     onEnterPressed,
+    inline,
+    labelWidth,
     ...rest
   }: NumberProps) => {
     const [actualValue, setActualValue] = useState<number>("" as AnyObject);
@@ -82,6 +84,8 @@ export const Number: FC<NumberProps> = memo(
         error={error}
         label={label}
         width={width}
+        inline={inline}
+        labelWidth={labelWidth}
         isPlain={isPlain}
         labelAppend={labelAppend}
         className={className}
