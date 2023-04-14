@@ -11,9 +11,9 @@ import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer";
 import ColorVariable from "@arcgis/core/renderers/visualVariables/ColorVariable";
 import SimpleMarker from "@arcgis/core/symbols/SimpleMarkerSymbol";
-import { FC, useEffect, useRef } from "react";
+import { type FC, useEffect, useRef } from "react";
 import { PALETTES } from "../constants/Palette";
-import { MapEvent } from "../constants/types";
+import { type MapEvent } from "../constants/types";
 import { useMapContext } from "../context/MapContext";
 import { makeFeatures, transparentize } from "../utils";
 

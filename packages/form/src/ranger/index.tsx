@@ -4,9 +4,9 @@
  */
 import { useIsRtl } from "@axux/core";
 import {
-  KeyboardEvent as KE,
-  MouseEvent as ME,
-  TouchEvent as TE,
+  type KeyboardEvent as KE,
+  type MouseEvent as ME,
+  type TouchEvent as TE,
   useCallback,
   useEffect,
   useMemo,
@@ -188,10 +188,10 @@ export const useRanger = (opts: RangerConfig) => {
       const { activeHandleIndex, onDrag } = getLatest();
 
       const clientX =
-        // @ts-expect-error
+        // @ts-expect-error ignore
         e.type === "touchmove" ? e.changedTouches[0].clientX : e.clientX;
       const clientY =
-        // @ts-expect-error
+        // @ts-expect-error ignore
         e.type === "touchmove" ? e.changedTouches[0].clientY : e.clientY;
       const newValue = isVertical
         ? getValueForClientY(clientY)
@@ -224,10 +224,10 @@ export const useRanger = (opts: RangerConfig) => {
       const { left, bottom } = getBoundingClientRect(segmentElRef.current);
 
       const clientX =
-        // @ts-expect-error
+        // @ts-expect-error ignore
         e.type === "touchmove" ? e.changedTouches[0].clientX : e.clientX;
       const clientY =
-        // @ts-expect-error
+        // @ts-expect-error ignore
         e.type === "touchmove" ? e.changedTouches[0].clientY : e.clientY;
 
       const start = isVertical
@@ -277,15 +277,15 @@ export const useRanger = (opts: RangerConfig) => {
       if (i === -1) {
         const clientX =
           e.type === "touchmove"
-            ? // @ts-expect-error
+            ? // @ts-expect-error ignore
               e.nativeEvent.changedTouches[0].clientX
-            : // @ts-expect-error
+            : // @ts-expect-error ignore
               e.nativeEvent.clientX;
         const clientY =
           e.type === "touchmove"
-            ? // @ts-expect-error
+            ? // @ts-expect-error ignore
               e.nativeEvent.changedTouches[0].clientY
-            : // @ts-expect-error
+            : // @ts-expect-error ignore
               e.nativeEvent.clientY;
 
         setTempValues(values);
@@ -339,15 +339,15 @@ export const useRanger = (opts: RangerConfig) => {
       const { onChange, values } = getLatest();
       const clientX =
         e.type === "touchmove"
-          ? // @ts-expect-error
+          ? // @ts-expect-error ignore
             e.changedTouches[0].clientX
-          : // @ts-expect-error
+          : // @ts-expect-error ignore
             e.clientX;
       const clientY =
         e.type === "touchmove"
-          ? // @ts-expect-error
+          ? // @ts-expect-error ignore
             e.changedTouches[0].clientY
-          : // @ts-expect-error
+          : // @ts-expect-error ignore
             e.clientY;
 
       const newValue = isVertical

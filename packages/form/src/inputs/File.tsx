@@ -7,11 +7,11 @@
  */
 
 import { AxIcon } from "@axux/core";
-import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
+import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
 import { Format } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
-  FC,
+  type FC,
   Fragment,
   memo,
   useCallback,
@@ -19,7 +19,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { InputProps } from "../types";
+import { type InputProps } from "../types";
 import { Icons } from "../types/icons";
 import { FieldWrapper } from "./Wrapper";
 
@@ -77,13 +77,13 @@ export const File: FC<FileProps> = memo(
     const [fileSelected, setFileSelected] = useState<KeyValue[]>([]);
 
     const handleClear = useCallback(() => {
-      // @ts-expect-error
+      // @ts-expect-error ignore
       if (elRef.current != null) elRef.current.value = null;
       setFileSelected([]);
       onChange?.(undefined);
     }, [onChange]);
     const handleChange = useCallback(() => {
-      // @ts-expect-error
+      // @ts-expect-error ignore
       setFileSelected(Array.from(elRef.current?.files));
       onChange?.(elRef.current?.files);
     }, [onChange]);

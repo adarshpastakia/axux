@@ -10,8 +10,8 @@ import { isFalse } from "@axux/utilities";
 import {
   Children,
   cloneElement,
-  FC,
-  ReactElement,
+  type FC,
+  type ReactElement,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -24,13 +24,13 @@ import { useBadge } from "../hooks/useBadge";
 import { getTooltipProps } from "../hooks/useTooltip";
 import { AxIcon } from "../icons/Icon";
 import {
-  BadgeType,
-  CallbackReturn,
-  ChildrenProp,
+  type BadgeType,
+  type CallbackReturn,
+  type ChildrenProp,
   CloseX,
-  ElementProps,
-  EmptyCallback,
-  IconProp,
+  type ElementProps,
+  type EmptyCallback,
+  type IconProp,
 } from "../types";
 
 export interface TabProps extends ChildrenProp, IconProp, ElementProps {
@@ -70,11 +70,11 @@ export const Tab: FC<TabProps> = ({
   isDisabled,
   onClose,
   className,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   onClick,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   isActive,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   isVertical,
   ...rest
 }) => {

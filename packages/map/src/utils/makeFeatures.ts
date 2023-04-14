@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { MapEvent } from "../constants/types";
+import { type MapEvent } from "../constants/types";
 import { convertLatLng } from "./convertLatLng";
 
 export const makeFeatures = (events: MapEvent[]) => {

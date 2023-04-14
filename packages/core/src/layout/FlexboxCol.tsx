@@ -7,7 +7,7 @@
  */
 
 import { forwardRef, useMemo } from "react";
-import { ChildrenProp, ElementProps } from "../types";
+import { type ChildrenProp, type ElementProps } from "../types";
 
 export interface FlexboxColProps extends ElementProps, ChildrenProp {
   /**

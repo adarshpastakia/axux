@@ -10,7 +10,7 @@ import { AxButton, AxDivider, AxIcon, AxText } from "@axux/core";
 import { AxField } from "@axux/form";
 import { Fragment, memo, useCallback, useEffect, useState } from "react";
 import { Icons } from "../types/icons";
-import { WavesurferInstance } from "./wavesurfer";
+import { type WavesurferInstance } from "./wavesurfer";
 
 const EQ_FREQUENCY = [
   32, 64, 128, 256, 512, 1000, 2000, 4000, 6000, 8000, 12000, 16000,
@@ -142,7 +142,7 @@ export const Equalizers = memo(
         const splitFilters = [];
         const gainNodes = [];
         const channels =
-          // @ts-expect-error
+          // @ts-expect-error ignore
           wavesurfer.instance.backend.buffer.numberOfChannels ?? 1;
         if (channels > 1) {
           const channelSplitterNode = backendAc.createChannelSplitter(channels);
@@ -171,7 +171,7 @@ export const Equalizers = memo(
         wavesurfer.instance.on("ready", createFilters);
         return () => {
           try {
-            // @ts-expect-error
+            // @ts-expect-error ignore
             wavesurfer.instance.backend.disconnectFilters();
           } catch (e) {
             //

@@ -7,12 +7,12 @@
  */
 
 import { Popover } from "@headlessui/react";
-import { Placement } from "@popperjs/core";
-import { FC, Fragment } from "react";
+import { type Placement } from "@popperjs/core";
+import { type FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { AxPopover } from "../overlays/Popover";
-import { BooleanCallback } from "../types";
-import { AxButton, ButtonProps } from "./Button";
+import { type BooleanCallback } from "../types";
+import { AxButton, type ButtonProps } from "./Button";
 
 export interface ConfirmProps extends Omit<ButtonProps, "onClick"> {
   /**

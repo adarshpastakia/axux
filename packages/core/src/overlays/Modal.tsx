@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { FC, useLayoutEffect, useRef } from "react";
+import { type FC, useLayoutEffect, useRef } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxHeader } from "../components/Header";
 import { AxTitle } from "../components/Title";
@@ -15,14 +15,14 @@ import { AxHotKey } from "../hotkeys/HotKey";
 import { HotKeyWrapper } from "../hotkeys/HotKeyWrapper";
 import { AxIcon } from "../icons/Icon";
 import {
-  ChildProp,
+  type ChildProp,
   CloseX,
-  Color,
-  ElementProps,
-  EmptyCallback,
-  IconProp,
-  NavigationDirection,
-  Size,
+  type Color,
+  type ElementProps,
+  type EmptyCallback,
+  type IconProp,
+  type NavigationDirection,
+  type Size,
 } from "../types";
 import { AppIcons } from "../types/appIcons";
 
@@ -115,7 +115,7 @@ export const AxModal: FC<ModalProps> = ({
 
   useLayoutEffect(() => {
     const el = maskRef.current;
-    // @ts-expect-error
+    // @ts-expect-error ignore
     el.close = onClose;
     el && requestAnimationFrame(() => (el.dataset.show = "true"));
   }, []);

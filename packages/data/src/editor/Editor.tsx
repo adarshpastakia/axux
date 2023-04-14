@@ -12,12 +12,12 @@ import {
   useIsDark,
   useResizeObserver,
 } from "@axux/core";
-import { ElementProps } from "@axux/core/dist/types";
+import { type ElementProps } from "@axux/core/dist/types";
 import { isString } from "@axux/utilities";
 import MonacoEditor from "@monaco-editor/react";
 import {
-  FC,
-  Ref,
+  type FC,
+  type Ref,
   useCallback,
   useDeferredValue,
   useImperativeHandle,

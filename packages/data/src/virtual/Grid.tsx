@@ -8,16 +8,16 @@
 
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
 import {
-  ChildrenProp,
-  ElementProps,
-  EmptyCallback,
+  type ChildrenProp,
+  type ElementProps,
+  type EmptyCallback,
 } from "@axux/core/dist/types";
 import memoize from "memoize-one";
 import {
-  CSSProperties,
+  type CSSProperties,
   memo,
-  ReactElement,
-  Ref,
+  type ReactElement,
+  type Ref,
   useCallback,
   useDeferredValue,
   useEffect,

@@ -7,13 +7,13 @@
  */
 
 import { AxAnimation, AxIcon } from "@axux/core";
-import { ElementProps } from "@axux/core/dist/types";
+import { type ElementProps } from "@axux/core/dist/types";
 import { getImageColorset } from "@axux/utilities/dist/getImageColorset";
 import {
-  FC,
+  type FC,
   memo,
-  MouseEvent,
-  SyntheticEvent,
+  type MouseEvent,
+  type SyntheticEvent,
   useCallback,
   useEffect,
   useState,

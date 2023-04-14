@@ -8,9 +8,9 @@
 
 import { debounce, isEmpty } from "@axux/utilities";
 import { endOfDay, startOfDay } from "date-fns";
-import { EChartOption, EChartsType } from "echarts";
-import { FC, useEffect, useMemo, useRef, useState } from "react";
-import { BaseChart } from "../types";
+import { type EChartOption, type EChartsType } from "echarts";
+import { type FC, useEffect, useMemo, useRef, useState } from "react";
+import { type BaseChart } from "../types";
 import { ChartContainer } from "../wrapper/ChartContainer";
 import { ChartWrapper } from "../wrapper/ChartWrapper";
 

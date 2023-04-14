@@ -10,7 +10,7 @@ import { AxIcon } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxList } from "@axux/data";
 import { Format } from "@axux/utilities";
-import { FC, memo, RefObject, useState } from "react";
+import { type FC, memo, type RefObject, useState } from "react";
 
 interface SceneListProps {
   scenes?: Array<[time: number, poster: string]>;

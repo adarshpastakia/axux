@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { NavigationDirection } from "@axux/core/dist/types";
+import { type NavigationDirection } from "@axux/core/dist/types";
 import { useCallback, useMemo, useState } from "react";
 
 export const useNavigator = (totalCount = 0) => {

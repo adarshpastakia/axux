@@ -9,13 +9,13 @@
 import {
   Children,
   cloneElement,
-  FC,
+  type FC,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from "react";
-import { ChildrenProp, ElementProps } from "../types";
+import { type ChildrenProp, type ElementProps } from "../types";
 
 export interface PanelGroupProps extends ElementProps, ChildrenProp {
   /**

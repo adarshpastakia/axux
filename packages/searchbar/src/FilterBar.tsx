@@ -6,10 +6,10 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
+import { type FC } from "react";
 import { SearchContextProvider } from "./context";
 import { FilterWrapper } from "./filterbar/FilterWrapper";
-import { FilterProps } from "./types";
+import { type FilterProps } from "./types";
 
 export const AxFilterBar: FC<FilterProps> = ({ ...props }) => {
   return (

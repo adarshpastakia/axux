@@ -7,10 +7,10 @@
  */
 
 import { isRtl } from "@axux/utilities";
-import { Placement } from "@popperjs/core";
+import { type Placement } from "@popperjs/core";
 import { defaultModifiers } from "@popperjs/core/lib/popper";
 import { useState } from "react";
-import { Modifier, usePopper } from "react-popper";
+import { type Modifier, usePopper } from "react-popper";
 
 /** ***************** popperjs: same width modifier *******************/
 const sameWidthModifier: Modifier<"sameWidth", KeyValue> = {

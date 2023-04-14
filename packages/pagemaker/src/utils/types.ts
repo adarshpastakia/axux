@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { ChildrenProp } from "@axux/core/dist/types";
+import { type ChildrenProp } from "@axux/core/dist/types";
 
 export enum EnumTypes {
   PAGE = "page",

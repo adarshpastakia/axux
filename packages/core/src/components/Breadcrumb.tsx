@@ -6,11 +6,11 @@
  * @license   : MIT
  */
 
-import { FC, useMemo } from "react";
+import { type FC, useMemo } from "react";
 import { useBadge } from "../hooks/useBadge";
 import { AxIcon } from "../icons/Icon";
 import { AxPopover } from "../overlays/Popover";
-import { BadgeType, EmptyCallback } from "../types";
+import { type BadgeType, type EmptyCallback } from "../types";
 import { Link } from "./Link";
 
 export interface BreadcrumbItem {

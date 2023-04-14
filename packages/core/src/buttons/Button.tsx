@@ -7,23 +7,23 @@
  */
 
 import { handleClick } from "@axux/utilities/dist/handlers";
-import { FC, forwardRef, ForwardRefExoticComponent, useMemo } from "react";
+import { type FC, forwardRef, type ForwardRefExoticComponent, useMemo } from "react";
 import { AxAnimation } from "../animations";
-import { Link, LinkProps } from "../components/Link";
+import { Link, type LinkProps } from "../components/Link";
 import { useBadge } from "../hooks/useBadge";
 import { getTooltipProps } from "../hooks/useTooltip";
 import { AxHotKey } from "../hotkeys/HotKey";
 import { AxIcon } from "../icons/Icon";
 import {
-  BadgeType,
-  ChildrenProp,
-  Color,
-  ElementProps,
-  EmptyCallback,
-  IconProp,
-  RefProp,
-  Size,
-  TooltipType,
+  type BadgeType,
+  type ChildrenProp,
+  type Color,
+  type ElementProps,
+  type EmptyCallback,
+  type IconProp,
+  type RefProp,
+  type Size,
+  type TooltipType,
 } from "../types";
 import { AppIcons } from "../types/appIcons";
 import { Ellipsis } from "../typography/Ellipsis";
@@ -151,9 +151,9 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     onClick,
     useSpinner,
     stopPropagation = false,
-    // @ts-expect-error
+    // @ts-expect-error ignore
     "data-extra": extra,
-    // @ts-expect-error
+    // @ts-expect-error ignore
     "data-popover-open": popoverOpen,
     ...rest
   } = props;

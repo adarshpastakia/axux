@@ -9,7 +9,7 @@
 import { getDay } from "date-fns";
 import i18next from "i18next";
 import { useMemo } from "react";
-import { DateContext } from "../types";
+import { type DateContext } from "../types";
 import { DateUtil } from "../utils";
 import { DateCell } from "./DateCell";
 

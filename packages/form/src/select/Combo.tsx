@@ -12,7 +12,7 @@ import { isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import { Combobox } from "@headlessui/react";
 import {
-  FocusEvent,
+  type FocusEvent,
   Fragment,
   memo,
   useCallback,
@@ -27,7 +27,7 @@ import { FieldWrapper } from "../inputs/Wrapper";
 import { Icons } from "../types/icons";
 import { Options } from "./Option";
 import { useSelect } from "./useSelect";
-import { defaultMatcher, getLabel, getValue, SelectProps } from "./utils";
+import { defaultMatcher, getLabel, getValue, type SelectProps } from "./utils";
 
 export const ComboInput = <T extends AnyObject>({
   label,
@@ -51,7 +51,7 @@ export const ComboInput = <T extends AnyObject>({
   isInvalid,
   className,
   isEditable,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   name,
   info,
   error,

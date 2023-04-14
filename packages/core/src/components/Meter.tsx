@@ -7,8 +7,8 @@
  */
 
 import { Format, isColor } from "@axux/utilities";
-import { FC, useMemo } from "react";
-import { Color, ElementProps } from "../types";
+import { type FC, useMemo } from "react";
+import { type Color, type ElementProps } from "../types";
 
 export interface MeterProps extends ElementProps {
   /**

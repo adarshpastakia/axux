@@ -8,21 +8,21 @@
 
 import { AxIcon } from "@axux/core";
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
-import { IconProps } from "@axux/core/dist/icons/Icon";
+import { type IconProps } from "@axux/core/dist/icons/Icon";
 import {
-  ChildrenProp,
-  ElementProps,
-  EmptyCallback,
+  type ChildrenProp,
+  type ElementProps,
+  type EmptyCallback,
 } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { isString } from "@axux/utilities";
 import memoize from "memoize-one";
 import {
-  CSSProperties,
+  type CSSProperties,
   memo,
-  ReactElement,
-  ReactNode,
-  Ref,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
   useCallback,
   useDeferredValue,
   useEffect,

@@ -6,7 +6,7 @@
 import { AxField } from "@axux/form";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import { IImageConfig } from "../../utils/types";
+import { type IImageConfig } from "../../utils/types";
 import { usePageContext } from "../context";
 
 export const ImageConfig = memo(() => {

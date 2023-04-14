@@ -8,7 +8,7 @@
 
 import { AxIcon } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { FC, Fragment, useMemo } from "react";
+import { type FC, Fragment, useMemo } from "react";
 
 export interface PaginationProps {
   page: number;

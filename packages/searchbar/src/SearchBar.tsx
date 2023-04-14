@@ -6,11 +6,11 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
+import { type FC } from "react";
 import { SearchContextProvider } from "./context";
 import { FilterWrapper } from "./filterbar/FilterWrapper";
 import { SearchWrapper } from "./searchbar/SearchWrapper";
-import { FilterProps, SearchProps } from "./types";
+import { type FilterProps, type SearchProps } from "./types";
 
 export const AxSearchBar: FC<SearchProps & FilterProps> = ({
   append,

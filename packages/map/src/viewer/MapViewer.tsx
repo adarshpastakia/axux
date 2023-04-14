@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
-import { MapViewerProps } from "../constants/types";
+import { type FC } from "react";
+import { type MapViewerProps } from "../constants/types";
 import { MapProvider } from "../context/MapContext";
 
 export const MapViewer: FC<MapViewerProps> = (props) => {

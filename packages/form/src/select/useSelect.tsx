@@ -8,7 +8,7 @@
 
 import { debounce, isEmpty, matchString } from "@axux/utilities";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { BaseSelectProps, getLabel } from "./utils";
+import { type BaseSelectProps, getLabel } from "./utils";
 
 export const useSelect = ({
   options = [],

@@ -3,8 +3,8 @@
 // @copyright : 2020
 // @license   : MIT
 
-import { FC, memo } from "react";
-import { IItem } from "../../utils/types";
+import { type FC, memo } from "react";
+import { type IItem } from "../../utils/types";
 import { Item } from "./Item";
 
 export const Break: FC<IItem> = memo((item) => {

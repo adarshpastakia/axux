@@ -10,7 +10,7 @@ import { AxButton } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import i18next from "i18next";
 import { useMemo } from "react";
-import { DateContext, PageType } from "../types";
+import { type DateContext, PageType } from "../types";
 import { DateUtil } from "../utils";
 
 export const DateHeader = (props: Partial<DateContext>) => {

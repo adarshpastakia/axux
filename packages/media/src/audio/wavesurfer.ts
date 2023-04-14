@@ -7,11 +7,11 @@
  */
 import { useLogger } from "@axux/utilities";
 import WaveSurfer from "wavesurfer.js";
-// @ts-expect-error
+// @ts-expect-error ignore
 import CursorPlugin from "wavesurfer.js/dist/plugin/wavesurfer.cursor";
-// @ts-expect-error
+// @ts-expect-error ignore
 import RegionsPlugin from "wavesurfer.js/dist/plugin/wavesurfer.regions";
-// @ts-expect-error
+// @ts-expect-error ignore
 import TimelinePlugin from "wavesurfer.js/dist/plugin/wavesurfer.timeline";
 
 const CHANNEL_COLORS = [
@@ -87,7 +87,7 @@ export const Wavesurfer = (container: HTMLElement, timeline?: HTMLElement) => {
     plugins,
   });
   instance.on("ready", () => {
-    // @ts-expect-error
+    // @ts-expect-error ignore
     const channels = instance.backend.buffer.numberOfChannels;
     instance.setHeight(200 / channels);
   });

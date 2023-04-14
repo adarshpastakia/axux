@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
-import { FC, memo, ReactEventHandler, RefObject, useMemo } from "react";
-import { Canvas, CanvasRef } from "../canvas/Canvas";
+import { type FC, memo, type ReactEventHandler, type RefObject, useMemo } from "react";
+import { Canvas, type CanvasRef } from "../canvas/Canvas";
 
 export interface ImageProps {
   src: string;

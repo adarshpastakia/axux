@@ -7,8 +7,8 @@
  */
 
 import { isColor, isEmpty, isString, tokenize } from "@axux/utilities";
-import { FC, forwardRef, Fragment, useCallback, useMemo } from "react";
-import { ElementProps } from "../types";
+import { type FC, forwardRef, Fragment, useCallback, useMemo } from "react";
+import { type ElementProps } from "../types";
 
 interface AbbrTextProps {
   children: string;

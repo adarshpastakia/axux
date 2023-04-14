@@ -10,7 +10,7 @@ import { AxButton } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
 import {
-  FC,
+  type FC,
   memo,
   useCallback,
   useEffect,
@@ -19,7 +19,7 @@ import {
   useTransition,
 } from "react";
 import { Addon } from "./Addon";
-import { Text, TextProps } from "./Text";
+import { Text, type TextProps } from "./Text";
 
 export interface SearchProps
   extends Omit<TextProps, "type" | "allowClear" | "onEnterPressed"> {

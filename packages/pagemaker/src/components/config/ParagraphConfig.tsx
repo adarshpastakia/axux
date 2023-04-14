@@ -12,7 +12,7 @@ import {
   iconAlignJustify,
   iconAlignStart,
 } from "../../utils/icons";
-import { IParagraphConfig } from "../../utils/types";
+import { type IParagraphConfig } from "../../utils/types";
 import { usePageContext } from "../context";
 
 export const ParagraphConfig = memo(() => {

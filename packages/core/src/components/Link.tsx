@@ -9,12 +9,12 @@
 import {
   forwardRef,
   Fragment,
-  HTMLAttributes,
+  type HTMLAttributes,
   useImperativeHandle,
   useRef,
 } from "react";
 import { NavLink, useInRouterContext } from "react-router-dom";
-import { ChildrenProp, ElementProps } from "../types";
+import { type ChildrenProp, type ElementProps } from "../types";
 
 export interface LinkProps {
   /**

@@ -8,8 +8,8 @@
 
 /** @internal */
 import { isEmpty } from "@axux/utilities";
-import { DragEvent } from "react";
-import { EnumTypes, IDragObject } from "./types";
+import { type DragEvent } from "react";
+import { EnumTypes, type IDragObject } from "./types";
 
 /**
  * Ghost element

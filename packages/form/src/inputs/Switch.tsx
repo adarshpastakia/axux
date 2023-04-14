@@ -7,17 +7,17 @@
  */
 
 import { AxIcon } from "@axux/core";
-import { Color, ElementProps } from "@axux/core/dist/types";
+import { type Color, type ElementProps } from "@axux/core/dist/types";
 import {
-  ChangeEvent,
-  FC,
+  type ChangeEvent,
+  type FC,
   memo,
   useCallback,
   useEffect,
   useState,
   useTransition,
 } from "react";
-import { OptionProps } from "../types";
+import { type OptionProps } from "../types";
 import { Icons } from "../types/icons";
 
 export interface SwitchProps
@@ -51,7 +51,7 @@ export const Switch: FC<SwitchProps> = memo(
     inputRef,
     label,
     onChange,
-    // @ts-expect-error
+    // @ts-expect-error ignore
     value,
     ...rest
   }: SwitchProps) => {

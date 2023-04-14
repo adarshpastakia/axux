@@ -11,7 +11,7 @@ import { isArray } from "@axux/utilities";
 import { Fragment, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context";
-import { EnumOperator, FilterObject } from "../types";
+import { EnumOperator, type FilterObject } from "../types";
 
 export const QueryView = ({
   index,

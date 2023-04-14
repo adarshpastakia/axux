@@ -10,7 +10,7 @@ import { AxIcon } from "@axux/core";
 import { handleClick } from "@axux/utilities/dist/handlers";
 import { memo, useCallback, useMemo } from "react";
 import { useDatagridContext } from "./Context";
-import { DatagridColumn } from "./types";
+import { type DatagridColumn } from "./types";
 
 const KEY =
   "M4 6.5C4 4 6 2 8.5 2S13 4 13 6.5C13 8.46 11.75 10.13 10 10.74V15H13V18H10V22H7V10.74C5.25 10.13 4 8.46 4 6.5M7 6.5C7 7.33 7.67 8 8.5 8S10 7.33 10 6.5 9.33 5 8.5 5 7 5.67 7 6.5";

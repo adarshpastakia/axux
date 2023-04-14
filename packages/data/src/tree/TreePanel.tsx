@@ -8,14 +8,14 @@
 
 import { useDebounce } from "@axux/core";
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
-import { ElementProps } from "@axux/core/dist/types";
+import { type ElementProps } from "@axux/core/dist/types";
 import { AxField } from "@axux/form";
 import { isNil, matchString } from "@axux/utilities";
 import {
-  FC,
+  type FC,
   memo,
-  ReactNode,
-  Ref,
+  type ReactNode,
+  type Ref,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -30,11 +30,11 @@ import { TreeNode } from "./Node";
 import { toggleCheck, toggleExpand, toggleSelect } from "./reducer";
 import { TreeTools } from "./Tools";
 import {
-  InternalNode,
-  TreeActions,
-  TreeNodeType,
-  TreeRef,
-  TreeState,
+  type InternalNode,
+  type TreeActions,
+  type TreeNodeType,
+  type TreeRef,
+  type TreeState,
 } from "./types";
 import {
   createChildItems,

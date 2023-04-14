@@ -7,8 +7,8 @@
  */
 
 import { isEmpty, isString, tokenize } from "@axux/utilities";
-import { FC, Fragment, useMemo } from "react";
-import { ElementProps } from "../types";
+import { type FC, Fragment, useMemo } from "react";
+import { type ElementProps } from "../types";
 
 export interface MarkProps extends ElementProps {
   children: string;

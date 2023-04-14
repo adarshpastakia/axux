@@ -7,7 +7,7 @@
  */
 
 import { isNil } from "@axux/utilities";
-import { TreeState } from "./types";
+import { type TreeState } from "./types";
 import {
   createNodeList,
   getNodeById,

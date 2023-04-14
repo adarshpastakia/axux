@@ -8,7 +8,7 @@
 
 import { forwardRef } from "react";
 import { Indicator } from "../animations";
-import { ChildrenProp, ElementProps } from "../types";
+import { type ChildrenProp, type ElementProps } from "../types";
 
 export interface SectionProps extends ElementProps, ChildrenProp {
   /**

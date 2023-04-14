@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { FC, ReactPortal, useCallback, useState } from "react";
+import { type FC, type ReactPortal, useCallback, useState } from "react";
 import { createPortal } from "react-dom";
 
 type OverlayComponent = FC<{

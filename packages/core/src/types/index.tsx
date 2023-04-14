@@ -7,8 +7,8 @@
  */
 /* istanbul ignore file */
 
-import { Placement } from "@popperjs/core";
-import { ReactNode, RefAttributes } from "react";
+import { type Placement } from "@popperjs/core";
+import { type ReactNode, type RefAttributes } from "react";
 import { AxIcon } from "../icons/Icon";
 import { AppIcons } from "./appIcons";
 

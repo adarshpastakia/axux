@@ -35,7 +35,7 @@ import {
   startOfYear,
 } from "date-fns";
 import i18n from "i18next";
-import { DateLike, DatePart, DateParts, ParsedDate, Type } from "../types";
+import { type DateLike, type DatePart, DateParts, type ParsedDate, Type } from "../types";
 import { DateUtil } from "./index";
 
 /** @internal */

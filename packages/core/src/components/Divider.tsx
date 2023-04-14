@@ -7,8 +7,8 @@
  */
 
 import { isString } from "@axux/utilities";
-import { FC, Fragment } from "react";
-import { ChildProp, ElementProps } from "../types";
+import { type FC, Fragment } from "react";
+import { type ChildProp, type ElementProps } from "../types";
 
 export interface DividerProps extends ElementProps, ChildProp {
   rainbow?: boolean;

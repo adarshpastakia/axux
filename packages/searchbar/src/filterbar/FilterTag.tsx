@@ -11,7 +11,7 @@ import { AxField } from "@axux/form";
 import { Fragment, memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context";
-import { FilterObject } from "../types";
+import { type FilterObject } from "../types";
 import { FilterForm } from "./FilterForm";
 import { FilterMenu } from "./FilterMenu";
 import { QueryView } from "./QueryView";
@@ -50,7 +50,7 @@ export const FilterTag = memo(
           <AxField.Checkbox
             isInvalid={filter.isNegative}
             isChecked={!filter.isDisabled}
-            // @ts-expect-error
+            // @ts-expect-error ignore
             onClick={(e) => e.stopPropagation()}
             onChange={(e) => updateFilter(index, { isDisabled: !e })}
           />

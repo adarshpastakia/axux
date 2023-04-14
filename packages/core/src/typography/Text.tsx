@@ -10,7 +10,7 @@ import { isString } from "@axux/utilities";
 import { calculateTextHeight } from "@axux/utilities/dist/dom";
 import {
   Children,
-  FC,
+  type FC,
   Fragment,
   useCallback,
   useLayoutEffect,
@@ -19,7 +19,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import ResizeObserver from "resize-observer-polyfill";
-import { ChildrenProp, ElementProps } from "../types";
+import { type ChildrenProp, type ElementProps } from "../types";
 import { Abbr } from "./Abbr";
 import { Badge } from "./Badge";
 import { Copy } from "./Copy";

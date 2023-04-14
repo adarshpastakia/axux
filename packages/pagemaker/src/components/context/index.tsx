@@ -7,10 +7,10 @@
  */
 
 import {
-  Context,
+  type Context,
   createContext,
-  FC,
-  Ref,
+  type FC,
+  type Ref,
   useContext,
   useEffect,
   useImperativeHandle,
@@ -20,13 +20,13 @@ import {
 import { getNodeConfig } from "../../utils/dnd";
 import { getRawHtml } from "../../utils/getRawHtml";
 import {
-  ArtifactObject,
+  type ArtifactObject,
   EnumTypes,
-  IDragObject,
-  IProps,
-  IWidgetObject,
-  PageConfig,
-  PageItem,
+  type IDragObject,
+  type IProps,
+  type IWidgetObject,
+  type PageConfig,
+  type PageItem,
 } from "../../utils/types";
 
 interface DropObject {
@@ -185,7 +185,7 @@ export const ContextProvider: FC<IProps> = ({
           if (found) found.list.splice(found.index + (pos ?? 0), 0, item);
         } else if (grid) {
           const found = findDeep(newConfig, grid);
-          // @ts-expect-error
+          // @ts-expect-error ignore
           if (found) found.item.children.push(item);
         } else {
           newConfig.push(item);
@@ -204,7 +204,7 @@ export const ContextProvider: FC<IProps> = ({
         title: widget.title,
         type: EnumTypes.TILE,
       });
-      // @ts-expect-error
+      // @ts-expect-error ignore
       updateConfig(colId, "children", [newTile]);
       setSelected(newTile);
     });

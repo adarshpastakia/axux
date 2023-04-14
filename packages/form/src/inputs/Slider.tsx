@@ -6,10 +6,10 @@
  * @license   : MIT
  */
 
-import { ElementProps } from "@axux/core/dist/types";
+import { type ElementProps } from "@axux/core/dist/types";
 import { Format } from "@axux/utilities";
 import {
-  FC,
+  type FC,
   Fragment,
   memo,
   useCallback,
@@ -19,7 +19,7 @@ import {
   useTransition,
 } from "react";
 import { useRanger } from "../ranger";
-import { InputProps } from "../types";
+import { type InputProps } from "../types";
 import { FieldWrapper } from "./Wrapper";
 
 export interface SliderProps

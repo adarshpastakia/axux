@@ -11,14 +11,14 @@ import {
   useApplicationContext,
   useResizeObserver,
 } from "@axux/core";
-import { SizeObject } from "@axux/core/dist/types";
+import { type SizeObject } from "@axux/core/dist/types";
 import * as echarts from "echarts";
-import { EChartOption, EChartsType } from "echarts";
+import { type EChartOption, type EChartsType } from "echarts";
 import "echarts-wordcloud";
 import {
   Fragment,
-  ReactElement,
-  RefObject,
+  type ReactElement,
+  type RefObject,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -26,9 +26,9 @@ import {
   useState,
 } from "react";
 import { registerThemes } from "../theme";
-import { Theme } from "../types";
+import { type Theme } from "../types";
 import { Icons } from "../types/icons";
-import { ChartToolbar } from "./ChartToolbar";
+import { type ChartToolbar } from "./ChartToolbar";
 
 const defaultOptions = {
   grid: {

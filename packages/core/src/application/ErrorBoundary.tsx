@@ -6,10 +6,10 @@
  * @license   : MIT
  */
 
-import { Component, ComponentType, FC, Fragment, useMemo } from "react";
+import { Component, type ComponentType, type FC, Fragment, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useGlobals } from "../context/Global";
-import { ChildrenProp } from "../types";
+import { type ChildrenProp } from "../types";
 
 const ErrorIcon: FC = () => (
   <svg

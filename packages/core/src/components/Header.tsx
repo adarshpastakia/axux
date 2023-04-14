@@ -7,9 +7,9 @@
  */
 
 import { handleClick } from "@axux/utilities/dist/handlers";
-import { FC } from "react";
+import { type FC } from "react";
 import { AxButton } from "../buttons/Button";
-import { ChildrenProp, ElementProps } from "../types";
+import { type ChildrenProp, type ElementProps } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 /**

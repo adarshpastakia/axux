@@ -8,11 +8,11 @@
 
 import { AxContent, AxIcon } from "@axux/core";
 import { useBadge } from "@axux/core/dist/hooks/useBadge";
-import { BadgeType } from "@axux/core/dist/types";
+import { type BadgeType } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { isString } from "@axux/utilities";
 import {
-  FC,
+  type FC,
   Fragment,
   isValidElement,
   useEffect,
@@ -20,7 +20,7 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { SelectableProps, useSelectableList } from "../hooks/useSelectableList";
+import { type SelectableProps, useSelectableList } from "../hooks/useSelectableList";
 
 export interface CheckListItem extends KeyValue {
   id: string;

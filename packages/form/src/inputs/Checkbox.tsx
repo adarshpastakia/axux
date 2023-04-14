@@ -7,17 +7,17 @@
  */
 
 import { AxIcon } from "@axux/core";
-import { ElementProps, IconProp } from "@axux/core/dist/types";
+import { type ElementProps, type IconProp } from "@axux/core/dist/types";
 import {
-  ChangeEvent,
-  FC,
+  type ChangeEvent,
+  type FC,
   memo,
   useCallback,
   useEffect,
   useState,
   useTransition,
 } from "react";
-import { OptionProps } from "../types";
+import { type OptionProps } from "../types";
 import { Icons } from "../types/icons";
 
 export interface CheckboxProps
@@ -41,7 +41,7 @@ export const Checkbox: FC<CheckboxProps> = memo(
     iconOff,
     rtlFlip,
     onChange,
-    // @ts-expect-error
+    // @ts-expect-error ignore
     value,
     ...rest
   }: CheckboxProps) => {

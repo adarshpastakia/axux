@@ -7,12 +7,12 @@
  */
 
 import { AxAnimation, AxContent, AxIcon, AxLoader } from "@axux/core";
-import { Color } from "@axux/core/dist/types";
+import { type Color } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { Format } from "@axux/utilities";
-import { FC, useMemo } from "react";
+import { type FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { SelectableProps, useSelectableList } from "../hooks/useSelectableList";
+import { type SelectableProps, useSelectableList } from "../hooks/useSelectableList";
 
 export interface HistogramItem extends KeyValue {
   id: string;

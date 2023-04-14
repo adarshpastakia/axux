@@ -1,12 +1,12 @@
-import { FC } from "react";
+import { type FC } from "react";
 import { AxIcon } from "../icons/Icon";
 import {
-  ChildrenProp,
+  type ChildrenProp,
   CloseX,
-  Color,
-  ElementProps,
-  EmptyCallback,
-  IconProp,
+  type Color,
+  type ElementProps,
+  type EmptyCallback,
+  type IconProp,
 } from "../types";
 
 export interface CalloutProps extends ElementProps, IconProp, ChildrenProp {

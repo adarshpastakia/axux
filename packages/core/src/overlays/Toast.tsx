@@ -6,11 +6,11 @@
  * @license   : MIT
  */
 
-import { FC, Ref, useCallback, useMemo } from "react";
+import { type FC, type Ref, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { AxButton } from "../buttons/Button";
 import { AxIcon } from "../icons/Icon";
-import { CloseX, Color, IconProp } from "../types";
+import { CloseX, type Color, type IconProp } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 export interface ToastProps extends IconProp {

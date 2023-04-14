@@ -7,11 +7,11 @@
  */
 
 import { isString } from "@axux/utilities";
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { type FC, useCallback, useEffect, useMemo, useState } from "react";
 import { AxAnimation } from "../animations";
 import { AxTooltip } from "../overlays/Tooltip";
-import { HandleCallback } from "../types";
-import { AxButton, ButtonProps } from "./Button";
+import { type HandleCallback } from "../types";
+import { AxButton, type ButtonProps } from "./Button";
 
 export interface ActionProps extends ButtonProps {
   /**

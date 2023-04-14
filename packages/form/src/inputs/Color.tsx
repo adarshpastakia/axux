@@ -7,11 +7,11 @@
  */
 
 import { AxPopover } from "@axux/core";
-import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
+import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
 import { isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
-  FC,
+  type FC,
   memo,
   useCallback,
   useDeferredValue,
@@ -20,7 +20,7 @@ import {
   useTransition,
 } from "react";
 import { SketchPicker } from "react-color";
-import { InputProps } from "../types";
+import { type InputProps } from "../types";
 import { FieldWrapper } from "./Wrapper";
 
 export interface ColorProps extends ElementProps, InputProps, ChildrenProp {

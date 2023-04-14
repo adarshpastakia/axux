@@ -7,14 +7,14 @@
  */
 
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
-import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
+import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
 import memoizeOne from "memoize-one";
 import {
-  CSSProperties,
+  type CSSProperties,
   forwardRef,
   memo,
-  ReactElement,
-  Ref,
+  type ReactElement,
+  type Ref,
   useCallback,
   useDeferredValue,
   useImperativeHandle,

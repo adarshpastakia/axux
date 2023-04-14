@@ -6,10 +6,10 @@
  * @license   : MIT
  */
 
-import { FC, useEffect } from "react";
+import { type FC, useEffect } from "react";
 import { useTooltipWatcher } from "../hooks/useTooltip";
 import { HotKeyWrapper } from "../hotkeys/HotKeyWrapper";
-import { ChildrenProp, ElementProps } from "../types";
+import { type ChildrenProp, type ElementProps } from "../types";
 import { AxErrorBoundary } from "./ErrorBoundary";
 
 export interface ViewportProps extends ElementProps, ChildrenProp {

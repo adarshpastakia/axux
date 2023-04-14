@@ -10,10 +10,10 @@ import { AxIcon } from "@axux/core";
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
 import { useResize } from "@axux/core/dist/hooks/useResize";
 import {
-  FC,
+  type FC,
   Fragment,
   memo,
-  ReactEventHandler,
+  type ReactEventHandler,
   useEffect,
   useMemo,
   useRef,

@@ -7,7 +7,7 @@
  */
 
 import ZoomWidget from "@arcgis/core/widgets/Zoom";
-import { FC, useEffect } from "react";
+import { type FC, useEffect } from "react";
 import { useMapContext } from "../context/MapContext";
 
 /**

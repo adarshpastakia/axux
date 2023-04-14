@@ -7,8 +7,8 @@
  */
 
 import { Format } from "@axux/utilities";
-import { FC, useMemo } from "react";
-import { Color } from "../types";
+import { type FC, useMemo } from "react";
+import { type Color } from "../types";
 
 export interface ProgressProps {
   /**

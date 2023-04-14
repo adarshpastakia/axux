@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
-import { FC, useMemo } from "react";
-import { HotKey, reduceHotKey } from "./commons";
+import { type FC, useMemo } from "react";
+import { type HotKey, reduceHotKey } from "./commons";
 
 export const HotKeyLabel: FC<Omit<HotKey, "global" | "handler">> = ({
   keyCombo,

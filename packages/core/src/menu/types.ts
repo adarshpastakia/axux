@@ -6,15 +6,15 @@
  * @license   : MIT
  */
 
-import { ReactElement } from "react";
-import { AxDivider } from "../components/Divider";
-import { LinkProps } from "../components/Link";
+import { type ReactElement } from "react";
+import { type AxDivider } from "../components/Divider";
+import { type LinkProps } from "../components/Link";
 import {
-  BadgeType,
-  CollapseProps,
-  ElementProps,
-  IconProp,
-  MouseProps,
+  type BadgeType,
+  type CollapseProps,
+  type ElementProps,
+  type IconProp,
+  type MouseProps,
 } from "../types";
 
 export type MenuChildren =

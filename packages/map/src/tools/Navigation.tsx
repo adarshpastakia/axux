@@ -6,11 +6,11 @@
  * @license   : MIT
  */
 
-import MapView from "@arcgis/core/views/MapView";
+import type MapView from "@arcgis/core/views/MapView";
 import { useDebounce } from "@axux/core";
 import { isEqual } from "@axux/utilities";
-import { FC, Fragment, useCallback, useEffect, useRef, useState } from "react";
-import { MapViewport } from "../constants/types";
+import { type FC, Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { type MapViewport } from "../constants/types";
 import { useMapContext } from "../context/MapContext";
 
 const HomeButton = () => {

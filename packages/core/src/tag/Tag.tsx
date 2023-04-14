@@ -7,17 +7,17 @@
  */
 
 import { isColor } from "@axux/utilities";
-import { forwardRef, ForwardRefExoticComponent, useMemo } from "react";
+import { forwardRef, type ForwardRefExoticComponent, useMemo } from "react";
 import { getTooltipProps } from "../hooks/useTooltip";
 import { AxIcon } from "../icons/Icon";
 import {
   CloseX,
-  Color,
-  ElementProps,
-  EmptyCallback,
-  IconProp,
-  MouseProps,
-  TooltipType,
+  type Color,
+  type ElementProps,
+  type EmptyCallback,
+  type IconProp,
+  type MouseProps,
+  type TooltipType,
 } from "../types";
 
 export interface TagProps extends ElementProps, MouseProps, IconProp {
@@ -87,7 +87,7 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
       onClick,
       onRemove,
       isDisabled,
-      // @ts-expect-error
+      // @ts-expect-error ignore
       "data-popover-open": popoverOpen,
       ...rest
     },

@@ -7,9 +7,9 @@
  */
 
 import { AxIcon } from "@axux/core";
-import { ElementProps, IconProp } from "@axux/core/dist/types";
-import { FC, FormEvent, memo, useCallback } from "react";
-import { OptionProps } from "../types";
+import { type ElementProps, type IconProp } from "@axux/core/dist/types";
+import { type FC, type FormEvent, memo, useCallback } from "react";
+import { type OptionProps } from "../types";
 import { Icons } from "../types/icons";
 
 export interface RadioProps

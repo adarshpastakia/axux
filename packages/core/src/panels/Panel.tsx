@@ -9,20 +9,20 @@
 import {
   Children,
   cloneElement,
-  FC,
+  type FC,
   forwardRef,
-  ReactElement,
+  type ReactElement,
   useMemo,
 } from "react";
 import { Indicator } from "../animations";
 import { AxHeader } from "../components/Header";
 import { usePropToggle } from "../hooks/usePropToggle";
 import {
-  ChildrenProp,
-  CollapseProps,
-  ElementProps,
-  EmptyCallback,
-  ExpandProps,
+  type ChildrenProp,
+  type CollapseProps,
+  type ElementProps,
+  type EmptyCallback,
+  type ExpandProps,
 } from "../types";
 import { PanelGroup } from "./PanelGroup";
 import { PanelStack } from "./PanelStack";
@@ -102,7 +102,7 @@ export const AxPanel: FC<PanelProps> & {
       minWidth,
       maxHeight,
       maxWidth,
-      // @ts-expect-error
+      // @ts-expect-error ignore
       onBack,
       onClose,
       ...rest

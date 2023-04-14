@@ -26,7 +26,7 @@ import {
   startOfWeek as _startOfWeek,
   startOfYear as _startOfYear,
 } from "date-fns";
-import { DateLike, PageType } from "../types";
+import { type DateLike, PageType } from "../types";
 import { parseDate } from "./dateMath";
 import "./hijri-date";
 

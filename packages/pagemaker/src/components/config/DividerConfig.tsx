@@ -11,7 +11,7 @@ import {
   iconAlignEnd,
   iconAlignStart,
 } from "../../utils/icons";
-import { IDividerConfig } from "../../utils/types";
+import { type IDividerConfig } from "../../utils/types";
 import { usePageContext } from "../context";
 
 export const DividerConfig = memo(() => {

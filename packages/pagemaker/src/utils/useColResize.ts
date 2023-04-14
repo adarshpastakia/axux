@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { MouseEvent as ME, useLayoutEffect, useRef, useState } from "react";
+import { type MouseEvent as ME, useLayoutEffect, useRef, useState } from "react";
 import { usePageContext } from "../components/context";
-import { SpanType } from "./types";
+import { type SpanType } from "./types";
 
 export const useColResize = (id: string, colSpan?: SpanType) => {
   const refEl = useRef<HTMLDivElement>(null);

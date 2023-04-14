@@ -13,7 +13,7 @@ import {
   AxTitle,
 } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { FC, memo } from "react";
+import { type FC, memo } from "react";
 import { useTranslation } from "react-i18next";
 import { iconDelete } from "../../utils/icons";
 import { usePageContext } from "../context";

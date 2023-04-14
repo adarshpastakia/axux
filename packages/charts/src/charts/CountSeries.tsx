@@ -8,9 +8,9 @@
 
 import { AxButton, AxDivider } from "@axux/core";
 import { compareValues, isEmpty } from "@axux/utilities";
-import { EChartOption, EChartsType } from "echarts";
-import { FC, useEffect, useMemo, useRef, useState } from "react";
-import { BaseChart, CountType } from "../types";
+import { type EChartOption, type EChartsType } from "echarts";
+import { type FC, useEffect, useMemo, useRef, useState } from "react";
+import { type BaseChart, type CountType } from "../types";
 import { Icons } from "../types/icons";
 import { countRenderer } from "../types/utils";
 import { ChartContainer } from "../wrapper/ChartContainer";

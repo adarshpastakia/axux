@@ -7,11 +7,11 @@
  */
 
 import Basemap from "@arcgis/core/Basemap";
-import Layer from "@arcgis/core/layers/Layer";
+import type Layer from "@arcgis/core/layers/Layer";
 import VectorTileLayer from "@arcgis/core/layers/VectorTileLayer";
 import WebTileLayer from "@arcgis/core/layers/WebTileLayer";
 import { isEmpty } from "@axux/utilities";
-import { MapSource } from "../constants/types";
+import { type MapSource } from "../constants/types";
 
 export const makeBasemap = ({ id, title, type, thumbnail, url }: MapSource) => {
   let layer;

@@ -7,7 +7,7 @@
  */
 
 import { AxDivider, AxHotKey, AxIcon } from "@axux/core";
-import { FC, memo } from "react";
+import { type FC, memo } from "react";
 import { Icons } from "../types/icons";
 import { ZoomMeter } from "./ZoomMeter";
 

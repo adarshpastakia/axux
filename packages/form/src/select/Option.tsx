@@ -9,7 +9,7 @@
 import { Combobox } from "@headlessui/react";
 import { Fragment, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { BaseSelectProps, getLabel } from "./utils";
+import { type BaseSelectProps, getLabel } from "./utils";
 
 export const Options = ({
   options,

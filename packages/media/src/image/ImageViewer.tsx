@@ -12,9 +12,9 @@ import { debounce } from "@axux/utilities";
 import { getImageColorset } from "@axux/utilities/dist/getImageColorset";
 import {
   forwardRef,
-  ReactEventHandler,
-  RefObject,
-  SyntheticEvent,
+  type ReactEventHandler,
+  type RefObject,
+  type SyntheticEvent,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -24,7 +24,7 @@ import {
   useRef,
   useTransition,
 } from "react";
-import { CanvasRef } from "../canvas/Canvas";
+import { type CanvasRef } from "../canvas/Canvas";
 import { NsfwOverlay } from "../nsfw/NsfwOverlay";
 import { Icons } from "../types/icons";
 import { Image } from "./Image";

@@ -10,7 +10,7 @@ import { AxDivider, AxMenu } from "@axux/core";
 import { Fragment, memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context";
-import { EnumFieldType, FilterObject } from "../types";
+import { EnumFieldType, type FilterObject } from "../types";
 import { Icons } from "../types/icons";
 
 export const FilterMenu = memo(
