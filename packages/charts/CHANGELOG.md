@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/adarshpastakia/axux/compare/v2.1.10...v2.2.0) (2023-04-14)
+
+**Note:** Version bump only for package @axux/charts
+
+
+
+
+
 ## [2.1.10](https://github.com/adarshpastakia/axux/compare/v2.1.9...v2.1.10) (2023-04-13)
 
 **Note:** Version bump only for package @axux/charts
