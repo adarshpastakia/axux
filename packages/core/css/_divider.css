@@ -9,7 +9,7 @@
 @layer components {
   .ax-divider {
     @apply flex flex-nowrap items-center self-stretch select-none my-4;
-    --dv-color: theme(colors.bw.500/0.7);
+    --dv-color: theme(colors.bw.500);
     color: var(--dv-color);
 
     & > hr {
