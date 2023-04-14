@@ -6,20 +6,20 @@
  * @license   : MIT
  */
 
-import { FC, MouseEvent, useCallback, useLayoutEffect, useRef } from "react";
+import { type FC, type MouseEvent, useCallback, useLayoutEffect, useRef } from "react";
 import { AxHeader } from "../components/Header";
 import { AxTitle } from "../components/Title";
 import { AxHotKey } from "../hotkeys/HotKey";
 import { HotKeyWrapper } from "../hotkeys/HotKeyWrapper";
 import { AxIcon } from "../icons/Icon";
 import {
-  ChildProp,
+  type ChildProp,
   CloseX,
-  Color,
-  ElementProps,
-  EmptyCallback,
-  IconProp,
-  Size,
+  type Color,
+  type ElementProps,
+  type EmptyCallback,
+  type IconProp,
+  type Size,
 } from "../types";
 
 export interface FlyoutProps extends ElementProps, IconProp, ChildProp {
@@ -105,7 +105,7 @@ export const AxFlyout: FC<FlyoutProps> = ({
 
   useLayoutEffect(() => {
     const el = maskRef.current;
-    // @ts-expect-error
+    // @ts-expect-error ignore
     el.close = onClose;
     el && requestAnimationFrame(() => (el.dataset.show = "true"));
   }, []);

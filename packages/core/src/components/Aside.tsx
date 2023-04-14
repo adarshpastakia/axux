@@ -6,19 +6,19 @@
  * @license   : MIT
  */
 
-import { FC, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { type FC, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { Indicator } from "../animations";
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../hooks/usePropToggle";
 import { useResize } from "../hooks/useResize";
 import { AxIcon } from "../icons/Icon";
 import {
-  ChildrenProp,
-  CollapseProps,
-  Color,
-  ElementProps,
-  EmptyCallback,
-  IconProp,
+  type ChildrenProp,
+  type CollapseProps,
+  type Color,
+  type ElementProps,
+  type EmptyCallback,
+  type IconProp,
 } from "../types";
 import { AppIcons } from "../types/appIcons";
 import { AxHeader } from "./Header";

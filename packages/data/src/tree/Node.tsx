@@ -11,7 +11,7 @@ import { useBadge } from "@axux/core/dist/hooks/useBadge";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { InternalNode } from "./types";
+import { type InternalNode } from "./types";
 
 export const TreeNode = memo(
   ({

@@ -7,7 +7,7 @@
  */
 
 import { AxButton, AxFlexBox, AxPopover } from "@axux/core";
-import { AxField, AxForm, FormRef } from "@axux/form";
+import { AxField, AxForm, type FormRef } from "@axux/form";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
@@ -15,8 +15,8 @@ import { useSearchContext } from "../context";
 import {
   EnumFieldType,
   EnumOperator,
-  FilterByField,
-  FilterField,
+  type FilterByField,
+  type FilterField,
   TypeOperators,
 } from "../types";
 

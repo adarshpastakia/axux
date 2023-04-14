@@ -8,10 +8,10 @@
 
 import { Countries, isEmpty } from "@axux/utilities";
 import * as echarts from "echarts";
-import { EChartOption, EChartsType } from "echarts";
-import { FC, useEffect, useMemo, useRef, useState } from "react";
+import { type EChartOption, type EChartsType } from "echarts";
+import { type FC, useEffect, useMemo, useRef, useState } from "react";
 import { ChartPalette } from "../theme";
-import { BaseChart, CountType } from "../types";
+import { type BaseChart, type CountType } from "../types";
 import { countRenderer } from "../types/utils";
 import { ChartContainer } from "../wrapper/ChartContainer";
 import { ChartToolbar } from "../wrapper/ChartToolbar";

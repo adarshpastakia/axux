@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { FC, useEffect, useRef } from "react";
+import { type FC, useEffect, useRef } from "react";
 import ResizeObserver from "resize-observer-polyfill";
 
 interface TimeSliderProps {

@@ -7,7 +7,7 @@
  */
 
 import { compareValues } from "@axux/utilities";
-import { InternalNode, TreeNodeType, TreeState } from "./types";
+import { type InternalNode, type TreeNodeType, type TreeState } from "./types";
 
 const sorter = (a: TreeNodeType, b: TreeNodeType) => {
   if (!!a.isLeaf !== !!b.isLeaf) return a.isLeaf ? 1 : -1;
@@ -88,7 +88,7 @@ export const refactorChildren = (
 };
 
 export const createTreeMap = (nodes: InternalNode[]) => {
-  const map: Map<string, InternalNode> = new Map();
+  const map = new Map<string, InternalNode>();
   const makeMap = (nodes: InternalNode[]) => {
     nodes.forEach((node) => {
       map.set(node.internalId, node);
@@ -100,7 +100,7 @@ export const createTreeMap = (nodes: InternalNode[]) => {
 };
 
 export const createIdMap = (nodes: InternalNode[]) => {
-  const map: Map<string, string> = new Map();
+  const map = new Map<string, string>();
   const makeMap = (nodes: InternalNode[]) => {
     nodes.forEach((node) => {
       node.node.id && map.set(node.node.id, node.internalId);
@@ -169,10 +169,10 @@ export const toggleProperty = (
   nodes.forEach((node) => {
     if (
       prop in node &&
-      // @ts-expect-error
+      // @ts-expect-error ignore
       (!checkChildren || (checkChildren && node.children?.length > 0))
     )
-      // @ts-expect-error
+      // @ts-expect-error ignore
       node[prop] = value;
     if (node.children != null)
       toggleProperty(node.children, prop, value, checkChildren);

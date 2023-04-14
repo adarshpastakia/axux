@@ -8,10 +8,10 @@
 /* istanbul ignore file */
 
 import { isString, isTrue } from "@axux/utilities";
-import { Placement } from "@popperjs/core";
+import { type Placement } from "@popperjs/core";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
-import { createRoot, Root } from "react-dom/client";
-import { TooltipType } from "../types";
+import { createRoot, type Root } from "react-dom/client";
+import { type TooltipType } from "../types";
 import { usePopover } from "./usePopover";
 
 export const getTooltipProps = (tooltip?: TooltipType) => {

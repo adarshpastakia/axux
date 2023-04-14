@@ -44,8 +44,7 @@ export const useLogger = (base: string) => ({
 
   debug(msg: string, ...rest: AnyObject[]) {
     if (process.env.NODE_ENV === "development") {
-      // tslint:disable-next-line:no-console
-      console.debug(
+           console.debug(
         `%cDEBUG::%c${base} - ${msg}`,
         TypeColors.debug,
         TagColors.debug
@@ -56,8 +55,7 @@ export const useLogger = (base: string) => ({
 
   info(msg: string, ...rest: AnyObject[]) {
     if (process.env.NODE_ENV === "development") {
-      // tslint:disable-next-line:no-console
-      console.info(
+           console.info(
         `%cINFO::%c${base} - ${msg}\n`,
         TypeColors.info,
         TagColors.info,
@@ -68,8 +66,7 @@ export const useLogger = (base: string) => ({
 
   error(msg: string, ...rest: AnyObject[]) {
     if (process.env.NODE_ENV === "development") {
-      // tslint:disable-next-line:no-console
-      console.error(
+           console.error(
         `%cERROR::%c${base} - ${msg}\n`,
         TypeColors.error,
         TagColors.error,
@@ -80,8 +77,7 @@ export const useLogger = (base: string) => ({
 
   warning(msg: string, ...rest: AnyObject[]) {
     if (process.env.NODE_ENV === "development") {
-      // tslint:disable-next-line:no-console
-      console.warn(
+           console.warn(
         `%cWARNING::%c${base} - ${msg}\n`,
         TypeColors.warning,
         TagColors.warning,

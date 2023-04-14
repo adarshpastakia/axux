@@ -7,10 +7,10 @@
  */
 
 import { AxButton, AxContent, AxFooter, AxPopover } from "@axux/core";
-import { FC, Fragment, useEffect, useState } from "react";
+import { type FC, Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AxRangePanel } from "../panels/RangePanel";
-import { ParsedDate, RelativeProps } from "../types";
+import { type ParsedDate, type RelativeProps } from "../types";
 import { DateMath } from "../utils";
 
 export const AbsoluteRange: FC<Omit<RelativeProps, "type" | "presets">> = ({

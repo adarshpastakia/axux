@@ -8,7 +8,7 @@
 
 import { AxProgress } from "@axux/core";
 import { memo, useEffect, useState } from "react";
-import { WavesurferInstance } from "./wavesurfer";
+import { type WavesurferInstance } from "./wavesurfer";
 
 export const Loading = memo(
   ({ wavesurfer }: { wavesurfer: WavesurferInstance }) => {

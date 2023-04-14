@@ -9,7 +9,7 @@
 
 import { isEmpty, isNumber, isString } from "@axux/utilities";
 import { useMemo } from "react";
-import { BadgeType } from "../types";
+import { type BadgeType } from "../types";
 import { Badge } from "../typography/Badge";
 
 export const useBadge = (options?: BadgeType) => {

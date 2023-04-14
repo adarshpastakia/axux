@@ -7,7 +7,7 @@
  */
 
 import { useCallback, useLayoutEffect, useState } from "react";
-import { CallbackReturn } from "../types";
+import { type CallbackReturn } from "../types";
 
 /**
  * hook to control boolean props

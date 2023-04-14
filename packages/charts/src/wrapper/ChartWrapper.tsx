@@ -8,7 +8,7 @@
 
 import { AxErrorBoundary } from "@axux/core/dist/application/ErrorBoundary";
 import "echarts-wordcloud";
-import { FC, ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 const Error: FC<{ error?: string }> = ({ error = "" }) => {
   return (

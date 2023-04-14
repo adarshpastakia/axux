@@ -7,8 +7,8 @@
  */
 
 import { AxIcon } from "@axux/core";
-import { ChildrenProp } from "@axux/core/dist/types";
-import { FC, memo, MouseEvent, ReactNode, Ref, useCallback } from "react";
+import { type ChildrenProp } from "@axux/core/dist/types";
+import { type FC, memo, type MouseEvent, type ReactNode, type Ref, useCallback } from "react";
 import { Icons } from "../types/icons";
 import { Container } from "./Container";
 

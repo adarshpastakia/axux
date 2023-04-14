@@ -3,9 +3,9 @@
 // @copyright : 2020
 // @license   : MIT
 
-import { AxTreePanel, TreeNode } from "@axux/data";
+import { AxTreePanel, type TreeNode } from "@axux/data";
 import { groupBy } from "@axux/utilities";
-import { FC, memo, useEffect, useState } from "react";
+import { type FC, memo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { EnumTypes } from "../..";
 import {
@@ -18,7 +18,7 @@ import {
   iconVDivider,
   iconWidget,
 } from "../../utils/icons";
-import { IWidgetObject } from "../../utils/types";
+import { type IWidgetObject } from "../../utils/types";
 import { usePageContext } from "../context";
 
 const makeTreeNode = (

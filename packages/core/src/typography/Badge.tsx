@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
+import { type FC } from "react";
 import { AxIcon } from "../icons/Icon";
-import { BadgeProps as BP, ElementProps } from "../types";
+import { type BadgeProps as BP, type ElementProps } from "../types";
 
 export interface BadgeProps extends Omit<BP, "value">, ElementProps {
   children?: string | number;

@@ -5,8 +5,8 @@
 
 import { AxField } from "@axux/form";
 import { getValue } from "@axux/utilities";
-import { FC, memo, useMemo } from "react";
-import { IHeadingConfig } from "../../utils/types";
+import { type FC, memo, useMemo } from "react";
+import { type IHeadingConfig } from "../../utils/types";
 import { usePageContext } from "../context";
 import { Item } from "./Item";
 

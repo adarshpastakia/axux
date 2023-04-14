@@ -3,18 +3,18 @@
 // @copyright : 2020
 // @license   : MIT
 
-import { ChildrenProp } from "@axux/core/dist/types";
+import { type ChildrenProp } from "@axux/core/dist/types";
 import {
-  CSSProperties,
-  FC,
+  type CSSProperties,
+  type FC,
   memo,
-  MouseEvent,
-  MutableRefObject,
+  type MouseEvent,
+  type MutableRefObject,
   useCallback,
   useMemo,
   useState,
 } from "react";
-import { EnumTypes, IItem } from "../../utils/types";
+import { EnumTypes, type IItem } from "../../utils/types";
 import { useColResize } from "../../utils/useColResize";
 import { usePageContext } from "../context";
 import { EditHead } from "./EditHead";

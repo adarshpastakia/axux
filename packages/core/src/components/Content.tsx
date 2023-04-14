@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
-import { ChildrenProp, ElementProps, Gutter } from "../types";
+import { type FC } from "react";
+import { type ChildrenProp, type ElementProps, type Gutter } from "../types";
 import { EmptyContent } from "./EmptyContent";
 
 type Props = ElementProps &

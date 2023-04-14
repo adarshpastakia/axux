@@ -9,8 +9,8 @@
 import {
   Children,
   cloneElement,
-  FC,
-  MouseEvent,
+  type FC,
+  type MouseEvent,
   useCallback,
   useEffect,
   useMemo,
@@ -18,7 +18,7 @@ import {
   useState,
   useTransition,
 } from "react";
-import { ChildrenProp, ElementProps } from "../types";
+import { type ChildrenProp, type ElementProps } from "../types";
 
 export interface PanelStackProps extends ElementProps, ChildrenProp {
   /**

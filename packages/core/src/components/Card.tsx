@@ -7,8 +7,8 @@
  */
 
 import { forwardRef, useMemo } from "react";
-import { ChildrenProp, ElementProps, MouseProps } from "../types";
-import { Link, LinkProps } from "./Link";
+import { type ChildrenProp, type ElementProps, type MouseProps } from "../types";
+import { Link, type LinkProps } from "./Link";
 
 export interface CardProps extends ElementProps, MouseProps, ChildrenProp {
   isPlain?: boolean;

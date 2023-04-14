@@ -6,15 +6,15 @@
  * @license   : MIT
  */
 
-import { ElementProps } from "@axux/core/dist/types";
+import { type ElementProps } from "@axux/core/dist/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Children,
   cloneElement,
-  FC,
-  PropsWithChildren,
-  ReactElement,
-  Ref,
+  type FC,
+  type PropsWithChildren,
+  type ReactElement,
+  type Ref,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -22,11 +22,11 @@ import {
 } from "react";
 import {
   Controller as HFController,
-  DeepPartial,
+  type DeepPartial,
   FormProvider,
   useForm,
 } from "react-hook-form";
-import * as yup from "yup";
+import type * as yup from "yup";
 
 export interface FormRef<K> {
   reset: () => void;

@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
+import { type FC } from "react";
 import { Indicator } from "../animations";
-import { ChildrenProp, ElementProps } from "../types";
+import { type ChildrenProp, type ElementProps } from "../types";
 
 export interface PageProps extends ElementProps, ChildrenProp {
   /**

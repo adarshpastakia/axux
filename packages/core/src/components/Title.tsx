@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
-import { ChildrenProp, ElementProps } from "../types";
+import { type FC } from "react";
+import { type ChildrenProp, type ElementProps } from "../types";
 
 /**
  * title

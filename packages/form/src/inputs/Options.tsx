@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
-import { Children, cloneElement, FC, memo } from "react";
-import { InputProps } from "../types";
+import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
+import { Children, cloneElement, type FC, memo } from "react";
+import { type InputProps } from "../types";
 import { FieldWrapper } from "./Wrapper";
 
 export interface OptionsProps extends ChildrenProp, InputProps, ElementProps {

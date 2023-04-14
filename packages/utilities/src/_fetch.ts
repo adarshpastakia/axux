@@ -16,7 +16,7 @@ declare interface FetchOptions {
   signal?: string | AbortSignal;
 }
 
-const _signals: Map<string, AbortController> = new Map();
+const _signals = new Map<string, AbortController>();
 
 /**
  * Fetch helper

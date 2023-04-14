@@ -7,14 +7,14 @@
  */
 
 import {
-  RefObject,
+  type RefObject,
   useCallback,
   useEffect,
   useRef,
   useTransition,
 } from "react";
 import ResizeObserver from "resize-observer-polyfill";
-import { SizeObject } from "../types";
+import { type SizeObject } from "../types";
 
 export const useResizeObserver = <T extends HTMLElement = HTMLDivElement>(
   onResize: (size: SizeObject) => void

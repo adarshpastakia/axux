@@ -6,9 +6,9 @@
 import { AxButton, AxModal, AxText, useOverlayService } from "@axux/core";
 import { AxEditor } from "@axux/data";
 import { marked } from "marked";
-import { FC, memo, useEffect, useState } from "react";
+import { type FC, memo, useEffect, useState } from "react";
 import { iconPencil } from "../../utils/icons";
-import { IParagraphConfig } from "../../utils/types";
+import { type IParagraphConfig } from "../../utils/types";
 import { usePageContext } from "../context";
 import { Item } from "./Item";
 

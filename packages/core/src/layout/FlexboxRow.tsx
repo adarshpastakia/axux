@@ -7,7 +7,7 @@
  */
 
 import { forwardRef, useMemo } from "react";
-import { ChildrenProp, ElementProps, Gutter } from "../types";
+import { type ChildrenProp, type ElementProps, type Gutter } from "../types";
 
 export interface FlexboxRowProps extends ElementProps, ChildrenProp {
   /**

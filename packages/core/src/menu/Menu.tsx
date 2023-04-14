@@ -9,19 +9,19 @@
 import { iconToken } from "@axux/utilities";
 import { Menu } from "@headlessui/react";
 import {
-  FC,
+  type FC,
   Fragment,
-  MouseEvent as ReactMouseEvent,
-  ReactNode,
+  type MouseEvent as ReactMouseEvent,
+  type ReactNode,
   useCallback,
 } from "react";
 import { Link } from "../components/Link";
 import { useBadge } from "../hooks/useBadge";
 import { AxHotKey } from "../hotkeys/HotKey";
 import { AxIcon } from "../icons/Icon";
-import { ChildProp, ElementProps } from "../types";
+import { type ChildProp, type ElementProps } from "../types";
 import { MenuGroup } from "./MenuGroup";
-import { MenuItemProps, MenuProps } from "./types";
+import { type MenuItemProps, type MenuProps } from "./types";
 
 const FakeItem = (props: KeyValue) => {
   return (
@@ -43,11 +43,11 @@ const MenuItem: FC<MenuItemProps<ReactNode>> = ({
   isDisabled,
   rtlFlip,
   onClick,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   "data-extra": extra,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   "data-panel": panelId,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   "data-popover-open": popoverOpen,
   ...rest
 }) => {
@@ -96,9 +96,9 @@ const MenuMini: FC<MenuItemProps> = ({
   isActive,
   isDisabled,
   rtlFlip,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   "data-extra": extra,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   "data-popover-open": popoverOpen,
   ...rest
 }) => {

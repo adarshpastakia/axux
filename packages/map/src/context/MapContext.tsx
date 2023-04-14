@@ -6,15 +6,15 @@
  * @license   : MIT
  */
 
-import Basemap from "@arcgis/core/Basemap";
+import type Basemap from "@arcgis/core/Basemap";
 import SpatialReference from "@arcgis/core/geometry/SpatialReference";
 import TileInfo from "@arcgis/core/layers/support/TileInfo";
 import GeoMap from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
-import { ChildrenProp } from "@axux/core/dist/types";
+import { type ChildrenProp } from "@axux/core/dist/types";
 import {
   createContext,
-  FC,
+  type FC,
   useContext,
   useEffect,
   useLayoutEffect,
@@ -25,8 +25,8 @@ import {
 import {
   DefaultViewProps,
   DEFAULT_VIEWPORT,
-  MapViewerProps,
-  MapViewport,
+  type MapViewerProps,
+  type MapViewport,
 } from "../constants/types";
 import { makeBasemap } from "../utils";
 

@@ -8,7 +8,7 @@
 
 import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 import Expand from "@arcgis/core/widgets/Expand";
-import { FC, useEffect } from "react";
+import { type FC, useEffect } from "react";
 import { useMapContext } from "../context/MapContext";
 
 /**

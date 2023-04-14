@@ -9,9 +9,9 @@
 import { AxButton, AxTabPanel, AxTag } from "@axux/core";
 import { useGlobals } from "@axux/core/dist/context/Global";
 import { AxPopover } from "@axux/core/dist/overlays/Popover";
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { type FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { RelativeProps, Type } from "../types";
+import { type RelativeProps, Type } from "../types";
 import { Icons } from "../types/icons";
 import { DateMath, superDateType } from "../utils/dateMath";
 import { AbsoluteRange } from "./AbsoluteRange";

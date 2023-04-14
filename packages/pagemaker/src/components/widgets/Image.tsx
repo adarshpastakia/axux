@@ -4,9 +4,9 @@
 // @license   : MIT
 
 import { AxIcon } from "@axux/core";
-import { FC, memo, useEffect, useMemo, useState } from "react";
+import { type FC, memo, useEffect, useMemo, useState } from "react";
 import { iconImageBroken } from "../../utils/icons";
-import { IImageConfig } from "../../utils/types";
+import { type IImageConfig } from "../../utils/types";
 import { Item } from "./Item";
 
 export const Image: FC<IImageConfig> = memo((item) => {

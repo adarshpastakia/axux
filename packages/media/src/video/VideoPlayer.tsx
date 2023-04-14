@@ -10,9 +10,9 @@ import { AxAnimation, AxIcon } from "@axux/core";
 import { HotKeyWrapper } from "@axux/core/dist/hotkeys/HotKeyWrapper";
 import {
   forwardRef,
-  ReactEventHandler,
-  RefObject,
-  SyntheticEvent,
+  type ReactEventHandler,
+  type RefObject,
+  type SyntheticEvent,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -22,7 +22,7 @@ import {
   useRef,
   useTransition,
 } from "react";
-import { CanvasRef } from "../canvas/Canvas";
+import { type CanvasRef } from "../canvas/Canvas";
 import { Video } from "./Video";
 
 import { isEmpty } from "@axux/utilities";
@@ -176,11 +176,11 @@ export const AxVideoPlayer = forwardRef<
           ? {
               seek: (ts: number) =>
                 videoRef.current && (videoRef.current.currentTime = ts),
-              play: () => videoRef.current?.play(),
-              playAt: (time: number) =>
-                videoRef.current &&
+              play: async () => await videoRef.current?.play(),
+              playAt: async (time: number) =>
+                await (videoRef.current &&
                 ((videoRef.current.currentTime = time),
-                videoRef.current?.play()),
+                videoRef.current?.play())),
               pause: () => videoRef.current?.pause(),
               currentTime: () => videoRef.current?.currentTime,
               on: videoRef.current?.addEventListener.bind(videoRef.current),

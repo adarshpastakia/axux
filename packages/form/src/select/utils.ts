@@ -6,10 +6,10 @@
  * @license   : MIT
  */
 
-import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
+import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
 import { isEmpty, isObject } from "@axux/utilities";
-import { ReactElement } from "react";
-import { InputProps } from "../types";
+import { type ReactElement } from "react";
+import { type InputProps } from "../types";
 
 export interface BaseSelectProps<T> extends ElementProps, ChildrenProp {
   options: T[] | Array<{ label: string; items: T[] }>;

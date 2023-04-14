@@ -8,9 +8,9 @@
 
 import { AxButton, AxDivider } from "@axux/core";
 import { isEmpty } from "@axux/utilities";
-import { EChartOption, EChartsType } from "echarts";
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { BaseChart, TimeSeriesType } from "../types";
+import { type EChartOption, type EChartsType } from "echarts";
+import { type FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { type BaseChart, type TimeSeriesType } from "../types";
 import { Icons } from "../types/icons";
 import { timeSeriesRenderer } from "../types/utils";
 import { ChartContainer } from "../wrapper/ChartContainer";

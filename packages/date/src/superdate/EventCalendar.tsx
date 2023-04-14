@@ -4,9 +4,9 @@
 // @license   : MIT
 
 import { AxContent, AxIcon, AxPopover } from "@axux/core";
-import { FC, useCallback, useMemo, useState } from "react";
+import { type FC, useCallback, useMemo, useState } from "react";
 import { DateHeader } from "../components/DateHeader";
-import { PageType, RelativeProps } from "../types";
+import { PageType, type RelativeProps } from "../types";
 import { DateMath, DateUtil } from "../utils";
 
 export const EventCalendar: FC<Pick<RelativeProps, "events" | "onChange">> = ({

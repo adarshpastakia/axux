@@ -6,19 +6,19 @@
  * @license   : MIT
  */
 
-import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
+import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
 import { isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
-  ChangeEvent,
-  FC,
+  type ChangeEvent,
+  type FC,
   memo,
   useCallback,
   useEffect,
   useState,
   useTransition,
 } from "react";
-import { InputProps } from "../types";
+import { type InputProps } from "../types";
 import { FieldWrapper } from "./Wrapper";
 
 export interface NumberProps

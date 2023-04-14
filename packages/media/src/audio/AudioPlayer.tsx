@@ -10,7 +10,7 @@ import { AxIcon } from "@axux/core";
 import { HotKeyWrapper } from "@axux/core/dist/hotkeys/HotKeyWrapper";
 import {
   forwardRef,
-  RefObject,
+  type RefObject,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -23,7 +23,7 @@ import {
 import { Icons } from "../types/icons";
 import { Loading } from "./Loading";
 import { Tools } from "./Tools";
-import { Wavesurfer, WavesurferInstance } from "./wavesurfer";
+import { Wavesurfer, type WavesurferInstance } from "./wavesurfer";
 
 interface PlayerState {
   isErrored: boolean;
@@ -140,9 +140,9 @@ export const AxAudioPlayer = forwardRef<
     useImperativeHandle(
       ref,
       () => ({
-        play: () => wavesurfer?.instance.play(),
+        play: async () => await wavesurfer?.instance.play(),
         pause: () => wavesurfer?.instance.pause(),
-        playRegion: (start, end) => wavesurfer?.instance.play(start, end),
+        playRegion: async (start, end) => await wavesurfer?.instance.play(start, end),
       }),
       [wavesurfer]
     );

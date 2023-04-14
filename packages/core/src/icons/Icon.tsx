@@ -7,8 +7,8 @@
  */
 
 import { isColor, isString, isSvgPath } from "@axux/utilities";
-import { FC, forwardRef, MouseEventHandler, useMemo } from "react";
-import { Color, ElementProps, IconProp, RefProp, SizeList } from "../types";
+import { type FC, forwardRef, type MouseEventHandler, useMemo } from "react";
+import { type Color, type ElementProps, type IconProp, type RefProp, SizeList } from "../types";
 
 const SvgTextSize = ["", ".75em", ".65em", ".45em", ".45em"];
 

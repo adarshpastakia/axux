@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
-import { IconProp } from "@axux/core/dist/types";
-import { ReactNode } from "react";
+import { type IconProp } from "@axux/core/dist/types";
+import { type ReactNode } from "react";
 
 export interface DatagridRef {
   hilight: (row: number) => void;

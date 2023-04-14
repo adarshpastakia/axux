@@ -4,7 +4,7 @@
 // @license   : MIT
 
 import { AxButton, AxIcon } from "@axux/core";
-import { DragEventHandler, FC, memo } from "react";
+import { type DragEventHandler, type FC, memo } from "react";
 import { iconDelete, iconDrag } from "../../utils/icons";
 
 interface Props {

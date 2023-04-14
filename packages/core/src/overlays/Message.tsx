@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { FC, Ref } from "react";
+import { type FC, type Ref } from "react";
 import { AxIcon } from "../icons/Icon";
-import { CloseX, Color, IconProp } from "../types";
+import { CloseX, type Color, type IconProp } from "../types";
 
 export interface MessageProps extends IconProp {
   /**

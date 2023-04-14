@@ -7,7 +7,7 @@
  */
 /* istanbul ignore file */
 
-import { KeyboardEvent, MouseEvent } from "react";
+import { type KeyboardEvent, type MouseEvent } from "react";
 
 /** ***************** common handler for enter press *******************/
 export const handleEnter = (callback?: AnyObject) => {

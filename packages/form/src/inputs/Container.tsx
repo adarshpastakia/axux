@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
-import { ChildProp, ElementProps } from "@axux/core/dist/types";
-import { FC, memo, MouseEvent, ReactNode, useCallback } from "react";
+import { type ChildProp, type ElementProps } from "@axux/core/dist/types";
+import { type FC, memo, type MouseEvent, type ReactNode, useCallback } from "react";
 
 export interface ContainerProps extends ElementProps, ChildProp {
   /**

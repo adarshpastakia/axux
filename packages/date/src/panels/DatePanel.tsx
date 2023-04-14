@@ -9,14 +9,14 @@
 import { AxButton } from "@axux/core";
 import { useGlobals } from "@axux/core/dist/context/Global";
 import { isAfter, isBefore } from "date-fns";
-import { FC, useCallback, useEffect, useState } from "react";
+import { type FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { DateHeader } from "../components/DateHeader";
 import { DatePage } from "../components/DatePage";
 import { DecadePage } from "../components/DecadePage";
 import { MonthPage } from "../components/MonthPage";
 import { YearPage } from "../components/YearPage";
-import { DateProps, PageType } from "../types";
+import { type DateProps, PageType } from "../types";
 import { DateUtil } from "../utils";
 
 export const AxDatePanel: FC<DateProps> = ({

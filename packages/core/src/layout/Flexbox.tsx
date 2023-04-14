@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
-import { forwardRef, ForwardRefExoticComponent, useMemo } from "react";
-import { ChildrenProp, ElementProps, Gutter } from "../types";
+import { forwardRef, type ForwardRefExoticComponent, useMemo } from "react";
+import { type ChildrenProp, type ElementProps, type Gutter } from "../types";
 import { FlexboxCol } from "./FlexboxCol";
 import { FlexboxRow } from "./FlexboxRow";
 

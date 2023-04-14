@@ -8,14 +8,14 @@
 
 import { iconToken } from "@axux/utilities";
 import { Menu } from "@headlessui/react";
-import { FC, Fragment } from "react";
+import { type FC, Fragment } from "react";
 import { createPortal } from "react-dom";
 import { usePopover } from "../hooks/usePopover";
 import { usePropToggle } from "../hooks/usePropToggle";
 import { AxIcon } from "../icons/Icon";
 import { AppIcons } from "../types/appIcons";
 import { Ellipsis } from "../typography/Ellipsis";
-import { MenuGroupProps } from "./types";
+import { type MenuGroupProps } from "./types";
 
 const CollapseGroup: FC<MenuGroupProps> = ({
   isCollapsed,

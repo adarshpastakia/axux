@@ -7,8 +7,8 @@
  */
 
 import { useLocalStorage } from "@axux/core";
-import { ChildrenProp } from "@axux/core/dist/types";
-import { SuggestItem } from "@axux/form/dist/select/Suggest";
+import { type ChildrenProp } from "@axux/core/dist/types";
+import { type SuggestItem } from "@axux/form/dist/select/Suggest";
 import { isArray } from "@axux/utilities";
 import i18next from "i18next";
 import React, {
@@ -19,7 +19,7 @@ import React, {
   useTransition,
 } from "react";
 import { I18nextProvider } from "react-i18next";
-import { FilterField, FilterObject, FilterProps, SearchProps } from "../types";
+import { type FilterField, type FilterObject, type FilterProps, type SearchProps } from "../types";
 
 interface Context {
   defaultQueryList: SuggestItem[];
@@ -124,7 +124,7 @@ export const SearchContextProvider: React.FC<
     onSearch?.({ query, filters });
   }, [query, filters, history, onSearch]);
 
-  const updateQuery = (query: string) => {
+  const updateQuery = async (query: string) => {
     const historyList = isArray(history) ? history : [];
     const newHistory = [
       query,
@@ -134,7 +134,7 @@ export const SearchContextProvider: React.FC<
       setDirty(true);
       setOptions(newHistory.filter((h) => h.includes(query)));
     });
-    return onQuery?.(query) ?? [];
+    return await (onQuery?.(query) ?? []);
   };
 
   const updateFilter = (index: number, filter: Partial<FilterObject>) => {

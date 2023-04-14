@@ -7,7 +7,7 @@
  */
 
 import { differenceInDays, format, parseISO } from "date-fns";
-import { CountryCode, parsePhoneNumberFromString } from "libphonenumber-js";
+import { type CountryCode, parsePhoneNumberFromString } from "libphonenumber-js";
 import * as numeral from "numeral";
 import { Countries } from ".";
 import { isEmpty, isNil } from "./_isType";

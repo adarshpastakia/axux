@@ -13,7 +13,7 @@ import {
   AxMeter,
   AxText,
 } from "@axux/core";
-import { ElementProps } from "@axux/core/dist/types";
+import { type ElementProps } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay } from "@axux/date";
 import {
@@ -27,7 +27,7 @@ import {
   isObject,
   isTrue,
 } from "@axux/utilities";
-import { FC, Fragment, useMemo } from "react";
+import { type FC, Fragment, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 export interface JsonViewProps extends ElementProps {

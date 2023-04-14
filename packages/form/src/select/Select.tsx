@@ -13,7 +13,7 @@ import { Listbox } from "@headlessui/react";
 import {
   Fragment,
   memo,
-  ReactNode,
+  type ReactNode,
   useCallback,
   useDeferredValue,
   useEffect,
@@ -25,7 +25,7 @@ import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { Icons } from "../types/icons";
-import { defaultMatcher, getLabel, getValue, SelectProps } from "./utils";
+import { defaultMatcher, getLabel, getValue, type SelectProps } from "./utils";
 
 export const SelectInput = <T extends AnyObject>({
   label,
@@ -48,7 +48,7 @@ export const SelectInput = <T extends AnyObject>({
   isInvalid,
   className,
   isEditable,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   name,
   info,
   error,

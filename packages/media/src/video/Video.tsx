@@ -8,16 +8,16 @@
 
 import { AxAnimation, AxIcon } from "@axux/core";
 import {
-  FC,
+  type FC,
   memo,
-  ReactEventHandler,
-  RefObject,
+  type ReactEventHandler,
+  type RefObject,
   useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { Canvas, CanvasRef } from "../canvas/Canvas";
+import { Canvas, type CanvasRef } from "../canvas/Canvas";
 import { Icons } from "../types/icons";
 
 export interface VideoProps {

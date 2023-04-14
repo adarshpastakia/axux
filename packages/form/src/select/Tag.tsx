@@ -11,9 +11,9 @@ import { usePopover } from "@axux/core/dist/hooks/usePopover";
 import { isArray, isEmpty } from "@axux/utilities";
 import { Combobox } from "@headlessui/react";
 import {
-  FocusEvent,
+  type FocusEvent,
   Fragment,
-  KeyboardEvent,
+  type KeyboardEvent,
   memo,
   useCallback,
   useDeferredValue,
@@ -27,7 +27,7 @@ import { FieldWrapper } from "../inputs/Wrapper";
 import { Icons } from "../types/icons";
 import { Options } from "./Option";
 import { useSelect } from "./useSelect";
-import { defaultMatcher, getLabel, getValue, TagProps } from "./utils";
+import { defaultMatcher, getLabel, getValue, type TagProps } from "./utils";
 
 export const TagInput = <T extends AnyObject>({
   label,
@@ -51,7 +51,7 @@ export const TagInput = <T extends AnyObject>({
   isInvalid,
   className,
   isEditable,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   name,
   info,
   error,

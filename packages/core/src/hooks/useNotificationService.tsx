@@ -9,9 +9,9 @@
 import { isObject, isString } from "@axux/utilities";
 import { useCallback } from "react";
 import { createRoot } from "react-dom/client";
-import { AlertProps, AxAlert } from "../overlays/Alert";
-import { AxMessage, MessageProps } from "../overlays/Message";
-import { AxToast, ToastProps } from "../overlays/Toast";
+import { type AlertProps, AxAlert } from "../overlays/Alert";
+import { AxMessage, type MessageProps } from "../overlays/Message";
+import { AxToast, type ToastProps } from "../overlays/Toast";
 
 export const useNotificationService = () => {
   /** ***************** refactor props *******************/

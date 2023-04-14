@@ -8,10 +8,10 @@
 
 import { useIsDark } from "@axux/core";
 import { compareValues, isEmpty } from "@axux/utilities";
-import { EChartOption } from "echarts";
-import { FC, useMemo } from "react";
+import { type EChartOption } from "echarts";
+import { type FC, useMemo } from "react";
 import { ChartPalette } from "../theme";
-import { BaseChart, CountType } from "../types";
+import { type BaseChart, type CountType } from "../types";
 import { Icons } from "../types/icons";
 import { countRenderer } from "../types/utils";
 import { ChartContainer } from "../wrapper/ChartContainer";

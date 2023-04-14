@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { KeyboardEventHandler } from "react";
+import { type KeyboardEventHandler } from "react";
 
 export interface InputProps<K = string> {
   /**

@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
-import { FC, useEffect } from "react";
-import { HotKey } from "./commons";
+import { type FC, useEffect } from "react";
+import { type HotKey } from "./commons";
 import { HotKeyLabel } from "./HotKeyLabel";
 import { useHotKeys } from "./HotKeyWrapper";
 

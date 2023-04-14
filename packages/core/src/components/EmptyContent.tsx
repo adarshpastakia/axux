@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { cloneElement, FC, ReactElement, useMemo } from "react";
+import { cloneElement, type FC, type ReactElement, useMemo } from "react";
 import { AxIcon } from "../icons/Icon";
-import { ElementProps, IconProp } from "../types";
+import { type ElementProps, type IconProp } from "../types";
 
 const DefaultInbox = () => (
   <svg version="1.1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">

@@ -9,7 +9,7 @@
 import { AxIcon } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { handleClick } from "@axux/utilities/dist/handlers";
-import { memo, ReactNode, useCallback, useMemo, useState } from "react";
+import { memo, type ReactNode, useCallback, useMemo, useState } from "react";
 import { BodyCell } from "./BodyCell";
 import { useDatagridContext } from "./Context";
 

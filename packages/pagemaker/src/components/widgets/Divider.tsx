@@ -4,8 +4,8 @@
 // @license   : MIT
 
 import { AxDivider } from "@axux/core";
-import { FC, memo, useMemo } from "react";
-import { IDividerConfig } from "../../utils/types";
+import { type FC, memo, useMemo } from "react";
+import { type IDividerConfig } from "../../utils/types";
 import { Item } from "./Item";
 
 export const Divider: FC<IDividerConfig> = memo((item) => {

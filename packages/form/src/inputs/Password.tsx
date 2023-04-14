@@ -7,10 +7,10 @@
  */
 
 import { AxButton } from "@axux/core";
-import { FC, memo, useState } from "react";
+import { type FC, memo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Icons } from "../types/icons";
-import { Text, TextProps } from "./Text";
+import { Text, type TextProps } from "./Text";
 
 export interface PasswordProps extends Omit<TextProps, "type"> {
   /**

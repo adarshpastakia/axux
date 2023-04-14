@@ -8,7 +8,7 @@
 
 import { AxButton, AxDivider, AxHeader } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { FC, useCallback } from "react";
+import { type FC, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 export const Tools: FC<{

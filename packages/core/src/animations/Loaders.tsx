@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
+import { type FC } from "react";
 
 export interface LoaderProps {
   /**

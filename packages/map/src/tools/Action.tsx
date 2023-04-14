@@ -7,7 +7,7 @@
  */
 
 import { AxIcon } from "@axux/core";
-import { FC, useEffect, useRef } from "react";
+import { type FC, useEffect, useRef } from "react";
 import { useMapContext } from "../context/MapContext";
 
 export interface Props {

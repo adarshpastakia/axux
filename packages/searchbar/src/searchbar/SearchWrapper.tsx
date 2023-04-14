@@ -8,8 +8,8 @@
 
 import { AxButton } from "@axux/core";
 import { AxField } from "@axux/form";
-import { FC } from "react";
-import { SearchProps } from "../types";
+import { type FC } from "react";
+import { type SearchProps } from "../types";
 import { Icons } from "../types/icons";
 import { FilterButton } from "./FilterButton";
 import { SearchButton } from "./SearchButton";

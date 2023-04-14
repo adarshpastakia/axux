@@ -6,12 +6,12 @@
  * @license   : MIT
  */
 
-import { ChildrenProp, ElementProps } from "@axux/core/dist/types";
+import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
 import {
   createContext,
-  FC,
-  MouseEvent,
-  ReactNode,
+  type FC,
+  type MouseEvent,
+  type ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -19,7 +19,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { DatagridColumn } from "./types";
+import { type DatagridColumn } from "./types";
 import { useResizer } from "./useResizer";
 
 interface ContextType {

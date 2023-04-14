@@ -7,10 +7,10 @@
  */
 
 import {
-  FC,
+  type FC,
   Fragment,
-  ReactNode,
-  RefObject,
+  type ReactNode,
+  type RefObject,
   useImperativeHandle,
   useState,
 } from "react";

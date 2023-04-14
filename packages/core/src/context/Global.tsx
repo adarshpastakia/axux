@@ -8,16 +8,16 @@
 
 import i18next from "i18next";
 import {
-  ComponentType,
+  type ComponentType,
   createContext,
-  FC,
+  type FC,
   useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { ChildrenProp } from "../types";
+import { type ChildrenProp } from "../types";
 
 interface State {
   theme: "light" | "dark";
@@ -176,7 +176,7 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
       .querySelectorAll(
         ".ax-overlay__container>div,.ax-notification__container>div"
       )
-      // @ts-expect-error
+      // @ts-expect-error ignore
       .forEach((node) => (node.close ? node.close() : node.remove()));
   }, []);
 

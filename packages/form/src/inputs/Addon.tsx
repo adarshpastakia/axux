@@ -8,13 +8,13 @@
 
 import { AxAnimation, AxIcon } from "@axux/core";
 import {
-  ChildrenProp,
-  Color,
-  ElementProps,
-  IconProp,
+  type ChildrenProp,
+  type Color,
+  type ElementProps,
+  type IconProp,
 } from "@axux/core/dist/types";
 import { isString } from "@axux/utilities";
-import { FC, memo, MouseEvent, useCallback } from "react";
+import { type FC, memo, type MouseEvent, useCallback } from "react";
 
 export interface AddonProps extends ElementProps, IconProp, ChildrenProp {
   /**

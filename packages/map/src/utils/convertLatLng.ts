@@ -7,7 +7,7 @@
  */
 
 import { isArray, isObject, isString } from "@axux/utilities";
-import { LngLatLike } from "../constants/types";
+import { type LngLatLike } from "../constants/types";
 
 export const convertLatLng = (lonLat: LngLatLike) => {
   if (

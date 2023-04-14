@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { FC, useCallback } from "react";
+import { type FC, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { ActionButton, ActionProps } from "../buttons/Action";
+import { ActionButton, type ActionProps } from "../buttons/Action";
 import { AppIcons } from "../types/appIcons";
 
 export interface CopyProps

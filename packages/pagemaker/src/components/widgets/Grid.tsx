@@ -3,8 +3,8 @@
 // @copyright : 2020
 // @license   : MIT
 
-import { FC } from "react";
-import { EnumTypes, IGridConfig } from "../../utils/types";
+import { type FC } from "react";
+import { EnumTypes, type IGridConfig } from "../../utils/types";
 import { Break } from "./Break";
 import { Divider } from "./Divider";
 import { Heading } from "./Heading";

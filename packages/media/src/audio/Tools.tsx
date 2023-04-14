@@ -8,11 +8,11 @@
 
 import { AxDivider, AxHotKey, AxIcon } from "@axux/core";
 import { Format } from "@axux/utilities";
-import { FC, memo, useCallback, useEffect, useMemo, useState } from "react";
+import { type FC, memo, useCallback, useEffect, useMemo, useState } from "react";
 import { TimeSlider } from "../timeslider/TimeSlider";
 import { Icons } from "../types/icons";
 import { Equalizers } from "./Equalizers";
-import { WavesurferInstance } from "./wavesurfer";
+import { type WavesurferInstance } from "./wavesurfer";
 
 export interface ToolsProps {
   isPlaying: boolean;

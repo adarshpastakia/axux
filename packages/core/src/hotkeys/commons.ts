@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { EmptyCallback } from "../types";
+import { type EmptyCallback } from "../types";
 
 export interface HotKey {
   /**

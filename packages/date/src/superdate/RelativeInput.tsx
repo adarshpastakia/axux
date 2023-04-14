@@ -7,12 +7,12 @@
  */
 
 import { usePopover } from "@axux/core/dist/hooks/usePopover";
-import { ChildrenProp } from "@axux/core/dist/types";
+import { type ChildrenProp } from "@axux/core/dist/types";
 import { AxField } from "@axux/form";
 import { Listbox } from "@headlessui/react";
-import { FC, useCallback, useMemo } from "react";
+import { type FC, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { DatePart, DateParts } from "../types";
+import { type DatePart, DateParts } from "../types";
 import { getDateParts } from "../utils/dateMath";
 
 interface Props extends ChildrenProp {

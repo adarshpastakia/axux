@@ -14,7 +14,7 @@ import {
   iconStyleItalic,
   iconStyleUnderline,
 } from "../../utils/icons";
-import { IHeadingConfig } from "../../utils/types";
+import { type IHeadingConfig } from "../../utils/types";
 import { usePageContext } from "../context";
 
 export const HeadingConfig = memo(() => {

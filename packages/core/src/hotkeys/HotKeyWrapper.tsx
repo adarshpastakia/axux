@@ -8,14 +8,14 @@
 
 import {
   createContext,
-  FC,
+  type FC,
   memo,
   useCallback,
   useContext,
   useEffect,
   useRef,
 } from "react";
-import { ChildrenProp, EmptyCallback } from "../types";
+import { type ChildrenProp, type EmptyCallback } from "../types";
 import { reduceHotKey } from "./commons";
 
 /** @internal */

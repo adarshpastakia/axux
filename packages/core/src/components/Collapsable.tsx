@@ -6,10 +6,10 @@
  * @license   : MIT
  */
 
-import { Children, FC, useMemo } from "react";
+import { Children, type FC, useMemo } from "react";
 import { usePropToggle } from "../hooks/usePropToggle";
 import { AxIcon } from "../icons/Icon";
-import { ChildrenProp, CollapseProps, ElementProps } from "../types";
+import { type ChildrenProp, type CollapseProps, type ElementProps } from "../types";
 import { AppIcons } from "../types/appIcons";
 
 export interface CollapsableProps

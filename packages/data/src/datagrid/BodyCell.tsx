@@ -10,7 +10,7 @@ import { AxDateDisplay } from "@axux/date";
 import { Format, getByPath, isTrue } from "@axux/utilities";
 import { memo, useMemo } from "react";
 import { useDatagridContext } from "./Context";
-import { DatagridColumn } from "./types";
+import { type DatagridColumn } from "./types";
 
 export const BodyCell = memo(
   ({

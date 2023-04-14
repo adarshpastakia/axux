@@ -9,9 +9,9 @@
 import { AxDivider, AxHotKey, AxIcon } from "@axux/core";
 import { Format } from "@axux/utilities";
 import {
-  FC,
+  type FC,
   memo,
-  RefObject,
+  type RefObject,
   useCallback,
   useEffect,
   useMemo,

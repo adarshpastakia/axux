@@ -7,8 +7,8 @@
  */
 
 import { calculateTextWidth } from "@axux/utilities/dist/dom";
-import { FC, useLayoutEffect, useRef, useState } from "react";
-import { ElementProps } from "../types";
+import { type FC, useLayoutEffect, useRef, useState } from "react";
+import { type ElementProps } from "../types";
 
 export interface EllipsisProps extends ElementProps {
   children: string;

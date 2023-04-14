@@ -13,9 +13,9 @@ import {
   AxTooltip,
 } from "@axux/core";
 import { getValue } from "@axux/utilities";
-import { FC, memo, useMemo } from "react";
+import { type FC, memo, useMemo } from "react";
 import { iconInfo, iconPencil } from "../../utils/icons";
-import { ITileConfig } from "../../utils/types";
+import { type ITileConfig } from "../../utils/types";
 import { usePageContext } from "../context";
 import { Item } from "./Item";
 

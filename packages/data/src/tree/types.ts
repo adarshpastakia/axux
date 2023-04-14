@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { BadgeType, IconProp } from "@axux/core/dist/types";
+import { type BadgeType, type IconProp } from "@axux/core/dist/types";
 
 export interface TreeRef {
   select: (id: string) => void;

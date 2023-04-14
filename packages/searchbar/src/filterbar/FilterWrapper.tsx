@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { FC } from "react";
+import { type FC } from "react";
 import { useSearchContext } from "../context";
-import { FilterProps } from "../types";
+import { type FilterProps } from "../types";
 import { AddFilter } from "./AddFilter";
 import { FilterTag } from "./FilterTag";
 import { GlobalMenu } from "./GlobalMenu";

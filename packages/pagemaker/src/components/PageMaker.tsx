@@ -7,8 +7,8 @@
  */
 
 import { AxSection } from "@axux/core";
-import { FC, memo } from "react";
-import { IProps } from "../utils/types";
+import { type FC, memo } from "react";
+import { type IProps } from "../utils/types";
 import { ContextProvider } from "./context";
 import { Aside } from "./widgets/Aside";
 import { Page } from "./widgets/Page";

@@ -12,8 +12,8 @@ import { debounce, isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import { Combobox } from "@headlessui/react";
 import {
-  FC,
-  FocusEvent,
+  type FC,
+  type FocusEvent,
   Fragment,
   memo,
   useCallback,
@@ -25,7 +25,7 @@ import {
 import { createPortal } from "react-dom";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { Options } from "./Option";
-import { SelectProps } from "./utils";
+import { type SelectProps } from "./utils";
 
 export type SuggestItem =
   | {
@@ -67,7 +67,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   isInvalid,
   className,
   value,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   name,
   info,
   error,

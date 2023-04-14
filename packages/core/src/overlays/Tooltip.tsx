@@ -6,11 +6,11 @@
  * @license   : MIT
  */
 
-import { Placement } from "@popperjs/core";
+import { type Placement } from "@popperjs/core";
 import {
   Children,
   cloneElement,
-  FC,
+  type FC,
   Fragment,
   useEffect,
   useImperativeHandle,
@@ -21,7 +21,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { usePopover } from "../hooks/usePopover";
-import { ChildProp, ElementProps, RefProp, TooltipProps as TP } from "../types";
+import { type ChildProp, type ElementProps, type RefProp, type TooltipProps as TP } from "../types";
 
 export interface TooltipProps
   extends TP,
@@ -64,9 +64,9 @@ export const AxTooltip: FC<TooltipProps> = ({
   isOpen = false,
   autoHide = false,
   color,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   innerRef,
-  // @ts-expect-error
+  // @ts-expect-error ignore
   "data-popover-open": parentOpen,
   ...rest
 }) => {

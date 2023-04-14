@@ -7,20 +7,20 @@
  */
 
 import { Popover } from "@headlessui/react";
-import { Placement } from "@popperjs/core";
+import { type Placement } from "@popperjs/core";
 import {
   Children,
   cloneElement,
-  FC,
+  type FC,
   forwardRef,
-  ForwardRefExoticComponent,
+  type ForwardRefExoticComponent,
   Fragment,
   useEffect,
   useMemo,
 } from "react";
 import { createPortal } from "react-dom";
 import { usePopover } from "../hooks/usePopover";
-import { ChildProp, ChildrenProp, ElementProps, RefProp } from "../types";
+import { type ChildProp, type ChildrenProp, type ElementProps, type RefProp } from "../types";
 
 export interface PopoverProps extends ChildrenProp, ElementProps {
   /**

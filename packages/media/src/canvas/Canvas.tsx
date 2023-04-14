@@ -8,11 +8,11 @@
 
 import { getBox } from "@axux/utilities";
 import {
-  FC,
-  HTMLAttributes,
+  type FC,
+  type HTMLAttributes,
   memo,
-  Reducer,
-  RefObject,
+  type Reducer,
+  type RefObject,
   useCallback,
   useEffect,
   useImperativeHandle,

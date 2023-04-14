@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
-import { ButtonProps } from "@axux/core/dist/buttons/Button";
-import { ElementProps } from "@axux/core/dist/types";
+import { type ButtonProps } from "@axux/core/dist/buttons/Button";
+import { type ElementProps } from "@axux/core/dist/types";
 
 export enum PageType {
   DATE,
@@ -32,7 +32,7 @@ export interface DateProps extends BaseProps {
 export interface RangeProps extends BaseProps {
   date?: [Date, Date];
   onChange?: (date?: [Date, Date]) => void;
-  presets?: { [label: string]: [Date, Date] };
+  presets?: Record<string, [Date, Date]>;
 }
 
 export interface DateContext {
@@ -94,7 +94,7 @@ export interface RelativeProps extends Omit<BaseProps, "min" | "max"> {
   className?: ElementProps["className"];
   isDisabled?: boolean;
   defaultView?: Type.QUICK | Type.RELATIVE | Type.ABSOLUTE;
-  presets?: { [label: string]: string };
-  events?: { [year: string]: CalendarEvent[] };
+  presets?: Record<string, string>;
+  events?: Record<string, CalendarEvent[]>;
   onChange?: (date?: string, dates?: [ParsedDate, ParsedDate]) => void;
 }

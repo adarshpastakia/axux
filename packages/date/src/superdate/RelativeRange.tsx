@@ -8,9 +8,9 @@
 
 import { AxButton, AxContent, AxFooter, AxPopover } from "@axux/core";
 import { isString } from "@axux/utilities";
-import { FC, Fragment, useCallback, useEffect, useState } from "react";
+import { type FC, Fragment, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { DateParts, RelativeProps } from "../types";
+import { DateParts, type RelativeProps } from "../types";
 import { makeSuperDate } from "../utils/dateMath";
 import { RelativeInput } from "./RelativeInput";
 

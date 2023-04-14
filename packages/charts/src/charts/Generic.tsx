@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { EChartOption, EChartsType } from "echarts";
-import { FC, RefObject, useImperativeHandle, useRef } from "react";
-import { BaseChart } from "../types";
+import { type EChartOption, type EChartsType } from "echarts";
+import { type FC, type RefObject, useImperativeHandle, useRef } from "react";
+import { type BaseChart } from "../types";
 import { ChartContainer } from "../wrapper/ChartContainer";
 import { ChartToolbar } from "../wrapper/ChartToolbar";
 import { ChartWrapper } from "../wrapper/ChartWrapper";

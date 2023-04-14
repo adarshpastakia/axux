@@ -6,9 +6,9 @@
  * @license   : MIT
  */
 
-import { MenuChildren } from "@axux/core/dist/menu/types";
-import { SuggestItem } from "@axux/form/dist/select/Suggest";
-import { ReactElement } from "react";
+import { type MenuChildren } from "@axux/core/dist/menu/types";
+import { type SuggestItem } from "@axux/form/dist/select/Suggest";
+import { type ReactElement } from "react";
 
 export enum EnumFieldType {
   KEYWORD = "KEYWORD",

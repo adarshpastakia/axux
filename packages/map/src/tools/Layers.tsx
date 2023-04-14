@@ -8,7 +8,7 @@
 
 import Expand from "@arcgis/core/widgets/Expand";
 import LayerList from "@arcgis/core/widgets/LayerList";
-import { FC, useEffect } from "react";
+import { type FC, useEffect } from "react";
 import { useMapContext } from "../context/MapContext";
 
 /**

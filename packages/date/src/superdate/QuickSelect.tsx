@@ -9,9 +9,9 @@
 import { AxButton, AxContent, AxDivider, AxPopover } from "@axux/core";
 import { AxField } from "@axux/form";
 import { isString } from "@axux/utilities";
-import { FC, MouseEvent, useCallback, useEffect, useState } from "react";
+import { type FC, type MouseEvent, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { DateParts, RelativeProps } from "../types";
+import { DateParts, type RelativeProps } from "../types";
 import { makeSuperDate, parseDateLabel } from "../utils/dateMath";
 import { RelativeInput } from "./RelativeInput";
 
