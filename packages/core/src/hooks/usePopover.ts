@@ -68,7 +68,7 @@ export const usePopover = (
     placement: "bottom",
   }
 ) => {
-  const [referenceElement, setReferenceElement] = useState<HTMLElement>();
+  const [referenceElement, setReferenceElement] = useState<HTMLElement | null>();
   const [popperElement, setPopperElement] = useState<HTMLElement>();
   const [arrowElement, setArrowElement] = useState<HTMLElement>();
 

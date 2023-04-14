@@ -36,7 +36,7 @@ const FilterSchema = new yup.ObjectSchema({
         schema.test({
           name: "array-check",
           message: `\${path} is a required field`,
-          test: (val = []) => val?.length > 0,
+          test: (val:AnyObject = []) => val?.length > 0,
         }),
     }),
 });

@@ -377,7 +377,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
         )}
         <div className="ax-tree__list">
           <AutoSizer>
-            {({ width, height }) => (
+            {({ width, height }:AnyObject) => (
               <List
                 ref={listRef}
                 useIsScrolling

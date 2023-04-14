@@ -171,7 +171,6 @@ export const ComboInput = <T extends AnyObject>({
               aria-errormessage={error}
               size={1}
               placeholder={placeholder}
-              disabled={isDisabled}
               readOnly={!isEditable && !allowCreate}
               data-invalid={isInvalid}
               className="ax-field__input"

@@ -14,7 +14,6 @@ export const FilterButton = () => {
   const { t } = useTranslation("searchbar");
   const { showFilters, setShowFilters, filters } = useSearchContext();
   return (
-    // @ts-expect-error ignore
     <AxButton
       color="accent"
       variant="outline"
@@ -22,10 +21,16 @@ export const FilterButton = () => {
       data-enabled={showFilters}
       onClick={() => setShowFilters(!showFilters)}
     >
-      <span>{t("label.filters")}&nbsp;</span>
-      <span className="ax-filterButton__count" data-active={showFilters}>
-        {filters.length}
-      </span>
+      {
+        (
+          <>
+            <span>{t("label.filters")}&nbsp;</span>
+            <span className="ax-filterButton__count" data-active={showFilters}>
+              {filters.length}
+            </span>
+          </>
+        ) as AnyObject
+      }
     </AxButton>
   );
 };

@@ -50,3 +50,4 @@ interface HDate extends Date {
 declare interface Date {
   toHijri: () => HDate;
 }
+

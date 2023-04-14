@@ -163,7 +163,7 @@ const AxListComponent = <T extends KeyValue>({
   return (
     <div {...rest} className={`ax-virtual__container ${className ?? ""}`}>
       <AutoSizer>
-        {({ width, height }) => (
+        {({ width, height }:AnyObject) => (
           <List
             ref={setList}
             useIsScrolling
