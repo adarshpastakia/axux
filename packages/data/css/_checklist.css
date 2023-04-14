@@ -28,7 +28,7 @@
       }
 
       & > label {
-        @apply flex-auto truncate ltr:pr-4 rtl:pl-4;
+        @apply flex-auto truncate pe-4;
       }
 
       & .ax-badge__label {

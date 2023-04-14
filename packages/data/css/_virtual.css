@@ -97,7 +97,7 @@
     }
 
     & .ax-list__sticky {
-      @apply sticky inline-block top-0 ltr:left-0 rtl:right-0 bg-base z-10;
+      @apply sticky inline-block top-0 start-0 bg-base z-10;
 
       &[data-layout="vertical"] {
         @apply min-w-full;

@@ -190,14 +190,14 @@
         @apply inset-x-0 bottom-0 h-2 cursor-row-resize;
       }
       &[data-orient="horizontal"] {
-        @apply inset-y-0 ltr:right-0 rtl:left-0 w-2 cursor-col-resize;
+        @apply inset-y-0 end-0 w-2 cursor-col-resize;
       }
     }
   }
 
   .ax-image__overlay--orient {
     @apply absolute p-1 text-amber-500 rounded-full ring-1 ring-amber-400 bg-bw-800 cursor-pointer leading-[0]
-    ltr:left-1/2 rtl:right-1/2 top-1/2 ltr:-translate-x-4 rtl:translate-x-4 -translate-y-4;
+    start-1/2 top-1/2 ltr:-translate-x-4 rtl:translate-x-4 -translate-y-4;
 
     & .ax-icon[data-orient="horizontal"] {
       @apply -scale-x-100;

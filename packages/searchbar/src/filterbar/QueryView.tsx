@@ -52,7 +52,7 @@ export const QueryView = ({
         <AxText.Copy
           size="sm"
           text={view as AnyObject}
-          className="absolute top-2 ltr:right-2 rtl:left-2 z-10"
+          className="absolute top-2 end-2 z-10"
         />
       )}
       <pre className="overflow-auto bg-base border border-bw-500/50 shadow-inner text-sm p-2 max-h-[24rem] max-w-[48rem] min-w-[24rem]">

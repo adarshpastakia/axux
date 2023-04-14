@@ -107,10 +107,10 @@
   }
 
   .ax-badge[data-placement="start"] {
-    @apply z-10 absolute top-1/2 ltr:left-0 rtl:right-0 ltr:-translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2;
+    @apply z-10 absolute top-1/2 start-0 ltr:-translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2;
   }
   .ax-badge[data-placement="end"] {
-    @apply z-10 absolute top-1/2 ltr:right-0 rtl:left-0 ltr:translate-x-1/2 rtl:-translate-x-1/2 -translate-y-1/2;
+    @apply z-10 absolute top-1/2 end-0 ltr:translate-x-1/2 rtl:-translate-x-1/2 -translate-y-1/2;
   }
   .ax-badge[data-placement="top"] {
     @apply z-10 absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2;
@@ -119,16 +119,16 @@
     @apply z-10 absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2;
   }
   .ax-badge[data-placement="top-end"] {
-    @apply z-10 absolute top-0 ltr:right-0 rtl:left-0 ltr:translate-x-1/3 rtl:-translate-x-1/3 -translate-y-1/3;
+    @apply z-10 absolute top-0 end-0 ltr:translate-x-1/3 rtl:-translate-x-1/3 -translate-y-1/3;
   }
   .ax-badge[data-placement="top-start"] {
-    @apply z-10 absolute top-0 ltr:left-0 rtl:right-0 ltr:-translate-x-1/3 rtl:translate-x-1/3 -translate-y-1/3;
+    @apply z-10 absolute top-0 start-0 ltr:-translate-x-1/3 rtl:translate-x-1/3 -translate-y-1/3;
   }
   .ax-badge[data-placement="bottom-end"] {
-    @apply z-10 absolute bottom-0 ltr:right-0 rtl:left-0 ltr:translate-x-1/3 rtl:-translate-x-1/3 translate-y-1/3;
+    @apply z-10 absolute bottom-0 end-0 ltr:translate-x-1/3 rtl:-translate-x-1/3 translate-y-1/3;
   }
   .ax-badge[data-placement="bottom-start"] {
-    @apply z-10 absolute bottom-0 ltr:left-0 rtl:right-0 ltr:-translate-x-1/3 rtl:translate-x-1/3 translate-y-1/3;
+    @apply z-10 absolute bottom-0 start-0 ltr:-translate-x-1/3 rtl:translate-x-1/3 translate-y-1/3;
   }
 
   .ax-badge-reveal {

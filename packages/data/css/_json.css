@@ -30,14 +30,14 @@
     @apply mb-2 last:mb-0;
 
     & .ax-collapsable .ax-collapsable {
-      @apply ltr:ml-4 rtl:mr-4;
+      @apply ms-4;
     }
 
     & .ax-json__property--label {
       @apply block text-sm text-muted;
 
       & .ax-button {
-        @apply my-0 ltr:first-of-type:ml-4 rtl:first-of-type:mr-4;
+        @apply my-0 first-of-type:ms-4;
 
         & .ax-button__inner {
           @apply p-1 w-fit h-fit min-w-fit min-h-fit;

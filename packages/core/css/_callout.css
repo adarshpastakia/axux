@@ -28,7 +28,7 @@
   }
 
   .ax-callout__close {
-    @apply absolute text-xl cursor-pointer top-1 ltr:right-1 rtl:left-1 opacity-50 hover:opacity-70;
+    @apply absolute text-xl cursor-pointer top-1 end-1 opacity-50 hover:opacity-70;
   }
 }
 @layer utilities {

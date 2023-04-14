@@ -40,7 +40,7 @@
     @apply flex justify-between flex-nowrap;
 
     & > label {
-      @apply text-sm text-bw-700 dark:text-bw-200 ltr:pl-1 rtl:pr-1 select-none;
+      @apply text-sm text-bw-700 dark:text-bw-200 ps-1 select-none;
     }
 
     & > label[data-required="true"] {
@@ -60,10 +60,10 @@
       }
     }
     &:first-child > .ax-button .ax-button__inner {
-      @apply ltr:rounded-l rtl:rounded-r;
+      @apply rounded-s;
     }
     &:last-child > .ax-button .ax-button__inner {
-      @apply ltr:rounded-r rtl:rounded-l;
+      @apply rounded-e;
     }
     & > span,
     & > .ax-field__option {
@@ -101,16 +101,16 @@
       @apply p-0;
     }
     & .ax-field__addon[data-align="start"] > span {
-      @apply ltr:pl-2 rtl:pr-2;
+      @apply ps-2;
     }
     & .ax-field__addon[data-align="end"] > span {
-      @apply ltr:pr-2 rtl:pl-2;
+      @apply pe-2;
     }
     & .ax-field__addon[data-align="start"] > .spinner-animation {
-      @apply ltr:ml-2 rtl:mr-2;
+      @apply ms-2;
     }
     & .ax-field__addon[data-align="end"] > .spinner-animation {
-      @apply ltr:mr-2 rtl:ml-2;
+      @apply me-2;
     }
   }
 
@@ -149,10 +149,10 @@
         }
 
         &:first-child > .ax-button__inner {
-          @apply ltr:rounded-r-none rtl:rounded-l-none;
+          @apply rounded-e-none;
         }
         &:last-child > .ax-button__inner {
-          @apply ltr:rounded-l-none rtl:rounded-r-none;
+          @apply rounded-s-none;
         }
         &:not(:first-child):not(:last-child) > .ax-button__inner {
           @apply rounded-none;
@@ -193,7 +193,7 @@
     &
       .ax-field__container--row:not([data-vertical="true"])
       > .ax-field__container {
-      @apply rounded-none ltr:first:rounded-l rtl:first:rounded-r ltr:last:rounded-r rtl:last:rounded-l;
+      @apply rounded-none first:rounded-s last:rounded-e;
     }
     & .ax-field__container--row[data-vertical="true"] > .ax-field__container {
       @apply rounded-none first:rounded-t last:rounded-b;
@@ -216,7 +216,7 @@
     }
 
     &[type="number"] {
-      @apply ltr:pr-0 rtl:pl-0 relative w-full;
+      @apply pe-0 relative w-full;
     }
     &[type="number"]::-webkit-inner-spin-button,
     &[type="number"]::-webkit-outer-spin-button {
@@ -353,7 +353,7 @@
     }
 
     & .ax-field__switch--handle {
-      @apply rounded-full h-[1em] shadow bg-bw-0 dark:bg-bw-1000 absolute top-[0.125em] ltr:left-[0.125em] rtl:right-[.125em];
+      @apply rounded-full h-[1em] shadow bg-bw-0 dark:bg-bw-1000 absolute top-[0.125em] start-[0.125em];
       width: calc(50% - 0.125em);
       box-shadow: 0 0 1px theme(colors.bw.500);
       transition: transform 200ms;
@@ -459,7 +459,7 @@
           margin-inline-start: 0.75rem;
 
           &:before {
-            @apply ltr:-translate-x-[0.125rem] rtl:translate-x-[0.125rem] ltr:left-0 rtl:right-0;
+            @apply ltr:-translate-x-[0.125rem] rtl:translate-x-[0.125rem] start-0;
           }
         }
         &[data-align="start"] {
@@ -467,7 +467,7 @@
           margin-inline-start: -0.75rem;
 
           &:before {
-            @apply ltr:translate-x-[0.125rem] rtl:-translate-x-[0.125rem] ltr:right-0 rtl:left-0;
+            @apply ltr:translate-x-[0.125rem] rtl:-translate-x-[0.125rem] end-0;
           }
         }
       }
@@ -501,10 +501,10 @@
       }
 
       & .ax-field__slider--value {
-        @apply rtl:left-0 ltr:right-0 ltr:translate-x-full rtl:-translate-x-full translate-y-2;
+        @apply end-0 ltr:translate-x-full rtl:-translate-x-full translate-y-2;
 
         &:before {
-          @apply ltr:-translate-x-[0.2rem] rtl:translate-x-[0.2rem] ltr:left-0 rtl:right-0;
+          @apply ltr:-translate-x-[0.2rem] rtl:translate-x-[0.2rem] start-0;
         }
       }
     }
@@ -542,14 +542,14 @@
 
   /*******************  *******************/
   .ax-field__error {
-    @apply ltr:ml-2 rtl:mr-2 order-2 text-danger-700 dark:text-danger-300 text-md leading-[0];
+    @apply ms-2 order-2 text-danger-700 dark:text-danger-300 text-md leading-[0];
 
     & > span {
       @apply align-middle;
     }
   }
   .ax-field__clear {
-    @apply ltr:pr-2 rtl:pl-2 py-1 order-4 opacity-50 hover:opacity-75 cursor-pointer select-none leading-none;
+    @apply pe-2 py-1 order-4 opacity-50 hover:opacity-75 cursor-pointer select-none leading-none;
   }
 
   .ax-field__strength {
@@ -594,13 +594,13 @@
   }
 
   button.ax-field__input {
-    @apply ltr:pr-6 rtl:pl-6;
+    @apply pe-6;
   }
   .ax-select__handle ~ .ax-field__clear {
     @apply px-0;
   }
   .ax-field__input[type="number"] ~ .ax-field__clear {
-    @apply absolute inset-y-0.5 ltr:right-5 rtl:left-5;
+    @apply absolute inset-y-0.5 end-5;
   }
 
   .ax-field__color {
