@@ -24,8 +24,8 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "date-fns": "^2.29.1",
-    "libphonenumber-js": "^1.10.6",
+    "date-fns": "^2.29.3",
+    "libphonenumber-js": "^1.10.26",
     "numeral": "^2.0.6"
   },
   "devDependencies": {

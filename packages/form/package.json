@@ -27,24 +27,24 @@
     "@axux/core": "^2.1.10",
     "@axux/utilities": "^2.1.10",
     "@headlessui/react": "^1.7.7",
-    "@hookform/resolvers": "^2.9.3",
+    "@hookform/resolvers": "^3.0.1",
     "react-color": "^2.19.3",
-    "react-hook-form": "^7.33.0",
-    "yup": "^0.32.11"
+    "react-hook-form": "^7.43.9",
+    "yup": "^1.1.0"
   },
   "peerDependencies": {
-    "i18next": "^21.8.8",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-i18next": "^11.17.0"
+    "i18next": "^22.4.14",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^12.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.10",
+    "@types/react": "^18.0.35",
     "@types/react-color": "^3.0.6",
-    "@types/react-dom": "^18.0.5",
+    "@types/react-dom": "^18.0.11",
     "@types/react-i18next": "^8.1.0",
     "@types/react-router-dom": "^5.3.3",
-    "@types/yup": "0.29.14"
+    "@types/yup": "^0.32.0"
   },
   "engines": {
     "node": ">=18",

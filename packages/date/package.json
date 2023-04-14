@@ -28,17 +28,17 @@
     "@axux/form": "^2.1.10",
     "@axux/utilities": "^2.1.10",
     "@headlessui/react": "^1.7.7",
-    "date-fns": "^2.29.1"
+    "date-fns": "^2.29.3"
   },
   "peerDependencies": {
-    "i18next": "^21.8.8",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-i18next": "^11.17.0"
+    "i18next": "^22.4.14",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^12.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.10",
-    "@types/react-dom": "^18.0.5",
+    "@types/react": "^18.0.35",
+    "@types/react-dom": "^18.0.11",
     "@types/react-i18next": "^8.1.0",
     "@types/react-router-dom": "^5.3.3"
   },

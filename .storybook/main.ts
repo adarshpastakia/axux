@@ -32,6 +32,9 @@ module.exports = {
       },
     },
   ],
+  typescript: {
+    reactDocgen: "react-docgen-typescript-plugin",
+  },
   staticDirs: ["../assets"],
   framework: "@storybook/react",
   webpackFinal: (config) => {
