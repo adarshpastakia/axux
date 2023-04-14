@@ -168,15 +168,15 @@ const parseLabel = (dt: DateLike, locale?: string): string => {
       const count = parseInt(`${op}${diff}`, 10);
       const t = (k: string, o?: AnyObject) => i18n.t<string, string>(`superdate:${k}`, o);
       if (part === DateParts.NOW) {
-        retVal = t(`label.${DateParts.NOW}`).res;
+        retVal = t(`label.${DateParts.NOW}`);
       } else if (count === 0) {
-        retVal = t(`now.${part}`).res;
+        retVal = t(`now.${part}`);
       } else {
         retVal = t(`${count < 0 ? "prev" : "next"}.${part}`, {
           count: Math.abs(count),
-        }).res;
+        });
       }
-      return retVal;
+      return retVal as AnyObject;
     }
   }
   return "";
