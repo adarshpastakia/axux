@@ -103,10 +103,10 @@
   }
   .tooltip[data-color="info"] {
     & .popover__container {
-      @apply bg-cyan-700 dark:bg-cyan-100 dark:text-cyan-800;
+      @apply bg-info-700 dark:bg-info-100 dark:text-info-800;
     }
     & .popover__arrow {
-      @apply text-cyan-700 dark:text-cyan-100;
+      @apply text-info-700 dark:text-info-100;
     }
   }
   .tooltip[data-color="danger"] {

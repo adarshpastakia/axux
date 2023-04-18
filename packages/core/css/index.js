@@ -57,6 +57,7 @@ module.exports = plugin(
             800: "rgb(var(--color-accent-800) / <alpha-value>)",
             900: "rgb(var(--color-accent-900) / <alpha-value>)",
           },
+          info: { ...colors.cyan },
           danger: { ...colors.red },
           warning: { ...colors.amber },
           success: { ...colors.green },
