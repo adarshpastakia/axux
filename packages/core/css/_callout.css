@@ -37,8 +37,8 @@
       print:!text-accent-700 print:!bg-accent-200 print:!border-accent-300;
   }
   .ax-callout[data-color="info"] {
-    @apply bg-opacity-10 text-cyan-700 dark:text-cyan-200 bg-cyan-500 border-cyan-300 dark:border-cyan-900
-      print:!text-cyan-700 print:!bg-cyan-200 print:!border-cyan-300;
+    @apply bg-opacity-10 text-info-700 dark:text-info-200 bg-info-500 border-info-300 dark:border-info-900
+      print:!text-info-700 print:!bg-info-200 print:!border-info-300;
   }
   .ax-callout[data-color="invert"] {
     @apply text-bw-200 dark:text-bw-700 bg-bw-800 dark:bg-bw-100 border-bw-300 dark:border-bw-900
