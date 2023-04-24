@@ -157,13 +157,14 @@ const Empty = () => {
 };
 
 const Viewport = ({ children, ...props }: KeyValue) => {
-  const openOverlay = useOverlayService(MyFlyout);
+  const [Overlay, openOverlay] = useOverlayService(MyFlyout);
   const openFlyout = () => {
     // Open overlay pass additional props
     openOverlay();
   };
   return (
     <AxViewport {...props}>
+      {Overlay}
       <AxHeader className="bg-component text-2xl">
         <AxButton icon="logo.png" variant="link" onClick={openFlyout} />
         <AxTitle className="text-primary-700 dark:text-primary-400 font-light">
