@@ -69,6 +69,8 @@ export interface InternalNode {
   isLoading?: boolean;
   isSelected: boolean;
   isFiltered?: boolean;
+  childFiltered?: boolean;
+  parentFiltered?: boolean;
   childSelected: boolean;
   isChecked: 0 | 1 | 2;
   lines: Array<0 | 1>;

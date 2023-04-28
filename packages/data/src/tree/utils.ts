@@ -114,8 +114,8 @@ export const createIdMap = (nodes: InternalNode[]) => {
 export const createNodeList = (nodes: InternalNode[], sortable: boolean) => {
   const list: InternalNode[] = [];
   nodes.forEach((node) => {
-    node.isFiltered !== false && list.push(node);
-    if (node.isOpen || node.isFiltered === true) {
+    (node.isFiltered !== false||node.childFiltered === true || node.parentFiltered === true) && list.push(node);
+    if (node.isOpen) {
       if (node.children != null && node.children.length > 0) {
         list.push(...createNodeList(node.children, sortable));
       } else if (node.isFiltered === undefined && !node.isLeaf) {
