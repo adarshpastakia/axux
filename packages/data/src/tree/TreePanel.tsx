@@ -242,8 +242,11 @@ export const AxTreePanel: FC<TreeProps> = memo(
               : undefined;
             if (item.parent && item.isFiltered) {
               let parent = state.treeMap.get(item.parent);
+              item.parentFiltered =
+                !!parent?.isFiltered || !!parent?.parentFiltered;
               while (parent != null) {
-                parent.isFiltered = true;
+                parent.isOpen = parent.childFiltered =
+                  !!action.search && item.isFiltered;
                 parent = state.treeMap.get(parent.parent ?? "");
               }
             }
@@ -377,7 +380,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
         )}
         <div className="ax-tree__list">
           <AutoSizer>
-            {({ width, height }:AnyObject) => (
+            {({ width, height }: AnyObject) => (
               <List
                 ref={listRef}
                 useIsScrolling
