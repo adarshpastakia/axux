@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/adarshpastakia/axux/compare/v2.2.1...v2.2.2) (2023-04-29)
+
+### Bug Fixes
+
+- **NotificationService:** render notification within context tree ([314de79](https://github.com/adarshpastakia/axux/commit/314de7912b7c19a482456cef07d72d1b5aff5ecd))
+
 ## [2.2.1](https://github.com/adarshpastakia/axux/compare/v2.2.0...v2.2.1) (2023-04-24)
 
 **Note:** Version bump only for package @axux/core

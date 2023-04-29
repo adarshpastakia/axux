@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/adarshpastakia/axux/compare/v2.2.1...v2.2.2) (2023-04-29)
+
+### Bug Fixes
+
+- **TreePanel:** filter children include parent labels ([495e333](https://github.com/adarshpastakia/axux/commit/495e3336e3478bbed9aa4d98e0c7b5653a209ab3))
+- **TreePanel:** search logic, add children if parent is filtered ([2cc215b](https://github.com/adarshpastakia/axux/commit/2cc215b41475109c71bd9011b6d9cf6eaa9ae29a))
+
 ## [2.2.1](https://github.com/adarshpastakia/axux/compare/v2.2.0...v2.2.1) (2023-04-24)
 
 **Note:** Version bump only for package @axux/data
