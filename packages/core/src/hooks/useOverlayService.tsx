@@ -24,7 +24,7 @@ export const useOverlayService = (
 
   /** ***************** overlay container *******************/
   const overlayContainer = useCallback(() => {
-    return document.body.querySelector(".ax-overlay__container") as HTMLElement;
+    return document.body.querySelector(".ax-overlay__container[data-mode='overlay']") as HTMLElement;
   }, []);
 
   const openOverlay = async ({ onClose, ...props }: KeyValue = {}) => {

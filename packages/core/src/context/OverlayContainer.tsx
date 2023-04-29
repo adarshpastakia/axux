@@ -7,60 +7,48 @@
  */
 
 import {
-  type FC,
   Fragment,
-  type ReactNode,
-  type RefObject,
   useImperativeHandle,
   useState,
+  type FC,
+  type ReactNode,
+  type RefObject,
 } from "react";
 
 export interface OverlayRef {
   showAlert: (key: string, alert: ReactNode) => void;
   closeAlert: (key: string) => void;
-  showOverlay: (key: string, overlay: ReactNode) => void;
-  closeOverlay: (key: string) => void;
   closeAll: () => void;
 }
 
 export const OverlayContainer: FC<{ itemRef: RefObject<OverlayRef> }> = ({
   itemRef,
 }) => {
-  const [overlays, setOverlays] = useState<KeyValue<ReactNode>>({});
   const [alerts, setAlerts] = useState<KeyValue<ReactNode>>({});
 
   useImperativeHandle(
     itemRef,
     () => ({
-      showAlert: (key: string, alert: ReactNode) =>
-        setAlerts({ ...overlays, [key]: alert }),
-      showOverlay: (key: string, overlay: ReactNode) =>
-        setOverlays({ ...alerts, [key]: overlay }),
+      showAlert: (key: string, alert: ReactNode) => setAlerts({ [key]: alert }),
       closeAlert: (key: string) => {
         setAlerts(
-          Object.fromEntries(
-            Object.entries(overlays).filter(([k]) => k !== key)
-          )
-        );
-      },
-      closeOverlay: (key: string) => {
-        setOverlays(
           Object.fromEntries(Object.entries(alerts).filter(([k]) => k !== key))
         );
       },
       closeAll: () => {
         setAlerts({});
-        setOverlays({});
+        document.body
+          .querySelectorAll(".ax-overlay__container[data-mode='overlay']>div")
+          // @ts-expect-error ignore
+          .forEach((node) => (node.close ? node.close() : node.remove()));
       },
     }),
-    [overlays, alerts]
+    [alerts]
   );
 
   return (
     <Fragment>
-      <div className="ax-overlay__container" data-mode="overlay">
-        {Object.values(overlays)}
-      </div>
+      <div className="ax-overlay__container" data-mode="overlay" />
       <div className="ax-overlay__container" data-mode="alert">
         {Object.values(alerts)}
       </div>
