@@ -6,16 +6,15 @@
  * @license   : MIT
  */
 
-import { useDebounce } from "@axux/core";
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
 import { type ElementProps } from "@axux/core/dist/types";
 import { AxField } from "@axux/form";
 import { isNil, matchString } from "@axux/utilities";
 import {
   type FC,
-  memo,
   type ReactNode,
   type Ref,
+  memo,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -27,8 +26,8 @@ import {
 import AutoSizer from "react-virtualized-auto-sizer";
 import { FixedSizeList as List } from "react-window";
 import { TreeNode } from "./Node";
-import { toggleCheck, toggleExpand, toggleSelect } from "./reducer";
 import { TreeTools } from "./Tools";
+import { toggleCheck, toggleExpand, toggleSelect } from "./reducer";
 import {
   type InternalNode,
   type TreeActions,
@@ -238,15 +237,13 @@ export const AxTreePanel: FC<TreeProps> = memo(
         if (action.type === "search") {
           Array.from(state.treeMap.values()).forEach((item) => {
             item.isFiltered = action.search
-              ? matchString(item.node.label, action.search)
+              ? matchString(item.query, action.search)
               : undefined;
-            if (item.parent && item.isFiltered) {
+            if (item.parent) {
               let parent = state.treeMap.get(item.parent);
-              item.parentFiltered =
-                !!parent?.isFiltered || !!parent?.parentFiltered;
               while (parent != null) {
-                parent.isOpen = parent.childFiltered =
-                  !!action.search && item.isFiltered;
+                !action.search && (parent.isOpen = false);
+                parent.isFiltered = item.isFiltered;
                 parent = state.treeMap.get(parent.parent ?? "");
               }
             }
@@ -353,10 +350,6 @@ export const AxTreePanel: FC<TreeProps> = memo(
         });
     }, [state]);
 
-    const onSearch = useDebounce((search) =>
-      dispatch({ type: "search", search })
-    );
-
     return (
       <div
         {...rest}
@@ -374,7 +367,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
         {isSearchable && (
           <AxField.Search
             isPlain
-            onChange={onSearch}
+            onChange={(search) => dispatch({ type: "search", search })}
             className="ax-tree__search"
           />
         )}
