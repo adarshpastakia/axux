@@ -30,7 +30,7 @@ jobs:
           yarn bootstrap
 
       - name: Run coverage
-        uses: paambaati/codeclimate-action@v3.7.5
+        uses: paambaati/codeclimate-action@v4.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.COVERAGE_TOKEN }}
         with:
