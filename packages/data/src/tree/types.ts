@@ -61,6 +61,7 @@ export interface TreeNodeType extends IconProp {
 export interface InternalNode {
   level: number;
   internalId: string;
+  query: string;
   isLeaf: boolean;
   parent?: string;
   isOpen: boolean;

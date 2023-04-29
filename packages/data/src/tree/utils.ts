@@ -18,6 +18,7 @@ export const refactorNode = ({
   index = 0,
   isLast = false,
   parent = "",
+  parentQuery = "",
   level = 0,
   lines = [],
   sortable = true,
@@ -25,9 +26,12 @@ export const refactorNode = ({
 }: KeyValue & {
   level?: number;
   parent?: string;
+  parentQuery?: string;
   index?: number;
 }): InternalNode => {
   const internalId = `${parent}.${index}`;
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  const query = `${parentQuery}~${node.label}`;
   const innerChildren = sortable ? children?.sort(sorter) : children;
   const newLines = [...lines, isLast ? 0 : 1];
   return {
@@ -35,6 +39,7 @@ export const refactorNode = ({
     parent,
     node,
     level,
+    query,
     ...rest,
     lines: newLines,
     isLeaf: !!node.isLeaf,
@@ -42,13 +47,14 @@ export const refactorNode = ({
     childSelected: false,
     isOpen: !!node.isOpen,
     isChecked: 0,
-    children: innerChildren?.map((child: InternalNode, idx: number) =>
+    children: innerChildren?.map((child: TreeNodeType, idx: number) =>
       refactorNode({
         node: child,
         index: idx,
         lines: newLines,
         isLast: idx + 1 === innerChildren.length,
         parent: internalId,
+        parentQuery: query,
         level: level + 1,
         sortable,
       })
@@ -114,7 +120,7 @@ export const createIdMap = (nodes: InternalNode[]) => {
 export const createNodeList = (nodes: InternalNode[], sortable: boolean) => {
   const list: InternalNode[] = [];
   nodes.forEach((node) => {
-    (node.isFiltered !== false||node.childFiltered === true || node.parentFiltered === true) && list.push(node);
+    node.isFiltered !== false && list.push(node);
     if (node.isOpen) {
       if (node.children != null && node.children.length > 0) {
         list.push(...createNodeList(node.children, sortable));
