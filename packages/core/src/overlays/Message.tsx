@@ -29,7 +29,7 @@ export interface MessageProps extends IconProp {
   actions?: JSX.Element[];
 
   onClose: (b?: boolean) => void;
-  rootRef: Ref<HTMLDivElement>;
+  rootRef?: Ref<HTMLDivElement>;
 }
 
 /**
