@@ -1,6 +1,6 @@
 {
   "name": "@axux/map",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "axux: Map viewers",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "@arcgis/core": "^4.26.5",
-    "@axux/core": "^2.2.2",
-    "@axux/utilities": "^2.2.2"
+    "@axux/core": "^2.2.3",
+    "@axux/utilities": "^2.2.3"
   },
   "peerDependencies": {
     "i18next": "^22.4.14",
