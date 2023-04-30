@@ -45,7 +45,7 @@ export interface ToastProps extends IconProp {
 
   onClose: (b?: boolean) => void;
   onCloseAll: (b?: boolean) => void;
-  rootRef: Ref<HTMLDivElement>;
+  rootRef?: Ref<HTMLDivElement>;
 }
 
 export const AxToast: FC<ToastProps> = ({

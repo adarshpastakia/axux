@@ -26,7 +26,7 @@ export const useNotificationService = () => {
   };
 
   /** ***************** alert dialog *******************/
-  const alert = async (props: Omit<AlertProps, "onClose">) => {
+  const alert = async (props: Omit<AlertProps, "onClose" | "rootRef">) => {
     return await new Promise<string | boolean>((resolve) => {
       const key = uuid();
       let rootEl: HTMLElement;
@@ -56,7 +56,7 @@ export const useNotificationService = () => {
 
   /** ***************** message *******************/
   const message = async (
-    props: string | Omit<MessageProps, "onClose">,
+    props: string | Omit<MessageProps, "onClose" | "rootRef">,
     timeout = 5000
   ) => {
     const obj: MessageProps = makeProps(props);
@@ -97,7 +97,7 @@ export const useNotificationService = () => {
   };
 
   const toast = async (
-    props: string | Omit<ToastProps, "onClose" | "onCloseAll">,
+    props: string | Omit<ToastProps, "onClose" | "onCloseAll" | "rootRef">,
     timeout = 5000
   ) => {
     const obj: ToastProps = makeProps(props);
@@ -133,7 +133,7 @@ export const useNotificationService = () => {
   };
 
   const toastError = async (
-    props: string | Omit<ToastProps, "color" | "onClose" | "onCloseAll">,
+    props: string | Omit<ToastProps, "color" | "onClose" | "onCloseAll" | "rootRef">,
     timeout = 30000
   ) => {
     const obj: ToastProps = makeProps(props);

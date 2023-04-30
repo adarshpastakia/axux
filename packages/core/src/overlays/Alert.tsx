@@ -54,7 +54,7 @@ export interface AlertProps extends IconProp {
 
   onClose: (b?: boolean | string) => void;
 
-  rootRef: Ref<HTMLDivElement>;
+  rootRef?: Ref<HTMLDivElement>;
 }
 
 export const AxAlert: FC<AlertProps> = ({
