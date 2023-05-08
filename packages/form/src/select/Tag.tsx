@@ -63,6 +63,7 @@ export const TagInput = <T extends AnyObject>({
   labelWidth,
   children,
   onEnterPressed,
+  autoFocus,
   ...rest
 }: TagProps<T>) => {
   const [_actualValue, setActualValue] = useState<T[]>([]);
@@ -234,6 +235,7 @@ export const TagInput = <T extends AnyObject>({
                 aria-required={isRequired}
                 aria-errormessage={error}
                 size={1}
+                autoFocus={autoFocus}
                 placeholder={placeholder}
                 readOnly={!isEditable && !allowCreate}
                 data-invalid={isInvalid}

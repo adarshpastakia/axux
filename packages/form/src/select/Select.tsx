@@ -60,6 +60,7 @@ export const SelectInput = <T extends AnyObject>({
   inline,
   labelWidth,
   onEnterPressed,
+  autoFocus,
   ...rest
 }: Omit<SelectProps<T>, "makeLabel" | "allowCreate"> & {
   makeLabel?: (item: T) => ReactNode;
@@ -186,7 +187,10 @@ export const SelectInput = <T extends AnyObject>({
             >
               <AxIcon icon={Icons.iconDropdown} />
             </div>
-            <Listbox.Button className="absolute inset-0 opacity-0" />
+            <Listbox.Button
+              className="absolute inset-0 opacity-0"
+              autoFocus={autoFocus}
+            />
             <span ref={inputRef} className="ax-field__input truncate">
               {displayLabel}
               {!displayLabel && (
