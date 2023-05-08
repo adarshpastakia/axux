@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.4](https://github.com/adarshpastakia/axux/compare/v2.2.3...v2.2.4) (2023-05-08)
+
+### Bug Fixes
+
+- **Modal:** focus issue ([a6ddde5](https://github.com/adarshpastakia/axux/commit/a6ddde5b3e2c846d85d84cd7cc2a57676ab3ec73))
+
 ## [2.2.3](https://github.com/adarshpastakia/axux/compare/v2.2.2...v2.2.3) (2023-04-30)
 
 ### Bug Fixes
