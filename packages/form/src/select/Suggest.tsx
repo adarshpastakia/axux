@@ -79,6 +79,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   labelWidth,
   children,
   defaultItems = [],
+  autoFocus,
   ...rest
 }) => {
   const [_actualValue, setActualValue] = useState(value);
@@ -210,6 +211,7 @@ export const SuggestInput: FC<SuggestProps> = ({
               data-invalid={isInvalid}
               className="ax-field__input"
               autoComplete="off"
+              autoFocus={autoFocus}
               onChange={(e) => handleQueryChange(e.target.value)}
               onKeyDown={!open ? handleEnter(onEnterPressed) : undefined}
               onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}

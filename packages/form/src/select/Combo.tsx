@@ -63,6 +63,7 @@ export const ComboInput = <T extends AnyObject>({
   inline,
   labelWidth,
   onEnterPressed,
+  autoFocus,
   ...rest
 }: SelectProps<T>) => {
   const [_actualValue, setActualValue] = useState<T>({} as AnyObject);
@@ -184,6 +185,7 @@ export const ComboInput = <T extends AnyObject>({
             {children}
             <Combobox.Button
               as="div"
+              autoFocus={autoFocus}
               className="ax-field__addon ax-select__handle"
               data-align="end"
             >
