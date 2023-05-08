@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { type FC, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, type FC } from "react";
 import { AxButton } from "../buttons/Button";
 import { AxHeader } from "../components/Header";
 import { AxTitle } from "../components/Title";
@@ -15,8 +15,8 @@ import { AxHotKey } from "../hotkeys/HotKey";
 import { HotKeyWrapper } from "../hotkeys/HotKeyWrapper";
 import { AxIcon } from "../icons/Icon";
 import {
-  type ChildProp,
   CloseX,
+  type ChildProp,
   type Color,
   type ElementProps,
   type EmptyCallback,
@@ -117,7 +117,12 @@ export const AxModal: FC<ModalProps> = ({
     const el = maskRef.current;
     // @ts-expect-error ignore
     el.close = onClose;
-    el && requestAnimationFrame(() => (el.dataset.show = "true"));
+    el &&
+      requestAnimationFrame(() => {
+        el.dataset.show = "true";
+        !el.contains(document.activeElement) &&
+          (el.querySelector(".ax-modal") as HTMLElement)?.focus();
+      });
   }, []);
 
   return (
@@ -138,7 +143,6 @@ export const AxModal: FC<ModalProps> = ({
           className="ax-modal"
           data-size={size}
           tabIndex={0}
-          ref={(el) => el?.focus()}
           style={{ height, width, minHeight, minWidth }}
           onClick={(e) => e.stopPropagation()}
         >
