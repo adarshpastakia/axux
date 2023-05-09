@@ -11,16 +11,14 @@ import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
 import { isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
-  type FC,
   memo,
   useCallback,
   useDeferredValue,
-  useEffect,
-  useState,
   useTransition,
+  type FC,
 } from "react";
-import { SketchPicker } from "react-color";
 import { type InputProps } from "../types";
+import { ColorPicker } from "./ColorPicker";
 import { FieldWrapper } from "./Wrapper";
 
 export interface ColorProps extends ElementProps, InputProps, ChildrenProp {
@@ -97,15 +95,10 @@ export const Color: FC<ColorProps> = memo(
     onEnterPressed,
     ...rest
   }: ColorProps) => {
-    const [_actualValue, setActualValue] = useState<string>("");
     const [, startTransition] = useTransition();
-    const actualValue = useDeferredValue(_actualValue);
-    useEffect(() => {
-      setActualValue(value ?? ("" as AnyObject));
-    }, [value]);
+    const actualValue = useDeferredValue(value ?? "");
     const handleChange = useCallback(
       (e?: string) => {
-        setActualValue(e ?? "");
         onChange != null && startTransition(() => onChange(e));
       },
       [onChange]
@@ -139,27 +132,11 @@ export const Color: FC<ColorProps> = memo(
               style={{ backgroundColor: actualValue }}
             />
           </div>
-          <SketchPicker
-            width="15rem"
-            className="ax-input__color"
-            styles={{
-              default: {
-                picker: { backgroundColor: "inherit" },
-                controls: {
-                  color: "inherit",
-                  backgroundColor: "inherit",
-                  boxShadow: "inherit",
-                  border: "inherit",
-                },
-                color: {
-                  border: 1,
-                },
-              },
-            }}
-            color={_actualValue}
-            presetColors={swatches}
-            disableAlpha={hideAlpha}
-            onChangeComplete={({ hex }) => handleChange(hex)}
+          <ColorPicker
+            value={value}
+            onChange={handleChange}
+            swatches={swatches}
+            hideAlpha={hideAlpha}
           />
         </AxPopover>
         {showInput && (

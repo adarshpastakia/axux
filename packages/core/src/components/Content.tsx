@@ -6,12 +6,18 @@
  * @license   : MIT
  */
 
-import { type FC } from "react";
-import { type ChildrenProp, type ElementProps, type Gutter } from "../types";
+import { forwardRef, type FC } from "react";
+import {
+  type ChildrenProp,
+  type ElementProps,
+  type Gutter,
+  type RefProp,
+} from "../types";
 import { EmptyContent } from "./EmptyContent";
 
 type Props = ElementProps &
-  ChildrenProp & {
+  ChildrenProp &
+  RefProp<HTMLDivElement> & {
     /**
      * padding
      */
@@ -20,17 +26,17 @@ type Props = ElementProps &
 /**
  * content panel
  */
-export const AxContent: FC<Props> & { Empty: typeof EmptyContent } = ({
-  className,
-  padding,
-  ...rest
-}: Props) => (
+export const AxContent: FC<Props> & { Empty: typeof EmptyContent } = forwardRef<
+  HTMLDivElement,
+  Props
+>(({ className, padding, ...rest }: Props, ref) => (
   <div
     {...rest}
+    ref={ref}
     data-padding={padding}
     className={`ax-content ${className ?? ""}`}
   />
-);
+)) as AnyObject;
 AxContent.Empty = EmptyContent;
 AxContent.displayName = "AxContent";
 AxContent.Empty.displayName = "AxContent.Empty";

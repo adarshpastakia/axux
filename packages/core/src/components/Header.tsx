@@ -42,47 +42,50 @@ export const AxHeader: FC<ElementProps & Partial<ChildrenProp>> = ({
           variant="link"
           className="toggle-back"
           aria-label="back"
+          data-tool="true"
           stopPropagation
           icon={AppIcons.iconCaretLeft}
           onClick={onBack}
         />
       )}
       {children}
-      {onExpand && (
-        <AxButton
-          rtlFlip
-          variant="link"
-          className="toggle-expand"
-          aria-label="toggle expand"
-          stopPropagation
-          icon={isExpanded ? AppIcons.iconCollapse : AppIcons.iconExpand}
-          onClick={onExpand}
-        />
-      )}
-      {!isExpanded && onCollapse && (
-        <AxButton
-          rtlFlip
-          variant="link"
-          className="toggle-collapse"
-          aria-label="toggle collapse"
-          stopPropagation
-          icon={
-            isCollapsed ? AppIcons.iconExpandPlus : AppIcons.iconCollapseMinus
-          }
-          onClick={onCollapse}
-        />
-      )}
-      {onClose && (
-        <AxButton
-          rtlFlip
-          variant="link"
-          className="toggle-close"
-          aria-label="close"
-          stopPropagation
-          icon={AppIcons.iconClose}
-          onClick={onClose}
-        />
-      )}
+      <AxButton.Group data-tool="true" variant="plain">
+        {onExpand && (
+          <AxButton
+            rtlFlip
+            variant="link"
+            className="toggle-expand"
+            aria-label="toggle expand"
+            stopPropagation
+            icon={isExpanded ? AppIcons.iconCollapse : AppIcons.iconExpand}
+            onClick={onExpand}
+          />
+        )}
+        {!isExpanded && onCollapse && (
+          <AxButton
+            rtlFlip
+            variant="link"
+            className="toggle-collapse"
+            aria-label="toggle collapse"
+            stopPropagation
+            icon={
+              isCollapsed ? AppIcons.iconExpandPlus : AppIcons.iconCollapseMinus
+            }
+            onClick={onCollapse}
+          />
+        )}
+        {onClose && (
+          <AxButton
+            rtlFlip
+            variant="link"
+            className="toggle-close"
+            aria-label="close"
+            stopPropagation
+            icon={AppIcons.iconClose}
+            onClick={onClose}
+          />
+        )}
+      </AxButton.Group>
     </div>
   );
 };
