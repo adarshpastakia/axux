@@ -20,7 +20,12 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { usePopover } from "../hooks/usePopover";
-import { type ChildProp, type ChildrenProp, type ElementProps, type RefProp } from "../types";
+import {
+  type ChildProp,
+  type ChildrenProp,
+  type ElementProps,
+  type RefProp,
+} from "../types";
 
 export interface PopoverProps extends ChildrenProp, ElementProps {
   /**

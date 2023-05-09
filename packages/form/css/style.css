@@ -620,7 +620,7 @@
   }
 
   .ax-input__color {
-    @apply bg-component;
+    @apply bg-component select-none;
 
     & input {
       @apply bg-white dark:bg-black !border !border-solid !rounded !border-bw-500/70 focus:!border-primary-500 !shadow-none;

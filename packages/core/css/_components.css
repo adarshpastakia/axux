@@ -89,16 +89,14 @@
       @apply m-1;
     }
 
-    & > .ax-button {
+    & > .ax-button,
+    & > .ax-button__group {
       @apply m-0;
 
-      & > .ax-button__inner {
+      &[data-tool="true"] .ax-button__inner {
         padding-block: 0;
         min-height: 1.5em;
-        min-width: 1em;
-      }
-      &[data-square="true"] > .ax-button__inner {
-        width: 1.5em;
+        min-width: 1.5em;
       }
     }
   }

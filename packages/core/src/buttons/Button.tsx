@@ -7,7 +7,12 @@
  */
 
 import { handleClick } from "@axux/utilities/dist/handlers";
-import { type FC, forwardRef, type ForwardRefExoticComponent, useMemo } from "react";
+import {
+  type FC,
+  forwardRef,
+  type ForwardRefExoticComponent,
+  useMemo,
+} from "react";
 import { AxAnimation } from "../animations";
 import { Link, type LinkProps } from "../components/Link";
 import { useBadge } from "../hooks/useBadge";
@@ -223,11 +228,13 @@ AxButton.Group = ({
   variant = "normal",
   isVertical = false,
   className = "",
+  ...rest
 }: ButtonGroupProps) => (
   <div
     className={`ax-button__group ${className ?? ""}`}
     data-variant={variant}
     data-vertical={isVertical}
+    {...rest}
   >
     {children}
   </div>
