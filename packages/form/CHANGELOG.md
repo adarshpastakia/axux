@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.5](https://github.com/adarshpastakia/axux/compare/v2.2.4...v2.2.5) (2023-05-09)
+
+### Bug Fixes
+
+- quick updates ([e3daae8](https://github.com/adarshpastakia/axux/commit/e3daae88d3d5d5974ca02ab52e72b6bca32b4cb6))
+- **SelectInputs:** add autoFocus prop ([c57a9b9](https://github.com/adarshpastakia/axux/commit/c57a9b9a0c1e3c207d89fcbbc5df030bda7c9400))
+
 ## [2.2.4](https://github.com/adarshpastakia/axux/compare/v2.2.3...v2.2.4) (2023-05-08)
 
 **Note:** Version bump only for package @axux/form
