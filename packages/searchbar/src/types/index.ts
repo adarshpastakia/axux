@@ -126,6 +126,7 @@ interface BaseFilter {
   id?: string;
   type: "filter" | "query";
   label?: string;
+  isScope?: boolean;
   isGlobal?: boolean;
   isDisabled?: boolean;
   isNegative?: boolean;
