@@ -49,43 +49,44 @@ export const AxHeader: FC<ElementProps & Partial<ChildrenProp>> = ({
         />
       )}
       {children}
-      <AxButton.Group data-tool="true" variant="plain">
-        {onExpand && (
-          <AxButton
-            rtlFlip
-            variant="link"
-            className="toggle-expand"
-            aria-label="toggle expand"
-            stopPropagation
-            icon={isExpanded ? AppIcons.iconCollapse : AppIcons.iconExpand}
-            onClick={onExpand}
-          />
-        )}
-        {!isExpanded && onCollapse && (
-          <AxButton
-            rtlFlip
-            variant="link"
-            className="toggle-collapse"
-            aria-label="toggle collapse"
-            stopPropagation
-            icon={
-              isCollapsed ? AppIcons.iconExpandPlus : AppIcons.iconCollapseMinus
-            }
-            onClick={onCollapse}
-          />
-        )}
-        {onClose && (
-          <AxButton
-            rtlFlip
-            variant="link"
-            className="toggle-close"
-            aria-label="close"
-            stopPropagation
-            icon={AppIcons.iconClose}
-            onClick={onClose}
-          />
-        )}
-      </AxButton.Group>
+      {onExpand && (
+        <AxButton
+          rtlFlip
+          data-tool="true"
+          variant="link"
+          className="toggle-expand"
+          aria-label="toggle expand"
+          stopPropagation
+          icon={isExpanded ? AppIcons.iconCollapse : AppIcons.iconExpand}
+          onClick={onExpand}
+        />
+      )}
+      {!isExpanded && onCollapse && (
+        <AxButton
+          rtlFlip
+          data-tool="true"
+          variant="link"
+          className="toggle-collapse"
+          aria-label="toggle collapse"
+          stopPropagation
+          icon={
+            isCollapsed ? AppIcons.iconExpandPlus : AppIcons.iconCollapseMinus
+          }
+          onClick={onCollapse}
+        />
+      )}
+      {onClose && (
+        <AxButton
+          rtlFlip
+          data-tool="true"
+          variant="link"
+          className="toggle-close"
+          aria-label="close"
+          stopPropagation
+          icon={AppIcons.iconClose}
+          onClick={onClose}
+        />
+      )}
     </div>
   );
 };
