@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.6](https://github.com/adarshpastakia/axux/compare/v2.2.5...v2.2.6) (2023-05-12)
+
+### Bug Fixes
+
+- **SearchBar:** added scope filters ([1cacae2](https://github.com/adarshpastakia/axux/commit/1cacae2c8b126a982ba9dd507f3705617e1d1c93))
+
 ## [2.2.5](https://github.com/adarshpastakia/axux/compare/v2.2.4...v2.2.5) (2023-05-09)
 
 **Note:** Version bump only for package @axux/searchbar
