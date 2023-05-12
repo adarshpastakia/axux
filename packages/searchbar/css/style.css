@@ -64,6 +64,10 @@
       &[data-global="true"] {
         @apply bg-primary-600/90;
       }
+
+      &[data-scope="true"] {
+        @apply bg-violet-600/90;
+      }
     }
     &[data-type="exclude"] {
       @apply bg-danger-500/10 border-danger-500/50;
@@ -75,8 +79,17 @@
           @apply text-white;
         }
       }
+
+      &[data-scope="true"] {
+        @apply bg-pink-600/90;
+
+        & .ax-field__option .ax-icon {
+          @apply text-white;
+        }
+      }
     }
-    &[data-global="true"] {
+    &[data-global="true"],
+    &[data-scope="true"] {
       @apply text-white;
 
       & .ax-field__option .ax-icon {

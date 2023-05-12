@@ -23,12 +23,12 @@ export const FilterButton = () => {
     >
       {
         (
-          <>
+          <div className="flex items-center">
             <span>{t("label.filters")}&nbsp;</span>
             <span className="ax-filterButton__count" data-active={showFilters}>
               {filters.length}
             </span>
-          </>
+          </div>
         ) as AnyObject
       }
     </AxButton>
