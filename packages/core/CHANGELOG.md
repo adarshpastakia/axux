@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.7](https://github.com/adarshpastakia/axux/compare/v2.2.6...v2.2.7) (2023-05-15)
+
+### Bug Fixes
+
+- allow false for optional element props ([0552c2f](https://github.com/adarshpastakia/axux/commit/0552c2f76c49aaa19f5d4e3753992ba79a1e8101))
+
 ## [2.2.6](https://github.com/adarshpastakia/axux/compare/v2.2.5...v2.2.6) (2023-05-12)
 
 ### Bug Fixes
