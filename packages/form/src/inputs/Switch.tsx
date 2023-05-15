@@ -43,6 +43,7 @@ export const Switch: FC<SwitchProps> = memo(
     isInvalid,
     isChecked,
     isDisabled,
+    isReadOnly,
     className,
     error,
     color,
@@ -80,6 +81,7 @@ export const Switch: FC<SwitchProps> = memo(
           type="checkbox"
           checked={actualValue}
           disabled={isDisabled}
+          readOnly={isReadOnly}
           className="ax-field__input"
           onChange={handleChange}
         />

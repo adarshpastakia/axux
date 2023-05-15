@@ -92,7 +92,7 @@ export const AxController: FC<ControllerProps> = ({ name, children }) => {
               //
             }
           },
-          isDisabled: isSubmitting || children.props.isDisabled,
+          isReadOnly: isSubmitting || children.props.isReadOnly,
           isInvalid: !!error?.message || children.props.isInvalid,
           error: error?.message,
           onChange: (v: AnyObject) => {

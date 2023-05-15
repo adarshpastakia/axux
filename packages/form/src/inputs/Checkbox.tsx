@@ -33,6 +33,7 @@ export const Checkbox: FC<CheckboxProps> = memo(
     isInvalid,
     isChecked,
     isDisabled,
+    isReadOnly,
     className,
     error,
     inputRef,
@@ -71,6 +72,7 @@ export const Checkbox: FC<CheckboxProps> = memo(
           type="checkbox"
           checked={actualValue}
           disabled={isDisabled}
+          readOnly={isReadOnly}
           className="ax-field__input"
           data-invalid={isInvalid}
           onChange={handleChange}
