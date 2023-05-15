@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { cloneElement, type FC, type ReactElement, useMemo } from "react";
+import { useMemo, type FC } from "react";
 import { AxIcon } from "../icons/Icon";
 import { type ElementProps, type IconProp } from "../types";
 
@@ -111,7 +111,7 @@ export interface EmptyContentProps extends IconProp, ElementProps {
   /**
    * actions
    */
-  actions?: JSX.Element[];
+  actions?: false | JSX.Element[];
   /**
    * size
    */
@@ -154,11 +154,7 @@ export const EmptyContent: FC<EmptyContentProps> = ({
       )}
       {title && <div className="ax-empty__title">{title}</div>}
       {message && <div className="ax-empty__message">{message}</div>}
-      <div className="ax-empty__actions">
-        {actions.map((action) =>
-          cloneElement(action as ReactElement, { type: "link" })
-        )}
-      </div>
+      <div className="ax-empty__actions">{actions}</div>
     </div>
   );
 };

@@ -24,7 +24,7 @@ export interface InputProps<K = string> {
   /**
    * label extra
    */
-  labelAppend?: JSX.Element;
+  labelAppend?: false | JSX.Element;
 
   /**
    * input element ref

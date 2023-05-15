@@ -160,6 +160,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     "data-extra": extra,
     // @ts-expect-error ignore
     "data-popover-open": popoverOpen,
+    "aria-label": ariaLabel,
     ...rest
   } = props;
 
@@ -188,7 +189,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
       {hotKey && <AxHotKey keyCombo={hotKey} handler={onClick} />}
       {!useSpinner && isLoading && <div className="ax-button__loader" />}
       <Link
-        aria-label={children}
+        aria-label={ariaLabel ?? children}
         {...rest}
         type={type}
         as="button"

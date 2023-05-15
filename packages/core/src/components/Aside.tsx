@@ -41,7 +41,7 @@ export interface AsideProps
   /**
    * header actions
    */
-  actions?: JSX.Element[];
+  actions?: false | JSX.Element[];
   /**
    * header class
    */

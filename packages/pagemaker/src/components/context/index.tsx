@@ -57,7 +57,7 @@ interface IContext<T = PageItem> {
   addWidget: (colId: string) => void;
   editWidget: (widgetId: string) => void;
   findWidget: (widgetId: string) => IWidgetObject | undefined;
-  renderWidget: (widgetId: string) => JSX.Element;
+  renderWidget: (widgetId: string) => false | JSX.Element;
 }
 
 const findDeep = (

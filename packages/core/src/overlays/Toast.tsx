@@ -33,7 +33,7 @@ export interface ToastProps extends IconProp {
   /**
    * extra actions
    */
-  actions?: JSX.Element[];
+  actions?: false | JSX.Element[];
   /**
    * ok label
    */

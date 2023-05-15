@@ -168,7 +168,7 @@ export interface IProps extends ChildrenProp {
    * Render widget tile
    * @param id
    */
-  renderWidget: (widgetId: string) => JSX.Element;
+  renderWidget: (widgetId: string) => false | JSX.Element;
   /**
    * Add new widget
    */

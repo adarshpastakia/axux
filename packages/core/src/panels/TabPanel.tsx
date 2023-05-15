@@ -52,8 +52,8 @@ export interface TabPanelProps extends ElementProps {
   barClassName?: HTMLDivElement["className"];
   activeStyle?: "outline" | "solid";
   activeTab?: string;
-  append?: JSX.Element;
-  prepend?: JSX.Element;
+  append?: false | JSX.Element;
+  prepend?: false | JSX.Element;
   onBeforeChange?: (oldKey?: string, newKey?: string) => CallbackReturn;
   onActiveChange?: (key: string) => void;
 }

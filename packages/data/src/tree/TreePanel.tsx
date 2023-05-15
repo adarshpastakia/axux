@@ -79,7 +79,7 @@ export interface TreeProps extends ElementProps {
   /**
    * addition toolbar actions
    */
-  actions?: JSX.Element[];
+  actions?: false | JSX.Element[];
 
   treeRef?: Ref<TreeRef | undefined>;
   /**
