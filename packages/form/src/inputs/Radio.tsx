@@ -28,6 +28,7 @@ export const Radio: FC<RadioProps> = memo(
     isInvalid,
     isChecked,
     isDisabled,
+    isReadOnly,
     className,
     error,
     inputRef,
@@ -57,6 +58,7 @@ export const Radio: FC<RadioProps> = memo(
           ref={inputRef}
           type="radio"
           disabled={isDisabled}
+          readOnly={isReadOnly}
           defaultChecked={isChecked}
           className="ax-field__input"
           onChange={handleChange}

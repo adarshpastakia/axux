@@ -17,6 +17,10 @@
     display: none;
   }
 
+  .ax-form[data-loading="true"] {
+    @apply animate-pulse;
+  }
+
   .ax-form[data-inline="true"] {
     & .ax-field__container {
       @apply flex flex-nowrap gap-2;

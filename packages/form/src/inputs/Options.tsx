@@ -65,6 +65,8 @@ export const Options: FC<OptionsProps> = memo(
         <div {...rest} className="ax-field__options" data-vertical={vertical}>
           {Children.toArray(children).map((child: AnyObject) => {
             const newProps = { ...child.props };
+            newProps.isReadOnly = isReadOnly;
+            newProps.isDisabled = isDisabled;
             if (value) {
               newProps.checked = newProps.value === value;
             }

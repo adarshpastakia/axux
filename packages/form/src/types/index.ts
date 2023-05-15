@@ -119,6 +119,10 @@ export interface OptionProps<K> {
    */
   isDisabled?: boolean;
   /**
+   * field readonly
+   */
+  isReadOnly?: boolean;
+  /**
    * inline label and input
    */
   inline?: boolean;
