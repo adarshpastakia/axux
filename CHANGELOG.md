@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.8](https://github.com/adarshpastakia/axux/compare/v2.2.7...v2.2.8) (2023-05-15)
+
+### Bug Fixes
+
+- **Button:** tool override ([b387867](https://github.com/adarshpastakia/axux/commit/b387867bcf269490a10ee3beee5309824b3ef5ed))
+- **Form:** loading state ([1c04c9b](https://github.com/adarshpastakia/axux/commit/1c04c9b1d3c5494ba548950a47d1b3353ea9635f))
+
 ## [2.2.7](https://github.com/adarshpastakia/axux/compare/v2.2.6...v2.2.7) (2023-05-15)
 
 ### Bug Fixes
