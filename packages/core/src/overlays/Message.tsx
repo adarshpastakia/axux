@@ -26,7 +26,7 @@ export interface MessageProps extends IconProp {
   /**
    * extra action button
    */
-  actions?: JSX.Element[];
+  actions?: false | JSX.Element[];
 
   onClose: (b?: boolean) => void;
   rootRef?: Ref<HTMLDivElement>;

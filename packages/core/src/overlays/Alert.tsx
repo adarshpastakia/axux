@@ -34,7 +34,7 @@ export interface AlertProps extends IconProp {
   /**
    * extra actions
    */
-  actions?: JSX.Element[];
+  actions?: false | JSX.Element[];
   /**
    * ok label
    */

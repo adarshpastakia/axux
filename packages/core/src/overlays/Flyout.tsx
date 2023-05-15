@@ -30,7 +30,7 @@ export interface FlyoutProps extends ElementProps, IconProp, ChildProp {
   /**
    * header actions
    */
-  actions?: JSX.Element[];
+  actions?: false | JSX.Element[];
   /**
    * header class
    */
