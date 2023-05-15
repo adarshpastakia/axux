@@ -159,6 +159,8 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     // @ts-expect-error ignore
     "data-extra": extra,
     // @ts-expect-error ignore
+    "data-tool": tool,
+    // @ts-expect-error ignore
     "data-popover-open": popoverOpen,
     "aria-label": ariaLabel,
     ...rest
@@ -174,6 +176,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     <div
       data-type={style}
       data-size={size}
+      data-tool={tool}
       data-color={color}
       data-active={isActive}
       data-round={isRound}
