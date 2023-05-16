@@ -11,9 +11,7 @@ import { usePopover } from "@axux/core/dist/hooks/usePopover";
 import { isArray, isEmpty } from "@axux/utilities";
 import { Combobox } from "@headlessui/react";
 import {
-  type FocusEvent,
   Fragment,
-  type KeyboardEvent,
   memo,
   useCallback,
   useDeferredValue,
@@ -21,9 +19,12 @@ import {
   useMemo,
   useState,
   useTransition,
+  type FocusEvent,
+  type KeyboardEvent,
 } from "react";
 import { createPortal } from "react-dom";
 import { FieldWrapper } from "../inputs/Wrapper";
+import { EMPTY_ARRAY } from "../types";
 import { Icons } from "../types/icons";
 import { Options } from "./Option";
 import { useSelect } from "./useSelect";
@@ -66,7 +67,7 @@ export const TagInput = <T extends AnyObject>({
   autoFocus,
   ...rest
 }: TagProps<T>) => {
-  const [_actualValue, setActualValue] = useState<T[]>([]);
+  const [_actualValue, setActualValue] = useState<T[]>(EMPTY_ARRAY);
   const [, startTransition] = useTransition();
   const actualValue = useDeferredValue(_actualValue);
   const { list, query, onQueryChange } = useSelect({
@@ -235,6 +236,7 @@ export const TagInput = <T extends AnyObject>({
                 aria-required={isRequired}
                 aria-errormessage={error}
                 size={1}
+                value={query}
                 autoFocus={autoFocus}
                 placeholder={placeholder}
                 readOnly={!isEditable && !allowCreate}
