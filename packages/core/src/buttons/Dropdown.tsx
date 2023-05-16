@@ -8,10 +8,16 @@
 
 import { Menu } from "@headlessui/react";
 import { type Placement } from "@popperjs/core";
-import { type FC, Fragment, type MouseEvent, useCallback, useEffect } from "react";
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  type FC,
+  type MouseEvent,
+} from "react";
 import { usePopover } from "../hooks/usePopover";
 import { type MenuChildren } from "../menu/types";
-import { type ElementProps } from "../types";
+import { type CallbackReturn, type ElementProps } from "../types";
 import { AxButton, type ButtonProps } from "./Button";
 
 export interface DropdownProps
@@ -32,7 +38,7 @@ export interface DropdownProps
   /**
    * click handler
    */
-  onClick?: (key: string) => void;
+  onClick?: (key: string) => CallbackReturn<AnyObject>;
 }
 
 export const DropdownButton: FC<DropdownProps> = ({

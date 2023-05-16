@@ -7,10 +7,10 @@
  */
 
 import { isString } from "@axux/utilities";
-import { type FC, useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, type FC } from "react";
 import { AxAnimation } from "../animations";
 import { AxTooltip } from "../overlays/Tooltip";
-import { type HandleCallback } from "../types";
+import { type ClickHandler } from "../types";
 import { AxButton, type ButtonProps } from "./Button";
 
 export interface ActionProps extends ButtonProps {
@@ -23,7 +23,7 @@ export interface ActionProps extends ButtonProps {
    */
   actionType?: "danger" | "success";
 
-  onClick?: HandleCallback;
+  onClick?: ClickHandler;
 }
 
 export const ActionButton: FC<ActionProps> = ({

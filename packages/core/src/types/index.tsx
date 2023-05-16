@@ -13,9 +13,10 @@ import { AxIcon } from "../icons/Icon";
 import { AppIcons } from "./appIcons";
 
 // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-export type CallbackReturn = void | boolean | Promise<boolean | void>;
+export type CallbackReturn<T = boolean> = void | T | Promise<T | void>;
 export type HandleCallback = () => CallbackReturn;
 export type EmptyCallback = () => void;
+export type ClickHandler = () => CallbackReturn<AnyObject>;
 export type BooleanCallback = (truthy: boolean) => void;
 
 export type Color = "primary" | "accent" | "danger" | "warning" | "success";
@@ -45,7 +46,7 @@ export interface MouseProps {
   /**
    * click handler
    */
-  onClick?: () => CallbackReturn;
+  onClick?: ClickHandler;
 }
 
 export interface SizeObject {
