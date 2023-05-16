@@ -19,6 +19,7 @@ import {
   useTransition,
   type FocusEvent,
 } from "react";
+import { Container } from "../inputs/Container";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { EMPTY_ARRAY } from "../types";
 import { Options } from "./Option";
@@ -130,59 +131,63 @@ export const ListInput = <T extends AnyObject>({
       multiple={multiple as AnyObject}
       nullable
     >
-      <FieldWrapper
-        info={info}
-        error={error}
+      <Container
+        isVertical
         label={label}
-        width={width}
-        className={className}
-        labelAppend={labelAppend}
-        isInvalid={isInvalid}
-        isRequired={isRequired}
-        disabled={isDisabled}
         inline={inline}
         labelWidth={labelWidth}
-        onClear={() => handleChange()}
-        canClear={allowClear && !isEmpty(actualValue)}
+        labelAppend={labelAppend}
+        isRequired={isRequired}
+        info={info}
+        width={width}
       >
-        <Combobox.Input
-          ref={inputRef}
-          aria-label={label}
-          aria-disabled={isDisabled}
-          aria-readonly={isReadOnly}
-          aria-required={isRequired}
-          aria-errormessage={error}
-          size={1}
-          value={query}
-          placeholder={placeholder}
-          readOnly={!allowCreate}
-          data-invalid={isInvalid}
-          className="ax-field__input rounded-b-none"
-          autoComplete="off"
-          onKeyDown={handleEnter(onEnterPressed)}
-          onChange={(e) => onQueryChange(e.target.value)}
-          onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
-          {...rest}
-        />
-        {children}
-      </FieldWrapper>
-      <Combobox.Options
-        className="ax-select__dropdown relative min-h-[12rem] max-h-[24rem] shadow-none rounded-t-none mx-px"
-        static
-        hold
-        style={{
-          minHeight,
-          maxHeight,
-        }}
-      >
-        <Options
-          query={query}
-          options={list ?? EMPTY_ARRAY}
-          renderer={renderer}
-          allowCreate={allowCreate}
-          labelProperty={labelProperty}
-        />
-      </Combobox.Options>
+        <FieldWrapper
+          error={error}
+          className={className}
+          isInvalid={isInvalid}
+          disabled={isDisabled}
+          onClear={() => handleChange()}
+          canClear={allowClear && !isEmpty(actualValue)}
+        >
+          <Combobox.Input
+            ref={inputRef}
+            aria-label={label}
+            aria-disabled={isDisabled}
+            aria-readonly={isReadOnly}
+            aria-required={isRequired}
+            aria-errormessage={error}
+            size={1}
+            value={query}
+            placeholder={placeholder}
+            readOnly={!allowCreate}
+            data-invalid={isInvalid}
+            className="ax-field__input rounded-b-none"
+            autoComplete="off"
+            onKeyDown={handleEnter(onEnterPressed)}
+            onChange={(e) => onQueryChange(e.target.value)}
+            onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
+            {...rest}
+          />
+          {children}
+        </FieldWrapper>
+        <Combobox.Options
+          className="ax-select__dropdown relative min-h-[12rem] max-h-[24rem] shadow-none rounded-t-none mx-px"
+          static
+          hold
+          style={{
+            minHeight,
+            maxHeight,
+          }}
+        >
+          <Options
+            query={query}
+            options={list ?? EMPTY_ARRAY}
+            renderer={renderer}
+            allowCreate={allowCreate}
+            labelProperty={labelProperty}
+          />
+        </Combobox.Options>
+      </Container>
     </Combobox>
   );
 };
