@@ -221,6 +221,7 @@ export const ButtonBadges: ComponentStory<AnyObject> = (props) => (
             badge={{
               value: "new",
               color: "primary",
+              placement: "top",
             }}
           >
             Color Badge
@@ -233,6 +234,7 @@ export const ButtonBadges: ComponentStory<AnyObject> = (props) => (
               ping: true,
               icon: "mdi mdi-bell",
               color: "danger",
+              placement: "top-end",
             }}
           >
             Pinging Badge w/ Icon
