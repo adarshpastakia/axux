@@ -101,6 +101,18 @@ export interface BadgeProps {
    * animate ping
    */
   ping?: boolean;
+  /**
+   * placement
+   */
+  placement?:
+    | "top"
+    | "bottom"
+    | "start"
+    | "end"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end";
 }
 
 export interface CollapseProps {

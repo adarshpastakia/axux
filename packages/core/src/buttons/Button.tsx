@@ -214,12 +214,12 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
         {children && (
           <Ellipsis className="ax-button__label">{children}</Ellipsis>
         )}
+        {Badge}
         {hotKey && <AxHotKey.Label keyCombo={hotKey} />}
         {showCaret && (
           <AxIcon className="ax-button__caret" icon={AppIcons.iconCaretDown} />
         )}
       </Link>
-      {Badge}
       {extra}
     </div>
   );

@@ -12,18 +12,6 @@ import { type BadgeProps as BP, type ElementProps } from "../types";
 
 export interface BadgeProps extends Omit<BP, "value">, ElementProps {
   children?: string | number;
-  /**
-   * placement
-   */
-  placement?:
-    | "top"
-    | "bottom"
-    | "start"
-    | "end"
-    | "top-start"
-    | "top-end"
-    | "bottom-start"
-    | "bottom-end";
 }
 
 /**
