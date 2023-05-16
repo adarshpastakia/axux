@@ -128,19 +128,26 @@ ColorStory.args = {
   isRequired: false,
 };
 
-const SelectIcons:KeyValue = {
+const SelectIcons: KeyValue = {
   first: "mdi-numeric-1-circle",
   second: "mdi-numeric-2-circle",
   third: "mdi-numeric-3-circle",
-}
-const SelectColor:KeyValue = {
+};
+const SelectColor: KeyValue = {
   first: "#ffc30b",
   second: "#adadc7",
   third: "#b2560c",
-}
+};
 
-const SelectTemplate: ComponentStory<typeof AxField.Select<string>> = (props) => (
-  <AxField.Select {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} />
+const SelectTemplate: ComponentStory<typeof AxField.Select<string>> = (
+  props
+) => (
+  <AxField.Select
+    {...props}
+    width="32rem"
+    onSelect={action("onSelect") as AnyObject}
+    onChange={action("onChange")}
+  />
 );
 export const SelectStory = SelectTemplate.bind({});
 SelectStory.args = {
@@ -148,15 +155,14 @@ SelectStory.args = {
   placeholder: "Select value....",
   error: "",
   info: "",
-  value:"first",
-  options: ["first", "second","third"],
+  value: "first",
+  options: ["first", "second", "third"],
   makeLabel: (item) => (
     <div className="flex gap-1 items-center">
       <AxIcon
         icon={`mdi ${SelectIcons[item]}`}
         className="text-lg"
-        color={SelectColor[item]
-        }
+        color={SelectColor[item]}
       />
       <label className="flex-auto">{item}</label>
     </div>
@@ -166,13 +172,12 @@ SelectStory.args = {
       <AxIcon
         icon={`mdi ${SelectIcons[item]}`}
         className="text-lg"
-        color={SelectColor[item]
-        }
+        color={SelectColor[item]}
       />
       <label className="flex-auto">{item}</label>
     </div>
   ),
-  allowClear:true,
+  allowClear: true,
   inline: false,
   autoFocus: false,
   isInvalid: false,
@@ -182,29 +187,38 @@ SelectStory.args = {
   isRequired: false,
 };
 
-const ComboTemplate: ComponentStory<typeof AxField.Combo<Country>> = (props) => (
-  <AxField.Combo {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} />
+const ComboTemplate: ComponentStory<typeof AxField.Combo<Country>> = (
+  props
+) => (
+  <AxField.Combo
+    {...props}
+    width="32rem"
+    onSelect={action("onSelect") as AnyObject}
+    onChange={action("onChange")}
+  />
 );
 export const ComboStory = ComboTemplate.bind({});
 ComboStory.args = {
   label: "Combo input",
   placeholder: "Combo value....",
   error: "",
-  info: "",value:"AE",
+  info: "",
+  value: "AE",
   valueProperty: "iso2",
   labelProperty: "name",
-  options: Object.entries(Countries.list.reduce<KeyValue>((r,c) => ({...r,
-    [c.continent] :[...(r[c.continent]??[]), c]
-  }),{})).map(([label, items]) => ({label,items})),
+  options: Object.entries(
+    Countries.list.reduce<KeyValue>(
+      (r, c) => ({ ...r, [c.continent]: [...(r[c.continent] ?? []), c] }),
+      {}
+    )
+  ).map(([label, items]) => ({ label, items })),
   renderer: (c) => (
     <div>
       {Countries.emoji(c.iso2)}&nbsp;{c.name}
     </div>
   ),
-  makeLabel: (c) => (
-    `${c.emoji} ${c.name}`
-  ),
-  allowClear:true,
+  makeLabel: (c) => `${c.emoji} ${c.name}`,
+  allowClear: true,
   inline: false,
   autoFocus: false,
   isInvalid: false,
@@ -215,7 +229,12 @@ ComboStory.args = {
 };
 
 const TagTemplate: ComponentStory<typeof AxField.Tag<Country>> = (props) => (
-  <AxField.Tag {...props} width="32rem" onSelect={action("onSelect")} onChange={action("onChange")} />
+  <AxField.Tag
+    {...props}
+    width="32rem"
+    onSelect={action("onSelect") as AnyObject}
+    onChange={action("onChange")}
+  />
 );
 export const TagStory = TagTemplate.bind({});
 TagStory.args = {
@@ -232,8 +251,39 @@ TagStory.args = {
     </div>
   ),
   makeLabel: (c) => (
+    <div>{c.iso2 ? Countries.emoji(c.iso2) + " " + c.name : c.toString()}</div>
+  ),
+  allowCreate: true,
+  inline: false,
+  allowClear: true,
+  autoFocus: false,
+  isInvalid: false,
+  isEditable: true,
+  isDisabled: false,
+  isReadOnly: false,
+  isRequired: false,
+};
+
+const ListTemplate: ComponentStory<typeof AxField.List<Country>> = (props) => (
+  <AxField.List
+    {...props}
+    width="32rem"
+    onSelect={action("onSelect") as AnyObject}
+    onChange={action("onChange")}
+  />
+);
+export const ListStory = ListTemplate.bind({});
+ListStory.args = {
+  label: "List input",
+  placeholder: "Select value....",
+  error: "",
+  info: "",
+  valueProperty: "iso2",
+  labelProperty: "name",
+  options: Countries.list,
+  renderer: (c) => (
     <div>
-      {c.iso2 ? Countries.emoji(c.iso2)+" "+c.name : c.toString()}
+      {Countries.emoji(c.iso2)}&nbsp;{c.name}
     </div>
   ),
   allowCreate: true,
@@ -248,7 +298,16 @@ TagStory.args = {
 };
 
 const SuggestTemplate: ComponentStory<typeof AxField.Suggest> = (props) => (
-  <AxField.Suggest {...props} width="32rem" onQuery={e=>{action("onQuery")(e);return []}} onSelect={action("onSelect")} onChange={action("onChange")} />
+  <AxField.Suggest
+    {...props}
+    width="32rem"
+    onQuery={(e) => {
+      action("onQuery")(e);
+      return [];
+    }}
+    onSelect={action("onSelect") as AnyObject}
+    onChange={action("onChange")}
+  />
 );
 export const SuggestStory = SuggestTemplate.bind({});
 SuggestStory.args = {
@@ -256,10 +315,14 @@ SuggestStory.args = {
   placeholder: "Search for something....",
   error: "",
   info: "",
-  options:["category: latest", "category: trending"],
-  defaultItems:[
-    {value:"category: games",label:"Games", info:"Search latest games"},
-    {value:"category: dev",label:"Dev Tools", info:"Search latest developer tools"},
+  options: ["category: latest", "category: trending"],
+  defaultItems: [
+    { value: "category: games", label: "Games", info: "Search latest games" },
+    {
+      value: "category: dev",
+      label: "Dev Tools",
+      info: "Search latest developer tools",
+    },
   ],
   allowClear: true,
   autoFocus: false,
@@ -304,7 +367,7 @@ RangeStory.args = {
   label: "Range input",
   error: "",
   info: "",
-  value: [1,4],
+  value: [1, 4],
   min: 0,
   max: 10,
   step: 0.5,
@@ -344,8 +407,17 @@ FileStory.args = {
 const CheckboxTemplate: ComponentStory<typeof AxField.Checkbox> = (props) => (
   <div>
     <AxField.Checkbox {...props} onChange={action("onChange")} />
-    <AxField.Checkbox {...props} onChange={action("onChange")} icon="mdi mdi-marker" />
-    <AxField.Checkbox {...props} onChange={action("onChange")} icon="mdi mdi-eye" iconOff="mdi mdi-eye-off-outline" />
+    <AxField.Checkbox
+      {...props}
+      onChange={action("onChange")}
+      icon="mdi mdi-marker"
+    />
+    <AxField.Checkbox
+      {...props}
+      onChange={action("onChange")}
+      icon="mdi mdi-eye"
+      iconOff="mdi mdi-eye-off-outline"
+    />
   </div>
 );
 export const CheckboxStory = CheckboxTemplate.bind({});

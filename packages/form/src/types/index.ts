@@ -136,3 +136,6 @@ export interface OptionProps<K> {
    */
   onChange?: (checked?: K) => void;
 }
+
+export const EMPTY_ARRAY = [];
+Object.freeze(EMPTY_ARRAY);

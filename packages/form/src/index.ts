@@ -23,6 +23,7 @@ import { Switch } from "./inputs/Switch";
 import { Text } from "./inputs/Text";
 import { Textarea } from "./inputs/Textarea";
 import { Combo } from "./select/Combo";
+import { List } from "./select/List";
 import { Select } from "./select/Select";
 import { Suggest } from "./select/Suggest";
 import { Tag } from "./select/Tag";
@@ -50,6 +51,7 @@ export const AxField = {
   Select,
   Suggest,
   Tag,
+  List,
 };
 
 export { AxForm } from "./form/Form";
@@ -73,5 +75,6 @@ AxField.Combo.displayName = "AxField.Combo";
 AxField.Select.displayName = "AxField.Select";
 AxField.Suggest.displayName = "AxField.Suggest";
 AxField.Tag.displayName = "AxField.Tag";
+AxField.List.displayName = "AxField.List";
 AxField.Color.displayName = "AxField.Color";
 AxField.ColorPicker.displayName = "AxField.ColorPicker";
