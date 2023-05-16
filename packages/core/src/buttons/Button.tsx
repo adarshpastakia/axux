@@ -8,10 +8,10 @@
 
 import { handleClick } from "@axux/utilities/dist/handlers";
 import {
-  type FC,
   forwardRef,
-  type ForwardRefExoticComponent,
   useMemo,
+  type FC,
+  type ForwardRefExoticComponent,
 } from "react";
 import { AxAnimation } from "../animations";
 import { Link, type LinkProps } from "../components/Link";
@@ -22,9 +22,9 @@ import { AxIcon } from "../icons/Icon";
 import {
   type BadgeType,
   type ChildrenProp,
+  type ClickHandler,
   type Color,
   type ElementProps,
-  type EmptyCallback,
   type IconProp,
   type RefProp,
   type Size,
@@ -115,7 +115,7 @@ export interface ButtonProps extends ElementProps, IconProp, RefProp {
    */
   nav?: LinkProps;
 
-  onClick?: EmptyCallback;
+  onClick?: ClickHandler;
 }
 
 export interface ButtonGroupProps extends ElementProps, ChildrenProp {
