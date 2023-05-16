@@ -11,22 +11,24 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Children,
   cloneElement,
-  type FC,
-  type PropsWithChildren,
-  type ReactElement,
-  type Ref,
+  isValidElement,
   useCallback,
   useEffect,
   useImperativeHandle,
   useTransition,
+  type FC,
+  type PropsWithChildren,
+  type ReactElement,
+  type Ref,
 } from "react";
 import {
-  Controller as HFController,
-  type DeepPartial,
   FormProvider,
+  Controller as HFController,
   useForm,
+  type DeepPartial,
 } from "react-hook-form";
 import type * as yup from "yup";
+import { type InputProps } from "../types";
 
 export interface FormRef<K> {
   reset: () => void;
@@ -64,7 +66,11 @@ export interface FormProps<K extends KeyValue = KeyValue> extends ElementProps {
 
 export interface ControllerProps {
   name: string;
-  children: ReactElement;
+  children:
+    | ReactElement
+    | ((
+        props: InputProps & { inputRef?: React.Ref<HTMLInputElement> }
+      ) => ReactElement);
 }
 
 export const AxController: FC<ControllerProps> = ({ name, children }) => {
@@ -76,30 +82,43 @@ export const AxController: FC<ControllerProps> = ({ name, children }) => {
         fieldState: { error },
         formState: { isSubmitting },
       }) =>
-        cloneElement(Children.only(children), {
-          ...field,
-          inputRef: (el: AnyObject) => {
-            el && ref(el);
-            try {
-              if (
-                children.props.inputRef &&
-                "current" in children.props.inputRef
-              )
-                children.props.inputRef.current = el;
-              if (children.props.inputRef?.prototype)
-                children.props.inputRef(el);
-            } catch (_) {
-              //
-            }
-          },
-          isReadOnly: isSubmitting || children.props.isReadOnly,
-          isInvalid: !!error?.message || children.props.isInvalid,
-          error: error?.message,
-          onChange: (v: AnyObject) => {
-            onChange(v);
-            children.props.onChange?.(v);
-          },
-        })
+        isValidElement<AnyObject>(children)
+          ? cloneElement(Children.only(children), {
+              ...field,
+              inputRef: (el: AnyObject) => {
+                el && ref(el);
+                try {
+                  if (
+                    children.props.inputRef &&
+                    "current" in children.props.inputRef
+                  )
+                    children.props.inputRef.current = el;
+                  if (children.props.inputRef?.prototype)
+                    children.props.inputRef(el);
+                } catch (_) {
+                  //
+                }
+              },
+              isReadOnly: isSubmitting || children.props.isReadOnly,
+              isInvalid: !!error?.message || children.props.isInvalid,
+              error: error?.message,
+              onChange: (v: AnyObject) => {
+                onChange(v);
+                children.props.onChange?.(v);
+              },
+            })
+          : children({
+              ...field,
+              inputRef: (el: AnyObject) => {
+                el && ref(el);
+              },
+              isReadOnly: isSubmitting,
+              isInvalid: !!error?.message,
+              error: error?.message,
+              onChange: (v: AnyObject) => {
+                onChange(v);
+              },
+            })
       }
     />
   );
