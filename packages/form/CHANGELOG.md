@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/adarshpastakia/axux/compare/v2.2.8...v2.3.0) (2023-05-16)
+
+### Bug Fixes
+
+- **FieldList:** added List component ([bc04b7d](https://github.com/adarshpastakia/axux/commit/bc04b7da8c45b8776ee0bb874dd7edcc3c0f5665))
+- **FieldTag:** clear input after select ([6df98b7](https://github.com/adarshpastakia/axux/commit/6df98b79fa79fbe823fdd21746e4b07857e289d2))
+- **FormController:** allow function as children ([a5497e2](https://github.com/adarshpastakia/axux/commit/a5497e2a40403b38805f82d6b5421ffeb054f5d5))
+- **Form:** field inline styling ([1cb39cf](https://github.com/adarshpastakia/axux/commit/1cb39cf0088e1bf1d22cb4c608efdf3b64e46757))
+
 ## [2.2.8](https://github.com/adarshpastakia/axux/compare/v2.2.7...v2.2.8) (2023-05-15)
 
 ### Bug Fixes

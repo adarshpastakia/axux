@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/adarshpastakia/axux/compare/v2.2.8...v2.3.0) (2023-05-16)
+
+### Bug Fixes
+
+- **Button:** onClick handler ([9685dc8](https://github.com/adarshpastakia/axux/commit/9685dc8c096fa16f85b067dbecc362f40604d5a4))
+- **Button:** use badge placement prop ([323bc8a](https://github.com/adarshpastakia/axux/commit/323bc8ae6121c181718bafb6a26a1bf585384ed3))
+
 ## [2.2.8](https://github.com/adarshpastakia/axux/compare/v2.2.7...v2.2.8) (2023-05-15)
 
 ### Bug Fixes
