@@ -534,7 +534,10 @@
       @apply bg-primary-500/10;
     }
     &[data-selected="true"] {
-      @apply bg-primary-500/50 pointer-events-none;
+      @apply bg-primary-500/30;
+    }
+    &[data-active="true"][data-selected="true"] {
+      @apply bg-primary-500/50;
     }
   }
   .ax-select__empty {
