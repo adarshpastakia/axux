@@ -7,7 +7,14 @@
  */
 
 import { type ChildProp, type ElementProps } from "@axux/core/dist/types";
-import { type FC, memo, type MouseEvent, type ReactNode, useCallback } from "react";
+import {
+  memo,
+  useCallback,
+  type FC,
+  type MouseEvent,
+  type ReactNode,
+  Fragment,
+} from "react";
 
 export interface ContainerProps extends ElementProps, ChildProp {
   /**
@@ -47,6 +54,10 @@ export interface ContainerProps extends ElementProps, ChildProp {
    */
   inline?: boolean;
   /**
+   * plain style
+   */
+  plain?: boolean;
+  /**
    * label width for inline
    */
   labelWidth?: string;
@@ -66,6 +77,7 @@ export const Container: FC<ContainerProps> = memo(
     labelAppend,
     className,
     inline,
+    plain,
     labelWidth,
     ...rest
   }: ContainerProps) => {
@@ -82,19 +94,31 @@ export const Container: FC<ContainerProps> = memo(
         className={`ax-field__container ${className ?? ""}`}
         style={{ width, minWidth, maxWidth }}
         data-inline={inline}
+        data-plain={plain}
       >
-        {label && (
-          <div className="ax-field__label" style={{ width: labelWidth }}>
-            <label data-required={isRequired} onClick={onClick}>
-              {label}
-            </label>
-            <div className="leading-[1]">{labelAppend}</div>
+        <div>
+          <div className="ax-field__label" style={{ flexBasis: labelWidth }}>
+            {label && (
+              <Fragment>
+                <label data-required={isRequired} onClick={onClick}>
+                  {label}
+                </label>
+                <div className="leading-[1]">{labelAppend}</div>
+              </Fragment>
+            )}
           </div>
-        )}
-        <div className="ax-field__container--row" data-vertical={isVertical}>
-          {children}
+          <div className="ax-field__container--row" data-vertical={isVertical}>
+            {children}
+          </div>
         </div>
-        {info && <small className="text-muted px-2">{info}</small>}
+        {info && (
+          <small
+            className="text-muted px-2"
+            style={{ marginInlineStart: labelWidth }}
+          >
+            {info}
+          </small>
+        )}
       </div>
     );
   }

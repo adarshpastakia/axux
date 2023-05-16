@@ -37,7 +37,7 @@ const FormSchema = new yup.ObjectSchema({
 });
 type SchemaType = yup.InferType<typeof FormSchema>;
 
-const Template: ComponentStory<typeof AxForm> = () => {
+const Template: ComponentStory<typeof AxForm> = (props: AnyObject) => {
   const formRef = useRef<FormRef<SchemaType>>(null);
 
   const [strength, setStrength] = useState(72);
@@ -55,6 +55,7 @@ const Template: ComponentStory<typeof AxForm> = () => {
     <AxViewport>
       <AxPage>
         <AxForm<SchemaType>
+          {...props}
           schema={FormSchema}
           formRef={formRef}
           onSubmit={action("onSubmit")}
@@ -113,17 +114,21 @@ const Template: ComponentStory<typeof AxForm> = () => {
                   <AxFlexBox.Col span="md:6">
                     <AxFlexBox.Row orient="col">
                       <AxFlexBox.Col>
-                        <AxForm.Controller name="check">
-                          <AxField.Checkbox label="Agree to something" />
-                        </AxForm.Controller>
+                        <AxField.Container plain>
+                          <AxForm.Controller name="check">
+                            <AxField.Checkbox label="Agree to something" />
+                          </AxForm.Controller>
+                        </AxField.Container>
                       </AxFlexBox.Col>
                       <AxFlexBox.Col>
-                        <AxForm.Controller name="switch">
-                          <AxField.Switch
-                            color="accent"
-                            label="Switch to something"
-                          />
-                        </AxForm.Controller>
+                        <AxField.Container plain>
+                          <AxForm.Controller name="switch">
+                            <AxField.Switch
+                              color="accent"
+                              label="Switch to something"
+                            />
+                          </AxForm.Controller>
+                        </AxField.Container>
                       </AxFlexBox.Col>
                     </AxFlexBox.Row>
                   </AxFlexBox.Col>
@@ -171,7 +176,7 @@ const Template: ComponentStory<typeof AxForm> = () => {
                         ]}
                         allowClear
                         onChange={action("select:onChange")}
-                        onSelect={action("select:onSelect")}
+                        onSelect={action("select:onSelect") as AnyObject}
                         onCreateOption={action("select:onCreateOption")}
                         renderer={(item) => (
                           <div>
@@ -212,7 +217,7 @@ const Template: ComponentStory<typeof AxForm> = () => {
                         ]}
                         allowClear
                         onChange={action("select:onChange")}
-                        onSelect={action("select:onSelect")}
+                        onSelect={action("select:onSelect") as AnyObject}
                         onCreateOption={action("select:onCreateOption")}
                       />
                     </AxForm.Controller>
@@ -239,6 +244,8 @@ const Template: ComponentStory<typeof AxForm> = () => {
 };
 
 export const FormStory = Template.bind({});
-FormStory.args = {};
+FormStory.args = {
+  inline: true,
+};
 
 export default { title: "AxForm", component: AxForm };

@@ -22,7 +22,7 @@
   }
 
   .ax-form[data-inline="true"] {
-    & .ax-field__container {
+    & .ax-field__container > div {
       @apply flex flex-nowrap gap-2;
 
       & > .ax-field__label {
@@ -30,11 +30,11 @@
       }
 
       & > .ax-field__container--row {
-        @apply flex-1;
+        @apply flex-auto;
+      }
 
-        & + small {
-          @apply basis-full;
-        }
+      & + small {
+        @apply ms-36;
       }
     }
   }
@@ -126,7 +126,7 @@
       @apply mt-4;
     }
 
-    &[data-inline="true"] {
+    &[data-inline="true"] > div {
       @apply flex flex-nowrap gap-2;
 
       & > .ax-field__label {
@@ -134,11 +134,11 @@
       }
 
       & > .ax-field__container--row {
-        @apply flex-1;
+        @apply flex-auto;
+      }
 
-        & + small {
-          @apply basis-full;
-        }
+      & + small {
+        @apply ms-36;
       }
     }
 

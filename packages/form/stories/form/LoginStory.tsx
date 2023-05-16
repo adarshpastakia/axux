@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxButton } from "@axux/core";
+import { AxButton, AxFooter } from "@axux/core";
 import { action } from "@storybook/addon-actions";
 import { ComponentStory } from "@storybook/react";
 import { useCallback } from "react";
@@ -42,7 +42,9 @@ const SampleLogin: ComponentStory<typeof AxForm> = (props) => {
         <AxForm.Controller name="password">
           <AxField.Password label="Password" />
         </AxForm.Controller>
-        <AxButton>Validate</AxButton>
+        <AxFooter justify="end" className="mt-8">
+          <AxButton>Validate</AxButton>
+        </AxFooter>
       </AxForm>
     </div>
   );
@@ -50,6 +52,7 @@ const SampleLogin: ComponentStory<typeof AxForm> = (props) => {
 
 export const LoginStory = SampleLogin.bind({});
 LoginStory.args = {
+  inline: true,
   defaultValues: {
     username: "testing",
     password: "passing",
