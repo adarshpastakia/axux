@@ -9,14 +9,15 @@
 import { debounce, isEmpty, matchString } from "@axux/utilities";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { type BaseSelectProps, getLabel } from "./utils";
+import { EMPTY_ARRAY } from "../types";
 
 export const useSelect = ({
   options = [],
   labelProperty,
   onQuery,
 }: BaseSelectProps<AnyObject>) => {
-  const originalList = useRef<AnyObject[]>([]);
-  const [list, setList] = useState<AnyObject[]>([]);
+  const originalList = useRef<AnyObject[]>(EMPTY_ARRAY);
+  const [list, setList] = useState<AnyObject[]>(EMPTY_ARRAY);
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export const useSelect = ({
   const onQueryChange = useCallback(
     (query: string) => {
       setQuery(query);
-      if (isEmpty(query)) return setList(originalList.current ?? []);
+      if (isEmpty(query)) return setList(originalList.current ?? EMPTY_ARRAY);
 
       if (onQuery != null) {
         return handleQuery(query);
