@@ -30,7 +30,7 @@
       }
 
       & > .ax-field__container--row {
-        @apply flex-auto;
+        @apply flex-1;
       }
 
       & + small {
@@ -73,12 +73,6 @@
     & > .ax-field__option {
       @apply px-2;
     }
-    &[data-align="start"] {
-      @apply order-1;
-    }
-    &[data-align="end"] {
-      @apply order-5;
-    }
 
     &.empty-addon {
       @apply text-sm text-muted opacity-70;
@@ -104,6 +98,13 @@
     & .ax-field__addon > span {
       @apply p-0;
     }
+
+    & .ax-field__addon[data-align="start"] {
+      @apply order-1;
+    }
+    & .ax-field__addon[data-align="end"] {
+      @apply order-5;
+    }
     & .ax-field__addon[data-align="start"] > span {
       @apply ps-2;
     }
@@ -120,10 +121,12 @@
 
   /******************* container *******************/
   .ax-field__container {
-    @apply rounded;
-
     & + .ax-field__container {
       @apply mt-4;
+    }
+
+    & .ax-field__container {
+      @apply mt-0;
     }
 
     &[data-inline="true"] > div {
@@ -134,7 +137,7 @@
       }
 
       & > .ax-field__container--row {
-        @apply flex-auto;
+        @apply flex-1;
       }
 
       & + small {
@@ -143,7 +146,7 @@
     }
 
     & .ax-field__container--row {
-      @apply flex flex-nowrap items-center border border-bw-200 dark:border-bw-700;
+      @apply flex flex-nowrap items-center border border-bw-200 dark:border-bw-700 rounded;
 
       & > .ax-button {
         @apply m-0 self-stretch;
@@ -176,31 +179,51 @@
       }
     }
 
-    &[data-plain="true"] .ax-field__container--row {
+    &[data-plain="true"] > div > .ax-field__container--row {
       @apply border-none;
     }
-    &:not([data-plain="true"]) .ax-field__container--row {
-      @apply rounded-[inherit];
+
+    &:not([data-plain="true"]) > div > .ax-field__container--row {
+      & > .ax-field__container,
+      & > .ax-field__wrapper {
+        @apply m-0;
+      }
+
+      & .ax-field__container--row {
+        @apply border-none;
+      }
+
+      &:not([data-vertical="true"]) > .ax-field__container {
+        & .ax-field__container--row {
+          @apply rounded-none;
+        }
+        &:first-child .ax-field__container--row {
+          @apply rounded-s;
+        }
+        &:last-child .ax-field__container--row {
+          @apply rounded-e;
+        }
+      }
+      &[data-vertical="true"] > .ax-field__container {
+        & .ax-field__container--row {
+          @apply rounded-none;
+        }
+        &:first-child .ax-field__container--row {
+          @apply rounded-t;
+        }
+        &:last-child .ax-field__container--row {
+          @apply rounded-b;
+        }
+      }
     }
 
-    & .ax-field__container--row > * {
-      @apply flex-initial !order-none;
-    }
     & .ax-field__container--row > .ax-field__container,
     & .ax-field__container--row > .ax-field__wrapper {
-      @apply flex-auto m-0;
+      @apply flex-auto;
     }
 
-    & .ax-field__container--row .ax-field__container--row {
-      @apply border-none;
-    }
-    &
-      .ax-field__container--row:not([data-vertical="true"])
-      > .ax-field__container {
-      @apply rounded-none first:rounded-s last:rounded-e;
-    }
-    & .ax-field__container--row[data-vertical="true"] > .ax-field__container {
-      @apply rounded-none first:rounded-t last:rounded-b;
+    & .ax-field__container--row .ax-field__container .ax-field__label {
+      @apply hidden;
     }
 
     &.ax-field--plain .ax-field__container--row,
