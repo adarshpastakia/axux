@@ -17,7 +17,7 @@
     display: none;
   }
 
-  .ax-form[data-loading="true"] {
+  .ax-form[data-loading="true"] .ax-field__container {
     @apply animate-pulse;
   }
 
@@ -121,7 +121,7 @@
 
   /******************* container *******************/
   .ax-field__container {
-    & + .ax-field__container {
+    & + * {
       @apply mt-4;
     }
 
