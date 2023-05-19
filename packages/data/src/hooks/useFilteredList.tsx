@@ -28,7 +28,7 @@ const filterList = (items: AnyObject[], query: string, matcher?: AnyObject) => {
   return newList;
 };
 
-export const useFilteredList = <T extends KeyValue = AnyObject>(
+export const useFilteredList = <T extends AnyObject = KeyValue>(
   items: T[],
   matcher?: (item: T, query: string) => boolean
 ) => {
