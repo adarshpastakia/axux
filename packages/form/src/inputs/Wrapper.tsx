@@ -9,15 +9,16 @@
 import { AxIcon } from "@axux/core";
 import { type ChildrenProp } from "@axux/core/dist/types";
 import {
-  type FC,
   memo,
+  useCallback,
+  type FC,
   type MouseEvent,
   type ReactNode,
   type Ref,
-  useCallback,
 } from "react";
 import { Icons } from "../types/icons";
 import { Container } from "./Container";
+import { Error } from "./Error";
 
 interface WrapperProps extends ChildrenProp {
   info?: string;
@@ -70,16 +71,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
           data-plain={isPlain}
           ref={wrapperRef}
         >
-          {error && (
-            <div className="ax-field__error">
-              <AxIcon
-                icon={Icons.iconError}
-                data-tooltip={error}
-                data-tooltip-color="danger"
-                data-tooltip-placement="bottom"
-              />
-            </div>
-          )}
+          {error && <Error error={error} />}
           {children}
           {canClear && (
             <div className="ax-field__clear" onClick={handleClear}>
