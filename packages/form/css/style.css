@@ -124,6 +124,7 @@
     }
 
     & .ax-field__container,
+    & .ax-field__container + *,
     & .ax-field__addon {
       @apply mt-0;
     }
@@ -560,6 +561,12 @@
   }
   .ax-select__tag {
     @apply m-1 text-bw-900 dark:text-bw-50 before:bg-bw-50 dark:before:bg-bw-900 before:opacity-100;
+  }
+
+  .ax-field__list {
+    & > .ax-field__container--row > .ax-field__container {
+      @apply flex-initial;
+    }
   }
 
   /*******************  *******************/
