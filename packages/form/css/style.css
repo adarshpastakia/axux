@@ -21,21 +21,19 @@
     @apply animate-pulse;
   }
 
-  .ax-form[data-inline="true"] {
-    & .ax-field__container > div {
-      @apply flex flex-nowrap gap-2;
+  .ax-field__container[data-inline="true"] {
+    @apply flex flex-wrap gap-2;
 
-      & > .ax-field__label {
-        @apply basis-36 mt-1.5 truncate;
-      }
+    & > .ax-field__label {
+      @apply basis-36 mt-1.5 truncate;
+    }
 
-      & > .ax-field__container--row {
-        @apply flex-1;
-      }
+    & > .ax-field__container--row {
+      @apply flex-1;
+    }
 
-      & + small {
-        @apply ms-36;
-      }
+    & > small {
+      @apply ms-36 basis-full;
     }
   }
 
@@ -125,28 +123,13 @@
       @apply mt-4;
     }
 
-    & .ax-field__container {
+    & .ax-field__container,
+    & .ax-field__addon {
       @apply mt-0;
     }
 
-    &[data-inline="true"] > div {
-      @apply flex flex-nowrap gap-2;
-
-      & > .ax-field__label {
-        @apply basis-36 mt-1.5 truncate;
-      }
-
-      & > .ax-field__container--row {
-        @apply flex-1;
-      }
-
-      & + small {
-        @apply ms-36;
-      }
-    }
-
-    & .ax-field__container--row {
-      @apply flex flex-nowrap items-center border border-bw-200 dark:border-bw-700 rounded;
+    & > .ax-field__container--row {
+      @apply flex flex-nowrap items-center rounded;
 
       & > .ax-button {
         @apply m-0 self-stretch;
@@ -166,54 +149,63 @@
         }
       }
 
+      & > .ax-field__addon {
+        @apply border border-bw-200 dark:border-bw-700 first:rounded-s last:rounded-e;
+      }
+
+      &:not([data-vertical="true"]) {
+        & > .ax-field__addon {
+          @apply leading-none min-h-[2.125rem] self-start py-1.5;
+        }
+      }
+
       &[data-vertical="true"] {
         @apply flex-col items-stretch;
 
-        & > .ax-field__addon {
-          @apply leading-normal;
-
-          &:not(:first-child) {
-            @apply border-t;
-          }
+        &:not(:first-child) {
+          @apply border-t;
         }
       }
     }
 
-    &[data-plain="true"] > div > .ax-field__container--row {
+    &[data-plain="true"] > .ax-field__container--row {
       @apply border-none;
     }
 
-    &:not([data-plain="true"]) > div > .ax-field__container--row {
+    &:not([data-plain="true"]) > .ax-field__container--row {
+      @apply border border-bw-200 dark:border-bw-700;
+
       & > .ax-field__container,
-      & > .ax-field__wrapper {
+      & > .ax-field__wrapper,
+      & > .ax-field__addon {
         @apply m-0;
       }
+    }
 
+    &
+      > .ax-field__container--row:not([data-vertical="true"])
+      > .ax-field__container {
       & .ax-field__container--row {
-        @apply border-none;
+        @apply rounded-none;
       }
-
-      &:not([data-vertical="true"]) > .ax-field__container {
-        & .ax-field__container--row {
-          @apply rounded-none;
-        }
-        &:first-child .ax-field__container--row {
-          @apply rounded-s;
-        }
-        &:last-child .ax-field__container--row {
-          @apply rounded-e;
-        }
+      &:first-child > .ax-field__container--row,
+      &:first-child > .ax-field__addon {
+        @apply rounded-s;
       }
-      &[data-vertical="true"] > .ax-field__container {
-        & .ax-field__container--row {
-          @apply rounded-none;
-        }
-        &:first-child .ax-field__container--row {
-          @apply rounded-t;
-        }
-        &:last-child .ax-field__container--row {
-          @apply rounded-b;
-        }
+      &:last-child > .ax-field__container--row,
+      &:last-child > .ax-field__addon {
+        @apply rounded-e;
+      }
+    }
+    & > .ax-field__container--row[data-vertical="true"] > .ax-field__container {
+      & .ax-field__container--row {
+        @apply rounded-none;
+      }
+      &:first-child > .ax-field__container--row {
+        @apply rounded-t;
+      }
+      &:last-child > .ax-field__container--row {
+        @apply rounded-b;
       }
     }
 

@@ -51,10 +51,6 @@ export interface FormProps<K extends KeyValue = KeyValue> extends ElementProps {
    */
   defaultValues?: K;
   /**
-   * inline labels
-   */
-  inline?: boolean;
-  /**
    * change callback
    */
   onChange?: (values: K) => void;
@@ -128,7 +124,6 @@ export const AxForm = <K extends KeyValue>({
   formRef,
   schema,
   children,
-  inline,
   defaultValues,
   onSubmit = () => undefined,
   onChange,
@@ -184,7 +179,6 @@ export const AxForm = <K extends KeyValue>({
       <form
         onSubmit={form.handleSubmit(onSubmit, onInvalid) as AnyObject}
         data-loading={form.formState.isSubmitting}
-        data-inline={inline}
         className="ax-form contents"
         autoComplete="off"
         {...rest}
