@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.2](https://github.com/adarshpastakia/axux/compare/v2.3.1...v2.3.2) (2023-05-20)
+
+**Note:** Version bump only for package @axux/date
+
 ## [2.3.1](https://github.com/adarshpastakia/axux/compare/v2.3.0...v2.3.1) (2023-05-20)
 
 **Note:** Version bump only for package @axux/date

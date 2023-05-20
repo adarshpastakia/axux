@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.2](https://github.com/adarshpastakia/axux/compare/v2.3.1...v2.3.2) (2023-05-20)
+
+### Bug Fixes
+
+- **Form:** added support for i18n error messages ([30ea201](https://github.com/adarshpastakia/axux/commit/30ea201ff49560193447e10ddd3c9242532c3a15))
+- **List:** added tag style input ([3d3e02e](https://github.com/adarshpastakia/axux/commit/3d3e02e08d18bb7f1aaebecf2f824a0246d9cbaf))
+
 ## [2.3.1](https://github.com/adarshpastakia/axux/compare/v2.3.0...v2.3.1) (2023-05-20)
 
 ### Bug Fixes
