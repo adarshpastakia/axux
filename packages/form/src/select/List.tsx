@@ -6,8 +6,8 @@
  * @license   : MIT
  */
 
+import { AxTag } from "@axux/core";
 import { isArray, isEmpty } from "@axux/utilities";
-import { handleEnter } from "@axux/utilities/dist/handlers";
 import { Combobox } from "@headlessui/react";
 import {
   Fragment,
@@ -18,13 +18,14 @@ import {
   useState,
   useTransition,
   type FocusEvent,
+  type KeyboardEvent,
 } from "react";
 import { Container } from "../inputs/Container";
 import { FieldWrapper } from "../inputs/Wrapper";
 import { EMPTY_ARRAY } from "../types";
 import { Options } from "./Option";
 import { useSelect } from "./useSelect";
-import { defaultMatcher, getValue, type TagProps } from "./utils";
+import { defaultMatcher, getLabel, getValue, type TagProps } from "./utils";
 
 export const ListInput = <T extends AnyObject>({
   label,
@@ -40,6 +41,7 @@ export const ListInput = <T extends AnyObject>({
   onChange,
   onSelect,
   onQuery,
+  makeLabel,
   onCreateOption,
   usePortal,
   allowCreate,
@@ -61,10 +63,10 @@ export const ListInput = <T extends AnyObject>({
   onEnterPressed,
   autoFocus,
   multiple = true,
-  minHeight,
-  maxHeight,
+  minHeight = "12rem",
+  maxHeight = "24rem",
   ...rest
-}: Omit<TagProps<T>, "makeLabel"> & {
+}: TagProps<T> & {
   multiple?: boolean;
   minHeight?: number | string;
   maxHeight?: number | string;
@@ -121,6 +123,45 @@ export const ListInput = <T extends AnyObject>({
     [onChange, valueProperty, query]
   );
 
+  /** ***************** display label *******************/
+  const displayLabel = useCallback(
+    (option: T) => {
+      if (makeLabel != null && !isEmpty(actualValue)) return makeLabel(option);
+      return getLabel(option, labelProperty);
+    },
+    [makeLabel, labelProperty]
+  );
+
+  const handleRemove = useCallback(
+    (index = -1) => {
+      const newValue = [...actualValue];
+      newValue.splice(index, 1);
+      setActualValue(newValue);
+      onChange != null &&
+        startTransition(() =>
+          onChange(
+            newValue.map((value: AnyObject) => getValue(value, valueProperty))
+          )
+        );
+    },
+    [actualValue]
+  );
+
+  const handleKeyPress = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      if (!e.currentTarget.value && e.key === "Backspace") {
+        handleRemove();
+      }
+      if (!e.currentTarget.value && e.key === "Enter") {
+        onEnterPressed?.(e);
+      }
+      if (e.currentTarget.value && e.key === "Enter") {
+        (e.target as HTMLInputElement).value = "";
+      }
+    },
+    [handleRemove, onEnterPressed]
+  );
+
   return (
     <Combobox
       value={actualValue}
@@ -140,6 +181,7 @@ export const ListInput = <T extends AnyObject>({
         isRequired={isRequired}
         info={info}
         width={width}
+        className="ax-field__list"
       >
         <FieldWrapper
           error={error}
@@ -149,29 +191,40 @@ export const ListInput = <T extends AnyObject>({
           onClear={() => handleChange()}
           canClear={allowClear && !isEmpty(actualValue)}
         >
-          <Combobox.Input
-            ref={inputRef}
-            aria-label={label}
-            aria-disabled={isDisabled}
-            aria-readonly={isReadOnly}
-            aria-required={isRequired}
-            aria-errormessage={error}
-            size={1}
-            value={query}
-            placeholder={placeholder}
-            readOnly={!allowCreate}
-            data-invalid={isInvalid}
-            className="ax-field__input rounded-b-none"
-            autoComplete="off"
-            onKeyDown={handleEnter(onEnterPressed)}
-            onChange={(e) => onQueryChange(e.target.value)}
-            onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
-            {...rest}
-          />
+          <div className="flex flex-wrap flex-auto items-center order-3">
+            {actualValue.map((option, i) => (
+              <AxTag
+                key={i}
+                className="ax-select__tag"
+                onRemove={() => handleRemove(i)}
+              >
+                {displayLabel(option)}
+              </AxTag>
+            ))}
+            <Combobox.Input
+              ref={inputRef}
+              aria-label={label}
+              aria-disabled={isDisabled}
+              aria-readonly={isReadOnly}
+              aria-required={isRequired}
+              aria-errormessage={error}
+              size={1}
+              value={query}
+              placeholder={placeholder}
+              readOnly={!isEditable && !allowCreate}
+              data-invalid={isInvalid}
+              className="ax-field__input rounded-b-none"
+              autoComplete="off"
+              onKeyDown={handleKeyPress}
+              onChange={(e) => onQueryChange(e.target.value)}
+              onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
+              {...rest}
+            />
+          </div>
           {children}
         </FieldWrapper>
         <Combobox.Options
-          className="ax-select__dropdown relative min-h-[12rem] max-h-[24rem] shadow-none rounded-t-none mx-px"
+          className="ax-select__dropdown relative shadow-none rounded-t-none mx-px"
           static
           hold
           style={{
