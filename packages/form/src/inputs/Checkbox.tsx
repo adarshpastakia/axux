@@ -9,16 +9,17 @@
 import { AxIcon } from "@axux/core";
 import { type ElementProps, type IconProp } from "@axux/core/dist/types";
 import {
-  type ChangeEvent,
-  type FC,
   memo,
   useCallback,
   useEffect,
   useState,
   useTransition,
+  type ChangeEvent,
+  type FC,
 } from "react";
 import { type OptionProps } from "../types";
 import { Icons } from "../types/icons";
+import { Error } from "./Error";
 
 export interface CheckboxProps
   extends ElementProps,
@@ -87,15 +88,7 @@ export const Checkbox: FC<CheckboxProps> = memo(
           rtlFlip={rtlFlip}
           icon={icon ?? Icons.iconCheckboxOn}
         />
-        {error && (
-          <AxIcon
-            className="ax-field__error"
-            icon={Icons.iconError}
-            data-tooltip={error}
-            data-tooltip-color="danger"
-            data-tooltip-placement="bottom"
-          />
-        )}
+        {error && <Error error={error} />}
         {label && <span className="ax-field__option--label">{label}</span>}
       </label>
     );

@@ -6,19 +6,18 @@
  * @license   : MIT
  */
 
-import { AxIcon } from "@axux/core";
 import { type Color, type ElementProps } from "@axux/core/dist/types";
 import {
-  type ChangeEvent,
-  type FC,
   memo,
   useCallback,
   useEffect,
   useState,
   useTransition,
+  type ChangeEvent,
+  type FC,
 } from "react";
 import { type OptionProps } from "../types";
-import { Icons } from "../types/icons";
+import { Error } from "./Error";
 
 export interface SwitchProps
   extends ElementProps,
@@ -93,15 +92,7 @@ export const Switch: FC<SwitchProps> = memo(
         >
           <div className="ax-field__switch--handle" />
         </div>
-        {error && (
-          <AxIcon
-            className="ax-field__error"
-            icon={Icons.iconError}
-            data-tooltip={error}
-            data-tooltip-color="danger"
-            data-tooltip-placement="bottom"
-          />
-        )}
+        {error && <Error error={error} />}
         {label && <span className="ax-field__option--label">{label}</span>}
       </label>
     );

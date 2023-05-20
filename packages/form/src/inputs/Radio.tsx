@@ -8,9 +8,10 @@
 
 import { AxIcon } from "@axux/core";
 import { type ElementProps, type IconProp } from "@axux/core/dist/types";
-import { type FC, type FormEvent, memo, useCallback } from "react";
+import { memo, useCallback, type FC, type FormEvent } from "react";
 import { type OptionProps } from "../types";
 import { Icons } from "../types/icons";
+import { Error } from "./Error";
 
 export interface RadioProps
   extends ElementProps,
@@ -73,15 +74,7 @@ export const Radio: FC<RadioProps> = memo(
           rtlFlip={rtlFlip}
           icon={icon ?? Icons.iconRadioOn}
         />
-        {error && (
-          <AxIcon
-            className="ax-field__error"
-            icon={Icons.iconError}
-            data-tooltip={error}
-            data-tooltip-color="danger"
-            data-tooltip-placement="bottom"
-          />
-        )}
+        {error && <Error error={error} />}
         {label && <span className="ax-field__option--label">{label}</span>}
       </label>
     );
