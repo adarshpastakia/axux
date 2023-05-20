@@ -8,7 +8,14 @@
 
 import { AxIcon } from "@axux/core";
 import { type ChildrenProp } from "@axux/core/dist/types";
-import { type FC, memo, type MouseEvent, type ReactNode, type Ref, useCallback } from "react";
+import {
+  type FC,
+  memo,
+  type MouseEvent,
+  type ReactNode,
+  type Ref,
+  useCallback,
+} from "react";
 import { Icons } from "../types/icons";
 import { Container } from "./Container";
 
@@ -39,7 +46,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
     disabled,
     onClear,
     width,
-    isPlain,
+    isPlain = true,
     wrapperRef,
     ...rest
   }: WrapperProps) => {
@@ -55,7 +62,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
       [onClear]
     );
     return (
-      <Container width={width} maxWidth={width} {...rest} data-plain={isPlain}>
+      <Container width={width} {...rest} data-plain={false}>
         <div
           className="ax-field__wrapper"
           data-invalid={!disabled && isInvalid}

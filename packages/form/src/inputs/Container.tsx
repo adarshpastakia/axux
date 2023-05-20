@@ -8,12 +8,12 @@
 
 import { type ChildProp, type ElementProps } from "@axux/core/dist/types";
 import {
+  Fragment,
   memo,
   useCallback,
   type FC,
   type MouseEvent,
   type ReactNode,
-  Fragment,
 } from "react";
 
 export interface ContainerProps extends ElementProps, ChildProp {
@@ -54,10 +54,6 @@ export interface ContainerProps extends ElementProps, ChildProp {
    */
   inline?: boolean;
   /**
-   * plain style
-   */
-  plain?: boolean;
-  /**
    * label width for inline
    */
   labelWidth?: string;
@@ -77,7 +73,6 @@ export const Container: FC<ContainerProps> = memo(
     labelAppend,
     className,
     inline,
-    plain,
     labelWidth,
     ...rest
   }: ContainerProps) => {
@@ -90,26 +85,24 @@ export const Container: FC<ContainerProps> = memo(
     }, []);
     return (
       <div
+        data-plain={true}
         {...rest}
         className={`ax-field__container ${className ?? ""}`}
-        style={{ width, minWidth, maxWidth }}
+        style={{ width, minWidth, maxWidth, flexBasis: width }}
         data-inline={inline}
-        data-plain={plain}
       >
-        <div>
-          <div className="ax-field__label" style={{ flexBasis: labelWidth }}>
-            {label && (
-              <Fragment>
-                <label data-required={isRequired} onClick={onClick}>
-                  {label}
-                </label>
-                <div className="leading-[1]">{labelAppend}</div>
-              </Fragment>
-            )}
-          </div>
-          <div className="ax-field__container--row" data-vertical={isVertical}>
-            {children}
-          </div>
+        <div className="ax-field__label" style={{ flexBasis: labelWidth }}>
+          {label && (
+            <Fragment>
+              <label data-required={isRequired} onClick={onClick}>
+                {label}
+              </label>
+              <div className="leading-[1]">{labelAppend}</div>
+            </Fragment>
+          )}
+        </div>
+        <div className="ax-field__container--row" data-vertical={isVertical}>
+          {children}
         </div>
         {info && (
           <small
