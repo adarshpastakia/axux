@@ -130,7 +130,7 @@
     }
 
     & > .ax-field__container--row {
-      @apply flex flex-nowrap items-center rounded;
+      @apply flex flex-wrap items-center rounded;
 
       & > .ax-button {
         @apply m-0 self-stretch;
@@ -156,12 +156,20 @@
 
       &:not([data-vertical="true"]) {
         & > .ax-field__addon {
-          @apply leading-none min-h-[2.125rem] self-start py-1.5;
+          @apply leading-none min-h-[2.125rem] self-start;
+
+          & > .addon-child {
+            @apply my-2;
+          }
+
+          & .ax-field__option {
+            @apply my-1.5;
+          }
         }
       }
 
       &[data-vertical="true"] {
-        @apply flex-col items-stretch;
+        @apply flex-col flex-nowrap items-stretch;
 
         &:not(:first-child) {
           @apply border-t;
