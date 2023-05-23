@@ -18,7 +18,7 @@
     & .ax-button__inner {
       @apply flex items-center justify-center py-[0.25em] px-[1em] gap-1 z-10 transition-colors font-medium
         shadow shadow-bw-400 dark:shadow-black active:shadow-inner active:shadow-bw-500 rounded
-        focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 w-full;
+        focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 w-full h-full;
       min-height: 2em;
       min-width: 2em;
       max-width: 15em;

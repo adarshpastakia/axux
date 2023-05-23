@@ -88,7 +88,12 @@ export const Container: FC<ContainerProps> = memo(
         data-plain={true}
         {...rest}
         className={`ax-field__container ${className ?? ""}`}
-        style={{ width, minWidth, maxWidth, flexBasis: width }}
+        style={{
+          width,
+          minWidth,
+          maxWidth,
+          flex: width ? `0 0 ${width}` : "",
+        }}
         data-inline={inline}
       >
         <div className="ax-field__label" style={{ flexBasis: labelWidth }}>
