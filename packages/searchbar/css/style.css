@@ -42,13 +42,13 @@
       @apply border-dashed px-2 py-px border-bw-500/50;
     }
 
-    & .ax-filter__deleteButton {
-      @apply text-danger-700 dark:text-danger-400;
-    }
-
     & .ax-filter__menu .ax-menu__item {
       @apply text-sm;
     }
+  }
+
+  .ax-filter__deleteButton {
+    @apply text-danger-700 dark:text-danger-400;
   }
 
   .ax-filter__tag {

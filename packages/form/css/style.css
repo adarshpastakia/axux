@@ -55,7 +55,7 @@
     @apply leading-none;
 
     & > .ax-button {
-      @apply m-0;
+      @apply m-0 h-full;
 
       & .ax-button__inner {
         @apply rounded-none;
@@ -70,6 +70,10 @@
     & > span,
     & > .ax-field__option {
       @apply px-2;
+    }
+
+    & .ax-field__container--row {
+      @apply border-0;
     }
 
     &.empty-addon {
@@ -119,14 +123,20 @@
 
   /******************* container *******************/
   .ax-field__container {
+    @apply relative;
+
     & + * {
-      @apply mt-4;
+      @apply mt-6;
     }
 
     & .ax-field__container,
     & .ax-field__container + *,
     & .ax-field__addon {
       @apply mt-0;
+    }
+
+    & > small {
+      @apply absolute -bottom-[1.15rem] truncate inset-x-0;
     }
 
     & > .ax-field__container--row {
@@ -156,10 +166,10 @@
 
       &:not([data-vertical="true"]) {
         & > .ax-field__addon {
-          @apply leading-none min-h-[2.125rem] self-start;
+          @apply leading-none min-h-[2.125rem] self-stretch;
 
           & > .addon-child {
-            @apply my-2;
+            @apply my-2 inline-block;
           }
 
           & .ax-field__option {
