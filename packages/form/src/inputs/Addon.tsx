@@ -69,12 +69,19 @@ export const Addon: FC<AddonProps> = memo(
         }`}
         {...rest}
       >
-        {showSpinner && <AxAnimation.Spinner className="text-primary" />}
+        {showSpinner && (
+          <AxAnimation.Spinner className="addon-child text-primary" />
+        )}
         {!showSpinner && icon && (
-          <AxIcon icon={icon} color={color} rtlFlip={rtlFlip} />
+          <AxIcon
+            icon={icon}
+            color={color}
+            rtlFlip={rtlFlip}
+            className="addon-child"
+          />
         )}
         {!showSpinner && isString(children) ? (
-          <span>{children}</span>
+          <span className="addon-child">{children}</span>
         ) : (
           children
         )}

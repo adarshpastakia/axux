@@ -25,7 +25,7 @@ const Select = ({ options, value, onChange, width }: KeyValue) => {
   const { attributes, styles, setPopperElement, setReferenceElement } =
     usePopover({ placement: "bottom", sameWidth: true, hideArrow: true });
   return (
-    <AxField.Container>
+    <AxField.Container data-plain={false}>
       <Listbox value={value} onChange={onChange}>
         <div className="relative ax-field__wrapper" style={{ width }}>
           <Listbox.Button

@@ -47,7 +47,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
     disabled,
     onClear,
     width,
-    isPlain = true,
+    isPlain = false,
     wrapperRef,
     ...rest
   }: WrapperProps) => {
