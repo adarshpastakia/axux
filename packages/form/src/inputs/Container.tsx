@@ -108,15 +108,15 @@ export const Container: FC<ContainerProps> = memo(
         </div>
         <div className="ax-field__container--row" data-vertical={isVertical}>
           {children}
+          {info && (
+            <small
+              className="text-muted px-2"
+              style={{ marginInlineStart: labelWidth }}
+            >
+              {info}
+            </small>
+          )}
         </div>
-        {info && (
-          <small
-            className="text-muted px-2"
-            style={{ marginInlineStart: labelWidth }}
-          >
-            {info}
-          </small>
-        )}
       </div>
     );
   }

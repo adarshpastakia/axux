@@ -17,12 +17,18 @@
     display: none;
   }
 
+  .ax-form {
+    & .ax-field__container ~ * {
+      @apply mt-4;
+    }
+  }
+
   .ax-form[data-loading="true"] .ax-field__container {
     @apply animate-pulse;
   }
 
   .ax-field__container[data-inline="true"] {
-    @apply flex flex-wrap gap-2;
+    @apply flex flex-wrap gap-1;
 
     & > .ax-field__label {
       @apply basis-36 mt-1.5 truncate;
@@ -83,12 +89,13 @@
 
   /******************* wrapper *******************/
   .ax-field__wrapper {
-    @apply bg-bw-50 dark:bg-bw-900 relative flex flex-nowrap items-center rounded-[inherit]
+    @apply bg-bw-0 dark:bg-bw-1000 relative flex flex-nowrap items-center rounded-[inherit] leading-normal min-h-[2rem]
         after:content-[""] after:h-0.5 after:rounded-b-sm after:bg-primary-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:w-0 after:transition-[width] after:duration-500
-        focus-within:bg-white focus-within:dark:bg-black focus-within:after:w-full print:hidden shadow-bw-100 dark:shadow-[#000];
+        focus-within:bg-white focus-within:dark:bg-black focus-within:after:w-full print:hidden shadow-bw-200/20 dark:shadow-[#000];
 
     &:not([data-plain="true"]) {
-      box-shadow: 0 1px 0 1px var(--tw-shadow-color) inset;
+      box-shadow: 0 1px 0 1px var(--tw-shadow-color) inset,
+        0 0 0 1px theme(colors.bw.400/0.3);
     }
     &[data-disabled="true"] {
       @apply pointer-events-none before:absolute before:inset-0 before:pointer-events-auto before:cursor-not-allowed before:bg-bw-500/20 before:rounded-[inherit];
@@ -125,22 +132,18 @@
   .ax-field__container {
     @apply relative;
 
-    & + * {
-      @apply mt-6;
-    }
-
     & .ax-field__container,
-    & .ax-field__container + *,
+    & .ax-field__container ~ *,
     & .ax-field__addon {
-      @apply mt-0;
-    }
-
-    & > small {
-      @apply absolute -bottom-[1.15rem] truncate inset-x-0;
+      @apply !mt-0;
     }
 
     & > .ax-field__container--row {
-      @apply flex flex-wrap items-center rounded;
+      @apply flex flex-wrap items-center rounded leading-none shadow-bw-400/30;
+
+      & > small {
+        @apply truncate inline-block max-w-full leading-4 basis-full;
+      }
 
       & > .ax-button {
         @apply m-0 self-stretch;
@@ -161,15 +164,16 @@
       }
 
       & > .ax-field__addon {
-        @apply border border-bw-200 dark:border-bw-700 first:rounded-s last:rounded-e;
+        @apply first:rounded-s last:rounded-e;
+        box-shadow: 0 0 0 1px var(--tw-shadow-color);
       }
 
       &:not([data-vertical="true"]) {
         & > .ax-field__addon {
-          @apply leading-none min-h-[2.125rem] self-stretch;
+          @apply leading-8 self-stretch;
 
           & > .addon-child {
-            @apply my-2 inline-block;
+            @apply inline-block;
           }
 
           & .ax-field__option {
@@ -188,16 +192,8 @@
     }
 
     &[data-plain="true"] > .ax-field__container--row {
-      @apply border-none;
-    }
-
-    &:not([data-plain="true"]) > .ax-field__container--row {
-      @apply border border-bw-200 dark:border-bw-700;
-
-      & > .ax-field__container,
-      & > .ax-field__wrapper,
-      & > .ax-field__addon {
-        @apply m-0;
+      & .ax-field__container--row {
+        box-shadow: 0 0 0 1px var(--tw-shadow-color);
       }
     }
 
@@ -220,10 +216,14 @@
       & .ax-field__container--row {
         @apply rounded-none;
       }
+      & + .ax-field__container {
+        @apply !mt-2;
+      }
+
       &:first-child > .ax-field__container--row {
         @apply rounded-t;
       }
-      &:last-child > .ax-field__container--row {
+      &:last-of-type > .ax-field__container--row {
         @apply rounded-b;
       }
     }
@@ -239,7 +239,7 @@
 
     &.ax-field--plain .ax-field__container--row,
     &.ax-field--plain .ax-field__wrapper {
-      @apply border-transparent shadow-none bg-transparent min-h-[2rem] after:hidden;
+      @apply !border-transparent !shadow-none !bg-transparent min-h-[2rem] after:hidden;
     }
   }
 
@@ -288,7 +288,7 @@
   }
 
   .ax-field__option {
-    @apply inline-flex items-center relative cursor-pointer align-middle max-w-full overflow-hidden;
+    @apply inline-flex items-center relative cursor-pointer align-middle max-w-full overflow-hidden leading-normal;
 
     & > .ax-field__option--label {
       @apply flex-auto px-1 truncate select-none;

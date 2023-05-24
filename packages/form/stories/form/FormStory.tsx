@@ -114,14 +114,14 @@ const Template: ComponentStory<typeof AxForm> = (props: AnyObject) => {
                   <AxFlexBox.Col span="md:6">
                     <AxFlexBox.Row orient="col">
                       <AxFlexBox.Col>
-                        <AxField.Container plain>
+                        <AxField.Container>
                           <AxForm.Controller name="check">
                             <AxField.Checkbox label="Agree to something" />
                           </AxForm.Controller>
                         </AxField.Container>
                       </AxFlexBox.Col>
                       <AxFlexBox.Col>
-                        <AxField.Container plain>
+                        <AxField.Container>
                           <AxForm.Controller name="switch">
                             <AxField.Switch
                               color="accent"
@@ -244,8 +244,6 @@ const Template: ComponentStory<typeof AxForm> = (props: AnyObject) => {
 };
 
 export const FormStory = Template.bind({});
-FormStory.args = {
-  inline: true,
-};
+FormStory.args = {};
 
 export default { title: "AxForm", component: AxForm };

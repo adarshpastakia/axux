@@ -65,7 +65,7 @@
     }
 
     &[data-square="true"] .ax-button__inner {
-      @apply p-[0.25em] justify-center w-fit h-fit;
+      @apply p-[0.25em] justify-center;
     }
     &[data-square="true"].flush .ax-button__inner {
       @apply p-0.5 justify-center;

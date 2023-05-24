@@ -41,56 +41,59 @@ import { LoginStory } from "./form/LoginStory";
 
 <Canvas>
   <Story name="Testing">
-    <div className="w-[48rem]">
-      <AxField.Text label="Test label" info="Test info line" />
-      <AxField.Text inline label="Test label" info="Test info line" />
-      <AxField.Container label="Container label" info="Test info line" inline>
-        <AxField.Addon>
-          <AxButton icon="mdi mdi-minus" variant="link" />
-        </AxField.Addon>
-        <AxField.Textarea />
-      </AxField.Container>
-      <AxField.Container label="Container label">
-        <AxField.Addon>
-          <AxField.Checkbox />
-        </AxField.Addon>
-        <AxField.Text info="Test info line" width="32px" />
-        <AxField.Addon icon="mdi mdi-plus" />
-        <AxField.Text info="Test info line" />
-      </AxField.Container>
-      <AxField.Container label="Container label" inline>
-        <AxField.Addon>
-          <AxField.Checkbox />
-        </AxField.Addon>
-        <AxField.Text info="Test info line" />
-        <AxField.Addon icon="mdi mdi-plus" />
-        <AxField.Text info="Test info line" />
-      </AxField.Container>
-      <AxField.Container label="Container label" info="Test info line" inline>
-        <AxField.Addon>
-          <AxButton icon="mdi mdi-minus" variant="link" />
-        </AxField.Addon>
-        <AxField.Text />
-        <AxField.Text />
-      </AxField.Container>
-      <AxField.Container
-        label="Container label"
-        info="Test info line"
-        isVertical
-      >
-        <AxField.Text />
-        <AxField.Text />
-      </AxField.Container>
-      <AxField.Container
-        label="Container label"
-        info="Test info line"
-        isVertical
-        inline
-      >
-        <AxField.Text />
-        <AxField.Text />
-      </AxField.Container>
-    </div>
+    <AxForm>
+      <div className="w-[48rem]">
+        <AxField.Text label="Test label" info="Testing info line" />
+        <AxField.Text inline label="Test label" info="Test info line" />
+        <AxField.Container label="Container label" info="Test info line" inline>
+          <AxField.Addon>
+            <AxButton icon="mdi mdi-minus" variant="link" />
+          </AxField.Addon>
+          <AxField.Textarea />
+        </AxField.Container>
+        <AxField.Container label="Container label">
+          <AxField.Text info="Testing info line" width="32px" />
+          <AxField.Addon icon="mdi mdi-plus" />
+          <AxField.Text info="Test info line" />
+        </AxField.Container>
+        <AxField.Container label="Container label">
+          <AxField.Text info="Testing info line" width="18rem" />
+          <AxField.Text info="Test info line" />
+        </AxField.Container>
+        <AxField.Container label="Container label" inline>
+          <AxField.Addon>
+            <AxField.Checkbox />
+          </AxField.Addon>
+          <AxField.Text info="Test info line" />
+          <AxField.Addon icon="mdi mdi-plus" />
+          <AxField.Text info="Testing info line" />
+        </AxField.Container>
+        <AxField.Container label="Container label" info="Test info line" inline>
+          <AxField.Addon>
+            <AxButton icon="mdi mdi-minus" variant="link" />
+          </AxField.Addon>
+          <AxField.Text />
+          <AxField.Text />
+        </AxField.Container>
+        <AxField.Container
+          label="Container label"
+          info="Test info line"
+          isVertical
+        >
+          <AxField.Text />
+          <AxField.Text />
+        </AxField.Container>
+        <AxField.Container
+          label="Container label"
+          info="Test info line"
+          isVertical
+          inline
+        >
+          <AxField.Text />
+          <AxField.Text />
+        </AxField.Container>
+      </div>
+    </AxForm>
   </Story>
 </Canvas>
 
