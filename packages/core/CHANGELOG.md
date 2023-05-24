@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.4](https://github.com/adarshpastakia/axux/compare/v2.3.3...v2.3.4) (2023-05-24)
+
+### Bug Fixes
+
+- field layout ([f5f1bfd](https://github.com/adarshpastakia/axux/commit/f5f1bfdd4e38bf24508c6a4bbfbcf556c2db2f99))
+
 ## [2.3.3](https://github.com/adarshpastakia/axux/compare/v2.3.2...v2.3.3) (2023-05-23)
 
 **Note:** Version bump only for package @axux/core
