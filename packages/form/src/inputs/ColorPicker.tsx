@@ -8,12 +8,12 @@
 
 import { type ElementProps } from "@axux/core/dist/types";
 import {
-  type FC,
   memo,
   useCallback,
   useEffect,
   useState,
   useTransition,
+  type FC,
 } from "react";
 import { SketchPicker } from "react-color";
 
@@ -100,8 +100,20 @@ export const ColorPicker: FC<ColorProps> = memo(
         color={_actualValue}
         presetColors={swatches}
         disableAlpha={hideAlpha}
-        onChange={({ hex }) => setActualValue(hex)}
-        onChangeComplete={({ hex }) => handleChange(hex)}
+        onChange={({ hex, rgb: { a = 1 } }) =>
+          setActualValue(
+            `${hex}${Math.round(a * 255)
+              .toString(16)
+              .padStart(2, "0")}`
+          )
+        }
+        onChangeComplete={({ hex, rgb: { a = 1 } }) =>
+          handleChange(
+            `${hex}${Math.round(a * 255)
+              .toString(16)
+              .padStart(2, "0")}`
+          )
+        }
       />
     );
   }
