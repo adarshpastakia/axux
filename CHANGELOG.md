@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.5](https://github.com/adarshpastakia/axux/compare/v2.3.4...v2.3.5) (2023-06-05)
+
+### Bug Fixes
+
+- bug with Object.own ([79ef517](https://github.com/adarshpastakia/axux/commit/79ef517dc53454d833e2c99f34faa2c133184860))
+- **ColorPicker:** added alpha ([e0bc8b7](https://github.com/adarshpastakia/axux/commit/e0bc8b77e94493ba70187f5cfa70d4f717d1f633))
+
 ## [2.3.4](https://github.com/adarshpastakia/axux/compare/v2.3.3...v2.3.4) (2023-05-24)
 
 ### Bug Fixes
