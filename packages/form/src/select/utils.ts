@@ -44,7 +44,7 @@ export const defaultMatcher = (
   value?: string,
   prop?: string
 ) =>
-  (Object.hasOwn(option ?? "", prop ?? "")
+  ((Object.hasOwn || Object.hasOwnProperty)(option ?? "", prop ?? "")
     ? option[prop as AnyObject]
     : option) === value;
 
