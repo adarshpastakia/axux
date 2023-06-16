@@ -9,7 +9,7 @@
 /******************* overlay mask *******************/
 @layer components {
   .ax-overlay__mask {
-    @apply fixed inset-0 z-50 grid;
+    @apply fixed inset-0 z-50 grid bg-transparent;
     &[data-hide-mask="true"] {
       @apply pointer-events-none;
     }
@@ -23,7 +23,7 @@
   }
 
   .ax-notification__container {
-    @apply bg-none flex flex-nowrap pointer-events-none fixed inset-0 z-[59] p-2;
+    @apply bg-none flex flex-nowrap pointer-events-none fixed inset-0 z-[59] p-2 bg-transparent;
 
     &[data-mode="message"] {
       @apply flex-col-reverse items-center justify-end;

@@ -7,7 +7,7 @@
  */
 /* istanbul ignore file */
 
-import { isString, isTrue } from "@axux/utilities";
+import { debounce, isString, isTrue } from "@axux/utilities";
 import { type Placement } from "@popperjs/core";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { createRoot, type Root } from "react-dom/client";
@@ -55,20 +55,23 @@ export const useTooltipWatcher = () => {
     placement,
   });
 
-  const removeTooltip = useCallback(() => {
-    if (refPortal.current != null) {
-      try {
-        refPortal.current.unmount();
-      } catch (_) {
-        //
+  const removeTooltip = useCallback(
+    debounce(() => {
+      if (refPortal.current) {
+        try {
+          refPortal.current.unmount();
+        } catch (_) {
+          //
+        }
+        clearTimeout(refTimer.current);
+        refEl.current?.remove();
+        refPortal.current = undefined;
+        setPopperElement(undefined);
+        setOpen(false);
       }
-      clearTimeout(refTimer.current);
-      refEl.current?.remove();
-      refPortal.current = undefined;
-      setPopperElement(undefined);
-      setOpen(false);
-    }
-  }, []);
+    }),
+    []
+  );
 
   const cbEnter = useCallback((e: MouseEvent) => {
     const target = (e.target as HTMLElement).closest(
@@ -115,15 +118,13 @@ export const useTooltipWatcher = () => {
   }, []);
 
   useEffect(() => {
-    if (isOpen && !!content) {
+    removeTooltip.cancel();
+    if (isOpen && !!content && !refPortal.current) {
       refEl.current = document.createElement("div");
       document.body.appendChild(refEl.current);
       refPortal.current = createRoot(refEl.current);
     }
-  }, [isOpen, content]);
-
-  useEffect(() => {
-    if (refPortal.current != null) {
+    if (refPortal.current) {
       refPortal.current.render(
         <div
           tabIndex={-1}

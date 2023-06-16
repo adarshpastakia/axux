@@ -8,17 +8,18 @@
 
 import i18next from "i18next";
 import {
-  type ComponentType,
   createContext,
-  type FC,
-  type RefObject,
   useCallback,
   useContext,
   useEffect,
   useRef,
   useState,
+  type ComponentType,
+  type FC,
+  type RefObject,
 } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { useTooltipWatcher } from "../hooks/useTooltip";
 import { type ChildrenProp } from "../types";
 import {
   NotificationContainer,
@@ -136,6 +137,14 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
   const [locale, setLocale] = useState<State["locale"]>(
     defaultLocale ?? systemLocale()
   );
+
+  /** ***************** add tooltip watcher  *******************/
+  const dispose = useTooltipWatcher();
+  useEffect(() => {
+    return () => {
+      dispose();
+    };
+  }, []);
 
   /** ***************** set initial theme and locale dir  *******************/
   useEffect(() => {

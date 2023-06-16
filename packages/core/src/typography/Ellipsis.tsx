@@ -67,7 +67,7 @@ export const Ellipsis: FC<EllipsisProps> = ({
       {...rest}
       ref={refContainer}
       data-break={applyEllipsis}
-      title={
+      data-tooltip={
         applyEllipsis
           ? (refContainer.current?.firstElementChild as HTMLElement)?.innerText
           : ""
@@ -75,6 +75,7 @@ export const Ellipsis: FC<EllipsisProps> = ({
       className={`ax-text ax-ellipsis ${className ?? ""}`}
       style={{ width, minWidth, maxWidth }}
     >
+      <span>{children}</span>
       <span>{children}</span>
     </div>
   );

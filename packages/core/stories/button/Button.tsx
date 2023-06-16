@@ -9,6 +9,7 @@
 import { action } from "@storybook/addon-actions";
 import { ComponentStory } from "@storybook/react";
 import {
+  AxApplicationProvider,
   AxButton,
   AxContent,
   AxFlexBox,
@@ -157,48 +158,50 @@ export const ButtonColors: ComponentStory<AnyObject> = (props) => (
 );
 
 export const ButtonTooltip: ComponentStory<AnyObject> = (props) => (
-  <AxFlexBox>
-    <AxFlexBox.Row>
-      <AxFlexBox.Col>
-        <AxButton {...props} color={undefined} tooltip="Normal tooltip">
-          Normal Tooltip!
-        </AxButton>
-      </AxFlexBox.Col>
-      <AxFlexBox.Col>
-        <AxButton
-          {...props}
-          color="primary"
-          tooltip={{
-            content: "Information tooltip",
-            color: "info",
-            placement: "top",
-          }}
-        >
-          Info Tooltip!
-        </AxButton>
-      </AxFlexBox.Col>
-      <AxFlexBox.Col>
-        <AxButton
-          {...props}
-          color="danger"
-          tooltip={{
-            content: "Danger tooltip",
-            color: "danger",
-            placement: "right",
-          }}
-        >
-          Danger Tooltip!
-        </AxButton>
-      </AxFlexBox.Col>
-      <AxFlexBox.Col>
-        <AxButton.Group>
-          <AxButton tooltip="First">First</AxButton>
-          <AxButton tooltip="Second">Second</AxButton>
-          <AxButton tooltip="Third">Third</AxButton>
-        </AxButton.Group>
-      </AxFlexBox.Col>
-    </AxFlexBox.Row>
-  </AxFlexBox>
+  <AxApplicationProvider>
+    <AxFlexBox>
+      <AxFlexBox.Row>
+        <AxFlexBox.Col>
+          <AxButton {...props} color={undefined} tooltip="Normal tooltip">
+            Normal Tooltip!
+          </AxButton>
+        </AxFlexBox.Col>
+        <AxFlexBox.Col>
+          <AxButton
+            {...props}
+            color="primary"
+            tooltip={{
+              content: "Information tooltip",
+              color: "info",
+              placement: "top",
+            }}
+          >
+            Info Tooltip!
+          </AxButton>
+        </AxFlexBox.Col>
+        <AxFlexBox.Col>
+          <AxButton
+            {...props}
+            color="danger"
+            tooltip={{
+              content: "Danger tooltip",
+              color: "danger",
+              placement: "right",
+            }}
+          >
+            Danger Tooltip!
+          </AxButton>
+        </AxFlexBox.Col>
+        <AxFlexBox.Col>
+          <AxButton.Group>
+            <AxButton tooltip="First">First</AxButton>
+            <AxButton tooltip="Second">Second</AxButton>
+            <AxButton tooltip="Third">Third</AxButton>
+          </AxButton.Group>
+        </AxFlexBox.Col>
+      </AxFlexBox.Row>
+    </AxFlexBox>
+  </AxApplicationProvider>
 );
 
 export const ButtonBadges: ComponentStory<AnyObject> = (props) => (

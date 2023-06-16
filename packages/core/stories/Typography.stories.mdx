@@ -42,7 +42,7 @@ export const LIPSUM =
 <Description of={AxText.Ellipsis} />
 
 <Canvas>
-  <Story name="2a.Ellipsis" args={{ className: "text-lg mx-auto", width: 260 }}>
+  <Story name="2a.Ellipsis" args={{ className: "text-lg mx-auto bg-component", width: 260 }}>
     {((args) => (
       <AxText.Ellipsis {...args}>
         This is very long text that is broken in the middle
@@ -51,7 +51,7 @@ export const LIPSUM =
   </Story>
   <Story
     name="2b.Ellipsis multiple spans"
-    args={{ className: "text-lg mx-auto", width: 260 }}
+    args={{ className: "text-lg mx-auto bg-component", width: 260 }}
   >
     {((args) => (
       <AxText.Ellipsis {...args}>
@@ -66,7 +66,7 @@ export const LIPSUM =
   </Story>
   <Story
     name="2c.Ellipsis multiple lines"
-    args={{ className: "text-lg mx-auto", width: 260 }}
+    args={{ className: "text-lg mx-auto bg-component", width: 260 }}
   >
     {((args) => (
       <AxText.Ellipsis {...args}>
@@ -195,14 +195,30 @@ export const LIPSUM =
   <Story name="6e.Badge Infograph">
     <AxFlexBox.Row>
       <AxFlexBox.Col className="relative ax-badge-reveal">
-        <AxText.Badge color="primary" icon="mdi mdi-comment" placement="top-start" />
-        <AxText.Badge color="accent" icon="mdi mdi-bell-circle" placement="top" />
+        <AxText.Badge
+          color="primary"
+          icon="mdi mdi-comment"
+          placement="top-start"
+        />
+        <AxText.Badge
+          color="accent"
+          icon="mdi mdi-bell-circle"
+          placement="top"
+        />
         <AxText.Badge color="warning" icon="mdi mdi-lock" placement="top-end" />
         <AxText.Badge color="danger" icon="mdi mdi-camera" placement="start" />
         <AxText.Badge color="primary" icon="mdi mdi-car" placement="end" />
-        <AxText.Badge color="accent" icon="mdi mdi-credit-card" placement="bottom-start" />
+        <AxText.Badge
+          color="accent"
+          icon="mdi mdi-credit-card"
+          placement="bottom-start"
+        />
         <AxText.Badge color="success" icon="mdi mdi-bell" placement="bottom" />
-        <AxText.Badge color="danger" icon="mdi mdi-bell" placement="bottom-end" />
+        <AxText.Badge
+          color="danger"
+          icon="mdi mdi-bell"
+          placement="bottom-end"
+        />
         <AxIcon
           size={64}
           icon="mdi mdi-account-circle"

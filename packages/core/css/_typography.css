@@ -33,7 +33,7 @@
 /******************* text components *******************/
 @layer components {
   .ax-ellipsis {
-    @apply truncate;
+    @apply truncate bg-inherit;
   }
 
   .ax-text {
@@ -53,7 +53,7 @@
   }
 
   .ax-abbr abbr {
-    @apply text-accent-700 dark:text-accent-300 border-b border-dashed border-current cursor-help;
+    @apply text-accent-700 dark:text-accent-300 border-b border-dashed border-current cursor-help relative before:absolute before:-inset-0.5 before:opacity-10 before:bg-current;
   }
 
   .ax-moreLink {
@@ -68,19 +68,24 @@
 }
 
 @layer utilities {
-  .ax-ellipsis[data-break="true"] {
-    @apply !pointer-events-auto;
-
-    & > div:first-child {
-      @apply inline-block truncate flex-auto;
-    }
-    & > div:last-child {
-      @apply flex-initial;
+  .ax-ellipsis[data-break="false"] {
+    & > span:last-child {
+      @apply hidden;
     }
   }
+  .ax-ellipsis[data-break="true"] {
+    @apply relative flex;
 
-  [dir="rtl"] .ax-ellipsis[data-break="true"] > bdi:last-child {
-    direction: ltr;
+    & > span:first-child {
+      @apply inline-block truncate bg-inherit flex-1 z-[1] me-[40%];
+
+      & > * {
+        @apply truncate;
+      }
+    }
+    & > span:last-child {
+      @apply absolute end-0 z-0;
+    }
   }
 
   .ax-text {

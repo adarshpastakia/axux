@@ -6,8 +6,7 @@
  * @license   : MIT
  */
 
-import { type FC, useEffect } from "react";
-import { useTooltipWatcher } from "../hooks/useTooltip";
+import { type FC } from "react";
 import { HotKeyWrapper } from "../hotkeys/HotKeyWrapper";
 import { type ChildrenProp, type ElementProps } from "../types";
 import { AxErrorBoundary } from "./ErrorBoundary";
@@ -21,12 +20,6 @@ export const AxViewport: FC<ViewportProps> = ({
   className,
   ...rest
 }) => {
-  const dispose = useTooltipWatcher();
-  useEffect(() => {
-    return () => {
-      dispose();
-    };
-  }, []);
   /** ***************** component *******************/
   return (
     <HotKeyWrapper>

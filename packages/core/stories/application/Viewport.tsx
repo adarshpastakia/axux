@@ -37,6 +37,7 @@ const toolAction = [
     key="action"
     color="invert"
     variant="link"
+    data-tool="true"
     icon="mdi mdi-backspace"
   />,
 ];
@@ -262,7 +263,7 @@ const Viewport = ({ children, ...props }: KeyValue) => {
           <AxContent>
             <div className="divide-y">
               <AxCollapsable>
-                <div>
+                <div className="contents">
                   <AxTitle>Test collapse</AxTitle>
                   <AxButton
                     size="sm"

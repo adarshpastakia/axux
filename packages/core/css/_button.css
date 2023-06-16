@@ -11,7 +11,7 @@
     @apply align-middle m-1 relative inline-block select-none max-w-full print:hidden;
 
     & .ax-button__label {
-      @apply transition-colors z-10;
+      @apply z-10;
       line-height: 1.2;
     }
 
