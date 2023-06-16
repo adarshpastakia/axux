@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.6](https://github.com/adarshpastakia/axux/compare/v2.3.5...v2.3.6) (2023-06-16)
+
+### Bug Fixes
+
+- **AxAlert:** fix input control ([a41504e](https://github.com/adarshpastakia/axux/commit/a41504eacef9a5e65f9f3b20c89b01ebeda6530d))
+- **AxText.Ellipsis:** fix middle ellipsis [hopefully] ([6c3c470](https://github.com/adarshpastakia/axux/commit/6c3c4703c572a0284080faee947bc4b26c2c29da))
+
 ## [2.3.5](https://github.com/adarshpastakia/axux/compare/v2.3.4...v2.3.5) (2023-06-05)
 
 **Note:** Version bump only for package @axux/core
