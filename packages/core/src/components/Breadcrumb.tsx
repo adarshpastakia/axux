@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { type FC, useMemo } from "react";
+import { useMemo, type FC } from "react";
 import { useBadge } from "../hooks/useBadge";
 import { AxIcon } from "../icons/Icon";
 import { AxPopover } from "../overlays/Popover";

@@ -86,11 +86,12 @@
     }
 
     & > .ax-icon {
-      @apply m-1;
+      @apply m-0 p-1;
     }
 
     & > .ax-button,
-    & > .ax-button__group {
+    & > .ax-button__group,
+    & > .ax-side__actions > .ax-button {
       @apply m-0;
 
       &[data-tool="true"] .ax-button__inner {

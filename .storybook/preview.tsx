@@ -6,6 +6,7 @@
  * @license   : MIT
  */
 
+import { AxApplicationProvider } from "@axux/core";
 import "@mdi/font/css/materialdesignicons.min.css";
 import {
   Anchor,
@@ -63,7 +64,9 @@ addParameters({
     container: ({ children, context }: any) => {
       return (
         <I18nextProvider i18n={i18n}>
-          <DC context={context}>{children}</DC>
+          <AxApplicationProvider>
+            <DC context={context}>{children}</DC>
+          </AxApplicationProvider>
         </I18nextProvider>
       );
     },
