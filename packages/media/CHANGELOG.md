@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.6](https://github.com/adarshpastakia/axux/compare/v2.3.5...v2.3.6) (2023-06-16)
+
+### Bug Fixes
+
+- **AxImageViewer:** update auto fit zoom level ([27a190a](https://github.com/adarshpastakia/axux/commit/27a190a836da72e619321395e92b5b6415231541))
+
 ## [2.3.5](https://github.com/adarshpastakia/axux/compare/v2.3.4...v2.3.5) (2023-06-05)
 
 **Note:** Version bump only for package @axux/media

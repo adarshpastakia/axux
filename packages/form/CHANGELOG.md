@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.6](https://github.com/adarshpastakia/axux/compare/v2.3.5...v2.3.6) (2023-06-16)
+
+### Bug Fixes
+
+- **AxField.Color:** fix inline, value set ([2a39a6b](https://github.com/adarshpastakia/axux/commit/2a39a6bd415c628a2155979a94cdb64b32fb4778))
+
 ## [2.3.5](https://github.com/adarshpastakia/axux/compare/v2.3.4...v2.3.5) (2023-06-05)
 
 ### Bug Fixes
