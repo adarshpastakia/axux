@@ -7,13 +7,14 @@
  */
 
 import { AxDivider, AxHotKey, AxIcon } from "@axux/core";
-import { type FC, memo } from "react";
+import { memo, type FC } from "react";
 import { Icons } from "../types/icons";
 import { ZoomMeter } from "./ZoomMeter";
 
 export interface ToolsProps {
   zoom: number;
   rotate: number;
+  fitToView: boolean;
   isDisabled: boolean;
   disableZoom: boolean;
   onZoom: (zoom: number) => void;
@@ -21,7 +22,15 @@ export interface ToolsProps {
 }
 
 export const Tools: FC<ToolsProps> = memo(
-  ({ zoom, rotate, onZoom, onRotate, isDisabled, disableZoom }: ToolsProps) => {
+  ({
+    zoom,
+    rotate,
+    fitToView,
+    onZoom,
+    onRotate,
+    isDisabled,
+    disableZoom,
+  }: ToolsProps) => {
     const startDrag = (e: React.MouseEvent) => {
       const target = e.currentTarget as HTMLDivElement;
       let startX = e.clientX;
@@ -52,7 +61,7 @@ export const Tools: FC<ToolsProps> = memo(
         <AxHotKey
           global
           keyCombo="f"
-          handler={() => !disableZoom && onZoom(zoom === 0 ? 1 : 0)}
+          handler={() => !disableZoom && onZoom(fitToView ? 1 : 0)}
         />
         <AxHotKey
           global

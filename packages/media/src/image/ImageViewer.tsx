@@ -12,9 +12,6 @@ import { debounce } from "@axux/utilities";
 import { getImageColorset } from "@axux/utilities/dist/getImageColorset";
 import {
   forwardRef,
-  type ReactEventHandler,
-  type RefObject,
-  type SyntheticEvent,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -23,6 +20,9 @@ import {
   useReducer,
   useRef,
   useTransition,
+  type ReactEventHandler,
+  type RefObject,
+  type SyntheticEvent,
 } from "react";
 import { type CanvasRef } from "../canvas/Canvas";
 import { NsfwOverlay } from "../nsfw/NsfwOverlay";
@@ -36,6 +36,7 @@ type Rotation = 0 | 90 | 180 | 270;
 interface ViewerState {
   zoom: number;
   rotate: Rotation;
+  fitToView: boolean;
   isLoading: boolean;
   isLoaded: boolean;
   isErrored: boolean;
@@ -96,6 +97,7 @@ export const AxImageViewer = forwardRef<
         ({
           zoom: 0,
           rotate: 0,
+          fitToView: true,
           isLoading: true,
           isLoaded: false,
           isErrored: false,
@@ -105,32 +107,39 @@ export const AxImageViewer = forwardRef<
       []
     );
 
-    const calculateSize = useCallback((rotate: number, zoom: number) => {
-      const el = containerRef.current;
-      const img = imageRef.current;
-      if (el != null && img != null && img.naturalWidth) {
-        const turn = rotate % 180 !== 0;
-        let width = turn ? img.naturalHeight : img.naturalWidth;
-        let height = turn ? img.naturalWidth : img.naturalHeight;
-        if (zoom === 0) {
-          const containerWidth = el.offsetWidth - 16;
-          const containerHeight = el.offsetHeight - 16;
-          // if container ratio is more than image ratio height set to container 100%
-          if (containerWidth / containerHeight > width / height) {
-            width = width * (containerHeight / height);
-            height = containerHeight;
+    const calculateSize = useCallback(
+      (rotate: number, zoom: number, fitToView: boolean) => {
+        const el = containerRef.current;
+        const img = imageRef.current;
+        if (el != null && img != null && img.naturalWidth) {
+          const turn = rotate % 180 !== 0;
+          let width = turn ? img.naturalHeight : img.naturalWidth;
+          let height = turn ? img.naturalWidth : img.naturalHeight;
+          if (fitToView) {
+            const containerWidth = el.offsetWidth - 16;
+            const containerHeight = el.offsetHeight - 16;
+            // if container ratio is more than image ratio height set to container 100%
+            if (containerWidth / containerHeight > width / height) {
+              width = width * (containerHeight / height);
+              height = containerHeight;
+            } else {
+              height = height * (containerWidth / width);
+              width = containerWidth;
+            }
+            zoom = Math.min(
+              5,
+              width / (turn ? img.naturalHeight : img.naturalWidth)
+            );
           } else {
-            height = height * (containerWidth / width);
-            width = containerWidth;
+            width *= zoom;
+            height *= zoom;
           }
-        } else {
-          width *= zoom;
-          height *= zoom;
+          return { zoom, width, height };
         }
-        return { width, height };
-      }
-      return { width: "100%", height: "100%" } as AnyObject;
-    }, []);
+        return { width: "100%", height: "100%" } as AnyObject;
+      },
+      []
+    );
 
     const recenter = useCallback(() => {
       const el = containerRef.current;
@@ -149,8 +158,12 @@ export const AxImageViewer = forwardRef<
           state = initState();
         }
         if (action.type === "zoom") {
+          state.fitToView = action.payload === 0;
           state.zoom = Math.min(5, Math.max(0, action.payload));
-          state = { ...state, ...calculateSize(state.rotate, state.zoom) };
+          state = {
+            ...state,
+            ...calculateSize(state.rotate, state.zoom, state.fitToView),
+          };
           startTransition(() => {
             debounce(recenter, 200)();
           });
@@ -162,17 +175,26 @@ export const AxImageViewer = forwardRef<
               : action.payload < 0
               ? 270
               : action.payload;
-          state = { ...state, ...calculateSize(state.rotate, state.zoom) };
+          state = {
+            ...state,
+            ...calculateSize(state.rotate, state.zoom, state.fitToView),
+          };
         }
         if (action.type === "resize") {
-          state = { ...state, ...calculateSize(state.rotate, state.zoom) };
+          state = {
+            ...state,
+            ...calculateSize(state.rotate, state.zoom, state.fitToView),
+          };
         }
         if (action.type === "loaded") {
           state.isLoading = false;
           state.isLoaded = true;
           state.isErrored = false;
           state.zoom = 0;
-          state = { ...state, ...calculateSize(state.rotate, state.zoom) };
+          state = {
+            ...state,
+            ...calculateSize(state.rotate, state.zoom, state.fitToView),
+          };
         }
         if (action.type === "errored") {
           state.isErrored = true;
@@ -331,6 +353,7 @@ export const AxImageViewer = forwardRef<
             disableZoom={!!overlaySrc}
             isDisabled={disableTools}
             zoom={state.zoom}
+            fitToView={state.fitToView}
             rotate={state.rotate}
             onZoom={handleZoom}
             onRotate={handleRotate}
