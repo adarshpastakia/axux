@@ -68,7 +68,7 @@ export const AxAlert: FC<AlertProps> = ({
   okLabel,
   cancelLabel,
   placeholder,
-  defaultValue,
+  defaultValue = "",
   onClose,
   rootRef,
 }) => {

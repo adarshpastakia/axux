@@ -34,6 +34,7 @@ export const AlertTemplate: ComponentStory<typeof AxAlert> = (props) => {
 };
 export const AlertStory = AlertTemplate.bind({});
 AlertStory.args = {
+  type: "alert",
   icon: "mdi mdi-check-circle",
   title: "Alert Message",
   message: "This is a user message",
