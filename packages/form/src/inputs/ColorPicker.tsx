@@ -23,6 +23,10 @@ export interface ColorProps extends ElementProps {
    */
   swatches?: string[];
   /**
+   * default color
+   */
+  defaultColor?: string;
+  /**
    * hide alpha value
    */
   hideAlpha?: boolean;
@@ -65,15 +69,21 @@ const DEFAULT_SWATCHES = [
 
 // eslint-disable-next-line react/display-name
 export const ColorPicker: FC<ColorProps> = memo(
-  ({ value, onChange, hideAlpha, swatches = DEFAULT_SWATCHES }: ColorProps) => {
-    const [_actualValue, setActualValue] = useState<string>("");
+  ({
+    value,
+    onChange,
+    hideAlpha,
+    defaultColor = "#ff0000",
+    swatches = DEFAULT_SWATCHES,
+  }: ColorProps) => {
+    const [_actualValue, setActualValue] = useState<string>(defaultColor);
     const [, startTransition] = useTransition();
     useEffect(() => {
-      setActualValue(value ?? ("" as AnyObject));
+      setActualValue(value ?? defaultColor);
     }, [value]);
     const handleChange = useCallback(
       (e: string) => {
-        setActualValue(e ?? "");
+        setActualValue(e ?? defaultColor);
         onChange != null && startTransition(() => onChange(e));
       },
       [onChange]
@@ -102,16 +112,24 @@ export const ColorPicker: FC<ColorProps> = memo(
         disableAlpha={hideAlpha}
         onChange={({ hex, rgb: { a = 1 } }) =>
           setActualValue(
-            `${hex}${Math.round(a * 255)
-              .toString(16)
-              .padStart(2, "0")}`
+            `${hex}${
+              a < 1
+                ? Math.round(a * 255)
+                    .toString(16)
+                    .padStart(2, "0")
+                : ""
+            }`
           )
         }
         onChangeComplete={({ hex, rgb: { a = 1 } }) =>
           handleChange(
-            `${hex}${Math.round(a * 255)
-              .toString(16)
-              .padStart(2, "0")}`
+            `${hex}${
+              a < 1
+                ? Math.round(a * 255)
+                    .toString(16)
+                    .padStart(2, "0")
+                : ""
+            }`
           )
         }
       />

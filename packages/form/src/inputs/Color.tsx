@@ -13,7 +13,8 @@ import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
   memo,
   useCallback,
-  useDeferredValue,
+  useEffect,
+  useState,
   useTransition,
   type FC,
 } from "react";
@@ -26,6 +27,10 @@ export interface ColorProps extends ElementProps, InputProps, ChildrenProp {
    * color swatches
    */
   swatches?: string[];
+  /**
+   * default color
+   */
+  defaultColor?: string;
   /**
    * hide alpha value
    */
@@ -93,12 +98,18 @@ export const Color: FC<ColorProps> = memo(
     size,
     swatches = DEFAULT_SWATCHES,
     onEnterPressed,
+    inline,
+    defaultColor = "#ff0000",
     ...rest
   }: ColorProps) => {
     const [, startTransition] = useTransition();
-    const actualValue = useDeferredValue(value ?? "");
+    const [actualValue, setActualValue] = useState(defaultColor);
+    useEffect(() => {
+      setActualValue(value ?? defaultColor);
+    }, [value]);
     const handleChange = useCallback(
       (e?: string) => {
+        setActualValue(e ?? defaultColor);
         onChange != null && startTransition(() => onChange(e));
       },
       [onChange]
@@ -110,6 +121,7 @@ export const Color: FC<ColorProps> = memo(
         error={error}
         label={label}
         width={width}
+        inline={inline}
         isPlain={isPlain}
         labelAppend={labelAppend}
         className={className}
@@ -133,7 +145,8 @@ export const Color: FC<ColorProps> = memo(
             />
           </div>
           <ColorPicker
-            value={value}
+            value={actualValue}
+            defaultColor={defaultColor}
             onChange={handleChange}
             swatches={swatches}
             hideAlpha={hideAlpha}
