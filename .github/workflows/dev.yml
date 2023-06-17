@@ -33,8 +33,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Install packages
         run: |
-          yarn global add lerna
-          yarn bootstrap
+          yarn
 
       - name: Run test
         run: yarn test
