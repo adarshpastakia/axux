@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.2](https://github.com/adarshpastakia/axux/compare/v2.4.1...v2.4.2) (2023-06-19)
+
+### Bug Fixes
+
+- tooltip remove onMouseLeave ([343eb8e](https://github.com/adarshpastakia/axux/commit/343eb8e8896efc6e96d55806f7016e67e617a6a5))
+- tooltip watcher causing rerender ([4d9fb5a](https://github.com/adarshpastakia/axux/commit/4d9fb5ad89f066890c3b5b737370a8065bd9543b))
+
 ## [2.4.1](https://github.com/adarshpastakia/axux/compare/v2.4.0...v2.4.1) (2023-06-17)
 
 **Note:** Version bump only for package axux
