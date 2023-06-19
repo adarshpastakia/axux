@@ -74,7 +74,7 @@ export const TooltipWatcher = () => {
   );
 
   const cbEnter = useCallback((e: MouseEvent) => {
-    const target = (e.target as HTMLElement).closest(
+    const target = (e.target as HTMLElement)?.closest(
       "[data-tooltip]"
     ) as HTMLElement;
     if (
@@ -97,7 +97,7 @@ export const TooltipWatcher = () => {
     }
   }, []);
   const cbLeave = useCallback((e: MouseEvent) => {
-    const target = (e.target as HTMLElement).closest(
+    const target = (e.target as HTMLElement)?.closest(
       "[data-tooltip]"
     ) as HTMLElement;
     if (!target) {
