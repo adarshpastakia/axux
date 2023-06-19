@@ -35,7 +35,7 @@ export const getTooltipProps = (tooltip?: TooltipType) => {
   return {};
 };
 
-export const useTooltipWatcher = () => {
+export const TooltipWatcher = () => {
   const refEl = useRef<HTMLDivElement>();
   const refTimer = useRef<AnyObject>();
   const refPortal = useRef<Root>();
@@ -109,10 +109,12 @@ export const useTooltipWatcher = () => {
   useEffect(() => {
     document.addEventListener("mouseover", cbEnter);
     document.addEventListener("mouseout", cbLeave);
+    document.addEventListener("mouseleave", cbLeave);
     document.addEventListener("mousedown", cbLeave);
     return () => {
       document.removeEventListener("mouseover", cbEnter);
       document.removeEventListener("mouseout", cbLeave);
+      document.removeEventListener("mouseleave", cbLeave);
       document.removeEventListener("mousedown", cbLeave);
     };
   }, []);
@@ -148,8 +150,5 @@ export const useTooltipWatcher = () => {
     }
   }, [isOpen, content, color, attributes, styles]);
 
-  return () => {
-    document.removeEventListener("mouseover", cbEnter);
-    document.removeEventListener("mouseout", cbLeave);
-  };
+  return null;
 };

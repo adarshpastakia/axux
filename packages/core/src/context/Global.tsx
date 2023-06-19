@@ -19,7 +19,7 @@ import {
   type RefObject,
 } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { useTooltipWatcher } from "../hooks/useTooltip";
+import { TooltipWatcher } from "../hooks/useTooltip";
 import { type ChildrenProp } from "../types";
 import {
   NotificationContainer,
@@ -138,14 +138,6 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
     defaultLocale ?? systemLocale()
   );
 
-  /** ***************** add tooltip watcher  *******************/
-  const dispose = useTooltipWatcher();
-  useEffect(() => {
-    return () => {
-      dispose();
-    };
-  }, []);
-
   /** ***************** set initial theme and locale dir  *******************/
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -221,6 +213,7 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
 
         <OverlayContainer itemRef={overlayRef} />
         <NotificationContainer itemRef={notificationRef} />
+        <TooltipWatcher />
       </HelmetProvider>
     </GlobalContext.Provider>
   );
