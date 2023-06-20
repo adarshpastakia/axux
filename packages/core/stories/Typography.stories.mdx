@@ -9,7 +9,13 @@ import {
   Title,
 } from "@storybook/addon-docs";
 import { useState, useEffect } from "react";
-import { AxText, AxFlexBox, AxIcon, AxDivider } from "../src";
+import {
+  AxText,
+  AxFlexBox,
+  AxIcon,
+  AxDivider,
+  AxApplicationProvider,
+} from "../src";
 
 export const LIPSUM =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vehicula nulla luctus sem congue iaculis. Praesent lobortis gravida nibh non sodales. Ut lacinia nulla ac pellentesque ullamcorper. Phasellus non quam lorem. Etiam consectetur dapibus dapibus. Nunc diam libero, facilisis a rhoncus eget, fermentum non lacus. Quisque scelerisque hendrerit ipsum, et lobortis diam venenatis at. Sed facilisis lectus vitae nisl vestibulum ultrices. Vivamus luctus neque ut dolor blandit sodales.\n\nDonec maximus, dui laoreet maximus hendrerit, mauris mi varius ex, a dapibus est ex eget tellus. Sed nisl purus, cursus sed dictum a, egestas et turpis. Praesent scelerisque placerat cursus. Phasellus et dui vel velit faucibus venenatis eu mattis ante. Maecenas eget vulputate dolor. Duis eu lobortis nisl. Vestibulum ullamcorper tristique rutrum. Mauris non est et neque cursus lobortis eu sed neque. Duis risus erat, malesuada eu nisi in, efficitur egestas eros.\n\nDonec scelerisque sit amet dolor in pulvinar. Integer id dolor lorem. Morbi dignissim lorem id tincidunt porttitor. Curabitur feugiat, dui et varius finibus, nisi ante rutrum elit, ac venenatis libero massa nec elit. Vivamus tincidunt libero quis nulla lobortis aliquet. Vestibulum felis nisl, ultricies ut lacus in, viverra elementum justo. Proin ut nisi enim.";
@@ -42,11 +48,16 @@ export const LIPSUM =
 <Description of={AxText.Ellipsis} />
 
 <Canvas>
-  <Story name="2a.Ellipsis" args={{ className: "text-lg mx-auto bg-component", width: 260 }}>
+  <Story
+    name="2a.Ellipsis"
+    args={{ className: "text-lg mx-auto bg-component", width: 260 }}
+  >
     {((args) => (
-      <AxText.Ellipsis {...args}>
-        This is very long text that is broken in the middle
-      </AxText.Ellipsis>
+      <AxApplicationProvider>
+        <AxText.Ellipsis {...args}>
+          This is very long text that is broken in the middle
+        </AxText.Ellipsis>
+      </AxApplicationProvider>
     )).bind({})}
   </Story>
   <Story
@@ -54,14 +65,16 @@ export const LIPSUM =
     args={{ className: "text-lg mx-auto bg-component", width: 260 }}
   >
     {((args) => (
-      <AxText.Ellipsis {...args}>
-        <span className="font-medium">This is </span>
-        <span className="underline decoration-wavy decoration-2 decoration-primary-500">
-          very long
-        </span>
-        <span className="text-primary-500 font-bold"> text </span>
-        <span>that is broken in the middle</span>
-      </AxText.Ellipsis>
+      <AxApplicationProvider>
+        <AxText.Ellipsis {...args}>
+          <span className="font-medium">This is </span>
+          <span className="underline decoration-wavy decoration-2 decoration-primary-500">
+            very long
+          </span>
+          <span className="text-primary-500 font-bold"> text </span>
+          <span>that is broken in the middle</span>
+        </AxText.Ellipsis>
+      </AxApplicationProvider>
     )).bind({})}
   </Story>
   <Story
@@ -69,20 +82,22 @@ export const LIPSUM =
     args={{ className: "text-lg mx-auto bg-component", width: 260 }}
   >
     {((args) => (
-      <AxText.Ellipsis {...args}>
-        <h1>
-          <span>This is very long</span>
-          <span className="text-primary-500 font-bold"> text </span>
-          <span>that is broken in the middle</span>
-        </h1>
-        <p>
-          <span>This is very long</span>
-          <span className="text-primary-500 font-bold"> text </span>
-          <span>
-            that is broken in the middle and is even langer than the previous
-          </span>
-        </p>
-      </AxText.Ellipsis>
+      <AxApplicationProvider>
+        <AxText.Ellipsis {...args}>
+          <h1>
+            <span>This is very long</span>
+            <span className="text-primary-500 font-bold"> text </span>
+            <span>that is broken in the middle</span>
+          </h1>
+          <p>
+            <span>This is very long</span>
+            <span className="text-primary-500 font-bold"> text </span>
+            <span>
+              that is broken in the middle and is even langer than the previous
+            </span>
+          </p>
+        </AxText.Ellipsis>
+      </AxApplicationProvider>
     )).bind({})}
   </Story>
 </Canvas>

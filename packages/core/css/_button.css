@@ -38,7 +38,7 @@
     }
 
     & .ax-button__inner:active {
-      & > * {
+      & > :not(.ax-badge) {
         @apply translate-y-px;
       }
     }
