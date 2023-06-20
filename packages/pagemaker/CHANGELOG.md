@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.3](https://github.com/adarshpastakia/axux/compare/v2.4.2...v2.4.3) (2023-06-20)
+
+### Bug Fixes
+
+- pagemaker i18n ([ab468c1](https://github.com/adarshpastakia/axux/commit/ab468c1e403f5964b3148a7d941f9a3df7c6d72b))
+
 ## [2.4.2](https://github.com/adarshpastakia/axux/compare/v2.4.1...v2.4.2) (2023-06-19)
 
 **Note:** Version bump only for package @axux/pagemaker
