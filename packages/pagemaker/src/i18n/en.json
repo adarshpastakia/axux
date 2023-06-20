@@ -24,6 +24,7 @@
     "info": "Info Tooltip",
     "icon": "Icon class",
     "size": "Text size",
+    "text": "Text",
     "width": "Size",
     "colSpan": "Col span",
     "height": "Row Height",
