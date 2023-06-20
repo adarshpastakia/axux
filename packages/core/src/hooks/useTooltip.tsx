@@ -74,15 +74,15 @@ export const TooltipWatcher = () => {
   );
 
   const cbEnter = useCallback((e: MouseEvent) => {
-    const target = (e.target as HTMLElement)?.closest(
+    const target = (e.target as HTMLElement)?.closest?.(
       "[data-tooltip]"
     ) as HTMLElement;
     if (
       target &&
+      !!target.dataset.tooltip &&
       !isTrue(target.dataset.disabled) &&
       !isTrue(target.dataset.popoverOpen)
     ) {
-      removeTooltip();
       setPlacement(target.dataset.tooltipPlacement as AnyObject);
       setContent(target.dataset.tooltip);
       setColor(target.dataset.tooltipColor);
@@ -94,10 +94,12 @@ export const TooltipWatcher = () => {
           refTimer.current = setTimeout(() => removeTooltip(), 2000);
         }
       });
+    } else {
+      removeTooltip();
     }
   }, []);
   const cbLeave = useCallback((e: MouseEvent) => {
-    const target = (e.target as HTMLElement)?.closest(
+    const target = (e.target as HTMLElement)?.closest?.(
       "[data-tooltip]"
     ) as HTMLElement;
     if (!target) {
@@ -120,7 +122,7 @@ export const TooltipWatcher = () => {
   }, []);
 
   useEffect(() => {
-    removeTooltip.cancel();
+    isOpen && removeTooltip.cancel();
     if (isOpen && !!content && !refPortal.current) {
       refEl.current = document.createElement("div");
       document.body.appendChild(refEl.current);
@@ -137,7 +139,10 @@ export const TooltipWatcher = () => {
           {...attributes.popper}
         >
           <div className={`popover__container`}>
-            <pre style={{ font: "inherit" }}>{content}</pre>
+            <pre
+              style={{ font: "inherit" }}
+              dangerouslySetInnerHTML={{ __html: content ?? "" }}
+            />
           </div>
           <div
             ref={setArrowElement as AnyObject}
