@@ -46,8 +46,11 @@
   .page-maker__aside {
     & .align-options .ax-field__options {
       grid-auto-flow: column;
-      grid-auto-columns: 1fr;
       grid-template-columns: unset;
+
+      & .ax-field__option--label {
+        @apply text-sm;
+      }
     }
   }
 
