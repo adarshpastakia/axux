@@ -33,7 +33,7 @@
 /******************* text components *******************/
 @layer components {
   .ax-ellipsis {
-    @apply truncate bg-inherit;
+    @apply truncate flex;
   }
 
   .ax-text {
@@ -74,16 +74,17 @@
     }
   }
   .ax-ellipsis[data-break="true"] {
-    @apply relative flex;
-
     & > span:first-child {
-      @apply inline-block truncate bg-inherit flex-1 z-[1] me-[40%];
+      @apply block truncate z-[1] basis-3/5;
 
       & > * {
         @apply truncate;
       }
     }
     & > span:last-child {
+      @apply relative overflow-hidden block basis-2/5;
+    }
+    & > span:last-child > span {
       @apply absolute end-0 z-0;
     }
   }
