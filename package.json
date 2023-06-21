@@ -80,7 +80,7 @@
     "jest-transform-stub": "^2.0.0",
     "jsdom": "^21.1.1",
     "jsdom-global": "^3.0.2",
-    "lerna": "^6.6.1",
+    "lerna": "^7.0.2",
     "lerna-changelog": "^2.2.0",
     "monaco-editor": "^0.37.1",
     "monaco-editor-webpack-plugin": "^7.0.1",
