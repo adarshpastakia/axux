@@ -47,7 +47,7 @@
       @apply grid-area-[body] z-[2] bg-base;
     }
     & .ax-side__icon {
-      @apply grid-area-[icon] m-1;
+      @apply grid-area-[icon] p-1.5;
     }
     & .ax-side__title {
       @apply grid-area-[title] px-1;
