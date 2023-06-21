@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { Format } from "../src";
+import { FileUtil, Format } from "../src";
 
 describe("format test", () => {
   it("should format number", (done) => {
@@ -63,6 +63,12 @@ describe("format test", () => {
     expect(Format.phone("99123")).toMatchSnapshot();
     expect(Format.phone("971502491824")).toMatchSnapshot();
     expect(Format.phone("00971502491824")).toMatchSnapshot();
+    done();
+  });
+
+  it("get mime type", (done) => {
+    expect(FileUtil.mime("application/pdf")).toBe("PDF");
+    expect(FileUtil.mime("image/xyz")).toBe("image (xyz)");
     done();
   });
 });
