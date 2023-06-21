@@ -214,7 +214,7 @@
     }
 
     & .ax-alert__message {
-      @apply grid-area-[message] px-2 me-8 overflow-auto mb-2;
+      @apply grid-area-[message] px-2 me-8 overflow-auto mb-2 pb-1;
     }
 
     & .ax-alert__footer {
@@ -311,7 +311,7 @@
     }
 
     & .ax-toast__message {
-      @apply grid-area-[message] text-sm px-2 overflow-auto;
+      @apply grid-area-[message] text-sm px-2 pb-1 overflow-auto;
     }
 
     & .ax-toast__footer {
