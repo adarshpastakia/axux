@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.4](https://github.com/adarshpastakia/axux/compare/v2.4.3...v2.4.4) (2023-06-21)
+
+**Note:** Version bump only for package @axux/searchbar
+
 ## [2.4.3](https://github.com/adarshpastakia/axux/compare/v2.4.2...v2.4.3) (2023-06-20)
 
 **Note:** Version bump only for package @axux/searchbar
