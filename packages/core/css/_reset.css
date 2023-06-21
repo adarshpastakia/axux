@@ -47,6 +47,7 @@
     margin: 0;
     width: 100vw;
     min-height: 100vh;
+    overflow: hidden;
     @apply align-baseline antialiased selection:bg-accent-500/30 print:!bg-white print:!text-black;
 
     & ::-webkit-scrollbar {

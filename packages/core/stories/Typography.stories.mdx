@@ -50,13 +50,15 @@ export const LIPSUM =
 <Canvas>
   <Story
     name="2a.Ellipsis"
-    args={{ className: "text-lg mx-auto bg-component", width: 260 }}
+    args={{
+      className: "text-lg mx-auto bg-component",
+      width: 260,
+      children: "This is very long text that is broken in the middle",
+    }}
   >
     {((args) => (
       <AxApplicationProvider>
-        <AxText.Ellipsis {...args}>
-          This is very long text that is broken in the middle
-        </AxText.Ellipsis>
+        <AxText.Ellipsis {...args} />
       </AxApplicationProvider>
     )).bind({})}
   </Story>

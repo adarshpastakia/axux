@@ -6,8 +6,7 @@
  * @license   : MIT
  */
 
-import { calculateTextWidth } from "@axux/utilities/dist/dom";
-import { type FC, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, type FC } from "react";
 import { type ElementProps } from "../types";
 
 export interface EllipsisProps extends ElementProps {
@@ -43,10 +42,13 @@ export const Ellipsis: FC<EllipsisProps> = ({
   /** ***************** check text width *******************/
   const checkWidth = useRef(() => {
     const el = refContainer.current as HTMLElement;
-    if (el) {
+    const child = el.firstElementChild as HTMLElement;
+    if (el && child) {
+      el.dataset.break = "false";
+      console.log(el.offsetWidth, child.offsetWidth);
       setApplyEllipsis(
-        calculateTextWidth(el.firstElementChild as HTMLElement, el) >
-          el.offsetWidth
+        (el.dataset.break =
+          child.offsetWidth > el.offsetWidth ? "true" : "false") === "true"
       );
     }
   });
@@ -55,10 +57,14 @@ export const Ellipsis: FC<EllipsisProps> = ({
   useLayoutEffect(() => {
     const ob = new ResizeObserver(checkWidth.current);
     ob.observe(refContainer.current as HTMLElement);
-    checkWidth.current();
     return () => {
       ob.disconnect();
     };
+  }, []);
+
+  useLayoutEffect(() => {
+    setApplyEllipsis(false);
+    checkWidth.current();
   }, [children]);
 
   /** ***************** component *******************/
@@ -66,7 +72,6 @@ export const Ellipsis: FC<EllipsisProps> = ({
     <div
       {...rest}
       ref={refContainer}
-      data-break={applyEllipsis}
       data-tooltip={
         applyEllipsis
           ? (refContainer.current?.firstElementChild as HTMLElement)?.innerHTML
