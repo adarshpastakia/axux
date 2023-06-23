@@ -30,6 +30,7 @@
     "@hookform/resolvers": "^3.0.1",
     "react-color": "^2.19.3",
     "react-hook-form": "^7.43.9",
+    "react-input-mask": "^3.0.0-alpha.2",
     "yup": "^1.1.0"
   },
   "peerDependencies": {
@@ -43,6 +44,7 @@
     "@types/react-color": "^3.0.6",
     "@types/react-dom": "^18.0.11",
     "@types/react-i18next": "^8.1.0",
+    "@types/react-input-mask": "^3.0.2",
     "@types/react-router-dom": "^5.3.3",
     "@types/yup": "^0.32.0"
   },
