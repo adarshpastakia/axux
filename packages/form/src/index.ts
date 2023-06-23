@@ -12,6 +12,7 @@ import { Color } from "./inputs/Color";
 import { ColorPicker } from "./inputs/ColorPicker";
 import { Container } from "./inputs/Container";
 import { File } from "./inputs/File";
+import { Masked } from "./inputs/Masked";
 import { Number } from "./inputs/Number";
 import { Options } from "./inputs/Options";
 import { Password } from "./inputs/Password";
@@ -42,6 +43,7 @@ export const AxField = {
   Slider,
   Range,
   File,
+  Masked,
   Search,
   Options,
   Checkbox,
@@ -60,7 +62,8 @@ export type { FormRef } from "./form/Form";
 AxField.Container.displayName = "AxField.Container";
 AxField.Addon.displayName = "AxField.Addon";
 AxField.Text.displayName = "AxField.Text";
-AxField.Textarea.displayName = "AxField.Text";
+AxField.Masked.displayName = "AxField.Masked";
+AxField.Textarea.displayName = "AxField.Textare";
 AxField.Password.displayName = "AxField.Password";
 AxField.Number.displayName = "AxField.Number";
 AxField.Slider.displayName = "AxField.Slider";
@@ -68,7 +71,7 @@ AxField.Range.displayName = "AxField.Range";
 AxField.File.displayName = "AxField.File";
 AxField.Search.displayName = "AxField.Search";
 AxField.Options.displayName = "AxField.Options";
-AxField.Checkbox.displayName = "AxField.Text";
+AxField.Checkbox.displayName = "AxField.Checkbox";
 AxField.Radio.displayName = "AxField.Radio";
 AxField.Switch.displayName = "AxField.Switch";
 AxField.Combo.displayName = "AxField.Combo";

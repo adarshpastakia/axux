@@ -23,6 +23,7 @@ import {
   SearchStory,
   SelectStory,
   ComboStory,
+  MaskedStory,
   TagStory,
   ListStory,
   ColorStory,
@@ -44,6 +45,14 @@ import {
 
 <Canvas>
   <Story name="Text">{TextStory}</Story>
+</Canvas>
+
+<Heading storyId="form-inputs--masked">Masked</Heading>
+
+<Description of={AxField.Masked} />
+
+<Canvas>
+  <Story name="Masked">{MaskedStory}</Story>
 </Canvas>
 
 <Heading storyId="form-inputs--textarea">Textarea</Heading>

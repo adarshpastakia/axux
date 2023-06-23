@@ -31,6 +31,26 @@ TextStory.args = {
   isRequired: false,
 };
 
+const MaskedTemplate: ComponentStory<typeof AxField.Masked> = (props) => (
+  <AxField.Masked {...props} width="32rem" onChange={action("onChange")} />
+);
+export const MaskedStory = MaskedTemplate.bind({});
+MaskedStory.args = {
+  label: "Text input",
+  mask: "CS-aaa-999",
+  placeholder: "Masked input..",
+  error: "",
+  info: "",
+  uppercase: true,
+  inline: false,
+  allowClear: true,
+  autoFocus: false,
+  isInvalid: false,
+  isDisabled: false,
+  isReadOnly: false,
+  isRequired: false,
+};
+
 const TextareaTemplate: ComponentStory<typeof AxField.Textarea> = (props) => (
   <AxField.Textarea {...props} width="32rem" onChange={action("onChange")} />
 );
