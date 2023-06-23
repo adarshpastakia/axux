@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/adarshpastakia/axux/compare/v2.4.4...v2.5.0) (2023-06-23)
+
+### Features
+
+- added masked input ([f02b4b8](https://github.com/adarshpastakia/axux/commit/f02b4b80f92e27ae7ddd559d091c5e8f852e70f3))
+
 ## [2.4.4](https://github.com/adarshpastakia/axux/compare/v2.4.3...v2.4.4) (2023-06-21)
 
 ### Bug Fixes
