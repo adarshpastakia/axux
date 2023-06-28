@@ -85,6 +85,8 @@ export interface TooltipProps {
 }
 
 export interface BadgeProps {
+  className?: HTMLElement["className"];
+
   /**
    * badge content
    */

@@ -45,7 +45,6 @@ export const Ellipsis: FC<EllipsisProps> = ({
     const child = el.firstElementChild as HTMLElement;
     if (el && child) {
       el.dataset.break = "false";
-      console.log(el.offsetWidth, child.offsetWidth);
       setApplyEllipsis(
         (el.dataset.break =
           child.offsetWidth > el.offsetWidth ? "true" : "false") === "true"
