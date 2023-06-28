@@ -28,6 +28,7 @@ export interface MaskedProps
     ChildrenProp,
     Pick<Props, "mask"> {
   uppercase?: boolean;
+  maskPlaceholder?: string | null;
 }
 
 // eslint-disable-next-line react/display-name
@@ -51,6 +52,7 @@ export const Masked: FC<MaskedProps> = memo(
     allowClear,
     children,
     onEnterPressed,
+    maskPlaceholder,
     inline,
     labelWidth,
     uppercase,
@@ -96,7 +98,7 @@ export const Masked: FC<MaskedProps> = memo(
           aria-errormessage={error}
           value={actualValue}
           size={1}
-          maskPlaceholder="_"
+          maskPlaceholder={maskPlaceholder}
           placeholder={placeholder}
           disabled={isDisabled}
           readOnly={isReadOnly}
