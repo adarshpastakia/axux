@@ -19,6 +19,13 @@
     &[data-error="true"] > .ax-media__container {
       @apply opacity-0 pointer-events-none;
     }
+
+    &[data-colorset="dark_transparent"] .ax-image__scroller {
+      @apply bg-neutral-100;
+    }
+    &[data-colorset="light_transparent"] .ax-image__scroller {
+      @apply bg-neutral-900;
+    }
   }
 
   .ax-media__container {
@@ -382,10 +389,10 @@
 @layer utilities {
   .ax-media {
     &[data-colorset="dark_transparent"] .ax-image__container {
-      @apply dark:bg-slate-100;
+      @apply bg-neutral-100;
     }
     &[data-colorset="light_transparent"] .ax-image__container {
-      @apply bg-slate-800 dark:bg-transparent;
+      @apply bg-neutral-900;
     }
   }
 }
