@@ -9,10 +9,12 @@
 import { isEmpty } from "./_isType";
 
 export const dedupe = (list: AnyObject[], key?: string) => {
-  const ret = Object.values(
-    list.reduce<KeyValue>((r, c) => ({ ...r, [key ? c[key] : c]: c }), {})
-  );
-  return ret.filter((i) => !isEmpty(i));
+  const filtered = list.filter((i) => !isEmpty(i));
+  if (!key) {
+    return Array.from(new Set(filtered).values());
+  }
+
+  return Array.from(new Map(filtered.map((obj) => [obj[key], obj])).values());
 };
 
 export const flatten = (list: AnyObject[]) => {
