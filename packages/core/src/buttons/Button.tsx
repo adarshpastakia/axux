@@ -31,7 +31,6 @@ import {
   type TooltipType,
 } from "../types";
 import { AppIcons } from "../types/appIcons";
-import { Ellipsis } from "../typography/Ellipsis";
 import { ActionButton } from "./Action";
 import { ConfirmButton } from "./Confirm";
 import { DropdownButton } from "./Dropdown";
@@ -211,9 +210,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
         {useSpinner && isLoading && (
           <AxAnimation.Spinner className="ax-button__icon" />
         )}
-        {children && (
-          <Ellipsis className="ax-button__label">{children}</Ellipsis>
-        )}
+        {children && <div className="ax-button__label">{children}</div>}
         {Badge}
         {hotKey && <AxHotKey.Label keyCombo={hotKey} />}
         {showCaret && (
