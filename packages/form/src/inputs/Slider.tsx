@@ -66,6 +66,10 @@ export interface SliderProps
    */
   maxLabel?: string;
 
+  ranges?: number[];
+  useInfinity?: true;
+  format?: string;
+
   onSlide?: (val: number) => void;
 }
 
@@ -77,6 +81,7 @@ export const Slider: FC<SliderProps> = memo(
     isRequired,
     className,
     value,
+    ranges,
     onChange,
     inputRef,
     isInvalid,
@@ -85,6 +90,7 @@ export const Slider: FC<SliderProps> = memo(
     minLabel,
     maxLabel,
     info,
+    format,
     error,
     width,
     color,
@@ -93,46 +99,52 @@ export const Slider: FC<SliderProps> = memo(
     isVertical,
     isDisabled,
     isReadOnly,
+    useInfinity,
     onSlide,
     onEnterPressed,
     height = 192,
     step = 1,
-    min = 0,
-    max = 100,
+    min: _min = 0,
+    max: _max = 100,
     ...rest
   }: SliderProps) => {
     const [actualValue, setActualValue] = useState(0);
     const [displayValue, setDisplayValue] = useState(false);
     const [, startTransition] = useTransition();
+
+    const min = useMemo(() => ranges?.[0] ?? _min, [_min, ranges]);
+    const max = useMemo(() => ranges?.slice(-1)[0] ?? _max, [_max, ranges]);
+
     useEffect(() => {
-      setActualValue(value ?? 0);
-    }, [value]);
+      setActualValue(useInfinity && value === Infinity ? max : value ?? 0);
+    }, [value, max, useInfinity]);
     useEffect(() => {
       setDisplayValue(!!showValue);
     }, [showValue]);
     const handleChange = useCallback(
       (value: number) => {
-        setActualValue(value ?? 0);
-        onChange != null && startTransition(() => onChange(value ?? undefined));
+        const val = useInfinity && value === max ? Infinity : value;
+        setActualValue(val ?? 0);
+        onChange != null && startTransition(() => onChange(val ?? undefined));
       },
-      [onChange]
+      [onChange, max, useInfinity]
     );
 
     const minDisplay = useMemo(
       () => (
         <span className="ax-field__slider--label">
-          {minLabel ?? Format.number(min)}
+          {minLabel ?? Format.number(min, format)}
         </span>
       ),
-      [minLabel, min]
+      [minLabel, min, format]
     );
     const maxDisplay = useMemo(
       () => (
         <span className="ax-field__slider--label">
-          {maxLabel ?? Format.number(max)}
+          {useInfinity ? "∞" : maxLabel ?? Format.number(max, format)}
         </span>
       ),
-      [maxLabel, max]
+      [maxLabel, max, format, useInfinity]
     );
 
     const rangerInstance = useRanger({
@@ -140,6 +152,7 @@ export const Slider: FC<SliderProps> = memo(
       min,
       max,
       stepSize: step,
+      steps: ranges,
       vertical: isVertical,
       tickSize: Math.max((max - min) / 10, step),
       onDrag: (val) => onSlide?.(val[0]),
@@ -204,7 +217,9 @@ export const Slider: FC<SliderProps> = memo(
                       data-align={percentage > 50 ? "start" : "end"}
                       style={valueStyles}
                     >
-                      {Format.number(value)}
+                      {value === Infinity || (useInfinity && value === max)
+                        ? "∞"
+                        : Format.number(value, format)}
                     </div>
                   )}
                 </Fragment>
