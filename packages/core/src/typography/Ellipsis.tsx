@@ -45,9 +45,13 @@ export const Ellipsis: FC<EllipsisProps> = ({
     const child = el.firstElementChild as HTMLElement;
     if (el && child) {
       el.dataset.break = "false";
-      setApplyEllipsis(
-        (el.dataset.break =
-          child.offsetWidth > el.offsetWidth ? "true" : "false") === "true"
+      setTimeout(
+        () =>
+          setApplyEllipsis(
+            (el.dataset.break =
+              child.offsetWidth > el.offsetWidth ? "true" : "false") === "true"
+          ),
+        10
       );
     }
   });
