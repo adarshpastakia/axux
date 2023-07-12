@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.2](https://github.com/adarshpastakia/axux/compare/v2.5.1...v2.5.2) (2023-07-12)
+
+### Bug Fixes
+
+- **Slider:** add custom ranges ([d810cac](https://github.com/adarshpastakia/axux/commit/d810cac184b11a8e2e74fe20a7fc4c43dff0c9ba))
+
 ## [2.5.1](https://github.com/adarshpastakia/axux/compare/v2.5.0...v2.5.1) (2023-07-02)
 
 ### Bug Fixes

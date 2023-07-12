@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.2](https://github.com/adarshpastakia/axux/compare/v2.5.1...v2.5.2) (2023-07-12)
+
+### Bug Fixes
+
+- **ImageViewer:** dynamic bg ([32576c8](https://github.com/adarshpastakia/axux/commit/32576c822eeb925f6c16dc8079a148808da15095))
+
 ## [2.5.1](https://github.com/adarshpastakia/axux/compare/v2.5.0...v2.5.1) (2023-07-02)
 
 **Note:** Version bump only for package @axux/media

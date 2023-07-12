@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.2](https://github.com/adarshpastakia/axux/compare/v2.5.1...v2.5.2) (2023-07-12)
+
+### Bug Fixes
+
+- **Button:** use truncated label ([2c55f2e](https://github.com/adarshpastakia/axux/commit/2c55f2ed0c3fdb04844a1b3abb0b28437d7ca75a))
+- dedupe logic using es set/map ([2eb93e6](https://github.com/adarshpastakia/axux/commit/2eb93e6230d3cce74dda4a8817a9e982835e4f09))
+- **Ellipsis:** timeout width check ([6269994](https://github.com/adarshpastakia/axux/commit/6269994053bd239a23b6bee3559daea845aaaea5))
+- **ImageViewer:** dynamic bg ([32576c8](https://github.com/adarshpastakia/axux/commit/32576c822eeb925f6c16dc8079a148808da15095))
+- **Slider:** add custom ranges ([d810cac](https://github.com/adarshpastakia/axux/commit/d810cac184b11a8e2e74fe20a7fc4c43dff0c9ba))
+
 ## [2.5.1](https://github.com/adarshpastakia/axux/compare/v2.5.0...v2.5.1) (2023-07-02)
 
 ### Bug Fixes

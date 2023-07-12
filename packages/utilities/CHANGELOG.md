@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.2](https://github.com/adarshpastakia/axux/compare/v2.5.1...v2.5.2) (2023-07-12)
+
+### Bug Fixes
+
+- dedupe logic using es set/map ([2eb93e6](https://github.com/adarshpastakia/axux/commit/2eb93e6230d3cce74dda4a8817a9e982835e4f09))
+
 ## [2.5.1](https://github.com/adarshpastakia/axux/compare/v2.5.0...v2.5.1) (2023-07-02)
 
 **Note:** Version bump only for package @axux/utilities
