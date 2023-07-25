@@ -81,7 +81,7 @@ interface GlobalContextType {
   /**
    * close all open overlays
    */
-  closeOverlays: () => void;
+  closeOverlays: (closeNotifs?: true) => void;
 
   currentTheme: State["theme"];
   currentLocale: string;
@@ -184,8 +184,8 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
     localStorage.setItem(KEY_CALENDAR, calendar);
   }, []);
 
-  const closeOverlays = useCallback(() => {
-    notificationRef.current?.closeAll();
+  const closeOverlays = useCallback((closeNotifs = false) => {
+    closeNotifs && notificationRef.current?.closeAll();
     overlayRef.current?.closeAll();
   }, []);
 
