@@ -126,4 +126,17 @@
       @apply text-gray-800 dark:text-gray-100 bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-zinc-700;
     }
   }
+
+  & .toc-list {
+    @apply ltr:border-l-2 ltr:border-l-bw-100 ltr:dark:border-l-bw-800 rtl:border-r-2 rtl:!border-l-0 rtl:border-r-bw-100 rtl:dark:border-r-bw-800;
+
+    & .toc-list-item {
+      @apply ps-5 ml-0;
+
+      &:before {
+        @apply ltr:-left-[2px] rtl:-right-[2px] rtl:!left-auto;
+        transform: none !important;
+      }
+    }
+  }
 }

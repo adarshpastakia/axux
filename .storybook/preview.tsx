@@ -8,20 +8,21 @@
 
 import { AxApplicationProvider, AxCollapsable } from "@axux/core";
 import "@mdi/font/css/materialdesignicons.min.css";
-import { Anchor, DocsContainer } from "@storybook/addon-docs";
+import { Anchor } from "@storybook/addon-docs";
 import { withTests } from "@storybook/addon-jest";
 import {
   Controls,
   Description,
+  DocsContainer,
   Primary,
   Stories,
   Subtitle,
   Title,
 } from "@storybook/blocks";
-import { addons } from "@storybook/preview-api";
+import { addons, useGlobals } from "@storybook/preview-api";
 import { Preview } from "@storybook/react";
-import { create, ensure } from "@storybook/theming";
-import { Fragment } from "react";
+import { create } from "@storybook/theming";
+import { Fragment, useEffect } from "react";
 import { I18nextProvider } from "react-i18next";
 import colors from "tailwindcss/colors";
 import { default as i18n } from "./i18n";
@@ -73,16 +74,17 @@ export default {
       lightTheme,
     },
     docs: {
-      theme: ensure(darkTheme),
       toc: {},
       controls: { exclude: /^on.*/, sort: "alpha" },
       container: ({ children, context }: any) => {
+        const globals = context.store.globals.get();
         return (
-          <I18nextProvider i18n={i18n}>
-            <AxApplicationProvider defaultTheme="light">
-              <DocsContainer context={context}>{children}</DocsContainer>
-            </AxApplicationProvider>
-          </I18nextProvider>
+          <DocsContainer
+            context={context}
+            theme={globals.theme === "dark" ? darkTheme : lightTheme}
+          >
+            {children}
+          </DocsContainer>
         );
       },
       page: () => {
@@ -138,14 +140,20 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
-      <I18nextProvider i18n={i18n}>
-        <AxApplicationProvider>
-          {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
-          <Story />
-        </AxApplicationProvider>
-      </I18nextProvider>
-    ),
+    (Story) => {
+      const [globals] = useGlobals();
+      return (
+        <I18nextProvider i18n={i18n}>
+          <AxApplicationProvider
+            defaultTheme={globals.theme}
+            defaultLocale={globals.locale}
+          >
+            {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+            <Story />
+          </AxApplicationProvider>
+        </I18nextProvider>
+      );
+    },
     withTests({ results }),
   ],
 } as Preview;
@@ -156,13 +164,8 @@ addons.getChannel().on("LOCALE_CHANGED", (locale: any) => {
   });
 });
 addons.getChannel().on("THEME_CHANGED", (theme: any) => {
-  setTimeout(() => {
-    document.documentElement.classList.remove("dark", "light");
-    document.querySelectorAll("#storybook-root, .docs-story")?.forEach((el) => {
-      el.classList.remove("light", "dark");
-      el.classList.add(`${theme}`);
-    });
-  }, 100);
+  document.documentElement.classList.remove("dark", "light");
+  document.documentElement.classList.add(theme);
   (
     document.getElementById("arcgisCss") as HTMLLinkElement
   ).href = `@arcgis/esri/themes/${theme}/main.css`;

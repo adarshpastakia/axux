@@ -9,8 +9,7 @@
 import { addons, types } from "@storybook/addons";
 import { API, useGlobals, useParameter } from "@storybook/api";
 import { IconButton } from "@storybook/components";
-import { FORCE_RE_RENDER } from "@storybook/core-events";
-import { ThemeVars, themes } from "@storybook/theming";
+import { ThemeVars, ensure, themes } from "@storybook/theming";
 import React, { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "storybook-theme";
@@ -36,14 +35,12 @@ const ThemeToggle = ({ api }: { api: API }) => {
 
   // Function that will update the global value and trigger a UI refresh.
   const refreshAndUpdateGlobal = useCallback((key: THEME, theme: ThemeVars) => {
-    api.setOptions({ theme, docs: { theme } });
+    api.setOptions({ theme });
     // Updates Storybook global value
     updateGlobals({
       [GLOBAL_KEY]: key,
     });
     api.getChannel()?.emit("THEME_CHANGED", key);
-    // Invokes Storybook's addon API method (with the FORCE_RE_RENDER) event to trigger a UI refresh
-    // addons.getChannel().emit(FORCE_RE_RENDER);
   }, []);
 
   const toggleTheme = useCallback(() => {
