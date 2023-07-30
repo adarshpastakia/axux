@@ -156,16 +156,13 @@ addons.getChannel().on("LOCALE_CHANGED", (locale: any) => {
   });
 });
 addons.getChannel().on("THEME_CHANGED", (theme: any) => {
-  setTimeout(
-    () =>
-      document
-        .querySelectorAll("#storybook-root, .docs-story")
-        ?.forEach((el) => {
-          el.classList.remove("light", "dark");
-          el.classList.add(`${theme}`);
-        }),
-    100
-  );
+  setTimeout(() => {
+    document.documentElement.classList.remove("dark", "light");
+    document.querySelectorAll("#storybook-root, .docs-story")?.forEach((el) => {
+      el.classList.remove("light", "dark");
+      el.classList.add(`${theme}`);
+    });
+  }, 100);
   (
     document.getElementById("arcgisCss") as HTMLLinkElement
   ).href = `@arcgis/esri/themes/${theme}/main.css`;
