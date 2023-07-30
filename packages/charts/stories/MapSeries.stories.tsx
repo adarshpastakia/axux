@@ -9,7 +9,7 @@ const meta: Meta<typeof AxChart.DataSeries> = {
   title: "@charts/DataSeries",
   tags: ["autodocs"],
   parameters: {
-    layout: "fullscreen",
+    layout: "centered",
     controls: { exclude: "children" },
   },
 };
@@ -55,7 +55,7 @@ export const Example: Story = {
       loadData();
     }, []);
     return (
-      <AxPanel minHeight={420}>
+      <AxPanel minHeight={420} minWidth={600}>
         <AxHeader>
           <AxTitle>Map Series chart</AxTitle>
           <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />

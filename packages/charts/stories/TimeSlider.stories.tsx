@@ -9,7 +9,7 @@ const meta: Meta<typeof AxChart.TimeSlider> = {
   title: "@charts/TimeSlider",
   tags: ["autodocs"],
   parameters: {
-    layout: "fullscreen",
+    layout: "centered",
     controls: { exclude: "children" },
   },
 };
@@ -33,7 +33,7 @@ export const Example: Story = {
       loadData();
     }, []);
     return (
-      <AxPanel height={100}>
+      <AxPanel height={100} width="100%">
         <AxHeader>
           <AxTitle>Time Slider chart</AxTitle>
           <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />

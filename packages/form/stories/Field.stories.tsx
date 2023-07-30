@@ -8,9 +8,6 @@ const meta: Meta<typeof AxField.Container> = {
   parameters: {
     layout: "centered",
     controls: { exclude: "children" },
-    docs: {
-      toc: { disabled: false },
-    },
   },
 };
 

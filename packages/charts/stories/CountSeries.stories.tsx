@@ -9,7 +9,7 @@ const meta: Meta<typeof AxChart.CountSeries> = {
   title: "@charts/CountSeries",
   tags: ["autodocs"],
   parameters: {
-    layout: "fullscreen",
+    layout: "centered",
     controls: { exclude: "children" },
   },
 };
@@ -33,7 +33,7 @@ export const Example: Story = {
       loadData();
     }, []);
     return (
-      <AxPanel minHeight={420}>
+      <AxPanel minHeight={420} minWidth={600}>
         <AxHeader>
           <AxTitle>Count Series chart</AxTitle>
           <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />

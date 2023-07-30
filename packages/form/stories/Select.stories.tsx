@@ -9,9 +9,6 @@ const meta: Meta<typeof AxField.Select> = {
   parameters: {
     layout: "centered",
     controls: { exclude: ["options", "renderer", "makeLabel"] },
-    docs: {
-      toc: { disabled: false },
-    },
   },
 };
 
