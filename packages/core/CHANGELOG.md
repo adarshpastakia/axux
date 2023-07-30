@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/adarshpastakia/axux/compare/v2.5.2...v2.6.0) (2023-07-30)
+
+### Bug Fixes
+
+- closeOverlays pass true to close notifications ([58fe357](https://github.com/adarshpastakia/axux/commit/58fe357b2e87ed33e556e20b6aa58b3e7d70dc31))
+- upgrade storybook ([ca6c500](https://github.com/adarshpastakia/axux/commit/ca6c500f2a969999f54875ba46f992e2a72691a3))
+
 ## [2.5.2](https://github.com/adarshpastakia/axux/compare/v2.5.1...v2.5.2) (2023-07-12)
 
 ### Bug Fixes
