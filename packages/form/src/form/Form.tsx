@@ -25,7 +25,7 @@ import {
   FormProvider,
   Controller as HFController,
   useForm,
-  type DeepPartial,
+  type DefaultValues,
 } from "react-hook-form";
 import type * as yup from "yup";
 import { type InputProps } from "../types";
@@ -132,7 +132,7 @@ export const AxForm = <K extends KeyValue>({
   const form = useForm({
     shouldFocusError: true,
     resolver: schema && yupResolver(schema as AnyObject),
-    defaultValues: defaultValues as DeepPartial<K>,
+    defaultValues: defaultValues as DefaultValues<K>,
   });
 
   const [, startTransition] = useTransition();

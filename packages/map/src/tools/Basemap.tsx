@@ -2,7 +2,7 @@
  * AxUX React+TailwindCSS UI Framework
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
- * @copyright : 2022
+ * @copyright : 2023
  * @license   : MIT
  */
 
@@ -31,13 +31,13 @@ export const Basemap: FC = () => {
         expandTooltip: "Open Basemap list",
         collapseTooltip: "Hide Basemap list",
       });
-      view.ui.add(basemapExpand, { index: 1, position: "top-trailing" });
+      view.ui.add(basemapExpand, { index: -5, position: "top-trailing" });
 
       return () => {
         view.ui.remove(basemapExpand);
       };
     }
-  }, [view, basemaps]);
+  }, [basemaps]);
 
   return null;
 };

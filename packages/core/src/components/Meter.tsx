@@ -22,7 +22,7 @@ export interface MeterProps extends ElementProps {
   /**
    * color
    */
-  color?: Color | string;
+  color?: Color;
   /**
    * hide value label
    */

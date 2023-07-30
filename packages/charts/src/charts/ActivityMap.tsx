@@ -9,7 +9,7 @@
 import { AxButton, AxDivider } from "@axux/core";
 import { isArray, isEmpty } from "@axux/utilities";
 import { type EChartOption, type EChartsType } from "echarts";
-import { type FC, useMemo, useRef, useState } from "react";
+import { type FC, useMemo, useRef, useState, useEffect } from "react";
 import { ChartPalette } from "../theme";
 import { type BaseChart } from "../types";
 import { Icons } from "../types/icons";
@@ -128,6 +128,13 @@ const ActivityMapChart: FC<ActivityMapProps> = ({
   const chartRef = useRef<EChartsType>(null);
   const [type, setType] = useState(chartType);
   const [theme, setTheme] = useState(chartTheme);
+
+  useEffect(() => {
+    setType(chartType);
+  }, [chartType]);
+  useEffect(() => {
+    setTheme(chartTheme);
+  }, [chartTheme]);
 
   const options = useMemo<EChartOption>(() => {
     chartRef.current?.clear();

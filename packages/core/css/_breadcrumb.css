@@ -16,6 +16,9 @@
       & > a {
         @apply flex flex-auto gap-1 cursor-pointer items-center leading-5 font-medium flex-nowrap overflow-hidden;
 
+        & > .ax-icon {
+          @apply text-lg;
+        }
         & > label {
           @apply truncate flex-auto;
         }

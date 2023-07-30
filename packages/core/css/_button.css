@@ -246,10 +246,10 @@
   }
   .light .ax-button {
     & .ax-button__inner {
-      @apply bg-bw-50 text-primary-600 hover:bg-primary-100 active:bg-primary-300 focus-visible:outline-primary-500;
+      @apply bg-bw-0 text-primary-600 hover:bg-primary-100 active:bg-primary-300 focus-visible:outline-primary-500;
     }
     &[data-type="link"] .ax-button__inner {
-      @apply shadow-none bg-bw-100/30 hover:bg-bw-100 active:bg-bw-200;
+      @apply shadow-none bg-transparent hover:bg-bw-100 active:bg-bw-200;
     }
 
     &[data-color="primary"] .ax-button__inner {
@@ -307,10 +307,10 @@
   }
   .dark .ax-button {
     & .ax-button__inner {
-      @apply bg-bw-800 text-primary-300 hover:bg-primary-800 active:bg-primary-900 focus-visible:outline-primary-500;
+      @apply bg-bw-950 text-primary-300 hover:bg-primary-800 active:bg-primary-900 focus-visible:outline-primary-500;
     }
     &[data-type="link"] .ax-button__inner {
-      @apply shadow-none bg-bw-800/30 hover:bg-bw-800 active:bg-bw-900;
+      @apply shadow-none bg-transparent hover:bg-bw-800 active:bg-bw-900;
     }
 
     &[data-color="primary"] .ax-button__inner {

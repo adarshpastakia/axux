@@ -25,7 +25,8 @@
   "dependencies": {
     "@arcgis/core": "^4.26.5",
     "@axux/core": "^2.5.2",
-    "@axux/utilities": "^2.5.2"
+    "@axux/utilities": "^2.5.2",
+    "ngeohash": "^0.6.3"
   },
   "peerDependencies": {
     "i18next": "^22.4.14",
@@ -34,7 +35,6 @@
     "react-i18next": "^12.2.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.3.0",
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
     "@types/react-i18next": "^8.1.0",

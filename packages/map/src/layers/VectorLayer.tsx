@@ -2,7 +2,7 @@
  * AxUX React+TailwindCSS UI Framework
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
- * @copyright : 2022
+ * @copyright : 2023
  * @license   : MIT
  */
 
@@ -10,7 +10,7 @@ import VectorTileLayer from "@arcgis/core/layers/VectorTileLayer";
 import { type FC, useEffect, useRef } from "react";
 import { useMapContext } from "../context/MapContext";
 
-export interface Props {
+interface Props {
   source: string;
   title?: string;
   opacity?: number;

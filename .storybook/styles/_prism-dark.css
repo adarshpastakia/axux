@@ -8,8 +8,8 @@
 
 html.dark {
   & .prismjs {
-    background: #272f36;
-    color: #cccccc;
+    background: #272f36 !important;
+    color: #cccccc !important;
   }
 
   & .prismjs > div[class*="language-"] {

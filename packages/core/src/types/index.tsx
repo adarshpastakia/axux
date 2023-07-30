@@ -21,7 +21,7 @@ export type BooleanCallback = (truthy: boolean) => void;
 
 export type Color = "primary" | "accent" | "danger" | "warning" | "success";
 
-export type Size = "sm" | "md" | "lg";
+export type Size = "sm" | "md" | "lg" | "normal";
 
 export type NavigationDirection = "prev" | "next";
 

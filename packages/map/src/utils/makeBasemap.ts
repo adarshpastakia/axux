@@ -2,7 +2,7 @@
  * AxUX React+TailwindCSS UI Framework
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
- * @copyright : 2022
+ * @copyright : 2023
  * @license   : MIT
  */
 
@@ -13,7 +13,7 @@ import WebTileLayer from "@arcgis/core/layers/WebTileLayer";
 import { isEmpty } from "@axux/utilities";
 import { type MapSource } from "../constants/types";
 
-export const makeBasemap = ({ id, title, type, thumbnail, url }: MapSource) => {
+export const makeBasemap = ({ id, title, type, thumb, url }: MapSource) => {
   let layer;
 
   if (isEmpty(url)) {
@@ -33,7 +33,7 @@ export const makeBasemap = ({ id, title, type, thumbnail, url }: MapSource) => {
 
   return new Basemap({
     baseLayers: [layer as Layer],
-    thumbnailUrl: thumbnail,
+    thumbnailUrl: thumb,
     id: `base:${id}`,
     title,
   });

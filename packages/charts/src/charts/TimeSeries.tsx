@@ -38,6 +38,13 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
   const [type, setType] = useState(chartType);
   const [theme, setTheme] = useState(chartTheme);
 
+  useEffect(() => {
+    setType(chartType);
+  }, [chartType]);
+  useEffect(() => {
+    setTheme(chartTheme);
+  }, [chartTheme]);
+
   const enableBrush = useCallback(() => {
     chartRef.current?.dispatchAction({
       type: "restore",

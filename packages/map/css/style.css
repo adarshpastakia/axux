@@ -2,47 +2,83 @@
  * AxUX React+TailwindCSS UI Framework
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
- * @copyright : 2022
- 
+ * @copyright : 2023
  * @license   : MIT
  */
 
-@layer components {
-  .ax-mapviewer {
-    @apply relative grid-area-[content];
+.mapviewer {
+  @apply relative w-full h-full overflow-hidden;
 
-    & > .ax-mapviewer__container {
-      @apply absolute inset-0;
+  & > .mapviewer__container {
+    @apply absolute inset-0 overflow-hidden;
+  }
+
+  & .esri-widget > .esri-widget--button:not(:first-child) {
+    @apply border-t border-bw-500/20;
+  }
+
+  & .esri-widget--button {
+    @apply text-primary-600 dark:text-primary-400 hover:bg-primary-500/20;
+
+    &:active {
+      box-shadow: 1px 1px 1px #888 inset;
+    }
+  }
+
+  & .esri-widget--button:disabled {
+    @apply pointer-events-none opacity-30;
+  }
+
+  & .esri-expand__content > .esri-widget {
+    @apply focus-within:outline-none;
+  }
+
+  & .esri-basemap-gallery__item {
+    &:hover,
+    &:focus {
+      @apply bg-primary-500/10 border-primary-700/30 dark:border-primary-300/30;
+    }
+    & > div {
+      @apply text-default;
+    }
+  }
+
+  & .esri-basemap-gallery__item.esri-basemap-gallery__item--selected {
+    @apply bg-primary-500/50 border-primary-700/50 dark:border-primary-300/50;
+  }
+
+  & .esri-widget__heading.esri-popup__header-title img {
+    @apply hidden;
+  }
+
+  & .esri-popup__feature-menu-title {
+    & > span {
+      @apply flex items-center gap-2;
     }
 
-    & .esri-widget > .esri-widget--button:not(:first-child) {
-      @apply border-t border-bw-500/20;
+    & img {
+      @apply w-16 h-12 bg-bw-500/50 object-cover p-1 ltr:float-left rtl:float-right;
     }
+  }
 
-    & .esri-widget--button {
-      @apply text-primary-600 dark:text-primary-400 hover:bg-primary-500/20;
-    }
+  & .esri-feature-media__item > img {
+    @apply bg-bw-500/50 object-cover p-1 max-w-sm max-h-72;
+  }
 
-    & .esri-widget--button:disabled {
-      @apply pointer-events-none opacity-30;
-    }
+  & .compare-slider {
+    @apply bg-transparent shadow-none;
 
-    & .esri-expand__content > .esri-widget {
-      @apply focus-within:outline-none;
-    }
+    & > input {
+      @apply w-96 max-w-full flex-auto appearance-none overflow-hidden border-bw-500/50 border;
 
-    & .esri-basemap-gallery__item {
-      &:hover,
-      &:focus {
-        @apply bg-primary-500/10 border-primary-700/30 dark:border-primary-300/30;
+      &::-webkit-slider-runnable-track {
+        @apply h-3;
+        background-color: var(--rightColor);
       }
-      & > div {
-        @apply text-default;
+      &::-webkit-slider-thumb {
+        @apply appearance-none h-3 w-1 rounded-sm bg-white cursor-ew-resize;
+        box-shadow: -100vw 0 0 100vw var(--leftColor);
       }
-    }
-
-    & .esri-basemap-gallery__item.esri-basemap-gallery__item--selected {
-      @apply bg-primary-500/50 border-primary-700/50 dark:border-primary-300/50;
     }
   }
 }

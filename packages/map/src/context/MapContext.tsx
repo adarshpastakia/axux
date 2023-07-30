@@ -2,7 +2,7 @@
  * AxUX React+TailwindCSS UI Framework
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
- * @copyright : 2022
+ * @copyright : 2023
  * @license   : MIT
  */
 
@@ -17,6 +17,7 @@ import {
   type FC,
   useContext,
   useEffect,
+  useImperativeHandle,
   useLayoutEffect,
   useRef,
   useState,
@@ -28,7 +29,8 @@ import {
   type MapViewerProps,
   type MapViewport,
 } from "../constants/types";
-import { makeBasemap } from "../utils";
+import { useProjection } from "../hooks/useProjection";
+import { convertToDMS, makeBasemap } from "../utils";
 
 const MapContext = createContext<{
   map?: GeoMap;
@@ -36,22 +38,23 @@ const MapContext = createContext<{
   basemaps: Map<string, Basemap>;
   defaultViewport: MapViewport;
   viewport: MapViewport;
-  minZoom: number;
-  maxZoom: number;
 }>({} as AnyObject);
 
 export const useMapContext = () => useContext(MapContext);
 
 export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
   defaultViewport,
+  onLoading,
   minZoom,
   maxZoom,
   sources,
   defaultSource,
   children,
+  mapRef,
 }) => {
   const refContainer = useRef<HTMLDivElement>(null);
   const [, startTransition] = useTransition();
+  const { getGeometry } = useProjection();
 
   const [map, setMap] = useState<GeoMap>();
   const [view, setView] = useState<MapView>();
@@ -63,11 +66,36 @@ export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
     defaultViewport && setViewport(defaultViewport);
   }, [defaultViewport]);
 
-  useLayoutEffect(() => {
-    startTransition(() => {
-      void view?.goTo(viewport);
-    });
-  }, [view, viewport]);
+  useImperativeHandle(
+    mapRef,
+    () => ({
+      exportMap: async () => {
+        if (view) {
+          const extent = await getGeometry(view.extent).then(
+            (extent?: KeyValue) => {
+              let infoText = "";
+              if (extent) {
+                infoText += convertToDMS(extent.ymin, true) + ", ";
+                infoText += convertToDMS(extent.xmin) + " - ";
+                infoText += convertToDMS(extent.ymax, true) + ", ";
+                infoText += convertToDMS(extent.xmax);
+              }
+              return infoText;
+            }
+          );
+          const { dataUrl: image } = await view.takeScreenshot({
+            ignorePadding: true,
+            width: 786 * 2,
+            height: 432 * 2,
+            format: "jpg",
+          });
+          return { image, extent };
+        }
+        return { image: "", extent: "" };
+      },
+    }),
+    [view]
+  );
 
   useEffect(() => {
     if (!(sources?.length > 0)) {
@@ -112,6 +140,10 @@ export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
       view.focus();
     });
 
+    view.watch("updating", () => {
+      onLoading?.(view.updating);
+    });
+
     startTransition(() => {
       setBasemaps(basemaps);
       setView(view);
@@ -121,13 +153,11 @@ export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
     return () => {
       map.destroy();
     };
-  }, [sources, defaultSource, minZoom, maxZoom]);
+  }, [sources, defaultSource]);
 
   return (
     <MapContext.Provider
       value={{
-        minZoom,
-        maxZoom,
         viewport,
         map,
         view,
@@ -135,11 +165,11 @@ export const MapProvider: FC<MapViewerProps & ChildrenProp> = ({
         defaultViewport: defaultViewport ?? DEFAULT_VIEWPORT,
       }}
     >
-      <div className="ax-mapviewer">
-        <div ref={refContainer} className="ax-mapviewer__container" />
-        {children}
+      <div className="mapviewer">
+        <div ref={refContainer} className="mapviewer__container" />
+        {map && view && children}
       </div>
     </MapContext.Provider>
   );
 };
-MapProvider.displayName = "AxMap.Provider";
+MapProvider.displayName = "Map.Provider";

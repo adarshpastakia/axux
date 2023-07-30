@@ -17,6 +17,7 @@ export const TreeNode = memo(
   ({
     style,
     isCheckable,
+    isSelectable,
     checkLevel = 0,
     onToggleCheck,
     onToggleExpand,
@@ -82,7 +83,7 @@ export const TreeNode = memo(
               isCheckable
                 ? onToggleCheck(node.id)
                 : props.isLeaf || nodesSelectable
-                ? onSelect(node.id)
+                ? isSelectable && onSelect(node.id)
                 : onToggleExpand(node.id)
             }
             onDoubleClick={onToggleExpand}

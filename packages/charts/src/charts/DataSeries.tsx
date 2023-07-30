@@ -45,6 +45,13 @@ const DataSeriesChart: FC<DataSeriesProps> = ({
   const [theme, setTheme] = useState(chartTheme);
 
   useEffect(() => {
+    setType(chartType);
+  }, [chartType]);
+  useEffect(() => {
+    setTheme(chartTheme);
+  }, [chartTheme]);
+
+  useEffect(() => {
     if (type === "radar") {
       return () => {
         chartRef.current?.clear();
