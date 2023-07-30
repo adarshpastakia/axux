@@ -79,7 +79,7 @@ export default {
       container: ({ children, context }: any) => {
         return (
           <I18nextProvider i18n={i18n}>
-            <AxApplicationProvider>
+            <AxApplicationProvider defaultTheme="light">
               <DocsContainer context={context}>{children}</DocsContainer>
             </AxApplicationProvider>
           </I18nextProvider>
