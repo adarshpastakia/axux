@@ -48,7 +48,7 @@ export interface ButtonProps extends ElementProps, IconProp, RefProp {
   /**
    * button style
    */
-  variant?: "outline" | "solid" | "link";
+  variant?: "outline" | "solid" | "link" | "normal";
   /**
    * icon alignment
    */

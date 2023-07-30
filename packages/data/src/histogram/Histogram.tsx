@@ -12,7 +12,10 @@ import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { Format } from "@axux/utilities";
 import { type FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { type SelectableProps, useSelectableList } from "../hooks/useSelectableList";
+import {
+  type SelectableProps,
+  useSelectableList,
+} from "../hooks/useSelectableList";
 
 export interface HistogramItem extends KeyValue {
   id: string;
@@ -158,7 +161,7 @@ export const AxHistogram: FC<HistogramProps> = ({
         return a.count > b.count ? -1 : 1;
       });
     return items;
-  }, [items, selection]);
+  }, [items, enableSorting, selection]);
 
   const totalValue = useMemo(() => {
     if (total > 0) return total;
@@ -177,7 +180,7 @@ export const AxHistogram: FC<HistogramProps> = ({
           color={color}
           positiveColor={positiveColor}
           negativeColor={negativeColor}
-          onClick={(props.onChange != null) ? toggleSelection : props.onClick}
+          onClick={props.onChange != null ? toggleSelection : props.onClick}
           allowNegative={allowNegative}
           selected={selection[item.id]}
         />

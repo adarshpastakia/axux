@@ -132,7 +132,7 @@
       & .ax-side__title {
         @apply absolute z-10;
         left: 1em;
-        top: 1em;
+        top: 2em;
         transform-origin: 0 50%;
       }
 

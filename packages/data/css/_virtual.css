@@ -104,6 +104,10 @@
       }
       &[data-layout="horizontal"] {
         @apply min-h-full;
+
+        & > div {
+          @apply inline-block;
+        }
       }
     }
   }

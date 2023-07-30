@@ -9,14 +9,6 @@
 @import "./_markdown.css";
 
 @layer components {
-  .page-maker__container {
-    @apply bg-bw-900/50;
-
-    & > .ax-content::-webkit-scrollbar-thumb {
-      @apply bg-bw-200;
-    }
-  }
-
   .page-maker__page {
     @apply min-h-full p-4 bg-component;
   }
@@ -130,6 +122,7 @@
 
         & > i {
           margin-inline-end: 8px;
+          line-height: 1;
         }
 
         & > div {
@@ -139,6 +132,10 @@
             outline: none;
             box-shadow: 0 0 0 1px theme(colors.primary.500/0.5);
           }
+        }
+
+        & > .ax-field__container input {
+          font-size: inherit;
         }
       }
     }

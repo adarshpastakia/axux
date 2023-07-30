@@ -13,10 +13,25 @@ import { type ChildProp, type ElementProps } from "../types";
 export interface DividerProps extends ElementProps, ChildProp {
   rainbow?: boolean;
   vertical?: boolean;
+  /**
+   * divider size (width: horizontal, height:vertical)
+   */
   width?: number;
+  /**
+   * color hex value
+   */
   color?: string;
+  /**
+   * apply color as text bg
+   */
   applyBg?: boolean;
+  /**
+   * margin size
+   */
   size?: "xs" | "sm";
+  /**
+   * text alignment
+   */
   align?: "start" | "center" | "end";
 }
 

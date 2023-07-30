@@ -25,6 +25,36 @@
 @import "./_prism-light.css";
 
 .sb-show-main {
+  &.sb-show-main {
+    @apply p-0;
+  }
+  &.sb-main-fullscreen {
+    @apply overflow-auto;
+  }
+  &.sb-main-fullscreen #storybook-root {
+    @apply h-[100vh];
+  }
+  &.sb-main-centered #storybook-root {
+    @apply h-[100vh] flex justify-center items-center flex-1;
+  }
+
+  #storybook-docs {
+    & .sbdocs-content > p {
+      @apply text-lg mt-2;
+    }
+
+    & .sbdocs-content > div > h3 {
+      @apply text-accent-700 dark:text-accent-300 !text-lg !font-normal;
+    }
+
+    & .sbdocs-title {
+      @apply text-primary-700 dark:text-primary-300 !text-4xl !font-normal;
+    }
+  }
+  #storybook-root {
+    @apply max-h-[100vh] overflow-hidden relative;
+  }
+
   & div {
     @apply selection:bg-accent-400 dark:selection:bg-accent-700 selection:text-white;
   }
@@ -54,7 +84,17 @@
   }
 
   & .docs-story.docs-story {
-    @apply bg-component;
+    @apply pb-8;
+  }
+
+  #story--data-datagrid--example--primary-inner,
+  #story--data-virtual-grid--example--primary-inner,
+  #story--data-virtual-list--example--primary-inner,
+  #story--data-virtual-timeline--example--primary-inner,
+  #story--core-components-sidepanel--example--primary-inner,
+  #story--core-components-tabpanel--example--primary-inner {
+    height: 600px;
+    overflow: hidden;
   }
 
   & .docs-story.docs-story > div {

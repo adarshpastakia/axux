@@ -1,0 +1,79 @@
+import {
+  Canvas,
+  ArgTypes,
+  Description,
+} from "@storybook/addon-docs";
+import { Meta } from "@storybook/blocks";
+import img from "/assets/thumbs/thumb-vec.png";
+import { AxMap } from "../src";
+
+<Meta title="@map/Introduction" />
+
+<img className="h-48 w-full mb-16 overflow-hidden object-cover" src={img} />
+
+# Using MapViewer
+
+<Description of={AxMap.Viewer} />
+
+- `shift+scroll`: zoom in/out
+- `shift+drag`: zoom in
+- `ctrl+drag`: draw circle selection (Requires selection tool)
+
+```tsx
+import { AxMap } from "@axux/map";
+
+<AxMap.Viewer
+    sources=[
+        { id:"key", title:"Title for basemap list", thumb:"png for basemap list",
+            type:"vector|raster", url:"layer source" }
+    ]
+    defaultSource="key"
+>
+    {/* Zoom tools */}
+    <AxMap.tools.Zoom />
+    {/* History navigation */}
+    <AxMap.tools.Navigation />
+    {/* Basemaps list */}
+    <AxMap.tools.Basemap />
+    {/* Layer list */}
+    <AxMap.tools.Layers />
+    {/* Selection tools */}
+    <AxMap.tools.Selection
+      filters="selected points"
+      onUpdate={handleUpdate}
+    />
+    {/* Custom action */}
+    <AxMap.tools.Action
+        icon="mdiIcon"
+        tooltip=""
+        position="top-start|top-end"
+        index={0}
+        isDisabled={false}
+        onClick={handler}
+     />
+    {/* Comparison tool */}
+     <AxMap.tools.Comparison
+        onCompareStart={() =>
+          Promise.resolve({ events, compareEvents })
+        }
+      />
+
+    <AxMap.layers.X />
+</AxMap.Viewer>
+
+```
+
+### AxMap.Viewer
+<ArgTypes sort="requiredFirst" of={AxMap.Viewer} />
+### AxMap.tools.Action
+<ArgTypes sort="requiredFirst" of={AxMap.tools.Action} />
+### AxMap.tools.Selection
+<ArgTypes sort="requiredFirst" of={AxMap.tools.Selection} />
+### AxMap.tools.Comparison
+<ArgTypes sort="requiredFirst" of={AxMap.tools.Comparison} />
+### AxMap.layers.Cluster
+<ArgTypes sort="requiredFirst" of={AxMap.layers.Cluster} />
+### AxMap.layers.Heatmap
+<ArgTypes sort="requiredFirst" of={AxMap.layers.Heatmap} />
+### AxMap.layers.Locations
+<ArgTypes sort="requiredFirst" of={AxMap.layers.Locations} />

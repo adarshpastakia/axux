@@ -1,0 +1,187 @@
+import {
+  Canvas,
+  Meta,
+  Story,
+  Controls,
+  Primary,
+  Anchor,
+  Subheading,
+  Description,
+} from "@storybook/blocks";
+import { AxCollapsable } from "@axux/core";
+import { AxField } from "../src";
+import * as FieldStories from "./Field.stories";
+import * as FileStories from "./fields/File.stories";
+import * as TextStories from "./fields/Text.stories";
+import * as TextareaStories from "./fields/Textarea.stories";
+import * as MaskedStories from "./fields/Masked.stories";
+import * as NumberStories from "./fields/Number.stories";
+import * as RangeStories from "./fields/Range.stories";
+import * as SearchStories from "./fields/Search.stories";
+import * as SliderStories from "./fields/Slider.stories";
+import * as PasswordStories from "./fields/Password.stories";
+import * as CheckboxStories from "./fields/Checkbox.stories";
+import * as RadioStories from "./fields/Radio.stories";
+import * as SwitchStories from "./fields/Switch.stories";
+import * as ColorStories from "./fields/Color.stories";
+
+<Meta of={FieldStories} />
+
+# Input Fields
+
+<Primary />
+
+<Anchor storyId="text">
+  <Subheading>Text</Subheading>
+</Anchor>
+
+<Canvas of={TextStories.Text} meta={TextStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={TextStories.Text} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="password">
+  <Subheading>Password</Subheading>
+  <Description of={PasswordStories} />
+</Anchor>
+
+<Canvas of={PasswordStories.Password} meta={PasswordStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={PasswordStories.Password} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="number">
+  <Subheading>Number</Subheading>
+</Anchor>
+
+<Canvas of={NumberStories.Number} meta={NumberStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={NumberStories.Number} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="masked">
+  <Subheading>Masked</Subheading>
+</Anchor>
+
+<Canvas of={MaskedStories.Masked} meta={MaskedStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={MaskedStories.Masked} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="search">
+  <Subheading>Search</Subheading>
+</Anchor>
+
+<Canvas of={SearchStories.Search} meta={SearchStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={SearchStories.Search} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="file">
+  <Subheading>File</Subheading>
+</Anchor>
+
+<Canvas of={FileStories.File} meta={FileStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={FileStories.File} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="textarea">
+  <Subheading>Textarea</Subheading>
+</Anchor>
+
+<Canvas of={TextareaStories.Textarea} meta={TextareaStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={TextareaStories.Textarea} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="slider">
+  <Subheading>Slider</Subheading>
+</Anchor>
+
+<Canvas of={SliderStories.Slider} meta={SliderStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={SliderStories.Slider} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="range">
+  <Subheading>Range</Subheading>
+</Anchor>
+
+<Canvas of={RangeStories.Range} meta={RangeStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={RangeStories.Range} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="color">
+  <Subheading>Color</Subheading>
+</Anchor>
+
+<Canvas of={ColorStories.Color} meta={ColorStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={ColorStories.Color} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="checkbox">
+  <Subheading>Checkbox</Subheading>
+</Anchor>
+
+<Canvas of={CheckboxStories.Checkbox} meta={CheckboxStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={CheckboxStories.Checkbox} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="radio">
+  <Subheading>Radio</Subheading>
+</Anchor>
+
+<Canvas of={RadioStories.Radio} meta={RadioStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={RadioStories.Radio} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="switch">
+  <Subheading>Switch</Subheading>
+</Anchor>
+
+<Canvas of={SwitchStories.Switch} meta={SwitchStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={SwitchStories.Switch} />
+</AxCollapsable>

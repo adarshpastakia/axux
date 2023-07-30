@@ -27,7 +27,7 @@ export const Heading: FC<IHeadingConfig> = memo((item) => {
 
   return (
     <Item item={item}>
-      <div style={style}>
+      <div className="heading-tile" style={style}>
         {icon && <i className={icon} />}
         {(!isEditing || item.isReadOnly) && (
           <div>{text || <span className="text-muted">Heading...</span>}</div>

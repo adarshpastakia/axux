@@ -272,7 +272,7 @@
   }
 
   .ax-video__scenes {
-    @apply outline-none relative flex flex-col bg-bw-1000;
+    @apply outline-none relative flex flex-col bg-bw-950;
 
     & > .ax-icon {
       @apply bg-bw-900 text-white rounded-t-full mx-auto self-center px-4 text-lg hover:bg-bw-700 cursor-pointer;
@@ -287,7 +287,7 @@
     @apply h-12 w-16 relative mx-1;
 
     & > span {
-      @apply text-xs bg-bw-1000/50 backdrop-blur text-white absolute top-0 inset-x-0 text-center;
+      @apply text-xs bg-bw-950/50 backdrop-blur text-white absolute top-0 inset-x-0 text-center;
     }
     & > img {
       @apply w-full h-full object-cover;

@@ -16,8 +16,6 @@
       @apply flex-auto bg-none border-t scale-y-50 m-0
         border-b-current border-t-bw-400 dark:border-b-current dark:border-t-bw-800 
         border-r-current border-l-bw-400 dark:border-r-current dark:border-l-bw-800;
-
-      border-bottom-width: calc(var(--dv-width) * 1px);
     }
 
     & > div {
@@ -25,6 +23,10 @@
       line-height: 1.5em;
       padding-inline: 0.5em;
     }
+  }
+
+  .ax-divider[data-vertical="false"] > hr {
+    border-bottom-width: calc(var(--dv-width) * 1px);
   }
 
   .ax-divider[data-vertical="true"],
@@ -54,6 +56,12 @@
   }
 
   .ax-divider[data-rainbow="true"] {
+    &[data-vertical="false"] > hr {
+      height: calc(var(--dv-width) * 1px);
+    }
+    &[data-vertical="true"] > hr {
+      width: calc(var(--dv-width) * 1px);
+    }
     & > hr {
       @apply border-0 h-0.5 scale-100;
       background: linear-gradient(

@@ -34,7 +34,6 @@
   },
   "peerDependencies": {
     "@tailwindcss/forms": "^0.5.3",
-    "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.9",
     "i18next": "^22.4.14",
     "postcss": "^8.4.21",

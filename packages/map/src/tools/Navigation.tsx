@@ -2,10 +2,11 @@
  * AxUX React+TailwindCSS UI Framework
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
- * @copyright : 2022
+ * @copyright : 2023
  * @license   : MIT
  */
 
+import Extent from "@arcgis/core/geometry/Extent";
 import type MapView from "@arcgis/core/views/MapView";
 import { useDebounce } from "@axux/core";
 import { isEqual } from "@axux/utilities";
@@ -14,9 +15,15 @@ import { type MapViewport } from "../constants/types";
 import { useMapContext } from "../context/MapContext";
 
 const HomeButton = () => {
-  const { view, defaultViewport } = useMapContext();
+  const { map, view, defaultViewport } = useMapContext();
   const gotoHome = useCallback(() => {
-    void view?.goTo(defaultViewport);
+    const extent = map?.allLayers.reduce((extent, layer) => {
+      return ["esri.layers.GeoJSONLayer"].includes(layer.declaredClass) &&
+        layer.fullExtent
+        ? extent.union(layer.fullExtent)
+        : extent;
+    }, new Extent());
+    void view?.goTo(extent);
   }, [view, defaultViewport]);
   return (
     <button
@@ -115,7 +122,7 @@ export const Navigation: FC = () => {
         view.ui.remove(widget);
       };
     }
-  }, [view]);
+  }, []);
 
   return (
     <div className="esri-widget" ref={refWidget}>

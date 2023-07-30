@@ -8,8 +8,8 @@
 
 html.light {
   & .prismjs {
-    background: #f5f7ff;
-    color: #000000;
+    background: #f5f7ff !important;
+    color: #000000 !important;
   }
 
   & .prismjs > div[class*="language-"] {

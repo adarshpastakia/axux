@@ -44,6 +44,7 @@ module.exports = plugin(
             700: "rgb(var(--color-primary-700) / <alpha-value>)",
             800: "rgb(var(--color-primary-800) / <alpha-value>)",
             900: "rgb(var(--color-primary-900) / <alpha-value>)",
+            950: "rgb(var(--color-primary-950) / <alpha-value>)",
           },
           accent: {
             50: "rgb(var(--color-accent-50) / <alpha-value>)",
@@ -56,6 +57,7 @@ module.exports = plugin(
             700: "rgb(var(--color-accent-700) / <alpha-value>)",
             800: "rgb(var(--color-accent-800) / <alpha-value>)",
             900: "rgb(var(--color-accent-900) / <alpha-value>)",
+            950: "rgb(var(--color-accent-950) / <alpha-value>)",
           },
           info: { ...colors.cyan },
           danger: { ...colors.red },
@@ -64,7 +66,8 @@ module.exports = plugin(
           white: "#FEFFFF",
           black: "#121c2b",
           bw: {
-            1000: "#172130",
+            1000: "#0D1117",
+            950: "#172130",
             900: "#1C293A",
             800: "#2C3E50",
             700: "#3F5467",

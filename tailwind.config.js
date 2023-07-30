@@ -7,7 +7,6 @@ module.exports = {
   plugins: [
     require("@axux/core/css"),
     require("@tailwindcss/forms"),
-    require("@tailwindcss/line-clamp"),
     require("@tailwindcss/typography"),
   ],
 };

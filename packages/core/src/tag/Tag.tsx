@@ -37,7 +37,7 @@ export interface TagProps extends ElementProps, MouseProps, IconProp {
   /**
    * size
    */
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "normal";
   /**
    * fill color
    */

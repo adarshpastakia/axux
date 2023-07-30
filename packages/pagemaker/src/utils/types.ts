@@ -145,7 +145,6 @@ export type WidgetObject = IWidgetObject;
 export type ArtifactObject = IArtifactObject;
 
 export interface IProps extends ChildrenProp {
-  mode?: "screen" | "pdf";
   /**
    * Edit mode
    */

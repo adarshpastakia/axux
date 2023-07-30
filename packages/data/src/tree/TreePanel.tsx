@@ -69,6 +69,10 @@ export interface TreeProps extends ElementProps {
    */
   isSortable?: boolean;
   /**
+   * enable selectable items
+   */
+  isSelectable?: boolean;
+  /**
    * enable checkboxes for nodes
    */
   isCheckable?: boolean;
@@ -109,6 +113,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
     isSortable = true,
     isSearchable,
     isCheckable,
+    isSelectable,
     checkLevel = 0,
     onChange,
     onLoad,
@@ -239,7 +244,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
             item.isFiltered = action.search
               ? matchString(item.query, action.search)
               : undefined;
-            if (item.parent) {
+            if (item.parent && item.isFiltered) {
               let parent = state.treeMap.get(item.parent);
               while (parent != null) {
                 !action.search && (parent.isOpen = false);
@@ -390,6 +395,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
                     {...state.items[index]}
                     checkLevel={checkLevel}
                     isCheckable={isCheckable}
+                    isSelectable={isSelectable}
                     nodesSelectable={nodesSelectable}
                     onSelect={(id: string) => dispatch({ type: "select", id })}
                     onToggleCheck={(id: string) =>

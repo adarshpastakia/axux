@@ -22,7 +22,8 @@
     --color-primary-600: 2 132 199;
     --color-primary-700: 3 105 161;
     --color-primary-800: 7 89 133;
-    --color-primary-900: 12 74 11;
+    --color-primary-900: 12 74 110;
+    --color-primary-950: 8, 47, 73;
 
     --color-accent-50: 253 242 248;
     --color-accent-100: 252 231 243;
@@ -34,6 +35,7 @@
     --color-accent-700: 190 24 93;
     --color-accent-800: 157 23 77;
     --color-accent-900: 131 24 67;
+    --color-accent-950: 80, 7, 36;
   }
 
   .light {

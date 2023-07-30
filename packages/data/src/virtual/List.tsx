@@ -22,6 +22,7 @@ import {
   useMemo,
   useRef,
   useState,
+  useEffect,
 } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { areEqual, VariableSizeList as List } from "react-window";
@@ -120,6 +121,10 @@ const AxListComponent = <T extends KeyValue>({
   const count = useDeferredValue(items.length);
   const itemList = createItemList(items);
 
+  useEffect(() => {
+    cache.clear();
+  }, [layout]);
+
   /** ***************** item height cache *******************/
   const updateCache = useCallback(
     (index: number, [width, height]: [number, number]) => {
@@ -163,7 +168,7 @@ const AxListComponent = <T extends KeyValue>({
   return (
     <div {...rest} className={`ax-virtual__container ${className ?? ""}`}>
       <AutoSizer>
-        {({ width, height }:AnyObject) => (
+        {({ width, height }: AnyObject) => (
           <List
             ref={setList}
             useIsScrolling

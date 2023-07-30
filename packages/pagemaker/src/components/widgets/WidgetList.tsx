@@ -5,14 +5,13 @@
 
 import { AxTreePanel, type TreeNode } from "@axux/data";
 import { groupBy } from "@axux/utilities";
-import { type FC, memo, useEffect, useState } from "react";
+import { memo, useEffect, useState, type FC } from "react";
 import { useTranslation } from "react-i18next";
 import { EnumTypes } from "../..";
 import {
   iconDivider,
   iconGrid,
   iconImage,
-  iconPageBreak,
   iconParagraph,
   iconText,
   iconVDivider,
@@ -66,12 +65,6 @@ export const WidgetList: FC = memo(() => {
           makeTreeNode(EnumTypes.IMAGE, iconImage, t("label.image"), () =>
             setDragging({ type: EnumTypes.IMAGE })
           ),
-          makeTreeNode(
-            EnumTypes.BREAK,
-            iconPageBreak,
-            t("label.pageBreak"),
-            () => setDragging({ type: EnumTypes.BREAK })
-          ),
           makeTreeNode(EnumTypes.DIVIDER, iconDivider, t("label.divider"), () =>
             setDragging({ type: EnumTypes.DIVIDER })
           ),
@@ -123,6 +116,13 @@ export const WidgetList: FC = memo(() => {
     setList(treeList);
   }, [widgets]);
 
-  return <AxTreePanel data={list} isSearchable isSortable={false} />;
+  return (
+    <AxTreePanel
+      data={list}
+      isSearchable
+      isSortable={false}
+      isSelectable={false}
+    />
+  );
 });
 WidgetList.displayName = "AxPageMaker.WidgetList";
