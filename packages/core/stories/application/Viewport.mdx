@@ -1,5 +1,9 @@
-import { Canvas, Meta } from "@storybook/blocks";
-
+import { Canvas, Meta, ArgTypes } from "@storybook/blocks";
+import {
+  AxViewport,
+  AxApplicationProvider,
+  useApplicationContext,
+} from "../../src";
 import * as ViewportStories from "./Viewport.stories";
 
 <Meta of={ViewportStories} />
@@ -9,3 +13,48 @@ import * as ViewportStories from "./Viewport.stories";
 Basic application viewport
 
 <Canvas of={ViewportStories.Example} />
+
+### AxViewport
+
+<ArgTypes sort="requiredFirst" of={AxViewport} />
+
+### AxApplicationProvider
+
+<ArgTypes sort="requiredFirst" of={AxApplicationProvider} />
+
+### useApplicationContext
+
+```ts
+import { useApplicationContext } from "@axux/core";
+
+const Component = () => {
+  const {
+    /**
+     * close all open overlays
+     * @aparam includeNotifications boolean
+     */
+    closeOverlays,
+    /**
+     * toggle theme
+     * @aparam "dark" "light"
+     */
+    toggleTheme,
+    /**
+     * change locale
+     */
+    changeLocale,
+    /**
+     * change default calendar
+     * @param "gregorian" "hijri"
+     */
+    changeCalendar,
+    currentTheme,
+    currentLocale,
+    currentCalendar,
+  } = useApplicationContext();
+
+  .
+  .
+  .
+};
+```

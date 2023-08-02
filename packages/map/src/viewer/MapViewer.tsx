@@ -11,7 +11,7 @@ import { type MapViewerProps } from "../constants/types";
 import { MapProvider } from "../context/MapContext";
 
 /**
- * MapViewer using warrper for arcgis
+ * MapViewer using wrapper for arcgis
  */
 export const MapViewer: FC<MapViewerProps> = (props) => {
   return <MapProvider {...props} />;

@@ -1,0 +1,84 @@
+import {
+  Canvas,
+  Meta,
+  Story,
+  Controls,
+  Primary,
+  Anchor,
+  Subheading,
+  Description,
+} from "@storybook/blocks";
+import { AxCollapsable } from "@axux/core";
+import * as ButtonStories from "./Button.stories";
+import * as DropdownStories from "./Dropdown.stories";
+import * as ActionStories from "./Action.stories";
+import * as ConfirmStories from "./Confirm.stories";
+
+<Meta of={ButtonStories} />
+
+# Buttons
+
+Basic action buttons
+
+<Primary />
+
+<Anchor storyId="withIcon">
+  <Subheading>With Icon</Subheading>
+</Anchor>
+<Canvas of={ButtonStories.WithIcon} />
+
+<Anchor storyId="sizes">
+  <Subheading>Sizes</Subheading>
+</Anchor>
+<Canvas of={ButtonStories.Sizes} />
+
+<Anchor storyId="variants">
+  <Subheading>Variants</Subheading>
+</Anchor>
+<Canvas of={ButtonStories.Variants} />
+
+<Anchor storyId="colors">
+  <Subheading>Colors</Subheading>
+</Anchor>
+<Canvas of={ButtonStories.Colors} />
+
+<Anchor storyId="badges">
+  <Subheading>Badges</Subheading>
+</Anchor>
+<Canvas of={ButtonStories.Badges} />
+
+---
+
+<Anchor storyId="dropdown">
+  <Subheading>Dropdown</Subheading>
+</Anchor>
+
+<Canvas of={DropdownStories.Dropdown} meta={DropdownStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={DropdownStories.Dropdown} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="action">
+  <Subheading>Action</Subheading>
+</Anchor>
+
+<Canvas of={ActionStories.Actions} meta={ActionStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={ActionStories.Actions} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="confirm">
+  <Subheading>Confirm</Subheading>
+</Anchor>
+
+<Canvas of={ConfirmStories.Confirm} meta={ConfirmStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={ConfirmStories.Confirm} />
+</AxCollapsable>

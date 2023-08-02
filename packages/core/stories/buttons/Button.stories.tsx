@@ -4,7 +4,9 @@ import { AxButton } from "../../src";
 const meta: Meta<typeof AxButton> = {
   component: AxButton,
   title: "@core/Button",
-  tags: ["autodocs"],
+  parameters: {
+    controls: { exclude: "children" },
+  },
 };
 
 export default meta;
@@ -24,6 +26,26 @@ export const WithIcon: Story = {
     children: "Click Me",
     icon: "mdi mdi-bell",
   },
+};
+
+export const Sizes: Story = {
+  render: (args) => (
+    <>
+      <AxButton {...args} size="sm">
+        Small
+      </AxButton>
+      <AxButton {...args} size="normal">
+        Normal
+      </AxButton>
+      <AxButton {...args} size="md">
+        Medium
+      </AxButton>
+      <AxButton {...args} size="lg">
+        Large
+      </AxButton>
+    </>
+  ),
+  args: {},
 };
 
 export const Variants: Story = {

@@ -4,3 +4,36 @@ import { Meta } from "@storybook/blocks";
 <Meta title="@core/Introduction" />
 
 # Core Components
+
+### Using axUX
+
+```bash
+
+yarn add @axux/core
+
+```
+
+```tsx
+import { AxApplicationProvider,AxViewport } from "@axux/core";
+import { I18nextProvider } from "react-i18next";
+import { BrowserRouter } from "react-router";
+
+export const Application = () => {
+  return (
+    {/** i18n for localization **/}
+    <I18nextProvider>
+      {/** react router **/}
+      <BrowserRouter>
+        <AxApplicationProvider>
+          <AxViewport>
+            .
+            .
+            .
+            .
+          </AxViewport>
+        </AxApplicationProvider>
+      </BrowserRouter>
+    </I18nextProvider>
+  );
+};
+```
