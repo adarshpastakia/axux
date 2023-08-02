@@ -10,7 +10,7 @@ import { type FC, type ReactPortal, useCallback, useState } from "react";
 import { createPortal } from "react-dom";
 
 type OverlayComponent = FC<{
-  onClose: (args: AnyObject) => void;
+  onClose: (args?: AnyObject) => void;
   [key: string]: AnyObject;
 }>;
 
@@ -24,7 +24,9 @@ export const useOverlayService = (
 
   /** ***************** overlay container *******************/
   const overlayContainer = useCallback(() => {
-    return document.body.querySelector(".ax-overlay__container[data-mode='overlay']") as HTMLElement;
+    return document.body.querySelector(
+      ".ax-overlay__container[data-mode='overlay']"
+    ) as HTMLElement;
   }, []);
 
   const openOverlay = async ({ onClose, ...props }: KeyValue = {}) => {

@@ -14,11 +14,13 @@ import {
   useEffect,
   type FC,
   type MouseEvent,
+  useMemo,
 } from "react";
 import { usePopover } from "../hooks/usePopover";
 import { type MenuChildren } from "../menu/types";
 import { type CallbackReturn, type ElementProps } from "../types";
 import { AxButton, type ButtonProps } from "./Button";
+import { createPortal } from "react-dom";
 
 export interface DropdownProps
   extends Omit<ButtonProps, "onClick" | "children"> {
@@ -39,6 +41,8 @@ export interface DropdownProps
    * click handler
    */
   onClick?: (key: string) => CallbackReturn<AnyObject>;
+
+  usePortal?: boolean;
 }
 
 export const DropdownButton: FC<DropdownProps> = ({
@@ -49,6 +53,7 @@ export const DropdownButton: FC<DropdownProps> = ({
   label,
   isDisabled,
   showCaret = true,
+  usePortal,
   ...rest
 }) => {
   const {
@@ -72,6 +77,11 @@ export const DropdownButton: FC<DropdownProps> = ({
       referenceElement?.click();
     });
   }, [popperElement, referenceElement]);
+
+  const wrapper = useMemo(
+    () => (usePortal ? createPortal : (d: AnyObject) => d),
+    [usePortal]
+  );
   return (
     <Menu as={Fragment}>
       {({ open }) => (
@@ -86,22 +96,25 @@ export const DropdownButton: FC<DropdownProps> = ({
               {label}
             </AxButton>
           </Menu.Button>
-          {!isDisabled && open && (
-            <Fragment>
-              <div className="fixed inset-0" />
-              <Menu.Items
-                onMouseUp={handleMenuClick}
-                className={`popover ax-button__dropdown ${
-                  dropdownClassName ?? ""
-                }`}
-                ref={setPopperElement as AnyObject}
-                style={styles.popper}
-                {...attributes.popper}
-              >
-                <div className="popover__container">{children}</div>
-              </Menu.Items>
-            </Fragment>
-          )}
+          {!isDisabled &&
+            open &&
+            wrapper(
+              <Fragment>
+                <div className="fixed inset-0" />
+                <Menu.Items
+                  onMouseUp={handleMenuClick}
+                  className={`popover ax-button__dropdown ${
+                    dropdownClassName ?? ""
+                  }`}
+                  ref={setPopperElement as AnyObject}
+                  style={styles.popper}
+                  {...attributes.popper}
+                >
+                  <div className="popover__container">{children}</div>
+                </Menu.Items>
+              </Fragment>,
+              document.body
+            )}
         </Fragment>
       )}
     </Menu>
