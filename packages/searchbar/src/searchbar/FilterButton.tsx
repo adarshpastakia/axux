@@ -20,7 +20,7 @@ export const FilterButton = () => {
       className="ax-filterButton"
       data-enabled={showFilters}
       badge={{
-        value: filters.length,
+        value: `${filters.length}`,
         color: showFilters ? "accent" : undefined,
       }}
       onClick={() => setShowFilters(!showFilters)}
