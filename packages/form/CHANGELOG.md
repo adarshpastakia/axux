@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://github.com/adarshpastakia/axux/compare/v2.6.0...v2.6.1) (2023-08-03)
+
+### Bug Fixes
+
+- storybook form/chart story layouts ([d56ab32](https://github.com/adarshpastakia/axux/commit/d56ab321a6ad8eabc4d033077c1d002b00871195))
+
 # [2.6.0](https://github.com/adarshpastakia/axux/compare/v2.5.2...v2.6.0) (2023-07-30)
 
 ### Bug Fixes

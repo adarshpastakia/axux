@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://github.com/adarshpastakia/axux/compare/v2.6.0...v2.6.1) (2023-08-03)
+
+### Bug Fixes
+
+- overlay container portals ([c03c4d1](https://github.com/adarshpastakia/axux/commit/c03c4d15b4402c1b52f5167997e81f3c1c62fbb0))
+
 # [2.6.0](https://github.com/adarshpastakia/axux/compare/v2.5.2...v2.6.0) (2023-07-30)
 
 ### Bug Fixes
