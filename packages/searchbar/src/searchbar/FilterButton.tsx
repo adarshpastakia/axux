@@ -19,18 +19,13 @@ export const FilterButton = () => {
       variant="outline"
       className="ax-filterButton"
       data-enabled={showFilters}
+      badge={{
+        value: filters.length,
+        color: showFilters ? "accent" : undefined,
+      }}
       onClick={() => setShowFilters(!showFilters)}
     >
-      {
-        (
-          <div className="flex items-center">
-            <span>{t("label.filters")}&nbsp;</span>
-            <span className="ax-filterButton__count" data-active={showFilters}>
-              {filters.length}
-            </span>
-          </div>
-        ) as AnyObject
-      }
+      {t("label.filters")}
     </AxButton>
   );
 };
