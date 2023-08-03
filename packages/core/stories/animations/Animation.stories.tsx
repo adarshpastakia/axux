@@ -12,7 +12,7 @@ type SpinnerStory = StoryObj<typeof AxAnimation.Spinner>;
 type BarStory = StoryObj<typeof AxAnimation.Bars>;
 type CircleStory = StoryObj<typeof AxAnimation.Bars>;
 
-export const Info: CardStory = {
+export const Card: CardStory = {
   render: (args) => <AxAnimation.Card {...args} />,
   args: {
     className: "w-96",
