@@ -4,7 +4,7 @@ import { AxAside, AxContent, AxHeader, AxText, AxTitle } from "../../src";
 
 const meta: Meta<typeof AxAside> = {
   component: AxAside,
-  title: "@core/Components/SidePanel",
+  title: "@core/Components/Aside",
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",

@@ -1,4 +1,4 @@
-import { Canvas, Meta, ArgTypes } from "@storybook/blocks";
+import { Canvas, Meta, ArgTypes, Anchor, Subheading } from "@storybook/blocks";
 import {
   AxViewport,
   AxApplicationProvider,
@@ -12,17 +12,23 @@ import * as ViewportStories from "./Viewport.stories";
 
 Basic application viewport
 
+---
+
+<Anchor storyId="viewport">
+  <Subheading>AxViewport</Subheading>
+</Anchor>
+
 <Canvas of={ViewportStories.Example} />
 
-### AxViewport
-
-<ArgTypes sort="requiredFirst" of={AxViewport} />
-
-### AxApplicationProvider
+<Anchor storyId="context">
+  <Subheading>AxApplicationProvider</Subheading>
+</Anchor>
 
 <ArgTypes sort="requiredFirst" of={AxApplicationProvider} />
 
-### useApplicationContext
+<Anchor storyId="hook">
+  <Subheading>useApplicationContext</Subheading>
+</Anchor>
 
 ```ts
 import { useApplicationContext } from "@axux/core";

@@ -1,0 +1,81 @@
+import {
+  Canvas,
+  Meta,
+  Story,
+  Controls,
+  Primary,
+  Anchor,
+  Subheading,
+  Description,
+} from "@storybook/blocks";
+import { AxCollapsable } from "@axux/core";
+import * as AlertStories from "./Alert.stories";
+import * as MessageStories from "./Message.stories";
+import * as ToastStories from "./Toast.stories";
+
+<Meta title="@core/Notifications" />
+
+# Notifications
+
+<Anchor storyId="sample">
+  <Subheading>Sample Code</Subheading>
+</Anchor>
+
+```tsx
+import { useNotificationService, AxButton } from "@axux/core";
+
+const Component = () => {
+  const { alert, toast, message } = useNotificationService();
+
+  return (
+    <Container>
+      <AxButton onClick={() => openAlert({ message: "Test alert" })}>
+        Open Alert
+      </AxButton>
+      <AxButton
+        onClick={() => openToast({ message: "Test toast", color: "success" })}
+      >
+        Open Toast
+      </AxButton>
+      <AxButton
+        onClick={() => openMessage({ message: "Test toast", color: "success" })}
+      >
+        Open Message
+      </AxButton>
+    </Container>
+  );
+};
+```
+
+---
+
+<Anchor storyId="alert">
+  <Subheading>Alert</Subheading>
+</Anchor>
+<Canvas of={AlertStories.Alert} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={AlertStories.Alert} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="message">
+  <Subheading>Message</Subheading>
+</Anchor>
+<Canvas of={MessageStories.Message} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={MessageStories.Message} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="toast">
+  <Subheading>Toast</Subheading>
+</Anchor>
+<Canvas of={ToastStories.Toast} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={ToastStories.Toast} />
+</AxCollapsable>

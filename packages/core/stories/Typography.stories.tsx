@@ -6,11 +6,6 @@ const meta: Meta<typeof AxText> = {
   title: "@core/Typography",
   component: AxText,
   tags: ["autodocs"],
-  parameters: {
-    docs: {
-      toc: true,
-    },
-  },
 };
 
 export default meta;
