@@ -14,6 +14,7 @@ import {
   type ReactNode,
   type RefObject,
 } from "react";
+import { createPortal } from "react-dom";
 
 export interface OverlayRef {
   showAlert: (key: string, alert: ReactNode) => void;
@@ -46,13 +47,14 @@ export const OverlayContainer: FC<{ itemRef: RefObject<OverlayRef> }> = ({
     [alerts]
   );
 
-  return (
+  return createPortal(
     <Fragment>
       <div className="ax-overlay__container" data-mode="overlay" />
       <div className="ax-overlay__container" data-mode="alert">
         {Object.values(alerts)}
       </div>
-    </Fragment>
+    </Fragment>,
+    document.body
   );
 };
 OverlayContainer.displayName = "OverlayContainer";

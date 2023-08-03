@@ -14,6 +14,7 @@ import {
   useImperativeHandle,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 
 export interface NotificationRef {
   showToast: (key: string, toast: ReactNode) => void;
@@ -58,7 +59,7 @@ export const NotificationContainer: FC<{
     [toasts, messages]
   );
 
-  return (
+  return createPortal(
     <Fragment>
       <div className="ax-notification__container" data-mode="toast">
         {Object.values(toasts)}
@@ -66,7 +67,8 @@ export const NotificationContainer: FC<{
       <div className="ax-notification__container" data-mode="message">
         {Object.values(messages)}
       </div>
-    </Fragment>
+    </Fragment>,
+    document.body
   );
 };
 NotificationContainer.displayName = "NotificationContainer";

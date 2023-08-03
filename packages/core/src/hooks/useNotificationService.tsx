@@ -133,7 +133,9 @@ export const useNotificationService = () => {
   };
 
   const toastError = async (
-    props: string | Omit<ToastProps, "color" | "onClose" | "onCloseAll" | "rootRef">,
+    props:
+      | string
+      | Omit<ToastProps, "color" | "onClose" | "onCloseAll" | "rootRef">,
     timeout = 30000
   ) => {
     const obj: ToastProps = makeProps(props);
