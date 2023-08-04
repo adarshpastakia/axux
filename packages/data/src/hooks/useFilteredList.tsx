@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { isEmpty, matchString } from "@axux/utilities";
+import { matchString } from "@axux/utilities";
 import {
   useCallback,
   useDeferredValue,
@@ -15,11 +15,16 @@ import {
   useTransition,
 } from "react";
 
-const filterList = (items: AnyObject[], query: string, matcher?: AnyObject) => {
+const filterList = (
+  items: AnyObject[],
+  query: string,
+  extraQuery = {},
+  matcher?: AnyObject
+) => {
   const newList: AnyObject[] = [];
   items.forEach((item) => {
-    if (matcher?.(item, query)) {
-      return newList.push(item);
+    if (matcher) {
+      return matcher?.(item, query, extraQuery) && newList.push(item);
     }
     if (matchString(item.label ?? item.toString(), query)) {
       return newList.push(item);
@@ -30,25 +35,28 @@ const filterList = (items: AnyObject[], query: string, matcher?: AnyObject) => {
 
 export const useFilteredList = <T extends AnyObject = KeyValue>(
   items: T[],
-  matcher?: (item: T, query: string) => boolean
+  matcher?: (item: T, query: string, extra?: KeyValue) => boolean
 ) => {
   const [query, setQuery] = useState("");
   const [filteredList, setFilteredList] = useState(items);
   const [isSearching, startTransition] = useTransition();
 
+  const [extraQuery, setExtraQuery] = useState<KeyValue>({});
+
   const search = useDeferredValue(query);
 
   const filterItems = useCallback(
-    (query: string) => {
-      if (isEmpty(query)) setFilteredList(items);
-      startTransition(() => setFilteredList(filterList(items, query, matcher)));
+    (query: string, extraQuery = {}) => {
+      startTransition(() =>
+        setFilteredList(filterList(items, query, extraQuery, matcher))
+      );
     },
     [items, matcher]
   );
 
   useEffect(() => {
-    filterItems(search ?? "");
-  }, [items, search]);
+    filterItems(search ?? "", extraQuery);
+  }, [items, search, extraQuery]);
 
   const onSearch = useCallback(
     (query?: string) => {
@@ -57,5 +65,5 @@ export const useFilteredList = <T extends AnyObject = KeyValue>(
     [filterItems]
   );
 
-  return { onSearch, search, filteredList, isSearching };
+  return { onSearch, setExtraQuery, search, filteredList, isSearching };
 };
