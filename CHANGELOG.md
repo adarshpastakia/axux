@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.2](https://github.com/adarshpastakia/axux/compare/v2.6.1...v2.6.2) (2023-08-04)
+
+### Bug Fixes
+
+- filter button badge ([eaa06a8](https://github.com/adarshpastakia/axux/commit/eaa06a82db6cfee47fd00da6b8b2227557172890))
+- **useFilteredList:** added extraQuery object ([3e36b92](https://github.com/adarshpastakia/axux/commit/3e36b922059138889417fecc44d019b9f1e94754))
+
 ## [2.6.1](https://github.com/adarshpastakia/axux/compare/v2.6.0...v2.6.1) (2023-08-03)
 
 ### Bug Fixes
