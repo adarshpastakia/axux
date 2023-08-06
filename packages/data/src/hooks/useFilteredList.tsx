@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { matchString } from "@axux/utilities";
+import { isString, matchString } from "@axux/utilities";
 import {
   useCallback,
   useDeferredValue,
@@ -17,53 +17,55 @@ import {
 
 const filterList = (
   items: AnyObject[],
-  query: string,
-  extraQuery = {},
+  query: AnyObject = "",
   matcher?: AnyObject
 ) => {
   const newList: AnyObject[] = [];
   items.forEach((item) => {
     if (matcher) {
-      return matcher?.(item, query, extraQuery) && newList.push(item);
+      return matcher?.(item, query) && newList.push(item);
     }
-    if (matchString(item.label ?? item.toString(), query)) {
+    if (query && isString(query)) {
+      if (matchString(item.label ?? item.toString(), query)) {
+        return newList.push(item);
+      }
+    } else {
       return newList.push(item);
     }
   });
   return newList;
 };
 
-export const useFilteredList = <T extends AnyObject = KeyValue>(
+export const useFilteredList = <
+  T extends AnyObject = KeyValue,
+  Q extends AnyObject = string
+>(
   items: T[],
-  matcher?: (item: T, query: string, extra?: KeyValue) => boolean
+  matcher?: (item: T, query: Q) => boolean
 ) => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState<Q>();
   const [filteredList, setFilteredList] = useState(items);
   const [isSearching, startTransition] = useTransition();
-
-  const [extraQuery, setExtraQuery] = useState<KeyValue>({});
 
   const search = useDeferredValue(query);
 
   const filterItems = useCallback(
-    (query: string, extraQuery = {}) => {
-      startTransition(() =>
-        setFilteredList(filterList(items, query, extraQuery, matcher))
-      );
+    (query?: Q) => {
+      startTransition(() => setFilteredList(filterList(items, query, matcher)));
     },
     [items, matcher]
   );
 
   useEffect(() => {
-    filterItems(search ?? "", extraQuery);
-  }, [items, search, extraQuery]);
+    filterItems(search);
+  }, [items, search]);
 
   const onSearch = useCallback(
-    (query?: string) => {
-      setQuery(query ?? "");
+    (query?: Q) => {
+      setQuery(query);
     },
     [filterItems]
   );
 
-  return { onSearch, setExtraQuery, search, filteredList, isSearching };
+  return { onSearch, search, filteredList, isSearching };
 };
