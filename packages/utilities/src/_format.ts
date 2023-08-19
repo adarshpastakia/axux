@@ -7,7 +7,10 @@
  */
 
 import { differenceInDays, format, parseISO } from "date-fns";
-import { type CountryCode, parsePhoneNumberFromString } from "libphonenumber-js";
+import {
+  type CountryCode,
+  parsePhoneNumberFromString,
+} from "libphonenumber-js";
 import * as numeral from "numeral";
 import { Countries } from ".";
 import { isEmpty, isNil } from "./_isType";
@@ -50,10 +53,10 @@ export namespace Format {
   };
 
   /** ***************** format phone number using `libphonenumber-js` *******************/
-  export const phone = (value?: string, useCss = false) => {
+  export const phone = (value?: string, country = "AE", useCss = false) => {
     if (isEmpty(value) || value.length < 6 || !/^[\d+\s\-()]+$/.test(value))
       return value;
-    const phone = getPhone(value);
+    const phone = getPhone(value, country);
     return `${
       useCss
         ? `<span class="flag ${phone.country ?? ""}"></span>`
