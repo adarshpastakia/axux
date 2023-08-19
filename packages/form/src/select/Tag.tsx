@@ -130,7 +130,7 @@ export const TagInput = <T extends AnyObject>({
   /** ***************** display label *******************/
   const displayLabel = useCallback(
     (option: T) => {
-      if (makeLabel != null && !isEmpty(actualValue)) return makeLabel(option);
+      if (makeLabel != null) return makeLabel(option);
       return getLabel(option, labelProperty);
     },
     [makeLabel, labelProperty]
