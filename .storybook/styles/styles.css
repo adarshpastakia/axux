@@ -93,7 +93,9 @@
   #story--data-virtual-timeline--example--primary-inner,
   #story--core-components-aside--example--primary-inner,
   #story--core-components-sidepanel--example--primary-inner,
-  #story--core-components-tabpanel--example--primary-inner {
+  #story--core-components-tabpanel--example--primary-inner,
+  #story--media-imageviewer--example--primary-inner,
+  #story--media-videoplayer--example--primary-inner {
     height: 600px;
     overflow: hidden;
   }
