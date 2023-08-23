@@ -1,6 +1,6 @@
 {
   "name": "@axux/charts",
-  "version": "2.6.3",
+  "version": "2.7.0",
   "description": "axux: Charts",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,8 +24,8 @@
     "watch": "tsc -w -p ./tsconfig.build.json && cp ./src/types/world.svg ./dist/types"
   },
   "dependencies": {
-    "@axux/core": "^2.6.3",
-    "@axux/utilities": "^2.6.3",
+    "@axux/core": "^2.7.0",
+    "@axux/utilities": "^2.7.0",
     "date-fns": "^2.29.3",
     "echarts": "^5.4.2",
     "echarts-wordcloud": "^2.1.0"

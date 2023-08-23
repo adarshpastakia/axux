@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/adarshpastakia/axux/compare/v2.6.3...v2.7.0) (2023-08-23)
+
+### Bug Fixes
+
+- **Format.phone:** add country prop ([c9daf5e](https://github.com/adarshpastakia/axux/commit/c9daf5ebb2e9c9e6489225d17af38a705c43f93d))
+- list tag display label ([d222a65](https://github.com/adarshpastakia/axux/commit/d222a65e89c79db5b7f4bac69562bb0fe96e12a9))
+
+### Features
+
+- Added array field ([5c3660d](https://github.com/adarshpastakia/axux/commit/5c3660d9128663fb2e6797c566d508a961b8be3c))
+
 ## [2.6.3](https://github.com/adarshpastakia/axux/compare/v2.6.2...v2.6.3) (2023-08-06)
 
 ### Bug Fixes

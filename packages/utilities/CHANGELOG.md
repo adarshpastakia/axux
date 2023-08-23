@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/adarshpastakia/axux/compare/v2.6.3...v2.7.0) (2023-08-23)
+
+### Bug Fixes
+
+- **Format.phone:** add country prop ([c9daf5e](https://github.com/adarshpastakia/axux/commit/c9daf5ebb2e9c9e6489225d17af38a705c43f93d))
+
 ## [2.6.3](https://github.com/adarshpastakia/axux/compare/v2.6.2...v2.6.3) (2023-08-06)
 
 **Note:** Version bump only for package @axux/utilities
