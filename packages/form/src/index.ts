@@ -7,6 +7,7 @@
  */
 
 import { Addon } from "./inputs/Addon";
+import { Array } from "./inputs/Array";
 import { Checkbox } from "./inputs/Checkbox";
 import { Color } from "./inputs/Color";
 import { ColorPicker } from "./inputs/ColorPicker";
@@ -34,6 +35,7 @@ import "./i18n";
 export const AxField = {
   Container,
   Addon,
+  Array,
   Text,
   Color,
   ColorPicker,

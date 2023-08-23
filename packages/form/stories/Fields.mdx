@@ -24,6 +24,8 @@ import * as CheckboxStories from "./fields/Checkbox.stories";
 import * as RadioStories from "./fields/Radio.stories";
 import * as SwitchStories from "./fields/Switch.stories";
 import * as ColorStories from "./fields/Color.stories";
+import * as ArrayStories from "./fields/Array.stories";
+import * as ArrayMultiStories from "./fields/ArrayMulti.stories";
 
 <Meta of={FieldStories} />
 
@@ -184,4 +186,28 @@ import * as ColorStories from "./fields/Color.stories";
 <AxCollapsable>
   <div>Controls</div>
   <Controls of={SwitchStories.Switch} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="arraySingle">
+  <Subheading>Array Input</Subheading>
+</Anchor>
+
+<Canvas of={ArrayStories.SingleArray} meta={ArrayStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={ArrayStories.SingleArray} />
+</AxCollapsable>
+
+---
+
+<Anchor storyId="arrayMulti">
+  <Subheading>Array Multi Field</Subheading>
+</Anchor>
+
+<Canvas of={ArrayMultiStories.MultiArray} meta={ArrayMultiStories} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={ArrayMultiStories.MultiArray} />
 </AxCollapsable>
