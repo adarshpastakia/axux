@@ -84,6 +84,9 @@ export namespace Format {
     if (isNil(number)) {
       return "00:00.000";
     }
+    if (number === Infinity) {
+      return "∞";
+    }
     const value = parseFloat(`${number}`) * (isFraction ? 1000 : 1);
     if (!isNaN(value)) {
       return makeDuration(value);
@@ -96,6 +99,9 @@ export namespace Format {
   ) => {
     if (isNil(number)) {
       return "00:00";
+    }
+    if (number === Infinity) {
+      return "∞";
     }
     const value = parseFloat(`${number}`) * (isFraction ? 1000 : 1);
     if (!isNaN(value)) {
