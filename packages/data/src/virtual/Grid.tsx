@@ -63,6 +63,9 @@ export interface GridProps<T> extends ElementProps {
    * load more callback
    */
   onLoadMore?: EmptyCallback;
+
+  lastScroll?: number;
+  onScroll?: (top: number) => void;
 }
 
 /** ***************** Timeline item *******************/
@@ -117,7 +120,9 @@ const AxGridViewComponent = <T extends KeyValue>({
   colWidth = 550,
   listRef: ref,
   isLoading,
+  lastScroll = 0,
   onLoadMore,
+  onScroll,
   ...rest
 }: GridProps<T>) => {
   const isRtl = useIsRtl();
@@ -132,6 +137,10 @@ const AxGridViewComponent = <T extends KeyValue>({
 
   useEffect(() => {
     listRef?._outerRef?.setLoading(isLoading);
+    !isLoading &&
+      setTimeout(() => {
+        listRef?.scrollTo({ scrollTop: lastScroll ?? 0 });
+      }, 50);
   }, [listRef, isLoading]);
 
   useImperativeHandle(
@@ -229,7 +238,7 @@ const AxGridViewComponent = <T extends KeyValue>({
       className={`ax-virtual__container ${className ?? ""}`}
     >
       <AutoSizer>
-        {({ width, height }:AnyObject) => {
+        {({ width, height }: AnyObject) => {
           const cc = Math.floor((width - 84) / colWidth);
           colCount.current = cc;
           return (
@@ -243,6 +252,7 @@ const AxGridViewComponent = <T extends KeyValue>({
               columnCount={cc}
               direction={isRtl ? "rtl" : "ltr"}
               outerElementType={outerElement}
+              onScroll={(e) => onScroll?.(e.scrollTop)}
               columnWidth={() => Math.min(colWidth, (width - 84) / cc)}
               rowHeight={(index) =>
                 Math.max(...(cache.get(index) ?? []), colHeight)
