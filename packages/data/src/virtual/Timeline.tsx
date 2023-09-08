@@ -18,11 +18,7 @@ import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { isString } from "@axux/utilities";
 import memoize from "memoize-one";
 import {
-  type CSSProperties,
   memo,
-  type ReactElement,
-  type ReactNode,
-  type Ref,
   useCallback,
   useDeferredValue,
   useEffect,
@@ -31,9 +27,13 @@ import {
   useMemo,
   useRef,
   useState,
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
 } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { areEqual, VariableSizeList as List } from "react-window";
+import { VariableSizeList as List, areEqual } from "react-window";
 import ResizeObserver from "resize-observer-polyfill";
 import { Wrapper } from "./Wrapper";
 
@@ -94,6 +94,9 @@ export interface TimelineProps<T> extends ElementProps {
    * load more callback
    */
   onLoadMore?: EmptyCallback;
+
+  lastScroll?: number;
+  onScroll?: (top: number) => void;
 }
 
 /** ***************** Timeline item *******************/
@@ -181,6 +184,8 @@ const AxTimelineComponent = <T extends KeyValue>({
   isLoading,
   hideScroller,
   onLoadMore,
+  onScroll,
+  lastScroll = 0,
   listRef: ref,
   ...rest
 }: TimelineProps<T>) => {
@@ -194,6 +199,10 @@ const AxTimelineComponent = <T extends KeyValue>({
 
   useEffect(() => {
     listRef?._outerRef.setLoading(isLoading);
+    !isLoading &&
+      setTimeout(() => {
+        listRef?.scrollTo(lastScroll ?? 0);
+      }, 50);
   }, [listRef, isLoading]);
 
   useImperativeHandle(
@@ -278,7 +287,7 @@ const AxTimelineComponent = <T extends KeyValue>({
       className={`ax-virtual__container ax-timeline ${className ?? ""}`}
     >
       <AutoSizer>
-        {({ width, height }:AnyObject) => (
+        {({ width, height }: AnyObject) => (
           <List
             ref={setList}
             useIsScrolling
@@ -292,6 +301,7 @@ const AxTimelineComponent = <T extends KeyValue>({
               cache.get(index) ??
               Math.max(minHeight, ...Array.from(cache.values()))
             }
+            onScroll={(e) => onScroll?.(e.scrollOffset)}
           >
             {(props) =>
               children({
