@@ -17,17 +17,15 @@ import { type ElementProps } from "@axux/core/dist/types";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { AxDateDisplay } from "@axux/date";
 import {
-  compareValues,
   Format,
+  compareValues,
   isArray,
-  isBoolean,
   isEmpty,
   isNil,
-  isNumber,
   isObject,
   isTrue,
 } from "@axux/utilities";
-import { type FC, Fragment, useMemo } from "react";
+import { Fragment, useMemo, type FC } from "react";
 import { useTranslation } from "react-i18next";
 
 export interface JsonViewProps extends ElementProps {
@@ -52,7 +50,15 @@ export interface JsonViewProps extends ElementProps {
    * properties to format as dates
    * (default format applied to property name containing `date` | `time`)
    */
-  dateProperties?: string[];
+  propertyScheme?: {
+    boolean?: string[];
+    date?: string[];
+    time?: string[];
+    number?: string[];
+    bytes?: string[];
+    percent?: string[];
+    phone?: string[];
+  };
   /**
    * enable value copy
    */
@@ -90,12 +96,14 @@ const JsonValue = ({
   filters,
   labeler,
   formatter,
-  dateProperties,
+  propertyScheme,
   onFilter,
   isInline,
   labelWidth,
   showPropertyTree,
-}: KeyValue) => {
+}: {
+  propertScheme: JsonViewProps["propertyScheme"];
+} & KeyValue) => {
   const { t } = useTranslation("data");
 
   const propWithoutOrdinal = useMemo(
@@ -125,7 +133,7 @@ const JsonValue = ({
 
   const display = useMemo(() => {
     if (isEmpty(value)) return <label className="ax-json__empty">null</label>;
-    const actualValue = value._label_ ?? value;
+    const actualValue = value._label_ ?? value ?? "";
     if (formatter) {
       const ret = formatter?.(fullProp, value);
       if (!isNil(ret)) return ret;
@@ -133,22 +141,26 @@ const JsonValue = ({
     }
 
     let ret = actualValue;
-    if (isNumber(actualValue)) ret = Format.number(actualValue);
-    if (isBoolean(actualValue))
-      ret = actualValue ? t("json.true") : t("json.false");
-
-    if (
-      fullProp.toLowerCase().includes("date") ||
-      dateProperties?.includes(fullProp)
-    ) {
-      return <AxDateDisplay date={value} />;
-    }
 
     if (isArray(actualValue)) {
       ret = `[${actualValue.join(", ")}]`;
     }
-
-    if (ret.length > 128) {
+    if (propertyScheme?.date?.includes(fullProp)) {
+      return <AxDateDisplay date={value} />;
+    }
+    if (propertyScheme?.time?.includes(fullProp))
+      ret = Format.date(actualValue, "pp");
+    if (propertyScheme?.number?.phone(fullProp))
+      ret = Format.phone(actualValue);
+    if (propertyScheme?.bytes?.includes(fullProp))
+      ret = Format.bytes(actualValue);
+    if (propertyScheme?.percent?.includes(fullProp))
+      ret = Format.percent(actualValue);
+    if (propertyScheme?.number?.includes(fullProp))
+      ret = Format.number(actualValue);
+    if (propertyScheme?.boolean?.includes(fullProp))
+      ret = actualValue ? t("json.true") : t("json.false");
+    if (ret?.length > 128) {
       ret = <AxText clip={3}>{ret}</AxText>;
     }
 
@@ -160,7 +172,7 @@ const JsonValue = ({
         )}
       </Fragment>
     );
-  }, [value, formatter, dateProperties, prop, fullProp]);
+  }, [value, formatter, propertyScheme, prop, fullProp]);
 
   const filterValue = useMemo(
     () => (isObject(value) ? value._label_ : value),
@@ -215,7 +227,7 @@ const JsonProperty = ({
   keys = [],
   showPropertyTree,
   ...props
-}: KeyValue) => {
+}: AnyObject) => {
   const type = useMemo(() => {
     if (isObject(value) && "_label_" in value && "_score_" in value) {
       return "value";
@@ -295,7 +307,7 @@ export const AxJsonView: FC<JsonViewProps> = ({
   className,
   json,
   copy,
-  dateProperties,
+  propertyScheme,
   filters,
   isInline,
   labelWidth,
@@ -314,7 +326,7 @@ export const AxJsonView: FC<JsonViewProps> = ({
           json={json}
           {...{
             copy,
-            dateProperties,
+            propertyScheme,
             filters,
             formatter,
             labeler,
