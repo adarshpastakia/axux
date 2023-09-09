@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.2](https://github.com/adarshpastakia/axux/compare/v2.7.1...v2.7.2) (2023-09-09)
+
+### Bug Fixes
+
+- **Chart:** palette select usePortal ([d5b6d62](https://github.com/adarshpastakia/axux/commit/d5b6d629d27da0324aaad6047716bd54c79e7ab4))
+
 ## [2.7.1](https://github.com/adarshpastakia/axux/compare/v2.7.0...v2.7.1) (2023-09-09)
 
 **Note:** Version bump only for package @axux/charts
