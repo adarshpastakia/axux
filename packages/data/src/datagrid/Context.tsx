@@ -50,6 +50,8 @@ export const DatagridProvider: FC<KeyValue & ElementProps & ChildrenProp> = ({
   onSort,
   onRowExpand,
   datagridRef,
+  lastScroll,
+  onScroll,
   ...props
 }) => {
   const ghostRef = useRef<HTMLDivElement>(null);
@@ -115,6 +117,10 @@ export const DatagridProvider: FC<KeyValue & ElementProps & ChildrenProp> = ({
     [widths]
   );
 
+  useEffect(() => {
+    refBody?.current?.scrollTo({ top: lastScroll, behavior: "instant" });
+  }, []);
+
   return (
     <DatagridContext.Provider
       value={{
@@ -132,6 +138,7 @@ export const DatagridProvider: FC<KeyValue & ElementProps & ChildrenProp> = ({
       <div className={`ax-datagrid ${className ?? ""}`}>
         <div
           className={`ax-datagrid__wrapper ${className ?? ""}`}
+          onScroll={(e) => onScroll?.(e.currentTarget.scrollTop)}
           ref={refBody}
         >
           {children}

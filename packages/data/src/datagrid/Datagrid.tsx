@@ -10,7 +10,13 @@ import { AxContent } from "@axux/core";
 import { Indicator } from "@axux/core/dist/animations";
 import { type ElementProps } from "@axux/core/dist/types";
 import { isString } from "@axux/utilities";
-import { Fragment, memo, type ReactElement, type ReactNode, type Ref } from "react";
+import {
+  Fragment,
+  memo,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { Body } from "./Body";
 import { DatagridProvider } from "./Context";
@@ -31,6 +37,9 @@ export interface DatagridProps<T extends KeyValue> extends ElementProps {
 
   isSelectable?: boolean;
   onRowSelect?: (record: T) => void;
+
+  lastScroll?: number;
+  onScroll?: (top: number) => void;
 
   children?: (record: T) => ReactNode;
 }
