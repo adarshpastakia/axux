@@ -36,6 +36,7 @@ export const PaletteSelect = ({
       variant="link"
       showCaret={false}
       className="flush"
+      usePortal
     >
       <AxMenu.Item
         id={defaultTheme}
