@@ -11,7 +11,6 @@ import { useBadge } from "../hooks/useBadge";
 import { AxIcon } from "../icons/Icon";
 import { AxPopover } from "../overlays/Popover";
 import { type BadgeType, type EmptyCallback } from "../types";
-import { AxText } from "../typography/Text";
 import { Link } from "./Link";
 
 export interface BreadcrumbItem {
@@ -35,7 +34,7 @@ const Crumb = (
   <div className="ax-breadcrumb__item" key={index}>
     <Link nav={{ to }} onClick={onClick} as="a">
       {icon && <AxIcon icon={icon} rtlFlip={rtlFlip} />}
-      <AxText.Ellipsis>{label}</AxText.Ellipsis>
+      <label>{label}</label>
       {badge && useBadge(badge)}
     </Link>
   </div>
