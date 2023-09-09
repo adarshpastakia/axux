@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://github.com/adarshpastakia/axux/compare/v2.7.0...v2.7.1) (2023-09-09)
+
+### Bug Fixes
+
+- **Datagrid:** add onScroll event handler ([974e4d6](https://github.com/adarshpastakia/axux/commit/974e4d6b992c1e244633f5fd563fcbe04eeef42b))
+- **Format:** check infinity for duration ([dc21b71](https://github.com/adarshpastakia/axux/commit/dc21b71b24e81a3635e16b10a2caf5e866f50d77))
+- **JsonView:** add propertyScheme prop to map property with type ([aee5fe8](https://github.com/adarshpastakia/axux/commit/aee5fe80148cb3bd693ac01dd5e2bf82c5b61450))
+- **VirtualList:** add onScroll event handler ([65b6165](https://github.com/adarshpastakia/axux/commit/65b616560b5130e02fad738f6b2970546e4e9034))
+
 # [2.7.0](https://github.com/adarshpastakia/axux/compare/v2.6.3...v2.7.0) (2023-08-23)
 
 ### Bug Fixes

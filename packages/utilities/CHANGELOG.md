@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://github.com/adarshpastakia/axux/compare/v2.7.0...v2.7.1) (2023-09-09)
+
+### Bug Fixes
+
+- **Format:** check infinity for duration ([dc21b71](https://github.com/adarshpastakia/axux/commit/dc21b71b24e81a3635e16b10a2caf5e866f50d77))
+
 # [2.7.0](https://github.com/adarshpastakia/axux/compare/v2.6.3...v2.7.0) (2023-08-23)
 
 ### Bug Fixes
