@@ -28,7 +28,7 @@
   }
 
   .ax-tree__node {
-    @apply flex flex-nowrap items-center overflow-hidden;
+    @apply flex flex-nowrap items-center overflow-visible min-w-full !w-auto;
 
     & .ax-tree__spacer {
       @apply text-center leading-none;
