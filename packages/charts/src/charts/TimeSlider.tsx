@@ -9,7 +9,14 @@
 import { debounce, isEmpty } from "@axux/utilities";
 import { endOfDay, startOfDay } from "date-fns";
 import { type EChartOption, type EChartsType } from "echarts";
-import { type FC, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type FC,
+} from "react";
 import { type BaseChart } from "../types";
 import { ChartContainer } from "../wrapper/ChartContainer";
 import { ChartWrapper } from "../wrapper/ChartWrapper";
@@ -46,9 +53,22 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
     });
   }, [sliderRange, data]);
 
+  const enableBrush = useCallback(() => {
+    chartRef.current?.dispatchAction({
+      type: "restore",
+    });
+    chartRef.current?.dispatchAction({
+      type: "takeGlobalCursor",
+      key: "dataZoomSelect",
+      // Activate or inactivate.
+      dataZoomSelectActive: true,
+    });
+  }, []);
+
   useEffect(() => {
     const chart = chartRef.current;
     if (chart && !chart?.isDisposed()) {
+      enableBrush();
       chart.on("datazoom", () => {
         const zoom = chart.getOption().dataZoom?.[0];
         if (zoom) {
@@ -130,7 +150,12 @@ const TimeSliderChart: FC<TimeSliderProps> = ({
       yAxis: valueAxis,
       series,
       toolbox: {
-        show: false,
+        itemSize: 0,
+        feature: {
+          dataZoom: {
+            yAxisIndex: "none",
+          },
+        },
       },
       legend: {
         show: false,
