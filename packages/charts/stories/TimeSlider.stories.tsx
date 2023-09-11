@@ -33,7 +33,7 @@ export const Example: Story = {
       loadData();
     }, []);
     return (
-      <AxPanel height={100} width="100%">
+      <AxPanel height={100} width="1100px" maxWidth="100%">
         <AxHeader>
           <AxTitle>Time Slider chart</AxTitle>
           <AxButton variant="link" icon="mdi mdi-refresh" onClick={loadData} />
