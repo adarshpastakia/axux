@@ -129,7 +129,7 @@ export const AxModal: FC<ModalProps> = ({
     <div
       ref={maskRef}
       className="ax-overlay__mask"
-      onClick={(e) => (handleClose(), e.stopPropagation())}
+      onMouseDown={(e) => (handleClose(), e.stopPropagation())}
     >
       <HotKeyWrapper>
         <AxHotKey global keyCombo="esc" handler={handleClose} />
@@ -144,7 +144,7 @@ export const AxModal: FC<ModalProps> = ({
           data-size={size}
           tabIndex={0}
           style={{ height, width, minHeight, minWidth }}
-          onClick={(e) => e.stopPropagation()}
+          onMouseDown={(e) => e.stopPropagation()}
         >
           <AxHeader className={`ax-modal__header ${headerClass ?? ""}`}>
             {icon && (
