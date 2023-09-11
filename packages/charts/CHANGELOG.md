@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.3](https://github.com/adarshpastakia/axux/compare/v2.7.2...v2.7.3) (2023-09-11)
+
+### Bug Fixes
+
+- **TimeSlider:** add zoom brush ([2a6874f](https://github.com/adarshpastakia/axux/commit/2a6874f3f4e10bc14895d1826ed0af17b637ad8f))
+
 ## [2.7.2](https://github.com/adarshpastakia/axux/compare/v2.7.1...v2.7.2) (2023-09-09)
 
 ### Bug Fixes

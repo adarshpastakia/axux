@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.3](https://github.com/adarshpastakia/axux/compare/v2.7.2...v2.7.3) (2023-09-11)
+
+### Bug Fixes
+
+- **Modal:** mousedown on mask to close ([df4a3bb](https://github.com/adarshpastakia/axux/commit/df4a3bb7a72ef3d63bb66da904bf026828aba740))
+
 ## [2.7.2](https://github.com/adarshpastakia/axux/compare/v2.7.1...v2.7.2) (2023-09-09)
 
 ### Bug Fixes
