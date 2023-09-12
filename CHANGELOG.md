@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.5](https://github.com/adarshpastakia/axux/compare/v2.7.4...v2.7.5) (2023-09-12)
+
+### Bug Fixes
+
+- **Modal:** mouse event on mask stop propagation ([dfd710c](https://github.com/adarshpastakia/axux/commit/dfd710c8581b69396060b8867aee86885b9c0381))
+- **VirtualList:** scroll using visible row ([df6c44d](https://github.com/adarshpastakia/axux/commit/df6c44dbb568249f40c88c76ee2e73c63cf677aa))
+
 ## [2.7.4](https://github.com/adarshpastakia/axux/compare/v2.7.3...v2.7.4) (2023-09-12)
 
 ### Bug Fixes

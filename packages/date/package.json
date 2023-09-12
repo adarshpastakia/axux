@@ -1,6 +1,6 @@
 {
   "name": "@axux/date",
-  "version": "2.7.4",
+  "version": "2.7.5",
   "description": "axux: Date package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,9 +24,9 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^2.7.4",
-    "@axux/form": "^2.7.4",
-    "@axux/utilities": "^2.7.4",
+    "@axux/core": "^2.7.5",
+    "@axux/form": "^2.7.5",
+    "@axux/utilities": "^2.7.5",
     "@headlessui/react": "^1.7.7",
     "date-fns": "^2.29.3"
   },

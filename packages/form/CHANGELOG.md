@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.5](https://github.com/adarshpastakia/axux/compare/v2.7.4...v2.7.5) (2023-09-12)
+
+**Note:** Version bump only for package @axux/form
+
 ## [2.7.4](https://github.com/adarshpastakia/axux/compare/v2.7.3...v2.7.4) (2023-09-12)
 
 **Note:** Version bump only for package @axux/form
