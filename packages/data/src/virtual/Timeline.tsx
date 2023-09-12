@@ -201,7 +201,7 @@ const AxTimelineComponent = <T extends KeyValue>({
     listRef?._outerRef.setLoading(isLoading);
     !isLoading &&
       setTimeout(() => {
-        listRef?.scrollTo(lastScroll ?? 0);
+        listRef?.scrollToItem(lastScroll ?? 0, "start");
       }, 50);
   }, [listRef, isLoading]);
 
@@ -301,7 +301,7 @@ const AxTimelineComponent = <T extends KeyValue>({
               cache.get(index) ??
               Math.max(minHeight, ...Array.from(cache.values()))
             }
-            onScroll={(e) => onScroll?.(e.scrollOffset)}
+            onItemsRendered={(e) => onScroll?.(e.visibleStartIndex)}
           >
             {(props) =>
               children({

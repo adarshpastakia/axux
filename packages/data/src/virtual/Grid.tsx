@@ -14,10 +14,7 @@ import {
 } from "@axux/core/dist/types";
 import memoize from "memoize-one";
 import {
-  type CSSProperties,
   memo,
-  type ReactElement,
-  type Ref,
   useCallback,
   useDeferredValue,
   useEffect,
@@ -26,9 +23,12 @@ import {
   useMemo,
   useRef,
   useState,
+  type CSSProperties,
+  type ReactElement,
+  type Ref,
 } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { areEqual, VariableSizeGrid as Grid } from "react-window";
+import { VariableSizeGrid as Grid, areEqual } from "react-window";
 import ResizeObserver from "resize-observer-polyfill";
 import { Wrapper } from "./Wrapper";
 
@@ -65,7 +65,7 @@ export interface GridProps<T> extends ElementProps {
   onLoadMore?: EmptyCallback;
 
   lastScroll?: number;
-  onScroll?: (top: number) => void;
+  onScroll?: (row: number) => void;
 }
 
 /** ***************** Timeline item *******************/
@@ -139,7 +139,11 @@ const AxGridViewComponent = <T extends KeyValue>({
     listRef?._outerRef?.setLoading(isLoading);
     !isLoading &&
       setTimeout(() => {
-        listRef?.scrollTo({ scrollTop: lastScroll ?? 0 });
+        listRef?.scrollToItem({
+          align: "start",
+          columnIndex: 0,
+          rowIndex: lastScroll,
+        });
       }, 50);
   }, [listRef, isLoading]);
 
@@ -252,7 +256,7 @@ const AxGridViewComponent = <T extends KeyValue>({
               columnCount={cc}
               direction={isRtl ? "rtl" : "ltr"}
               outerElementType={outerElement}
-              onScroll={(e) => onScroll?.(e.scrollTop)}
+              onItemsRendered={(e) => onScroll?.(e.visibleRowStartIndex)}
               columnWidth={() => Math.min(colWidth, (width - 84) / cc)}
               rowHeight={(index) =>
                 Math.max(...(cache.get(index) ?? []), colHeight)
