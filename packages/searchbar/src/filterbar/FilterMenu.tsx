@@ -20,14 +20,14 @@ export const FilterMenu = memo(
       useSearchContext();
 
     const canEdit = useMemo(() => {
-      if (fields.length === 0 || !isEditable) return false;
+      if (fields.length === 0 || !!filter.isScope || !isEditable) return false;
       const field = fields.find(
         (f) => (filter.type === "filter" && f.field === filter.field) ?? ""
       );
       return field?.type !== EnumFieldType.GEO;
     }, [filter, isEditable]);
     const canView = useMemo(() => {
-      return !canEdit || filter.type === "query";
+      return !filter.isScope && (!canEdit || filter.type === "query");
     }, [filter, canEdit]);
 
     return (

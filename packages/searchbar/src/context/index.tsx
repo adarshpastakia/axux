@@ -19,7 +19,12 @@ import React, {
   useTransition,
 } from "react";
 import { I18nextProvider } from "react-i18next";
-import { type FilterField, type FilterObject, type FilterProps, type SearchProps } from "../types";
+import {
+  type FilterField,
+  type FilterObject,
+  type FilterProps,
+  type SearchProps,
+} from "../types";
 
 interface Context {
   defaultQueryList: SuggestItem[];
@@ -125,14 +130,9 @@ export const SearchContextProvider: React.FC<
   }, [query, filters, history, onSearch]);
 
   const updateQuery = async (query: string) => {
-    const historyList = isArray(history) ? history : [];
-    const newHistory = [
-      query,
-      ...historyList.filter((h) => h !== query).slice(0, historyCount - 1),
-    ];
     startTransition(() => {
       setDirty(true);
-      setOptions(newHistory.filter((h) => h.includes(query)));
+      setQuery(query);
     });
     return await (onQuery?.(query) ?? []);
   };
