@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.4](https://github.com/adarshpastakia/axux/compare/v2.7.3...v2.7.4) (2023-09-12)
+
+### Bug Fixes
+
+- **Modal:** prevent mouse event propagation ([9f245c6](https://github.com/adarshpastakia/axux/commit/9f245c64a8d8f564ec84b101a45e90a3492b13ee))
+- **SearchBar:** update query on click update ([eb161a2](https://github.com/adarshpastakia/axux/commit/eb161a2564fb47dc90463a2fd0edc8682c6cd834))
+
 ## [2.7.3](https://github.com/adarshpastakia/axux/compare/v2.7.2...v2.7.3) (2023-09-11)
 
 ### Bug Fixes
