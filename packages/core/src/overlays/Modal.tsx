@@ -130,6 +130,8 @@ export const AxModal: FC<ModalProps> = ({
       ref={maskRef}
       className="ax-overlay__mask"
       onMouseDown={(e) => (handleClose(), e.stopPropagation())}
+      onMouseUp={(e) => e.stopPropagation()}
+      onClick={(e) => e.stopPropagation()}
     >
       <HotKeyWrapper>
         <AxHotKey global keyCombo="esc" handler={handleClose} />
