@@ -145,6 +145,8 @@ export const AxModal: FC<ModalProps> = ({
           tabIndex={0}
           style={{ height, width, minHeight, minWidth }}
           onMouseDown={(e) => e.stopPropagation()}
+          onMouseUp={(e) => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
         >
           <AxHeader className={`ax-modal__header ${headerClass ?? ""}`}>
             {icon && (
