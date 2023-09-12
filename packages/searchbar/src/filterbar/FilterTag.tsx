@@ -40,7 +40,7 @@ export const FilterTag = memo(
     }, [filter]);
 
     return (
-      <AxPopover placement="bottom-start" isDisabled={filter.isScope}>
+      <AxPopover placement="bottom-start">
         <div
           className="ax-filter__tag"
           data-disabled={filter.isDisabled}
@@ -48,15 +48,13 @@ export const FilterTag = memo(
           data-scope={filter.isScope}
           data-type={filter.isNegative ? "exclude" : "include"}
         >
-          {!filter.isScope && (
-            <AxField.Checkbox
-              isInvalid={filter.isNegative}
-              isChecked={!filter.isDisabled}
-              // @ts-expect-error ignore
-              onClick={(e) => e.stopPropagation()}
-              onChange={(e) => updateFilter(index, { isDisabled: !e })}
-            />
-          )}
+          <AxField.Checkbox
+            isInvalid={filter.isNegative}
+            isChecked={!filter.isDisabled}
+            // @ts-expect-error ignore
+            onClick={(e) => e.stopPropagation()}
+            onChange={(e) => updateFilter(index, { isDisabled: !e })}
+          />
           <div>{label}</div>
           {!filter.isRequired && (
             <span

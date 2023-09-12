@@ -73,8 +73,14 @@ export const Example: Story = {
           <AxTag color="#7c3aed" fill>
             Scoped filter
           </AxTag>
+          <AxTag color="#db2777" fill>
+            Scoped disabled filter
+          </AxTag>
           <AxTag color="primary" fill>
             Global filter
+          </AxTag>
+          <AxTag color="danger" fill>
+            Global disabled filter
           </AxTag>
           <AxTag color="primary">Local filter</AxTag>
           <AxTag color="danger">Disabled filter</AxTag>
