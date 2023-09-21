@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.6](https://github.com/adarshpastakia/axux/compare/v2.7.5...v2.7.6) (2023-09-21)
+
+### Bug Fixes
+
+- **Form:** focus select on error ([a066532](https://github.com/adarshpastakia/axux/commit/a066532b91453b2101ce6ac8cc67e7b51235531e))
+- **Slider:** capture mouseup ([66a4aa1](https://github.com/adarshpastakia/axux/commit/66a4aa1082ddc842333e50cffc1717ab5c7e1558))
+- **Slider:** use maxLabel ([aa7294c](https://github.com/adarshpastakia/axux/commit/aa7294cd0883f19aedc6c3fd430e34bd696c4c2c))
+
 ## [2.7.5](https://github.com/adarshpastakia/axux/compare/v2.7.4...v2.7.5) (2023-09-12)
 
 ### Bug Fixes
