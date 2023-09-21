@@ -304,8 +304,12 @@ export const useRanger = (opts: RangerConfig) => {
           "touchmove",
           i === -1 ? handleSegmentDrag : handleDrag
         );
-        document.removeEventListener("mouseup", handleRelease);
-        document.removeEventListener("touchend", handleRelease);
+        document.removeEventListener("mouseup", handleRelease, {
+          capture: true,
+        });
+        document.removeEventListener("touchend", handleRelease, {
+          capture: true,
+        });
         const sortedValues = sortNumList(tempValues || values);
         onDragEnd?.();
         onChange?.(sortedValues);
@@ -323,8 +327,8 @@ export const useRanger = (opts: RangerConfig) => {
         "touchmove",
         i === -1 ? handleSegmentDrag : handleDrag
       );
-      document.addEventListener("mouseup", handleRelease);
-      document.addEventListener("touchend", handleRelease);
+      document.addEventListener("mouseup", handleRelease, { capture: true });
+      document.addEventListener("touchend", handleRelease, { capture: true });
     },
     [getLatest, handleDrag]
   );
