@@ -141,7 +141,7 @@ export const Slider: FC<SliderProps> = memo(
     const maxDisplay = useMemo(
       () => (
         <span className="ax-field__slider--label">
-          {useInfinity ? "∞" : maxLabel ?? Format.number(max, format)}
+          {maxLabel ?? (useInfinity ? "∞" : Format.number(max, format))}
         </span>
       ),
       [maxLabel, max, format, useInfinity]
@@ -218,7 +218,7 @@ export const Slider: FC<SliderProps> = memo(
                       style={valueStyles}
                     >
                       {value === Infinity || (useInfinity && value === max)
-                        ? "∞"
+                        ? maxLabel ?? "∞"
                         : Format.number(value, format)}
                     </div>
                   )}
