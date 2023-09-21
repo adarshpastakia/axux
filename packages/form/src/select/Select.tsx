@@ -188,7 +188,7 @@ export const SelectInput = <T extends AnyObject>({
               <AxIcon icon={Icons.iconDropdown} />
             </div>
             <Listbox.Button
-              className="absolute inset-0 opacity-0"
+              className="absolute inset-0 opacity-0 ax-select__input"
               autoFocus={autoFocus}
             />
             <span ref={inputRef} className="ax-field__input truncate">

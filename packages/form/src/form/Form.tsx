@@ -167,7 +167,7 @@ export const AxForm = <K extends KeyValue>({
       () =>
         el
           .querySelector(
-            "input[data-invalid='true'],textarea[data-invalid='true']"
+            "input[data-invalid='true'],textarea[data-invalid='true'],.ax-select__input"
           )
           ?.focus(),
       10
