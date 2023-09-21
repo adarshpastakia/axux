@@ -461,11 +461,11 @@
     }
 
     & > .ax-field__slider--label {
-      @apply text-sm text-muted px-1 py-px;
+      @apply text-sm text-muted px-1 py-px whitespace-nowrap;
     }
 
     & .ax-field__slider--value {
-      @apply bg-invert text-invert py-px px-2 text-xs absolute rounded z-[5]
+      @apply bg-invert text-invert py-px px-2 text-xs absolute rounded z-[5] whitespace-nowrap
     before:absolute before:h-1.5 before:w-1.5 before:z-[-1] before:bg-invert before:top-1/2 before:-translate-y-1/2 before:rotate-45;
     }
 
