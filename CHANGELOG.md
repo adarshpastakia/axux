@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.7](https://github.com/adarshpastakia/axux/compare/v2.7.6...v2.7.7) (2023-09-29)
+
+### Bug Fixes
+
+- **Editor:** add suggestions prop ([0b75c58](https://github.com/adarshpastakia/axux/commit/0b75c58a9972222b97948d896759960ce1064849))
+- **Suggest:** prevent home/end key propagation ([79f0259](https://github.com/adarshpastakia/axux/commit/79f0259a1d0099678d5d7af0a9ff8bb4fe043892))
+
 ## [2.7.6](https://github.com/adarshpastakia/axux/compare/v2.7.5...v2.7.6) (2023-09-21)
 
 ### Bug Fixes
