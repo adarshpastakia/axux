@@ -213,7 +213,11 @@ export const SuggestInput: FC<SuggestProps> = ({
               autoComplete="off"
               autoFocus={autoFocus}
               onChange={(e) => handleQueryChange(e.target.value)}
-              onKeyDown={!open ? handleEnter(onEnterPressed) : undefined}
+              onKeyDownCapture={(e) =>
+                ["Home", "End"].includes(e.key)
+                  ? e.stopPropagation()
+                  : handleEnter(onEnterPressed)(e)
+              }
               onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
               {...rest}
             />

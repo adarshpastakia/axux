@@ -176,7 +176,11 @@ export const ComboInput = <T extends AnyObject>({
               data-invalid={isInvalid}
               className="ax-field__input"
               autoComplete="off"
-              onKeyDown={handleEnter(onEnterPressed)}
+              onKeyDownCapture={(e) =>
+                ["Home", "End"].includes(e.key)
+                  ? e.stopPropagation()
+                  : handleEnter(onEnterPressed)(e)
+              }
               displayValue={() => displayLabel}
               onChange={(e) => onQueryChange(e.target.value)}
               onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
