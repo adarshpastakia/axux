@@ -85,7 +85,7 @@ const mainConfig: StorybookConfig = {
     config.plugins?.push(
       new MonacoWebpackPlugin({
         // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
-        languages: ["json", "text", "markdown"],
+        languages: ["json", "text", "html", "markdown"],
       })
     );
     return config;
