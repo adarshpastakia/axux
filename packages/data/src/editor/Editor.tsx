@@ -14,18 +14,19 @@ import {
 } from "@axux/core";
 import { type ElementProps } from "@axux/core/dist/types";
 import { isString } from "@axux/utilities";
-import MonacoEditor from "@monaco-editor/react";
+import MonacoEditor, { type Monaco } from "@monaco-editor/react";
 import {
-  type FC,
-  type Ref,
   useCallback,
   useDeferredValue,
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
   useState,
+  type FC,
+  type Ref,
 } from "react";
 import { Tools } from "./Tools";
+import { useSuggestions, type SuggestionItem } from "./suggestionHook";
 
 export interface EditorRef {
   validate: () => boolean;
@@ -59,6 +60,8 @@ export interface EditorProps extends ElementProps {
    * code language
    */
   language?: "json" | "css" | "html" | "text" | "markdown";
+
+  suggestions?: SuggestionItem[];
 }
 
 export const AxEditor: FC<EditorProps> = ({
@@ -68,10 +71,14 @@ export const AxEditor: FC<EditorProps> = ({
   isLoading,
   isReadonly = false,
   language = "json",
+  suggestions = [],
   onChange,
 }) => {
   const [editorRef, setEditorRef] = useState<AnyObject>();
+  const [monacoRef, setMonacoRef] = useState<Monaco>();
   const isDark = useIsDark();
+
+  useSuggestions(monacoRef, language, suggestions);
 
   useImperativeHandle(
     ref,
@@ -82,7 +89,7 @@ export const AxEditor: FC<EditorProps> = ({
       validate() {
         const model = editorRef?.editor?.getModel();
         if (model) {
-          const markers = editorRef?.editor.getModelMarkers(model );
+          const markers = editorRef?.editor.getModelMarkers(model);
           return markers?.length === 0;
         }
         return true;
@@ -121,7 +128,7 @@ export const AxEditor: FC<EditorProps> = ({
       {!hideToolbar && <Tools editor={editorRef} />}
       <AxSection ref={containerRef} className="ax-editor">
         <MonacoEditor
-          onMount={(e) => !!e && setEditorRef(e)}
+          onMount={(e, m) => (!!e && setEditorRef(e), !!m && setMonacoRef(m))}
           value={codeValue}
           language={language}
           onChange={handleChange}
