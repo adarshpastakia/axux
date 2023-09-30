@@ -6,7 +6,13 @@
  * @license   : MIT
  */
 
-import { useLayoutEffect, useRef, type FC } from "react";
+import {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  type FC,
+  type MouseEvent,
+} from "react";
 import { AxButton } from "../buttons/Button";
 import { AxHeader } from "../components/Header";
 import { AxTitle } from "../components/Title";
@@ -125,13 +131,17 @@ export const AxModal: FC<ModalProps> = ({
       });
   }, []);
 
+  const handleMouseEvent = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    if (e.target === maskRef.current) {
+      onClose?.();
+    }
+  }, []);
+
   return (
     <div
       ref={maskRef}
       className="ax-overlay__mask"
-      onMouseDown={(e) => (handleClose(), e.stopPropagation())}
-      onMouseUp={(e) => e.stopPropagation()}
-      onClick={(e) => e.stopPropagation()}
+      onMouseDown={handleMouseEvent}
     >
       <HotKeyWrapper>
         <AxHotKey global keyCombo="esc" handler={handleClose} />
@@ -146,9 +156,6 @@ export const AxModal: FC<ModalProps> = ({
           data-size={size}
           tabIndex={0}
           style={{ height, width, minHeight, minWidth }}
-          onMouseDown={(e) => e.stopPropagation()}
-          onMouseUp={(e) => e.stopPropagation()}
-          onClick={(e) => e.stopPropagation()}
         >
           <AxHeader className={`ax-modal__header ${headerClass ?? ""}`}>
             {icon && (
