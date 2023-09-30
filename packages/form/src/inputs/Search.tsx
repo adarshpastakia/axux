@@ -10,13 +10,12 @@ import { AxButton } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { debounce } from "@axux/utilities";
 import {
-  type FC,
   memo,
   useCallback,
   useEffect,
   useMemo,
   useState,
-  useTransition,
+  type FC,
 } from "react";
 import { Addon } from "./Addon";
 import { Text, type TextProps } from "./Text";
@@ -45,7 +44,6 @@ export const Search: FC<SearchProps> = memo(
     ...props
   }: SearchProps) => {
     const [query, setQuery] = useState(defaultValue);
-    const [, startTransition] = useTransition();
 
     useEffect(() => {
       setQuery(value ?? "");
@@ -59,16 +57,12 @@ export const Search: FC<SearchProps> = memo(
     const handleChange = useCallback(
       (value?: string) => {
         setQuery(value);
-        startTransition(() => {
-          handleSearch(value);
-        });
+        handleSearch?.(value);
       },
       [handleSearch]
     );
     const handleQuery = useCallback(() => {
-      startTransition(() => {
-        onSearch?.(query);
-      });
+      onSearch?.(query);
     }, [query]);
 
     return (
