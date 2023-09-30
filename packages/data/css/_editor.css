@@ -11,6 +11,7 @@
     & > section {
       direction: ltr;
       grid-area: content;
+      overflow: hidden;
     }
 
     & .monaco-editor .folded-background {
