@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.9](https://github.com/adarshpastakia/axux/compare/v2.7.8...v2.7.9) (2023-10-04)
+
+### Bug Fixes
+
+- **DropdownOverlay:** set zIndex ([955b6b2](https://github.com/adarshpastakia/axux/commit/955b6b27f0a272b1e191f93c956b079770292c2d))
+
 ## [2.7.8](https://github.com/adarshpastakia/axux/compare/v2.7.7...v2.7.8) (2023-10-01)
 
 ### Bug Fixes
