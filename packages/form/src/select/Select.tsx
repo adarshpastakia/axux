@@ -199,7 +199,7 @@ export const SelectInput = <T extends AnyObject>({
             </span>
             {children}
           </FieldWrapper>
-          {open && <div className="fixed inset-0" />}
+          {open && <div className="fixed inset-0 z-10" />}
           {usePortal && createPortal(optionDropdown, document.body)}
           {!usePortal && optionDropdown}
         </Fragment>

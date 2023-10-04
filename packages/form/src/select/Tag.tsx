@@ -241,7 +241,7 @@ export const TagInput = <T extends AnyObject>({
                 placeholder={placeholder}
                 readOnly={!isEditable && !allowCreate}
                 data-invalid={isInvalid}
-                className="ax-field__input flex-auto min-w-fit"
+                className="ax-field__input z-20 flex-auto min-w-fit"
                 autoComplete="off"
                 onKeyDown={handleKeyPress}
                 onChange={(e) => onQueryChange(e.target.value)}
@@ -258,7 +258,7 @@ export const TagInput = <T extends AnyObject>({
               <AxIcon icon={Icons.iconDropdown} />
             </Combobox.Button>
           </FieldWrapper>
-          {open && <div className="fixed inset-0" />}
+          {open && <div className="fixed inset-0 z-10" />}
           {usePortal && createPortal(optionDropdown, document.body)}
           {!usePortal && optionDropdown}
         </Fragment>
