@@ -715,4 +715,9 @@
     -webkit-text-fill-color: theme(colors.amber.200);
     box-shadow: 0 0 0 999em theme(colors.black) inset;
   }
+
+  .ax-field__list ~ .ax-field__clear,
+  .ax-field__input[type="number"] ~ .ax-field__clear {
+    @apply ltr:right-5 rtl:left-5;
+  }
 }

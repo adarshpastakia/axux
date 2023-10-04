@@ -210,7 +210,7 @@
     }
 
     & .ax-alert__title {
-      @apply grid-area-[title] text-xl font-semibold p-2 select-none me-8;
+      @apply grid-area-[title] text-xl font-semibold p-2 select-none me-8 overflow-hidden;
     }
 
     & .ax-alert__message {
@@ -307,7 +307,7 @@
     }
 
     & .ax-toast__title {
-      @apply grid-area-[title] text-md font-semibold px-2 select-none me-12;
+      @apply grid-area-[title] text-md font-semibold px-2 select-none me-12 overflow-hidden;
     }
 
     & .ax-toast__message {

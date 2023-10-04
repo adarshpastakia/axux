@@ -39,6 +39,11 @@
 @layer components {
   .ax-page {
     @apply panel relative bg-base z-0;
+
+    & ~ .ax-footer,
+    & ~ .ax-breadrcumb {
+      @apply !m-0;
+    }
   }
 }
 
