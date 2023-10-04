@@ -174,7 +174,7 @@ export const ComboInput = <T extends AnyObject>({
               placeholder={placeholder}
               readOnly={!isEditable && !allowCreate}
               data-invalid={isInvalid}
-              className="ax-field__input"
+              className="ax-field__input z-20"
               autoComplete="off"
               onKeyDownCapture={(e) =>
                 ["Home", "End"].includes(e.key)
@@ -196,7 +196,7 @@ export const ComboInput = <T extends AnyObject>({
               <AxIcon icon={Icons.iconDropdown} />
             </Combobox.Button>
           </FieldWrapper>
-          {open && <div className="fixed inset-0" />}
+          {open && <div className="fixed inset-0 z-10" />}
           {usePortal && createPortal(optionDropdown, document.body)}
           {!usePortal && optionDropdown}
         </Fragment>

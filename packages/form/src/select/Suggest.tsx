@@ -209,7 +209,7 @@ export const SuggestInput: FC<SuggestProps> = ({
               size={1}
               placeholder={placeholder}
               data-invalid={isInvalid}
-              className="ax-field__input"
+              className="ax-field__input z-20"
               autoComplete="off"
               autoFocus={autoFocus}
               onChange={(e) => handleQueryChange(e.target.value)}
@@ -223,7 +223,7 @@ export const SuggestInput: FC<SuggestProps> = ({
             />
             {children}
           </FieldWrapper>
-          {open && <div className="fixed inset-0" />}
+          {open && <div className="fixed inset-0 z-10" />}
           {usePortal && createPortal(optionDropdown, document.body)}
           {!usePortal && optionDropdown}
         </Fragment>
