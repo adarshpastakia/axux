@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/adarshpastakia/axux/compare/v2.7.9...v2.8.0) (2023-10-05)
+
+### Bug Fixes
+
+- **Inputs:** debounce onChange ([2c7c42a](https://github.com/adarshpastakia/axux/commit/2c7c42ac476227ac51b287e6e8b37677bae13081))
+
 ## [2.7.9](https://github.com/adarshpastakia/axux/compare/v2.7.8...v2.7.9) (2023-10-04)
 
 **Note:** Version bump only for package @axux/data
