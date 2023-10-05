@@ -84,7 +84,7 @@ export const Formatters: StoryObj<{
 }> = {
   render: (args) => (
     <div className="w-[30rem] p-8">
-      <AxText>Phone: {Format.phone(args.phone, true)}</AxText>
+      <AxText>Phone: {Format.phone(args.phone, "AE", true)}</AxText>
       <code className="inline-block bg-base text-muted mb-4 text-sm">
         Format.phone(phoneNumber)
       </code>
