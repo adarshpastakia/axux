@@ -49,18 +49,19 @@ export const Search: FC<SearchProps> = memo(
       setQuery(value ?? "");
     }, [value]);
 
-    const handleSearch = useMemo(
-      () => debounce((q) => onChange?.(q), 200),
+    const debounceChange = useMemo(
+      () => debounce((q) => onChange?.(q), 100),
       [onChange]
     );
 
     const handleChange = useCallback(
       (value?: string) => {
         setQuery(value);
-        handleSearch?.(value);
+        debounceChange(value);
       },
-      [handleSearch]
+      [debounceChange]
     );
+
     const handleQuery = useCallback(() => {
       onSearch?.(query);
     }, [query]);

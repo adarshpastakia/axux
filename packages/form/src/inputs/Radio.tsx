@@ -41,9 +41,7 @@ export const Radio: FC<RadioProps> = memo(
   }: RadioProps) => {
     const handleChange = useCallback(
       (e?: FormEvent<HTMLInputElement>) => {
-        e?.currentTarget.checked &&
-          onChange != null &&
-          onChange(e?.currentTarget.value ?? "");
+        e?.currentTarget.checked && onChange?.(e?.currentTarget.value ?? "");
       },
       [onChange]
     );

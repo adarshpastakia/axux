@@ -11,13 +11,7 @@ import { type ChildrenProp } from "@axux/core/dist/types";
 import { type SuggestItem } from "@axux/form/dist/select/Suggest";
 import { isArray } from "@axux/utilities";
 import i18next from "i18next";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  useTransition,
-} from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { I18nextProvider } from "react-i18next";
 import {
   type FilterField,
@@ -83,7 +77,6 @@ export const SearchContextProvider: React.FC<
   const [isDirty, setDirty] = useState(false);
   const [showFilters, setShowFilters] = useState(!isCollapsed);
 
-  const [, startTransition] = useTransition();
   const [history, setHistory] = useLocalStorage<string[]>(
     historyKey,
     blankHistory
@@ -130,10 +123,8 @@ export const SearchContextProvider: React.FC<
   }, [query, filters, history, onSearch]);
 
   const updateQuery = async (query: string) => {
-    startTransition(() => {
-      setDirty(true);
-      setQuery(query);
-    });
+    setDirty(true);
+    setQuery(query);
     return await (onQuery?.(query) ?? []);
   };
 

@@ -14,11 +14,9 @@ import {
   Fragment,
   memo,
   useCallback,
-  useDeferredValue,
   useEffect,
   useMemo,
   useState,
-  useTransition,
   type FocusEvent,
   type KeyboardEvent,
 } from "react";
@@ -67,9 +65,7 @@ export const TagInput = <T extends AnyObject>({
   autoFocus,
   ...rest
 }: TagProps<T>) => {
-  const [_actualValue, setActualValue] = useState<T[]>(EMPTY_ARRAY);
-  const [, startTransition] = useTransition();
-  const actualValue = useDeferredValue(_actualValue);
+  const [actualValue, setActualValue] = useState<T[]>(EMPTY_ARRAY);
   const { list, query, onQueryChange } = useSelect({
     options,
     labelProperty,
@@ -110,14 +106,9 @@ export const TagInput = <T extends AnyObject>({
     (options: T[] = []) => {
       void Promise.resolve(onSelect?.(options)).then((b) => {
         if (b !== false) {
-          onChange != null &&
-            startTransition(() =>
-              onChange(
-                options.map((value: AnyObject) =>
-                  getValue(value, valueProperty)
-                )
-              )
-            );
+          onChange?.(
+            options.map((value: AnyObject) => getValue(value, valueProperty))
+          );
           setActualValue(options);
           onQueryChange("");
           setTimeout(() => forceUpdate?.(), 100);
@@ -141,12 +132,9 @@ export const TagInput = <T extends AnyObject>({
       const newValue = [...actualValue];
       newValue.splice(index, 1);
       setActualValue(newValue);
-      onChange != null &&
-        startTransition(() =>
-          onChange(
-            newValue.map((value: AnyObject) => getValue(value, valueProperty))
-          )
-        );
+      onChange?.(
+        newValue.map((value: AnyObject) => getValue(value, valueProperty))
+      );
       setTimeout(() => forceUpdate?.(), 100);
     },
     [actualValue]

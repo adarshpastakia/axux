@@ -13,13 +13,11 @@ import { Listbox } from "@headlessui/react";
 import {
   Fragment,
   memo,
-  type ReactNode,
   useCallback,
-  useDeferredValue,
   useEffect,
   useMemo,
   useState,
-  useTransition,
+  type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
@@ -66,9 +64,7 @@ export const SelectInput = <T extends AnyObject>({
   makeLabel?: (item: T) => ReactNode;
 }) => {
   const { t } = useTranslation("form");
-  const [_actualValue, setActualValue] = useState<T>("" as AnyObject);
-  const [, startTransition] = useTransition();
-  const actualValue = useDeferredValue(_actualValue);
+  const [actualValue, setActualValue] = useState<T>("" as AnyObject);
 
   const { styles, setPopperElement, setReferenceElement } = usePopover({
     hideArrow: true,
@@ -94,8 +90,7 @@ export const SelectInput = <T extends AnyObject>({
     (option?: T) => {
       void Promise.resolve(option && onSelect?.(option)).then((b) => {
         if (b !== false) {
-          onChange != null &&
-            startTransition(() => onChange(getValue(option, valueProperty)));
+          onChange?.(getValue(option, valueProperty));
           setActualValue(option ?? ("" as AnyObject));
         }
       });

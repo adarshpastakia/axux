@@ -13,10 +13,8 @@ import {
   Fragment,
   memo,
   useCallback,
-  useDeferredValue,
   useEffect,
   useState,
-  useTransition,
   type FocusEvent,
   type KeyboardEvent,
 } from "react";
@@ -71,9 +69,7 @@ export const ListInput = <T extends AnyObject>({
   minHeight?: number | string;
   maxHeight?: number | string;
 }) => {
-  const [_actualValue, setActualValue] = useState<T[]>(EMPTY_ARRAY);
-  const [, startTransition] = useTransition();
-  const actualValue = useDeferredValue(_actualValue);
+  const [actualValue, setActualValue] = useState<T[]>(EMPTY_ARRAY);
   const { list, query, onQueryChange } = useSelect({
     options,
     labelProperty,
@@ -107,14 +103,9 @@ export const ListInput = <T extends AnyObject>({
     (options: T[] = []) => {
       void Promise.resolve(onSelect?.(options)).then((b) => {
         if (b !== false) {
-          onChange != null &&
-            startTransition(() =>
-              onChange(
-                options.map((value: AnyObject) =>
-                  getValue(value, valueProperty)
-                )
-              )
-            );
+          onChange?.(
+            options.map((value: AnyObject) => getValue(value, valueProperty))
+          );
           setActualValue(options);
           onQueryChange("");
         }
@@ -137,12 +128,9 @@ export const ListInput = <T extends AnyObject>({
       const newValue = [...actualValue];
       newValue.splice(index, 1);
       setActualValue(newValue);
-      onChange != null &&
-        startTransition(() =>
-          onChange(
-            newValue.map((value: AnyObject) => getValue(value, valueProperty))
-          )
-        );
+      onChange?.(
+        newValue.map((value: AnyObject) => getValue(value, valueProperty))
+      );
     },
     [actualValue]
   );

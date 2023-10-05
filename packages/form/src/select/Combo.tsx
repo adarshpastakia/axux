@@ -12,15 +12,13 @@ import { isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import { Combobox } from "@headlessui/react";
 import {
-  type FocusEvent,
   Fragment,
   memo,
   useCallback,
-  useDeferredValue,
   useEffect,
   useMemo,
   useState,
-  useTransition,
+  type FocusEvent,
 } from "react";
 import { createPortal } from "react-dom";
 import { FieldWrapper } from "../inputs/Wrapper";
@@ -66,9 +64,7 @@ export const ComboInput = <T extends AnyObject>({
   autoFocus,
   ...rest
 }: SelectProps<T>) => {
-  const [_actualValue, setActualValue] = useState<T>({} as AnyObject);
-  const [, startTransition] = useTransition();
-  const actualValue = useDeferredValue(_actualValue);
+  const [actualValue, setActualValue] = useState<T>({} as AnyObject);
   const { list, query, onQueryChange } = useSelect({
     options,
     labelProperty,
@@ -100,8 +96,7 @@ export const ComboInput = <T extends AnyObject>({
     (option?: T) => {
       void Promise.resolve(option && onSelect?.(option)).then((b) => {
         if (b !== false) {
-          onChange != null &&
-            startTransition(() => onChange(getValue(option, valueProperty)));
+          onChange?.(getValue(option, valueProperty));
           setActualValue(option ?? ({} as T));
           onQueryChange("");
         }

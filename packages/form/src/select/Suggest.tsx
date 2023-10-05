@@ -12,15 +12,14 @@ import { debounce, isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import { Combobox } from "@headlessui/react";
 import {
-  type FC,
-  type FocusEvent,
   Fragment,
   memo,
   useCallback,
-  useDeferredValue,
   useEffect,
   useMemo,
   useState,
+  type FC,
+  type FocusEvent,
 } from "react";
 import { createPortal } from "react-dom";
 import { FieldWrapper } from "../inputs/Wrapper";
@@ -82,10 +81,9 @@ export const SuggestInput: FC<SuggestProps> = ({
   autoFocus,
   ...rest
 }) => {
-  const [_actualValue, setActualValue] = useState(value);
+  const [actualValue, setActualValue] = useState(value);
   const [items, setItems] = useState<Array<SuggestItem | string>>([]);
   const [queryItems, setQueryItems] = useState<Array<SuggestItem | string>>([]);
-  const actualValue = useDeferredValue(_actualValue);
 
   useEffect(() => {
     setActualValue(value);
@@ -107,7 +105,7 @@ export const SuggestInput: FC<SuggestProps> = ({
         void Promise.resolve(ret).then(
           (resp) => resp != null && setQueryItems(resp)
         );
-      }),
+      }, 100),
     [onQuery]
   );
 

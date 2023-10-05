@@ -7,16 +7,15 @@
  */
 
 import { type ElementProps } from "@axux/core/dist/types";
-import { Format } from "@axux/utilities";
+import { Format, debounce } from "@axux/utilities";
 import {
-  type FC,
   Fragment,
   memo,
   useCallback,
   useEffect,
   useMemo,
   useState,
-  useTransition,
+  type FC,
 } from "react";
 import { useRanger } from "../ranger";
 import { type InputProps } from "../types";
@@ -103,19 +102,24 @@ export const Range: FC<RangeProps> = memo(
   }: RangeProps) => {
     const [actualValue, setActualValue] = useState([0, 0]);
     const [displayValue, setDisplayValue] = useState(false);
-    const [, startTransition] = useTransition();
     useEffect(() => {
       setActualValue(value ?? [0, 0]);
     }, [value]);
     useEffect(() => {
       setDisplayValue(!!showValue);
     }, [showValue]);
+
+    const debounceChange = useMemo(
+      () => debounce((q) => onChange?.(q), 100),
+      [onChange]
+    );
+
     const handleChange = useCallback(
       (value: [number, number]) => {
         setActualValue(value ?? [0, 0]);
-        onChange != null && startTransition(() => onChange(value ?? undefined));
+        debounceChange(value ?? undefined);
       },
-      [onChange]
+      [debounceChange]
     );
 
     const minDisplay = useMemo(

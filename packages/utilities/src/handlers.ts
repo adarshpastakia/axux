@@ -8,11 +8,12 @@
 /* istanbul ignore file */
 
 import { type KeyboardEvent, type MouseEvent } from "react";
+import { debounce } from "./_debounce";
 
 /** ***************** common handler for enter press *******************/
 export const handleEnter = (callback?: AnyObject) => {
   return (e: KeyboardEvent) => {
-    e.key === "Enter" && callback?.(e);
+    e.key === "Enter" && debounce(() => callback?.(e), 100)();
   };
 };
 
