@@ -14,7 +14,6 @@ import {
   useCallback,
   useEffect,
   useState,
-  useTransition,
   type ChangeEvent,
   type FC,
 } from "react";
@@ -59,7 +58,6 @@ export const Masked: FC<MaskedProps> = memo(
     ...rest
   }: MaskedProps) => {
     const [actualValue, setActualValue] = useState("");
-    const [, startTransition] = useTransition();
     useEffect(() => {
       setActualValue(value ?? "");
     }, [value]);
@@ -68,7 +66,7 @@ export const Masked: FC<MaskedProps> = memo(
         let val = e?.target.value ?? "";
         if (uppercase) val = val.toUpperCase();
         setActualValue(val);
-        onChange != null && startTransition(() => onChange(val));
+        onChange?.(val);
       },
       [onChange]
     );

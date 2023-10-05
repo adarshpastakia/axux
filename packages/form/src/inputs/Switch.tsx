@@ -12,7 +12,6 @@ import {
   useCallback,
   useEffect,
   useState,
-  useTransition,
   type ChangeEvent,
   type FC,
 } from "react";
@@ -56,15 +55,13 @@ export const Switch: FC<SwitchProps> = memo(
     ...rest
   }: SwitchProps) => {
     const [actualValue, setActualValue] = useState(value ?? isChecked ?? false);
-    const [, startTransition] = useTransition();
     useEffect(() => {
       setActualValue(value ?? isChecked ?? false);
     }, [value, isChecked]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         setActualValue(e?.target.checked ?? false);
-        onChange != null &&
-          startTransition(() => onChange(e?.target.checked ?? false));
+        onChange?.(e?.target.checked ?? false);
       },
       [onChange]
     );

@@ -7,16 +7,16 @@
  */
 
 import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
-import { isEmpty } from "@axux/utilities";
+import { debounce, isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
-  type ChangeEvent,
-  type FC,
   memo,
   useCallback,
   useEffect,
+  useMemo,
   useState,
-  useTransition,
+  type ChangeEvent,
+  type FC,
 } from "react";
 import { type InputProps } from "../types";
 import { FieldWrapper } from "./Wrapper";
@@ -54,17 +54,21 @@ export const Text: FC<TextProps> = memo(
     ...rest
   }: TextProps) => {
     const [actualValue, setActualValue] = useState("");
-    const [, startTransition] = useTransition();
     useEffect(() => {
       setActualValue(value ?? "");
     }, [value]);
+
+    const debounceChange = useMemo(
+      () => debounce((q) => onChange?.(q), 100),
+      [onChange]
+    );
+
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         setActualValue(e?.target.value ?? "");
-        onChange != null &&
-          startTransition(() => onChange(e?.target.value ?? ""));
+        debounceChange(e?.target.value ?? "");
       },
-      [onChange]
+      [debounceChange]
     );
     return (
       <FieldWrapper

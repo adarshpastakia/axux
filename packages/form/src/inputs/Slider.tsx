@@ -7,16 +7,15 @@
  */
 
 import { type ElementProps } from "@axux/core/dist/types";
-import { Format } from "@axux/utilities";
+import { Format, debounce } from "@axux/utilities";
 import {
-  type FC,
   Fragment,
   memo,
   useCallback,
   useEffect,
   useMemo,
   useState,
-  useTransition,
+  type FC,
 } from "react";
 import { useRanger } from "../ranger";
 import { type InputProps } from "../types";
@@ -110,7 +109,6 @@ export const Slider: FC<SliderProps> = memo(
   }: SliderProps) => {
     const [actualValue, setActualValue] = useState(0);
     const [displayValue, setDisplayValue] = useState(false);
-    const [, startTransition] = useTransition();
 
     const min = useMemo(() => ranges?.[0] ?? _min, [_min, ranges]);
     const max = useMemo(() => ranges?.slice(-1)[0] ?? _max, [_max, ranges]);
@@ -121,13 +119,19 @@ export const Slider: FC<SliderProps> = memo(
     useEffect(() => {
       setDisplayValue(!!showValue);
     }, [showValue]);
+
+    const debounceChange = useMemo(
+      () => debounce((q) => onChange?.(q), 100),
+      [onChange]
+    );
+
     const handleChange = useCallback(
       (value: number) => {
         const val = useInfinity && value === max ? Infinity : value;
         setActualValue(val ?? 0);
-        onChange != null && startTransition(() => onChange(val ?? undefined));
+        debounceChange(val ?? undefined);
       },
-      [onChange, max, useInfinity]
+      [debounceChange, max, useInfinity]
     );
 
     const minDisplay = useMemo(

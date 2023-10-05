@@ -6,11 +6,11 @@
  * @license   : MIT
  */
 
-import { isString, matchString } from "@axux/utilities";
+import { debounce, isString, matchString } from "@axux/utilities";
 import {
   useCallback,
-  useDeferredValue,
   useEffect,
+  useMemo,
   useState,
   useTransition,
 } from "react";
@@ -47,18 +47,21 @@ export const useFilteredList = <
   const [filteredList, setFilteredList] = useState(items);
   const [isSearching, startTransition] = useTransition();
 
-  const search = useDeferredValue(query);
-
-  const filterItems = useCallback(
-    (query?: Q) => {
-      startTransition(() => setFilteredList(filterList(items, query, matcher)));
-    },
+  const filterItems = useMemo(
+    () =>
+      debounce(
+        (query?: Q) =>
+          startTransition(() =>
+            setFilteredList(filterList(items, query, matcher))
+          ),
+        100
+      ),
     [items, matcher]
   );
 
   useEffect(() => {
-    filterItems(search);
-  }, [items, search]);
+    filterItems(query);
+  }, [query]);
 
   const onSearch = useCallback(
     (query?: Q) => {
@@ -67,5 +70,5 @@ export const useFilteredList = <
     [filterItems]
   );
 
-  return { onSearch, search, filteredList, isSearching };
+  return { onSearch, search: query, filteredList, isSearching };
 };
