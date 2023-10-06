@@ -61,7 +61,7 @@ export const useFilteredList = <
 
   useEffect(() => {
     filterItems(query);
-  }, [query]);
+  }, [query, items]);
 
   const onSearch = useCallback(
     (query?: Q) => {
