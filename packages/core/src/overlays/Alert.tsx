@@ -55,6 +55,8 @@ export interface AlertProps extends IconProp {
   onClose: (b?: boolean | string) => void;
 
   rootRef?: Ref<HTMLDivElement>;
+
+  width?: string | number;
 }
 
 export const AxAlert: FC<AlertProps> = ({
@@ -71,6 +73,7 @@ export const AxAlert: FC<AlertProps> = ({
   defaultValue = "",
   onClose,
   rootRef,
+  width,
 }) => {
   const { t } = useTranslation("core");
   const [value, setValue] = useState(defaultValue);
@@ -127,6 +130,7 @@ export const AxAlert: FC<AlertProps> = ({
         {message && <p className="ax-alert__message">{message}</p>}
         <input
           value={value}
+          style={{ width }}
           placeholder={placeholder}
           className="ax-alert__input"
           data-hidden={type !== "prompt"}
