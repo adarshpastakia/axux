@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/adarshpastakia/axux/compare/v2.8.0...v2.8.1) (2023-10-06)
+
+### Bug Fixes
+
+- **Alert:** input width for prompt ([e6f461a](https://github.com/adarshpastakia/axux/commit/e6f461a6352409d02ced48e66d81ad3f81c41272))
+
 # [2.8.0](https://github.com/adarshpastakia/axux/compare/v2.7.9...v2.8.0) (2023-10-05)
 
 **Note:** Version bump only for package @axux/core

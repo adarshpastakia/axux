@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/adarshpastakia/axux/compare/v2.8.0...v2.8.1) (2023-10-06)
+
+**Note:** Version bump only for package @axux/map
+
 # [2.8.0](https://github.com/adarshpastakia/axux/compare/v2.7.9...v2.8.0) (2023-10-05)
 
 **Note:** Version bump only for package @axux/map

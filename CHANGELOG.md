@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/adarshpastakia/axux/compare/v2.8.0...v2.8.1) (2023-10-06)
+
+### Bug Fixes
+
+- **Alert:** input width for prompt ([e6f461a](https://github.com/adarshpastakia/axux/commit/e6f461a6352409d02ced48e66d81ad3f81c41272))
+- **FilteredList:** update list on items change ([84236b2](https://github.com/adarshpastakia/axux/commit/84236b29187f4de95656d5e635841445eeb2da52))
+- **TreePanel:** auto scroll on data change ([a15bab8](https://github.com/adarshpastakia/axux/commit/a15bab8d31bdb2837c016feb14b821c14a2cbc2d))
+
 # [2.8.0](https://github.com/adarshpastakia/axux/compare/v2.7.9...v2.8.0) (2023-10-05)
 
 ### Bug Fixes
