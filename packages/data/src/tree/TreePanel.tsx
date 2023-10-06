@@ -229,6 +229,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
           );
         }
         if (action.type === "select") {
+          state.autoScroll = true;
           toggleSelect(state, action.id, isSortable, action.propChange);
           !action.propChange &&
             setTimeout(
