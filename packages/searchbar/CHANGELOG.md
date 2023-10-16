@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.2](https://github.com/adarshpastakia/axux/compare/v2.8.1...v2.8.2) (2023-10-16)
+
+### Bug Fixes
+
+- **SearchBar:** correct search event ([9fc15dd](https://github.com/adarshpastakia/axux/commit/9fc15ddb78a8f670deaa957b4aa497aef4a962b3))
+
 ## [2.8.1](https://github.com/adarshpastakia/axux/compare/v2.8.0...v2.8.1) (2023-10-06)
 
 **Note:** Version bump only for package @axux/searchbar

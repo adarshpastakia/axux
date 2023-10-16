@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.2](https://github.com/adarshpastakia/axux/compare/v2.8.1...v2.8.2) (2023-10-16)
+
+### Bug Fixes
+
+- **useLogger:** update for browser / nodejs ([5decceb](https://github.com/adarshpastakia/axux/commit/5decceb880cab0ee92a6e9cdcc22c2d00365f40a))
+
 ## [2.8.1](https://github.com/adarshpastakia/axux/compare/v2.8.0...v2.8.1) (2023-10-06)
 
 **Note:** Version bump only for package @axux/utilities
