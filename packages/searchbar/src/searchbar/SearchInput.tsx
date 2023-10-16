@@ -29,9 +29,12 @@ export const SearchInput = () => {
       value={query ?? ""}
       options={options}
       onQuery={updateQuery}
-      onSelect={onSelect}
+      onSelect={async (v: AnyObject) => {
+        handleSearch(v.value ?? v.toString());
+        return (await onSelect?.(v)) ?? true;
+      }}
       onChange={handleChange}
-      onEnterPressed={handleSearch}
+      onEnterPressed={() => handleSearch(query)}
       defaultItems={defaultQueryList as AnyObject}
     >
       <AxField.Addon className="text-muted" icon={Icons.iconConsole} />

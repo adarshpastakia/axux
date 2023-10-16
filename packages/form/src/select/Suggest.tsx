@@ -214,7 +214,7 @@ export const SuggestInput: FC<SuggestProps> = ({
               onKeyDownCapture={(e) =>
                 ["Home", "End"].includes(e.key)
                   ? e.stopPropagation()
-                  : handleEnter(onEnterPressed)(e)
+                  : !open && handleEnter(onEnterPressed)(e)
               }
               onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
               {...rest}
