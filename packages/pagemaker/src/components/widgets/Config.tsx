@@ -11,6 +11,7 @@ import { DividerConfig } from "../config/DividerConfig";
 import { HeadingConfig } from "../config/HeadingConfig";
 import { ImageConfig } from "../config/ImageConfig";
 import { ParagraphConfig } from "../config/ParagraphConfig";
+import { TileConfig } from "../config/TileConfig";
 import { usePageContext } from "../context";
 
 export const Config = memo(() => {
@@ -27,6 +28,8 @@ export const Config = memo(() => {
         return <ParagraphConfig />;
       case EnumTypes.IMAGE:
         return <ImageConfig />;
+      case EnumTypes.TILE:
+        return <TileConfig />;
       default:
         return null;
     }
