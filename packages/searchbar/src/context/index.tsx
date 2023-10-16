@@ -9,9 +9,15 @@
 import { useLocalStorage } from "@axux/core";
 import { type ChildrenProp } from "@axux/core/dist/types";
 import { type SuggestItem } from "@axux/form/dist/select/Suggest";
-import { isArray } from "@axux/utilities";
+import { debounce, isArray } from "@axux/utilities";
 import i18next from "i18next";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { I18nextProvider } from "react-i18next";
 import {
   type FilterField,
@@ -38,7 +44,7 @@ interface Context {
   fields: FilterField[];
   filters: FilterObject[];
 
-  handleSearch: () => void;
+  handleSearch: (q?: string) => void;
 
   updateFilter: (index: number, filter: Partial<FilterObject>) => void;
   addFilter: (filter: FilterObject) => void;
@@ -95,6 +101,14 @@ export const SearchContextProvider: React.FC<
     setOptions(history);
   }, [history]);
 
+  const fireSearchEvent = useMemo(
+    () =>
+      debounce((q: AnyObject) => {
+        onSearch?.(q);
+      }),
+    []
+  );
+
   const handleChange = useCallback(
     (query: string = "") => {
       setDirty(false);
@@ -105,22 +119,17 @@ export const SearchContextProvider: React.FC<
           query,
           ...historyList.filter((h) => h !== query).slice(0, historyCount - 1),
         ]);
-      onSearch?.({ query, filters });
     },
     [filters, history, onSearch]
   );
 
-  const handleSearch = useCallback(() => {
-    setDirty(false);
-    const historyList = isArray(history) ? history : [];
-    !!query &&
-      setHistory([
-        query,
-        ...historyList.filter((h) => h !== query).slice(0, historyCount - 1),
-      ]);
-    setQuery(query);
-    onSearch?.({ query, filters });
-  }, [query, filters, history, onSearch]);
+  const handleSearch = useCallback(
+    (query: string = "") => {
+      setDirty(false);
+      fireSearchEvent({ query, filters });
+    },
+    [query, filters, history, onSearch]
+  );
 
   const updateQuery = async (query: string) => {
     setDirty(true);
