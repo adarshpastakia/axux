@@ -16,71 +16,71 @@ export const TypeColors = {
 };
 
 export const TagColors = {
-  info: "color: #106BA3;",
-  debug: "color: #394B59;",
-  timer: "color: #394B59;",
-  error: "color: #C23030;",
-  warning: "color: #BF7326;",
+  info: "\u001B[38;5;14m",
+  debug: "\u001B[38;5;7m",
+  timer: "\u001B[38;5;1m",
+  error: "\u001B[38;5;9m",
+  warning: "\u001B[38;5;3m",
 };
 
 /**
  * @internal
  */
 export const useLogger = (base: string) => ({
+  colors: navigator?.userAgent ? TypeColors : TagColors,
   timer(key: string) {
-    const timerKey = `${base} - ${key}`;
-    console.time(timerKey);
-    return {
-      log: (...args: AnyObject[]) =>
-        console.log(
-          `%c${base} - %c${key}\n`,
-          TypeColors.timer,
-          TagColors.timer,
-          ...args
-        ),
-      end: () => console.timeEnd(timerKey),
+    const startTime = new Date().getTime();
+    let nextTime = new Date().getTime();
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const self = this;
+    const getTime = () => {
+      const ret = (new Date().getTime() - nextTime) / 1000;
+      nextTime = new Date().getTime();
+      return `${ret}ms (${(new Date().getTime() - startTime) / 1000}ms)`;
     };
+    return {
+      log: (msg: string) => self.log(msg),
+      debug: (msg: string, ...rest: unknown[]) =>
+        self.debug(key, msg, getTime(), ...rest),
+      info: (msg: string, ...rest: unknown[]) =>
+        self.info(key, msg, getTime(), ...rest),
+      error: (msg: string, ...rest: unknown[]) =>
+        self.error(key, msg, getTime(), ...rest),
+      warning: (msg: string, ...rest: unknown[]) =>
+        self.warning(key, msg, getTime(), ...rest),
+      end: (msg = "completed", ...rest: unknown[]) =>
+        self.info(key, msg, getTime(), ...rest),
+    };
+  },
+
+  log(msg: string) {
+    console.log(msg);
   },
 
   debug(msg: string, ...rest: AnyObject[]) {
     if (process.env.NODE_ENV === "development") {
-           console.debug(
-        `%cDEBUG::%c${base} - ${msg}`,
-        TypeColors.debug,
-        TagColors.debug
-      );
+      console.debug(`%cDEBUG::${base} - ${msg}`, this.colors.debug, ...rest);
       rest.forEach((e) => console.table(e));
     }
   },
 
   info(msg: string, ...rest: AnyObject[]) {
     if (process.env.NODE_ENV === "development") {
-           console.info(
-        `%cINFO::%c${base} - ${msg}\n`,
-        TypeColors.info,
-        TagColors.info,
-        ...rest
-      );
+      console.info(`%cINFO::${base} - ${msg}\n`, this.colors.info, ...rest);
     }
   },
 
   error(msg: string, ...rest: AnyObject[]) {
     if (process.env.NODE_ENV === "development") {
-           console.error(
-        `%cERROR::%c${base} - ${msg}\n`,
-        TypeColors.error,
-        TagColors.error,
-        ...rest
-      );
+      console.error(`%cERROR::${base} - ${msg}\n`, this.colors.error, ...rest);
     }
   },
 
   warning(msg: string, ...rest: AnyObject[]) {
     if (process.env.NODE_ENV === "development") {
-           console.warn(
-        `%cWARNING::%c${base} - ${msg}\n`,
-        TypeColors.warning,
-        TagColors.warning,
+      console.warn(
+        `%cWARNING::${base} - ${msg}\n`,
+        this.colors.warning,
         ...rest
       );
     }
