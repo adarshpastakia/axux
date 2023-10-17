@@ -27,7 +27,7 @@ export const TagColors = {
  * @internal
  */
 export const useLogger = (base: string) => ({
-  colors: navigator?.userAgent ? TypeColors : TagColors,
+  colors: typeof window === "undefined" ? TagColors : TypeColors,
   timer(key: string) {
     const startTime = new Date().getTime();
     let nextTime = new Date().getTime();
