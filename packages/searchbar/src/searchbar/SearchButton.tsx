@@ -12,13 +12,13 @@ import { useSearchContext } from "../context";
 
 export const SearchButton = () => {
   const { t } = useTranslation("searchbar");
-  const { isDirty, handleSearch } = useSearchContext();
+  const { query, isDirty, handleSearch } = useSearchContext();
 
   return (
     <AxButton
       color={isDirty ? "warning" : "primary"}
       variant="solid"
-      onClick={handleSearch}
+      onClick={() => handleSearch(query)}
     >
       {t(isDirty ? "label.update" : "label.refresh")}
     </AxButton>
