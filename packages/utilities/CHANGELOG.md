@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.3](https://github.com/adarshpastakia/axux/compare/v2.8.2...v2.8.3) (2023-10-18)
+
+### Bug Fixes
+
+- **useLogger:** check window ([f76ce21](https://github.com/adarshpastakia/axux/commit/f76ce21f4cdd02bd8631b14b2f099a1e8c2196fc))
+
 ## [2.8.2](https://github.com/adarshpastakia/axux/compare/v2.8.1...v2.8.2) (2023-10-16)
 
 ### Bug Fixes
