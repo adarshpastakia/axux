@@ -9,8 +9,8 @@
 import { debounce, isString, matchString } from "@axux/utilities";
 import {
   useCallback,
+  useDeferredValue,
   useEffect,
-  useMemo,
   useState,
   useTransition,
 } from "react";
@@ -44,24 +44,24 @@ export const useFilteredList = <
   matcher?: (item: T, query: Q) => boolean
 ) => {
   const [query, setQuery] = useState<Q>();
-  const [filteredList, setFilteredList] = useState(items);
+  const _items = useDeferredValue(items ?? []);
+  const [filteredList, setFilteredList] = useState<T[]>([]);
   const [isSearching, startTransition] = useTransition();
 
-  const filterItems = useMemo(
-    () =>
-      debounce(
-        (query?: Q) =>
-          startTransition(() =>
-            setFilteredList(filterList(items, query, matcher))
-          ),
-        100
-      ),
-    [items, matcher]
+  const filterItems = useCallback(
+    debounce(
+      (items: T[], query?: Q) =>
+        startTransition(() =>
+          setFilteredList(filterList(items, query, matcher))
+        ),
+      250
+    ),
+    []
   );
 
   useEffect(() => {
-    filterItems(query);
-  }, [query, items]);
+    filterItems(_items, query);
+  }, [query, _items]);
 
   const onSearch = useCallback(
     (query?: Q) => {
