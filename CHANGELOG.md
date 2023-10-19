@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.4](https://github.com/adarshpastakia/axux/compare/v2.8.3...v2.8.4) (2023-10-19)
+
+### Bug Fixes
+
+- **Datagrid:** add canExpand prop ([b09fd4b](https://github.com/adarshpastakia/axux/commit/b09fd4b391bbc4aa704e18fc609a9d29bf5b15c5))
+
 ## [2.8.3](https://github.com/adarshpastakia/axux/compare/v2.8.2...v2.8.3) (2023-10-18)
 
 ### Bug Fixes
