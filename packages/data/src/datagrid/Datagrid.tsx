@@ -41,6 +41,8 @@ export interface DatagridProps<T extends KeyValue> extends ElementProps {
   lastScroll?: number;
   onScroll?: (top: number) => void;
 
+  canExpand?: (record: T) => boolean;
+
   children?: (record: T) => ReactNode;
 }
 
