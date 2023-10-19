@@ -14,7 +14,7 @@ import { BodyCell } from "./BodyCell";
 import { useDatagridContext } from "./Context";
 
 export const BodyRow = memo(({ row, record }: KeyValue) => {
-  const { columns, isSelectable, onRowSelect, onRowExpand } =
+  const { columns, isSelectable, onRowSelect, onRowExpand, canExpand } =
     useDatagridContext();
 
   const [isExpanded, setExpanded] = useState(false);
@@ -51,7 +51,11 @@ export const BodyRow = memo(({ row, record }: KeyValue) => {
         <div className="ax-datagrid__fixStart">
           {!(onRowExpand == null) && (
             <div
-              className="ax-datagrid__body--cell cursor-pointer"
+              className={`ax-datagrid__body--cell ${
+                canExpand?.(record) !== false
+                  ? "cursor-pointer"
+                  : "opacity-30 pointer-events-none"
+              }`}
               onClick={handleClick(handleExpand, { stopPropagation: true })}
             >
               <AxIcon

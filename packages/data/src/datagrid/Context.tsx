@@ -31,6 +31,7 @@ interface ContextType {
 
   isSelectable: boolean;
   onRowSelect?: (record: KeyValue) => void;
+  canExpand?: (record: KeyValue) => boolean;
   onRowExpand?: (record: KeyValue) => ReactNode;
 
   sort?: { name: string; order: "asc" | "desc" };
@@ -52,6 +53,7 @@ export const DatagridProvider: FC<KeyValue & ElementProps & ChildrenProp> = ({
   datagridRef,
   lastScroll,
   onScroll,
+  canExpand,
   ...props
 }) => {
   const ghostRef = useRef<HTMLDivElement>(null);
@@ -131,6 +133,7 @@ export const DatagridProvider: FC<KeyValue & ElementProps & ChildrenProp> = ({
         onRowExpand,
         isSelectable,
         onRowSelect,
+        canExpand,
         sort,
         onSort,
       }}
