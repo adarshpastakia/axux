@@ -176,10 +176,10 @@ export const useRanger = (opts: RangerConfig) => {
       }
 
       if (val - left < right - val) {
-        return left;
+        return +left.toFixed(3);
       }
 
-      return right;
+      return +right.toFixed(3);
     },
     [max, min, stepSize, steps]
   );
