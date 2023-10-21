@@ -82,8 +82,7 @@ export type ParsedDate = Date | undefined;
 export interface CalendarEvent {
   icon: string;
   label: string;
-  start: string | number;
-  end: string | number;
+  dates: [start: string | number, end: string | number];
 }
 
 export interface RelativeProps extends Omit<BaseProps, "min" | "max"> {
