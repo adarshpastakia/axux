@@ -7,13 +7,13 @@
  */
 
 import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
-import { debounce, isEmpty } from "@axux/utilities";
+import { isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
   memo,
   useCallback,
+  useDeferredValue,
   useEffect,
-  useMemo,
   useState,
   type ChangeEvent,
   type FC,
@@ -46,7 +46,7 @@ export const Number: FC<NumberProps> = memo(
     labelAppend,
     isRequired,
     className,
-    value,
+    value: _value,
     placeholder,
     onChange,
     inputRef,
@@ -65,23 +65,19 @@ export const Number: FC<NumberProps> = memo(
     ...rest
   }: NumberProps) => {
     const [actualValue, setActualValue] = useState<number>("" as AnyObject);
+    const value = useDeferredValue(actualValue);
     useEffect(() => {
-      setActualValue(value ?? ("" as AnyObject));
-    }, [value]);
-
-    const debounceChange = useMemo(
-      () => debounce((q) => onChange?.(q), 100),
-      [onChange]
-    );
+      setActualValue(_value ?? ("" as AnyObject));
+    }, [_value]);
 
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         let val: AnyObject = e?.target.valueAsNumber;
         if (isNaN(val)) val = undefined;
         setActualValue(val ?? "");
-        debounceChange(val);
+        onChange?.(val);
       },
-      [debounceChange]
+      [onChange]
     );
     return (
       <FieldWrapper
@@ -98,7 +94,7 @@ export const Number: FC<NumberProps> = memo(
         isInvalid={isInvalid}
         isRequired={isRequired}
         onClear={handleChange}
-        canClear={allowClear && !isEmpty(actualValue)}
+        canClear={allowClear && !isEmpty(value)}
       >
         <input
           ref={inputRef}
@@ -108,7 +104,7 @@ export const Number: FC<NumberProps> = memo(
           aria-readonly={isReadOnly}
           aria-required={isRequired}
           aria-errormessage={error}
-          value={actualValue}
+          value={value}
           placeholder={placeholder}
           disabled={isDisabled}
           readOnly={isReadOnly}

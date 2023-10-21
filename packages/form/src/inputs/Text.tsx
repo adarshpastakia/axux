@@ -7,13 +7,13 @@
  */
 
 import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
-import { debounce, isEmpty } from "@axux/utilities";
+import { isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
   memo,
   useCallback,
+  useDeferredValue,
   useEffect,
-  useMemo,
   useState,
   type ChangeEvent,
   type FC,
@@ -34,7 +34,7 @@ export const Text: FC<TextProps> = memo(
     label,
     labelAppend,
     isRequired,
-    value,
+    value: _value,
     placeholder,
     onChange,
     inputRef,
@@ -54,21 +54,17 @@ export const Text: FC<TextProps> = memo(
     ...rest
   }: TextProps) => {
     const [actualValue, setActualValue] = useState("");
+    const value = useDeferredValue(actualValue);
     useEffect(() => {
-      setActualValue(value ?? "");
-    }, [value]);
-
-    const debounceChange = useMemo(
-      () => debounce((q) => onChange?.(q), 100),
-      [onChange]
-    );
+      setActualValue(_value ?? "");
+    }, [_value]);
 
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         setActualValue(e?.target.value ?? "");
-        debounceChange(e?.target.value ?? "");
+        onChange?.(e?.target.value ?? "");
       },
-      [debounceChange]
+      [onChange]
     );
     return (
       <FieldWrapper
@@ -85,7 +81,7 @@ export const Text: FC<TextProps> = memo(
         isRequired={isRequired}
         disabled={isDisabled}
         onClear={handleChange}
-        canClear={allowClear && !isEmpty(actualValue)}
+        canClear={allowClear && !isEmpty(value)}
       >
         <input
           ref={inputRef}
@@ -94,7 +90,7 @@ export const Text: FC<TextProps> = memo(
           aria-readonly={isReadOnly}
           aria-required={isRequired}
           aria-errormessage={error}
-          value={actualValue}
+          value={value}
           size={1}
           placeholder={placeholder}
           disabled={isDisabled}
