@@ -12,8 +12,10 @@ import {
   Children,
   cloneElement,
   useCallback,
+  useImperativeHandle,
   type FC,
   type ReactElement,
+  type RefObject,
 } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -31,9 +33,14 @@ export interface Props
   focusName?: string;
   children:
     | ReactElement<ControllerProps>
-    | Array<ReactElement<ControllerProps>>;
+    | Array<ReactElement<ControllerProps>>
+    | ((props: { index: number; name: string }) => JSX.Element);
   addLabel?: string;
   fixedList?: boolean;
+  arrayRef?: RefObject<{
+    addItem: (item: AnyObject) => void;
+    removeItem: (idx: number) => void;
+  }>;
 
   onAdd?: () => AnyObject;
 }
@@ -45,6 +52,7 @@ export const Array: FC<Props> = ({
   fixedList,
   focusName = "",
   onAdd,
+  arrayRef,
   ...rest
 }) => {
   const { t } = useTranslation("form");
@@ -58,27 +66,37 @@ export const Array: FC<Props> = ({
     control: form.control,
   });
 
-  const handleAdd = useCallback(() => {
-    append(onAdd?.());
-    setTimeout(() => {
-      form.setFocus(
-        `${name}.${fields.length}${focusName ? "." + focusName : ""}`
-      );
-    }, 50);
-  }, [name, fields, focusName, onAdd]);
+  const handleAdd = useCallback(
+    (item: AnyObject) => {
+      append(item);
+      setTimeout(() => {
+        form.setFocus(
+          `${name}.${fields.length}${focusName ? "." + focusName : ""}`
+        );
+      }, 50);
+    },
+    [name, fields, focusName, onAdd]
+  );
+
+  useImperativeHandle(arrayRef, () => ({
+    addItem: handleAdd,
+    removeItem: remove,
+  }));
 
   return (
     <div>
       <Container {...rest} isVertical>
         {fields.map((item, index) => (
           <Container key={item.id}>
-            {Children.toArray(children).map((child: AnyObject) =>
-              cloneElement(child, {
-                name: `${name}.${index}${
-                  child.props.name ? "." + (child.props.name as string) : ""
-                }`,
-              })
-            )}
+            {typeof children === "function"
+              ? children({ index, name: `${name}.${index}` })
+              : Children.toArray(children).map((child: AnyObject) =>
+                  cloneElement(child, {
+                    name: `${name}.${index}${
+                      child.props.name ? "." + (child.props.name as string) : ""
+                    }`,
+                  })
+                )}
             {!fixedList && (
               <AxButton
                 icon={Icons.iconDelete}
@@ -92,7 +110,11 @@ export const Array: FC<Props> = ({
       </Container>
       {!fixedList && onAdd && (
         <div className="flex justify-end">
-          <AxButton icon={Icons.iconAdd} onClick={handleAdd} variant="outline">
+          <AxButton
+            icon={Icons.iconAdd}
+            onClick={() => handleAdd(onAdd())}
+            variant="outline"
+          >
             {addLabel ?? t("addArray")}
           </AxButton>
         </div>
