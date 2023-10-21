@@ -19,11 +19,14 @@ export const EventCalendar: FC<Pick<RelativeProps, "events" | "onChange">> = ({
     const year = pageDate.getFullYear();
     const list = events?.[`${year}`] ?? [];
     return list
-      .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
+      .sort(
+        (a, b) =>
+          new Date(a.dates[0]).getTime() - new Date(b.dates[0]).getTime()
+      )
       .map((d) => ({
         ...d,
-        start: DateMath.toISOString(d.start)?.toString(),
-        end: DateMath.toISOString(d.end)?.toString(),
+        start: DateMath.toISOString(d.dates[0])?.toString(),
+        end: DateMath.toISOString(d.dates[1])?.toString(),
       }));
   }, [events, pageDate]);
 
@@ -57,25 +60,27 @@ export const EventCalendar: FC<Pick<RelativeProps, "events" | "onChange">> = ({
             message="No events available for selected year"
           />
         )}
-        {list.map(({ icon, label, start = "$now", end = "$now" }, idx) => (
-          <AxPopover.Dismiss key={`${idx}-${label}`}>
-            <div
-              className="flex items-center hover:bg-primary-500/20 mb-1 px-2 cursor-pointer select-none"
-              onClick={() =>
-                onChange?.(`${start}|${end}`, [
-                  DateMath.parse(start),
-                  DateMath.parse(end),
-                ])
-              }
-            >
-              {icon && <AxIcon icon={icon} size="md" />}
-              <div className="flex-auto">&nbsp;{label}&nbsp;</div>
-              <div className="text-sm text-muted">
-                {dateLabel(start)} - {dateLabel(end)}
+        {list.map(
+          ({ icon, label, dates: [start = "$now", end = "$now"] }, idx) => (
+            <AxPopover.Dismiss key={`${idx}-${label}`}>
+              <div
+                className="flex items-center hover:bg-primary-500/20 mb-1 px-2 cursor-pointer select-none"
+                onClick={() =>
+                  onChange?.(`${start}|${end}`, [
+                    DateMath.parse(start),
+                    DateMath.parse(end),
+                  ])
+                }
+              >
+                {icon && <AxIcon icon={icon} size="md" />}
+                <div className="flex-auto">&nbsp;{label}&nbsp;</div>
+                <div className="text-sm text-muted">
+                  {dateLabel(start)} - {dateLabel(end)}
+                </div>
               </div>
-            </div>
-          </AxPopover.Dismiss>
-        ))}
+            </AxPopover.Dismiss>
+          )
+        )}
       </div>
     </div>
   );
