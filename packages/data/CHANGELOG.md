@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.5](https://github.com/adarshpastakia/axux/compare/v2.8.4...v2.8.5) (2023-10-21)
+
+### Bug Fixes
+
+- **Inputs:** use deferred values ([4d0a1d7](https://github.com/adarshpastakia/axux/commit/4d0a1d76b4e80a04eef35f49df68ccf70c2e0d5e))
+
 ## [2.8.4](https://github.com/adarshpastakia/axux/compare/v2.8.3...v2.8.4) (2023-10-19)
 
 ### Bug Fixes

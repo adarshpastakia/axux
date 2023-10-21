@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.5](https://github.com/adarshpastakia/axux/compare/v2.8.4...v2.8.5) (2023-10-21)
+
+### Bug Fixes
+
+- **Array:** allow function as children ([5135e6a](https://github.com/adarshpastakia/axux/commit/5135e6ae776323d01c79b20ef8221a16aa58c13a))
+- **Inputs:** use deferred values ([4d0a1d7](https://github.com/adarshpastakia/axux/commit/4d0a1d76b4e80a04eef35f49df68ccf70c2e0d5e))
+- **Slider:** value fix to 3 decimals ([57339c6](https://github.com/adarshpastakia/axux/commit/57339c6955264735308c501f2bd442734bcbedf1))
+
 ## [2.8.4](https://github.com/adarshpastakia/axux/compare/v2.8.3...v2.8.4) (2023-10-19)
 
 **Note:** Version bump only for package @axux/form
