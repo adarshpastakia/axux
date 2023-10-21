@@ -64,10 +64,10 @@ export const useFilteredList = <
   }, [query, _items]);
 
   const onSearch = useCallback(
-    (query?: Q) => {
+    debounce((query?: Q) => {
       setQuery(query);
-    },
-    [filterItems]
+    }, 250),
+    []
   );
 
   return { onSearch, search: query, filteredList, isSearching };

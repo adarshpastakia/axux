@@ -7,13 +7,13 @@
  */
 
 import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
-import { debounce, isEmpty } from "@axux/utilities";
+import { isEmpty } from "@axux/utilities";
 import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
   memo,
   useCallback,
+  useDeferredValue,
   useEffect,
-  useMemo,
   useState,
   type ChangeEvent,
   type FC,
@@ -34,7 +34,7 @@ export const Textarea: FC<TextareaProps> = memo(
     label,
     labelAppend,
     isRequired,
-    value,
+    value: _value,
     placeholder,
     onChange,
     inputRef,
@@ -55,21 +55,17 @@ export const Textarea: FC<TextareaProps> = memo(
     ...rest
   }: TextareaProps) => {
     const [actualValue, setActualValue] = useState("");
+    const value = useDeferredValue(actualValue);
     useEffect(() => {
-      setActualValue(value ?? "");
-    }, [value]);
-
-    const debounceChange = useMemo(
-      () => debounce((q) => onChange?.(q), 100),
-      [onChange]
-    );
+      setActualValue(_value ?? "");
+    }, [_value]);
 
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLTextAreaElement>) => {
         setActualValue(e?.target.value ?? "");
-        debounceChange(e?.target.value ?? undefined);
+        onChange?.(e?.target.value ?? undefined);
       },
-      [debounceChange]
+      [onChange]
     );
     return (
       <FieldWrapper
@@ -86,7 +82,7 @@ export const Textarea: FC<TextareaProps> = memo(
         isInvalid={isInvalid}
         isRequired={isRequired}
         onClear={handleChange}
-        canClear={allowClear && !isEmpty(actualValue)}
+        canClear={allowClear && !isEmpty(value)}
       >
         <textarea
           ref={inputRef as any}
@@ -95,7 +91,7 @@ export const Textarea: FC<TextareaProps> = memo(
           aria-readonly={isReadOnly}
           aria-required={isRequired}
           aria-errormessage={error}
-          value={actualValue}
+          value={value}
           placeholder={placeholder}
           disabled={isDisabled}
           readOnly={isReadOnly}

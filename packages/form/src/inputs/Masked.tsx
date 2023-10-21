@@ -12,6 +12,7 @@ import { handleEnter } from "@axux/utilities/dist/handlers";
 import {
   memo,
   useCallback,
+  useDeferredValue,
   useEffect,
   useState,
   type ChangeEvent,
@@ -36,7 +37,7 @@ export const Masked: FC<MaskedProps> = memo(
     label,
     labelAppend,
     isRequired,
-    value,
+    value: _value,
     placeholder,
     onChange,
     inputRef,
@@ -58,9 +59,10 @@ export const Masked: FC<MaskedProps> = memo(
     ...rest
   }: MaskedProps) => {
     const [actualValue, setActualValue] = useState("");
+    const value = useDeferredValue(actualValue);
     useEffect(() => {
-      setActualValue(value ?? "");
-    }, [value]);
+      setActualValue(_value ?? "");
+    }, [_value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         let val = e?.target.value ?? "";
@@ -85,7 +87,7 @@ export const Masked: FC<MaskedProps> = memo(
         isRequired={isRequired}
         disabled={isDisabled}
         onClear={handleChange}
-        canClear={allowClear && !isEmpty(actualValue)}
+        canClear={allowClear && !isEmpty(value)}
       >
         <InputMask
           ref={inputRef}
@@ -94,7 +96,7 @@ export const Masked: FC<MaskedProps> = memo(
           aria-readonly={isReadOnly}
           aria-required={isRequired}
           aria-errormessage={error}
-          value={actualValue}
+          value={value}
           size={1}
           maskPlaceholder={maskPlaceholder}
           placeholder={placeholder}

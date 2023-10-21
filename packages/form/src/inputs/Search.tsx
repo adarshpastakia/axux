@@ -8,12 +8,11 @@
 
 import { AxButton } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
-import { debounce } from "@axux/utilities";
 import {
   memo,
   useCallback,
+  useDeferredValue,
   useEffect,
-  useMemo,
   useState,
   type FC,
 } from "react";
@@ -39,39 +38,35 @@ export const Search: FC<SearchProps> = memo(
     isSearching,
     onChange,
     onSearch,
-    value,
+    value: _value,
     defaultValue,
     ...props
   }: SearchProps) => {
     const [query, setQuery] = useState(defaultValue);
+    const value = useDeferredValue(query);
 
     useEffect(() => {
-      setQuery(value ?? "");
-    }, [value]);
-
-    const debounceChange = useMemo(
-      () => debounce((q) => onChange?.(q), 100),
-      [onChange]
-    );
+      setQuery(_value ?? "");
+    }, [_value]);
 
     const handleChange = useCallback(
       (value?: string) => {
         setQuery(value);
-        debounceChange(value);
+        onChange?.(value);
       },
-      [debounceChange]
+      [onChange]
     );
 
     const handleQuery = useCallback(() => {
-      onSearch?.(query);
-    }, [query]);
+      onSearch?.(value);
+    }, [value]);
 
     return (
       <Text
         {...props}
         allowClear
         type="search"
-        value={query}
+        value={value}
         onChange={handleChange}
         onEnterPressed={handleQuery}
       >
