@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/adarshpastakia/axux/compare/v2.8.6...v2.9.0) (2023-10-23)
+
+### Bug Fixes
+
+- **Textarea:** stop event if onEnterPressed handler passed ([77326d7](https://github.com/adarshpastakia/axux/commit/77326d76741b1395fd5d3cdce8a2214e994a756c))
+
 ## [2.8.6](https://github.com/adarshpastakia/axux/compare/v2.8.5...v2.8.6) (2023-10-23)
 
 ### Bug Fixes
