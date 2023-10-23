@@ -100,7 +100,7 @@ export const Textarea: FC<TextareaProps> = memo(
           onChange={handleChange}
           autoComplete="off"
           rows={rows}
-          onKeyDown={handleEnter(onEnterPressed)}
+          onKeyDown={handleEnter(onEnterPressed, true)}
           {...rest}
         />
         {children}
