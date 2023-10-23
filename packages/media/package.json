@@ -1,6 +1,6 @@
 {
   "name": "@axux/media",
-  "version": "2.8.5",
+  "version": "2.8.6",
   "description": "axux: Media players",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,9 +24,9 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^2.8.5",
-    "@axux/data": "^2.8.5",
-    "@axux/utilities": "^2.8.5",
+    "@axux/core": "^2.8.6",
+    "@axux/data": "^2.8.6",
+    "@axux/utilities": "^2.8.6",
     "wavesurfer.js": "^6.6.3"
   },
   "peerDependencies": {
