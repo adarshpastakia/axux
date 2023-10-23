@@ -54,10 +54,10 @@ export const Text: FC<TextProps> = memo(
     ...rest
   }: TextProps) => {
     const [actualValue, setActualValue] = useState("");
-    const value = useDeferredValue(actualValue);
+    const value = useDeferredValue(_value);
     useEffect(() => {
-      setActualValue(_value ?? "");
-    }, [_value]);
+      setActualValue(value ?? "");
+    }, [value]);
 
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +81,7 @@ export const Text: FC<TextProps> = memo(
         isRequired={isRequired}
         disabled={isDisabled}
         onClear={handleChange}
-        canClear={allowClear && !isEmpty(value)}
+        canClear={allowClear && !isEmpty(actualValue)}
       >
         <input
           ref={inputRef}
@@ -90,7 +90,7 @@ export const Text: FC<TextProps> = memo(
           aria-readonly={isReadOnly}
           aria-required={isRequired}
           aria-errormessage={error}
-          value={value}
+          value={actualValue}
           size={1}
           placeholder={placeholder}
           disabled={isDisabled}

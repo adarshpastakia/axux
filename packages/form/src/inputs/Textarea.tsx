@@ -55,10 +55,10 @@ export const Textarea: FC<TextareaProps> = memo(
     ...rest
   }: TextareaProps) => {
     const [actualValue, setActualValue] = useState("");
-    const value = useDeferredValue(actualValue);
+    const value = useDeferredValue(_value);
     useEffect(() => {
-      setActualValue(_value ?? "");
-    }, [_value]);
+      setActualValue(value ?? "");
+    }, [value]);
 
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLTextAreaElement>) => {
@@ -82,7 +82,7 @@ export const Textarea: FC<TextareaProps> = memo(
         isInvalid={isInvalid}
         isRequired={isRequired}
         onClear={handleChange}
-        canClear={allowClear && !isEmpty(value)}
+        canClear={allowClear && !isEmpty(actualValue)}
       >
         <textarea
           ref={inputRef as any}
@@ -91,7 +91,7 @@ export const Textarea: FC<TextareaProps> = memo(
           aria-readonly={isReadOnly}
           aria-required={isRequired}
           aria-errormessage={error}
-          value={value}
+          value={actualValue}
           placeholder={placeholder}
           disabled={isDisabled}
           readOnly={isReadOnly}

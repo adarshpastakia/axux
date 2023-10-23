@@ -65,10 +65,10 @@ export const Number: FC<NumberProps> = memo(
     ...rest
   }: NumberProps) => {
     const [actualValue, setActualValue] = useState<number>("" as AnyObject);
-    const value = useDeferredValue(actualValue);
+    const value = useDeferredValue(_value);
     useEffect(() => {
-      setActualValue(_value ?? ("" as AnyObject));
-    }, [_value]);
+      setActualValue(value ?? ("" as AnyObject));
+    }, [value]);
 
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +94,7 @@ export const Number: FC<NumberProps> = memo(
         isInvalid={isInvalid}
         isRequired={isRequired}
         onClear={handleChange}
-        canClear={allowClear && !isEmpty(value)}
+        canClear={allowClear && !isEmpty(actualValue)}
       >
         <input
           ref={inputRef}
@@ -104,7 +104,7 @@ export const Number: FC<NumberProps> = memo(
           aria-readonly={isReadOnly}
           aria-required={isRequired}
           aria-errormessage={error}
-          value={value}
+          value={actualValue}
           placeholder={placeholder}
           disabled={isDisabled}
           readOnly={isReadOnly}
