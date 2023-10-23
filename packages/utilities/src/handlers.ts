@@ -11,9 +11,15 @@ import { type KeyboardEvent, type MouseEvent } from "react";
 import { debounce } from "./_debounce";
 
 /** ***************** common handler for enter press *******************/
-export const handleEnter = (callback?: AnyObject) => {
+export const handleEnter = (callback?: AnyObject, preventDefault = false) => {
   return (e: KeyboardEvent) => {
-    e.key === "Enter" && debounce(() => callback?.(e), 100)();
+    if (e.key === "Enter" && callback) {
+      debounce(() => callback?.(e), 100)();
+      if (preventDefault) {
+        e.preventDefault();
+        return false;
+      }
+    }
   };
 };
 

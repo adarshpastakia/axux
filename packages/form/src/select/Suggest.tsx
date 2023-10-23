@@ -20,6 +20,7 @@ import {
   useState,
   type FC,
   type FocusEvent,
+  useDeferredValue,
 } from "react";
 import { createPortal } from "react-dom";
 import { FieldWrapper } from "../inputs/Wrapper";
@@ -65,7 +66,7 @@ export const SuggestInput: FC<SuggestProps> = ({
   inputRef,
   isInvalid,
   className,
-  value,
+  value: _value,
   // @ts-expect-error ignore
   name,
   info,
@@ -81,12 +82,13 @@ export const SuggestInput: FC<SuggestProps> = ({
   autoFocus,
   ...rest
 }) => {
-  const [actualValue, setActualValue] = useState(value);
+  const [actualValue, setActualValue] = useState("");
   const [items, setItems] = useState<Array<SuggestItem | string>>([]);
   const [queryItems, setQueryItems] = useState<Array<SuggestItem | string>>([]);
+  const value = useDeferredValue(_value);
 
   useEffect(() => {
-    setActualValue(value);
+    setActualValue(value ?? "");
   }, [value]);
   useEffect(() => {
     setItems(options);

@@ -43,11 +43,11 @@ export const Search: FC<SearchProps> = memo(
     ...props
   }: SearchProps) => {
     const [query, setQuery] = useState(defaultValue);
-    const value = useDeferredValue(query);
+    const value = useDeferredValue(_value);
 
     useEffect(() => {
-      setQuery(_value ?? "");
-    }, [_value]);
+      setQuery(value ?? "");
+    }, [value]);
 
     const handleChange = useCallback(
       (value?: string) => {
@@ -66,7 +66,7 @@ export const Search: FC<SearchProps> = memo(
         {...props}
         allowClear
         type="search"
-        value={value}
+        value={query}
         onChange={handleChange}
         onEnterPressed={handleQuery}
       >
