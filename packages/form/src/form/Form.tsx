@@ -138,7 +138,8 @@ export const AxForm = <K extends KeyValue>({
   const [, startTransition] = useTransition();
   useEffect(() => {
     const subscription = form.watch((value) => {
-      startTransition(() => onChange?.(value as K));
+      const handle = onChange;
+      handle && startTransition(() => handle?.(value as K));
     });
     return () => subscription.unsubscribe();
   }, [form.watch]);
