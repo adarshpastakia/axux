@@ -59,10 +59,10 @@ export const Masked: FC<MaskedProps> = memo(
     ...rest
   }: MaskedProps) => {
     const [actualValue, setActualValue] = useState("");
-    const value = useDeferredValue(actualValue);
+    const value = useDeferredValue(_value);
     useEffect(() => {
-      setActualValue(_value ?? "");
-    }, [_value]);
+      setActualValue(value ?? "");
+    }, [value]);
     const handleChange = useCallback(
       (e?: ChangeEvent<HTMLInputElement>) => {
         let val = e?.target.value ?? "";
@@ -96,7 +96,7 @@ export const Masked: FC<MaskedProps> = memo(
           aria-readonly={isReadOnly}
           aria-required={isRequired}
           aria-errormessage={error}
-          value={value}
+          value={actualValue}
           size={1}
           maskPlaceholder={maskPlaceholder}
           placeholder={placeholder}
