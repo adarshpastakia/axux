@@ -18,6 +18,7 @@ export const SearchButton = () => {
     <AxButton
       color={isDirty ? "warning" : "primary"}
       variant="solid"
+      className="z-20"
       onClick={() => handleSearch(query)}
     >
       {t(isDirty ? "label.update" : "label.refresh")}
