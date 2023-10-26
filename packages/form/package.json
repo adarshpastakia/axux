@@ -1,6 +1,6 @@
 {
   "name": "@axux/form",
-  "version": "2.9.2",
+  "version": "2.9.3",
   "description": "axux: Form components",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,8 +24,8 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^2.9.2",
-    "@axux/utilities": "^2.9.2",
+    "@axux/core": "^2.9.3",
+    "@axux/utilities": "^2.9.3",
     "@headlessui/react": "^1.7.7",
     "@hookform/resolvers": "^3.0.1",
     "react-color": "^2.19.3",
