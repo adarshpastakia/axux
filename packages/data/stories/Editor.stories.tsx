@@ -29,5 +29,12 @@ export const Example: Story = {
   ),
   args: {
     value: json,
+    suggestions: [
+      {
+        label: "Version",
+        text: "VERSION",
+        description: "Test handlebar variable",
+      },
+    ],
   },
 };
