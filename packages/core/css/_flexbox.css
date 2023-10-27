@@ -25,7 +25,7 @@
   }
 
   .ax-col {
-    @apply flex-initial;
+    @apply flex-auto;
     margin: calc(0.5 * var(--gutter));
   }
 }
