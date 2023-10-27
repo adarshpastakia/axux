@@ -22,12 +22,21 @@ import { EditHead } from "./EditHead";
 interface Props extends ChildrenProp {
   item: IItem;
   expanded?: boolean;
+  canUnselect?: false;
   style?: CSSProperties;
   itemRef?: MutableRefObject<HTMLDivElement | null>;
 }
 
 export const Item: FC<Props> = memo(
-  ({ item, children, style, itemRef, expanded = false, ...rest }: Props) => {
+  ({
+    item,
+    children,
+    style,
+    itemRef,
+    canUnselect,
+    expanded = false,
+    ...rest
+  }: Props) => {
     const [hover, setHover] = useState(false);
     const {
       isEditing,
@@ -48,11 +57,13 @@ export const Item: FC<Props> = memo(
     const onClick = useCallback(
       (e: MouseEvent) => {
         if (isEditing) {
-          editConfig(selected?.id === id ? undefined : id);
+          editConfig(
+            selected?.id === id && canUnselect !== false ? undefined : id
+          );
           e.stopPropagation();
         }
       },
-      [isEditing, editConfig, selected, id]
+      [isEditing, editConfig, selected, id, canUnselect]
     );
 
     const onMouseOver = useCallback(

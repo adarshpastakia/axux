@@ -27,6 +27,13 @@ enum EnumAlign {
   JUSTIFY = "justify",
 }
 
+enum EnumHeight {
+  AUTO = "auto",
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+}
+
 export type AspectType = "0" | "1 / 1" | "4 / 3" | "16 / 9";
 
 export type SpanType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
@@ -57,7 +64,7 @@ export interface IHeadingConfig extends IItem {
 export interface IParagraphConfig extends IItem {
   type: EnumTypes.PARAGRAPH;
   text: string;
-  align?: EnumAlign;
+  height?: EnumHeight;
 }
 
 export interface IImageConfig extends IItem {

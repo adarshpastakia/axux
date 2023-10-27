@@ -59,7 +59,17 @@ const config: PageConfig = [
   {
     id: "para-1",
     colSpan: 9,
-    text: "# Sample header\n- List item\n- List item\n- List item",
+    text: `
+# Sample header
+
+* List item
+* List item
+* List item
+
+| fgdfgfddsfg | dfgdsfgdfg | sdfgsdfgdsfg | sdfgdfsgdfgdfgdsfgsdfg |
+| ----------- | ---------- | ------------ | ---------------------- |
+| sdfg        | sdfg       |              |                        |
+`,
     type: EnumTypes.PARAGRAPH,
   },
   {
