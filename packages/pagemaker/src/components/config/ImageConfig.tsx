@@ -25,6 +25,16 @@ export const ImageConfig = memo(() => {
         rows={5}
         onChange={(value) => updateField("src", value)}
       />
+      <AxField.Options
+        name="fit"
+        className="align-options"
+        label={t("config.fit")}
+        value={selected.fit ?? "contain"}
+        onChange={(value) => updateField("fit", value)}
+      >
+        <AxField.Radio value="contain" label="Contain" />
+        <AxField.Radio value="cover" label="Cover" />
+      </AxField.Options>
     </div>
   ) : null;
 });

@@ -26,7 +26,7 @@
   }
 
   .page-maker__grid {
-    @apply grid gap-2 min-h-full grid-flow-row;
+    @apply grid gap-4 min-h-full grid-flow-row;
     grid-template-columns: repeat(12, 1fr);
     align-content: start;
 
@@ -114,6 +114,10 @@
       grid-template-rows: 1fr;
     }
 
+    &[data-type="paragraph"] > .paragraph-text {
+      @apply max-h-full overflow-auto;
+    }
+
     &[data-type="heading"] {
       line-height: 1.25;
 
@@ -122,11 +126,10 @@
 
         & > i {
           margin-inline-end: 8px;
-          line-height: 1;
         }
 
         & > div {
-          @apply flex-1 truncate;
+          @apply flex-1;
 
           &:focus {
             outline: none;
@@ -177,7 +180,7 @@
     }
 
     & .page-maker__grid {
-      @apply select-none;
+      @apply select-none gap-2;
     }
 
     & .page-maker__item {
@@ -212,4 +215,148 @@
   .page-maker__emptyCol {
     @apply place-self-center text-center text-muted;
   }
+
+  .page-maker__item .mdx-editor {
+    @apply ax-section max-h-full;
+
+    & > div[role="toolbar"] {
+      @apply grid-area-[head] rounded-none px-2 py-1;
+
+      & button {
+        @apply cursor-pointer;
+      }
+    }
+    & > div[role="toolbar"] + div {
+      @apply ax-section;
+
+      & > div {
+        @apply grid-area-[content] overflow-auto;
+      }
+    }
+
+    & div[class^="_nestedEditor_"] {
+      @apply bg-bw-50 dark:bg-bw-950;
+    }
+  }
+
+  .ax-notification__container ~ .mdx-editor {
+    & div[data-radix-popper-content-wrapper] {
+      @apply z-50;
+    }
+  }
+
+  .admonition {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border-inline-start: 4px solid transparent;
+
+    & p:last-child {
+      margin: 0 !important;
+    }
+    & .admonition-title {
+      display: none;
+    }
+
+    &.admonition-note {
+      @apply bg-bw-100 border-bw-300 dark:bg-bw-950 dark:border-bw-700;
+    }
+    &.admonition-tip {
+      @apply bg-cyan-100 border-cyan-300 dark:bg-cyan-950 dark:border-cyan-700;
+    }
+    &.admonition-info {
+      @apply bg-sky-100 border-sky-300 dark:bg-sky-950 dark:border-sky-700;
+    }
+    &.admonition-caution {
+      @apply bg-amber-100 border-amber-300 dark:bg-amber-950 dark:border-amber-700;
+    }
+    &.admonition-danger {
+      @apply bg-red-100 border-red-300 dark:bg-red-950 dark:border-red-700;
+    }
+  }
+}
+
+.light .mdx-editor {
+  --accentBase: theme(colors.primary.50);
+  --accentBgSubtle: theme(colors.primary.100);
+  --accentBg: theme(colors.primary.200);
+  --accentBgHover: theme(colors.primary.300);
+  --accentBgActive: theme(colors.primary.400);
+  --accentLine: theme(colors.primary.500);
+  --accentBorder: theme(colors.primary.600);
+  --accentBorderHover: theme(colors.primary.700);
+  --accentSolid: theme(colors.primary.800);
+  --accentSolidHover: theme(colors.primary.700);
+  --accentText: theme(colors.primary.950);
+  --accentTextContrast: theme(colors.primary.950);
+
+  --baseBase: theme(colors.white);
+  --baseBgSubtle: theme(colors.bw.50);
+  --baseBg: theme(colors.bw.50);
+  --baseBgHover: theme(colors.bw.100);
+  --baseBgActive: theme(colors.bw.300);
+  --baseLine: theme(colors.bw.400);
+  --baseBorder: theme(colors.bw.200);
+  --baseBorderHover: theme(colors.bw.600);
+  --baseSolid: theme(colors.bw.700);
+  --baseSolidHover: theme(colors.bw.800);
+  --baseText: theme(colors.bw.900);
+  --baseTextContrast: theme(colors.bw.950);
+
+  --admonitionTipBg: theme(colors.cyan.100);
+  --admonitionTipBorder: theme(colors.cyan.300);
+
+  --admonitionInfoBg: theme(colors.sky.100);
+  --admonitionInfoBorder: theme(colors.sky.300);
+
+  --admonitionCautionBg: theme(colors.amber.100);
+  --admonitionCautionBorder: theme(colors.amber.300);
+
+  --admonitionDangerBg: theme(colors.red.100);
+  --admonitionDangerBorder: theme(colors.red.300);
+
+  --admonitionNoteBg: theme(colors.slate.100);
+  --admonitionNoteBorder: theme(colors.slate.300);
+}
+
+.dark .mdx-editor {
+  --accentBase: theme(colors.primary.950);
+  --accentBgSubtle: theme(colors.primary.900);
+  --accentBg: theme(colors.primary.800);
+  --accentBgHover: theme(colors.primary.700);
+  --accentBgActive: theme(colors.primary.600);
+  --accentLine: theme(colors.primary.500);
+  --accentBorder: theme(colors.primary.400);
+  --accentBorderHover: theme(colors.primary.300);
+  --accentSolid: theme(colors.primary.200);
+  --accentSolidHover: theme(colors.primary.100);
+  --accentText: theme(colors.primary.50);
+  --accentTextContrast: theme(colors.primary.50);
+
+  --baseBase: theme(colors.bw.950);
+  --baseBgSubtle: theme(colors.bw.900);
+  --baseBg: theme(colors.bw.800);
+  --baseBgHover: theme(colors.bw.700);
+  --baseBgActive: theme(colors.bw.600);
+  --baseLine: theme(colors.bw.500);
+  --baseBorder: theme(colors.bw.700);
+  --baseBorderHover: theme(colors.bw.300);
+  --baseSolid: theme(colors.bw.200);
+  --baseSolidHover: theme(colors.bw.100);
+  --baseText: theme(colors.bw.50);
+  --baseTextContrast: theme(colors.white);
+
+  --admonitionTipBg: theme(colors.cyan.950);
+  --admonitionTipBorder: theme(colors.cyan.700);
+
+  --admonitionInfoBg: theme(colors.sky.950);
+  --admonitionInfoBorder: theme(colors.sky.700);
+
+  --admonitionCautionBg: theme(colors.amber.950);
+  --admonitionCautionBorder: theme(colors.amber.700);
+
+  --admonitionDangerBg: theme(colors.red.950);
+  --admonitionDangerBorder: theme(colors.red.700);
+
+  --admonitionNoteBg: theme(colors.slate.950);
+  --admonitionNoteBorder: theme(colors.slate.700);
 }
