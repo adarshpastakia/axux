@@ -24,8 +24,9 @@ export const Tile: FC<ITileConfig> = memo((item) => {
   const style = useMemo(
     () => ({
       color: getValue(item.color, "inherit"),
+      backgroundColor: getValue(item.bg, undefined),
     }),
-    [item.color]
+    [item.color, item.bg]
   );
 
   const widget = useMemo(
@@ -36,9 +37,9 @@ export const Tile: FC<ITileConfig> = memo((item) => {
   return (
     <Item item={item} style={{ aspectRatio: item.aspect }}>
       <AxPanel isExpandable={!isEditing && item.expandable}>
-        <AxHeader className="page-maker__tileHead ax-header" {...{ style }}>
+        <AxHeader className="page-maker__tileHead ax-header py-1" {...{ style }}>
           {item.icon && <AxIcon icon={item.icon} />}
-          <AxTitle>{item.title}</AxTitle>
+          <AxTitle className="font-medium">{item.title}</AxTitle>
           {item.info && (
             <AxTooltip
               content={<pre dangerouslySetInnerHTML={{ __html: item.info }} />}
@@ -50,7 +51,8 @@ export const Tile: FC<ITileConfig> = memo((item) => {
 
           {isEditing && (
             <AxButton
-              variant="link"
+              variant="outline"
+              className="!text-xs"
               icon={iconPencil}
               onClick={() => editWidget(item.widgetId)}
             />
