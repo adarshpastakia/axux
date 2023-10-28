@@ -19,6 +19,33 @@ export const TileConfig = memo(() => {
 
   return selected ? (
     <div className="page-maker__aside--form">
+      <AxField.Text
+        label={t("config.title")}
+        value={selected.title}
+        onChange={(value) => updateField("title", value)}
+      />
+      <AxField.Color
+        showInput
+        allowClear
+        label={t("config.headBg")}
+        value={selected.bg}
+        defaultColor="#00000000"
+        onChange={(c) => updateField("bg", c)}
+      />
+      <AxField.Color
+        showInput
+        allowClear
+        label={t("config.color")}
+        value={selected.color}
+        onChange={(c) => updateField("color", c)}
+      />
+      <AxField.Text
+        label={t("config.icon")}
+        value={selected.icon}
+        onChange={(value) => updateField("icon", value)}
+      >
+        <AxField.Addon icon={selected.icon} />
+      </AxField.Text>
       <AxField.Textarea
         label={t("config.info")}
         value={selected.info}

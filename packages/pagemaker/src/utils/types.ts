@@ -104,6 +104,7 @@ export interface ITileConfig extends IItem {
   type: EnumTypes.TILE;
   title?: string;
   info?: string;
+  bg?: string;
   color?: string;
   icon?: string;
   bordered?: boolean;
