@@ -75,7 +75,7 @@
 /******************* header *******************/
 @layer components {
   .ax-header {
-    @apply flex grid-area-[head] items-center border-b bg-base;
+    @apply flex grid-area-[head] items-center bg-base;
 
     & > .ax-title {
       @apply select-none px-2 truncate;

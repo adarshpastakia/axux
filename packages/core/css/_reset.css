@@ -42,7 +42,7 @@
     @apply bg-bw-50 text-bw-900;
   }
   .dark {
-    @apply bg-bw-800 text-bw-50;
+    @apply bg-bw-900 text-bw-50;
   }
 
   body {

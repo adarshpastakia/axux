@@ -122,7 +122,7 @@ export const Example: Story = {
               </AxFooter>
             </AxAside>
           )}
-          <AxFooter className="text-xs bg-bw-500/50 px-4">
+          <AxFooter className="text-xs bg-bw-500/20 px-4">
             <span>Copyright © 2023</span>
           </AxFooter>
           <AxSection>
