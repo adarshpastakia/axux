@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import json from "../package.json";
-import { AxEditor } from "../src";
+import { AxMonacoEditor } from "../src";
 
 import { loader } from "@monaco-editor/react";
 import * as monaco from "monaco-editor";
 
 loader.config({ monaco });
-const meta: Meta<typeof AxEditor> = {
-  component: AxEditor,
-  title: "@data/Editor",
+const meta: Meta<typeof AxMonacoEditor> = {
+  component: AxMonacoEditor,
+  title: "@editors/Monaco Editor",
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
@@ -17,13 +17,13 @@ const meta: Meta<typeof AxEditor> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof AxEditor>;
+type Story = StoryObj<typeof AxMonacoEditor>;
 
 export const Example: Story = {
   render: (args) => (
     <div className="h-full min-h-[600px] grid overflow-hidden">
       <div className="w-full h-full ax-section grid-area-[unset]">
-        <AxEditor {...args} />
+        <AxMonacoEditor {...args} />
       </div>
     </div>
   ),

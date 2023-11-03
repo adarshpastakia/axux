@@ -28,14 +28,14 @@ import {
 import { Tools } from "./Tools";
 import { useSuggestions, type SuggestionItem } from "./suggestionHook";
 
-export interface EditorRef {
+export interface MonacoEditorRef {
   validate: () => boolean;
   getValue: () => string | undefined;
 }
 
 /** @internal */
 export interface EditorProps extends ElementProps {
-  editorRef?: Ref<EditorRef>;
+  editorRef?: Ref<MonacoEditorRef>;
   /**
    * code string
    */
@@ -64,7 +64,7 @@ export interface EditorProps extends ElementProps {
   suggestions?: SuggestionItem[];
 }
 
-export const AxEditor: FC<EditorProps> = ({
+export const AxMonacoEditor: FC<EditorProps> = ({
   editorRef: ref,
   value,
   hideToolbar,

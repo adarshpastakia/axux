@@ -49,8 +49,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/react-virtualized": "^9.21.21",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
-    "@types/react-window": "^1.8.5",
-    "monaco-editor": "^0.37.1"
+    "@types/react-window": "^1.8.5"
   },
   "engines": {
     "node": ">=18",
