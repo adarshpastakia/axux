@@ -177,7 +177,7 @@
   }
 
   .progress-bar {
-    @apply block w-3/4 h-[1em] mx-auto relative rounded bg-bw-100 dark:bg-bw-800 overflow-hidden whitespace-nowrap;
+    @apply block w-3/4 h-[1em] mx-auto relative rounded bg-bw-200 dark:bg-bw-700 overflow-hidden whitespace-nowrap;
 
     & > span {
       @apply inline-block z-10 text-bw-950 dark:text-bw-0 w-auto align-text-top sticky end-0;

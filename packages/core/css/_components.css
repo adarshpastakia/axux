@@ -27,7 +27,7 @@
 /******************* content *******************/
 @layer components {
   .ax-content {
-    @apply overflow-auto grid-area-[content] p-4;
+    @apply overflow-auto bg-component grid-area-[content] p-4;
 
     &[data-padding="none"] {
       @apply p-0;

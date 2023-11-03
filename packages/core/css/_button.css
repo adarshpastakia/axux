@@ -17,7 +17,7 @@
 
     & .ax-button__inner {
       @apply flex items-center justify-center py-[0.25em] px-[1em] gap-1 z-10 transition-colors font-medium
-        shadow shadow-bw-400 dark:shadow-black active:shadow-inner active:shadow-bw-500 rounded
+        shadow shadow-bw-400 dark:shadow-bw-700 active:shadow-inner active:shadow-bw-500 rounded
         focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 w-full h-full;
       min-height: 2em;
       min-width: 2em;
@@ -307,7 +307,7 @@
   }
   .dark .ax-button {
     & .ax-button__inner {
-      @apply bg-bw-950 text-primary-300 hover:bg-primary-800 active:bg-primary-900 focus-visible:outline-primary-500;
+      @apply bg-bw-900 text-primary-300 hover:bg-primary-800 active:bg-primary-900 focus-visible:outline-primary-500;
     }
     &[data-type="link"] .ax-button__inner {
       @apply shadow-none bg-transparent hover:bg-bw-800 active:bg-bw-900;

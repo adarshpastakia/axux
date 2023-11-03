@@ -11,7 +11,7 @@
     @apply inline-flex relative overflow-hidden text-sm px-1 py-px m-0.5 text-center align-middle select-none items-center
         before:absolute before:rounded before:inset-0 before:opacity-10 before:bg-current before:z-[0]
         after:absolute after:rounded after:inset-0 after:opacity-30 after:border after:border-current after:z-[1]
-        text-bw-600 dark:text-bw-300;
+        text-bw-600 dark:text-bw-200;
 
     & > label {
       @apply px-1 inline-block z-10;
@@ -38,7 +38,7 @@
     }
 
     &[data-fill="true"] {
-      @apply before:opacity-75 after:opacity-100;
+      @apply before:opacity-75 after:opacity-100 dark:text-bw-500;
 
       & > .ax-icon,
       & > label,

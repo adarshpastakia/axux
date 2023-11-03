@@ -42,7 +42,7 @@
     @apply bg-bw-50 text-bw-900;
   }
   .dark {
-    @apply bg-bw-900 text-bw-50;
+    @apply bg-bw-800 text-bw-50;
   }
 
   body {
@@ -69,7 +69,7 @@
   *,
   :after,
   :before {
-    @apply border-bw-100 dark:border-bw-800 ring-offset-bw-50 dark:ring-offset-bw-900 print:border-bw-200 outline-0;
+    @apply border-bw-500/30 ring-offset-bw-50 dark:ring-offset-bw-900 print:border-bw-200 outline-0;
   }
 }
 
