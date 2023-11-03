@@ -6,24 +6,20 @@
  * @license   : MIT
  */
 
-import {
-  AxContent,
-  useApplicationContext,
-  useResizeObserver,
-} from "@axux/core";
+import { AxContent, useIsDark, useResizeObserver } from "@axux/core";
 import { type SizeObject } from "@axux/core/dist/types";
 import * as echarts from "echarts";
 import { type EChartOption, type EChartsType } from "echarts";
 import "echarts-wordcloud";
 import {
   Fragment,
-  type ReactElement,
-  type RefObject,
   useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
   useState,
+  type ReactElement,
+  type RefObject,
 } from "react";
 import { registerThemes } from "../theme";
 import { type Theme } from "../types";
@@ -85,7 +81,7 @@ export const ChartContainer = ({
   onResize?: (size: { width: number; height: number }) => void;
 }) => {
   const [chartRef, setChartRef] = useState<EChartsType>();
-  const { currentTheme } = useApplicationContext();
+  const isDark = useIsDark();
 
   const handleResize = useCallback(
     (size: SizeObject) => {
@@ -103,8 +99,8 @@ export const ChartContainer = ({
   );
 
   const chartTheme = useMemo(
-    () => (currentTheme === "dark" ? `${theme}_dark` : theme),
-    [theme, currentTheme]
+    () => (isDark ? `${theme}_dark` : theme),
+    [theme, isDark]
   );
 
   useEffect(() => {
