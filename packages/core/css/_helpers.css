@@ -46,7 +46,7 @@
   }
   /* Base Colors */
   .bg-base {
-    @apply bg-bw-50 dark:bg-bw-800 ring-offset-bw-50 dark:ring-offset-bw-900;
+    @apply bg-bw-50 dark:bg-bw-950 ring-offset-bw-50 dark:ring-offset-bw-900;
   }
   .bg-component {
     @apply bg-bw-0 dark:bg-bw-900 ring-offset-bw-0 dark:ring-offset-bw-950;
