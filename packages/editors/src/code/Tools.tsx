@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 export const Tools: FC<{
   editor?: AnyObject;
 }> = ({ editor }) => {
-  const { t } = useTranslation("data");
+  const { t } = useTranslation("editors");
 
   const foldAll = useCallback(() => {
     if (editor) {

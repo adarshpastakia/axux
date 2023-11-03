@@ -6,7 +6,6 @@
  * @license   : MIT
  */
 
-@import "./_editor.css";
 @import "./_virtual.css";
 @import "./_json.css";
 @import "./_tree.css";

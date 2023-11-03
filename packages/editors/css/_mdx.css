@@ -1,0 +1,104 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2023
+ * @license   : MIT
+ */
+
+@layer components {
+  .mdx-editor {
+    @apply ax-section max-h-full;
+
+    &.light-theme {
+      --blue1: theme(colors.primary.50);
+      --blue2: theme(colors.primary.100);
+      --blue3: theme(colors.primary.200);
+      --blue4: theme(colors.primary.300);
+      --blue5: theme(colors.primary.400);
+      --blue6: theme(colors.primary.500);
+      --blue7: theme(colors.primary.600);
+      --blue8: theme(colors.primary.700);
+      --blue9: theme(colors.primary.800);
+      --blue10: theme(colors.primary.900);
+      --blue11: theme(colors.primary.950);
+      --blue12: theme(colors.primary.950);
+
+      --admonitionTipBg: theme(colors.green.100);
+      --admonitionTipBorder: theme(colors.green.300);
+
+      --admonitionInfoBg: theme(colors.sky.100);
+      --admonitionInfoBorder: theme(colors.sky.300);
+
+      --admonitionCautionBg: theme(colors.amber.100);
+      --admonitionCautionBorder: theme(colors.amber.300);
+
+      --admonitionDangerBg: theme(colors.red.100);
+      --admonitionDangerBorder: theme(colors.red.300);
+
+      --admonitionNoteBg: theme(colors.slate.100);
+      --admonitionNoteBorder: theme(colors.slate.300);
+    }
+
+    &.dark-theme {
+      --blue1: theme(colors.primary.950);
+      --blue2: theme(colors.primary.950);
+      --blue3: theme(colors.primary.900);
+      --blue4: theme(colors.primary.800);
+      --blue5: theme(colors.primary.700);
+      --blue6: theme(colors.primary.600);
+      --blue7: theme(colors.primary.500);
+      --blue8: theme(colors.primary.400);
+      --blue9: theme(colors.primary.300);
+      --blue10: theme(colors.primary.200);
+      --blue11: theme(colors.primary.100);
+      --blue12: theme(colors.primary.50);
+
+      --admonitionTipBg: theme(colors.green.950);
+      --admonitionTipBorder: theme(colors.green.700);
+
+      --admonitionInfoBg: theme(colors.sky.950);
+      --admonitionInfoBorder: theme(colors.sky.700);
+
+      --admonitionCautionBg: theme(colors.amber.950);
+      --admonitionCautionBorder: theme(colors.amber.700);
+
+      --admonitionDangerBg: theme(colors.red.950);
+      --admonitionDangerBorder: theme(colors.red.700);
+
+      --admonitionNoteBg: theme(colors.slate.950);
+      --admonitionNoteBorder: theme(colors.slate.700);
+    }
+
+    & > div[role="toolbar"] {
+      @apply grid-area-[head] rounded-none px-2 py-1 bg-bw-100/50 dark:bg-bw-900;
+
+      & > div:first-child {
+        @apply flex-1 items-center;
+      }
+
+      & button {
+        @apply cursor-pointer;
+      }
+    }
+    & > div[role="toolbar"] + div {
+      @apply ax-section;
+
+      & > div {
+        @apply grid-area-[content] overflow-auto dark:bg-neutral-900;
+      }
+    }
+
+    & div[class*="_nestedEditor_"] {
+      @apply bg-bw-50 dark:bg-bw-950;
+    }
+
+    div[class*="_sandpackWrapper_"] {
+      margin: 1.5rem 0;
+    }
+  }
+
+  div[data-radix-popper-content-wrapper] {
+    @apply z-50;
+  }
+}
