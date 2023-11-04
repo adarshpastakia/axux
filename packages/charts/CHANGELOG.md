@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.4](https://github.com/adarshpastakia/axux/compare/v2.9.3...v2.9.4) (2023-11-04)
+
+### Bug Fixes
+
+- chart theme toggle ([95161a0](https://github.com/adarshpastakia/axux/commit/95161a01e77ade7b614552673fbac91e7ff7b091))
+
 ## [2.9.3](https://github.com/adarshpastakia/axux/compare/v2.9.2...v2.9.3) (2023-10-26)
 
 **Note:** Version bump only for package @axux/charts
