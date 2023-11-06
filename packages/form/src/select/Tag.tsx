@@ -206,7 +206,7 @@ export const TagInput = <T extends AnyObject>({
             wrapperRef={setReferenceElement as AnyObject}
             canClear={allowClear && !isEmpty(actualValue)}
           >
-            <div className="flex flex-wrap flex-auto items-center order-3">
+            <div className="flex flex-wrap flex-auto items-center order-3 line-clamp-2 overflow-auto">
               {actualValue.map((option, i) => (
                 <AxTag
                   key={i}

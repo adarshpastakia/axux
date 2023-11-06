@@ -11,7 +11,7 @@
     @apply z-50;
   }
   .popover__container {
-    @apply relative overflow-hidden rounded shadow-2xl dark:shadow-black ring-1 ring-bw-500/20 z-0 bg-base;
+    @apply relative overflow-hidden rounded shadow-2xl dark:shadow-black ring-1 ring-bw-500/20 z-0 bg-component;
 
     & .ax-panel {
       @apply border-none;

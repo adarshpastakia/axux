@@ -8,7 +8,7 @@
 
 @layer components {
   .ax-media {
-    @apply grid-area-[content] grid relative overflow-hidden select-none bg-slate-100 dark:bg-slate-800;
+    @apply grid-area-[content] grid relative overflow-hidden select-none bg-bw-50 dark:bg-bw-950/60;
     grid-template-rows: 1fr auto auto;
     grid-template-columns: 1fr;
 
@@ -62,7 +62,7 @@
     }
 
     & > .toolbar {
-      @apply relative flex bg-slate-800 backdrop-blur px-2 py-1 text-white justify-center items-center;
+      @apply relative flex bg-black backdrop-blur px-2 py-1 text-white justify-center items-center;
 
       & > label {
         @apply px-2 text-xs;
@@ -155,7 +155,7 @@
 /******************* images *******************/
 @layer components {
   .ax-image__scroller {
-    @apply overflow-auto grid place-items-center p-[8px] bg-neutral-900;
+    @apply overflow-auto grid place-items-center p-[8px] bg-neutral-800;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
 
@@ -241,7 +241,7 @@
 /******************* video *******************/
 @layer components {
   .ax-video__wrapper {
-    @apply bg-neutral-900;
+    @apply bg-neutral-800;
   }
   .ax-video__container {
     @apply absolute inset-0 overflow-hidden grid grid-cols-1 grid-rows-1 place-items-center m-1;
@@ -272,14 +272,14 @@
   }
 
   .ax-video__scenes {
-    @apply outline-none relative flex flex-col bg-bw-950;
+    @apply outline-none relative flex flex-col bg-neutral-800;
 
     & > .ax-icon {
       @apply bg-bw-900 text-white rounded-t-full mx-auto self-center px-4 text-lg hover:bg-bw-700 cursor-pointer;
     }
 
     & > .ax-virtual__container {
-      @apply bg-bw-800;
+      @apply bg-bw-900;
     }
   }
 
@@ -325,7 +325,7 @@
     }
   }
   .ax-audio__timeline {
-    @apply bg-bw-800 pb-1;
+    @apply bg-bw-950 pb-1;
   }
 
   .ax-audio__equalizers {
