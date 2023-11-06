@@ -87,7 +87,7 @@ export const Example: Story = {
     return (
       <div className="min-h-[32rem] relative">
         <AxViewport {...args}>
-          <AxHeader className="px-2">
+          <AxHeader className="px-2 bg-component">
             {!miniMenu && (
               <MenuFlyout menu={Menu} onToggle={() => setMiniMenu(true)} />
             )}

@@ -98,7 +98,7 @@
         0 0 0 1px theme(colors.bw.400/0.3);
     }
     &[data-disabled="true"] {
-      @apply pointer-events-none before:absolute before:inset-0 before:pointer-events-auto before:cursor-not-allowed before:bg-bw-500/50 before:rounded-[inherit];
+      @apply pointer-events-none before:absolute before:inset-0 before:pointer-events-auto before:cursor-not-allowed before:bg-bw-300/50 before:dark:bg-bw-800/50 before:rounded-[inherit];
     }
     &[data-invalid="true"] {
       @apply bg-danger-200/30 dark:bg-danger-500/30 dark:bg-opacity-20 after:bg-danger-500;

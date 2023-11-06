@@ -7,7 +7,7 @@
  */
 
 export const LightThemeBase = {
-  backgroundColor: "#FCFDFD",
+  backgroundColor: "#fdFfFe",
   textStyle: {},
   title: {
     textStyle: {

@@ -51,6 +51,9 @@
   .bg-component {
     @apply bg-bw-0 dark:bg-bw-950 ring-offset-bw-0 dark:ring-offset-bw-950;
   }
+  .bg-chrome {
+    @apply bg-white dark:bg-bw-1000 ring-offset-bw-0 dark:ring-offset-bw-950;
+  }
   .bg-primary {
     @apply bg-primary-300 dark:bg-primary-700;
   }

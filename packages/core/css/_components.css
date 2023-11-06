@@ -121,7 +121,7 @@
 /******************* card *******************/
 @layer components {
   .ax-card {
-    @apply m-1 block relative rounded bg-component;
+    @apply m-1 block relative rounded bg-white dark:bg-black;
 
     &:not([data-plain="true"]) {
       @apply border shadow-sm;

@@ -7,7 +7,7 @@
  */
 
 export const DarkThemeBase = {
-  backgroundColor: "#172130",
+  backgroundColor: "#101211",
   textStyle: {},
   title: {
     textStyle: {
