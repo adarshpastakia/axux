@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AxDrawCanvas } from "../src";
-import audioSrc from "/assets/sample.mp3";
+import snapshot from "./snapshot.json";
 
 const meta: Meta<typeof AxDrawCanvas> = {
   component: AxDrawCanvas,
@@ -8,7 +8,7 @@ const meta: Meta<typeof AxDrawCanvas> = {
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
-    controls: { exclude: "value" },
+    controls: { exclude: "snapshot" },
   },
 };
 
@@ -24,38 +24,7 @@ export const Example: Story = {
     </div>
   ),
   args: {
-    shapes: [
-      {
-        type: "image-card",
-        x: 666,
-        y: 144,
-        props: {
-          src: "https://picsum.photos/1920/1080?",
-          fileSize: 123456,
-          fileName: "Image",
-        },
-      },
-      {
-        type: "video-card",
-        x: 256,
-        y: 72,
-        props: {
-          poster: "https://picsum.photos/1920/1080?",
-          src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-          fileSize: 123456,
-          fileName: "BigBuckBunny",
-        },
-      },
-      {
-        type: "audio-card",
-        x: 666,
-        y: 72,
-        props: {
-          src: audioSrc,
-          fileSize: 123456,
-          fileName: "Sample",
-        },
-      },
-    ],
+    snapshot,
+    assetsPath: "/@tldraw",
   },
 };

@@ -13,6 +13,7 @@ import {
   ShapeUtil,
   TLBaseShape,
 } from "@tldraw/tldraw";
+import { useRef, useEffect } from "react";
 
 type AudioShape = TLBaseShape<
   "audio-card",
@@ -45,6 +46,20 @@ export class AudioShapeUtil extends ShapeUtil<AudioShape> {
   }
 
   component(shape: AudioShape) {
+    const audioRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+      const handler = () => {
+        audioRef.current
+          ?.closest(".tl-container")
+          ?.querySelectorAll<HTMLMediaElement>("video,audio")
+          .forEach((el) => {
+            if (el !== audioRef.current) el.pause();
+          });
+      };
+      audioRef.current?.addEventListener("play", handler);
+    }, []);
+
     return (
       <HTMLContainer
         id={shape.id}
@@ -52,6 +67,7 @@ export class AudioShapeUtil extends ShapeUtil<AudioShape> {
       >
         <audio
           controls
+          ref={audioRef}
           src={shape.props.src}
           className="object-contain flex-1 w-full pointer-events-auto overflow-hidden"
         />

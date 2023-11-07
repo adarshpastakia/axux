@@ -1,3 +1,11 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2023
+ * @license   : MIT
+ */
+
 import { Format } from "@axux/utilities";
 import {
   HTMLContainer,
@@ -5,8 +13,8 @@ import {
   ShapeUtil,
   TLBaseShape,
   TLOnResizeHandler,
-  TLShapeUtilFlag,
 } from "@tldraw/tldraw";
+import { useEffect, useRef } from "react";
 
 type VideoShape = TLBaseShape<
   "video-card",
@@ -52,10 +60,25 @@ export class VideoShapeUtil extends ShapeUtil<VideoShape> {
   }
 
   component(shape: VideoShape) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+      const handler = () => {
+        videoRef.current
+          ?.closest(".tl-container")
+          ?.querySelectorAll<HTMLMediaElement>("video,audio")
+          .forEach((el) => {
+            if (el !== videoRef.current) el.pause();
+          });
+      };
+      videoRef.current?.addEventListener("play", handler);
+    }, []);
+
     return (
       <HTMLContainer className="bg-zinc-900 relative p-1 flex flex-col">
         <video
           controls
+          ref={videoRef}
           src={shape.props.src}
           poster={shape.props.poster}
           className="object-contain flex-1 pointer-events-auto overflow-hidden"

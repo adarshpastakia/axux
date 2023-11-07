@@ -71,7 +71,7 @@
     }
 
     & > div[role="toolbar"] {
-      @apply grid-area-[head] rounded-none px-2 py-1 bg-bw-100/50 dark:bg-bw-900;
+      @apply grid-area-[head] rounded-none px-2 py-1 bg-base;
 
       & > div:first-child {
         @apply flex-1 items-center;
@@ -85,7 +85,7 @@
       @apply ax-section;
 
       & > div {
-        @apply grid-area-[content] overflow-auto dark:bg-neutral-900;
+        @apply grid-area-[content] overflow-auto bg-component;
       }
     }
 

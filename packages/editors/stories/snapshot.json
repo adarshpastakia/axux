@@ -1,0 +1,159 @@
+{
+  "store": {
+    "document:document": {
+      "gridSize": 10,
+      "name": "",
+      "meta": {},
+      "id": "document:document",
+      "typeName": "document"
+    },
+    "page:page": {
+      "meta": {},
+      "id": "page:page",
+      "name": "Page 1",
+      "index": "a1",
+      "typeName": "page"
+    },
+    "shape:K3GNTxmWboi4bPI66b2RD": {
+      "x": 666,
+      "y": 144,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:K3GNTxmWboi4bPI66b2RD",
+      "type": "image-card",
+      "props": {
+        "src": "https://picsum.photos/1920/1080?",
+        "fileName": "Image",
+        "fileSize": 123456,
+        "w": 400,
+        "h": 300
+      },
+      "parentId": "page:page",
+      "index": "a1",
+      "typeName": "shape"
+    },
+    "shape:uZoB1dmEdbi1ksnXst8qz": {
+      "x": 256,
+      "y": 72,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:uZoB1dmEdbi1ksnXst8qz",
+      "type": "video-card",
+      "props": {
+        "src": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        "poster": "https://picsum.photos/1920/1080?",
+        "fileName": "BigBuckBunny",
+        "fileSize": 123456,
+        "w": 400,
+        "h": 300
+      },
+      "parentId": "page:page",
+      "index": "a2",
+      "typeName": "shape"
+    },
+    "shape:jhRfDyaU52kvr18nj_rum": {
+      "x": 666,
+      "y": 72,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:jhRfDyaU52kvr18nj_rum",
+      "type": "audio-card",
+      "props": {
+        "src": "static/media/assets/sample.mp3",
+        "fileName": "Sample",
+        "fileSize": 123456
+      },
+      "parentId": "page:page",
+      "index": "a3",
+      "typeName": "shape"
+    },
+    "shape:usertest": {
+      "x": 26,
+      "y": 72,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:usertest",
+      "type": "avatar",
+      "props": {
+        "color": "black",
+        "fill": "none",
+        "dash": "draw",
+        "size": "m",
+        "font": "draw",
+        "text": "Username",
+        "align": "middle"
+      },
+      "parentId": "page:page",
+      "index": "a4",
+      "typeName": "shape"
+    }
+  },
+  "schema": {
+    "schemaVersion": 1,
+    "storeVersion": 4,
+    "recordVersions": {
+      "asset": {
+        "version": 1,
+        "subTypeKey": "type",
+        "subTypeVersions": {
+          "image": 2,
+          "video": 2,
+          "bookmark": 0
+        }
+      },
+      "camera": {
+        "version": 1
+      },
+      "document": {
+        "version": 2
+      },
+      "instance": {
+        "version": 21
+      },
+      "instance_page_state": {
+        "version": 5
+      },
+      "page": {
+        "version": 1
+      },
+      "shape": {
+        "version": 3,
+        "subTypeKey": "type",
+        "subTypeVersions": {
+          "group": 0,
+          "text": 1,
+          "bookmark": 1,
+          "draw": 1,
+          "geo": 7,
+          "note": 4,
+          "line": 1,
+          "frame": 0,
+          "arrow": 1,
+          "highlight": 0,
+          "embed": 4,
+          "image": 2,
+          "video": 1,
+          "audio-card": 0,
+          "image-card": 0,
+          "video-card": 0,
+          "avatar": 0,
+          "user": 0
+        }
+      },
+      "instance_presence": {
+        "version": 5
+      },
+      "pointer": {
+        "version": 1
+      }
+    }
+  }
+}

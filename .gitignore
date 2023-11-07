@@ -42,6 +42,7 @@ yarn-error.log
 testem.log
 /typings
 /assets/@arcgis
+/assets/@tldraw
 
 # System Files
 .DS_Store

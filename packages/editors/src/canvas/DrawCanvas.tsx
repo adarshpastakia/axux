@@ -6,20 +6,33 @@
  * @license   : MIT
  */
 
-import { AxAside, AxSection, useIsDark } from "@axux/core";
-import { Editor, Tldraw } from "@tldraw/tldraw";
+import { AxAside, AxButton, AxFooter, AxSection, useIsDark } from "@axux/core";
+import { getAssetUrls } from "@tldraw/assets/selfHosted";
+import { Editor, StoreSnapshot, TLRecord, Tldraw } from "@tldraw/tldraw";
 import "@tldraw/tldraw/tldraw.css";
 import { FC, useEffect, useMemo, useState } from "react";
-import { AudioShapeUtil } from "./shapes/AudioShape";
-import { ImageShapeUtil } from "./shapes/ImageShape";
-import { VideoShapeUtil } from "./shapes/VideoShape";
+import { useTranslation } from "react-i18next";
+import {
+  AvatarShapeTool,
+  AvatarShapeUtil,
+} from "./shapes/avatar/AvatarShapeTool";
+import { AudioShapeUtil } from "./shapes/custom/AudioShape";
+import { ImageShapeUtil } from "./shapes/custom/ImageShape";
+import { VideoShapeUtil } from "./shapes/custom/VideoShape";
 
 export interface DrawProps {
   assetsTitle?: string;
-  shapes?: AnyObject[];
+  snapshot?: StoreSnapshot<TLRecord>;
+  assetsPath?: string;
+  onUpdate?: (snapshot: StoreSnapshot<TLRecord>) => void;
 }
 
-export const AxDrawCanvas: FC<DrawProps> = ({ assetsTitle, shapes = [] }) => {
+export const AxDrawCanvas: FC<DrawProps> = ({
+  assetsTitle,
+  assetsPath = "/assets/@tldraw",
+  snapshot,
+}) => {
+  const { t } = useTranslation("editors");
   const [editorRef, setEditor] = useState<Editor>();
   const isDark = useIsDark();
 
@@ -28,16 +41,37 @@ export const AxDrawCanvas: FC<DrawProps> = ({ assetsTitle, shapes = [] }) => {
   }, [editorRef, isDark]);
 
   useEffect(() => {
-    editorRef?.createShapes(shapes);
-  }, [editorRef, shapes]);
+    snapshot && editorRef?.store.loadSnapshot(snapshot);
+  }, [editorRef, snapshot]);
 
   const TLDraw = useMemo(
     () => (
       <Tldraw
-        shapeUtils={[AudioShapeUtil, ImageShapeUtil, VideoShapeUtil]}
+        assetUrls={getAssetUrls({ baseUrl: assetsPath })}
+        shapeUtils={[
+          AvatarShapeUtil,
+          AudioShapeUtil,
+          ImageShapeUtil,
+          VideoShapeUtil,
+        ]}
+        tools={[AvatarShapeTool]}
         onMount={setEditor}
         overrides={{
           toolbar(editor, schema, helpers) {
+            schema.push({
+              id: "avatar",
+              type: "item",
+              readonlyOk: true,
+              toolItem: {
+                id: "avatar",
+                label: "tool.avatar" as AnyObject,
+                readonlyOk: false,
+                icon: "avatar",
+                onSelect() {
+                  editor.setCurrentTool("avatar");
+                },
+              },
+            });
             return schema.filter((t) => !["asset", "embed"].includes(t.id));
           },
           menu(editor, schema, helpers) {
@@ -65,7 +99,20 @@ export const AxDrawCanvas: FC<DrawProps> = ({ assetsTitle, shapes = [] }) => {
         title={assetsTitle ?? " "}
         isCollapsable
         isFlyout
-      ></AxAside>
+      >
+        <AxFooter justify="end">
+          <AxButton
+            variant="solid"
+            onClick={() =>
+              console.log(
+                JSON.stringify(editorRef?.store.getSnapshot(), null, 4)
+              )
+            }
+          >
+            {t("core:action.save")}
+          </AxButton>
+        </AxFooter>
+      </AxAside>
     </AxSection>
   );
 };
