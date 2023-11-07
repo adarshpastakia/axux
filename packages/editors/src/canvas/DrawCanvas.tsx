@@ -8,9 +8,14 @@
 
 import { AxAside, AxButton, AxFooter, AxSection, useIsDark } from "@axux/core";
 import { getAssetUrls } from "@tldraw/assets/selfHosted";
-import { Editor, StoreSnapshot, TLRecord, Tldraw } from "@tldraw/tldraw";
+import {
+  Tldraw,
+  type Editor,
+  type StoreSnapshot,
+  type TLRecord,
+} from "@tldraw/tldraw";
 import "@tldraw/tldraw/tldraw.css";
-import { FC, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type FC } from "react";
 import { useTranslation } from "react-i18next";
 import {
   AvatarShapeTool,

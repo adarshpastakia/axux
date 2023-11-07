@@ -14,9 +14,8 @@ import {
   DefaultHorizontalAlignStyle,
   DefaultSizeStyle,
   T,
-  TLBaseShape,
+  type TLBaseShape,
 } from "@tldraw/tldraw";
-import { ShapePropsType } from "@tldraw/tlschema/src/shapes/TLBaseShape";
 
 export const AvatarShapeProps = {
   color: DefaultColorStyle,
@@ -28,7 +27,4 @@ export const AvatarShapeProps = {
   text: T.string,
 };
 
-export type AvatarShape = TLBaseShape<
-  "avatar",
-  ShapePropsType<typeof AvatarShapeProps>
->;
+export type AvatarShape = TLBaseShape<"avatar", typeof AvatarShapeProps>;

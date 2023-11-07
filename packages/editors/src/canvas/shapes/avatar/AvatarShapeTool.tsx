@@ -11,14 +11,14 @@ import { StateNode } from "@tldraw/editor";
 import {
   Rectangle2d,
   ShapeUtil,
-  TLShapeUtilFlag,
+  type TLShapeUtilFlag,
   getDefaultColorTheme,
   useIsEditing,
 } from "@tldraw/tldraw";
 import { useEffect, useRef } from "react";
 import { Idle } from "./IdleState";
 import { Pointing } from "./PointingState";
-import { AvatarShape } from "./type";
+import { type AvatarShape } from "./type";
 
 /** @public */
 export class AvatarShapeTool extends StateNode {

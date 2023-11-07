@@ -11,8 +11,8 @@ import {
   HTMLContainer,
   Rectangle2d,
   ShapeUtil,
-  TLBaseShape,
-  TLOnResizeHandler,
+  type TLBaseShape,
+  type TLOnResizeHandler,
 } from "@tldraw/tldraw";
 
 type ImageShape = TLBaseShape<
