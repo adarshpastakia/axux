@@ -39,7 +39,7 @@
   }
 
   .check-animation {
-    @apply inline-block w-[1.5em] h-[1.5em] rounded-[50%] stroke-bw-0 fill-transparent;
+    @apply inline-block w-[1.5em] h-[1.5em] rounded-[50%] stroke-bw-50 fill-transparent;
     stroke-width: 4px;
     stroke-miterlimit: 10;
     box-shadow: inset 0px 0px 0px currentColor;
@@ -180,7 +180,7 @@
     @apply block w-3/4 h-[1em] mx-auto relative rounded bg-bw-200 dark:bg-bw-700 overflow-hidden whitespace-nowrap;
 
     & > span {
-      @apply inline-block z-10 text-bw-950 dark:text-bw-0 w-auto align-text-top sticky end-0;
+      @apply inline-block z-10 text-bw-950 dark:text-bw-50 w-auto align-text-top sticky end-0;
       font-size: 0.5em;
       line-height: 0.5em;
       padding: 0.75em;

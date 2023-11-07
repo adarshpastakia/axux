@@ -52,7 +52,7 @@
     }
   }
   #storybook-root {
-    @apply max-h-[100vh] overflow-hidden relative;
+    @apply max-h-[100vh] overflow-hidden relative bg-component;
   }
 
   & div {

@@ -43,7 +43,7 @@
       & > .ax-icon,
       & > label,
       & > span {
-        @apply text-bw-0;
+        @apply text-bw-50;
       }
     }
 

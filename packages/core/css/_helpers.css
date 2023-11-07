@@ -46,13 +46,10 @@
   }
   /* Base Colors */
   .bg-base {
-    @apply bg-bw-50 dark:bg-bw-900 ring-offset-bw-50 dark:ring-offset-bw-900;
+    @apply bg-bw-100 dark:bg-bw-900 ring-offset-bw-50 dark:ring-offset-bw-900;
   }
   .bg-component {
-    @apply bg-bw-0 dark:bg-bw-950 ring-offset-bw-0 dark:ring-offset-bw-950;
-  }
-  .bg-chrome {
-    @apply bg-white dark:bg-bw-1000 ring-offset-bw-0 dark:ring-offset-bw-950;
+    @apply bg-bw-50 dark:bg-bw-950 ring-offset-bw-50 dark:ring-offset-bw-950;
   }
   .bg-primary {
     @apply bg-primary-300 dark:bg-primary-700;
@@ -97,13 +94,17 @@
     @apply text-success-700 dark:text-success-300;
   }
   .text-invert {
-    @apply text-bw-0 dark:text-bw-950;
+    @apply text-bw-50 dark:text-bw-950;
   }
   .text-muted {
     @apply text-bw-600 dark:text-bw-300;
   }
   .text-default {
     @apply text-bw-900 dark:text-bw-50;
+  }
+
+  .bg-alternate {
+    @apply odd:bg-bw-50 dark:odd:bg-bw-950 even:bg-white dark:even:bg-black;
   }
 
   .aspect-43 {

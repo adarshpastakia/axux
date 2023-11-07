@@ -89,7 +89,7 @@
 
   /******************* wrapper *******************/
   .ax-field__wrapper {
-    @apply bg-bw-0 dark:bg-bw-900 relative flex flex-nowrap items-center rounded-[inherit] leading-normal min-h-[2rem]
+    @apply bg-bw-100/50 dark:bg-bw-900 relative flex flex-nowrap items-center rounded-[inherit] leading-normal min-h-[2rem]
         after:content-[""] after:h-0.5 after:rounded-b-sm after:bg-primary-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:w-0 after:transition-[width] after:duration-500
         focus-within:bg-white focus-within:dark:bg-black focus-within:after:w-full print:hidden shadow-bw-200/20 dark:shadow-[#000];
 
@@ -98,7 +98,7 @@
         0 0 0 1px theme(colors.bw.400/0.3);
     }
     &[data-disabled="true"] {
-      @apply pointer-events-none before:absolute before:inset-0 before:pointer-events-auto before:cursor-not-allowed before:bg-bw-300/50 before:dark:bg-bw-800/50 before:rounded-[inherit];
+      @apply pointer-events-none before:absolute before:inset-0 before:pointer-events-auto before:cursor-not-allowed before:bg-bw-300/50 before:dark:bg-bw-700/50 before:rounded-[inherit];
     }
     &[data-invalid="true"] {
       @apply bg-danger-200/30 dark:bg-danger-500/30 dark:bg-opacity-20 after:bg-danger-500;
@@ -384,14 +384,14 @@
       transition: opacity 200ms;
     }
     &:before {
-      @apply text-bw-0 opacity-0;
+      @apply text-bw-50 opacity-0;
     }
     &:after {
       @apply text-bw-600 dark:text-bw-400;
     }
 
     & .ax-field__switch--handle {
-      @apply rounded-full h-[1em] shadow bg-bw-0 dark:bg-bw-950 absolute top-[0.125em] start-[0.125em];
+      @apply rounded-full h-[1em] shadow bg-bw-50 dark:bg-bw-950 absolute top-[0.125em] start-[0.125em];
       width: calc(50% - 0.125em);
       box-shadow: 0 0 1px theme(colors.bw.500);
       transition: transform 200ms;
@@ -438,7 +438,7 @@
     }
 
     & .ax-field__slider--hilight {
-      @apply absolute bg-bw-200 dark:bg-black z-[0];
+      @apply absolute bg-bw-200 dark:bg-bw-800 z-[0];
 
       &[data-hilight="true"] {
         @apply bg-current z-[1];

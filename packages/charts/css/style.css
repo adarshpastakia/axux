@@ -41,7 +41,7 @@
   }
 
   .ax-chart__toolbar {
-    @apply flex flex-nowrap items-center justify-end bg-bw-0 dark:bg-bw-1000;
+    @apply flex flex-nowrap items-center justify-end bg-bw-50 dark:bg-bw-950;
 
     & > label {
       @apply flex-auto px-2 text-muted;

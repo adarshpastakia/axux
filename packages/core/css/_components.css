@@ -9,7 +9,7 @@
 /******************* panel loader *******************/
 @layer components {
   .ax-loader {
-    @apply inset-0 flex flex-col items-center justify-center cursor-wait bg-bw-0/0 z-50;
+    @apply inset-0 flex flex-col items-center justify-center cursor-wait bg-bw-50/0 z-50;
 
     & > div {
       @apply px-8 py-4 rounded shadow border bg-bw-50/75 dark:bg-bw-900/75 backdrop-blur text-center;
@@ -121,7 +121,12 @@
 /******************* card *******************/
 @layer components {
   .ax-card {
-    @apply m-1 block relative rounded bg-white dark:bg-black;
+    @apply m-1 block relative rounded bg-white dark:bg-bw-900;
+
+    & .ax-content,
+    & .ax-section {
+      @apply bg-transparent;
+    }
 
     &:not([data-plain="true"]) {
       @apply border shadow-sm;

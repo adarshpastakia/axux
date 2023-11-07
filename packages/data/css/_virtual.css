@@ -8,7 +8,7 @@
 
 @layer components {
   .ax-virtual__container {
-    @apply grid-area-[content] grid overflow-hidden bg-base;
+    @apply grid-area-[content] grid overflow-hidden bg-component;
 
     &.ax-timeline .ax-virtual__wrapper {
       grid-template-columns: auto auto;
