@@ -96,14 +96,14 @@
     }
 
     & .ax-datagrid__row {
-      @apply odd:bg-bw-0 even:bg-bw-50 dark:odd:bg-bw-950 dark:even:bg-bw-900 hover:bg-primary-50 hover:dark:bg-primary-900;
+      @apply odd:bg-bw-50 even:bg-white dark:odd:bg-bw-950 dark:even:bg-black hover:bg-primary-50 hover:dark:bg-primary-900;
 
       &.hilight {
         @apply outline-2 outline-primary-500 -outline-offset-2 outline;
       }
 
       &:last-child {
-        @apply bg-bw-0 dark:bg-bw-950;
+        @apply bg-bw-50 dark:bg-bw-950;
       }
     }
 

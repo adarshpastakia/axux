@@ -60,57 +60,57 @@
     &[data-theme="modern"] {
       & .ax-breadcrumb__item {
         &:nth-child(1) {
-          @apply text-crumb-1;
+          color: var(--crumb-1);
           & > * {
-            @apply bg-crumb-1;
+            background-color: var(--crumb-1);
           }
         }
         &:nth-child(2) {
-          @apply text-crumb-2;
+          color: var(--crumb-2);
           & > * {
-            @apply bg-crumb-2;
+            background-color: var(--crumb-2);
           }
         }
         &:nth-child(3) {
-          @apply text-crumb-3;
+          color: var(--crumb-3);
           & > * {
-            @apply bg-crumb-3;
+            background-color: var(--crumb-3);
           }
         }
         &:nth-child(4) {
-          @apply text-crumb-4;
+          color: var(--crumb-4);
           & > * {
-            @apply bg-crumb-4;
+            background-color: var(--crumb-4);
           }
         }
         &:nth-child(5) {
-          @apply text-crumb-5;
+          color: var(--crumb-5);
           & > * {
-            @apply bg-crumb-5;
+            background-color: var(--crumb-5);
           }
         }
         &:nth-child(6) {
-          @apply text-crumb-6;
+          color: var(--crumb-6);
           & > * {
-            @apply bg-crumb-6;
+            background-color: var(--crumb-6);
           }
         }
         &:nth-child(7) {
-          @apply text-crumb-7;
+          color: var(--crumb-7);
           & > * {
-            @apply bg-crumb-7;
+            background-color: var(--crumb-7);
           }
         }
         &:nth-child(8) {
-          @apply text-crumb-8;
+          color: var(--crumb-8);
           & > * {
-            @apply bg-crumb-8;
+            background-color: var(--crumb-8);
           }
         }
         &:nth-child(9) {
-          @apply text-crumb-9;
+          color: var(--crumb-9);
           & > * {
-            @apply bg-crumb-9;
+            background-color: var(--crumb-9);
           }
         }
         &:hover {
@@ -146,7 +146,7 @@
         }
 
         & > * {
-          @apply text-white;
+          @apply text-white leading-5;
           margin-inline-start: -0.25em;
           padding-inline-end: 0.25em;
         }

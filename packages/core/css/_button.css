@@ -246,7 +246,7 @@
   }
   .light .ax-button {
     & .ax-button__inner {
-      @apply bg-bw-0 text-primary-600 hover:bg-primary-100 active:bg-primary-300 focus-visible:outline-primary-500;
+      @apply bg-bw-50 text-primary-600 hover:bg-primary-100 active:bg-primary-300 focus-visible:outline-primary-500;
     }
     &[data-type="link"] .ax-button__inner {
       @apply shadow-none bg-transparent hover:bg-bw-100 active:bg-bw-200;

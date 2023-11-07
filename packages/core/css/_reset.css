@@ -13,6 +13,21 @@
   }
 
   :root {
+    --color-white: 254 255 255;
+    --color-black: 1 1 11;
+
+    --color-grayscale-50: 250 252 254;
+    --color-grayscale-100: 241 245 249;
+    --color-grayscale-200: 226 232 240;
+    --color-grayscale-300: 203 213 225;
+    --color-grayscale-400: 148 163 184;
+    --color-grayscale-500: 100 116 139;
+    --color-grayscale-600: 71 85 105;
+    --color-grayscale-700: 51 65 85;
+    --color-grayscale-800: 30 41 59;
+    --color-grayscale-900: 15 23 42;
+    --color-grayscale-950: 2 6 23;
+
     --color-primary-50: 240 249 255;
     --color-primary-100: 224 242 254;
     --color-primary-200: 186 230 253;
@@ -23,7 +38,7 @@
     --color-primary-700: 3 105 161;
     --color-primary-800: 7 89 133;
     --color-primary-900: 12 74 110;
-    --color-primary-950: 8, 47, 73;
+    --color-primary-950: 8 47 73;
 
     --color-accent-50: 253 242 248;
     --color-accent-100: 252 231 243;
@@ -35,7 +50,46 @@
     --color-accent-700: 190 24 93;
     --color-accent-800: 157 23 77;
     --color-accent-900: 131 24 67;
-    --color-accent-950: 80, 7, 36;
+    --color-accent-950: 80 7 36;
+
+    --crumb-1: #0a2f47;
+    --crumb-2: #0f496b;
+    --crumb-3: #0b5881;
+    --crumb-4: #096ea6;
+    --crumb-5: #0982c0;
+    --crumb-6: #16a2e1;
+    --crumb-7: #3fbaf1;
+    --crumb-8: #81d1f8;
+    --crumb-9: #bce5fb;
+  }
+
+  .grayscale-olive {
+    --color-black: 16 21 19;
+    --color-grayscale-50: 248 250 250;
+    --color-grayscale-100: 231 238 237;
+    --color-grayscale-200: 207 218 217;
+    --color-grayscale-300: 177 192 190;
+    --color-grayscale-400: 151 168 165;
+    --color-grayscale-500: 119 136 132;
+    --color-grayscale-600: 92 107 103;
+    --color-grayscale-700: 69 83 79;
+    --color-grayscale-800: 49 61 57;
+    --color-grayscale-900: 31 40 37;
+    --color-grayscale-950: 22 29 26;
+  }
+
+  .grayscale-neutral {
+    --color-grayscale-50: 250 250 250;
+    --color-grayscale-100: 244 244 245;
+    --color-grayscale-200: 228 228 231;
+    --color-grayscale-300: 212 212 216;
+    --color-grayscale-400: 161 161 170;
+    --color-grayscale-500: 113 113 122;
+    --color-grayscale-600: 82 82 91;
+    --color-grayscale-700: 63 63 70;
+    --color-grayscale-800: 39 39 42;
+    --color-grayscale-900: 24 24 27;
+    --color-grayscale-950: 9 9 11;
   }
 
   .light {

@@ -26,6 +26,10 @@
       grid-template-areas: "head" "content" "foot";
       grid-template-rows: auto 1fr auto;
       grid-area: body;
+
+      & .ax-content {
+        @apply bg-transparent;
+      }
     }
   }
 

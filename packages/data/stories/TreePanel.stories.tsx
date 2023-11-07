@@ -120,7 +120,7 @@ const loadMore = (id: string) => {
 
 export const Example: Story = {
   render: (args) => (
-    <div className="h-full min-h-[600px] grid overflow-hidden">
+    <div className="h-full min-h-[600px] grid overflow-hidden bg-base">
       <div className="w-[420px] h-full ax-section grid-area-[unset]">
         <AxTreePanel {...args} />
       </div>

@@ -8,7 +8,7 @@
 
 @layer components {
   .ax-media {
-    @apply grid-area-[content] grid relative overflow-hidden select-none bg-bw-50 dark:bg-bw-950/60;
+    @apply grid-area-[content] grid relative overflow-hidden select-none bg-bw-50 dark:bg-bw-950;
     grid-template-rows: 1fr auto auto;
     grid-template-columns: 1fr;
 
@@ -309,7 +309,7 @@
     @apply bg-component;
 
     & .wavesurfer-region {
-      @apply border-x border-x-primary-500 opacity-40 border-y-4 border-y-bw-0 dark:border-y-bw-900;
+      @apply border-x border-x-primary-500 opacity-40 border-y-4 border-y-bw-50 dark:border-y-bw-900;
     }
 
     & wave > wave {
