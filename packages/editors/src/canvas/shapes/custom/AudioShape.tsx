@@ -11,7 +11,7 @@ import {
   HTMLContainer,
   Rectangle2d,
   ShapeUtil,
-  TLBaseShape,
+  type TLBaseShape,
 } from "@tldraw/tldraw";
 import { useRef, useEffect } from "react";
 

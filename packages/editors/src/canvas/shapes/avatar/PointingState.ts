@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { StateNode, TLEventHandlers } from "@tldraw/editor";
+import { StateNode, type TLEventHandlers } from "@tldraw/editor";
 import { createShapeId } from "@tldraw/tldraw";
 import { type AvatarShape } from "./type";
 

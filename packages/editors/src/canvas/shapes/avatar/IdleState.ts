@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { StateNode, TLEventHandlers } from "@tldraw/editor";
+import { StateNode, type TLEventHandlers } from "@tldraw/editor";
 
 export class Idle extends StateNode {
   static override id = "idle";
@@ -34,7 +34,7 @@ export class Idle extends StateNode {
       ) {
         this.editor.setCurrentTool("select");
         this.editor.setEditingShape(onlySelectedShape.id);
-        this.editor.root.current.value!.transition("editing_shape", {
+        this.editor.root.current.value?.transition("editing_shape", {
           ...info,
           target: "shape",
           shape: onlySelectedShape,

@@ -18,9 +18,8 @@ export const AxMdx: FC<Props> = ({ text, className, ...rest }) => {
   const [mdtext, setMdtext] = useState("");
 
   useEffect(() => {
-    !text
-      ? setMdtext("")
-      : setMdtext(marked.parse(text.replaceAll(":::", "!!! ")).toString());
+    const parsed = !text ? "" : marked.parse(text.replaceAll(":::", "!!! "));
+    void Promise.resolve(parsed).then(setMdtext);
   }, [text]);
 
   return (
