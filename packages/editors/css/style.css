@@ -9,3 +9,8 @@
 @import "./_editor.css";
 @import "./_markdown.css";
 @import "./_mdx.css";
+
+.tl-container svg {
+  width: unset;
+  height: unset;
+}
