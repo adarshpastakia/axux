@@ -89,7 +89,7 @@
 
   /******************* wrapper *******************/
   .ax-field__wrapper {
-    @apply bg-bw-100/50 dark:bg-bw-900 relative flex flex-nowrap items-center rounded-[inherit] leading-normal min-h-[2rem]
+    @apply bg-bw-50 dark:bg-bw-950 relative flex flex-nowrap items-center rounded-[inherit] leading-normal min-h-[2rem]
         after:content-[""] after:h-0.5 after:rounded-b-sm after:bg-primary-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:w-0 after:transition-[width] after:duration-500
         focus-within:bg-white focus-within:dark:bg-black focus-within:after:w-full print:hidden shadow-bw-200/20 dark:shadow-[#000];
 
