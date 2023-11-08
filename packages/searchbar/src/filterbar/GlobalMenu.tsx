@@ -21,7 +21,7 @@ export const GlobalMenu = () => {
       variant="link"
       isDisabled={filters.length === 0}
       dropdownClassName="ax-filter__menu"
-      className="flush"
+      className="ax-filter__action flush"
       size="sm"
       icon={Icons.iconCog}
       showCaret={false}

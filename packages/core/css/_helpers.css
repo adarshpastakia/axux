@@ -25,6 +25,11 @@
       @apply !w-0 !h-0;
     }
   }
+  .overflow-wrap {
+    overflow-wrap: break-word;
+    word-break: normal;
+    overflow: hidden;
+  }
   .align-start {
     text-align: start;
   }

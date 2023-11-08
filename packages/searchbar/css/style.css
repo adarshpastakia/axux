@@ -36,12 +36,14 @@
     @apply flex;
 
     & .ax-filter__wrapper {
-      @apply flex flex-1 items-center flex-wrap gap-1 py-1;
+      @apply flex flex-1 items-center flex-wrap gap-1 py-1 max-h-40 overflow-auto;
     }
     & .ax-filter__addButton {
       @apply border-dashed px-2 py-px border-bw-500/50;
     }
-
+    & .ax-filter__action {
+      @apply self-start;
+    }
     & .ax-filter__menu .ax-menu__item {
       @apply text-sm;
     }
