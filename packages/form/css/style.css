@@ -550,7 +550,7 @@
 
   /******************* select *******************/
   .ax-select__dropdown {
-    @apply bg-component overflow-auto rounded shadow-2xl dark:shadow-black ring-1 ring-bw-500/20 z-50 max-h-72;
+    @apply bg-component overflow-auto rounded shadow-2xl dark:shadow-black ring-1 ring-bw-500/20 z-50 max-h-72 max-w-4xl;
   }
   .ax-select__group {
     @apply px-2 py-1 text-muted text-sm;
@@ -596,7 +596,7 @@
     }
   }
   .ax-field__clear {
-    @apply pe-2 py-1 order-4 opacity-50 hover:opacity-75 cursor-pointer select-none leading-none;
+    @apply pe-2 py-1 order-4 opacity-50 hover:opacity-75 cursor-pointer select-none leading-none z-[2];
   }
 
   .ax-field__strength {
