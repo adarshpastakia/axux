@@ -9,7 +9,7 @@
 
 import { debounce, isString, isTrue } from "@axux/utilities";
 import { type Placement } from "@popperjs/core";
-import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { type TooltipType } from "../types";
 import { usePopover } from "./usePopover";
@@ -55,74 +55,68 @@ export const TooltipWatcher = () => {
     placement,
   });
 
-  const removeTooltip = useCallback(
-    debounce(() => {
-      if (refPortal.current) {
-        try {
-          refPortal.current.unmount();
-        } catch (_) {
-          //
-        }
-        clearTimeout(refTimer.current);
-        refEl.current?.remove();
-        refPortal.current = undefined;
-        setPopperElement(undefined);
-        setOpen(false);
+  const removeTooltip = useRef(() => {
+    if (refPortal.current) {
+      try {
+        refPortal.current.unmount();
+      } catch (_) {
+        //
       }
-    }),
-    []
-  );
-
-  const cbEnter = useCallback((e: MouseEvent) => {
-    const target = (e.target as HTMLElement)?.closest?.(
-      "[data-tooltip]"
-    ) as HTMLElement;
-    if (
-      target &&
-      !!target.dataset.tooltip &&
-      !isTrue(target.dataset.disabled) &&
-      !isTrue(target.dataset.popoverOpen)
-    ) {
-      setPlacement(target.dataset.tooltipPlacement as AnyObject);
-      setContent(target.dataset.tooltip);
-      setColor(target.dataset.tooltipColor);
-      setReferenceElement(target);
-      startTransition(() => {
-        setOpen(true);
-
-        if (isTrue(target.dataset.tooltipHide)) {
-          refTimer.current = setTimeout(() => removeTooltip(), 2000);
-        }
-      });
-    } else {
-      removeTooltip();
-    }
-  }, []);
-  const cbLeave = useCallback((e: MouseEvent) => {
-    const target = (e.target as HTMLElement)?.closest?.(
-      "[data-tooltip]"
-    ) as HTMLElement;
-    if (!target) {
-      removeTooltip();
+      clearTimeout(refTimer.current);
+      refEl.current?.remove();
+      refPortal.current = undefined;
+      setPopperElement(undefined);
       setOpen(false);
     }
-  }, []);
+  });
+
+  const cbEnter = useRef(
+    debounce((e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest?.(
+        "[data-tooltip]"
+      ) as HTMLElement;
+      if (
+        target &&
+        !!target.dataset.tooltip &&
+        !isTrue(target.dataset.disabled) &&
+        !isTrue(target.dataset.popoverOpen)
+      ) {
+        setPlacement(target.dataset.tooltipPlacement as AnyObject);
+        setContent(target.dataset.tooltip);
+        setColor(target.dataset.tooltipColor);
+        setReferenceElement(target);
+        startTransition(() => {
+          setOpen(true);
+
+          if (isTrue(target.dataset.tooltipHide)) {
+            refTimer.current = setTimeout(() => removeTooltip.current(), 2000);
+          }
+        });
+      } else {
+        removeTooltip.current();
+      }
+    }, 1000)
+  );
+  const cbLeave = useRef((e: MouseEvent) => {
+    cbEnter.current.cancel();
+    removeTooltip.current();
+    setOpen(false);
+  });
 
   useEffect(() => {
-    document.addEventListener("mouseover", cbEnter);
-    document.addEventListener("mouseout", cbLeave);
-    document.addEventListener("mouseleave", cbLeave);
-    document.addEventListener("mousedown", cbLeave);
+    document.addEventListener("mouseover", cbEnter.current);
+    document.addEventListener("mouseout", cbLeave.current);
+    document.addEventListener("mouseleave", cbLeave.current);
+    document.addEventListener("mousedown", cbLeave.current);
     return () => {
-      document.removeEventListener("mouseover", cbEnter);
-      document.removeEventListener("mouseout", cbLeave);
-      document.removeEventListener("mouseleave", cbLeave);
-      document.removeEventListener("mousedown", cbLeave);
+      document.removeEventListener("mouseover", cbEnter.current);
+      document.removeEventListener("mouseout", cbLeave.current);
+      document.removeEventListener("mouseleave", cbLeave.current);
+      document.removeEventListener("mousedown", cbLeave.current);
     };
   }, []);
 
   useEffect(() => {
-    isOpen && removeTooltip.cancel();
     if (isOpen && !!content && !refPortal.current) {
       refEl.current = document.createElement("div");
       document.body.appendChild(refEl.current);
