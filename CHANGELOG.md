@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/adarshpastakia/axux/compare/v3.0.0...v3.0.1) (2023-11-08)
+
+### Bug Fixes
+
+- **handleEnter:** fire event callback when meta keys not pressed ([deeb71d](https://github.com/adarshpastakia/axux/commit/deeb71d0695ebda7537cf9026d8d89b8058d9d6d))
+- **MdxEditor:** style import ([0e1e344](https://github.com/adarshpastakia/axux/commit/0e1e34411b999edc596fede4f2971b54a63bd0bc))
+- **Textarea:** change rows by text lines for variableRows ([937201f](https://github.com/adarshpastakia/axux/commit/937201fe101bbf83b14e77fe4aaa65290ece6b10))
+- **Tooltip:** delay show using debouce ([03ae5a8](https://github.com/adarshpastakia/axux/commit/03ae5a805497d21bf94f6365a80a57d92a40667f))
+
 # [3.0.0](https://github.com/adarshpastakia/axux/compare/v2.9.6...v3.0.0) (2023-11-07)
 
 ### Bug Fixes

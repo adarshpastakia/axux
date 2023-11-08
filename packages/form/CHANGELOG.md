@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/adarshpastakia/axux/compare/v3.0.0...v3.0.1) (2023-11-08)
+
+### Bug Fixes
+
+- **Textarea:** change rows by text lines for variableRows ([937201f](https://github.com/adarshpastakia/axux/commit/937201fe101bbf83b14e77fe4aaa65290ece6b10))
+
 # [3.0.0](https://github.com/adarshpastakia/axux/compare/v2.9.6...v3.0.0) (2023-11-07)
 
 **Note:** Version bump only for package @axux/form
