@@ -13,7 +13,13 @@ import { debounce } from "./_debounce";
 /** ***************** common handler for enter press *******************/
 export const handleEnter = (callback?: AnyObject, preventDefault = false) => {
   return (e: KeyboardEvent) => {
-    if (e.key === "Enter" && callback) {
+    if (
+      !e.shiftKey &&
+      !e.altKey &&
+      !e.metaKey &&
+      e.key === "Enter" &&
+      callback
+    ) {
       debounce(() => callback?.(e), 100)();
       if (preventDefault) {
         e.preventDefault();
