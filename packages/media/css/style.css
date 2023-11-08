@@ -89,7 +89,7 @@
 /******************* thumbnail *******************/
 @layer components {
   .ax-thumbnail {
-    @apply bg-bw-100 dark:bg-bw-800 relative ring-1 ring-offset-1 ring-slate-300 dark:ring-slate-600 rounded-sm;
+    @apply bg-bw-200 dark:bg-bw-800 relative ring-1 ring-offset-1 ring-slate-300 dark:ring-slate-600 rounded-sm;
 
     & img {
       @apply max-w-full max-h-full absolute inset-0 m-auto;

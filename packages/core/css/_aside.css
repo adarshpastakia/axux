@@ -56,7 +56,11 @@
       @apply grid-area-[actions] leading-none;
     }
     & .ax-side__toggle {
-      @apply grid-area-[toggle];
+      @apply grid-area-[toggle] m-0;
+
+      & .ax-button__inner {
+        @apply rounded-none;
+      }
     }
 
     & .ax-side__resizeHandle {

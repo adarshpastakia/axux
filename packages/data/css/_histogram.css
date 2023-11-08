@@ -48,7 +48,7 @@
     @apply my-px h-6 flex-1 ltr:bg-gradient-to-r rtl:bg-gradient-to-l flex items-center relative select-none truncate;
 
     &::before {
-      @apply overflow-hidden absolute inset-0 border-s-2 bg-bw-50/70 dark:bg-bw-950/70;
+      @apply overflow-hidden absolute inset-0 border-s-2 bg-white/80 dark:bg-black/80;
       content: "";
     }
 
