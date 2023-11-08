@@ -43,7 +43,7 @@ import {
   thematicBreakPlugin,
   toolbarPlugin,
 } from "@mdxeditor/editor";
-import "@mdxeditor/editor/dist/style.css";
+import "@mdxeditor/editor/style.css";
 import {
   useCallback,
   useDeferredValue,
