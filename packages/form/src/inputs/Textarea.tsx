@@ -26,6 +26,9 @@ export interface TextareaProps extends ElementProps, InputProps, ChildrenProp {
    * textarea rows
    */
   rows?: number;
+
+  maxRows?: number;
+  variableRows?: boolean;
 }
 
 // eslint-disable-next-line react/display-name
@@ -52,12 +55,19 @@ export const Textarea: FC<TextareaProps> = memo(
     inline,
     labelWidth,
     onEnterPressed,
+    variableRows,
+    maxRows = 12,
     ...rest
   }: TextareaProps) => {
     const [actualValue, setActualValue] = useState("");
+    const [fixedRows, setFixedRows] = useState(rows);
     const value = useDeferredValue(_value);
     useEffect(() => {
       setActualValue(value ?? "");
+      if (variableRows) {
+        const lines = value?.split("\n").length ?? 1;
+        setFixedRows(Math.max(rows, Math.min(maxRows, lines)));
+      }
     }, [value]);
 
     const handleChange = useCallback(
@@ -99,7 +109,7 @@ export const Textarea: FC<TextareaProps> = memo(
           className="ax-field__input"
           onChange={handleChange}
           autoComplete="off"
-          rows={rows}
+          rows={fixedRows}
           onKeyDown={handleEnter(onEnterPressed, true)}
           {...rest}
         />
