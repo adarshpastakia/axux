@@ -9,7 +9,7 @@
 /******************* viewport *******************/
 @layer components {
   .ax-viewport {
-    @apply panel fixed inset-0 w-full h-full bg-bw-100 dark:bg-bw-800;
+    @apply panel fixed inset-0 w-full h-full bg-bw-200 dark:bg-bw-800;
     grid-template-areas: "head head head" "crumbbar crumbbar crumbbar" "side-s content side-e" "foot foot foot";
     grid-template-rows: auto auto 1fr auto;
 
