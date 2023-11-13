@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.2](https://github.com/adarshpastakia/axux/compare/v3.0.1...v3.0.2) (2023-11-13)
+
+### Bug Fixes
+
+- **Canvas:** add custom card renderer ([49ab4a7](https://github.com/adarshpastakia/axux/commit/49ab4a7e53d4c1f0fdc020529832a9df9243fdd4))
+
 ## [3.0.1](https://github.com/adarshpastakia/axux/compare/v3.0.0...v3.0.1) (2023-11-08)
 
 ### Bug Fixes
