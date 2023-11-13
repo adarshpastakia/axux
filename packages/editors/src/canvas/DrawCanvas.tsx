@@ -7,7 +7,7 @@
  */
 
 import { AxSection, useIsDark } from "@axux/core";
-import { getAssetUrls } from "@tldraw/assets/selfHosted";
+import { getAssetUrlsByMetaUrl } from "@tldraw/assets/urls";
 import {
   Tldraw,
   type Editor,
@@ -36,7 +36,6 @@ import { VideoShapeUtil } from "./shapes/custom/VideoShape";
 
 export interface DrawProps {
   snapshot?: StoreSnapshot<TLRecord>;
-  assetsPath?: string;
   onUpdate?: (snapshot: StoreSnapshot<TLRecord>) => void;
   renderer?: (props: KeyValue) => AnyObject;
 }
@@ -48,11 +47,7 @@ const TypeMap: KeyValue = {
   card: "data-card",
 };
 
-export const AxDrawCanvas: FC<DrawProps> = ({
-  assetsPath = "/assets/@tldraw",
-  snapshot,
-  renderer,
-}) => {
+export const AxDrawCanvas: FC<DrawProps> = ({ snapshot, renderer }) => {
   const [editorRef, setEditor] = useState<Editor>();
   const isDark = useIsDark();
 
@@ -100,7 +95,7 @@ export const AxDrawCanvas: FC<DrawProps> = ({
   const TLDraw = useMemo(
     () => (
       <Tldraw
-        assetUrls={getAssetUrls({ baseUrl: assetsPath })}
+        assetUrls={getAssetUrlsByMetaUrl()}
         shapeUtils={[
           AvatarShapeUtil,
           AudioShapeUtil,
