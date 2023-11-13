@@ -7,11 +7,12 @@
  */
 
 import {
-  forwardRef,
   Fragment,
-  type HTMLAttributes,
+  forwardRef,
   useImperativeHandle,
   useRef,
+  type DragEvent,
+  type HTMLAttributes,
 } from "react";
 import { NavLink, useInRouterContext } from "react-router-dom";
 import { type ChildrenProp, type ElementProps } from "../types";
@@ -41,6 +42,9 @@ interface LinkWrapperProps {
   as?: React.ElementType;
   nav?: LinkProps;
   type?: "button" | "submit" | "reset";
+  draggable?: boolean;
+  dragKey?: string;
+  dragData?: KeyValue;
 }
 
 export const Link = forwardRef<
@@ -54,6 +58,8 @@ export const Link = forwardRef<
       onClick,
       onMouseDown,
       type,
+      dragKey,
+      dragData,
       ...props
     },
     ref
@@ -76,6 +82,10 @@ export const Link = forwardRef<
             target={target}
             replace={replace}
             download={download}
+            onDragStart={(e: DragEvent) =>
+              dragKey &&
+              e.dataTransfer?.setData(dragKey, JSON.stringify(dragData))
+            }
             onClick={onClick}
             onMouseDown={onMouseDown}
           />
@@ -86,6 +96,10 @@ export const Link = forwardRef<
             href={href}
             target={target}
             download={download}
+            onDragStart={(e: DragEvent) =>
+              dragKey &&
+              e.dataTransfer?.setData(dragKey, JSON.stringify(dragData))
+            }
             onClick={onClick}
             onMouseDown={onMouseDown}
           />
@@ -93,6 +107,10 @@ export const Link = forwardRef<
           <T
             {...props}
             type={type}
+            onDragStart={(e: DragEvent) =>
+              dragKey &&
+              e.dataTransfer?.setData(dragKey, JSON.stringify(dragData))
+            }
             ref={linkRef as AnyObject}
             onClick={onClick}
             onMouseDown={onMouseDown}
