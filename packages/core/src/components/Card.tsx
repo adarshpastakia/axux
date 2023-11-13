@@ -7,7 +7,11 @@
  */
 
 import { forwardRef, useMemo } from "react";
-import { type ChildrenProp, type ElementProps, type MouseProps } from "../types";
+import {
+  type ChildrenProp,
+  type ElementProps,
+  type MouseProps,
+} from "../types";
 import { Link, type LinkProps } from "./Link";
 
 export interface CardProps extends ElementProps, MouseProps, ChildrenProp {
@@ -20,6 +24,10 @@ export interface CardProps extends ElementProps, MouseProps, ChildrenProp {
    * navigation props
    */
   nav?: LinkProps;
+
+  draggable?: boolean;
+  dragKey?: string;
+  dragData?: KeyValue;
 }
 
 export const AxCard = forwardRef<HTMLElement, CardProps>(
@@ -34,7 +42,7 @@ export const AxCard = forwardRef<HTMLElement, CardProps>(
       }),
       [rest, isPlain, isActive, className]
     );
-    return <Link {...props} ref={ref} />;
+    return <Link {...props} ref={ref} draggable />;
   }
 );
 AxCard.displayName = "AxCard";

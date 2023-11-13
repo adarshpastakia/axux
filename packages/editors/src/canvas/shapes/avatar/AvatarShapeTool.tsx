@@ -11,9 +11,9 @@ import { StateNode } from "@tldraw/editor";
 import {
   Rectangle2d,
   ShapeUtil,
-  type TLShapeUtilFlag,
   getDefaultColorTheme,
   useIsEditing,
+  type TLShapeUtilFlag,
 } from "@tldraw/tldraw";
 import { useEffect, useRef } from "react";
 import { Idle } from "./IdleState";
@@ -22,7 +22,7 @@ import { type AvatarShape } from "./type";
 
 /** @public */
 export class AvatarShapeTool extends StateNode {
-  static override id = "avatar";
+  static override id = "avatar-card";
   static override initial = "idle";
   static override children = () => [Idle, Pointing];
 
@@ -44,7 +44,7 @@ const FONT_SIZE_MAP: KeyValue = {
 };
 
 export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
-  static override type = "avatar" as const;
+  static override type = "avatar-card" as const;
 
   override canEdit = () => true;
   override hideResizeHandles: TLShapeUtilFlag<AvatarShape> = () => true;
@@ -66,7 +66,7 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
     const size = SIZE_MAP[shape.props.size as AnyObject];
     return new Rectangle2d({
       width: size,
-      height: size,
+      height: +size + 32,
       isFilled: true,
     });
   }
@@ -102,16 +102,21 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
           className="tl-text-label"
           data-font={shape.props.font}
           contentEditable={isEditing}
+          onChange={(e) =>
+            (shape.props.text = e.currentTarget.innerText as AnyObject)
+          }
           style={{
             alignItems: "end",
             textAlign: "center",
             border: isEditing ? "2px solid currentColor" : "",
-            // fontFamily: shape.props.font,
             fontSize: FONT_SIZE_MAP[shape.props.size as AnyObject],
             color: theme[shape.props.color as AnyObject].solid,
           }}
         >
-          {shape.props.text as AnyObject}
+          {
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
+            `${shape.props.text}`
+          }
         </div>
       </>
     );

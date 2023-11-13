@@ -81,7 +81,7 @@
       "opacity": 1,
       "meta": {},
       "id": "shape:usertest",
-      "type": "avatar",
+      "type": "avatar-card",
       "props": {
         "color": "black",
         "fill": "none",
@@ -144,8 +144,7 @@
           "audio-card": 0,
           "image-card": 0,
           "video-card": 0,
-          "avatar": 0,
-          "user": 0
+          "avatar-card": 0
         }
       },
       "instance_presence": {

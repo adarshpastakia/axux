@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxAside, AxButton, AxFooter, AxSection, useIsDark } from "@axux/core";
+import { AxSection, useIsDark } from "@axux/core";
 import { getAssetUrls } from "@tldraw/assets/selfHosted";
 import {
   Tldraw,
@@ -15,29 +15,44 @@ import {
   type TLRecord,
 } from "@tldraw/tldraw";
 import "@tldraw/tldraw/tldraw.css";
-import { useEffect, useMemo, useState, type FC } from "react";
-import { useTranslation } from "react-i18next";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+  type DragEvent,
+  type FC,
+} from "react";
+import { DrawContextProvider } from "./DrawContext";
 import {
   AvatarShapeTool,
   AvatarShapeUtil,
 } from "./shapes/avatar/AvatarShapeTool";
 import { AudioShapeUtil } from "./shapes/custom/AudioShape";
+import { CardShapeUtil } from "./shapes/custom/CardShape";
 import { ImageShapeUtil } from "./shapes/custom/ImageShape";
 import { VideoShapeUtil } from "./shapes/custom/VideoShape";
 
 export interface DrawProps {
-  assetsTitle?: string;
   snapshot?: StoreSnapshot<TLRecord>;
   assetsPath?: string;
   onUpdate?: (snapshot: StoreSnapshot<TLRecord>) => void;
+  renderer?: (props: KeyValue) => AnyObject;
 }
 
+const TypeMap: KeyValue = {
+  image: "image-card",
+  video: "video-card",
+  audio: "audio-card",
+  card: "data-card",
+};
+
 export const AxDrawCanvas: FC<DrawProps> = ({
-  assetsTitle,
   assetsPath = "/assets/@tldraw",
   snapshot,
+  renderer,
 }) => {
-  const { t } = useTranslation("editors");
   const [editorRef, setEditor] = useState<Editor>();
   const isDark = useIsDark();
 
@@ -45,9 +60,42 @@ export const AxDrawCanvas: FC<DrawProps> = ({
     editorRef?.user.updateUserPreferences({ isDarkMode: isDark });
   }, [editorRef, isDark]);
 
-  useEffect(() => {
-    snapshot && editorRef?.store.loadSnapshot(snapshot);
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      snapshot && editorRef?.store.loadSnapshot(snapshot);
+    }, 500);
   }, [editorRef, snapshot]);
+
+  const handleDragOver = useCallback((e: DragEvent) => {
+    if (!e.dataTransfer.getData("axux/canvas")) {
+      e.preventDefault();
+      return false;
+    }
+    return true;
+  }, []);
+
+  const handleDrop = useCallback(
+    (e: DragEvent) => {
+      const data = e.dataTransfer.getData("axux/canvas");
+      if (!data) {
+        e.preventDefault();
+        return false;
+      }
+      const { type, ...props } = JSON.parse(data);
+      if (type in TypeMap) {
+        const { x = 0, y = 0 } =
+          editorRef?.getContainer().getBoundingClientRect() ?? {};
+        editorRef?.createShape({
+          type: TypeMap[type],
+          x: e.clientX - x,
+          y: e.clientY - y,
+          props,
+        });
+      }
+      return true;
+    },
+    [editorRef]
+  );
 
   const TLDraw = useMemo(
     () => (
@@ -58,6 +106,7 @@ export const AxDrawCanvas: FC<DrawProps> = ({
           AudioShapeUtil,
           ImageShapeUtil,
           VideoShapeUtil,
+          CardShapeUtil,
         ]}
         tools={[AvatarShapeTool]}
         onMount={setEditor}
@@ -94,30 +143,16 @@ export const AxDrawCanvas: FC<DrawProps> = ({
   );
 
   return (
-    <AxSection>
+    <DrawContextProvider renderer={renderer}>
       <AxSection>
-        <div className="absolute inset-0">{TLDraw}</div>
+        <div
+          className="absolute inset-0"
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+        >
+          {TLDraw}
+        </div>
       </AxSection>
-      <AxAside
-        align="end"
-        minWidth="20rem"
-        title={assetsTitle ?? " "}
-        isCollapsable
-        isFlyout
-      >
-        <AxFooter justify="end">
-          <AxButton
-            variant="solid"
-            onClick={() =>
-              console.log(
-                JSON.stringify(editorRef?.store.getSnapshot(), null, 4)
-              )
-            }
-          >
-            {t("core:action.save")}
-          </AxButton>
-        </AxFooter>
-      </AxAside>
-    </AxSection>
+    </DrawContextProvider>
   );
 };
