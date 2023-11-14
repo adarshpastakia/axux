@@ -21,13 +21,16 @@ export const SearchInput = () => {
     handleChange,
     updateQuery,
     handleSearch,
+    setFocused,
   } = useSearchContext();
 
   return (
     <AxField.Suggest
+      {...{ onFocus: () => setFocused(true), onBlur: () => setFocused(false) }}
       placeholder={t("placeholder")}
       value={query ?? ""}
       options={options}
+      enlargeOnFocus
       onQuery={updateQuery}
       onSelect={async (v: AnyObject) => {
         handleSearch(v.value ?? v.toString());

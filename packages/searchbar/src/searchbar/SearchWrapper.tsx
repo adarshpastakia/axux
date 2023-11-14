@@ -14,6 +14,7 @@ import { Icons } from "../types/icons";
 import { FilterButton } from "./FilterButton";
 import { SearchButton } from "./SearchButton";
 import { SearchInput } from "./SearchInput";
+import { useSearchContext } from "../context";
 
 export const SearchWrapper: FC<Partial<SearchProps>> = ({
   append,
@@ -21,16 +22,17 @@ export const SearchWrapper: FC<Partial<SearchProps>> = ({
   actions,
   hideFilters,
 }) => {
+  const { isFocused } = useSearchContext();
   return (
     <div className="ax-searchbar">
       <AxField.Container>
-        {!hideFilters && <FilterButton />}
-        {prepend}
+        {!isFocused && !hideFilters && <FilterButton />}
+        {!isFocused && prepend}
         <SearchInput />
         <SearchButton />
       </AxField.Container>
-      {append}
-      {actions && (
+      {!isFocused && append}
+      {!isFocused && actions && (
         <AxButton.Dropdown
           variant="outline"
           showCaret={false}
