@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { forwardRef, type FC } from "react";
+import { forwardRef, type FC, type UIEventHandler } from "react";
 import {
   type ChildrenProp,
   type ElementProps,
@@ -22,6 +22,8 @@ type Props = ElementProps &
      * padding
      */
     padding?: Gutter;
+
+    onScroll?: UIEventHandler;
   };
 /**
  * content panel
