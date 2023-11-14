@@ -28,7 +28,16 @@ hljs.registerLanguage("json", json);
 hljs.registerLanguage("bash", bash);
 hljs.registerLanguage("html", html);
 hljs.registerLanguage("yaml", yaml);
-
+hljs.registerLanguage("default", html);
+const LANGS = [
+  "javascript",
+  "typescript",
+  "css",
+  "json",
+  "bash",
+  "html",
+  "yaml",
+];
 const _marked = new Marked(
   admonition.default,
   markedEmoji({
@@ -38,7 +47,9 @@ const _marked = new Marked(
   markedHighlight({
     langPrefix: "hljs language-",
     highlight(code, language) {
-      return hljs.highlight(code, { language }).value;
+      return hljs.highlight(code, {
+        language: LANGS.includes(language) ? language : "default",
+      }).value;
     },
   })
 );
