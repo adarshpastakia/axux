@@ -15,12 +15,12 @@ import {
   Fragment,
   memo,
   useCallback,
+  useDeferredValue,
   useEffect,
   useMemo,
   useState,
   type FC,
   type FocusEvent,
-  useDeferredValue,
 } from "react";
 import { createPortal } from "react-dom";
 import { FieldWrapper } from "../inputs/Wrapper";
@@ -50,6 +50,8 @@ export interface SuggestProps
   > {
   options?: SuggestItem[];
   defaultItems?: SuggestItem[];
+
+  enlargeOnFocus?: boolean;
 }
 
 export const SuggestInput: FC<SuggestProps> = ({
@@ -62,6 +64,8 @@ export const SuggestInput: FC<SuggestProps> = ({
   onChange,
   onQuery,
   onEnterPressed,
+  onFocus,
+  onBlur,
   usePortal,
   inputRef,
   isInvalid,
@@ -80,8 +84,10 @@ export const SuggestInput: FC<SuggestProps> = ({
   children,
   defaultItems = [],
   autoFocus,
+  enlargeOnFocus,
   ...rest
 }) => {
+  const [isFocused, setFocused] = useState(false);
   const [actualValue, setActualValue] = useState("");
   const [items, setItems] = useState<Array<SuggestItem | string>>([]);
   const [queryItems, setQueryItems] = useState<Array<SuggestItem | string>>([]);
@@ -198,6 +204,16 @@ export const SuggestInput: FC<SuggestProps> = ({
             onClear={() => handleSelectChange("")}
             wrapperRef={setReferenceElement as AnyObject}
             canClear={!isEmpty(actualValue)}
+            style={
+              isFocused && enlargeOnFocus
+                ? {
+                    position: "absolute",
+                    height: "9rem",
+                    inset: "0 0 auto",
+                    zIndex: 99,
+                  }
+                : undefined
+            }
           >
             <Combobox.Input
               ref={inputRef}
@@ -206,10 +222,12 @@ export const SuggestInput: FC<SuggestProps> = ({
               aria-readonly={isReadOnly}
               aria-required={isRequired}
               aria-errormessage={error}
-              size={1}
+              rows={1}
+              as="textarea"
+              style={{ overflow: isFocused ? "auto" : "hidden" }}
               placeholder={placeholder}
               data-invalid={isInvalid}
-              className="ax-field__input z-20"
+              className="ax-field__input z-20 resize-none h-full"
               autoComplete="off"
               autoFocus={autoFocus}
               onChange={(e) => handleQueryChange(e.target.value)}
@@ -218,7 +236,10 @@ export const SuggestInput: FC<SuggestProps> = ({
                   ? e.stopPropagation()
                   : !open && handleEnter(onEnterPressed)(e)
               }
-              onFocus={(e: FocusEvent<HTMLInputElement>) => e.target.select()}
+              onFocus={(e: FocusEvent<HTMLTextAreaElement>) => (
+                setFocused(true), e.target.select(), onFocus?.(e)
+              )}
+              onBlur={(e) => (setFocused(false), onBlur?.(e))}
               {...rest}
             />
             {children}

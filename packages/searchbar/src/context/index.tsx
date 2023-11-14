@@ -53,6 +53,9 @@ interface Context {
   toggleDisable: (disable: boolean) => void;
   toggleExclude: () => void;
   removeAll: () => void;
+
+  isFocused: boolean;
+  setFocused: (isFocus: boolean) => void;
 }
 
 export const SearchContext = React.createContext<Context>({} as AnyObject);
@@ -82,6 +85,7 @@ export const SearchContextProvider: React.FC<
   const [filters, setFilters] = useState(_filters);
   const [isDirty, setDirty] = useState(false);
   const [showFilters, setShowFilters] = useState(!isCollapsed);
+  const [isFocused, setFocused] = useState(false);
 
   const [history, setHistory] = useLocalStorage<string[]>(
     historyKey,
@@ -192,6 +196,8 @@ export const SearchContextProvider: React.FC<
           defaultQueryList,
           showFilters,
           setShowFilters,
+          isFocused,
+          setFocused,
           filters,
           isDirty,
           query,

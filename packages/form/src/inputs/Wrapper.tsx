@@ -36,6 +36,8 @@ interface WrapperProps extends ChildrenProp {
   width?: number | string;
   onClear?: () => void;
   wrapperRef?: Ref<HTMLDivElement>;
+
+  style?: AnyObject;
 }
 
 export const FieldWrapper: FC<WrapperProps> = memo(
@@ -49,6 +51,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
     width,
     isPlain = false,
     wrapperRef,
+    style,
     ...rest
   }: WrapperProps) => {
     const handleClear = useCallback(
@@ -70,6 +73,7 @@ export const FieldWrapper: FC<WrapperProps> = memo(
           data-disabled={disabled}
           data-plain={isPlain}
           ref={wrapperRef}
+          style={style}
         >
           {error && <Error error={error} />}
           {children}

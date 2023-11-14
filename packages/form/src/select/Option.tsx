@@ -6,15 +6,17 @@
  * @license   : MIT
  */
 
+import { matchString } from "@axux/utilities";
 import { Combobox } from "@headlessui/react";
-import { Fragment, useCallback } from "react";
+import { Fragment, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { type BaseSelectProps, getLabel } from "./utils";
+import { getLabel, getValue, type BaseSelectProps } from "./utils";
 
 export const Options = ({
   options,
   renderer,
   labelProperty,
+  valueProperty,
   allowCreate,
   query,
   hideEmpty = false,
@@ -29,16 +31,29 @@ export const Options = ({
             data-selected={selected}
             data-active={active}
           >
-            {(renderer != null) ? renderer(option) : getLabel(option, labelProperty)}
+            {renderer != null
+              ? renderer(option)
+              : getLabel(option, labelProperty)}
           </div>
         )}
       </Combobox.Option>
     ),
     [renderer, labelProperty]
   );
+
+  const canCreate = useMemo(
+    () =>
+      allowCreate &&
+      query &&
+      !options.find((o) =>
+        matchString(query, getValue(o, valueProperty).toString())
+      ),
+    [query, options, valueProperty]
+  );
+
   return (
     <Fragment>
-      {allowCreate && query && (
+      {canCreate && (
         <Combobox.Option value={query}>
           {({ active }) => (
             <div className="ax-select__option" data-active={active}>

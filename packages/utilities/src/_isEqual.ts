@@ -44,11 +44,11 @@ export const isEqual = (obj: AnyObject, test: AnyObject): boolean => {
  * match strings
  * @internal
  */
-export const matchString = (base: string, match: string) => {
+export const matchString = (base: string, match: string, equality = false) => {
   const _base = ascii(base).toLowerCase();
   const _match = ascii(match).toLowerCase();
 
-  return _base.includes(_match);
+  return equality ? _base === _match : _base.includes(_match);
 };
 
 /**

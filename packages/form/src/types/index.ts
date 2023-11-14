@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { type KeyboardEventHandler } from "react";
+import { type FocusEventHandler, type KeyboardEventHandler } from "react";
 
 export interface InputProps<K = string> {
   /**
@@ -86,6 +86,9 @@ export interface InputProps<K = string> {
    * on enter press callback
    */
   onEnterPressed?: KeyboardEventHandler;
+
+  onFocus?: FocusEventHandler;
+  onBlur?: FocusEventHandler;
 }
 
 export interface OptionProps<K> {

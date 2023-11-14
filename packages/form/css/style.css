@@ -139,7 +139,7 @@
     }
 
     & > .ax-field__container--row {
-      @apply flex flex-wrap items-center rounded leading-none shadow-bw-400/30;
+      @apply flex flex-wrap items-center rounded leading-none shadow-bw-400/30 min-h-[2rem];
 
       & > small {
         @apply truncate inline-block max-w-full leading-4 basis-full;
@@ -269,7 +269,7 @@
     @apply m-0 px-2;
   }
   textarea.ax-field__input ~ .ax-field__clear {
-    @apply self-stretch;
+    @apply self-stretch pt-2;
   }
 
   /******************* options *******************/
