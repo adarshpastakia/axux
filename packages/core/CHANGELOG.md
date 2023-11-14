@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.3](https://github.com/adarshpastakia/axux/compare/v3.0.2...v3.0.3) (2023-11-14)
+
+### Bug Fixes
+
+- **Content:** add onScroll prop ([e9f3abb](https://github.com/adarshpastakia/axux/commit/e9f3abbb8c29fe4959fa4e7c6ad4be54317b3948))
+
 ## [3.0.2](https://github.com/adarshpastakia/axux/compare/v3.0.1...v3.0.2) (2023-11-13)
 
 ### Bug Fixes

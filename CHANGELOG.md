@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.3](https://github.com/adarshpastakia/axux/compare/v3.0.2...v3.0.3) (2023-11-14)
+
+### Bug Fixes
+
+- **Canvas:** fix asset imports ([a5f7178](https://github.com/adarshpastakia/axux/commit/a5f7178e32c457d4499f8d5dcf9b9fd3c00d4935))
+- **Content:** add onScroll prop ([e9f3abb](https://github.com/adarshpastakia/axux/commit/e9f3abbb8c29fe4959fa4e7c6ad4be54317b3948))
+- **Mdx:** markdown renderer ([180d738](https://github.com/adarshpastakia/axux/commit/180d738322bfc7ad8a065b23919e89c0f35689f5))
+- **SuggestInput:** click trap when expanded ([ebbbc44](https://github.com/adarshpastakia/axux/commit/ebbbc44ff29182b2626d4fd9ac2afc3ea47fa3c1))
+- **SuggestInput:** prevent enter press ([7dc13cc](https://github.com/adarshpastakia/axux/commit/7dc13cc594d3491846b6fa9780821f358c6b5a3d))
+- **SuggestInput:** use textarea and expand on focus ([16427db](https://github.com/adarshpastakia/axux/commit/16427dbc53125778bc37302cca4963cc7d7b0e6c))
+- **TagInput:** max height ([fdd7560](https://github.com/adarshpastakia/axux/commit/fdd7560467cde8ad16db2f379ddfcd3f057584c7))
+
 ## [3.0.2](https://github.com/adarshpastakia/axux/compare/v3.0.1...v3.0.2) (2023-11-13)
 
 ### Bug Fixes

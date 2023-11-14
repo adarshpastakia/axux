@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.3](https://github.com/adarshpastakia/axux/compare/v3.0.2...v3.0.3) (2023-11-14)
+
+### Bug Fixes
+
+- **SuggestInput:** use textarea and expand on focus ([16427db](https://github.com/adarshpastakia/axux/commit/16427dbc53125778bc37302cca4963cc7d7b0e6c))
+
 ## [3.0.2](https://github.com/adarshpastakia/axux/compare/v3.0.1...v3.0.2) (2023-11-13)
 
 **Note:** Version bump only for package @axux/utilities
