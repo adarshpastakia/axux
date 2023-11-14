@@ -237,14 +237,16 @@ export const SuggestInput: FC<SuggestProps> = ({
                   : !open && handleEnter(onEnterPressed, true)(e)
               }
               onFocus={(e: FocusEvent<HTMLTextAreaElement>) => (
-                setFocused(true), e.target.select(), onFocus?.(e)
+                setFocused(enlargeOnFocus ?? false),
+                e.target.select(),
+                onFocus?.(e)
               )}
               onBlur={(e) => (setFocused(false), onBlur?.(e))}
               {...rest}
             />
             {children}
           </FieldWrapper>
-          {open && <div className="fixed inset-0 z-10" />}
+          {(open || isFocused) && <div className="fixed inset-0 z-10" />}
           {usePortal && createPortal(optionDropdown, document.body)}
           {!usePortal && optionDropdown}
         </Fragment>
