@@ -275,7 +275,7 @@
   }
 
   &.markdown-body pre.hljs {
-    @apply bg-white dark:bg-black border rounded relative;
+    @apply bg-white dark:bg-black border rounded relative overflow-auto whitespace-normal;
     margin: 1.5rem 0;
     font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
       Liberation Mono, monospace;
@@ -283,7 +283,8 @@
     word-wrap: normal;
 
     & > code {
-      @apply bg-transparent p-6 overflow-auto max-h-96 block;
+      @apply bg-transparent p-6 block whitespace-pre;
+      white-space: pre;
     }
 
     &:after {
