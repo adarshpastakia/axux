@@ -52,6 +52,7 @@ export interface SuggestProps
   defaultItems?: SuggestItem[];
 
   enlargeOnFocus?: boolean;
+  onFocusChange?: (isFocused: boolean) => void;
 }
 
 export const SuggestInput: FC<SuggestProps> = ({
@@ -84,7 +85,8 @@ export const SuggestInput: FC<SuggestProps> = ({
   children,
   defaultItems = [],
   autoFocus,
-  enlargeOnFocus,
+  enlargeOnFocus = false,
+  onFocusChange,
   ...rest
 }) => {
   const [isFocused, setFocused] = useState(false);
@@ -99,6 +101,10 @@ export const SuggestInput: FC<SuggestProps> = ({
   useEffect(() => {
     setItems(options);
   }, [options]);
+
+  useEffect(() => {
+    onFocusChange?.(isFocused);
+  }, [isFocused]);
 
   const { styles, setPopperElement, setReferenceElement } = usePopover({
     hideArrow: true,
@@ -224,24 +230,33 @@ export const SuggestInput: FC<SuggestProps> = ({
               aria-errormessage={error}
               rows={1}
               as="textarea"
-              style={{ overflow: isFocused ? "auto" : "hidden" }}
+              style={
+                isFocused
+                  ? {
+                      overflow: "auto",
+                      whiteSpace: "nowrap",
+                    }
+                  : undefined
+              }
               placeholder={placeholder}
               data-invalid={isInvalid}
               className="ax-field__input z-20 resize-none h-full"
               autoComplete="off"
               autoFocus={autoFocus}
               onChange={(e) => handleQueryChange(e.target.value)}
-              onKeyDownCapture={(e) =>
+              onKeyDownCapture={(e) => {
+                setFocused(!["Enter", "Escape"].includes(e.key));
                 ["Home", "End"].includes(e.key)
                   ? e.stopPropagation()
-                  : !open && handleEnter(onEnterPressed, true)(e)
-              }
+                  : !open && handleEnter(onEnterPressed, true)(e);
+              }}
+              onMouseDown={() => setFocused(enlargeOnFocus)}
               onFocus={(e: FocusEvent<HTMLTextAreaElement>) => (
-                setFocused(enlargeOnFocus ?? false),
-                e.target.select(),
-                onFocus?.(e)
+                e.target.select(), onFocus?.(e)
               )}
-              onBlur={(e) => (setFocused(false), onBlur?.(e))}
+              onBlur={(e) => (
+                setTimeout(() => setFocused(false), 200), onBlur?.(e)
+              )}
               {...rest}
             />
             {children}
