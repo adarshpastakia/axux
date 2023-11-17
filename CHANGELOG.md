@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.4](https://github.com/adarshpastakia/axux/compare/v3.0.3...v3.0.4) (2023-11-17)
+
+### Bug Fixes
+
+- **SearchInput:** change focus on enter/escape ([5c1efff](https://github.com/adarshpastakia/axux/commit/5c1efff6c564d913dff5833992432057a0386b3e))
+
 ## [3.0.3](https://github.com/adarshpastakia/axux/compare/v3.0.2...v3.0.3) (2023-11-14)
 
 ### Bug Fixes
