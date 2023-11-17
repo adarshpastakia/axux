@@ -13,6 +13,7 @@ import {
   type TLBaseShape,
   type TLOnResizeHandler,
 } from "@tldraw/tldraw";
+import domtoimage from "dom-to-image";
 import { useDrawContext } from "../../DrawContext";
 
 type CardShape = TLBaseShape<
@@ -25,6 +26,7 @@ type CardShape = TLBaseShape<
 
 export class CardShapeUtil extends ShapeUtil<CardShape> {
   static override type = "data-card" as const;
+  containerRef?: HTMLElement;
 
   override onResize: TLOnResizeHandler<CardShape> = (shape, info) => {
     return {
@@ -54,12 +56,30 @@ export class CardShapeUtil extends ShapeUtil<CardShape> {
     const { renderer } = useDrawContext();
     return (
       <HTMLContainer className="relative grid">
-        {renderer?.(shape.props)}
+        <div
+          className="relative grid"
+          ref={(el: HTMLDivElement) => (this.containerRef = el)}
+        >
+          {renderer?.(shape.props)}
+        </div>
       </HTMLContainer>
     );
   }
 
   indicator(shape: CardShape) {
     return <rect width={shape.props.w} height={shape.props.h} />;
+  }
+
+  async toSvg() {
+    if (!this.containerRef)
+      return document.createElementNS("http://www.w3.org/2000/svg", "image");
+    return domtoimage.toPng(this.containerRef).then(function (dataUrl) {
+      const image = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "image"
+      );
+      image.setAttributeNS("http://www.w3.org/1999/xlink", "href", dataUrl);
+      return image;
+    });
   }
 }

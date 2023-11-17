@@ -15,6 +15,7 @@ import {
   useIsEditing,
   type TLShapeUtilFlag,
 } from "@tldraw/tldraw";
+import domtoimage from "dom-to-image";
 import { useEffect, useRef } from "react";
 import { Idle } from "./IdleState";
 import { Pointing } from "./PointingState";
@@ -45,6 +46,7 @@ const FONT_SIZE_MAP: KeyValue = {
 
 export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
   static override type = "avatar-card" as const;
+  containerRef?: HTMLElement;
 
   override canEdit = () => true;
   override hideResizeHandles: TLShapeUtilFlag<AvatarShape> = () => true;
@@ -86,7 +88,7 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
       inputRef.current?.focus();
     }, [isEditing]);
     return (
-      <>
+      <div ref={(el: HTMLDivElement) => (this.containerRef = el)}>
         <svg id={shape.id} viewBox="0 0 30 30">
           <path
             width={size}
@@ -118,7 +120,20 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
             `${shape.props.text}`
           }
         </div>
-      </>
+      </div>
     );
+  }
+
+  async toSvg() {
+    if (!this.containerRef)
+      return document.createElementNS("http://www.w3.org/2000/svg", "image");
+    return await domtoimage.toPng(this.containerRef).then(function (dataUrl) {
+      const image = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "image"
+      );
+      image.setAttributeNS("http://www.w3.org/1999/xlink", "href", dataUrl);
+      return image;
+    });
   }
 }
