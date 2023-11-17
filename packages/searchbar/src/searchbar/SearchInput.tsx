@@ -26,7 +26,6 @@ export const SearchInput = () => {
 
   return (
     <AxField.Suggest
-      {...{ onFocus: () => setFocused(true), onBlur: () => setFocused(false) }}
       placeholder={t("placeholder")}
       value={query ?? ""}
       options={options}
@@ -37,6 +36,7 @@ export const SearchInput = () => {
         return (await onSelect?.(v)) ?? true;
       }}
       onChange={handleChange}
+      onFocusChange={setFocused}
       onEnterPressed={() => handleSearch(query)}
       defaultItems={defaultQueryList as AnyObject}
     >
