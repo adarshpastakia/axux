@@ -259,7 +259,7 @@ export const useRanger = (opts: RangerConfig) => {
       if (["ArrowLeft", "ArrowUp", "ArrowRight", "ArrowDown"].includes(e.key)) {
         setActiveHandleIndex(i);
         const direction = ["ArrowLeft", "ArrowDown"].includes(e.key) ? -1 : 1;
-        const newValue = getNextStep(values[i], direction);
+        const newValue = +getNextStep(values[i], direction).toFixed(3);
         const newValues = [
           ...values.slice(0, i),
           ...[newValue],
