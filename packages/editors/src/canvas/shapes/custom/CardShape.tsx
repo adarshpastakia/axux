@@ -73,7 +73,7 @@ export class CardShapeUtil extends ShapeUtil<CardShape> {
   async toSvg() {
     if (!this.containerRef)
       return document.createElementNS("http://www.w3.org/2000/svg", "image");
-    return domtoimage.toPng(this.containerRef).then(function (dataUrl) {
+    return await domtoimage.toPng(this.containerRef).then(function (dataUrl) {
       const image = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "image"
