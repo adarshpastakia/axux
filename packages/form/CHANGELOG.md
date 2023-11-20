@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.5](https://github.com/adarshpastakia/axux/compare/v3.0.4...v3.0.5) (2023-11-20)
+
+### Bug Fixes
+
+- **Slider:** correct precision on keypress ([b88db42](https://github.com/adarshpastakia/axux/commit/b88db42dbaa7eaa5987554e2fe85a6870bf06f97))
+
 ## [3.0.4](https://github.com/adarshpastakia/axux/compare/v3.0.3...v3.0.4) (2023-11-17)
 
 ### Bug Fixes
