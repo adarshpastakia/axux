@@ -18,11 +18,13 @@ import "@tldraw/tldraw/tldraw.css";
 import {
   useCallback,
   useEffect,
+  useImperativeHandle,
   useLayoutEffect,
   useMemo,
   useState,
   type DragEvent,
   type FC,
+  type RefObject,
 } from "react";
 import { DrawContextProvider } from "./DrawContext";
 import {
@@ -38,6 +40,7 @@ export interface DrawProps {
   snapshot?: StoreSnapshot<TLRecord>;
   onUpdate?: (snapshot: StoreSnapshot<TLRecord>) => void;
   renderer?: (props: KeyValue) => AnyObject;
+  canvasRef?: RefObject<{ exportPages: () => KeyValue<string> }>;
 }
 
 const TypeMap: KeyValue = {
@@ -47,7 +50,11 @@ const TypeMap: KeyValue = {
   card: "data-card",
 };
 
-export const AxDrawCanvas: FC<DrawProps> = ({ snapshot, renderer }) => {
+export const AxDrawCanvas: FC<DrawProps> = ({
+  snapshot,
+  renderer,
+  canvasRef,
+}) => {
   const [editorRef, setEditor] = useState<Editor>();
   const isDark = useIsDark();
 
@@ -91,6 +98,12 @@ export const AxDrawCanvas: FC<DrawProps> = ({ snapshot, renderer }) => {
     },
     [editorRef]
   );
+
+  useImperativeHandle(canvasRef, () => ({
+    exportPages() {
+      return {};
+    },
+  }));
 
   const TLDraw = useMemo(
     () => (
