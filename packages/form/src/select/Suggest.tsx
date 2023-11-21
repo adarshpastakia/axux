@@ -234,9 +234,12 @@ export const SuggestInput: FC<SuggestProps> = ({
                 isFocused
                   ? {
                       overflow: "auto",
+                      whiteSpace: "normal",
+                    }
+                  : {
+                      overflow: "hidden",
                       whiteSpace: "nowrap",
                     }
-                  : undefined
               }
               placeholder={placeholder}
               data-invalid={isInvalid}
