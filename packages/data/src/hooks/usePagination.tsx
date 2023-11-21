@@ -81,12 +81,14 @@ export const usePagination = ({
   /** ***************** set page *******************/
   useEffect(() => {
     setPage(Math.min(currentPage, totalPages - 1));
+    onChange?.(Math.min(currentPage, totalPages - 1));
   }, [currentPage, totalPages]);
 
   const headLabel = useMemo(
     () => (
       <span className="text-muted">
-        {page * perPage + 1} -{" "}
+        {page * perPage + 1}
+        &nbsp;-&nbsp;
         {Math.min(page * perPage + perPage, totalRecords)}
       </span>
     ),
