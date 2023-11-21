@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.6](https://github.com/adarshpastakia/axux/compare/v3.0.5...v3.0.6) (2023-11-21)
+
+### Bug Fixes
+
+- **Pagination:** reset page on list change ([5ab28cd](https://github.com/adarshpastakia/axux/commit/5ab28cd46ab6b2206fb722b15a99b3b1f71fc2a5))
+- **Suggest:** nowrap when not focused ([c2d206b](https://github.com/adarshpastakia/axux/commit/c2d206bf7338082fd10b7d85fdf0c39c2436c479))
+
 ## [3.0.5](https://github.com/adarshpastakia/axux/compare/v3.0.4...v3.0.5) (2023-11-20)
 
 ### Bug Fixes
