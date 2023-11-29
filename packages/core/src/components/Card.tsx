@@ -42,7 +42,7 @@ export const AxCard = forwardRef<HTMLElement, CardProps>(
       }),
       [rest, isPlain, isActive, className]
     );
-    return <Link {...props} ref={ref} draggable />;
+    return <Link {...props} ref={ref} />;
   }
 );
 AxCard.displayName = "AxCard";
