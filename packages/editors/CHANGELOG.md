@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.7](https://github.com/adarshpastakia/axux/compare/v3.0.6...v3.0.7) (2023-11-29)
+
+### Bug Fixes
+
+- **Canvas:** update shapes and avatar text ([9739cf7](https://github.com/adarshpastakia/axux/commit/9739cf7ff224acdc3dadf1ca3d3f9eae0dbce2e5))
+
 ## [3.0.6](https://github.com/adarshpastakia/axux/compare/v3.0.5...v3.0.6) (2023-11-21)
 
 **Note:** Version bump only for package @axux/editors
