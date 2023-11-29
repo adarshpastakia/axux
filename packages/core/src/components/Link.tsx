@@ -60,6 +60,7 @@ export const Link = forwardRef<
       type,
       dragKey,
       dragData,
+      draggable,
       ...props
     },
     ref
@@ -82,9 +83,13 @@ export const Link = forwardRef<
             target={target}
             replace={replace}
             download={download}
-            onDragStart={(e: DragEvent) =>
-              dragKey &&
-              e.dataTransfer?.setData(dragKey, JSON.stringify(dragData))
+            draggable={draggable}
+            onDragStart={
+              !draggable
+                ? undefined
+                : (e: DragEvent) =>
+                    dragKey &&
+                    e.dataTransfer?.setData(dragKey, JSON.stringify(dragData))
             }
             onClick={onClick}
             onMouseDown={onMouseDown}
@@ -96,9 +101,13 @@ export const Link = forwardRef<
             href={href}
             target={target}
             download={download}
-            onDragStart={(e: DragEvent) =>
-              dragKey &&
-              e.dataTransfer?.setData(dragKey, JSON.stringify(dragData))
+            draggable={draggable}
+            onDragStart={
+              !draggable
+                ? undefined
+                : (e: DragEvent) =>
+                    dragKey &&
+                    e.dataTransfer?.setData(dragKey, JSON.stringify(dragData))
             }
             onClick={onClick}
             onMouseDown={onMouseDown}
@@ -107,9 +116,13 @@ export const Link = forwardRef<
           <T
             {...props}
             type={type}
-            onDragStart={(e: DragEvent) =>
-              dragKey &&
-              e.dataTransfer?.setData(dragKey, JSON.stringify(dragData))
+            draggable={draggable}
+            onDragStart={
+              !draggable
+                ? undefined
+                : (e: DragEvent) =>
+                    dragKey &&
+                    e.dataTransfer?.setData(dragKey, JSON.stringify(dragData))
             }
             ref={linkRef as AnyObject}
             onClick={onClick}
