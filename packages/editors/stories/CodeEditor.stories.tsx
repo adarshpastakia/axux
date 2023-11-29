@@ -9,7 +9,6 @@ loader.config({ monaco });
 const meta: Meta<typeof AxMonacoEditor> = {
   component: AxMonacoEditor,
   title: "@editors/Monaco Editor",
-  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
     controls: { exclude: "value" },
@@ -19,7 +18,7 @@ const meta: Meta<typeof AxMonacoEditor> = {
 export default meta;
 type Story = StoryObj<typeof AxMonacoEditor>;
 
-export const Example: Story = {
+export const MonacoEditor: Story = {
   render: (args) => (
     <div className="h-full min-h-[600px] grid overflow-hidden">
       <div className="w-full h-full ax-section grid-area-[unset]">

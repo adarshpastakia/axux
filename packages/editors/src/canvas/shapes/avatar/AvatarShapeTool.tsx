@@ -19,11 +19,11 @@ import domtoimage from "dom-to-image";
 import { useEffect, useRef } from "react";
 import { Idle } from "./IdleState";
 import { Pointing } from "./PointingState";
-import { type AvatarShape } from "./type";
+import { AvatarShapeProps, type AvatarShape } from "./type";
 
 /** @public */
 export class AvatarShapeTool extends StateNode {
-  static override id = "avatar-card";
+  static override id = "avatar";
   static override initial = "idle";
   static override children = () => [Idle, Pointing];
 
@@ -45,7 +45,8 @@ const FONT_SIZE_MAP: KeyValue = {
 };
 
 export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
-  static override type = "avatar-card" as const;
+  static override type = "avatar" as const;
+  static override props = AvatarShapeProps;
   containerRef?: HTMLElement;
 
   override canEdit = () => true;
@@ -60,7 +61,7 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
       size: "s",
       font: "draw",
       text: "person",
-      align: "center",
+      align: "middle",
     } as AnyObject;
   }
 
@@ -78,17 +79,37 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
     return <rect width={size} height={size} />;
   }
 
+  onChange = (shape: AvatarShape, newText: string) => {
+    const {
+      id,
+      type,
+      props: { text },
+    } = shape as AnyObject;
+
+    if (newText && text.trim() !== newText.trim()) {
+      this.editor.updateShapes([
+        {
+          id,
+          type,
+          props: {
+            text: newText.trim(),
+          },
+        },
+      ]);
+    }
+  };
+
   component(shape: AvatarShape) {
     const isDark = useIsDark();
-    const inputRef = useRef<HTMLDivElement>(null);
     const isEditing = useIsEditing(shape.id);
     const size = SIZE_MAP[shape.props.size as AnyObject];
     const theme: KeyValue = getDefaultColorTheme({ isDarkMode: isDark });
+    const inputRef = useRef("");
     useEffect(() => {
-      inputRef.current?.focus();
+      !isEditing && inputRef.current && this.onChange(shape, inputRef.current);
     }, [isEditing]);
     return (
-      <div ref={(el: HTMLDivElement) => (this.containerRef = el)}>
+      <div data-shape-id={shape.id}>
         <svg id={shape.id} viewBox="0 0 30 30">
           <path
             width={size}
@@ -99,35 +120,52 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
           />
         </svg>
         <div
-          ref={inputRef}
           id={shape.id}
           className="tl-text-label"
+          data-isediting={isEditing}
           data-font={shape.props.font}
-          contentEditable={isEditing}
-          onChange={(e) =>
-            (shape.props.text = e.currentTarget.innerText as AnyObject)
-          }
           style={{
             alignItems: "end",
-            textAlign: "center",
-            border: isEditing ? "2px solid currentColor" : "",
             fontSize: FONT_SIZE_MAP[shape.props.size as AnyObject],
             color: theme[shape.props.color as AnyObject].solid,
           }}
         >
-          {
-            // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
-            `${shape.props.text}`
-          }
+          <div className="tl-text-label__inner">
+            <div className="tl-text tl-text-content" dir="ltr">
+              {
+                // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
+                `${shape.props.text}`
+              }
+            </div>
+            {isEditing && (
+              <textarea
+                className="tl-text tl-text-input"
+                name="text"
+                tabIndex={-1}
+                autoComplete="false"
+                autoCapitalize="false"
+                autoCorrect="false"
+                autoSave="false"
+                placeholder=""
+                spellCheck="true"
+                wrap="off"
+                dir="auto"
+                ref={(el) => (el?.select(), el?.focus())}
+                onChange={(e) => (inputRef.current = e.target.value)}
+                defaultValue={shape.props.text as AnyObject}
+              />
+            )}
+          </div>
         </div>
       </div>
     );
   }
 
-  async toSvg() {
-    if (!this.containerRef)
+  async toSvg(shape: AvatarShape) {
+    const el = document.querySelector(`div[data-shape-id="${shape.id}"]`);
+    if (!el)
       return document.createElementNS("http://www.w3.org/2000/svg", "image");
-    return await domtoimage.toPng(this.containerRef).then(function (dataUrl) {
+    return await domtoimage.toPng(el).then(function (dataUrl) {
       const image = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "image"

@@ -26,7 +26,6 @@ type CardShape = TLBaseShape<
 
 export class CardShapeUtil extends ShapeUtil<CardShape> {
   static override type = "data-card" as const;
-  containerRef?: HTMLElement;
 
   override onResize: TLOnResizeHandler<CardShape> = (shape, info) => {
     return {
@@ -39,8 +38,8 @@ export class CardShapeUtil extends ShapeUtil<CardShape> {
 
   getDefaultProps(): CardShape["props"] {
     return {
-      w: 200,
-      h: 100,
+      w: 300,
+      h: 200,
     };
   }
 
@@ -56,10 +55,7 @@ export class CardShapeUtil extends ShapeUtil<CardShape> {
     const { renderer } = useDrawContext();
     return (
       <HTMLContainer className="relative grid">
-        <div
-          className="relative grid"
-          ref={(el: HTMLDivElement) => (this.containerRef = el)}
-        >
+        <div className="relative grid" data-shape-id={shape.id}>
           {renderer?.(shape.props)}
         </div>
       </HTMLContainer>
@@ -70,10 +66,11 @@ export class CardShapeUtil extends ShapeUtil<CardShape> {
     return <rect width={shape.props.w} height={shape.props.h} />;
   }
 
-  async toSvg() {
-    if (!this.containerRef)
+  async toSvg(shape: CardShape) {
+    const el = document.querySelector(`div[data-shape-id="${shape.id}"]`);
+    if (!el)
       return document.createElementNS("http://www.w3.org/2000/svg", "image");
-    return await domtoimage.toPng(this.containerRef).then(function (dataUrl) {
+    return await domtoimage.toPng(el).then(function (dataUrl) {
       const image = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "image"

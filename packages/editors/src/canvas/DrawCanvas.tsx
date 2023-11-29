@@ -33,6 +33,7 @@ import {
 } from "./shapes/avatar/AvatarShapeTool";
 import { AudioShapeUtil } from "./shapes/custom/AudioShape";
 import { CardShapeUtil } from "./shapes/custom/CardShape";
+import { FileShapeUtil } from "./shapes/custom/FileShape";
 import { ImageShapeUtil } from "./shapes/custom/ImageShape";
 import { VideoShapeUtil } from "./shapes/custom/VideoShape";
 
@@ -47,6 +48,7 @@ const TypeMap: KeyValue = {
   image: "image-card",
   video: "video-card",
   audio: "audio-card",
+  file: "file-card",
   card: "data-card",
 };
 
@@ -115,6 +117,7 @@ export const AxDrawCanvas: FC<DrawProps> = ({
           ImageShapeUtil,
           VideoShapeUtil,
           CardShapeUtil,
+          FileShapeUtil,
         ]}
         tools={[AvatarShapeTool]}
         onMount={setEditor}

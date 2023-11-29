@@ -79,8 +79,8 @@ export class VideoShapeUtil extends ShapeUtil<VideoShape> {
     return (
       <HTMLContainer className="relative grid">
         <div
-          ref={(el: HTMLDivElement) => (this.containerRef = el)}
-          className="bg-zinc-900 relative p-1 flex flex-col"
+          data-shape-id={shape.id}
+          className="bg-zinc-900 relative p-1 flex flex-col overflow-hidden"
         >
           <video
             controls
@@ -89,7 +89,19 @@ export class VideoShapeUtil extends ShapeUtil<VideoShape> {
             poster={shape.props.poster}
             className="object-contain flex-1 pointer-events-auto overflow-hidden"
           />
+          <img
+            src={shape.props.poster}
+            className="object-contain flex-1 pointer-events-auto overflow-hidden hidden"
+          />
           <div className="bg-zinc-800/80 text-white items-center py-1 px-2 flex gap-1 text-sm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width={16}
+              height={16}
+            >
+              <path d="M17,10.5V7A1,1 0 0,0 16,6H4A1,1 0 0,0 3,7V17A1,1 0 0,0 4,18H16A1,1 0 0,0 17,17V13.5L21,17.5V6.5L17,10.5Z" />
+            </svg>
             <div className="truncate flex-1">{shape.props.fileName}</div>
             <div>{Format.bytes(shape.props.fileSize ?? 0)}</div>
           </div>
@@ -102,15 +114,20 @@ export class VideoShapeUtil extends ShapeUtil<VideoShape> {
     return <rect width={shape.props.w} height={shape.props.h} />;
   }
 
-  async toSvg() {
-    if (!this.containerRef)
+  async toSvg(shape: VideoShape) {
+    const el = document.querySelector(`div[data-shape-id="${shape.id}"]`);
+    if (!el)
       return document.createElementNS("http://www.w3.org/2000/svg", "image");
-    return await domtoimage.toPng(this.containerRef).then(function (dataUrl) {
+    (el.childNodes.item(0) as HTMLElement).style.display = "none";
+    (el.childNodes.item(1) as HTMLElement).style.display = "block";
+    return await domtoimage.toPng(el).then(function (dataUrl) {
       const image = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "image"
       );
       image.setAttributeNS("http://www.w3.org/1999/xlink", "href", dataUrl);
+      (el.childNodes.item(0) as HTMLElement).style.display = "block";
+      (el.childNodes.item(1) as HTMLElement).style.display = "none";
       return image;
     });
   }

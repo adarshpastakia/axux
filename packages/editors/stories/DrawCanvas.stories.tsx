@@ -6,7 +6,6 @@ import snapshot from "./snapshot.json";
 const meta: Meta<typeof AxDrawCanvas> = {
   component: AxDrawCanvas,
   title: "@editors/Draw Canvas",
-  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
     controls: { exclude: "snapshot" },
@@ -16,7 +15,7 @@ const meta: Meta<typeof AxDrawCanvas> = {
 export default meta;
 type Story = StoryObj<typeof AxDrawCanvas>;
 
-export const Example: Story = {
+export const DrawCanvas: Story = {
   render: (args) => (
     <div className="h-full min-h-[600px] grid overflow-hidden">
       <div className="w-full h-full ax-section grid-area-[unset]">
@@ -46,11 +45,24 @@ export const Example: Story = {
                   type: "video",
                   src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                   poster: "https://picsum.photos/1920/1080?",
-                  fileName: "Image",
+                  fileName: "Video",
                   fileSize: 123456,
                 }}
               >
                 Sample video
+              </AxCard>
+              <AxCard
+                draggable
+                dragKey="axux/canvas"
+                dragData={{
+                  type: "file",
+                  icon: "https://picsum.photos/48/48?",
+                  fileType: "PDF",
+                  fileName: "Some file",
+                  fileSize: 123456,
+                }}
+              >
+                Sample file
               </AxCard>
               <AxCard
                 draggable
@@ -62,6 +74,16 @@ export const Example: Story = {
               >
                 Sample card
               </AxCard>
+              <AxCard
+                draggable
+                dragKey="axux/canvas"
+                dragData={{
+                  type: "card",
+                  message: "Sample message in a card\nmore lines",
+                }}
+              >
+                Sample card 2
+              </AxCard>
             </AxContent>
           </AxAside>
         </AxSection>
@@ -70,6 +92,5 @@ export const Example: Story = {
   ),
   args: {
     snapshot,
-    assetsPath: "/@tldraw",
   },
 };
