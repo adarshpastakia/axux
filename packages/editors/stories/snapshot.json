@@ -66,6 +66,7 @@
       "type": "audio-card",
       "props": {
         "src": "static/media/assets/sample.mp3",
+        "poster": "https://picsum.photos/1920/1080?",
         "fileName": "Sample",
         "fileSize": 123456
       },
@@ -81,7 +82,7 @@
       "opacity": 1,
       "meta": {},
       "id": "shape:usertest",
-      "type": "avatar-card",
+      "type": "avatar",
       "props": {
         "color": "black",
         "fill": "none",
@@ -144,7 +145,8 @@
           "audio-card": 0,
           "image-card": 0,
           "video-card": 0,
-          "avatar-card": 0
+          "file-card": 0,
+          "avatar": 0
         }
       },
       "instance_presence": {

@@ -4,7 +4,6 @@ import { AxMdxEditor } from "../src";
 const meta: Meta<typeof AxMdxEditor> = {
   component: AxMdxEditor,
   title: "@editors/MDX Editor",
-  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
     controls: { exclude: "value" },
@@ -14,7 +13,7 @@ const meta: Meta<typeof AxMdxEditor> = {
 export default meta;
 type Story = StoryObj<typeof AxMdxEditor>;
 
-export const Example: Story = {
+export const MDXEditor: Story = {
   render: (args) => (
     <div className="h-full min-h-[600px] grid overflow-hidden">
       <div className="w-full h-full ax-section grid-area-[unset]">

@@ -56,8 +56,8 @@ export class Pointing extends StateNode {
               dash: "draw",
               size: "m",
               font: "draw",
-              text: "",
-              align: "center",
+              text: "person",
+              align: "middle",
             } as AnyObject,
           },
         ])
