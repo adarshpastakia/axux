@@ -51,6 +51,11 @@
 
     & .ax-empty__icon {
       font-size: 4em;
+
+      & > svg {
+        width: 1em;
+        height: 1em;
+      }
     }
     & .ax-empty__title {
       @apply font-medium py-1 text-default;
