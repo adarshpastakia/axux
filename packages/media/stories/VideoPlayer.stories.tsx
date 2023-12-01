@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AxVideoPlayer } from "../src";
+import src from "/assets/small_video.mp4";
 
 const meta: Meta<typeof AxVideoPlayer> = {
   component: AxVideoPlayer,
@@ -14,12 +15,12 @@ const meta: Meta<typeof AxVideoPlayer> = {
 export default meta;
 type Story = StoryObj<typeof AxVideoPlayer>;
 
-const markers: [number, number][] = new Array(250)
+const markers: [number, number][] = new Array(300)
   .fill([])
-  .map((_, i) => [Math.random() * 596, Math.random()]);
-const scenes: [number, string][] = new Array(250)
+  .map((_, i) => [Math.random() * 90, Math.random()]);
+const scenes: [number, string][] = new Array(10)
   .fill([])
-  .map((_, i) => [Math.random() * 596, "https://picsum.photos/192/108?" + i]);
+  .map((_, i) => [Math.random() * 30, "https://picsum.photos/192/108?" + i]);
 
 export const Example: Story = {
   render: (args) => {
@@ -32,7 +33,7 @@ export const Example: Story = {
     );
   },
   args: {
-    src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    src,
     markers,
     scenes,
   },

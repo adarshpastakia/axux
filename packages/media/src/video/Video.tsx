@@ -8,14 +8,14 @@
 
 import { AxAnimation, AxIcon } from "@axux/core";
 import {
-  type FC,
   memo,
-  type ReactEventHandler,
-  type RefObject,
   useCallback,
   useEffect,
   useRef,
   useState,
+  type FC,
+  type ReactEventHandler,
+  type RefObject,
 } from "react";
 import { Canvas, type CanvasRef } from "../canvas/Canvas";
 import { Icons } from "../types/icons";
@@ -25,6 +25,9 @@ export interface VideoProps {
   poster?: string;
   isNsfw: boolean;
   isFit: boolean;
+  width: number;
+  height: number;
+  rotate: number;
   showVtt: boolean;
   isPlaying: boolean;
   vttText?: string;
@@ -46,6 +49,9 @@ export const Video: FC<VideoProps> = memo(
     isNsfw,
     showVtt,
     vttText,
+    width,
+    height,
+    rotate,
     onLoad,
     onError,
     onChange,
@@ -68,7 +74,7 @@ export const Video: FC<VideoProps> = memo(
           height: videoRef.current.videoHeight * ratio,
         });
       }
-    }, []);
+    }, [isFit]);
 
     useEffect(() => {
       if (videoRef.current != null) {
@@ -81,7 +87,7 @@ export const Video: FC<VideoProps> = memo(
           el.removeEventListener("loadedmetadata", resizeHandler);
         };
       }
-    }, []);
+    }, [resizeHandler]);
 
     useEffect(() => {
       overlayRef.current != null && (overlayRef.current.dataset.show = "true");
@@ -125,10 +131,21 @@ export const Video: FC<VideoProps> = memo(
           onLoadedMetadata={onLoad}
           onTimeUpdate={onChange}
           onError={onError}
+          style={
+            {
+              "--rotate": `${rotate}deg`,
+              width,
+              height,
+            } as AnyObject
+          }
         >
           {showVtt && <track src={vttSrc} default />}
         </video>
-        <Canvas canvas={canvasRef} media={videoRef} style={style} />
+        <Canvas
+          canvas={canvasRef}
+          media={videoRef}
+          style={{ "--rotate": `${rotate}deg`, ...style } as AnyObject}
+        />
 
         <AxIcon
           icon={isPlaying ? Icons.iconPlay : Icons.iconPause}

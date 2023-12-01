@@ -10,9 +10,6 @@ import { AxAnimation, AxIcon } from "@axux/core";
 import { HotKeyWrapper } from "@axux/core/dist/hotkeys/HotKeyWrapper";
 import {
   forwardRef,
-  type ReactEventHandler,
-  type RefObject,
-  type SyntheticEvent,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -21,6 +18,9 @@ import {
   useReducer,
   useRef,
   useTransition,
+  type ReactEventHandler,
+  type RefObject,
+  type SyntheticEvent,
 } from "react";
 import { type CanvasRef } from "../canvas/Canvas";
 import { Video } from "./Video";
@@ -32,6 +32,9 @@ import { SceneList } from "./SceneList";
 import { Tools } from "./Tools";
 
 interface PlayerState {
+  width: number;
+  height: number;
+  rotate: number;
   isFit: boolean;
   showVtt: boolean;
   isLoading: boolean;
@@ -40,7 +43,16 @@ interface PlayerState {
 }
 
 interface PlayerActions {
-  type: "init" | "loaded" | "errored" | "play" | "pause" | "fit" | "vtt";
+  type:
+    | "init"
+    | "loaded"
+    | "errored"
+    | "play"
+    | "pause"
+    | "resize"
+    | "rotate"
+    | "fit"
+    | "vtt";
   payload?: AnyObject;
 }
 
@@ -112,12 +124,16 @@ export const AxVideoPlayer = forwardRef<
   ) => {
     const canvasRef = useRef<CanvasRef>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const [, startTransition] = useTransition();
 
     const initState = useCallback(
       () =>
         ({
+          rotate: 0,
+          width: 0,
+          height: 0,
           isLoading: true,
           isErrored: false,
           isFit: false,
@@ -127,6 +143,33 @@ export const AxVideoPlayer = forwardRef<
       []
     );
 
+    const calculateSize = useCallback((rotate: number, fitToView: boolean) => {
+      const el = containerRef.current;
+      const vid = videoRef.current;
+      if (el != null && vid && vid.videoWidth) {
+        const turn = rotate % 180 !== 0;
+        let width = vid.videoWidth;
+        let height = vid.videoHeight;
+        const containerWidth = turn ? el.offsetHeight : el.offsetWidth;
+        const containerHeight = turn ? el.offsetWidth : el.offsetHeight;
+        if (fitToView) {
+          // if container ratio is more than image ratio height set to container 100%
+          if (containerWidth / containerHeight > width / height) {
+            width = width * (containerHeight / height);
+            height = containerHeight;
+          } else {
+            height = height * (containerWidth / width);
+            width = containerWidth;
+          }
+        } else {
+          width = Math.min(width, containerWidth);
+          height = Math.min(height, containerHeight);
+        }
+        return { width, height };
+      }
+      return { width: "100%", height: "100%" } as AnyObject;
+    }, []);
+
     const reducer = useCallback(
       (state: PlayerState, action: PlayerActions) => {
         if (action.type === "init") {
@@ -135,6 +178,10 @@ export const AxVideoPlayer = forwardRef<
         if (action.type === "loaded") {
           state.isLoading = false;
           state.isErrored = false;
+          state = {
+            ...state,
+            ...calculateSize(state.rotate, state.isFit),
+          };
         }
         if (action.type === "errored") {
           state.isErrored = true;
@@ -148,9 +195,31 @@ export const AxVideoPlayer = forwardRef<
         }
         if (action.type === "fit") {
           state.isFit = action.payload;
+          state = {
+            ...state,
+            ...calculateSize(state.rotate, state.isFit),
+          };
         }
         if (action.type === "vtt") {
           state.showVtt = action.payload;
+        }
+        if (action.type === "rotate") {
+          state.rotate =
+            action.payload > 270
+              ? 0
+              : action.payload < 0
+              ? 270
+              : action.payload;
+          state = {
+            ...state,
+            ...calculateSize(state.rotate, state.isFit),
+          };
+        }
+        if (action.type === "resize") {
+          state = {
+            ...state,
+            ...calculateSize(state.rotate, state.isFit),
+          };
         }
         return { ...state };
       },
@@ -179,8 +248,8 @@ export const AxVideoPlayer = forwardRef<
               play: async () => await videoRef.current?.play(),
               playAt: async (time: number) =>
                 await (videoRef.current &&
-                ((videoRef.current.currentTime = time),
-                videoRef.current?.play())),
+                  ((videoRef.current.currentTime = time),
+                  videoRef.current?.play())),
               pause: () => videoRef.current?.pause(),
               currentTime: () => videoRef.current?.currentTime,
               on: videoRef.current?.addEventListener.bind(videoRef.current),
@@ -190,6 +259,23 @@ export const AxVideoPlayer = forwardRef<
           : (null as AnyObject),
       []
     );
+
+    const resizeHandler = useCallback(
+      (size: KeyValue) => {
+        dispatch({ type: "resize" });
+      },
+      [state.rotate]
+    );
+    useEffect(() => {
+      if (videoRef.current != null) {
+        const ob = new ResizeObserver(resizeHandler);
+        ob.observe(videoRef.current);
+
+        return () => {
+          ob.disconnect();
+        };
+      }
+    }, []);
 
     useLayoutEffect(() => {
       dispatch({ type: "init" });
@@ -252,6 +338,7 @@ export const AxVideoPlayer = forwardRef<
         >
           <div
             className="ax-media__container ax-video__wrapper"
+            ref={containerRef}
             onClick={() => {
               videoRef.current?.paused
                 ? videoRef.current?.play()
@@ -263,8 +350,11 @@ export const AxVideoPlayer = forwardRef<
               poster={poster}
               vttText={vttText}
               isFit={state.isFit}
+              rotate={state.rotate}
               showVtt={state.showVtt}
               isPlaying={state.isPlaying}
+              width={state.width}
+              height={state.height}
               videoRef={videoRef}
               canvasRef={canvasRef}
               isNsfw={!!isNsfw}
@@ -286,6 +376,8 @@ export const AxVideoPlayer = forwardRef<
             isFit={state.isFit}
             showVtt={state.showVtt}
             hasVtt={!isEmpty(vttText)}
+            rotate={state.rotate}
+            onRotate={(rotate) => dispatch({ type: "rotate", payload: rotate })}
             onToggleSrt={() =>
               dispatch({ type: "vtt", payload: !state.showVtt })
             }
