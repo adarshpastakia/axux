@@ -246,11 +246,16 @@
   .ax-video__container {
     @apply absolute inset-0 overflow-hidden grid grid-cols-1 grid-rows-1 place-items-center m-1;
 
+    & video,
+    & canvas {
+      transform: rotate(var(--rotate));
+    }
+
     & video {
-      @apply object-contain max-w-full max-h-full;
+      @apply object-none max-w-full max-h-full;
 
       &[data-fit="true"] {
-        @apply w-full h-full;
+        @apply object-contain;
       }
     }
     & canvas {

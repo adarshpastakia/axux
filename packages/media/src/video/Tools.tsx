@@ -26,10 +26,12 @@ export interface ToolsProps {
   isDisabled: boolean;
   showVtt: boolean;
   hasVtt: boolean;
+  rotate: number;
   videoRef: RefObject<HTMLVideoElement>;
   markers?: Array<[time: number, score: number]>;
   onToggleFit: () => void;
   onToggleSrt: () => void;
+  onRotate: (rotate: number) => void;
 }
 
 /*
@@ -45,9 +47,11 @@ export const Tools: FC<ToolsProps> = memo(
     isDisabled,
     videoRef,
     isFit,
+    rotate,
     markers = [],
     onToggleFit,
     onToggleSrt,
+    onRotate,
     showVtt,
     hasVtt,
   }: ToolsProps) => {
@@ -122,14 +126,16 @@ export const Tools: FC<ToolsProps> = memo(
         <AxHotKey global keyCombo="x" handler={handleVolume} />
         <AxHotKey global keyCombo="," handler={() => handleSeek(time - 5)} />
         <AxHotKey global keyCombo="." handler={() => handleSeek(time + 5)} />
+        <AxHotKey global keyCombo="[" handler={() => onRotate(rotate - 90)} />
+        <AxHotKey global keyCombo="]" handler={() => onRotate(rotate + 90)} />
         <AxHotKey
           global
-          keyCombo="["
+          keyCombo="shift+{"
           handler={() => handleSpeed(speed - 0.5)}
         />
         <AxHotKey
           global
-          keyCombo="]"
+          keyCombo="shift+}"
           handler={() => handleSpeed(speed + 0.5)}
         />
         <AxHotKey
@@ -218,6 +224,18 @@ export const Tools: FC<ToolsProps> = memo(
               onClick={onToggleSrt}
             />
           )}
+          <AxDivider vertical size="sm" />
+          <AxIcon
+            className="ax-media__tool"
+            icon={Icons.iconRotateCCW}
+            onClick={() => onRotate(rotate - 90)}
+          />
+          <AxIcon
+            className="ax-media__tool"
+            icon={Icons.iconRotateCW}
+            onClick={() => onRotate(rotate + 90)}
+          />
+          <label className="basis-24">Rotate: {rotate}°</label>
           <AxDivider vertical size="xs" />
           <TimeSlider
             duration={duration}
