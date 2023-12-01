@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-base-to-string */
 /**
  * AxUX React+TailwindCSS UI Framework
  * @author    : Adarsh Pastakia
@@ -7,12 +9,14 @@
  */
 
 import { useIsDark } from "@axux/core";
+import { handleEnter } from "@axux/utilities/dist/handlers";
 import { StateNode } from "@tldraw/editor";
 import {
   Rectangle2d,
   ShapeUtil,
   getDefaultColorTheme,
   useIsEditing,
+  type Editor,
   type TLShapeUtilFlag,
 } from "@tldraw/tldraw";
 import domtoimage from "dom-to-image";
@@ -47,7 +51,8 @@ const FONT_SIZE_MAP: KeyValue = {
 export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
   static override type = "avatar" as const;
   static override props = AvatarShapeProps;
-  containerRef?: HTMLElement;
+
+  el = document.createElement("div");
 
   override canEdit = () => true;
   override hideResizeHandles: TLShapeUtilFlag<AvatarShape> = () => true;
@@ -65,18 +70,42 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
     } as AnyObject;
   }
 
-  getGeometry(shape: AvatarShape) {
+  constructor(editor: Editor) {
+    super(editor);
+    this.el.style.position = "absolute";
+    editor.getContainer().appendChild(this.el);
+  }
+
+  getSize(shape: AvatarShape) {
     const size = SIZE_MAP[shape.props.size as AnyObject];
+    this.el.innerHTML = `<div class="tl-text-label" data-font="${
+      shape.props.font
+    }" style="position:relative;align-items:end;font-size:${
+      FONT_SIZE_MAP[shape.props.size as AnyObject] as string
+    }px;">
+<div class="tl-text-label__inner">
+  <div class="tl-text tl-text-content" style="white-space:nowrap;padding:4px;">
+      ${shape.props.text}
+    </div></div></div>`;
+
+    return {
+      width: Math.max(size, this.el.offsetWidth),
+      height: +size + this.el.offsetHeight,
+    };
+  }
+
+  getGeometry(shape: AvatarShape) {
+    const { width, height } = this.getSize(shape);
     return new Rectangle2d({
-      width: size,
-      height: +size + 32,
+      width,
+      height,
       isFilled: true,
     });
   }
 
   indicator(shape: AvatarShape) {
-    const size = SIZE_MAP[shape.props.size as AnyObject];
-    return <rect width={size} height={size} />;
+    const { width, height } = this.getSize(shape);
+    return <rect width={width} height={height} />;
   }
 
   onChange = (shape: AvatarShape, newText: string) => {
@@ -105,22 +134,37 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
     const size = SIZE_MAP[shape.props.size as AnyObject];
     const theme: KeyValue = getDefaultColorTheme({ isDarkMode: isDark });
     const inputRef = useRef("");
+    const { width, height } = this.getSize(shape);
     useEffect(() => {
       !isEditing && inputRef.current && this.onChange(shape, inputRef.current);
     }, [isEditing]);
+    let bg = "transparent";
+    if (
+      (shape.props.fill as AnyObject) === "solid" ||
+      (shape.props.fill as AnyObject) === "pattern"
+    )
+      bg = theme[shape.props.color as AnyObject]?.semi;
+    if ((shape.props.fill as AnyObject) === "semi")
+      bg = isDark ? "#28292e" : "#fcfffe";
     return (
-      <div data-shape-id={shape.id}>
-        <svg id={shape.id} viewBox="0 0 30 30">
+      <div
+        data-shape-id={shape.id}
+        style={{ position: "relative", textAlign: "center", width, height }}
+      >
+        <svg
+          id={"svg-" + shape.id}
+          viewBox="0 0 30 30"
+          width={size}
+          height={size}
+        >
           <path
-            width={size}
-            height={size}
-            fill="transparent"
+            fill={bg}
             stroke={theme[shape.props.color as AnyObject]?.solid}
             d="M5 27.4996C5 20.2996 8.79988 17.0996 14.9999 17.0996C21.1999 17.0996 25.0001 20.2996 25 27.4996M14.9997 15.6001C18.4792 15.6001 21.2998 12.7794 21.2998 9.30003C21.2998 5.82062 18.4792 3 14.9997 3C11.5203 3 8.69971 5.82062 8.69971 9.30003C8.69971 12.7794 11.5203 15.6001 14.9997 15.6001Z"
           />
         </svg>
         <div
-          id={shape.id}
+          id={"label-" + shape.id}
           className="tl-text-label"
           data-isediting={isEditing}
           data-font={shape.props.font}
@@ -130,16 +174,17 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
             color: theme[shape.props.color as AnyObject].solid,
           }}
         >
-          <div className="tl-text-label__inner">
-            <div className="tl-text tl-text-content" dir="ltr">
-              {
-                // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
-                `${shape.props.text}`
-              }
+          <div className="tl-text-label__inner" style={{ minWidth: "100%" }}>
+            <div
+              className="tl-text tl-text-content"
+              style={{ whiteSpace: "nowrap", padding: 4 }}
+            >
+              {`${shape.props.text}`}
             </div>
             {isEditing && (
               <textarea
                 className="tl-text tl-text-input"
+                style={{ whiteSpace: "nowrap", padding: 4, minWidth: "100%" }}
                 name="text"
                 tabIndex={-1}
                 autoComplete="false"
@@ -151,6 +196,13 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
                 wrap="off"
                 dir="auto"
                 ref={(el) => (el?.select(), el?.focus())}
+                onKeyDown={handleEnter(
+                  () => (
+                    this.onChange(shape, inputRef.current),
+                    this.editor.setEditingShape(null)
+                  ),
+                  true
+                )}
                 onChange={(e) => (inputRef.current = e.target.value)}
                 defaultValue={shape.props.text as AnyObject}
               />

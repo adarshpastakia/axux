@@ -16,7 +16,7 @@
     },
     "shape:K3GNTxmWboi4bPI66b2RD": {
       "x": 666,
-      "y": 144,
+      "y": 184,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -24,7 +24,7 @@
       "id": "shape:K3GNTxmWboi4bPI66b2RD",
       "type": "image-card",
       "props": {
-        "src": "https://picsum.photos/1920/1080?",
+        "src": "static/media/assets/poster-dark.png",
         "fileName": "Image",
         "fileSize": 123456,
         "w": 400,
@@ -45,7 +45,7 @@
       "type": "video-card",
       "props": {
         "src": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        "poster": "https://picsum.photos/1920/1080?",
+        "poster": "static/media/assets/poster-dark.png",
         "fileName": "BigBuckBunny",
         "fileSize": 123456,
         "w": 400,
@@ -66,7 +66,7 @@
       "type": "audio-card",
       "props": {
         "src": "static/media/assets/sample.mp3",
-        "poster": "https://picsum.photos/1920/1080?",
+        "poster": "static/media/assets/poster-dark.png",
         "fileName": "Sample",
         "fileSize": 123456
       },
@@ -86,11 +86,29 @@
       "props": {
         "color": "black",
         "fill": "none",
-        "dash": "draw",
         "size": "m",
         "font": "draw",
-        "text": "Username",
-        "align": "middle"
+        "text": "Username"
+      },
+      "parentId": "page:page",
+      "index": "a4",
+      "typeName": "shape"
+    },
+    "shape:usertest2": {
+      "x": 26,
+      "y": 324,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:usertest2",
+      "type": "avatar",
+      "props": {
+        "color": "black",
+        "fill": "none",
+        "size": "m",
+        "font": "draw",
+        "text": "Long Username"
       },
       "parentId": "page:page",
       "index": "a4",

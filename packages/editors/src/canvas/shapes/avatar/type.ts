@@ -8,10 +8,8 @@
 
 import {
   DefaultColorStyle,
-  DefaultDashStyle,
   DefaultFillStyle,
   DefaultFontStyle,
-  DefaultHorizontalAlignStyle,
   DefaultSizeStyle,
   T,
   type TLBaseShape,
@@ -20,10 +18,8 @@ import {
 export const AvatarShapeProps = {
   color: DefaultColorStyle,
   fill: DefaultFillStyle,
-  dash: DefaultDashStyle,
   size: DefaultSizeStyle,
   font: DefaultFontStyle,
-  align: DefaultHorizontalAlignStyle,
   text: T.string,
 };
 
