@@ -43,12 +43,14 @@ export const FilterTag = memo(
       <AxPopover placement="bottom-start">
         <div
           className="ax-filter__tag"
+          data-test-id="filter-tag"
           data-disabled={filter.isDisabled}
           data-global={filter.isGlobal}
           data-scope={filter.isScope}
           data-type={filter.isNegative ? "exclude" : "include"}
         >
           <AxField.Checkbox
+            data-test-id="filter-checkbox"
             isInvalid={filter.isNegative}
             isChecked={!filter.isDisabled}
             // @ts-expect-error ignore
@@ -58,6 +60,7 @@ export const FilterTag = memo(
           <div>{label}</div>
           {!filter.isRequired && (
             <span
+              data-test-id="filter-remove"
               className="ax-filter__tag--close"
               onClick={(e) => (removeFilter(index), e.preventDefault())}
             >
