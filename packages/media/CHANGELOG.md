@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.8](https://github.com/adarshpastakia/axux/compare/v3.0.7...v3.0.8) (2023-12-01)
+
+### Bug Fixes
+
+- **VideoPlayer:** add rotate action ([149d3cc](https://github.com/adarshpastakia/axux/commit/149d3cc90ecd150739e8c3e8df909d2a48556bc4))
+
 ## [3.0.7](https://github.com/adarshpastakia/axux/compare/v3.0.6...v3.0.7) (2023-11-29)
 
 **Note:** Version bump only for package @axux/media

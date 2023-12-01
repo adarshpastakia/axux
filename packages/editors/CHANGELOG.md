@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.8](https://github.com/adarshpastakia/axux/compare/v3.0.7...v3.0.8) (2023-12-01)
+
+### Bug Fixes
+
+- **DrawCanvas:** export svg ([f656509](https://github.com/adarshpastakia/axux/commit/f65650902e8c4f82adbe24e98395bf282c9ff670))
+
 ## [3.0.7](https://github.com/adarshpastakia/axux/compare/v3.0.6...v3.0.7) (2023-11-29)
 
 ### Bug Fixes
