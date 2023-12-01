@@ -19,6 +19,7 @@ export const FilterButton = () => {
       variant="outline"
       className="ax-filterButton"
       data-enabled={showFilters}
+      data-test-id="filter-toggle"
       badge={{
         value: `${filters.length}`,
         color: showFilters ? "accent" : undefined,

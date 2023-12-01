@@ -19,6 +19,7 @@ export const SearchButton = () => {
       color={isDirty ? "warning" : "primary"}
       variant="solid"
       className="z-20"
+      data-test-id="search-button"
       onClick={() => handleSearch(query)}
     >
       {t(isDirty ? "label.update" : "label.refresh")}

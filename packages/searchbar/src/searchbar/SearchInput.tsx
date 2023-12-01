@@ -35,6 +35,7 @@ export const SearchInput = () => {
         handleSearch(v.value ?? v.toString());
         return (await onSelect?.(v)) ?? true;
       }}
+      data-test-id="search-input"
       onChange={handleChange}
       onFocusChange={setFocused}
       onEnterPressed={() => handleSearch(query)}
