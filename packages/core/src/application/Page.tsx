@@ -32,6 +32,7 @@ export const AxPage: FC<PageProps> = ({
   return (
     <div
       {...rest}
+      data-test-loading={isLoading}
       className={`ax-page ${isPaper ? "ax-paper" : ""} ${className ?? ""}`}
     >
       {isLoading && <Indicator />}

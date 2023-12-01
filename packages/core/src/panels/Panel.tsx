@@ -138,6 +138,7 @@ export const AxPanel: FC<PanelProps> & {
       <div
         {...rest}
         ref={ref}
+        data-test-loading={isLoading}
         data-expanded={expanded}
         data-collapsed={!expanded && collapsed}
         data-active-shadow={isActive}
