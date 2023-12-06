@@ -226,7 +226,8 @@ const AxGridViewComponent = <T extends KeyValue>({
   const updateCache = useCallback(
     (rowIndex: number, columnIndex: number, height: number) => {
       const size = cache.get(rowIndex) ?? [];
-      if (height !== size[columnIndex] ?? colHeight) {
+      const oldSize = size[columnIndex];
+      if (height !== oldSize ?? colHeight) {
         size[columnIndex] = height;
         cache.set(rowIndex, size);
         listRef.resetAfterRowIndex(rowIndex, false);
