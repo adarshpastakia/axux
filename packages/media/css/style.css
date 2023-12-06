@@ -252,11 +252,7 @@
     }
 
     & video {
-      @apply object-none max-w-full max-h-full;
-
-      &[data-fit="true"] {
-        @apply object-contain;
-      }
+      @apply object-contain max-w-full max-h-full;
     }
     & canvas {
       @apply absolute inset-0 m-auto;
