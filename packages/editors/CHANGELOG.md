@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.10](https://github.com/adarshpastakia/axux/compare/v3.0.9...v3.0.10) (2023-12-06)
+
+### Bug Fixes
+
+- **Canvas:** export pages return array of snapshots ([1a15c03](https://github.com/adarshpastakia/axux/commit/1a15c0350b48ffc245c1c4d7b2809e16f70ff56d))
+
 ## [3.0.9](https://github.com/adarshpastakia/axux/compare/v3.0.8...v3.0.9) (2023-12-06)
 
 **Note:** Version bump only for package @axux/editors
