@@ -70,7 +70,7 @@ export interface DrawProps {
   snapshot?: StoreSnapshot<TLRecord>;
   onUpdate?: (snapshot: StoreSnapshot<TLRecord>) => void;
   renderer?: (props: KeyValue) => AnyObject;
-  canvasRef?: RefObject<{ exportPages: () => Promise<KeyValue<string>> }>;
+  canvasRef?: RefObject<{ exportPages: () => Promise<KeyValue[]> }>;
 }
 
 const TypeMap: KeyValue = {
@@ -150,7 +150,7 @@ export const AxDrawCanvas: FC<DrawProps> = ({
         const pages = Object.keys(
           editorRef?.store.getSnapshot().store ?? {}
         ).filter((key) => key.startsWith("page:"));
-        const pageSnapshots: KeyValue = {};
+        const pageSnapshots: KeyValue[] = [];
         while (pages.length) {
           const pg: AnyObject = pages.shift();
           await new Promise((resolve) => {
@@ -167,7 +167,12 @@ export const AxDrawCanvas: FC<DrawProps> = ({
             scale: 1,
             background: true,
           });
-          if (svg) pageSnapshots[pg] = await getSvgAsDataUrl(svg);
+          if (svg)
+            pageSnapshots.push({
+              id: pg,
+              name: editorRef?.currentPage.name,
+              content: { image: await getSvgAsDataUrl(svg) },
+            });
         }
         currentPage && editorRef?.setCurrentPage(currentPage);
         return pageSnapshots;
