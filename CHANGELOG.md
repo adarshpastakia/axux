@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.9](https://github.com/adarshpastakia/axux/compare/v3.0.8...v3.0.9) (2023-12-06)
+
+### Bug Fixes
+
+- **Virtual:** reset size cache ([ae440ab](https://github.com/adarshpastakia/axux/commit/ae440ab4c1b889a5a24ea73d8a982b71a5965d17))
+
+### Performance Improvements
+
+- **VirtualList:** cache size reset ([479c55e](https://github.com/adarshpastakia/axux/commit/479c55e2ec0701aa59502a98c266a82f22488022))
+
 ## [3.0.8](https://github.com/adarshpastakia/axux/compare/v3.0.7...v3.0.8) (2023-12-01)
 
 ### Bug Fixes
