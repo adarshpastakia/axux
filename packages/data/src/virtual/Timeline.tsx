@@ -136,7 +136,7 @@ const Item = memo(
       return () => {
         ob.disconnect();
       };
-    }, [index, parent]);
+    }, [index]);
 
     /** ***************** component *******************/
     return (
@@ -198,11 +198,14 @@ const AxTimelineComponent = <T extends KeyValue>({
   const itemList = createItemList(items);
 
   useEffect(() => {
-    listRef?._outerRef.setLoading(isLoading);
     !isLoading &&
       setTimeout(() => {
         listRef?.scrollToItem(lastScroll ?? 0, "start");
       }, 50);
+  }, [listRef]);
+
+  useEffect(() => {
+    listRef?._outerRef.setLoading(isLoading);
   }, [listRef, isLoading]);
 
   useImperativeHandle(
@@ -268,7 +271,7 @@ const AxTimelineComponent = <T extends KeyValue>({
     (index: number, height: number) => {
       if (height !== (cache.get(index) ?? minHeight)) {
         cache.set(index, height);
-        listRef.resetAfterIndex(index);
+        listRef.resetAfterIndex(index, false);
       }
     },
     [listRef]
