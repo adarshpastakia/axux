@@ -93,6 +93,7 @@ const HistogramMeter: FC<Partial<HistogramProps> & HistogramItem> = ({
 
   return (
     <div
+      data-test-id={id}
       className="ax-histogram__item"
       data-disabled={allowDisable && count === 0}
     >
