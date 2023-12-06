@@ -83,10 +83,9 @@ export const Wrapper = (maxWidth = 1100, hideScroller = false) => {
       <div {...props} className="ax-virtual__wrapper" ref={scrollerRef}>
         <div style={{ minWidth: Math.min(props.style.width * 0.8, maxWidth) }}>
           {children}
-          <AxAnimation.Card
-            showIcon
-            className={isLoading ? "visible" : "invisible"}
-          />
+          <div className="h-16">
+            {isLoading && <AxAnimation.Card showIcon />}
+          </div>
         </div>
         {!hideScroller && (
           <div className="ax-virtual__scroll">

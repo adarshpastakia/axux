@@ -93,7 +93,7 @@ const Item = memo(
       return () => {
         ob.disconnect();
       };
-    }, [rowIndex, columnIndex, parent]);
+    }, [rowIndex, columnIndex]);
 
     /** ***************** component *******************/
     return (
@@ -136,15 +136,17 @@ const AxGridViewComponent = <T extends KeyValue>({
   const colCount = useRef(0);
 
   useEffect(() => {
+    setTimeout(() => {
+      listRef?.scrollToItem({
+        align: "start",
+        columnIndex: 0,
+        rowIndex: lastScroll,
+      });
+    }, 50);
+  }, [listRef]);
+
+  useEffect(() => {
     listRef?._outerRef?.setLoading(isLoading);
-    !isLoading &&
-      setTimeout(() => {
-        listRef?.scrollToItem({
-          align: "start",
-          columnIndex: 0,
-          rowIndex: lastScroll,
-        });
-      }, 50);
   }, [listRef, isLoading]);
 
   useImperativeHandle(
@@ -227,7 +229,7 @@ const AxGridViewComponent = <T extends KeyValue>({
       if (height !== size[columnIndex] ?? colHeight) {
         size[columnIndex] = height;
         cache.set(rowIndex, size);
-        listRef.resetAfterRowIndex(rowIndex);
+        listRef.resetAfterRowIndex(rowIndex, false);
       }
     },
     [listRef]
