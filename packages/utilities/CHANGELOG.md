@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.11](https://github.com/adarshpastakia/axux/compare/v3.0.10...v3.0.11) (2023-12-07)
+
+### Bug Fixes
+
+- **asciiConverter:** stringify the param ([950f856](https://github.com/adarshpastakia/axux/commit/950f856caa1ae1fbfbd99d169ec48b38256803ab))
+
 ## [3.0.10](https://github.com/adarshpastakia/axux/compare/v3.0.9...v3.0.10) (2023-12-06)
 
 **Note:** Version bump only for package @axux/utilities
