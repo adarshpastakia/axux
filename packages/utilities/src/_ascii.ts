@@ -72,7 +72,7 @@ export const ascii = (str: string) => {
   if (isEmpty(str)) return "";
   Object.entries(conversions).forEach(([a, l]) => {
     const re = new RegExp(l, "g");
-    str = str.replace(re, a);
+    str = `${str}`.replace(re, a);
   });
   return str;
 };
