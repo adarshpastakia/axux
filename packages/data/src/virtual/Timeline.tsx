@@ -272,7 +272,7 @@ const AxTimelineComponent = <T extends KeyValue>({
       const oldHeight = cache.get(index);
       if (height !== (oldHeight ?? minHeight)) {
         cache.set(index, height);
-        listRef.resetAfterIndex(index, false);
+        listRef.resetAfterIndex(index);
       }
     },
     [listRef]
