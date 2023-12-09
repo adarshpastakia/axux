@@ -25,3 +25,8 @@ export type { TreeNodeType as TreeNode } from "./tree/types";
 export type { GridRef } from "./virtual/Grid";
 export type { ListRef } from "./virtual/List";
 export type { TimelineRef } from "./virtual/Timeline";
+
+export { AxGrid as AxGrid2 } from "./virtual.v2/Grid";
+export type { GridRef as GridRef2 } from "./virtual.v2/Grid";
+export { AxTimeline as AxTimeline2 } from "./virtual.v2/Timeline";
+export type { TimelineRef as TimelineRef2 } from "./virtual.v2/Timeline";
