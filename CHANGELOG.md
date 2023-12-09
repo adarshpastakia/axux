@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/adarshpastakia/axux/compare/v3.0.11...v3.1.0) (2023-12-09)
+
+### Features
+
+- **VirtualLists-V2:** created lightweight virtual scroll list/grid with enhanced support for variable size items ([e1449b2](https://github.com/adarshpastakia/axux/commit/e1449b2675ccce2c7a5cb935410eefde98c23103))
+
 ## [3.0.11](https://github.com/adarshpastakia/axux/compare/v3.0.10...v3.0.11) (2023-12-07)
 
 ### Bug Fixes
