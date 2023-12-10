@@ -46,7 +46,7 @@ export const Options = ({
       allowCreate &&
       query &&
       !options.find((o) =>
-        matchString(query, getValue(o, valueProperty).toString(), true)
+        matchString(getValue(o, valueProperty).toString(), query, true)
       ),
     [query, options, valueProperty]
   );
