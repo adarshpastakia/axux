@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/adarshpastakia/axux/compare/v3.1.0...v3.1.1) (2023-12-10)
+
+### Bug Fixes
+
+- **Select:** match string to check for allow create ([e57f67f](https://github.com/adarshpastakia/axux/commit/e57f67ff926fe85ea5ee1fb1c5bf55c092c090db))
+
 # [3.1.0](https://github.com/adarshpastakia/axux/compare/v3.0.11...v3.1.0) (2023-12-09)
 
 **Note:** Version bump only for package @axux/form
