@@ -148,6 +148,10 @@ const GridComponent = <T extends KeyValue>({
     rowsizeCache.current = new Array(Math.ceil(count / columnCount))
       .fill(height)
       .map((h, i) => Math.max(h, rowsizeCache.current[i] ?? height));
+
+    setScrollHeight(
+      rowsizeCache.current.reduce<number>((t, h) => t + h, 0) + EXTRA_HEIGHT
+    );
   }, [count, columnCount, height]);
 
   // start item index

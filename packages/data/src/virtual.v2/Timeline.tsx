@@ -195,6 +195,14 @@ const TimelineComponent = <T extends KeyValue>({
 
   useEffect(() => {
     minsizeCache.current = new Array(count).fill(height);
+
+    sizeCache.current = new Array(count)
+      .fill(height)
+      .map((h, i) => Math.max(h, sizeCache.current[i] ?? height));
+
+    setScrollHeight(
+      sizeCache.current.reduce<number>((t, h) => t + h, 0) + EXTRA_HEIGHT
+    );
   }, [count, height]);
 
   // start item index
