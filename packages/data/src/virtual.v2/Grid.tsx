@@ -175,9 +175,11 @@ const GridComponent = <T extends KeyValue>({
   const [pagedList, otherHeight] = useMemo(() => {
     if (columnCount > 0) {
       const index = Math.max(0, startIndex - pageCount * columnCount);
+      let heightCount = Math.ceil(index / columnCount);
+      if (isNaN(heightCount) || heightCount < 0) heightCount = 0;
       return [
         itemList.slice(index, startIndex + pageCount * columnCount * 2),
-        new Array(index / columnCount)
+        new Array(heightCount)
           .fill(0)
           .reduce<number>(
             (t, _, i) =>
