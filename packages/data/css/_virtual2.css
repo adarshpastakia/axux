@@ -18,7 +18,7 @@
       @apply flex flex-nowrap p-0 gap-2 overflow-hidden min-h-[2rem];
 
       & > .ax-timeline__avatar {
-        @apply text-lg leading-none relative;
+        @apply text-lg leading-none relative w-12 text-center;
 
         & > .ax-icon {
           @apply p-1 mt-1 rounded-full shadow-inner;
