@@ -8,7 +8,7 @@
 
 @layer components {
   .ax-callout {
-    @apply my-2 py-2 px-4 relative border rounded bg-opacity-5 text-slate-700 dark:text-slate-200 bg-slate-500 border-slate-300 dark:border-slate-900
+    @apply my-2 py-2 px-4 relative border rounded bg-opacity-5 text-slate-700 dark:text-slate-200 bg-slate-500 dark:bg-slate-800 border-slate-300 dark:border-slate-600
       print:!text-slate-700 print:!bg-slate-200 print:!border-slate-300;
     padding-inline-end: 1.5rem;
   }
