@@ -147,7 +147,14 @@ const GridComponent = <T extends KeyValue>({
   useEffect(() => {
     rowsizeCache.current = new Array(Math.ceil(count / columnCount))
       .fill(height)
-      .map((h, i) => Math.max(h, rowsizeCache.current[i] ?? height));
+      .map((h, i) =>
+        Math.max(
+          h,
+          ...sizeCache.current
+            .slice(i * columnCount, i * columnCount + columnCount)
+            .filter(Boolean)
+        )
+      );
 
     setScrollHeight(
       rowsizeCache.current.reduce<number>((t, h) => t + h, 0) + EXTRA_HEIGHT
