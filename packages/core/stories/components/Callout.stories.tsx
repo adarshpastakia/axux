@@ -19,7 +19,6 @@ export const Example: Story = {
   args: {
     className: "w-96",
     title: faker.commerce.productName(),
-    color: "info",
     icon: "mdi mdi-alert",
     children: <p>{faker.lorem.paragraph()}</p>,
   },
