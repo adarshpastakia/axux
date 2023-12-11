@@ -44,7 +44,7 @@
       }
 
       & > .ax-timeline__body {
-        @apply flex-1 pb-4 flex items-start;
+        @apply flex-1 pb-4 flex items-start overflow-hidden;
         flex-direction: inherit;
 
         & > :first-child {
