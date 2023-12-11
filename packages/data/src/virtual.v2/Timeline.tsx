@@ -232,14 +232,19 @@ const TimelineComponent = <T extends KeyValue>({
   useEffect(() => {
     if (scrollerRef.current) {
       const el = scrollerRef.current;
-      const ob = new ResizeObserver(() => {
+      const handler = () => {
+        // page minimum 10 records with minimum viewport height 1000px
         setPageCount(
-          Math.round((scrollerRef.current?.offsetHeight ?? 0) / height)
+          Math.max(
+            10,
+            Math.round(
+              Math.max(1000, scrollerRef.current?.offsetHeight ?? 0) / height
+            )
+          )
         );
-      });
-      setPageCount(
-        Math.round((scrollerRef.current?.offsetHeight ?? 0) / height)
-      );
+      };
+      const ob = new ResizeObserver(handler);
+      handler();
       ob.observe(el);
 
       return () => {

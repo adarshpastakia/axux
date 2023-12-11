@@ -200,9 +200,15 @@ const GridComponent = <T extends KeyValue>({
   useEffect(() => {
     if (scrollerRef.current) {
       const el = scrollerRef.current;
-      const ob = new ResizeObserver(() => {
+      const handler = () => {
+        // page minimum 10 records with minimum viewport height 1000px
         setPageCount(
-          Math.round((scrollerRef.current?.offsetHeight ?? 0) / height)
+          Math.max(
+            10,
+            Math.round(
+              Math.max(1000, scrollerRef.current?.offsetHeight ?? 0) / height
+            )
+          )
         );
         setColumnCount(
           columns ??
@@ -213,19 +219,9 @@ const GridComponent = <T extends KeyValue>({
               )
             )
         );
-      });
-      setPageCount(
-        Math.round((scrollerRef.current?.offsetHeight ?? 0) / height)
-      );
-      setColumnCount(
-        columns ??
-          Math.max(
-            1,
-            Math.floor(
-              ((scrollerRef.current?.offsetWidth ?? 800) - 32) / (width + 16)
-            )
-          )
-      );
+      };
+      const ob = new ResizeObserver(handler);
+      handler();
       ob.observe(el);
 
       return () => {
