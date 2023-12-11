@@ -10,14 +10,14 @@ import { AxIcon } from "@axux/core";
 import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
 import { useResize } from "@axux/core/dist/hooks/useResize";
 import {
-  type FC,
   Fragment,
   memo,
-  type ReactEventHandler,
   useEffect,
   useMemo,
   useRef,
   useState,
+  type FC,
+  type ReactEventHandler,
 } from "react";
 import { Icons } from "../types/icons";
 
@@ -71,14 +71,16 @@ export const ImageOverlay: FC<OverlayProps> = memo(
     );
 
     const togglePos = useMemo(() => {
-      return Math.max(
+      const approx = Math.max(
         6,
         Math.min(overlaySize, orientVertical ? containerHeight : containerWidth)
       );
+      return isNaN(approx) ? 0 : approx;
     }, [orientVertical, containerHeight, containerWidth, overlaySize]);
 
     useEffect(() => {
-      setOverlaySize((orientVertical ? containerHeight : containerWidth) / 2);
+      const approx = (orientVertical ? containerHeight : containerWidth) / 2;
+      setOverlaySize(isNaN(approx) ? 0 : approx);
     }, [orientVertical, containerHeight, containerWidth]);
 
     return (

@@ -42,6 +42,8 @@ interface ViewerState {
   isErrored: boolean;
   width: number;
   height: number;
+  containerWidth: number;
+  containerHeight: number;
 }
 
 interface ViewerActions {
@@ -103,6 +105,8 @@ export const AxImageViewer = forwardRef<
           isErrored: false,
           width: "100%",
           height: "100%",
+          containerWidth: "100%",
+          containerHeight: "100%",
         } as AnyObject),
       []
     );
@@ -134,9 +138,20 @@ export const AxImageViewer = forwardRef<
             width *= zoom;
             height *= zoom;
           }
-          return { zoom, width, height };
+          return {
+            zoom,
+            width: isNaN(width) ? 0 : width,
+            height: isNaN(height) ? 0 : height,
+            containerWidth: el.offsetWidth,
+            containerHeight: el.offsetHeight,
+          };
         }
-        return { width: "100%", height: "100%" } as AnyObject;
+        return {
+          width: "100%",
+          height: "100%",
+          containerWidth: "100%",
+          containerHeight: "100%",
+        } as AnyObject;
       },
       []
     );
@@ -228,15 +243,15 @@ export const AxImageViewer = forwardRef<
       [changeCallback, state.isLoaded]
     );
     useEffect(() => {
-      if (imageRef.current != null) {
+      if (containerRef.current != null) {
         const ob = new ResizeObserver(resizeHandler);
-        ob.observe(imageRef.current);
+        ob.observe(containerRef.current);
 
         return () => {
           ob.disconnect();
         };
       }
-    }, []);
+    }, [resizeHandler]);
 
     useImperativeHandle(
       ref,
@@ -344,8 +359,8 @@ export const AxImageViewer = forwardRef<
               rotate={state.rotate}
               onLoad={handleLoad}
               onError={handleError}
-              containerWidth={containerRef.current?.offsetWidth}
-              containerHeight={containerRef.current?.offsetHeight}
+              containerWidth={state.containerWidth}
+              containerHeight={state.containerHeight}
             />
           )}
 
