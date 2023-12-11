@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.2](https://github.com/adarshpastakia/axux/compare/v3.1.1...v3.1.2) (2023-12-11)
+
+### Bug Fixes
+
+- **ImageViewer:** resize with overlay ([0892d84](https://github.com/adarshpastakia/axux/commit/0892d84518d1d22e46a4b6274d7ef422f35e53af))
+
 ## [3.1.1](https://github.com/adarshpastakia/axux/compare/v3.1.0...v3.1.1) (2023-12-10)
 
 **Note:** Version bump only for package @axux/media

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.2](https://github.com/adarshpastakia/axux/compare/v3.1.1...v3.1.2) (2023-12-11)
+
+### Bug Fixes
+
+- **Virtual2:** set minimum page to 10 records ([0c5e44c](https://github.com/adarshpastakia/axux/commit/0c5e44c9cf30fb9e617374dcfd00f1ba621b1794))
+
 ## [3.1.1](https://github.com/adarshpastakia/axux/compare/v3.1.0...v3.1.1) (2023-12-10)
 
 ### Bug Fixes
