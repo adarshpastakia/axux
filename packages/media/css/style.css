@@ -106,7 +106,7 @@
     }
 
     & .ax-thumbnail--spinner {
-      @apply absolute inset-0 m-auto z-10 h-8 w-8 p-1 bg-gray-900/70 text-white backdrop-blur rounded-full leading-none;
+      @apply absolute inset-0 m-auto z-[1] h-8 w-8 p-1 bg-gray-900/70 text-white backdrop-blur rounded-full leading-none;
 
       & .spinner-animation {
         @apply w-full h-full;
@@ -273,19 +273,22 @@
   }
 
   .ax-video__scenes {
-    @apply outline-none relative flex flex-col bg-neutral-800;
+    @apply outline-none relative flex flex-col bg-neutral-800 overflow-hidden;
 
     & > .ax-icon {
       @apply bg-bw-900 text-white rounded-t-full mx-auto self-center px-4 text-lg hover:bg-bw-700 cursor-pointer;
     }
 
-    & > .ax-virtual__container {
+    & > .ax-virtual-list {
       @apply bg-bw-900;
+      & .ax-virtual__container {
+        @apply bg-bw-900 h-16;
+      }
     }
   }
 
   .ax-video__scenes--card {
-    @apply h-12 w-16 relative mx-1;
+    @apply h-14 w-16 relative mx-1;
 
     & > span {
       @apply text-xs bg-bw-950/50 backdrop-blur text-white absolute top-0 inset-x-0 text-center;

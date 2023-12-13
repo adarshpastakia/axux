@@ -126,7 +126,7 @@
 /******************* card *******************/
 @layer components {
   .ax-card {
-    @apply m-1 block relative rounded bg-white dark:bg-bw-900;
+    @apply m-1 block relative rounded;
 
     & .ax-content,
     & .ax-section {
@@ -134,12 +134,62 @@
     }
 
     &:not([data-plain="true"]) {
-      @apply border shadow-sm;
+      @apply border shadow-sm bg-white dark:bg-bw-900;
     }
 
     &[data-clickable="true"] {
       @apply cursor-pointer shadow-bw-200 dark:shadow-black hover:shadow-md 
        active:translate-y-0 active:shadow-inner;
+    }
+  }
+
+  .ax-timeline__card {
+    @apply flex flex-nowrap p-0 gap-2 min-h-[2rem];
+
+    & > .ax-timeline__avatar {
+      @apply text-lg leading-none relative w-12 text-center;
+
+      & > .ax-icon {
+        @apply p-1 mt-1 rounded-full shadow-inner;
+      }
+
+      &:not([class*="bg-"]) > .ax-icon {
+        @apply bg-bw-100 dark:bg-bw-800;
+      }
+
+      &:not([class*="text-"]) > .ax-icon {
+        @apply text-bw-600 dark:text-bw-400;
+      }
+    }
+
+    &[data-size="sm"] .ax-timeline__avatar {
+      @apply text-md;
+    }
+    &[data-size="md"] .ax-timeline__avatar {
+      @apply text-2xl;
+    }
+    &[data-size="lg"] .ax-timeline__avatar {
+      @apply text-4xl;
+    }
+
+    & > .ax-timeline__body {
+      @apply flex-1;
+    }
+
+    &[data-reverse="true"] {
+      @apply flex-row-reverse;
+    }
+
+    &[data-sticky="true"] {
+      @apply sticky top-0 bottom-0 z-[5] bg-component;
+    }
+
+    &:not([data-noline="true"]) > .ax-timeline__avatar {
+      @apply before:absolute before:w-px before:bg-bw-500 before:bg-opacity-50 before:top-1 before:bottom-0 before:left-1/2 before:z-0;
+    }
+
+    &[data-last-child="true"] > .ax-timeline__avatar {
+      @apply before:hidden;
     }
   }
 }

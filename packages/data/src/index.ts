@@ -16,17 +16,12 @@ export { usePagination } from "./hooks/usePagination";
 export { AxJsonView } from "./json/JsonView";
 export { AxPagination } from "./pagination/Pagination";
 export { AxTreePanel } from "./tree/TreePanel";
-export { AxGridView } from "./virtual/Grid";
-export { AxList } from "./virtual/List";
-export { AxTimeline } from "./virtual/Timeline";
 
 export type { DatagridColumn, DatagridRef } from "./datagrid/types";
 export type { TreeNodeType as TreeNode } from "./tree/types";
-export type { GridRef } from "./virtual/Grid";
-export type { ListRef } from "./virtual/List";
-export type { TimelineRef } from "./virtual/Timeline";
 
-export { AxGrid as AxGrid2 } from "./virtual.v2/Grid";
-export type { GridRef as GridRef2 } from "./virtual.v2/Grid";
-export { AxTimeline as AxTimeline2 } from "./virtual.v2/Timeline";
-export type { TimelineRef as TimelineRef2 } from "./virtual.v2/Timeline";
+export { AxVirtualGallery } from "./virtual/Gallery";
+export type { VirtualGalleryRef } from "./virtual/Gallery";
+export { AxVirtualItem } from "./virtual/Item";
+export { AxVirtualList } from "./virtual/List";
+export type { VirtualListRef } from "./virtual/List";

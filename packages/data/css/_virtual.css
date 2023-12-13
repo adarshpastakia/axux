@@ -2,125 +2,105 @@
  * AxUX React+TailwindCSS UI Framework
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
- * @copyright : 2022
+ * @copyright : 2023
  * @license   : MIT
  */
 
 @layer components {
-  .ax-virtual__container {
-    @apply grid-area-[content] grid overflow-hidden bg-component;
+  .ax-virtual-list {
+    @apply grid-area-[content] bg-component;
 
-    &.ax-timeline .ax-virtual__wrapper {
-      grid-template-columns: auto auto;
+    & .ax-virtual__container {
+      @apply bg-component flex flex-nowrap gap-2 justify-center;
     }
 
-    & .ax-virtual__wrapper {
-      @apply grid justify-center p-4 gap-2;
-      grid-template-columns: auto auto;
-
-      & > div:first-child {
-        @apply relative;
-      }
-      & > div:first-child > div {
-        @apply relative mx-auto;
-      }
+    & .ax-virtual__scroller {
+      box-sizing: content-box;
     }
 
-    & .ax-grid__item {
-      @apply p-2;
-
-      & > :first-child {
-        @apply outline outline-0 outline-offset-0 outline-primary-500;
-        transition: outline-offset 1s;
-      }
-
-      &.hilight > :first-child {
-        @apply outline-2 outline-offset-2;
-      }
+    & .ax-virtual__gallery {
+      @apply grid gap-[8px];
     }
 
-    & .ax-timeline__item {
-      @apply flex flex-nowrap p-0;
+    & .ax-virtual__sticky {
+      @apply sticky top-0 start-0 z-10 bg-component;
+    }
 
-      &[data-size="sm"] .ax-timeline__avatar {
-        @apply scale-75;
+    &[data-padding="sm"] {
+      & .ax-virtual__scroller {
+        @apply p-2;
       }
-      &[data-size="md"] .ax-timeline__avatar {
-        @apply scale-125 translate-y-1;
+      & .ax-virtual__tools {
+        @apply bottom-2 end-2;
       }
-
-      &[data-reverse="true"] {
-        @apply flex-row-reverse;
+    }
+    &[data-padding="md"] {
+      & .ax-virtual__scroller {
+        @apply p-4;
       }
-
-      & > div:first-child {
-        @apply text-muted relative mx-2;
-
-        & > .ax-timeline__avatar {
-          @apply text-lg rounded-full leading-none relative;
-
-          & > .ax-icon {
-            @apply p-1;
-          }
-
-          &:not([class*="bg-"]) {
-            @apply bg-bw-100 dark:bg-bw-800;
-          }
-
-          &:not([class*="text-"]) {
-            @apply text-bw-600 dark:text-bw-400;
-          }
-        }
-      }
-      & > div:last-child {
-        @apply flex-1 p-1 pb-4 overflow-hidden;
-        & > :first-child {
-          @apply outline outline-0 outline-offset-0 outline-primary-500;
-          transition: outline-offset 1s;
-        }
-      }
-
-      &:not([data-noline="true"]) > div:first-child {
-        @apply before:absolute before:w-px before:bg-bw-500 before:bg-opacity-50 before:top-0 before:bottom-0 before:left-1/2 before:z-0;
-      }
-      &[data-last-child="true"] > div:first-child {
-        @apply before:hidden;
-      }
-
-      &.hilight > div:last-child > :first-child {
-        @apply outline-2 outline-offset-2;
+      & .ax-virtual__tools {
+        @apply bottom-4 end-4;
       }
     }
 
-    & .ax-list__item {
-      @apply inline-block;
-    }
+    &[data-orientation="vertical"] {
+      @apply overflow-y-auto;
 
-    & .ax-list__sticky {
-      @apply sticky inline-block top-0 start-0 bg-base z-10;
-
-      &[data-layout="vertical"] {
-        @apply min-w-full;
-      }
-      &[data-layout="horizontal"] {
+      & .ax-virtual__container {
         @apply min-h-full;
+      }
 
-        & > div {
-          @apply inline-block;
-        }
+      & .ax-virtual__placeholder {
+        @apply h-[64px];
+      }
+    }
+
+    &[data-orientation="horizontal"] {
+      @apply overflow-x-auto;
+
+      & .ax-virtual__tools {
+        @apply flex-row;
+      }
+      & .ax-virtual__container {
+        @apply min-w-full h-full inline-flex flex-col;
+      }
+      & .ax-virtual__sticky,
+      & .ax-virtual__scroller {
+        @apply inline-flex flex-row flex-nowrap;
+      }
+
+      & .ax-virtual__item,
+      & .ax-virtual__placeholder {
+        @apply inline-block;
+      }
+
+      .ax-button .ax-icon {
+        @apply ltr:-rotate-90 rtl:rotate-90;
+      }
+
+      & .ax-virtual__placeholder {
+        @apply w-[64px];
       }
     }
   }
 
-  .ax-virtual__scroll {
-    @apply flex items-end;
+  & .ax-virtual__item {
+    @apply flex flex-nowrap p-0 overflow-hidden min-h-[2rem] items-stretch;
 
-    & > div:first-child {
-      @apply sticky bottom-0;
+    & .ax-card {
+      @apply outline outline-0 outline-offset-0 outline-primary-500;
+    }
 
-      & .ax-button__inner {
-        @apply p-1 w-auto h-auto;
-      }
+    &.hilight .ax-card {
+      @apply outline-2 outline-offset-2;
+    }
+  }
+
+  & .ax-virtual__tools {
+    @apply self-end sticky bottom-2 end-2;
+
+    & > .ax-button__group {
+      @apply m-0 bg-component;
     }
   }
 }

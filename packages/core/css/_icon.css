@@ -23,5 +23,13 @@
     & > i::before {
       @apply leading-none align-top;
     }
+
+    &[data-animate="spin"] {
+      @apply animate-spin;
+    }
+
+    &[data-animate="bounce"] {
+      @apply animate-bounce;
+    }
   }
 }

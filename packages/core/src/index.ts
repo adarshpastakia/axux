@@ -24,6 +24,7 @@ export { AxHeader } from "./components/Header";
 export { AxLoader } from "./components/Loader";
 export { AxMeter } from "./components/Meter";
 export { AxSection } from "./components/Section";
+export { AxTimelineCard } from "./components/TimelineCard";
 export { AxTitle } from "./components/Title";
 export { AxApplicationProvider, useApplicationContext } from "./context/Global";
 export { useDebounce } from "./hooks/useDebounce";

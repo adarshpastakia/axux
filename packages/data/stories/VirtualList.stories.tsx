@@ -1,22 +1,11 @@
-import {
-  AxCard,
-  AxContent,
-  AxFlexBox,
-  AxHeader,
-  AxIcon,
-  AxPanel,
-  AxText,
-  AxTitle,
-  AxViewport,
-} from "@axux/core";
+import { AxCard, AxFlexBox, AxIcon, AxText, AxViewport } from "@axux/core";
+import { Countries } from "@axux/utilities";
 import { faker } from "@faker-js/faker";
 import type { Meta, StoryObj } from "@storybook/react";
-import { useCallback, useEffect, useState } from "react";
-import { AxList } from "../src";
-import { Countries } from "@axux/utilities";
+import { AxVirtualItem, AxVirtualList } from "../src";
 
-const meta: Meta<typeof AxList> = {
-  component: AxList,
+const meta: Meta<typeof AxVirtualList> = {
+  component: AxVirtualList,
   title: "@data/Virtual/List",
   tags: ["autodocs"],
   parameters: {
@@ -26,7 +15,7 @@ const meta: Meta<typeof AxList> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof AxList>;
+type Story = StoryObj<typeof AxVirtualList>;
 
 const count = 10;
 const lorem = faker.lorem.paragraph();
@@ -34,11 +23,11 @@ export const Example: Story = {
   render: (args) => {
     return (
       <AxViewport>
-        <AxList {...args}>
-          {({ data, ...props }) =>
-            data && (
-              <AxList.Item {...props}>
-                <AxCard className="p-2 w-72 h-40">
+        <AxVirtualList {...args} height={160}>
+          {({ data, ...props }) => (
+            <AxVirtualItem {...props}>
+              <div className="pb-2 w-[480px] h-[160px] grid flex-1">
+                <AxCard className="p-2 overflow-hidden">
                   <AxFlexBox.Row
                     className="text-lg font-semibold"
                     align="center"
@@ -70,10 +59,10 @@ export const Example: Story = {
                     </AxText>
                   </AxFlexBox.Row>
                 </AxCard>
-              </AxList.Item>
-            )
-          }
-        </AxList>
+              </div>
+            </AxVirtualItem>
+          )}
+        </AxVirtualList>
       </AxViewport>
     );
   },
