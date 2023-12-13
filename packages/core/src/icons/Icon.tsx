@@ -8,7 +8,13 @@
 
 import { isColor, isString, isSvgPath } from "@axux/utilities";
 import { type FC, forwardRef, type MouseEventHandler, useMemo } from "react";
-import { type Color, type ElementProps, type IconProp, type RefProp, SizeList } from "../types";
+import {
+  type Color,
+  type ElementProps,
+  type IconProp,
+  type RefProp,
+  SizeList,
+} from "../types";
 
 const SvgTextSize = ["", ".75em", ".65em", ".45em", ".45em"];
 
@@ -48,6 +54,7 @@ export const AxIcon: FC<IconProps & RefProp> = forwardRef<
       icon,
       bg,
       color,
+      animate,
       size = "",
       rtlFlip,
       viewBox = "0 0 24 24",
@@ -117,6 +124,7 @@ export const AxIcon: FC<IconProps & RefProp> = forwardRef<
         className={`ax-icon ${className ?? ""}`}
         onClick={onClick}
         data-flip={rtlFlip}
+        data-animate={animate}
         ref={ref as AnyObject}
         style={styles}
       >

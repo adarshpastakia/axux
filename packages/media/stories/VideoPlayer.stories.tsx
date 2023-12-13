@@ -18,7 +18,7 @@ type Story = StoryObj<typeof AxVideoPlayer>;
 const markers: [number, number][] = new Array(300)
   .fill([])
   .map((_, i) => [Math.random() * 90, Math.random()]);
-const scenes: [number, string][] = new Array(10)
+const scenes: [number, string][] = new Array(30)
   .fill([])
   .map((_, i) => [Math.random() * 30, "https://picsum.photos/192/108?" + i]);
 

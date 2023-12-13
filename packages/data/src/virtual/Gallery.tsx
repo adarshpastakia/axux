@@ -22,25 +22,25 @@ import {
   type Ref,
 } from "react";
 import { type VirtualItemProps } from "./Item";
-import { useVirtualScroll } from "./useVirtualScroll";
+import { useVirtualGallery } from "./useVirtualGallery";
 
-export interface VirtualListRef {
+export interface VirtualGalleryRef {
   scrollToItem: (index: number) => void;
   hilight: (index: number) => void;
   unhilight: () => void;
 }
 
-export interface VirtualListProps<T> {
+export interface GridProps<T> {
   children: (
     props: Omit<VirtualItemProps, "children"> & {
       data: T;
     }
   ) => ReactElement;
-  listRef?: Ref<VirtualListRef | undefined>;
+  listRef?: Ref<VirtualGalleryRef | undefined>;
   height?: number;
   width?: number;
+  columns?: number;
   padding?: "sm" | "md" | "none";
-  orientation?: "vertical" | "horizontal";
   /**
    * data list
    */
@@ -58,45 +58,41 @@ export interface VirtualListProps<T> {
    */
   onLoadMore?: EmptyCallback;
 
-  isSticky?: (index: number) => boolean;
-
   onScroll?: (top: number) => void;
 }
 
 const createItemList = memoize((items) => items);
 
-const VirtualList = <T extends KeyValue>({
+const VirtualGallery = <T extends KeyValue>({
   items,
   children,
   padding = "md",
-  orientation = "vertical",
   height = 48,
-  width = 48,
+  width = 64,
+  columns,
   hideScroller,
   isLoading,
   onLoadMore,
   onScroll,
-  isSticky,
   listRef,
-}: VirtualListProps<T>) => {
+}: GridProps<T>) => {
   const count = useDeferredValue(items.length);
   const itemList: Array<{
     index: number;
     data: T;
     isLast: boolean;
-    isSticky: boolean;
   }> = createItemList(
     items.map((item: AnyObject, idx) => {
       return {
         index: idx,
         data: item,
-        isSticky: isSticky?.(idx) === true,
         isLast: idx + 1 === items.length,
       };
     })
   );
 
   const {
+    columnCount,
     scrollerRef,
     scrollSize,
     pageIndex,
@@ -108,8 +104,8 @@ const VirtualList = <T extends KeyValue>({
     updateCache,
     scrollToItem,
     scrollActions,
-  } = useVirtualScroll({
-    orientation,
+  } = useVirtualGallery({
+    columns,
     height,
     width,
     count,
@@ -121,13 +117,8 @@ const VirtualList = <T extends KeyValue>({
     scrollCallback.current(pageIndex);
   }, [pageIndex]);
 
-  const [stickiesStart, pagedList] = useMemo(() => {
-    return [
-      itemList.slice(0, pageIndex).filter((item) => item.isSticky),
-      itemList
-        .slice(startIndex, endIndex)
-        .filter((item, idx) => !(idx < pageIndex && item.isSticky)),
-    ];
+  const pagedList = useMemo(() => {
+    return itemList.slice(startIndex, endIndex);
   }, [itemList, startIndex, endIndex]);
 
   useImperativeHandle(
@@ -155,7 +146,7 @@ const VirtualList = <T extends KeyValue>({
         scrollToItem(index);
       },
     }),
-    []
+    [scrollToItem]
   );
 
   return (
@@ -164,46 +155,28 @@ const VirtualList = <T extends KeyValue>({
       ref={scrollerRef}
       onScroll={(evt) => handleScroll(evt) && onLoadMore?.()}
       data-padding={padding}
-      data-orientation={orientation}
+      data-orientation="vertical"
     >
       <div className="ax-virtual__container">
-        <div
-          className="ax-virtual__scroller"
-          style={
-            orientation === "vertical"
-              ? { minHeight: scrollSize, minWidth: width }
-              : { minWidth: scrollSize, minHeight: height }
-          }
-        >
+        <div className="ax-virtual__scroller" style={{ minHeight: scrollSize }}>
+          <div style={{ height: springSize }} />
           <div
-            style={
-              orientation === "vertical"
-                ? { height: springSize }
-                : { width: springSize, display: "inline-block" }
-            }
-          />
-          <div className="ax-virtual__sticky">
-            {stickiesStart.map(({ index, data, isSticky, isLast }) =>
+            className="ax-virtual__gallery"
+            style={{
+              gridTemplateColumns: `repeat(${columnCount}, ${width}px)`,
+              maxWidth: columns ? undefined : (width + 8) * columnCount,
+            }}
+          >
+            {pagedList.map(({ index, data, isLast }) =>
               children({
                 data,
                 index,
-                key: index,
                 isLast,
-                isSticky,
+                key: index,
                 updateSize: updateCache,
               } as AnyObject)
             )}
           </div>
-          {pagedList.map(({ index, data, isSticky, isLast }) =>
-            children({
-              data,
-              index,
-              isLast,
-              isSticky,
-              key: index,
-              updateSize: updateCache,
-            } as AnyObject)
-          )}
           {onLoadMore && (
             <div className="ax-virtual__placeholder">
               {isLoading && <AxAnimation.Card showIcon />}
@@ -212,10 +185,7 @@ const VirtualList = <T extends KeyValue>({
         </div>
         {!hideScroller && (
           <div className="ax-virtual__tools">
-            <AxButton.Group
-              isVertical={orientation === "vertical"}
-              variant="flat"
-            >
+            <AxButton.Group isVertical variant="flat">
               <AxButton
                 size="sm"
                 variant="link"
@@ -260,5 +230,5 @@ const VirtualList = <T extends KeyValue>({
   );
 };
 
-export const AxVirtualList = memo(VirtualList);
-AxVirtualList.displayName = "AxVirtualList";
+export const AxVirtualGallery = memo(VirtualGallery);
+AxVirtualGallery.displayName = "AxVirtualGallery";
