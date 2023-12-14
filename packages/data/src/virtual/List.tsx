@@ -39,6 +39,7 @@ export interface VirtualListProps<T> {
   listRef?: Ref<VirtualListRef | undefined>;
   height?: number;
   width?: number;
+  fullWidth?: boolean;
   padding?: "sm" | "md" | "none";
   orientation?: "vertical" | "horizontal";
   /**
@@ -68,6 +69,7 @@ const createItemList = memoize((items) => items);
 const VirtualList = <T extends KeyValue>({
   items,
   children,
+  fullWidth,
   padding = "md",
   orientation = "vertical",
   height = 48,
@@ -166,7 +168,7 @@ const VirtualList = <T extends KeyValue>({
     >
       <div className="ax-virtual__container">
         <div
-          className="ax-virtual__scroller"
+          className={`ax-virtual__scroller ${fullWidth ? "flex-1" : ""}`}
           style={
             orientation === "vertical"
               ? { minHeight: scrollSize, minWidth: width }
@@ -257,6 +259,7 @@ const VirtualList = <T extends KeyValue>({
     </div>
   );
 };
+VirtualList.displayName = "AxVirtualList";
 
-export const AxVirtualList = memo(VirtualList);
-AxVirtualList.displayName = "AxVirtualList";
+const GenericMemo: <T>(c: T) => T = memo;
+export const AxVirtualList = GenericMemo(VirtualList);

@@ -144,7 +144,7 @@
   }
 
   .ax-timeline__card {
-    @apply flex flex-nowrap p-0 gap-2 min-h-[2rem];
+    @apply flex flex-nowrap p-0 min-h-[2rem];
 
     & > .ax-timeline__avatar {
       @apply text-lg leading-none relative w-12 text-center;

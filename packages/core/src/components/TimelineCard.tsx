@@ -9,11 +9,11 @@
 import { isString } from "@axux/utilities";
 import { forwardRef, type ReactNode } from "react";
 import { AxIcon, type IconProps } from "../icons/Icon";
+import { type ChildrenProp } from "../types";
 import { AppIcons } from "../types/appIcons";
-import { AxCard, type CardProps } from "./Card";
 
 export interface TimelineCardProps
-  extends CardProps,
+  extends ChildrenProp,
     Omit<IconProps, "onClick" | "size" | "icon"> {
   /**
    * avatar size
@@ -44,7 +44,7 @@ export interface TimelineCardProps
   actions?: ReactNode | ReactNode[];
 }
 
-export const AxTimelineCard = forwardRef<HTMLElement, TimelineCardProps>(
+export const AxTimelineCard = forwardRef<HTMLDivElement, TimelineCardProps>(
   (
     {
       children,
@@ -85,13 +85,13 @@ export const AxTimelineCard = forwardRef<HTMLElement, TimelineCardProps>(
             {!isString(icon) && icon}
           </div>
         )}
-        <AxCard
+        <div
           ref={ref}
           {...rest}
           className={`ax-timeline__body ${bodyClassName ?? ""}`}
         >
           {children}
-        </AxCard>
+        </div>
         {actions}
       </div>
     );

@@ -20,7 +20,14 @@ export interface VirtualItemProps extends ChildrenProp {
 /** ***************** Timeline item *******************/
 // eslint-disable-next-line react/display-name
 export const AxVirtualItem = memo(
-  ({ index, children, isLast, updateSize, isSticky }: VirtualItemProps) => {
+  ({
+    index,
+    children,
+    isLast,
+    updateSize,
+    isSticky,
+    ...rest
+  }: VirtualItemProps) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
     /** ***************** calculate height on resize *******************/
@@ -32,18 +39,18 @@ export const AxVirtualItem = memo(
             updateSize(index, child.offsetWidth, child.offsetHeight);
           }
         });
-        updateSize(index, child.offsetWidth, child.offsetHeight);
         ob.observe(child);
         return () => {
           ob.unobserve(child);
           ob.disconnect();
         };
       }
-    }, [index]);
+    }, []);
 
     /** ***************** component *******************/
     return (
       <div
+        {...rest}
         ref={itemRef}
         data-index={index}
         data-sticky={isSticky}

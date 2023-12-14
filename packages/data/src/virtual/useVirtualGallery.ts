@@ -166,7 +166,6 @@ export const useVirtualGallery = ({
   const scrollToItem = useCallback(
     (index: number) => {
       ignoreScrollChange.current = true;
-      console.log(index, Math.floor(index / columnCount));
       setPageIndex(Math.floor(index / columnCount));
       setTimeout(() => {
         scrollerRef.current
