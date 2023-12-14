@@ -26,8 +26,9 @@
     }
   }
   .overflow-wrap {
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
     word-break: normal;
+    text-wrap: wrap;
     overflow: hidden;
   }
   .align-start {

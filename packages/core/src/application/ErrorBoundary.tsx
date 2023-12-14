@@ -6,7 +6,14 @@
  * @license   : MIT
  */
 
-import { Component, type ComponentType, type FC, Fragment, useMemo } from "react";
+import {
+  Component,
+  Fragment,
+  useMemo,
+  useState,
+  type ComponentType,
+  type FC,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { useGlobals } from "../context/Global";
 import { type ChildrenProp } from "../types";
@@ -17,7 +24,7 @@ const ErrorIcon: FC = () => (
     x="0px"
     y="0px"
     viewBox="0 0 511.999 511.999"
-    className="w-12 h-12"
+    className="w-10 h-10"
   >
     <circle style={{ fill: "#E24C4B" }} cx="227.556" cy="227.556" r="227.556" />
     <path
@@ -40,7 +47,7 @@ const DefaultError: FC<{ error?: string }> = ({ error }) => {
   const { t } = useTranslation("core");
   return (
     <Fragment>
-      <h4 className="text-xl font-medium">{t("error.title")}</h4>
+      <h4 className="text-md font-medium">{t("error.title")}</h4>
       <p>{error}</p>
     </Fragment>
   );
@@ -62,10 +69,20 @@ const ErrorMessage: FC<KeyValue> = ({ error, errorElement }) => {
 };
 
 const ErrorStack: FC<KeyValue> = ({ stack }) => {
+  const [show, setShow] = useState(false);
   return (
-    <div className="p-4 overflow-auto border-t">
-      <pre>{stack}</pre>
-    </div>
+    <Fragment>
+      <div className="text-end px-4 text-sm pb-2">
+        <a className="ax-link" onClick={() => setShow(!show)}>
+          {show ? "Hide Detail" : "Show Detail"}
+        </a>
+      </div>
+      {show && (
+        <div className="p-4 overflow-auto border-t text-sm">
+          <pre className="overflow-wrap">{stack}</pre>
+        </div>
+      )}
+    </Fragment>
   );
 };
 

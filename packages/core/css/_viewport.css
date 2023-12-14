@@ -50,7 +50,7 @@
 /******************* error boundary *******************/
 @layer components {
   .ax-error-boundary {
-    @apply grid overflow-hidden p-3 rounded bg-repeat shadow-md bg-danger-600;
+    @apply grid overflow-hidden p-2 rounded bg-repeat shadow-md bg-danger-600;
     grid-template-rows: 1fr;
     background-image: repeating-linear-gradient(
       135deg,
