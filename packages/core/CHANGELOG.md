@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/adarshpastakia/axux/compare/v3.1.3...v3.2.0) (2023-12-14)
+
+### Performance Improvements
+
+- **Virtual:** update scroll size calculation ([a21de32](https://github.com/adarshpastakia/axux/commit/a21de320d490574ff856d36fcf344a5488dabbf3))
+
 ## [3.1.3](https://github.com/adarshpastakia/axux/compare/v3.1.2...v3.1.3) (2023-12-14)
 
 ### Bug Fixes
