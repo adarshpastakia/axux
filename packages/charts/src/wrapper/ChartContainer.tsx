@@ -125,7 +125,7 @@ export const ChartContainer = ({
         !chart.isDisposed() && chart.off("click");
       };
     }
-  }, [onClick]);
+  }, [chartRef, onClick]);
 
   const toolbox = useMemo(
     () => toolboxOptions(dataTableRenderer),
