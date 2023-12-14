@@ -65,6 +65,7 @@ export const Example: Story = {
             {...args}
             listRef={listRef}
             width={480}
+            height={170}
             items={new Array(recordCount).fill(true)}
             onLoadMore={loadMore}
             isLoading={isLoading}

@@ -68,7 +68,7 @@ export const useVirtualGallery = ({
     const index = Math.max(0, pageIndex - pageCount);
     return [
       index * columnCount,
-      (pageIndex + pageCount * 2) * columnCount,
+      (pageIndex + pageCount + pageCount) * columnCount,
       new Array(index)
         .fill(0)
         .reduce<number>((t, _, i) => t + rowsizeCache.current[i] + 8, 0),

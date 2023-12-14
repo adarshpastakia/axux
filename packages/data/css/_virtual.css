@@ -84,7 +84,7 @@
     }
   }
 
-  & .ax-virtual__item {
+  .ax-virtual__item {
     @apply flex flex-nowrap p-0 overflow-hidden min-h-[2rem] items-stretch;
 
     & .ax-card {
@@ -96,7 +96,7 @@
     }
   }
 
-  & .ax-virtual__tools {
+  .ax-virtual__tools {
     @apply self-end sticky bottom-2 end-2;
 
     & > .ax-button__group {

@@ -40,6 +40,8 @@ export interface TimelineCardProps
    */
   iconClassName?: HTMLElement["className"];
   bodyClassName?: HTMLElement["className"];
+
+  actions?: ReactNode | ReactNode[];
 }
 
 export const AxTimelineCard = forwardRef<HTMLElement, TimelineCardProps>(
@@ -59,6 +61,7 @@ export const AxTimelineCard = forwardRef<HTMLElement, TimelineCardProps>(
       animate,
       className,
       bodyClassName,
+      actions,
       ...rest
     }: TimelineCardProps,
     ref
@@ -89,6 +92,7 @@ export const AxTimelineCard = forwardRef<HTMLElement, TimelineCardProps>(
         >
           {children}
         </AxCard>
+        {actions}
       </div>
     );
   }
