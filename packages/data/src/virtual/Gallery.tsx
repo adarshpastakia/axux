@@ -229,6 +229,7 @@ const VirtualGallery = <T extends KeyValue>({
     </div>
   );
 };
+VirtualGallery.displayName = "AxVirtualGallery";
 
-export const AxVirtualGallery = memo(VirtualGallery);
-AxVirtualGallery.displayName = "AxVirtualGallery";
+const GenericMemo: <T>(c: T) => T = memo;
+export const AxVirtualGallery = GenericMemo(VirtualGallery);
