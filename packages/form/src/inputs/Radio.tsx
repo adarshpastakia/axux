@@ -21,6 +21,7 @@ export interface RadioProps
    * radio group name
    */
   name?: string;
+  iconOff?: string;
 }
 
 // eslint-disable-next-line react/display-name
@@ -36,6 +37,7 @@ export const Radio: FC<RadioProps> = memo(
     label,
     onChange,
     icon,
+    iconOff,
     rtlFlip,
     ...rest
   }: RadioProps) => {
@@ -47,7 +49,7 @@ export const Radio: FC<RadioProps> = memo(
     );
     return (
       <label
-        data-has-icon={!!icon}
+        data-has-icon={!!icon && !iconOff}
         data-disabled={isDisabled}
         data-invalid={!isDisabled && isInvalid}
         className={`ax-field__option ${className ?? ""}`}
@@ -65,11 +67,13 @@ export const Radio: FC<RadioProps> = memo(
         <AxIcon
           data-check="off"
           rtlFlip={rtlFlip}
-          icon={icon ?? Icons.iconRadioOff}
+          className="!rounded-full"
+          icon={iconOff ?? icon ?? Icons.iconRadioOff}
         />
         <AxIcon
           data-check="on"
           rtlFlip={rtlFlip}
+          className="!rounded-full"
           icon={icon ?? Icons.iconRadioOn}
         />
         {error && <Error error={error} />}

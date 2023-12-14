@@ -17,7 +17,7 @@ export const Radio: StoryObj<typeof AxField.Radio> = {
     return (
       <>
         <AxField.Radio {...args} name="radio" value="1" />
-        <AxField.Radio {...args} name="radio" value="2" icon="mdi mdi-clock" />
+        <AxField.Radio {...args} name="radio" value="2" icon="mdi mdi-clock" iconOff="mdi mdi-clock-outline" />
       </>
     );
   },
