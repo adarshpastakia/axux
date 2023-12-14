@@ -23,7 +23,7 @@ export const Example: Story = {
   render: (args) => {
     return (
       <AxViewport>
-        <AxVirtualList {...args} height={160}>
+        <AxVirtualList {...args} height={160} isSticky={(idx) => idx < 2}>
           {({ data, ...props }) => (
             <AxVirtualItem {...props}>
               <div className="pb-2 w-[480px] h-[160px] grid flex-1">

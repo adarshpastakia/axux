@@ -54,7 +54,7 @@ export const useVirtualScroll = ({
     const index = Math.max(0, pageIndex - pageCount);
     return [
       index,
-      pageIndex + pageCount * 2,
+      pageIndex + pageCount + pageCount,
       new Array(index)
         .fill(0)
         .reduce<number>(
@@ -122,13 +122,13 @@ export const useVirtualScroll = ({
       offsetHeight = 0,
     } = (scrollerRef.current ?? {}) as HTMLElement;
     if (orientation === "vertical") {
-      if (scrollSize === offsetHeight) return 0;
+      if (scrollHeight === offsetHeight) return 0;
 
       if (scrollTop === 0) return 1;
       if (scrollTop >= scrollHeight - offsetHeight - EXTRA_SIZE) return 2;
     }
     if (orientation === "horizontal") {
-      if (scrollSize === offsetWidth) return 0;
+      if (scrollWidth === offsetWidth) return 0;
 
       if (Math.abs(scrollLeft) === 0) return 1;
       if (Math.abs(scrollLeft) >= scrollWidth - offsetWidth - EXTRA_SIZE)

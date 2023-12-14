@@ -124,9 +124,7 @@ const VirtualList = <T extends KeyValue>({
   const [stickiesStart, pagedList] = useMemo(() => {
     return [
       itemList.slice(0, pageIndex).filter((item) => item.isSticky),
-      itemList
-        .slice(startIndex, endIndex)
-        .filter((item, idx) => !(idx < pageIndex && item.isSticky)),
+      itemList.slice(startIndex, endIndex),
     ];
   }, [itemList, startIndex, endIndex]);
 
