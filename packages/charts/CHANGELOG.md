@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.3](https://github.com/adarshpastakia/axux/compare/v3.1.2...v3.1.3) (2023-12-14)
+
+### Bug Fixes
+
+- **Charts:** reattach onClick on theme change ([4ef558e](https://github.com/adarshpastakia/axux/commit/4ef558e9ed7711abd65538f24b9f302d6eda74fa))
+
 ## [3.1.2](https://github.com/adarshpastakia/axux/compare/v3.1.1...v3.1.2) (2023-12-11)
 
 **Note:** Version bump only for package @axux/charts

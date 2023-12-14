@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.3](https://github.com/adarshpastakia/axux/compare/v3.1.2...v3.1.3) (2023-12-14)
+
+### Bug Fixes
+
+- **Charts:** reattach onClick on theme change ([4ef558e](https://github.com/adarshpastakia/axux/commit/4ef558e9ed7711abd65538f24b9f302d6eda74fa))
+- **ErrorBoundary:** update layout ([825b434](https://github.com/adarshpastakia/axux/commit/825b434033187561117ce944cb23802f87dfa587))
+- **RadioOption:** add iconOff prop ([c1be4c9](https://github.com/adarshpastakia/axux/commit/c1be4c940b62d91c5e40cb46ff8c4b26dbbc374e))
+- **Virtual:** updated list and gallery ([9ba18d3](https://github.com/adarshpastakia/axux/commit/9ba18d3e4e262870d8bf621425c904def1d01b93))
+
 ## [3.1.2](https://github.com/adarshpastakia/axux/compare/v3.1.1...v3.1.2) (2023-12-11)
 
 ### Bug Fixes

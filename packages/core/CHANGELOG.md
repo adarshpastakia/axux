@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.3](https://github.com/adarshpastakia/axux/compare/v3.1.2...v3.1.3) (2023-12-14)
+
+### Bug Fixes
+
+- **ErrorBoundary:** update layout ([825b434](https://github.com/adarshpastakia/axux/commit/825b434033187561117ce944cb23802f87dfa587))
+- **Virtual:** updated list and gallery ([9ba18d3](https://github.com/adarshpastakia/axux/commit/9ba18d3e4e262870d8bf621425c904def1d01b93))
+
 ## [3.1.2](https://github.com/adarshpastakia/axux/compare/v3.1.1...v3.1.2) (2023-12-11)
 
 **Note:** Version bump only for package @axux/core
