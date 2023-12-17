@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.1](https://github.com/adarshpastakia/axux/compare/v3.2.0...v3.2.1) (2023-12-17)
+
+### Bug Fixes
+
+- **Tree:** use AxVirtualList ([0b19ca9](https://github.com/adarshpastakia/axux/commit/0b19ca9065e912b872457704b54a37e34fda05bd))
+- **Virtual:** remove react-window dep, fix layout ([2dced8d](https://github.com/adarshpastakia/axux/commit/2dced8d05e163bf4d326450c0bc786a9366a12a3))
+
 # [3.2.0](https://github.com/adarshpastakia/axux/compare/v3.1.3...v3.2.0) (2023-12-14)
 
 ### Performance Improvements
