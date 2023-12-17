@@ -11,7 +11,7 @@
     @apply grid-area-[content] bg-component;
 
     & .ax-virtual__container {
-      @apply bg-component flex flex-nowrap gap-2 justify-center;
+      @apply bg-component inline-flex flex-nowrap gap-2 justify-center min-h-full min-w-full;
     }
 
     & .ax-virtual__scroller {
@@ -46,10 +46,6 @@
     &[data-orientation="vertical"] {
       @apply overflow-y-auto;
 
-      & .ax-virtual__container {
-        @apply min-h-full;
-      }
-
       & .ax-virtual__placeholder {
         @apply h-[64px];
       }
@@ -62,7 +58,7 @@
         @apply flex-row;
       }
       & .ax-virtual__container {
-        @apply min-w-full h-full inline-flex flex-col;
+        @apply inline-flex flex-col;
       }
       & .ax-virtual__sticky,
       & .ax-virtual__scroller {
