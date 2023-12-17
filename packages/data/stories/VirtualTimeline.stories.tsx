@@ -9,12 +9,12 @@ import {
   AxTimelineCard,
   AxViewport,
 } from "@axux/core";
+import { AxDateDisplay } from "@axux/date";
 import { faker } from "@faker-js/faker";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { AxVirtualItem, AxVirtualList } from "../src";
 import { VirtualListRef } from "../src/virtual/List";
-import { AxDateDisplay } from "@axux/date";
 
 const meta: Meta<typeof AxVirtualList> = {
   component: AxVirtualList,
@@ -64,7 +64,7 @@ const Item = ({ data, index, ...props }: AnyObject) => {
           </AxButton.Group>
         }
       >
-        <div className="p-4">
+        <AxCard className="p-4">
           <div>Item {index + 1}</div>
           <AxText clip={3}>{data.para}</AxText>
           {data.para2 && (
@@ -73,7 +73,7 @@ const Item = ({ data, index, ...props }: AnyObject) => {
             </AxCallout>
           )}
           {isLoading && <AxAnimation.Spinner />}
-        </div>
+        </AxCard>
       </AxTimelineCard>
     </AxVirtualItem>
   );
@@ -114,7 +114,7 @@ const ChatItem = ({ data, index, ...props }: AnyObject) => {
           </Fragment>
         }
       >
-        <div className="p-4">
+        <AxCard className="p-4">
           <div>Item {index + 1}</div>
           <AxText clip={3}>{data.para}</AxText>
           {data.para2 && (
@@ -123,7 +123,7 @@ const ChatItem = ({ data, index, ...props }: AnyObject) => {
             </AxCallout>
           )}
           {isLoading && <AxAnimation.Spinner />}
-        </div>
+        </AxCard>
       </AxTimelineCard>
     </AxVirtualItem>
   );
@@ -263,13 +263,13 @@ export const History: Story = {
             <AxVirtualItem {...props}>
               <AxTimelineCard
                 size={data.showComment ? "lg" : "sm"}
-                isPlain
                 className="flex-1 max-w-2xl"
                 bodyClassName="pb-8"
+                noLine={props.isLast}
                 color={data.showComment ? undefined : "#94a3b8"}
                 icon={data.showComment ? undefined : "mdi mdi-bell"}
               >
-                <div className="flex gap-2">
+                <div className="flex gap-2 px-2 py-1">
                   <span className="font-medium">{data.account}</span>
                   <span>{data.action}</span>
                   <AxDateDisplay

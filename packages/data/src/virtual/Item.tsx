@@ -7,8 +7,8 @@
  */
 
 import { type ChildrenProp } from "@axux/core/dist/types";
+import { isEqual } from "@axux/utilities";
 import { memo, useLayoutEffect, useRef } from "react";
-import { areEqual } from "react-window";
 
 export interface VirtualItemProps extends ChildrenProp {
   index: number;
@@ -61,6 +61,6 @@ export const AxVirtualItem = memo(
       </div>
     );
   },
-  areEqual
+  isEqual
 );
 AxVirtualItem.displayName = "AxVirtualItem";
