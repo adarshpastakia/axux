@@ -6,14 +6,10 @@
  * @license   : MIT
  */
 
-import { useIsRtl } from "@axux/core/dist/hooks/useIsRtl";
 import { type ElementProps } from "@axux/core/dist/types";
 import { AxField } from "@axux/form";
 import { isNil, matchString } from "@axux/utilities";
 import {
-  type FC,
-  type ReactNode,
-  type Ref,
   memo,
   useCallback,
   useEffect,
@@ -22,9 +18,12 @@ import {
   useReducer,
   useRef,
   useTransition,
+  type FC,
+  type ReactNode,
+  type Ref,
 } from "react";
-import AutoSizer from "react-virtualized-auto-sizer";
-import { FixedSizeList as List } from "react-window";
+import { AxVirtualItem } from "../virtual/Item";
+import { AxVirtualList, type VirtualListRef } from "../virtual/List";
 import { TreeNode } from "./Node";
 import { TreeTools } from "./Tools";
 import { toggleCheck, toggleExpand, toggleSelect } from "./reducer";
@@ -121,8 +120,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
     treeRef: ref,
     ...rest
   }: TreeProps) => {
-    const isRtl = useIsRtl();
-    const listRef = useRef<List>(null);
+    const listRef = useRef<VirtualListRef>(null);
     const panelRef = useRef<HTMLDivElement>(null);
     const [, startTransition] = useTransition();
 
@@ -350,8 +348,7 @@ export const AxTreePanel: FC<TreeProps> = memo(
           );
           if (item != null) {
             const focusIndex = state.items.indexOf(item);
-            focusIndex > -1 &&
-              listRef.current?.scrollToItem(focusIndex, "center");
+            focusIndex > -1 && listRef.current?.scrollToItem(focusIndex);
           }
         });
     }, [state]);
@@ -377,38 +374,30 @@ export const AxTreePanel: FC<TreeProps> = memo(
             className="ax-tree__search"
           />
         )}
-        <div className="ax-tree__list">
-          <AutoSizer>
-            {({ width, height }: AnyObject) => (
-              <List
-                ref={listRef}
-                useIsScrolling
-                width={width}
-                height={height}
-                itemSize={itemHeight(panelRef.current)}
-                itemCount={state.items.length}
-                direction={isRtl ? "rtl" : "ltr"}
-                style={{ paddingBottom: "2rem" }}
-              >
-                {({ index, style }) => (
-                  <TreeNode
-                    style={style}
-                    {...state.items[index]}
-                    checkLevel={checkLevel}
-                    isCheckable={isCheckable}
-                    isSelectable={isSelectable}
-                    nodesSelectable={nodesSelectable}
-                    onSelect={(id: string) => dispatch({ type: "select", id })}
-                    onToggleCheck={(id: string) =>
-                      dispatch({ type: "toggleCheck", id })
-                    }
-                    onToggleExpand={() => handleExpand(index)}
-                  />
-                )}
-              </List>
-            )}
-          </AutoSizer>
-        </div>
+        <AxVirtualList
+          fullWidth
+          hideScroller
+          listRef={listRef}
+          items={state.items}
+          height={itemHeight(panelRef.current)}
+        >
+          {({ data, ...props }) => (
+            <AxVirtualItem {...props}>
+              <TreeNode
+                {...data}
+                checkLevel={checkLevel}
+                isCheckable={isCheckable}
+                isSelectable={isSelectable}
+                nodesSelectable={nodesSelectable}
+                onSelect={(id: string) => dispatch({ type: "select", id })}
+                onToggleCheck={(id: string) =>
+                  dispatch({ type: "toggleCheck", id })
+                }
+                onToggleExpand={() => handleExpand(props.index)}
+              />
+            </AxVirtualItem>
+          )}
+        </AxVirtualList>
       </div>
     );
   }

@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxAnimation, AxIcon, AxText } from "@axux/core";
+import { AxAnimation, AxIcon } from "@axux/core";
 import { useBadge } from "@axux/core/dist/hooks/useBadge";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { memo, useMemo } from "react";
@@ -103,7 +103,7 @@ export const TreeNode = memo(
               />
             )}
             {node.icon && <AxIcon icon={node.icon ?? ""} />}
-            <AxText.Ellipsis>{node.label}</AxText.Ellipsis>
+            <div>{node.label}</div>
             {BadgeEl}
           </div>
         )}
