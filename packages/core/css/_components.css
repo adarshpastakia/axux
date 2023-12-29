@@ -224,10 +224,8 @@
       }
     }
     & .ax-collapsable__body {
-      @apply p-2;
-
       & > .ax-content {
-        @apply p-0;
+        @apply p-2;
       }
     }
   }
