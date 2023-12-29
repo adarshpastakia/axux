@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.2](https://github.com/adarshpastakia/axux/compare/v3.2.1...v3.2.2) (2023-12-29)
+
+### Bug Fixes
+
+- **VirtualGallery:** scroll to row index ([c0b8558](https://github.com/adarshpastakia/axux/commit/c0b85588b5979eed08abd347f97a815b0c035264))
+
 ## [3.2.1](https://github.com/adarshpastakia/axux/compare/v3.2.0...v3.2.1) (2023-12-17)
 
 ### Bug Fixes

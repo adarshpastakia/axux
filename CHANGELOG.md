@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.2](https://github.com/adarshpastakia/axux/compare/v3.2.1...v3.2.2) (2023-12-29)
+
+### Bug Fixes
+
+- **Media:** check NaN for width/height ([3a174d9](https://github.com/adarshpastakia/axux/commit/3a174d929f10e9fda7259c0943b7107e8f2a4113))
+- **VideoPlayer:** redraw markers on resize ([8faa390](https://github.com/adarshpastakia/axux/commit/8faa39000a8addb6e94e12ca8ede5d3775f5a8e9))
+- **VirtualGallery:** scroll to row index ([c0b8558](https://github.com/adarshpastakia/axux/commit/c0b85588b5979eed08abd347f97a815b0c035264))
+
 ## [3.2.1](https://github.com/adarshpastakia/axux/compare/v3.2.0...v3.2.1) (2023-12-17)
 
 ### Bug Fixes
