@@ -166,10 +166,10 @@ export const useVirtualGallery = ({
   const scrollToItem = useCallback(
     (index: number) => {
       ignoreScrollChange.current = true;
-      setPageIndex(Math.floor(index / columnCount));
+      setPageIndex(index);
       setTimeout(() => {
         scrollerRef.current
-          ?.querySelector(`[data-index="${index}"]`)
+          ?.querySelector(`[data-index="${index * columnCount}"]`)
           ?.scrollIntoView({ behavior: "instant", block: "start" });
         setTimeout(() => (ignoreScrollChange.current = false), 10);
       }, 100);
