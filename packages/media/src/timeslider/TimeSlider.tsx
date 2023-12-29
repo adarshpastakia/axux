@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { type FC, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, type FC } from "react";
 import ResizeObserver from "resize-observer-polyfill";
 
 interface TimeSliderProps {
@@ -24,25 +24,9 @@ export const TimeSlider: FC<TimeSliderProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    const resize = () => {
-      if (canvasRef.current != null) {
-        canvasRef.current.width = canvasRef.current.offsetWidth;
-        canvasRef.current.height = canvasRef.current.offsetHeight;
-      }
-    };
-
-    const ob = new ResizeObserver(resize);
-    (canvasRef.current != null) && ob.observe(canvasRef.current);
-
-    return () => {
-      ob.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
+  const drawMarkers = useCallback(() => {
     const context = canvasRef.current?.getContext("2d");
-    (context != null) &&
+    context != null &&
       duration > 0 &&
       markers.forEach((marker) => {
         const [time, size] = marker;
@@ -52,10 +36,32 @@ export const TimeSlider: FC<TimeSliderProps> = ({
         context && (context.strokeStyle = "#fc0000");
         context?.strokeRect(left, height - h, 1, h);
       });
+  }, [markers, duration]);
+
+  useEffect(() => {
+    const resize = () => {
+      if (canvasRef.current != null) {
+        canvasRef.current.width = canvasRef.current.offsetWidth;
+        canvasRef.current.height = canvasRef.current.offsetHeight;
+        drawMarkers();
+      }
+    };
+
+    const ob = new ResizeObserver(resize);
+    canvasRef.current != null && ob.observe(canvasRef.current);
+
+    return () => {
+      ob.disconnect();
+    };
+  }, [drawMarkers]);
+
+  useEffect(() => {
+    const context = canvasRef.current?.getContext("2d");
+    drawMarkers();
     return () => {
       context?.clearRect(0, 0, context.canvas.width, context.canvas.height);
     };
-  }, [markers, duration]);
+  }, [drawMarkers]);
 
   return (
     <div className="ax-media__slider">
