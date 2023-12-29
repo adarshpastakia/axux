@@ -69,9 +69,11 @@ export const Video: FC<VideoProps> = memo(
           videoRef.current.offsetHeight /
             (videoRef.current.videoHeight || videoRef.current.offsetHeight)
         );
+        const width = videoRef.current.videoWidth * ratio;
+        const height = videoRef.current.videoHeight * ratio;
         setStyle({
-          width: videoRef.current.videoWidth * ratio,
-          height: videoRef.current.videoHeight * ratio,
+          width: isNaN(width) ? 0 : width,
+          height: isNaN(height) ? 0 : height,
         });
       }
     }, [isFit]);
