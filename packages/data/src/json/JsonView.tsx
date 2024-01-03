@@ -188,7 +188,7 @@ const JsonValue = ({
     >
       <label className="ax-json__property--label" style={{ width: labelWidth }}>
         <span>{label}</span>
-        {canCopy && <AxText.Copy text={value} tooltip={t("action.copy")} />}
+        {canCopy && <AxText.Copy text={filterValue} tooltip={t("action.copy")} />}
         {canFilter && (
           <Fragment>
             <AxButton
