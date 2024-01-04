@@ -9,7 +9,14 @@
 import { AxIcon } from "@axux/core";
 import { AppIcons } from "@axux/core/dist/types/appIcons";
 import { handleClick } from "@axux/utilities/dist/handlers";
-import { memo, type ReactNode, useCallback, useMemo, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useMemo,
+  useState,
+  type ReactNode,
+  useEffect,
+} from "react";
 import { BodyCell } from "./BodyCell";
 import { useDatagridContext } from "./Context";
 
@@ -17,16 +24,15 @@ export const BodyRow = memo(({ row, record }: KeyValue) => {
   const { columns, isSelectable, onRowSelect, onRowExpand, canExpand } =
     useDatagridContext();
 
-  const [isExpanded, setExpanded] = useState(false);
   const [expandedNode, setExpandedNode] = useState<ReactNode>();
+  useEffect(() => {
+    setExpandedNode(undefined);
+  }, [record]);
   const handleExpand = useCallback(() => {
-    if (!expandedNode) {
-      const node = onRowExpand?.(record);
-      setExpandedNode(node);
-      return setExpanded(!!node);
-    }
-    setExpanded(!isExpanded);
-  }, [isExpanded, expandedNode, record, onRowExpand]);
+    if (expandedNode) return setExpandedNode(undefined);
+    const node = onRowExpand?.(record);
+    setExpandedNode(node);
+  }, [expandedNode, record, onRowExpand]);
 
   const [start, end, cols] = useMemo(
     () => [
@@ -60,7 +66,7 @@ export const BodyRow = memo(({ row, record }: KeyValue) => {
             >
               <AxIcon
                 icon={
-                  isExpanded
+                  expandedNode
                     ? AppIcons.iconCollapseMinus
                     : AppIcons.iconExpandPlus
                 }
@@ -80,7 +86,7 @@ export const BodyRow = memo(({ row, record }: KeyValue) => {
           ))}
         </div>
       </div>
-      {isExpanded && expandedNode}
+      {expandedNode}
     </div>
   );
 });
