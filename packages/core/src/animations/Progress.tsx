@@ -97,7 +97,9 @@ export const ProgressBar: FC<ProgressProps> = ({
   const actualValue = useMemo(() => Math.min(Math.max(value, 0), 100), [value]);
 
   const progressVar = useMemo<KeyValue>(
-    () => ({ "--progress": actualValue }),
+    () => ({
+      "--progress": actualValue,
+    }),
     [actualValue]
   );
 
@@ -111,7 +113,8 @@ export const ProgressBar: FC<ProgressProps> = ({
       style={progressVar}
       aria-hidden="true"
     >
-      <span>{Format.percent(actualValue / 100)}</span>
+      <div>{Format.percent(actualValue / 100)}</div>
+      <div data-label={Format.percent(actualValue / 100)} />
     </div>
   );
 };
