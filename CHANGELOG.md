@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.4](https://github.com/adarshpastakia/axux/compare/v3.2.3...v3.2.4) (2024-01-04)
+
+### Bug Fixes
+
+- **Datagrid:** clear expanded content on record change ([eaf9de3](https://github.com/adarshpastakia/axux/commit/eaf9de3e422cf5f76a2c8575b4a5110ad2e3f810))
+- **Popover:** trap click on overlay ([27208db](https://github.com/adarshpastakia/axux/commit/27208dbea6d635b754625a0dbc19835f63663415))
+- **Virtual:** load more scroll check when zoom below 100% ([c3226d1](https://github.com/adarshpastakia/axux/commit/c3226d1a21ca6b4df06f3028ead938d85aef9de1))
+
 ## [3.2.3](https://github.com/adarshpastakia/axux/compare/v3.2.2...v3.2.3) (2024-01-03)
 
 ### Bug Fixes

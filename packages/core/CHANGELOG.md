@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.4](https://github.com/adarshpastakia/axux/compare/v3.2.3...v3.2.4) (2024-01-04)
+
+### Bug Fixes
+
+- **Popover:** trap click on overlay ([27208db](https://github.com/adarshpastakia/axux/commit/27208dbea6d635b754625a0dbc19835f63663415))
+
 ## [3.2.3](https://github.com/adarshpastakia/axux/compare/v3.2.2...v3.2.3) (2024-01-03)
 
 **Note:** Version bump only for package @axux/core
