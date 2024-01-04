@@ -110,7 +110,12 @@ export const AxPopover: FC<PopoverProps> & {
           {!isDisabled &&
             createPortal(
               <Fragment>
-                {open && <Popover.Overlay className="fixed inset-0 z-10" />}
+                {open && (
+                  <Popover.Overlay
+                    className="fixed inset-0 z-10"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                )}
                 <Popover.Panel
                   {...rest}
                   className={`popover ${popoverClassName ?? ""}`}
