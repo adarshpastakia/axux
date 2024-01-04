@@ -13,6 +13,7 @@ import * as ButtonStories from "./Button.stories";
 import * as DropdownStories from "./Dropdown.stories";
 import * as ActionStories from "./Action.stories";
 import * as ConfirmStories from "./Confirm.stories";
+import * as GroupStories from "./Group.stories";
 
 <Meta of={ButtonStories} />
 
@@ -46,6 +47,17 @@ Basic action buttons
   <Subheading>Badges</Subheading>
 </Anchor>
 <Canvas of={ButtonStories.Badges} />
+
+---
+
+<Anchor storyId="group">
+  <Subheading>Group</Subheading>
+</Anchor>
+<Canvas of={GroupStories.Group} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={GroupStories.Group} />
+</AxCollapsable>
 
 ---
 
