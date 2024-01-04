@@ -154,12 +154,12 @@ export const useVirtualScroll = ({
 
       if (
         orientation === "vertical" &&
-        +scrollTop + +offsetHeight >= +scrollHeight
+        Math.ceil(+scrollTop + +offsetHeight) >= +scrollHeight
       )
         return true;
       if (
         orientation === "horizontal" &&
-        Math.abs(+scrollLeft) + +offsetWidth >= +scrollWidth
+        Math.ceil(Math.abs(+scrollLeft) + +offsetWidth) >= +scrollWidth
       )
         return true;
 

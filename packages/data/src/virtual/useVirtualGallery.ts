@@ -158,7 +158,7 @@ export const useVirtualGallery = ({
       evt.currentTarget as HTMLElement;
     if (!ignoreScrollChange.current) setScrollOffset(scrollTop);
 
-    if (+scrollTop + +offsetHeight >= +scrollHeight) return true;
+    if (Math.ceil(+scrollTop + +offsetHeight) >= +scrollHeight) return true;
 
     return false;
   }, []);
