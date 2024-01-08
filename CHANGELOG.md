@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.5](https://github.com/adarshpastakia/axux/compare/v3.2.4...v3.2.5) (2024-01-08)
+
+### Bug Fixes
+
+- **ButtonConfirm:** use mouseup ([da8e8ea](https://github.com/adarshpastakia/axux/commit/da8e8ea6ef79f19adc3b62af8eb22e1814be3727))
+
 ## [3.2.4](https://github.com/adarshpastakia/axux/compare/v3.2.3...v3.2.4) (2024-01-04)
 
 ### Bug Fixes
