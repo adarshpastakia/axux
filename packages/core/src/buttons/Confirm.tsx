@@ -64,7 +64,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
               size="sm"
               variant="link"
               color={actionType}
-              onClick={() => onClick?.(false)}
+              {...{ onMouseUp: () => onClick?.(false) }}
             >
               {cancelLabel ?? t("action.cancel")}
             </AxButton>
@@ -74,7 +74,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
               size="sm"
               variant="solid"
               color={actionType}
-              onClick={() => onClick?.(true)}
+              {...{ onMouseUp: () => onClick?.(true) }}
             >
               {okLabel ?? t("action.ok")}
             </AxButton>
