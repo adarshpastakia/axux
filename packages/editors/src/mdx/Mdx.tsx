@@ -26,6 +26,11 @@ export const AxMdx: FC<Props> = ({ text, className, ...rest }) => {
     <div
       className={`markdown-body ${className ?? ""}`}
       dangerouslySetInnerHTML={{ __html: mdtext }}
+      onClick={(e) => {
+        const el = e.currentTarget.closest(".hljs-copy")
+          ?.previousElementSibling as HTMLElement;
+        if (el) void navigator.clipboard.writeText(el.innerText);
+      }}
     />
   );
 };
