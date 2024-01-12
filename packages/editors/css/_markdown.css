@@ -328,7 +328,12 @@
     }
 
     & .hljs-copy {
-      @apply absolute end-0 bottom-0 p-2 border bg-component text-primary hover:bg-primary-500/30 cursor-pointer;
+      @apply absolute end-0 bottom-0 p-2 border bg-component text-primary hover:bg-primary-500/30 cursor-pointer leading-none;
+
+      & > svg {
+        width: 1em;
+        height: 1em;
+      }
     }
   }
 
