@@ -7,7 +7,7 @@
  */
 
 import { type ElementProps } from "@axux/core/dist/types";
-import { useEffect, useState, type FC } from "react";
+import { useEffect, useState, type FC, useCallback } from "react";
 import { marked } from "../utils/marked";
 
 export interface Props extends ElementProps {
@@ -16,6 +16,11 @@ export interface Props extends ElementProps {
 
 export const AxMdx: FC<Props> = ({ text, className, ...rest }) => {
   const [mdtext, setMdtext] = useState("");
+
+  const copySuccess = useCallback((el: HTMLElement) => {
+    el.dataset.show = "true";
+    setTimeout(() => (el.dataset.show = "false"), 1000);
+  }, []);
 
   useEffect(() => {
     const parsed = !text ? "" : marked.parse(text.replaceAll(":::", "!!! "));
@@ -27,9 +32,11 @@ export const AxMdx: FC<Props> = ({ text, className, ...rest }) => {
       className={`markdown-body ${className ?? ""}`}
       dangerouslySetInnerHTML={{ __html: mdtext }}
       onClick={(e) => {
-        const el = e.currentTarget.closest(".hljs-copy")
-          ?.previousElementSibling as HTMLElement;
-        if (el) void navigator.clipboard.writeText(el.innerText);
+        const el = (e.target as HTMLElement)?.closest(".hljs-copy");
+        if (el)
+          void navigator.clipboard
+            .writeText((el.previousElementSibling as HTMLElement).innerText)
+            .then(() => copySuccess(el.nextElementSibling as HTMLElement));
       }}
     />
   );

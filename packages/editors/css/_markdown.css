@@ -335,6 +335,14 @@
         height: 1em;
       }
     }
+
+    & .hljs-copy-success {
+      @apply absolute end-0 bottom-0 p-2 border text-white bg-bw-900 select-none leading-none hidden;
+
+      &[data-show="true"] {
+        @apply block;
+      }
+    }
   }
 
   &.markdown-body::before {
