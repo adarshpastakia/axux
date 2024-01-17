@@ -62,11 +62,9 @@ export class AvatarShapeUtil extends ShapeUtil<AvatarShape> {
     return {
       color: "black",
       fill: "none",
-      dash: "draw",
       size: "s",
       font: "draw",
       text: "person",
-      align: "middle",
     } as AnyObject;
   }
 

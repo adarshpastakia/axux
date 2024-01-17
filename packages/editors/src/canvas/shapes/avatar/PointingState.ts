@@ -53,11 +53,9 @@ export class Pointing extends StateNode {
             props: {
               color: "black",
               fill: "none",
-              dash: "draw",
               size: "m",
               font: "draw",
               text: "person",
-              align: "middle",
             } as AnyObject,
           },
         ])
