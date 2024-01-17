@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.6](https://github.com/adarshpastakia/axux/compare/v3.2.5...v3.2.6) (2024-01-17)
+
+### Bug Fixes
+
+- **DrawCanvas:** avatar shape default props ([e54ca60](https://github.com/adarshpastakia/axux/commit/e54ca609967140cf1fc1c351eb1b710ba0cc85c1))
+- **Mdx:** copy action with success msg ([ad1d846](https://github.com/adarshpastakia/axux/commit/ad1d846904ab70da0d3bbf4ca18872aaa5d3844e))
+- **Mdx:** copy code section ([1af3d50](https://github.com/adarshpastakia/axux/commit/1af3d503f20e660fa9af06db3c80854963113c85))
+
 ## [3.2.5](https://github.com/adarshpastakia/axux/compare/v3.2.4...v3.2.5) (2024-01-08)
 
 ### Bug Fixes
