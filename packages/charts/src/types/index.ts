@@ -24,6 +24,7 @@ export type Theme =
 export interface BaseChart {
   title?: string;
   theme?: Theme;
+  onExport?: (chart: { title: string; image: string }) => void;
 }
 
 export interface CountType {

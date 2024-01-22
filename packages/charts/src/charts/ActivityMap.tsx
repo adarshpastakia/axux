@@ -9,13 +9,12 @@
 import { AxButton, AxDivider } from "@axux/core";
 import { isArray, isEmpty } from "@axux/utilities";
 import { type EChartOption, type EChartsType } from "echarts";
-import { type FC, useMemo, useRef, useState, useEffect } from "react";
+import { useEffect, useMemo, useRef, useState, type FC } from "react";
 import { ChartPalette } from "../theme";
 import { type BaseChart } from "../types";
 import { Icons } from "../types/icons";
 import { activityRenderer } from "../types/utils";
 import { ChartContainer } from "../wrapper/ChartContainer";
-import { ChartToolbar } from "../wrapper/ChartToolbar";
 import { ChartWrapper } from "../wrapper/ChartWrapper";
 import { PaletteSelect } from "../wrapper/PaletteSelect";
 
@@ -117,6 +116,7 @@ const MONTH_DAY = {
 const ActivityMapChart: FC<ActivityMapProps> = ({
   data = [],
   title,
+  onExport,
   theme: chartTheme = "activity",
   heatmapPalette,
   highLabels,
@@ -220,6 +220,8 @@ const ActivityMapChart: FC<ActivityMapProps> = ({
 
   return (
     <ChartContainer
+      title={title}
+      onExport={onExport}
       theme={theme}
       options={options}
       chartRef={chartRef}
@@ -228,31 +230,24 @@ const ActivityMapChart: FC<ActivityMapProps> = ({
       dataTableRenderer={activityRenderer}
       onClick={(e) => onClick?.(e.seriesIndex, e.dataIndex)}
     >
-      <ChartToolbar>
-        <label>{title}</label>
-        <AxButton
-          size="sm"
-          variant="link"
-          className="flush"
-          icon={Icons.ActivityScatter}
-          isActive={type === "scatter"}
-          onClick={() => setType("scatter")}
-        />
-        <AxButton
-          size="sm"
-          variant="link"
-          className="flush"
-          icon={Icons.ActivityCalendar}
-          isActive={type === "heatmap"}
-          onClick={() => setType("heatmap")}
-        />
-        <AxDivider size="xs" vertical />
-        <PaletteSelect
-          theme={theme}
-          onClick={setTheme}
-          defaultTheme="activity"
-        />
-      </ChartToolbar>
+      <AxButton
+        size="sm"
+        variant="link"
+        className="flush"
+        icon={Icons.ActivityScatter}
+        isActive={type === "scatter"}
+        onClick={() => setType("scatter")}
+      />
+      <AxButton
+        size="sm"
+        variant="link"
+        className="flush"
+        icon={Icons.ActivityCalendar}
+        isActive={type === "heatmap"}
+        onClick={() => setType("heatmap")}
+      />
+      <AxDivider size="xs" vertical />
+      <PaletteSelect theme={theme} onClick={setTheme} defaultTheme="activity" />
     </ChartContainer>
   );
 };

@@ -9,12 +9,11 @@
 import { Countries, isEmpty } from "@axux/utilities";
 import * as echarts from "echarts";
 import { type EChartOption, type EChartsType } from "echarts";
-import { type FC, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type FC } from "react";
 import { ChartPalette } from "../theme";
 import { type BaseChart, type CountType } from "../types";
 import { countRenderer } from "../types/utils";
 import { ChartContainer } from "../wrapper/ChartContainer";
-import { ChartToolbar } from "../wrapper/ChartToolbar";
 import { ChartWrapper } from "../wrapper/ChartWrapper";
 
 import WorldMap from "../types/world.svg";
@@ -28,6 +27,7 @@ export interface MapSeriesProps extends BaseChart, CountType {
 
 const MapSeriesChart: FC<MapSeriesProps> = ({
   data,
+  onExport,
   theme: chartTheme,
   title,
   onClick,
@@ -87,24 +87,23 @@ const MapSeriesChart: FC<MapSeriesProps> = ({
 
   return (
     <ChartContainer
+      title={title}
+      onExport={onExport}
       chartRef={chartRef}
       options={options}
       dataTableRenderer={countRenderer}
       onClick={(e) => e.data && onClick?.(e?.data?.id ?? "")}
     >
-      <ChartToolbar>
-        <label>{title}</label>
-        <div className="ax-chart__slider">
-          <input
-            type="range"
-            min={1.25}
-            max={24}
-            step={0.25}
-            value={zoom}
-            onChange={(e) => setZoom(e.target.valueAsNumber)}
-          />
-        </div>
-      </ChartToolbar>
+      <div className="ax-chart__slider">
+        <input
+          type="range"
+          min={1.25}
+          max={24}
+          step={0.25}
+          value={zoom}
+          onChange={(e) => setZoom(e.target.valueAsNumber)}
+        />
+      </div>
     </ChartContainer>
   );
 };
