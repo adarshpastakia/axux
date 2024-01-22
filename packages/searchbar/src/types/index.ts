@@ -131,6 +131,9 @@ interface BaseFilter {
   isDisabled?: boolean;
   isNegative?: boolean;
   isRequired?: boolean;
+  canEdit?: false;
+  canInvert?: false;
+  canDisable?: false;
 }
 export interface FilterByField extends BaseFilter {
   type: "filter";
