@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/adarshpastakia/axux/compare/v3.2.6...v3.3.0) (2024-01-22)
+
+### Bug Fixes
+
+- **Filters:** add props to hide menu actions ([cd67a88](https://github.com/adarshpastakia/axux/commit/cd67a88b5c66d8d0e6ec311293c4c6f827cef6d4))
+
 ## [3.2.6](https://github.com/adarshpastakia/axux/compare/v3.2.5...v3.2.6) (2024-01-17)
 
 **Note:** Version bump only for package @axux/searchbar
