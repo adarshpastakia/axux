@@ -9,12 +9,18 @@
 import { AxButton, AxDivider } from "@axux/core";
 import { isEmpty } from "@axux/utilities";
 import { type EChartOption, type EChartsType } from "echarts";
-import { type FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type FC,
+} from "react";
 import { type BaseChart, type TimeSeriesType } from "../types";
 import { Icons } from "../types/icons";
 import { timeSeriesRenderer } from "../types/utils";
 import { ChartContainer } from "../wrapper/ChartContainer";
-import { ChartToolbar } from "../wrapper/ChartToolbar";
 import { ChartWrapper } from "../wrapper/ChartWrapper";
 import { PaletteSelect } from "../wrapper/PaletteSelect";
 
@@ -26,6 +32,7 @@ export interface TimeSeriesProps extends BaseChart, TimeSeriesType {
 
 const TimeSeriesChart: FC<TimeSeriesProps> = ({
   data,
+  onExport,
   categoryAxisName,
   valueAxisName,
   title,
@@ -44,6 +51,12 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
   useEffect(() => {
     setTheme(chartTheme);
   }, [chartTheme]);
+
+  useEffect(() => {
+    return () => {
+      chartRef.current?.clear();
+    };
+  }, [data]);
 
   const enableBrush = useCallback(() => {
     chartRef.current?.dispatchAction({
@@ -140,6 +153,8 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
 
   return (
     <ChartContainer
+      title={title}
+      onExport={onExport}
       theme={theme}
       options={options}
       chartRef={chartRef}
@@ -148,43 +163,40 @@ const TimeSeriesChart: FC<TimeSeriesProps> = ({
       dataTableRenderer={timeSeriesRenderer}
       onClick={(e) => onClick?.({ category: e.data[0], series: e.seriesId })}
     >
-      <ChartToolbar>
-        <label>{title}</label>
-        <AxButton
-          size="sm"
-          variant="link"
-          className="flush"
-          icon={Icons.Line}
-          isActive={type === "line"}
-          onClick={() => setType("line")}
-        />
-        <AxButton
-          size="sm"
-          variant="link"
-          className="flush"
-          icon={Icons.Column}
-          isActive={type === "column"}
-          onClick={() => setType("column")}
-        />
-        <AxButton
-          size="sm"
-          variant="link"
-          className="flush"
-          icon={Icons.LineStacked}
-          isActive={type === "line-stacked"}
-          onClick={() => setType("line-stacked")}
-        />
-        <AxButton
-          size="sm"
-          variant="link"
-          className="flush"
-          icon={Icons.ColumnStacked}
-          isActive={type === "column-stacked"}
-          onClick={() => setType("column-stacked")}
-        />
-        <AxDivider size="xs" vertical />
-        <PaletteSelect theme={theme} onClick={setTheme} />
-      </ChartToolbar>
+      <AxButton
+        size="sm"
+        variant="link"
+        className="flush"
+        icon={Icons.Line}
+        isActive={type === "line"}
+        onClick={() => setType("line")}
+      />
+      <AxButton
+        size="sm"
+        variant="link"
+        className="flush"
+        icon={Icons.Column}
+        isActive={type === "column"}
+        onClick={() => setType("column")}
+      />
+      <AxButton
+        size="sm"
+        variant="link"
+        className="flush"
+        icon={Icons.LineStacked}
+        isActive={type === "line-stacked"}
+        onClick={() => setType("line-stacked")}
+      />
+      <AxButton
+        size="sm"
+        variant="link"
+        className="flush"
+        icon={Icons.ColumnStacked}
+        isActive={type === "column-stacked"}
+        onClick={() => setType("column-stacked")}
+      />
+      <AxDivider size="xs" vertical />
+      <PaletteSelect theme={theme} onClick={setTheme} />
     </ChartContainer>
   );
 };

@@ -9,12 +9,11 @@
 import { AxButton, AxDivider } from "@axux/core";
 import { compareValues, isEmpty } from "@axux/utilities";
 import { type EChartOption, type EChartsType } from "echarts";
-import { type FC, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type FC } from "react";
 import { type BaseChart, type CountType } from "../types";
 import { Icons } from "../types/icons";
 import { countRenderer } from "../types/utils";
 import { ChartContainer } from "../wrapper/ChartContainer";
-import { ChartToolbar } from "../wrapper/ChartToolbar";
 import { ChartWrapper } from "../wrapper/ChartWrapper";
 import { PaletteSelect } from "../wrapper/PaletteSelect";
 
@@ -26,6 +25,7 @@ export interface CountSeriesProps extends BaseChart, CountType {
 const CountSeriesChart: FC<CountSeriesProps> = ({
   data,
   title,
+  onExport,
   theme: chartTheme,
   type: chartType = "pie",
   onClick,
@@ -48,6 +48,12 @@ const CountSeriesChart: FC<CountSeriesProps> = ({
       };
     }
   }, [type]);
+
+  useEffect(() => {
+    return () => {
+      chartRef.current?.clear();
+    };
+  }, [data]);
 
   const options = useMemo<EChartOption>(() => {
     if (type === "pie") {
@@ -115,6 +121,8 @@ const CountSeriesChart: FC<CountSeriesProps> = ({
 
   return (
     <ChartContainer
+      title={title}
+      onExport={onExport}
       theme={theme}
       options={options}
       chartRef={chartRef}
@@ -123,35 +131,32 @@ const CountSeriesChart: FC<CountSeriesProps> = ({
       dataTableRenderer={countRenderer}
       onClick={(e) => onClick?.(e.data.id ?? e.seriesId)}
     >
-      <ChartToolbar>
-        <label>{title}</label>
-        <AxButton
-          size="sm"
-          variant="link"
-          className="flush"
-          icon={Icons.Pie}
-          isActive={type === "pie"}
-          onClick={() => setType("pie")}
-        />
-        <AxButton
-          size="sm"
-          variant="link"
-          className="flush"
-          icon={Icons.Column}
-          isActive={type === "column"}
-          onClick={() => setType("column")}
-        />
-        <AxButton
-          size="sm"
-          variant="link"
-          className="flush"
-          icon={Icons.Bar}
-          isActive={type === "bar"}
-          onClick={() => setType("bar")}
-        />
-        <AxDivider size="xs" vertical />
-        <PaletteSelect theme={theme} onClick={setTheme} />
-      </ChartToolbar>
+      <AxButton
+        size="sm"
+        variant="link"
+        className="flush"
+        icon={Icons.Pie}
+        isActive={type === "pie"}
+        onClick={() => setType("pie")}
+      />
+      <AxButton
+        size="sm"
+        variant="link"
+        className="flush"
+        icon={Icons.Column}
+        isActive={type === "column"}
+        onClick={() => setType("column")}
+      />
+      <AxButton
+        size="sm"
+        variant="link"
+        className="flush"
+        icon={Icons.Bar}
+        isActive={type === "bar"}
+        onClick={() => setType("bar")}
+      />
+      <AxDivider size="xs" vertical />
+      <PaletteSelect theme={theme} onClick={setTheme} />
     </ChartContainer>
   );
 };

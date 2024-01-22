@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { AxContent, useIsDark, useResizeObserver } from "@axux/core";
+import { AxButton, AxContent, useIsDark, useResizeObserver } from "@axux/core";
 import { type SizeObject } from "@axux/core/dist/types";
 import * as echarts from "echarts";
 import { type EChartOption, type EChartsType } from "echarts";
@@ -18,13 +18,12 @@ import {
   useImperativeHandle,
   useMemo,
   useState,
-  type ReactElement,
   type RefObject,
 } from "react";
 import { registerThemes } from "../theme";
 import { type Theme } from "../types";
 import { Icons } from "../types/icons";
-import { type ChartToolbar } from "./ChartToolbar";
+import { ChartToolbar } from "./ChartToolbar";
 
 const defaultOptions = {
   grid: {
@@ -61,22 +60,26 @@ registerThemes(echarts);
 
 export const ChartContainer = ({
   theme = "default",
+  title,
   options,
   children,
   onResize,
   onClick,
+  onExport,
   isEmpty,
   emptyIcon,
   chartRef: _ref,
   dataTableRenderer,
 }: {
+  title?: string;
   theme?: Theme;
   isEmpty?: boolean;
   emptyIcon?: string;
   options: EChartOption;
-  children?: ReactElement<typeof ChartToolbar>;
+  children?: AnyObject;
   chartRef?: RefObject<EChartsType>;
   onClick?: (event: AnyObject) => void;
+  onExport?: (event: AnyObject) => void;
   dataTableRenderer?: (opt: KeyValue) => string;
   onResize?: (size: { width: number; height: number }) => void;
 }) => {
@@ -140,9 +143,30 @@ export const ChartContainer = ({
     });
   }, [options, chartRef]);
 
+  const handleExport = useCallback(() => {
+    const image = chartRef?.getDataURL({
+      type: "png",
+      excludeComponents: ["toolbox"],
+    });
+    console.log(image);
+    onExport?.({ image, title });
+  }, [chartRef, onExport, title]);
+
   return (
     <Fragment>
-      <div>{children}</div>
+      <ChartToolbar>
+        <label>{title}</label>
+        {children}
+        {onExport && (
+          <AxButton
+            size="sm"
+            variant="link"
+            className="flush"
+            icon={Icons.iconExport}
+            onClick={handleExport}
+          />
+        )}
+      </ChartToolbar>
       <div ref={containerRef} className="overflow-hidden" />
       {isEmpty && (
         <AxContent.Empty icon={emptyIcon ?? Icons.Line} message="Empty chart" />

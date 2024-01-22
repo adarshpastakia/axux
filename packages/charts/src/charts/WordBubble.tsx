@@ -9,20 +9,24 @@
 import { useIsDark } from "@axux/core";
 import { compareValues, isEmpty } from "@axux/utilities";
 import { type EChartOption } from "echarts";
-import { type FC, useMemo } from "react";
+import { useMemo, type FC } from "react";
 import { ChartPalette } from "../theme";
 import { type BaseChart, type CountType } from "../types";
 import { Icons } from "../types/icons";
 import { countRenderer } from "../types/utils";
 import { ChartContainer } from "../wrapper/ChartContainer";
-import { ChartToolbar } from "../wrapper/ChartToolbar";
 import { ChartWrapper } from "../wrapper/ChartWrapper";
 
 export interface WordBubbleProps extends Omit<BaseChart, "theme">, CountType {
   onClick?: (key: string) => void;
 }
 
-const WordBubbleChart: FC<WordBubbleProps> = ({ data, title, onClick }) => {
+const WordBubbleChart: FC<WordBubbleProps> = ({
+  data,
+  title,
+  onExport,
+  onClick,
+}) => {
   const isDark = useIsDark();
 
   const options = useMemo<EChartOption>(() => {
@@ -62,16 +66,14 @@ const WordBubbleChart: FC<WordBubbleProps> = ({ data, title, onClick }) => {
 
   return (
     <ChartContainer
+      title={title}
+      onExport={onExport}
       options={options}
       isEmpty={isEmpty(data)}
       emptyIcon={Icons.ActivityScatter}
       dataTableRenderer={countRenderer}
       onClick={(e) => onClick?.(e?.name ?? "")}
-    >
-      <ChartToolbar>
-        <label>{title}</label>
-      </ChartToolbar>
-    </ChartContainer>
+    />
   );
 };
 
