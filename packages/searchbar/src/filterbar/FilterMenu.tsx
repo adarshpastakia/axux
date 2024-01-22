@@ -20,7 +20,13 @@ export const FilterMenu = memo(
       useSearchContext();
 
     const canEdit = useMemo(() => {
-      if (fields.length === 0 || !!filter.isScope || !isEditable) return false;
+      if (
+        fields.length === 0 ||
+        !!filter.isScope ||
+        !isEditable ||
+        filter.canEdit === false
+      )
+        return false;
       const field = fields.find(
         (f) => (filter.type === "filter" && f.field === filter.field) ?? ""
       );
@@ -52,32 +58,42 @@ export const FilterMenu = memo(
             <AxDivider size="xs" />
           </Fragment>
         )}
-        <AxMenu.Item
-          icon={Icons.iconEnable}
-          label={t("label.enable")}
-          isDisabled={!filter.isDisabled}
-          onClick={() => updateFilter(index, { isDisabled: false })}
-        />
-        <AxMenu.Item
-          icon={Icons.iconDisable}
-          label={t("label.disable")}
-          isDisabled={filter.isDisabled}
-          onClick={() => updateFilter(index, { isDisabled: true })}
-        />
-        <AxMenu.Item
-          icon={Icons.iconInvert}
-          label={t("label.invert")}
-          onClick={() =>
-            updateFilter(index, { isNegative: !filter.isNegative })
-          }
-        />
-        <AxDivider size="xs" />
-        <AxMenu.Item
-          icon={Icons.iconDelete}
-          onClick={() => removeFilter(index)}
-          label={t("label.remove")}
-          className="ax-filter__deleteButton"
-        />
+        {filter.canDisable !== false && (
+          <Fragment>
+            <AxMenu.Item
+              icon={Icons.iconEnable}
+              label={t("label.enable")}
+              isDisabled={!filter.isDisabled}
+              onClick={() => updateFilter(index, { isDisabled: false })}
+            />
+            <AxMenu.Item
+              icon={Icons.iconDisable}
+              label={t("label.disable")}
+              isDisabled={filter.isDisabled}
+              onClick={() => updateFilter(index, { isDisabled: true })}
+            />
+          </Fragment>
+        )}
+        {filter.canInvert !== false && (
+          <AxMenu.Item
+            icon={Icons.iconInvert}
+            label={t("label.invert")}
+            onClick={() =>
+              updateFilter(index, { isNegative: !filter.isNegative })
+            }
+          />
+        )}
+        {!filter.isRequired && (
+          <Fragment>
+            <AxDivider size="xs" />
+            <AxMenu.Item
+              icon={Icons.iconDelete}
+              onClick={() => removeFilter(index)}
+              label={t("label.remove")}
+              className="ax-filter__deleteButton"
+            />
+          </Fragment>
+        )}
       </AxMenu>
     );
   }
