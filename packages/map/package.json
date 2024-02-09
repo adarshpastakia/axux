@@ -23,16 +23,16 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@arcgis/core": "^4.26.5",
+    "@arcgis/core": "^4.28.10",
     "@axux/core": "^3.3.0",
     "@axux/utilities": "^3.3.0",
     "ngeohash": "^0.6.3"
   },
   "peerDependencies": {
-    "i18next": "^22.4.14",
+    "i18next": "^23.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^12.2.0"
+    "react-i18next": "^14.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.35",

@@ -30,10 +30,10 @@
     "wavesurfer.js": "^6.6.3"
   },
   "peerDependencies": {
-    "i18next": "^22.4.14",
+    "i18next": "^23.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^12.2.0"
+    "react-i18next": "^14.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.35",
