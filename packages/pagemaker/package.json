@@ -27,15 +27,13 @@
     "@axux/core": "^3.3.0",
     "@axux/data": "^3.3.0",
     "@axux/form": "^3.3.0",
-    "@axux/utilities": "^3.3.0",
-    "@mdxeditor/editor": "^1.5.0",
-    "react-color": "^2.19.3"
+    "@axux/utilities": "^3.3.0"
   },
   "peerDependencies": {
-    "i18next": "^22.4.14",
+    "i18next": "^23.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^12.2.0"
+    "react-i18next": "^14.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.35",
