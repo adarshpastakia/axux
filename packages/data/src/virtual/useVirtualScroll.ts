@@ -38,6 +38,12 @@ export const useVirtualScroll = ({
         Math.max(h[0], sizeCache.current[i]?.[0] ?? width),
         Math.max(h[1], sizeCache.current[i]?.[1] ?? height),
       ]);
+    setScrollSize(
+      sizeCache.current.reduce<number>(
+        (t, h, i) => (t += h[orientation === "vertical" ? 1 : 0] ?? 0),
+        0
+      ) + EXTRA_SIZE
+    );
   }, [count, height, width, orientation]);
 
   // start item index

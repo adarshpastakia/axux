@@ -52,6 +52,9 @@ export const useVirtualGallery = ({
             .filter(Boolean)
         )
       );
+    setScrollSize(
+      rowsizeCache.current.reduce<number>((t, h) => t + h + 8, 0) + EXTRA_SIZE
+    );
   }, [count, columnCount, height, width]);
 
   // start item index
