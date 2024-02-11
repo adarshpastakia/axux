@@ -25,3 +25,5 @@ export type { VirtualGalleryRef } from "./virtual/Gallery";
 export { AxVirtualItem } from "./virtual/Item";
 export { AxVirtualList } from "./virtual/List";
 export type { VirtualListRef } from "./virtual/List";
+
+export { AxGraph } from "./graph/Graph";

@@ -9,6 +9,7 @@
 @import "./_virtual.css";
 @import "./_json.css";
 @import "./_tree.css";
+@import "./_graph.css";
 @import "./_pagination.css";
 @import "./_checklist.css";
 @import "./_histogram.css";
