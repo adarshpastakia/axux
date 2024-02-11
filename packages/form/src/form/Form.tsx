@@ -131,7 +131,7 @@ export const AxForm = <K extends KeyValue>({
 }: PropsWithChildren<FormProps<K>>) => {
   const form = useForm({
     shouldFocusError: true,
-    resolver: schema && yupResolver(schema as AnyObject),
+    resolver: schema && (yupResolver(schema as AnyObject) as AnyObject),
     defaultValues: defaultValues as DefaultValues<K>,
   });
 
