@@ -35,7 +35,13 @@ import {
   startOfYear,
 } from "date-fns";
 import i18n from "i18next";
-import { type DateLike, type DatePart, DateParts, type ParsedDate, Type } from "../types";
+import {
+  DateParts,
+  Type,
+  type DateLike,
+  type DatePart,
+  type ParsedDate,
+} from "../types";
 import { DateUtil } from "./index";
 
 /** @internal */
@@ -166,7 +172,7 @@ const parseLabel = (dt: DateLike, locale?: string): string => {
       let retVal;
       const { part = "$day", op = "+", diff = 0 } = parts;
       const count = parseInt(`${op}${diff}`, 10);
-      const t = (k: string, o?: AnyObject) => i18n.t<string, string>(`superdate:${k}`, o);
+      const t = (k: string, o?: AnyObject) => i18n.t(`superdate:${k}`, o);
       if (part === DateParts.NOW) {
         retVal = t(`label.${DateParts.NOW}`);
       } else if (count === 0) {
