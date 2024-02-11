@@ -179,7 +179,8 @@ export const AxMdxEditor: FC<MdxEditorProps> = ({
                                   "danger",
                                   "caution",
                                 ].includes(
-                                  editor.rootNode.getMdastNode()?.name
+                                  // @ts-expect-error ignore
+                                  editor.rootNode?.getMdastNode?.().name
                                 ),
                               contents: () => <ChangeAdmonitionType />,
                             },
