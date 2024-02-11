@@ -57,7 +57,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
     <AxPopover placement={placement}>
       <AxButton {...props}>{children}</AxButton>
       <div className="p-2" onClick={(e) => e.stopPropagation()}>
-        <p>{message}</p>
+        <div>{message}</div>
         <div className="flex justify-end">
           <Popover.Button as={Fragment}>
             <AxButton
