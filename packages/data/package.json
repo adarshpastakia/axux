@@ -1,6 +1,6 @@
 {
   "name": "@axux/data",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "axux: Data package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -25,10 +25,10 @@
   },
   "dependencies": {
     "@antv/g6": "^5.0.0-beta.27",
-    "@axux/core": "^3.3.0",
-    "@axux/date": "^3.3.0",
-    "@axux/form": "^3.3.0",
-    "@axux/utilities": "^3.3.0",
+    "@axux/core": "^3.3.1",
+    "@axux/date": "^3.3.1",
+    "@axux/form": "^3.3.1",
+    "@axux/utilities": "^3.3.1",
     "memoize-one": "^6.0.0",
     "resize-observer-polyfill": "^1.5.1"
   },

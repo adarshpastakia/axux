@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.1](https://github.com/adarshpastakia/axux/compare/v3.3.0...v3.3.1) (2024-02-11)
+
+### Bug Fixes
+
+- **VirtualLists:** recalculate spring size on item count change ([b4cad1a](https://github.com/adarshpastakia/axux/commit/b4cad1a476860d9b7d46f8e284568462f3e6e2e9))
+
 # [3.3.0](https://github.com/adarshpastakia/axux/compare/v3.2.6...v3.3.0) (2024-01-22)
 
 **Note:** Version bump only for package @axux/data

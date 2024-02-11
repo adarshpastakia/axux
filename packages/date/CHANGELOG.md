@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.1](https://github.com/adarshpastakia/axux/compare/v3.3.0...v3.3.1) (2024-02-11)
+
+### Bug Fixes
+
+- **DateMath:** i18n t ([e86d6e7](https://github.com/adarshpastakia/axux/commit/e86d6e72577e91729934ebb21c5bbe7149efc312))
+
 # [3.3.0](https://github.com/adarshpastakia/axux/compare/v3.2.6...v3.3.0) (2024-01-22)
 
 **Note:** Version bump only for package @axux/date

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.1](https://github.com/adarshpastakia/axux/compare/v3.3.0...v3.3.1) (2024-02-11)
+
+### Bug Fixes
+
+- **ConfirmBbutton:** place message in div ([313dd41](https://github.com/adarshpastakia/axux/commit/313dd41967693c53a84af92e12549e2ab71be576))
+- **DateMath:** i18n t ([e86d6e7](https://github.com/adarshpastakia/axux/commit/e86d6e72577e91729934ebb21c5bbe7149efc312))
+- **Form:** lint issue ([d5579d3](https://github.com/adarshpastakia/axux/commit/d5579d37b7520ee9495813bfcf76fb48feb28286))
+- **MdxEditor:** lint issue ([7d6e1b1](https://github.com/adarshpastakia/axux/commit/7d6e1b12dad708d139833daa32d10a2a2cddc0dc))
+- **VirtualLists:** recalculate spring size on item count change ([b4cad1a](https://github.com/adarshpastakia/axux/commit/b4cad1a476860d9b7d46f8e284568462f3e6e2e9))
+
 # [3.3.0](https://github.com/adarshpastakia/axux/compare/v3.2.6...v3.3.0) (2024-01-22)
 
 ### Bug Fixes
