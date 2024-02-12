@@ -24,28 +24,28 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^3.3.1",
-    "@axux/utilities": "^3.3.1",
-    "@headlessui/react": "^1.7.18",
-    "@hookform/resolvers": "^3.3.4",
-    "react-color": "^2.19.3",
-    "react-hook-form": "^7.50.1",
-    "react-input-mask": "^3.0.0-alpha.2",
-    "yup": "^1.3.3"
+    "@axux/core": "~3.3.1",
+    "@axux/utilities": "~3.3.1",
+    "@headlessui/react": "~1.7.18",
+    "@hookform/resolvers": "~3.3.4",
+    "react-color": "~2.19.3",
+    "react-hook-form": "~7.50.1",
+    "react-input-mask": "~3.0.0-alpha.2",
+    "yup": "~1.3.3"
   },
   "peerDependencies": {
-    "i18next": "^22.4.14",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-i18next": "^12.2.0"
+    "i18next": "~22.4.14",
+    "react": "~18.2.0",
+    "react-dom": "~18.2.0",
+    "react-i18next": "~12.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.35",
-    "@types/react-color": "^3.0.6",
-    "@types/react-dom": "^18.0.11",
-    "@types/react-i18next": "^8.1.0",
-    "@types/react-input-mask": "^3.0.2",
-    "@types/react-router-dom": "^5.3.3"
+    "@types/react": "~18.0.35",
+    "@types/react-color": "~3.0.6",
+    "@types/react-dom": "~18.0.11",
+    "@types/react-i18next": "~8.1.0",
+    "@types/react-input-mask": "~3.0.2",
+    "@types/react-router-dom": "~5.3.3"
   },
   "engines": {
     "node": ">=18",
