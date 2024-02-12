@@ -1,0 +1,62 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+import { AxButton } from "@axux/core";
+import { Fragment, useCallback, useState } from "react";
+import { useGraphInternal } from "../context/GraphContext";
+import { GraphIcons } from "../types/icons";
+
+type Mode = "brush" | "lasso" | undefined;
+
+export const ActionBrush = () => {
+  const { changeMode } = useGraphInternal();
+
+  const [enabled, setEnabled] = useState<Mode>();
+
+  const enableBrush = useCallback(
+    (mode: Mode) => {
+      changeMode(mode);
+      setEnabled(mode as AnyObject);
+    },
+    [changeMode]
+  );
+
+  return (
+    <Fragment>
+      {enabled && (
+        <AxButton.Group variant="flat" className="m-0 fixed z-10 bg-base">
+          <AxButton
+            className="flush m-0"
+            variant={enabled === "lasso" ? "solid" : "link"}
+            icon={GraphIcons.selectLasso}
+            // isDisabled={enabled === "lasso"}
+            onClick={() => enableBrush("lasso")}
+          />
+          <AxButton
+            className="flush m-0"
+            variant={enabled === "brush" ? "solid" : "link"}
+            icon={GraphIcons.selectRect}
+            // isDisabled={enabled === "brush"}
+            onClick={() => enableBrush("brush")}
+          />
+          <AxButton
+            variant="link"
+            className="flush"
+            onClick={() => enableBrush(undefined)}
+          >
+            Cancel
+          </AxButton>
+        </AxButton.Group>
+      )}
+      <AxButton
+        icon={GraphIcons.selectLasso}
+        onClick={() => enableBrush("lasso")}
+      />
+    </Fragment>
+  );
+};

@@ -14,7 +14,6 @@ import G6, {
 import { useIsDark } from "@axux/core";
 import { debounce } from "@axux/utilities";
 import { useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { type GraphProps } from "../types";
 import { makeSvg, shadeColor } from "../utils";
 
@@ -76,7 +75,6 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
 
 export const useGraph = (container: HTMLDivElement | null) => {
   const [graph, setGraph] = useState<InstanceType<typeof G6.Graph>>();
-  const { t } = useTranslation("graph");
   const isDark = useIsDark();
 
   useEffect(() => {
@@ -100,8 +98,10 @@ export const useGraph = (container: HTMLDivElement | null) => {
           "process-parallel-edges": G6.Extensions.ProcessParallelEdges,
         },
         behaviors: {
-          "activate-relations": G6.Extensions.ActivateRelations,
+          "lasso-select": G6.Extensions.LassoSelect,
           "brush-select": G6.Extensions.BrushSelect,
+          "hover-state": G6.Extensions.HoverActivate,
+          "activate-relations": G6.Extensions.ActivateRelations,
         },
         plugins: {
           legend: G6.Extensions.Legend,
@@ -123,10 +123,15 @@ export const useGraph = (container: HTMLDivElement | null) => {
           scalableRange: 0.5,
         },
         {
-          key: "hover",
+          key: "relations",
           type: "activate-relations",
           trigger: "pointerenter",
-          activeState: "hilight",
+          activeState: "focus",
+        },
+        {
+          key: "hover",
+          type: "hover-state",
+          activateState: "active",
         },
       ];
 
@@ -140,41 +145,29 @@ export const useGraph = (container: HTMLDivElement | null) => {
             ...readonlyMode,
             "drag-node",
             { key: "click", type: "click-select", eventName: "select" },
+          ],
+          brush: [
             {
               key: "brush",
               type: "brush-select",
               itemTypes: ["node"],
               eventName: "select",
+              trigger: "drag",
+              selectSetMode: "union",
             },
           ],
-        },
-        plugins: [
-          {
-            key: "default-legend",
-            type: "legend",
-            size: [320, "fit-content"],
-            className:
-              "bg-base text-base border !absolute bottom-0 rounded m-4 w-24",
-            node: {
-              enable: true,
-              cols: 4,
-              rows: 3,
-              padding: [20, 20],
-              title: "node-legend",
-              typeField: "nodeType",
-              labelFormatter: (model: string) => t(`node.${model}`, model),
+          lasso: [
+            {
+              key: "lasso",
+              type: "lasso-select",
+              itemTypes: ["node"],
+              eventName: "select",
+              trigger: "drag",
+              selectSetMode: "union",
             },
-            edge: {
-              enable: true,
-              cols: 4,
-              rows: 3,
-              padding: [10, 20],
-              title: "edge-legend",
-              typeField: "edgeType",
-              labelFormatter: (model: string) => t(`node.${model}`, model),
-            },
-          },
-        ],
+          ],
+        } as AnyObject,
+        plugins: [],
         transforms: [
           {
             type: "process-parallel-edges",
@@ -189,15 +182,15 @@ export const useGraph = (container: HTMLDivElement | null) => {
         const allNodesId = graph.getAllNodesData().map((node) => node.id);
         const allEdgesIds = graph.getAllEdgesData().map((edge) => edge.id);
         const highlightIds = [itemId];
-        graph.setItemState(itemId, "dark", false);
+        graph.setItemState(itemId, "blur", false);
         graph.getAllEdgesData().forEach((edge) => {
           const sourceId = edge.source;
           const targetId = edge.target;
           if (sourceId === itemId) {
-            graph.setItemState([sourceId, edge.id], "dark", false);
+            graph.setItemState([sourceId, edge.id], "blur", false);
             highlightIds.push(targetId, edge.id);
           } else if (targetId === itemId) {
-            graph.setItemState([targetId, edge.id], "dark", false);
+            graph.setItemState([targetId, edge.id], "blur", false);
             highlightIds.push(sourceId, edge.id);
           }
         });
@@ -205,7 +198,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
           [...allNodesId, ...allEdgesIds].filter(
             (id) => !highlightIds.includes(id)
           ),
-          "dark",
+          "blur",
           true
         );
       }, 500);
@@ -215,7 +208,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
         handleEnter.cancel();
         const allNodesIds = graph.getAllNodesData().map((node) => node.id);
         const allEdgesIds = graph.getAllEdgesData().map((edge) => edge.id);
-        graph.setItemState([...allNodesIds, ...allEdgesIds], "dark", false);
+        graph.setItemState([...allNodesIds, ...allEdgesIds], "blur", false);
       });
 
       const ob = new ResizeObserver(() => {
@@ -363,7 +356,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
           animates: {
             update: [
               {
-                fields: ["opacity"],
+                fields: ["opacity", "lineWidth", "r"],
                 shapeId: "haloShape",
                 states: ["selected", "active"],
               },
@@ -380,8 +373,25 @@ export const useGraph = (container: HTMLDivElement | null) => {
             keyShape: {
               stroke: "#f00",
             },
-          },
-          hilight: {
+            haloShape: {
+              r: 32,
+            },
+          } as AnyObject,
+          active: {
+            haloShape: {
+              r: 42,
+              opacity: 0.5,
+              lineWidth: 6,
+              stroke: {
+                fields: ["id", "nodeType", "color"],
+                formatter: (model: KeyValue) =>
+                  model.data.color ??
+                  colorMap?.[model.data.nodeType] ??
+                  DEFAULT_NODE_COLOR,
+              },
+            },
+          } as AnyObject,
+          focus: {
             keyShape: {
               opacity: 0.9,
             },
@@ -393,7 +403,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
               innerSize: 0.7,
             },
           },
-          dark: {
+          blur: {
             keyShape: {
               opacity: 0.1,
             },
@@ -426,7 +436,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
           },
         },
         edgeState: {
-          dark: {
+          blur: {
             keyShape: {
               opacity: 0.1,
               stroke: "#8888",
