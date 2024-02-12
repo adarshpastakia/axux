@@ -12,8 +12,10 @@ export interface GraphNode extends NodeModel {
   data: {
     label?: string;
     path?: string;
+    avatar?: string;
     color?: string;
     nodeType?: string;
+    cluster?: string;
     colorMap?: string[];
     [key: string]: unknown;
   };
@@ -42,7 +44,11 @@ export interface GraphProps {
    */
   colorMap?: KeyValue;
 
+  defaultLayout?: "auto" | "radial" | "circular" | "grid" | "hierarchy";
+
   showLegend?: boolean;
   showToolbar?: boolean;
   allowInteraction?: boolean;
+
+  onNodeExpand?: (nodes: NodeModel[]) => Promise<GraphData>;
 }

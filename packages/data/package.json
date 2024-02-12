@@ -39,6 +39,7 @@
     "react-i18next": "^14.0.5"
   },
   "devDependencies": {
+    "@mdi/js": "^7.2.96",
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
     "@types/react-i18next": "^8.1.0",
