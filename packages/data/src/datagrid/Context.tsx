@@ -9,15 +9,15 @@
 import { type ChildrenProp, type ElementProps } from "@axux/core/dist/types";
 import {
   createContext,
-  type FC,
-  type MouseEvent,
-  type ReactNode,
   useCallback,
   useContext,
   useEffect,
   useImperativeHandle,
   useRef,
   useState,
+  type FC,
+  type MouseEvent,
+  type ReactNode,
 } from "react";
 import { type DatagridColumn } from "./types";
 import { useResizer } from "./useResizer";
@@ -120,7 +120,7 @@ export const DatagridProvider: FC<KeyValue & ElementProps & ChildrenProp> = ({
   );
 
   useEffect(() => {
-    refBody?.current?.scrollTo({ top: lastScroll, behavior: "instant" });
+    refBody?.current?.scrollTo({ top: lastScroll, behavior: "auto" });
   }, []);
 
   return (

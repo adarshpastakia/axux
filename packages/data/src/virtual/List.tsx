@@ -143,7 +143,7 @@ const VirtualList = <T extends KeyValue>({
         setTimeout(() => {
           scrollerRef.current
             ?.querySelector(`[data-index="${index}"]`)
-            ?.scrollIntoView({ behavior: "instant", block: "nearest" });
+            ?.scrollIntoView({ behavior: "auto", block: "nearest" });
         }, 100);
       },
       unhilight() {
