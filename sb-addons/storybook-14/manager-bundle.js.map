@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["global-externals:@storybook/addons", "../../../.storybook/manager.ts"],
+  "sourcesContent": ["export default __STORYBOOKADDONS__;\nconst { addons, types, mockChannel } = __STORYBOOKADDONS__;\nexport { addons, types, mockChannel };", "/**\n * AxUX React+TailwindCSS UI Framework\n * @author    : Adarsh Pastakia\n * @version   : 2.0.0\n * @copyright : 2022\n * @license   : MIT\n */\n\nimport { addons } from \"@storybook/addons\";\n\naddons.setConfig({\n  sidebar: {\n    showRoots: true,\n  },\n});\n\nconst originalError = console.error;\nwindow.console.error = (...args) => {\n  if (\n    /.*ReactDOM.render is no longer supported in React 18.*/.test(args[0]) ||\n    /.*\\:first-child.*/.test(args[0])\n  ) {\n    return;\n  }\n  originalError.call(console, ...args);\n};\n"],
+  "mappings": ";AAAA,IAAOA,EAAQ,oBACT,CAAE,OAAAC,EAAQ,MAAAC,EAAO,YAAAC,CAAY,EAAI,oBCSvCC,EAAO,UAAU,CACf,QAAS,CACP,UAAW,EACb,CACF,CAAC,EAED,IAAMC,EAAgB,QAAQ,MAC9B,OAAO,QAAQ,MAAQ,IAAIC,IAAS,CAEhC,yDAAyD,KAAKA,EAAK,CAAC,CAAC,GACrE,oBAAoB,KAAKA,EAAK,CAAC,CAAC,GAIlCD,EAAc,KAAK,QAAS,GAAGC,CAAI,CACrC",
+  "names": ["addons_default", "addons", "types", "mockChannel", "addons", "originalError", "args"]
+}
