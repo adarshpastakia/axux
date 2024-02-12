@@ -12,6 +12,10 @@
 
     & .ax-graph__container {
       @apply grid overflow-hidden grid-area-[content];
+
+      &[data-brush="true"] {
+        @apply !cursor-crosshair;
+      }
     }
   }
 }

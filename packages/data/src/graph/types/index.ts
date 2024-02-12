@@ -7,6 +7,9 @@
  */
 
 import { type EdgeModel, type NodeModel } from "@antv/g6";
+import { type ChildrenProp } from "@axux/core/dist/types";
+import { type RefObject } from "react";
+import { type useGraph } from "../hooks/useGraph";
 
 export interface GraphNode extends NodeModel {
   data: {
@@ -36,8 +39,9 @@ export interface GraphData {
   edges: GraphEdge[];
 }
 
-export interface GraphProps {
+export interface GraphProps extends ChildrenProp {
   data: GraphData;
+  graphRef?: RefObject<ReturnType<typeof useGraph>>;
 
   /**
    * { [nodeType | edgeType]: color }
@@ -46,9 +50,8 @@ export interface GraphProps {
 
   defaultLayout?: "auto" | "radial" | "circular" | "grid" | "hierarchy";
 
-  showLegend?: boolean;
-  showToolbar?: boolean;
-  allowInteraction?: boolean;
+  readOnly?: boolean;
 
+  onNodeSelect?: (nodes: NodeModel[]) => void;
   onNodeExpand?: (nodes: NodeModel[]) => Promise<GraphData>;
 }

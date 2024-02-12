@@ -167,7 +167,19 @@ export const Example: Story = {
               {...args}
               data={data}
               onNodeExpand={(node) => Promise.resolve(loadMore(node[0].id))}
-            />
+            >
+              <AxGraph.Toolbar>
+                <AxGraph.ActionZoom />
+                <AxGraph.ActionGroup>
+                  <AxGraph.ActionBrush />
+                  <AxGraph.ActionExpand />
+                  <AxGraph.ActionDelete />
+                  <AxGraph.ActionClear />
+                </AxGraph.ActionGroup>
+                <AxGraph.ActionLayout />
+              </AxGraph.Toolbar>
+              <AxGraph.Canvas />
+            </AxGraph>
           </AxSection>
         </div>
       </div>
