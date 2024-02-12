@@ -173,7 +173,7 @@ export const useVirtualGallery = ({
       setTimeout(() => {
         scrollerRef.current
           ?.querySelector(`[data-index="${index * columnCount}"]`)
-          ?.scrollIntoView({ behavior: "instant", block: "start" });
+          ?.scrollIntoView({ behavior: "auto", block: "start" });
         setTimeout(() => (ignoreScrollChange.current = false), 10);
       }, 100);
     },
@@ -185,7 +185,7 @@ export const useVirtualGallery = ({
       first() {
         scrollerRef.current?.scrollTo({
           top: 0,
-          behavior: "instant",
+          behavior: "auto",
         });
       },
       pgup() {
@@ -210,7 +210,7 @@ export const useVirtualGallery = ({
             (scrollerRef.current?.scrollHeight ?? 0) -
             (scrollerRef.current?.offsetHeight ?? 0) -
             EXTRA_SIZE,
-          behavior: "instant",
+          behavior: "auto",
         });
       },
     }),
