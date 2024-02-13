@@ -24,23 +24,23 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "~3.3.1",
-    "@axux/data": "~3.3.1",
-    "@axux/form": "~3.3.1",
-    "@axux/utilities": "~3.3.1"
+    "@axux/core": "^3.3.1",
+    "@axux/data": "^3.3.1",
+    "@axux/form": "^3.3.1",
+    "@axux/utilities": "^3.3.1"
   },
   "peerDependencies": {
-    "i18next": "~23.8.2",
-    "react": "~18.2.0",
-    "react-dom": "~18.2.0",
-    "react-i18next": "~14.0.5"
+    "i18next": "^23.8.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^14.0.5"
   },
   "devDependencies": {
-    "@types/react": "~18.0.35",
-    "@types/react-color": "~3.0.6",
-    "@types/react-dom": "~18.0.11",
-    "@types/react-i18next": "~8.1.0",
-    "@types/react-router-dom": "~5.3.3"
+    "@types/react": "^18.0.35",
+    "@types/react-color": "^3.0.6",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-i18next": "^8.1.0",
+    "@types/react-router-dom": "^5.3.3"
   },
   "engines": {
     "node": ">=18",

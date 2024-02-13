@@ -24,26 +24,26 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@antv/g6": "~5.0.0-beta.27",
-    "@axux/core": "~3.3.1",
-    "@axux/date": "~3.3.1",
-    "@axux/form": "~3.3.1",
-    "@axux/utilities": "~3.3.1",
-    "memoize-one": "~6.0.0",
-    "resize-observer-polyfill": "~1.5.1"
+    "@axux/core": "^3.3.1",
+    "@axux/date": "^3.3.1",
+    "@axux/form": "^3.3.1",
+    "@axux/utilities": "^3.3.1"
   },
   "peerDependencies": {
-    "i18next": "~23.8.2",
-    "react": "~18.2.0",
-    "react-dom": "~18.2.0",
-    "react-i18next": "~14.0.5"
+    "@antv/g6": "^5.0.0-beta.27",
+    "i18next": "^23.8.2",
+    "memoize-one": "^6.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^14.0.5",
+    "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
-    "@mdi/js": "~7.2.96",
-    "@types/react": "~18.0.35",
-    "@types/react-dom": "~18.0.11",
-    "@types/react-i18next": "~8.1.0",
-    "@types/react-router-dom": "~5.3.3"
+    "@mdi/js": "^7.2.96",
+    "@types/react": "^18.0.35",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-i18next": "^8.1.0",
+    "@types/react-router-dom": "^5.3.3"
   },
   "engines": {
     "node": ">=18",
