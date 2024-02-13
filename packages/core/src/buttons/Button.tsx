@@ -36,7 +36,7 @@ import { ConfirmButton } from "./Confirm";
 import { DropdownButton } from "./Dropdown";
 
 export interface ButtonProps extends ElementProps, IconProp, RefProp {
-  children?: string;
+  children?: JSX.Element | string;
   /**
    * size
    */
@@ -208,7 +208,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
       {hotKey && <AxHotKey keyCombo={hotKey} handler={onClick} />}
       {!useSpinner && isLoading && <div className="ax-button__loader" />}
       <Link
-        aria-label={ariaLabel ?? children}
+        aria-label={ariaLabel ?? children?.toString()}
         {...rest}
         type={type}
         as="button"
