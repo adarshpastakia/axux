@@ -7,10 +7,14 @@
  */
 
 import G6, {
+  stdLib,
+  type ComboDisplayModel,
+  type ComboModelData,
   type GraphData,
   type IG6GraphEvent,
   type LayoutOptions,
 } from "@antv/g6";
+import { type ComboShapeMap } from "@antv/g6/lib/types/combo";
 import { useIsDark } from "@axux/core";
 import { debounce } from "@axux/utilities";
 import { useCallback, useEffect, useState } from "react";
@@ -30,7 +34,6 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
     clustering: true,
     nodeClusterBy: "cluster",
     preventOverlap: true,
-    workerEnabled: true,
   };
   if (layout === "grid")
     type = {
@@ -39,7 +42,6 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
       gravity: 0.1,
       linkDistance: 120,
       preventOverlap: true,
-      workerEnabled: true,
     };
   if (layout === "circular")
     type = {
@@ -48,7 +50,6 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
       nodeSpacing: 120,
       linkDistance: 120,
       preventOverlap: true,
-      workerEnabled: true,
     };
   if (layout === "radial")
     type = {
@@ -59,7 +60,6 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
       linkDistance: 240,
       sortBy: "degree",
       preventOverlap: true,
-      workerEnabled: true,
     };
   if (layout === "hierarchy")
     type = {
@@ -73,6 +73,82 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
   return type;
 };
 
+class CustomCombo extends G6.Extensions.CircleCombo {
+  drawOtherShapes(
+    model: ComboDisplayModel,
+    shapeMap: ComboShapeMap,
+    diffData?: {
+      previous: ComboModelData;
+      current: ComboModelData;
+    },
+    diffState?: AnyObject
+  ) {
+    const { data } = model;
+    const keyShapeBBox = shapeMap.keyShape.getLocalBounds();
+    const otherShapes = {
+      markerShape: this.upsertShape(
+        "path",
+        "markerShape",
+        {
+          cursor: "pointer",
+          stroke: "#666",
+          lineWidth: 1,
+          fill: "#fff",
+          path: data.collapsed
+            ? stdLib.markers.expand(
+                keyShapeBBox.center[0],
+                keyShapeBBox.max[1],
+                10
+              )
+            : stdLib.markers.collapse(
+                keyShapeBBox.center[0],
+                keyShapeBBox.max[1],
+                10
+              ),
+        } as AnyObject,
+        {
+          model,
+          shapeMap,
+          diffData,
+          diffState,
+        }
+      ),
+    };
+    return otherShapes;
+  }
+}
+
+const ExtGraph = G6.extend(G6.Graph, {
+  combos: {
+    "custom-combo": CustomCombo,
+  },
+  nodes: {
+    "donut-node": G6.Extensions.DonutNode,
+  },
+  edges: {
+    "quadratic-edge": G6.Extensions.QuadraticEdge,
+  },
+  layouts: {
+    "force-layout": G6.Extensions.ForceLayout,
+    "circular-layout": G6.Extensions.ConcentricLayout,
+    "radial-layout": G6.Extensions.RadialLayout,
+    "dagre-layout": G6.Extensions.DagreLayout,
+    "grid-layout": G6.Extensions.GridLayout,
+  },
+  transforms: {
+    "process-parallel-edges": G6.Extensions.ProcessParallelEdges,
+  },
+  behaviors: {
+    "lasso-select": G6.Extensions.LassoSelect,
+    "brush-select": G6.Extensions.BrushSelect,
+    "hover-state": G6.Extensions.HoverActivate,
+    "activate-relations": G6.Extensions.ActivateRelations,
+  },
+  plugins: {
+    legend: G6.Extensions.Legend,
+  },
+} as AnyObject);
+
 export const useGraph = (container: HTMLDivElement | null) => {
   const [graph, setGraph] = useState<InstanceType<typeof G6.Graph>>();
   const isDark = useIsDark();
@@ -80,33 +156,6 @@ export const useGraph = (container: HTMLDivElement | null) => {
   useEffect(() => {
     if (container) {
       console.log("create graph");
-      const ExtGraph = G6.extend(G6.Graph, {
-        nodes: {
-          "donut-node": G6.Extensions.DonutNode,
-        },
-        edges: {
-          "quadratic-edge": G6.Extensions.QuadraticEdge,
-        },
-        layouts: {
-          "force-layout": G6.Extensions.ForceLayout,
-          "circular-layout": G6.Extensions.ConcentricLayout,
-          "radial-layout": G6.Extensions.RadialLayout,
-          "dagre-layout": G6.Extensions.DagreLayout,
-          "grid-layout": G6.Extensions.GridLayout,
-        },
-        transforms: {
-          "process-parallel-edges": G6.Extensions.ProcessParallelEdges,
-        },
-        behaviors: {
-          "lasso-select": G6.Extensions.LassoSelect,
-          "brush-select": G6.Extensions.BrushSelect,
-          "hover-state": G6.Extensions.HoverActivate,
-          "activate-relations": G6.Extensions.ActivateRelations,
-        },
-        plugins: {
-          legend: G6.Extensions.Legend,
-        },
-      } as AnyObject);
 
       const readonlyMode: AnyObject = [
         {
@@ -120,7 +169,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
           key: "drag",
           type: "drag-canvas",
           optimize: true,
-          scalableRange: 0.5,
+          scalableRange: 0,
         },
         {
           key: "relations",
@@ -143,7 +192,8 @@ export const useGraph = (container: HTMLDivElement | null) => {
           default: readonlyMode,
           edit: [
             ...readonlyMode,
-            "drag-node",
+            { type: "drag-node", enableTransient: false },
+            { type: "drag-combo", enableTransient: false },
             { key: "click", type: "click-select", eventName: "select" },
           ],
           brush: [
@@ -209,6 +259,20 @@ export const useGraph = (container: HTMLDivElement | null) => {
         const allNodesIds = graph.getAllNodesData().map((node) => node.id);
         const allEdgesIds = graph.getAllEdgesData().map((edge) => edge.id);
         graph.setItemState([...allNodesIds, ...allEdgesIds], "blur", false);
+      });
+
+      /** Click the bottom marker to collapse/expand the combo. */
+      graph.on("combo:click", (event: IG6GraphEvent) => {
+        const { itemId, target } = event;
+        // @ts-expect-error ignore
+        if (target?.id === "markerShape") {
+          const model = graph.getComboData(itemId);
+          if (model?.data.collapsed) {
+            graph.expandCombo(itemId);
+          } else {
+            graph.collapseCombo(itemId);
+          }
+        }
       });
 
       const ob = new ResizeObserver(() => {
@@ -289,6 +353,45 @@ export const useGraph = (container: HTMLDivElement | null) => {
   const restyle = useCallback(
     (colorMap: GraphProps["colorMap"]) => {
       graph?.updateSpecification({
+        combo: {
+          type: "custom-combo",
+          keyShape: {
+            r: 50,
+          },
+          labelShape: {
+            text: {
+              fields: ["id", "label"],
+              formatter: (model: KeyValue) => model.data.label,
+            },
+            position: "bottom",
+          },
+          otherShapes: {},
+          animates: {
+            buildIn: [
+              {
+                fields: ["opacity"],
+                duration: 500,
+                delay: 500 + Math.random() * 500,
+              },
+            ],
+            buildOut: [
+              {
+                fields: ["opacity"],
+                duration: 200,
+              },
+            ],
+            update: [
+              {
+                fields: ["lineWidth", "r"],
+                shapeId: "keyShape",
+              },
+              {
+                fields: ["opacity"],
+                shapeId: "haloShape",
+              },
+            ],
+          },
+        },
         node: {
           type: "donut-node",
           keyShape: {
@@ -371,10 +474,12 @@ export const useGraph = (container: HTMLDivElement | null) => {
         nodeState: {
           selected: {
             keyShape: {
+              r: 42,
               stroke: "#f00",
             },
             haloShape: {
-              r: 32,
+              r: 42,
+              stroke: "#f00",
             },
           } as AnyObject,
           active: {
@@ -408,6 +513,9 @@ export const useGraph = (container: HTMLDivElement | null) => {
               opacity: 0.1,
             },
             iconShape: {
+              opacity: 0.1,
+            },
+            labelShape: {
               opacity: 0.1,
             },
             // @ts-expect-error ignore
