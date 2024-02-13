@@ -7,7 +7,7 @@
  */
 
 import { isColor } from "@axux/utilities";
-import { forwardRef, type ForwardRefExoticComponent, useMemo } from "react";
+import { forwardRef, useMemo, type ForwardRefExoticComponent } from "react";
 import { getTooltipProps } from "../hooks/useTooltip";
 import { AxIcon } from "../icons/Icon";
 import {
@@ -21,7 +21,7 @@ import {
 } from "../types";
 
 export interface TagProps extends ElementProps, MouseProps, IconProp {
-  children: string;
+  children?: JSX.Element | string;
   /**
    * remove handler
    */
@@ -107,7 +107,7 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
     /** ***************** component *******************/
     return (
       <div
-        aria-label={children}
+        aria-label={children?.toString()}
         {...rest}
         {...tooltipProps}
         ref={ref}

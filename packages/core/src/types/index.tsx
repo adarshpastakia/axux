@@ -13,10 +13,12 @@ import { AxIcon } from "../icons/Icon";
 import { AppIcons } from "./appIcons";
 
 // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-export type CallbackReturn<T = boolean> = void | T | Promise<T | void>;
+export type CallbackReturn<T = unknown> = void | T | Promise<T | void>;
 export type HandleCallback = () => CallbackReturn;
 export type EmptyCallback = () => void;
-export type ClickHandler = () => CallbackReturn<AnyObject>;
+export type ClickHandler<T = unknown> = (
+  ...args: AnyObject
+) => CallbackReturn<T>;
 export type BooleanCallback = (truthy: boolean) => void;
 
 export type Color = "primary" | "accent" | "danger" | "warning" | "success";
