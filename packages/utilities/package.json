@@ -24,11 +24,11 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "date-fns": "~3.3.1",
-    "libphonenumber-js": "~1.10.55",
-    "numeral": "~2.0.6"
+    "date-fns": "^3.3.1",
+    "libphonenumber-js": "^1.10.55",
+    "numeral": "^2.0.6"
   },
   "devDependencies": {
-    "@types/numeral": "~2.0.2"
+    "@types/numeral": "^2.0.2"
   }
 }
