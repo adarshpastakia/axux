@@ -49,7 +49,24 @@
       "id": "node_5",
       "data": {
         "nodeType": "node-c",
+        "parentId": "combo-1",
         "label": "Node 5"
+      }
+    },
+    {
+      "id": "node_6",
+      "data": {
+        "nodeType": "node-c",
+        "parentId": "combo-1",
+        "label": "Node 6"
+      }
+    },
+    {
+      "id": "node_7",
+      "data": {
+        "nodeType": "node-c",
+        "parentId": "combo-1",
+        "label": "Node 7"
       }
     }
   ],
@@ -91,10 +108,19 @@
       "data": { "edgeType": "edge-a" }
     },
     {
-      "id": "2-5",
-      "source": "node_2",
-      "target": "node_5",
+      "id": "2-6",
+      "source": "node_3",
+      "target": "node_6",
+      "data": { "edgeType": "edge-c" }
+    },
+    {
+      "id": "2-7",
+      "source": "node_3",
+      "target": "node_7",
       "data": { "edgeType": "edge-c" }
     }
+  ],
+  "combos": [
+    
   ]
 }
