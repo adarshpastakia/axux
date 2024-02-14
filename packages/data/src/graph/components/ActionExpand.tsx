@@ -13,7 +13,7 @@ import { useGraphInternal } from "../context/GraphContext";
 import { GraphIcons } from "../types/icons";
 
 export const ActionExpand = () => {
-  const { graph , onNodeExpand} = useGraphInternal();
+  const { graph, onNodeExpand } = useGraphInternal();
 
   const [selected, setSelected] = useState<NodeModel[]>([]);
 
@@ -45,13 +45,12 @@ export const ActionExpand = () => {
   }, [graph.ref]);
 
   return (
-    
-              <AxButton
-                icon={GraphIcons.toolExpand}
-                isDisabled={!selected.length}
-                onClick={() => {
-                  handleExpand(selected);
-                }}
-              />
+    <AxButton
+      icon={GraphIcons.toolExpand}
+      isDisabled={graph.isClear || !selected.length}
+      onClick={() => {
+        handleExpand(selected);
+      }}
+    />
   );
 };
