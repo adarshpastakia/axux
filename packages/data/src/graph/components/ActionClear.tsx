@@ -18,6 +18,7 @@ export const ActionClear = () => {
       color="danger"
       placement="right"
       actionType="danger"
+      isDisabled={graph.isClear}
       message={(<div className="text-center">Clear graph?</div>) as AnyObject}
       icon={GraphIcons.toolErase}
       onClick={(b) => b && graph.ref?.clear()}

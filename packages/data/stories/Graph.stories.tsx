@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { AxGraph } from "../src";
 
-import { ID } from "@antv/g6";
 import { AxButton, AxHeader, AxSection } from "@axux/core";
 import { faker } from "@faker-js/faker";
 import {
@@ -14,6 +13,7 @@ import {
   mdiHome,
 } from "@mdi/js";
 import { useState } from "react";
+import { GraphData, GraphNode } from "../src/graph/types";
 import graphJson from "./graph.json";
 
 const meta: Meta<typeof AxGraph> = {
@@ -119,33 +119,41 @@ const largeGraph = (count = 100) => {
   };
 };
 
-const loadMore = (nodeId: ID) => {
-  const nodes = new Array(10).fill(0).map((_, idx) => ({
-    id: `${nodeId}--node-${faker.commerce.product()}`,
-    data: makeNode(),
-  }));
-  return {
-    nodes,
-    edges: nodes.map((node) => ({
-      id: `${nodeId}--edge-${node.id}`,
-      source: nodeId,
-      target: node.id,
-      data: {
-        dashed: faker.number.binary() === "1",
-        edgeType: faker.helpers.arrayElement([
-          "edge-a",
-          "edge-b",
-          "edge-c",
-          "edge-d",
-        ]),
-      },
-    })),
+const loadMore = (list: GraphNode[]) => {
+  const data: GraphData = {
+    nodes: [],
+    edges: [],
   };
+
+  list.forEach(({ id }) => {
+    const newNodes = new Array(10).fill(0).map((_, idx) => ({
+      id: `${id}--node-${faker.commerce.product()}`,
+      data: makeNode(),
+    }));
+    data.edges.push(
+      ...newNodes.map((node) => ({
+        id: `${id}--edge-${node.id}`,
+        source: id,
+        target: node.id,
+        data: {
+          dashed: faker.number.binary() === "1",
+          edgeType: faker.helpers.arrayElement([
+            "edge-a",
+            "edge-b",
+            "edge-c",
+            "edge-d",
+          ]),
+        },
+      }))
+    );
+    data.nodes.push(...newNodes);
+  });
+  return data;
 };
 
 export const Example: Story = {
   render: (args) => {
-    const [data, setData] = useState(graphJson);
+    const [data, setData] = useState<GraphData>();
     return (
       <div className="h-full min-h-[600px] grid overflow-hidden">
         <div className="w-full h-full ax-section grid-area-[unset]">
@@ -166,7 +174,7 @@ export const Example: Story = {
             <AxGraph
               {...args}
               data={data}
-              onNodeExpand={(node) => Promise.resolve(loadMore(node[0].id))}
+              onNodeExpand={(nodes) => Promise.resolve(loadMore(nodes))}
             >
               <AxGraph.Toolbar>
                 <AxGraph.ActionZoom />

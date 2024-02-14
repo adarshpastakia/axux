@@ -31,18 +31,19 @@ export const ActionZoom = () => {
       <AxButton
         className="flush"
         icon={GraphIcons.zoomIn}
-        isDisabled={zoom === 1}
+        isDisabled={graph.isClear || zoom === 1}
         onClick={() => graph.ref?.zoom(1.5) as AnyObject}
       />
       <AxButton
         className="flush"
         icon={GraphIcons.zoomOut}
-        isDisabled={zoom === -1}
+        isDisabled={graph.isClear || zoom === -1}
         onClick={() => graph.ref?.zoom(0.5) as AnyObject}
       />
       <AxButton
         className="flush"
         icon={GraphIcons.zoomReset}
+        isDisabled={graph.isClear}
         onClick={graph.resetView}
       />
     </AxButton.Group>

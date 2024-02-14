@@ -27,39 +27,61 @@ const DEFAULT_EDGE_COLOR = "#6b7280";
 const getLayout = (layout: GraphProps["defaultLayout"]) => {
   let type: LayoutOptions = {
     type: "force-layout",
-    nodeSize: 32,
-    factor: 9,
-    nodeSpacing: 120,
-    linkDistance: 120,
-    clustering: true,
-    nodeClusterBy: "cluster",
-    preventOverlap: true,
-  };
-  if (layout === "grid")
-    type = {
-      type: "grid-layout",
-      nodeSize: 32,
-      gravity: 0.1,
-      linkDistance: 120,
-      preventOverlap: true,
-    };
-  if (layout === "circular")
-    type = {
+    center: [0, 0],
+    nodeSize: 196,
+    // factor: 9,
+    // damping: 1,
+    // nodeSpacing: 120,
+    // linkDistance: 120,
+    // clustering: true,
+    // nodeClusterBy: "cluster",
+    presetLayout: {
       type: "circular-layout",
       nodeSize: 32,
       nodeSpacing: 120,
       linkDistance: 120,
       preventOverlap: true,
+    },
+    kr: 20,
+    kg: 0.1,
+    preventOverlap: true,
+    animated: true,
+    workerEnabled: false,
+  };
+  if (layout === "grid")
+    type = {
+      type: "grid-layout",
+      center: [0, 0],
+      nodeSize: 120,
+      gravity: 0.1,
+      linkDistance: 120,
+      preventOverlap: true,
+      animated: true,
+      workerEnabled: false,
+    };
+  if (layout === "circular")
+    type = {
+      type: "circular-layout",
+      center: [0, 0],
+      nodeSize: 32,
+      nodeSpacing: 120,
+      linkDistance: 120,
+      preventOverlap: true,
+      animated: true,
+      workerEnabled: false,
     };
   if (layout === "radial")
     type = {
       type: "radial-layout",
+      center: [0, 0],
       nodeSize: 32,
       unitRadius: 240,
       nodeSpacing: 120,
       linkDistance: 240,
       sortBy: "degree",
       preventOverlap: true,
+      animated: true,
+      workerEnabled: false,
     };
   if (layout === "hierarchy")
     type = {
@@ -68,7 +90,8 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
       nodesep: 100,
       ranksep: 70,
       preventOverlap: true,
-      workerEnabled: true,
+      animated: true,
+      workerEnabled: false,
     };
   return type;
 };
@@ -129,7 +152,7 @@ const ExtGraph = G6.extend(G6.Graph, {
     "quadratic-edge": G6.Extensions.QuadraticEdge,
   },
   layouts: {
-    "force-layout": G6.Extensions.ForceLayout,
+    "force-layout": G6.Extensions.ForceAtlas2Layout,
     "circular-layout": G6.Extensions.ConcentricLayout,
     "radial-layout": G6.Extensions.RadialLayout,
     "dagre-layout": G6.Extensions.DagreLayout,
@@ -146,17 +169,17 @@ const ExtGraph = G6.extend(G6.Graph, {
   },
   plugins: {
     legend: G6.Extensions.Legend,
+    contextmenu: G6.Extensions.Menu,
   },
 } as AnyObject);
 
 export const useGraph = (container: HTMLDivElement | null) => {
   const [graph, setGraph] = useState<InstanceType<typeof G6.Graph>>();
+  const [isClear, setClear] = useState(true);
   const isDark = useIsDark();
 
   useEffect(() => {
     if (container) {
-      console.log("create graph");
-
       const readonlyMode: AnyObject = [
         {
           key: "zoom",
@@ -192,8 +215,8 @@ export const useGraph = (container: HTMLDivElement | null) => {
           default: readonlyMode,
           edit: [
             ...readonlyMode,
-            { type: "drag-node", enableTransient: false },
-            { type: "drag-combo", enableTransient: false },
+            { type: "drag-node", enableTransient: true },
+            { type: "drag-combo", enableTransient: true },
             { key: "click", type: "click-select", eventName: "select" },
           ],
           brush: [
@@ -224,7 +247,6 @@ export const useGraph = (container: HTMLDivElement | null) => {
             multiEdgeType: "quadratic-edge",
           } as AnyObject,
         ],
-        layout: getLayout("auto"),
       });
 
       const handleEnter = debounce((e: IG6GraphEvent) => {
@@ -275,6 +297,13 @@ export const useGraph = (container: HTMLDivElement | null) => {
         }
       });
 
+      graph.on(
+        "afteritemchange",
+        debounce(() => {
+          setClear(graph.getAllNodesData().length === 0);
+        })
+      );
+
       const ob = new ResizeObserver(() => {
         graph.setSize([container.offsetWidth, container.offsetHeight]);
         resetView();
@@ -322,30 +351,27 @@ export const useGraph = (container: HTMLDivElement | null) => {
   );
 
   const resetView = useCallback(() => {
-    void graph
-      ?.fitView({
-        padding: 24,
-        rules: {
-          boundsType: "layout",
-        },
-      })
-      .then(() => {
-        void graph?.fitCenter("layout");
-      });
+    void graph?.fitView({
+      padding: 24,
+      rules: {
+        boundsType: "layout",
+      },
+    });
   }, [graph]);
 
   const resetLayout = useCallback(
     (layout: GraphProps["defaultLayout"]) => {
-      void graph?.updateSpecification({ layout: getLayout(layout) });
+      void graph?.updateSpecification({
+        layout: getLayout(layout),
+      });
     },
     [graph]
   );
 
   const applyLayout = useCallback(
     (layout: GraphProps["defaultLayout"]) => {
-      void graph?.layout(getLayout(layout)).then(() => {
-        resetView();
-      });
+      graph?.once("afterlayout", () => resetView());
+      void graph?.layout(getLayout(layout));
     },
     [graph]
   );
@@ -433,6 +459,14 @@ export const useGraph = (container: HTMLDivElement | null) => {
             height: 32,
             cursor: "pointer",
             pointerEvents: "none",
+            clipCfg: {
+              type: "circle",
+              r: 16,
+              cx: 16,
+              cy: 16,
+              show: true,
+              fill: "#f00",
+            },
             src: {
               fields: ["id", "path", "avatar"],
               formatter: (model: KeyValue) =>
@@ -523,6 +557,14 @@ export const useGraph = (container: HTMLDivElement | null) => {
               innerSize: 1,
             },
           },
+          islocked: {
+            anchorShapes: [
+              {
+                position: [0, 0],
+                r: 8,
+              },
+            ],
+          },
         },
         edge: {
           keyShape: {
@@ -558,6 +600,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
 
   return {
     ref: graph,
+    isClear,
     loadData,
     addData,
     restyle,

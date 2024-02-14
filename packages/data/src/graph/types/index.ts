@@ -37,10 +37,11 @@ export interface GraphEdge extends EdgeModel {
 export interface GraphData {
   nodes: GraphNode[];
   edges: GraphEdge[];
+  combos?: GraphNode[];
 }
 
 export interface GraphProps extends ChildrenProp {
-  data: GraphData;
+  data?: GraphData;
   graphRef?: RefObject<ReturnType<typeof useGraph>>;
 
   /**

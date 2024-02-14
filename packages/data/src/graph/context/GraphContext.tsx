@@ -6,15 +6,17 @@
  * @license   : MIT
  */
 
+import { type IG6GraphEvent } from "@antv/g6";
 import {
   createContext,
   useCallback,
   useContext,
   useEffect,
+  useImperativeHandle,
   useState,
   type FC,
-  useImperativeHandle,
 } from "react";
+import { ContextMenu } from "../components/ContextMenu";
 import { useGraph } from "../hooks/useGraph";
 import { type GraphProps } from "../types";
 
@@ -28,7 +30,7 @@ const GraphContext = createContext<{
 export const GraphProvider: FC<GraphProps> = ({
   data,
   colorMap,
-  defaultLayout,
+  defaultLayout = "auto",
   readOnly,
   children,
   graphRef,
@@ -52,8 +54,7 @@ export const GraphProvider: FC<GraphProps> = ({
   }, [graph.ref, readOnly]);
 
   useEffect(() => {
-    console.log("render graph");
-    graph.loadData(data as AnyObject);
+    data && graph.loadData(data as AnyObject);
   }, [graph.loadData, data]);
 
   const changeMode = useCallback(
@@ -63,6 +64,33 @@ export const GraphProvider: FC<GraphProps> = ({
     },
     [graph.ref, container, readOnly]
   );
+
+  useEffect(() => {
+    graph.ref?.addPlugins([
+      {
+        key: "contextmenu",
+        type: "contextmenu",
+        trigger: "contextmenu",
+        className: "ax-graph__menu-container",
+        itemTypes: ["node", "edge", "combo", "canvas"],
+        /** async string menu */
+        getContent: (e: IG6GraphEvent) => {
+          setTimeout(() => {
+            const el = container?.querySelector(
+              ".ax-graph__menu-container"
+            ) as HTMLDivElement;
+            let item: AnyObject = { type: "canvas" };
+            if (e.itemType === "node") item = graph.ref?.getNodeData(e.itemId);
+            if (e.itemType === "edge") item = graph.ref?.getEdgeData(e.itemId);
+            if (e.itemType === "combo")
+              item = graph.ref?.getComboData(e.itemId);
+            el && ContextMenu(el, { type: e.itemType, ...item });
+          }, 500);
+          return "";
+        },
+      },
+    ]);
+  }, [graph.ref]);
 
   return (
     <GraphContext.Provider

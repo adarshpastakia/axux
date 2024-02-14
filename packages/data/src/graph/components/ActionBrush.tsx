@@ -14,7 +14,7 @@ import { GraphIcons } from "../types/icons";
 type Mode = "brush" | "lasso" | undefined;
 
 export const ActionBrush = () => {
-  const { changeMode } = useGraphInternal();
+  const { changeMode, graph } = useGraphInternal();
 
   const [enabled, setEnabled] = useState<Mode>();
 
@@ -55,6 +55,7 @@ export const ActionBrush = () => {
       )}
       <AxButton
         icon={GraphIcons.selectLasso}
+        isDisabled={graph.isClear}
         onClick={() => enableBrush("lasso")}
       />
     </Fragment>

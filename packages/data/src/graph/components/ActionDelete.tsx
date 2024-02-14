@@ -32,7 +32,7 @@ export const ActionDelete = () => {
     <AxButton
       color="danger"
       icon={GraphIcons.toolDelete}
-      isDisabled={!selected.length}
+      isDisabled={graph.isClear || !selected.length}
       onClick={() => (
         graph.ref?.removeData(
           "node",
