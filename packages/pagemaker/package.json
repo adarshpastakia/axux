@@ -1,6 +1,6 @@
 {
   "name": "@axux/pagemaker",
-  "version": "3.3.1",
+  "version": "3.4.0",
   "description": "axux: PageMaker",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,10 +24,10 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^3.3.1",
-    "@axux/data": "^3.3.1",
-    "@axux/form": "^3.3.1",
-    "@axux/utilities": "^3.3.1"
+    "@axux/core": "^3.4.0",
+    "@axux/data": "^3.4.0",
+    "@axux/form": "^3.4.0",
+    "@axux/utilities": "^3.4.0"
   },
   "peerDependencies": {
     "i18next": "^23.8.2",

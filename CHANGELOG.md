@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://github.com/adarshpastakia/axux/compare/v3.3.1...v3.4.0) (2024-02-16)
+
+### Bug Fixes
+
+- **Button:** children and click handler ([e3e2040](https://github.com/adarshpastakia/axux/commit/e3e2040b3bba4958aed9b9a83d6d0da52955d28a))
+- **EmptyContent:** allow custom icon ([1152b3b](https://github.com/adarshpastakia/axux/commit/1152b3b0176546543c3c9ffd5fc9ec7d6c599242))
+- **ImageViewer:** provide toggle for overlay splitter ([5474435](https://github.com/adarshpastakia/axux/commit/547443546139e18e5ffae2af27e8f77e08602caf))
+
 ## [3.3.1](https://github.com/adarshpastakia/axux/compare/v3.3.0...v3.3.1) (2024-02-11)
 
 ### Bug Fixes
