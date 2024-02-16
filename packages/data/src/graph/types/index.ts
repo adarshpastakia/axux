@@ -53,6 +53,7 @@ export interface GraphProps extends ChildrenProp {
 
   readOnly?: boolean;
 
-  onNodeSelect?: (nodes: NodeModel[]) => void;
   onNodeExpand?: (nodes: NodeModel[]) => Promise<GraphData>;
+
+  onClear?: () => void;
 }

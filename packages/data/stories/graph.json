@@ -121,6 +121,11 @@
     }
   ],
   "combos": [
-    
+    {
+      "id": "combo-1",
+      "data": {
+        "label": "Combo"
+      }
+    }
   ]
 }

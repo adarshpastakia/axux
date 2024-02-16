@@ -8,12 +8,14 @@
 
 import { AxButton } from "@axux/core";
 import { Fragment, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useGraphInternal } from "../context/GraphContext";
 import { GraphIcons } from "../types/icons";
 
 type Mode = "brush" | "lasso" | undefined;
 
 export const ActionBrush = () => {
+  const { t } = useTranslation("graph");
   const { changeMode, graph } = useGraphInternal();
 
   const [enabled, setEnabled] = useState<Mode>();
@@ -36,6 +38,7 @@ export const ActionBrush = () => {
             icon={GraphIcons.selectLasso}
             // isDisabled={enabled === "lasso"}
             onClick={() => enableBrush("lasso")}
+            tooltip={{ content: t("action.lassoSelect"), placement: "bottom" }}
           />
           <AxButton
             className="flush m-0"
@@ -43,13 +46,14 @@ export const ActionBrush = () => {
             icon={GraphIcons.selectRect}
             // isDisabled={enabled === "brush"}
             onClick={() => enableBrush("brush")}
+            tooltip={{ content: t("action.brushSelect"), placement: "bottom" }}
           />
           <AxButton
             variant="link"
             className="flush"
             onClick={() => enableBrush(undefined)}
           >
-            Cancel
+            {t("action.cancel")}
           </AxButton>
         </AxButton.Group>
       )}
@@ -57,6 +61,7 @@ export const ActionBrush = () => {
         icon={GraphIcons.selectLasso}
         isDisabled={graph.isClear}
         onClick={() => enableBrush("lasso")}
+        tooltip={{ content: t("action.startSelect"), placement: "right" }}
       />
     </Fragment>
   );

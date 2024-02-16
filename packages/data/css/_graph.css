@@ -11,7 +11,7 @@
     @apply ax-section;
 
     & .ax-graph__container {
-      @apply grid overflow-hidden grid-area-[content];
+      @apply grid relative overflow-hidden grid-area-[content];
 
       &[data-brush="true"] {
         @apply !cursor-crosshair;
@@ -20,6 +20,9 @@
 
     & .ax-graph__menu {
       @apply bg-component shadow-md shadow-bw-500 border text-sm min-w-28;
+    }
+    & .ax-graph__menu-container {
+      transform: translateY(55px);
     }
     & .ax-graph__menu-item {
       @apply px-2 py-1 hover:bg-primary-500/50 active:bg-primary-700/50 cursor-pointer;

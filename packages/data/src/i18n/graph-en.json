@@ -1,0 +1,21 @@
+{
+  "action": {
+    "brushSelect": "Brush select",
+    "cancel": "Cancel",
+    "clear": "Clear graph",
+    "delete": "Delete",
+    "expand": "Expand node",
+    "fitView": "Fit to view",
+    "hilight": "Hilight connections",
+    "lassoSelect": "Lasso select",
+    "layoutAuto": "Auto layout",
+    "layoutGrid": "Grid layout",
+    "layoutHierarchy": "Hierarchy layout",
+    "layoutRadial": "Radial layout",
+    "neighbors": "Select neighbors",
+    "selectAll": "Select all",
+    "startSelect": "Start select",
+    "zoomin": "Zoom in",
+    "zoomout": "Zoom out"
+  }
+}
