@@ -6,7 +6,8 @@
  * @license   : MIT
  */
 
-import { useMemo, type FC } from "react";
+import { isString } from "@axux/utilities";
+import { isValidElement, useMemo, type FC } from "react";
 import { AxIcon } from "../icons/Icon";
 import { type ElementProps, type IconProp } from "../types";
 
@@ -98,7 +99,10 @@ const DefaultExclamation = () => (
 );
 
 /** @internal */
-export interface EmptyContentProps extends IconProp, ElementProps {
+export interface EmptyContentProps
+  extends Pick<IconProp, "rtlFlip">,
+    ElementProps {
+  icon?: JSX.Element | string;
   iconClassName?: ElementProps["className"];
   /**
    * title text
@@ -140,7 +144,8 @@ export const EmptyContent: FC<EmptyContentProps> = ({
   }, [type]);
   return (
     <div className={`ax-empty ${className ?? ""}`} data-size={size}>
-      {icon && (
+      {isValidElement(icon) && <span className="ax-empty__icon">{icon}</span>}
+      {isString(icon) && (
         <AxIcon
           icon={icon}
           rtlFlip={rtlFlip}
