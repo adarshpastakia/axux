@@ -7,18 +7,21 @@
  */
 
 import { AxDivider, AxHotKey, AxIcon } from "@axux/core";
-import { memo, type FC } from "react";
+import { Fragment, memo, type FC } from "react";
 import { Icons } from "../types/icons";
 import { ZoomMeter } from "./ZoomMeter";
 
 export interface ToolsProps {
   zoom: number;
   rotate: number;
+  splitter: boolean;
   fitToView: boolean;
   isDisabled: boolean;
   disableZoom: boolean;
+  disableSplitter: boolean;
   onZoom: (zoom: number) => void;
   onRotate: (rotate: number) => void;
+  onSplitToggle: () => void;
 }
 
 export const Tools: FC<ToolsProps> = memo(
@@ -26,10 +29,13 @@ export const Tools: FC<ToolsProps> = memo(
     zoom,
     rotate,
     fitToView,
+    splitter,
+    onSplitToggle,
     onZoom,
     onRotate,
     isDisabled,
     disableZoom,
+    disableSplitter,
   }: ToolsProps) => {
     const startDrag = (e: React.MouseEvent) => {
       const target = e.currentTarget as HTMLDivElement;
@@ -109,12 +115,17 @@ export const Tools: FC<ToolsProps> = memo(
             />
           </div>
           <AxDivider vertical size="sm" />
-          <AxIcon
-            className="ax-media__tool"
-            icon={Icons.iconCrop}
-            data-disabled={disableZoom}
-          />
-          <AxDivider vertical size="sm" />
+          {!disableSplitter && (
+            <Fragment>
+              <AxIcon
+                className="ax-media__tool"
+                icon={Icons.iconSplitter}
+                onClick={onSplitToggle}
+                data-active={splitter}
+              />
+              <AxDivider vertical size="sm" />
+            </Fragment>
+          )}
           <AxIcon
             className="ax-media__tool"
             icon={Icons.iconRotateCCW}

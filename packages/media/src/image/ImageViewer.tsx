@@ -40,6 +40,7 @@ interface ViewerState {
   isLoading: boolean;
   isLoaded: boolean;
   isErrored: boolean;
+  showSplitter: boolean;
   width: number;
   height: number;
   containerWidth: number;
@@ -47,7 +48,14 @@ interface ViewerState {
 }
 
 interface ViewerActions {
-  type: "init" | "zoom" | "rotate" | "resize" | "loaded" | "errored";
+  type:
+    | "init"
+    | "zoom"
+    | "rotate"
+    | "resize"
+    | "loaded"
+    | "errored"
+    | "splitter";
   payload?: AnyObject;
 }
 
@@ -103,6 +111,7 @@ export const AxImageViewer = forwardRef<
           isLoading: true,
           isLoaded: false,
           isErrored: false,
+          showSplitter: true,
           width: "100%",
           height: "100%",
           containerWidth: "100%",
@@ -172,6 +181,11 @@ export const AxImageViewer = forwardRef<
         if (action.type === "init") {
           state = initState();
         }
+        if (action.type === "splitter") {
+          state = state.showSplitter
+            ? { ...state, showSplitter: false }
+            : { ...state, showSplitter: true, fitToView: true };
+        }
         if (action.type === "zoom") {
           state.fitToView = action.payload === 0;
           state.zoom = Math.min(5, Math.max(0, action.payload));
@@ -228,6 +242,7 @@ export const AxImageViewer = forwardRef<
         isLoading: true,
         isLoaded: false,
         isErrored: false,
+        showSplitter: true,
       },
       initState
     );
@@ -340,7 +355,7 @@ export const AxImageViewer = forwardRef<
             ref={containerRef}
           >
             <Image
-              src={src}
+              src={!state.showSplitter && overlaySrc ? overlaySrc : src}
               imageRef={imageRef}
               canvasRef={canvasRef}
               onLoad={handleLoad}
@@ -351,7 +366,7 @@ export const AxImageViewer = forwardRef<
             />
           </div>
 
-          {overlaySrc && (
+          {state.showSplitter && overlaySrc && (
             <ImageOverlay
               src={overlaySrc}
               width={state.width}
@@ -365,13 +380,16 @@ export const AxImageViewer = forwardRef<
           )}
 
           <Tools
-            disableZoom={!!overlaySrc}
+            disableSplitter={!overlaySrc}
+            disableZoom={state.showSplitter && !!overlaySrc}
             isDisabled={disableTools}
             zoom={state.zoom}
             fitToView={state.fitToView}
             rotate={state.rotate}
+            splitter={state.showSplitter}
             onZoom={handleZoom}
             onRotate={handleRotate}
+            onSplitToggle={() => dispatch({ type: "splitter" })}
           />
 
           {state.isLoading && (
