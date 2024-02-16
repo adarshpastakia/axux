@@ -1,0 +1,21 @@
+{
+  "action": {
+    "brushSelect": "حدد الفرشاة",
+    "cancel": "يلغي",
+    "clear": "رسم بياني واضح",
+    "delete": "يمسح",
+    "expand": "قم بتوسيع العقدة",
+    "fitView": "صالح للعرض",
+    "hilight": "اتصالات هايلايت",
+    "lassoSelect": "حدد لاسو",
+    "layoutAuto": "تخطيط تلقائي",
+    "layoutGrid": "تخطيط الشبكة",
+    "layoutHierarchy": "تخطيط التسلسل الهرمي",
+    "layoutRadial": "تخطيط شعاعي",
+    "neighbors": "حدد الجيران",
+    "selectAll": "اختر الكل",
+    "startSelect": "ابدأ بالاختيار",
+    "zoomin": "تكبير",
+    "zoomout": "تصغير"
+  }
+}

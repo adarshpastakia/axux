@@ -8,10 +8,12 @@
 
 import { AxButton } from "@axux/core";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useGraphInternal } from "../context/GraphContext";
 import { GraphIcons } from "../types/icons";
 
 export const ActionZoom = () => {
+  const { t } = useTranslation("graph");
   const { graph } = useGraphInternal();
 
   const [zoom, setZoom] = useState(0);
@@ -33,18 +35,21 @@ export const ActionZoom = () => {
         icon={GraphIcons.zoomIn}
         isDisabled={graph.isClear || zoom === 1}
         onClick={() => graph.ref?.zoom(1.5) as AnyObject}
+        tooltip={{ content: t("action.zoomin"), placement: "right" }}
       />
       <AxButton
         className="flush"
         icon={GraphIcons.zoomOut}
         isDisabled={graph.isClear || zoom === -1}
         onClick={() => graph.ref?.zoom(0.5) as AnyObject}
+        tooltip={{ content: t("action.zoomout"), placement: "right" }}
       />
       <AxButton
         className="flush"
         icon={GraphIcons.zoomReset}
         isDisabled={graph.isClear}
         onClick={graph.resetView}
+        tooltip={{ content: t("action.fitView"), placement: "right" }}
       />
     </AxButton.Group>
   );

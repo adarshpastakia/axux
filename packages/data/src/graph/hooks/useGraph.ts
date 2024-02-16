@@ -6,16 +6,19 @@
  * @license   : MIT
  */
 
+import { findShortestPath } from "@antv/algorithm";
 import G6, {
   stdLib,
   type ComboDisplayModel,
   type ComboModelData,
   type GraphData,
+  type ID,
   type IG6GraphEvent,
   type LayoutOptions,
+  type NodeModel,
 } from "@antv/g6";
 import { type ComboShapeMap } from "@antv/g6/lib/types/combo";
-import { useIsDark } from "@axux/core";
+import { useIsDark, useNotificationService } from "@axux/core";
 import { debounce } from "@axux/utilities";
 import { useCallback, useEffect, useState } from "react";
 import { type GraphProps } from "../types";
@@ -85,10 +88,11 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
     };
   if (layout === "hierarchy")
     type = {
-      type: "dagre-layout",
+      type: "hierarchy-layout",
       nodeSize: 32,
       nodesep: 100,
       ranksep: 70,
+      align: undefined,
       preventOverlap: true,
       animated: true,
       workerEnabled: false,
@@ -155,7 +159,7 @@ const ExtGraph = G6.extend(G6.Graph, {
     "force-layout": G6.Extensions.ForceAtlas2Layout,
     "circular-layout": G6.Extensions.ConcentricLayout,
     "radial-layout": G6.Extensions.RadialLayout,
-    "dagre-layout": G6.Extensions.DagreLayout,
+    "hierarchy-layout": G6.Extensions.DagreLayout,
     "grid-layout": G6.Extensions.GridLayout,
   },
   transforms: {
@@ -176,7 +180,16 @@ const ExtGraph = G6.extend(G6.Graph, {
 export const useGraph = (container: HTMLDivElement | null) => {
   const [graph, setGraph] = useState<InstanceType<typeof G6.Graph>>();
   const [isClear, setClear] = useState(true);
+  const [selectedItems, setSelectedItems] = useState<NodeModel[]>([]);
+  const { message } = useNotificationService();
   const isDark = useIsDark();
+
+  const clearHilights = useCallback((g: InstanceType<typeof G6.Graph>) => {
+    g.clearItemState(
+      g.getAllEdgesData().map((edge) => edge.id),
+      ["hilight"]
+    );
+  }, []);
 
   useEffect(() => {
     if (container) {
@@ -217,14 +230,36 @@ export const useGraph = (container: HTMLDivElement | null) => {
             ...readonlyMode,
             { type: "drag-node", enableTransient: true },
             { type: "drag-combo", enableTransient: true },
-            { key: "click", type: "click-select", eventName: "select" },
+            {
+              key: "click",
+              type: "click-select",
+              itemTypes: ["node"],
+              eventName: "select",
+            },
+            {
+              key: "brush",
+              type: "brush-select",
+              itemTypes: ["node"],
+              selectSetMode: "latest",
+              trigger: "shift",
+              eventName: "dragZoom",
+              selectedState: "__zoom__",
+            },
+            {
+              key: "lasso",
+              type: "lasso-select",
+              itemTypes: ["node"],
+              eventName: "brush-select",
+              trigger: "ctrl",
+              selectSetMode: "union",
+            },
           ],
           brush: [
             {
               key: "brush",
               type: "brush-select",
               itemTypes: ["node"],
-              eventName: "select",
+              eventName: "brush-select",
               trigger: "drag",
               selectSetMode: "union",
             },
@@ -234,7 +269,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
               key: "lasso",
               type: "lasso-select",
               itemTypes: ["node"],
-              eventName: "select",
+              eventName: "brush-select",
               trigger: "drag",
               selectSetMode: "union",
             },
@@ -283,6 +318,62 @@ export const useGraph = (container: HTMLDivElement | null) => {
         graph.setItemState([...allNodesIds, ...allEdgesIds], "blur", false);
       });
 
+      graph.on("dragZoom", (e: KeyValue) => {
+        e.selectedIds.nodes.length && graph.focusItem(e.selectedIds.nodes);
+      });
+
+      const doSelectEdge = (action: string, edgeId: ID) => {
+        const edgeData = graph.getEdgeData(edgeId);
+        edgeData &&
+          graph.setItemState(
+            [edgeData.source, edgeData.target],
+            "selected",
+            action === "select"
+          );
+      };
+      const doSelectCombo = (action: string, comboId: ID) => {
+        const nodes = graph
+          .getComboChildrenData(comboId)
+          .map((node) => node.id);
+        nodes.length &&
+          graph.setItemState(nodes, "selected", action === "select");
+      };
+
+      graph.on(
+        "select",
+        (e: IG6GraphEvent & { action: "select" | "unselect" }) => {
+          clearHilights(graph);
+          if (e.itemType === "edge") {
+            doSelectEdge(e.action, e.itemId);
+          }
+          if (e.itemType === "combo") {
+            doSelectCombo(e.action, e.itemId);
+          }
+        }
+      );
+      graph.on(
+        "brush-select",
+        (e: {
+          action: "select" | "deselect";
+          selectedIds: KeyValue<ID[]>;
+          deselectedIds: KeyValue<ID[]>;
+        }) => {
+          clearHilights(graph);
+          e.selectedIds?.edges.forEach((edgeId) =>
+            doSelectEdge(e.action, edgeId)
+          );
+          e.selectedIds?.combos.forEach((comboId) =>
+            doSelectEdge(e.action, comboId)
+          );
+          e.deselectedIds?.edges.forEach((edgeId) =>
+            doSelectEdge(e.action, edgeId)
+          );
+          e.deselectedIds?.combos.forEach((comboId) =>
+            doSelectEdge(e.action, comboId)
+          );
+        }
+      );
+
       /** Click the bottom marker to collapse/expand the combo. */
       graph.on("combo:click", (event: IG6GraphEvent) => {
         const { itemId, target } = event;
@@ -298,11 +389,34 @@ export const useGraph = (container: HTMLDivElement | null) => {
       });
 
       graph.on(
+        "afteritemstatechange",
+        debounce((e) => {
+          const selectedItemsRef =
+            graph
+              ?.getAllNodesData()
+              .filter((node) => graph?.getItemState(node.id, "selected")) ?? [];
+          setSelectedItems(selectedItemsRef);
+        })
+      );
+
+      graph.on(
         "afteritemchange",
         debounce(() => {
+          clearHilights(graph);
+          const selectedItemsRef =
+            graph
+              ?.getAllNodesData()
+              .filter((node) => graph?.getItemState(node.id, "selected")) ?? [];
+          setSelectedItems(selectedItemsRef);
           setClear(graph.getAllNodesData().length === 0);
         })
       );
+
+      container.addEventListener("contextmenu", (e: MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        return false;
+      });
 
       const ob = new ResizeObserver(() => {
         graph.setSize([container.offsetWidth, container.offsetHeight]);
@@ -375,6 +489,35 @@ export const useGraph = (container: HTMLDivElement | null) => {
     },
     [graph]
   );
+
+  const hilightPath = useCallback(() => {
+    if (selectedItems.length === 2) {
+      const { path = [] } = findShortestPath(
+        {
+          nodes: graph?.getAllNodesData() as AnyObject,
+          edges: graph?.getAllEdgesData() as AnyObject,
+        },
+        selectedItems[0].id.toString(),
+        selectedItems[1].id.toString()
+      );
+      graph && clearHilights(graph);
+      const edges = (
+        graph
+          ?.getAllEdgesData()
+          .filter(
+            (edge) => path.includes(edge.source) && path.includes(edge.target)
+          ) ?? []
+      ).map((edge) => edge.id);
+      if (edges.length) {
+        graph?.setItemState(path, "selected", true);
+        graph?.setItemState(edges, "hilight", true);
+        graph?.frontItem([...path, ...edges]);
+      }
+      if (edges.length === 0) {
+        void message("Path between nodes not found");
+      }
+    }
+  }, [graph, selectedItems]);
 
   const restyle = useCallback(
     (colorMap: GraphProps["colorMap"]) => {
@@ -508,7 +651,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
         nodeState: {
           selected: {
             keyShape: {
-              r: 42,
+              r: 36,
               stroke: "#f00",
             },
             haloShape: {
@@ -568,7 +711,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
         },
         edge: {
           keyShape: {
-            lineWidth: 3,
+            lineWidth: 4,
             lineDash: {
               fields: ["id", "dashed"],
               formatter: (model: KeyValue) => {
@@ -586,6 +729,13 @@ export const useGraph = (container: HTMLDivElement | null) => {
           },
         },
         edgeState: {
+          hilight: {
+            haloShape: {
+              opacity: 0.5,
+              lineWidth: 12,
+              stroke: "#f00",
+            },
+          } as AnyObject,
           blur: {
             keyShape: {
               opacity: 0.1,
@@ -601,11 +751,13 @@ export const useGraph = (container: HTMLDivElement | null) => {
   return {
     ref: graph,
     isClear,
+    selectedItems,
     loadData,
     addData,
     restyle,
     resetView,
     applyLayout,
     resetLayout,
+    hilightPath,
   };
 };

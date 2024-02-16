@@ -180,6 +180,7 @@ export const Example: Story = {
                 <AxGraph.ActionZoom />
                 <AxGraph.ActionGroup>
                   <AxGraph.ActionBrush />
+                  <AxGraph.ActionHilight />
                   <AxGraph.ActionExpand />
                   <AxGraph.ActionDelete />
                   <AxGraph.ActionClear />

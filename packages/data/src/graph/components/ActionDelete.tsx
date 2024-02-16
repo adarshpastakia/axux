@@ -6,40 +6,49 @@
  * @license   : MIT
  */
 
-import { type IG6GraphEvent, type NodeModel } from "@antv/g6";
+import { type ID, type IG6GraphEvent } from "@antv/g6";
 import { AxButton } from "@axux/core";
-import { useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect } from "react";
 import { useGraphInternal } from "../context/GraphContext";
 import { GraphIcons } from "../types/icons";
+import { useTranslation } from "react-i18next";
 
 export const ActionDelete = () => {
+  const { t } = useTranslation("graph");
   const { graph } = useGraphInternal();
-  const [selected, setSelected] = useState<NodeModel[]>([]);
+
+  const handleRemove = useCallback(() => {
+    const edges: ID[] = [];
+    const items = graph.ref?.findIdByState("node", "selected", true) ?? [];
+    items.forEach((id) => {
+      edges.push(
+        ...(graph.ref?.getRelatedEdgesData(id)?.map((ed) => ed.id) ?? [])
+      );
+    });
+    graph.ref?.setItemState([...edges, ...items], "selected", false);
+    edges.length && graph.ref?.removeData("edge", edges);
+    items.length && graph.ref?.removeData("node", items);
+  }, [graph.ref]);
 
   useEffect(() => {
-    graph.ref?.on("select", (e: IG6GraphEvent) => {
-      setSelected(
-        graph.ref
-          ?.getAllNodesData()
-          .filter((node) => graph.ref?.getItemState(node.id, "selected")) ?? []
-      );
+    graph.ref?.on("keydown", (e: IG6GraphEvent) => {
+      e.key === "Delete" && handleRemove();
     });
     return () => {
       graph.ref?.off("select");
+      graph.ref?.off("keydown");
     };
   }, [graph.ref]);
+
   return (
-    <AxButton
-      color="danger"
-      icon={GraphIcons.toolDelete}
-      isDisabled={graph.isClear || !selected.length}
-      onClick={() => (
-        graph.ref?.removeData(
-          "node",
-          selected.map((node) => node.id)
-        ),
-        setSelected([])
-      )}
-    />
+    <Fragment>
+      <AxButton
+        color="danger"
+        icon={GraphIcons.toolDelete}
+        isDisabled={graph.isClear || !graph.selectedItems.length}
+        onClick={handleRemove}
+        tooltip={{ content: t("action.delete"), placement: "right" }}
+      />
+    </Fragment>
   );
 };

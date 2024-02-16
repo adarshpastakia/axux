@@ -8,14 +8,14 @@
 
 import { type IG6GraphEvent, type NodeModel } from "@antv/g6";
 import { AxButton } from "@axux/core";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useGraphInternal } from "../context/GraphContext";
 import { GraphIcons } from "../types/icons";
+import { useTranslation } from "react-i18next";
 
 export const ActionExpand = () => {
+  const { t } = useTranslation("graph");
   const { graph, onNodeExpand } = useGraphInternal();
-
-  const [selected, setSelected] = useState<NodeModel[]>([]);
 
   const handleExpand = useCallback(
     (nodes: NodeModel[]) => {
@@ -27,30 +27,23 @@ export const ActionExpand = () => {
   );
 
   useEffect(() => {
-    graph.ref?.on("select", (e: IG6GraphEvent) => {
-      setSelected(
-        graph.ref
-          ?.getAllNodesData()
-          .filter((node) => graph.ref?.getItemState(node.id, "selected")) ?? []
-      );
-    });
     graph.ref?.on("node:dblclick", (e: IG6GraphEvent) => {
       const node = graph.ref?.getNodeData(e.itemId);
       node && handleExpand([node]);
     });
     return () => {
       graph.ref?.off("ode:dblclick");
-      graph.ref?.off("select");
     };
   }, [graph.ref]);
 
   return (
     <AxButton
       icon={GraphIcons.toolExpand}
-      isDisabled={graph.isClear || !selected.length}
+      isDisabled={graph.isClear || !graph.selectedItems.length}
       onClick={() => {
-        handleExpand(selected);
+        handleExpand(graph.selectedItems);
       }}
+      tooltip={{ content: t("action.expand"), placement: "right" }}
     />
   );
 };

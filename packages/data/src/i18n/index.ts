@@ -9,5 +9,8 @@
 import { addTranslationBundle } from "@axux/core";
 import ar from "./ar.json";
 import en from "./en.json";
+import graphAr from "./graph-ar.json";
+import graphEn from "./graph-en.json";
 
 addTranslationBundle("data", { en, ar });
+addTranslationBundle("graph", { en: graphEn, ar: graphAr });
