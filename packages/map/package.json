@@ -1,6 +1,6 @@
 {
   "name": "@axux/map",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "description": "axux: Map viewers",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -23,9 +23,9 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^3.4.0",
-    "@axux/utilities": "^3.4.0",
     "@arcgis/core": "^4.28.10",
+    "@axux/core": "^3.4.1",
+    "@axux/utilities": "^3.4.1",
     "i18next": "^23.8.2",
     "ngeohash": "^0.6.3",
     "react": "^18.2.0",
