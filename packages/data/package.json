@@ -27,9 +27,7 @@
     "@axux/core": "^3.4.0",
     "@axux/date": "^3.4.0",
     "@axux/form": "^3.4.0",
-    "@axux/utilities": "^3.4.0"
-  },
-  "peerDependencies": {
+    "@axux/utilities": "^3.4.0",
     "@antv/algorithm": "^0.1.26",
     "@antv/g6": "^5.0.0-beta.27",
     "i18next": "^23.8.2",

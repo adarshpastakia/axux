@@ -24,9 +24,7 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/utilities": "^3.4.0"
-  },
-  "peerDependencies": {
+    "@axux/utilities": "^3.4.0",
     "@headlessui/react": "^1.7.18",
     "@popperjs/core": "^2.11.8",
     "@tailwindcss/forms": "^0.5.7",

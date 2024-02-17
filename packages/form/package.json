@@ -25,9 +25,7 @@
   },
   "dependencies": {
     "@axux/core": "^3.4.0",
-    "@axux/utilities": "^3.4.0"
-  },
-  "peerDependencies": {
+    "@axux/utilities": "^3.4.0",
     "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
     "i18next": "^22.4.14",
