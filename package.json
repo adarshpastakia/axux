@@ -22,16 +22,34 @@
     "release": "lerna version --conventional-commits --yes --preid=beta -m \"chore(release): %v\""
   },
   "resolutions": {
-    "@types/react": "^18.0.10",
-    "autoprefixer": "^10.4.7",
     "jackspeak": "2.1.1",
-    "postcss": "^8.4.14"
+    "lexical": "^0.13.1",
+    "@lexical/clipboard": "^0.13.1",
+    "@lexical/link": "^0.13.1",
+    "@lexical/list": "^0.13.1",
+    "@lexical/markdown": "^0.13.1",
+    "@lexical/plain-text": "^0.13.1",
+    "@lexical/react": "^0.13.1",
+    "@lexical/rich-text": "^0.13.1",
+    "@lexical/selection": "^0.13.1",
+    "@lexical/utils": "^0.13.1"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "i18next": "^23.8.2",
     "i18next-browser-languagedetector": "^7.0.1",
     "postcss": "^8.4.21",
     "postcss-import": "^15.1.0",
-    "postcss-nesting": "^11.2.2"
+    "postcss-nesting": "^11.2.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.4",
+    "react-i18next": "^14.0.5",
+    "react-popper": "^2.3.0",
+    "react-router-dom": "^6.22.0",
+    "resize-observer-polyfill": "^1.5.1",
+    "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.9",

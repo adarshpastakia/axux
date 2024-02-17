@@ -36,7 +36,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.4",
-    "react-i18next": "^12.2.0",
+    "react-i18next": "^14.0.5",
     "react-popper": "^2.3.0",
     "react-router-dom": "^6.22.0",
     "resize-observer-polyfill": "^1.5.1",
