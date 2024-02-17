@@ -1,6 +1,6 @@
 {
   "name": "@axux/form",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "description": "axux: Form components",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,8 +24,8 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^3.4.1",
-    "@axux/utilities": "^3.4.1",
+    "@axux/core": "^3.4.2",
+    "@axux/utilities": "^3.4.2",
     "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
     "i18next": "^23.8.2",
