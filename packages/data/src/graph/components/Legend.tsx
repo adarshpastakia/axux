@@ -46,6 +46,7 @@ export const Legend = () => {
 
     return () => {
       graph.ref?.removePlugins(["default-legend"]);
+      graph.ref?.container.querySelector(".ax-graph__legend")?.remove();
     };
   }, [graph.ref, graph.isClear]);
 

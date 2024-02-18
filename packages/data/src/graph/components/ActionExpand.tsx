@@ -7,21 +7,29 @@
  */
 
 import { type IG6GraphEvent, type NodeModel } from "@antv/g6";
-import { AxButton } from "@axux/core";
+import { AxButton, useNotificationService } from "@axux/core";
 import { useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useGraphInternal } from "../context/GraphContext";
 import { GraphIcons } from "../types/icons";
-import { useTranslation } from "react-i18next";
 
 export const ActionExpand = () => {
   const { t } = useTranslation("graph");
   const { graph, onNodeExpand } = useGraphInternal();
+  const { message } = useNotificationService();
 
   const handleExpand = useCallback(
     (nodes: NodeModel[]) => {
-      void onNodeExpand?.(nodes).then((newData) => {
-        graph.addData(newData);
-      });
+      void onNodeExpand?.(nodes)
+        .then((newData) => {
+          graph.addData(newData);
+        })
+        .catch(() => {
+          void message({
+            message: "Unable to fetch node data",
+            color: "danger",
+          });
+        });
     },
     [graph.ref, onNodeExpand]
   );
@@ -32,7 +40,7 @@ export const ActionExpand = () => {
       node && handleExpand([node]);
     });
     return () => {
-      graph.ref?.off("ode:dblclick");
+      graph.ref?.off("node:dblclick");
     };
   }, [graph.ref]);
 

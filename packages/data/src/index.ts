@@ -27,4 +27,4 @@ export { AxVirtualList } from "./virtual/List";
 export type { VirtualListRef } from "./virtual/List";
 
 export { AxGraph } from "./graph/Graph";
-export { type GraphRef } from "./graph/types";
+export { type GraphInstance, type GraphRef } from "./graph/types";
