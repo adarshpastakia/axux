@@ -116,14 +116,14 @@
       & > .ax-button {
         @apply m-0 z-0 focus-within:z-[1];
 
+        & > .ax-button__inner {
+          @apply rounded-none border-e;
+        }
         &:first-of-type > .ax-button__inner {
-          @apply rounded-e-none border-e;
+          @apply rounded-s;
         }
         &:last-of-type > .ax-button__inner {
-          @apply rounded-s-none border-0;
-        }
-        &:not(:first-of-type):not(:last-of-type) > .ax-button__inner {
-          @apply rounded-none border-e;
+          @apply rounded-e border-0;
         }
       }
     }
@@ -133,14 +133,14 @@
       & > .ax-button {
         @apply m-0 z-0 focus-within:z-[1];
 
+        & > .ax-button__inner {
+          @apply rounded-none border-b;
+        }
         &:first-of-type > .ax-button__inner {
-          @apply rounded-b-none border-b;
+          @apply rounded-t;
         }
         &:last-of-type > .ax-button__inner {
-          @apply rounded-t-none border-0;
-        }
-        &:not(:first-of-type):not(:last-of-type) > .ax-button__inner {
-          @apply rounded-none border-b;
+          @apply rounded-b border-0;
         }
       }
     }
