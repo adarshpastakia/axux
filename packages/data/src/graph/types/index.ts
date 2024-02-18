@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { type EdgeModel, type NodeModel } from "@antv/g6";
+import { type EdgeModel, type Graph, type NodeModel } from "@antv/g6";
 import { type ChildrenProp } from "@axux/core/dist/types";
 import { type Ref } from "react";
 import { type useGraph } from "../hooks/useGraph";
@@ -45,6 +45,7 @@ export interface GraphData {
 }
 
 export type GraphRef = ReturnType<typeof useGraph>;
+export type GraphInstance = InstanceType<typeof Graph>;
 
 export interface GraphProps extends ChildrenProp {
   data?: GraphData;
@@ -68,5 +69,6 @@ export interface GraphProps extends ChildrenProp {
 
   onNodeExpand?: (nodes: NodeModel[]) => Promise<GraphData>;
 
+  onDataLoad?: (graph: GraphInstance) => void;
   onClear?: () => void;
 }

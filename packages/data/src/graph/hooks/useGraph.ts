@@ -224,7 +224,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
 
       const graph = new ExtGraph({
         container,
-        renderer: "webgl",
+        renderer: "canvas",
         autoFit: "view",
         modes: {
           default: readonlyMode,
@@ -452,6 +452,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
     (data: GraphData) => {
       void graph?.read(data).then(() => {
         resetView();
+        graph.emit("dataloaded");
       });
     },
     [graph]
@@ -459,10 +460,11 @@ export const useGraph = (container: HTMLDivElement | null) => {
 
   const addData = useCallback(
     (data: GraphData) => {
-      data.nodes?.map((node) => graph?.addData("node", node));
-      data.edges?.map((edge) => graph?.addData("edge", edge));
+      data.nodes && graph?.addData("node", data.nodes);
+      data.edges && graph?.addData("edge", data.edges);
       void graph?.layout().then(() => {
         resetView();
+        graph.emit("dataloaded");
       });
     },
     [graph]
@@ -777,6 +779,10 @@ export const useGraph = (container: HTMLDivElement | null) => {
     };
   }, []);
 
+  const exportImage = useCallback(async () => {
+    return await graph?.toFullDataURL("image/png", { padding: [0, 0, -24, 0] });
+  }, [graph]);
+
   return {
     ref: graph,
     isClear,
@@ -788,5 +794,6 @@ export const useGraph = (container: HTMLDivElement | null) => {
     applyLayout,
     resetLayout,
     hilightPath,
+    exportImage,
   };
 };

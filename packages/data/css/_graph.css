@@ -11,7 +11,7 @@
     @apply ax-section;
 
     & .ax-graph__container {
-      @apply grid relative overflow-hidden grid-area-[content];
+      @apply bg-component grid relative overflow-hidden grid-area-[content];
 
       &[data-brush="true"] {
         @apply !cursor-crosshair;

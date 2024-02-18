@@ -34,6 +34,8 @@ export const GraphProvider: FC<GraphProps> = ({
   readOnly,
   children,
   graphRef,
+  onDataLoad,
+  onClear,
   onNodeExpand,
 }) => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
@@ -56,6 +58,20 @@ export const GraphProvider: FC<GraphProps> = ({
   useEffect(() => {
     data && graph.loadData(data as AnyObject);
   }, [graph.loadData, data]);
+
+  useEffect(() => {
+    graph.isClear && onClear?.();
+  }, [graph.isClear, onClear]);
+
+  useEffect(() => {
+    graph.ref?.on("dataloaded", () => {
+      graph.ref && onDataLoad?.(graph.ref);
+    });
+
+    return () => {
+      graph.ref?.off("dataloaded");
+    };
+  }, [graph.ref, onDataLoad]);
 
   const changeMode = useCallback(
     (mode?: "brush" | "lasso") => {

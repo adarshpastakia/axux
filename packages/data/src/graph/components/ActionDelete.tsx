@@ -35,7 +35,6 @@ export const ActionDelete = () => {
       e.key === "Delete" && handleRemove();
     });
     return () => {
-      graph.ref?.off("select");
       graph.ref?.off("keydown");
     };
   }, [graph.ref]);
