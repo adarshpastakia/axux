@@ -20,9 +20,9 @@ import G6, {
 import { type ComboShapeMap } from "@antv/g6/lib/types/combo";
 import { useIsDark, useNotificationService } from "@axux/core";
 import { debounce } from "@axux/utilities";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { type GraphProps } from "../types";
-import { makeSvg, shadeColor } from "../utils";
+import { makeSvg } from "../utils";
 
 const DEFAULT_NODE_COLOR = "#94a3b8";
 const DEFAULT_EDGE_COLOR = "#6b7280";
@@ -181,6 +181,8 @@ export const useGraph = (container: HTMLDivElement | null) => {
   const [graph, setGraph] = useState<InstanceType<typeof G6.Graph>>();
   const [isClear, setClear] = useState(true);
   const [selectedItems, setSelectedItems] = useState<NodeModel[]>([]);
+  const styleMap = useRef<GraphProps["styleMap"]>();
+  const bgColor = useRef<"#fff" | "#222">("#fff");
   const { message } = useNotificationService();
   const isDark = useIsDark();
 
@@ -222,7 +224,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
 
       const graph = new ExtGraph({
         container,
-        renderer: "canvas",
+        renderer: "webgl",
         autoFit: "view",
         modes: {
           default: readonlyMode,
@@ -282,6 +284,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
             multiEdgeType: "quadratic-edge",
           } as AnyObject,
         ],
+        ...(getStyleSpec() as AnyObject),
       });
 
       const handleEnter = debounce((e: IG6GraphEvent) => {
@@ -437,6 +440,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
   }, [container]);
 
   useEffect(() => {
+    bgColor.current = isDark ? "#222" : "#fff";
     graph?.updateTheme({
       type: "spec",
       // @ts-expect-error ignore
@@ -519,234 +523,259 @@ export const useGraph = (container: HTMLDivElement | null) => {
     }
   }, [graph, selectedItems]);
 
-  const restyle = useCallback(
-    (colorMap: GraphProps["colorMap"]) => {
-      graph?.updateSpecification({
-        combo: {
-          type: "custom-combo",
-          keyShape: {
-            r: 50,
+  const restyle = useCallback((map: GraphProps["styleMap"]) => {
+    styleMap.current = map;
+  }, []);
+
+  const getStyleSpec = useCallback(() => {
+    return {
+      combo: {
+        type: {
+          fields: ["id", "nodeType"],
+          formatter: (model: KeyValue) =>
+            styleMap.current?.[model.data.nodeType]?.shape
+              ? `${styleMap.current?.[model.data.nodeType]?.shape ?? ""}-node`
+              : "custom-combo",
+        },
+        keyShape: {
+          r: 50,
+        },
+        labelShape: {
+          text: {
+            fields: ["id", "label"],
+            formatter: (model: KeyValue) => model.data.label,
           },
-          labelShape: {
-            text: {
-              fields: ["id", "label"],
-              formatter: (model: KeyValue) => model.data.label,
+          position: "bottom",
+        },
+        otherShapes: {},
+        animates: {
+          buildIn: [
+            {
+              fields: ["opacity"],
+              duration: 500,
+              delay: 500 + Math.random() * 500,
             },
-            position: "bottom",
+          ],
+          buildOut: [
+            {
+              fields: ["opacity"],
+              duration: 200,
+            },
+          ],
+          update: [
+            {
+              fields: ["lineWidth", "r"],
+              shapeId: "keyShape",
+            },
+            {
+              fields: ["opacity"],
+              shapeId: "haloShape",
+            },
+          ],
+        },
+      },
+      node: {
+        type: {
+          fields: ["id", "nodeType"],
+          formatter: (model: KeyValue) =>
+            styleMap.current?.[model.data.nodeType]?.shape
+              ? `${styleMap.current?.[model.data.nodeType]?.shape ?? ""}-node`
+              : "donut-node",
+        },
+        keyShape: {
+          r: 32,
+          lineWidth: 6,
+          cursor: "pointer",
+          stroke: {
+            fields: ["id", "nodeType", "color"],
+            formatter: (model: KeyValue) =>
+              model.data.color ??
+              styleMap.current?.[model.data.nodeType]?.color ??
+              DEFAULT_NODE_COLOR,
           },
-          otherShapes: {},
-          animates: {
-            buildIn: [
-              {
-                fields: ["opacity"],
-                duration: 500,
-                delay: 500 + Math.random() * 500,
-              },
-            ],
-            buildOut: [
-              {
-                fields: ["opacity"],
-                duration: 200,
-              },
-            ],
-            update: [
-              {
-                fields: ["lineWidth", "r"],
-                shapeId: "keyShape",
-              },
-              {
-                fields: ["opacity"],
-                shapeId: "haloShape",
-              },
-            ],
+          lineDash: {
+            fields: ["id", "nodeType", "strokeType"],
+            formatter: (model: KeyValue) => {
+              if (
+                model.data.strokeType === "dashed" ||
+                styleMap.current?.[model.data.nodeType]?.strokeType === "dashed"
+              )
+                return [8, 4];
+              if (
+                model.data.strokeType === "dotted" ||
+                styleMap.current?.[model.data.nodeType]?.strokeType === "dotted"
+              )
+                return [4, 4];
+
+              return [];
+            },
+          },
+          fill: {
+            fields: ["id", "nodeType", "fill"],
+            formatter: (model: KeyValue) =>
+              model.data.fill ??
+              styleMap.current?.[model.data.nodeType]?.fill ??
+              bgColor.current,
           },
         },
-        node: {
-          type: "donut-node",
+        labelShape: {
+          text: {
+            fields: ["id", "nodeType", "label"],
+            formatter: (model: KeyValue) =>
+              model.data.label ??
+              styleMap.current?.[model.data.nodeType]?.label,
+          },
+          dy: 4,
+          fontSize: 12,
+          maxWidth: "110%",
+          position: "bottom",
+        },
+        labelBackgroundShape: {},
+        iconShape: {
+          width: 38,
+          height: 38,
+          cursor: "pointer",
+          pointerEvents: "none",
+          clipCfg: {
+            type: "circle",
+            r: 16,
+            cx: 16,
+            cy: 16,
+            show: true,
+            fill: "#f00",
+          },
+          src: {
+            fields: ["id", "nodeType", "avatar", "color"],
+            formatter: (model: KeyValue) =>
+              model.data.avatar
+                ? model.data.avatar
+                : makeSvg(
+                    model.data.iconPath ??
+                      styleMap.current?.[model.data.nodeType]?.iconPath,
+                    model.data.color ??
+                      styleMap.current?.[model.data.nodeType]?.color ??
+                      DEFAULT_NODE_COLOR
+                  ),
+          },
+        },
+        donutShapes: {
+          innerSize: 0.8,
+          cursor: "pointer",
+          attrs: {
+            fields: ["id", "colorMap"],
+            formatter: (model: KeyValue) =>
+              model.data.colorMap?.map(() => 100 / model.data.colorMap.length),
+          },
+          colorMap: {
+            fields: ["id", "colorMap"],
+            formatter: (model: KeyValue) => model.data.colorMap?.sort(),
+          },
+        },
+      },
+      nodeState: {
+        selected: {
           keyShape: {
-            r: 32,
+            r: 36,
+            stroke: "#f00",
+          },
+          haloShape: {
+            r: 42,
+            stroke: "#f00",
+          },
+        } as AnyObject,
+        active: {
+          haloShape: {
+            r: 42,
+            opacity: 0.5,
             lineWidth: 6,
-            cursor: "pointer",
             stroke: {
               fields: ["id", "nodeType", "color"],
               formatter: (model: KeyValue) =>
                 model.data.color ??
-                colorMap?.[model.data.nodeType] ??
+                styleMap.current?.[model.data.nodeType]?.color ??
                 DEFAULT_NODE_COLOR,
             },
-            fill: {
-              fields: ["id", "nodeType", "color"],
-              formatter: (model: KeyValue) =>
-                shadeColor(
-                  (model.data.color as string) ??
-                    colorMap?.[model.data.nodeType] ??
-                    DEFAULT_NODE_COLOR,
-                  50
-                ),
-            },
           },
-          labelShape: {
-            text: {
-              fields: ["id", "label"],
-              formatter: (model: KeyValue) => model.data.label,
-            },
-            dy: 4,
-            fontSize: 12,
-            maxWidth: "110%",
-            position: "bottom",
+        } as AnyObject,
+        focus: {
+          keyShape: {
+            opacity: 0.9,
           },
-          // @ts-expect-error ignore
-          labelBackgroundShape: {},
           iconShape: {
-            width: 32,
-            height: 32,
-            cursor: "pointer",
-            pointerEvents: "none",
-            clipCfg: {
-              type: "circle",
-              r: 16,
-              cx: 16,
-              cy: 16,
-              show: true,
-              fill: "#f00",
-            },
-            src: {
-              fields: ["id", "path", "avatar"],
-              formatter: (model: KeyValue) =>
-                model.data.avatar
-                  ? model.data.avatar
-                  : makeSvg(model.data.path),
-            },
+            opacity: 0.9,
           },
           donutShapes: {
-            innerSize: 0.7,
-            cursor: "pointer",
-            attrs: {
-              fields: ["id", "colorMap"],
-              formatter: (model: KeyValue) =>
-                model.data.colorMap?.map(
-                  () => 100 / model.data.colorMap.length
-                ),
-            },
-            colorMap: {
-              fields: ["id", "colorMap"],
-              formatter: (model: KeyValue) => model.data.colorMap?.sort(),
-            },
-          },
-          animates: {
-            update: [
-              {
-                fields: ["opacity", "lineWidth", "r"],
-                shapeId: "haloShape",
-                states: ["selected", "active"],
-              },
-              {
-                fields: ["lineWidth"],
-                shapeId: "keyShape",
-                states: ["selected", "active"],
-              },
-            ],
+            innerSize: 0.8,
           },
         },
-        nodeState: {
-          selected: {
-            keyShape: {
-              r: 36,
-              stroke: "#f00",
-            },
-            haloShape: {
-              r: 42,
-              stroke: "#f00",
-            },
-          } as AnyObject,
-          active: {
-            haloShape: {
-              r: 42,
-              opacity: 0.5,
-              lineWidth: 6,
-              stroke: {
-                fields: ["id", "nodeType", "color"],
-                formatter: (model: KeyValue) =>
-                  model.data.color ??
-                  colorMap?.[model.data.nodeType] ??
-                  DEFAULT_NODE_COLOR,
-              },
-            },
-          } as AnyObject,
-          focus: {
-            keyShape: {
-              opacity: 0.9,
-            },
-            iconShape: {
-              opacity: 0.9,
-            },
-            // @ts-expect-error ignore
-            donutShapes: {
-              innerSize: 0.7,
-            },
-          },
-          blur: {
-            keyShape: {
-              opacity: 0.1,
-            },
-            iconShape: {
-              opacity: 0.1,
-            },
-            labelShape: {
-              opacity: 0.1,
-            },
-            // @ts-expect-error ignore
-            donutShapes: {
-              innerSize: 1,
-            },
-          },
-          islocked: {
-            anchorShapes: [
-              {
-                position: [0, 0],
-                r: 8,
-              },
-            ],
-          },
-        },
-        edge: {
+        blur: {
           keyShape: {
-            lineWidth: 4,
-            lineDash: {
-              fields: ["id", "dashed"],
-              formatter: (model: KeyValue) => {
-                return model.data.dashed ? [8, 4] : 0;
-              },
-            },
-            cursor: "pointer",
-            stroke: {
-              fields: ["id", "edgeType", "color"],
-              formatter: (model: KeyValue) =>
-                model.data.color ??
-                colorMap?.[model.data.edgeType] ??
-                DEFAULT_EDGE_COLOR,
-            },
+            opacity: 0.1,
+          },
+          iconShape: {
+            opacity: 0.1,
+          },
+          labelShape: {
+            opacity: 0.1,
+          },
+          donutShapes: {
+            innerSize: 1,
           },
         },
-        edgeState: {
-          hilight: {
-            haloShape: {
-              opacity: 0.5,
-              lineWidth: 12,
-              stroke: "#f00",
+        islocked: {
+          anchorShapes: [
+            {
+              position: [0, 0],
+              r: 8,
             },
-          } as AnyObject,
-          blur: {
-            keyShape: {
-              opacity: 0.1,
-              stroke: "#8888",
+          ],
+        },
+      },
+      edge: {
+        keyShape: {
+          lineWidth: 4,
+          lineDash: {
+            fields: ["id", "edgeType", "strokeType"],
+            formatter: (model: KeyValue) => {
+              if (
+                model.data.strokeType === "dashed" ||
+                styleMap.current?.[model.data.edgeType]?.strokeType === "dashed"
+              )
+                return [8, 4];
+              if (
+                model.data.strokeType === "dotted" ||
+                styleMap.current?.[model.data.edgeType]?.strokeType === "dotted"
+              )
+                return [4, 4];
             },
           },
+          cursor: "pointer",
+          stroke: {
+            fields: ["id", "edgeType", "color"],
+            formatter: (model: KeyValue) =>
+              model.data.color ??
+              styleMap.current?.[model.data.edgeType]?.color ??
+              DEFAULT_EDGE_COLOR,
+          },
         },
-      });
-    },
-    [graph]
-  );
+      },
+      edgeState: {
+        hilight: {
+          haloShape: {
+            opacity: 0.5,
+            lineWidth: 12,
+            stroke: "#f00",
+          },
+        } as AnyObject,
+        blur: {
+          keyShape: {
+            opacity: 0.1,
+            stroke: "#8888",
+          },
+        },
+      },
+    };
+  }, []);
 
   return {
     ref: graph,

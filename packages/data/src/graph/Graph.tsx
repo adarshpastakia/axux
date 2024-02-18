@@ -16,6 +16,7 @@ import { ActionHilight } from "./components/ActionHilight";
 import { ActionLayout } from "./components/ActionLayout";
 import { ActionZoom } from "./components/ActionZoom";
 import { Canvas } from "./components/Canvas";
+import { Legend } from "./components/Legend";
 import { Toolbar } from "./components/Toolbar";
 import { GraphProvider } from "./context/GraphContext";
 import { type GraphProps } from "./types";
@@ -95,6 +96,7 @@ const EmptyIcon = () => (
 export const AxGraph: FC<GraphProps> & {
   Toolbar: typeof Toolbar;
   Canvas: typeof Canvas;
+  Legend: typeof Legend;
   ActionGroup: typeof ActionGroup;
   ActionBrush: typeof ActionBrush;
   ActionClear: typeof ActionClear;
@@ -110,6 +112,7 @@ export const AxGraph: FC<GraphProps> & {
 
 AxGraph.Toolbar = Toolbar;
 AxGraph.Canvas = Canvas;
+AxGraph.Legend = Legend;
 AxGraph.ActionGroup = ActionGroup;
 AxGraph.ActionBrush = ActionBrush;
 AxGraph.ActionClear = ActionClear;
