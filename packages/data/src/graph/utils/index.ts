@@ -25,7 +25,7 @@ export const shadeColor = (hexColor: string, magnitude: number) => {
   }
 };
 
-export const makeSvg = (path: string) => {
-  const svg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#fff" d="${path}"></path></svg>`;
+export const makeSvg = (path: string = "", color: string = "#333") => {
+  const svg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="${color}" d="${path}"></path></svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 };

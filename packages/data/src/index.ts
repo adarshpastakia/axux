@@ -6,10 +6,7 @@
  * @license   : MIT
  */
 
-import { type GraphProps } from "./graph/types";
 import "./i18n";
-
-type GraphRef = GraphProps["graphRef"];
 
 export { AxCheckList } from "./checklist/CheckList";
 export { AxDatagrid } from "./datagrid/Datagrid";
@@ -30,4 +27,4 @@ export { AxVirtualList } from "./virtual/List";
 export type { VirtualListRef } from "./virtual/List";
 
 export { AxGraph } from "./graph/Graph";
-export { type GraphRef };
+export { type GraphRef } from "./graph/types";

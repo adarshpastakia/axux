@@ -29,7 +29,7 @@ const GraphContext = createContext<{
 
 export const GraphProvider: FC<GraphProps> = ({
   data,
-  colorMap,
+  styleMap,
   defaultLayout = "auto",
   readOnly,
   children,
@@ -42,8 +42,8 @@ export const GraphProvider: FC<GraphProps> = ({
   useImperativeHandle(graphRef, () => graph, [graph]);
 
   useEffect(() => {
-    graph.restyle(colorMap);
-  }, [graph.restyle, colorMap]);
+    graph.restyle(styleMap);
+  }, [graph.restyle, styleMap]);
 
   useEffect(() => {
     graph.resetLayout(defaultLayout);
@@ -67,13 +67,12 @@ export const GraphProvider: FC<GraphProps> = ({
 
   const [contextMenu, setContextMenu] = useState<KeyValue>();
   useEffect(() => {
-    const box = container?.getBoundingClientRect();
     graph.ref?.addPlugins([
       {
         key: "contextmenu",
         type: "contextmenu",
         trigger: "contextmenu",
-        offsetX: -1 * (box?.x ?? 0),
+        offsetX: -1 * (container?.offsetLeft ?? 0),
         className: "ax-graph__menu-container",
         itemTypes: ["node", "edge", "combo", "canvas"],
         shouldBegin: () => {
