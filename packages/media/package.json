@@ -1,6 +1,6 @@
 {
   "name": "@axux/media",
-  "version": "3.4.3",
+  "version": "3.4.4",
   "description": "axux: Media players",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,9 +24,9 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/core": "^3.4.3",
-    "@axux/data": "^3.4.3",
-    "@axux/utilities": "^3.4.3",
+    "@axux/core": "^3.4.4",
+    "@axux/data": "^3.4.4",
+    "@axux/utilities": "^3.4.4",
     "i18next": "^23.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
