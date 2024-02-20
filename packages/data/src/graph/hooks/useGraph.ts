@@ -27,7 +27,7 @@ import { makeSvg } from "../utils";
 const DEFAULT_NODE_COLOR = "#94a3b8";
 const DEFAULT_EDGE_COLOR = "#6b7280";
 
-const getLayout = (layout: GraphProps["defaultLayout"]) => {
+const getLayout = (layout: GraphProps["defaultLayout"], useWorker = false) => {
   let type: LayoutOptions = {
     type: "force-layout",
     center: [0, 0],
@@ -49,7 +49,7 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
     kg: 0.1,
     preventOverlap: true,
     animated: true,
-    workerEnabled: false,
+    workerEnabled: useWorker,
   };
   if (layout === "grid")
     type = {
@@ -60,7 +60,7 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
       linkDistance: 120,
       preventOverlap: true,
       animated: true,
-      workerEnabled: false,
+      workerEnabled: useWorker,
     };
   if (layout === "circular")
     type = {
@@ -71,7 +71,7 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
       linkDistance: 120,
       preventOverlap: true,
       animated: true,
-      workerEnabled: false,
+      workerEnabled: useWorker,
     };
   if (layout === "radial")
     type = {
@@ -84,7 +84,7 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
       sortBy: "degree",
       preventOverlap: true,
       animated: true,
-      workerEnabled: false,
+      workerEnabled: useWorker,
     };
   if (layout === "hierarchy")
     type = {
@@ -95,7 +95,7 @@ const getLayout = (layout: GraphProps["defaultLayout"]) => {
       align: undefined,
       preventOverlap: true,
       animated: true,
-      workerEnabled: false,
+      workerEnabled: useWorker,
     };
   return type;
 };
@@ -173,11 +173,12 @@ const ExtGraph = G6.extend(G6.Graph, {
   },
   plugins: {
     legend: G6.Extensions.Legend,
+    tooltip: G6.Extensions.Tooltip,
     contextmenu: G6.Extensions.Menu,
   },
 } as AnyObject);
 
-export const useGraph = (container: HTMLDivElement | null) => {
+export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
   const [graph, setGraph] = useState<InstanceType<typeof G6.Graph>>();
   const [isClear, setClear] = useState(true);
   const [selectedItems, setSelectedItems] = useState<NodeModel[]>([]);
@@ -185,6 +186,13 @@ export const useGraph = (container: HTMLDivElement | null) => {
   const bgColor = useRef<"#fff" | "#222">("#fff");
   const { message } = useNotificationService();
   const isDark = useIsDark();
+
+  const options = Object.assign(
+    {
+      useWorker: false,
+    },
+    opts
+  );
 
   const clearHilights = useCallback((g: InstanceType<typeof G6.Graph>) => {
     g.clearItemState(
@@ -470,6 +478,17 @@ export const useGraph = (container: HTMLDivElement | null) => {
     [graph]
   );
 
+  const removeSelected = useCallback(() => {
+    const edges: ID[] = [];
+    const items = graph?.findIdByState("node", "selected", true) ?? [];
+    items.forEach((id) => {
+      edges.push(...(graph?.getRelatedEdgesData(id)?.map((ed) => ed.id) ?? []));
+    });
+    graph?.setItemState([...edges, ...items], "selected", false);
+    edges.length && graph?.removeData("edge", edges);
+    items.length && graph?.removeData("node", items);
+  }, [graph]);
+
   const resetView = useCallback(() => {
     void graph?.fitView({
       padding: 24,
@@ -482,7 +501,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
   const resetLayout = useCallback(
     (layout: GraphProps["defaultLayout"]) => {
       void graph?.updateSpecification({
-        layout: getLayout(layout),
+        layout: getLayout(layout, options.useWorker),
       });
     },
     [graph]
@@ -491,7 +510,21 @@ export const useGraph = (container: HTMLDivElement | null) => {
   const applyLayout = useCallback(
     (layout: GraphProps["defaultLayout"]) => {
       graph?.once("afterlayout", () => resetView());
-      void graph?.layout(getLayout(layout));
+      void graph?.layout(getLayout(layout), options.useWorker);
+    },
+    [graph]
+  );
+
+  const hilightNode = useCallback(
+    (nodeId: ID, hilight = true) => {
+      graph?.setItemState(nodeId, "hilight", hilight);
+    },
+    [graph]
+  );
+
+  const selectNode = useCallback(
+    (nodeId: ID, selected = true) => {
+      graph?.setItemState(nodeId, "selected", selected);
     },
     [graph]
   );
@@ -735,7 +768,7 @@ export const useGraph = (container: HTMLDivElement | null) => {
       },
       edge: {
         keyShape: {
-          lineWidth: 4,
+          lineWidth: 6,
           lineDash: {
             fields: ["id", "edgeType", "strokeType"],
             formatter: (model: KeyValue) => {
@@ -762,6 +795,10 @@ export const useGraph = (container: HTMLDivElement | null) => {
         },
       },
       edgeState: {
+        active: {
+          keyShape: { lineWidth: 6 },
+          haloShape: { lineWidth: 22 },
+        },
         hilight: {
           haloShape: {
             opacity: 0.5,
@@ -789,10 +826,13 @@ export const useGraph = (container: HTMLDivElement | null) => {
     selectedItems,
     loadData,
     addData,
+    removeSelected,
     restyle,
     resetView,
     applyLayout,
     resetLayout,
+    selectNode,
+    hilightNode,
     hilightPath,
     exportImage,
   };

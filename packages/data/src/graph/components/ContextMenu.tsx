@@ -15,24 +15,15 @@ import { GraphIcons } from "../types/icons";
 
 const ContextMenuComponent = ({ item }: AnyObject) => {
   const { t } = useTranslation("graph");
-  const { graph } = useGraphInternal();
+  const { graph, handleExpand } = useGraphInternal();
 
   const items = useMemo(() => {
     const menu: Array<KeyValue | "-"> = [];
     if (item.type === "edge") {
-      menu.push(
-        {
-          id: "neighbors",
-          label: "action.neighbors",
-        },
-        "-",
-        {
-          id: "delete",
-          className: "text-danger",
-          icon: GraphIcons.toolDelete,
-          label: "action.delete",
-        }
-      );
+      menu.push({
+        id: "neighbors",
+        label: "action.neighbors",
+      });
     }
     if (item.type === "node") {
       menu.push({
@@ -72,7 +63,7 @@ const ContextMenuComponent = ({ item }: AnyObject) => {
         },
         "-",
         {
-          id: "delete",
+          id: "clear",
           className: "text-danger",
           icon: GraphIcons.toolErase,
           label: "action.clear",
@@ -87,8 +78,17 @@ const ContextMenuComponent = ({ item }: AnyObject) => {
       if (id === "hilight") {
         graph.hilightPath();
       }
+      if (id === "expand") {
+        handleExpand(graph.selectedItems);
+      }
+      if (id === "delete") {
+        graph.removeSelected();
+      }
+      if (id === "clear") {
+        graph.ref?.clear();
+      }
     },
-    [graph]
+    [graph, handleExpand]
   );
 
   return (
@@ -110,9 +110,6 @@ const ContextMenuComponent = ({ item }: AnyObject) => {
   );
 };
 
-export const ContextMenu = (item: AnyObject) => {
-  const container = document?.querySelector(
-    ".ax-graph__menu-portal"
-  ) as HTMLDivElement;
-  return createPortal(<ContextMenuComponent item={item} />, container);
+export const ContextMenu = ({ root, ...item }: AnyObject) => {
+  return createPortal(<ContextMenuComponent item={item} />, root);
 };

@@ -66,8 +66,11 @@ export interface GraphProps extends ChildrenProp {
   defaultLayout?: "auto" | "radial" | "circular" | "grid" | "hierarchy";
 
   readOnly?: boolean;
+  useWorker?: boolean;
 
   onNodeExpand?: (nodes: NodeModel[]) => Promise<GraphData>;
+
+  renderTooltip?: (item: NodeModel | EdgeModel) => JSX.Element;
 
   onDataLoad?: (graph: GraphInstance) => void;
   onClear?: () => void;
