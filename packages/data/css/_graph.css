@@ -20,6 +20,9 @@
     & .ax-graph__legend {
       @apply bg-component border text-base rounded absolute top-2 start-2;
     }
+    & .ax-graph__tooltip-container {
+      @apply absolute !top-2 !end-2 !left-auto;
+    }
     & .ax-graph__menu {
       @apply bg-component shadow-md shadow-bw-500 border text-sm min-w-28;
     }

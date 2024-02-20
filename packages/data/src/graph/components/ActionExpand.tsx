@@ -6,33 +6,16 @@
  * @license   : MIT
  */
 
-import { type IG6GraphEvent, type NodeModel } from "@antv/g6";
-import { AxButton, useNotificationService } from "@axux/core";
-import { useCallback, useEffect } from "react";
+import { type IG6GraphEvent } from "@antv/g6";
+import { AxButton } from "@axux/core";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useGraphInternal } from "../context/GraphContext";
 import { GraphIcons } from "../types/icons";
 
 export const ActionExpand = () => {
   const { t } = useTranslation("graph");
-  const { graph, onNodeExpand } = useGraphInternal();
-  const { message } = useNotificationService();
-
-  const handleExpand = useCallback(
-    (nodes: NodeModel[]) => {
-      void onNodeExpand?.(nodes)
-        .then((newData) => {
-          graph.addData(newData);
-        })
-        .catch(() => {
-          void message({
-            message: "Unable to fetch node data",
-            color: "danger",
-          });
-        });
-    },
-    [graph.ref, onNodeExpand]
-  );
+  const { graph, handleExpand } = useGraphInternal();
 
   useEffect(() => {
     graph.ref?.on("node:dblclick", (e: IG6GraphEvent) => {
