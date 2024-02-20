@@ -7,11 +7,12 @@
  */
 
 import { type EdgeModel, type Graph, type NodeModel } from "@antv/g6";
+import { type MenuProps } from "@axux/core/dist/menu/types";
 import { type ChildrenProp } from "@axux/core/dist/types";
 import { type Ref } from "react";
 import { type useGraph } from "../hooks/useGraph";
 
-export interface GraphNode extends NodeModel {
+export interface GraphNode<N extends KeyValue = KeyValue> extends NodeModel {
   data: {
     label?: string;
     avatar?: string;
@@ -24,10 +25,10 @@ export interface GraphNode extends NodeModel {
     shape?: "circle" | "rect" | "diamond";
     strokeType?: "dashed" | "dotted";
     [key: string]: unknown;
-  };
+  } & N;
 }
 
-export interface GraphEdge extends EdgeModel {
+export interface GraphEdge<E extends KeyValue = KeyValue> extends EdgeModel {
   data: {
     label?: string;
     color?: string;
@@ -35,32 +36,44 @@ export interface GraphEdge extends EdgeModel {
     weight?: number;
     strokeType?: "dashed" | "dotted";
     [key: string]: unknown;
-  };
+  } & E;
 }
 
-export interface GraphData {
-  nodes: GraphNode[];
-  edges: GraphEdge[];
-  combos?: GraphNode[];
+export interface GraphData<
+  N extends KeyValue = KeyValue,
+  E extends KeyValue = KeyValue
+> {
+  nodes: Array<GraphNode<N>>;
+  edges: Array<GraphEdge<E>>;
+  combos?: Array<GraphNode<N>>;
 }
 
-export type GraphRef = ReturnType<typeof useGraph>;
+export type GraphRef<N extends KeyValue> = ReturnType<typeof useGraph<N>>;
 export type GraphInstance = InstanceType<typeof Graph>;
 
-export interface GraphProps extends ChildrenProp {
-  data?: GraphData;
-  graphRef?: Ref<GraphRef | undefined>;
+export interface StyleObject {
+  fill?: string;
+  color?: string;
+  label?: string;
+  iconPath?: string;
+  shape?: "circle" | "rect" | "diamond";
+  strokeType?: "dashed" | "dotted";
+}
+
+export interface GraphProps<
+  N extends KeyValue = KeyValue,
+  E extends KeyValue = KeyValue
+> extends ChildrenProp {
+  data?: GraphData<N, E>;
+  graphRef?: Ref<GraphRef<N> | undefined>;
 
   /**
    * { [nodeType | edgeType]: { icon, color, shape, strokeType } }
    */
-  styleMap?: KeyValue<{
-    fill?: string;
-    color?: string;
-    label?: string;
-    iconPath?: string;
-    shape?: "circle" | "rect" | "diamond";
-    strokeType?: "dashed" | "dotted";
+  styleMap?: Partial<{
+    defaultNode: StyleObject;
+    defaultEdge: StyleObject;
+    [key: string]: StyleObject;
   }>;
 
   defaultLayout?: "auto" | "radial" | "circular" | "grid" | "hierarchy";
@@ -68,9 +81,22 @@ export interface GraphProps extends ChildrenProp {
   readOnly?: boolean;
   useWorker?: boolean;
 
-  onNodeExpand?: (nodes: NodeModel[]) => Promise<GraphData>;
+  onNodeExpand?: (nodes: Array<GraphNode<N>>) => Promise<GraphData<N, E>>;
 
-  renderTooltip?: (item: NodeModel | EdgeModel) => JSX.Element;
+  onContextMenu?: (props: {
+    type: "node" | "edge" | "canvas";
+  }) => MenuProps["children"];
+
+  renderTooltip?: (props: {
+    item:
+      | (GraphNode<N> & { source?: never; target?: never })
+      | (GraphEdge<E> & {
+          source?: GraphNode<N> & { style?: StyleObject };
+          target?: GraphNode<N> & { style?: StyleObject };
+        });
+    itemType: "node" | "edge" | "combo";
+    style?: StyleObject;
+  }) => JSX.Element;
 
   onDataLoad?: (graph: GraphInstance) => void;
   onClear?: () => void;

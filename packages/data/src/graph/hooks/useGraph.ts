@@ -15,13 +15,12 @@ import G6, {
   type ID,
   type IG6GraphEvent,
   type LayoutOptions,
-  type NodeModel,
 } from "@antv/g6";
 import { type ComboShapeMap } from "@antv/g6/lib/types/combo";
 import { useIsDark, useNotificationService } from "@axux/core";
 import { debounce } from "@axux/utilities";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { type GraphProps } from "../types";
+import { type GraphNode, type GraphProps } from "../types";
 import { makeSvg } from "../utils";
 
 const DEFAULT_NODE_COLOR = "#94a3b8";
@@ -178,10 +177,13 @@ const ExtGraph = G6.extend(G6.Graph, {
   },
 } as AnyObject);
 
-export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
+export const useGraph = <N extends KeyValue>(
+  container: HTMLDivElement | null,
+  opts: KeyValue
+) => {
   const [graph, setGraph] = useState<InstanceType<typeof G6.Graph>>();
   const [isClear, setClear] = useState(true);
-  const [selectedItems, setSelectedItems] = useState<NodeModel[]>([]);
+  const [selectedItems, setSelectedItems] = useState<Array<GraphNode<N>>>([]);
   const styleMap = useRef<GraphProps["styleMap"]>();
   const bgColor = useRef<"#fff" | "#222">("#fff");
   const { message } = useNotificationService();
@@ -406,7 +408,7 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
             graph
               ?.getAllNodesData()
               .filter((node) => graph?.getItemState(node.id, "selected")) ?? [];
-          setSelectedItems(selectedItemsRef);
+          setSelectedItems(selectedItemsRef as Array<GraphNode<N>>);
         })
       );
 
@@ -418,7 +420,7 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
             graph
               ?.getAllNodesData()
               .filter((node) => graph?.getItemState(node.id, "selected")) ?? [];
-          setSelectedItems(selectedItemsRef);
+          setSelectedItems(selectedItemsRef as Array<GraphNode<N>>);
           setClear(graph.getAllNodesData().length === 0);
         })
       );
@@ -442,7 +444,6 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
 
       return () => {
         ob.disconnect();
-        graph.destroy();
       };
     }
   }, [container]);
@@ -488,6 +489,17 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
     edges.length && graph?.removeData("edge", edges);
     items.length && graph?.removeData("node", items);
   }, [graph]);
+
+  const selectByProp = useCallback(
+    (prop: string, value: unknown) => {
+      const ids = graph
+        ?.getAllNodesData()
+        .filter((node) => node.data?.[prop] === value)
+        .map((node) => node.id);
+      ids?.length && graph?.setItemState(ids, "selected", true);
+    },
+    [graph]
+  );
 
   const resetView = useCallback(() => {
     void graph?.fitView({
@@ -626,19 +638,22 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
             formatter: (model: KeyValue) =>
               model.data.color ??
               styleMap.current?.[model.data.nodeType]?.color ??
+              styleMap.current?.defaultNode?.color ??
               DEFAULT_NODE_COLOR,
           },
           lineDash: {
             fields: ["id", "nodeType", "strokeType"],
             formatter: (model: KeyValue) => {
               if (
-                model.data.strokeType === "dashed" ||
-                styleMap.current?.[model.data.nodeType]?.strokeType === "dashed"
+                (model.data.strokeType ??
+                  styleMap.current?.[model.data.nodeType]?.strokeType ??
+                  styleMap.current?.defaultNode?.strokeType) === "dashed"
               )
                 return [8, 4];
               if (
-                model.data.strokeType === "dotted" ||
-                styleMap.current?.[model.data.nodeType]?.strokeType === "dotted"
+                (model.data.strokeType ??
+                  styleMap.current?.[model.data.nodeType]?.strokeType ??
+                  styleMap.current?.defaultNode?.strokeType) === "dotted"
               )
                 return [4, 4];
 
@@ -650,7 +665,24 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
             formatter: (model: KeyValue) =>
               model.data.fill ??
               styleMap.current?.[model.data.nodeType]?.fill ??
+              styleMap.current?.defaultNode?.fill ??
               bgColor.current,
+          },
+        },
+        badgeShapes: {
+          fields: ["id", "isImportant"],
+          formatter: (model: KeyValue) => {
+            const ret = [];
+            if (model.data.isImportant)
+              ret.push({
+                position: "topRight",
+                text: "★",
+                fontSize: 18,
+                r: 24,
+                color: "#f59e0b",
+                textColor: "#fff",
+              });
+            return ret;
           },
         },
         labelShape: {
@@ -658,7 +690,8 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
             fields: ["id", "nodeType", "label"],
             formatter: (model: KeyValue) =>
               model.data.label ??
-              styleMap.current?.[model.data.nodeType]?.label,
+              styleMap.current?.[model.data.nodeType]?.label ??
+              styleMap.current?.defaultNode?.label,
           },
           dy: 4,
           fontSize: 12,
@@ -686,9 +719,11 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
                 ? model.data.avatar
                 : makeSvg(
                     model.data.iconPath ??
-                      styleMap.current?.[model.data.nodeType]?.iconPath,
+                      styleMap.current?.[model.data.nodeType]?.iconPath ??
+                      styleMap.current?.defaultNode?.iconPath,
                     model.data.color ??
                       styleMap.current?.[model.data.nodeType]?.color ??
+                      styleMap.current?.defaultNode?.color ??
                       DEFAULT_NODE_COLOR
                   ),
           },
@@ -728,6 +763,7 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
               formatter: (model: KeyValue) =>
                 model.data.color ??
                 styleMap.current?.[model.data.nodeType]?.color ??
+                styleMap.current?.defaultNode?.color ??
                 DEFAULT_NODE_COLOR,
             },
           },
@@ -773,13 +809,15 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
             fields: ["id", "edgeType", "strokeType"],
             formatter: (model: KeyValue) => {
               if (
-                model.data.strokeType === "dashed" ||
-                styleMap.current?.[model.data.edgeType]?.strokeType === "dashed"
+                (model.data.strokeType ??
+                  styleMap.current?.[model.data.edgeType]?.strokeType ??
+                  styleMap.current?.defaultEdge?.strokeType) === "dashed"
               )
                 return [8, 4];
               if (
-                model.data.strokeType === "dotted" ||
-                styleMap.current?.[model.data.edgeType]?.strokeType === "dotted"
+                (model.data.strokeType ??
+                  styleMap.current?.[model.data.edgeType]?.strokeType ??
+                  styleMap.current?.defaultEdge?.strokeType) === "dotted"
               )
                 return [4, 4];
             },
@@ -790,6 +828,7 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
             formatter: (model: KeyValue) =>
               model.data.color ??
               styleMap.current?.[model.data.edgeType]?.color ??
+              styleMap.current?.defaultEdge?.color ??
               DEFAULT_EDGE_COLOR,
           },
         },
@@ -832,6 +871,7 @@ export const useGraph = (container: HTMLDivElement | null, opts: KeyValue) => {
     applyLayout,
     resetLayout,
     selectNode,
+    selectByProp,
     hilightNode,
     hilightPath,
     exportImage,

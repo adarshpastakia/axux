@@ -1,16 +1,27 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { AxGraph } from "../src";
 
-import { AxButton, AxHeader, AxSection } from "@axux/core";
+import {
+  AxButton,
+  AxDivider,
+  AxHeader,
+  AxIcon,
+  AxMenu,
+  AxSection,
+} from "@axux/core";
 import { faker } from "@faker-js/faker";
 import {
   mdiAccount,
   mdiAccountTieHat,
   mdiAlien,
   mdiBank,
+  mdiBus,
   mdiBusStop,
   mdiCar,
+  mdiHelpBox,
   mdiHome,
+  mdiPlaneTrain,
+  mdiRoutes,
 } from "@mdi/js";
 import { useState } from "react";
 import { GraphData, GraphNode } from "../src/graph/types";
@@ -84,6 +95,7 @@ const circularData = () => {
       source: "node-0",
       target: `node-${idx + 1}`,
       data: {
+        label: faker.company.buzzVerb(),
         dashed: faker.number.binary() === "1",
         edgeType: faker.helpers.arrayElement([
           "edge-a",
@@ -187,7 +199,6 @@ export const Example: Story = {
                 </AxGraph.ActionGroup>
                 <AxGraph.ActionLayout />
               </AxGraph.Toolbar>
-              <AxGraph.Canvas />
             </AxGraph>
           </AxSection>
         </div>
@@ -195,14 +206,89 @@ export const Example: Story = {
     );
   },
   args: {
-    defaultLayout: "circular",
-    colorMap: {
-      "node-a": "#d946ef",
-      "node-b": "#6366f1",
-      "node-c": "#4d7c0f",
-      "edge-a": "#059669",
-      "edge-b": "#2563eb",
-      "edge-c": "#65a30d",
+    defaultLayout: "auto",
+    styleMap: {
+      "node-a": { color: "#d946ef", iconPath: mdiAccount },
+      "node-b": { color: "#6366f1", iconPath: mdiAccount },
+      "node-c": { color: "#4d7c0f", iconPath: mdiAccount },
+      "edge-a": { color: "#059669", iconPath: mdiBus },
+      "edge-b": { color: "#2563eb", iconPath: mdiCar },
+      "edge-c": { color: "#65a30d", iconPath: mdiPlaneTrain },
+      defaultNode: { color: "#94a3b8", iconPath: mdiHelpBox },
+      defaultEdge: { color: "#6b7280", iconPath: mdiRoutes },
+    },
+    onContextMenu({ type }) {
+      return <AxMenu.Item label="Custom select" />;
+    },
+    renderTooltip({ item, itemType, style }) {
+      return (
+        <div
+          className="bg-component rounded border-2 p-2 max-w-md min-w-64"
+          style={{
+            borderColor: style?.color,
+          }}
+        >
+          <div className="flex gap-2 items-center">
+            {(item.data?.avatar || style?.iconPath) && (
+              <div
+                className="rounded-full text-6xl p-2 leading-none overflow-hidden text-white"
+                style={{
+                  backgroundColor: style?.color,
+                }}
+              >
+                <AxIcon icon={item.data?.avatar ?? style?.iconPath} />
+              </div>
+            )}
+            <div className="flex-1">
+              <div className="font-medium">{item.data?.label}</div>
+              <div className="text-sm text-muted">{itemType}</div>
+            </div>
+          </div>
+          <AxDivider size="xs" />
+          {item.source && (
+            <div className="flex gap-2 items-center mb-1">
+              {(item.source.data?.avatar || item.source.style?.iconPath) && (
+                <div
+                  className="rounded-full text-lg p-1 leading-none overflow-hidden text-white"
+                  style={{
+                    backgroundColor: item.source.style?.color,
+                  }}
+                >
+                  <AxIcon
+                    icon={
+                      item.source.data?.avatar ?? item.source.style?.iconPath
+                    }
+                  />
+                </div>
+              )}
+              <div className="flex-1">
+                <div className="font-medium">{item.source.data?.label}</div>
+              </div>
+            </div>
+          )}
+          {item.target && (
+            <div className="flex gap-2 items-center">
+              {(item.target.data?.avatar || item.target.style?.iconPath) && (
+                <div
+                  className="rounded-full text-lg p-1 leading-none overflow-hidden text-white"
+                  style={{
+                    backgroundColor: item.target.style?.color,
+                  }}
+                >
+                  <AxIcon
+                    icon={
+                      item.target.data?.avatar ?? item.target.style?.iconPath
+                    }
+                  />
+                </div>
+              )}
+              <div className="flex-1">
+                <div className="font-medium">{item.target.data?.label}</div>
+              </div>
+            </div>
+          )}
+        </div>
+      );
     },
   },
 };

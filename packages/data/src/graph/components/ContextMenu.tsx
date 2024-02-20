@@ -7,13 +7,13 @@
  */
 import { AxDivider, AxMenu } from "@axux/core";
 import { isString } from "@axux/utilities";
-import { useCallback, useMemo } from "react";
+import { Fragment, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { useGraphInternal } from "../context/GraphContext";
 import { GraphIcons } from "../types/icons";
 
-const ContextMenuComponent = ({ item }: AnyObject) => {
+const ContextMenuComponent = ({ item, children }: AnyObject) => {
   const { t } = useTranslation("graph");
   const { graph, handleExpand } = useGraphInternal();
 
@@ -93,6 +93,12 @@ const ContextMenuComponent = ({ item }: AnyObject) => {
 
   return (
     <AxMenu className="ax-graph__menu" onClick={handleMenu}>
+      {children && (
+        <Fragment>
+          {children}
+          <AxDivider size="xs" />
+        </Fragment>
+      )}
       {items.map((item, idx) =>
         isString(item) ? (
           <AxDivider key={idx} size="xs" />
@@ -110,6 +116,9 @@ const ContextMenuComponent = ({ item }: AnyObject) => {
   );
 };
 
-export const ContextMenu = ({ root, ...item }: AnyObject) => {
-  return createPortal(<ContextMenuComponent item={item} />, root);
+export const ContextMenu = ({ root, children, ...item }: AnyObject) => {
+  return createPortal(
+    <ContextMenuComponent item={item}>{children}</ContextMenuComponent>,
+    root
+  );
 };
