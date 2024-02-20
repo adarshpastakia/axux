@@ -6,7 +6,7 @@
  * @license   : MIT
  */
 
-import { type FC } from "react";
+import { type FC, type PropsWithChildren } from "react";
 import { ActionBrush } from "./components/ActionBrush";
 import { ActionClear } from "./components/ActionClear";
 import { ActionDelete } from "./components/ActionDelete";
@@ -104,7 +104,9 @@ export const AxGraph: FC<GraphProps> & {
   ActionLayout: typeof ActionLayout;
   ActionZoom: typeof ActionZoom;
   EmptyIcon: typeof EmptyIcon;
-} = (props) => {
+} = <N extends KeyValue, E extends KeyValue>(
+  props: PropsWithChildren<GraphProps<N, E>>
+) => {
   return <GraphProvider {...props} />;
 };
 

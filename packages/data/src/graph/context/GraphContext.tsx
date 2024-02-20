@@ -16,12 +16,12 @@ import {
   useImperativeHandle,
   useRef,
   useState,
-  type FC,
+  type PropsWithChildren,
 } from "react";
 import { createRoot } from "react-dom/client";
 import { ContextMenu } from "../components/ContextMenu";
 import { useGraph } from "../hooks/useGraph";
-import { type GraphProps } from "../types";
+import { type GraphNode, type GraphProps } from "../types";
 
 const GraphContext = createContext<{
   graph: ReturnType<typeof useGraph>;
@@ -30,7 +30,7 @@ const GraphContext = createContext<{
   handleExpand: (nodes: NodeModel[]) => void;
 }>({} as AnyObject);
 
-export const GraphProvider: FC<GraphProps> = ({
+export const GraphProvider = <N extends KeyValue, E extends KeyValue>({
   data,
   styleMap,
   defaultLayout = "auto",
@@ -42,9 +42,10 @@ export const GraphProvider: FC<GraphProps> = ({
   onDataLoad,
   onClear,
   onNodeExpand,
-}) => {
+  onContextMenu,
+}: PropsWithChildren<GraphProps<N, E>>) => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
-  const graph = useGraph(container, { useWorker });
+  const graph = useGraph<N>(container, { useWorker });
   const { message } = useNotificationService();
 
   useImperativeHandle(graphRef, () => graph, [graph]);
@@ -62,7 +63,7 @@ export const GraphProvider: FC<GraphProps> = ({
   }, [graph.ref, readOnly]);
 
   useEffect(() => {
-    data && graph.loadData(data as AnyObject);
+    data && graph.loadData(data);
   }, [graph.loadData, data]);
 
   useEffect(() => {
@@ -89,7 +90,7 @@ export const GraphProvider: FC<GraphProps> = ({
 
   const handleExpand = useCallback(
     (nodes: NodeModel[]) => {
-      void onNodeExpand?.(nodes)
+      void onNodeExpand?.(nodes as Array<GraphNode<N>>)
         .then((newData) => {
           graph.addData(newData);
         })
@@ -103,7 +104,7 @@ export const GraphProvider: FC<GraphProps> = ({
     [graph.ref, onNodeExpand]
   );
 
-  const [contextMenu, setContextMenu] = useState<KeyValue>();
+  const [contextMenu, setContextMenu] = useState<AnyObject>();
   useEffect(() => {
     graph.ref?.addPlugins([
       {
@@ -173,6 +174,15 @@ export const GraphProvider: FC<GraphProps> = ({
                 source: item.source && graph.ref?.getNodeData(item.source),
                 target: item.target && graph.ref?.getNodeData(item.target),
               };
+
+              item.source.style = styleMap?.[item.source.data?.nodeType] ??
+                styleMap?.defaultNode ?? {
+                  color: "#6b7280",
+                };
+              item.target.style = styleMap?.[item.target.data?.nodeType] ??
+                styleMap?.defaultNode ?? {
+                  color: "#6b7280",
+                };
             }
             if (e.itemType === "combo") {
               item = graph.ref?.getComboData(e.itemId);
@@ -186,7 +196,18 @@ export const GraphProvider: FC<GraphProps> = ({
                   container.querySelector(
                     ".ax-graph__tooltip-portal"
                   ) as HTMLDivElement
-                ).render(<TooltipEl {...item} itemType={e.itemType} />);
+                ).render(
+                  <TooltipEl
+                    item={item}
+                    itemType={e.itemType as AnyObject}
+                    style={
+                      styleMap?.[item.data?.nodeType ?? item.data?.edgeType] ??
+                      styleMap?.[
+                        e.itemType === "edge" ? "defaultEdge" : "defaultNode"
+                      ] ?? { color: "#6b7280" }
+                    }
+                  />
+                );
               }, 200) as AnyObject;
             }
 
@@ -197,10 +218,14 @@ export const GraphProvider: FC<GraphProps> = ({
       ]);
 
       return () => {
-        graph.ref?.removePlugins(["default-tooltip"]);
+        try {
+          graph.ref?.removePlugins(["default-tooltip"]);
+        } catch {
+          //
+        }
       };
     }
-  }, [graph.ref, container, TooltipEl]);
+  }, [graph.ref, container, styleMap, TooltipEl]);
 
   return (
     <GraphContext.Provider
@@ -215,7 +240,9 @@ export const GraphProvider: FC<GraphProps> = ({
         <ContextMenu
           root={container?.querySelector(".ax-graph__menu-portal")}
           {...contextMenu}
-        />
+        >
+          {onContextMenu?.({ type: contextMenu.type })}
+        </ContextMenu>
       )}
     </GraphContext.Provider>
   );
