@@ -87,6 +87,11 @@ export interface GraphProps<
     type: "node" | "edge" | "canvas";
   }) => MenuProps["children"];
 
+  renderDetail?: (props: {
+    item: GraphNode<N>;
+    style?: StyleObject;
+  }) => JSX.Element;
+
   renderTooltip?: (props: {
     item:
       | (GraphNode<N> & { source?: never; target?: never })

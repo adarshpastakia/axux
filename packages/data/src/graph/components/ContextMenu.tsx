@@ -15,7 +15,7 @@ import { GraphIcons } from "../types/icons";
 
 const ContextMenuComponent = ({ item, children }: AnyObject) => {
   const { t } = useTranslation("graph");
-  const { graph, handleExpand } = useGraphInternal();
+  const { graph, handleExpand, renderDetail } = useGraphInternal();
 
   const items = useMemo(() => {
     const menu: Array<KeyValue | "-"> = [];
@@ -26,10 +26,17 @@ const ContextMenuComponent = ({ item, children }: AnyObject) => {
       });
     }
     if (item.type === "node") {
-      menu.push({
-        id: "neighbors",
-        label: "action.neighbors",
-      });
+      menu.push(
+        // {
+        //   id: "toggleDetail",
+        //   label: "action.detail",
+        // },
+        // "-",
+        {
+          id: "neighbors",
+          label: "action.neighbors",
+        }
+      );
       if (graph.selectedItems.length > 1) {
         menu.push({
           id: "group",
@@ -87,8 +94,34 @@ const ContextMenuComponent = ({ item, children }: AnyObject) => {
       if (id === "clear") {
         graph.ref?.clear();
       }
+      if (id === "toggleDetail") {
+        const nodes = graph.selectedItems.map(
+          ({ id, data: { type, data, ...rest } }) => ({
+            id,
+            data: type
+              ? data
+              : {
+                  type: "react-node",
+                  data: rest,
+                  x: rest.x,
+                  y: rest.y,
+                  renderDetail,
+                },
+          })
+        );
+        const edges = graph.selectedItems
+          .map(({ id }) => graph.ref?.getRelatedEdgesData(id))
+          .flat()
+          .filter(Boolean);
+        graph.ref?.removeData(
+          "node",
+          graph.selectedItems.map(({ id }) => id)
+        );
+        graph.ref?.addData("node", nodes);
+        edges?.length && graph.ref?.addData("edge", edges as AnyObject);
+      }
     },
-    [graph, handleExpand]
+    [graph, handleExpand, renderDetail]
   );
 
   return (

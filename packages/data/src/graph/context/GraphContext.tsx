@@ -27,6 +27,7 @@ const GraphContext = createContext<{
   graph: ReturnType<typeof useGraph>;
   changeMode: (mode?: "brush" | "lasso") => void;
   onNodeExpand: GraphProps["onNodeExpand"];
+  renderDetail: (node: NodeModel) => JSX.Element;
   handleExpand: (nodes: NodeModel[]) => void;
 }>({} as AnyObject);
 
@@ -39,6 +40,7 @@ export const GraphProvider = <N extends KeyValue, E extends KeyValue>({
   children,
   graphRef,
   renderTooltip: TooltipEl,
+  renderDetail: DetailEl,
   onDataLoad,
   onClear,
   onNodeExpand,
@@ -106,48 +108,60 @@ export const GraphProvider = <N extends KeyValue, E extends KeyValue>({
 
   const [contextMenu, setContextMenu] = useState<AnyObject>();
   useEffect(() => {
-    graph.ref?.addPlugins([
-      {
-        key: "contextmenu",
-        type: "contextmenu",
-        trigger: "contextmenu",
-        offsetX: -1 * (container?.offsetLeft ?? 0),
-        className: "ax-graph__menu-container",
-        itemTypes: ["node", "edge", "canvas"],
-        shouldBegin: () => {
-          return !!graph.ref?.getAllNodesData()?.length;
+    if (graph.ref) {
+      graph.ref?.addPlugins([
+        {
+          key: "default-contextmenu",
+          type: "contextmenu",
+          trigger: "contextmenu",
+          offsetX: -1 * (container?.offsetLeft ?? 0),
+          className: "ax-graph__menu-container",
+          itemTypes: ["node", "edge", "canvas"],
+          shouldBegin: () => {
+            return !!graph.ref?.getAllNodesData()?.length;
+          },
+          onHide: () => {
+            container?.querySelector(".ax-graph__menu-portal")?.remove();
+          },
+          /** async string menu */
+          getContent: (e: IG6GraphEvent) => {
+            let item: AnyObject = { type: "canvas" };
+            if (e.itemType === "node") item = graph.ref?.getNodeData(e.itemId);
+            if (e.itemType === "edge") item = graph.ref?.getEdgeData(e.itemId);
+            if (e.itemType === "combo")
+              item = graph.ref?.getComboData(e.itemId);
+            if (e.itemId && !graph.ref?.getItemState(e.itemId, "selected")) {
+              const nodes =
+                graph.ref?.findIdByState("node", "selected", true) ?? [];
+              const edges =
+                graph.ref?.findIdByState("edge", "selected", true) ?? [];
+              const combos =
+                graph.ref?.findIdByState("combo", "selected", true) ?? [];
+              nodes?.length &&
+                graph.ref?.setItemState(
+                  [...nodes, ...edges, ...combos],
+                  "selected",
+                  false
+                );
+            }
+            e.itemId && graph.ref?.setItemState(e.itemId, "selected", true);
+            graph.updateSelectedList();
+            setTimeout(() => {
+              setContextMenu({ type: e.itemType, ...item });
+            }, 100);
+            return "<div class='ax-graph__menu-portal'/>";
+          },
         },
-        onHide: () => {
-          container?.querySelector(".ax-graph__menu-portal")?.remove();
-        },
-        /** async string menu */
-        getContent: (e: IG6GraphEvent) => {
-          let item: AnyObject = { type: "canvas" };
-          if (e.itemType === "node") item = graph.ref?.getNodeData(e.itemId);
-          if (e.itemType === "edge") item = graph.ref?.getEdgeData(e.itemId);
-          if (e.itemType === "combo") item = graph.ref?.getComboData(e.itemId);
-          if (e.itemId && !graph.ref?.getItemState(e.itemId, "selected")) {
-            const nodes =
-              graph.ref?.findIdByState("node", "selected", true) ?? [];
-            const edges =
-              graph.ref?.findIdByState("edge", "selected", true) ?? [];
-            const combos =
-              graph.ref?.findIdByState("combo", "selected", true) ?? [];
-            nodes?.length &&
-              graph.ref?.setItemState(
-                [...nodes, ...edges, ...combos],
-                "selected",
-                false
-              );
-          }
-          e.itemId && graph.ref?.setItemState(e.itemId, "selected", true);
-          setTimeout(() => {
-            setContextMenu({ type: e.itemType, ...item });
-          }, 100);
-          return "<div class='ax-graph__menu-portal'/>";
-        },
-      },
-    ]);
+      ]);
+
+      return () => {
+        try {
+          graph.ref?.removePlugins(["default-contextmenu"]);
+        } catch {
+          //
+        }
+      };
+    }
   }, [graph.ref, container]);
 
   const timerRef = useRef();
@@ -227,9 +241,28 @@ export const GraphProvider = <N extends KeyValue, E extends KeyValue>({
     }
   }, [graph.ref, container, styleMap, TooltipEl]);
 
+  const renderDetail = useCallback(
+    (item: AnyObject) => {
+      if (DetailEl) {
+        return (
+          <DetailEl
+            item={item as GraphNode<N>}
+            style={
+              styleMap?.[item.data?.nodeType ?? "defaultNode"] ??
+              styleMap?.defaultNode ?? { color: "#6b7280" }
+            }
+          />
+        );
+      }
+
+      return <div className="border rounded p-2">No renderer available</div>;
+    },
+    [styleMap, DetailEl]
+  );
+
   return (
     <GraphContext.Provider
-      value={{ graph, changeMode, onNodeExpand, handleExpand }}
+      value={{ graph, changeMode, onNodeExpand, handleExpand, renderDetail }}
     >
       <div className="ax-graph-viewer">
         <div className="ax-graph__container" ref={setContainer} />

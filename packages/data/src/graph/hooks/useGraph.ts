@@ -16,6 +16,7 @@ import G6, {
   type IG6GraphEvent,
   type LayoutOptions,
 } from "@antv/g6";
+import { createReactNode } from "@antv/g6-react-node";
 import { type ComboShapeMap } from "@antv/g6/lib/types/combo";
 import { useIsDark, useNotificationService } from "@axux/core";
 import { debounce } from "@axux/utilities";
@@ -143,6 +144,9 @@ class CustomCombo extends G6.Extensions.CircleCombo {
     return otherShapes;
   }
 }
+const Node = ({ model }: KeyValue) => {
+  return model.data.renderDetail({ id: model.id, data: model.data.data });
+};
 
 const ExtGraph = G6.extend(G6.Graph, {
   combos: {
@@ -150,6 +154,7 @@ const ExtGraph = G6.extend(G6.Graph, {
   },
   nodes: {
     "donut-node": G6.Extensions.DonutNode,
+    "react-node": createReactNode(Node),
   },
   edges: {
     "quadratic-edge": G6.Extensions.QuadraticEdge,
@@ -541,6 +546,14 @@ export const useGraph = <N extends KeyValue>(
     [graph]
   );
 
+  const updateSelectedList = useCallback(() => {
+    const selectedItemsRef =
+      graph
+        ?.getAllNodesData()
+        .filter((node) => graph?.getItemState(node.id, "selected")) ?? [];
+    setSelectedItems(selectedItemsRef as Array<GraphNode<N>>);
+  }, [graph]);
+
   const hilightPath = useCallback(() => {
     if (selectedItems.length === 2) {
       const { path = [] } = findShortestPath(
@@ -832,6 +845,19 @@ export const useGraph = <N extends KeyValue>(
               DEFAULT_EDGE_COLOR,
           },
         },
+        labelShape: {
+          text: {
+            fields: ["id", "edgeType", "label"],
+            formatter: (model: KeyValue) =>
+              model.data.label ??
+              styleMap.current?.[model.data.edgeType]?.label ??
+              styleMap.current?.defaultEdge?.label,
+          },
+          dy: -8,
+          fontSize: 12,
+          maxWidth: "110%",
+          position: "top",
+        },
       },
       edgeState: {
         active: {
@@ -875,5 +901,6 @@ export const useGraph = <N extends KeyValue>(
     hilightNode,
     hilightPath,
     exportImage,
+    updateSelectedList,
   };
 };

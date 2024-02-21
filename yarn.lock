@@ -318,6 +318,14 @@
     gl-vec2 "^1.3.0"
     lodash "^4.17.15"
 
+"@antv/g6-react-node@^2.0.0-beta.1":
+  version "2.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@antv/g6-react-node/-/g6-react-node-2.0.0-beta.1.tgz#36e856ce5dd1e9f4f2e765ddd7046a994b1c6a79"
+  integrity sha512-UvrPZuPWOgfZODUxuARi/TUDc9tO63xSZ0CXmFR0KfD2bCexfZk3OwqMj5bWMgKXMXCCtGUcWt1Fly0FezphBQ==
+  dependencies:
+    "@antv/react-g" "^1.10.19"
+    "@antv/util" "^3.3.5"
+
 "@antv/g6@^5.0.0-beta.27":
   version "5.0.0-beta.28"
   resolved "https://registry.yarnpkg.com/@antv/g6/-/g6-5.0.0-beta.28.tgz#43f1563541888c18c0d8b13a78e8be2f714ba216"
@@ -345,7 +353,7 @@
     insert-css "^2.0.0"
     tslib "^2.5.0"
 
-"@antv/g@^5.15.15", "@antv/g@^5.18.23":
+"@antv/g@5.18.24", "@antv/g@^5.15.15", "@antv/g@^5.18.23":
   version "5.18.24"
   resolved "https://registry.yarnpkg.com/@antv/g/-/g-5.18.24.tgz#a3e94d153ee146fe8b806819cf80fe0414b34ab8"
   integrity sha512-qUIjxNPd60VpA6bjDALkRWEWA0CKm2G+vRPkP729eiZ0JnqlRuSqVNibo6QbrlZGEZQfqKiNjiVDODbJjHxNIw==
@@ -447,6 +455,18 @@
     d3-quadtree "^3.0.1"
     ml-matrix "^6.10.4"
     tslib "^2.5.0"
+
+"@antv/react-g@^1.10.19":
+  version "1.10.25"
+  resolved "https://registry.yarnpkg.com/@antv/react-g/-/react-g-1.10.25.tgz#851419a3371dc93a3b6a359fa00886a2837cedad"
+  integrity sha512-KuAjLkzUpwCjeAOzPsmgGjSffAME1uCh75vYP4/6NuQ1y0G3LAmcLdHXL/HcoK8PL79GUEduLc51rh9getOgkA==
+  dependencies:
+    "@antv/g" "5.18.24"
+    "@antv/util" "^3.3.4"
+    gl-matrix "^3.4.3"
+    react-reconciler "^0.26.2"
+    scheduler "^0.20.2"
+    tslib "^2.5.3"
 
 "@antv/scale@^0.4.3":
   version "0.4.15"
@@ -13423,6 +13443,15 @@ react-popper@^2.3.0:
     react-fast-compare "^3.0.1"
     warning "^4.0.2"
 
+react-reconciler@^0.26.2:
+  version "0.26.2"
+  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.26.2.tgz#bbad0e2d1309423f76cf3c3309ac6c96e05e9d91"
+  integrity sha512-nK6kgY28HwrMNwDnMui3dvm3rCFjZrcGiuwLc5COUipBK5hWHLOxMJhSnSomirqWwjPBJKV1QcbkI0VJr7Gl1Q==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    scheduler "^0.20.2"
+
 react-refresh@^0.14.0:
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
@@ -13911,6 +13940,14 @@ saxes@^6.0.0:
   integrity sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==
   dependencies:
     xmlchars "^2.2.0"
+
+scheduler@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.20.2.tgz#4baee39436e34aa93b4874bddcbf0fe8b8b50e91"
+  integrity sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 scheduler@^0.23.0:
   version "0.23.0"
