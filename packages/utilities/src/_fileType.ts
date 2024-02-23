@@ -9,7 +9,7 @@
 
 export default {
   mime(mime: string = "") {
-    const ret = (this.mimeList as KeyValue)[mime];
+    const ret = (this.mimeList as KeyValue)[mime.split(";")[0]];
     if (!ret && !!mime) {
       const [t, e] = mime.split("/");
       return `${t} (${e})`;
@@ -17,6 +17,8 @@ export default {
     return ret || "Unknown type";
   },
   mimeList: {
+    "application/x-tika-msoffice": "Microsft Office File",
+    "application/x-tika-ooxml": "Open Office File",
     "3d/vnd.adobe.dn+dcx": "Adobe Dimension",
     "application-x/geogebra-file": "Ggb",
     "application/acad": "DWG",
