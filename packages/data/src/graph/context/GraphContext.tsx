@@ -185,15 +185,16 @@ export const GraphProvider = <N extends KeyValue, E extends KeyValue>({
                 source: item.source && graph.ref?.getNodeData(item.source),
                 target: item.target && graph.ref?.getNodeData(item.target),
               };
-
-              item.source.style = styleMap?.[item.source.data?.nodeType] ??
-                styleMap?.defaultNode ?? {
-                  color: "#6b7280",
-                };
-              item.target.style = styleMap?.[item.target.data?.nodeType] ??
-                styleMap?.defaultNode ?? {
-                  color: "#6b7280",
-                };
+              if (item.source)
+                item.source.style = styleMap?.[item.source.data?.nodeType] ??
+                  styleMap?.defaultNode ?? {
+                    color: "#6b7280",
+                  };
+              if (item.target)
+                item.target.style = styleMap?.[item.target.data?.nodeType] ??
+                  styleMap?.defaultNode ?? {
+                    color: "#6b7280",
+                  };
             }
             if (e.itemType === "combo") {
               item = graph.ref?.getComboData(e.itemId);
