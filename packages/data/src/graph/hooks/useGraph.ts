@@ -470,7 +470,7 @@ export const useGraph = <N extends KeyValue>(
   useEffect(() => {
     if (graph) {
       const handler = (e: KeyValue) => {
-        if (e.action === "updateState" && e.states.includes("selected")) {
+        if (e.action === "updateState" && e.states?.includes("selected")) {
           const selectedItemsRef =
             graph
               ?.getAllNodesData()
