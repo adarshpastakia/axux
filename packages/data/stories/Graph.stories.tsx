@@ -1,14 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { AxGraph } from "../src";
 
-import {
-  AxButton,
-  AxDivider,
-  AxHeader,
-  AxIcon,
-  AxMenu,
-  AxSection,
-} from "@axux/core";
+import { AxButton, AxDivider, AxHeader, AxIcon, AxSection } from "@axux/core";
 import { faker } from "@faker-js/faker";
 import {
   mdiAccount,
@@ -218,7 +211,9 @@ export const Example: Story = {
       defaultEdge: { color: "#6b7280", iconPath: mdiRoutes },
     },
     onContextMenu({ type }) {
-      return <AxMenu.Item label="Custom select" />;
+      return [
+        [{ id: "detail", label: "View detail", handler: () => undefined }],
+      ];
     },
     renderTooltip({ item, itemType, style }) {
       return (

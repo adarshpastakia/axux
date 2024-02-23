@@ -44,10 +44,11 @@ export const GraphProvider = <N extends KeyValue, E extends KeyValue>({
   onDataLoad,
   onClear,
   onNodeExpand,
+  onNodeSelected,
   onContextMenu,
 }: PropsWithChildren<GraphProps<N, E>>) => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
-  const graph = useGraph<N>(container, { useWorker });
+  const graph = useGraph<N>(container, { useWorker, onClear, onNodeSelected });
   const { message } = useNotificationService();
 
   useImperativeHandle(graphRef, () => graph, [graph]);
@@ -67,10 +68,6 @@ export const GraphProvider = <N extends KeyValue, E extends KeyValue>({
   useEffect(() => {
     data && graph.loadData(data);
   }, [graph.loadData, data]);
-
-  useEffect(() => {
-    graph.isClear && onClear?.();
-  }, [graph.isClear, onClear]);
 
   useEffect(() => {
     graph.ref?.on("dataloaded", () => {
@@ -272,10 +269,9 @@ export const GraphProvider = <N extends KeyValue, E extends KeyValue>({
       {contextMenu && (
         <ContextMenu
           root={container?.querySelector(".ax-graph__menu-portal")}
+          custom={onContextMenu?.({ type: contextMenu.type })}
           {...contextMenu}
-        >
-          {onContextMenu?.({ type: contextMenu.type })}
-        </ContextMenu>
+        />
       )}
     </GraphContext.Provider>
   );

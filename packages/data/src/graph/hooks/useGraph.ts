@@ -19,7 +19,7 @@ import G6, {
 import { createReactNode } from "@antv/g6-react-node";
 import { type ComboShapeMap } from "@antv/g6/lib/types/combo";
 import { useIsDark, useNotificationService } from "@axux/core";
-import { debounce } from "@axux/utilities";
+import { debounce, dedupe } from "@axux/utilities";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { type GraphNode, type GraphProps } from "../types";
 import { makeSvg } from "../utils";
@@ -194,9 +194,11 @@ export const useGraph = <N extends KeyValue>(
   const { message } = useNotificationService();
   const isDark = useIsDark();
 
-  const options = Object.assign(
+  const options: KeyValue = Object.assign(
     {
       useWorker: false,
+      onClear: undefined,
+      onNodeSelected: undefined,
     },
     opts
   );
@@ -417,19 +419,6 @@ export const useGraph = <N extends KeyValue>(
         })
       );
 
-      graph.on(
-        "afteritemchange",
-        debounce(() => {
-          clearHilights(graph);
-          const selectedItemsRef =
-            graph
-              ?.getAllNodesData()
-              .filter((node) => graph?.getItemState(node.id, "selected")) ?? [];
-          setSelectedItems(selectedItemsRef as Array<GraphNode<N>>);
-          setClear(graph.getAllNodesData().length === 0);
-        })
-      );
-
       container.addEventListener("contextmenu", (e: MouseEvent) => {
         e.stopPropagation();
         e.preventDefault();
@@ -462,6 +451,42 @@ export const useGraph = <N extends KeyValue>(
     });
   }, [isDark, graph]);
 
+  useEffect(() => {
+    if (graph) {
+      const handler = debounce(() => {
+        clearHilights(graph);
+        const cleared = graph.getAllNodesData().length === 0;
+        setClear(cleared);
+        cleared && options.onClear?.();
+      });
+      graph?.on("afteritemchange", handler);
+
+      return () => {
+        graph?.off("afteritemchange", handler);
+      };
+    }
+  }, [graph, options.onClear]);
+
+  useEffect(() => {
+    if (graph) {
+      const handler = (e: KeyValue) => {
+        if (e.action === "updateState" && e.states.includes("selected")) {
+          const selectedItemsRef =
+            graph
+              ?.getAllNodesData()
+              .filter((node) => graph?.getItemState(node.id, "selected")) ?? [];
+          setSelectedItems(selectedItemsRef as Array<GraphNode<N>>);
+          options.onNodeSelected?.(selectedItemsRef);
+        }
+      };
+      graph?.on("afteritemstatechange", handler);
+
+      return () => {
+        graph?.off("afteritemstatechange", handler);
+      };
+    }
+  }, [graph, options.onNodeSelected]);
+
   const loadData = useCallback(
     (data: GraphData) => {
       void graph?.read(data).then(() => {
@@ -491,8 +516,8 @@ export const useGraph = <N extends KeyValue>(
       edges.push(...(graph?.getRelatedEdgesData(id)?.map((ed) => ed.id) ?? []));
     });
     graph?.setItemState([...edges, ...items], "selected", false);
-    edges.length && graph?.removeData("edge", edges);
-    items.length && graph?.removeData("node", items);
+    edges.length && graph?.removeData("edge", dedupe(edges));
+    items.length && graph?.removeData("node", dedupe(items));
   }, [graph]);
 
   const selectByProp = useCallback(
@@ -521,7 +546,7 @@ export const useGraph = <N extends KeyValue>(
         layout: getLayout(layout, options.useWorker),
       });
     },
-    [graph]
+    [graph, options.useWorker]
   );
 
   const applyLayout = useCallback(
@@ -529,7 +554,7 @@ export const useGraph = <N extends KeyValue>(
       graph?.once("afterlayout", () => resetView());
       void graph?.layout(getLayout(layout), options.useWorker);
     },
-    [graph]
+    [graph, options.useWorker]
   );
 
   const hilightNode = useCallback(
