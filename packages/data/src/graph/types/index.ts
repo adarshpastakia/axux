@@ -7,7 +7,6 @@
  */
 
 import { type EdgeModel, type Graph, type NodeModel } from "@antv/g6";
-import { type MenuProps } from "@axux/core/dist/menu/types";
 import { type ChildrenProp } from "@axux/core/dist/types";
 import { type Ref } from "react";
 import { type useGraph } from "../hooks/useGraph";
@@ -82,10 +81,17 @@ export interface GraphProps<
   useWorker?: boolean;
 
   onNodeExpand?: (nodes: Array<GraphNode<N>>) => Promise<GraphData<N, E>>;
+  onNodeSelected?: (nodes: Array<GraphNode<N>>) => void;
 
-  onContextMenu?: (props: {
-    type: "node" | "edge" | "canvas";
-  }) => MenuProps["children"];
+  onContextMenu?: (props: { type: "node" | "edge" | "canvas" }) => Array<
+    Array<{
+      id: string;
+      label: string;
+      className?: string;
+      isDisabled?: boolean;
+      handler: (nodes: Array<GraphNode<N>>) => void;
+    }>
+  >;
 
   renderDetail?: (props: {
     item: GraphNode<N>;

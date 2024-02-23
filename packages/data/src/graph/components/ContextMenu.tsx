@@ -6,75 +6,75 @@
  * @license   : MIT
  */
 import { AxDivider, AxMenu } from "@axux/core";
-import { isString } from "@axux/utilities";
 import { Fragment, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { useGraphInternal } from "../context/GraphContext";
 import { GraphIcons } from "../types/icons";
 
-const ContextMenuComponent = ({ item, children }: AnyObject) => {
+const ContextMenuComponent = ({ item, custom }: AnyObject) => {
   const { t } = useTranslation("graph");
   const { graph, handleExpand, renderDetail } = useGraphInternal();
 
   const items = useMemo(() => {
-    const menu: Array<KeyValue | "-"> = [];
+    const menu: KeyValue[][] = [];
     if (item.type === "edge") {
-      menu.push({
-        id: "neighbors",
-        label: "action.neighbors",
-      });
-    }
-    if (item.type === "node") {
-      menu.push(
-        // {
-        //   id: "toggleDetail",
-        //   label: "action.detail",
-        // },
-        // "-",
+      menu.push([
         {
           id: "neighbors",
           label: "action.neighbors",
-        }
-      );
-      if (graph.selectedItems.length > 1) {
-        menu.push({
-          id: "group",
-          label: "action.group",
-        });
-      }
-      menu.push({
+        },
+      ]);
+    }
+    if (item.type === "node") {
+      const selectMenu = [];
+      const deleteMenu = [];
+      selectMenu.push({
+        id: "neighbors",
+        label: "action.neighbors",
+      });
+      // if (graph.selectedItems.length > 1) {
+      //   selectMenu.push({
+      //     id: "group",
+      //     label: "action.group",
+      //   });
+      // }
+      selectMenu.push({
         id: "expand",
         icon: GraphIcons.toolExpand,
         label: "action.expand",
       });
       if (graph.selectedItems.length === 2) {
-        menu.push({
+        selectMenu.push({
           id: "hilight",
           icon: GraphIcons.toolHilight,
           label: "action.hilight",
         });
       }
-      menu.push("-", {
+      deleteMenu.push({
         id: "delete",
         className: "text-danger",
         icon: GraphIcons.toolDelete,
         label: "action.delete",
       });
+      menu.push(selectMenu, deleteMenu);
     }
     if (item.type === "canvas") {
       menu.push(
-        {
-          id: "selectAll",
-          label: "action.selectAll",
-        },
-        "-",
-        {
-          id: "clear",
-          className: "text-danger",
-          icon: GraphIcons.toolErase,
-          label: "action.clear",
-        }
+        [
+          {
+            id: "selectAll",
+            label: "action.selectAll",
+          },
+        ],
+        [
+          {
+            id: "clear",
+            className: "text-danger",
+            icon: GraphIcons.toolErase,
+            label: "action.clear",
+          },
+        ]
       );
     }
     return menu;
@@ -126,32 +126,38 @@ const ContextMenuComponent = ({ item, children }: AnyObject) => {
 
   return (
     <AxMenu className="ax-graph__menu" onClick={handleMenu}>
-      {children && (
-        <Fragment>
-          {children}
-          <AxDivider size="xs" />
+      {items.map((list, idx) => (
+        <Fragment key={idx}>
+          {idx > 0 && <AxDivider key={idx} size="xs" />}
+          {custom?.[idx]?.map?.((item: KeyValue, cdx: number) => (
+            <AxMenu.Item
+              key={`${idx}-custom-${cdx}`}
+              id={item.id}
+              label={item.label}
+              icon={item.icon}
+              className={item.className}
+              isDisabled={item.isDisabled}
+              onClick={() => item.handler(graph.selectedItems)}
+            />
+          ))}
+          {list.map((item, jdx) => (
+            <AxMenu.Item
+              key={`${idx}-${jdx}`}
+              id={item.id}
+              label={t(item.label, item.label, {})}
+              icon={item.icon}
+              className={item.className}
+            />
+          ))}
         </Fragment>
-      )}
-      {items.map((item, idx) =>
-        isString(item) ? (
-          <AxDivider key={idx} size="xs" />
-        ) : (
-          <AxMenu.Item
-            key={idx}
-            id={item.id}
-            label={t(item.label, item.label, {})}
-            icon={item.icon}
-            className={item.className}
-          />
-        )
-      )}
+      ))}
     </AxMenu>
   );
 };
 
-export const ContextMenu = ({ root, children, ...item }: AnyObject) => {
+export const ContextMenu = ({ root, custom, ...item }: AnyObject) => {
   return createPortal(
-    <ContextMenuComponent item={item}>{children}</ContextMenuComponent>,
+    <ContextMenuComponent item={item} custom={custom} />,
     root
   );
 };
