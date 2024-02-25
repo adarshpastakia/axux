@@ -23,6 +23,7 @@ export interface GraphNode<N extends KeyValue = KeyValue> extends NodeModel {
     colorMap?: string[];
     shape?: "circle" | "rect" | "diamond";
     strokeType?: "dashed" | "dotted";
+
     [key: string]: unknown;
   } & N;
 }
@@ -42,9 +43,13 @@ export interface GraphData<
   N extends KeyValue = KeyValue,
   E extends KeyValue = KeyValue
 > {
-  nodes: Array<GraphNode<N>>;
+  nodes: Array<
+    GraphNode<N> & {
+      isGroup?: true;
+      originalEdges?: Array<GraphEdge<N>>;
+    }
+  >;
   edges: Array<GraphEdge<E>>;
-  combos?: Array<GraphNode<N>>;
 }
 
 export type GraphRef<N extends KeyValue> = ReturnType<typeof useGraph<N>>;
@@ -92,6 +97,11 @@ export interface GraphProps<
       handler: (nodes: Array<GraphNode<N>>) => void;
     }>
   >;
+
+  onMergeNodes?: (subGraph: {
+    nodes: Array<GraphNode<N>>;
+    edges: Array<GraphEdge<N>>;
+  }) => { node: GraphNode<N>; edges: Array<GraphEdge<N>> };
 
   renderDetail?: (props: {
     item: GraphNode<N>;
