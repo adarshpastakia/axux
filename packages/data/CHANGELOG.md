@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.8](https://github.com/adarshpastakia/axux/compare/v3.4.7...v3.4.8) (2024-02-25)
+
+### Bug Fixes
+
+- graph bugs ([fc4a333](https://github.com/adarshpastakia/axux/commit/fc4a3334a170fd09fb3e4c182751cf88917e37a0))
+
 ## [3.4.7](https://github.com/adarshpastakia/axux/compare/v3.4.6...v3.4.7) (2024-02-23)
 
 **Note:** Version bump only for package @axux/data

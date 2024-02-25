@@ -1,6 +1,6 @@
 {
   "name": "@axux/core",
-  "version": "3.4.7",
+  "version": "3.4.8",
   "description": "axux: Core package",
   "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "watch": "tsc -w -p ./tsconfig.build.json"
   },
   "dependencies": {
-    "@axux/utilities": "^3.4.7",
+    "@axux/utilities": "^3.4.8",
     "@headlessui/react": "^1.7.18",
     "@popperjs/core": "^2.11.8",
     "@tailwindcss/forms": "^0.5.7",
