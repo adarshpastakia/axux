@@ -15,9 +15,15 @@ import G6, {
   type ID,
   type IG6GraphEvent,
   type LayoutOptions,
+  type NodeDisplayModel,
 } from "@antv/g6";
 import { createReactNode } from "@antv/g6-react-node";
 import { type ComboShapeMap } from "@antv/g6/lib/types/combo";
+import { type State } from "@antv/g6/lib/types/item";
+import {
+  type NodeShapeMap,
+  type NodeUserModelData,
+} from "@antv/g6/lib/types/node";
 import { useIsDark, useNotificationService } from "@axux/core";
 import { debounce, dedupe } from "@axux/utilities";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -101,6 +107,303 @@ const getLayout = (layout: GraphProps["defaultLayout"], useWorker = false) => {
 };
 
 class CustomCombo extends G6.Extensions.CircleCombo {
+  getMergedStyles(model: AnyObject) {
+    const ret: AnyObject = super.getMergedStyles(model);
+    model.data.childCount = this.graph.getComboChildrenData(model.id).length;
+    model.data.collapsed && ret.keyShape && (ret.keyShape.r = 48);
+    ret.keyShape && (ret.keyShape.zIndex = 0);
+    ret.keyShape &&
+      (ret.keyShape.fill = document.documentElement.classList.contains("dark")
+        ? "#0f172a"
+        : "#f8fafc");
+    ret.iconShape && (ret.iconShape.text = undefined);
+    return ret;
+  }
+
+  drawBadgeShapes(
+    model: ComboDisplayModel | NodeDisplayModel,
+    shapeMap: NodeShapeMap,
+    diffData?:
+      | {
+          previous: ComboModelData | NodeUserModelData;
+          current: ComboModelData | NodeUserModelData;
+        }
+      | undefined,
+    diffState?: { previous: State[]; current: State[] } | undefined
+  ) {
+    const shapes: KeyValue = {};
+
+    const keyShapeBBox = shapeMap.keyShape.getGeometryBounds();
+
+    if (model.data.isImportant) {
+      const xl = keyShapeBBox.min[0];
+      const xr = keyShapeBBox.max[0];
+      const y = keyShapeBBox.min[1];
+      const bgHeight = 32;
+      const pos = {
+        xl: xl - xl * 0.25,
+        xr: xr - xr * 0.25,
+        y: y - y * 0.25,
+      };
+
+      shapes.topRightBadgeShape = this.upsertShape(
+        "text",
+        "topRightBadgeShape",
+        Object.assign(
+          Object.assign({
+            text: "★",
+            fill: "#fff",
+            fontSize: 24,
+            x: pos.xr,
+            y: pos.y + bgHeight / 2,
+          }),
+          { textAlign: "center", textBaseline: "middle", zIndex: 2 }
+        ),
+        {
+          shapeMap,
+          model,
+          diffData,
+          diffState,
+        }
+      );
+      shapes.topRightBadgeBackgroundShape = this.upsertShape(
+        "rect",
+        "topRightBadgeBackgroundShape",
+        Object.assign({
+          fill: "#fc0",
+          height: bgHeight,
+          width: bgHeight,
+          radius: bgHeight / 2,
+          zIndex: 1,
+          x: pos.xr - bgHeight / 2,
+          y: pos.y,
+        }),
+        {
+          shapeMap,
+          model,
+          diffData,
+          diffState,
+        }
+      );
+
+      shapes.topLeftBadgeShape = this.upsertShape(
+        "text",
+        "topLeftBadgeShape",
+        Object.assign(
+          Object.assign({
+            text: model.data.childCount?.toString() ?? "0",
+            fill: "#fff",
+            fontSize: 24,
+            x: pos.xl,
+            y: pos.y + bgHeight / 2,
+          }),
+          { textAlign: "center", textBaseline: "middle", zIndex: 2 }
+        ),
+        {
+          shapeMap,
+          model,
+          diffData,
+          diffState,
+        }
+      );
+      shapes.topLeftBadgeBackgroundShape = this.upsertShape(
+        "rect",
+        "topLeftBadgeBackgroundShape",
+        Object.assign({
+          fill: "#64748b",
+          height: bgHeight,
+          width: bgHeight,
+          radius: bgHeight / 2,
+          zIndex: 1,
+          x: pos.xl - bgHeight / 2,
+          y: pos.y,
+        }),
+        {
+          shapeMap,
+          model,
+          diffData,
+          diffState,
+        }
+      );
+    }
+
+    return shapes;
+  }
+
+  drawOtherShapes(
+    model: ComboDisplayModel,
+    shapeMap: ComboShapeMap,
+    diffData?: {
+      previous: ComboModelData;
+      current: ComboModelData;
+    },
+    diffState?: AnyObject
+  ) {
+    const { data } = model;
+    const keyShapeBBox = shapeMap.keyShape.getLocalBounds();
+    const otherShapes = {
+      markerShape: this.upsertShape(
+        "path",
+        "markerShape",
+        {
+          cursor: "pointer",
+          stroke: "#64748b",
+          lineWidth: 1,
+          zIndex: 2,
+          fill: shapeMap.keyShape?.config.style.fill,
+          path: data.collapsed
+            ? stdLib.markers.expand(
+                keyShapeBBox.center[0],
+                keyShapeBBox.max[1],
+                16
+              )
+            : stdLib.markers.collapse(
+                keyShapeBBox.center[0],
+                keyShapeBBox.max[1],
+                16
+              ),
+        } as AnyObject,
+        {
+          model,
+          shapeMap,
+          diffData,
+          diffState,
+        }
+      ),
+    };
+    return otherShapes;
+  }
+}
+
+class ManualCombo extends G6.Extensions.RectCombo {
+  getMergedStyles(model: AnyObject) {
+    const ret: AnyObject = super.getMergedStyles(model);
+    model.data.childCount = this.graph.getComboChildrenData(model.id).length;
+    if (model.data.collapsed && ret.keyShape) {
+      ret.keyShape.width = 96;
+      ret.keyShape.height = 96;
+      ret.keyShape.x = -48;
+      ret.keyShape.y = -48;
+    }
+    ret.keyShape && (ret.keyShape.zIndex = 0);
+    ret.keyShape &&
+      (ret.keyShape.fill = document.documentElement.classList.contains("dark")
+        ? "#0f172a"
+        : "#f8fafc");
+    ret.iconShape && (ret.iconShape.text = undefined);
+    return ret;
+  }
+
+  drawBadgeShapes(
+    model: ComboDisplayModel | NodeDisplayModel,
+    shapeMap: NodeShapeMap,
+    diffData?:
+      | {
+          previous: ComboModelData | NodeUserModelData;
+          current: ComboModelData | NodeUserModelData;
+        }
+      | undefined,
+    diffState?: { previous: State[]; current: State[] } | undefined
+  ) {
+    const shapes: KeyValue = {};
+
+    const keyShapeBBox = shapeMap.keyShape.getRenderBounds();
+
+    if (model.data.isImportant) {
+      const xl = keyShapeBBox.min[0] - keyShapeBBox.center[0];
+      const xr = keyShapeBBox.max[0] - keyShapeBBox.center[0];
+      const y = keyShapeBBox.min[1] - keyShapeBBox.center[1];
+      const bgHeight = 32;
+      const pos = {
+        xl,
+        xr,
+        y: y - bgHeight / 2,
+      };
+
+      shapes.topRightBadgeShape = this.upsertShape(
+        "text",
+        "topRightBadgeShape",
+        Object.assign(
+          Object.assign({
+            text: "★",
+            fill: "#fff",
+            fontSize: 24,
+            x: pos.xr,
+            y: pos.y + bgHeight / 2,
+          }),
+          { textAlign: "center", textBaseline: "middle", zIndex: 2 }
+        ),
+        {
+          shapeMap,
+          model,
+          diffData,
+          diffState,
+        }
+      );
+      shapes.topRightBadgeBackgroundShape = this.upsertShape(
+        "rect",
+        "topRightBadgeBackgroundShape",
+        Object.assign({
+          fill: "#fc0",
+          height: bgHeight,
+          width: bgHeight,
+          radius: bgHeight / 2,
+          zIndex: 1,
+          x: pos.xr - bgHeight / 2,
+          y: pos.y,
+        }),
+        {
+          shapeMap,
+          model,
+          diffData,
+          diffState,
+        }
+      );
+
+      shapes.topLeftBadgeShape = this.upsertShape(
+        "text",
+        "topLeftBadgeShape",
+        Object.assign(
+          Object.assign({
+            text: model.data.childCount?.toString() ?? "0",
+            fill: "#fff",
+            fontSize: 24,
+            x: pos.xl,
+            y: pos.y + bgHeight / 2,
+          }),
+          { textAlign: "center", textBaseline: "middle", zIndex: 2 }
+        ),
+        {
+          shapeMap,
+          model,
+          diffData,
+          diffState,
+        }
+      );
+      shapes.topLeftBadgeBackgroundShape = this.upsertShape(
+        "rect",
+        "topLeftBadgeBackgroundShape",
+        Object.assign({
+          fill: "#475569",
+          height: bgHeight,
+          width: bgHeight,
+          radius: bgHeight / 2,
+          zIndex: 1,
+          x: pos.xl - bgHeight / 2,
+          y: pos.y,
+        }),
+        {
+          shapeMap,
+          model,
+          diffData,
+          diffState,
+        }
+      );
+    }
+
+    return shapes;
+  }
+
   drawOtherShapes(
     model: ComboDisplayModel,
     shapeMap: ComboShapeMap,
@@ -120,17 +423,18 @@ class CustomCombo extends G6.Extensions.CircleCombo {
           cursor: "pointer",
           stroke: "#666",
           lineWidth: 1,
-          fill: "#fff",
+          zIndex: 2,
+          fill: shapeMap.keyShape?.config.style.fill,
           path: data.collapsed
             ? stdLib.markers.expand(
                 keyShapeBBox.center[0],
                 keyShapeBBox.max[1],
-                10
+                16
               )
             : stdLib.markers.collapse(
                 keyShapeBBox.center[0],
                 keyShapeBBox.max[1],
-                10
+                16
               ),
         } as AnyObject,
         {
@@ -144,6 +448,7 @@ class CustomCombo extends G6.Extensions.CircleCombo {
     return otherShapes;
   }
 }
+
 const Node = ({ model }: KeyValue) => {
   return model.data.renderDetail({ id: model.id, data: model.data.data });
 };
@@ -151,6 +456,7 @@ const Node = ({ model }: KeyValue) => {
 const ExtGraph = G6.extend(G6.Graph, {
   combos: {
     "custom-combo": CustomCombo,
+    "manual-combo": ManualCombo,
   },
   nodes: {
     "donut-node": G6.Extensions.DonutNode,
@@ -408,6 +714,20 @@ export const useGraph = <N extends KeyValue>(
         }
       });
 
+      /** Click the bottom marker to collapse/expand the combo. */
+      graph.on("node:click", (event: IG6GraphEvent) => {
+        const { itemId, target } = event;
+        // @ts-expect-error ignore
+        if (target?.id === "collapseMarker") {
+          const model = graph.getComboData(itemId);
+          if (model?.data.collapsed) {
+            graph.expandCombo(itemId);
+          } else {
+            graph.collapseCombo(itemId);
+          }
+        }
+      });
+
       graph.on(
         "afteritemstatechange",
         debounce((e) => {
@@ -488,8 +808,8 @@ export const useGraph = <N extends KeyValue>(
   }, [graph, options.onNodeSelected]);
 
   const loadData = useCallback(
-    (data: GraphData) => {
-      void graph?.read(data).then(() => {
+    ({ nodes, edges, combos }: GraphData) => {
+      void graph?.read({ nodes, edges, combos }).then(() => {
         resetView();
         graph.emit("dataloaded");
       });
@@ -498,9 +818,10 @@ export const useGraph = <N extends KeyValue>(
   );
 
   const addData = useCallback(
-    (data: GraphData) => {
-      data.nodes && graph?.addData("node", data.nodes);
-      data.edges && graph?.addData("edge", data.edges);
+    ({ nodes, edges, combos }: GraphData) => {
+      combos && graph?.addData("combo", combos);
+      nodes && graph?.addData("node", nodes);
+      edges && graph?.addData("edge", edges);
       void graph?.layout().then(() => {
         resetView();
         graph.emit("dataloaded");
@@ -616,22 +937,54 @@ export const useGraph = <N extends KeyValue>(
     return {
       combo: {
         type: {
-          fields: ["id", "nodeType"],
+          fields: ["id", "isManualGroup"],
           formatter: (model: KeyValue) =>
-            styleMap.current?.[model.data.nodeType]?.shape
-              ? `${styleMap.current?.[model.data.nodeType]?.shape ?? ""}-node`
-              : "custom-combo",
-        },
-        keyShape: {
-          r: 50,
+            model.data.isManualGroup ? "manual-combo" : "custom-combo",
         },
         labelShape: {
           text: {
-            fields: ["id", "label"],
-            formatter: (model: KeyValue) => model.data.label,
+            fields: ["id", "nodeType", "label"],
+            formatter: (model: KeyValue) =>
+              model.data.label ??
+              styleMap.current?.[model.data.nodeType]?.label ??
+              styleMap.current?.defaultNode?.label,
           },
+          dy: 4,
+          fontSize: 12,
+          maxWidth: "110%",
           position: "bottom",
         },
+        labelBackgroundShape: {},
+        iconShape: {
+          width: 38,
+          height: 38,
+          cursor: "pointer",
+          pointerEvents: "none",
+          clipCfg: {
+            type: "circle",
+            r: 16,
+            cx: 16,
+            cy: 16,
+            show: true,
+            fill: "#f00",
+          },
+          src: {
+            fields: ["id", "nodeType", "avatar", "color"],
+            formatter: (model: KeyValue) =>
+              model.data.avatar
+                ? model.data.avatar
+                : makeSvg(
+                    model.data.iconPath ??
+                      styleMap.current?.[model.data.nodeType]?.iconPath ??
+                      styleMap.current?.defaultNode?.iconPath,
+                    model.data.color ??
+                      styleMap.current?.[model.data.nodeType]?.color ??
+                      styleMap.current?.defaultNode?.color ??
+                      DEFAULT_NODE_COLOR
+                  ),
+          },
+        },
+        badgeShapes: [],
         otherShapes: {},
         animates: {
           buildIn: [

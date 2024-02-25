@@ -24,6 +24,7 @@
       "data": {
         "nodeType": "node-a",
         "label": "Node 3",
+        "parentId": "combo-2",
         "badges": [
           {
             "position": "topRight",
@@ -36,6 +37,7 @@
       "id": "node_4",
       "data": {
         "nodeType": "node-c",
+        "parentId": "combo-2",
         "label": "Node 4"
       }
     },
@@ -118,7 +120,19 @@
     {
       "id": "combo-1",
       "data": {
-        "label": "Combo"
+        "nodeType": "node-a",
+        "label": "Combo group",
+        "isImportant": true,
+        "iconPath": "M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+      }
+    },
+    {
+      "id": "combo-2",
+      "data": {
+        "label": "Manual group",
+        "isImportant": true,
+        "isManualGroup": true,
+        "iconPath": "M19,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10L12,6H19A2,2 0 0,1 21,8H21L4,8V18L6.14,10H23.21L20.93,18.5C20.7,19.37 19.92,20 19,20Z"
       }
     }
   ]
