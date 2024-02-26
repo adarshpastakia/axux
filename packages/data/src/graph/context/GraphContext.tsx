@@ -113,7 +113,7 @@ export const GraphProvider = <N extends KeyValue, E extends KeyValue>({
           trigger: "contextmenu",
           offsetX: -1 * (container?.offsetLeft ?? 0),
           className: "ax-graph__menu-container",
-          itemTypes: ["node", "edge", "canvas"],
+          itemTypes: ["node", "edge", "canvas", "combo"],
           shouldBegin: () => {
             return !!graph.ref?.getAllNodesData()?.length;
           },
@@ -198,9 +198,6 @@ export const GraphProvider = <N extends KeyValue, E extends KeyValue>({
             }
             if (e.itemType === "combo") {
               item = graph.ref?.getComboData(e.itemId);
-              item = {
-                children: graph.ref?.getComboChildrenData(e.itemId),
-              };
             }
             if (item) {
               timerRef.current = setTimeout(() => {

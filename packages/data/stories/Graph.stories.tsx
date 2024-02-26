@@ -207,7 +207,7 @@ export const Example: Story = {
       "edge-a": { color: "#059669", iconPath: mdiBus },
       "edge-b": { color: "#2563eb", iconPath: mdiCar },
       "edge-c": { color: "#65a30d", iconPath: mdiPlaneTrain },
-      defaultNode: { color: "#94a3b8", iconPath: mdiHelpBox },
+      defaultNode: { color: "#64748b", iconPath: mdiHelpBox },
       defaultEdge: { color: "#6b7280", iconPath: mdiRoutes },
     },
     onContextMenu({ type }) {
