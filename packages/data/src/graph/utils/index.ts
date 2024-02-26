@@ -19,7 +19,7 @@ export const shadeColor = (hexColor: string, magnitude: number) => {
     let b = ((decimalColor >> 8) & 0x00ff) + magnitude;
     b > 255 && (b = 255);
     b < 0 && (b = 0);
-    return `#${(g | (b << 8) | (r << 16)).toString(16)}`;
+    return `#${(g | (b << 8) | (r << 16)).toString(16).padStart(6, "0")}`;
   } else {
     return hexColor;
   }

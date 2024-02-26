@@ -7,447 +7,16 @@
  */
 
 import { findShortestPath } from "@antv/algorithm";
-import G6, {
-  stdLib,
-  type ComboDisplayModel,
-  type ComboModelData,
-  type GraphData,
-  type ID,
-  type IG6GraphEvent,
-  type LayoutOptions,
-  type NodeDisplayModel,
-} from "@antv/g6";
+import G6, { type GraphData, type ID, type IG6GraphEvent } from "@antv/g6";
 import { createReactNode } from "@antv/g6-react-node";
-import { type ComboShapeMap } from "@antv/g6/lib/types/combo";
-import { type State } from "@antv/g6/lib/types/item";
-import {
-  type NodeShapeMap,
-  type NodeUserModelData,
-} from "@antv/g6/lib/types/node";
 import { useIsDark, useNotificationService } from "@axux/core";
 import { debounce, dedupe } from "@axux/utilities";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { type GraphNode, type GraphProps } from "../types";
-import { makeSvg } from "../utils";
-
-const DEFAULT_NODE_COLOR = "#94a3b8";
-const DEFAULT_EDGE_COLOR = "#6b7280";
-
-const getLayout = (layout: GraphProps["defaultLayout"], useWorker = false) => {
-  let type: LayoutOptions = {
-    type: "force-layout",
-    center: [0, 0],
-    nodeSize: 196,
-    // factor: 9,
-    // damping: 1,
-    // nodeSpacing: 120,
-    // linkDistance: 120,
-    // clustering: true,
-    // nodeClusterBy: "cluster",
-    presetLayout: {
-      type: "circular-layout",
-      nodeSize: 32,
-      nodeSpacing: 120,
-      linkDistance: 120,
-      preventOverlap: true,
-    },
-    kr: 20,
-    kg: 0.1,
-    preventOverlap: true,
-    animated: true,
-    workerEnabled: useWorker,
-  };
-  if (layout === "grid")
-    type = {
-      type: "grid-layout",
-      center: [0, 0],
-      nodeSize: 120,
-      gravity: 0.1,
-      linkDistance: 120,
-      preventOverlap: true,
-      animated: true,
-      workerEnabled: useWorker,
-    };
-  if (layout === "circular")
-    type = {
-      type: "circular-layout",
-      center: [0, 0],
-      nodeSize: 32,
-      nodeSpacing: 120,
-      linkDistance: 120,
-      preventOverlap: true,
-      animated: true,
-      workerEnabled: useWorker,
-    };
-  if (layout === "radial")
-    type = {
-      type: "radial-layout",
-      center: [0, 0],
-      nodeSize: 32,
-      unitRadius: 240,
-      nodeSpacing: 120,
-      linkDistance: 240,
-      sortBy: "degree",
-      preventOverlap: true,
-      animated: true,
-      workerEnabled: useWorker,
-    };
-  if (layout === "hierarchy")
-    type = {
-      type: "hierarchy-layout",
-      nodeSize: 32,
-      nodesep: 100,
-      ranksep: 70,
-      align: undefined,
-      preventOverlap: true,
-      animated: true,
-      workerEnabled: useWorker,
-    };
-  return type;
-};
-
-class CustomCombo extends G6.Extensions.CircleCombo {
-  getMergedStyles(model: AnyObject) {
-    const ret: AnyObject = super.getMergedStyles(model);
-    model.data.childCount = this.graph.getComboChildrenData(model.id).length;
-    model.data.collapsed && ret.keyShape && (ret.keyShape.r = 48);
-    ret.keyShape && (ret.keyShape.zIndex = 0);
-    ret.keyShape &&
-      (ret.keyShape.fill = document.documentElement.classList.contains("dark")
-        ? "#0f172a"
-        : "#f8fafc");
-    ret.iconShape && (ret.iconShape.text = undefined);
-    return ret;
-  }
-
-  drawBadgeShapes(
-    model: ComboDisplayModel | NodeDisplayModel,
-    shapeMap: NodeShapeMap,
-    diffData?:
-      | {
-          previous: ComboModelData | NodeUserModelData;
-          current: ComboModelData | NodeUserModelData;
-        }
-      | undefined,
-    diffState?: { previous: State[]; current: State[] } | undefined
-  ) {
-    const shapes: KeyValue = {};
-
-    const keyShapeBBox = shapeMap.keyShape.getGeometryBounds();
-
-    if (model.data.isImportant) {
-      const xl = keyShapeBBox.min[0];
-      const xr = keyShapeBBox.max[0];
-      const y = keyShapeBBox.min[1];
-      const bgHeight = 32;
-      const pos = {
-        xl: xl - xl * 0.25,
-        xr: xr - xr * 0.25,
-        y: y - y * 0.25,
-      };
-
-      shapes.topRightBadgeShape = this.upsertShape(
-        "text",
-        "topRightBadgeShape",
-        Object.assign(
-          Object.assign({
-            text: "★",
-            fill: "#fff",
-            fontSize: 24,
-            x: pos.xr,
-            y: pos.y + bgHeight / 2,
-          }),
-          { textAlign: "center", textBaseline: "middle", zIndex: 2 }
-        ),
-        {
-          shapeMap,
-          model,
-          diffData,
-          diffState,
-        }
-      );
-      shapes.topRightBadgeBackgroundShape = this.upsertShape(
-        "rect",
-        "topRightBadgeBackgroundShape",
-        Object.assign({
-          fill: "#fc0",
-          height: bgHeight,
-          width: bgHeight,
-          radius: bgHeight / 2,
-          zIndex: 1,
-          x: pos.xr - bgHeight / 2,
-          y: pos.y,
-        }),
-        {
-          shapeMap,
-          model,
-          diffData,
-          diffState,
-        }
-      );
-
-      shapes.topLeftBadgeShape = this.upsertShape(
-        "text",
-        "topLeftBadgeShape",
-        Object.assign(
-          Object.assign({
-            text: model.data.childCount?.toString() ?? "0",
-            fill: "#fff",
-            fontSize: 24,
-            x: pos.xl,
-            y: pos.y + bgHeight / 2,
-          }),
-          { textAlign: "center", textBaseline: "middle", zIndex: 2 }
-        ),
-        {
-          shapeMap,
-          model,
-          diffData,
-          diffState,
-        }
-      );
-      shapes.topLeftBadgeBackgroundShape = this.upsertShape(
-        "rect",
-        "topLeftBadgeBackgroundShape",
-        Object.assign({
-          fill: "#64748b",
-          height: bgHeight,
-          width: bgHeight,
-          radius: bgHeight / 2,
-          zIndex: 1,
-          x: pos.xl - bgHeight / 2,
-          y: pos.y,
-        }),
-        {
-          shapeMap,
-          model,
-          diffData,
-          diffState,
-        }
-      );
-    }
-
-    return shapes;
-  }
-
-  drawOtherShapes(
-    model: ComboDisplayModel,
-    shapeMap: ComboShapeMap,
-    diffData?: {
-      previous: ComboModelData;
-      current: ComboModelData;
-    },
-    diffState?: AnyObject
-  ) {
-    const { data } = model;
-    const keyShapeBBox = shapeMap.keyShape.getLocalBounds();
-    const otherShapes = {
-      markerShape: this.upsertShape(
-        "path",
-        "markerShape",
-        {
-          cursor: "pointer",
-          stroke: "#64748b",
-          lineWidth: 1,
-          zIndex: 2,
-          fill: shapeMap.keyShape?.config.style.fill,
-          path: data.collapsed
-            ? stdLib.markers.expand(
-                keyShapeBBox.center[0],
-                keyShapeBBox.max[1],
-                16
-              )
-            : stdLib.markers.collapse(
-                keyShapeBBox.center[0],
-                keyShapeBBox.max[1],
-                16
-              ),
-        } as AnyObject,
-        {
-          model,
-          shapeMap,
-          diffData,
-          diffState,
-        }
-      ),
-    };
-    return otherShapes;
-  }
-}
-
-class ManualCombo extends G6.Extensions.RectCombo {
-  getMergedStyles(model: AnyObject) {
-    const ret: AnyObject = super.getMergedStyles(model);
-    model.data.childCount = this.graph.getComboChildrenData(model.id).length;
-    if (model.data.collapsed && ret.keyShape) {
-      ret.keyShape.width = 96;
-      ret.keyShape.height = 96;
-      ret.keyShape.x = -48;
-      ret.keyShape.y = -48;
-    }
-    ret.keyShape && (ret.keyShape.zIndex = 0);
-    ret.keyShape &&
-      (ret.keyShape.fill = document.documentElement.classList.contains("dark")
-        ? "#0f172a"
-        : "#f8fafc");
-    ret.iconShape && (ret.iconShape.text = undefined);
-    return ret;
-  }
-
-  drawBadgeShapes(
-    model: ComboDisplayModel | NodeDisplayModel,
-    shapeMap: NodeShapeMap,
-    diffData?:
-      | {
-          previous: ComboModelData | NodeUserModelData;
-          current: ComboModelData | NodeUserModelData;
-        }
-      | undefined,
-    diffState?: { previous: State[]; current: State[] } | undefined
-  ) {
-    const shapes: KeyValue = {};
-
-    const keyShapeBBox = shapeMap.keyShape.getRenderBounds();
-
-    if (model.data.isImportant) {
-      const xl = keyShapeBBox.min[0] - keyShapeBBox.center[0];
-      const xr = keyShapeBBox.max[0] - keyShapeBBox.center[0];
-      const y = keyShapeBBox.min[1] - keyShapeBBox.center[1];
-      const bgHeight = 32;
-      const pos = {
-        xl,
-        xr,
-        y: y - bgHeight / 2,
-      };
-
-      shapes.topRightBadgeShape = this.upsertShape(
-        "text",
-        "topRightBadgeShape",
-        Object.assign(
-          Object.assign({
-            text: "★",
-            fill: "#fff",
-            fontSize: 24,
-            x: pos.xr,
-            y: pos.y + bgHeight / 2,
-          }),
-          { textAlign: "center", textBaseline: "middle", zIndex: 2 }
-        ),
-        {
-          shapeMap,
-          model,
-          diffData,
-          diffState,
-        }
-      );
-      shapes.topRightBadgeBackgroundShape = this.upsertShape(
-        "rect",
-        "topRightBadgeBackgroundShape",
-        Object.assign({
-          fill: "#fc0",
-          height: bgHeight,
-          width: bgHeight,
-          radius: bgHeight / 2,
-          zIndex: 1,
-          x: pos.xr - bgHeight / 2,
-          y: pos.y,
-        }),
-        {
-          shapeMap,
-          model,
-          diffData,
-          diffState,
-        }
-      );
-
-      shapes.topLeftBadgeShape = this.upsertShape(
-        "text",
-        "topLeftBadgeShape",
-        Object.assign(
-          Object.assign({
-            text: model.data.childCount?.toString() ?? "0",
-            fill: "#fff",
-            fontSize: 24,
-            x: pos.xl,
-            y: pos.y + bgHeight / 2,
-          }),
-          { textAlign: "center", textBaseline: "middle", zIndex: 2 }
-        ),
-        {
-          shapeMap,
-          model,
-          diffData,
-          diffState,
-        }
-      );
-      shapes.topLeftBadgeBackgroundShape = this.upsertShape(
-        "rect",
-        "topLeftBadgeBackgroundShape",
-        Object.assign({
-          fill: "#475569",
-          height: bgHeight,
-          width: bgHeight,
-          radius: bgHeight / 2,
-          zIndex: 1,
-          x: pos.xl - bgHeight / 2,
-          y: pos.y,
-        }),
-        {
-          shapeMap,
-          model,
-          diffData,
-          diffState,
-        }
-      );
-    }
-
-    return shapes;
-  }
-
-  drawOtherShapes(
-    model: ComboDisplayModel,
-    shapeMap: ComboShapeMap,
-    diffData?: {
-      previous: ComboModelData;
-      current: ComboModelData;
-    },
-    diffState?: AnyObject
-  ) {
-    const { data } = model;
-    const keyShapeBBox = shapeMap.keyShape.getLocalBounds();
-    const otherShapes = {
-      markerShape: this.upsertShape(
-        "path",
-        "markerShape",
-        {
-          cursor: "pointer",
-          stroke: "#666",
-          lineWidth: 1,
-          zIndex: 2,
-          fill: shapeMap.keyShape?.config.style.fill,
-          path: data.collapsed
-            ? stdLib.markers.expand(
-                keyShapeBBox.center[0],
-                keyShapeBBox.max[1],
-                16
-              )
-            : stdLib.markers.collapse(
-                keyShapeBBox.center[0],
-                keyShapeBBox.max[1],
-                16
-              ),
-        } as AnyObject,
-        {
-          model,
-          shapeMap,
-          diffData,
-          diffState,
-        }
-      ),
-    };
-    return otherShapes;
-  }
-}
+import { AutoCombo } from "./AutoCombo";
+import { ManualCombo } from "./ManualCombo";
+import { layoutSpec } from "./layoutSpec";
+import { styleSpec } from "./styleSpec";
 
 const Node = ({ model }: KeyValue) => {
   return model.data.renderDetail({ id: model.id, data: model.data.data });
@@ -455,7 +24,7 @@ const Node = ({ model }: KeyValue) => {
 
 const ExtGraph = G6.extend(G6.Graph, {
   combos: {
-    "custom-combo": CustomCombo,
+    "auto-combo": AutoCombo,
     "manual-combo": ManualCombo,
   },
   nodes: {
@@ -471,6 +40,7 @@ const ExtGraph = G6.extend(G6.Graph, {
     "radial-layout": G6.Extensions.RadialLayout,
     "hierarchy-layout": G6.Extensions.DagreLayout,
     "grid-layout": G6.Extensions.GridLayout,
+    "combo-layout": G6.Extensions.ComboCombinedLayout,
   },
   transforms: {
     "process-parallel-edges": G6.Extensions.ProcessParallelEdges,
@@ -496,7 +66,7 @@ export const useGraph = <N extends KeyValue>(
   const [isClear, setClear] = useState(true);
   const [selectedItems, setSelectedItems] = useState<Array<GraphNode<N>>>([]);
   const styleMap = useRef<GraphProps["styleMap"]>();
-  const bgColor = useRef<"#fff" | "#222">("#fff");
+  const bgColor = useRef<"#ffffff" | "#222222">("#ffffff");
   const { message } = useNotificationService();
   const isDark = useIsDark();
 
@@ -553,8 +123,8 @@ export const useGraph = <N extends KeyValue>(
           default: readonlyMode,
           edit: [
             ...readonlyMode,
-            { type: "drag-node", enableTransient: true },
-            { type: "drag-combo", enableTransient: true },
+            { type: "drag-node", enableTransient: false },
+            { type: "drag-combo", enableTransient: false },
             {
               key: "click",
               type: "click-select",
@@ -763,12 +333,13 @@ export const useGraph = <N extends KeyValue>(
   }, [container]);
 
   useEffect(() => {
-    bgColor.current = isDark ? "#222" : "#fff";
+    bgColor.current = isDark ? "#222222" : "#ffffff";
     graph?.updateTheme({
       type: "spec",
       // @ts-expect-error ignore
       base: isDark ? "dark" : "light",
     });
+    graph?.updateSpecification(getStyleSpec() as AnyObject);
   }, [isDark, graph]);
 
   useEffect(() => {
@@ -864,7 +435,7 @@ export const useGraph = <N extends KeyValue>(
   const resetLayout = useCallback(
     (layout: GraphProps["defaultLayout"]) => {
       void graph?.updateSpecification({
-        layout: getLayout(layout, options.useWorker),
+        layout: layoutSpec(layout, options.useWorker),
       });
     },
     [graph, options.useWorker]
@@ -873,7 +444,7 @@ export const useGraph = <N extends KeyValue>(
   const applyLayout = useCallback(
     (layout: GraphProps["defaultLayout"]) => {
       graph?.once("afterlayout", () => resetView());
-      void graph?.layout(getLayout(layout), options.useWorker);
+      void graph?.layout(layoutSpec(layout, options.useWorker));
     },
     [graph, options.useWorker]
   );
@@ -934,329 +505,7 @@ export const useGraph = <N extends KeyValue>(
   }, []);
 
   const getStyleSpec = useCallback(() => {
-    return {
-      combo: {
-        type: {
-          fields: ["id", "isManualGroup"],
-          formatter: (model: KeyValue) =>
-            model.data.isManualGroup ? "manual-combo" : "custom-combo",
-        },
-        labelShape: {
-          text: {
-            fields: ["id", "nodeType", "label"],
-            formatter: (model: KeyValue) =>
-              model.data.label ??
-              styleMap.current?.[model.data.nodeType]?.label ??
-              styleMap.current?.defaultNode?.label,
-          },
-          dy: 4,
-          fontSize: 12,
-          maxWidth: "110%",
-          position: "bottom",
-        },
-        labelBackgroundShape: {},
-        iconShape: {
-          width: 38,
-          height: 38,
-          cursor: "pointer",
-          pointerEvents: "none",
-          clipCfg: {
-            type: "circle",
-            r: 16,
-            cx: 16,
-            cy: 16,
-            show: true,
-            fill: "#f00",
-          },
-          src: {
-            fields: ["id", "nodeType", "avatar", "color"],
-            formatter: (model: KeyValue) =>
-              model.data.avatar
-                ? model.data.avatar
-                : makeSvg(
-                    model.data.iconPath ??
-                      styleMap.current?.[model.data.nodeType]?.iconPath ??
-                      styleMap.current?.defaultNode?.iconPath,
-                    model.data.color ??
-                      styleMap.current?.[model.data.nodeType]?.color ??
-                      styleMap.current?.defaultNode?.color ??
-                      DEFAULT_NODE_COLOR
-                  ),
-          },
-        },
-        badgeShapes: [],
-        otherShapes: {},
-        animates: {
-          buildIn: [
-            {
-              fields: ["opacity"],
-              duration: 500,
-              delay: 500 + Math.random() * 500,
-            },
-          ],
-          buildOut: [
-            {
-              fields: ["opacity"],
-              duration: 200,
-            },
-          ],
-          update: [
-            {
-              fields: ["lineWidth", "r"],
-              shapeId: "keyShape",
-            },
-            {
-              fields: ["opacity"],
-              shapeId: "haloShape",
-            },
-          ],
-        },
-      },
-      node: {
-        type: {
-          fields: ["id", "nodeType"],
-          formatter: (model: KeyValue) =>
-            styleMap.current?.[model.data.nodeType]?.shape
-              ? `${styleMap.current?.[model.data.nodeType]?.shape ?? ""}-node`
-              : "donut-node",
-        },
-        keyShape: {
-          r: 32,
-          lineWidth: 6,
-          cursor: "pointer",
-          stroke: {
-            fields: ["id", "nodeType", "color"],
-            formatter: (model: KeyValue) =>
-              model.data.color ??
-              styleMap.current?.[model.data.nodeType]?.color ??
-              styleMap.current?.defaultNode?.color ??
-              DEFAULT_NODE_COLOR,
-          },
-          lineDash: {
-            fields: ["id", "nodeType", "strokeType"],
-            formatter: (model: KeyValue) => {
-              if (
-                (model.data.strokeType ??
-                  styleMap.current?.[model.data.nodeType]?.strokeType ??
-                  styleMap.current?.defaultNode?.strokeType) === "dashed"
-              )
-                return [8, 4];
-              if (
-                (model.data.strokeType ??
-                  styleMap.current?.[model.data.nodeType]?.strokeType ??
-                  styleMap.current?.defaultNode?.strokeType) === "dotted"
-              )
-                return [4, 4];
-
-              return [];
-            },
-          },
-          fill: {
-            fields: ["id", "nodeType", "fill"],
-            formatter: (model: KeyValue) =>
-              model.data.fill ??
-              styleMap.current?.[model.data.nodeType]?.fill ??
-              styleMap.current?.defaultNode?.fill ??
-              bgColor.current,
-          },
-        },
-        badgeShapes: {
-          fields: ["id", "isImportant"],
-          formatter: (model: KeyValue) => {
-            const ret = [];
-            if (model.data.isImportant)
-              ret.push({
-                position: "topRight",
-                text: "★",
-                fontSize: 18,
-                r: 24,
-                color: "#f59e0b",
-                textColor: "#fff",
-              });
-            return ret;
-          },
-        },
-        labelShape: {
-          text: {
-            fields: ["id", "nodeType", "label"],
-            formatter: (model: KeyValue) =>
-              model.data.label ??
-              styleMap.current?.[model.data.nodeType]?.label ??
-              styleMap.current?.defaultNode?.label,
-          },
-          dy: 4,
-          fontSize: 12,
-          maxWidth: "110%",
-          position: "bottom",
-        },
-        labelBackgroundShape: {},
-        iconShape: {
-          width: 38,
-          height: 38,
-          cursor: "pointer",
-          pointerEvents: "none",
-          clipCfg: {
-            type: "circle",
-            r: 16,
-            cx: 16,
-            cy: 16,
-            show: true,
-            fill: "#f00",
-          },
-          src: {
-            fields: ["id", "nodeType", "avatar", "color"],
-            formatter: (model: KeyValue) =>
-              model.data.avatar
-                ? model.data.avatar
-                : makeSvg(
-                    model.data.iconPath ??
-                      styleMap.current?.[model.data.nodeType]?.iconPath ??
-                      styleMap.current?.defaultNode?.iconPath,
-                    model.data.color ??
-                      styleMap.current?.[model.data.nodeType]?.color ??
-                      styleMap.current?.defaultNode?.color ??
-                      DEFAULT_NODE_COLOR
-                  ),
-          },
-        },
-        donutShapes: {
-          innerSize: 0.8,
-          cursor: "pointer",
-          attrs: {
-            fields: ["id", "colorMap"],
-            formatter: (model: KeyValue) =>
-              model.data.colorMap?.map(() => 100 / model.data.colorMap.length),
-          },
-          colorMap: {
-            fields: ["id", "colorMap"],
-            formatter: (model: KeyValue) => model.data.colorMap?.sort(),
-          },
-        },
-      },
-      nodeState: {
-        selected: {
-          keyShape: {
-            r: 36,
-            stroke: "#f00",
-          },
-          haloShape: {
-            r: 42,
-            stroke: "#f00",
-          },
-        } as AnyObject,
-        active: {
-          haloShape: {
-            r: 42,
-            opacity: 0.5,
-            lineWidth: 6,
-            stroke: {
-              fields: ["id", "nodeType", "color"],
-              formatter: (model: KeyValue) =>
-                model.data.color ??
-                styleMap.current?.[model.data.nodeType]?.color ??
-                styleMap.current?.defaultNode?.color ??
-                DEFAULT_NODE_COLOR,
-            },
-          },
-        } as AnyObject,
-        focus: {
-          keyShape: {
-            opacity: 0.9,
-          },
-          iconShape: {
-            opacity: 0.9,
-          },
-          donutShapes: {
-            innerSize: 0.8,
-          },
-        },
-        blur: {
-          keyShape: {
-            opacity: 0.1,
-          },
-          iconShape: {
-            opacity: 0.1,
-          },
-          labelShape: {
-            opacity: 0.1,
-          },
-          donutShapes: {
-            innerSize: 1,
-          },
-        },
-        islocked: {
-          anchorShapes: [
-            {
-              position: [0, 0],
-              r: 8,
-            },
-          ],
-        },
-      },
-      edge: {
-        keyShape: {
-          lineWidth: 6,
-          lineDash: {
-            fields: ["id", "edgeType", "strokeType"],
-            formatter: (model: KeyValue) => {
-              if (
-                (model.data.strokeType ??
-                  styleMap.current?.[model.data.edgeType]?.strokeType ??
-                  styleMap.current?.defaultEdge?.strokeType) === "dashed"
-              )
-                return [8, 4];
-              if (
-                (model.data.strokeType ??
-                  styleMap.current?.[model.data.edgeType]?.strokeType ??
-                  styleMap.current?.defaultEdge?.strokeType) === "dotted"
-              )
-                return [4, 4];
-            },
-          },
-          cursor: "pointer",
-          stroke: {
-            fields: ["id", "edgeType", "color"],
-            formatter: (model: KeyValue) =>
-              model.data.color ??
-              styleMap.current?.[model.data.edgeType]?.color ??
-              styleMap.current?.defaultEdge?.color ??
-              DEFAULT_EDGE_COLOR,
-          },
-        },
-        labelShape: {
-          text: {
-            fields: ["id", "edgeType", "label"],
-            formatter: (model: KeyValue) =>
-              model.data.label ??
-              styleMap.current?.[model.data.edgeType]?.label ??
-              styleMap.current?.defaultEdge?.label,
-          },
-          dy: -8,
-          fontSize: 12,
-          maxWidth: "110%",
-          position: "top",
-        },
-      },
-      edgeState: {
-        active: {
-          keyShape: { lineWidth: 6 },
-          haloShape: { lineWidth: 22 },
-        },
-        hilight: {
-          haloShape: {
-            opacity: 0.5,
-            lineWidth: 12,
-            stroke: "#f00",
-          },
-        } as AnyObject,
-        blur: {
-          keyShape: {
-            opacity: 0.1,
-            stroke: "#8888",
-          },
-        },
-      },
-    };
+    return styleSpec(bgColor.current, styleMap.current);
   }, []);
 
   const exportImage = useCallback(async () => {
