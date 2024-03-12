@@ -1,0 +1,182 @@
+import { Meta } from "@storybook/addon-docs";
+import { Translation } from "react-i18next";
+import { Anchor, Subheading, Title, Markdown } from "@storybook/blocks";
+import { AxButton, AxTheme } from "../packages/core/src";
+
+<Meta title="Theming" />
+
+<Title>Theming</Title>
+
+<Markdown type="info">
+  {`Theming is made effortless through the use of CSS \`color-mix\` and a
+  meticulously curated base color palette.`}
+</Markdown>
+
+<Anchor storyId="colorPalette">
+  <Subheading>Color Palette</Subheading>
+</Anchor>
+
+<div className="home-palette">
+  <div>
+    <div className="swatch-silver" />
+    <span>silver</span>
+  </div>
+  <div>
+    <div className="swatch-steel" />
+    <span>steel</span>
+  </div>
+  <div>
+    <div className="swatch-olive" />
+    <span>olive</span>
+  </div>
+  <div>
+    <div className="swatch-sand" />
+    <span>sand</span>
+  </div>
+  <div>
+    <div className="swatch-info" />
+    <span>info</span>
+  </div>
+  <div>
+    <div className="swatch-danger" />
+    <span>danger</span>
+  </div>
+  <div>
+    <div className="swatch-success" />
+    <span>success</span>
+  </div>
+  <div>
+    <div className="swatch-warning" />
+    <span>warning</span>
+  </div>
+</div>
+<div className="home-palette">
+  <div>
+    <div className="swatch-scarlet" />
+    <span>scarlet</span>
+  </div>
+  <div>
+    <div className="swatch-pumpkin" />
+    <span>pumpkin</span>
+  </div>
+  <div>
+    <div className="swatch-jade" />
+    <span>jade</span>
+  </div>
+  <div>
+    <div className="swatch-denim" />
+    <span>denim</span>
+  </div>
+  <div>
+    <div className="swatch-iris" />
+    <span>iris</span>
+  </div>
+  <div>
+    <div className="swatch-lilac" />
+    <span>lilac</span>
+  </div>
+  <div>
+    <div className="swatch-coral" />
+    <span>coral</span>
+  </div>
+  <div>
+    <div className="swatch-wood" />
+    <span>wood</span>
+  </div>
+</div>
+
+<Markdown className="!text-md !my-8">
+  {`The grayscale shades provide a cleanand elegant foundation, 
+  while the state colors offer distinct shades for control states and messages.
+  The palette provides basic colors that can be used as primary and accent color scheme.`}
+</Markdown>
+
+<Anchor storyId="themeOverride">
+  <Subheading>Overriding Theme</Subheading>
+</Anchor>
+
+<div className="flex gap-2 border !mb-8">
+<AxTheme data-gray-scheme='sand'
+  colorScheme="light"
+  primary="lilac"
+  accent="pumpkin"
+>
+  <div className="flex-1 text-center p-8 bg-base">
+    <h4 className="!text-base">Default theme</h4>
+    <AxButton variant="solid">Primary button</AxButton>
+  </div>
+
+{/* Override theme on inner elements */}
+
+  <AxTheme colorScheme="dark" primary="jade" accent="coral">
+    <div className="flex-1 text-center p-8 bg-base">
+      <h4 className="!text-base">Override theme</h4>
+      <AxButton variant="solid">Primary green button</AxButton>
+    </div>
+  </AxTheme>
+</AxTheme>
+</div>
+
+<cite type="code">tailwind.config.js</cite>
+
+```js
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/@axux/**/dist/**/*.js",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        brandPrimary: "#6b5b95",
+        brandAccent: "#feb236",
+      },
+    },
+  },
+  plugins: [
+    require("@axux/core/css"),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
+  ],
+};
+```
+
+<cite type="code">public/index.html</cite>
+
+```html
+<html data-gray-scheme="steel" data-rounded="full">
+  ...
+</html>
+```
+
+<cite type="code">src/styles.css</cite>
+
+```css
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "@axux/core/css/style.css";
+
+:root {
+  --ax-primary: theme(colors.brandPrimary);
+  --ax-accent: theme(colors.brandAccent);
+}
+```
+
+<cite type="code">src/index.tsx</cite>
+
+```tsx
+<AxApplicationProvider defaultColorScheme="light">
+  <div className="p-8">
+    <AxButton variant="solid">Primary button</AxButton>
+  </div>
+
+  {/* Override theme on inner elements */}
+  <AxTheme colorScheme="dark" primary="jade" accent="coral">
+    <div className="p-8">
+      <AxButton variant="solid">Primary green button</AxButton>
+    </div>
+  </AxTheme>
+</AxApplicationProvider>
+```

@@ -1,12 +1,12 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
  * @license   : MIT
  */
 
-import { isString } from "@axux/utilities";
+import { isString } from "@axux/utilities/src";
 import { useCallback, useEffect, useMemo, useState, type FC } from "react";
 import { AxAnimation } from "../animations";
 import { AxTooltip } from "../overlays/Tooltip";
@@ -23,6 +23,16 @@ export interface ActionProps extends ButtonProps {
   actionType?: "danger" | "success";
 }
 
+/**
+ * Action button to show tooltip message on success
+ *
+ * @requires This button expects a `onClick` return value of boolean type,
+ * if true will display given message and display animated check/cross
+ *
+ * @prop message
+ * @prop actionType - danger | success
+ * @prop see Button
+ */
 export const ActionButton: FC<ActionProps> = ({
   onClick,
   message,
@@ -78,10 +88,10 @@ export const ActionButton: FC<ActionProps> = ({
           actionDone && (
             <div className="animated-svg">
               {actionType === "success" && (
-                <AxAnimation.Check className="text-success-500" />
+                <AxAnimation.Check className="text-success-base" />
               )}
               {actionType === "danger" && (
-                <AxAnimation.Cross className="text-danger-400" />
+                <AxAnimation.Cross className="text-danger-base" />
               )}
             </div>
           )

@@ -1,0 +1,21 @@
+{
+  "search.exclude": {
+    "**/coverage": true
+  },
+  "colorize.languages": [
+    "css",
+    "sass",
+    "scss",
+    "less",
+    "postcss",
+    "sss",
+    "stylus",
+    "xml",
+    "svg",
+    "typescript",
+    "typescriptreact"
+  ],
+  "postcss.validate": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnSave": true
+}

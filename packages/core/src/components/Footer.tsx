@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -10,7 +10,7 @@ import { type FC } from "react";
 import { type ChildrenProp, type ElementProps } from "../types";
 
 /**
- * footer panel
+ * Footer element to contain page/panel actions
  */
 export const AxFooter: FC<
   ElementProps &

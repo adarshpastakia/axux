@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
  * @copyright : 2023
@@ -14,7 +14,6 @@ import {
   type ReactNode,
   type RefObject,
 } from "react";
-import { createPortal } from "react-dom";
 
 export interface OverlayRef {
   showAlert: (key: string, alert: ReactNode) => void;
@@ -47,14 +46,13 @@ export const OverlayContainer: FC<{ itemRef: RefObject<OverlayRef> }> = ({
     [alerts],
   );
 
-  return createPortal(
+  return (
     <Fragment>
       <div className="ax-overlay__container" data-mode="overlay" />
       <div className="ax-overlay__container" data-mode="alert">
         {Object.values(alerts)}
       </div>
-    </Fragment>,
-    document.body,
+    </Fragment>
   );
 };
 OverlayContainer.displayName = "OverlayContainer";

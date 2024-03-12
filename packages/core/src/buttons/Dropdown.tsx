@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -12,18 +12,18 @@ import {
   Fragment,
   useCallback,
   useEffect,
+  useMemo,
   type FC,
   type MouseEvent,
-  useMemo,
 } from "react";
+import { createPortal } from "react-dom";
+import { useGlobals } from "../context/Global";
 import { usePopover } from "../hooks/usePopover";
 import { type MenuChildren } from "../menu/types";
 import { type CallbackReturn, type ElementProps } from "../types";
 import { AxButton, type ButtonProps } from "./Button";
-import { createPortal } from "react-dom";
 
-export interface DropdownProps
-  extends Omit<ButtonProps, "onClick" | "children"> {
+export interface DropdownProps extends ButtonProps {
   children: MenuChildren | MenuChildren[];
   /**
    * button label
@@ -48,6 +48,17 @@ export interface DropdownProps
   usePortal?: boolean;
 }
 
+/**
+ * Dropdown button to display menu as dropdown
+ *
+ * @prop label
+ * @prop placement
+ * @prop usePortal
+ * @prop dropdownClassName
+ * @prop onClick(@param menuId)
+ * @prop children <MenuItem>[]
+ * @prop see Button
+ */
 export const DropdownButton: FC<DropdownProps> = ({
   children,
   placement = "bottom-start",
@@ -55,10 +66,11 @@ export const DropdownButton: FC<DropdownProps> = ({
   onClick,
   label,
   isDisabled,
-  showCaret = true,
   usePortal,
+  hideCaret = false,
   ...rest
 }) => {
+  const { portalRoot } = useGlobals();
   const {
     attributes,
     setPopperElement,
@@ -69,7 +81,6 @@ export const DropdownButton: FC<DropdownProps> = ({
   } = usePopover({
     placement,
     sameWidth: true,
-    hideArrow: true,
   });
   const handleMenuClick = useCallback((e: MouseEvent) => {
     const id = (e.target as HTMLElement).dataset.id;
@@ -92,15 +103,16 @@ export const DropdownButton: FC<DropdownProps> = ({
           <Menu.Button as={Fragment} {...{ ref: setReferenceElement }}>
             <AxButton
               {...rest}
+              hideCaret={hideCaret}
               isDisabled={isDisabled}
               data-popover-open={!isDisabled && open}
-              showCaret={showCaret}
             >
               {label}
             </AxButton>
           </Menu.Button>
           {!isDisabled &&
             open &&
+            portalRoot.current &&
             wrapper(
               <Fragment>
                 <div className="fixed inset-0" />
@@ -113,10 +125,12 @@ export const DropdownButton: FC<DropdownProps> = ({
                   style={styles.popper}
                   {...attributes.popper}
                 >
-                  <div className="popover__container">{children}</div>
+                  <div className="ax-popover__container ax-menu">
+                    {children}
+                  </div>
                 </Menu.Items>
               </Fragment>,
-              document.body,
+              portalRoot.current,
             )}
         </Fragment>
       )}

@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -9,6 +9,7 @@
 import i18next from "i18next";
 import { FC, PropsWithChildren } from "react";
 import { I18nextProvider, initReactI18next } from "react-i18next";
+import { AxApplicationProvider } from "@axux/core/src";
 
 i18next
   // pass the i18n instance to react-i18next.
@@ -30,6 +31,18 @@ i18next
   .then();
 i18next.languages = ["en", "ar"];
 
-export const TestWrapper: FC<PropsWithChildren<{}>> = ({ children }) => {
-  return <I18nextProvider i18n={i18next}>{children}</I18nextProvider>;
+export default {
+  parameters: {},
+  decorators: [
+    (Story: any) => {
+      return (
+        <I18nextProvider i18n={i18next}>
+          <AxApplicationProvider>
+            {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+            <Story />
+          </AxApplicationProvider>
+        </I18nextProvider>
+      );
+    },
+  ],
 };

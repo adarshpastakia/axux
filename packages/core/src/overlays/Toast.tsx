@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -26,7 +26,7 @@ export interface ToastProps extends IconProp {
   /**
    * alert title text
    */
-  title: string | JSX.Element;
+  title?: string | JSX.Element;
   /**
    * alert message
    */
@@ -107,7 +107,12 @@ export const AxToast: FC<ToastProps> = ({
       <div className="ax-toast__footer">
         <div onClickCapture={() => onClose?.(false)}>{actions}</div>
         {type === "confirm" && (
-          <AxButton size="sm" color={color} onClick={() => closeToast(false)}>
+          <AxButton
+            size="sm"
+            variant="link"
+            color={color}
+            onClick={() => closeToast(false)}
+          >
             {cancelText}
           </AxButton>
         )}

@@ -1,0 +1,71 @@
+import { Meta } from "@storybook/addon-docs";
+import { Translation } from "react-i18next";
+import { Anchor, Subheading, Title, Markdown } from "@storybook/blocks";
+import { Crayola, Copic, Panatone } from "./colors";
+
+<Meta title="Color Swatches" />
+
+<Title>Color Swatches</Title>
+
+<Anchor storyId="crayola">
+  <Subheading>Crayola Crayons</Subheading>
+</Anchor>
+
+<div
+  className="grid gap-2 grid-flow-row"
+  style={{ gridTemplateColumns: "repeat(auto-fill, 8rem)" }}
+>
+  {Crayola.map((c) => (
+    <div key={"crayola" + c.color} className="flex flex-col items-center gap-1">
+      <div
+        className="w-16 h-12 rounded-sm outline outline-dimmed cursor-pointer"
+        onClick={() => navigator.clipboard.writeText(c.color)}
+        style={{ backgroundColor: c.color }}
+      />
+      <div className="!text-xs">{c.name}</div>
+    </div>
+  ))}
+</div>
+
+<Anchor storyId="copic">
+  <Subheading>Copic</Subheading>
+</Anchor>
+
+<div
+  className="grid gap-2 grid-flow-row"
+  style={{ gridTemplateColumns: "repeat(auto-fill, 8rem)" }}
+>
+  {Copic.map((c) => (
+    <div key={"copic" + c.color} className="flex flex-col items-center gap-1">
+      <div
+        className="w-16 h-12 rounded-sm outline outline-dimmed cursor-pointer"
+        onClick={() => navigator.clipboard.writeText(c.color)}
+        style={{ backgroundColor: c.color }}
+      />
+      <div className="!text-xs">{c.name}</div>
+    </div>
+  ))}
+</div>
+
+<Anchor storyId="panatone">
+  <Subheading>Panatone</Subheading>
+</Anchor>
+
+<div
+  className="grid gap-2 grid-flow-row"
+  style={{ gridTemplateColumns: "repeat(auto-fill, 8rem)" }}
+>
+  {Panatone.map((c) => (
+    <div
+      key={"panatone" + c.color}
+      className="flex flex-col items-center gap-1"
+    >
+      <div
+        className="w-16 h-12 rounded-sm outline outline-dimmed cursor-pointer"
+        onClick={() => navigator.clipboard.writeText(c.color)}
+        style={{ backgroundColor: c.color }}
+      />
+      <div className="!text-xs">{c.name}</div>
+    </div>
+  ))}
+</div>

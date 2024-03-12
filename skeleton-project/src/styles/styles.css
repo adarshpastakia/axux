@@ -1,0 +1,13 @@
+/*
+ * AX/UX skeleton project
+ * @version   : 0.0.1
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "@axux/core/css/style.css";
+@import "@axux/core/css/flags.rect.css";

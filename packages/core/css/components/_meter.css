@@ -1,0 +1,129 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-meter {
+    @apply flex flex-nowrap items-center text-sm gap-x-px;
+
+    & > .ax-meter--label {
+      @apply text-muted flex-1 px-2;
+
+      font-size: 0.875em;
+    }
+
+    & > .ax-meter--bar {
+      @apply first-of-type:rounded-s last-of-type:rounded-e overflow-hidden flex-1 basis-[1rem] max-w-[12rem] relative after:absolute after:inset-0;
+
+      height: 0.75rem;
+    }
+  }
+}
+
+@layer utilities {
+  .ax-meter[data-size="sm"] {
+    @apply text-xs;
+
+    & > .ax-meter--bar {
+      @apply h-2;
+    }
+  }
+
+  .ax-meter[data-size="xs"] {
+    @apply text-xs;
+
+    & > .ax-meter--bar {
+      @apply h-1;
+    }
+  }
+
+  .ax-meter > .ax-meter--bar {
+    @apply bg-muted;
+
+    &::after {
+      @apply end-auto;
+
+      width: inherit;
+    }
+  }
+
+  .ax-meter > .ax-meter--bar[data-active="true"] {
+    &:nth-child(1) {
+      @apply after:bg-[#c0392b]/80;
+    }
+
+    &:nth-child(2) {
+      @apply after:bg-[#e67e22]/80;
+    }
+
+    &:nth-child(3) {
+      @apply after:bg-[#ffb142]/80;
+    }
+
+    &:nth-child(4) {
+      @apply after:bg-[#f9ca24]/80;
+    }
+
+    &:nth-child(5) {
+      @apply after:bg-[#badc58]/80;
+    }
+
+    &:nth-child(6) {
+      @apply after:bg-[#16a085]/80;
+    }
+  }
+
+  .ax-meter[data-color] > .ax-meter--bar[data-active="true"] {
+    &:nth-child(1) {
+      @apply after:bg-current after:opacity-35;
+    }
+
+    &:nth-child(2) {
+      @apply after:bg-current after:opacity-45;
+    }
+
+    &:nth-child(3) {
+      @apply after:bg-current after:opacity-55;
+    }
+
+    &:nth-child(4) {
+      @apply after:bg-current after:opacity-75;
+    }
+
+    &:nth-child(5) {
+      @apply after:bg-current after:opacity-85;
+    }
+
+    &:nth-child(6) {
+      @apply after:bg-current after:opacity-95;
+    }
+  }
+
+  .ax-meter[data-color="primary"] {
+    @apply text-primary;
+  }
+
+  .ax-meter[data-color="accent"] {
+    @apply text-accent;
+  }
+
+  .ax-meter[data-color="info"] {
+    @apply text-info;
+  }
+
+  .ax-meter[data-color="danger"] {
+    @apply text-danger;
+  }
+
+  .ax-meter[data-color="success"] {
+    @apply text-success;
+  }
+
+  .ax-meter[data-color="warning"] {
+    @apply text-warning;
+  }
+}

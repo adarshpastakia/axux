@@ -1,0 +1,97 @@
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Primary,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import {
+  Anchor,
+  ArgTypes,
+  Controls,
+  Meta,
+  Subheading,
+} from "@storybook/blocks";
+import { AxTag, AxCollapsable } from "../../src";
+import * as TagStories from "./Tag.stories";
+
+<Meta of={TagStories} />
+
+<Anchor storyId="tag">
+  <div className="invisible h-0 overflow-hidden">
+    <Subheading>Tag</Subheading>
+  </div>
+</Anchor>
+
+# Tag Labels
+
+<Description of={AxTag} />
+
+<Primary />
+
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={TagStories.Example} />
+</AxCollapsable>
+
+<Anchor storyId="variants">
+  <Subheading>Variants</Subheading>
+</Anchor>
+<Canvas withToolbar of={TagStories.Variants} />
+
+<Anchor storyId="colors">
+  <Subheading>Colors</Subheading>
+</Anchor>
+<Canvas withToolbar of={TagStories.Colors} />
+
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={TagStories.Colors} />
+</AxCollapsable>
+
+<Anchor storyId="sizes">
+  <Subheading>Sizes</Subheading>
+</Anchor>
+<Canvas withToolbar of={TagStories.Sizes} />
+
+<Anchor storyId="states">
+  <Subheading>States</Subheading>
+</Anchor>
+<Canvas withToolbar of={TagStories.States} />
+
+<hr />
+
+<Anchor storyId="props">
+  <Subheading>Props</Subheading>
+</Anchor>
+
+<ArgTypes sort="requiredFirst" of={AxTag} />
+
+<Anchor storyId="sample">
+  <Subheading>Example</Subheading>
+</Anchor>
+
+```tsx
+import { AxTag } from "@axux/core";
+
+export const TagExample = () => {
+  return (
+    <AxTag
+      color="primary"
+      fill={fillState}
+      icon={svgPath || "mdi mdi-icon" || "image.url"}
+      isDisabled={disabledState}
+      size="md"
+      tooltip={{ content: "Tooltip", color: "info", placement: "top" }}
+      onClick={clickHandler}
+      onRemove={removeHandler}
+      stopPropagation
+    >
+      Tag Label
+    </AxTag>
+  );
+};
+```
+
+import { Children } from "react";

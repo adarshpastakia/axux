@@ -20,5 +20,6 @@
     "typeRoots": ["node_modules/@types", "@types"]
   },
   "include": ["**/*.ts", "**/*.tsx", ".storybook/preview.tsx"],
-  "files": ["@types/global.d.ts", "./@types/i18next.d.ts"]
+  "exclude": ["skeleton-project"],
+  "files": ["./@types/global.d.ts", "./@types/i18next.d.ts"]
 }

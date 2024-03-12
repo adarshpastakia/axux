@@ -1,0 +1,187 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-popover {
+    z-index: var(--z-popover);
+  }
+
+  .ax-popover__mask {
+    @apply cursor-default;
+
+    z-index: var(--z-popover-mask);
+  }
+
+  .ax-popover__container {
+    @apply relative overflow-hidden rounded outline outline-muted shadow-md text-reset z-0 bg;
+
+    & > .ax-card,
+    & > .ax-panel {
+      @apply border-none shadow-none;
+    }
+  }
+
+  .ax-popover__arrow {
+    @apply relative shadow-lg z-10 text-invert border-transparent;
+
+    width: 10px;
+    height: 10px;
+  }
+
+  .ax-popover__arrow::before {
+    @apply absolute -inset-px;
+
+    content: "";
+    border: 6px solid;
+    border-color: inherit;
+  }
+
+  .ax-popover__arrow::after {
+    @apply absolute inset-0;
+
+    content: "";
+    border: 5px solid;
+    border-color: inherit;
+  }
+
+  .ax-popover[data-popper-placement^="top"] {
+    & .ax-popover__arrow {
+      border-top-color: currentcolor;
+      bottom: -10px;
+    }
+
+    & .ax-popover__arrow::before {
+      border-top-color: var(--ax-border-base);
+    }
+
+    & .ax-popover__arrow::after {
+      margin-top: -1px;
+    }
+  }
+
+  .ax-popover[data-popper-placement^="bottom"] {
+    & .ax-popover__arrow {
+      border-bottom-color: currentcolor;
+      top: -10px;
+    }
+
+    & .ax-popover__arrow::before {
+      border-bottom-color: var(--ax-border-base);
+    }
+
+    & .ax-popover__arrow::after {
+      margin-bottom: -1px;
+    }
+  }
+
+  .ax-popover[data-popper-placement^="left"] {
+    & .ax-popover__arrow {
+      border-left-color: currentcolor;
+      right: -10px;
+    }
+
+    & .ax-popover__arrow::before {
+      border-left-color: var(--ax-border-base);
+    }
+
+    & .ax-popover__arrow::after {
+      margin-left: -1px;
+    }
+  }
+
+  .ax-popover[data-popper-placement^="right"] {
+    & .ax-popover__arrow {
+      border-right-color: currentcolor;
+      left: -10px;
+    }
+
+    & .ax-popover__arrow::before {
+      border-right-color: var(--ax-border-base);
+    }
+
+    & .ax-popover__arrow::after {
+      margin-right: -1px;
+    }
+  }
+
+  .ax-popover.ax-tooltip {
+    @apply pointer-events-none;
+
+    z-index: var(--z-tooltip);
+
+    & .ax-popover__container {
+      @apply bg-invert text-invert outline-0 text-sm py-1 px-2;
+    }
+
+    & .ax-popover__arrow {
+      @apply text-base;
+    }
+  }
+}
+
+@layer utilities {
+  .ax-tooltip[data-color="primary"] {
+    & .ax-popover__container {
+      @apply bg-primary-base;
+    }
+
+    & .ax-popover__arrow {
+      @apply text-primary-base;
+    }
+  }
+
+  .ax-tooltip[data-color="accent"] {
+    & .ax-popover__container {
+      @apply bg-accent-base;
+    }
+
+    & .ax-popover__arrow {
+      @apply text-accent-base;
+    }
+  }
+
+  .ax-tooltip[data-color="info"] {
+    & .ax-popover__container {
+      @apply bg-info-base;
+    }
+
+    & .ax-popover__arrow {
+      @apply text-info-base;
+    }
+  }
+
+  .ax-tooltip[data-color="danger"] {
+    & .ax-popover__container {
+      @apply bg-danger-base;
+    }
+
+    & .ax-popover__arrow {
+      @apply text-danger-base;
+    }
+  }
+
+  .ax-tooltip[data-color="success"] {
+    & .ax-popover__container {
+      @apply bg-success-base;
+    }
+
+    & .ax-popover__arrow {
+      @apply text-success-base;
+    }
+  }
+
+  .ax-tooltip[data-color="warning"] {
+    & .ax-popover__container {
+      @apply bg-warning-base;
+    }
+
+    & .ax-popover__arrow {
+      @apply text-warning-base;
+    }
+  }
+}

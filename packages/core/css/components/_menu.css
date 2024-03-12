@@ -1,0 +1,121 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-menu {
+    @apply overflow-y-auto overflow-x-hidden;
+
+    & .ax-divider {
+      @apply my-0.5;
+    }
+  }
+
+  .ax-menu__item {
+    @apply flex gap-1 px-2 py-1 items-center whitespace-nowrap select-none cursor-pointer text-base;
+
+    & > * {
+      @apply pointer-events-none;
+    }
+
+    & .ax-menu__label {
+      @apply pe-4 truncate;
+    }
+  }
+
+  .ax-menu__group {
+    @apply flex gap-1 py-1 items-center whitespace-nowrap select-none font-medium text-base;
+
+    &[data-plain="false"] {
+      @apply px-2 cursor-pointer;
+    }
+
+    &[data-plain="true"] {
+      @apply text-sm text-muted;
+
+      &::after,
+      &::before {
+        @apply h-px w-6;
+
+        content: "";
+      }
+
+      &::after {
+        @apply flex-auto;
+      }
+
+      & .ax-menu__label {
+        @apply flex-initial min-w-0 truncate;
+      }
+    }
+  }
+
+  .ax-menu__label {
+    @apply flex-auto;
+  }
+
+  .ax-menu__mini {
+    @apply relative select-none cursor-pointer block leading-none;
+
+    & .ax-menu__icon {
+      @apply text-xl p-2 pointer-events-none;
+    }
+
+    & .ax-badge {
+      @apply absolute top-0 end-0;
+    }
+  }
+
+  .ax-menu__item,
+  .ax-menu__mini,
+  .ax-menu__group {
+    &:hover {
+      background-color: color-mix(
+        in lab,
+        var(--current-color, var(--ax-primary)) 36%,
+        var(--ax-bg)
+      );
+    }
+
+    &:active {
+      @apply shadow-inner;
+
+      background-color: color-mix(
+        in lab,
+        var(--current-color, var(--ax-primary)) 24%,
+        var(--ax-bg)
+      );
+
+      --tw-shadow-color: rgb(0 0 0 / 32%);
+    }
+  }
+
+  .ax-menu__mini,
+  .ax-menu__group {
+    &[data-popover-open="true"] {
+      @apply text-primary bg-primary pointer-events-none;
+    }
+  }
+
+  .ax-menu__item,
+  .ax-menu__mini {
+    &.active,
+    &[data-active="true"] {
+      @apply text-white bg-primary-base pointer-events-none;
+
+      background-color: color-mix(
+        in lab,
+        var(--current-color, var(--ax-primary)) 75%,
+        var(--ax-gray)
+      );
+    }
+
+    &[data-disabled="true"] {
+      @apply text-muted opacity-70 pointer-events-none;
+    }
+  }
+}

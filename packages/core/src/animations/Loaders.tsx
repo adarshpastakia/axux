@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -51,15 +51,15 @@ export const Card: FC<
   return (
     <div className="card-animation">
       <div className={`animate-pulse flex space-x-4 ${className}`}>
-        {showIcon && <div className="rounded-full bg-current h-10 w-10"></div>}
+        {showIcon && <figure className="rounded-full" />}
         <div className="flex-1 space-y-3 py-1">
-          <div className="h-2 bg-current rounded"></div>
+          <span />
           <div className="space-y-3">
             <div className="grid grid-cols-3 gap-4">
-              <div className="h-2 bg-current rounded col-span-2"></div>
-              <div className="h-2 bg-current rounded col-span-1"></div>
+              <span className="col-span-2" />
+              <span className="col-span-1" />
             </div>
-            <div className="h-2 bg-current rounded"></div>
+            <span />
           </div>
         </div>
       </div>

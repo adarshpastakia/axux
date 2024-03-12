@@ -1,0 +1,96 @@
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Primary,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import {
+  Anchor,
+  ArgTypes,
+  Controls,
+  Meta,
+  Subheading,
+} from "@storybook/blocks";
+import {
+  AxAside,
+  AxButton,
+  AxCollapsable,
+  AxContent,
+  AxSection,
+} from "../../src";
+import * as SectionStories from "./0.Section.stories";
+import * as ContentStories from "./1.Content.stories";
+import * as AsideStories from "./2.Aside.stories";
+
+<Meta of={SectionStories} />
+
+# Page Elements
+
+Page section elements using CSS grid layout
+
+<Anchor storyId="section">
+  <Subheading>Section</Subheading>
+</Anchor>
+
+<Description of={AxSection} />
+
+<Primary />
+
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={SectionStories.Section} />
+</AxCollapsable>
+
+<Anchor storyId="content">
+  <Subheading>Content</Subheading>
+</Anchor>
+<Description of={AxContent} />
+<Canvas withToolbar of={ContentStories.Content} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={ContentStories.Content} />
+</AxCollapsable>
+
+<Anchor storyId="aside">
+  <Subheading>Aside</Subheading>
+</Anchor>
+<Description of={AxAside} />
+<Canvas withToolbar of={AsideStories.Aside} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={AsideStories.Aside} />
+</AxCollapsable>
+
+<hr />
+
+<Anchor storyId="props">
+  <Subheading>Props</Subheading>
+</Anchor>
+
+<ArgTypes sort="requiredFirst" />
+
+<Anchor storyId="sample">
+  <Subheading>Example</Subheading>
+</Anchor>
+
+```tsx
+import { AxAside, AxContent, AxFooter, AxHeader, AxSection } from "@axux/core";
+
+export const SectionExample = () => {
+  return (
+    <AxSection>
+      <AxHeader>Header goes here</AxHeader>
+      <AxFooter>Footer goes here</AxFooter>
+      <AxAside align="start" width={300}>
+        <AxContent>Left side panel</AxContent>
+      </AxAside>
+      <AxAside align="end" width={300}>
+        <AxContent>Right side panel</AxContent>
+      </AxAside>
+      <AxContent>Padded scrollable content</AxContent>
+    </AxSection>
+  );
+};
+```

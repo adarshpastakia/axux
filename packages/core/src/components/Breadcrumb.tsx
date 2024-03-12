@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -75,7 +75,7 @@ export const AxBreadcrumb: FC<BreadcrumbProps> = ({
     <div className="ax-breadcrumb" data-theme={theme} data-color={color}>
       {start.map(Crumb)}
       {rest.length > 0 && (
-        <AxPopover>
+        <AxPopover showArrow placement="bottom">
           <div className="ax-breadcrumb__item">
             <span>...</span>
           </div>

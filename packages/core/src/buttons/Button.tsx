@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -7,12 +7,7 @@
  */
 
 import { handleClick } from "@axux/utilities/src/handlers";
-import {
-  forwardRef,
-  useMemo,
-  type FC,
-  type ForwardRefExoticComponent,
-} from "react";
+import { forwardRef, useMemo, type FC } from "react";
 import { AxAnimation } from "../animations";
 import { Link, type LinkProps } from "../components/Link";
 import { useBadge } from "../hooks/useBadge";
@@ -48,7 +43,7 @@ export interface ButtonProps
   /**
    * color
    */
-  color?: Color | "invert";
+  color?: Color;
   /**
    * button style
    */
@@ -82,13 +77,9 @@ export interface ButtonProps
    */
   isDisabled?: boolean;
   /**
-   * invert text color
+   * hide dropdown caret
    */
-  invertColor?: boolean;
-  /**
-   * show dropdown caret
-   */
-  showCaret?: boolean;
+  hideCaret?: boolean;
   /**
    * use loading spinner
    */
@@ -110,10 +101,6 @@ export interface ButtonProps
    */
   hotKey?: string;
   /**
-   * dont propagate click event
-   */
-  stopPropagation?: boolean;
-  /**
    * navigation props
    */
   nav?: LinkProps;
@@ -124,6 +111,12 @@ export interface ButtonGroupProps extends ElementProps, ChildrenProp {
   variant?: "normal" | "flat" | "plain";
 }
 
+/**
+ * Button group
+ * @prop className
+ * @prop isVertical
+ * @prop variant - normal | flat | plain
+ */
 export const ButtonGroup: FC<ButtonGroupProps> = ({
   children,
   variant = "normal",
@@ -142,14 +135,12 @@ export const ButtonGroup: FC<ButtonGroupProps> = ({
 );
 
 /**
- * Action button
+ * A simple clickable element used to trigger a specific action or function in the user interface
  */
-export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
-  Action: typeof ActionButton;
-  Confirm: typeof ConfirmButton;
-  Dropdown: typeof DropdownButton;
-  Group: typeof ButtonGroup;
-} = forwardRef<HTMLElement, ButtonProps>((props, ref) => {
+export const ButtonComponent: FC<ButtonProps> = forwardRef<
+  HTMLElement,
+  ButtonProps
+>((props, ref) => {
   const {
     icon,
     variant: style,
@@ -165,11 +156,10 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
     isRound = false,
     isLoading = false,
     isDisabled = false,
-    showCaret,
+    hideCaret = true,
     tooltip,
     badge,
     fullWidth,
-    invertColor,
     hotKey,
     onClick,
     useSpinner,
@@ -188,6 +178,12 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
 
   const tooltipProps = useMemo(() => getTooltipProps(tooltip), [tooltip]);
 
+  const clickHandler = useMemo(() => {
+    if (!isDisabled && !isLoading && !isActive) {
+      return handleClick(onClick, { stopPropagation });
+    }
+  }, [onClick, isActive, isDisabled, isLoading, stopPropagation]);
+
   /** ***************** component *******************/
   return (
     <div
@@ -203,7 +199,6 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
       data-loading={isLoading}
       data-disabled={isDisabled}
       data-icon-align={iconAlign}
-      data-invert={invertColor}
       className={`ax-button ${className ?? ""}`}
     >
       {hotKey && <AxHotKey keyCombo={hotKey} handler={onClick} />}
@@ -215,7 +210,7 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
         role="button"
         ref={ref}
         className="ax-button__inner"
-        onClick={handleClick(onClick, { stopPropagation })}
+        onClick={clickHandler}
         data-disabled={isDisabled || isLoading}
         data-popover-open={popoverOpen}
         {...tooltipProps}
@@ -230,18 +225,22 @@ export const AxButton: ForwardRefExoticComponent<ButtonProps> & {
         {children && <div className="ax-button__label">{children}</div>}
         {Badge}
         {hotKey && <AxHotKey.Label keyCombo={hotKey} />}
-        {showCaret && (
+        {!hideCaret && (
           <AxIcon className="ax-button__caret" icon={AppIcons.iconCaretDown} />
         )}
       </Link>
       {extra}
     </div>
   );
-}) as AnyObject;
-AxButton.Action = ActionButton;
-AxButton.Confirm = ConfirmButton;
-AxButton.Dropdown = DropdownButton;
-AxButton.Group = ButtonGroup;
+});
+ButtonComponent.displayName = "AxButton";
+
+export const AxButton = Object.assign(ButtonComponent, {
+  Group: ButtonGroup,
+  Action: ActionButton,
+  Confirm: ConfirmButton,
+  Dropdown: DropdownButton,
+});
 
 AxButton.displayName = "AxButton";
 AxButton.Action.displayName = "AxButton.Action";

@@ -1,0 +1,63 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-icon {
+    @apply inline-block size-[1em] overflow-hidden px-px leading-none relative select-none text-center;
+
+    box-sizing: content-box;
+
+    & > i,
+    & > svg,
+    & > img {
+      @apply block size-[1em] overflow-hidden pointer-events-none object-cover fill-current;
+    }
+
+    &[data-flip="true"] {
+      @apply rtl:-scale-x-100;
+    }
+
+    & > i::before {
+      @apply leading-none align-top;
+    }
+
+    &[data-animate="spin"] {
+      @apply animate-spin;
+    }
+
+    &[data-animate="bounce"] {
+      @apply animate-bounce;
+    }
+  }
+
+  .ax-avatar {
+    @apply inline-block aspect-square leading-none overflow-hidden relative select-none align-middle text-center rounded-full bg-muted;
+
+    box-shadow:
+      0 0 0 1px var(--ax-border-base),
+      inset 0 1px 2px 0 var(--ax-shadow-base);
+    padding: min(0.25em, 0.5rem);
+
+    & > img:not([data-show]) {
+      transform: translateY(-150%);
+    }
+
+    & > .ax-icon {
+      margin-top: 1px;
+      border-radius: inherit;
+    }
+
+    & > img,
+    & > svg {
+      @apply block !size-[1em] mt-px overflow-hidden pointer-events-none object-cover fill-current;
+
+      color: transparent;
+      border-radius: inherit;
+    }
+  }
+}

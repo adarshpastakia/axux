@@ -1,117 +1,130 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
  * @license   : MIT
  */
 
-@layer reset {
+@layer colors {
   :root {
-    /* black/white */
-    --ax-black: #12181c;
-    --ax-white: #ffffff;
+    --mix-mode: lab;
 
-    /* control colors */
-    --ax-info: #0abde3;
-    --ax-danger: #ff3838;
-    --ax-success: #27ae60;
-    --ax-warning: #f97d07;
+    /* app default colors */
+    --ax-white: theme(colors.white);
+    --ax-black: theme(colors.black);
+    --ax-gray: theme(colors.silver);
 
-    /* palette */
-    --ax-blue: #4b7bec;
-    --ax-green: #1abc9c;
-    --ax-red: #fa3429;
-    --ax-orange: #ffa901;
-    --ax-violet: #e154e1;
-    --ax-purple: #a660ec;
-    --ax-pink: #fc427b;
-    --ax-brown: #9b6c33;
+    /* app default primary */
+    --ax-primary: theme(colors.denim);
+    --ax-accent: theme(colors.jade);
 
-    /* grayscale */
-    --ax-gray: #879797;
-    --ax-grayblue: #89a7be;
-    --ax-graygreen: #89a8a9;
-    --ax-graybrown: #88857c;
+    /* app default controls */
+    --ax-info: theme(colors.info);
+    --ax-danger: theme(colors.danger);
+    --ax-success: theme(colors.success);
+    --ax-warning: theme(colors.warning);
   }
 
-  /* app grayscale */
-  :root {
-    --ax-gr: var(--ax-gray);
-  }
-  :root[data-gray-scheme="grayblue"] {
-    --ax-gr: var(--ax-grayblue);
-  }
-  :root[data-gray-scheme="graygreen"] {
-    --ax-gr: var(--ax-graygreen);
-  }
-  :root[data-gray-scheme="graybrown"] {
-    --ax-gr: var(--ax-graybrown);
+  [data-gray-scheme="olive"] {
+    --ax-gray: theme(colors.olive);
   }
 
-  /* color scheme */
-  [data-color-scheme="light"] {
-    --ax-scheme: light;
-    --ax-bg: var(--ax-white);
-    --ax-text: var(--ax-black);
+  [data-gray-scheme="steel"] {
+    --ax-gray: theme(colors.steel);
   }
-  [data-color-scheme="dark"] {
-    --ax-scheme: dark;
-    --ax-bg: var(--ax-black);
-    --ax-text: var(--ax-white);
+
+  [data-gray-scheme="sand"] {
+    --ax-gray: theme(colors.sand);
   }
 
   /* primary color scheme */
-  [data-primary-scheme],
-  [data-primary-scheme="blue"] {
-    --ax-primary: var(--ax-blue);
+  [data-primary-scheme="scarlet"] {
+    --ax-primary: theme(colors.scarlet);
   }
-  [data-primary-scheme="red"] {
-    --ax-primary: var(--ax-red);
+
+  [data-primary-scheme="pumpkin"] {
+    --ax-primary: theme(colors.pumpkin);
   }
-  [data-primary-scheme="green"] {
-    --ax-primary: var(--ax-green);
+
+  [data-primary-scheme="jade"] {
+    --ax-primary: theme(colors.jade);
   }
-  [data-primary-scheme="orange"] {
-    --ax-primary: var(--ax-orange);
+
+  [data-primary-scheme="denim"] {
+    --ax-primary: theme(colors.denim);
   }
-  [data-primary-scheme="pink"] {
-    --ax-primary: var(--ax-pink);
+
+  [data-primary-scheme="iris"] {
+    --ax-primary: theme(colors.iris);
   }
-  [data-primary-scheme="violet"] {
-    --ax-primary: var(--ax-violet);
+
+  [data-primary-scheme="lilac"] {
+    --ax-primary: theme(colors.lilac);
   }
-  [data-primary-scheme="purple"] {
-    --ax-primary: var(--ax-purple);
+
+  [data-primary-scheme="coral"] {
+    --ax-primary: theme(colors.coral);
   }
-  [data-primary-scheme="brown"] {
-    --ax-primary: var(--ax-brown);
+
+  [data-primary-scheme="wood"] {
+    --ax-primary: theme(colors.wood);
   }
 
   /* accent color scheme */
-  [data-primary-scheme],
-  [data-accent-scheme="blue"] {
-    --ax-accent: var(--ax-blue);
+  [data-accent-scheme="scarlet"] {
+    --ax-accent: theme(colors.scarlet);
   }
-  [data-accent-scheme="red"] {
-    --ax-accent: var(--ax-red);
+
+  [data-accent-scheme="pumpkin"] {
+    --ax-accent: theme(colors.pumpkin);
   }
-  [data-accent-scheme="green"] {
-    --ax-accent: var(--ax-green);
+
+  [data-accent-scheme="jade"] {
+    --ax-accent: theme(colors.jade);
   }
-  [data-accent-scheme="orange"] {
-    --ax-accent: var(--ax-orange);
+
+  [data-accent-scheme="denim"] {
+    --ax-accent: theme(colors.denim);
   }
-  [data-accent-scheme="pink"] {
-    --ax-accent: var(--ax-pink);
+
+  [data-accent-scheme="iris"] {
+    --ax-accent: theme(colors.iris);
   }
-  [data-accent-scheme="violet"] {
-    --ax-accent: var(--ax-violet);
+
+  [data-accent-scheme="lilac"] {
+    --ax-accent: theme(colors.lilac);
   }
-  [data-accent-scheme="purple"] {
-    --ax-accent: var(--ax-purple);
+
+  [data-accent-scheme="coral"] {
+    --ax-accent: theme(colors.coral);
   }
-  [data-accent-scheme="brown"] {
-    --ax-accent: var(--ax-brown);
+
+  [data-accent-scheme="wood"] {
+    --ax-accent: theme(colors.wood);
+  }
+
+  .text-primary {
+    --current-color: var(--ax-primary);
+  }
+
+  .text-accent {
+    --current-color: var(--ax-accent);
+  }
+
+  .text-info {
+    --current-color: var(--ax-info);
+  }
+
+  .text-danger {
+    --current-color: var(--ax-danger);
+  }
+
+  .text-success {
+    --current-color: var(--ax-success);
+  }
+
+  .text-warning {
+    --current-color: var(--ax-warning);
   }
 }

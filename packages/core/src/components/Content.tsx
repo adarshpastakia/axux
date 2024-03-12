@@ -1,12 +1,14 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
  * @license   : MIT
  */
 
-import { forwardRef, type FC, type UIEventHandler } from "react";
+import { type FC, type UIEventHandler } from "react";
+import { AxErrorBoundary } from "../application/ErrorBoundary";
+import { useResizeObserver } from "../hooks/useResizeObserver";
 import {
   type ChildrenProp,
   type ElementProps,
@@ -15,7 +17,7 @@ import {
 } from "../types";
 import { EmptyContent } from "./EmptyContent";
 
-type Props = ElementProps &
+export type Props = ElementProps &
   ChildrenProp &
   RefProp<HTMLDivElement> & {
     /**
@@ -26,21 +28,39 @@ type Props = ElementProps &
      * scroll handler
      */
     onScroll?: UIEventHandler;
+    /**
+     * Resize handler
+     *
+     * @param { width, height }
+     */
+    onResize?: (rect: { width: number; height: number }) => void;
   };
 /**
- * content panel
+ * A simple scrollable content area with padding
  */
-export const AxContent: FC<Props> & { Empty: typeof EmptyContent } = forwardRef<
-  HTMLDivElement,
-  Props
->(({ className, padding, ...rest }: Props, ref) => (
-  <div
-    {...rest}
-    ref={ref}
-    data-padding={padding}
-    className={`ax-content ${className ?? ""}`}
-  />
-)) as AnyObject;
-AxContent.Empty = EmptyContent;
+export const ContentRoot: FC<Props> = (({
+  className,
+  padding,
+  onResize,
+  children,
+  ...rest
+}: Props) => {
+  const resizeHandle = useResizeObserver(onResize);
+  return (
+    <div
+      {...rest}
+      ref={resizeHandle}
+      data-padding={padding}
+      className={`ax-content ${className ?? ""}`}
+    >
+      <AxErrorBoundary>{children}</AxErrorBoundary>
+    </div>
+  );
+}) as AnyObject;
+
+export const AxContent = Object.assign(ContentRoot, {
+  Empty: EmptyContent,
+});
+
 AxContent.displayName = "AxContent";
 AxContent.Empty.displayName = "AxContent.Empty";

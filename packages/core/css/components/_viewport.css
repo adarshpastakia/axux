@@ -1,0 +1,91 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+/******************* viewport *******************/
+@layer components {
+  .ax-viewport {
+    @apply grid-layout fixed inset-0 w-full h-full;
+
+    background-color: var(--ax-bg-viewport);
+    grid-template-areas: "head head head" "crumbbar crumbbar crumbbar" "side-s content side-e" "foot foot foot";
+    grid-template-rows: auto auto 1fr auto;
+
+    & .ax-banner {
+      @apply absolute top-0 left-1/2 -translate-x-1/2 shadow-sm leading-none py-1 px-4 text-sm min-w-[12em] max-w-[70%] rounded-b-md;
+
+      & span:last-child {
+        @apply ms-4;
+      }
+    }
+
+    & > .ax-page {
+      @apply overflow-hidden grid-area-content;
+
+      & .ax-page__title {
+        @apply grid-area-head text-primary flex items-center justify-center gap-1 font-medium;
+      }
+    }
+
+    & > .ax-breadcrumb {
+      @apply grid-area-[crumbbar];
+
+      & ~ .ax-page.ax-paper {
+        @apply mt-0.5;
+      }
+    }
+  }
+}
+
+/******************* page *******************/
+@layer components {
+  .ax-page {
+    @apply grid-layout relative z-0;
+
+    background-color: var(--ax-bg-page);
+
+    & ~ .ax-footer,
+    & ~ .ax-breadrcumb {
+      @apply !m-0;
+    }
+  }
+}
+
+/******************* error boundary *******************/
+@layer components {
+  .ax-error-boundary {
+    @apply grid overflow-hidden rounded bg-repeat;
+
+    padding: 3px;
+    grid-template-rows: 1fr;
+    background-color: theme(colors.red.500);
+    box-shadow: 0 0 2px 0 theme(colors.gray.500/0.5) inset;
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgba(255 255 255 / 50%) 0 12px,
+      rgba(255 255 255 / 20%) 12px 24px
+    );
+
+    & > div {
+      @apply grid overflow-hidden bg-base rounded;
+
+      grid-template-rows: auto auto 1fr;
+      box-shadow: 0 0 2px 1px theme(colors.red.500/0.5) inset;
+    }
+
+    & hr,
+    & pre {
+      @apply m-0;
+    }
+  }
+
+  .ax-page > .ax-error-boundary,
+  .ax-section > .ax-error-boundary,
+  .ax-viewport > .ax-error-boundary {
+    @apply grid-area-content max-h-[80%] max-w-[80%] place-self-center;
+  }
+}

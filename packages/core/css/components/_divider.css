@@ -1,0 +1,133 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-divider {
+    @apply flex flex-nowrap items-center self-stretch select-none my-2;
+
+    color: var(--dv-color, var(--ax-text-dimmed));
+
+    & > hr {
+      @apply flex-auto m-0 border-b-[var(--dv-color,var(--ax-border-base))] border-r-[var(--dv-color,var(--ax-border-base))];
+    }
+
+    & > div {
+      @apply flex-initial rounded;
+
+      line-height: 1.5em;
+      padding-inline: 0.5em;
+    }
+  }
+
+  .ax-divider:not([data-vertical="true"]) > hr {
+    border-bottom-width: calc(var(--dv-width) * 1px);
+  }
+
+  .ax-divider[data-vertical="true"],
+  .ax-header > .ax-divider,
+  .ax-row > .ax-divider {
+    @apply flex-col self-stretch mx-2 my-0;
+
+    & > hr {
+      @apply border-y-0 border-x scale-x-50 scale-y-90;
+
+      border-right-width: calc(var(--dv-width) * 1px);
+    }
+  }
+
+  .ax-divider[data-has-label="true"][data-align="start"] hr:first-of-type,
+  .ax-divider[data-has-label="true"][data-align="end"] hr:last-of-type {
+    @apply flex-initial basis-4;
+  }
+
+  .ax-divider[data-bg="true"] {
+    & > div {
+      @apply bg-current;
+
+      & > * {
+        @apply text-invert;
+      }
+    }
+  }
+
+  .ax-divider[data-rainbow="true"] {
+    &[data-vertical="false"] > hr {
+      height: calc(var(--dv-width) * 1px);
+    }
+
+    &[data-vertical="true"] > hr {
+      width: calc(var(--dv-width) * 1px);
+    }
+
+    & > hr {
+      @apply border-0 h-0.5 scale-100;
+
+      background: linear-gradient(
+        90deg,
+        #6366f1 0%,
+        #6366f1 17%,
+        #0ea5e9 17%,
+        #0ea5e9 34%,
+        #16a34a 34%,
+        #16a34a 51%,
+        #eab308 51%,
+        #eab308 67%,
+        #f97316 67%,
+        #f97316 83%,
+        #dc2626 83%,
+        #dc2626 100%
+      );
+    }
+
+    &[data-has-label="true"] hr:first-of-type {
+      background: linear-gradient(
+        90deg,
+        #6366f1 0%,
+        #6366f1 33%,
+        #0ea5e9 33%,
+        #0ea5e9 66%,
+        #16a34a 66%,
+        #16a34a 100%
+      );
+    }
+
+    &[data-has-label="true"] hr:last-of-type {
+      background: linear-gradient(
+        90deg,
+        #eab308 0%,
+        #eab308 33%,
+        #f97316 33%,
+        #f97316 66%,
+        #dc2626 66%,
+        #dc2626 100%
+      );
+    }
+  }
+}
+
+@layer utilities {
+  .ax-divider[data-size="sm"] {
+    &[data-vertical="true"] {
+      @apply mx-1;
+    }
+
+    &:not([data-vertical="true"]) {
+      @apply my-1;
+    }
+  }
+
+  .ax-divider[data-size="md"] {
+    &[data-vertical="true"] {
+      @apply mx-4;
+    }
+
+    &:not([data-vertical="true"]) {
+      @apply my-4;
+    }
+  }
+}

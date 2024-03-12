@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -8,6 +8,7 @@
 
 import { useCallback, useLayoutEffect, useRef, useState, type FC } from "react";
 import { Indicator } from "../animations";
+import { AxErrorBoundary } from "../application/ErrorBoundary";
 import { AxButton } from "../buttons/Button";
 import { usePropToggle } from "../hooks/usePropToggle";
 import { useResize } from "../hooks/useResize";
@@ -92,7 +93,7 @@ export interface AsideProps
 }
 
 /**
- * Aside panel
+ * A collapsable, resizable side panel
  */
 export const AxAside: FC<AsideProps> = ({
   children,
@@ -112,8 +113,8 @@ export const AxAside: FC<AsideProps> = ({
   onFlyout,
   isResizeable,
   width: wd = "10rem",
-  minWidth = "2em",
-  maxWidth = "35vw",
+  minWidth = "6em",
+  maxWidth = "25vw",
   align = "start",
   actions,
   ...aria
@@ -168,6 +169,11 @@ export const AxAside: FC<AsideProps> = ({
       data-flyout={peek}
       onClick={tryPeek}
       role="none"
+      style={{
+        width,
+        minWidth,
+        maxWidth,
+      }}
       {...aria}
     >
       {(!!title || !!isFlyout || !!isCollapsable) && (
@@ -205,14 +211,16 @@ export const AxAside: FC<AsideProps> = ({
       <div
         ref={elementRef}
         className="ax-side__body"
-        style={{
-          width,
-          minWidth,
-          maxWidth,
-        }}
+        style={
+          collapsed
+            ? {
+                width,
+              }
+            : undefined
+        }
       >
         {isLoading && <Indicator />}
-        {children}
+        <AxErrorBoundary>{children}</AxErrorBoundary>
       </div>
       {isResizeable && (
         <div ref={resizeHandleRef} className="ax-side__resizeHandle" />

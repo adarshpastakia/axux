@@ -37,17 +37,21 @@
     "@axux/utilities": "^4.0.0",
     "@headlessui/react": "^1.7.18",
     "@popperjs/core": "^2.11.8",
-    "react-helmet-async": "^2.0.4"
-  },
-  "peerDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
     "i18next": "^23.10.0",
     "i18next-browser-languagedetector": "^7.2.0",
-    "react": "next",
-    "react-dom": "next",
+    "boring-avatars": "^1.10.1",
+    "react-helmet-async": "^2.0.4",
     "react-i18next": "^14.1.0",
     "react-popper": "^2.3.0",
-    "react-router-dom": "^6.22.0",
-    "resize-observer-polyfill": "^1.5.0"
+    "resize-observer-polyfill": "^1.5.0",
+    "tailwindcss": "^3.4.1"
+  },
+  "peerDependencies": {
+    "react": "next",
+    "react-dom": "next",
+    "react-router-dom": "^6.22.0"
   },
   "engines": {
     "node": ">=18",

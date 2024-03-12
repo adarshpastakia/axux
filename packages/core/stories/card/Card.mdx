@@ -1,0 +1,76 @@
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Primary,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import {
+  Anchor,
+  ArgTypes,
+  Controls,
+  Meta,
+  Subheading,
+} from "@storybook/blocks";
+import { AxCollapsable, AxCard } from "../../src";
+import * as CardStories from "./Card.stories";
+
+<Meta of={CardStories} />
+
+<Anchor storyId="card">
+  <div className="invisible h-0 overflow-hidden">
+    <Subheading>Card</Subheading>
+  </div>
+</Anchor>
+
+# Display Cards
+
+<Description of={AxCard} />
+
+<Primary />
+
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={CardStories.Example} />
+</AxCollapsable>
+
+<Anchor storyId="clickable">
+  <Subheading>Clickable</Subheading>
+</Anchor>
+<Canvas withToolbar of={CardStories.Clickable} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={CardStories.Clickable} />
+</AxCollapsable>
+
+<hr />
+
+<Anchor storyId="props">
+  <Subheading>Props</Subheading>
+</Anchor>
+
+<ArgTypes sort="requiredFirst" of={AxCard} />
+
+<Anchor storyId="sample">
+  <Subheading>Example</Subheading>
+</Anchor>
+
+```tsx
+import { AxCard } from "@axux/core";
+
+export const TagExample = () => {
+  return (
+    <AxCard>
+      <AxHeader>
+        <AxIcon className="mdi mdi-alien" />
+        <AxTitle>Card title</AxTitle>
+      </AxHeader>
+      <AxContent>...</AxContent>
+      <AxFooter justify="end">
+        <AxButton>Click</AxButton>
+      </AxFooter>
+    </AxCard>
+  );
+};
+```

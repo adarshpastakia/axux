@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -136,12 +136,12 @@ const MenuTitle: FC<ElementProps & ChildProp> = ({ children, className }) => {
   return <div className={`px-4 text-muted ${className ?? ""}`}>{children}</div>;
 };
 
-export const AxMenu: FC<MenuProps> & {
-  Item: typeof MenuItem;
-  Mini: typeof MenuMini;
-  Group: typeof MenuGroup;
-  Title: typeof MenuTitle;
-} = ({ children, onClick, className, ...rest }: MenuProps) => {
+export const MenuRoot: FC<MenuProps> = ({
+  children,
+  onClick,
+  className,
+  ...rest
+}: MenuProps) => {
   const handleMenuClick = useCallback((e: ReactMouseEvent) => {
     const id = (e.target as HTMLElement).dataset.id;
     id && onClick?.(id);
@@ -152,7 +152,6 @@ export const AxMenu: FC<MenuProps> & {
         static
         {...rest}
         onMouseUp={handleMenuClick}
-        ref={(el: AnyObject) => el?.focus()}
         className={`ax-menu ${className ?? ""}`}
       >
         {children}
@@ -161,10 +160,12 @@ export const AxMenu: FC<MenuProps> & {
   );
 };
 
-AxMenu.Item = MenuItem;
-AxMenu.Mini = MenuMini;
-AxMenu.Group = MenuGroup;
-AxMenu.Title = MenuTitle;
+export const AxMenu = Object.assign(MenuRoot, {
+  Item: MenuItem,
+  Mini: MenuMini,
+  Group: MenuGroup,
+  Title: MenuTitle,
+});
 
 AxMenu.Item.displayName = "AxMenu.Item";
 AxMenu.Mini.displayName = "AxMenu.Mini";

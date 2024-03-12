@@ -1,0 +1,50 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+/******************* collapsable *******************/
+@layer components {
+  .ax-collapsable {
+    &[data-sticky-head="true"] .ax-collapsable__head {
+      @apply bg-base sticky top-0 px-4 py-2 z-10;
+    }
+
+    & .ax-collapsable__head {
+      @apply flex flex-nowrap items-center cursor-pointer;
+
+      &[data-disabled="true"] {
+        @apply cursor-default;
+
+        & > .ax-icon {
+          @apply text-muted;
+        }
+      }
+
+      & > div {
+        @apply flex-1;
+      }
+
+      & .ax-title {
+        @apply flex-1 select-none;
+      }
+
+      & > .ax-icon {
+        @apply p-2 text-sm;
+      }
+
+      & .ax-button {
+        @apply m-0;
+      }
+    }
+
+    & .ax-collapsable__body {
+      & > .ax-content {
+        @apply p-2;
+      }
+    }
+  }
+}

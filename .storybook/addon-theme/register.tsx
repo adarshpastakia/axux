@@ -1,15 +1,15 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
  * @license   : MIT
  */
 
-import { addons, types } from "@storybook/addons";
-import { API, useGlobals, useParameter } from "@storybook/api";
+import { useGlobals, useParameter, useStorybookApi } from "@storybook/api";
 import { IconButton } from "@storybook/components";
-import { ThemeVars, ensure, themes } from "@storybook/theming";
+import { SunIcon, MoonIcon } from "@storybook/icons";
+import { ThemeVars, themes } from "@storybook/theming";
 import React, { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "storybook-theme";
@@ -24,7 +24,8 @@ interface ThemeToggleParams {
   darkTheme: ThemeVars;
 }
 
-const ThemeToggle = ({ api }: { api: API }) => {
+export const ThemeToggle = () => {
+  const api = useStorybookApi();
   const [globals, updateGlobals] = useGlobals();
   const { darkTheme = themes.dark, lightTheme = themes.light } = useParameter<
     Partial<ThemeToggleParams>
@@ -54,42 +55,14 @@ const ThemeToggle = ({ api }: { api: API }) => {
   }, [globals.locale]);
 
   useEffect(() => {
-    api.getChannel()?.emit("PRIMARY_CHANGED", globals.primary);
-  }, [globals.primary]);
-
-  useEffect(() => {
-    api.getChannel()?.emit("ACCENT_CHANGED", globals.accent);
-  }, [globals.accent]);
-
-  useEffect(() => {
-    refreshAndUpdateGlobal(
-      theme,
-      theme === THEME.DARK ? darkTheme : lightTheme,
-    );
-  }, [theme, darkTheme, lightTheme]);
+    refreshAndUpdateGlobal(theme, {
+      ...(theme === THEME.DARK ? darkTheme : lightTheme),
+    });
+  }, [theme, darkTheme, lightTheme, globals.primary, globals.accent]);
 
   return (
-    <IconButton
-      key="ThemeToggle"
-      title="Toggle theme"
-      active={theme === THEME.DARK}
-      onClick={toggleTheme}
-    >
-      <svg viewBox="0 0 32 32">
-        <path
-          fill="currentColor"
-          d="M10.895 7.574c0 7.55 5.179 13.67 11.567 13.67 1.588 0 3.101-0.38 4.479-1.063-1.695 4.46-5.996 7.636-11.051 7.636-6.533 0-11.83-5.297-11.83-11.83 0-4.82 2.888-8.959 7.023-10.803-0.116 0.778-0.188 1.573-0.188 2.39z"
-        />
-      </svg>
+    <IconButton key="ThemeToggle" title="Toggle theme" onClick={toggleTheme}>
+      {theme === THEME.DARK ? <SunIcon /> : <MoonIcon />}
     </IconButton>
   );
 };
-
-addons.register("storybook/theme-toggle", (api) => {
-  addons.add("storybook/theme-toggle/button", {
-    title: "Theme toggle",
-    type: types.TOOL,
-    match: ({ viewMode }) => viewMode === "story" || viewMode === "docs",
-    render: () => <ThemeToggle api={api} />,
-  });
-});

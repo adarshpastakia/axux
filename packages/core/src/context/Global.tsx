@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -21,6 +21,7 @@ import {
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useLocalStorage } from "../hooks/useStorage";
 import { TooltipWatcher } from "../hooks/useTooltip";
+import { type COLORS, type COLOR_SCHEME } from "../types";
 import {
   NotificationContainer,
   type NotificationRef,
@@ -28,20 +29,10 @@ import {
 import { OverlayContainer, type OverlayRef } from "./OverlayContainer";
 
 type CALENDARS = "gregorian" | "hijri";
-type COLORS =
-  | "blue"
-  | "green"
-  | "red"
-  | "orange"
-  | "purple"
-  | "pink"
-  | "violet"
-  | "brown";
-type MODES = "light" | "dark";
 
 interface State {
-  mode: MODES;
-  theme: COLORS;
+  colorScheme: COLOR_SCHEME;
+  primary: COLORS;
   accent: COLORS;
   locale: string;
   calendar: CALENDARS;
@@ -67,24 +58,21 @@ export interface GlobalProps extends PropsWithChildren {
 
   /**
    * default color scheme
-   * @param "light" | "dark"
    */
-  defaultMode?: State["mode"];
+  defaultColorScheme?: State["colorScheme"];
   /**
    * default i18n locale
-   * @param "en" | "ar"
    */
   defaultLocale?: string;
   /**
    * default calendar type
-   * @param "gregorian" | "hijri"
    */
   defaultCalendar?: State["calendar"];
 
   /**
    * default primary theme color
    */
-  defaultTheme?: State["theme"];
+  defaultPrimary?: State["primary"];
   /**
    * default accent theme color
    */
@@ -93,11 +81,11 @@ export interface GlobalProps extends PropsWithChildren {
 
 interface GlobalContextType {
   /**
-   * toggle theme between light and dark
-   * or force to theme provided
+   * toggle color scheme between light and dark
+   * or force to scheme provided
    * @param theme
    */
-  toggleMode: (theme?: State["mode"]) => void;
+  toggleColorScheme: (scheme?: State["colorScheme"]) => void;
   /**
    * change language locale
    * @param locale
@@ -112,7 +100,7 @@ interface GlobalContextType {
    * change primary theme color
    * @param color
    */
-  changeTheme: (color: State["theme"]) => void;
+  changePrimary: (color: State["primary"]) => void;
   /**
    * change accent theme color
    * @param color
@@ -131,11 +119,11 @@ interface GlobalContextType {
   /**
    * current color scheme
    */
-  currentMode: State["mode"];
+  currentColorScheme: State["colorScheme"];
   /**
    * current primary theme color
    */
-  currentTheme: State["theme"];
+  currentPrimary: State["primary"];
   /**
    * current accent theme color
    */
@@ -149,6 +137,7 @@ interface GlobalContextType {
    */
   currentCalendar: State["calendar"];
 
+  portalRoot: RefObject<HTMLDivElement>;
   overlayRef: RefObject<OverlayRef>;
   notificationRef: RefObject<NotificationRef>;
 }
@@ -167,7 +156,12 @@ export const GlobalContext = createContext<GlobalContextType>(
 );
 
 /**
- * global context provider
+ * The Application Provider is designed to manage and provide customization options across the application.
+ * It allows for setting user preferences for prefered color schemes, calendar type and localization locales.
+ *
+ * It also wraps the application with ReactHelmet for providing templated route titles throughout the application.
+ *
+ * > **Note**: Ensure that the Application Provider wraps around the root component of the application to make the customization options available throughout the component tree.
  */
 export const AxApplicationProvider: FC<GlobalProps> = ({
   children,
@@ -175,21 +169,26 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
   titleTemplate,
   defaultTitle,
   errorElement,
-  defaultMode,
+  defaultColorScheme,
   defaultLocale = "en",
-  defaultTheme = "blue",
-  defaultAccent = "pink",
+  defaultPrimary = "denim",
+  defaultAccent = "jade",
   defaultCalendar = "gregorian",
+  // @ts-expect-error ignore
+  forceTheme,
+  // @ts-expect-error ignore
+  forceLocale,
 }) => {
+  const portalRoot = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<OverlayRef>(null);
   const notificationRef = useRef<NotificationRef>(null);
-  const [mode, setMode] = useLocalStorage<State["mode"]>(
+  const [colorScheme, setColorScheme] = useLocalStorage<State["colorScheme"]>(
     KEY_MODE,
-    defaultMode ?? SYSTEM_MODE,
+    defaultColorScheme ?? SYSTEM_MODE,
   );
-  const [theme, setTheme] = useLocalStorage<State["theme"]>(
+  const [primary, setPrimary] = useLocalStorage<State["primary"]>(
     KEY_THEME,
-    defaultTheme,
+    defaultPrimary,
   );
   const [accent, setAccent] = useLocalStorage<State["accent"]>(
     KEY_ACCENT,
@@ -207,28 +206,18 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
   /** ***************** set initial theme and locale dir  *******************/
   useEffect(() => {
     document.documentElement.lang = locale;
-    if (document.documentElement.dataset.colorScheme == null) {
-      document.documentElement.dataset.colorScheme = mode;
-    } else {
-      setMode(
-        document.documentElement.dataset.colorScheme === "dark"
-          ? "dark"
-          : "light",
-      );
-    }
     void i18next.changeLanguage(locale).then(() => {
       document.documentElement.dir = i18next.dir();
     });
   }, []);
 
   /** ***************** theme toggle *******************/
-  const toggleMode = useCallback(
-    (forceMode?: State["mode"]) => {
-      const newMode = forceMode ?? (mode === "dark" ? "light" : "dark");
-      setMode(newMode);
-      document.documentElement.dataset.colorScheme = newMode;
+  const toggleColorScheme = useCallback(
+    (forceMode?: State["colorScheme"]) => {
+      const newMode = forceMode ?? (colorScheme === "dark" ? "light" : "dark");
+      setColorScheme(newMode);
     },
-    [mode],
+    [colorScheme],
   );
 
   /** ***************** change locale *******************/
@@ -246,15 +235,13 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
   }, []);
 
   /** ***************** change primary theme *******************/
-  const changeTheme = useCallback((color: State["theme"]) => {
-    setTheme(color);
-    document.documentElement.dataset.primaryScheme = color;
+  const changePrimary = useCallback((color: State["primary"]) => {
+    setPrimary(color);
   }, []);
 
   /** ***************** change accent theme *******************/
   const changeAccent = useCallback((color: State["accent"]) => {
     setAccent(color);
-    document.documentElement.dataset.accentScheme = color;
   }, []);
 
   const closeOverlays = useCallback((closeNotifs = false) => {
@@ -262,19 +249,25 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
     overlayRef.current?.closeAll();
   }, []);
 
+  useEffect(() => {
+    forceTheme && toggleColorScheme(forceTheme);
+    forceLocale && changeLocale(forceLocale);
+  }, [forceLocale, forceTheme]);
+
   /** ***************** context provider *******************/
   return (
     <GlobalContext.Provider
       value={{
         closeOverlays,
-        toggleMode,
-        changeTheme,
+        toggleColorScheme,
+        changePrimary,
         changeAccent,
         changeLocale,
         changeCalendar,
         errorElement,
-        currentMode: mode,
-        currentTheme: theme,
+        portalRoot,
+        currentColorScheme: colorScheme,
+        currentPrimary: primary,
         currentAccent: accent,
         currentCalendar: calendar,
         currentLocale: locale,
@@ -286,11 +279,18 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
         <Helmet titleTemplate={titleTemplate} defaultTitle={defaultTitle}>
           <meta name="description" content={description} />
         </Helmet>
-        {children}
-
-        <OverlayContainer itemRef={overlayRef} />
-        <NotificationContainer itemRef={notificationRef} />
-        <TooltipWatcher />
+        <div
+          ref={portalRoot}
+          className="contents"
+          data-color-scheme={colorScheme}
+          data-primary-scheme={primary}
+          data-accent-scheme={accent}
+        >
+          {children}
+          <OverlayContainer itemRef={overlayRef} />
+          <NotificationContainer itemRef={notificationRef} />
+          <TooltipWatcher />
+        </div>
       </HelmetProvider>
     </GlobalContext.Provider>
   );
@@ -303,7 +303,37 @@ export const AxApplicationProvider: FC<GlobalProps> = ({
 export const useGlobals = () => useContext(GlobalContext);
 
 /**
- * global application context
+ * The useApplicationContext hook provides access to current color scheme, calendar type, localization locale.
+ *
+ * Use context provides the following options
+ *
+ * > `currentColorScheme`
+ *
+ * > `currentPrimary`
+ *
+ * > `currentAccent`
+ *
+ * > `currentLocale`
+ *
+ * > `currentCalendar`
+ *
+ * >`toggleColorScheme: (scheme?: "dark" | "light") => void`
+ * > _toggle current color scheme between light/dark unless scheme provided_
+ *
+ * > `changeLocale: (locale: string) => void`
+ * > _switch current localization locale_
+ *
+ * > `changeCalendar: (calendar: "gregorian" | "hijri") => void`
+ * > _switch current calendar_
+ *
+ * > `changePrimary: (color: Colors | ColorHex) => void`
+ * > _apply new primary color_
+ *
+ * > `changeAccent: (color: Colors | ColorHex) => void`
+ * > _apply new accent color_
+ *
+ * > `closeOverlays: (closeNotifs?: true) => void`
+ * > _provide mechanism to close all overlays, useful when navigating between routes_
  */
 export const useApplicationContext = () => {
   const {

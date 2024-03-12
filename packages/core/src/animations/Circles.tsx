@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -14,7 +14,9 @@ export interface CircleProps extends ElementProps {
 }
 
 /**
- * animated tick
+ * SVG animated check mark
+ *
+ * @prop className
  */
 export const Check: FC<CircleProps> = ({ className }) => {
   /** ***************** component *******************/
@@ -35,7 +37,9 @@ export const Check: FC<CircleProps> = ({ className }) => {
 };
 
 /**
- * animated cross
+ * SVG animated cross mark
+ *
+ * @prop className
  */
 export const Cross: FC<CircleProps> = ({ className }) => {
   /** ***************** component *******************/
@@ -56,7 +60,9 @@ export const Cross: FC<CircleProps> = ({ className }) => {
 };
 
 /**
- * animated info
+ * SVG animated info 'i'
+ *
+ * @prop className
  */
 export const Info: FC<CircleProps> = ({ className }) => {
   /** ***************** component *******************/

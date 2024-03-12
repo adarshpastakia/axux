@@ -1,0 +1,82 @@
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Primary,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import {
+  Anchor,
+  ArgTypes,
+  Controls,
+  Meta,
+  Subheading,
+} from "@storybook/blocks";
+import {
+  AxApplicationProvider,
+  AxCollapsable,
+  AxErrorBoundary,
+  AxPage,
+  AxViewport,
+  useApplicationContext,
+} from "../../src";
+import * as ErrorBoundaryStories from "./ErrorBoundary.stories";
+
+<Meta of={ErrorBoundaryStories} />
+
+<Anchor storyId="page">
+  <div className="invisible h-0 overflow-hidden">
+    <Subheading>Error Boundary</Subheading>
+  </div>
+</Anchor>
+
+# Error Boundary
+
+<Description of={AxErrorBoundary} />
+
+<Primary />
+
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={ErrorBoundaryStories.Example} />
+</AxCollapsable>
+
+<hr />
+
+<Anchor storyId="props">
+  <Subheading>Props</Subheading>
+</Anchor>
+
+<ArgTypes sort="requiredFirst" of={AxErrorBoundary} />
+
+<hr />
+
+<Anchor storyId="sample">
+  <Subheading>Example</Subheading>
+</Anchor>
+
+```tsx
+import { AxPage, AxHeader, AxContent, AxErrorBoundary } from "@axux/core";
+
+export const RoutePage = () => {
+  return (
+    <AxPage isPaper isLoading={loadingState} title="Route title">
+      <AxHeader>Page header controls</AxHeader>
+      <AxContent>
+        <AxErrorBoundary
+          errorElement={({ error }) => (
+            <div>
+              <p>Application error [{error}]</p>
+              <a className="link">Navigate to previous state</a>
+            </div>
+          )}
+        >
+          <BadComponent />
+        </AxErrorBoundary>
+        <p>Page content</p>
+      </AxContent>
+    </AxPage>
+  );
+};
+```

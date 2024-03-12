@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -126,6 +126,9 @@ export interface EmptyContentProps
   type?: "exclaim" | "folder" | "inbox";
 }
 
+/**
+ * A empty content display for displaying fallback view when content is empty/missing.
+ */
 export const EmptyContent: FC<EmptyContentProps> = ({
   icon,
   title,

@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -123,7 +123,24 @@ export const ProgressBar: FC<ProgressProps & { label?: string }> = ({
 };
 
 export const AxProgress = {
+  /**
+   * Circle progress bar
+   *
+   * @prop value
+   * @prop size - "sm" "md" "lg" "xl"
+   * @prop color - "primary" "accent" "info" "danger" "success" "warning"
+   * @prop animate
+   */
   Circle: ProgressCircle,
+  /**
+   * Progress bar
+   *
+   * @prop value
+   * @prop label
+   * @prop size - "sm" "md" "lg" "xl"
+   * @prop color - "primary" "accent" "info" "danger" "success" "warning"
+   * @prop animate
+   */
   Bar: ProgressBar,
 };
 AxProgress.Bar.displayName = "AxProgress.Bar";

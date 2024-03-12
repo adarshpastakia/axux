@@ -1,0 +1,342 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-button {
+    @apply align-middle m-1 relative inline-block select-none max-w-full text-base rounded;
+
+    & .ax-button__label {
+      @apply truncate;
+
+      line-height: 1.2;
+    }
+
+    & .ax-button__inner {
+      @apply flex btn-gradient items-center justify-center p-[0.25em] gap-1 relative z-1 transition-colors font-medium 
+        outline -outline-offset-1 outline-1 outline-dimmed shadow-sm rounded-[inherit] 
+        focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-4 w-full h-full;
+
+      min-height: 2em;
+      min-width: 2em;
+      max-width: 15em;
+
+      &[tabindex="-1"] {
+        @apply focus-visible:outline-0;
+      }
+
+      & * {
+        @apply pointer-events-none;
+      }
+
+      & .ax-button__caret {
+        @apply order-last;
+
+        margin-inline-end: -0.5em;
+      }
+    }
+
+    & .ax-button__inner:active {
+      & > :not(.ax-badge) {
+        @apply translate-y-px;
+      }
+    }
+
+    & .ax-button__loader {
+      @apply absolute inset-px overflow-hidden z-0 rounded-[inherit];
+
+      background-image: linear-gradient(
+        -45deg,
+        rgb(255 255 255 / 15%) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgb(255 255 255 / 15%) 50%,
+        rgb(255 255 255 / 15%) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 1em 1em;
+      animation: progress-animate 1s linear infinite;
+    }
+
+    & .ax-hotkey__label,
+    & .ax-badge:not([data-placement]) {
+      @apply ms-2;
+    }
+
+    &:has(.ax-button__label) .ax-button__inner {
+      @apply px-[1em];
+    }
+
+    &.flush .ax-button__icon {
+      font-size: 1.5em;
+    }
+  }
+
+  .ax-button__inner[data-action-done="true"] {
+    & .ax-button__icon,
+    & .ax-button__label {
+      @apply text-transparent;
+    }
+
+    & + .animated-svg {
+      @apply absolute inset-0 z-1 flex justify-center items-center;
+
+      & > svg {
+        @apply size-[1.5em] block;
+      }
+    }
+  }
+
+  .ax-button__group {
+    @apply m-1 relative inline-flex align-middle flex-nowrap rounded leading-none;
+
+    & > .ax-button {
+      @apply m-0 z-0 flex-1 focus-within:z-1;
+
+      & > .ax-button__inner {
+        @apply outline-0;
+      }
+
+      & > .ax-button__inner:not(:active) {
+        @apply shadow-none;
+      }
+    }
+
+    &[data-variant="normal"] {
+      @apply shadow;
+    }
+
+    &[data-variant="flat"] {
+      @apply border;
+    }
+
+    &[data-variant="plain"] .ax-button {
+      background-image: none;
+    }
+
+    &[data-vertical="false"] {
+      & > .ax-button {
+        & > .ax-button__inner {
+          @apply rounded-none border-e;
+        }
+
+        &:first-of-type > .ax-button__inner {
+          @apply rounded-s-[var(--ax-rounded)];
+        }
+
+        &:last-of-type > .ax-button__inner {
+          @apply rounded-e-[var(--ax-rounded)] border-0;
+        }
+      }
+    }
+
+    &[data-vertical="true"] {
+      @apply flex-col;
+
+      & > .ax-button {
+        & > .ax-button__inner {
+          @apply rounded-none border-b;
+        }
+
+        &:first-of-type > .ax-button__inner {
+          @apply rounded-t-[var(--ax-rounded)];
+        }
+
+        &:last-of-type > .ax-button__inner {
+          @apply rounded-b-[var(--ax-rounded)] border-0;
+        }
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .ax-button[data-size="sm"] {
+    @apply text-sm;
+  }
+
+  .ax-button[data-size="md"] {
+    @apply text-md;
+  }
+
+  .ax-button[data-size="lg"] {
+    @apply text-lg;
+  }
+
+  .ax-button[data-block="true"] {
+    @apply block;
+
+    & .ax-button__inner {
+      @apply max-w-none w-full;
+    }
+  }
+
+  .ax-button[data-color="invert"] {
+    --ax-bg-dimmed: var(--ax-text);
+  }
+
+  .ax-button[data-type="outline"] .ax-button__inner {
+    @apply outline-2 outline-current -outline-offset-1;
+  }
+
+  .ax-button[data-round="true"] {
+    @apply rounded-full;
+  }
+
+  .ax-button[data-icon-align="end"] .ax-button__inner {
+    @apply flex-row-reverse;
+
+    & .ax-button__caret {
+      @apply order-first;
+    }
+  }
+
+  .ax-button[data-icon-align="top"] .ax-button__inner {
+    @apply flex-col;
+  }
+
+  .ax-button[data-disabled="true"] {
+    @apply cursor-not-allowed;
+  }
+
+  .ax-button[data-active="true"] .ax-button__inner {
+    @apply pointer-events-none;
+  }
+
+  .ax-button[data-disabled="true"] .ax-button__inner {
+    @apply pointer-events-none opacity-50;
+
+    box-shadow: 0 0 0 1px var(--ax-border-dimmed);
+  }
+
+  .ax-button[data-loading="true"] {
+    @apply cursor-wait;
+
+    & .spinner-animation {
+      @apply size-[1.25em] text-current;
+
+      font-size: 1em;
+    }
+  }
+
+  .ax-button[data-loading="true"] .ax-button__inner {
+    @apply pointer-events-none ring-1 shadow-sm;
+  }
+
+  .ax-button > .ax-button__loader {
+    & ~ .ax-button__inner {
+      @apply !bg-transparent !text-white;
+    }
+  }
+
+  .ax-button__inner {
+    & .ax-hotkey__label {
+      @apply -me-2;
+    }
+  }
+}
+
+/******************* light colors *******************/
+@layer utilities {
+  .ax-button {
+    --color: var(--ax-primary);
+
+    &[data-color="accent"] {
+      --color: var(--ax-accent);
+    }
+
+    &[data-color="info"] {
+      --color: var(--ax-info);
+    }
+
+    &[data-color="danger"] {
+      --color: var(--ax-danger);
+    }
+
+    &[data-color="success"] {
+      --color: var(--ax-success);
+    }
+
+    &[data-color="warning"] {
+      --color: var(--ax-warning);
+    }
+  }
+
+  .ax-button > .ax-button__inner {
+    background-color: var(--ax-bg-dimmed);
+    color: color-mix(in lab, var(--color) 80%, var(--ax-text));
+
+    &:hover {
+      background-color: color-mix(in lab, var(--color) 10%, #fff1);
+    }
+  }
+
+  .ax-button .ax-button__inner:active {
+    @apply shadow-inner shadow-[#0006] dark:shadow-[#000];
+
+    background-color: color-mix(in lab, var(--color) 10%, #0001);
+  }
+
+  .ax-button .ax-button__inner[data-popover-open="true"] {
+    @apply shadow-inner shadow-[#0004] dark:shadow-[#000a];
+  }
+
+  .ax-button[data-type="link"] .ax-button__inner {
+    @apply shadow-none outline-0;
+
+    background-image: none;
+  }
+
+  .ax-button .ax-button__inner:active,
+  .ax-button[data-active="true"] .ax-button__inner {
+    background-image: linear-gradient(
+      0deg,
+      rgb(255 255 255 / 5%) 0%,
+      transparent 35%,
+      transparent 63%,
+      rgb(0 0 0 / 5%) 100%
+    );
+  }
+
+  .ax-button[data-active="true"]:not([data-type="link"]) .ax-button__inner {
+    outline-width: 1px;
+    box-shadow: 0 0 1px 1px var(--ax-shadow-base) inset;
+  }
+
+  .ax-button[data-active="true"][data-type="link"] .ax-button__inner {
+    box-shadow: 0 0 1px 0 var(--ax-shadow-base) inset;
+  }
+
+  .ax-button > .ax-button__loader,
+  .ax-button[data-type="solid"] > .ax-button__inner {
+    color: var(--ax-white);
+    outline-color: var(--color);
+    background-color: color-mix(in lab, var(--color) 80%, var(--ax-black));
+
+    &:hover {
+      background-color: color-mix(in lab, var(--color) 90%, var(--ax-white));
+    }
+  }
+
+  .ax-button[data-type="solid"] .ax-button__inner:active,
+  .ax-button[data-type="solid"][data-active="true"] .ax-button__inner {
+    background-color: color-mix(in lab, var(--color) 70%, var(--ax-black));
+  }
+}
+
+@layer utilities {
+  .ax-navigator {
+    & .ax-button__inner {
+      border: 0;
+    }
+
+    & .ax-button__inner:not(:hover) {
+      background-color: transparent;
+    }
+  }
+}

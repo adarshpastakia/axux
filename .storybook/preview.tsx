@@ -1,12 +1,12 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
  * @license   : MIT
  */
 
-import { AxApplicationProvider } from "@axux/core/src";
+import { AxApplicationProvider, AxText } from "@axux/core/src";
 import "@mdi/font/css/materialdesignicons.min.css";
 import { Anchor } from "@storybook/addon-docs";
 import { withTests } from "@storybook/addon-jest";
@@ -41,8 +41,8 @@ const lightTheme = create({
   barBg: "#fefefe",
   appContentBg: "#fafdfd",
   brandImage: "poster-light.png",
-  colorPrimary: "#be185d",
-  colorSecondary: "#0074e3",
+  colorPrimary: "#10ac84",
+  colorSecondary: "#2e86de",
   ...reset,
 });
 const darkTheme = create({
@@ -51,8 +51,8 @@ const darkTheme = create({
   barBg: "#2f3640",
   appContentBg: "#1e272e",
   brandImage: "poster-dark.png",
-  colorPrimary: "#f472b6",
-  colorSecondary: "#3490de",
+  colorPrimary: "#10ac84",
+  colorSecondary: "#2e86de",
   ...reset,
 });
 
@@ -61,12 +61,34 @@ document.documentElement.dir = i18n.dir();
 export default {
   parameters: {
     layout: "centered",
-    actions: { argTypesRegex: "^on(?!Label).*" },
     backgrounds: { disable: true, grid: { disable: true } },
     controls: {
+      exclude: /^(on.*)/,
+      sort: "requiredFirst",
       matchers: {
         date: /^date$/,
+        text: /^className$/,
       },
+    },
+    viewport: {
+      viewports: {
+        mobile1: {
+          name: "Small mobile",
+          styles: { height: "568px", width: "320px" },
+          type: "mobile",
+        },
+        mobile2: {
+          name: "Large mobile",
+          styles: { height: "896px", width: "414px" },
+          type: "mobile",
+        },
+        tablet: {
+          name: "Tablet",
+          styles: { height: "1112px", width: "834px" },
+          type: "tablet",
+        },
+      },
+      // defaultViewport: "responsive",
     },
     themeToggle: {
       darkTheme,
@@ -78,12 +100,16 @@ export default {
       container: ({ children, context }: any) => {
         const globals = context.store.globals.get();
         return (
-          <DocsContainer
-            context={context}
-            theme={globals.theme === "dark" ? darkTheme : lightTheme}
+          <AxApplicationProvider
+            {...{ forceTheme: globals.theme, forceLocale: globals.locale }}
           >
-            {children}
-          </DocsContainer>
+            <DocsContainer
+              context={context}
+              theme={globals.theme === "dark" ? darkTheme : lightTheme}
+            >
+              {children}
+            </DocsContainer>
+          </AxApplicationProvider>
         );
       },
       page: () => {
@@ -93,10 +119,7 @@ export default {
             <Subtitle />
             <Description />
             <Primary />
-            <div>
-              <div>Controls</div>
-              <Controls />
-            </div>
+            <Controls />
             <hr />
             <Stories includePrimary={false} />
           </>
@@ -134,43 +157,6 @@ export default {
         ],
       },
     },
-    primary: {
-      name: "Primary",
-      description: "Primary theme",
-      defaultValue: "blue",
-      toolbar: {
-        className: "primary-theme",
-        icon: "circle",
-        active: true,
-        items: [
-          { value: "blue", left: "🔵", title: "Blue" },
-          { value: "green", left: "🟢", title: "Green" },
-          { value: "orange", left: "🟠", title: "Orange" },
-          { value: "red", left: "🔴", title: "Red" },
-          { value: "purple", left: "🟣", title: "Purple" },
-          { value: "pink", left: "⚪️", title: "Pink" },
-          { value: "brown", left: "🟤", title: "Brown" },
-        ],
-      },
-    },
-    accent: {
-      name: "Accent",
-      description: "Accent theme",
-      defaultValue: "pink",
-      toolbar: {
-        icon: "circle",
-        active: true,
-        items: [
-          { value: "blue", left: "🔵", title: "Blue" },
-          { value: "green", left: "🟢", title: "Green" },
-          { value: "orange", left: "🟠", title: "Orange" },
-          { value: "red", left: "🔴", title: "Red" },
-          { value: "purple", left: "🟣", title: "Purple" },
-          { value: "pink", left: "⚪️", title: "Pink" },
-          { value: "brown", left: "🟤", title: "Brown" },
-        ],
-      },
-    },
   },
   decorators: [
     (Story) => {
@@ -178,10 +164,7 @@ export default {
       return (
         <I18nextProvider i18n={i18n}>
           <AxApplicationProvider
-            defaultMode={globals.theme}
-            defaultTheme={globals.primary}
-            defaultAccent={globals.accent}
-            defaultLocale={globals.locale}
+            {...{ forceTheme: globals.theme, forceLocale: globals.locale }}
           >
             {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
             <Story />
@@ -203,20 +186,3 @@ addons.getChannel().on("THEME_CHANGED", (theme: any) => {
   // (document.getElementById("arcgisCss") as HTMLLinkElement).href =
   //   `@arcgis/esri/themes/${theme}/main.css`;
 });
-addons.getChannel().on("PRIMARY_CHANGED", (theme: any) => {
-  document.documentElement.dataset.primaryScheme = theme;
-});
-addons.getChannel().on("ACCENT_CHANGED", (theme: any) => {
-  document.documentElement.dataset.accentScheme = theme;
-});
-
-const originalError = console.error;
-window.console.error = (...args) => {
-  if (
-    /.*ReactDOM.render is no longer supported in React 18.*/.test(args[0]) ||
-    /.*\:first-child.*/.test(args[0])
-  ) {
-    return;
-  }
-  originalError.call(console, ...args);
-};

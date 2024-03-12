@@ -1,0 +1,152 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  @keyframes ping {
+    75%,
+    100% {
+      transform: scale(var(--scale), 2);
+      opacity: 0;
+    }
+  }
+
+  .ax-badge {
+    @apply inline-block relative !text-xs leading-none pointer-events-none select-none align-middle;
+
+    --color: var(--ax-gray);
+  }
+
+  .ax-badge__label {
+    @apply z-2 relative leading-none py-0.5 px-1 rounded-full block text-center min-w-[1.5em];
+
+    font-variant: small-caps;
+    color: color-mix(in lab, var(--color) 30%, var(--ax-bg));
+    background-color: color-mix(in lab, var(--color) 80%, var(--ax-text));
+
+    & > .ax-icon {
+      @apply block;
+    }
+
+    & > .ax-badge__ping {
+      @apply scale-50;
+    }
+  }
+
+  .ax-badge__ping {
+    @apply z-0 absolute block inset-0 rounded-full opacity-80 origin-center scale-125;
+
+    background-color: var(--color);
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .ax-badge[data-is-icon="true"] {
+    --scale: 2.5;
+
+    & .ax-badge__label {
+      @apply bg-transparent p-0 text-[1.5em] rounded-full leading-none min-w-0;
+
+      color: var(--color);
+      background-color: transparent;
+
+      & > span {
+        color: inherit;
+      }
+    }
+
+    & .ax-badge__ping {
+      @apply scale-50;
+    }
+  }
+}
+
+@layer utilities {
+  .ax-badge[data-empty="true"] {
+    --scale: 2.5;
+
+    @apply size-3;
+
+    & .ax-badge__label {
+      @apply size-3 p-0 min-w-0 opacity-80;
+    }
+  }
+
+  .ax-badge[data-color="primary"] {
+    --color: var(--ax-primary);
+  }
+
+  .ax-badge[data-color="accent"] {
+    --color: var(--ax-accent);
+  }
+
+  .ax-badge[data-color="info"] {
+    --color: var(--ax-info);
+  }
+
+  .ax-badge[data-color="danger"] {
+    --color: var(--ax-danger);
+  }
+
+  .ax-badge[data-color="success"] {
+    --color: var(--ax-success);
+  }
+
+  .ax-badge[data-color="warning"] {
+    --color: var(--ax-warning);
+  }
+
+  .ax-badge[data-placement="start"] {
+    @apply z-10 absolute top-1/2 start-0 ltr:-translate-x-2/3 rtl:translate-x-2/3 -translate-y-1/2;
+  }
+
+  .ax-badge[data-placement="end"] {
+    @apply z-10 absolute top-1/2 end-0 ltr:translate-x-2/3 rtl:-translate-x-2/3 -translate-y-1/2;
+  }
+
+  .ax-badge[data-placement="top"] {
+    @apply z-10 absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2/3;
+  }
+
+  .ax-badge[data-placement="bottom"] {
+    @apply z-10 absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-2/3;
+  }
+
+  .ax-badge[data-placement="top-end"] {
+    @apply z-10 absolute top-0 end-0 ltr:translate-x-1/3 rtl:-translate-x-1/3 -translate-y-1/3;
+  }
+
+  .ax-badge[data-placement="top-start"] {
+    @apply z-10 absolute top-0 start-0 ltr:-translate-x-1/3 rtl:translate-x-1/3 -translate-y-1/3;
+  }
+
+  .ax-badge[data-placement="bottom-end"] {
+    @apply z-10 absolute bottom-0 end-0 ltr:translate-x-1/3 rtl:-translate-x-1/3 translate-y-1/3;
+  }
+
+  .ax-badge[data-placement="bottom-start"] {
+    @apply z-10 absolute bottom-0 start-0 ltr:-translate-x-1/3 rtl:translate-x-1/3 translate-y-1/3;
+  }
+
+  .ax-badge-reveal {
+    @apply m-4;
+
+    & .ax-badge {
+      transition:
+        left 0.5s,
+        right 0.5s,
+        top 0.5s,
+        bottom 0.5s,
+        opacity 0.5s;
+    }
+
+    &:not(:hover) .ax-badge {
+      @apply opacity-0 inset-1/2 -translate-x-1/2 -translate-y-1/2;
+
+      transition: none;
+    }
+  }
+}

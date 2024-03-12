@@ -1,0 +1,280 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-breadcrumb {
+    @apply flex flex-nowrap select-none items-center px-2 text-base;
+
+    & .ax-breadcrumb__item {
+      @apply flex items-center max-w-[12rem] my-0.5;
+
+      & > span {
+        @apply cursor-pointer;
+      }
+
+      & > a {
+        @apply flex flex-auto gap-1 cursor-pointer items-center leading-5 font-medium flex-nowrap overflow-hidden;
+
+        & > .ax-icon {
+          @apply text-lg;
+        }
+
+        & > label {
+          @apply truncate flex-auto;
+        }
+
+        & > .ax-badge {
+          @apply mx-px text-xs;
+        }
+      }
+    }
+
+    & > .ax-breadcrumb__item:last-child {
+      @apply pointer-events-none;
+    }
+
+    &:not([data-theme="modern"]) {
+      & .ax-breadcrumb__item {
+        @apply last:text-muted;
+
+        &::after {
+          @apply px-2 origin-center text-muted inline-block;
+
+          content: "/";
+        }
+
+        &:last-child {
+          &::after {
+            content: unset;
+          }
+
+          & > * {
+            @apply text-dimmed;
+          }
+        }
+
+        & > a {
+          color: var(--base-color);
+
+          &:hover {
+            color: var(--hover-color);
+          }
+
+          &:active {
+            color: var(--active-color);
+          }
+        }
+      }
+    }
+
+    &[data-theme="modern"] .ax-breadcrumb__item {
+      &:nth-child(1) {
+        color: color-mix(in lab, var(--base-color) 99%, var(--ax-bg));
+
+        & > * {
+          background-color: color-mix(
+            in lab,
+            var(--base-color) 100%,
+            var(--ax-bg)
+          );
+        }
+      }
+
+      &:nth-child(2) {
+        color: color-mix(in lab, var(--base-color) 93%, var(--ax-bg));
+
+        & > * {
+          background-color: color-mix(
+            in lab,
+            var(--base-color) 93%,
+            var(--ax-bg)
+          );
+        }
+      }
+
+      &:nth-child(3) {
+        color: color-mix(in lab, var(--base-color) 86%, var(--ax-bg));
+
+        & > * {
+          background-color: color-mix(
+            in lab,
+            var(--base-color) 86%,
+            var(--ax-bg)
+          );
+        }
+      }
+
+      &:nth-child(4) {
+        color: color-mix(in lab, var(--base-color) 79%, var(--ax-bg));
+
+        & > * {
+          background-color: color-mix(
+            in lab,
+            var(--base-color) 79%,
+            var(--ax-bg)
+          );
+        }
+      }
+
+      &:nth-child(5) {
+        color: color-mix(in lab, var(--base-color) 72%, var(--ax-bg));
+
+        & > * {
+          background-color: color-mix(
+            in lab,
+            var(--base-color) 72%,
+            var(--ax-bg)
+          );
+        }
+      }
+
+      &:nth-child(6) {
+        color: color-mix(in lab, var(--base-color) 65%, var(--ax-bg));
+
+        & > * {
+          background-color: color-mix(
+            in lab,
+            var(--base-color) 65%,
+            var(--ax-bg)
+          );
+        }
+      }
+
+      &:nth-child(7) {
+        color: color-mix(in lab, var(--base-color) 58%, var(--ax-bg));
+
+        & > * {
+          background-color: color-mix(
+            in lab,
+            var(--base-color) 58%,
+            var(--ax-bg)
+          );
+        }
+      }
+
+      &:nth-child(8) {
+        color: color-mix(in lab, var(--base-color) 51%, var(--ax-bg));
+
+        & > * {
+          background-color: color-mix(
+            in lab,
+            var(--base-color) 51%,
+            var(--ax-bg)
+          );
+        }
+      }
+
+      &:nth-child(9) {
+        color: color-mix(in lab, var(--base-color) 44%, var(--ax-bg));
+
+        & > * {
+          background-color: color-mix(
+            in lab,
+            var(--base-color) 44%,
+            var(--ax-bg)
+          );
+        }
+      }
+
+      &::after,
+      &::before {
+        border: 0.625rem solid;
+        display: inline-block;
+        content: "";
+        height: 1.25rem;
+      }
+
+      &::before {
+        border-color: currentcolor;
+        border-inline-start-color: transparent;
+      }
+
+      &::after {
+        border-color: transparent;
+        border-inline-start-color: currentcolor;
+      }
+
+      &:first-child::before {
+        border-color: currentcolor;
+        border-end-start-radius: 0.25rem;
+        border-start-start-radius: 0.25rem;
+        border-width: 0 0.75rem 0 0;
+      }
+
+      &:not(:first-child) {
+        margin-inline-start: -1rem;
+      }
+
+      & > * {
+        @apply text-white leading-5;
+
+        margin-inline-start: -0.25em;
+        padding-inline-end: 0.25em;
+      }
+
+      &:hover {
+        color: var(--hover-color);
+
+        & > * {
+          background-color: var(--hover-color);
+        }
+      }
+
+      &:active {
+        color: var(--active-color);
+
+        & > * {
+          background-color: var(--active-color);
+        }
+      }
+    }
+  }
+
+  .ax-breadcrumb__dropdown.ax-breadcrumb__dropdown {
+    & > .ax-breadcrumb__item.ax-breadcrumb__item {
+      @apply bg-base m-0 py-1 px-2;
+
+      & > * {
+        @apply bg-inherit py-1 px-2 cursor-pointer;
+      }
+
+      &:hover {
+        background-color: color-mix(
+          in lab,
+          var(--ax-primary) 40%,
+          var(--ax-bg)
+        );
+      }
+
+      &:active {
+        background-color: color-mix(
+          in lab,
+          var(--ax-primary) 20%,
+          var(--ax-bg)
+        );
+      }
+
+      &::after,
+      &::before {
+        content: unset !important;
+      }
+    }
+  }
+
+  .ax-breadcrumb[data-color="primary"] .ax-breadcrumb__item {
+    --base-color: var(--ax-text-primary);
+    --hover-color: color-mix(in lab, var(--ax-accent) 90%, var(--ax-white));
+    --active-color: color-mix(in lab, var(--ax-accent) 80%, var(--ax-black));
+  }
+
+  .ax-breadcrumb[data-color="accent"] .ax-breadcrumb__item {
+    --base-color: var(--ax-text-accent);
+    --hover-color: color-mix(in lab, var(--ax-primary) 90%, var(--ax-white));
+    --active-color: color-mix(in lab, var(--ax-primary) 80%, var(--ax-black));
+  }
+}

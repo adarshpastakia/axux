@@ -13,13 +13,11 @@ import { Anchor, Subheading } from "@storybook/blocks";
 
 <Translation>
   {(t, { i18n }) => (
-    <div className="text-center text-muted !text-2xl">
+    <div className="text-center text-muted !text-2xl !my-12">
       {t("appDescription", "Default text")}
     </div>
   )}
 </Translation>
-
----
 
 <Anchor storyId="home">
   <Subheading></Subheading>
@@ -98,8 +96,6 @@ import { Anchor, Subheading } from "@storybook/blocks";
   </div>
 </div>
 
----
-
 <Anchor storyId="installing">
   <Subheading>Installing</Subheading>
 </Anchor>
@@ -128,46 +124,4 @@ yarn add @axux/map
 yarn add @axux/media
 yarn add @axux/pagemaker
 yarn add @axux/searchbar
-```
-
----
-
-<Anchor storyId="colorSystem">
-  <Subheading>Color System</Subheading>
-</Anchor>
-
-<div className="home-palette">
-  <div>Grayscale</div>
-  <div style={{ backgroundColor: "var(--ax-gray)" }}>Gray</div>
-  <div style={{ backgroundColor: "var(--ax-grayblue)" }}>Blue</div>
-  <div style={{ backgroundColor: "var(--ax-graygreen)" }}>Green</div>
-  <div style={{ backgroundColor: "var(--ax-graybrown)" }}>Brown</div>
-</div>
-
-<div className="home-palette">
-  <div>Controls</div>
-  <div style={{ backgroundColor: "var(--ax-info)" }}>Info</div>
-  <div style={{ backgroundColor: "var(--ax-danger)" }}>Danger</div>
-  <div style={{ backgroundColor: "var(--ax-success)" }}>Success</div>
-  <div style={{ backgroundColor: "var(--ax-warning)" }}>Warning</div>
-</div>
-<div className="home-palette">
-  <div>Palette</div>
-  <div style={{ backgroundColor: "var(--ax-red)" }}>Red</div>
-  <div style={{ backgroundColor: "var(--ax-orange)" }}>Orange</div>
-  <div style={{ backgroundColor: "var(--ax-brown)" }}>Brown</div>
-  <div style={{ backgroundColor: "var(--ax-green)" }}>Green</div>
-  <div style={{ backgroundColor: "var(--ax-blue)" }}>Blue</div>
-  <div style={{ backgroundColor: "var(--ax-purple)" }}>Purple</div>
-  <div style={{ backgroundColor: "var(--ax-violet)" }}>Violet</div>
-  <div style={{ backgroundColor: "var(--ax-pink)" }}>Pink</div>
-</div>
-
-```html
-<html
-  data-color-scheme="dark"
-  data-primary-scheme="blue"
-  data-accent-scheme="pink"
-  data-gray-scheme="olive"
-></html>
 ```

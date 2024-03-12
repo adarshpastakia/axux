@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -56,21 +56,24 @@ const rtlFlip: Modifier<"rtlFlip", KeyValue> = {
 
 defaultModifiers.push(sameWidthModifier as AnyObject, rtlFlip as AnyObject);
 
-export const usePopover = (
-  options: {
-    placement?: Placement;
-    sameWidth?: boolean;
-    hideArrow?: boolean;
-  } = {
-    hideArrow: false,
-    sameWidth: false,
-    placement: "bottom",
-  },
-) => {
+export const usePopover = (options: {
+  placement?: Placement;
+  sameWidth?: boolean;
+  showArrow?: boolean;
+}) => {
   const [referenceElement, setReferenceElement] =
     useState<HTMLElement | null>();
   const [popperElement, setPopperElement] = useState<HTMLElement>();
   const [arrowElement, setArrowElement] = useState<HTMLElement>();
+
+  options = Object.assign(
+    {
+      showArrow: false,
+      sameWidth: false,
+      placement: "bottom",
+    },
+    options,
+  );
 
   /** ***************** popperjs *******************/
   const { styles, attributes, forceUpdate, update } = usePopper(
@@ -82,7 +85,7 @@ export const usePopover = (
       modifiers: [
         {
           name: "arrow",
-          enabled: !options.hideArrow,
+          enabled: options.showArrow,
           options: {
             element: arrowElement,
             padding: 10,
@@ -91,7 +94,7 @@ export const usePopover = (
         {
           name: "offset",
           options: {
-            offset: [0, options.hideArrow ? 0 : 5],
+            offset: [0, options.showArrow ? 5 : 0],
           },
         },
         { name: "rtlFlip" },

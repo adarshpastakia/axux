@@ -2,6 +2,7 @@ import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
+import json from "@rollup/plugin-json";
 import * as fs from "fs";
 import path from "path";
 import excludeDependenciesFromBundle from "rollup-plugin-exclude-dependencies-from-bundle";
@@ -53,6 +54,9 @@ export default [
         preserveModules: true,
       },
     ],
+    watch: {
+      clearScreen: false,
+    },
     plugins: [
       excludeDependenciesFromBundle({
         peerDependencies: true,
@@ -62,6 +66,7 @@ export default [
       typescript(typescriptOptions),
       commonjs(commonjsOptions),
       babel(babelOptions),
+      json(),
     ],
   },
 ];

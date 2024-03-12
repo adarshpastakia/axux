@@ -1,0 +1,437 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+/******************* overlay mask *******************/
+@layer components {
+  .ax-overlay__mask {
+    @apply fixed inset-0 z-50 grid bg-transparent;
+
+    &[data-hide-mask="true"] {
+      @apply pointer-events-none;
+    }
+
+    &:not([data-hide-mask="true"]) {
+      @apply bg-gray-50/50 dark:bg-gray-900/50;
+    }
+
+    & > div {
+      @apply pointer-events-auto;
+    }
+  }
+
+  .ax-notification__container {
+    @apply bg-none flex flex-nowrap pointer-events-none fixed inset-0 p-2 bg-transparent;
+
+    z-index: var(--z-notification-container);
+
+    --notif-primary: color-mix(in lab, var(--ax-primary) 80%, var(--ax-black));
+    --notif-accent: color-mix(in lab, var(--ax-accent) 80%, var(--ax-black));
+    --notif-info: color-mix(in lab, var(--ax-info) 80%, var(--ax-black));
+    --notif-danger: color-mix(in lab, var(--ax-danger) 80%, var(--ax-black));
+    --notif-success: color-mix(in lab, var(--ax-success) 80%, var(--ax-black));
+    --notif-warning: color-mix(in lab, var(--ax-warning) 80%, var(--ax-black));
+
+    &[data-mode="message"] {
+      @apply flex-col-reverse items-center justify-end;
+
+      & > div {
+        & > div {
+          @apply -mt-[100%] opacity-0;
+        }
+      }
+    }
+
+    &[data-mode="toast"] {
+      @apply flex-col items-end justify-end;
+
+      & > div {
+        & > div {
+          @apply -mb-[100%] opacity-0;
+        }
+      }
+    }
+
+    & > div {
+      @apply flex-initial my-1 pointer-events-auto overflow-hidden;
+
+      &[data-show="true"] {
+        overflow: visible;
+
+        & > div {
+          @apply my-0 opacity-100;
+        }
+      }
+
+      & > div {
+        transition:
+          margin 0.4s,
+          opacity 0.3s 0.2s;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .ax-overlay__mask {
+    &[data-show="true"] {
+      &:not([data-hide-mask="true"]) {
+        @apply backdrop-blur-[1px];
+      }
+
+      & .ax-alert,
+      & .ax-modal,
+      & .ax-flyout {
+        @apply opacity-100;
+
+        transform: none;
+      }
+    }
+  }
+}
+
+/******************* modal *******************/
+@layer components {
+  .ax-modal {
+    @apply grid overflow-hidden rounded border shadow-xl relative place-self-center max-w-[80vw] min-w-[12rem] max-h-[80vh] 
+      -translate-y-48 opacity-0 focus-within:ring-2 ring-primary bg-base;
+
+    grid-template: "head" auto "content" 1fr / 1fr;
+    transition:
+      opacity 0.15s,
+      transform 0.25s;
+
+    & .ax-modal__header {
+      @apply grid items-center select-none border-b gap-0 z-1 relative;
+
+      grid-template-areas: "icon title actions navs close";
+      grid-template-columns: auto 1fr auto auto auto;
+
+      & .ax-modal__icon {
+        @apply grid-area-[icon] p-1;
+      }
+
+      & .ax-modal__title {
+        @apply grid-area-[title] px-1;
+      }
+
+      & .ax-modal__actions {
+        @apply grid-area-[actions] leading-none;
+      }
+
+      & .close-x {
+        @apply grid-area-[close] text-[1.5em] leading-none;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .ax-modal {
+    &[data-size="sm"] {
+      @apply w-[20rem];
+    }
+
+    &[data-size="md"] {
+      @apply w-[40vw];
+    }
+
+    &[data-size="lg"] {
+      @apply w-[60vw];
+    }
+
+    &[data-size="xl"] {
+      @apply w-[80vw];
+    }
+  }
+}
+
+/******************* flyout *******************/
+@layer components {
+  .ax-flyout {
+    @apply grid overflow-hidden border-x shadow-xl relative max-w-[80vw] min-w-[12rem]
+      ltr:-translate-x-full rtl:translate-x-full opacity-0 bg-base;
+
+    grid-template: "head" auto "content" 1fr "foot" auto / 1fr;
+    transition:
+      opacity 0.15s,
+      transform 0.25s;
+
+    &[data-align="end"] {
+      @apply justify-self-end ltr:translate-x-full rtl:-translate-x-full;
+    }
+
+    & .ax-flyout__header {
+      @apply grid items-center select-none border-b gap-0 z-1 relative;
+
+      grid-template-areas: "icon title actions close";
+      grid-template-columns: auto 1fr auto auto;
+
+      & .ax-flyout__icon {
+        @apply grid-area-[icon] p-1;
+      }
+
+      & .ax-flyout__title {
+        @apply grid-area-[title] px-1;
+      }
+
+      & .ax-flyout__actions {
+        @apply grid-area-[actions] leading-none;
+      }
+
+      & .close-x {
+        @apply grid-area-[close] text-[1.5em] leading-none;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .ax-flyout {
+    &[data-size="sm"] {
+      @apply w-[20rem];
+    }
+
+    &[data-size="md"] {
+      @apply w-[40vw];
+    }
+
+    &[data-size="lg"] {
+      @apply w-[60vw];
+    }
+
+    &[data-size="xl"] {
+      @apply w-[80vw];
+    }
+  }
+}
+
+/******************* alert *******************/
+@layer components {
+  .ax-alert {
+    @apply grid overflow-hidden p-4 rounded border shadow-xl relative place-self-center max-w-[60vw] min-w-[24rem] max-h-[60vh] 
+      -translate-y-48 opacity-0 bg-base text-primary ring-2 ring-offset-2 ring-current;
+
+    grid-template: "icon title" auto "icon message" 1fr "icon input" auto "footer footer" auto / auto 1fr;
+    transition:
+      opacity 0.15s,
+      transform 0.25s;
+
+    & .ax-alert__icon {
+      @apply grid-area-[icon] leading-none py-1 px-2;
+
+      & .ax-icon {
+        @apply text-5xl;
+      }
+    }
+
+    & .ax-alert__title {
+      @apply grid-area-[title] text-xl font-semibold p-2 select-none me-8 overflow-hidden;
+    }
+
+    & .ax-alert__message {
+      @apply grid-area-[message] px-2 me-8 overflow-auto mb-2 pb-1 overflow-wrap;
+    }
+
+    & .ax-alert__footer {
+      @apply grid-area-[footer] flex flex-nowrap justify-end py-1 px-2 mt-4;
+    }
+
+    & .close-x {
+      @apply text-xl absolute mx-2 top-0 end-0;
+    }
+
+    & .ax-alert__input {
+      @apply border rounded px-4 py-2 relative overflow-hidden placeholder:text-placeholder bg-input;
+
+      box-shadow: 0 1px 2px 0 var(--ax-shadow-base) inset;
+
+      &:focus {
+        @apply border-primary border-b-2 bg-input-focus;
+
+        box-shadow:
+          0 1px 2px 0 var(--ax-shadow-base) inset,
+          0 0 1px 0 var(--ax-primary);
+      }
+
+      &.invalid {
+        @apply border-danger;
+
+        box-shadow:
+          0 1px 2px 0 var(--ax-shadow-base) inset,
+          0 0 1px 0 var(--ax-danger);
+      }
+
+      &[data-hidden="true"] {
+        @apply absolute -top-full;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .ax-alert {
+    &[data-color="accent"] {
+      @apply text-accent;
+    }
+
+    &[data-color="danger"] {
+      @apply text-danger;
+    }
+
+    &[data-color="success"] {
+      @apply text-success;
+    }
+
+    &[data-color="warning"] {
+      @apply text-warning;
+    }
+  }
+}
+
+/******************* message *******************/
+@layer components {
+  .ax-message {
+    @apply bg-invert text-invert max-w-lg rounded flex flex-nowrap items-center gap-1 
+      pointer-events-auto select-none relative py-0.5 px-2 shadow;
+
+    & > p {
+      @apply flex-1 px-2;
+    }
+
+    & > .close-x {
+      @apply leading-[0.5];
+    }
+  }
+}
+
+@layer utilities {
+  .ax-message {
+    &[data-color="primary"] {
+      @apply text-white;
+
+      background-color: var(--notif-primary);
+    }
+
+    &[data-color="accent"] {
+      @apply text-white;
+
+      background-color: var(--notif-accent);
+    }
+
+    &[data-color="info"] {
+      @apply text-white;
+
+      background-color: var(--notif-info);
+    }
+
+    &[data-color="danger"] {
+      @apply text-white;
+
+      background-color: var(--notif-danger);
+    }
+
+    &[data-color="success"] {
+      @apply text-white;
+
+      background-color: var(--notif-success);
+    }
+
+    &[data-color="warning"] {
+      @apply text-white;
+
+      background-color: var(--notif-amber);
+    }
+  }
+}
+
+/******************* toast *******************/
+@layer components {
+  .ax-toast {
+    @apply rounded border shadow relative grid overflow-hidden max-w-sm min-w-[18rem] max-h-[60vh];
+
+    grid-template: "icon title" auto "icon message" 1fr "icon footer" auto / auto 1fr;
+
+    & .ax-button__inner {
+      @apply shadow-none;
+    }
+
+    & .ax-toast__icon {
+      @apply grid-area-[icon] leading-none p-2 text-white;
+
+      & .ax-icon {
+        @apply text-2xl;
+      }
+    }
+
+    & .ax-toast__message {
+      @apply grid-area-[message] text-md px-2 pt-2 overflow-auto overflow-wrap;
+    }
+
+    & .ax-toast__title {
+      @apply grid-area-[title] text-md font-semibold px-2 pt-2 select-none me-12 overflow-hidden;
+
+      & + .ax-toast__message {
+        @apply text-reset pt-0;
+      }
+    }
+
+    & .ax-toast__footer {
+      @apply grid-area-[footer] flex flex-nowrap justify-end py-1 px-2 mt-1;
+    }
+
+    & .ax-toast__close {
+      @apply text-base absolute py-1 px-2 top-0 end-0;
+    }
+
+    & .ax-toast__input {
+      @apply absolute -top-full;
+    }
+  }
+}
+
+@layer utilities {
+  .ax-toast {
+    @apply text-primary bg-base;
+
+    & > .ax-toast__icon {
+      background-color: var(--notif-primary);
+    }
+
+    &[data-color="accent"] {
+      @apply text-accent;
+
+      & > .ax-toast__icon {
+        background-color: var(--notif-accent);
+      }
+    }
+
+    &[data-color="danger"] {
+      @apply text-danger;
+
+      & > .ax-toast__icon {
+        background-color: var(--notif-danger);
+      }
+    }
+
+    &[data-color="success"] {
+      @apply text-success;
+
+      & > .ax-toast__icon {
+        background-color: var(--notif-success);
+      }
+    }
+
+    &[data-color="warning"] {
+      @apply text-warning;
+
+      & > .ax-toast__icon {
+        background-color: var(--notif-warning);
+      }
+    }
+  }
+}

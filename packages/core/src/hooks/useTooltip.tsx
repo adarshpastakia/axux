@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -13,6 +13,7 @@ import { useEffect, useRef, useState, useTransition } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { type TooltipType } from "../types";
 import { usePopover } from "./usePopover";
+import { useGlobals } from "../context/Global";
 
 export const getTooltipProps = (tooltip?: TooltipType) => {
   if (isString(tooltip)) {
@@ -44,6 +45,7 @@ export const TooltipWatcher = () => {
   const [placement, setPlacement] = useState<Placement>("bottom");
   const [color, setColor] = useState<string>();
   const [, startTransition] = useTransition();
+  const { portalRoot } = useGlobals();
 
   const {
     attributes,
@@ -53,6 +55,7 @@ export const TooltipWatcher = () => {
     styles,
   } = usePopover({
     placement,
+    showArrow: true,
   });
 
   const removeTooltip = useRef(() => {
@@ -119,7 +122,7 @@ export const TooltipWatcher = () => {
   useEffect(() => {
     if (isOpen && !!content && !refPortal.current) {
       refEl.current = document.createElement("div");
-      document.body.appendChild(refEl.current);
+      portalRoot.current?.appendChild(refEl.current);
       refPortal.current = createRoot(refEl.current);
     }
     if (refPortal.current) {

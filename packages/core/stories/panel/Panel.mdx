@@ -1,0 +1,89 @@
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Primary,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import {
+  Anchor,
+  ArgTypes,
+  Controls,
+  Meta,
+  Subheading,
+} from "@storybook/blocks";
+import { AxCollapsable, AxPanel } from "../../src";
+import * as PanelStories from "./Panel.stories";
+import * as PanelGroupStories from "./PanelGroup.stories";
+import * as PanelStackStories from "./PanelStack.stories";
+
+<Meta of={PanelStories} />
+
+<Anchor storyId="panel">
+  <div className="invisible h-0 overflow-hidden">
+    <Subheading>Panel</Subheading>
+  </div>
+</Anchor>
+
+# Content Panels
+
+<Description of={AxPanel} />
+
+<Primary />
+
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={PanelStories.Example} />
+</AxCollapsable>
+
+<Anchor storyId="group">
+  <Subheading>Group</Subheading>
+</Anchor>
+<Description of={AxPanel.Group} />
+<Canvas withToolbar of={PanelGroupStories.Group} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={PanelGroupStories.Group} />
+</AxCollapsable>
+
+<Anchor storyId="stack">
+  <Subheading>Stack</Subheading>
+</Anchor>
+<Description of={AxPanel.Stack} />
+<Canvas withToolbar of={PanelStackStories.Stack} />
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={PanelStackStories.Stack} />
+</AxCollapsable>
+
+<hr />
+
+<Anchor storyId="props">
+  <Subheading>Props</Subheading>
+</Anchor>
+
+<ArgTypes sort="requiredFirst" of={PanelStories} />
+
+<Anchor storyId="sample">
+  <Subheading>Example</Subheading>
+</Anchor>
+
+```tsx
+import { AxPanel } from "@axux/core";
+
+export const TagExample = () => {
+  return (
+    <AxPanel>
+      <AxHeader>
+        <AxIcon className="mdi mdi-alien" />
+        <AxTitle>Card title</AxTitle>
+      </AxHeader>
+      <AxContent>...</AxContent>
+      <AxFooter justify="end">
+        <AxButton>Click</AxButton>
+      </AxFooter>
+    </AxPanel>
+  );
+};
+```

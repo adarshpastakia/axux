@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -23,7 +23,7 @@ const ErrorIcon: FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 64 64"
-    className="w-10 h-10"
+    className="size-10"
   >
     <path
       fill="#242424"
@@ -95,7 +95,8 @@ const ErrorStack: FC<KeyValue> = ({ stack }) => {
 };
 
 /**
- * Error boundary wrapper
+ * An error boundary wrapper higher-order component designed to provide consistent error display across the application
+ * > will trap runtime errors
  */
 export class AxErrorBoundary extends Component<
   {

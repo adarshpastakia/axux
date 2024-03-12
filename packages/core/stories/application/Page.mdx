@@ -1,0 +1,71 @@
+import {
+  ArgsTable,
+  Canvas,
+  Description,
+  Primary,
+  Story,
+  Title,
+} from "@storybook/addon-docs";
+import {
+  Anchor,
+  ArgTypes,
+  Controls,
+  Meta,
+  Subheading,
+} from "@storybook/blocks";
+import {
+  AxApplicationProvider,
+  AxPage,
+  AxCollapsable,
+  AxViewport,
+  useApplicationContext,
+} from "../../src";
+import * as PageStories from "./Page.stories";
+
+<Meta of={PageStories} />
+
+<Anchor storyId="page">
+  <div className="invisible h-0 overflow-hidden">
+    <Subheading>Page</Subheading>
+  </div>
+</Anchor>
+
+# Route Page
+
+<Description of={AxPage} />
+
+<Primary />
+
+<AxCollapsable>
+  <div>Controls</div>
+  <Controls of={PageStories.Example} />
+</AxCollapsable>
+
+<hr />
+
+<Anchor storyId="props">
+  <Subheading>Props</Subheading>
+</Anchor>
+
+<ArgTypes sort="requiredFirst" of={AxPage} />
+
+<hr />
+
+<Anchor storyId="sample">
+  <Subheading>Example</Subheading>
+</Anchor>
+
+```tsx
+import { AxPage, AxHeader, AxContent } from "@axux/core";
+
+export const RoutePage = () => {
+  return (
+    <AxPage isPaper isLoading={loadingState} title="Route title">
+      <AxHeader>Page header controls</AxHeader>
+      <AxContent>
+        <p>Page content</p>
+      </AxContent>
+    </AxPage>
+  );
+};
+```

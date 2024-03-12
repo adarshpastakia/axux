@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -24,10 +24,15 @@ export interface CollapsableProps
    * disable collapse toggle
    */
   isDisabled?: boolean;
+  /**
+   * Header position sticky
+   */
+  stickyHead?: boolean;
 }
 
 export const AxCollapsable: FC<CollapsableProps> = ({
   children,
+  stickyHead,
   className = "",
   isDisabled = false,
   isCollapsed = true,
@@ -48,7 +53,11 @@ export const AxCollapsable: FC<CollapsableProps> = ({
 
   /** ***************** component *******************/
   return (
-    <div {...rest} className={`ax-collapsable ${className ?? ""}`}>
+    <div
+      {...rest}
+      data-sticky-head={stickyHead}
+      className={`ax-collapsable ${className ?? ""}`}
+    >
       <div
         role="none"
         onClick={isDisabled ? undefined : toggleCollapse}

@@ -1,0 +1,315 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-panel {
+    @apply grid relative overflow-hidden border rounded bg-base;
+
+    grid-template: "head" auto "loader" auto "body" 1fr / 1fr;
+
+    &[data-expanded="true"] {
+      @apply fixed inset-4 shadow-xl z-20 !w-auto !h-auto !max-h-full !max-w-full;
+    }
+
+    & .ax-header > .ax-title {
+      @apply flex-1;
+    }
+
+    & .ax-panel__body {
+      @apply grid relative overflow-hidden grid-area-body;
+
+      grid-template-areas: "head" "content" "foot";
+      grid-template-rows: auto 1fr auto;
+
+      & .ax-content {
+        @apply bg-transparent;
+      }
+    }
+  }
+
+  .ax-panel__group {
+    @apply flex flex-col flex-nowrap rounded overflow-auto;
+
+    & .ax-panel {
+      @apply rounded-none;
+
+      & + .ax-panel {
+        @apply -mt-px;
+      }
+
+      &:first-child {
+        border-start-end-radius: inherit;
+        border-start-start-radius: inherit;
+      }
+
+      &:last-child {
+        border-end-end-radius: inherit;
+        border-end-start-radius: inherit;
+      }
+
+      &[data-collapsed="true"] {
+        flex: 0 0 auto;
+
+        & > .ax-header {
+          @apply cursor-pointer;
+        }
+      }
+
+      &[data-collapsed="false"] {
+        flex: 1 1 auto;
+        min-height: 15rem;
+
+        & .toggle-collapse {
+          @apply opacity-10 pointer-events-none;
+        }
+      }
+    }
+  }
+}
+
+/******************* tab panels *******************/
+@layer components {
+  .ax-tab__panel {
+    @apply grid-area-content grid overflow-hidden;
+
+    &[data-placement="top"] {
+      grid-template: "bar" auto "content" 1fr / 1fr;
+    }
+
+    &[data-placement="bottom"] {
+      grid-template: "content" 1fr "bar" auto / 1fr;
+    }
+
+    &[data-placement="start"] {
+      grid-template: "bar content" 1fr / auto 1fr;
+    }
+
+    &[data-placement="end"] {
+      grid-template: "content bar" 1fr / 1fr auto;
+    }
+
+    &[data-placement="top"],
+    &[data-placement="bottom"] {
+      & .ax-tab__bar {
+        @apply flex-row overflow-x-auto;
+      }
+    }
+
+    &[data-placement="start"],
+    &[data-placement="end"] {
+      & .ax-tab__bar {
+        @apply flex-col overflow-y-auto;
+      }
+    }
+
+    &[data-align="start"] {
+      & .ax-tab__bar {
+        @apply justify-start;
+      }
+    }
+
+    &[data-align="center"] {
+      & .ax-tab__bar {
+        @apply justify-center;
+      }
+    }
+
+    &[data-align="end"] {
+      & .ax-tab__bar {
+        @apply justify-end;
+      }
+    }
+  }
+
+  .ax-tab__bar {
+    @apply grid-area-[bar] relative bg-base flex flex-nowrap items-stretch gap-2 
+      overflow-hidden text-accent hide-scroll;
+  }
+
+  .ax-tab__body {
+    @apply grid-layout relative bg-base;
+  }
+
+  .ax-tab__button {
+    @apply inline-flex flex-none relative z-10 overflow-hidden cursor-pointer 
+      font-medium gap-2 text-center align-middle select-none items-center;
+
+    & label {
+      @apply align-baseline;
+    }
+
+    & .close-x {
+      @apply !m-0;
+    }
+
+    &[data-active="true"] {
+      @apply opacity-100;
+    }
+
+    &[data-disabled="true"] {
+      @apply opacity-50 pointer-events-none text-muted;
+    }
+  }
+}
+
+@layer utilities {
+  .ax-tab__panel {
+    --ax-bar-border: var(--ax-border-muted);
+
+    &[data-style="outline"] {
+      & .ax-tab__button {
+        @apply border border-transparent;
+
+        &[data-active="true"] {
+          @apply border-current;
+        }
+      }
+    }
+
+    &[data-style="solid"] {
+      --ax-bar-border: color-mix(
+        in lab,
+        var(--ax-border-muted) 70%,
+        var(--ax-accent)
+      );
+
+      & .ax-tab__button[data-active="true"] {
+        @apply bg-current;
+
+        & * {
+          @apply text-invert;
+        }
+      }
+    }
+
+    &[data-placement="top"] {
+      & .ax-tab__bar {
+        @apply items-end pt-px mb-1;
+
+        box-shadow: 0 -1px 0 var(--ax-bar-border) inset;
+      }
+
+      & .ax-tab__button {
+        @apply rounded-t px-4 pt-1.5 pb-px;
+
+        &:hover,
+        &[data-active="true"] {
+          box-shadow: 0 -2px 0 currentcolor inset;
+        }
+
+        &[data-active="true"] {
+          @apply -translate-y-px;
+        }
+      }
+
+      &[data-style="outline"] .ax-tab__button[data-active="true"] {
+        @apply border-b-transparent;
+
+        box-shadow: 0 1px 0 var(--ax-bg);
+      }
+    }
+
+    &[data-placement="bottom"] {
+      & .ax-tab__bar {
+        @apply items-start pb-px mt-1;
+
+        box-shadow: 0 1px 0 var(--ax-bar-border) inset;
+      }
+
+      & .ax-tab__button {
+        @apply rounded-b px-4 pb-1.5 pt-px;
+
+        &:hover,
+        &[data-active="true"] {
+          box-shadow: 0 2px 0 currentcolor inset;
+        }
+
+        &[data-active="true"] {
+          @apply translate-y-px;
+        }
+      }
+
+      &[data-style="outline"] .ax-tab__button[data-active="true"] {
+        @apply border-t-transparent;
+
+        box-shadow: 0 -1px 0 var(--ax-bg);
+      }
+    }
+
+    &[data-placement="start"],
+    &[data-placement="end"] {
+      & .ax-tab__bar {
+        @apply items-stretch;
+      }
+
+      & .ax-tab__button {
+        @apply flex-col;
+      }
+    }
+  }
+
+  [dir="ltr"] .ax-tab__panel[data-placement="start"],
+  [dir="rtl"] .ax-tab__panel[data-placement="end"] {
+    & .ax-tab__bar {
+      @apply pl-px mr-1;
+
+      box-shadow: -1px 0 0 var(--ax-bar-border) inset;
+    }
+
+    & .ax-tab__button {
+      @apply rounded-l py-4 pl-1.5 pr-px;
+
+      &:hover,
+      &[data-active="true"] {
+        box-shadow:
+          -1px 0 0 currentcolor inset,
+          1px 0 0 currentcolor;
+      }
+
+      &[data-active="true"] {
+        @apply -translate-x-px;
+      }
+    }
+
+    &[data-style="outline"] .ax-tab__button[data-active="true"] {
+      @apply border-r-transparent;
+
+      box-shadow: 1px 0 0 var(--ax-bg);
+    }
+  }
+
+  [dir="rtl"] .ax-tab__panel[data-placement="start"],
+  [dir="ltr"] .ax-tab__panel[data-placement="end"] {
+    & .ax-tab__bar {
+      @apply pr-px ml-1;
+
+      box-shadow: 1px 0 0 var(--ax-bar-border) inset;
+    }
+
+    & .ax-tab__button {
+      @apply rounded-r py-4 pr-1.5 pl-px;
+
+      &:hover,
+      &[data-active="true"] {
+        box-shadow:
+          1px 0 0 currentcolor inset,
+          -1px 0 0 currentcolor;
+      }
+
+      &[data-active="true"] {
+        @apply translate-x-px;
+      }
+    }
+
+    &[data-style="outline"] .ax-tab__button[data-active="true"] {
+      @apply border-l-transparent;
+
+      box-shadow: -2px 0 0 var(--ax-bg);
+    }
+  }
+}

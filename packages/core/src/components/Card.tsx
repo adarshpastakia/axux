@@ -1,20 +1,26 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
  * @license   : MIT
  */
 
-import { forwardRef, useMemo } from "react";
+import { forwardRef, useMemo, type FC } from "react";
+import { AxErrorBoundary } from "../application/ErrorBoundary";
 import {
   type ChildrenProp,
   type ElementProps,
   type MouseProps,
+  type RefProp,
 } from "../types";
 import { Link, type LinkProps } from "./Link";
 
-export interface CardProps extends ElementProps, MouseProps, ChildrenProp {
+export interface CardProps
+  extends RefProp,
+    ElementProps,
+    MouseProps,
+    ChildrenProp {
   isPlain?: boolean;
   /**
    * highlight shadow
@@ -38,8 +44,8 @@ export interface CardProps extends ElementProps, MouseProps, ChildrenProp {
   dragData?: KeyValue;
 }
 
-export const AxCard = forwardRef<HTMLElement, CardProps>(
-  ({ className, isActive, isPlain, ...rest }, ref) => {
+export const AxCard: FC<CardProps> = forwardRef<HTMLElement, CardProps>(
+  ({ className, isActive, isPlain, children, ...rest }, ref) => {
     const props = useMemo(
       () => ({
         ...rest,
@@ -50,7 +56,11 @@ export const AxCard = forwardRef<HTMLElement, CardProps>(
       }),
       [rest, isPlain, isActive, className],
     );
-    return <Link {...props} ref={ref} />;
+    return (
+      <Link {...props} ref={ref}>
+        <AxErrorBoundary>{children}</AxErrorBoundary>
+      </Link>
+    );
   },
 );
 AxCard.displayName = "AxCard";

@@ -1,15 +1,15 @@
 /*
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
  * @copyright : 2022
  * @license   : MIT
  */
 
-html.dark {
+html[data-color-scheme="dark"] {
   & .prismjs {
-    background: #272f36 !important;
-    color: #cccccc !important;
+    background: #2d3436 !important;
+    color: #ccc !important;
   }
 
   & .prismjs > div[class*="language-"] {
@@ -18,11 +18,11 @@ html.dark {
     & .token.prolog,
     & .token.doctype,
     & .token.cdata {
-      color: #999999;
+      color: #999;
     }
 
     & .token.punctuation {
-      color: #cccccc;
+      color: #ccc;
     }
 
     & .token.tag,

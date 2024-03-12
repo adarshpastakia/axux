@@ -1,12 +1,13 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
  * @license   : MIT
  */
 
-import { addons } from "@storybook/addons";
+import { addons, types } from "@storybook/addons";
+import { ThemeToggle } from "./addon-theme/register";
 
 addons.setConfig({
   sidebar: {
@@ -14,13 +15,20 @@ addons.setConfig({
   },
 });
 
-const originalError = console.error;
-window.console.error = (...args) => {
-  if (
-    /.*ReactDOM.render is no longer supported in React 18.*/.test(args[0]) ||
-    /.*\:first-child.*/.test(args[0])
-  ) {
-    return;
-  }
-  originalError.call(console, ...args);
-};
+addons.getChannel().on("PRIMARY_CHANGED", (theme: any) => {
+  document.documentElement.dataset.primaryScheme = theme;
+});
+addons.getChannel().on("ACCENT_CHANGED", (theme: any) => {
+  document.documentElement.dataset.accentScheme = theme;
+});
+
+// Register the addon
+addons.register("themeToggle", () => {
+  // Register the tool
+  addons.add("themeToggle", {
+    type: types.TOOL,
+    title: "Theme toggle",
+    match: ({ viewMode }) => viewMode === "story" || viewMode === "docs",
+    render: ThemeToggle,
+  });
+});

@@ -1,0 +1,168 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-tag {
+    @apply inline-flex relative overflow-hidden text-sm px-1 py-px m-0.5 rounded
+      text-center align-middle select-none items-center before:rounded-[inherit] before:absolute before:inset-0 before:border before:opacity-50;
+
+    color: color-mix(in lab, var(--color, var(--ax-gray)) 65%, var(--ax-text));
+
+    &::before {
+      background-color: color-mix(
+        in lab,
+        var(--color, var(--ax-gray)) 18%,
+        var(--ax-bg)
+      );
+      border-color: color-mix(
+        in lab,
+        var(--color, var(--ax-bg)) 50%,
+        var(--ax-gray)
+      );
+    }
+
+    & > label {
+      @apply px-1 inline-block z-1;
+    }
+
+    & > .close-x {
+      @apply ms-1 leading-none self-end;
+    }
+  }
+
+  .ax-hotkey__label {
+    @apply text-xs py-px px-2 inline-block border rounded mx-px select-none;
+
+    direction: ltr;
+  }
+}
+
+@layer utilities {
+  .ax-tag {
+    &[data-size="sm"] {
+      @apply text-xs;
+    }
+
+    &[data-size="md"] {
+      @apply text-reset;
+    }
+
+    &[data-fill="true"] {
+      color: color-mix(
+        in lab,
+        var(--color, var(--ax-gray)) 30%,
+        var(--ax-text)
+      );
+
+      &::before {
+        background-color: color-mix(
+          in lab,
+          var(--color, var(--ax-gray)) 70%,
+          var(--ax-bg)
+        );
+        border-color: color-mix(
+          in lab,
+          var(--color, var(--ax-gray)) 70%,
+          var(--ax-text)
+        );
+      }
+    }
+
+    &[data-clickable="true"] {
+      @apply btn-gradient before:opacity-70 hover:before:opacity-90;
+
+      &::before {
+        border-color: color-mix(
+          in lab,
+          var(--color, var(--ax-gray)) 50%,
+          var(--ax-text)
+        );
+      }
+    }
+
+    &[data-disabled="true"] {
+      @apply before:opacity-40 pointer-events-none;
+
+      & > label {
+        @apply opacity-40;
+      }
+    }
+
+    &[data-fill="true"][data-clickable="true"] {
+      @apply before:opacity-75 hover:before:opacity-100;
+    }
+
+    &[data-fill="true"][data-disabled="true"] {
+      @apply before:opacity-20;
+
+      & > label {
+        @apply opacity-20 text-base;
+      }
+
+      & > .close-x {
+        @apply opacity-20;
+      }
+    }
+
+    &[data-color="primary"] {
+      --color: var(--ax-primary);
+    }
+
+    &[data-color="accent"] {
+      --color: var(--ax-accent);
+    }
+
+    &[data-color="info"] {
+      --color: theme(colors.info);
+    }
+
+    &[data-color="danger"] {
+      --color: theme(colors.danger);
+    }
+
+    &[data-color="success"] {
+      --color: theme(colors.success);
+    }
+
+    &[data-color="warning"] {
+      --color: theme(colors.warning);
+    }
+
+    &[data-color="red"] {
+      --color: var(--ax-red);
+    }
+
+    &[data-color="orange"] {
+      --color: var(--ax-orange);
+    }
+
+    &[data-color="green"] {
+      --color: var(--ax-green);
+    }
+
+    &[data-color="blue"] {
+      --color: var(--ax-blue);
+    }
+
+    &[data-color="violet"] {
+      --color: var(--ax-violet);
+    }
+
+    &[data-color="purple"] {
+      --color: var(--ax-purple);
+    }
+
+    &[data-color="pink"] {
+      --color: var(--ax-pink);
+    }
+
+    &[data-color="brown"] {
+      --color: var(--ax-brown);
+    }
+  }
+}

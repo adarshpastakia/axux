@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -24,6 +24,7 @@ import { usePropToggle } from "../hooks/usePropToggle";
 import { type ChildrenProp, type ElementProps } from "../types";
 import { Abbr } from "./Abbr";
 import { Badge } from "./Badge";
+import { Copy } from "./Copy";
 import { Mark } from "./Mark";
 
 export interface TextProps extends ElementProps, ChildrenProp {
@@ -36,11 +37,12 @@ export interface TextProps extends ElementProps, ChildrenProp {
 /**
  * Text block with option to clip lines for show less/more
  */
-export const AxText: FC<TextProps> & {
-  Badge: typeof Badge;
-  Mark: typeof Mark;
-  Abbr: typeof Abbr;
-} = ({ children, className, clip, ...rest }: TextProps) => {
+export const TextComponent: FC<TextProps> = ({
+  children,
+  className,
+  clip,
+  ...rest
+}: TextProps) => {
   const { t } = useTranslation("core");
   const refContainer = useRef<HTMLDivElement>(null);
   const [clipped, setClipped] = useState(false);
@@ -69,25 +71,27 @@ export const AxText: FC<TextProps> & {
 
   /** ***************** component *******************/
   return (
-    <Fragment>
+    <div>
       <div
         {...rest}
         ref={refContainer}
         className={`ax-text ${className ?? ""}`}
         data-clip={showMore ? "none" : clip ?? "none"}
       >
-        {Children.map(children, (child) => (
-          <Fragment>
-            {isString(child) && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: child.split("\n").join("<br />"),
-                }}
-              />
-            )}
-            {!isString(child) && <>{child}</>}
-          </Fragment>
-        ))}
+        <div>
+          {Children.map(children, (child) => (
+            <Fragment>
+              {isString(child) && (
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: child.split("\n").join("<br />"),
+                  }}
+                />
+              )}
+              {!isString(child) && <>{child}</>}
+            </Fragment>
+          ))}
+        </div>
       </div>
       {clipped && (
         <div className="ax-moreLink">
@@ -104,14 +108,19 @@ export const AxText: FC<TextProps> & {
           </span>
         </div>
       )}
-    </Fragment>
+    </div>
   );
 };
-AxText.Badge = Badge;
-AxText.Mark = Mark;
-AxText.Abbr = Abbr;
+
+export const AxText = Object.assign(TextComponent, {
+  Badge,
+  Mark,
+  Abbr,
+  Copy,
+});
 
 AxText.displayName = "AxText";
 AxText.Badge.displayName = "AxText.Badge";
 AxText.Mark.displayName = "AxText.Mark";
 AxText.Abbr.displayName = "AxText.Abbr";
+AxText.Copy.displayName = "AxText.Copy";

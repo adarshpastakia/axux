@@ -1,12 +1,12 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
  * @license   : MIT
  */
 
-import { useMemo, useState, type FC, type ReactPortal } from "react";
+import { useCallback, useState, type FC, type ReactPortal } from "react";
 import { createPortal } from "react-dom";
 
 type OverlayComponent = FC<{
@@ -23,14 +23,15 @@ export const useOverlayService = (
   const [Overlay, setOverlay] = useState<ReactPortal | null>(null);
 
   /** ***************** overlay container *******************/
-  const overlayContainer = useMemo(() => {
+  const overlayContainer = useCallback(() => {
     return document.body.querySelector<HTMLElement>(
       ".ax-overlay__container[data-mode='overlay']",
     );
   }, []);
 
   const openOverlay = async ({ onClose, ...props }: KeyValue = {}) => {
-    if (!overlayContainer) return;
+    const el = overlayContainer();
+    if (!el) return;
     return await new Promise((resolve) => {
       const handleClose = (args: AnyObject) => {
         setOverlay(null);
@@ -38,10 +39,7 @@ export const useOverlayService = (
         onClose?.(args);
       };
       setOverlay(
-        createPortal(
-          <ModalOrFlyout {...props} onClose={handleClose} />,
-          overlayContainer,
-        ),
+        createPortal(<ModalOrFlyout {...props} onClose={handleClose} />, el),
       );
     });
   };

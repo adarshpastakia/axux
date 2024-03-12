@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page should render 1`] = `"<div><div class="contents" data-color-scheme="light" data-primary-scheme="denim" data-accent-scheme="jade"><div class="viewport-wrapper"><div data-test-loading="true" class="ax-page  "><div class="loading-indicator" aria-hidden="true"><div></div></div><div class="ax-page__title"><div class="ax-title ">Page title</div></div><div class="ax-section ">Page content</div></div></div><div class="ax-overlay__container" data-mode="overlay"></div><div class="ax-overlay__container" data-mode="alert"></div><div class="ax-notification__container" data-mode="toast"></div><div class="ax-notification__container" data-mode="message"></div></div></div>"`;

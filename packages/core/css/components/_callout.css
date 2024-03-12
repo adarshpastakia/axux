@@ -1,0 +1,69 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .ax-callout {
+    @apply my-2 py-2 px-4 pe-6 relative border rounded bg-dimmed text-dimmed;
+
+    &[data-color="primary"] {
+      @apply text-primary border-primary;
+
+      background-color: color-mix(in lab, var(--ax-primary) 10%, var(--ax-bg));
+    }
+
+    &[data-color="accent"] {
+      @apply text-accent border-accent;
+
+      background-color: color-mix(in lab, var(--ax-accent) 10%, var(--ax-bg));
+    }
+
+    &[data-color="info"] {
+      @apply text-info border-info;
+
+      background-color: color-mix(in lab, var(--ax-info) 10%, var(--ax-bg));
+    }
+
+    &[data-color="danger"] {
+      @apply text-danger border-danger;
+
+      background-color: color-mix(in lab, var(--ax-danger) 10%, var(--ax-bg));
+    }
+
+    &[data-color="success"] {
+      @apply text-success border-success;
+
+      background-color: color-mix(in lab, var(--ax-success) 10%, var(--ax-bg));
+    }
+
+    &[data-color="warning"] {
+      @apply text-warning border-warning;
+
+      background-color: color-mix(in lab, var(--ax-warning) 10%, var(--ax-bg));
+    }
+  }
+
+  .ax-callout__title {
+    @apply text-xl mb-2 flex gap-1 items-center select-none;
+  }
+
+  .ax-callout[data-inline="true"] {
+    @apply flex gap-2 items-start py-1 px-2;
+  }
+
+  .ax-callout[data-inline="true"] > .ax-callout__title {
+    @apply m-0;
+  }
+
+  .ax-callout[data-inline="true"] > .ax-callout__body {
+    @apply flex-auto pt-0.5;
+  }
+
+  .ax-callout__close {
+    @apply absolute text-xl cursor-pointer top-1 end-1 opacity-50 hover:opacity-70;
+  }
+}

@@ -1,0 +1,146 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer utilities {
+  .paper {
+    @apply m-2 rounded-base;
+
+    box-shadow: 0 0 8px 1px var(--ax-shadow-base);
+  }
+
+  .centered {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  .bg-alternate > :is(p, li, div, span) {
+    &:nth-of-type(odd) {
+      @apply bg-base;
+    }
+
+    &:nth-of-type(even) {
+      @apply bg-dimmed;
+    }
+  }
+
+  .hide-scroll {
+    &::-webkit-scrollbar {
+      @apply !size-0.5;
+    }
+  }
+
+  .close-x {
+    @apply inline-block leading-none cursor-pointer opacity-50 hover:opacity-100 active:opacity-35 z-10 ms-2 ltr:float-right rtl:float-left select-none;
+
+    font-size: 1em;
+  }
+
+  .link {
+    --focus-color: color-mix(in lab, var(--ax-accent) 80%, var(--ax-white));
+    --active-color: color-mix(in lab, var(--ax-accent) 60%, var(--ax-black));
+
+    @apply font-medium cursor-pointer text-accent underline underline-offset-4 decoration-current decoration-dotted outline-offset-2 outline-[var(--focus-color)]
+      hover:decoration-dashed hover:text-[var(--focus-color)] active:decoration-solid active:text-[var(--active-color)];
+  }
+
+  /* visibility utility */
+  .show-xl-only {
+    @apply max-xl:hidden;
+  }
+
+  .show-lg-only {
+    @apply xl:hidden max-lg:hidden;
+  }
+
+  .show-md-only {
+    @apply lg:hidden max-md:hidden;
+  }
+
+  .show-sm-only {
+    @apply md:hidden max-sm:hidden;
+  }
+
+  .show-xs-only {
+    @apply sm:hidden;
+  }
+
+  .show-xl {
+    @apply max-xl:hidden;
+  }
+
+  .show-lg {
+    @apply max-lg:hidden;
+  }
+
+  .show-md {
+    @apply max-md:hidden;
+  }
+
+  .show-sm {
+    @apply max-sm:hidden;
+  }
+
+  .show-xs {
+    @apply max-xs:hidden;
+  }
+
+  .hide-xl-only {
+    @apply xl:hidden;
+  }
+
+  .hide-lg-only {
+    @apply lg:max-xl:hidden;
+  }
+
+  .hide-md-only {
+    @apply md:max-lg:hidden;
+  }
+
+  .hide-sm-only {
+    @apply sm:max-md:hidden;
+  }
+
+  .hide-xs-only {
+    @apply xs:max-sm:hidden;
+  }
+
+  .hide-xl {
+    @apply xl:hidden;
+  }
+
+  .hide-lg {
+    @apply lg:hidden;
+  }
+
+  .hide-md {
+    @apply md:hidden;
+  }
+
+  .hide-sm {
+    @apply sm:hidden;
+  }
+
+  .hide-xs {
+    @apply xs:hidden;
+  }
+
+  [data-clickable="true"] {
+    @apply cursor-pointer hover:border-dimmed active:translate-y-px;
+  }
+
+  [data-active-shadow="true"] {
+    @apply ring-2 ring-offset-2;
+  }
+
+  [data-loading="true"] {
+    @apply cursor-wait;
+
+    & > * {
+      @apply pointer-events-none;
+    }
+  }
+}

@@ -1,0 +1,110 @@
+/**
+ * AxUX React+TailwindCSS UI Framework
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+/******************* heading sizes *******************/
+@layer utilities {
+  h1 {
+    @apply text-4xl font-medium mb-4;
+  }
+
+  h2 {
+    @apply text-3xl font-medium mb-4;
+  }
+
+  h3 {
+    @apply text-2xl font-medium mb-4;
+  }
+
+  h4 {
+    @apply text-xl font-medium mb-4;
+  }
+
+  h5 {
+    @apply text-lg font-semibold mb-4;
+  }
+
+  h6 {
+    @apply text-base font-bold mb-4;
+  }
+}
+
+/******************* text components *******************/
+@layer components {
+  .ax-text {
+    @apply select-text;
+
+    & .ax-copy {
+      font-size: 0.625em;
+    }
+  }
+
+  .ax-mark mark {
+    @apply px-0.5 text-base;
+
+    background-color: color-mix(in lab, var(--ax-primary) 20%, var(--ax-bg));
+  }
+
+  .ax-abbr abbr {
+    @apply px-0.5 text-[var(--ax-accent)] border-b border-dashed border-current cursor-help;
+
+    background-color: color-mix(
+      in lab,
+      var(--abbr-color, var(--ax-accent)) 20%,
+      var(--ax-bg)
+    );
+    color: color-mix(
+      in lab,
+      var(--abbr-color, var(--ax-accent)) 70%,
+      var(--ax-text)
+    );
+  }
+
+  .ax-moreLink {
+    @apply text-xs align-end print:hidden;
+
+    & span {
+      @apply cursor-pointer link select-none underline-offset-2 hover:underline;
+    }
+  }
+}
+
+@layer utilities {
+  .ax-text {
+    &[data-clip="none"] {
+      @apply line-clamp-none;
+    }
+
+    &[data-clip="true"] > div {
+      @apply truncate;
+    }
+
+    &[data-clip="1"] {
+      @apply line-clamp-1;
+    }
+
+    &[data-clip="2"] {
+      @apply line-clamp-2;
+    }
+
+    &[data-clip="3"] {
+      @apply line-clamp-3;
+    }
+
+    &[data-clip="4"] {
+      @apply line-clamp-4;
+    }
+
+    &[data-clip="5"] {
+      @apply line-clamp-5;
+    }
+
+    &[data-clip="6"] {
+      @apply line-clamp-6;
+    }
+  }
+}

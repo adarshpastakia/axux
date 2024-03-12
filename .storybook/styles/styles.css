@@ -1,169 +1,19 @@
 /*
- * AxUX React UI Framework with Pure CSS
- * @author    : Adarsh Pastakia
- * @version   : 2.0.0
- * @copyright : 2022
- * @license   : MIT
- */
+* AxUX React UI Framework with Tailwind CSS
+* @author    : Adarsh Pastakia
+* @version   : 2.0.0
+* @copyright : 2022
+* @license   : MIT
+*/
 
-@import "@axux/core/css/style.css";
-@import "@axux/core/css/flags.rect.css";
-
-@import "./_prism.css";
-@import "./_prism-dark.css";
-@import "./_prism-light.css";
-
-@layer components {
-  .home-hero {
-    @apply grid gap-4 grid-cols-2 max-sm:grid-cols-1;
-
-    & > div {
-      @apply flex items-center even:flex-row-reverse text-center border rounded-lg overflow-hidden cursor-pointer;
-
-      & > div:first-child {
-        @apply text-white p-4 flex flex-col justify-center w-44;
-
-        & > div {
-          @apply first:text-4xl last:text-xl text-center first:mb-2;
-        }
-      }
-
-      & > div:last-child {
-        @apply p-4 text-lg;
-      }
-    }
-  }
-
-  .home-palette {
-    display: grid;
-    gap: 0.5rem;
-    margin-bottom: 1rem !important;
-    grid-template-columns: repeat(5, 1fr);
-
-    & > div {
-      margin: 0.25rem;
-      border: 1px solid var(--ax-border);
-      border-radius: 0.25rem;
-      color: var(--ax-white);
-      text-align: center;
-      line-height: 2.5rem;
-
-      &:first-child {
-        place-self: center;
-        grid-row: 1 / span 2;
-        color: var(--ax-text-dimmed);
-      }
-    }
-  }
-
-  .home-selector {
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 0.75rem solid;
-    border-radius: 999px;
-    margin: 2px;
-    display: inline-block;
-    outline: 1px solid var(--ax-bg-viewport);
-
-    &.color-scheme {
-      border-color: var(--ax-white) var(--ax-black) var(--ax-black)
-        var(--ax-white);
-    }
-    &.blue-pink {
-      border-color: var(--ax-blue) var(--ax-pink) var(--ax-pink) var(--ax-blue);
-    }
-    &.green-brown {
-      border-color: var(--ax-green) var(--ax-brown) var(--ax-brown)
-        var(--ax-green);
-    }
-    &.orange-purple {
-      border-color: var(--ax-orange) var(--ax-purple) var(--ax-purple)
-        var(--ax-orange);
-    }
-    &.red-violet {
-      border-color: var(--ax-red) var(--ax-violet) var(--ax-violet)
-        var(--ax-red);
-    }
-  }
-
-  .color-red {
-    background-color: var(--ax-red);
-  }
-  .color-green {
-    background-color: var(--ax-green);
-  }
-  .color-blue {
-    background-color: var(--ax-blue);
-  }
-  .color-orange {
-    background-color: var(--ax-orange);
-  }
-  .color-violet {
-    background-color: var(--ax-violet);
-  }
-  .color-purple {
-    background-color: var(--ax-purple);
-  }
-  .color-brown {
-    background-color: var(--ax-brown);
-  }
-  .color-pink {
-    background-color: var(--ax-pink);
-  }
-  .color-info {
-    background-color: var(--ax-info);
-  }
-  .color-danger {
-    background-color: var(--ax-danger);
-  }
-  .color-success {
-    background-color: var(--ax-success);
-  }
-  .color-warning {
-    background-color: var(--ax-warning);
-  }
-}
-
-.sb-show-main.sb-show-main.sb-show-main {
-  &.sb-show-main {
-    @apply p-0;
-  }
-  &.sb-main-fullscreen {
-    @apply overflow-auto;
-  }
-
-  & .toc-list {
-    @apply ltr:border-l-2   rtl:border-r-2 rtl:!border-l-0;
-
-    & .toc-list-item {
-      @apply ps-5 ml-0;
-
-      &:has(a:empty) {
-        @apply hidden;
-      }
-
-      &:before {
-        @apply ltr:-left-[2px] rtl:-right-[2px] rtl:!left-auto;
-        transform: none !important;
-      }
-    }
-  }
-
-  #storybook-docs {
-    & .sbdocs-content > p {
-      @apply text-lg mt-2;
-    }
-
-    & .sbdocs-content > div > h3 {
-      @apply text-accent !text-lg !font-normal;
-    }
-
-    & .sbdocs-title {
-      @apply text-primary !text-4xl !font-normal;
-    }
-  }
-  #storybook-root {
-    @apply max-h-[100vh] overflow-hidden relative;
-    background-color: var(--ax-bg-component);
-  }
-}
+@import url("tailwindcss/base");
+@import url("tailwindcss/components");
+@import url("tailwindcss/utilities");
+@import url("@axux/core/css/style.css");
+@import url("@axux/core/css/flags.rect.css");
+@import url("./_prism.css");
+@import url("./_prism-dark.css");
+@import url("./_prism-light.css");
+@import url("./_home.css");
+@import url("./_playground.css");
+@import url("./_sb-overrides.css");

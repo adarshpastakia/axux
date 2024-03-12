@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -9,17 +9,18 @@
 import { type Placement } from "@popperjs/core";
 import {
   Children,
-  cloneElement,
-  type FC,
   Fragment,
+  cloneElement,
   useEffect,
   useImperativeHandle,
   useLayoutEffect,
   useMemo,
   useRef,
   useState,
+  type FC,
 } from "react";
 import { createPortal } from "react-dom";
+import { useGlobals } from "../context/Global";
 import { usePopover } from "../hooks/usePopover";
 import {
   type ChildProp,
@@ -75,6 +76,7 @@ export const AxTooltip: FC<TooltipProps> = ({
   "data-popover-open": parentOpen,
   ...rest
 }) => {
+  const { portalRoot } = useGlobals();
   const {
     attributes,
     forceUpdate,
@@ -86,6 +88,7 @@ export const AxTooltip: FC<TooltipProps> = ({
     styles,
   } = usePopover({
     placement,
+    showArrow: true,
   });
   const [open, setOpen] = useState(false);
 
@@ -144,29 +147,30 @@ export const AxTooltip: FC<TooltipProps> = ({
       })}
       {!parentOpen &&
         open &&
+        portalRoot.current &&
         createPortal(
           <div
             {...rest}
             tabIndex={-1}
             data-color={color}
-            className="popover tooltip"
+            className="ax-popover ax-tooltip"
             ref={setPopperElement as AnyObject}
             style={styles.popper}
             {...attributes.popper}
           >
-            <div className={`popover__container ${className ?? ""}`}>
+            <div className={`ax-popover__container ${className ?? ""}`}>
               {content}
             </div>
             {!hideArrow && (
               <div
                 ref={setArrowElement as AnyObject}
-                className="popover__arrow"
+                className="ax-popover__arrow"
                 style={styles.arrow}
                 {...attributes.arrow}
               />
             )}
           </div>,
-          document.body,
+          portalRoot.current,
         )}
     </Fragment>
   );

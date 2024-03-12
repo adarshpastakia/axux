@@ -1,0 +1,81 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+/******************* card *******************/
+@layer components {
+  .ax-card {
+    @apply m-1 block relative rounded bg-base border border-muted overflow-hidden;
+
+    & .ax-content,
+    & .ax-section {
+      @apply bg-transparent;
+    }
+
+    &:not([data-plain="true"]) {
+      @apply border-base;
+    }
+
+    &[data-clickable="true"] {
+      @apply cursor-pointer shadow shadow-dimmed hover:shadow-md active:shadow-none after:absolute after:inset-0 after:pointer-events-none;
+
+      &::after {
+        background-image: linear-gradient(
+          160deg,
+          rgb(255 255 255 / 5%) 0%,
+          transparent 36%,
+          transparent 63%,
+          rgb(0 0 0 / 5%) 100%
+        );
+      }
+    }
+  }
+
+  .ax-timeline__card {
+    @apply flex flex-nowrap p-0 min-h-[2rem];
+
+    & > .ax-timeline__avatar {
+      @apply text-lg leading-none relative w-12 text-center;
+
+      & > .ax-icon {
+        @apply p-1 mt-1 rounded-full shadow-inner;
+      }
+    }
+
+    &[data-size="sm"] .ax-timeline__avatar {
+      @apply text-md;
+    }
+
+    &[data-size="md"] .ax-timeline__avatar {
+      @apply text-2xl;
+    }
+
+    &[data-size="lg"] .ax-timeline__avatar {
+      @apply text-4xl;
+    }
+
+    & > .ax-timeline__body {
+      @apply flex-1 overflow-hidden;
+    }
+
+    &[data-reverse="true"] {
+      @apply flex-row-reverse;
+    }
+
+    &[data-sticky="true"] {
+      @apply sticky top-0 bottom-0 z-[5] bg-base;
+    }
+
+    &:not([data-noline="true"]) > .ax-timeline__avatar {
+      @apply before:absolute before:w-px before: before: before:top-1 before:bottom-0 before:left-1/2 before:z-0;
+    }
+
+    &[data-last-child="true"] > .ax-timeline__avatar {
+      @apply before:hidden;
+    }
+  }
+}

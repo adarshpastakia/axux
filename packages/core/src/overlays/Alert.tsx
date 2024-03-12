@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -119,7 +119,7 @@ export const AxAlert: FC<AlertProps> = ({
         role="none"
         className="ax-alert"
         data-color={color}
-        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
       >
         {Close(closeModal)}
         <div className="ax-alert__icon">

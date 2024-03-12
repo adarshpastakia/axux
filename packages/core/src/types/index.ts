@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -27,11 +27,24 @@ export type Color =
   | "warning"
   | "success";
 
+export type COLORS =
+  | "scarlet"
+  | "pumpkin"
+  | "jade"
+  | "denim"
+  | "iris"
+  | "lilac"
+  | "coral"
+  | "wood"
+  | string;
+
+export type COLOR_SCHEME = "light" | "dark";
+
 export type Size = "sm" | "md" | "lg" | "normal";
 
 export type NavigationDirection = "prev" | "next";
 
-export type Gutter = "none" | Size;
+export type Gutter = "none" | "sm" | "md" | "lg" | "normal";
 
 export type RefProp<T = HTMLElement> = RefAttributes<T>;
 
@@ -62,6 +75,10 @@ export interface MouseProps {
    * click handler
    */
   onClick?: ClickHandler;
+  /**
+   * dont propagate click event
+   */
+  stopPropagation?: boolean;
 }
 
 export interface SizeObject {

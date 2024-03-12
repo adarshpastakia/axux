@@ -1,5 +1,5 @@
 /*
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
  * @copyright : 2022
@@ -7,12 +7,7 @@
  */
 
 .prismjs > code {
-  font-family:
-    Consolas,
-    Monaco,
-    Andale Mono,
-    Ubuntu Mono,
-    monospace;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   font-size: 1em;
   line-height: 1.5;
   text-align: left;
@@ -58,56 +53,65 @@ pre[class*="language-"] {
 }
 
 .prismjs > div {
-  &:after {
+  &::after {
     position: absolute;
     top: 0;
     inset-inline-end: 0;
     border-end-start-radius: 8px;
     padding: 0.25rem 0.5rem;
   }
-  &.language-jsx:after {
+
+  &.language-jsx::after {
     background-color: #61dafb;
-    color: #000000;
-    content: "JSX";
+    color: #000;
+    content: "React";
   }
-  &.language-tsx:after {
+
+  &.language-tsx::after {
     background-color: #61dafb;
-    color: #000000;
-    content: "TSX";
+    color: #000;
+    content: "React";
   }
-  &.language-js:after {
+
+  &.language-js::after {
     background-color: #f7df1e;
-    color: #000000;
+    color: #000;
     content: "JS";
   }
-  &.language-ts:after {
+
+  &.language-ts::after {
     background-color: #3178c6;
-    color: #ffffff;
+    color: #fff;
     content: "TS";
   }
-  &.language-css:after {
+
+  &.language-css::after {
     background-color: #1572b6;
-    color: #ffffff;
+    color: #fff;
     content: "CSS";
   }
-  &.language-html:after {
+
+  &.language-html::after {
     background-color: #e34f26;
-    color: #ffffff;
+    color: #fff;
     content: "HTML";
   }
-  &.language-bash:after {
+
+  &.language-bash::after {
     background-color: #64748b;
-    color: #ffffff;
+    color: #fff;
     content: "Bash";
   }
-  &.language-json:after {
-    background-color: #000000;
-    color: #ffffff;
+
+  &.language-json::after {
+    background-color: #000;
+    color: #fff;
     content: "JSON";
   }
-  &.language-yaml:after {
+
+  &.language-yaml::after {
     background-color: #cb171e;
-    color: #ffffff;
+    color: #fff;
     content: "YAML";
   }
 }

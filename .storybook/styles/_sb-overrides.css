@@ -1,0 +1,297 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable selector-id-pattern */
+
+body {
+  .swatch-info {
+    background-color: theme(colors.info);
+  }
+
+  .swatch-danger {
+    background-color: theme(colors.danger);
+  }
+
+  .swatch-success {
+    background-color: theme(colors.success);
+  }
+
+  .swatch-warning {
+    background-color: theme(colors.warning);
+  }
+
+  .swatch-silver {
+    background-color: theme(colors.silver);
+  }
+
+  .swatch-steel {
+    background-color: theme(colors.steel);
+  }
+
+  .swatch-olive {
+    background-color: theme(colors.olive);
+  }
+
+  .swatch-sand {
+    background-color: theme(colors.sand);
+  }
+
+  .swatch-scarlet {
+    background-color: theme(colors.scarlet);
+  }
+
+  .swatch-pumpkin {
+    background-color: theme(colors.pumpkin);
+  }
+
+  .swatch-jade {
+    background-color: theme(colors.jade);
+  }
+
+  .swatch-denim {
+    background-color: theme(colors.denim);
+  }
+
+  .swatch-iris {
+    background-color: theme(colors.iris);
+  }
+
+  .swatch-lilac {
+    background-color: theme(colors.lilac);
+  }
+
+  .swatch-coral {
+    background-color: theme(colors.coral);
+  }
+
+  .swatch-wood {
+    background-color: theme(colors.wood);
+  }
+}
+
+.sb-show-main.sb-show-main.sb-show-main {
+  & .viewport-wrapper {
+    @apply ax-viewport;
+  }
+
+  &.sb-show-main {
+    @apply p-0;
+  }
+
+  &.sb-main-fullscreen {
+    @apply overflow-auto;
+  }
+
+  #storybook-root {
+    @apply max-h-screen overflow-auto relative bg-base;
+  }
+
+  &.sb-main-fullscreen #storybook-root {
+    @apply h-screen;
+  }
+
+  &.sb-main-centered #storybook-root {
+    @apply h-screen flex justify-center items-center flex-auto;
+  }
+
+  .sbdocs-preview.sbdocs-preview + .ax-collapsable {
+    @apply -mt-6;
+  }
+
+  .ax-collapsable__body .sb-bar {
+    @apply hidden;
+  }
+
+  #storybook-docs {
+    & .viewport-wrapper {
+      @apply relative;
+
+      height: 32rem;
+    }
+
+    & .sbdocs-content + div > div {
+      width: 12rem;
+    }
+
+    & .sb-story {
+      max-height: 600px;
+    }
+
+    & .sbdocs-content > p,
+    & .sbdocs-content > div > p {
+      @apply mt-2 text-md leading-loose;
+
+      &[type="info"] code {
+        font-size: 1em !important;
+      }
+    }
+
+    & div.card-grid {
+      @apply grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 items-start;
+
+      & div.comp-card {
+        @apply rounded p-2;
+
+        & label {
+          @apply block font-semibold text-md text-dimmed;
+        }
+      }
+    }
+
+    & cite[type="code"] {
+      @apply text-dimmed block font-medium border-s-4 border-s-primary ps-4;
+
+      margin: 1rem 0 -1rem;
+    }
+
+    & .sbdocs-content > div > h2 {
+      @apply text-xl text-primary font-medium border-0 border-t border-t-primary pt-4 !mb-4 mt-24 empty:hidden;
+
+      & > a {
+        @apply m-0 p-0 -ms-6 pe-2 rtl:float-right;
+      }
+    }
+
+    & .sbdocs-content > div > h3 {
+      @apply text-lg text-accent font-medium border-t border-t-accent pt-2 !mb-4 mt-24 empty:hidden;
+
+      & > a {
+        @apply m-0 p-0 -ms-6 pe-2 rtl:float-right;
+      }
+    }
+
+    & .sbdocs-title {
+      @apply text-4xl text-primary font-medium border-b-2 border-b-primary !py-2 !mb-10 empty:hidden;
+
+      & + hr {
+        @apply hidden;
+      }
+
+      &:not(:has(+ hr + p, + p)) {
+        @apply mb-32;
+      }
+    }
+
+    & hr {
+      @apply !my-8;
+    }
+  }
+
+  & .sbdocs.sbdocs.sbdocs-wrapper {
+    @apply bg-base;
+  }
+
+  & .os-host.os-host {
+    background-color: var(--bg-input);
+  }
+
+  & .sbdocs-preview.sbdocs-preview {
+    @apply bg-transparent shadow  border-0;
+  }
+
+  & .docblock-code-toggle.docblock-code-toggle {
+    @apply bg-muted;
+  }
+
+  & .docblock-source.docblock-source {
+    @apply border;
+
+    & > div {
+      @apply bg-transparent;
+    }
+
+    & button {
+      @apply bg-muted text-dimmed;
+    }
+  }
+
+  & .docs-story.docs-story {
+    @apply pb-8;
+  }
+
+  #story--data-datagrid--example--primary-inner,
+  #story--data-virtual-grid--example--primary-inner,
+  #story--data-virtual-list--example--primary-inner,
+  #story--data-virtual-timeline--example--primary-inner,
+  #story--core-components-aside--example--primary-inner,
+  #story--core-components-sidepanel--example--primary-inner,
+  #story--core-components-tabpanel--example--primary-inner,
+  #story--media-imageviewer--example--primary-inner,
+  #story--media-videoplayer--example--primary-inner {
+    @apply h-[18rem] overflow-hidden;
+  }
+
+  & .docs-story.docs-story > div {
+    @apply bg-transparent;
+  }
+
+  & .innerZoomElementWrapper.innerZoomElementWrapper > div:only-child {
+    @apply w-full mb-6;
+  }
+
+  & .docblock-argstable.docblock-argstable {
+    @apply border-0 mx-0 border-separate border-spacing-1;
+
+    & thead th {
+      @apply text-accent-base bg-dimmed rounded-base;
+    }
+
+    & tbody {
+      @apply bg-transparent border-0;
+    }
+
+    & tbody tr:nth-child(odd) td {
+      @apply bg-base;
+    }
+
+    & tbody tr:nth-child(even) td {
+      @apply bg-dimmed;
+    }
+
+    & tbody td {
+      @apply text-dimmed bg-transparent rounded-base;
+
+      border: 1px solid var(--ax-border-muted);
+
+      & table {
+        @apply table-auto w-auto;
+      }
+    }
+
+    & tbody td:last-child > div > span,
+    & tbody td > div > div > span,
+    & tbody td > div > span {
+      @apply text-dimmed bg-dimmed border-muted border-s-accent;
+    }
+
+    & tbody td > div:last-child > div > span,
+    & tbody td > div:last-child > span {
+      @apply border-s-2;
+    }
+  }
+
+  & .toc-list {
+    @apply !border-l-transparent border-s-2 !border-s-dimmed;
+
+    & .toc-list-item {
+      @apply ps-6 ml-0 before:!border-l-transparent before:!border-s-2 before:!border-s-accent-base before:!left-auto before:!-start-[2px] before:!transform-none;
+
+      &:has(a:empty) {
+        @apply hidden;
+      }
+
+      & > a {
+        @apply text-muted;
+      }
+
+      &.is-active-li > a {
+        @apply text-accent;
+      }
+    }
+  }
+}

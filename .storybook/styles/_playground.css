@@ -1,0 +1,148 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .playground {
+    .section {
+      @apply text-accent font-medium border-t border-t-accent text-xl mt-16 mb-6;
+    }
+
+    .check-animation.false {
+      animation-iteration-count: 0;
+
+      .check-animation__circle {
+        animation-iteration-count: 0;
+      }
+
+      .check-animation__icon {
+        animation-iteration-count: 0;
+      }
+    }
+
+    .check-animation.true {
+      animation-iteration-count: 1;
+
+      .check-animation__circle {
+        animation-iteration-count: 1;
+      }
+
+      .check-animation__icon {
+        animation-iteration-count: 1;
+      }
+    }
+
+    .theme-selector {
+      @apply flex flex-wrap gap-1 max-xs:flex-col justify-end max-lg:basis-full;
+
+      & > div {
+        @apply flex gap-2 justify-end max-xs:justify-center max-xs:text-sm max-md:text-reset text-xl px-2;
+      }
+
+      & > div > div {
+        @apply size-6 cursor-pointer border-[0.75rem] rounded-full inline-block outline outline-dimmed;
+
+        &.color-scheme {
+          @apply border-t-white border-l-white border-b-black border-r-black;
+        }
+
+        &.blue-pink {
+          @apply border-t-denim border-l-denim border-b-coral border-r-coral;
+        }
+
+        &.green-brown {
+          @apply border-t-jade border-l-jade border-b-wood border-r-wood;
+        }
+
+        &.orange-violet {
+          @apply border-t-pumpkin border-l-pumpkin border-b-lilac border-r-lilac;
+        }
+
+        &.red-indigo {
+          @apply border-t-scarlet border-l-scarlet border-b-iris border-r-iris;
+        }
+
+        &.silver {
+          @apply border-silver;
+        }
+
+        &.steel {
+          @apply border-steel;
+        }
+
+        &.olive {
+          @apply border-olive;
+        }
+
+        &.sand {
+          @apply border-sand;
+        }
+
+        &.round-normal {
+          @apply rounded-base;
+        }
+
+        &.round-none {
+          @apply rounded-sm;
+        }
+
+        &.round-full {
+          @apply rounded-full;
+        }
+      }
+    }
+
+    .palette-grid {
+      @apply grid items-start grid-cols-8 max-md:grid-cols-2 max-lg:grid-cols-4 gap-2 font-bold mb-2;
+
+      &.double {
+        @apply grid-cols-12 max-md:grid-cols-2 max-xl:grid-cols-6;
+      }
+
+      & span {
+        @apply block my-1 text-center rounded py-2 outline outline-dimmed;
+      }
+    }
+
+    .grid-layout-sm {
+      @apply grid grid-cols-3 max-md:grid-cols-1;
+    }
+
+    .grid-layout-lg {
+      @apply grid grid-cols-4 max-sm:grid-cols-1 max-lg:grid-cols-2 gap-4;
+    }
+
+    .sample-input {
+      @apply border rounded px-4 py-2 relative overflow-hidden bg-input;
+
+      color: var(--ax-placeholder);
+      box-shadow: 0 1px 2px 0 var(--ax-shadow-base) inset;
+
+      &.focus {
+        @apply border-primary after:absolute after:inset-x-0 after:bottom-0 after:bg-primary-base after:h-[2px] bg-input-focus;
+
+        box-shadow:
+          0 1px 2px 0 var(--ax-shadow-base) inset,
+          0 0 1px 0 var(--ax-primary);
+      }
+
+      &.invalid {
+        @apply border-danger;
+
+        box-shadow:
+          0 1px 2px 0 var(--ax-shadow-base) inset,
+          0 0 1px 0 var(--ax-danger);
+      }
+
+      &.disabled {
+        @apply bg-dimmed;
+
+        box-shadow: 0 0 1px 0 var(--ax-shadow-base) inset;
+      }
+    }
+  }
+}

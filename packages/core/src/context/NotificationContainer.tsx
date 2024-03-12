@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
  * @copyright : 2023
@@ -7,14 +7,14 @@
  */
 
 import {
-  type FC,
   Fragment,
+  useImperativeHandle,
+  useRef,
+  useState,
+  type FC,
   type ReactNode,
   type RefObject,
-  useImperativeHandle,
-  useState,
 } from "react";
-import { createPortal } from "react-dom";
 
 export interface NotificationRef {
   showToast: (key: string, toast: ReactNode) => void;
@@ -28,38 +28,44 @@ export interface NotificationRef {
 export const NotificationContainer: FC<{
   itemRef: RefObject<NotificationRef>;
 }> = ({ itemRef }) => {
+  const refItems = useRef<KeyValue>({ toasts: {}, messages: {} });
   const [toasts, setToasts] = useState<KeyValue<ReactNode>>({});
   const [messages, setMessages] = useState<KeyValue<ReactNode>>({});
 
   useImperativeHandle(
     itemRef,
     () => ({
-      showToast: (key: string, toast: ReactNode) =>
-        setToasts({ ...toasts, [key]: toast }),
-      showMessage: (key: string, message: ReactNode) =>
-        setMessages({ ...messages, [key]: message }),
+      showToast: (key: string, toast: ReactNode) => {
+        refItems.current.toasts[key] = toast;
+        setToasts({ ...refItems.current.toasts });
+      },
+      showMessage: (key: string, message: ReactNode) => {
+        refItems.current.messages[key] = message;
+        console.log(refItems.current.messages);
+        setMessages({ ...refItems.current.messages });
+      },
       closeToast: (key: string) => {
-        setToasts(
-          Object.fromEntries(Object.entries(toasts).filter(([k]) => k !== key)),
-        );
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        delete refItems.current.toasts[key];
+        setToasts({ ...refItems.current.toasts });
       },
       closeMessage: (key: string) => {
-        setMessages(
-          Object.fromEntries(
-            Object.entries(messages).filter(([k]) => k !== key),
-          ),
-        );
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        delete refItems.current.messages[key];
+        setMessages({ ...refItems.current.messages });
       },
       closeAll: () => {
-        setMessages({});
-        setToasts({});
+        refItems.current.messages = {};
+        refItems.current.toasts = {};
+        setMessages(refItems.current.messages);
+        setToasts(refItems.current.toasts);
       },
       closeAllToasts: () => setToasts({}),
     }),
-    [toasts, messages],
+    [],
   );
 
-  return createPortal(
+  return (
     <Fragment>
       <div className="ax-notification__container" data-mode="toast">
         {Object.values(toasts)}
@@ -67,8 +73,7 @@ export const NotificationContainer: FC<{
       <div className="ax-notification__container" data-mode="message">
         {Object.values(messages)}
       </div>
-    </Fragment>,
-    document.body,
+    </Fragment>
   );
 };
 NotificationContainer.displayName = "NotificationContainer";

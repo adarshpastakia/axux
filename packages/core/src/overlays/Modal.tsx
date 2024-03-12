@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -13,10 +13,8 @@ import {
   type FC,
   type MouseEvent,
 } from "react";
-import { AxButton } from "../buttons/Button";
 import { AxHeader } from "../components/Header";
 import { AxTitle } from "../components/Title";
-import { useIsRtl } from "../hooks/useIsRtl";
 import { AxHotKey } from "../hotkeys/HotKey";
 import { HotKeyWrapper } from "../hotkeys/HotKeyWrapper";
 import { AxIcon } from "../icons/Icon";
@@ -27,10 +25,8 @@ import {
   type ElementProps,
   type EmptyCallback,
   type IconProp,
-  type NavigationDirection,
   type Size,
 } from "../types";
-import { AppIcons } from "../types/appIcons";
 
 export interface ModalProps extends ElementProps, IconProp, ChildProp {
   /**
@@ -83,10 +79,6 @@ export interface ModalProps extends ElementProps, IconProp, ChildProp {
    * close handler
    */
   onClose?: EmptyCallback;
-  /**
-   * navigation handler
-   */
-  onNavigate?: (dir: NavigationDirection) => void;
 }
 
 export const AxModal: FC<ModalProps> = ({
@@ -105,9 +97,7 @@ export const AxModal: FC<ModalProps> = ({
   iconClass,
   iconColor,
   onClose,
-  onNavigate,
 }) => {
-  const isRtl = useIsRtl();
   const maskRef = useRef<HTMLDivElement>(null);
 
   const handleClose = () => {
@@ -147,16 +137,11 @@ export const AxModal: FC<ModalProps> = ({
     >
       <HotKeyWrapper>
         <AxHotKey global keyCombo="esc" handler={handleClose} />
-        <AxHotKey global keyCombo="left" handler={() => onNavigate?.("prev")} />
-        <AxHotKey
-          global
-          keyCombo="right"
-          handler={() => onNavigate?.("next")}
-        />
         <div
           role="dialog"
           className="ax-modal"
           data-size={size}
+          {...({ tabIndex: 0 } as AnyObject)}
           style={{ height, width, minHeight, minWidth }}
         >
           <AxHeader className={`ax-modal__header ${headerClass ?? ""}`}>
@@ -173,27 +158,7 @@ export const AxModal: FC<ModalProps> = ({
             <div className="ax-modal__actions">{actions}</div>
             {Close(handleClose)}
           </AxHeader>
-          <div className="ax-modal__body">
-            {onNavigate != null && (
-              <AxButton
-                rtlFlip
-                variant="link"
-                icon={AppIcons.iconCaretLeft}
-                onClick={() => onNavigate("prev")}
-                aria-label={isRtl ? "next" : "previous"}
-              />
-            )}
-            {children}
-            {onNavigate != null && (
-              <AxButton
-                rtlFlip
-                variant="link"
-                icon={AppIcons.iconCaretRight}
-                onClick={() => onNavigate("next")}
-                aria-label={isRtl ? "previous" : "next"}
-              />
-            )}
-          </div>
+          {children}
         </div>
       </HotKeyWrapper>
     </div>

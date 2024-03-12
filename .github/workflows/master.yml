@@ -4,7 +4,7 @@ name: Build and Deploy
 on:
   # Triggers the workflow on push events for the master branch
   push:
-    branches: [main]
+    branches: [WIP-v4]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -15,25 +15,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # Runs a single command using the runners shell
       - name: Use node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "18.1.0"
+          node-version: "18.12.1"
 
       # Runs a set of commands using the runners shell
       - name: Install packages
         run: |
           yarn
 
-      - name: Run coverage
-        uses: paambaati/codeclimate-action@v5.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.COVERAGE_TOKEN }}
-        with:
-          coverageCommand: yarn test --coverage --json --outputFile=./.storybook/jest-test-results.json
+      # Build library
+      - name: Build library
+        run: |
+          yarn dist
 
       # Runs a set of commands using the runners shell
       - name: Build storybook
@@ -47,4 +45,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
+          target-folder: v4
           folder: build

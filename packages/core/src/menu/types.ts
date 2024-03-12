@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -73,6 +73,10 @@ export interface MenuGroupProps
    * group type
    */
   type?: "divider" | "mini" | "floating" | "collapsable";
+  /**
+   * badge
+   */
+  badge?: BadgeType;
 }
 
 export interface MenuProps extends ElementProps, ChildrenProp<MenuChildren> {

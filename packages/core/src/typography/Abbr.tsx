@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -19,7 +19,9 @@ const AbbrText: FC<AbbrTextProps> = ({ color, children, ...rest }) => (
   <abbr
     {...rest}
     className={color}
-    style={color && isColor(color) ? { color } : {}}
+    style={
+      color && isColor(color) ? ({ "--abbr-color": color } as AnyObject) : {}
+    }
   >
     {children}
   </abbr>

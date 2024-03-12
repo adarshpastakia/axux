@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -7,20 +7,22 @@
  */
 
 import { debounce } from "@axux/utilities";
-import { useCallback, useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 export const useDebounce = (
   callback?: (...rest: AnyObject) => AnyObject,
+  deps: AnyObject[] = [],
   timeout = 250,
 ) => {
-  const cb = useCallback(debounce(callback ?? (() => undefined), timeout), [
-    callback,
-  ]);
+  const cb = useMemo(
+    () => debounce(callback ?? (() => undefined), timeout),
+    [callback, ...deps],
+  );
   useEffect(() => {
     return () => {
       cb?.cancel();
     };
-  }, [callback]);
+  }, [cb]);
 
   return cb;
 };

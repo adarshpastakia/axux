@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -62,6 +62,7 @@ export const useNotificationService = () => {
     const obj: MessageProps = makeProps(props);
     return await new Promise<boolean>((resolve) => {
       const key = uuid();
+      console.log(key);
       let timerRef: AnyObject = null;
       let rootEl: HTMLElement;
       const show = (el: AnyObject) => {

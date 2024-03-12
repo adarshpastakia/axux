@@ -1,0 +1,297 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+/******************* animated circles *******************/
+@layer components {
+  @keyframes check-stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes check-scale {
+    0%,
+    100% {
+      transform: none;
+    }
+
+    50% {
+      transform: scale3d(1.1, 1.1, 1);
+    }
+  }
+
+  @keyframes check-fill {
+    100% {
+      box-shadow: inset 0 0 0 1em currentcolor;
+    }
+  }
+
+  @keyframes progress-animate {
+    0% {
+      background-position-x: 0;
+    }
+
+    100% {
+      background-position-x: 1em;
+    }
+  }
+
+  .check-animation {
+    @apply inline-block w-[1.5em] h-[1.5em] rounded-[50%] stroke-white text-primary-base fill-transparent;
+
+    stroke-width: 4px;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0 0 0 currentcolor;
+    animation:
+      check-fill 0.4s ease-in-out 0.4s forwards,
+      check-scale 0.3s ease-in-out 0.9s both;
+  }
+
+  .check-animation__circle {
+    @apply stroke-current fill-transparent;
+
+    stroke-width: 8px;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-miterlimit: 10;
+    animation: check-stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  }
+
+  .check-animation__icon {
+    @apply origin-center;
+
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: check-stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+  }
+}
+
+/******************* loading bars *******************/
+@layer components {
+  @keyframes bar-animation {
+    0% {
+      @apply h-2;
+    }
+
+    60% {
+      @apply h-2;
+    }
+
+    80% {
+      @apply h-8;
+    }
+
+    100% {
+      @apply h-2;
+    }
+  }
+
+  .bar-animation {
+    @apply inline-flex items-end h-12 text-white;
+
+    & li {
+      @apply list-none w-3 h-2 mx-px relative
+        before:absolute before:inset-0 before:opacity-50 before:bg-current
+        after:absolute after:inset-0 after:opacity-30 dark:opacity-100;
+
+      &::before {
+        background-color: color-mix(in lab, currentcolor 50%, var(--ax-gray));
+      }
+
+      &::after {
+        box-shadow: 0 0 2px 1px var(--ax-black) inset;
+      }
+
+      animation: bar-animation 1.5s ease-in-out infinite;
+    }
+
+    & li:nth-child(1) {
+      animation-delay: -1.2s;
+    }
+
+    & li:nth-child(2) {
+      animation-delay: -1s;
+    }
+
+    & li:nth-child(3) {
+      animation-delay: -0.8s;
+    }
+
+    & li:nth-child(4) {
+      animation-delay: -0.6s;
+    }
+  }
+}
+
+/******************* loading spinner *******************/
+@layer components {
+  @keyframes spinner-animation {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spinner-animation {
+    @apply inline-block text-muted relative w-[1em] h-[1em] rounded-[50%] border-[0.125em] border-transparent border-t-current border-opacity-75 leading-none
+    after:content-[""] after:absolute after:-inset-[0.125em] after:rounded-[50%] after:border-[0.125em] after:border-current after:opacity-30;
+
+    animation: spinner-animation 1.8s cubic-bezier(0.65, 0.25, 0.45, 0) infinite;
+  }
+}
+
+/******************* loading bar *******************/
+@layer components {
+  @keyframes loading-indicator {
+    from {
+      transform: translateX(calc(-100% * var(--multiplier)));
+    }
+
+    to {
+      transform: translateX(calc(100% * var(--multiplier)));
+    }
+  }
+
+  .loading-indicator {
+    --multiplier: 1;
+
+    @apply grid-area-[loader] relative;
+
+    & > div {
+      @apply absolute z-10 bg-base py-px inset-0 after:h-0.5 after:block after:bg-primary-base;
+
+      height: calc(0.125rem + 2px);
+
+      &::after {
+        animation: loading-indicator 1s cubic-bezier(0.65, 0, 0.45, 1) infinite;
+      }
+    }
+  }
+
+  [dir="rtl"] .loading-indicator {
+    --multiplier: -1;
+  }
+}
+
+/******************* card content *******************/
+@layer components {
+  .card-animation {
+    & > div {
+      @apply max-w-lg text-muted;
+
+      & figure {
+        @apply block bg-gray-500/20 size-10;
+      }
+
+      & span {
+        @apply block h-2 rounded bg-gradient-to-r from-gray-600/15 via-gray-600/10 to-gray-600/15;
+      }
+    }
+  }
+}
+
+/******************* progress bar/circle *******************/
+@layer components {
+  [class^="progress-"] span {
+    @apply flex w-full h-full items-center justify-center select-none font-bold;
+  }
+
+  .progress-circle {
+    @apply inline-block w-[4em] h-[4em] text-lg relative;
+
+    & > span {
+      font-size: 0.625em;
+    }
+
+    & > svg {
+      @apply absolute inset-0 w-full h-full;
+
+      & circle {
+        transition: stroke-dashoffset 0.5s;
+      }
+    }
+  }
+
+  .progress-bar {
+    @apply block w-3/4 h-[1em] bg-dimmed mx-auto relative rounded font-bold overflow-hidden whitespace-nowrap;
+
+    & > div:last-child {
+      @apply h-full overflow-hidden bg-current relative;
+
+      width: calc(var(--progress) * 1%);
+      transition: width 0.5s;
+
+      &::after {
+        @apply absolute inset-0 text-white text-center z-0 align-top transition-none;
+
+        width: calc((100 / var(--progress)) * 100%);
+        content: attr(data-label);
+        font-size: 0.5em;
+        line-height: 0.5em;
+        padding: 0.75em;
+      }
+    }
+
+    &[data-animate="true"] > div:last-child {
+      background-image: linear-gradient(
+        -45deg,
+        rgb(255 255 255 / 15%) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgb(255 255 255 / 15%) 50%,
+        rgb(255 255 255 / 15%) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 1em 1em;
+      animation: progress-animate 1s linear infinite;
+    }
+
+    & > div:first-child {
+      @apply absolute inset-0 text-center z-0 align-top;
+
+      font-size: 0.5em;
+      line-height: 0.5em;
+      padding: 0.75em;
+    }
+  }
+}
+
+/******************* progress colors/sizes *******************/
+@layer utilities {
+  [class^="progress-"][data-size="md"] {
+    @apply text-2xl;
+  }
+
+  [class^="progress-"][data-size="lg"] {
+    @apply text-3xl;
+  }
+
+  [class^="progress-"][data-size="xl"] {
+    @apply text-4xl;
+  }
+
+  [class^="progress-"][data-color="primary"] {
+    @apply text-primary-base;
+  }
+
+  [class^="progress-"][data-color="accent"] {
+    @apply text-accent-base;
+  }
+
+  [class^="progress-"][data-color="danger"] {
+    @apply text-danger-base;
+  }
+
+  [class^="progress-"][data-color="success"] {
+    @apply text-success-base;
+  }
+
+  [class^="progress-"][data-color="warning"] {
+    @apply text-warning-base;
+  }
+}

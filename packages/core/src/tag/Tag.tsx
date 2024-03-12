@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -8,7 +8,7 @@
 
 import { isColor } from "@axux/utilities";
 import { handleClick, handleEnter } from "@axux/utilities/src/handlers";
-import { forwardRef, useMemo, type ForwardRefExoticComponent } from "react";
+import { forwardRef, useMemo, type FC } from "react";
 import { getTooltipProps } from "../hooks/useTooltip";
 import { AxIcon } from "../icons/Icon";
 import { Close } from "../internal/Close";
@@ -19,11 +19,13 @@ import {
   type EmptyCallback,
   type IconProp,
   type MouseProps,
+  type RefProp,
   type TooltipType,
 } from "../types";
 
 export interface TagProps
-  extends ElementProps,
+  extends RefProp,
+    ElementProps,
     MouseProps,
     IconProp,
     ChildrenProp {
@@ -56,10 +58,7 @@ export interface TagProps
 /**
  * Tag labels
  */
-export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
-  HTMLDivElement,
-  TagProps
->(
+export const AxTag: FC<TagProps> = forwardRef<HTMLDivElement, TagProps>(
   (
     {
       children,
@@ -73,6 +72,7 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
       onClick,
       onRemove,
       isDisabled,
+      stopPropagation,
       // @ts-expect-error ignore
       "data-popover-open": popoverOpen,
       ...rest
@@ -83,12 +83,18 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
     const styles = useMemo(() => {
       const s: KeyValue = {};
       if (color && isColor(color)) {
-        s.color = color;
+        s["--color"] = color;
       }
       return s;
     }, [color]);
 
     const tooltipProps = useMemo(() => getTooltipProps(tooltip), [tooltip]);
+
+    const clickHandler = useMemo(() => {
+      if (!isDisabled && onClick) {
+        return handleClick(onClick, { stopPropagation });
+      }
+    }, [onClick, isDisabled, stopPropagation]);
 
     /** ***************** component *******************/
     return (
@@ -96,7 +102,7 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
         {...rest}
         {...tooltipProps}
         ref={ref}
-        role="button"
+        role={onClick == null ? "term" : "button"}
         tabIndex={-1}
         className={`ax-tag ${className ?? ""}`}
         data-fill={fill}
@@ -105,7 +111,7 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
         data-clickable={!(onClick == null)}
         data-disabled={isDisabled}
         data-popover-open={popoverOpen}
-        onClick={handleClick(onClick)}
+        onClick={clickHandler}
         onKeyDown={handleEnter(onClick)}
         style={styles}
       >
@@ -115,5 +121,5 @@ export const AxTag: ForwardRefExoticComponent<TagProps> = forwardRef<
       </div>
     );
   },
-);
+) as AnyObject;
 AxTag.displayName = "AxTag";

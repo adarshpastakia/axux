@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -14,7 +14,7 @@ import { AxPopover } from "../overlays/Popover";
 import { type BooleanCallback } from "../types";
 import { AxButton, type ButtonProps } from "./Button";
 
-export interface ConfirmProps extends Omit<ButtonProps, "onClick"> {
+export interface ConfirmProps extends ButtonProps {
   /**
    * action message
    */
@@ -41,6 +41,17 @@ export interface ConfirmProps extends Omit<ButtonProps, "onClick"> {
   onClick?: BooleanCallback;
 }
 
+/**
+ * Confirm button to show confirmation message before handle click
+ *
+ * @prop message
+ * @prop actionType - danger | success
+ * @prop okLabel
+ * @prop cancelLabel
+ * @prop placement
+ * @prop onClick(@param boolean)
+ * @prop see Button
+ */
 export const ConfirmButton: FC<ConfirmProps> = ({
   onClick,
   message,
@@ -54,7 +65,7 @@ export const ConfirmButton: FC<ConfirmProps> = ({
   const { t } = useTranslation("core");
   /** ***************** component *******************/
   return (
-    <AxPopover placement={placement}>
+    <AxPopover placement={placement} showArrow>
       <AxButton {...props}>{children}</AxButton>
       <div className="p-2" role="none" onClick={(e) => e.stopPropagation()}>
         <div>{message}</div>

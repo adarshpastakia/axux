@@ -2,7 +2,10 @@
   "verbose": true,
   "collectCoverage": false,
   "testEnvironment": "jsdom",
-  "setupFilesAfterEnv": ["./jest/setup.ts"],
+  "setupFilesAfterEnv": [
+    "./jest/setup.ts",
+    "@testing-library/react/dont-cleanup-after-each"
+  ],
   "roots": ["<rootDir>/packages"],
   "testRegex": "(/tests/.*\\.(test|spec))\\.[jt]sx?$",
   "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json"],
@@ -13,10 +16,16 @@
         "tsconfig": "tsconfig.test.json"
       }
     ],
+    "\\.(js|jsx)$": "babel-jest",
+    "\\.css$": "jest-transform-css",
     "\\.svg$": "jest-transform-stub"
   },
+  "transformIgnorePatterns": ["/node_modules/(?!@popperjs)"],
   "modulePaths": ["<rootDir>/packages", "<rootDir>/node_modules"],
   "modulePathIgnorePatterns": ["<rootDir>/packages/*/dist"],
+  "moduleNameMapper": {
+    "^@mdi/font/css/materialdesignicons.min.css": "<rootDir>/jest/blank.js"
+  },
   "collectCoverageFrom": [
     "packages/**/src/**/*.{ts,tsx}",
     "!**/@types/**/*",

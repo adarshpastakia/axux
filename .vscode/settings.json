@@ -16,7 +16,7 @@
     "typescript",
     "typescriptreact"
   ],
+  "postcss.validate": false,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "editor.formatOnSave": true,
-  "tailwindCSS.emmetCompletions": true
+  "editor.formatOnSave": true
 }

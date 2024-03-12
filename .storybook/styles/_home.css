@@ -1,0 +1,45 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer components {
+  .home-hero {
+    @apply grid gap-2 grid-cols-2 max-sm:grid-cols-1;
+
+    & > div {
+      @apply flex items-center text-center border rounded overflow-hidden cursor-pointer;
+
+      &:nth-child(even) {
+        @apply flex-row-reverse;
+      }
+
+      & > div:last-child {
+        @apply p-4 text-lg;
+      }
+
+      & > div:first-child {
+        @apply bg-accent text-accent p-4 flex flex-col justify-center w-44;
+
+        & > div {
+          @apply text-center text-lg first:text-4xl first:mb-2;
+        }
+      }
+    }
+  }
+
+  .home-palette {
+    @apply grid gap-2 grid-cols-8 max-sm:grid-cols-4 !mb-4 leading-none text-dimmed text-center;
+
+    & span {
+      @apply text-xs;
+    }
+
+    & > div > div {
+      @apply border rounded h-6;
+    }
+  }
+}

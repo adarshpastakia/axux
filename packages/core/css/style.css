@@ -1,13 +1,13 @@
 /*
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 2.0.0
  * @copyright : 2022
  * @license   : MIT
  */
 
-@layer reset, base, components, variants, utilities;
+@layer colors, base, components, variants, utilities;
 
-@import "./reset/index.css";
-@import "./theme/index.css";
-@import "./components/index.css";
+@import url("./reset/index.css");
+@import url("./theme/index.css");
+@import url("./components/index.css");

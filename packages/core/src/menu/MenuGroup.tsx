@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -10,6 +10,8 @@ import { iconToken } from "@axux/utilities";
 import { Menu } from "@headlessui/react";
 import { Fragment, type FC } from "react";
 import { createPortal } from "react-dom";
+import { useGlobals } from "../context/Global";
+import { useBadge } from "../hooks/useBadge";
 import { usePopover } from "../hooks/usePopover";
 import { usePropToggle } from "../hooks/usePropToggle";
 import { AxIcon } from "../icons/Icon";
@@ -24,9 +26,11 @@ const CollapseGroup: FC<MenuGroupProps> = ({
   label,
   icon,
   rtlFlip,
+  badge,
   ...rest
 }) => {
   const [collapsed, toggleCollapse] = usePropToggle(isCollapsed, onCollapse);
+  const Badge = useBadge(badge);
   return (
     <Fragment>
       <div
@@ -41,6 +45,7 @@ const CollapseGroup: FC<MenuGroupProps> = ({
           icon={collapsed ? AppIcons.iconCaretRight : AppIcons.iconCaretDown}
           rtlFlip
         />
+        {Badge}
       </div>
       {!collapsed && (
         <div {...rest} className={`ax-menu ${className ?? ""}`}>
@@ -57,8 +62,11 @@ const PlainGroup: FC<MenuGroupProps> = ({
   label,
   icon,
   rtlFlip,
+  badge,
   ...rest
 }) => {
+  const Badge = useBadge(badge);
+
   return (
     <Fragment>
       <div className="ax-menu__group prevent-close" data-plain="true">
@@ -70,6 +78,7 @@ const PlainGroup: FC<MenuGroupProps> = ({
           />
         )}
         <div className="ax-menu__label">{label}</div>
+        {Badge}
       </div>
       <div {...rest} className={`ax-menu ${className ?? ""}`}>
         {children}
@@ -84,8 +93,11 @@ const FloatingGroup: FC<MenuGroupProps> = ({
   label,
   icon,
   rtlFlip,
+  badge,
   ...rest
 }) => {
+  const { portalRoot } = useGlobals();
+  const Badge = useBadge(badge);
   const {
     attributes,
     setPopperElement,
@@ -95,7 +107,6 @@ const FloatingGroup: FC<MenuGroupProps> = ({
   } = usePopover({
     placement: "right-start",
     sameWidth: false,
-    hideArrow: true,
   });
   return (
     <Menu as={Fragment}>
@@ -113,27 +124,32 @@ const FloatingGroup: FC<MenuGroupProps> = ({
             />
             <div className="ax-menu__label">{label}</div>
             <AxIcon icon={AppIcons.iconCaretRight} rtlFlip />
+            {Badge}
           </div>
         )}
       </Menu.Button>
-      {createPortal(
-        <Menu.Items
-          className={`ax-popover ax-menu__popover`}
-          ref={setPopperElement as AnyObject}
-          onClick={() =>
-            referenceElement?.dispatchEvent(
-              new Event("closeParentGroup", { bubbles: true }),
-            )
-          }
-          style={styles.popper}
-          {...attributes.popper}
-        >
-          <div {...rest} className={`ax-popover__container ${className ?? ""}`}>
-            {children}
-          </div>
-        </Menu.Items>,
-        document.body,
-      )}
+      {portalRoot.current &&
+        createPortal(
+          <Menu.Items
+            className={`ax-popover ax-menu__popover`}
+            ref={setPopperElement as AnyObject}
+            onClick={() =>
+              referenceElement?.dispatchEvent(
+                new Event("closeParentGroup", { bubbles: true }),
+              )
+            }
+            style={styles.popper}
+            {...attributes.popper}
+          >
+            <div
+              {...rest}
+              className={`ax-popover__container ${className ?? ""}`}
+            >
+              {children}
+            </div>
+          </Menu.Items>,
+          portalRoot.current,
+        )}
     </Menu>
   );
 };
@@ -144,13 +160,15 @@ const MiniGroup: FC<MenuGroupProps> = ({
   label,
   icon,
   rtlFlip,
+  badge,
   ...rest
 }) => {
+  const { portalRoot } = useGlobals();
+  const Badge = useBadge(badge);
   const { attributes, setPopperElement, setReferenceElement, styles } =
     usePopover({
       placement: "right-start",
       sameWidth: false,
-      hideArrow: true,
     });
   return (
     <Menu as={Fragment}>
@@ -179,22 +197,27 @@ const MiniGroup: FC<MenuGroupProps> = ({
                 rtlFlip={rtlFlip}
               />
             </div>
+            {Badge}
           </div>
         )}
       </Menu.Button>
-      {createPortal(
-        <Menu.Items
-          className={`ax-popover ax-menu__popover`}
-          ref={setPopperElement as AnyObject}
-          style={styles.popper}
-          {...attributes.popper}
-        >
-          <div className={`ax-popover__container ${className ?? ""}`} {...rest}>
-            {children}
-          </div>
-        </Menu.Items>,
-        document.body,
-      )}
+      {portalRoot.current &&
+        createPortal(
+          <Menu.Items
+            className={`ax-popover ax-menu__popover`}
+            ref={setPopperElement as AnyObject}
+            style={styles.popper}
+            {...attributes.popper}
+          >
+            <div
+              className={`ax-popover__container ${className ?? ""}`}
+              {...rest}
+            >
+              {children}
+            </div>
+          </Menu.Items>,
+          portalRoot.current,
+        )}
     </Menu>
   );
 };

@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -10,15 +10,16 @@ import { Popover } from "@headlessui/react";
 import { type Placement } from "@popperjs/core";
 import {
   Children,
-  cloneElement,
-  type FC,
-  forwardRef,
-  type ForwardRefExoticComponent,
   Fragment,
+  cloneElement,
+  forwardRef,
   useEffect,
   useMemo,
+  type FC,
+  type ForwardRefExoticComponent,
 } from "react";
 import { createPortal } from "react-dom";
+import { useGlobals } from "../context/Global";
 import { usePopover } from "../hooks/usePopover";
 import {
   type ChildProp,
@@ -41,9 +42,9 @@ export interface PopoverProps extends ChildrenProp, ElementProps {
    */
   sameWidth?: boolean;
   /**
-   * hide arrow
+   * show arrow
    */
-  hideArrow?: boolean;
+  showArrow?: boolean;
 
   popoverClassName?: HTMLElement["className"];
 }
@@ -56,13 +57,14 @@ export const AxPopover: FC<PopoverProps> & {
 } = ({
   children,
   className,
-  hideArrow = false,
+  showArrow = false,
   sameWidth = false,
   isDisabled = false,
   placement = "bottom",
   popoverClassName,
   ...rest
 }: PopoverProps) => {
+  const { portalRoot } = useGlobals();
   const {
     attributes,
     forceUpdate,
@@ -74,7 +76,7 @@ export const AxPopover: FC<PopoverProps> & {
   } = usePopover({
     placement,
     sameWidth,
-    hideArrow,
+    showArrow,
   });
 
   /** ***************** check for children count *******************/
@@ -108,11 +110,12 @@ export const AxPopover: FC<PopoverProps> & {
             })}
           </Popover.Button>
           {!isDisabled &&
+            portalRoot.current &&
             createPortal(
               <Fragment>
                 {open && (
                   <Popover.Overlay
-                    className="fixed inset-0 z-40"
+                    className="ax-popover__mask"
                     onClick={(e) => e.stopPropagation()}
                   />
                 )}
@@ -130,17 +133,17 @@ export const AxPopover: FC<PopoverProps> & {
                   >
                     {open && popperEl}
                   </div>
-                  {!hideArrow && (
+                  {showArrow && (
                     <div
                       ref={setArrowElement as AnyObject}
-                      className="popover__arrow"
+                      className="ax-popover__arrow"
                       style={styles.arrow}
                       {...attributes.arrow}
                     />
                   )}
                 </Popover.Panel>
               </Fragment>,
-              document.body,
+              portalRoot.current,
             )}
         </Fragment>
       )}

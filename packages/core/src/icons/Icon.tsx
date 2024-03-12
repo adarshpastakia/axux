@@ -1,5 +1,5 @@
 /**
- * AxUX React UI Framework with Pure CSS
+ * AxUX React UI Framework with Tailwind CSS
  * @author    : Adarsh Pastakia
  * @version   : 4.0.0
  * @copyright : 2024
@@ -103,7 +103,7 @@ export const AxIcon: FC<IconProps & RefProp> = forwardRef<
           <text
             x="50%"
             y="50%"
-            dy=".075em"
+            dy=".15em"
             dominantBaseline="middle"
             textAnchor="middle"
             style={{ fontSize: SvgTextSize[icon.length] ?? "1em" }}

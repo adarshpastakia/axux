@@ -1,0 +1,156 @@
+/**
+ * AxUX React UI Framework with Tailwind CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+/******************* section *******************/
+@layer components {
+  .ax-section {
+    @apply grid-layout relative z-0;
+
+    & > .ax-content {
+      box-shadow: 0 0 2px 0 var(--ax-shadow-base) inset;
+    }
+  }
+}
+
+/******************* panel loader *******************/
+@layer components {
+  .ax-loader {
+    @apply inset-0 flex flex-col items-center justify-center cursor-wait bg-gray-50/0 z-50;
+
+    & > div {
+      @apply px-4 py-2 rounded shadow relative backdrop-blur text-center;
+
+      &::after {
+        @apply absolute inset-0 opacity-5;
+
+        background-color: color-mix(in srgb, var(--ax-bg) 50%, var(--ax-gray));
+      }
+    }
+  }
+}
+
+/******************* content *******************/
+@layer components {
+  .ax-content {
+    @apply overflow-auto grid-area-content bg-base p-4;
+
+    &[data-padding="none"] {
+      @apply p-0;
+    }
+
+    &[data-padding="sm"] {
+      @apply p-2;
+    }
+
+    &[data-padding="md"] {
+      @apply p-6;
+    }
+
+    &[data-padding="lg"] {
+      @apply p-8;
+    }
+  }
+}
+
+/******************* empty content *******************/
+@layer components {
+  .ax-empty {
+    @apply my-4 mx-auto p-4 place-self-center text-lg text-center text-muted;
+
+    & .ax-empty__icon {
+      font-size: 4rem;
+
+      & > svg {
+        width: 1em;
+        height: 1em;
+      }
+    }
+
+    & .ax-empty__title {
+      @apply font-medium py-1 text-base;
+
+      font-size: 1.325em;
+    }
+
+    & .ax-empty__message {
+      @apply text-muted py-2;
+    }
+
+    & .ax-empty__actions {
+      @apply flex justify-center items-center gap-1;
+    }
+
+    &[data-size="sm"] {
+      @apply text-sm;
+
+      & .ax-empty__icon {
+        font-size: 2rem;
+      }
+    }
+
+    &[data-size="md"] {
+      @apply text-md;
+
+      & .ax-empty__icon {
+        font-size: 3rem;
+      }
+    }
+  }
+}
+
+/******************* header *******************/
+@layer components {
+  .ax-header {
+    @apply flex bg-base grid-area-head items-center p-1 z-1;
+
+    & > .ax-title {
+      @apply select-none px-2 truncate;
+    }
+
+    & > .ax-flexbox,
+    & > .ax-row {
+      @apply flex-auto;
+    }
+
+    & > .ax-icon {
+      @apply m-0 p-1;
+    }
+
+    & > .ax-button,
+    & > .ax-button__group,
+    & > .ax-side__actions > :is(.ax-button, .ax-button__group),
+    & > .ax-modal__actions > :is(.ax-button, .ax-button__group) {
+      @apply m-0;
+
+      &[data-type="link"] .ax-button__inner:not(:hover) {
+        @apply bg-transparent;
+      }
+
+      &[data-tool="true"] .ax-button__inner {
+        padding-block: 0;
+        min-height: 1.5em;
+        min-width: 1.5em;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .ax-header[class*="text-white"] {
+    & .ax-button > .ax-button__inner {
+      color: inherit;
+    }
+  }
+}
+
+/******************* footer *******************/
+@layer components {
+  .ax-footer {
+    @apply flex bg-base gap-1 grid-area-foot justify-between px-2 py-1 z-1;
+  }
+}
