@@ -1,0 +1,73 @@
+/**
+ * AxUX React UI Framework with Pure CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer utilities {
+  .bg-base {
+    background-color: var(--ax-bg-base);
+  }
+  .bg-component {
+    background-color: var(--ax-bg-component);
+  }
+  .bg-dimmed {
+    background-color: var(--ax-bg-dimmed);
+  }
+  .bg-muted {
+    background-color: var(--ax-bg-muted);
+  }
+  .bg-primary {
+    background-color: var(--ax-bg-primary);
+  }
+  .bg-accent {
+    background-color: var(--ax-bg-accent);
+  }
+  .bg-info {
+    background-color: var(--ax-bg-info);
+  }
+  .bg-danger {
+    background-color: var(--ax-bg-danger);
+  }
+  .bg-success {
+    background-color: var(--ax-bg-success);
+  }
+  .bg-warning {
+    background-color: var(--ax-bg-warning);
+  }
+}
+
+@layer utilities {
+  .text-base {
+    color: var(--ax-text-base);
+  }
+  .text-component {
+    color: var(--ax-text-component);
+  }
+  .text-dimmed {
+    color: var(--ax-text-dimmed);
+  }
+  .text-muted {
+    color: var(--ax-text-muted);
+  }
+  .text-primary {
+    color: var(--ax-text-primary);
+  }
+  .text-accent {
+    color: var(--ax-text-accent);
+  }
+  .text-info {
+    color: var(--ax-text-info);
+  }
+  .text-danger {
+    color: var(--ax-text-danger);
+  }
+  .text-success {
+    color: var(--ax-text-success);
+  }
+  .text-warning {
+    color: var(--ax-text-warning);
+  }
+}

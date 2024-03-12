@@ -1,0 +1,13 @@
+/*
+ * AxUX React UI Framework with Pure CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+@layer reset, base, components, variants, utilities;
+
+@import "./reset/index.css";
+@import "./theme/index.css";
+@import "./components/index.css";

@@ -1,0 +1,42 @@
+{
+  "name": "@axux/utilities",
+  "version": "4.0.0",
+  "description": "axux: Utility package",
+  "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
+  "license": "MIT",
+  "source": "src/index.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "directories": {
+    "src": "src",
+    "styles": "css",
+    "test": "tests"
+  },
+  "files": [
+    "css",
+    "src",
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "prebuild": "rm -rf ./dist",
+    "build:dts": "tsc -p ./tsconfig.build.json",
+    "build:rollup": "rollup -c ../../rollup.config.js",
+    "build": "npm-run-all -p build:rollup build:dts",
+    "watch:dts": "tsc -w -p ./tsconfig.build.json",
+    "watch:rollup": "rollup -w -c ../../rollup.config.js",
+    "watch": "npm-run-all -p watch:rollup watch:dts"
+  },
+  "dependencies": {
+    "date-fns": "^3.3.1",
+    "libphonenumber-js": "^1.10.55",
+    "numeral": "^2.0.6"
+  },
+  "devDependencies": {
+    "@types/numeral": "^2.0.2"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "verbose": true,
+  "collectCoverage": false,
+  "testEnvironment": "jsdom",
+  "setupFilesAfterEnv": ["./jest/setup.ts"],
+  "roots": ["<rootDir>/packages"],
+  "testRegex": "(/tests/.*\\.(test|spec))\\.[jt]sx?$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json"],
+  "transform": {
+    "\\.(js|jsx|ts|tsx)$": [
+      "ts-jest",
+      {
+        "tsconfig": "tsconfig.test.json"
+      }
+    ],
+    "\\.svg$": "jest-transform-stub"
+  },
+  "modulePaths": ["<rootDir>/packages", "<rootDir>/node_modules"],
+  "modulePathIgnorePatterns": ["<rootDir>/packages/*/dist"],
+  "collectCoverageFrom": [
+    "packages/**/src/**/*.{ts,tsx}",
+    "!**/@types/**/*",
+    "!**/i18n/**/*",
+    "!**/*.d.ts"
+  ],
+  "coveragePathIgnorePatterns": [
+    "tests/",
+    "stories/",
+    "types/",
+    "helpers/",
+    "internals/",
+    "node_modules/"
+  ],
+  "coverageDirectory": "<rootDir>/coverage",
+  "coverageReporters": ["json", "lcov", "text", "html"]
+}

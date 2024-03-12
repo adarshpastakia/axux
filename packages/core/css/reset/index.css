@@ -1,0 +1,93 @@
+/**
+ * AxUX React UI Framework with Pure CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer reset {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    user-select: none;
+    font-family:
+      Avenir Next,
+      Avenir,
+      Segoe UI,
+      Roboto,
+      Helvetica Neue,
+      Arial,
+      Noto Sans,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif,
+      Apple Color Emoji,
+      Segoe UI Emoji,
+      Segoe UI Symbol,
+      Noto Color Emoji;
+    font-size: 16px;
+    vertical-align: baseline;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  p,
+  pre,
+  code {
+    user-select: text;
+  }
+
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--ax-border);
+  }
+
+  img,
+  svg {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentColor;
+  }
+
+  hr {
+    margin-block: 0.5rem;
+    background: none;
+    border-top: 1px solid var(--ax-bg-base);
+    border-bottom: 1px solid var(--ax-bg-dimmed);
+    transform: scaleY(0.75);
+  }
+
+  label {
+    cursor: inherit;
+  }
+
+  a {
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--ax-accent);
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 0.25rem;
+    text-decoration-color: currentColor;
+    outline-color: var(--focus-color);
+    outline-offset: 2px;
+    --focus-color: color-mix(in srgb, var(--ax-accent) 80%, var(--ax-white));
+
+    &:hover {
+      text-decoration-style: solid;
+      color: var(--focus-color);
+    }
+    &:active {
+      color: color-mix(in srgb, var(--ax-accent) 60%, var(--ax-black));
+    }
+  }
+}

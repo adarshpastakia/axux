@@ -1,0 +1,56 @@
+{
+  "name": "@axux/core",
+  "version": "4.0.0",
+  "description": "axux: Core package",
+  "author": "Adarsh Pastakia <adarshpastakia@outlook.com>",
+  "license": "MIT",
+  "repository": "https://github.com/adarshpastakia/axux/tree/main/packages/core",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "directories": {
+    "src": "src",
+    "styles": "css",
+    "test": "tests"
+  },
+  "files": [
+    "css",
+    "src",
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "prebuild": "rm -rf ./dist",
+    "build:dts": "tsc -p ./tsconfig.build.json",
+    "build:rollup": "rollup -c ../../rollup.config.js",
+    "build": "npm-run-all -p build:rollup build:dts",
+    "watch:dts": "tsc -w -p ./tsconfig.build.json",
+    "watch:rollup": "rollup -w -c ../../rollup.config.js",
+    "watch": "npm-run-all -p watch:rollup watch:dts"
+  },
+  "dependencies": {
+    "@axux/utilities": "^4.0.0",
+    "@headlessui/react": "^1.7.18",
+    "@popperjs/core": "^2.11.8",
+    "react-helmet-async": "^2.0.4"
+  },
+  "peerDependencies": {
+    "i18next": "^23.10.0",
+    "i18next-browser-languagedetector": "^7.2.0",
+    "react": "next",
+    "react-dom": "next",
+    "react-i18next": "^14.1.0",
+    "react-popper": "^2.3.0",
+    "react-router-dom": "^6.22.0",
+    "resize-observer-polyfill": "^1.5.0"
+  },
+  "engines": {
+    "node": ">=18",
+    "npm": ">=8"
+  }
+}

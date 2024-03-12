@@ -1,0 +1,173 @@
+import { Meta } from "@storybook/addon-docs";
+import { Translation } from "react-i18next";
+import { Anchor, Subheading } from "@storybook/blocks";
+
+<Meta title="Introduction" />
+
+<div className="text-center">
+  <picture>
+    <img className="h-48 hidden dark:inline" srcSet="poster-dark.png" />
+    <img className="h-48 inline dark:hidden" src="poster-light.png" />
+  </picture>
+</div>
+
+<Translation>
+  {(t, { i18n }) => (
+    <div className="text-center text-muted !text-2xl">
+      {t("appDescription", "Default text")}
+    </div>
+  )}
+</Translation>
+
+---
+
+<Anchor storyId="home">
+  <Subheading></Subheading>
+</Anchor>
+
+<div className="home-hero">
+  <div>
+    <div>
+      <div className="mdi mdi-monitor-dashboard" />
+      <div>@core</div>
+    </div>
+    <div>Essential app components</div>
+  </div>
+  <div>
+    <div>
+      <div className="mdi mdi-form-select" />
+      <div>@form</div>
+    </div>
+    <div>Form and input components</div>
+  </div>
+  <div>
+    <div>
+      <div className="mdi mdi-database-outline" />
+      <div>@data</div>
+    </div>
+    <div>Data display components</div>
+  </div>
+  <div>
+    <div>
+      <div className="mdi mdi-calendar-month-outline" />
+      <div>@date</div>
+    </div>
+    <div>Date components</div>
+  </div>
+  <div>
+    <div>
+      <div className="mdi mdi-format-page-break" />
+      <div>@pagebuilder</div>
+    </div>
+    <div>Page builder</div>
+  </div>
+  <div>
+    <div>
+      <div className="mdi mdi-filter-multiple-outline" />
+      <div>@searchbar</div>
+    </div>
+    <div>Searchbar with filters</div>
+  </div>
+  <div>
+    <div>
+      <div className="mdi mdi-chart-bar" />
+      <div>@charts</div>
+    </div>
+    <div>Charts using @echarts</div>
+  </div>
+  <div>
+    <div>
+      <div className="mdi mdi-multimedia" />
+      <div>@media</div>
+    </div>
+    <div>Media viewer components</div>
+  </div>
+  <div>
+    <div>
+      <div className="mdi mdi-application-edit-outline" />
+      <div>@editors</div>
+    </div>
+    <div>Basic editors</div>
+  </div>
+  <div>
+    <div>
+      <div className="mdi mdi-map-legend" />
+      <div>@map</div>
+    </div>
+    <div>Map viewer using @arcgis</div>
+  </div>
+</div>
+
+---
+
+<Anchor storyId="installing">
+  <Subheading>Installing</Subheading>
+</Anchor>
+
+```bash
+# npm
+npm install @axux/core @axux/utilities
+npm install @axux/form
+npm install @axux/data
+npm install @axux/date
+npm install @axux/editors
+npm install @axux/charts
+npm install @axux/map
+npm install @axux/media
+npm install @axux/pagemaker
+npm install @axux/searchbar
+
+# yarn
+yarn add @axux/core @axux/utilities
+yarn add @axux/form
+yarn add @axux/data
+yarn add @axux/date
+yarn add @axux/editors
+yarn add @axux/charts
+yarn add @axux/map
+yarn add @axux/media
+yarn add @axux/pagemaker
+yarn add @axux/searchbar
+```
+
+---
+
+<Anchor storyId="colorSystem">
+  <Subheading>Color System</Subheading>
+</Anchor>
+
+<div className="home-palette">
+  <div>Grayscale</div>
+  <div style={{ backgroundColor: "var(--ax-gray)" }}>Gray</div>
+  <div style={{ backgroundColor: "var(--ax-grayblue)" }}>Blue</div>
+  <div style={{ backgroundColor: "var(--ax-graygreen)" }}>Green</div>
+  <div style={{ backgroundColor: "var(--ax-graybrown)" }}>Brown</div>
+</div>
+
+<div className="home-palette">
+  <div>Controls</div>
+  <div style={{ backgroundColor: "var(--ax-info)" }}>Info</div>
+  <div style={{ backgroundColor: "var(--ax-danger)" }}>Danger</div>
+  <div style={{ backgroundColor: "var(--ax-success)" }}>Success</div>
+  <div style={{ backgroundColor: "var(--ax-warning)" }}>Warning</div>
+</div>
+<div className="home-palette">
+  <div>Palette</div>
+  <div style={{ backgroundColor: "var(--ax-red)" }}>Red</div>
+  <div style={{ backgroundColor: "var(--ax-orange)" }}>Orange</div>
+  <div style={{ backgroundColor: "var(--ax-brown)" }}>Brown</div>
+  <div style={{ backgroundColor: "var(--ax-green)" }}>Green</div>
+  <div style={{ backgroundColor: "var(--ax-blue)" }}>Blue</div>
+  <div style={{ backgroundColor: "var(--ax-purple)" }}>Purple</div>
+  <div style={{ backgroundColor: "var(--ax-violet)" }}>Violet</div>
+  <div style={{ backgroundColor: "var(--ax-pink)" }}>Pink</div>
+</div>
+
+```html
+<html
+  data-color-scheme="dark"
+  data-primary-scheme="blue"
+  data-accent-scheme="pink"
+  data-gray-scheme="olive"
+></html>
+```

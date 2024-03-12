@@ -1,0 +1,9 @@
+{
+  "app": {
+    "appTitle": "AxUX",
+    "appDescription": "React+StyleX UI framework for business applications"
+  },
+  "login": {
+    "demo": "Login credential for demo [demo/pass]"
+  }
+}

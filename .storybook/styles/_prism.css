@@ -1,0 +1,113 @@
+/*
+ * AxUX React UI Framework with Pure CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 2.0.0
+ * @copyright : 2022
+ * @license   : MIT
+ */
+
+.prismjs > code {
+  font-family:
+    Consolas,
+    Monaco,
+    Andale Mono,
+    Ubuntu Mono,
+    monospace;
+  font-size: 1em;
+  line-height: 1.5;
+  text-align: left;
+  user-select: text;
+  white-space: pre;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  margin: 0.5em 0;
+  overflow: auto;
+  padding: 1em;
+}
+
+/* Inline code */
+*:not(pre) > code[class*="language-"] {
+  border-radius: 0.3em;
+  padding: 0.1em;
+  white-space: normal;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  & .token.important,
+  & .token.bold {
+    font-weight: 600;
+  }
+
+  & .token.italic {
+    font-style: italic;
+  }
+
+  & .token.entity {
+    cursor: help;
+  }
+}
+
+.prismjs {
+  position: relative;
+}
+
+.prismjs > div {
+  &:after {
+    position: absolute;
+    top: 0;
+    inset-inline-end: 0;
+    border-end-start-radius: 8px;
+    padding: 0.25rem 0.5rem;
+  }
+  &.language-jsx:after {
+    background-color: #61dafb;
+    color: #000000;
+    content: "JSX";
+  }
+  &.language-tsx:after {
+    background-color: #61dafb;
+    color: #000000;
+    content: "TSX";
+  }
+  &.language-js:after {
+    background-color: #f7df1e;
+    color: #000000;
+    content: "JS";
+  }
+  &.language-ts:after {
+    background-color: #3178c6;
+    color: #ffffff;
+    content: "TS";
+  }
+  &.language-css:after {
+    background-color: #1572b6;
+    color: #ffffff;
+    content: "CSS";
+  }
+  &.language-html:after {
+    background-color: #e34f26;
+    color: #ffffff;
+    content: "HTML";
+  }
+  &.language-bash:after {
+    background-color: #64748b;
+    color: #ffffff;
+    content: "Bash";
+  }
+  &.language-json:after {
+    background-color: #000000;
+    color: #ffffff;
+    content: "JSON";
+  }
+  &.language-yaml:after {
+    background-color: #cb171e;
+    color: #ffffff;
+    content: "YAML";
+  }
+}

@@ -1,0 +1,117 @@
+/**
+ * AxUX React UI Framework with Pure CSS
+ * @author    : Adarsh Pastakia
+ * @version   : 4.0.0
+ * @copyright : 2024
+ * @license   : MIT
+ */
+
+@layer reset {
+  :root {
+    /* black/white */
+    --ax-black: #12181c;
+    --ax-white: #ffffff;
+
+    /* control colors */
+    --ax-info: #0abde3;
+    --ax-danger: #ff3838;
+    --ax-success: #27ae60;
+    --ax-warning: #f97d07;
+
+    /* palette */
+    --ax-blue: #4b7bec;
+    --ax-green: #1abc9c;
+    --ax-red: #fa3429;
+    --ax-orange: #ffa901;
+    --ax-violet: #e154e1;
+    --ax-purple: #a660ec;
+    --ax-pink: #fc427b;
+    --ax-brown: #9b6c33;
+
+    /* grayscale */
+    --ax-gray: #879797;
+    --ax-grayblue: #89a7be;
+    --ax-graygreen: #89a8a9;
+    --ax-graybrown: #88857c;
+  }
+
+  /* app grayscale */
+  :root {
+    --ax-gr: var(--ax-gray);
+  }
+  :root[data-gray-scheme="grayblue"] {
+    --ax-gr: var(--ax-grayblue);
+  }
+  :root[data-gray-scheme="graygreen"] {
+    --ax-gr: var(--ax-graygreen);
+  }
+  :root[data-gray-scheme="graybrown"] {
+    --ax-gr: var(--ax-graybrown);
+  }
+
+  /* color scheme */
+  [data-color-scheme="light"] {
+    --ax-scheme: light;
+    --ax-bg: var(--ax-white);
+    --ax-text: var(--ax-black);
+  }
+  [data-color-scheme="dark"] {
+    --ax-scheme: dark;
+    --ax-bg: var(--ax-black);
+    --ax-text: var(--ax-white);
+  }
+
+  /* primary color scheme */
+  [data-primary-scheme],
+  [data-primary-scheme="blue"] {
+    --ax-primary: var(--ax-blue);
+  }
+  [data-primary-scheme="red"] {
+    --ax-primary: var(--ax-red);
+  }
+  [data-primary-scheme="green"] {
+    --ax-primary: var(--ax-green);
+  }
+  [data-primary-scheme="orange"] {
+    --ax-primary: var(--ax-orange);
+  }
+  [data-primary-scheme="pink"] {
+    --ax-primary: var(--ax-pink);
+  }
+  [data-primary-scheme="violet"] {
+    --ax-primary: var(--ax-violet);
+  }
+  [data-primary-scheme="purple"] {
+    --ax-primary: var(--ax-purple);
+  }
+  [data-primary-scheme="brown"] {
+    --ax-primary: var(--ax-brown);
+  }
+
+  /* accent color scheme */
+  [data-primary-scheme],
+  [data-accent-scheme="blue"] {
+    --ax-accent: var(--ax-blue);
+  }
+  [data-accent-scheme="red"] {
+    --ax-accent: var(--ax-red);
+  }
+  [data-accent-scheme="green"] {
+    --ax-accent: var(--ax-green);
+  }
+  [data-accent-scheme="orange"] {
+    --ax-accent: var(--ax-orange);
+  }
+  [data-accent-scheme="pink"] {
+    --ax-accent: var(--ax-pink);
+  }
+  [data-accent-scheme="violet"] {
+    --ax-accent: var(--ax-violet);
+  }
+  [data-accent-scheme="purple"] {
+    --ax-accent: var(--ax-purple);
+  }
+  [data-accent-scheme="brown"] {
+    --ax-accent: var(--ax-brown);
+  }
+}

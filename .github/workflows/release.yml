@@ -1,0 +1,58 @@
+name: Release
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on publish/prerelease tag
+  release:
+    types: [published]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Runs a single command using the runners shell
+      - name: Use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.1.0"
+
+      - name: Config git user
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      # Runs a set of commands using the runners shell
+      - name: Install packages
+        run: |
+          yarn
+
+      - name: Build packages
+        run: |
+          yarn dist
+
+      # Runs a set of commands using the runners shell
+      - name: Publish release
+        run: |
+          echo "@axux:registry=https://registry.npmjs.org/" > .npmrc
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          npm whoami
+          lerna publish from-package --yes --no-verify-access --pre-dist-tag next
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Rebase development branch
+        run: |
+          git checkout dev
+          git fetch
+          git pull
+          git rebase origin/main -q
+          git push -ff
